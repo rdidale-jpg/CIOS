@@ -1,0 +1,19 @@
+{
+  "base": "854a783b3c5f83d6ee3604f49a76772529b7339a",
+  "files": {
+    ".github/workflows/flora-validation.yml": "b6d40a254f8f15a9a2b90d40c3968c6003cc6d639eca81798818f436e10d6266",
+    "cios/applications/flora/public_routes.py": "7a0874d9c0bdc525105eb9e6116e57e257a384ba7846431baeff403a4a25d5ce",
+    "cios/applications/flora/research_intelligence/technology_commercial.py": "b4cace45d509a54dcac6276abbc4bc8b761ad06f442a0b292bd691ee006177b5",
+    "cios/applications/flora/research_intelligence/technology_commercial_views.py": "f14db12ddacb1b47c1034fac252e4476bd031c77defa9df2bb1f684bd49aea23",
+    "cios/applications/flora/research_intelligence/technology_experience.py": "8c4e68d60b5417b96c8dbb419332c95a59935b90419ec74d6bebcefb9430d69c",
+    "cios/applications/flora/research_intelligence/technology_experience_assets/experience.css": "6b47b3f1324e7526b1d3b80bc6382eb8c3859b085077b3cc9e95919267e59813",
+    "cios/applications/flora/research_intelligence/technology_experience_assets/experience.js": "3fca5f8659f7f9eae194d27ea53ee8593fe182dfd3454920228b76205df73ece",
+    "cios/applications/flora/research_intelligence/technology_experience_assets/uk-technology.webp": "194ff4b1bdfd1899988c5c7b1ed89240d1ef0ef4115670742552120fed8601fe",
+    "cios/applications/flora/web/app.py": "6de9a3c8f5644be834b2e49946c30e52580fe126dd9a853c35619e0baa9c09a2",
+    "docs/flora-runtime/ux-refinement-573/Commercial-Views.json": "75a80994f78251bc092e858788a23538685812034add59ad76ac6aeb8dc9db7d",
+    "tests/test_flora_technology_owner_journey.py": "b61df7a4355eb7e0ce6a361604e674af4c4154d83b33e378c0474baafd14b23d",
+    "tests/test_flora_ux_refinement_573.py": "b59626712c58a0738b2000d9b1e13ccb0be0ac216ed4d9360863083bed15fd74",
+    "tools/research/check_flora_ux_573.cjs": "d89561dbf773aaab46d0a5d17b2b2975717515517ade849e147978aa465a1e00",
+    "tools/research/check_technology_owner_journey.cjs": "208bdf93b9dc404d1582684826c87448b0c45ef2de586f20299038063ff761d9"
+  }
+}

@@ -1,0 +1,305 @@
+{
+  "baseline_version": 1,
+  "profile": "01b",
+  "head_sha": "854a783b3c5f83d6ee3604f49a76772529b7339a",
+  "runtime": "3.12.14",
+  "unique_ids": 1432,
+  "passed": true,
+  "issues": [],
+  "integrity": {
+    "unchanged_comparisons": 146,
+    "counts": {
+      "hash-comparison.json": 52,
+      "01c-integrity.json": 9,
+      "01d-integrity.json": 62,
+      "acceptance-integrity.json": 5,
+      "01e-integrity.json": 18
+    },
+    "audit_chains": 15,
+    "audit_record_digests": 17,
+    "cleanup_audits": 1
+  },
+  "run_kind": "Working-tree regression gate over baseline 854a783; final feature checks are separately source-bound.",
+  "suites": {
+    "aviation_twin": {
+      "counts": {
+        "passed": 13
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "banking_explorer": {
+      "counts": {
+        "passed": 12
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "commercial_assessment": {
+      "counts": {
+        "passed": 8
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "domain": {
+      "counts": {
+        "passed": 405,
+        "failed": 21,
+        "skipped": 10
+      },
+      "issues": [],
+      "inherited": [
+        "tests/test_flora_banking_increment44_executive_navigation.py::test_account_default_opportunities_breadcrumbs_and_evidence_drilldown",
+        "tests/test_flora_banking_increment44_executive_navigation.py::test_ai_native_reference_model_collapsed_and_separate",
+        "tests/test_flora_banking_increment44_executive_navigation.py::test_landing_budget_conclusion_and_signals",
+        "tests/test_flora_banking_increment44_executive_navigation.py::test_pestle_only_outlook_not_landing_or_portfolio",
+        "tests/test_flora_banking_increment451_visual_correction.py::test_featured_subset_has_full_exploration_route_and_counts_match_projection",
+        "tests/test_flora_banking_increment45_visual_intelligence.py::test_ai_native_maturity_journey_renders_as_visual_progression",
+        "tests/test_flora_banking_industry_reinvention_increment42.py::test_financial_behaviour_narrative_has_required_causal_sections",
+        "tests/test_flora_banking_industry_reinvention_increment42.py::test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace",
+        "tests/test_flora_banking_industry_reinvention_increment42.py::test_industry_opportunity_totals_reconcile_to_account_opportunities",
+        "tests/test_flora_banking_industry_reinvention_increment42.py::test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs",
+        "tests/test_flora_banking_industry_reinvention_increment42.py::test_rendered_acceptance_artefacts_exist",
+        "tests/test_flora_banking_industry_reinvention_increment42.py::test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist",
+        "tests/test_flora_banking_portfolio_increment3.py::test_analyst_views_preserve_attribution_without_fake_consensus",
+        "tests/test_flora_banking_portfolio_increment3.py::test_each_bank_page_uses_executive_structure_and_preserves_inspection",
+        "tests/test_flora_banking_portfolio_increment3.py::test_increment_41_pipeline_reconciliation_horizons_and_value_meaning",
+        "tests/test_flora_banking_portfolio_increment3.py::test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion",
+        "tests/test_flora_banking_portfolio_increment3.py::test_increment_41_supplier_traction_is_sourced_or_human_labelled_and_unknown_is_bounded",
+        "tests/test_flora_banking_portfolio_increment3.py::test_opportunities_have_values_feedback_and_preserve_originals",
+        "tests/test_flora_banking_portfolio_increment3.py::test_theme_relevance_ranking_and_pipeline_are_deterministic",
+        "tests/test_flora_enterprise_canvas.py::test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+        "tests/test_flora_enterprise_canvas.py::test_mod_executive_commercial_canvas_read_model"
+      ],
+      "fixed": []
+    },
+    "financial": {
+      "counts": {
+        "passed": 35,
+        "failed": 12
+      },
+      "issues": [],
+      "inherited": [
+        "tests/test_flora_ai_financial_report_review.py::test_ai_financial_report_review_applies_accepted_claim",
+        "tests/test_flora_ai_financial_report_review.py::test_financial_intelligence_persistence_failure_is_not_provider_failure",
+        "tests/test_flora_ai_financial_report_review.py::test_financial_intelligence_records_provider_not_configured",
+        "tests/test_flora_ai_financial_report_review.py::test_financial_intelligence_records_source_retrieval_failure",
+        "tests/test_flora_ai_financial_report_review.py::test_financial_intelligence_refresh_creates_missing_nested_directories",
+        "tests/test_flora_ai_financial_report_review.py::test_flora_data_dir_defaults_to_render_persistent_pilot_storage",
+        "tests/test_flora_ai_financial_report_review.py::test_missing_financial_intelligence_run_returns_usable_page",
+        "tests/test_flora_ai_financial_report_review.py::test_old_financial_intelligence_url_does_not_raise",
+        "tests/test_flora_ai_financial_report_review.py::test_progress_run_deduplicates_refresh_clicks",
+        "tests/test_flora_ai_financial_report_review.py::test_provider_request_failures_remain_classified",
+        "tests/test_flora_ai_financial_report_review.py::test_provider_timeout_is_distinct_and_records_safe_diagnostic",
+        "tests/test_flora_ai_financial_report_review.py::test_review_page_exposes_accept_amend_reject"
+      ],
+      "fixed": []
+    },
+    "legacy": {
+      "counts": {
+        "failed": 24,
+        "passed": 3
+      },
+      "issues": [],
+      "inherited": [
+        "tests/test_flora_pilot_auth.py::test_blueprint_get_and_post_use_same_signed_session_and_anonymous_denied",
+        "tests/test_flora_pilot_auth.py::test_cios_owner_can_upload_inspect_and_stage_mod_package_without_canonical_mutation",
+        "tests/test_flora_pilot_auth.py::test_cookie_security_attributes_for_https_deployment",
+        "tests/test_flora_pilot_auth.py::test_deprecated_auto_sign_in_conflicts_with_canonical_pilot_mode",
+        "tests/test_flora_pilot_auth.py::test_owner_managed_enterprise_policy_is_case_normalised_and_workspace_bound",
+        "tests/test_flora_pilot_auth.py::test_persistent_cookie_has_30_day_expiry_survives_restart_and_rejects_expired",
+        "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_defaults_false_and_refuses_non_pilot",
+        "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_OWNER_ID-owner]",
+        "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_ROLE-membership]",
+        "tests/test_flora_pilot_auth.py::test_pilot_sign_in_route_accepts_secret_only_by_post_and_sets_cookie",
+        "tests/test_flora_pilot_auth.py::test_sign_in_issues_one_cookie_and_browser_reuses_it_for_import_get_and_post",
+        "tests/test_flora_pilot_auth.py::test_synthetic_headers_ignored_and_tampered_cookie_rejected",
+        "tests/test_flora_pilot_auth.py::test_unexpected_diagnostic_storage_failure_preserves_denied_context",
+        "tests/test_flora_pilot_auth.py::test_valid_pilot_session_cookie_resolves_owner_workspace_role_and_policy",
+        "tests/test_flora_pilot_blueprint_review.py::test_non_pilot_workspace_and_capability_checks_are_unchanged",
+        "tests/test_flora_pilot_blueprint_review.py::test_pilot_upload_review_and_dispositions_do_not_grant_promotion",
+        "tests/test_flora_pilot_import_bypass.py::test_configured_module_complete_http_commercial_context_and_twin_map",
+        "tests/test_flora_pilot_import_bypass.py::test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspace",
+        "tests/test_flora_pilot_import_bypass.py::test_deployment_endpoint_identifies_canonical_import_runtime",
+        "tests/test_flora_pilot_import_bypass.py::test_form_validation_secure_mode_and_promotion_boundary",
+        "tests/test_flora_pilot_import_bypass.py::test_one_canonical_mode_and_conflicting_legacy_modes_fail",
+        "tests/test_flora_pilot_import_bypass.py::test_pilot_configure_save_and_recompose_uses_narrow_actor_scope",
+        "tests/test_flora_pilot_import_bypass.py::test_secure_mode_settings_route_reports_root_authorisation_decision",
+        "tests/test_flora_pilot_import_bypass.py::test_validation_and_archive_safety_precede_identity"
+      ],
+      "fixed": []
+    },
+    "multi_industry_integration": {
+      "counts": {
+        "passed": 8
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "primary_enrichment": {
+      "counts": {
+        "passed": 18
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "research_intelligence": {
+      "counts": {
+        "passed": 18
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "sales_pipeline": {
+      "counts": {
+        "passed": 25
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "security": {
+      "counts": {
+        "passed": 388
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "supplemental": {
+      "counts": {
+        "passed": 39
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "unified_experience": {
+      "counts": {
+        "passed": 15
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "research_diagnostic": {
+      "counts": {
+        "passed": 4
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "research_cycle": {
+      "counts": {
+        "passed": 25
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "enterprise_understanding": {
+      "counts": {
+        "passed": 36
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "visual_intelligence": {
+      "counts": {
+        "passed": 32
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "living_industry_maps": {
+      "counts": {
+        "passed": 29
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "commercial_visual_v3": {
+      "counts": {
+        "passed": 27
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "commercial_usability_v31": {
+      "counts": {
+        "passed": 22
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "intelligence_depth": {
+      "counts": {
+        "passed": 20
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "enterprise_opportunity": {
+      "counts": {
+        "passed": 17
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "global_macro": {
+      "counts": {
+        "passed": 55
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "macro_enterprise_v2": {
+      "counts": {
+        "passed": 33
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "unified_integration_v1": {
+      "counts": {
+        "passed": 15
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "technology_visual_foundation_v1": {
+      "counts": {
+        "passed": 39
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    },
+    "technology_visual_world_v1": {
+      "counts": {
+        "passed": 24
+      },
+      "issues": [],
+      "inherited": [],
+      "fixed": []
+    }
+  }
+}

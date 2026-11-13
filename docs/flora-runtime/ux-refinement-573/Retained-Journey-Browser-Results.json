@@ -1,0 +1,268 @@
+{
+  "passed": true,
+  "responsiveChecks": 60,
+  "keyboardDistrictActivations": 24,
+  "checks": [
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "?selected=cloud",
+      "width": 1440
+    },
+    {
+      "suffix": "/district?district=cloud",
+      "width": 1440
+    },
+    {
+      "suffix": "/enterprise",
+      "width": 1440
+    },
+    {
+      "suffix": "/operating-model",
+      "width": 1440
+    },
+    {
+      "suffix": "/pipeline?scope=industry",
+      "width": 1440
+    },
+    {
+      "suffix": "/opportunity?record=cooling&scope=industry",
+      "width": 1440
+    },
+    {
+      "suffix": "?selected=cloud",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "?selected=cloud",
+      "width": 1024
+    },
+    {
+      "suffix": "/district?district=cloud",
+      "width": 1024
+    },
+    {
+      "suffix": "/enterprise",
+      "width": 1024
+    },
+    {
+      "suffix": "/operating-model",
+      "width": 1024
+    },
+    {
+      "suffix": "/pipeline?scope=industry",
+      "width": 1024
+    },
+    {
+      "suffix": "/opportunity?record=cooling&scope=industry",
+      "width": 1024
+    },
+    {
+      "suffix": "?selected=cloud",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "?selected=cloud",
+      "width": 768
+    },
+    {
+      "suffix": "/district?district=cloud",
+      "width": 768
+    },
+    {
+      "suffix": "/enterprise",
+      "width": 768
+    },
+    {
+      "suffix": "/operating-model",
+      "width": 768
+    },
+    {
+      "suffix": "/pipeline?scope=industry",
+      "width": 768
+    },
+    {
+      "suffix": "/opportunity?record=cooling&scope=industry",
+      "width": 768
+    },
+    {
+      "suffix": "?selected=cloud",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 390
+    },
+    {
+      "suffix": "?selected=cloud",
+      "width": 390
+    },
+    {
+      "suffix": "/district?district=cloud",
+      "width": 390
+    },
+    {
+      "suffix": "/enterprise",
+      "width": 390
+    },
+    {
+      "suffix": "/operating-model",
+      "width": 390
+    },
+    {
+      "suffix": "/pipeline?scope=industry",
+      "width": 390
+    },
+    {
+      "suffix": "/opportunity?record=cooling&scope=industry",
+      "width": 390
+    },
+    {
+      "suffix": "?selected=cloud",
+      "width": 390
+    },
+    {
+      "suffix": "/district?district=cloud",
+      "width": 1440
+    },
+    {
+      "suffix": "/enterprise",
+      "width": 1440
+    },
+    {
+      "suffix": "/opportunity?record=cooling&scope=equinix",
+      "width": 1440
+    },
+    {
+      "suffix": "/pipeline",
+      "width": 1440
+    }
+  ],
+  "errors": [],
+  "networkWrites": [],
+  "externalRequests": [],
+  "tests": [
+    "image-relative alignment at four sizes",
+    "market-enterprise-financial-model-Pipeline drill",
+    "search filters numeric sorting",
+    "explicit enterprise-scoped tab-local creation",
+    "stage update persists on reload",
+    "dates rejected when close precedes start",
+    "notes rendered as text, not markup",
+    "scope changes preserve context and local edits",
+    "fresh context cannot read another tab preview",
+    "no-JavaScript native read journey",
+    "storage unavailable fallback",
+    "reduced motion and print"
+  ],
+  "limitations": [
+    "Chromium simulated iPad sizes; physical iPad/Safari and assistive technology not tested",
+    "Synthetic sales examples only; no live Pipeline integration"
+  ]
+}

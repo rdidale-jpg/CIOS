@@ -1,0 +1,110 @@
+{
+  "base": "854a783b3c5f83d6ee3604f49a76772529b7339a",
+  "rows": [
+    {
+      "path": "cios/applications/flora/sales_pipeline.py",
+      "unchanged": true,
+      "sha256": "ac16d29added41baa4f1a640cddd5fa5b8a5e1174291c98536330826b348fb23"
+    },
+    {
+      "path": "cios/applications/flora/security.py",
+      "unchanged": true,
+      "sha256": "1aded78551cbf8d0272dd36d55a8ff3b5249383f688aac7943abd436c246e94d"
+    },
+    {
+      "path": "cios/applications/flora/access.py",
+      "unchanged": true,
+      "sha256": "da0abc2923c2c02d93e65c3ba986df879c6a71946b2e6b567dfca08c0c8ceb51"
+    },
+    {
+      "path": "cios/applications/flora/security_web.py",
+      "unchanged": true,
+      "sha256": "9eb6e3226884c8bd4d6a6277f5807699c39d0cb79a62202892e8dc57237580cd"
+    },
+    {
+      "path": "cios/applications/flora/security_store.py",
+      "unchanged": true,
+      "sha256": "1d096ac0d335fee0a8da41c389780e764b1707c8ba046962cb1bef503750863e"
+    },
+    {
+      "path": "cios/applications/flora/blueprint_import/views.py",
+      "unchanged": true,
+      "sha256": "31bbde3fafcb254d771b68876a7d0eb6d094f7dcd4aca5466e0b0787e3716ad2"
+    },
+    {
+      "path": "cios/applications/flora/memory/models.py",
+      "unchanged": true,
+      "sha256": "69e8c03b3873320768240af3772791778eb35660b0f711fd985e28f53191ba33"
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/registry.py",
+      "unchanged": true,
+      "sha256": "840f5cb8ef66c5ab5947f462b2b5e1acde07e1a186653207323a2a5ef3dfd080"
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/source_import.py",
+      "unchanged": true,
+      "sha256": "e851f66a9c4540f538881e60ae451b0ad7c889d20cdd2ae5f4789d6490f7ebc7"
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/technology.py",
+      "unchanged": true,
+      "sha256": "65917a54f1f81505b04969aad26c89c9b629bce4adc300062e9992359f8b04d2"
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/technology_views.py",
+      "unchanged": true,
+      "sha256": "3942536c9541198c6233f54747bb64a55c3973ebd1badb6fd857dec315c24ff4"
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/technology_scene.py",
+      "unchanged": true,
+      "sha256": "06a32c99e8f72065f8144cf37b065479dfdadc17be82d7a0cc16c2d3e56a3d50"
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/unified_views.py",
+      "unchanged": true,
+      "sha256": "101a93501d80653b6685f488b5fe3a6c611ec6f12dc9a00a48f2a18d9c147371"
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/macro_views.py",
+      "unchanged": true,
+      "sha256": "79f7589c38dbceb91578570f1cb94ede5fc5a65605b74ca70d3aed9ade935be5"
+    },
+    {
+      "path": "tools/ci/flora_ci.py",
+      "unchanged": true,
+      "sha256": "6538c0b1c02aba99e890c026ef633b3f68e740ffd8c54cdfb8eb54068b8817c4"
+    },
+    {
+      "path": "tools/ci/flora-baseline-v1.json",
+      "unchanged": true,
+      "sha256": "901a6719b6f90247fc0b4daeaaf217e402abf211606394917f59ea67c5f9e7cf"
+    },
+    {
+      "path": "render.yaml",
+      "unchanged": true,
+      "sha256": "008ced76a4b5e28a4198f2266c2c8ca98e6b8754cafe3b17fbce389b95570741"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/Research-Page.json",
+      "unchanged": true,
+      "sha256": "e7f0bad8a7451cbb10f65a84b786c8ba4c1b5d634540fd02b660d46c57285b11"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/Candidate-Handoff.json",
+      "unchanged": true,
+      "sha256": "61c4012b5b60fc8219ad7dd8910d455faa11c604e163e83f3117d17d97f2945a"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/Coverage-and-Reconciliation.json",
+      "unchanged": true,
+      "sha256": "b0ef6fcc9f8a33f773d8da11be8e222a0b45b1d8e3fb876187b65f9ded0c2b2e"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/Foundation.json",
+      "unchanged": true,
+      "sha256": "1f332a13026e83d677d3897fcec9bd29c259546b070b9cea23b6b8dcd83c05b5"
+    }
+  ]
+}

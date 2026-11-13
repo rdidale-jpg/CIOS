@@ -1,0 +1,679 @@
+{
+  "passed": true,
+  "responsiveChecks": 63,
+  "districtKeyboardActivations": 32,
+  "viewports": [
+    [
+      1440,
+      1050,
+      "desktop"
+    ],
+    [
+      1024,
+      768,
+      "ipad-landscape"
+    ],
+    [
+      768,
+      1024,
+      "ipad-portrait"
+    ],
+    [
+      390,
+      844,
+      "mobile"
+    ]
+  ],
+  "checks": [
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "/district?district=ai",
+      "width": 1440
+    },
+    {
+      "suffix": "/district?district=channels",
+      "width": 1440
+    },
+    {
+      "suffix": "/enterprise?enterprise=nvidia&district=ai",
+      "width": 1440
+    },
+    {
+      "suffix": "/pipeline?scope=nvidia",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1440
+    },
+    {
+      "suffix": "/district?district=ai",
+      "width": 1440
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "/district?district=ai",
+      "width": 1024
+    },
+    {
+      "suffix": "/district?district=channels",
+      "width": 1024
+    },
+    {
+      "suffix": "/enterprise?enterprise=nvidia&district=ai",
+      "width": 1024
+    },
+    {
+      "suffix": "/pipeline?scope=nvidia",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 1024
+    },
+    {
+      "suffix": "/district?district=ai",
+      "width": 1024
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "/district?district=ai",
+      "width": 768
+    },
+    {
+      "suffix": "/district?district=channels",
+      "width": 768
+    },
+    {
+      "suffix": "/enterprise?enterprise=nvidia&district=ai",
+      "width": 768
+    },
+    {
+      "suffix": "/pipeline?scope=nvidia",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 768
+    },
+    {
+      "suffix": "/district?district=ai",
+      "width": 768
+    },
+    {
+      "suffix": "",
+      "width": 390
+    },
+    {
+      "suffix": "/district?district=ai",
+      "width": 390
+    },
+    {
+      "suffix": "/district?district=channels",
+      "width": 390
+    },
+    {
+      "suffix": "/enterprise?enterprise=nvidia&district=ai",
+      "width": 390
+    },
+    {
+      "suffix": "/pipeline?scope=nvidia",
+      "width": 390
+    },
+    {
+      "suffix": "",
+      "width": 390
+    },
+    {
+      "suffix": "",
+      "width": 390
+    },
+    {
+      "suffix": "",
+      "width": 390
+    },
+    {
+      "suffix": "",
+      "width": 390
+    },
+    {
+      "suffix": "",
+      "width": 390
+    },
+    {
+      "suffix": "",
+      "width": 390
+    },
+    {
+      "suffix": "",
+      "width": 390
+    },
+    {
+      "suffix": "",
+      "width": 390
+    },
+    {
+      "suffix": "",
+      "width": 390
+    },
+    {
+      "suffix": "/district?district=ai",
+      "width": 390
+    },
+    {
+      "suffix": "/district?district=channels",
+      "width": 1440
+    },
+    {
+      "suffix": "/participants",
+      "width": 1440
+    },
+    {
+      "suffix": "/enterprise?enterprise=nvidia",
+      "width": 390
+    }
+  ],
+  "errors": [],
+  "networkWrites": [],
+  "externalRequests": [],
+  "parity": [
+    {
+      "path": "/industries/banking",
+      "width": 1440,
+      "height": 1050,
+      "identical": true,
+      "base_sha256": "c71b7f1e06c0af93271aea9ea24754260801cb5e240d47db139ae4b2bc21dd7d",
+      "candidate_sha256": "c71b7f1e06c0af93271aea9ea24754260801cb5e240d47db139ae4b2bc21dd7d",
+      "audit": {
+        "headings": [
+          "Banking",
+          "UK Banking — pressures to investigate",
+          "The banking system.",
+          "",
+          "",
+          ""
+        ],
+        "svg": 2,
+        "images": 0,
+        "tables": 0,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": true
+      }
+    },
+    {
+      "path": "/industries/aviation",
+      "width": 1440,
+      "height": 1050,
+      "identical": true,
+      "base_sha256": "7d3d305bd9c370dee55de1cab980dcdb686852ecd0577fac7e198e7a06993418",
+      "candidate_sha256": "7d3d305bd9c370dee55de1cab980dcdb686852ecd0577fac7e198e7a06993418",
+      "audit": {
+        "headings": [
+          "Aviation",
+          "From demand to departure.",
+          "",
+          "",
+          ""
+        ],
+        "svg": 2,
+        "images": 0,
+        "tables": 0,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": true
+      }
+    },
+    {
+      "path": "/enterprises/lloyds",
+      "width": 1440,
+      "height": 1050,
+      "identical": true,
+      "base_sha256": "332a7f8d5ed8c19f65a17bdf69ffc53ec7477da0b9cbfdc92645871cfb1fdb82",
+      "candidate_sha256": "332a7f8d5ed8c19f65a17bdf69ffc53ec7477da0b9cbfdc92645871cfb1fdb82",
+      "audit": {
+        "headings": [
+          "Lloyds Banking Group.",
+          "Lloyds — three changes worth investigating",
+          "Programme → operating capability → outcome to validate",
+          "How Lloyds works.",
+          "Locate the possibility in the business.",
+          "",
+          ""
+        ],
+        "svg": 14,
+        "images": 0,
+        "tables": 2,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": true
+      }
+    },
+    {
+      "path": "/enterprises/easyjet",
+      "width": 1440,
+      "height": 1050,
+      "identical": true,
+      "base_sha256": "747028b87b611b935b035baac2d144bacff9a74c963735b34bf791007702011e",
+      "candidate_sha256": "747028b87b611b935b035baac2d144bacff9a74c963735b34bf791007702011e",
+      "audit": {
+        "headings": [
+          "easyJet.",
+          "How easyJet works.",
+          "Key findings & important changes",
+          "Where to validate next"
+        ],
+        "svg": 2,
+        "images": 0,
+        "tables": 0,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": true
+      }
+    },
+    {
+      "path": "/macro",
+      "width": 1440,
+      "height": 1050,
+      "identical": true,
+      "base_sha256": "8bd659642bd0165c60a0068087b1646a6a4c02659365b40209353adf08ec7bc4",
+      "candidate_sha256": "8bd659642bd0165c60a0068087b1646a6a4c02659365b40209353adf08ec7bc4",
+      "audit": {
+        "headings": [
+          "See the forces.\nFollow the evidence.",
+          "Resilience across connected services"
+        ],
+        "svg": 8,
+        "images": 0,
+        "tables": 0,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": false
+      }
+    },
+    {
+      "path": "/industries/banking",
+      "width": 1024,
+      "height": 768,
+      "identical": true,
+      "base_sha256": "d8ce1e3a45ba6c5d5eb6802f9dc3cdd1564d961c739ff8de00f4ca7591947f90",
+      "candidate_sha256": "d8ce1e3a45ba6c5d5eb6802f9dc3cdd1564d961c739ff8de00f4ca7591947f90",
+      "audit": {
+        "headings": [
+          "Banking",
+          "UK Banking — pressures to investigate",
+          "The banking system.",
+          "",
+          "",
+          ""
+        ],
+        "svg": 2,
+        "images": 0,
+        "tables": 0,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": true
+      }
+    },
+    {
+      "path": "/industries/aviation",
+      "width": 1024,
+      "height": 768,
+      "identical": true,
+      "base_sha256": "1a1bd7d1da282a8f4131d4501c185946b5cc486b2709cbff9a4c17a9cf8f1553",
+      "candidate_sha256": "1a1bd7d1da282a8f4131d4501c185946b5cc486b2709cbff9a4c17a9cf8f1553",
+      "audit": {
+        "headings": [
+          "Aviation",
+          "From demand to departure.",
+          "",
+          "",
+          ""
+        ],
+        "svg": 2,
+        "images": 0,
+        "tables": 0,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": true
+      }
+    },
+    {
+      "path": "/enterprises/lloyds",
+      "width": 1024,
+      "height": 768,
+      "identical": true,
+      "base_sha256": "ebc049a8ed39e48282d6f4eeccd01fd912d3ceea9151cb29346786120c62d6c1",
+      "candidate_sha256": "ebc049a8ed39e48282d6f4eeccd01fd912d3ceea9151cb29346786120c62d6c1",
+      "audit": {
+        "headings": [
+          "Lloyds Banking Group.",
+          "Lloyds — three changes worth investigating",
+          "Programme → operating capability → outcome to validate",
+          "How Lloyds works.",
+          "Locate the possibility in the business.",
+          "",
+          ""
+        ],
+        "svg": 14,
+        "images": 0,
+        "tables": 2,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": true
+      }
+    },
+    {
+      "path": "/enterprises/easyjet",
+      "width": 1024,
+      "height": 768,
+      "identical": true,
+      "base_sha256": "ceb787d4487dbaf32de33b87dcdf7b006008877ba061b869321f7a1b50fe8765",
+      "candidate_sha256": "ceb787d4487dbaf32de33b87dcdf7b006008877ba061b869321f7a1b50fe8765",
+      "audit": {
+        "headings": [
+          "easyJet.",
+          "How easyJet works.",
+          "Key findings & important changes",
+          "Where to validate next"
+        ],
+        "svg": 2,
+        "images": 0,
+        "tables": 0,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": true
+      }
+    },
+    {
+      "path": "/macro",
+      "width": 1024,
+      "height": 768,
+      "identical": true,
+      "base_sha256": "9e5497f09a3e27ad840c42055f8030e99ad0140bcf354eb31231cc83b3a3d693",
+      "candidate_sha256": "9e5497f09a3e27ad840c42055f8030e99ad0140bcf354eb31231cc83b3a3d693",
+      "audit": {
+        "headings": [
+          "See the forces.\nFollow the evidence.",
+          "Resilience across connected services"
+        ],
+        "svg": 8,
+        "images": 0,
+        "tables": 0,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": false
+      }
+    },
+    {
+      "path": "/industries/banking",
+      "width": 390,
+      "height": 844,
+      "identical": true,
+      "base_sha256": "b4ffe57397c7e4536e7e8c8d0a932d07953ab61210e68e46ca763eb2c1cd3b25",
+      "candidate_sha256": "b4ffe57397c7e4536e7e8c8d0a932d07953ab61210e68e46ca763eb2c1cd3b25",
+      "audit": {
+        "headings": [
+          "Banking",
+          "UK Banking — pressures to investigate",
+          "The banking system.",
+          "",
+          "",
+          ""
+        ],
+        "svg": 2,
+        "images": 0,
+        "tables": 0,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": true
+      }
+    },
+    {
+      "path": "/industries/aviation",
+      "width": 390,
+      "height": 844,
+      "identical": true,
+      "base_sha256": "6415cce3883f4e35b543740c2ae7d47a466ec8a9e8baeffdd3d12b15ff3c223a",
+      "candidate_sha256": "6415cce3883f4e35b543740c2ae7d47a466ec8a9e8baeffdd3d12b15ff3c223a",
+      "audit": {
+        "headings": [
+          "Aviation",
+          "From demand to departure.",
+          "",
+          "",
+          ""
+        ],
+        "svg": 2,
+        "images": 0,
+        "tables": 0,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": true
+      }
+    },
+    {
+      "path": "/enterprises/lloyds",
+      "width": 390,
+      "height": 844,
+      "identical": true,
+      "base_sha256": "9e45f7d090e08b9e36db01dfd7ec30742418f23303c5c760abb598a381c98362",
+      "candidate_sha256": "9e45f7d090e08b9e36db01dfd7ec30742418f23303c5c760abb598a381c98362",
+      "audit": {
+        "headings": [
+          "Lloyds Banking Group.",
+          "Lloyds — three changes worth investigating",
+          "Programme → operating capability → outcome to validate",
+          "How Lloyds works.",
+          "Locate the possibility in the business.",
+          "",
+          ""
+        ],
+        "svg": 14,
+        "images": 0,
+        "tables": 2,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": true
+      }
+    },
+    {
+      "path": "/enterprises/easyjet",
+      "width": 390,
+      "height": 844,
+      "identical": true,
+      "base_sha256": "95ccd5fb3605e66b2fc02f442cac4691ddb853c7fd5068a4f04d4abba0e5f7f4",
+      "candidate_sha256": "95ccd5fb3605e66b2fc02f442cac4691ddb853c7fd5068a4f04d4abba0e5f7f4",
+      "audit": {
+        "headings": [
+          "easyJet.",
+          "How easyJet works.",
+          "Key findings & important changes",
+          "Where to validate next"
+        ],
+        "svg": 2,
+        "images": 0,
+        "tables": 0,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": true
+      }
+    },
+    {
+      "path": "/macro",
+      "width": 390,
+      "height": 844,
+      "identical": true,
+      "base_sha256": "acb1db24c3543a65f780f9e7ee1780deaa9dff37fa51059f8541e0f3fb21bc0c",
+      "candidate_sha256": "acb1db24c3543a65f780f9e7ee1780deaa9dff37fa51059f8541e0f3fb21bc0c",
+      "audit": {
+        "headings": [
+          "See the forces.\nFollow the evidence.",
+          "Resilience across connected services"
+        ],
+        "svg": 8,
+        "images": 0,
+        "tables": 0,
+        "pipelineLinks": [
+          "/flora/sales/pipeline"
+        ],
+        "overflow": false,
+        "visibleDiagnosticLanguage": false
+      }
+    }
+  ],
+  "assertions": [
+    "8 persistent desktop labels and mobile name key",
+    "embedded local artwork, minimum 44px district targets",
+    "native one-step district navigation at four sizes",
+    "compact source-supported UK metrics and blank NVIDIA UK cells",
+    "native numeric sorting, blanks last, search and source detail",
+    "substantial NVIDIA financials, strategy, ecosystem, programmes and hypotheses",
+    "no default governance-status prose",
+    "keyboard financial detail and hypothesis expansion",
+    "explicit scoped preview creation, reload persistence and note escaping",
+    "fresh browser context cannot read another preview",
+    "native no-JS reading and sorting",
+    "15 existing-screen parity comparisons",
+    "reduced-motion and print"
+  ],
+  "limitations": [
+    "Physical iPad/Safari and screen-reader user testing not performed",
+    "UK revenue and workforce populated only where reviewed UK scope is defensible",
+    "NVIDIA is the first fully enriched profile; other views reuse available research",
+    "No live Pipeline, canonical promotion or hosted deployment exercised"
+  ]
+}

@@ -61,9 +61,9 @@ def public_route_catalog():
     add(('/flora/banking/heatmap/detail',), 'heatmap_detail_page', 'Public bank/theme scenario lookup only', ('mode','theme','bank'))
     add(('/flora/banking/explorer',), 'industry_page', 'Repository BANKS public-source fixtures; conceptual ecosystem only')
     add(('/industries','/enterprises'), 'unified_catalogue', 'Repository-owned public research navigation only')
-    add(tuple('/industries/technology/experience'+suffix for suffix in ('','/district','/enterprise','/operating-model','/pipeline','/opportunity')),
+    add(tuple('/industries/technology/experience'+suffix for suffix in ('','/district','/participants','/enterprise','/operating-model','/pipeline','/opportunity')),
         'technology_owner_experience', 'Public presentation research and browser-tab-only synthetic sales examples; no live stores',
-        ('selected','district','scope','record','detail','area','macro'))
+        ('selected','district','scope','record','detail','area','macro','enterprise','sort','direction','search'))
     add(tuple('/industries/technology/experience/assets/'+name for name in ('artwork','styles','interactions')),
         'technology_experience_asset', 'Exact repository-owned artwork, styles and interaction code')
     add(('/industries/technology',), 'technology_research', 'Hash-pinned recovered Page research only; no canonical or private stores', ('lens','segment','relationship','theme'))
