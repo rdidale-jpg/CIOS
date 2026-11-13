@@ -263,6 +263,15 @@ def test_explicit_587_owner_revisions_preserve_existing_authority_and_matching_e
         tree=ast.parse((root/path).read_text())
         functions={n.name:n for n in tree.body if isinstance(n,ast.FunctionDef)}
         for name,checksum in expected.items():
+            # #591 explicitly extends the shared discovery entry point. Keep
+            # its original pin and verify the scoped reviewed replacement.
+            revisions=json.loads((root/'docs/flora-runtime/buying-trigger-591/Owner-Revisions.json').read_text())
+            assert set(revisions['authorised_function_revisions'])=={'cios/applications/flora/offers.py'}
+            assert set(revisions['authorised_function_revisions']['cios/applications/flora/offers.py'])=={'discover'}
+            revision=revisions['authorised_function_revisions'].get(path,{}).get(name)
+            if revision:
+                assert revision['baseline_ast_sha256']==checksum
+                checksum=revision['candidate_ast_sha256']
             assert hashlib.sha256(ast.dump(functions[name],include_attributes=False).encode()).hexdigest()==checksum,(path,name)
     # There is still one matching call in both modes; no library matching service.
     assert 'def assess_fit' not in (root/'cios/applications/flora/offer_library.py').read_text()

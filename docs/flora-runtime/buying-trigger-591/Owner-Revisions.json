@@ -1,0 +1,13 @@
+{
+  "issue": 591,
+  "base_sha": "6da105a474fbbcdf9903fdd77b6aee88ca638d1f",
+  "authorised_function_revisions": {
+    "cios/applications/flora/offers.py": {
+      "discover": {
+        "baseline_ast_sha256": "f1d0ba6d6eecee15317614128b2a40e5f35cd7c518ffbebee3fb35ad8f9ddbf9",
+        "candidate_ast_sha256": "cd9cc89b5a2c50deac094f9fe2864bea1a2f0736d256e61b2cab9d6c03fe3104",
+        "reason": "Add an explicit intelligence mode to the existing single shared assessment entry point; preserve original mode unchanged"
+      }
+    }
+  }
+}

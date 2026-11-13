@@ -1,0 +1,13 @@
+{
+  "head_sha": "6da105a474fbbcdf9903fdd77b6aee88ca638d1f",
+  "conclusion": "success",
+  "run_url": "https://github.com/rdidale-jpg/CIOS/actions/runs/43490182841",
+  "artifact_id": 14069886581,
+  "artifact_sha256": "ddb6274ec605011a04b1dc0a693b335cce735d0693598d1f25cb2722a38754a4",
+  "unique_ids": 1432,
+  "security_passed": 388,
+  "inherited_failures": 36,
+  "inherited_skips": 10,
+  "comparator_issues": 0,
+  "verified_before_branch_creation": true
+}
