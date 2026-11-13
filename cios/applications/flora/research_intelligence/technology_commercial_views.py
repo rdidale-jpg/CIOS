@@ -54,7 +54,10 @@ def comparison(district='', sort='name', direction='asc', search='', macro=''):
         term = search.casefold()
         rows = [r for r in rows if term in ' '.join(str(r[k] or '') for k in ('name', 'role', 'specialty')).casefold()]
     title = x.DISTRICTS[district][0] if district else 'Technology participants'
-    intro = x.crumbs([(title, '')]) + '<div class="exp-heading"><div><h1>' + e(title) + '</h1>'
+    banner = ('<a class="commercial-sector-banner" href="' + x.url() + '" aria-label="Back to UK Technology industry">'
+              '<img src="' + x.ASSET_BASE + 'artwork" alt="" aria-hidden="true">'
+              '<span><small>Industry</small>UK Technology</span></a>')
+    intro = banner + x.crumbs([(title, '')]) + '<div class="exp-heading"><div><h1>' + e(title) + '</h1>'
     intro += '<p class="commercial-deck">Compare the enterprises, their roles and commercial signals.</p></div>' + x.pipeline_link(district or 'industry') + '</div>'
     if district == 'cloud':
         intro += '<p class="commercial-market"><strong>£10.5bn</strong> UK public cloud spend · 2024 · IaaS & PaaS</p>'

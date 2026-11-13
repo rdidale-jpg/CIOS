@@ -24,6 +24,7 @@ on:
       - 'docs/flora-runtime/integration-578/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
+      - '.github/workflows/flora-release-preflight.yml'
   push:
     branches: [main]
     paths:
@@ -46,6 +47,7 @@ on:
       - 'docs/flora-runtime/integration-578/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
+      - '.github/workflows/flora-release-preflight.yml'
   workflow_dispatch:
 
 permissions:

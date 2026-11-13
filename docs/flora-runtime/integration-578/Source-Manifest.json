@@ -1,0 +1,35 @@
+{
+  "base_sha": "854a783b3c5f83d6ee3604f49a76772529b7339a",
+  "reviewed_pr_heads": {
+    "574": "867e11809dd13058648b891387038948ccd978a1",
+    "575": "667ce1b3d1f77d4c7d66b20e21c595e7b4882cbb",
+    "577": "ad0b3d4c781178e6fb02271f3f8373fd3b23c339"
+  },
+  "files_sha256": {
+    ".github/workflows/flora-release-preflight.yml": "66297a850048f15564c6ee5096d7a479f90225dd17fddda21b19b972ee94f275",
+    ".github/workflows/flora-validation.yml": "fabd018fb7371271ffb4e1c44f1cc6e47654f117d2740b0e71f35698f57c7577",
+    "cios/applications/flora/offers.py": "ed9021312b666a7b7f331a214f295cc67d9875860e99a08fec9b39f1c41973a9",
+    "cios/applications/flora/offers_views.py": "efc3916251699f2c0ec4a2a3f962d209fb1bb9a672c1b906b22fe4e91e2bc9d3",
+    "cios/applications/flora/public_routes.py": "7a0874d9c0bdc525105eb9e6116e57e257a384ba7846431baeff403a4a25d5ce",
+    "cios/applications/flora/research_intelligence/technology_commercial.py": "b4cace45d509a54dcac6276abbc4bc8b761ad06f442a0b292bd691ee006177b5",
+    "cios/applications/flora/research_intelligence/technology_commercial_views.py": "76125d41169ca638391165752739fe50a3bc090ed600c2d81d2513f27fbdf7aa",
+    "cios/applications/flora/research_intelligence/technology_experience.py": "8c4e68d60b5417b96c8dbb419332c95a59935b90419ec74d6bebcefb9430d69c",
+    "cios/applications/flora/research_intelligence/technology_experience_assets/experience.css": "db2aeeedfde35231da3c3071952b8f0b88d2226c8d83234ecba86f43dd67615b",
+    "cios/applications/flora/research_intelligence/technology_experience_assets/experience.js": "3fca5f8659f7f9eae194d27ea53ee8593fe182dfd3454920228b76205df73ece",
+    "cios/applications/flora/security_web.py": "667ff0eb9c4ab28565148de91454853d702b0e0a5b63bdd0d8845e8ac1ec9cd1",
+    "cios/applications/flora/web/app.py": "07970bdb7646eaf658b4bc9657ca2c6d61d3940a8d748376d46ae3ec47ab1c97",
+    "docs/flora-runtime/ux-refinement-573/Commercial-Views.json": "75a80994f78251bc092e858788a23538685812034add59ad76ac6aeb8dc9db7d",
+    "tests/ci/test_flora_release_preflight.py": "12414f7d8da592eb6db98b5d0ba38176a0f41a383dda024970a23ec12df9d117",
+    "tests/test_flora_integration_578.py": "153e0593623cff06cda27c2ee6976a963a18419e88baf52d5eb47d98dfac79a0",
+    "tests/test_flora_offers_v1.py": "c09ff3f1b60edf22830caa9a12ddb59c2d5df7cacf7e6548241e9ab9980cf870",
+    "tests/test_flora_technology_owner_journey.py": "b61df7a4355eb7e0ce6a361604e674af4c4154d83b33e378c0474baafd14b23d",
+    "tests/test_flora_ux_refinement_573.py": "b59626712c58a0738b2000d9b1e13ccb0be0ac216ed4d9360863083bed15fd74",
+    "tools/ci/flora_offers_preview.cjs": "e4616aad47985c32023d3c8e34f90ce48f18ffb373557af50cca167c8477c2c9",
+    "tools/ci/flora_offers_preview.py": "03e4ba57da5e343a78e988e5d0c0affa4f3d290eb98d25df71e85d32ccf571f8",
+    "tools/ci/flora_release_preflight.py": "a6d836c842f99f452f021b2e7ed90758f452177a88fcef807bd8267d2b50d9ab",
+    "tools/research/check_flora_integration_578.cjs": "ba0488b9e1093fc3053f0a1d0ce072f64cc8a9d9ef0d217d654b6eeba07ef6a3",
+    "tools/research/check_flora_ux_573.cjs": "d89561dbf773aaab46d0a5d17b2b2975717515517ade849e147978aa465a1e00",
+    "tools/research/check_technology_owner_journey.cjs": "208bdf93b9dc404d1582684826c87448b0c45ef2de586f20299038063ff761d9"
+  },
+  "note": "Exact integration SHA and hosted test checkout SHA are recorded by the draft PR and CI artifacts; historical feature manifests remain tied to their own commits."
+}

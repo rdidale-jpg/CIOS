@@ -1,0 +1,55 @@
+{
+  "passed": 6,
+  "checks": [
+    {
+      "device": "desktop",
+      "screen": "cloud",
+      "banner_height": 88,
+      "native_keyboard": true,
+      "native_sort": true,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "screen": "all",
+      "banner_height": 88,
+      "native_keyboard": true,
+      "native_sort": true,
+      "overflow": false
+    },
+    {
+      "device": "ipad",
+      "screen": "cloud",
+      "banner_height": 72,
+      "native_keyboard": true,
+      "native_sort": true,
+      "overflow": false
+    },
+    {
+      "device": "ipad",
+      "screen": "all",
+      "banner_height": 72,
+      "native_keyboard": true,
+      "native_sort": true,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "screen": "cloud",
+      "banner_height": 64,
+      "native_keyboard": true,
+      "native_sort": true,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "screen": "all",
+      "banner_height": 64,
+      "native_keyboard": true,
+      "native_sort": true,
+      "overflow": false
+    }
+  ],
+  "external_requests": 0,
+  "network_writes": 0
+}

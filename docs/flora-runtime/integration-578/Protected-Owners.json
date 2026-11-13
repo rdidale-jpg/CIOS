@@ -1,0 +1,14 @@
+{
+  "base_sha": "854a783b3c5f83d6ee3604f49a76772529b7339a",
+  "unchanged_sha256": {
+    "cios/applications/flora/sales_pipeline.py": "ac16d29added41baa4f1a640cddd5fa5b8a5e1174291c98536330826b348fb23",
+    "cios/applications/flora/security.py": "1aded78551cbf8d0272dd36d55a8ff3b5249383f688aac7943abd436c246e94d",
+    "cios/applications/flora/security_store.py": "1d096ac0d335fee0a8da41c389780e764b1707c8ba046962cb1bef503750863e",
+    "cios/applications/flora/access.py": "da0abc2923c2c02d93e65c3ba986df879c6a71946b2e6b567dfca08c0c8ceb51",
+    "cios/applications/flora/commercial_mission.py": "13e7216d61c97dc3b5faf8d1b94bd83f31fbe56dd6f64a8b9c126f1697d4728d",
+    "cios/applications/flora/blueprint_import/views.py": "31bbde3fafcb254d771b68876a7d0eb6d094f7dcd4aca5466e0b0787e3716ad2",
+    "cios/applications/flora/research_intelligence/registry.py": "840f5cb8ef66c5ab5947f462b2b5e1acde07e1a186653207323a2a5ef3dfd080",
+    "cios/applications/flora/research_intelligence/technology.py": "65917a54f1f81505b04969aad26c89c9b629bce4adc300062e9992359f8b04d2",
+    "render.yaml": "008ced76a4b5e28a4198f2266c2c8ca98e6b8754cafe3b17fbce389b95570741"
+  }
+}

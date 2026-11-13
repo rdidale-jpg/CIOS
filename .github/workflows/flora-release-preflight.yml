@@ -1,0 +1,67 @@
+name: FLORA owner release preflight (no deployment)
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: Full validated 40-character commit SHA (never a branch or tag)
+        required: true
+        type: string
+      configured_branch:
+        description: Actual Render deployment branch, independently confirmed by owner
+        required: true
+        default: main
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: flora-owner-release
+  cancel-in-progress: false
+
+jobs:
+  eligibility:
+    name: Read-only eligibility before requesting owner approval
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Require the trusted main workflow
+        run: test "$GITHUB_REF" = refs/heads/main
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.workflow_sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify exact SHA, branch, full CI and pre-existing approval protection
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          FLORA_RELEASE_SHA: ${{ inputs.commit_sha }}
+          FLORA_DEPLOY_BRANCH: ${{ inputs.configured_branch }}
+        run: python tools/ci/flora_release_preflight.py --sha "$FLORA_RELEASE_SHA" --branch "$FLORA_DEPLOY_BRANCH"
+
+  owner-review:
+    name: Owner approval and repeated read-only checks (does not deploy)
+    needs: eligibility
+    environment: flora-production
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Require the trusted main workflow
+        run: test "$GITHUB_REF" = refs/heads/main
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.workflow_sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Recheck SHA and CI after explicit human approval
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          FLORA_RELEASE_SHA: ${{ inputs.commit_sha }}
+          FLORA_DEPLOY_BRANCH: ${{ inputs.configured_branch }}
+        run: python tools/ci/flora_release_preflight.py --sha "$FLORA_RELEASE_SHA" --branch "$FLORA_DEPLOY_BRANCH"
