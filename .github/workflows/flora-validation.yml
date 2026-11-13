@@ -2,7 +2,7 @@ name: FLORA validation
 
 on:
   pull_request:
-    branches: [main, codex/flora-security-repair-01a, codex/flora-security-repair-01b, codex/flora-living-industry-maps-v2, codex/flora-commercial-visual-intelligence-v3, codex/flora-global-macro-intelligence-v1, codex/flora-intelligence-depth-v1, codex/flora-uk-technology-visual-foundation-v1, codex/flora-technology-visual-world-v1]
+    branches: [main, codex/flora-integration-578, codex/flora-security-repair-01a, codex/flora-security-repair-01b, codex/flora-living-industry-maps-v2, codex/flora-commercial-visual-intelligence-v3, codex/flora-global-macro-intelligence-v1, codex/flora-intelligence-depth-v1, codex/flora-uk-technology-visual-foundation-v1, codex/flora-technology-visual-world-v1]
     types: [opened, synchronize, reopened, ready_for_review, edited]
     paths:
       - 'cios/applications/flora/**'
@@ -22,6 +22,7 @@ on:
       - 'docs/flora-runtime/offers-v1-576/**'
       - 'docs/flora-runtime/ux-refinement-573/**'
       - 'docs/flora-runtime/integration-578/**'
+      - 'docs/flora-runtime/visual-v2-583/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
       - '.github/workflows/flora-release-preflight.yml'
@@ -45,6 +46,7 @@ on:
       - 'docs/flora-runtime/offers-v1-576/**'
       - 'docs/flora-runtime/ux-refinement-573/**'
       - 'docs/flora-runtime/integration-578/**'
+      - 'docs/flora-runtime/visual-v2-583/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
       - '.github/workflows/flora-release-preflight.yml'
@@ -83,6 +85,8 @@ jobs:
         run: python -m pytest tests/test_flora_technology_owner_journey.py tests/test_flora_ux_refinement_573.py tests/test_flora_integration_578.py -q
       - name: Test controlled Offers pilot
         run: python -m pytest tests/test_flora_offers_v1.py -q
+      - name: Test separate two-screen Visual Experience v2
+        run: python -m pytest tests/test_flora_visual_v2_583.py -q
       - name: Publish sanitized job summary
         if: always()
         run: |

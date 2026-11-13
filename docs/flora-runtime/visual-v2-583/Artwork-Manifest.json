@@ -1,0 +1,33 @@
+{
+  "issue": 583,
+  "owner_acceptance": "pending; illustrative proof only",
+  "assets": [
+    {
+      "path": "cios/applications/flora/visual_v2_assets/uk-economy.webp",
+      "sha256": "ff4f70c21fcfe733affd0405021fa24386f5edaeb3497a10596550d9dbed0567",
+      "original_generation_file": "exec-c30c21c5-dc52-47f7-a91a-366113d79c3d.png",
+      "original_sha256": "c63316968e2498290f3a8b4880858319d10bd93be18bc1e60ddcf77cf3d739c2",
+      "origin": "image_gen conceptual commissioned illustration; portrait PESTLE derived from generated landscape",
+      "classification": "presentation artwork, not research, geography, company identity, source evidence or economic-area encoding",
+      "conversion": "WebP quality 87; format conversion only; original generated PNG retained in workspace"
+    },
+    {
+      "path": "cios/applications/flora/visual_v2_assets/pestle.webp",
+      "sha256": "98f374fa572a08c206483f70101155190cef788a6902ca6f73637603f7805c0c",
+      "original_generation_file": "exec-f1be5760-f360-4e71-8673-21120b814670.png",
+      "original_sha256": "b81282788db9dad95bf6decfca05a179d2a20c0855c1154f60c1b7d2c4aea890",
+      "origin": "image_gen conceptual commissioned illustration; portrait PESTLE derived from generated landscape",
+      "classification": "presentation artwork, not research, geography, company identity, source evidence or economic-area encoding",
+      "conversion": "WebP quality 87; format conversion only; original generated PNG retained in workspace"
+    },
+    {
+      "path": "cios/applications/flora/visual_v2_assets/pestle-mobile.webp",
+      "sha256": "0c2baab6abbfd314c3063f3e2798521f6b209aa4275c16aaeee887bfd38830b7",
+      "original_generation_file": "exec-0d4b917b-e008-483f-bf6c-4c9bd0e1ed23.png",
+      "original_sha256": "c7b932e1d7aa7a18272da0b7b08874f668df76d5ca47ab75ad0f3897c50c6228",
+      "origin": "image_gen conceptual commissioned illustration; portrait PESTLE derived from generated landscape",
+      "classification": "presentation artwork, not research, geography, company identity, source evidence or economic-area encoding",
+      "conversion": "WebP quality 87; format conversion only; original generated PNG retained in workspace"
+    }
+  ]
+}

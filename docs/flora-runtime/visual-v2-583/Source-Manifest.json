@@ -1,0 +1,20 @@
+{
+  "issue": 583,
+  "integration_base_sha": "34e34570c52847e16eb5f0d00579ca923983af7c",
+  "unaccepted_visual_comparison_sha": "9aaaa692e5200681bfa69d55a6d13aa483cc1837",
+  "source_files_sha256": {
+    ".github/workflows/flora-validation.yml": "6a31da40fb31ec636c82f03d6e45e8668ab1a4427387427d593922089120531e",
+    "cios/applications/flora/public_routes.py": "747425e42a8358bc40206ae9e8a40e537b2153db745e876a2dd365196b62b80b",
+    "cios/applications/flora/visual_v2.py": "baabb03a56d286403e16f2feecb67ad20e343d0857b439a25b90a031e1dbc448",
+    "cios/applications/flora/visual_v2_assets/economy.json": "78b4bb90c02b9af8132d7f8eca3c1832b6a1047feb382f9473d463d44e1f31cd",
+    "cios/applications/flora/visual_v2_assets/pestle-mobile.webp": "0c2baab6abbfd314c3063f3e2798521f6b209aa4275c16aaeee887bfd38830b7",
+    "cios/applications/flora/visual_v2_assets/pestle.webp": "98f374fa572a08c206483f70101155190cef788a6902ca6f73637603f7805c0c",
+    "cios/applications/flora/visual_v2_assets/uk-economy.webp": "ff4f70c21fcfe733affd0405021fa24386f5edaeb3497a10596550d9dbed0567",
+    "cios/applications/flora/visual_v2_assets/visual.css": "3d0b8d0c559dc1e740faea05e6ab9610e999e18a70d297765491ba8d57fbcdd9",
+    "cios/applications/flora/visual_v2_assets/visual.js": "90ba42c79e4ab56d14e3fd9499f5c07232b1f0ad3f44178482599fe658e5a682",
+    "cios/applications/flora/web/app.py": "a6220dd5baf78adc6bbd4e98d916c05b764ef8dc84e80e24319795c0ccf4bc7a",
+    "tests/test_flora_visual_v2_583.py": "91d355072ed998e4ca6985c9944cfa1a79c5823eeb9bb8cd936f442f479a412a",
+    "tools/ci/flora_visual_v2_preview.cjs": "c3e5a67b21c9b07169431be09012a6ef1763ac56c2a228c60fb2abf359f1813d",
+    "tools/ci/flora_visual_v2_preview.py": "bc2e1fd830cbf25658f837035cdad012b59ac8317ac55d765c23ff216e397e5f"
+  }
+}

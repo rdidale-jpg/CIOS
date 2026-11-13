@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "classification": "UK SIC 2007",
+  "country": "GB",
+  "year": 2024,
+  "measure": "GVA",
+  "valuation": "current basic prices",
+  "currency": "GBP",
+  "published_total_billion": 2623,
+  "display_total": "£2.62tn",
+  "denominator_per_thousand": 1000,
+  "published_section_weight_sum": 1002,
+  "authority": "Frozen public presentation extract; no canonical intelligence promotion or independent human acceptance",
+  "growth": {
+    "measure": "real GDP volume change",
+    "value_pct": 0.7,
+    "period": "three months to September 2026",
+    "comparison": "previous three months",
+    "source_id": "ONS-GDP-2026-09",
+    "locator": "Main points, PDF pages 2–3",
+    "leading_contributor": "services"
+  },
+  "sources": [
+    {
+      "id": "ONS-BB-2026",
+      "title": "ONS Blue Book 2026: industrial analysis",
+      "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/compendium/unitedkingdomnationalaccountsthebluebook/2026/theindustrialanalysis/pdf",
+      "publication_date": "2026-10-30",
+      "locator": "Page 2, industrial analysis; pages 6–7, SUT and current-price definition",
+      "reviewed_at": "2026-11-13",
+      "retrieval_method": "approved web research tool",
+      "retrieval_reference": "turn877631view0",
+      "primary_content_sha256": null,
+      "limitation": "Reviewed web PDF text; full original file bytes not archived; no independent human approval. 2024 is the latest supply-use-balanced year in this release."
+    },
+    {
+      "id": "ONS-GDP-2026-09",
+      "title": "ONS GDP monthly estimate: September 2026",
+      "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+      "publication_date": "2026-11-12",
+      "locator": "GVA2 appendix, PDF page index 27: SIC 2007 2024 weights; main points pages 2–3: real GDP growth",
+      "reviewed_at": "2026-11-13",
+      "retrieval_method": "approved web research tool",
+      "retrieval_reference": "turn877631view1 / turn629604view1",
+      "primary_content_sha256": null,
+      "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+    },
+    {
+      "id": "ONS-SIC",
+      "title": "ONS UK Standard Industrial Classification",
+      "url": "https://www.ons.gov.uk/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities",
+      "publication_date": null,
+      "locator": "UK SIC 2007 and UK SIC 2026 sections",
+      "reviewed_at": "2026-11-13",
+      "retrieval_method": "approved web research tool",
+      "retrieval_reference": "turn877631search0",
+      "primary_content_sha256": null,
+      "limitation": "UK SIC 2026 exists; SIC 2007 retained here to match the published compatible 2024 national-accounts basis."
+    },
+    {
+      "id": "ONS-SIC-2007",
+      "title": "ONS SIC 2007 explanatory notes",
+      "url": "https://www.ons.gov.uk/file?uri=%2Fmethodology%2Fclassificationsandstandards%2Fukstandardindustrialclassificationofeconomicactivities%2Fuksic2007%2Fuksic2007web.pdf",
+      "publication_date": null,
+      "locator": "Sections A–U; section U: extraterritorial organisations and bodies",
+      "reviewed_at": "2026-11-13",
+      "retrieval_method": "approved web research tool",
+      "retrieval_reference": "turn877631search12",
+      "primary_content_sha256": null,
+      "limitation": "Classification definitions, not additional domestic GVA. The ONS weights denominator is A–T."
+    }
+  ],
+  "districts": [
+    {
+      "id": "uk-sic07-a",
+      "sic": "A",
+      "label": "Agriculture & fishing",
+      "weight_per_thousand": 7,
+      "position": [
+        14,
+        12
+      ],
+      "art_motif": "Farm, fields, forest and coastal fishing",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section A GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-b",
+      "sic": "B",
+      "label": "Mining & quarrying",
+      "weight_per_thousand": 7,
+      "position": [
+        38,
+        12
+      ],
+      "art_motif": "Quarry and extraction plant",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section B GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-d",
+      "sic": "D",
+      "label": "Energy supply",
+      "weight_per_thousand": 19,
+      "position": [
+        62,
+        12
+      ],
+      "art_motif": "Wind turbines, substation and power lines",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section D GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-e",
+      "sic": "E",
+      "label": "Water & waste",
+      "weight_per_thousand": 12,
+      "position": [
+        86,
+        12
+      ],
+      "art_motif": "Reservoir, water treatment and recycling",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section E GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-c",
+      "sic": "C",
+      "label": "Manufacturing",
+      "weight_per_thousand": 87,
+      "position": [
+        14,
+        32
+      ],
+      "art_motif": "Advanced production factory",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section C GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-f",
+      "sic": "F",
+      "label": "Construction",
+      "weight_per_thousand": 57,
+      "position": [
+        38,
+        32
+      ],
+      "art_motif": "Cranes and building site",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section F GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-n",
+      "sic": "N",
+      "label": "Business support",
+      "weight_per_thousand": 54,
+      "position": [
+        62,
+        32
+      ],
+      "art_motif": "Administrative, facilities and service offices",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section N GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-h",
+      "sic": "H",
+      "label": "Transport & logistics",
+      "weight_per_thousand": 36,
+      "position": [
+        86,
+        32
+      ],
+      "art_motif": "Airport, cargo port, train and warehouse",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section H GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-p",
+      "sic": "P",
+      "label": "Education",
+      "weight_per_thousand": 59,
+      "position": [
+        14,
+        53
+      ],
+      "art_motif": "University and school",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section P GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-q",
+      "sic": "Q",
+      "label": "Health & social care",
+      "weight_per_thousand": 84,
+      "position": [
+        38,
+        53
+      ],
+      "art_motif": "Hospital and care campus",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section Q GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-j",
+      "sic": "J",
+      "label": "Information & communication",
+      "weight_per_thousand": 66,
+      "position": [
+        62,
+        53
+      ],
+      "art_motif": "Technology, communications and media campus",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section J GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-m",
+      "sic": "M",
+      "label": "Professional services",
+      "weight_per_thousand": 87,
+      "position": [
+        86,
+        53
+      ],
+      "art_motif": "Professional, scientific and technical offices",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section M GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-l",
+      "sic": "L",
+      "label": "Real estate",
+      "weight_per_thousand": 142,
+      "position": [
+        14,
+        73
+      ],
+      "art_motif": "Residential streets, including owner-occupied housing",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section L GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-k",
+      "sic": "K",
+      "label": "Finance & insurance",
+      "weight_per_thousand": 81,
+      "position": [
+        38,
+        73
+      ],
+      "art_motif": "Classical bank and financial towers",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section K GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-o",
+      "sic": "O",
+      "label": "Public administration",
+      "weight_per_thousand": 51,
+      "position": [
+        62,
+        73
+      ],
+      "art_motif": "Westminster administration and defence",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section O GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-g",
+      "sic": "G",
+      "label": "Retail & wholesale",
+      "weight_per_thousand": 94,
+      "position": [
+        86,
+        73
+      ],
+      "art_motif": "Market, shops, motor repair and wholesale",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section G GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-i",
+      "sic": "I",
+      "label": "Hospitality & food",
+      "weight_per_thousand": 28,
+      "position": [
+        14,
+        91
+      ],
+      "art_motif": "Hotel and riverside restaurant",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section I GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-r",
+      "sic": "R",
+      "label": "Arts & recreation",
+      "weight_per_thousand": 15,
+      "position": [
+        38,
+        91
+      ],
+      "art_motif": "Theatre, gallery and recreation park",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section R GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-s",
+      "sic": "S",
+      "label": "Other services",
+      "weight_per_thousand": 15,
+      "position": [
+        62,
+        91
+      ],
+      "art_motif": "Repair, salon and community services",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section S GVA, 2024; broader than any linked research sub-sector"
+    },
+    {
+      "id": "uk-sic07-t",
+      "sic": "T",
+      "label": "Household employment",
+      "weight_per_thousand": 1,
+      "position": [
+        86,
+        91
+      ],
+      "art_motif": "Homes and household care work",
+      "source_id": "ONS-GDP-2026-09",
+      "share_scope": "UK section T GVA, 2024; broader than any linked research sub-sector"
+    }
+  ]
+}
