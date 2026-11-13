@@ -186,7 +186,8 @@ def _eligible(envelope, record):
     if record.get('parent'):
         parent = record['parent']
         latest = envelope['offers'].get(parent['id'], [])
-        if not latest or latest[-1]['version'] != parent['version'] or latest[-1]['state'] != 'employer_approved':
+        if (not latest or latest[-1]['version'] != parent['version']
+                or latest[-1]['state'] != 'employer_approved' or not _eligible(envelope, latest[-1])):
             return False
     for component in record.get('components', []):
         latest = envelope['offers'].get(component['id'], [])
@@ -360,6 +361,13 @@ def compose(components, enterprise_slug='', *, headers=None):
 
 
 # Public account adapters retain their owning research contracts and verification.
+# These are adapter-input seals, not an Evidence store or acceptance decision.
+# Reconcile the policy/cutoff before a changed upstream overlay can enter matching.
+REVIEWED_ACCOUNT_DIGESTS = {
+    'lloyds': '6687039517eba7b8aa531c74c25a7d8f81836d211c6bdcf61c130a17d946e1c5',
+    'easyjet': '413774700cbd08e5f5eca14046a75fb4d70bd4c6e3b94a84715688e7030b40b1',
+    'equinix': '6f40eaf24b9723272a987bb3718e5171ca3ab2df45f391832522a9656bdf6996',
+}
 ACCOUNT_CONFIG = {
     'lloyds': ('banking', ('LBG-AR25-MIGRATION', 'LBG-A2030-DATA', 'LBG-ENVOY-CONTROLS', 'LBG-SOURCING-ACCESS')),
     'easyjet': ('aviation', ('AV-DIGITAL', 'AV-ICC', 'AV-MRO', 'AV-PROCUREMENT')),
@@ -402,6 +410,8 @@ def accounts():
             'No account-specific buying event, access, budget or procurement established.'],
         'counter_indicators': ['Existing infrastructure and in-house capability may remove the need for an external diagnostic.'],
         'url': '/industries/technology/experience/enterprise?enterprise=equinix'}
+    if any(digest(canonical(account)) != REVIEWED_ACCOUNT_DIGESTS[slug] for slug, account in result.items()):
+        raise ValueError('Offers source snapshot changed; reconcile policy and evidence cutoff before matching')
     return result
 
 

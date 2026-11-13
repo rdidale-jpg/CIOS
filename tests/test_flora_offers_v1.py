@@ -467,3 +467,29 @@ def test_delegated_reviewer_can_draft_master_revision_but_not_self_approve(pilot
     offers.transition(r['id'], revision['version'], 'submit', headers=pilot['reviewer'])
     with pytest.raises(PermissionError):
         offers.transition(r['id'], 5, 'approve', 'self', headers=pilot['reviewer'])
+
+
+def test_grandparent_withdrawal_invalidates_nested_variations(pilot):
+    master = approved(pilot)
+    child = offers.save_offer({'name': 'First variation'}, parent_id=master['id'], parent_version=3, headers=pilot['seller'])
+    offers.transition(child['id'], 1, 'submit', headers=pilot['seller'])
+    offers.transition(child['id'], 2, 'approve', 'SYNTHETIC', headers=pilot['reviewer'])
+    grandchild = offers.save_offer({'name': 'Nested variation'}, parent_id=child['id'], parent_version=3, headers=pilot['owner'])
+    offers.transition(master['id'], 3, 'retire', headers=pilot['reviewer'])
+    record = next(r for r in offers.snapshot(headers=pilot['owner'])['offers'] if r['id'] == grandchild['id'])
+    assert not record['eligible']
+
+
+def test_changed_upstream_source_snapshot_requires_policy_reconciliation(monkeypatch):
+    from cios.applications.flora.research_intelligence import model
+    original = model.load_assessment
+    def changed(domain):
+        value = deepcopy(original(domain))
+        value['sources'][0]['limitation'] = 'A changed source state requires new review'
+        # Select a guaranteed referenced source, not an unused metadata row.
+        for source in value['sources']:
+            source['limitation'] = 'Changed after reviewed cutoff'
+        return value
+    monkeypatch.setattr(model, 'load_assessment', changed)
+    with pytest.raises(ValueError, match='snapshot changed'):
+        offers.accounts()
