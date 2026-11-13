@@ -86,3 +86,7 @@ No merge, Render change/deployment or production-data action is authorised. Befo
 | 320px / zoom | [320px discovery](previews/mobile-320-discovery-before.jpg) | [320px Digital](previews/mobile-320-digital-after.jpg), [200% zoom](previews/zoom-200-ai.jpg) | [320px Pipeline](previews/mobile-320-pipeline-handoff.jpg) |
 
 See [pilot source/version snapshots](previews/Development-Pilots.json), [browser checks](previews/Browser-Checks.json) and [hand-off integrity](previews/Handoff-Validation.json). No real user or customer data is used.
+
+## Deterministic existing Canvas read-only fixture
+
+The first full gate exposed `test_mod_executive_commercial_canvas_read_model` crossing a one-second boundary between two transient empty legacy model reads. The repository intentionally creates fresh default timestamps when no legacy model file exists; no production file changed. The test now fixes only the memory-model clock within that case, keeps its full before/after equality assertion, and adds persisted-file byte equality/absence. Production Canvas code, all failure/skip identities and the comparator remain unchanged. Full exact-head validation is rerun after this correction.
