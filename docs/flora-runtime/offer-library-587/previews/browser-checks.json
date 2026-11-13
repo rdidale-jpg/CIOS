@@ -60,6 +60,7 @@
     "desktop selection: business example language",
     "desktop: relevant suggestions",
     "desktop: no prechecked seller capability claims",
+    "desktop: spoken checkbox name includes its visible label",
     "desktop: native keyboard selection",
     "desktop: seller confirmation required",
     "desktop: full playbook disclosure",
@@ -95,6 +96,7 @@
     "ipad-landscape selection: business example language",
     "ipad-landscape: relevant suggestions",
     "ipad-landscape: no prechecked seller capability claims",
+    "ipad-landscape: spoken checkbox name includes its visible label",
     "ipad-landscape: native keyboard selection",
     "ipad-landscape: seller confirmation required",
     "ipad-landscape: full playbook disclosure",
@@ -130,6 +132,7 @@
     "ipad-portrait selection: business example language",
     "ipad-portrait: relevant suggestions",
     "ipad-portrait: no prechecked seller capability claims",
+    "ipad-portrait: spoken checkbox name includes its visible label",
     "ipad-portrait: native keyboard selection",
     "ipad-portrait: seller confirmation required",
     "ipad-portrait: full playbook disclosure",
@@ -165,6 +168,7 @@
     "mobile selection: business example language",
     "mobile: relevant suggestions",
     "mobile: no prechecked seller capability claims",
+    "mobile: spoken checkbox name includes its visible label",
     "mobile: native keyboard selection",
     "mobile: seller confirmation required",
     "mobile: full playbook disclosure",
@@ -200,6 +204,7 @@
     "mobile-320 selection: business example language",
     "mobile-320: relevant suggestions",
     "mobile-320: no prechecked seller capability claims",
+    "mobile-320: spoken checkbox name includes its visible label",
     "mobile-320: native keyboard selection",
     "mobile-320: seller confirmation required",
     "mobile-320: full playbook disclosure",
@@ -270,9 +275,9 @@
     "mssp: independent approval retained",
     "mssp: cannot cross selected employer boundary"
   ],
-  "passed": 267,
+  "passed": 272,
   "pilots": {
-    "repeatSelectionSeconds": 0.354,
+    "repeatSelectionSeconds": 0.315,
     "si": {
       "categories": [
         "consulting",

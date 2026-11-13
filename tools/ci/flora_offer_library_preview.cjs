@@ -24,6 +24,7 @@ function check(v,label){assert(v,label);checks.push(label);}
      if(phase==='after'&&name==='selection'){
       const boxes=p.locator('input[name=templates]');check(await boxes.count()>=3,device+': relevant suggestions');
       check(await boxes.evaluateAll(es=>es.every(e=>!e.checked)),device+': no prechecked seller capability claims');
+      check(await boxes.evaluateAll(es=>es.every(e=>e.getAttribute('aria-label').includes(e.closest('label').innerText.trim()))),device+': spoken checkbox name includes its visible label');
       await boxes.first().focus();check(await boxes.first().evaluate(e=>e===document.activeElement),device+': native keyboard selection');
       check(await p.locator('[name=confirmed]').count()===1,device+': seller confirmation required');
       await p.locator('.offer-card details').first().locator('summary').click();

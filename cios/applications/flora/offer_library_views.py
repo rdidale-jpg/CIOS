@@ -53,7 +53,7 @@ def onboarding(state, q, headers):
     family_labels = {c['id']: c['label'] for c in data['subindustries']}
     for row in rows:
         token = row['id'] + ':' + str(row['version']) + ':' + library.fingerprint(row)
-        cards += '<article class="offer-card"><p class="eyebrow">Example offer · ' + e(family_labels[row['family']]) + '</p><h2>' + e(row['name']) + '</h2><p>' + e(row['outcome']) + '</p><p class="muted">' + e(' · '.join(row['buyer_roles'][:2])) + '</p>' + playbook_details(row) + '<label class="library-check"><input type="checkbox" name="templates" value="' + e(token, quote=True) + '" aria-label="Select ' + e(row['name'], quote=True) + '"><span>Add to my offers</span></label></article>'
+        cards += '<article class="offer-card"><p class="eyebrow">Example offer · ' + e(family_labels[row['family']]) + '</p><h2>' + e(row['name']) + '</h2><p>' + e(row['outcome']) + '</p><p class="muted">' + e(' · '.join(row['buyer_roles'][:2])) + '</p>' + playbook_details(row) + '<label class="library-check"><input type="checkbox" name="templates" value="' + e(token, quote=True) + '" aria-label="Add to my offers: ' + e(row['name'], quote=True) + '"><span>Add to my offers</span></label></article>'
     if cards:
         body += form('/onboard-adopt', common + '<div class="offer-grid">' + cards + '</div><label class="library-check"><input type="checkbox" name="confirmed" value="yes" required><span>I will validate these private examples against my company’s capabilities and rights.</span></label>', 'Create my private example offers')
     else:
