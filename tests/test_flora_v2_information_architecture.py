@@ -59,7 +59,7 @@ def test_primary_workspace_routes_are_served_without_replacing_deep_links():
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     try:
-        for path, expected in (("/", "Enterprise Intelligence Workspace"), ("/intelligence", "Explore the enterprise intelligence estate"), ("/opportunities", "Commercial Pipeline Workspace"), ("/research", "Research Workspace"), ("/governance", "Governed Intelligence Workspace"), ("/digital-twins", "Digital Twins"), ("/explore", "What is changing in Banking"), ("/focus", "Banking Opportunity Pipeline"), ("/shape", "Strategic Sales Brief")):
+        for path, expected in (("/", "UK economic landscape"), ("/intelligence", "Explore the enterprise intelligence estate"), ("/opportunities", "Sales opportunities"), ("/research", "Research Workspace"), ("/governance", "Governed Intelligence Workspace"), ("/digital-twins", "Digital Twins"), ("/explore", "What is changing in Banking"), ("/focus", "Banking Opportunity Pipeline"), ("/shape", "Strategic Sales Brief")):
             connection = http.client.HTTPConnection("127.0.0.1", server.server_port)
             connection.request("GET", path)
             response = connection.getresponse()

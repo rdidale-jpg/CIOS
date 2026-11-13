@@ -18,6 +18,12 @@ The unchanged 01b gate enforces **1,432 identities**: normally 1,365 pass, **57 
 
 `Protected-Owners.json` fingerprints **198 unchanged files** including research/model data, security/permissions and their tests, employer context, Offers engine, Pipeline writer, CI comparator/baseline and release helpers. Five approved artwork/statistical assets are separately pinned. Three presentation-owner exceptions to the older #584 guard are explicit: Offers views, unified views and the navigation registry. All other protected owners remain byte-identical.
 
+## Readiness blocker discovered by the full gate
+
+The first frozen candidate exposed a real specialist route regression: the flagship-only enterprise registry did not include every legacy bank. The presentation parent now uses the explorer’s existing Banking/Aviation scope, preserving Barclays and other bank discovery without broadening access. Targeted specialist tests pass. Canonical Home assertions are adapted to the approved industry destinations.
+
+The full comparator also detects changed signatures for inherited failures whose rendered-HTML exception text changed with the shared shell. The original failing assertions remain; these are not automatically accepted as equivalent failures. The comparator, baseline and exception records remain unchanged. This is a **NO-GO for integration** until the exact-head gate passes or a separately reviewed baseline reconciliation establishes equivalence. Do not merge or deploy this draft. Final local and hosted outcomes are reported in the PR and handoff.
+
 ## Presentation-test adaptations
 
 Existing UI assertions are updated for the approved design, not removed to hide failures: seven compact destinations instead of the old five-link bar; one scoped Technology demo link alongside the separate protected live Pipeline; readable image labels instead of a duplicate phone legend; three NVIDIA section names; approved world/skip/20-sector Home instead of a question form; and compatible presentation-owner changes. Original test identities are retained for the versioned comparator. The original Home function remains as a compatibility helper, while separate HTTP tests verify the intentional new canonical route. No security test, data validation, source scope assertion or baseline exception is weakened.

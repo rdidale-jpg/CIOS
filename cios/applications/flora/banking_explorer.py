@@ -112,8 +112,8 @@ def _page(title, body, headers=None, *, active=None, notice=None):
 def _crumb(bank=None, insight=False):
     from . import design_system as ds
     if ds.active():
-        from .research_intelligence.registry import enterprise_domain
-        domain=enterprise_domain(bank.slug) if bank else 'banking'
+        # The explorer also contains banks beyond the flagship research registry.
+        domain='aviation' if bank and bank.slug=='easyjet' else 'banking'
         ds.context_link('/industries/'+domain,domain.title())
         if bank: ds.context_link('/enterprises/'+bank.slug,bank.name)
         return ''

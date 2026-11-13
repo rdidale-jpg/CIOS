@@ -109,7 +109,7 @@ def test_supplier_edges_preserve_historical_and_planned_scope():
 
 def test_industry_home_navigation_reaches_easyjet_and_existing_banking(web):
     status,home=web('/')
-    assert status==200 and '/flora/industries' in home
+    assert status==200 and '/industries' in home and '/industries/aviation' in home
     status,html=web('/flora/industries')
     assert status==200 and ROOT in html and model.ROOT in html
     for path,text in [(ROOT,'Aviation.'),(ROOT+'/easyjet','easyJet.'),(model.ROOT,'Banking.'),(model.ROOT+'/lloyds','Lloyds.')]:

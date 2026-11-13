@@ -55,7 +55,9 @@ def web(tmp_path, monkeypatch):
 
 def test_home_and_industry_entry_are_discoverable(web):
     get, _ = web
-    for path in ['/', '/flora/banking']:
+    status, home = get('/')
+    assert status == 200 and '/industries/banking' in Links(home).hrefs
+    for path in ['/flora/banking']:
         status, html = get(path)
         assert status == 200
         assert ROOT in Links(html).hrefs
