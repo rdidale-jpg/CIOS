@@ -1,4 +1,5 @@
 """Small authenticated Offers UI; browser controls convey no service authority."""
+from . import design_system as ds
 from html import escape as e
 from urllib.parse import urlencode
 
@@ -44,6 +45,7 @@ def _record(state, offer_id):
     return record
 
 
+@ds.view_scope
 def render(path, query, headers):
     allowed = {'offer', 'parent', 'template', 'mode', 'selected', 'cutoff'}
     if set(query) - allowed or any(len(v) != 1 for v in query.values()):
@@ -51,8 +53,8 @@ def render(path, query, headers):
     q = {k: v[0] for k, v in query.items()}
     state = offers.snapshot(headers=headers)
     current = path.removeprefix(offers.BASE)
-    nav = ''.join(f'<a href="{url(s)}"'+ (' aria-current="page"' if current == s else '') + f'>{label}</a>'
-        for s, label in (('', 'My offers'), ('/company', 'My company'), ('/discover', 'Discover'), ('/review', 'Reviews'), ('/studio', 'Creative Studio')))
+    for suffix, label in (('', 'My offers'), ('/company', 'My company'), ('/discover', 'Discover'), ('/review', 'Reviews'), ('/studio', 'Creative Studio')):
+        ds.context_link(url(suffix), label)
     if path == url('/company'):
         title, body = 'My company', company(state, headers)
     elif not state['selected']:
@@ -68,8 +70,8 @@ def render(path, query, headers):
     else:
         title, body = 'What can you help customers achieve?', catalogue(state)
     company_name = state['selected']['organisation'] if state['selected'] else 'Your commercial workspace'
-    content = f'<style>{CSS}</style><section class="offers" id="offers-content" aria-label="Offers workspace"><p class="eyebrow">FLORA / Offers pilot · {e(company_name)}</p><nav aria-label="Offers">{nav}</nav><h1>{e(title)}</h1>{body}</section>'
-    return page('Offers — ' + title, content, headers, 'opportunities', path)
+    content = f'<style>{CSS}</style><section class="offers" id="offers-content" aria-label="Offers workspace"><p class="eyebrow">{e(company_name)}</p><h1>{e(title)}</h1>{body}</section>'
+    return page('Offers — ' + title, content, headers, 'offers', path)
 
 
 def company(state, headers):
@@ -182,7 +184,7 @@ def reviews(state):
     for r in state['offers']:
         if not r['current'] or r['state'] != 'submitted_for_review' or r['author'] == state['user_id']:
             continue
-        body += f'<article class="offer-card"><h2>{e(r["content"]["name"])}</h2><p>{e(r["content"]["outcome"])}</p>{link("/edit", "Inspect full offer and evidence", offer=r["id"])}'
+        body += f'<article class="offer-card"><h2>{e(r["content"]["name"])}</h2><p>{e(r["content"]["outcome"])}</p>{link("/edit", "Review full offer", offer=r["id"])}'
         options = '<option value="changes">Request changes</option><option value="reject">Reject</option><option value="approve">Approve for employer catalogue</option>'
         body += form('/transition', hidden('offer_id', r['id']) + hidden('expected_version', r['version'])
             + '<label>Decision<select name="action">' + options + '</select></label>'
@@ -203,27 +205,29 @@ def discovery(state, q, headers):
     options += ''.join(f'<option value="{e(r["id"] if mode == "offer" else r["slug"])}" {"selected" if selected == (r["id"] if mode == "offer" else r["slug"]) else ""}>{e(r["content"]["name"] if mode == "offer" else r["name"])}</option>' for r in choices)
     cutoff = q.get('cutoff', '2026-11-13')
     body = '<p>Start with your offer or with an account. The same assessment answers why this customer, why this offer, and the next useful test.</p>'
-    body += '<p>' + link('/discover', 'Offer-led discovery', mode='offer') + ' · ' + link('/discover', 'Account-led discovery', mode='account') + '</p>'
+    ds.context_link(url('/discover', mode='offer'), 'Offer-led discovery')
+    ds.context_link(url('/discover', mode='account'), 'Account-led discovery')
     body += f'<form method="get" action="{url("/discover")}" class="inline">{hidden("mode", mode)}<label>{"Offer" if mode == "offer" else "Account"}<select name="selected">{options}</select></label><label>Evidence cutoff<input type="date" name="cutoff" value="{e(cutoff, quote=True)}" required></label><button>Explore matches</button></form>'
     results = offers.discover(mode, selected, cutoff, headers=headers)
     for r in results:
         offer = next(o for o in eligible if o['id'] == r['offer_id'])
-        body += f'<article class="pair" data-assessment-id="{e(r["assessment_id"])}"><p class="eyebrow">{e(r["recommended_posture"])} · hypothesis to test</p><h2>{e(r["enterprise_name"])} × {e(offer["content"]["name"])}</h2><div class="split"><div><p><strong>Why this customer</strong><br>{e(r["why_account"])}</p><p><strong>Why this offer</strong><br>{e(r["why_offer"])}</p><p><strong>Why now</strong><br>{e(r["why_now"])}</p></div><div class="explanation"><h3>First move</h3><p>{e(r["entry_play"])}</p><p><strong>Test next</strong><br>{e(r["next_validation_action"])}</p></div></div>'
+        body += f'<article class="pair" id="{e(r["assessment_id"])}" data-assessment-id="{e(r["assessment_id"])}"><p class="eyebrow">{e(r["recommended_posture"])} · hypothesis to test</p><h2>{e(r["enterprise_name"])} × {e(offer["content"]["name"])}</h2><div class="split"><div><p><strong>Why this customer</strong><br>{e(r["why_account"])}</p><p><strong>Why this offer</strong><br>{e(r["why_offer"])}</p><p><strong>Why now</strong><br>{e(r["why_now"])}</p></div><div class="explanation"><h3>First move</h3><p>{e(r["entry_play"])}</p><p><strong>Test next</strong><br>{e(r["next_validation_action"])}</p></div></div>'
         body += '<p class="muted">Access and delivery fit need validation. No buying intent or funding established.</p>'
-        body += '<details><summary>Assessment, uncertainty and sources</summary>'
+        detail = '<section class="offer-assessment-source"><h2>' + e(r['enterprise_name']) + ' × ' + e(offer['content']['name']) + '</h2>'
         for k in ('capability_fit', 'credibility', 'relationship_access', 'trigger_evaluation', 'delivery_risk'):
-            body += f'<p><strong>{e(k.replace("_", " ").capitalize())}:</strong> {e(r[k])}</p>'
-        body += '<p><strong>Unknowns:</strong> ' + e('; '.join(r['unknowns'])) + '</p><p><strong>Counter-indicators:</strong> ' + e('; '.join(r['contradictions'])) + '</p>'
-        body += '<p><strong>Alternatives:</strong> ' + e('; '.join(r['competitive_alternatives'])) + '</p><p><strong>Do not claim:</strong> ' + e('; '.join(r['what_not_to_claim'])) + '</p>'
-        body += '<div class="source-list">'
+            detail += f'<p><strong>{e(k.replace("_", " ").capitalize())}:</strong> {e(r[k])}</p>'
+        detail += '<p><strong>Unknowns:</strong> ' + e('; '.join(r['unknowns'])) + '</p><p><strong>Counter-indicators:</strong> ' + e('; '.join(r['contradictions'])) + '</p>'
+        detail += '<p><strong>Alternatives:</strong> ' + e('; '.join(r['competitive_alternatives'])) + '</p><p><strong>Do not claim:</strong> ' + e('; '.join(r['what_not_to_claim'])) + '</p>'
+        detail += '<div class="source-list">'
         for ref in r['evidence_lineage']:
-            body += f'<p>{e(ref["statement"])} <small>({e(ref["classification"])})</small></p>'
+            detail += f'<p>{e(ref["statement"])} <small>({e(ref["classification"])})</small></p>'
             for source in ref['source_refs']:
-                body += f'<p><a href="{e(source["url"], quote=True)}" rel="noreferrer">{e(source["title"])}</a> · {e(source.get("verification", ""))}</p>'
-                body += '<p class="muted">' + e(source.get('limitation', 'Existing source verification and rights limitations retained.')) + '</p>'
-        body += '</div><p>Offer evidence / seller declaration: ' + e(r['offer_evidence']) + '</p><p>' + e('; '.join(r['limitations'])) + '</p>'
-        body += f'<p>Assessment <code>{e(r["assessment_id"])}</code> · cutoff {e(r["source_cut_off"])} · {e(r["policy_version"])}. Proposed hypothesis; no accepted APPA or canonical promotion.</p></details>'
-        body += f'<p><a href="{e(targets[r["enterprise_slug"]]["url"], quote=True)}">Explore account</a> · <a href="/flora/sales/pipeline">Open existing Pipeline</a></p>'
+                detail += f'<p><a href="{e(source["url"], quote=True)}" rel="noreferrer">{e(source["title"])}</a> · {e(source.get("verification", ""))}</p>'
+                detail += '<p class="muted">' + e(source.get('limitation', 'Existing source verification and rights limitations retained.')) + '</p>'
+        detail += '</div><p>Offer evidence / seller declaration: ' + e(r['offer_evidence']) + '</p><p>' + e('; '.join(r['limitations'])) + '</p>'
+        detail += f'<p>Assessment <code>{e(r["assessment_id"])}</code> · cutoff {e(r["source_cut_off"])} · {e(r["policy_version"])}. Proposed hypothesis; no accepted APPA or canonical promotion.</p></section>'
+        body += ds.source_note(detail)
+        body += f'<p><a href="{e(targets[r["enterprise_slug"]]["url"], quote=True)}">Explore account</a></p>'
         if r['enterprise_slug'] in {'lloyds', 'easyjet'}:
             body += f'<p><a href="/flora/sales/new?enterprise={r["enterprise_slug"]}">Open manual Pipeline qualification</a> — separate seller-authorised action; no offer data is copied or saved by this link.</p>'
         else:

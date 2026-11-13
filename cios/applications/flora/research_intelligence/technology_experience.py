@@ -4,6 +4,7 @@ No canonical enterprise binding, importer, model client or live Pipeline access.
 The supplementary presentation facts cite their public sources; they do not
 create an Evidence store or change the reviewed foundation's acceptance state.
 """
+from .. import design_system as ds
 from html import escape
 from pathlib import Path
 from urllib.parse import urlencode
@@ -78,7 +79,7 @@ def url(suffix='', **query):
 
 
 def link(href, text, **attrs):
-    attributes = ''.join(f' {escape(k.replace("_", "-"))}="{escape(str(v), quote=True)}"' for k, v in attrs.items())
+    attributes = ''.join(f' {escape(k.rstrip("_").replace("_", "-"))}="{escape(str(v), quote=True)}"' for k, v in attrs.items())
     return f'<a href="{escape(href, quote=True)}"{attributes}>{escape(text)}</a>'
 
 
@@ -121,16 +122,30 @@ def validate(query):
 
 
 def crumbs(parts):
+    if ds.active():
+        for label, href in [('UK Technology', BASE), *parts]:
+            if href: ds.context_link(href, label)
+        return ''
     items = [link('/industries', 'Industries'), link(BASE, 'UK Technology')]
     items += [link(href, label) if href else f'<span aria-current="page">{escape(label)}</span>' for label, href in parts]
     return '<nav class="exp-crumb" aria-label="Breadcrumb">' + '<span aria-hidden="true"> / </span>'.join(items) + '</nav>'
 
 
 def pipeline_link(scope='industry'):
+    if ds.active():
+        ds.context_link(url('/pipeline', scope=scope), 'Illustrative Technology Pipeline')
+        return ''
     return link(url('/pipeline', scope=scope), 'Pipeline →', class_='exp-pipeline-link')
 
 
 def support():
+    if ds.active():
+        return ds.source_note('<h2>Technology reference</h2>' + ''.join('<p>' + link(href, label) + '</p>' for href, label in (
+            (research.BASE + '?lens=how', 'Original functional prototype'),
+            (research.BASE + '/providers', 'Participant research'),
+            (research.BASE + '?lens=uses', 'Programmes & relationships'),
+            (research.BASE + '?lens=work', 'Commercial themes'),
+            (research.BASE + '/evidence', 'Sources & specialist research'))))
     return ('<details class="exp-support"><summary>More from Flora</summary><nav>'
             + link(research.BASE + '?lens=how', 'Original functional prototype')
             + link(research.BASE + '/providers', 'Participant research')
@@ -146,7 +161,7 @@ def scene(selected=''):
     for n, (key, (label, (x, y, w, h))) in enumerate(DISTRICTS.items(), 1):
         current = ' aria-current="true"' if selected == key else ''
         hotspots.append(f'<a class="exp-hotspot" data-district="{key}" href="{url('/district', district=key)}" '
-                        f'aria-label="{escape(label)}" style="left:{x}%;top:{y}%;width:{w}%;height:{h}%"{current}>'
+                        f'aria-label="{escape(label)}" style="left:{x}%;top:{y}%;width:{w}%;height:{h}%;--mx:{25 if n%2 else 75}%;--my:{12+((n-1)//2)*24}%"{current}>'
                         f'<span><b>{n}</b><em>{escape(label)}</em></span></a>')
     detail = ''
     if selected:
@@ -156,17 +171,25 @@ def scene(selected=''):
         detail = (f'<aside class="exp-scene-detail" aria-label="Selected district"><a class="exp-close" href="{BASE}#scene" '
                   f'aria-label="Close district detail">×</a><h2>{escape(label)}</h2><p>{escape(desc)}</p>'
                   + link(url('/district', district=selected), 'Explore this area →') + '</aside>')
-    return ('<div class="exp-heading exp-scene-heading"><h1>UK Technology</h1><nav aria-label="Technology navigation">' + link(url('/participants'), 'Compare participants →') + pipeline_link() + '</nav></div>'
-            f'<section class="exp-scene" id="scene" aria-label="UK Technology industry scene"><div class="exp-artwork">'
+    ds.context_link(url('/participants'), 'All Technology participants')
+    pipeline_link()
+    scale = ds.section_scale('J')
+    return ('<div class="exp-heading exp-scene-heading"><h1>UK Technology</h1></div>' + scale
+            + f'<section class="exp-scene" id="scene" aria-label="UK Technology industry scene"><div class="exp-artwork">'
             f'<img src="{ASSET_BASE}artwork" width="1536" height="1024" alt="Conceptual UK technology landscape with software offices, '
             'data centres, research laboratories, a connectivity mast and distribution facilities against a London skyline.">'
             + ''.join(hotspots)
-            + '</div>' + detail + '</section><nav class="commercial-district-nav" aria-label="Industry districts">'
-            + ''.join(link(url('/district', district=k), f'{n} · {label}') for n, (k, (label, _)) in enumerate(DISTRICTS.items(), 1))
-            + '</nav>')
+            + '</div>' + detail + '</section>')
 
 
 def macro_links(suffix='/district', selected='', **context):
+    if ds.active():
+        for key, value in MACRO_CONTEXT.items():
+            ds.context_link(url(suffix, macro=key, **context) + '#macro-context', value[0])
+        if selected:
+            label, insight, next_step = MACRO_CONTEXT[selected]
+            return ds.source_note('<section id="macro-context"><h3>' + escape(label) + '</h3><p>' + escape(insight) + '</p><p>' + escape(next_step) + '</p><p>Flora interpretation; not confirmed enterprise demand or a legal applicability finding.</p></section>')
+        return ''
     # Same category IDs as the Macro owner, interpreted against Technology's
     # existing PESTLE research. Never inherit its default Banking applicability.
     nav = '<nav class="exp-macro" aria-label="Macro themes"><span>Macro themes</span>' + ' · '.join(
@@ -190,18 +213,17 @@ def district(key, macro=""):
 
 
 def enterprise(detail=''):
+    for endpoint, title in [('financials','Business & financials'),('strategy','Strategy & investment')]:
+        ds.context_link(url('/enterprise', detail=endpoint)+'#enterprise-detail', title)
+    ds.context_link(url('/operating-model'), 'Inside Equinix')
     body = (crumbs([('Cloud & data centres', url('/district', district='cloud')), ('Equinix', '')])
             + '<div class="exp-heading"><div><h1>Equinix</h1><p class="exp-subtitle">Global group · FY2025 annual report</p></div>'
             + pipeline_link('equinix') + '</div><p class="exp-subtle">Global figures · USD</p><div class="exp-financials">'
-            + ''.join(link(url('/enterprise', detail='financials') + '#' + key,
-                           value + ' · ' + label) for key, value, label in (
+            + ''.join('<div><strong>'+value+'</strong><span>'+label+'</span></div>' for key, value, label in (
                                ('revenue', '$9.217bn', 'Revenue'), ('colocation', '$6.475bn', 'Colocation'),
                                ('interconnection', '$1.655bn', 'Interconnection')))
             + '</div><p class="exp-lead">A recurring infrastructure business built around colocation and interconnection.</p>'
-            + '<div class="exp-list">'
-            + link(url('/enterprise', detail='strategy') + '#enterprise-detail', 'Strategy & investment →')
-            + link(url('/enterprise', detail='financials') + '#enterprise-detail', 'Business & financials →')
-            + link(url('/operating-model'), 'Explore enterprise →') + '</div>')
+            + '')
     if detail:
         content = ('<h2>Business & financials</h2><dl class="exp-facts">'
                    '<div id="revenue"><dt>Revenue</dt><dd>$9.217bn consolidated revenue in FY2025, compared with $8.748bn in FY2024.</dd></div>'
@@ -214,7 +236,7 @@ def enterprise(detail=''):
                    '<p><span class="commercial-hypothesis">Hypothesis</span> Explore whether a specific facility has a power, cooling or connectivity requirement.</p>'
                    '<details class="commercial-source"><summary>Commercial context</summary><p>Confirm the site, requirement, sponsor and sourcing route before qualifying an opportunity.</p></details>')
         body += '<section class="exp-editorial" id="enterprise-detail">' + content + link(REPORT_URL, 'Read the FY2025 filing →') + '</section>'
-    return body + ('<details class="exp-support"><summary>Reporting context</summary><p>' + SOURCE_NOTE
+    return body + ds.source_note('<details class="exp-support"><summary>Reporting context</summary><p>' + SOURCE_NOTE
                    + ' Latest annual filing checked: FY2025, filed 11 February 2026. These are annual figures, not the latest quarterly trading update. '
                    'Equinix is an existing Flora provider view; group-to-UK operating entity and contracting scope remain unresolved.</p>'
                    + link(REPORT_URL, 'Annual report') + ' · ' + link(research.BASE + '/providers?provider=equinix', 'Retained Flora profile') + '</details>')
@@ -225,20 +247,17 @@ def operating_model(area='facilities', macro=''):
         'facilities': ('Facilities', 'Explore power and cooling optimisation as capacity expands.', 'Which facilities have a funded requirement and an external delivery gap?'),
         'interconnection': ('Interconnection', 'Explore resilient connectivity and hybrid-cloud integration needs.', 'Which workloads or connections need improvement, and who owns the decision?'),
     }[area]
-    return (crumbs([('Cloud & data centres', url('/district', district='cloud')), ('Equinix', url('/enterprise')), ('Inside Equinix', '')])
-            + '<div class="exp-heading"><div><h1>Inside Equinix</h1><p class="exp-subtitle">Flora conceptual operating view</p></div>'
-            + pipeline_link('equinix') + '</div>'
-            + '<nav class="exp-tabs" aria-label="Conceptual enterprise areas">'
-            + ''.join(link(url('/operating-model', area=k, macro=macro), name, aria_current='page' if k == area else 'false')
-                      for k, name in (('facilities', 'Facilities'), ('interconnection', 'Interconnection')))
-            + '</nav><section id="operating-area" class="exp-editorial"><h2>' + label + '</h2>'
-            + '<dl class="exp-facts"><div><dt>Potential sales angle</dt><dd>' + angle + '</dd></div>'
-            + '<div><dt>Next conversation</dt><dd>' + question + '</dd></div></dl></section>'
-            + macro_links('/operating-model', selected=macro, area=area) + '<p><span class="commercial-hypothesis">Hypothesis</span></p>'
-            + link(url('/pipeline', scope='equinix'), 'View enterprise Pipeline →', class_='exp-button')
-            + '<details class="exp-support"><summary>Investigate this need</summary><p>This is not a disclosed organisation chart; demand and budget not established.</p><p>Confirm the facility, requirement, sponsor, timing and procurement route with the customer. '
-            'Existing teams or suppliers may already address it. A public growth theme is not a qualified opportunity.</p>'
-            + link(research.BASE + '?lens=work&theme=theme-4', 'Infrastructure & cloud connectivity research') + '</details>')
+    crumbs([('Cloud & data centres', url('/district', district='cloud')), ('Equinix', url('/enterprise'))])
+    pipeline_link('equinix')
+    macro_links('/operating-model', selected=macro, area=area)
+    ds.source_note('<p>Flora conceptual operating view. This is not a disclosed organisation chart; demand and budget not established. Confirm the facility, requirement, sponsor, timing and procurement route with the customer. Existing teams or suppliers may already address it. A public growth theme is not a qualified opportunity.</p>'
+        + link(research.BASE + '?lens=work&theme=theme-4', 'Infrastructure & cloud connectivity research'))
+    controls = ''.join(link(url('/operating-model', area=k, macro=macro)+'#operating-area', name,
+        class_='ds-model-control', aria_current='true' if k==area else 'false', style='--x:'+str(x)+'%')
+        for k,name,x in [('facilities','Facilities',28),('interconnection','Interconnection',72)])
+    return ('<div class="exp-heading"><div><h1>Inside Equinix</h1><p class="exp-subtitle">Flora conceptual operating view</p></div></div>'
+        '<section class="ds-model ds-image-surface" aria-label="Conceptual enterprise areas"><img src="'+ASSET_BASE+'artwork" alt="Conceptual facilities and connected technology landscape; not an Equinix organisation chart">'
+        + controls + '<aside class="ds-model-insight" id="operating-area" tabindex="-1"><h2>'+label+'</h2><p>'+angle+'</p><p><strong>Next conversation</strong> '+question+'</p></aside></section>')
 
 
 def demo_json():
@@ -319,6 +338,7 @@ def opportunity(record, scope):
             + link(url('/pipeline', scope=scope), 'Return to Pipeline') + '</noscript>' + demo_form())
 
 
+@ds.view_scope
 def render(path, query, headers=None):
     if path not in PATHS:
         raise ValueError('Unknown Technology experience view')
@@ -346,7 +366,5 @@ def render(path, query, headers=None):
             + f'<script type="application/json" id="experience-config">{config}</script>'
             + f'<script type="application/json" id="experience-demo">{demo_json()}</script>'
             + f'<script src="{ASSET_BASE}interactions" defer></script>')
-    html = page('UK Technology — Flora visual experience', body, headers, 'pipeline' if suffix in ('/pipeline', '/opportunity') else 'industries', path)
-    # Only this presentation's primary Pipeline entry inherits the current scope.
-    html = html.replace("href='/flora/sales/pipeline'", "href='" + url('/pipeline', scope=scope) + "'", 1)
+    html = page('UK Technology — Flora visual experience', body, headers, 'pipeline' if suffix in ('/pipeline', '/opportunity') else 'enterprises' if suffix in ('/enterprise','/operating-model') else 'industries', path)
     return html

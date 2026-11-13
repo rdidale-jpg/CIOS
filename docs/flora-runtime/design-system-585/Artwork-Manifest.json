@@ -1,0 +1,12 @@
+{
+  "approval": "https://github.com/rdidale-jpg/CIOS/pull/584#issuecomment-6852990986",
+  "approved_sha": "19ab36d241dbca2099ffb9b5d519c68c493a914a",
+  "treatment": "CSS background-colour match and edge feather only; no new generation, edit or re-encoding of approved assets",
+  "assets_sha256": {
+    "cios/applications/flora/visual_v2_assets/uk-economy.webp": "ff4f70c21fcfe733affd0405021fa24386f5edaeb3497a10596550d9dbed0567",
+    "cios/applications/flora/visual_v2_assets/pestle.webp": "98f374fa572a08c206483f70101155190cef788a6902ca6f73637603f7805c0c",
+    "cios/applications/flora/visual_v2_assets/pestle-mobile.webp": "0c2baab6abbfd314c3063f3e2798521f6b209aa4275c16aaeee887bfd38830b7",
+    "cios/applications/flora/visual_v2_assets/economy.json": "78b4bb90c02b9af8132d7f8eca3c1832b6a1047feb382f9473d463d44e1f31cd",
+    "cios/applications/flora/research_intelligence/technology_experience_assets/uk-technology.webp": "194ff4b1bdfd1899988c5c7b1ed89240d1ef0ef4115670742552120fed8601fe"
+  }
+}

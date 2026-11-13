@@ -398,9 +398,9 @@ def test_home_accessibility_basics() -> None:
     html = body.decode("utf-8")
     assert status == 200
     assert html.count("<h1") == 1
-    assert "aria-label='Primary product navigation'" in html
-    assert "id='flora-question'" in html
-    assert "type='submit'" in html
+    assert 'aria-label="Primary product navigation"' in html
+    assert html.count('data-sic=') == 20 and html.count('data-research=') == 3
+    assert 'id="visual-content" tabindex="-1"' in html
 
 
 def test_governance_preserves_permission_context() -> None:

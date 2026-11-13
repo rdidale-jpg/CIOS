@@ -29,7 +29,8 @@ def test_industry_has_eight_labelled_native_embedded_regions_without_intermediat
     assert all('/district?district=' in a['href'] for a in regions)
     assert any(tag=='img' and a.get('src')==x.ASSET_BASE+'artwork' for tag,a in dom.nodes)
     assert '<iframe' not in html and 'Explore by name</summary>' not in html
-    assert 'commercial-district-nav' in html  # Mobile label key, not a collapsed legend.
+    assert 'commercial-district-nav' not in html  # #585: labels stay on the image at every size.
+    assert html.count('<em>') == 8 and all('--mx:' in a['style'] and '--my:' in a['style'] for a in regions)
 
 
 @pytest.mark.parametrize('suffix', ['/participants', '/district?district=ai', '/district?district=channels&sort=uk_revenue&direction=desc',
@@ -122,7 +123,7 @@ def test_metrics_cannot_be_unsupported_estimates_or_cross_scope_values(mutation)
 
 def test_nvidia_profile_is_commercially_substantial_and_not_a_large_diagram(web):
     _,html=web(x.BASE+'/enterprise?enterprise=nvidia&district=ai')
-    for section in ('Financial context','Strategic priorities','Commercial pressures','Customers, partners & suppliers','UK programmes & activity','Where sales work may emerge'):
+    for section in ('At a glance','Strategic priorities','Commercial pressures','Commercial ecosystem','UK programmes & activity','Potential sales plays'):
         assert section in unescape(html)
     for name in ('Nebius','University of Bristol','CoreWeave','Microsoft','Nscale','TSMC','Samsung','SK hynix','Micron'):
         assert name in html
@@ -188,10 +189,10 @@ def test_refined_views_never_read_or_mutate_private_pipeline_or_promote(web,monk
 def test_protected_data_access_and_sector_owners_remain_byte_identical():
     paths=['cios/applications/flora/sales_pipeline.py','cios/applications/flora/security.py','cios/applications/flora/access.py',
            'cios/applications/flora/blueprint_import/views.py','cios/applications/flora/research_intelligence/registry.py',
-           'cios/applications/flora/research_intelligence/technology.py','cios/applications/flora/research_intelligence/unified_views.py']
+           'cios/applications/flora/research_intelligence/technology.py','cios/applications/flora/research_intelligence/technology_commercial.py','cios/applications/flora/research_intelligence/macro_intelligence.py']
     paths += [str(p.relative_to(t.ROOT)) for p in t.ASSETS.glob('*.json')]
     for path in paths:
-        assert subprocess.check_output(['git','show','854a783:'+path],cwd=t.ROOT)==(t.ROOT/path).read_bytes(),path
+        assert subprocess.check_output(['git','show','19ab36d:'+path],cwd=t.ROOT)==(t.ROOT/path).read_bytes(),path
 
 
 def test_participant_config_preserves_text_without_script_breakout(monkeypatch):

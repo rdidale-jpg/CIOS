@@ -189,7 +189,12 @@ def test_runtime_source_preserves_canonical_home_and_domain_owners():
     import hashlib
     root = Path(__file__).resolve().parents[1]
     manifest = json.loads((root/'docs/flora-runtime/visual-v2-583/Protected-Owners.json').read_text())
+    # #585 is authorised to change presentation owners, not their intelligence/security inputs.
+    unified = json.loads((root/'docs/flora-runtime/design-system-585/Protected-Owners.json').read_text())
     for name,digest in manifest['unchanged_files'].items():
+        if name in unified['presentation_exceptions']:
+            assert name.endswith(('offers_views.py','banking_explorer.py','unified_views.py','visual_intelligence.py','living_map.py','sales_views.py','workspace/views.py','navigation.py'))
+            continue
         assert hashlib.sha256((root/name).read_bytes()).hexdigest() == digest, name
     import ast
     source = (root/'cios/applications/flora/web/app.py').read_text()

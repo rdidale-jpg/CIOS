@@ -4,6 +4,7 @@ This module intentionally uses the Python standard library HTTP server so Flora
 can be deployed without adding framework, LLM, crawler, or database dependencies.
 """
 from __future__ import annotations
+from cios.applications.flora import design_system as ds
 
 from cios.applications.flora.security import ACCESS_UNAVAILABLE, public_request_target
 
@@ -184,6 +185,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path in {"/flora/offers", "/flora/offers/company", "/flora/offers/edit", "/flora/offers/review", "/flora/offers/discover", "/flora/offers/studio"}:
                 from cios.applications.flora.offers_views import render
                 self._html(render(parsed.path, parse_qs(parsed.query, keep_blank_values=True), self.headers))
+            elif parsed.path in {"/design-system/assets/styles", "/design-system/assets/interactions"}:
+                body, mime = ds.asset(parsed.path.rsplit('/', 1)[-1])
+                self._body(body, mime, 200)
+            elif parsed.path == "/pestle":
+                from cios.applications.flora import visual_v2
+                self._html(visual_v2.render(visual_v2.BASE + '/pestle', parse_qs(parsed.query, keep_blank_values=True), self.headers))
             elif parsed.path in {"/visual-v2", "/visual-v2/pestle", "/visual-v2/assets/styles", "/visual-v2/assets/interactions", "/visual-v2/assets/uk-artwork", "/visual-v2/assets/pestle-artwork", "/visual-v2/assets/pestle-mobile-artwork"}:
                 from cios.applications.flora import visual_v2
                 if parsed.path.startswith("/visual-v2/assets/"):
@@ -192,7 +199,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 else:
                     self._html(visual_v2.render(parsed.path, parse_qs(parsed.query, keep_blank_values=True), self.headers))
             elif parsed.path in {"/", "/flora", "/flora/"}:
-                self._html(_flora_home_page(self.headers))
+                from cios.applications.flora import visual_v2
+                self._html(visual_v2.render(visual_v2.BASE, {}, self.headers))
             elif parsed.path in ("/enterprises/lloyds/understanding", "/enterprises/easyjet/understanding"):
                 from cios.applications.flora.research_intelligence.understanding_views import understanding_page
                 self._html(understanding_page(parsed.path.split("/")[2], self.headers))
@@ -1242,6 +1250,7 @@ def _flora_intelligence_page(headers=None, query=None) -> str:
     return _flora_v2_page("Intelligence", "intelligence", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
 
 
+@ds.view_scope
 def _flora_opportunities_page(headers=None, query=None) -> str:
     from html import escape
     pipeline = _opportunity_pipeline(); requested = ((query or {}).get("tab") or ["horizon_1"])[0]
@@ -1250,10 +1259,10 @@ def _flora_opportunities_page(headers=None, query=None) -> str:
     cards = "".join(f"<article class='priority-card'><p class='eyebrow'>{escape(_horizon_label(o.horizon))}</p><h2>{escape(o.title)}</h2><p><strong>Customer</strong> {escape(o.enterprise_name or o.participant_type)}</p><p><strong>Problem</strong> {escape(o.commercial_problem)}</p><dl><div><dt>Timing</dt><dd>Not supplied</dd></div><div><dt>Value</dt><dd>Not supplied</dd></div><div><dt>Confidence</dt><dd>{escape(o.confidence)}</dd></div><div><dt>Evidence</dt><dd>{escape(o.evidence_strength)}</dd></div></dl><p><strong>Reason for Horizon</strong> {escape(o.horizon_rationale.rationale)}</p><a href='/focus?opportunity={escape(o.opportunity_id)}'>Inspect evidence and rationale</a></article>" for o in selected)
     if requested not in {"horizon_1", "horizon_2", "horizon_3"}: cards = "<section class='card'><h2>Summary not available</h2><p>The current runtime does not provide a separate governed summary for this view. Existing opportunity intelligence remains available in the Horizon views.</p><a href='/focus'>Open the full opportunity pipeline</a></section>"
     elif not cards: cards = "<section class='card'><h2>No opportunities currently classified here</h2><p>Flora does not force unsupported candidates into a Horizon.</p></section>"
-    body = f"<section class='workspace-heading'><p class='eyebrow'>Opportunities</p><h1>Commercial Pipeline Workspace</h1><p class='lead'>Understand the customer problem, commercial timing and evidence behind every Horizon decision.</p></section>{_workspace_tabs(requested, tabs)}<div class='priority-grid'>{cards}</div>"
+    body = f"<section class='workspace-heading'><p class='eyebrow'>Opportunities</p><h2>Commercial Pipeline Workspace</h2><p class='lead'>Understand the customer problem, commercial timing and evidence behind every Horizon decision.</p></section>{_workspace_tabs(requested, tabs)}<div class='priority-grid'>{cards}</div>"
     from cios.applications.flora.research_intelligence.unified_views import opportunities_body
-    body=opportunities_body()+"<details class='context-tools'"+(" open" if query and query.get('tab') else "")+"><summary>Historical Horizon scenarios & supporting views</summary>"+body+"</details>"
-    body = "<section class='card'><h2>Start with your offer</h2><p>Explore seller offers and account fit in the controlled pilot.</p><a href='/flora/offers'>Open My offers →</a></section>" + body
+    body=opportunities_body()+ds.source_note("<details class='context-tools'><summary>Historical Horizon scenarios & supporting views</summary>"+body+"</details>")
+    ds.context_link('/flora/offers/discover','Discover from your offers')
     return _flora_v2_page("Opportunities", "opportunities", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
 
 
@@ -1539,22 +1548,21 @@ def _account_context_html(decision) -> str:
     from html import escape
     if decision.user_id:
         controls = "<a href='/digital-twins'>Enterprise Canvas</a><a href='/blueprint-import'>Import Twin</a><a href='/blueprint-import/history'>Import History</a><a href='/settings/general' aria-label='Profile and settings'>Controls</a>" if decision.owner_recognised else ""
-        return f"<div class='account' aria-label='Account context'><span>{escape(decision.user_id)}</span><span>{escape(decision.active_workspace or 'No workspace')}</span>{controls}<form method='post' action='/auth/sign-out'><button type='submit'>Sign out</button></form></div>"
-    return "<div class='account' aria-label='Account context'><a href='/auth/sign-in'>Sign In</a><a href='/auth/workspace'>Workspace</a><a href='/auth/sign-out'>Sign out</a></div>"
+        return f"<div class='account' aria-label='Account context'><span>{escape(decision.user_id)}</span><span>{escape(decision.active_workspace or 'No workspace')}</span>{controls}<a href='/auth/workspace'>Switch workspace</a><form method='post' action='/auth/sign-out'><button type='submit'>Sign out</button></form></div>"
+    return "<div class='account' aria-label='Account context'><a href='/auth/sign-in'>Sign in</a></div>"
 
 
+@ds.view_scope
 def _flora_v2_page(title: str, active: str, body: str, account_html: str, footer: str = "") -> str:
     from html import escape
-    from cios.applications.flora.navigation import primary_links, specialist_tools
+    ds.source_note("<p>" + escape(footer) + "</p>" if footer else "")
     active={'intelligence':'industries'}.get(active,active)
     if "Commercial opportunity" in title or title=='Commercial opportunity pipeline': active='pipeline'
-    links=primary_links(active)
-    tools=specialist_tools()
     return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>{escape(title)}</title><style>
     :root{{--bg:#f5f1ea;--ink:#13211c;--muted:#5f6f68;--line:#ded6c8;--card:#fffdf9;--brand:#174d3f;--brand2:#e7f1ec;--focus:#9b5cff}}*{{box-sizing:border-box}}body{{font-family:Inter,Arial,sans-serif;margin:0;background:linear-gradient(180deg,#fbf8f2,#f3eee5);color:var(--ink);line-height:1.55}}a{{color:var(--brand);font-weight:700;text-underline-offset:3px}}a:focus-visible,button:focus-visible,input:focus-visible{{outline:3px solid var(--focus);outline-offset:3px}}.shell{{max-width:1120px;margin:auto;padding:24px}}.topbar{{display:flex;gap:20px;align-items:center;justify-content:space-between;margin-bottom:44px}}.brand strong{{display:block;font-size:1.3rem}}.brand span,.muted{{color:var(--muted)}}.primary-nav{{display:flex;gap:6px;flex-wrap:wrap}}.primary-nav a{{padding:10px 12px;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:650}}.primary-nav a[aria-current='page']{{background:var(--brand);color:white}}.account{{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.92rem}}button,.button-link{{background:var(--brand);color:#fff;border:0;border-radius:999px;padding:13px 18px;text-decoration:none;display:inline-block;cursor:pointer;font-weight:800}}button:hover,.button-link:hover{{background:#0f392f}}.secondary-link{{display:inline-block;padding:10px 0}}.hero,.card,.mode-card a{{background:rgba(255,253,249,.95);border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 50px #1b13060a}}.hero{{padding:42px;margin:18px 0}}.question-hero{{padding:56px}}.eyebrow{{text-transform:uppercase;letter-spacing:.12em;color:var(--brand);font-weight:800;margin:0 0 8px}}h1{{font-size:clamp(2.15rem,5vw,4.5rem);line-height:1.02;margin:.1em 0 .25em}}.lead{{font-size:clamp(1.08rem,2vw,1.35rem);max-width:780px;color:#31413a}}.question-form label{{display:block;font-size:clamp(1.25rem,3vw,2rem);font-weight:850;margin:28px 0 12px}}.question-row{{display:flex;gap:12px}}input{{min-height:56px;border:1px solid #c9beaf;border-radius:999px;padding:0 18px;font:inherit;font-size:1.05rem;background:white}}.question-row input{{flex:1;min-width:0}}.error{{color:#8a1f11;background:#fff0ec;border-left:4px solid #8a1f11;padding:10px 12px;border-radius:10px}}.mode-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}}.mode-card a{{display:block;min-height:190px;padding:24px;text-decoration:none;color:var(--ink)}}.mode-card span{{display:block;color:var(--brand);font-weight:900;font-size:1.5rem}}.mode-card strong{{display:block;font-size:1.15rem;margin:8px 0}}.mode-card em{{font-style:normal;color:var(--muted)}}.card{{padding:24px;margin:16px 0}}.pill,.badge,.confidence,.chip{{display:inline-block;border-radius:999px;padding:4px 10px;background:var(--brand2);margin:3px 4px 3px 0}}.badge{{background:#174d3f;color:white}}.confidence{{background:#efe8ff;color:#3d246b}}.chip{{background:#e7f1ec;text-decoration:none}}.mini-card{{border:1px solid var(--line);border-radius:18px;padding:16px;margin:10px 0;background:#fff}}.unknown{{border-left:5px solid #b27700}}.contradiction{{border-left:5px solid #9b2c2c}}.pipeline-stage{{border-top:1px solid var(--line);padding:14px 0}}.link-list li{{margin:10px 0}}.visually-hidden{{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}}footer{{color:var(--muted);font-size:.9rem;padding:24px 0}}@media(max-width:780px){{.topbar{{align-items:flex-start;flex-direction:column;margin-bottom:20px}}.mode-grid{{grid-template-columns:1fr}}.question-row{{flex-direction:column}}.hero,.question-hero{{padding:28px}}.shell{{padding:16px}}.primary-nav a{{padding:10px 9px}}}}@media(prefers-reduced-motion:reduce){{*{{scroll-behavior:auto!important}}}}
     .workspace-heading{{margin:24px 0 36px;max-width:880px}}.workspace-heading h1{{font-size:clamp(2.5rem,6vw,5rem)}}.context-banner{{display:grid;grid-template-columns:1.3fr 2fr auto;gap:24px;align-items:center;background:#173f35;color:white;padding:24px 28px;border-radius:20px}}.context-banner .eyebrow,.context-banner a{{color:#bce5d5}}dl{{margin:0}}.context-banner dl,.priority-card dl{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}}dt{{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}}.context-banner dt{{color:#b8ccc4}}dd{{margin:3px 0;font-weight:800}}.section-heading{{display:flex;justify-content:space-between;gap:24px;align-items:end;margin:48px 0 16px}}.section-heading h2{{margin:0;font-size:2rem}}.section-heading p{{max-width:500px}}.estate-grid,.priority-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}}.estate-tile,.industry-card{{display:flex;flex-direction:column;min-height:210px;padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--line);text-decoration:none;color:var(--ink)}}.estate-tile strong{{font-size:1.55rem;margin:10px 0}}.estate-tile em,.industry-card em{{font-style:normal;color:var(--brand);font-weight:800;margin-top:auto;padding-top:20px}}.priority-card{{padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--line)}}.priority-card h3{{font-size:1.35rem;margin-bottom:4px}}.priority-card h4{{font-size:1.05rem;margin:0 0 12px}}.priority-card .why{{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}}.priority-card dl{{grid-template-columns:1fr 1fr}}.attention-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}}.attention-grid p,.attention-grid a{{display:flex;flex-direction:column;background:#f4f0e8;padding:14px;border-radius:12px;margin:0;text-decoration:none;color:var(--ink)}}.attention-grid span{{color:var(--muted)}}.industry-card{{max-width:360px;min-height:150px}}.status{{width:max-content;border-radius:99px;padding:5px 10px;margin-top:10px}}.governed{{background:#d9eee5;color:#174d3f}}.workspace-tabs{{display:flex;gap:8px;overflow:auto;padding:4px 0 18px}}.workspace-tabs a{{white-space:nowrap;padding:9px 14px;border:1px solid var(--line);border-radius:99px;text-decoration:none}}.workspace-tabs a[aria-current='page']{{background:var(--brand);color:white}}@media(max-width:900px){{.context-banner{{grid-template-columns:1fr}}.estate-grid,.priority-grid{{grid-template-columns:1fr 1fr}}}}@media(max-width:620px){{.estate-grid,.priority-grid,.attention-grid{{grid-template-columns:1fr}}.section-heading{{display:block}}.context-banner dl{{grid-template-columns:1fr}}}}
     .context-tools{{padding:16px 20px;border:1px solid var(--line);border-radius:14px;margin:20px 0}}.context-tools summary{{cursor:pointer;font-weight:700}}.context-tools nav{{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}}@media(max-width:1100px){{.topbar{{flex-wrap:wrap}}.primary-nav{{order:3;width:100%}}.profile-control{{margin-left:auto}}}}
-    </style></head><body><div class='shell'><header class='topbar'><a class='brand' href='/'><strong>Flora</strong></a><nav class='primary-nav' aria-label='Primary product navigation'>{links}</nav><div class='profile-control'>{account_html}</div></header><main>{body}</main>{tools}<footer>{escape(footer)}</footer></div></body></html>"""
+    </style>{ds.head()}</head><body class='ds-page'><div class='shell'><a class='ds-skip' href='#page-content'>Skip to content</a>{ds.header(active, account_html)}<main id='page-content' tabindex='-1'>{body}</main></div></body></html>"""
 
 def _is_enterprise_intelligence_path(path: str) -> bool:
     parts = [part for part in path.split('/') if part]

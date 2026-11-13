@@ -131,7 +131,8 @@ def test_enterprise_detail_is_clickable_without_javascript(web):
 def test_primary_pipeline_entry_inherits_industry_district_or_enterprise_scope(web, suffix, scope):
     _, html = web(x.BASE + suffix)
     links = [a for tag,a in DOM(html).nodes if tag == 'a' and a.get('href') == x.url('/pipeline', scope=scope)]
-    assert len(links) >= 2  # Primary navigation and contextual entry agree.
+    assert len(links) == 1  # #585: one scoped demo entry; no replacement of the protected live Pipeline.
+    assert any(tag=='a' and a.get('href')=='/flora/sales/pipeline' for tag,a in DOM(html).nodes)
 
 
 def test_macro_drill_keeps_technology_context_instead_of_inheriting_banking(web):

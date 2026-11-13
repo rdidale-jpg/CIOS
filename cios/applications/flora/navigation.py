@@ -1,6 +1,6 @@
 """Presentation links only. Destination handlers retain their access checks."""
-PRIMARY = (('home','/','Home'), ('industries','/industries','Industries'),
-           ('enterprises','/enterprises','Enterprises'), ('opportunities','/opportunities','Opportunities'),
+PRIMARY = (('home','/','Home'), ('pestle','/pestle?market=GB','PESTLE'), ('industries','/industries','Industries'),
+           ('enterprises','/enterprises','Enterprises'), ('offers','/flora/offers','Offers'), ('opportunities','/opportunities','Opportunities'),
            ('pipeline','/flora/sales/pipeline','Pipeline'))
 
 

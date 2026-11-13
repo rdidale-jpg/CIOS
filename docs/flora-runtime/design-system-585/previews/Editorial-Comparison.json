@@ -1,0 +1,174 @@
+{
+  "before": {
+    "home": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 4,
+      "sourcePrompts": 0,
+      "visibleWords": 107
+    },
+    "technology": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 2,
+      "bodyGlobalLinks": 1,
+      "sourcePrompts": 0,
+      "visibleWords": 35
+    },
+    "frontier": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 3,
+      "bodyGlobalLinks": 2,
+      "sourcePrompts": 10,
+      "visibleWords": 149
+    },
+    "nvidia": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 3,
+      "bodyGlobalLinks": 2,
+      "sourcePrompts": 21,
+      "visibleWords": 490
+    },
+    "pestle": {
+      "primaryNavigations": 0,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 0,
+      "sourcePrompts": 0,
+      "visibleWords": 100
+    },
+    "model": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 4,
+      "bodyGlobalLinks": 2,
+      "sourcePrompts": 0,
+      "visibleWords": 79
+    },
+    "banking": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 4,
+      "bodyGlobalLinks": 4,
+      "sourcePrompts": 5,
+      "visibleWords": 543
+    },
+    "aviation": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 4,
+      "bodyGlobalLinks": 4,
+      "sourcePrompts": 6,
+      "visibleWords": 437
+    },
+    "offers": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 1,
+      "bodyGlobalLinks": 1,
+      "sourcePrompts": 0,
+      "visibleWords": 97
+    },
+    "discovery": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 1,
+      "bodyGlobalLinks": 3,
+      "sourcePrompts": 0,
+      "visibleWords": 281
+    },
+    "pipeline": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 2,
+      "bodyGlobalLinks": 1,
+      "sourcePrompts": 0,
+      "visibleWords": 155
+    },
+    "qualification": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 1,
+      "bodyGlobalLinks": 3,
+      "sourcePrompts": 0,
+      "visibleWords": 552
+    }
+  },
+  "after": {
+    "home": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 0,
+      "sourcePrompts": 0,
+      "visibleWords": 195
+    },
+    "technology": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 0,
+      "sourcePrompts": 0,
+      "visibleWords": 34
+    },
+    "frontier": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 0,
+      "sourcePrompts": 0,
+      "visibleWords": 97
+    },
+    "nvidia": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 0,
+      "sourcePrompts": 0,
+      "visibleWords": 411
+    },
+    "pestle": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 0,
+      "sourcePrompts": 0,
+      "visibleWords": 100
+    },
+    "model": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 0,
+      "sourcePrompts": 0,
+      "visibleWords": 29
+    },
+    "banking": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 0,
+      "sourcePrompts": 1,
+      "visibleWords": 363
+    },
+    "aviation": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 0,
+      "sourcePrompts": 0,
+      "visibleWords": 392
+    },
+    "offers": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 0,
+      "sourcePrompts": 0,
+      "visibleWords": 81
+    },
+    "discovery": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 0,
+      "sourcePrompts": 0,
+      "visibleWords": 244
+    },
+    "pipeline": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 1,
+      "sourcePrompts": 0,
+      "visibleWords": 119
+    },
+    "qualification": {
+      "primaryNavigations": 1,
+      "bodyNavigation": 0,
+      "bodyGlobalLinks": 1,
+      "sourcePrompts": 0,
+      "visibleWords": 515
+    }
+  }
+}

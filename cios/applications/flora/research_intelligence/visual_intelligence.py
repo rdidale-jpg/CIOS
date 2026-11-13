@@ -3,6 +3,7 @@
 Artwork is conceptual. Every company label, metric, date and evidence destination
 comes from the generated spec, never from a bitmap or facts embedded in drawing code.
 """
+from .. import design_system as ds
 from html import escape as e
 import re
 from textwrap import wrap
@@ -127,12 +128,12 @@ def _metrics(spec):
 
 
 def _sources(proof):
-    if not proof:return "<p class='vi-empty'>Supporting source evidence is not established in this snapshot. This is a research gap, not a verified fact.</p>"
+    if not proof:return ds.source_note("<p class='vi-empty'>Supporting source evidence is not established in this snapshot. This is a research gap, not a verified fact.</p>")
     rows=[]
     for p in proof:
         dates='; '.join('publication '+str(s.get('publication_date') or 'Unknown')+' / retrieved '+str(s.get('retrieved_at') or 'not verified') for s in p['source_dates'])
         rows.append(f"<article class='vi-source'>{_badge(p['state'])}<p>{e(p['label'])}</p><small>{e(p['scope'])} · {e(p['period'])}<br>{e(dates)}</small><p><a href='{e(p['url'],quote=True)}'>Read the evidence and exact passage →</a></p></article>")
-    return ''.join(rows)
+    return ds.source_note(''.join(rows))
 
 
 def _detail(spec,n):

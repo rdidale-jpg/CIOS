@@ -96,6 +96,7 @@ STYLE = """
 
 
 def _page(title, body, headers=None, *, active=None, notice=None):
+    from . import design_system as ds
     # Reuse the product shell and its verified account presentation.
     from .web.app import _flora_v2_page, _account_context_html
     from .access import blueprint_upload_authorisation
@@ -104,11 +105,18 @@ def _page(title, body, headers=None, *, active=None, notice=None):
               "interpretations and opportunities require validation, not confirmed buying intent.")
     return _flora_v2_page(title, active or 'industries', f"<style>{STYLE}</style><div class='explorer'>"
         "<a class='ex-skip' href='#explorer-content'>Skip to explorer content</a>" + body +
-        f"<footer class='ex-footer'>{e(notice)}</footer></div>",
+        ds.source_note(f"<p>{e(notice)}</p>") + '</div>',
         _account_context_html(blueprint_upload_authorisation(headers or {})))
 
 
 def _crumb(bank=None, insight=False):
+    from . import design_system as ds
+    if ds.active():
+        from .research_intelligence.registry import enterprise_domain
+        domain=enterprise_domain(bank.slug) if bank else 'banking'
+        ds.context_link('/industries/'+domain,domain.title())
+        if bank: ds.context_link('/enterprises/'+bank.slug,bank.name)
+        return ''
     parts = ["<a href='/'>FLORA</a>", "<a href='/intelligence?tab=industries'>Industries</a>",
              f"<a href='{ROOT}'>Banking</a>"]
     if bank:

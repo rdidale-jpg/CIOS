@@ -1,4 +1,5 @@
 """Illustrated Living Industry Map; facts and topology stay in derived specs."""
+from .. import design_system as ds
 from html import escape as e
 import re
 from textwrap import wrap
@@ -149,7 +150,7 @@ def _panel(spec,n,kind='activity'):
     elif kind=='actor':
         for edge in n['documented_relationships']:
             body+=f"<h3>Documented reference-company relationship</h3><p>{e(edge['state'])} · {e(edge['period'])} · {e(spec['enterprise']['label'])}</p><p>{e(edge['reason'])}</p><p>Still unknown: {e(', '.join(edge['missing_evidence']))}</p>"
-            for claim in edge['claim_ids']:body+=f"<a class='lm-pill' href='{spec['enterprise']['url']}/understanding#claim-{e(claim,quote=True)}'>Inspect relationship evidence →</a>"
+            for claim in edge['claim_ids']:body+=ds.source_note(f"<p>{e(n['label'])} · {e(edge['period'])}</p><a class='lm-pill' href='{spec['enterprise']['url']}/understanding#claim-{e(claim,quote=True)}'>Relationship evidence</a>")
         body+=f"<p><a href='{e(n['url'],quote=True)}'>Open enterprise / underlying research →</a></p>"+_sources(n['evidence'])
     else:
         for endpoint in (n['source'],n['target']):
@@ -182,13 +183,19 @@ def render_living_map(spec,lens='overview'):
     m=spec['metrics'][0] if spec['metrics'] else None
     scale="<strong>Not established</strong><small>No supported industry measurement at this snapshot.</small>"
     if m:
-        scale=f"<span class='lm-kicker'>{e(m['label'])}</span><strong>{e(str(m['value'])) if m['value'] is not None else 'Not established'}</strong><small>{e(m['unit'] or m['limitation'])}<br>{e(m['scope_note'])}<br>{e(m['period'] or 'Period not established')}</small>"+(''.join(f"<a href='{e(p['url'],quote=True)}'>Inspect measurement & source →</a>" for p in m['evidence'][:1]))
+        scale=f"<span class='lm-kicker'>{e(m['label'])}</span><strong>{e(str(m['value'])) if m['value'] is not None else 'Not established'}</strong><small>{e(m['unit'] or m['limitation'])}<br>{e(m['scope_note'])}<br>{e(m['period'] or 'Period not established')}</small>"+ds.source_note(''.join(f"<a href='{e(p['url'],quote=True)}'>Measurement & source</a>" for p in m['evidence'][:1]))
+    if ds.active():
+        ds.source_note(scale if not m or m.get('value') is None else '')
+        if not m or m.get('value') is None: scale=''
     root=spec['industry']['url']
     toolbar=''.join(f"<a href='{root}?lens={k}' {'aria-current=page' if k==lens else ''}>{label}</a>" for k,label in [('overview','Operating system'),('ai-disruption','AI disruption'),('regulation','Regulation & resilience'),('commercial','Commercial Opportunities')])
+    if ds.active():
+        for key,label in [('overview','Operating system'),('ai-disruption','AI disruption'),('regulation','Regulation & resilience'),('commercial','Commercial Opportunities')]: ds.context_link(root+'?lens='+key,label)
+        toolbar=''
     commercial_style=''
     if lens=='commercial':
         from .commercial_views import STYLE as commercial_style
-    body=f"<style>{EVIDENCE_STYLE}{STYLE}{commercial_style}</style><section class='lm' data-ready='false' data-visual-family='industry-signature' data-living-map='2' data-snapshot='{e(spec['snapshot_digest'],quote=True)}'><div class='lm-frame'><header class='lm-intro'><div><span class='lm-kicker'>01 / Understand · {e(spec['industry']['label'])}</span><h2>{e(spec['title'])}</h2><p>{e(spec['summary'])}</p></div><aside class='lm-scale'>{scale}</aside></header><nav class='lm-toolbar' aria-label='Living industry layers'>{toolbar}<button class='lm-zoom' type='button' aria-pressed='false' hidden>Inspect at larger scale</button></nav>"
+    body=f"<style>{EVIDENCE_STYLE}{STYLE}{commercial_style}</style><section class='lm' data-ready='false' data-visual-family='industry-signature' data-living-map='2' data-snapshot='{e(spec['snapshot_digest'],quote=True)}'><div class='lm-frame'><header class='lm-intro'><div><span class='lm-kicker'>01 / Understand · {e(spec['industry']['label'])}</span><h2>{e(spec['title'])}</h2><p>{e(spec['summary'])}</p></div><aside class='lm-scale'>{scale}</aside></header><div class='lm-toolbar'>{toolbar}<button class='lm-zoom' type='button' aria-pressed='false' hidden>Inspect at larger scale</button></div>"
     if lens=='commercial':body+=commercial_summary(spec)
     body+=f"<div class='lm-pan' tabindex='0' data-zoom='fit' aria-label='Pan the industry system; equivalent text navigation follows'>{_scene(spec,lens)}</div>"
     body+="<div class='lm-legend'><b>Dashed → conceptual money / passenger / service flow</b><span>◇ Unknown provider / scope</span><span>■ Dated reference-company relationship — inspect period</span><span>Rust outline: challenged finding</span><span>Plum: AI scenario</span><span>Amber: regulatory exposure to investigate</span></div>"
@@ -198,6 +205,10 @@ def render_living_map(spec,lens='overview'):
     body+="<p class='lm-live' aria-live='polite'>02 / Explore — select an illustrated activity, participant or dashed flow to inspect its intelligence.</p></div>"
     body+="<details class='lm-keyboard'><summary>Equivalent text navigation · activities, participants & flows</summary><div class='lm-text-list'>"+''.join(pick(spec,n,e(n['label']),'lm-pill') for n in spec['map_nodes']+spec['participants']+spec['flows'])+'</div></details>'
     body+="<div class='lm-inspector' aria-label='Contextual intelligence inspection'><p class='lm-print-note'>Print includes all contextual panels; source dates and conceptual/unknown status are retained.</p>"+''.join(_panel(spec,n) for n in spec['map_nodes'])+''.join(_panel(spec,n,'actor') for n in spec['participants'])+''.join(_panel(spec,n,'flow') for n in spec['flows'])+'</div>'
-    body+=f"<p><a href='{e(spec['enterprise']['url'],quote=True)}'>Explore {e(spec['enterprise']['label'])} Enterprise Twin →</a> · <a href='{e(spec['timeline_url'],quote=True)}'>Strategic timeline →</a></p>"
+    if ds.active():
+        ds.context_link(spec['enterprise']['url'],'Explore '+spec['enterprise']['label'])
+        ds.context_link(spec['timeline_url'],'Strategic timeline')
+    else:
+        body+=f"<p><a href='{e(spec['enterprise']['url'],quote=True)}'>Explore {e(spec['enterprise']['label'])} Enterprise Twin →</a> · <a href='{e(spec['timeline_url'],quote=True)}'>Strategic timeline →</a></p>"
     body+=f"<details class='lm-snapshot'><summary>Research scope, source limitations & reproducible snapshot</summary><p>{e(spec['scale_gaps'])}</p><p>As of {e(spec['as_of'])}; input source periods differ. Snapshot {e(spec['snapshot_digest'])}. Candidate research remains unaccepted; no Pipeline qualification.</p></details><script>{SCRIPT}</script></section>"
     return body

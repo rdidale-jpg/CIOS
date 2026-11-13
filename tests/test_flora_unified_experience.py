@@ -21,7 +21,7 @@ class Navigation(HTMLParser):
         if tag=='nav' and a.get('aria-label')=='Primary product navigation':self.primary=True
         if tag=='a':
             self.urls.append(a.get('href',''))
-            if self.primary:self.in_link=True
+            if self.primary and a.get('data-product-link')=='true':self.in_link=True
     def handle_endtag(self,tag):
         if tag=='nav':self.primary=False
         if tag=='a':self.in_link=False
@@ -32,7 +32,8 @@ class Navigation(HTMLParser):
 def test_primary_navigation_is_consistent_and_specialist_tools_are_contextual(web):
     for path in ['/','/industries','/enterprises','/opportunities','/industries/banking','/enterprises/lloyds','/flora/banking','/flora/banking/research/sources']:
         status,html=web(path);assert status==200,path
-        assert Navigation(html).labels==['Home','Industries','Enterprises','Opportunities','Pipeline']
+        assert Navigation(html).labels==['Home','PESTLE','Industries','Enterprises','Offers','Opportunities','Pipeline']
+        assert html.count('aria-label="Primary product navigation"')==1
         assert '/flora/sales/pipeline' in Navigation(html).urls
         assert 'Research &amp; specialist tools' in html or 'Research & specialist tools' in html
     assert not public_request_target('/flora/sales/pipeline')

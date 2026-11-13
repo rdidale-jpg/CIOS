@@ -1,4 +1,4 @@
-"""Two read-only, image-native design studies; no canonical Home replacement.
+"""Approved image-native UK world and PESTLE over existing read-only sources.
 
 The economy basis is a frozen public presentation extract, not canonical
 intelligence. PESTLE adapts the existing validated macro owner. No private
@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 from urllib.parse import urlencode
 
-from .security import verified_context
+from . import design_system as ds
 from .research_intelligence import macro_intelligence as macro
 
 BASE = '/visual-v2'
@@ -69,7 +69,7 @@ def asset(name):
 
 
 def url(pestle=False, **query):
-    return BASE + ('/pestle' if pestle else '') + '?' + urlencode({'market': 'GB', **query})
+    return ('/pestle' if pestle else BASE) + '?' + urlencode({'market': 'GB', **query})
 
 
 def selection(path, query):
@@ -118,7 +118,7 @@ def insight(factor):
 
 def _sources(factor):
     data = basis()
-    body = '<details class="sources-menu" name="visual-header-tools"><summary>Sources & method</summary><section class="menu-sheet source-sheet" aria-label="Sources and methodology"><h2>Scale, scope & sources</h2>'
+    body = '<h2>Scale, scope & sources</h2>'
     body += '<p>United Kingdom · 2024 · GVA at current basic prices. £2.62tn is a rounded display of the ONS £2,623bn total. GVA is output less intermediate consumption; it is neither company revenue nor GDP at market prices.</p>'
     body += '<p>District shares are the published 2024 weights divided by ten, not estimates of sales. Rounded sections total 100.2%; no normalisation is applied. Real estate includes imputed owner-occupier rents. Area and building size are illustrative, not a quantitative map.</p>'
     body += '<p>SIC 2007 matches these national-accounts data; the newer SIC 2026 is not silently mixed in. All domestic sections A–T appear. U is extraterritorial activity and is outside the published domestic denominator.</p>'
@@ -138,19 +138,8 @@ def _sources(factor):
             continue
         seen.add(source['id'])
         body += '<p><a href="' + e(source['url'], quote=True) + '" rel="noreferrer">' + e(source['title']) + '</a><br><small>' + e(source.get('publication_date') or source.get('reviewed_at') or '') + ' · ' + e(source.get('locator') or source.get('limitation') or '') + '</small></p>'
-    return body + '<p>ONS data: Crown copyright, Open Government Licence. Public source excerpts and existing macro review retain their original limitations; no canonical research status is changed. Defensible estimates, when introduced, require EST, range and method. None are used in this study.</p></section></details>'
+    return body + '<p>ONS data: Crown copyright, Open Government Licence. Public source excerpts and existing macro review retain their original limitations; no canonical research status is changed. Defensible estimates, when introduced, require EST, range and method. None are used in this study.</p>'
 
-
-def _header(pestle, factor, headers):
-    context = verified_context(headers)
-    account = ('<p class="workspace-name">' + e(context.workspace) + '</p><a href="/auth/workspace">Switch workspace</a><form method="post" action="/auth/sign-out"><button type="submit">Sign out</button></form>'
-               if context else '<a href="/auth/sign-in">Sign in</a>')
-    return ('<header class="product-header"><span class="wordmark">FLORA</span><nav aria-label="FLORA navigation">'
-        '<a href="' + url() + '"' + ('' if pestle else ' aria-current="page"') + '>UK economy</a>'
-        '<a href="' + url(True) + '"' + (' aria-current="page"' if pestle else '') + '>PESTLE</a>'
-        '<details class="product-menu" name="visual-header-tools"><summary>Menu</summary><div class="menu-sheet"><p class="market-label">Selected market · United Kingdom</p>'
-        '<a href="/industries">Industries</a><a href="/enterprises">Enterprises</a><a href="/flora/offers">Offers</a><a href="/opportunities">Opportunities</a><a href="/pipeline">Pipeline</a>'
-        + account + '</div></details>' + _sources(factor) + '</nav></header>')
 
 
 def _home():
@@ -184,9 +173,11 @@ def _pestle(factor):
     return body + '</figure>'
 
 
+@ds.view_scope
 def render(path, query, headers=None):
     factor = selection(path, query)
     pestle = path.endswith('/pestle')
     body = _pestle(factor) if pestle else _home()
-    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>FLORA · ' + ('PESTLE' if pestle else 'United Kingdom') + ' · Visual study v2</title><link rel="stylesheet" href="' + BASE + '/assets/styles"><script defer src="' + BASE + '/assets/interactions"></script></head><body><a class="skip" href="#visual-content">Skip to visual</a>'
-        + _header(pestle, factor, headers) + '<main id="visual-content" tabindex="-1" data-market="GB">' + body + '</main></body></html>')
+    ds.source_note(_sources(factor))
+    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>FLORA · ' + ('PESTLE' if pestle else 'United Kingdom') + '</title><link rel="stylesheet" href="' + BASE + '/assets/styles">' + ds.head() + '</head><body class="ds-page visual-world"><a class="skip" href="#visual-content">Skip to visual</a>'
+        + ds.header('pestle' if pestle else 'home', headers=headers) + '<main id="visual-content" tabindex="-1" data-market="GB">' + body + '</main></body></html>')

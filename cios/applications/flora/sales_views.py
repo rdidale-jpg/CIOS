@@ -1,4 +1,5 @@
 """Visual discovery, qualification and pipeline views using the Banking Explorer shell."""
+from . import design_system as ds
 import json
 from datetime import datetime, timezone
 from decimal import Decimal
@@ -47,6 +48,7 @@ def _demo():
     return "<aside class='sales-banner'><strong>Demonstration commercial workspace.</strong> Public market context → opportunity hypothesis → evidence-backed potential → user-qualified opportunity → active pursuit. A stage change never makes an AI inference a confirmed customer requirement. All records in this Banking slice remain labelled demonstration data.</aside>"
 
 
+@ds.view_scope
 def discovery_page(slug, theme='', headers=None):
     bank = BANKS.get(slug)
     if bank is None:
@@ -98,6 +100,7 @@ def capture_controls(slug, origin, headers=None):
     return capture_action
 
 
+@ds.view_scope
 def opportunity_page(slug, origin, headers=None):
     bank, source = hypothesis(slug, origin)
     capture_action = capture_controls(slug, origin, headers)
@@ -138,6 +141,7 @@ def _record_card(record):
 <span class='sales-evidence-label'>{e(evidence_maturity(record)['research'])}</span><p>Customer validation: not established</p><p>Evidence assessment: {e(record['confidence'])}</p><small>Updated {e(_date(record['updated_at']))}</small><p><strong>Last activity:</strong> {e(shorten(last_activity,width=160,placeholder='…'))}</p></div></div></article>"""
 
 
+@ds.view_scope
 def pipeline_page(headers=None, filters=None, board=False, error=''):
     filters=filters or {}
     rows=list_opportunities(headers=headers, filters=filters)
@@ -158,15 +162,18 @@ def pipeline_page(headers=None, filters=None, board=False, error=''):
     else:
         content=''.join(_record_card(r) for r in rows)
     query={k:v for k,v in filters.items() if v}
-    body=f"""<nav class='ex-breadcrumb' aria-label='Breadcrumb'><a href='{ROOT}'>Banking Explorer</a> / <span>Commercial pipeline</span></nav>
+    ds.context_link(BASE+'/pipeline?'+urlencode(dict(query,view='list')), 'Pipeline list')
+    ds.context_link(BASE+'/pipeline?'+urlencode(dict(query,view='board')), 'Stage board')
+    body=f"""
 <div class='sales-register'><header class='sales-compact' id='explorer-content'><div><p class='eyebrow'>Workspace opportunity pipeline</p><h1>Your commercial pipeline</h1><p>Stage tracks the sales process. Evidence maturity tracks what is established.</p></div><a class='ex-button' href='{BASE}/new'>Create an opportunity →</a></header><aside class='sales-banner'><strong>Demonstration commercial workspace.</strong> Stage and evidence maturity are separate. No customer validation or real revenue forecast is implied.</aside>
 <section><div class='sales-totals'>{amounts}</div><details class='sales-filters' {'open' if any(filters.values()) or error else ''}><summary>Filters & value discipline</summary><p class='ex-notice'>Known amounts mean user-recorded customer-confirmed amounts with references; they are not independently verified. Estimates remain separate with assumptions. Demonstration records are never a real-world revenue forecast.</p>
 {f"<p class='sales-error' role='alert'>Filters were not applied: {e(error)}</p>" if error else ''}<form class='sales-filter' method='get' action='{BASE}/pipeline'>{controls}</form></details>
-<nav class='sales-theme' aria-label='Pipeline view'><a href='{BASE}/pipeline?{urlencode(dict(query,view='list'))}' {'aria-current=page' if not board else ''}>List view</a><a href='{BASE}/pipeline?{urlencode(dict(query,view='board'))}' {'aria-current=page' if board else ''}>Stage board</a></nav>
+
 {content or '<div class="ex-empty">Your pipeline is empty. Explore a Banking hypothesis or create a record to start qualification.</div>'}</section></div>"""
     return page('Commercial opportunity pipeline',body,headers)
 
 
+@ds.view_scope
 def new_page(slug='lloyds', headers=None, error=''):
     bank=enterprise_reference(slug) or BANKS['lloyds']
     choices=''.join(f"<option value='{b.slug}' {'selected' if b.slug==bank.slug else ''}>{e(b.name)}</option>" for b in [*BANKS.values(),enterprise_reference('easyjet')])
@@ -181,6 +188,7 @@ def evidence_panel(state):
             +'</ul><p>'+e(state['limitation'])+'</p><p>Based on the saved record. Unsaved inputs do not change this status.</p></section>')
 
 
+@ds.view_scope
 def record_page(identifier, headers=None, error='', draft=None):
     r=get_opportunity(identifier,headers=headers)
     saved_evidence=evidence_maturity(r)
@@ -270,6 +278,7 @@ def submit(path, form, headers):
     return BASE+'/'+record['id']+'#qualification'
 
 
+@ds.view_scope
 def error_page(path, message, headers, draft=None):
     if path == BASE+'/pipeline':
         return pipeline_page(headers=headers,error=message)

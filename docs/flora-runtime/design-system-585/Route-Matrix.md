@@ -1,0 +1,27 @@
+# Candidate route and compatibility matrix
+
+These are **development routes in the candidate**, not observed deployed URLs. Original #580/#584 heads remain unchanged. The candidate is stacked on approved #584 `19ab36d241dbca2099ffb9b5d519c68c493a914a`, which contains tested integration #580 `34e34570c52847e16eb5f0d00579ca923983af7c`. Rejected Home v1 #582 is not an ancestor.
+
+| Surface | Candidate paths | Change / preserved boundary |
+|---|---|---|
+| Canonical Home | `/`, `/flora`, `/flora/` | Routes to the owner-approved 20-sector UK world on this branch. Old below-image modules disappear. Original Home function remains as an unserved compatibility/regression helper; its unchanged function hash does **not** mean canonical HTTP Home is unchanged. |
+| Approved preview compatibility | `/visual-v2`, `/visual-v2/pestle` | Still available, now with shared header; identical artwork/statistical basis and six factors. Historical #584 screenshots/manifests describe that earlier head, not this new candidate. |
+| PESTLE | `/pestle?market=GB&factor=…` | Friendly canonical entry, same native six states/one image insight. Unsupported countries/selectors fail closed. No redirect of country-specific `/macro` research into UK-only context. |
+| Technology industry | `/industries/technology/experience` | Eight native labelled regions; parent-section GVA context; responsive on-image labels. Removes duplicate comparison/Pipeline/district-key/footer navigation. Existing IDs/routes/scene artwork retained. |
+| Participants | `…/district?district=frontier`, `…/participants` and other districts/sorts/search | Same 80-provider membership and comparison owners. Shallow banner retained; six sortable columns; one company row link; UK metrics or blanks; methods in header. |
+| NVIDIA | `…/enterprise?enterprise=nvidia&district=…` | Three editorial groups; all existing facts/relationships/programmes/hypotheses retained; visible potential buyer. No canonical account binding or capture action added. |
+| Other Technology profiles | `…/enterprise?enterprise=…`; existing Equinix financial/strategy selectors | Shared shell and source presentation. Existing group/UK identity limitations and financial drill URLs remain. No new enterprise financials/research invented. |
+| Conceptual enterprise model | `…/operating-model?area=facilities|interconnection` | Approved Technology artwork reused as conceptual scenery; two existing questions are native image controls with an anchored note. Not a disclosed Equinix org chart. Macro context stays local to Technology. |
+| Technology demo sales | `…/pipeline`, `…/opportunity` | Existing synthetic, tab-local behaviour retained. Explicitly labelled demo destination in header; generic product Pipeline remains the protected live owner. No network writes added. |
+| Banking / Aviation | `/industries/banking`, `/industries/aviation`, existing lenses | Shared header, broader-section GVA context, existing SVG living scene and source consolidation. Existing topology, node IDs, analytical semantics, source limitations and enterprise routes retained. |
+| Enterprise / strategic SVGs | `/enterprises/lloyds`, `/enterprises/easyjet`, existing timeline/ecosystem and industry PESTLE/Five Forces/value-chain lenses | Shared shell and subdued source presentation where existing helpers contribute notes. Existing derived SVG geometries and node destinations are preserved, not replaced by invented illustration/research. |
+| Offers | `/flora/offers`, `/company`, `/edit`, `/review`, `/discover`, `/studio` | One header/context menu; same employer selection, private/versioned definitions, independent reviews and default-off Studio. All assessment dimensions, uncertainty, lineage, proof/cutoff/policy remain in one private source disclosure. |
+| Opportunities | `/opportunities` | Cleaner primary research-hypothesis entry; legacy Horizon material retained in Sources. No automatic sales record or qualification. |
+| Live sales | `/flora/sales/pipeline`, `/new`, record/edit/qualification paths | Header/type/spacing only. Original controls, versions, CSRF, resource scope, evidence versus stage distinctions and explicit save/capture actions preserved. GET navigation leaves domain bytes unchanged. |
+| Shared-shell legacy tools | Workspace/Banking compatibility, reference/research screens using existing shells | Shared header/palette; specialist data/workflow bodies largely retained. This is not a semantic rewrite of every historic research page. |
+
+## Intentionally not changed
+
+Authentication/enrolment handlers, authority/ACL/capability evaluation, storage recovery and operational alerts; canonical intelligence/research acceptance; financial/research models and JSON/specification APIs; imports, Evidence, publisher and observation memory; employer/seller data; Offers matching/approval/state owners; live Pipeline writer/schema/audit; Render manifest, release helper and deployment configuration. Advanced historic bodies may retain specialist inspection controls. They stay available through the compact header and retain destination permissions.
+
+Canonical routing here is **reviewable implementation after the owner's #584 design acceptance**, not a release. Promotion still requires owner review of this draft, completion of integration/release #578 checks, reconciliation of the final base and exact-SHA validation. No main merge or deployment is performed.
