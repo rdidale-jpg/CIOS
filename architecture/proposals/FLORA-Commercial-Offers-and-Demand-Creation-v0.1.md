@@ -159,11 +159,38 @@ Seller: a UK technology-services company, identity and offer portfolio explicitl
 ## 11. Owner decisions before coding
 
 1. **Identity:** Is a user able to represent one employer at a time, or multiple seller organisations/roles (advisor, channel partner, portfolio career)? Recommend many authorised identities but one active Commercial Mission at a time.
-2. **Offer creation:** Should a seller be able to create personal Offers immediately, with a separate approval state for organisation-wide publication? Recommend yes.
+2. **Offer ownership — OWNER DECISION CONFIRMED (13 Nov 2026):** Support both employer-managed Offers and seller-defined Offers, including seller-specific variations, with separate organisational approval. Seller drafts remain private to an authorised scope until explicitly approved for organisation-wide publication.
 3. **Targeting mode — OWNER DECISION CONFIRMED (13 Nov 2026):** Support both offer-led discovery and account-led discovery with **one shared Offer–Enterprise matching engine**. This is a required product/architecture contract, not a future option.
 4. **Composite proposals:** Opt-in exploratory mode only, with no external or contractual claims until seller approval.
 5. **Scoring:** Show explainable prioritisation, not pseudo-exact win probabilities.
 6. **Pipeline threshold:** Require account problem, relevant buyer/access route, explicit seller fit, qualified commercial action and user approval before promotion.
+
+## 11B. Confirmed decision: employer-managed and seller-defined Offers
+
+**Owner confirmation: 13 November 2026.** FLORA supports an organisational Offer catalogue alongside seller-defined Offers and seller-specific variations.
+
+### Offer ownership and publication states
+
+- **Employer-managed Offer:** owned by an authorised employer organisation, with designated catalogue administrators, an approved master definition and version history. Sellers with the appropriate authorisation may select it for their Commercial Mission.
+- **Seller-defined Offer:** owned by the author or their authorised workspace, with explicit represented-employer association (if applicable), scoped visibility and its own versions. Seller authors may test and develop private plays without making claims on behalf of the whole employer.
+- **Seller variation:** references a particular approved parent Offer/version rather than forking its evidence or changing the approved master. It may add target-sector emphasis, buyer-specific entry plays, territory, discovery questions and seller-owned assets. It must not silently override protected capabilities, approved proof points, delivery boundaries, commercial terms, regulated claims or product availability.
+- **Composite Offer draft:** may combine known capabilities/Offers but remains private and proposed until capability ownership, partner/rights and commercial authorisations are checked.
+- **Organisational approval:** explicit authorised review of a seller-defined Offer or variation before it is shared or represented as an employer-approved proposition. Approved catalogues and seller drafts remain separately versioned; approval never upgrades marketing claims to accepted evidence.
+
+Suggested lifecycle: `private_draft → submitted_for_review → employer_approved`, with `changes_requested`, `rejected`, `retired` and `superseded` outcomes. Private seller publication is distinct from organisation-wide publication. Record author, owner, represented organisation, reviewer and authority, timestamp, parent/version, approved scope, evidence references and audit event. A rejected/retired version cannot be silently reused as approved.
+
+### Authorisation and invariants
+
+- Authenticated sellers may create/edit their own permitted Offers and variations. Only delegated employer approvers may publish or modify employer-managed master Offers.
+- Employer association must resolve through the seller's authorised Commercial Mission/EmployerContext; free text employer names never confer rights.
+- Users cannot read another seller's private offer drafts, access unrelated employer catalogues, or use a private/unapproved variation as an authorised corporate claim.
+- Approved master changes do not retroactively rewrite seller variations or prior fit assessments; reassess affected pairs on version changes and flag required review discreetly.
+- The shared matching engine takes `offer_id + version + seller_context + enterprise_id + evidence_cutoff + policy_context` so both offer-led and account-led paths use identical authorised offer definitions.
+- No catalogue action grants permission to mutate canonical Enterprise Intelligence, bypass provenance checks or auto-create Pipeline opportunities.
+
+### Acceptance tests
+
+Test private seller creation; employer catalogue read and controlled approval; variation lineage and protected fields; cross-workspace/organisation isolation; stale parent version handling; withdrawal/retirement effects; audit trail; cross-route assessment equivalence; no Pipeline writes. Corporate claims and approval badges must be accurate; no misleading appearance of certification.
 
 ## 11A. Confirmed decision: symmetric discovery, one matching engine
 
