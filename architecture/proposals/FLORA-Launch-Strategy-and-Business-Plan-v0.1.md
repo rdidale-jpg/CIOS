@@ -409,3 +409,107 @@ Define explicit entry criteria for expanding beyond Sales: proven Sales activati
 ### Version control and next update
 
 Update to v0.2 **only after** (a) real design-partner feedback, (b) a costed 24-month monthly financial model, (c) explicit source/rights validation, and (d) commercial/operational launch ownership decisions. Keep this paper separate from current sprint branches and do not merge or deploy without owner review.
+
+
+---
+
+## Appendix A — Alternative social-purpose ownership structures (13 November 2026)
+
+**Decision status:** Exploratory. The proposed for-profit SaaS framing in sections 1–15 is one option, **not the chosen constitutional structure**. This appendix compares commercially viable, community-interest and charitable alternatives. No legal incorporation, certification, subscription tax status, grant eligibility, charitable registration or ownership change is authorised.
+
+### A1. Strategic reframe
+
+FLORA could aim to democratise public economic, industry, enterprise and environmental understanding, while charging for valuable, private, professional applications such as seller-specific Opportunity Factory, team tools, investor analysis and premium research. The mission could be:
+
+> **Improve access to reliable intelligence about industries, enterprises and economic change, enabling people to learn, make better decisions and contribute to social and environmental progress.**
+
+This is **an aspirational product mission**, not a charity-law-approved charitable object. Free educational access alone does not make a company a charity; private benefit of corporate sales users and founders must be accounted for.
+
+### A2. UK structural alternatives
+
+| Legal/commercial option | Can trade/sell Sales subscriptions? | Founder equity/profits and investor appeal | Public purpose and constraints | Initial assessment |
+|---|---|---|---|---|
+| **Ordinary limited company**, with mission in articles/policies; pursue **B Corp certification** later | Yes | Normal equity and permitted distributions; subject to adopted governance | B Corp is a **certification not UK legal form**; for-profit entity must comply with updated B Lab standards, stakeholder-governance legal requirement, reporting/fees | Best near-term flexibility |
+| **Community Interest Company limited by shares** | Yes | Shareholder dividends restricted by statutory cap; asset lock constrains capital extraction/sale | Formal community-interest test, community purpose, CIC reporting and asset lock; cannot simply revert to ordinary Ltd | Credible mission commitment with constrained private returns |
+| **CIC limited by guarantee** | Yes | No equity shareholder distributions; social-purpose reinvestment | CIC asset lock and accountability; may fit founder/non-profit stewardship | Better for strongly reinvested enterprise |
+| **Charity (CIO or charitable company limited by guarantee)** | Only to further charitable purposes or under proper trading rules/subsidiary structure | No private equity ownership or investor dividends; trustees manage charity for public benefit | Exclusively charitable purposes/public benefit; trustees independent of founder interests; trading and private benefit restrictions | Fits public education/research mandate; **poor fit as sole home for a private commercial sales-intelligence business** |
+| **Commercial Ltd + separate independent charity** | Yes, within Ltd, subject to normal licensing and contracts | Ltd retains investor/founder equity; charity has no private owners | Separate governing bodies, accounting, conflicts, contracts, transfer pricing, IP and grant treatment; charity can receive donations/fund educational work | Attractive **future hybrid** after commercial evidence and sustainable profits |
+| **Charity with wholly owned trading subsidiary** | Sales subsidiary might trade, subject to charity/group governance and lawful use of resources | Private investors generally cannot control charity's charitable assets; subsidiary profits can support charity | Charity's mission drives group; independent trustee governance, transfer/finance and benefit controls | Relevant only if primary founder purpose is education/public benefit rather than owner equity |
+
+### A3. Source-verified UK considerations
+
+- **B Corp certification:** B Lab UK says it is for eligible for-profit businesses; charities and nonprofits are not eligible. UK limited companies must meet the stakeholder legal requirement, usually via amended articles. New V2 standards and third-party assurance apply; small/startup certification timing must be verified. Fees and standards can change. Official: https://bcorporation.uk/b-corp-certification/before-you-certify/who-can-certify/ ; https://bcorporation.uk/b-corp-certification/before-you-certify/legal-requirement/ ; https://bcorporation.uk/b-corp-certification/b-labs-new-standards-are-here/ ; https://bcorporation.uk/b-corp-certification/pricing/
+- **CIC:** Company exists for community benefit. The statutory asset lock limits transfers and private gain; a CIC limited by shares can pay capped private dividends. Regulator guidance reports an aggregate dividend cap of 35% of profits; a CIC does not ordinarily convert back into an unrestricted Ltd. Official: https://www.gov.uk/set-up-a-social-enterprise ; https://www.gov.uk/government/publications/community-interest-companies-how-to-form-a-cic/community-interest-companies-guidance-chapters
+- **Charity/CIO:** Only charitable purposes for the public benefit; eligible purposes include appropriately framed education, but a commercial seller product is not automatically charitable. An England/Wales CIO is regulated by the Charity Commission, without Companies House registration. A charitable company limited by guarantee is another option. Official: https://www.gov.uk/guidance/public-benefit-rules-for-charities ; https://www.gov.uk/setting-up-charity/structures
+- **Charitable trading:** HMRC distinguishes primary-purpose from non-primary-purpose commercial trading and describes the subsidiary option. The charity does **not** enjoy general VAT exemption just because it is a charity. Official: https://www.gov.uk/guidance/charities-and-trading
+
+These are high-level UK/England-Wales descriptions, not advice on eligibility, tax, governance or formation. Formal advice from a charity/corporate solicitor and accountant is required before incorporation or restructuring.
+
+### A4. Comparative product and funding implications
+
+| Factor | Mission-led Ltd / prospective B Corp | CIC | Charity | Ltd + separate charity |
+|---|---|---|---|---|
+| Founder control, equity value and future exit | Highest flexibility | Constrained by asset lock/dividend regulation | Charity trustees govern; founder has no private ownership | Ltd retains flexibility; charity is separately governed |
+| Premium Sales subscription activity | Straightforward in company law (still subject to data/IP/privacy rules) | Permitted if consistent with community benefit | Potential non-primary-purpose trade; legal/financial design required | In Ltd |
+| Free educator/learner offer | Subsidised by profits or sponsorship | Natural community-benefit mission | Potential direct charitable education | Funded through separately constituted charity |
+| Philanthropy and grants | May access selective commercial/social innovation grants; gifts normally not charitable donations | Some social-enterprise funds; not generally charitable tax gift relief | Potential charity-eligible grants and Gift Aid subject to rules | Charity eligible for appropriate funds; cannot subsidise private company |
+| Outside equity investment | Conventional | More restricted | No equity investment into charity | Conventional at Ltd; charity separately funded |
+| Regulatory/reporting complexity | Ordinary Ltd + B Corp certification efforts | CIC statements/accounts, asset lock | Charity reporting, trustee governance, charitable tax and restrictions | Two entities, costs, IP licences and conflicts |
+| Mission credibility | Depends on measurable commitments and independent verification | Statutory asset lock/community benefit | Legally protected public-benefit purpose | Depends on independent charity and properly separated activities |
+
+**No particular legal wrapper guarantees customer trust, research impartiality, or grant funding.** Avoid using charitable language while maximising private commercial benefits without structural safeguards.
+
+### A5. Potential hybrid social-impact operating model
+
+```text
+FLORA Commercial Ltd
+  - Professional Sales and business-development subscriptions
+  - Authorised private data, team services and professional integrations
+  - Licensing/operational responsibility for intellectual property
+  - Normal commercial staffing, risk and investor relations
+                    |
+         Transparent, lawful contribution
+         (donation, sponsorship or agreed IP licence)
+                    v
+Independent FLORA Education / Public Intelligence Charity (potential future)
+  - Free guided industry learning, public economic literacy
+  - Research and accessible educational journeys
+  - Grants, donor and university/institution partnerships
+  - Public-benefit measurement and independent governance
+```
+
+This is **a governance hypothesis, not a transfer plan**. A charity would need genuine charitable objects, sufficient public benefit, independent trustees, arm's-length licensing/finance arrangements, separate accounts and protection from undue private benefit. It must not be used to launder commercial product research costs into donations or grant-funded work.
+
+Alternately a **CIC can pursue a combined commercial/public mission inside one organisation** but the statutory asset lock significantly reduces the flexibility to change direction or realise private equity returns.
+
+### A6. Mission metrics to test
+
+- Number of truly free learners/educators with access to usable, independently sourced materials, adjusted for quality not login volume.
+- Lessons completed, teaching materials deployed and demonstrable improvement in industry/economic literacy.
+- Geographic/socioeconomic access and accessibility, measured with consent and privacy.
+- Share of reliable public data and research that users can actually inspect under appropriate source rights.
+- Low-cost tools used to support workforce upskilling, social value or environmental transition *without claiming unsupported causal effects*.
+- Transparent annual public-impact report, source corrections and privacy/security incidents.
+- Commercial side: seller-reviewed real opportunities, subscriber retention, gross margin, and **cost to fund public services** without an unbounded AI subsidy.
+
+### A7. Recommended decision sequence
+
+**Step 1 — Decide whether public benefit is a core legal purpose or an enduring commercial commitment.** If owner equity and broad platform innovation remain central, a mission-led Ltd is simpler. If the platform is primarily dedicated to public education/research and private benefit is incidental, explore charity/CIO seriously.
+
+**Step 2 — Do not lock FLORA into a hard-to-reverse structure before testing willingness-to-pay, founder ownership/IP and source licences.** CIC asset-lock and charitable restrictions are material, long-term choices.
+
+**Step 3 — Define a short impact charter now**, regardless of legal form: sourced public education commitment; a minimum free-use guarantee subject to transparent limits; user privacy; no fabricated buying intent; accessible learning; measurable impact with annual review.
+
+**Step 4 — Seek qualified UK legal/tax advice** on Ltd/B Corp stakeholder articles, CIC limited by shares/guarantee, charity viability, trading subsidiary, grant restrictions, founder remuneration and IP/brand arrangements.
+
+**Step 5 — Decide on a future legal structure before formal public fundraising, equity offering or commercial subscription launch.** Avoid prematurely representing FLORA as B Corp-certified, a registered charity or a CIC.
+
+### A8. Current provisional recommendation
+
+**Best reversible route:** establish the public-benefit mission and independent research/education commitments, while keeping FLORA a commercial Ltd (eventually pursuing B Corp certification if standards, operation duration and impact evidence support it). Preserve an option for a distinct charity or educational foundation once genuine sustainable cash flow and separately charitable public-benefit activity justify the overhead.
+
+**Best strongly mission-locked option:** a CIC with carefully designed ownership and community-interest articles, if limiting private extraction is an intentional owner decision.
+
+**Best charitable option:** a genuine independent education/economic-literacy charity, possibly with a commercial trading subsidiary, **only if** public benefit becomes the dominant objective and control/equity constraints are accepted.
+
+**No legal formation decision made by this paper.**
