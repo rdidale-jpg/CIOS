@@ -27,6 +27,7 @@ on:
       - 'docs/flora-runtime/design-system-585/**'
       - 'docs/flora-runtime/offer-library-587/**'
       - 'docs/flora-runtime/buying-trigger-591/**'
+      - 'docs/flora-runtime/seller-development-598/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
       - '.github/workflows/flora-release-preflight.yml'
@@ -55,6 +56,7 @@ on:
       - 'docs/flora-runtime/design-system-585/**'
       - 'docs/flora-runtime/offer-library-587/**'
       - 'docs/flora-runtime/buying-trigger-591/**'
+      - 'docs/flora-runtime/seller-development-598/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
       - '.github/workflows/flora-release-preflight.yml'
@@ -98,7 +100,7 @@ jobs:
       - name: Test technology library, seller onboarding and protected owner compatibility
         run: python -m pytest tests/test_flora_offer_library_587.py tests/test_flora_strategic_offers_588.py -q
       - name: Test evidence-led buying triggers and private shortlist controls
-        run: python -m pytest tests/test_flora_buying_triggers_591.py -q
+        run: python -m pytest tests/test_flora_buying_triggers_591.py tests/test_flora_seller_development_598.py -q
       - name: Test separate two-screen Visual Experience v2
         run: python -m pytest tests/test_flora_visual_v2_583.py -q
       - name: Test unified visual system and protected source ownership

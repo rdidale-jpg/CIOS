@@ -1,0 +1,11 @@
+{
+  "head_sha": "b5003f81481fb8d7a039972255da8a8b58a8b814",
+  "run_id": 43511484185,
+  "conclusion": "success",
+  "artifact_id": 14079916381,
+  "artifact_sha256": "4154bbf16c512ee7bfc9370657f6426892885cb8c8c24ce44797a079b6d0d797",
+  "unique_ids": 1432,
+  "security_passes": 388,
+  "comparator_issues": 0,
+  "verified_before_branch_creation": true
+}
