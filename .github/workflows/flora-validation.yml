@@ -71,6 +71,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          # Validate the candidate itself, including draft PRs, rather than a synthetic merge ref.
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
           fetch-depth: 0
       - uses: actions/setup-python@v5

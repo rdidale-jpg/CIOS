@@ -1,6 +1,6 @@
 # Sprint A validation contract
 
-Base `3b8bd2c5e5177c012826658f820eeeb4ea2705f5`; exact candidate SHA and hosted run are reported in the draft PR and its current-head checks. Repository evidence describes the tested scope; it does not claim future CI success. No raw logs, runtime stores, credentials or real private research are committed.
+Base `3b8bd2c5e5177c012826658f820eeeb4ea2705f5`; exact candidate SHA and hosted run are reported in the draft PR and its current-head checks. The hosted validation checkout explicitly pins the PR head SHA (or the triggering SHA for push/dispatch), so the tested checkout is the candidate itself rather than a synthetic merge ref. Repository evidence describes the tested scope; it does not claim future CI success. No raw logs, runtime stores, credentials or real private research are committed.
 
 ## Required gates
 
