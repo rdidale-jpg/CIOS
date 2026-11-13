@@ -1,0 +1,37 @@
+{
+  "issue": 587,
+  "base_sha": "3b8bd2c5e5177c012826658f820eeeb4ea2705f5",
+  "scope": "Owner-authorised additive library adoption and private supplier preferences; historical #585 byte manifest is retained unchanged",
+  "functional_owner_revisions": {
+    "cios/applications/flora/offers.py": {
+      "baseline_sha256": "ed9021312b666a7b7f331a214f295cc67d9875860e99a08fec9b39f1c41973a9",
+      "candidate_sha256": "b2374863064bed4d5bb29605e155a77ab2024d3c824a6648142fb1e2e03fc28a"
+    },
+    "cios/applications/flora/commercial_mission.py": {
+      "baseline_sha256": "13e7216d61c97dc3b5faf8d1b94bd83f31fbe56dd6f64a8b9c126f1697d4728d",
+      "candidate_sha256": "8d42ca093ef26459dd4b3831e9b1b74cb0cd5d8ef783a54794621b48f7cd3740"
+    }
+  },
+  "unchanged_control_functions": {
+    "cios/applications/flora/offers.py": {
+      "_actor": "6aa5ae061387faa19599f208033dcbba09e5f020a8fa4d983d48fb6a47e1fcf0",
+      "_employer": "4dbd92a0b4be2f49109d67ba6210dfb04251d36b3fc167a3ebd021f72bc1b137",
+      "_selected": "a5b6bfcc7913a4c5301050bb8b1f54dc3068372bfe57d9302e01fa27b9b77f30",
+      "_persist": "7f05fe6b5e8d0b1d253bb291fd474522bc422bcc5cab7145190fc2e2ba92f19b",
+      "bind_employer": "0dfc685b6570abf659c2fc3337edb15d90f8dd5ae0c201a6968dd8d747144aa2",
+      "_visible": "f3aa840cf48358ef099349682dcdfaae4cb0e2af68d38666027f9db02acffbb3",
+      "_record": "58c38aac5e19c5a03448d0e69b23d2917009da2112b104d7e1cae91745df5a17",
+      "studio_toggle": "7ef77e63a504f3f8e87f01d55f2bfad2d2a3182d85b592e5f59cd126331afe1c",
+      "compose": "1fd251a8e854d843d6446897cc4c4ee94bceb69fca0b24b591dd3f45af4c30e5",
+      "accounts": "e2e9e3df91f9ff1b78d441c93a434ef8a8fdaa9f38e0c33edd06dc306cd19411",
+      "discover": "f1d0ba6d6eecee15317614128b2a40e5f35cd7c518ffbebee3fb35ad8f9ddbf9"
+    },
+    "cios/applications/flora/commercial_mission.py": {
+      "_profile_visible": "d0ff2dc5fcba4969fc000500ba70a646368715c17edc201b066fed5365bdd7a0",
+      "_profile_authority": "16db2ad59050fe4aa57a7103d7fd3731e2aaaf04246a05ed0bb7ddc7b6d2adba",
+      "_profile_audit": "c53842c765bf4d27d07e5eececbcd85b7dcaeb73cdb642e7f28d849af2bf6086",
+      "_resolve_commercial_mission": "1f85e806cda8c7d1556d4f6b672f43a71acaf4755b341e435b8aa5bebaf6eaf1",
+      "save_employer_context": "c2712eeea1e91c4e2c7f81296cc8ef87b239f5b3a1b08f1529b7836ad12e1da9"
+    }
+  }
+}

@@ -118,6 +118,8 @@ class CommercialMission:
     supplied_by: str = "configured user profile"
     context_id: str = ""
     version: int = 1
+    technology_subindustries: tuple[str, ...] = ()
+    offer_library_employer_id: str = ""
 
     @property
     def operational_status(self) -> str:
@@ -148,7 +150,7 @@ class CommercialMission:
                  ("industries", "enterprises", "offer_portfolio", "competitors", "partners", "geography",
                   "interests", "named_accounts", "campaigns", "target_customers", "priority_accounts",
                   "excluded_accounts", "relevant_business_units", "objectives", "strategic_propositions",
-                  "delivery_constraints")}
+                  "delivery_constraints", "technology_subindustries")}
         return cls(user_id=user_id, **scalar, **lists,
                    **{k: str(value.get(k) or "") for k in ("mission_name", "account_focus", "commercial_horizon",
                       "opportunity_horizon", "required_opportunity_maturity", "minimum_evidence_state", "speculative_treatment")},
@@ -157,7 +159,8 @@ class CommercialMission:
                    authority_status=str(value.get("authority_status") or "human-supplied operational context"),
                    supplied_by=str(value.get("supplied_by") or "configured user profile"),
                    context_id=str(value.get("context_id") or f"commercial-mission:{user_id}"),
-                   version=int(value.get("version") or 1))
+                   version=int(value.get("version") or 1),
+                   offer_library_employer_id=str(value.get("offer_library_employer_id") or ""))
 
 
 def resolve_commercial_mission(headers: Any) -> CommercialMission | None:
@@ -198,18 +201,24 @@ def save_commercial_mission(headers: Any, value: dict[str, Any]) -> CommercialMi
     if not isinstance(profiles, dict):
         raise ValueError("Commercial Mission profile store must be an object")
     context = _profile_authority(headers, path, value, profiles.get(user_id))
+    # Older profile forms do not submit Sprint A supplier preferences. Preserve
+    # those additive fields unless a caller explicitly replaces them.
+    previous = profiles.get(user_id) or {}
+    value = {**{k: previous[k] for k in ('technology_subindustries', 'offer_library_employer_id')
+                if k in previous}, **value}
     mission = CommercialMission.from_dict(user_id, value)
     if not all((mission.executive_role, mission.commercial_objective)):
         raise ValueError("Role and objective are required")
     profiles[user_id] = {name: list(getattr(mission, name)) for name in (
-        "industries", "enterprises", "geography",
+        "industries", "enterprises", "geography", "technology_subindustries",
+        "offer_portfolio", "competitors", "partners", "strategic_propositions", "delivery_constraints",
         "interests", "named_accounts", "campaigns", "target_customers", "priority_accounts",
         "excluded_accounts", "relevant_business_units", "objectives")}
     profiles[user_id].update({name: getattr(mission, name) for name in (
         "executive_role", "commercial_objective", "mission_name", "account_focus", "commercial_horizon",
         "opportunity_horizon", "required_opportunity_maturity", "minimum_evidence_state", "speculative_treatment",
         "show_unvalued_opportunities", "inspection_depth", "authority_status", "supplied_by",
-        "context_id", "version")})
+        "context_id", "version", "employer", "offer_library_employer_id")})
     profiles[user_id]['workspace_id'] = context.workspace
     _profile_audit(headers, path, context, profiles[user_id])
     atomic_write_json(path, profiles)

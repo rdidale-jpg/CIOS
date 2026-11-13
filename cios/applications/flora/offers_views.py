@@ -7,7 +7,7 @@ from . import offers
 from .research_intelligence.unified_views import page
 
 CSS = """
-.offers{--ink:#173e32;--paper:#faf8f2;max-width:1160px;margin:auto;color:var(--ink);padding:30px 22px 70px}.offers *{box-sizing:border-box}.offers h1{font:clamp(2.4rem,5vw,4.4rem)/1.06 Georgia,serif;letter-spacing:-.035em;margin:16px 0}.offers h2{font:1.7rem Georgia,serif}.offers p{max-width:74ch;line-height:1.65}.offers nav{display:flex;gap:10px 22px;flex-wrap:wrap;border-bottom:1px solid #d6ddd3;padding:12px 0 20px}.offers a{color:#174e3d}.offers a[aria-current=page]{font-weight:bold;text-decoration-thickness:3px}.offer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:30px 0}.offer-card{background:#fffdf8;border:1px solid #dce1d5;border-radius:18px;padding:24px;min-width:0}.offer-card h2{margin-top:8px}.offer-card small,.offers .muted{color:#59675e}.offers .eyebrow{text-transform:uppercase;font-size:.76rem;letter-spacing:.13em}.offers label{display:block;margin:14px 0}.offers input:not([type=checkbox]),.offers textarea,.offers select{display:block;width:100%;font:inherit;padding:11px;border:1px solid #a9b5aa;border-radius:7px;background:white;color:#183a2e}.offers textarea{min-height:90px;resize:vertical}.offers button,.offers .offer-button{display:inline-block;background:#174e3d;color:white;border:0;border-radius:7px;padding:11px 17px;font:inherit;cursor:pointer;text-decoration:none;margin:8px 10px 8px 0}.offers .quiet{background:#e9eee4;color:#173e32}.offers :focus-visible{outline:3px solid #bb731c;outline-offset:4px}.offers details{border-top:1px solid #dce1d5;margin:18px 0;padding-top:16px}.offers summary{cursor:pointer;font-weight:600}.offers .split{display:grid;grid-template-columns:1.5fr 1fr;gap:24px}.offers form{margin:10px 0}.offers .pair{border-top:1px solid #d7ddce;padding:28px 0}.offers .pair h2{margin:0 0 10px}.offers .status{display:inline-block;font-size:.77rem;border:1px solid #b6c6b3;border-radius:20px;padding:4px 10px}.offers .explanation{background:#eff2e9;padding:18px;border-radius:12px}.offers .source-list{overflow-wrap:anywhere}.offers .actions{display:flex;gap:8px;flex-wrap:wrap}.offers fieldset{border:1px solid #d6ddd3;border-radius:12px;padding:16px}.offers .inline{display:flex;gap:16px;align-items:end;flex-wrap:wrap}.offers .inline label{flex:1;min-width:180px}.offers .notice{border-left:3px solid #8a9f78;padding-left:16px}.offers .history{font-size:.9rem}.offers code{overflow-wrap:anywhere}@media(max-width:950px){.offer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.offers{padding:20px 12px 50px}.offer-grid,.offers .split{grid-template-columns:1fr}.offer-card{padding:19px}.offers nav{gap:12px}.offers .inline{display:block}.offers h1{font-size:2.7rem}}
+.offers{--ink:#173e32;--paper:#faf8f2;max-width:1160px;margin:auto;color:var(--ink);padding:30px 22px 70px}.offers *{box-sizing:border-box}.offers h1{font:clamp(2.4rem,5vw,4.4rem)/1.06 Georgia,serif;letter-spacing:-.035em;margin:16px 0}.offers h2{font:1.7rem Georgia,serif}.offers p{max-width:74ch;line-height:1.65}.offers nav{display:flex;gap:10px 22px;flex-wrap:wrap;border-bottom:1px solid #d6ddd3;padding:12px 0 20px}.offers a{color:#174e3d}.offers a[aria-current=page]{font-weight:bold;text-decoration-thickness:3px}.offer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:30px 0}.offer-card{background:#fffdf8;border:1px solid #dce1d5;border-radius:18px;padding:24px;min-width:0}.offer-card h2{margin-top:8px}.offer-card small,.offers .muted{color:#59675e}.offers .eyebrow{text-transform:uppercase;font-size:.76rem;letter-spacing:.13em}.offers label{display:block;margin:14px 0}.offers input:not([type=checkbox]),.offers textarea,.offers select{display:block;width:100%;font:inherit;padding:11px;border:1px solid #a9b5aa;border-radius:7px;background:white;color:#183a2e}.offers textarea{min-height:90px;resize:vertical}.offers button,.offers .offer-button{display:inline-block;background:#174e3d;color:white;border:0;border-radius:7px;padding:11px 17px;font:inherit;cursor:pointer;text-decoration:none;margin:8px 10px 8px 0}.offers .quiet{background:#e9eee4;color:#173e32}.offers :focus-visible{outline:3px solid #bb731c;outline-offset:4px}.offers details{border-top:1px solid #dce1d5;margin:18px 0;padding-top:16px}.offers summary{cursor:pointer;font-weight:600}.offers .split{display:grid;grid-template-columns:1.5fr 1fr;gap:24px}.offers form{margin:10px 0}.offers .pair{border-top:1px solid #d7ddce;padding:28px 0}.offers .pair h2{margin:0 0 10px}.offers .status{display:inline-block;font-size:.77rem;border:1px solid #b6c6b3;border-radius:20px;padding:4px 10px}.offers .explanation{background:#eff2e9;padding:18px;border-radius:12px}.offers .source-list{overflow-wrap:anywhere}.offers .actions{display:flex;gap:8px;flex-wrap:wrap}.offers fieldset{border:1px solid #d6ddd3;border-radius:12px;padding:16px}.offers .inline{display:flex;gap:16px;align-items:end;flex-wrap:wrap}.offers .inline label{flex:1;min-width:180px}.offers .notice{border-left:3px solid #8a9f78;padding-left:16px}.offers .history{font-size:.9rem}.offers code{overflow-wrap:anywhere}.offers .library-check{display:flex;align-items:flex-start;gap:10px;line-height:1.5;min-height:44px}.offers .library-check input{flex:0 0 auto;width:20px;height:20px;margin-top:2px}.offers li{line-height:1.6;overflow-wrap:anywhere}.offers h3,.offers h4{line-height:1.35}@media(max-width:950px){.offer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.offers{padding:20px 12px 50px}.offer-grid,.offers .split{grid-template-columns:1fr}.offer-card{padding:19px}.offers nav{gap:12px}.offers .inline{display:block}.offers h1{font-size:2.7rem}}
 """
 LABELS = {'name': 'Offer name', 'outcome': 'Customer outcome', 'icp': 'Target industries (comma separated)',
     'buyers': 'Buyer roles', 'trigger': 'Buying trigger / structural pattern', 'entry_play': 'First entry play',
@@ -47,7 +47,7 @@ def _record(state, offer_id):
 
 @ds.view_scope
 def render(path, query, headers):
-    allowed = {'offer', 'parent', 'template', 'mode', 'selected', 'cutoff'}
+    allowed = {'offer', 'parent', 'template', 'mode', 'selected', 'cutoff', 'search'}
     if set(query) - allowed or any(len(v) != 1 for v in query.values()):
         raise ValueError('Unsupported offer selector')
     q = {k: v[0] for k, v in query.items()}
@@ -55,7 +55,10 @@ def render(path, query, headers):
     current = path.removeprefix(offers.BASE)
     for suffix, label in (('', 'My offers'), ('/company', 'My company'), ('/discover', 'Discover'), ('/review', 'Reviews'), ('/studio', 'Creative Studio')):
         ds.context_link(url(suffix), label)
-    if path == url('/company'):
+    if path == url('/start'):
+        from .offer_library_views import onboarding
+        title, body = 'Build your commercial focus', onboarding(state, q, headers)
+    elif path == url('/company'):
         title, body = 'My company', company(state, headers)
     elif not state['selected']:
         title, body = 'Choose your company', '<p>Select an authorised employer before creating or discovering offers.</p>' + company(state, headers)
@@ -104,16 +107,21 @@ def catalogue(state):
     for r in records:
         content = r['content']
         controls = link('/edit', 'Open offer', offer=r['id'])
-        if r['eligible']:
+        if r['eligible'] and not r.get('library_playbook'):
             controls += ' · ' + link('/discover', 'Discover accounts', mode='offer', selected=r['id'])
         if r['state'] == 'employer_approved' and r['eligible']:
             controls += ' · ' + link('/edit', 'Create private variation', parent=r['id'])
         status = r['state'].replace('_', ' ')
         if not r['eligible'] and r['state'] in {'private_draft', 'employer_approved'}:
             status += ' · review dependency changes'
-        cards += f'<article class="offer-card"><span class="status">{e(status)} · v{r["version"]}</span><h2>{e(content["name"])}</h2><p>{e(content["outcome"])}</p><p class="muted">{e(content["buyers"])}</p><p>{controls}</p></article>'
+        highlights = ''
+        if r.get('library_playbook'):
+            highlights = '<p class="eyebrow">Example offer</p><p><strong>When to explore</strong> · ' + e(r['library_playbook']['structural_triggers'][0]['condition']) + '</p><p><strong>First move</strong> · ' + e(content['entry_play']) + '</p>'
+        cards += f'<article class="offer-card"><span class="status">{e(status)} · v{r["version"]}</span><h2>{e(content["name"])}</h2><p>{e(content["outcome"])}</p><p class="muted">{e(content["buyers"])}</p>{highlights}<p>{controls}</p></article>'
     body = '<p>Start with the outcome. Choose an offer, explore a customer, then test the fit.</p>'
-    body += '<div class="actions">' + link('/edit', 'Create private offer') + '</div>'
+    if any(r.get('library_playbook') for r in records):
+        body += '<p>' + link('/discover', 'Continue to discovery') + '</p>'
+    body += '<div class="actions">' + link('/start', 'Set up my offers') + ' · ' + link('/edit', 'Create private offer') + '</div>'
     if cards:
         body += '<div class="offer-grid">' + cards + '</div>'
     else:
@@ -138,6 +146,11 @@ def editor(state, q):
         values += hidden('parent_id', parent['id']) + hidden('parent_version', parent['version'])
     variation = bool(parent or (record and record['parent']))
     body = '<p>Private drafts express a hypothesis and a first conversation. Organisational publication needs a separate reviewer.</p>'
+    if record and record.get('library_playbook'):
+        from .offer_library_views import playbook_details, register_sources
+        row = record['library_playbook']
+        register_sources([row])
+        body += '<p class="muted">Example offer · library v' + str(record['template_source']['version']) + ' · retained source snapshot</p>' + playbook_details(row)
     if record:
         body += f'<p><span class="status">{e(record["state"].replace("_", " "))} · v{record["version"]}</span></p>'
     if record and record['state'] == 'employer_approved' and record['eligible']:
@@ -212,6 +225,9 @@ def discovery(state, q, headers):
     for r in results:
         offer = next(o for o in eligible if o['id'] == r['offer_id'])
         body += f'<article class="pair" id="{e(r["assessment_id"])}" data-assessment-id="{e(r["assessment_id"])}"><p class="eyebrow">{e(r["recommended_posture"])} · hypothesis to test</p><h2>{e(r["enterprise_name"])} × {e(offer["content"]["name"])}</h2><div class="split"><div><p><strong>Why this customer</strong><br>{e(r["why_account"])}</p><p><strong>Why this offer</strong><br>{e(r["why_offer"])}</p><p><strong>Why now</strong><br>{e(r["why_now"])}</p></div><div class="explanation"><h3>First move</h3><p>{e(r["entry_play"])}</p><p><strong>Test next</strong><br>{e(r["next_validation_action"])}</p></div></div>'
+        if r.get('entry_plays'):
+            second = r['entry_plays'][1]
+            body += '<details><summary>Another way to start · compare the alternative</summary><p>' + e(second['conversation']) + '</p><p>' + e(second['workshop_or_proof']) + '</p><p>' + e(second['disconfirming_question']) + '</p><p>Stop if: ' + e('; '.join(second['stop_conditions'])) + '</p></details>'
         body += '<p class="muted">Access and delivery fit need validation. No buying intent or funding established.</p>'
         detail = '<section class="offer-assessment-source"><h2>' + e(r['enterprise_name']) + ' × ' + e(offer['content']['name']) + '</h2>'
         for k in ('capability_fit', 'credibility', 'relationship_access', 'trigger_evaluation', 'delivery_risk'):
@@ -256,6 +272,10 @@ def studio(state, headers):
 
 
 def submit(path, form_values, headers):
+    suffix = path.removeprefix(offers.BASE)
+    if suffix in {'/onboard-company', '/onboard-preferences', '/onboard-adopt'}:
+        from .offer_library_views import submit as onboarding_submit
+        return onboarding_submit(suffix, form_values, headers)
     def one(key, default=''):
         values = form_values.get(key, [default])
         if len(values) != 1:

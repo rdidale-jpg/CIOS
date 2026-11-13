@@ -182,7 +182,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                     self.send_error(403, "Storage recovery requires an authorised Flora owner")
                     return
                 self._html(_storage_recovery_page())
-            elif parsed.path in {"/flora/offers", "/flora/offers/company", "/flora/offers/edit", "/flora/offers/review", "/flora/offers/discover", "/flora/offers/studio"}:
+            elif parsed.path in {"/flora/offers", "/flora/offers/company", "/flora/offers/edit", "/flora/offers/review", "/flora/offers/discover", "/flora/offers/studio", "/flora/offers/start"}:
                 from cios.applications.flora.offers_views import render
                 self._html(render(parsed.path, parse_qs(parsed.query, keep_blank_values=True), self.headers))
             elif parsed.path in {"/design-system/assets/styles", "/design-system/assets/interactions"}:
@@ -780,7 +780,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length", "0"))
         raw_body = self.rfile.read(length)
         form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)
-        if self.path in {"/flora/offers/profile", "/flora/offers/bind", "/flora/offers/select", "/flora/offers/save", "/flora/offers/transition", "/flora/offers/studio-toggle", "/flora/offers/compose", "/flora/offers/revoke"}:
+        if self.path in {"/flora/offers/profile", "/flora/offers/bind", "/flora/offers/select", "/flora/offers/save", "/flora/offers/transition", "/flora/offers/studio-toggle", "/flora/offers/compose", "/flora/offers/revoke", "/flora/offers/onboard-company", "/flora/offers/onboard-preferences", "/flora/offers/onboard-adopt"}:
             from cios.applications.flora.offers_views import submit
             self._redirect(submit(self.path, form, self.headers))
         elif self.path.startswith("/flora/sales/"):
