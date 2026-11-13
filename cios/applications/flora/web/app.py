@@ -764,7 +764,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length", "0"))
         raw_body = self.rfile.read(length)
         form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)
-        if self.path in {"/flora/offers/bind", "/flora/offers/select", "/flora/offers/save", "/flora/offers/transition", "/flora/offers/studio-toggle", "/flora/offers/compose", "/flora/offers/revoke"}:
+        if self.path in {"/flora/offers/profile", "/flora/offers/bind", "/flora/offers/select", "/flora/offers/save", "/flora/offers/transition", "/flora/offers/studio-toggle", "/flora/offers/compose", "/flora/offers/revoke"}:
             from cios.applications.flora.offers_views import submit
             self._redirect(submit(self.path, form, self.headers))
         elif self.path.startswith("/flora/sales/"):

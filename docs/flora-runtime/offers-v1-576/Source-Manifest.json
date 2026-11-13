@@ -3,13 +3,13 @@
   "proposal_reviewed_sha": "667ce1b3d1f77d4c7d66b20e21c595e7b4882cbb",
   "files": {
     ".github/workflows/flora-validation.yml": "7356ec2d9e5f1deeabd22b64c5817bb14b349ba62a2801c812b66846f34c430e",
-    "cios/applications/flora/offers.py": "ef3c720fe0ccb2c0592ae2a89ee1c6803881ef60a1ede6d8279d3a9708fa40cb",
-    "cios/applications/flora/offers_views.py": "6491a669e55e90c39cf1d1d1e3ab7c1ed776b8fcd75588921e658ec2386dbd7b",
+    "cios/applications/flora/offers.py": "ed9021312b666a7b7f331a214f295cc67d9875860e99a08fec9b39f1c41973a9",
+    "cios/applications/flora/offers_views.py": "efc3916251699f2c0ec4a2a3f962d209fb1bb9a672c1b906b22fe4e91e2bc9d3",
     "cios/applications/flora/security_web.py": "667ff0eb9c4ab28565148de91454853d702b0e0a5b63bdd0d8845e8ac1ec9cd1",
-    "cios/applications/flora/web/app.py": "2eada249257df3c5d8c850fe04d74333b1b40f9fb56bfeba139d0d5671a4f3aa",
-    "tests/test_flora_offers_v1.py": "3407ddfe2f5e7de9497c6e3f172aea323ee8b07c053367898d8859e48ec8777e",
+    "cios/applications/flora/web/app.py": "dacfeed0945f75b36cdb352e0e5abd6e3ce3f8612f5bfa8bc59eb455cb1cea13",
+    "tests/test_flora_offers_v1.py": "c09ff3f1b60edf22830caa9a12ddb59c2d5df7cacf7e6548241e9ab9980cf870",
     "tools/ci/flora_offers_preview.py": "03e4ba57da5e343a78e988e5d0c0affa4f3d290eb98d25df71e85d32ccf571f8",
-    "tools/ci/flora_offers_preview.cjs": "ef83e3bf8c36be4671f6c8dd0afcf3f937606b2fa6894caf7d6d064bf50decb9"
+    "tools/ci/flora_offers_preview.cjs": "e4616aad47985c32023d3c8e34f90ce48f18ffb373557af50cca167c8477c2c9"
   },
   "authority": "Source-content identity; exact candidate SHA and hosted result belong to the PR checks."
 }

@@ -87,7 +87,8 @@ def company(state, headers):
     if state['owner']:
         from .commercial_mission import resolve_employer_context
         profile = resolve_employer_context(headers)
-        body += '<details><summary>Owner: authorise company context</summary><p>First configure your declared Employer Context in existing My Company settings. This explicit binding authorises only named active workspace members. It does not certify company capabilities or canonical identity. A separate person must approve offers.</p><a href="/blueprint-import">Open existing commercial settings</a>'
+        body += '<details><summary>Owner: authorise company context</summary><p>Declare your company context first, then explicitly authorise named active workspace members. Saving a profile grants no employer rights and does not certify capabilities or canonical identity. Changing employer clears employer-specific profile fields; existing authorised catalogues stay separate. A separate person must approve offers.</p>'
+        body += form('/profile', field('organisation', profile.organisation if profile else '', 'Declared employer name', required=True) + hidden('expected_version', profile.version if profile else 0), 'Save declared company context')
         body += '<p>Configured employer: ' + e(profile.organisation if profile else 'Not configured') + '</p>'
         body += form('/bind', field('sellers', state['user_id'], 'Seller user IDs (comma separated)', required=True)
             + field('approvers', '', 'Delegated approver user IDs (comma separated)', required=True)
@@ -257,13 +258,16 @@ def submit(path, form_values, headers):
             raise ValueError('Duplicate form field')
         return values[0]
     permitted = {'csrf'}
-    schemas = {'/bind': {'sellers', 'approvers', 'approval_reference'}, '/select': {'employer_id'},
+    schemas = {'/profile': {'organisation', 'expected_version'}, '/bind': {'sellers', 'approvers', 'approval_reference'}, '/select': {'employer_id'},
         '/revoke': {'employer_id'}, '/save': set(offers.FIELDS) | {'offer_id', 'expected_version', 'parent_id', 'parent_version'},
         '/transition': {'offer_id', 'expected_version', 'action', 'approval_reference'}, '/studio-toggle': {'enabled'},
         '/compose': {'first', 'second', 'enterprise_slug'}}
     suffix = path.removeprefix(offers.BASE)
     if suffix not in schemas or set(form_values) - (schemas[suffix] | permitted):
         raise ValueError('Unsupported offer action')
+    if suffix == '/profile':
+        offers.declare_employer(one('organisation'), int(one('expected_version', '0')), headers=headers)
+        return url('/company')
     if suffix == '/bind':
         offers.bind_employer([s.strip() for s in one('sellers').split(',')], [s.strip() for s in one('approvers').split(',')], one('approval_reference'), headers=headers)
         return url('/company')

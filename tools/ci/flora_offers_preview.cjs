@@ -42,7 +42,11 @@ function check(condition, label) { if (!condition) throw new Error(label); check
     for (const route of parityPaths) {
      const before = await original.goto(config.baseline+route); const after = await current.goto(config.base+route);
      check(before.status()===200 && after.status()===200,device+' '+route+': existing public journey accessible');
-     const first = await original.screenshot({fullPage:true}); const second = await current.screenshot({fullPage:true});
+     await original.bringToFront(); await original.evaluate(()=>document.fonts.ready);
+     const first = await original.screenshot({fullPage:true,animations:'disabled',caret:'hide'});
+     await current.bringToFront(); await current.evaluate(()=>document.fonts.ready);
+     const second = await current.screenshot({fullPage:true,animations:'disabled',caret:'hide'});
+     if(sha(first)!==sha(second)){fs.writeFileSync(path.join(config.output,'diagnostic-before.png'),first);fs.writeFileSync(path.join(config.output,'diagnostic-after.png'),second);}
      check(sha(first)===sha(second),device+' '+route+': pixels identical to main');
      if(route==='/industries/technology/experience') fs.writeFileSync(path.join(config.output,device+'-before-technology.png'),first);
     }
@@ -93,6 +97,18 @@ function check(condition, label) { if (!condition) throw new Error(label); check
    check(await page.getByText('submitted for review',{exact:false}).count()>0,device+': browser submits separately');
    await context.close();
   }
+  const ownerContext = await browser.newContext({ignoreHTTPSErrors:true,viewport:{width:1440,height:1000}});
+  const owner = await login(ownerContext,'preview-owner');
+  await owner.goto(config.base+'/flora/offers/company');
+  await owner.getByText('Owner: authorise company context',{exact:true}).click();
+  check(await owner.locator('[name=organisation]').count()===1,'owner setup uses existing EmployerContext without imported Twin');
+  await Promise.all([owner.waitForURL('**/flora/offers/company'),owner.getByRole('button',{name:'Save declared company context'}).click()]);
+  await owner.getByText('Owner: authorise company context',{exact:true}).click();
+  check(await owner.locator('[name=organisation]').inputValue()==='Illustrative UK services company','browser saves declared profile separately from employer binding');
+  for (const [device, viewport] of Object.entries({desktop:{width:1440,height:1000},ipad:{width:1024,height:1366},mobile:{width:390,height:844}})) {
+   await owner.setViewportSize(viewport); await capture(owner,device+'-owner-setup','owner declaration and separate employer binding');
+  }
+  await ownerContext.close();
   const reviewerContext = await browser.newContext({ignoreHTTPSErrors:true,viewport:{width:1440,height:1000}});
   const reviewer = await login(reviewerContext,'preview-reviewer');
   await reviewer.goto(config.base+'/flora/offers/review');

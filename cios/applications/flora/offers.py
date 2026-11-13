@@ -4,12 +4,13 @@ All state uses the existing verified service envelope/protected journal. Matchin
 is a pure APPA-aligned projection; neither matches nor Studio import Pipeline.
 """
 from copy import deepcopy
+from dataclasses import asdict
 from datetime import date, datetime, timezone
 import json
 from uuid import uuid4
 
 from .access import require_capability, is_cios_owner
-from .commercial_mission import resolve_commercial_mission, resolve_employer_context
+from .commercial_mission import resolve_commercial_mission, resolve_employer_context, save_employer_context
 from .security import verified_service_read, verified_service_write, require_active_service_write
 from .security_store import SecurityStore, canonical, digest
 from .storage import data_path, atomic_write_json
@@ -23,7 +24,7 @@ PATTERNS = {
 }
 BASE = '/flora/offers'
 READ_PATHS = frozenset(BASE + s for s in ('', '/company', '/edit', '/review', '/discover', '/studio'))
-WRITE_PATHS = frozenset(BASE + s for s in ('/bind', '/select', '/save', '/transition', '/studio-toggle', '/compose', '/revoke'))
+WRITE_PATHS = frozenset(BASE + s for s in ('/profile', '/bind', '/select', '/save', '/transition', '/studio-toggle', '/compose', '/revoke'))
 FIELDS = ('name', 'outcome', 'icp', 'buyers', 'trigger', 'entry_play', 'next_test',
           'capabilities', 'partners', 'constraints', 'evidence', 'exclusions', 'trigger_pattern')
 VARIATION_FIELDS = frozenset({'name', 'icp', 'buyers', 'entry_play', 'next_test'})
@@ -110,6 +111,25 @@ def _persist(envelope, headers, action, resource):
             user_id=context.user_id, workspace_id=context.workspace,
             membership_id=context.membership.membership_id, membership_version=context.membership.version,
             session_ref=context.session.session_ref)
+
+
+@verified_service_write('commercial_context.edit', recent=True)
+def declare_employer(organisation, expected_version=0, *, headers=None):
+    """Edit the existing owner profile without requiring an imported Twin."""
+    if not is_cios_owner(headers):
+        raise PermissionError('Owner-reviewed pilot setup required')
+    current = resolve_employer_context(headers)
+    version = current.version if current else 0
+    if version != expected_version:
+        raise ValueError('Employer profile changed; reload before saving')
+    organisation = _text(organisation, 256)
+    value = asdict(current) if current and current.organisation == organisation else {}
+    if current:
+        value['context_id'] = current.context_id
+    value.update(organisation=organisation, version=version + 1)
+    value.setdefault('field_statuses', {})['organisation'] = 'human-supplied'
+    # Existing profile owner supplies storage, workspace guard and audited persistence.
+    return save_employer_context(headers, value)
 
 
 @verified_service_write('commercial_context.edit', recent=True)

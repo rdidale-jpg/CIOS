@@ -493,3 +493,31 @@ def test_changed_upstream_source_snapshot_requires_policy_reconciliation(monkeyp
     monkeypatch.setattr(model, 'load_assessment', changed)
     with pytest.raises(ValueError, match='snapshot changed'):
         offers.accounts()
+
+
+def test_fresh_owner_can_declare_company_in_browser_without_imported_twin(actor, web):
+    from cios.applications.flora.commercial_mission import resolve_employer_context
+    assert resolve_employer_context(actor[3]) is None
+    status, html, _ = web('/flora/offers/company')
+    assert status == 200 and 'Save declared company context' in html
+    assert web('/flora/offers/profile', {'organisation': 'Synthetic fresh employer', 'expected_version': 0})[0] == 303
+    profile = resolve_employer_context(actor[3])
+    assert profile.organisation == 'Synthetic fresh employer' and profile.version == 1
+    assert not offers.snapshot(headers=actor[3])['employers']
+    assert not offers.snapshot(headers=actor[3])['selected']
+    assert web('/flora/offers/profile', {'organisation': 'stale override', 'expected_version': 0})[0] == 403
+    assert resolve_employer_context(actor[3]).organisation == 'Synthetic fresh employer'
+
+
+def test_declare_employer_preserves_existing_profile_and_does_not_grant_authority(pilot):
+    from cios.applications.flora.commercial_mission import resolve_employer_context
+    before = resolve_employer_context(pilot['owner'])
+    result = offers.declare_employer(before.organisation, before.version, headers=pilot['owner'])
+    assert result.capabilities == before.capabilities and result.context_id == before.context_id
+    assert result.version == before.version + 1
+    changed = offers.declare_employer('Synthetic second employer', result.version, headers=pilot['owner'])
+    assert not changed.capabilities and not changed.partners and not changed.credentials
+    assert changed.context_id == before.context_id
+    assert offers.snapshot(headers=pilot['owner'])['selected']['organisation'] == 'Illustrative UK employer'
+    with pytest.raises(PermissionError):
+        offers.declare_employer('Impersonation', headers=pilot['seller'])
