@@ -1,0 +1,65 @@
+{
+  "status": "ready_for_owner_testing",
+  "as_of": "2026-11-12",
+  "branch": "codex/flora-technology-owner-journey",
+  "source_binding": "Source-Manifest.json; implementation content, not an asserted hosted commit check",
+  "focused_final": {
+    "tests": 99,
+    "passed": 99,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "new_owner_journey_tests": 36,
+  "security_final": {
+    "tests": 388,
+    "passed": 388,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "ci_policy": {
+    "tests": 25,
+    "passed": 25
+  },
+  "regression_gate": {
+    "passed": true,
+    "unique_ids": 1432,
+    "passed_tests": 1365,
+    "inherited_failures": 57,
+    "unchanged_skips": 10,
+    "issues": [],
+    "report": "Regression-Gate.json"
+  },
+  "browser": {
+    "new_responsive_checks": 60,
+    "retained_responsive_checks": 83,
+    "keyboard_district_activations": 24,
+    "new_journey_network_writes": [],
+    "external_requests": [],
+    "new_journey_page_errors": [],
+    "existing_screen_pixel_comparisons": 15,
+    "all_existing_screens_identical": true
+  },
+  "preservation": {
+    "protected_files": 12,
+    "unchanged": true,
+    "report": "Protected-Files.json",
+    "live_pipeline_mutations": 0,
+    "canonical_promotions": 0,
+    "runtime_agents_or_paid_model_calls": 0
+  },
+  "review_boundary": {
+    "merged": false,
+    "deployed": false,
+    "hosted_ci": "Not run for this local feature branch; no remote branch or PR published",
+    "pipeline": "Explicit browser-tab-only synthetic preview; live store untouched"
+  },
+  "limitations": [
+    "Physical iPad/Safari and assistive-technology user testing outstanding",
+    "Non-cloud districts retain existing partial research rather than invented market figures",
+    "UK legal-entity/contracting identity unresolved; annual group numbers are global",
+    "Enterprise model is conceptual; potential buying needs are unqualified",
+    "Sales edits are not shared or durable CRM records"
+  ]
+}

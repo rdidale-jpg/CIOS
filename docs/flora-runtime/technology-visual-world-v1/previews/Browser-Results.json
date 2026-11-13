@@ -1,0 +1,430 @@
+{
+  "checks": [
+    {
+      "path": "/industries/technology?lens=how",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=uses",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology/providers?provider=microsoft",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/banking",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/aviation",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/enterprises/lloyds",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/enterprises/easyjet",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/macro",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=how",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=uses",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology/providers?provider=microsoft",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/banking",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/aviation",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/enterprises/lloyds",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/enterprises/easyjet",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/macro",
+      "width": 1024,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=how",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=uses",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology/providers?provider=microsoft",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/banking",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/aviation",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/enterprises/lloyds",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/enterprises/easyjet",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/macro",
+      "width": 768,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=how",
+      "width": 390,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=uses",
+      "width": 390,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 390,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology/providers?provider=microsoft",
+      "width": 390,
+      "status": 200
+    },
+    {
+      "path": "/industries/banking",
+      "width": 390,
+      "status": 200
+    },
+    {
+      "path": "/industries/aviation",
+      "width": 390,
+      "status": 200
+    },
+    {
+      "path": "/enterprises/lloyds",
+      "width": 390,
+      "status": 200
+    },
+    {
+      "path": "/enterprises/easyjet",
+      "width": 390,
+      "status": 200
+    },
+    {
+      "path": "/macro",
+      "width": 390,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=how&segment=ai",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=uses&relationship=programme-67-5",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=uses&relationship=programme-202-1",
+      "width": 1440,
+      "status": 200
+    },
+    {
+      "path": "/industries/technology?lens=uses&relationship=programme-222-4",
+      "width": 1440,
+      "status": 200
+    }
+  ],
+  "errors": [],
+  "districtKeyboardActivations": 24,
+  "themePointerActivations": 18,
+  "noJavaScriptRolesAndThemes": true,
+  "providerProgrammeEvidenceDrill": true,
+  "existingEnterpriseLinks": true,
+  "reducedMotionAndPrint": true,
+  "limitations": [
+    "Chromium simulated viewports; physical iPad/Safari and assistive-technology user studies not performed",
+    "Owner visual acceptance and comprehension remain unmeasured; research remains partial"
+  ]
+}

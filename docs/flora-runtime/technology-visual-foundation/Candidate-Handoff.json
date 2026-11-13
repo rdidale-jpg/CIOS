@@ -1,0 +1,3729 @@
+{
+  "version": 1,
+  "authority": "candidate_intelligence",
+  "as_of": "2026-11-12",
+  "source_page": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523",
+  "page_sequence": 11,
+  "source_page_sha256": "e7f0bad8a7451cbb10f65a84b786c8ba4c1b5d634540fd02b660d46c57285b11",
+  "scope": "Deterministic Page candidate mapping; not an accepted import package",
+  "existing_owners": {
+    "source": "cios.applications.flora.research_intelligence.source_import",
+    "candidate": "cios.applications.flora.enterprise_intelligence.semantic",
+    "review_promotion": "cios.applications.flora.blueprint_import.views",
+    "observations": "cios.applications.flora.memory.models",
+    "enterprise_navigation": "cios.applications.flora.research_intelligence.registry"
+  },
+  "accepted": 0,
+  "eligible": 0,
+  "canonical_mutation": false,
+  "pipeline_mutation": false,
+  "relationships": [
+    {
+      "research_key": "programme-67-1",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-67-1:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| BT Group | ServiceNow | Service management, Service Bridge, Now Assist for TSM | Customer publication 20 June 2024: prior Digital-unit consolidation, wider rollout and initial pilot distinguished. [Source](https://newsroom.bt.com/bt-group-expands-strategic-relationship-with-servicenow-to-improve-customer-and-employee-experiences/) |",
+        "content_hash": "84d9f59dfc619bc2f6dc6324c0676b50eedc73c133d581796e5937b676b42b76",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-67-1",
+        "claim_type": "relationship research draft",
+        "statement": "BT Group — ServiceNow — Service management, Service Bridge, Now Assist for TSM",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-67-1:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "BT Group",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "ServiceNow",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-67-1",
+        "object_class": "research_claim_candidate",
+        "statement": "BT Group — ServiceNow — Service management, Service Bridge, Now Assist for TSM",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-67-1:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://newsroom.bt.com/bt-group-expands-strategic-relationship-with-servicenow-to-improve-customer-and-employee-experiences/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-67-2",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-67-2:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Dojo | Equinix; Oracle Cloud, AWS, Google Cloud referenced | Payments infrastructure / cloud connectivity | Supplier case study 8 September 2022; historical, current deployment not confirmed. [Source](https://blog.equinix.com/blog/2022/09/08/delivering-fast-reliable-and-secure-credit-card-payments/) |",
+        "content_hash": "43e880caff15655f9aac07d1d7e79f76753973d86c6125fce9954d59f8024ef4",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-67-2",
+        "claim_type": "relationship research draft",
+        "statement": "Dojo — Equinix; Oracle Cloud, AWS, Google Cloud referenced — Payments infrastructure / cloud connectivity",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-67-2:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Dojo",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Equinix; Oracle Cloud, AWS, Google Cloud referenced",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-67-2",
+        "object_class": "research_claim_candidate",
+        "statement": "Dojo — Equinix; Oracle Cloud, AWS, Google Cloud referenced — Payments infrastructure / cloud connectivity",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-67-2:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://blog.equinix.com/blog/2022/09/08/delivering-fast-reliable-and-secure-credit-card-payments/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-67-3",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-67-3:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Rolls-Royce | Deloitte; Databricks | AiRR engineering-data and AI platform | Delivery-partner report; date and legal deployment scope unresolved. [Source](https://www.deloitte.com/uk/en/about/story/impact/driving-ai-powered-integration-rolls-royce.html) |",
+        "content_hash": "e4dabc0a3db17f2776fc8a7acc04351c2cea82430fa977a2b2de810501c8ecb5",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-67-3",
+        "claim_type": "relationship research draft",
+        "statement": "Rolls-Royce — Deloitte; Databricks — AiRR engineering-data and AI platform",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-67-3:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Rolls-Royce",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Deloitte; Databricks",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-67-3",
+        "object_class": "research_claim_candidate",
+        "statement": "Rolls-Royce — Deloitte; Databricks — AiRR engineering-data and AI platform",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-67-3:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.deloitte.com/uk/en/about/story/impact/driving-ai-powered-integration-rolls-royce.html"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-67-4",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-67-4:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Computacenter | Genesys | Service-desk interaction platform and AI | Supplier report referencing 2026 award; downstream customers not identified. [Source](https://www.genesys.com/en-gb/customer-stories/computacenter) |",
+        "content_hash": "295793180bdb7cfdac391cb43cbc15fade3f9205d263953a863c0996bc178ef4",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-67-4",
+        "claim_type": "relationship research draft",
+        "statement": "Computacenter — Genesys — Service-desk interaction platform and AI",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-67-4:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Computacenter",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Genesys",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-67-4",
+        "object_class": "research_claim_candidate",
+        "statement": "Computacenter — Genesys — Service-desk interaction platform and AI",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-67-4:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.genesys.com/en-gb/customer-stories/computacenter"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-67-5",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-67-5:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Lloyds Banking Group | Microsoft; Google Cloud | Copilot, Copilot Studio, generative-AI infrastructure | Customer publication 24 July 2025. [Source](https://www.lloydsbankinggroup.com/insights/reimagining-the-future-how-ai-is-transforming-lloyds-banking-group.html) |",
+        "content_hash": "0cfd470337c25ac623a75a206a338b62c094df9f697c40c5045c6e51a4c0e287",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-67-5",
+        "claim_type": "relationship research draft",
+        "statement": "Lloyds Banking Group — Microsoft; Google Cloud — Copilot, Copilot Studio, generative-AI infrastructure",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-67-5:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Lloyds Banking Group",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Microsoft; Google Cloud",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-67-5",
+        "object_class": "research_claim_candidate",
+        "statement": "Lloyds Banking Group — Microsoft; Google Cloud — Copilot, Copilot Studio, generative-AI infrastructure",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-67-5:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.lloydsbankinggroup.com/insights/reimagining-the-future-how-ai-is-transforming-lloyds-banking-group.html"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-67-6",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-67-6:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Lloyds Banking Group | Oracle; Microsoft Azure infrastructure referenced | Database@Azure; Exadata Cloud@Customer | Supplier announcement 20 March 2025, with customer quotation; multiyear migration, not proof all databases migrated. [Source](https://www.oracle.com/news/announcement/lloyds-banking-group-expands-collaboration-with-oracle-to-support-tech-transformation-2025-03-20/) |",
+        "content_hash": "b429239cffd6ba3479f93647ef8c2d035bf01cad17b7767aa5f2c1971ddc2635",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-67-6",
+        "claim_type": "relationship research draft",
+        "statement": "Lloyds Banking Group — Oracle; Microsoft Azure infrastructure referenced — Database@Azure; Exadata Cloud@Customer",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-67-6:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Lloyds Banking Group",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Oracle; Microsoft Azure infrastructure referenced",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-67-6",
+        "object_class": "research_claim_candidate",
+        "statement": "Lloyds Banking Group — Oracle; Microsoft Azure infrastructure referenced — Database@Azure; Exadata Cloud@Customer",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-67-6:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.oracle.com/news/announcement/lloyds-banking-group-expands-collaboration-with-oracle-to-support-tech-transformation-2025-03-20/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-67-7",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-67-7:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Sainsbury’s | Microsoft | Copilot | Customer reports rollout to around 3,000 colleagues; publication date unresolved. [Source](https://corporate.sainsburys.co.uk/purpose-in-action/ai-in-action-at-sainsbury-s-people-at-the-heart/) |",
+        "content_hash": "a6020b6a1644523400ad98307b511314282dbae8daa75c6ad9c6839078ac9d5e",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-67-7",
+        "claim_type": "relationship research draft",
+        "statement": "Sainsbury’s — Microsoft — Copilot",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-67-7:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Sainsbury’s",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Microsoft",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-67-7",
+        "object_class": "research_claim_candidate",
+        "statement": "Sainsbury’s — Microsoft — Copilot",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-67-7:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://corporate.sainsburys.co.uk/purpose-in-action/ai-in-action-at-sainsbury-s-people-at-the-heart/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-67-8",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-67-8:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Centrica | SAP; Microsoft referenced | Business Data Cloud; RISE with SAP; Business AI | Supplier announcement 27 May 2026 reports February data-platform go-live but schedules RISE for July. Completion needs later evidence. Unnamed integrators remain unnamed. [Source](https://news.sap.com/uk/2026/05/centrica-adopts-rise-with-sap-to-support-ai-driven-transformation/) |",
+        "content_hash": "c4439e74defb4658b1aed7685badbe49d36cd1ff76735580258fad8a63d18a16",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-67-8",
+        "claim_type": "relationship research draft",
+        "statement": "Centrica — SAP; Microsoft referenced — Business Data Cloud; RISE with SAP; Business AI",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-67-8:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Centrica",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "SAP; Microsoft referenced",
+        "time_scope": "planned / collaboration",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-67-8",
+        "object_class": "research_claim_candidate",
+        "statement": "Centrica — SAP; Microsoft referenced — Business Data Cloud; RISE with SAP; Business AI",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "planned / collaboration",
+        "lineage": [
+          "page-research:programme-67-8:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://news.sap.com/uk/2026/05/centrica-adopts-rise-with-sap-to-support-ai-driven-transformation/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-67-9",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-67-9:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Bank of England | Accenture | RTGS renewal delivery | Customer appointment 30 July 2020; RT2 go-live 28 April 2025 separately confirmed. Not proof of current outsourcing. [Appointment](https://www.bankofengland.co.uk/news/2020/July/boe-appoints-accenture-as-the-technology-delivery-partner-for-the-rtgs-service-renewal-programme), [go-live](https://www.bankofengland.co.uk/news/2025/april/renewed-rtgs-service) |",
+        "content_hash": "1c804d1daf151e5560639bbbe48625984e0e3ccb40a9fa001c89e641151e12e4",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-67-9",
+        "claim_type": "relationship research draft",
+        "statement": "Bank of England — Accenture — RTGS renewal delivery",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-67-9:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Bank of England",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Accenture",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-67-9",
+        "object_class": "research_claim_candidate",
+        "statement": "Bank of England — Accenture — RTGS renewal delivery",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-67-9:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Appointment",
+          "url": "https://www.bankofengland.co.uk/news/2020/July/boe-appoints-accenture-as-the-technology-delivery-partner-for-the-rtgs-service-renewal-programme"
+        },
+        {
+          "label": "go-live",
+          "url": "https://www.bankofengland.co.uk/news/2025/april/renewed-rtgs-service"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-67-10",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-67-10:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Heathrow | Salesforce | Customer 360; passenger communications and commercial experience | Supplier report 30 August 2023; historical use. [Source](https://www.salesforce.com/news/stories/heathrow-airport-customer/) |",
+        "content_hash": "5d623d457ab2a64b80de1979a68e70e29fdf43c13e2d1fe73527dc8e2463054a",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-67-10",
+        "claim_type": "relationship research draft",
+        "statement": "Heathrow — Salesforce — Customer 360; passenger communications and commercial experience",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-67-10:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Heathrow",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Salesforce",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-67-10",
+        "object_class": "research_claim_candidate",
+        "statement": "Heathrow — Salesforce — Customer 360; passenger communications and commercial experience",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-67-10:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.salesforce.com/news/stories/heathrow-airport-customer/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-67-11",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-67-11:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| HSBC | Quantexa | Entity/data connections for investigation | Supplier report; deployment geography and date unresolved. [Source](https://www.quantexa.com/resources/holistic-view-of-financial-crime/) |",
+        "content_hash": "27d2892dce6788649a9b04dfc76f0db91d1972969e0857284b8bbd59c6ba2a7e",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-67-11",
+        "claim_type": "relationship research draft",
+        "statement": "HSBC — Quantexa — Entity/data connections for investigation",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-67-11:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "HSBC",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Quantexa",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-67-11",
+        "object_class": "research_claim_candidate",
+        "statement": "HSBC — Quantexa — Entity/data connections for investigation",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-67-11:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.quantexa.com/resources/holistic-view-of-financial-crime/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-67-12",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-67-12:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Standard Chartered | Quantexa | Financial-crime decision intelligence | Supplier report; deployment geography and date unresolved. [Source](https://www.quantexa.com/resources/holistic-view-of-financial-crime/) |",
+        "content_hash": "80e32feb1c66ec4d575f3be5c441bc455c9c162ac8507f3a4596572709ad9450",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-67-12",
+        "claim_type": "relationship research draft",
+        "statement": "Standard Chartered — Quantexa — Financial-crime decision intelligence",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-67-12:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Standard Chartered",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Quantexa",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-67-12",
+        "object_class": "research_claim_candidate",
+        "statement": "Standard Chartered — Quantexa — Financial-crime decision intelligence",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-67-12:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.quantexa.com/resources/holistic-view-of-financial-crime/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-67-13",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-67-13:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Bentley Motors | Capgemini | Digital infrastructure, integration, data and AI | Supplier announcement 29 June 2026, forward delivery scope; not completed outcomes. [Source](https://www.capgemini.com/news/press-releases/capgemini-supports-bentley-motors-in-the-acceleration-of-its-future-digital-strategy/) |",
+        "content_hash": "d946afc16b779f71e90cc3e7608f7e62768d44b10b099a02b7d4e2976aa4a768",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-67-13",
+        "claim_type": "relationship research draft",
+        "statement": "Bentley Motors — Capgemini — Digital infrastructure, integration, data and AI",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-67-13:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Bentley Motors",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Capgemini",
+        "time_scope": "planned / collaboration",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-67-13",
+        "object_class": "research_claim_candidate",
+        "statement": "Bentley Motors — Capgemini — Digital infrastructure, integration, data and AI",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "planned / collaboration",
+        "lineage": [
+          "page-research:programme-67-13:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-210d82ac-8085-4060-85df-5b69ff911b9f",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.capgemini.com/news/press-releases/capgemini-supports-bentley-motors-in-the-acceleration-of-its-future-digital-strategy/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-202-1",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-202-1:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| easyJet | Microsoft | Dynamics 365 Contact Centre; supplier article 21 October 2026 | Supplier-reported deployment; independent customer confirmation pending |",
+        "content_hash": "5821a3a634618d0178f247e9276934e5d5f6a750dc3ce2649478f308c355c7ed",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-202-1",
+        "claim_type": "relationship research draft",
+        "statement": "easyJet — Microsoft — Dynamics 365 Contact Centre; supplier article 21 October 2026",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-202-1:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "easyJet",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Microsoft",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-202-1",
+        "object_class": "research_claim_candidate",
+        "statement": "easyJet — Microsoft — Dynamics 365 Contact Centre; supplier article 21 October 2026",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-202-1:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "easyJet",
+          "url": "https://ukstories.microsoft.com/features/easyjets-new-ai-powered-customer-service-platform-takes-flight/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-202-2",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-202-2:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Aviva | TCS / Diligenta | BaNCS-based life/pensions administration expansion, 18 December 2025 | Announcement distinguishes parent, delivery subsidiary and technology |",
+        "content_hash": "0525a165feeae8d078c6dda41c2344e05b7206c551fc6ea26480dcba60cd7fd2",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-202-2",
+        "claim_type": "relationship research draft",
+        "statement": "Aviva — TCS / Diligenta — BaNCS-based life/pensions administration expansion, 18 December 2025",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-202-2:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Aviva",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "TCS / Diligenta",
+        "time_scope": "planned / collaboration",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-202-2",
+        "object_class": "research_claim_candidate",
+        "statement": "Aviva — TCS / Diligenta — BaNCS-based life/pensions administration expansion, 18 December 2025",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "planned / collaboration",
+        "lineage": [
+          "page-research:programme-202-2:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Aviva",
+          "url": "https://www.tcs.com/who-we-are/newsroom/press-release/tcs-strengthens-partnership-aviva-uk-enhance-life-pensions-customer-experience"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-202-3",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-202-3:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| bp | Infosys | MoU announced 16 May 2023 following signature 10 May | Intent to deepen application services; not a current exclusive contract assertion |",
+        "content_hash": "f13f5accb1b3373ac94e2781939d342c738af446ffac58860c449b2f16d738ec",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-202-3",
+        "claim_type": "relationship research draft",
+        "statement": "bp — Infosys — MoU announced 16 May 2023 following signature 10 May",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-202-3:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "bp",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Infosys",
+        "time_scope": "planned / collaboration",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-202-3",
+        "object_class": "research_claim_candidate",
+        "statement": "bp — Infosys — MoU announced 16 May 2023 following signature 10 May",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "planned / collaboration",
+        "lineage": [
+          "page-research:programme-202-3:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "bp",
+          "url": "https://www.infosys.com/newsroom/press-releases/2023/relationship-transform-digital-application-landscape.html"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-202-4",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-202-4:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| HMRC | Equal Experts | GAILZ adoption, product/onboarding and cost-control work | Provider-reported; publication date unresolved; infrastructure/security assertions not adopted as fact |",
+        "content_hash": "a878f99fc30794e3cd41e9f4044103d3ecf55d95efb83c9c2daeb7cfd1d9b683",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-202-4",
+        "claim_type": "relationship research draft",
+        "statement": "HMRC — Equal Experts — GAILZ adoption, product/onboarding and cost-control work",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-202-4:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "HMRC",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Equal Experts",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-202-4",
+        "object_class": "research_claim_candidate",
+        "statement": "HMRC — Equal Experts — GAILZ adoption, product/onboarding and cost-control work",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-202-4:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "HMRC",
+          "url": "https://www.equalexperts.com/case-study/how-equal-experts-helped-hmrc-safely-deepen-its-use-of-ai-with-built-in-cost-control/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-202-5",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-202-5:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| DWP Digital | HPE | GreenLake case published 3 August 2023 | Procurement-body case; potential savings derived from modelling, not realised outcome |",
+        "content_hash": "cfbf362b9a39cfe1e7a1db8db69331feba903642c7d475cf99cdadc236bd1199",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-202-5",
+        "claim_type": "relationship research draft",
+        "statement": "DWP Digital — HPE — GreenLake case published 3 August 2023",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-202-5:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "DWP Digital",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "HPE",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-202-5",
+        "object_class": "research_claim_candidate",
+        "statement": "DWP Digital — HPE — GreenLake case published 3 August 2023",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-202-5:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "DWP",
+          "url": "https://www.gca.gov.uk/news/dwp-digital-make-savings-on-digital-transformation-with-pay-as-you-use-model"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-202-6",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-202-6:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| CCS Media | Dell | PC-as-a-Service profile | Supplier report; underlying event date/current scope unresolved |",
+        "content_hash": "f1bd753c37db33906c160b11d2d0dc46c240c623e7f6f420cacaaec15b366d75",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-202-6",
+        "claim_type": "relationship research draft",
+        "statement": "CCS Media — Dell — PC-as-a-Service profile",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-202-6:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "CCS Media",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Dell",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-202-6",
+        "object_class": "research_claim_candidate",
+        "statement": "CCS Media — Dell — PC-as-a-Service profile",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-202-6:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Dell CCS Media profile",
+          "url": "https://www.delltechnologies.com/asset/en-gb/solutions/business-solutions/customer-stories-case-studies/ccs-media-written-case-study.pdf"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-213-1",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-213-1:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Aviva | Snowflake platform; AWS hosting; Snowflake Professional Services and NextPathway delivery | Data-estate migration, including claims/fraud workloads | Publication/event date Unknown. Supplier case reports deployment; no whole-estate migration inference. [Source](https://www.snowflake.com/en/customers/all-customers/case-study/aviva/) |",
+        "content_hash": "93a4b11f937e6326ca18783dfe17dd7b050fc26bd9947229d5fb1e22a06e7819",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-213-1",
+        "claim_type": "relationship research draft",
+        "statement": "Aviva — Snowflake platform; AWS hosting; Snowflake Professional Services and NextPathway delivery — Data-estate migration, including claims/fraud workloads",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-213-1:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Aviva",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Snowflake platform; AWS hosting; Snowflake Professional Services and NextPathway delivery",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-213-1",
+        "object_class": "research_claim_candidate",
+        "statement": "Aviva — Snowflake platform; AWS hosting; Snowflake Professional Services and NextPathway delivery — Data-estate migration, including claims/fraud workloads",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-213-1:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.snowflake.com/en/customers/all-customers/case-study/aviva/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-213-2",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-213-2:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Rolls-Royce Civil Aerospace | Databricks platform | Engine-monitoring data and analytics | Date Unknown; supplier case; do not merge with the separate Deloitte AiRR programme. [Source](https://www.databricks.com/customers/rolls-royce) |",
+        "content_hash": "7c5d671a450988cc83473866750e6e62da10d3368d440fb58aeb861f4c1282a5",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-213-2",
+        "claim_type": "relationship research draft",
+        "statement": "Rolls-Royce Civil Aerospace — Databricks platform — Engine-monitoring data and analytics",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-213-2:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Rolls-Royce Civil Aerospace",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Databricks platform",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-213-2",
+        "object_class": "research_claim_candidate",
+        "statement": "Rolls-Royce Civil Aerospace — Databricks platform — Engine-monitoring data and analytics",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-213-2:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.databricks.com/customers/rolls-royce"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-213-3",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-213-3:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Berkeley Group | CrowdStrike security platform | Falcon Fusion SOAR | Date Unknown; supplier-hosted customer account; results are attributed. [Source](https://www.crowdstrike.com/en-us/resources/customer-stories/berkeley-group/) |",
+        "content_hash": "95d08d86b2ded758b30c83a85b08de907345ac43ef2c4bf7d5ab217ec5b071ca",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-213-3",
+        "claim_type": "relationship research draft",
+        "statement": "Berkeley Group — CrowdStrike security platform — Falcon Fusion SOAR",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-213-3:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Berkeley Group",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "CrowdStrike security platform",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-213-3",
+        "object_class": "research_claim_candidate",
+        "statement": "Berkeley Group — CrowdStrike security platform — Falcon Fusion SOAR",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-213-3:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.crowdstrike.com/en-us/resources/customer-stories/berkeley-group/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-213-4",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-213-4:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Harbour Energy | Rubrik, supplier-reported customer | Cyber resilience | Announcement 9 July 2026; exact product, deployment boundary and contract date Unknown. [Source](https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx) |",
+        "content_hash": "ebeffb425c6c5c5c88c46714f54b477b6e09775d1de5902feab89dc99481fd87",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-213-4",
+        "claim_type": "relationship research draft",
+        "statement": "Harbour Energy — Rubrik, supplier-reported customer — Cyber resilience",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-213-4:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Harbour Energy",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Rubrik, supplier-reported customer",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-213-4",
+        "object_class": "research_claim_candidate",
+        "statement": "Harbour Energy — Rubrik, supplier-reported customer — Cyber resilience",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-213-4:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-213-5",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-213-5:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Manchester City Council | Rubrik, supplier-reported customer | Cyber resilience | Same July announcement; do not generalise to all council workloads. |",
+        "content_hash": "8df7cf5329552e0e10caecfcddc2d53894a7c26a43a23b43ef49728d5926d8ae",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-213-5",
+        "claim_type": "relationship research draft",
+        "statement": "Manchester City Council — Rubrik, supplier-reported customer — Cyber resilience",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-213-5:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Manchester City Council",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Rubrik, supplier-reported customer",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-213-5",
+        "object_class": "research_claim_candidate",
+        "statement": "Manchester City Council — Rubrik, supplier-reported customer — Cyber resilience",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-213-5:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-213-6",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-213-6:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Scottish Government | Rubrik, supplier-reported customer | Cyber resilience | Same July announcement; individual agency/product deployment unresolved. |",
+        "content_hash": "6ea3cdd87616339e3e7c92e092d76a15dca96b727d308af7970c973a515922db",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-213-6",
+        "claim_type": "relationship research draft",
+        "statement": "Scottish Government — Rubrik, supplier-reported customer — Cyber resilience",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-213-6:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Scottish Government",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Rubrik, supplier-reported customer",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-213-6",
+        "object_class": "research_claim_candidate",
+        "statement": "Scottish Government — Rubrik, supplier-reported customer — Cyber resilience",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-213-6:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-213-7",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-213-7:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Imperial College London; BOLD; SOFAIR | NVIDIA compute-access commitment | Agentic safety/security research | 13 October 2026; planned research support, not a commercial customer contract. [Source](https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years) |",
+        "content_hash": "858833d298b726c2c7919b3123b976f1f335ccee18adf8fe27fa10f3cf35efa8",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-213-7",
+        "claim_type": "relationship research draft",
+        "statement": "Imperial College London; BOLD; SOFAIR — NVIDIA compute-access commitment — Agentic safety/security research",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-213-7:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Imperial College London; BOLD; SOFAIR",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "NVIDIA compute-access commitment",
+        "time_scope": "planned / collaboration",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-213-7",
+        "object_class": "research_claim_candidate",
+        "statement": "Imperial College London; BOLD; SOFAIR — NVIDIA compute-access commitment — Agentic safety/security research",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "planned / collaboration",
+        "lineage": [
+          "page-research:programme-213-7:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-213-8",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-213-8:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Ministry of Defence; Environment Agency; NatWest; Network Rail | Fujitsu supplier-listed relationships | UK technology services, product-specific scope Unknown | Undated overview; discovery relationships only, not dated contract assurances. [Source](https://global.fujitsu/en-UK/local/about) |",
+        "content_hash": "a41bd361b097e9b808ab333898237cbc8a94d7c7560bfc4611a9b365271846d5",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-213-8",
+        "claim_type": "relationship research draft",
+        "statement": "Ministry of Defence; Environment Agency; NatWest; Network Rail — Fujitsu supplier-listed relationships — UK technology services, product-specific scope Unknown",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-213-8:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Ministry of Defence; Environment Agency; NatWest; Network Rail",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Fujitsu supplier-listed relationships",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-213-8",
+        "object_class": "research_claim_candidate",
+        "statement": "Ministry of Defence; Environment Agency; NatWest; Network Rail — Fujitsu supplier-listed relationships — UK technology services, product-specific scope Unknown",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-213-8:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-e505e833-42c0-4505-87f3-6d9635398617",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Source",
+          "url": "https://global.fujitsu/en-UK/local/about"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-222-1",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-222-1:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| NatWest → OpenAI | Customer-authored collaboration | 2025 article describes planned digital-assistant, fraud/scam and colleague-tool development; exact publication day not established from the retrieved article | All described use cases live, realised benefits, procurement value or exclusive model use |",
+        "content_hash": "62987a5cceef3732681653132ed49f7d6403f802c155663f860a1e98042c64fc",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-48a40e84-375f-43dc-904e-f74d8283934d",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-222-1",
+        "claim_type": "relationship research draft",
+        "statement": "NatWest — OpenAI — collaboration — Digital assistants, fraud/scam and colleague-tool development; plans",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-222-1:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "NatWest",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "OpenAI — collaboration",
+        "time_scope": "planned / collaboration",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-222-1",
+        "object_class": "research_claim_candidate",
+        "statement": "NatWest — OpenAI — collaboration — Digital assistants, fraud/scam and colleague-tool development; plans",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "planned / collaboration",
+        "lineage": [
+          "page-research:programme-222-1:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-48a40e84-375f-43dc-904e-f74d8283934d",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "NatWest",
+          "url": "https://www.natwestgroup.com/news-and-insights/latest-stories/ai-and-data/2025/mar/accelerating-our-ai-transformation-in-banking-with-openai.html"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-222-2",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-222-2:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Barclays → Anthropic | Supplier-reported Claude use and expansion | 1 October 2026; knowledge assistant reported live since 2025; wider developer adoption explicitly forward-looking | Target adoption achieved, independent outcome assurance or all-bank deployment |",
+        "content_hash": "749ea5f67b3e23b30ab8c24b1614bbfef8a6522a1e7ed4c5e750c53329e86128",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-48a40e84-375f-43dc-904e-f74d8283934d",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-222-2",
+        "claim_type": "relationship research draft",
+        "statement": "Barclays — Anthropic — Claude model/product provider — Claude knowledge assistant; future wider developer adoption",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-222-2:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Barclays",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Anthropic — Claude model/product provider",
+        "time_scope": "reported / date-bound; current contract unconfirmed",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-222-2",
+        "object_class": "research_claim_candidate",
+        "statement": "Barclays — Anthropic — Claude model/product provider — Claude knowledge assistant; future wider developer adoption",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported / date-bound; current contract unconfirmed",
+        "lineage": [
+          "page-research:programme-222-2:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-48a40e84-375f-43dc-904e-f74d8283934d",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Barclays",
+          "url": "https://www.anthropic.com/news/barclays-scales-claude"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-222-3",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-222-3:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| TCS → Anthropic | Announced product/services partnership and internal adoption | 12 June 2026; TCS described as customer zero and joining the partner network | Announced employee rollout complete |",
+        "content_hash": "eb030245f7cd9a66640fc980a06eb56ed1559ba50c02d8848e2168a64835f1c2",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-48a40e84-375f-43dc-904e-f74d8283934d",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-222-3",
+        "claim_type": "relationship research draft",
+        "statement": "TCS — Anthropic — partnership and internal adoption — Claude; TCS customer-zero and partner network",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-222-3:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "TCS",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Anthropic — partnership and internal adoption",
+        "time_scope": "planned / collaboration",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-222-3",
+        "object_class": "research_claim_candidate",
+        "statement": "TCS — Anthropic — partnership and internal adoption — Claude; TCS customer-zero and partner network",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "planned / collaboration",
+        "lineage": [
+          "page-research:programme-222-3:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-48a40e84-375f-43dc-904e-f74d8283934d",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "TCS",
+          "url": "https://www.anthropic.com/news/tcs-anthropic-partnership"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-222-4",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-222-4:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| Diligenta → Anthropic | Planned Claude adoption within UK life/pensions business | Same June announcement; maintain separate Diligenta and parent TCS identities | Every underlying insurer or policyholder is a direct Anthropic customer |",
+        "content_hash": "27bba4fd05fca902632b27e8b4e1183ceea99e5a563063b3ef72ce01348b90cd",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-48a40e84-375f-43dc-904e-f74d8283934d",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-222-4",
+        "claim_type": "relationship research draft",
+        "statement": "Diligenta — Anthropic — planned Claude use — Claude planned adoption in UK life/pensions business",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-222-4:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "Diligenta",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Anthropic — planned Claude use",
+        "time_scope": "planned / collaboration",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-222-4",
+        "object_class": "research_claim_candidate",
+        "statement": "Diligenta — Anthropic — planned Claude use — Claude planned adoption in UK life/pensions business",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "planned / collaboration",
+        "lineage": [
+          "page-research:programme-222-4:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-48a40e84-375f-43dc-904e-f74d8283934d",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "TCS",
+          "url": "https://www.anthropic.com/news/tcs-anthropic-partnership"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "programme-222-5",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:programme-222-5:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "| DSIT ↔ Google DeepMind | Non-binding research/public-sector collaboration MoU | Published 11 December 2025; text expressly creates no financial commitment or obligation to pursue a commercial agreement | A procurement award, commercial customer contract or completed deployment |",
+        "content_hash": "1cb93e2e7cc80374260e70fbd15aa31d0bc2c731628e14c2d16017ab60a3e895",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-48a40e84-375f-43dc-904e-f74d8283934d",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:programme-222-5",
+        "claim_type": "relationship research draft",
+        "statement": "DSIT ↔ Google DeepMind — DSIT ↔ Google DeepMind — non-binding collaboration — Research and public-sector AI opportunities/security",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:programme-222-5:segment",
+        "scope": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+        "subject": "DSIT ↔ Google DeepMind",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "DSIT ↔ Google DeepMind — non-binding collaboration",
+        "time_scope": "planned / collaboration",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:programme-222-5",
+        "object_class": "research_claim_candidate",
+        "statement": "DSIT ↔ Google DeepMind — DSIT ↔ Google DeepMind — non-binding collaboration — Research and public-sector AI opportunities/security",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "planned / collaboration",
+        "lineage": [
+          "page-research:programme-222-5:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-48a40e84-375f-43dc-904e-f74d8283934d",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "government MoU",
+          "url": "https://www.gov.uk/government/publications/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "nhs-sbs-oracle",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:nhs-sbs-oracle:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "NHS Shared Business Services itself confirms use of Oracle Fusion Cloud Applications, including finance ERP/EPM and OCI-related infrastructure, and describes its public/private joint venture with Sopra Steria. This closes the earlier absence of a customer-authored source for the core Oracle relationship. It does not independently corroborate every partner role, metric or legal claim on Oracle’s separate page. [Customer announcement](https://www.sbs.nhs.uk/news/nhs-shared-business-services-instils-financial-excellence-across-the-nhs-with-oracle-fusion-cloud-applications/).",
+        "content_hash": "a310289cdc1d40402f9cc75281fb84c7cb3dfd723763bc1b5b0152b218097119",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-569b4378-278e-441a-8cf1-cb4d537f61af",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:nhs-sbs-oracle",
+        "claim_type": "relationship research draft",
+        "statement": "NHS Shared Business Services — Oracle application/infrastructure provider — Oracle Fusion Cloud Applications; finance ERP/EPM and OCI-related infrastructure",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:nhs-sbs-oracle:segment",
+        "scope": "NHS SBS programme; not every NHS trust",
+        "subject": "NHS Shared Business Services",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Oracle application/infrastructure provider",
+        "time_scope": "reported use; publication Unknown",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:nhs-sbs-oracle",
+        "object_class": "research_claim_candidate",
+        "statement": "NHS Shared Business Services — Oracle application/infrastructure provider — Oracle Fusion Cloud Applications; finance ERP/EPM and OCI-related infrastructure",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "reported use; publication Unknown",
+        "lineage": [
+          "page-research:nhs-sbs-oracle:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-569b4378-278e-441a-8cf1-cb4d537f61af",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Customer announcement",
+          "url": "https://www.sbs.nhs.uk/news/nhs-shared-business-services-instils-financial-excellence-across-the-nhs-with-oracle-fusion-cloud-applications/"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    },
+    {
+      "research_key": "quantum-collaboration",
+      "status": "withheld",
+      "source_segment": {
+        "segment_id": "page-research:quantum-collaboration:segment",
+        "asset_id": "recovered-technology-page",
+        "section_heading": "Customer / provider research row",
+        "content": "Riverlane describes a quantum error-correction stack. Its July 2026 collaboration with Quantinuum, Rolls-Royce and EPCC gives specific ecosystem roles: Riverlane contributes error correction and algorithms; Quantinuum systems/software access; Rolls-Royce industrial use cases; EPCC supercomputing and hybrid integration. This is research collaboration, not proof of production quantum advantage or a customer purchase. [Riverlane](https://www.riverlane.com/about-us), [joint announcement](https://ir.quantinuum.com/news-releases/news-release-details/quantinuum-rolls-royce-riverlane-and-university-edinburgh-sign).",
+        "content_hash": "9bea2108dbc845a84e1336d9d5085bdc804a1d1b8a5dfcbe1af077d70a2f5442",
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-5ba64a56-3c6c-43b3-96a9-7e2202838e10",
+        "authority": "candidate_intelligence",
+        "status": "page_research_not_original_source"
+      },
+      "candidate_claim": {
+        "claim_id": "page-research:quantum-collaboration",
+        "claim_type": "relationship research draft",
+        "statement": "Rolls-Royce; industrial use-case participant — Quantinuum systems/software; Riverlane error correction/algorithms; EPCC hybrid/HPC expertise — Explore future industrial design and simulation workflows",
+        "source_asset_id": "recovered-technology-page",
+        "source_segment_id": "page-research:quantum-collaboration:segment",
+        "scope": "Named collaboration; no all-Rolls-Royce deployment assertion",
+        "subject": "Rolls-Royce; industrial use-case participant",
+        "predicate": "Page reports; see typed programme roles",
+        "object": "Quantinuum systems/software; Riverlane error correction/algorithms; EPCC hybrid/HPC expertise",
+        "time_scope": "research collaboration / future workflows",
+        "participant_scope": "exact cited programme only",
+        "enterprise_scope": "",
+        "confidence": "Unvalidated Page research",
+        "authority": "candidate_intelligence",
+        "status": "withheld",
+        "supporting_ids": [],
+        "contradicting_ids": []
+      },
+      "evidence_package_item": {
+        "stable_id": "page-research:quantum-collaboration",
+        "object_class": "research_claim_candidate",
+        "statement": "Rolls-Royce; industrial use-case participant — Quantinuum systems/software; Riverlane error correction/algorithms; EPCC hybrid/HPC expertise — Explore future industrial design and simulation workflows",
+        "truth_status": "page_research_not_accepted_evidence",
+        "confidence": "Unvalidated",
+        "freshness": "research collaboration / future workflows",
+        "lineage": [
+          "page-research:quantum-collaboration:segment"
+        ],
+        "linked_objects": [],
+        "source_location": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523#block-5ba64a56-3c6c-43b3-96a9-7e2202838e10",
+        "enterprise_id": ""
+      },
+      "reasons": [
+        "canonical_identity_unbound",
+        "exact_source_retrieval_timestamp_missing",
+        "publisher_not_in_existing_allowlist",
+        "publisher_source_not_reacquired",
+        "registered_technology_domain_mapping_unaccepted",
+        "source_operation_rights_unestablished"
+      ],
+      "publisher_source_links": [
+        {
+          "label": "Participant announcement",
+          "url": "https://ir.quantinuum.com/news-releases/news-release-details/quantinuum-rolls-royce-riverlane-and-university-edinburgh-sign"
+        }
+      ],
+      "publisher_original_sha256": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "canonical_evidence_id": null,
+      "canonical_enterprise_id": null,
+      "eligible_for_import": false
+    }
+  ],
+  "atomic_passage_references": [
+    {
+      "reference": "E01",
+      "claim": "easyJet is reported using Dynamics 365 Contact Centre",
+      "passage_and_locator": [
+        "“Microsoft Dynamics 365 Contact Centre”",
+        "Microsoft easyJet story, opening paragraph, retrieved lines 12–19; publication 21 October 2026; supplier report"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 1,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E02",
+      "claim": "DWP’s cited savings were modelled potential savings",
+      "passage_and_locator": [
+        "“potential savings of over £7 million”",
+        "GCA DWP story, Benefits section, line 86; publication 3 August 2023"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 2,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E03",
+      "claim": "Infosys/bp announcement describes an MoU",
+      "passage_and_locator": [
+        "“Memorandum of Understanding (MoU)”",
+        "Infosys bp release, opening paragraph, line 211; publication 16 May 2023"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 3,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E04",
+      "claim": "Diligenta is the stated Aviva policy-service delivery entity",
+      "passage_and_locator": [
+        "“to be managed by TCS’ FCA-regulated subsidiary, Diligenta UK”",
+        "TCS Aviva release, opening paragraph, line 771; publication 18 December 2025; forward expansion"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 4,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E05",
+      "claim": "NTT DATA declares a UK Salesforce partnership",
+      "passage_and_locator": [
+        "“a strategic partner of Salesforce in the UK”",
+        "NTT DATA partners, Salesforce section, line 178; publication Unknown"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 5,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E06",
+      "claim": "Version 1 declares Oracle transformation services",
+      "passage_and_locator": [
+        "“Fusion Cloud Applications, OCI and managed services”",
+        "Version 1 Partners, Oracle description, line 185; publication Unknown"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 6,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E07",
+      "claim": "Pulsant describes 14 interconnected centres",
+      "passage_and_locator": [
+        "“14 interconnected data centres”",
+        "Pulsant About Us, platformEDGE description; publication Unknown; supplier count"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 7,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E08",
+      "claim": "Nu Quantum describes a Cambridge spin-out origin",
+      "passage_and_locator": [
+        "“a spin-out of the University of Cambridge”",
+        "Nu Quantum About Us, opening company description, line 54; founded 2018"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 8,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E09",
+      "claim": "The quantum collaboration has a research objective",
+      "passage_and_locator": [
+        "“explore the quantum computing capabilities needed in future industrial workflows”",
+        "Quantinuum July 14, 2026 announcement, opening body, line 24"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 9,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E10",
+      "claim": "NHS SBS itself confirms Oracle application use",
+      "passage_and_locator": [
+        "“is using Oracle Fusion Cloud Applications”",
+        "NHS SBS finance-platform announcement, line 153; publication date unresolved"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 10,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E11",
+      "claim": "Aviva's supplier case describes “Snowflake on Amazon Web Services (AWS)”",
+      "passage_and_locator": [
+        "[Aviva case](https://www.snowflake.com/en/customers/all-customers/case-study/aviva/), transformation highlights, retrieved line 49",
+        "Reported deployment; no all-Aviva estate assertion; publication Unknown"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 11,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E12",
+      "claim": "The same case names “AI Data Cloud Services Partner NextPathway”",
+      "passage_and_locator": [
+        "Same source, migration/operating-model paragraph, line 69",
+        "Named delivery support for this programme; no general exclusive-partner assertion"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 12,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E13",
+      "claim": "Rolls-Royce case identifies “Rolls-Royce Civil Aerospace”",
+      "passage_and_locator": [
+        "[Databricks case](https://www.databricks.com/customers/rolls-royce), title and opening description, lines 14–19",
+        "Specific business/use case; date Unknown; supplier report"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 13,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E14",
+      "claim": "Berkeley's named solution is “Falcon Fusion SOAR”",
+      "passage_and_locator": [
+        "[CrowdStrike case](https://www.crowdstrike.com/en-us/resources/customer-stories/berkeley-group/), CrowdStrike Solutions, lines 254–256",
+        "Product-level supplier report; date Unknown"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 14,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E15",
+      "claim": "Rubrik lists “Harbour Energy, Manchester City Council and the Scottish Government”",
+      "passage_and_locator": [
+        "[UK announcement](https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx), UK business paragraph, line 40",
+        "Supplier-named customers, 9 July 2026; contract/product boundary Unknown"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 15,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E16",
+      "claim": "NVIDIA says “Provider selection, technical architecture and commercial terms are to be agreed”",
+      "passage_and_locator": [
+        "[Compute announcement](https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years), compute-delivery paragraph, line 65",
+        "Plan, 13 October 2026; no supplier award or completed infrastructure assertion"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 16,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E17",
+      "claim": "AVEVA says “AVEVA is now a member of the Schneider Electric group”",
+      "passage_and_locator": [
+        "[Company](https://www.aveva.com/en/about/), ownership footer, line 96",
+        "Ownership boundary; page publication Unknown"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 17,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E18",
+      "claim": "CityFibre tells retail users “your contract is with them”",
+      "passage_and_locator": [
+        "[Company](https://cityfibre.com/about-us), service-support footer, line 204",
+        "Refers to the user's retail provider; separates network ownership from retail account"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 18,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E19",
+      "claim": "Government MoU “does not create any financial commitments”",
+      "passage_and_locator": [
+        "[DSIT/DeepMind MoU](https://www.gov.uk/government/publications/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security), Nature of the MoU, line 104",
+        "Published 11 December 2025; collaboration, not procurement or spend"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 19,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E20",
+      "claim": "Barclays article says the knowledge capability “has been live since 2025”",
+      "passage_and_locator": [
+        "[Anthropic/Barclays](https://www.anthropic.com/news/barclays-scales-claude), knowledge-assistance section, line 49",
+        "Supplier report published 1 October 2026; distinct from future developer rollout"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 20,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E21",
+      "claim": "Diligenta “will use Claude”",
+      "passage_and_locator": [
+        "[Anthropic/TCS](https://www.anthropic.com/news/tcs-anthropic-partnership), use-case list, line 43",
+        "Forward adoption statement, 12 June 2026; not completed rollout or a direct contract with every underlying insurer"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 21,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E22",
+      "claim": "OpenAI announced a “new office in London, United Kingdom”",
+      "passage_and_locator": [
+        "[London announcement](https://openai.com/index/introducing-openai-london/), opening paragraph, line 18",
+        "28 June 2023 event; not current workforce or revenue evidence"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 22,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E23",
+      "claim": "CMA footnote says “The geographic scope of our markets is UK+EEA”",
+      "passage_and_locator": [
+        "[Final cloud summary](https://assets.publishing.service.gov.uk/media/688b20e6ff8c05468cb7b120/summary_of_final_decision.pdf), page 2, footnote 1",
+        "Provider-share geography must not be relabelled UK-only; 31 July 2025 findings"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 23,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E24",
+      "claim": "Node4 footer says “Registered in England and Wales No. 04759927”",
+      "passage_and_locator": [
+        "[Company](https://node4.co.uk/about-us), legal footer, line 152",
+        "Site-declared company identity; canonical mapping still needs registry reconciliation"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 24,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    }
+  ],
+  "provider_identity_register": [
+    {
+      "key": "microsoft",
+      "label": "Microsoft",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "sap",
+      "label": "SAP",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "oracle",
+      "label": "Oracle",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "salesforce",
+      "label": "Salesforce",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "servicenow",
+      "label": "ServiceNow",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "sage",
+      "label": "Sage",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "workday",
+      "label": "Workday",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "pega",
+      "label": "Pega",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Do not join by name to PEGA LIMITED. Ownership/domain evidence and registry reconciliation remain unresolved.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "access-group",
+      "label": "Access Group",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "oneadvanced",
+      "label": "OneAdvanced",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Page records ONEADVANCED LIMITED name change, company 03214465; registry citation is not canonical binding.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "adobe",
+      "label": "Adobe",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "autodesk",
+      "label": "Autodesk",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "aveva",
+      "label": "AVEVA",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Schneider Electric group ownership reported; brand/group/local contracting entity remain distinct.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "aws",
+      "label": "AWS",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "google-cloud",
+      "label": "Google Cloud",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Provider view within Google/Alphabet; distinct from Google DeepMind, not an additional independent corporate group.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "snowflake",
+      "label": "Snowflake",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "databricks",
+      "label": "Databricks",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "ovhcloud",
+      "label": "OVHcloud",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "rackspace",
+      "label": "Rackspace",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "quantexa",
+      "label": "Quantexa",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "faculty",
+      "label": "Faculty",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "nvidia",
+      "label": "NVIDIA",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "openai",
+      "label": "OpenAI",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "anthropic",
+      "label": "Anthropic",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "google-deepmind",
+      "label": "Google DeepMind",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Research organisation within Google/Alphabet; shared group with Google Cloud. No separate independent-group count.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "ncc-group",
+      "label": "NCC Group",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Escode sale completed 29 May 2026; Escode is historical ownership, not a current division.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "sophos",
+      "label": "Sophos",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Secureworks acquisition completed 3 February 2025; historical independent-group boundary is superseded.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "darktrace",
+      "label": "Darktrace",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "2024 Thoma Bravo acquisition completed; historical listed-company data is not current ownership.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "palo-alto-networks",
+      "label": "Palo Alto Networks",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "crowdstrike",
+      "label": "CrowdStrike",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "fortinet",
+      "label": "Fortinet",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "rubrik",
+      "label": "Rubrik",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "accenture",
+      "label": "Accenture",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "ibm",
+      "label": "IBM",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "capgemini",
+      "label": "Capgemini",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "sopra-steria",
+      "label": "Sopra Steria",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "dxc",
+      "label": "DXC",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "kainos",
+      "label": "Kainos",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "tcs-diligenta",
+      "label": "TCS / Diligenta",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Composite selection view: TCS parent, Diligenta delivery subsidiary and BaNCS product remain distinct. No single contracting entity bound.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "infosys",
+      "label": "Infosys",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "cognizant",
+      "label": "Cognizant",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "ntt-data",
+      "label": "NTT DATA",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "equal-experts",
+      "label": "Equal Experts",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "version-1",
+      "label": "Version 1",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "netcompany",
+      "label": "Netcompany",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "cgi",
+      "label": "CGI",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "fujitsu",
+      "label": "Fujitsu",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "hcltech",
+      "label": "HCLTech",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "wipro",
+      "label": "Wipro",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "tech-mahindra",
+      "label": "Tech Mahindra",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "atos-eviden",
+      "label": "Atos / Eviden",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Composite brand/group view; current service/product perimeter and local entities require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "valtech",
+      "label": "Valtech",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "deloitte",
+      "label": "Deloitte",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Professional-services network and UK practice differ; global network economics are not UK figures.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "node4",
+      "label": "Node4",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Site-declared England and Wales company 04759927; canonical reconciliation still required.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "computacenter",
+      "label": "Computacenter",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "softcat",
+      "label": "Softcat",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "scc",
+      "label": "SCC",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "SCC and Rigby Group remain separate entities; group financials are not SCC UK financials.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "td-synnex",
+      "label": "TD SYNNEX",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "ingram-micro",
+      "label": "Ingram Micro",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "equinix",
+      "label": "Equinix",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "telehouse",
+      "label": "Telehouse",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Site declares Telehouse International Corporation of Europe Ltd, 2138407; parent/local binding remains unaccepted.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "bt",
+      "label": "BT",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "pulsant",
+      "label": "Pulsant",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "digital-realty",
+      "label": "Digital Realty",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "virtus",
+      "label": "VIRTUS",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "cisco",
+      "label": "Cisco",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "hpe",
+      "label": "HPE",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "dell",
+      "label": "Dell",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "broadcom-vmware",
+      "label": "Broadcom / VMware",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Acquired brand/platform view; vendor, reseller and operator are separate roles. No extra independent group inferred.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "lenovo",
+      "label": "Lenovo",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "vodafonethree",
+      "label": "VodafoneThree",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Combined UK organisation; Vodafone and Three trading brands are not additional independent groups.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "virgin-media-o2",
+      "label": "Virgin Media O2",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "cityfibre",
+      "label": "CityFibre",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "arm",
+      "label": "Arm",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "intel",
+      "label": "Intel",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "amd",
+      "label": "AMD",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "oqc",
+      "label": "OQC",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "riverlane",
+      "label": "Riverlane",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "quantinuum",
+      "label": "Quantinuum",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "nu-quantum",
+      "label": "Nu Quantum",
+      "identity_status": "unbound",
+      "canonical_enterprise_id": null,
+      "note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "coverage": "partial profile",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    }
+  ]
+}

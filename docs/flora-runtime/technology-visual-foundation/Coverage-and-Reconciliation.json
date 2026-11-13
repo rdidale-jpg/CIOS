@@ -1,0 +1,2134 @@
+{
+  "version": 1,
+  "page_id": "page_61a0dab9a9708191a323c9b0e048e523",
+  "page_sequence": 11,
+  "page_sha256": "e7f0bad8a7451cbb10f65a84b786c8ba4c1b5d634540fd02b660d46c57285b11",
+  "compared_refs": {
+    "main": "c3b818cbae7a2f88930d26bcd65b2dab7263e19f",
+    "568": "b4a2c2c680d21bc252f3bc7e365c7eb08af178d3",
+    "569": "0ff024c17505be5c8404e9ed33be2bc6672d7dd1"
+  },
+  "experiment_state": {
+    "568": {
+      "draft": true,
+      "merged": false,
+      "activated": false
+    },
+    "569": {
+      "draft": true,
+      "merged": false,
+      "activated": false
+    }
+  },
+  "source_inventory": {
+    "main": 146,
+    "568": 151,
+    "569": 154
+  },
+  "scope": "Read-only git object comparison. Text mentions do not establish matching accepted facts. No production Enterprise Model queried.",
+  "providers": [
+    {
+      "provider_view": "Microsoft",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "aa3b439a-e6ba-4e28-a3cd-098814fbf857",
+        "eea8bc49-80d0-4789-9e73-a7e804c3c119"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/comparisons/Banking-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+          "enterprise-knowledge/banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json",
+          "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/banking/research-model/Visual-Profile.json",
+          "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/comparisons/Banking-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+          "enterprise-knowledge/banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json",
+          "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/banking/research-model/Visual-Profile.json",
+          "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/comparisons/Banking-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+          "enterprise-knowledge/banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json",
+          "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/banking/research-model/Visual-Profile.json",
+          "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json",
+          "enterprise-knowledge/technology/research-sprint2/Completion-v2.json",
+          "enterprise-knowledge/technology/research-sprint2/Research-v1.json"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "SAP",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "0679ead9-aea4-4636-ac68-ebf3b23aa910",
+        "5659c314-203a-4fc2-afaf-11278922d410",
+        "9b884f4d-596b-4c05-b168-2ff68d8a56ad"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Oracle",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "9cbfac95-6e6e-41d1-9d64-dcd7a75f676a",
+        "ed6307be-6d4c-4ea9-a0d1-0c24e0fd589f"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+          "enterprise-knowledge/banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md",
+          "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+          "enterprise-knowledge/banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md",
+          "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+          "enterprise-knowledge/banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md",
+          "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Salesforce",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "8a507851-9795-4ad2-a88f-6a9cac26254c",
+        "e8901b6a-b9d7-4b75-ae58-864eec076821"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "ServiceNow",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "b87eb95c-06e4-4cf5-8f9c-6b1f3c8e3324",
+        "c9adcfad-0f29-4d17-82a5-ce27ceb6488a"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Sage",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "3714edc7-224f-4060-841b-c6421e2bf65d",
+        "e9a6fa88-d683-4dd9-87cd-32783ef343ec"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Workday",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Pega",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Do not join by name to PEGA LIMITED. Ownership/domain evidence and registry reconciliation remain unresolved."
+    },
+    {
+      "provider_view": "Access Group",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "OneAdvanced",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Page records ONEADVANCED LIMITED name change, company 03214465; registry citation is not canonical binding."
+    },
+    {
+      "provider_view": "Adobe",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Autodesk",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "AVEVA",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Schneider Electric group ownership reported; brand/group/local contracting entity remain distinct."
+    },
+    {
+      "provider_view": "AWS",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "837342f2-4432-4ab4-97ed-66404ae5fa7a",
+        "c8d707d0-a813-4dc0-9035-4437a8cf7b9e"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt",
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/monzo/Monzo-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/starling/Starling-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+          "enterprise-knowledge/banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json",
+          "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json"
+        ],
+        "568": [
+          "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt",
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/monzo/Monzo-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/starling/Starling-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+          "enterprise-knowledge/banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json",
+          "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json"
+        ],
+        "569": [
+          "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt",
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/monzo/Monzo-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/starling/Starling-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+          "enterprise-knowledge/banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json",
+          "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json",
+          "enterprise-knowledge/technology/research-sprint2/Assurance-v1.json",
+          "enterprise-knowledge/technology/research-sprint2/Completion-v2.json",
+          "enterprise-knowledge/technology/research-sprint2/Research-v1.json"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Google Cloud",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "9347d6bd-3d07-475b-b8da-baa6441fb901",
+        "edb33742-2b1e-46d0-a838-a81ffac1fdce"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/comparisons/Banking-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Content-Understanding-Evaluation.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Failure-Analysis.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-B-Outputs.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-C-Outputs.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-Comparison.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+          "enterprise-knowledge/banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md",
+          "enterprise-knowledge/banking/provider-offer-twin/Provider-Offer-Twin-Implementation-Report.md",
+          "enterprise-knowledge/banking/provider-offer-twin/banking-provider-offer-twin.json",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json",
+          "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/banking/research-model/Understanding-Review.json",
+          "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json",
+          "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-AI.txt",
+          "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-ENVOY.txt",
+          "enterprise-knowledge/banking/research-model/source-snapshots/V3-LBG-ENVOY.txt"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/comparisons/Banking-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Content-Understanding-Evaluation.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Failure-Analysis.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-B-Outputs.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-C-Outputs.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-Comparison.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+          "enterprise-knowledge/banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md",
+          "enterprise-knowledge/banking/provider-offer-twin/Provider-Offer-Twin-Implementation-Report.md",
+          "enterprise-knowledge/banking/provider-offer-twin/banking-provider-offer-twin.json",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json",
+          "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/banking/research-model/Understanding-Review.json",
+          "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json",
+          "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-AI.txt",
+          "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-ENVOY.txt",
+          "enterprise-knowledge/banking/research-model/source-snapshots/V3-LBG-ENVOY.txt"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/comparisons/Banking-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Content-Understanding-Evaluation.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Failure-Analysis.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-B-Outputs.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-C-Outputs.md",
+          "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-Comparison.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+          "enterprise-knowledge/banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md",
+          "enterprise-knowledge/banking/provider-offer-twin/Provider-Offer-Twin-Implementation-Report.md",
+          "enterprise-knowledge/banking/provider-offer-twin/banking-provider-offer-twin.json",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json",
+          "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/banking/research-model/Understanding-Review.json",
+          "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json",
+          "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-AI.txt",
+          "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-ENVOY.txt",
+          "enterprise-knowledge/banking/research-model/source-snapshots/V3-LBG-ENVOY.txt"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Provider view within Google/Alphabet; distinct from Google DeepMind, not an additional independent corporate group."
+    },
+    {
+      "provider_view": "Snowflake",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Databricks",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "OVHcloud",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Rackspace",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Quantexa",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "94e1767f-6952-48d3-8529-5887fb152143",
+        "a7414c87-2c87-4bdb-9982-4a3a95bbb5da"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Faculty",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "6ed208b3-2bd3-432b-9a63-85b4ce2f6b44",
+        "a39cd005-a5ec-4a91-9489-fcd86896ea7b"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "NVIDIA",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "OpenAI",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/aviation/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/aviation/research-model/Visual-Profile.json",
+          "enterprise-knowledge/banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "568": [
+          "enterprise-knowledge/aviation/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/aviation/research-model/Visual-Profile.json",
+          "enterprise-knowledge/banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "569": [
+          "enterprise-knowledge/aviation/research-model/Assessment-Overlay.json",
+          "enterprise-knowledge/aviation/research-model/Visual-Profile.json",
+          "enterprise-knowledge/banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/technology/research-sprint2/Completion-v2.json"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Anthropic",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Google DeepMind",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Research organisation within Google/Alphabet; shared group with Google Cloud. No separate independent-group count."
+    },
+    {
+      "provider_view": "NCC Group",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "420cb2ed-8e3f-41b0-8319-e899d426a0fc",
+        "8ba36d93-0c8e-46d9-8afa-3ba26eada69a"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Escode sale completed 29 May 2026; Escode is historical ownership, not a current division."
+    },
+    {
+      "provider_view": "Sophos",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "6c595faf-bf2f-4997-a50a-4416df50e34f",
+        "e8170ced-ee3f-4122-9a53-a7ebfdf55963"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Secureworks acquisition completed 3 February 2025; historical independent-group boundary is superseded."
+    },
+    {
+      "provider_view": "Darktrace",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2263c018-31f4-4538-9012-f8ff1b4ce92d",
+        "24fa2b06-fe36-4451-bb91-8f83dc5cb63d"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": [
+          "enterprise-knowledge/technology/research-sprint2/Completion-v2.json",
+          "enterprise-knowledge/technology/research-sprint2/Research-v1.json"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "2024 Thoma Bravo acquisition completed; historical listed-company data is not current ownership."
+    },
+    {
+      "provider_view": "Palo Alto Networks",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "CrowdStrike",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Fortinet",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Rubrik",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Accenture",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2c5c228e-cf48-49a7-81d5-296443fb0c7f",
+        "b9e9ef6c-d087-44cc-aad6-ee7f26d157cd"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt",
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json"
+        ],
+        "568": [
+          "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt",
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json"
+        ],
+        "569": [
+          "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt",
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md",
+          "enterprise-knowledge/banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "IBM",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "71397392-675f-4b75-aeb2-73f6b01e3e39",
+        "fa3b6b63-a012-494c-86e4-b7f1016a918a"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Capgemini",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "bc4921fa-ada6-48ea-80d6-c96040a1ccef",
+        "f1daff1c-bd7a-4104-b1bf-a46f24838744"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "568": [
+          "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "569": [
+          "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Sopra Steria",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "3eaf5241-a244-4005-8d70-9136ce392b65",
+        "a0c0e925-3cd5-4b26-99c4-24b357b91648",
+        "f2dc0440-33da-445c-88fe-3fd8f2c7cb96"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "DXC",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2c5c228e-cf48-49a7-81d5-296443fb0c7f",
+        "5b79f850-4e6e-407e-8af4-7e7984846f65",
+        "b9e9ef6c-d087-44cc-aad6-ee7f26d157cd"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Kainos",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2678abd1-456b-4ab2-83bc-0dad90fd8c6a",
+        "4b21581f-f5d2-4643-88cc-a8518b14fed5",
+        "fc96a2b7-4e68-46eb-9ade-42c5f656304a"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "TCS / Diligenta",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "373d8d16-6df6-4e2c-a226-ec8523ba77eb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Composite selection view: TCS parent, Diligenta delivery subsidiary and BaNCS product remain distinct. No single contracting entity bound."
+    },
+    {
+      "provider_view": "Infosys",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "373d8d16-6df6-4e2c-a226-ec8523ba77eb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Cognizant",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "373d8d16-6df6-4e2c-a226-ec8523ba77eb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "NTT DATA",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "373d8d16-6df6-4e2c-a226-ec8523ba77eb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Equal Experts",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "373d8d16-6df6-4e2c-a226-ec8523ba77eb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Version 1",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "373d8d16-6df6-4e2c-a226-ec8523ba77eb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Netcompany",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "373d8d16-6df6-4e2c-a226-ec8523ba77eb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "CGI",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Fujitsu",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "HCLTech",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Wipro",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Tech Mahindra",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Atos / Eviden",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Composite brand/group view; current service/product perimeter and local entities require reconciliation."
+    },
+    {
+      "provider_view": "Valtech",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Deloitte",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Professional-services network and UK practice differ; global network economics are not UK figures."
+    },
+    {
+      "provider_view": "Node4",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Site-declared England and Wales company 04759927; canonical reconciliation still required."
+    },
+    {
+      "provider_view": "Computacenter",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "2ceaebba-7bac-4fc8-a40d-45aced700154",
+        "71d7f39b-c585-4d60-9d83-cdc97ce4d1cc",
+        "88ef4444-fa4e-4dc6-8c5d-71906f56ba00"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": [
+          "enterprise-knowledge/technology/research-sprint2/Completion-v2.json",
+          "enterprise-knowledge/technology/research-sprint2/Research-v1.json"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Softcat",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "058c483e-b14a-4ec3-926c-f085a418ad62",
+        "3b47bba8-2540-40d5-8793-d7677240683b",
+        "80dbce3a-148e-412e-901a-86bf4f015a74"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "SCC",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "31bb9eda-bf25-4e2a-af5d-5a8521da5917",
+        "aef4b393-9d9e-4964-8bf9-b09221242d76"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "SCC and Rigby Group remain separate entities; group financials are not SCC UK financials."
+    },
+    {
+      "provider_view": "TD SYNNEX",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "058c483e-b14a-4ec3-926c-f085a418ad62",
+        "3b47bba8-2540-40d5-8793-d7677240683b",
+        "80dbce3a-148e-412e-901a-86bf4f015a74"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": [
+          "enterprise-knowledge/technology/research-sprint2/Completion-v2.json",
+          "enterprise-knowledge/technology/research-sprint2/Research-v1.json"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Ingram Micro",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "058c483e-b14a-4ec3-926c-f085a418ad62",
+        "3b47bba8-2540-40d5-8793-d7677240683b",
+        "80dbce3a-148e-412e-901a-86bf4f015a74"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Equinix",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "3cfdb972-1aae-4e5d-aa73-39168dc82b3f",
+        "b636c614-ffcf-4065-82af-458c582dacf5"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Telehouse",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "0952371c-1e7a-45f7-976b-5a4a079a4c33",
+        "5567d425-b697-4f2d-94a4-d45a20a51dfe"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Site declares Telehouse International Corporation of Europe Ltd, 2138407; parent/local binding remains unaccepted."
+    },
+    {
+      "provider_view": "BT",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "6dc2fce2-9450-4ef9-b2c6-e7a7049e73ed",
+        "7907df13-813d-448f-b373-6026dd997254"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Pulsant",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "373d8d16-6df6-4e2c-a226-ec8523ba77eb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Digital Realty",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "373d8d16-6df6-4e2c-a226-ec8523ba77eb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "VIRTUS",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "373d8d16-6df6-4e2c-a226-ec8523ba77eb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Cisco",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "373d8d16-6df6-4e2c-a226-ec8523ba77eb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "HPE",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "373d8d16-6df6-4e2c-a226-ec8523ba77eb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Dell",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "373d8d16-6df6-4e2c-a226-ec8523ba77eb"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Broadcom / VMware",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json"
+        ],
+        "568": [
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json"
+        ],
+        "569": [
+          "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+          "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+          "enterprise-knowledge/banking/research-migration/migration-review-items.json"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Acquired brand/platform view; vendor, reseller and operator are separate roles. No extra independent group inferred."
+    },
+    {
+      "provider_view": "Lenovo",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "VodafoneThree",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Combined UK organisation; Vodafone and Three trading brands are not additional independent groups."
+    },
+    {
+      "provider_view": "Virgin Media O2",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "CityFibre",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Arm",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "659a4511-6752-4aa1-a321-b3854994fb93",
+        "ad96723c-d301-40d0-a187-630b608e34d5"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [
+          "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "568": [
+          "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ],
+        "569": [
+          "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt",
+          "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md"
+        ]
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Intel",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "AMD",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "312a7a3b-8076-4019-88bf-07d9089b42e6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "OQC",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "50b8e38c-15db-4329-82eb-45683397e449",
+        "72a25481-6192-4d24-8473-583585f4271d"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Riverlane",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "5ba64a56-3c6c-43b3-96a9-7e2202838e10"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Quantinuum",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "55a3064c-acf0-4784-b61c-edd4a42f584c",
+        "69e08f67-8957-45f2-84b6-87f3835c0fc6"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    },
+    {
+      "provider_view": "Nu Quantum",
+      "page_profile_state": "partial profile",
+      "page_profile_block_ids": [
+        "68579eab-def9-4e0c-b3e7-63025c29595f",
+        "ae778ff6-c7e5-4c5b-af2a-c795f6c9c46e"
+      ],
+      "identity_status": "unbound",
+      "canonical_acceptance_from_this_handoff": "none",
+      "repository_mentions": {
+        "main": [],
+        "568": [],
+        "569": []
+      },
+      "interpretation": "Text mention only, not equivalent claim coverage, legal-entity resolution or canonical acceptance",
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ],
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation."
+    }
+  ],
+  "counts": {
+    "selected_views": 80,
+    "partial_profiles": 80,
+    "selection_only": 0,
+    "relationship_research_records": 34,
+    "atomic_references": 24,
+    "commercial_themes": 6,
+    "validated_canonical_imports": 0
+  },
+  "ownership": {
+    "source_acquisition": "research_intelligence/source_import.py (allowlist unchanged)",
+    "claims": "enterprise_intelligence/semantic.py",
+    "evidence_package": "enterprise_intelligence/models.py",
+    "observation": "memory/models.py",
+    "review_and_promotion": "blueprint_import/views.py",
+    "public_navigation": "research_intelligence/registry.py"
+  },
+  "decision": "12 November 2026 decision log pauses autonomous-agent development; ChatGPT-led research and governed imports selected. No agent code copied, imported or executed."
+}

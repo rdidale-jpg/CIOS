@@ -18,7 +18,7 @@ from pathlib import Path
 from email.parser import BytesParser
 from email.policy import default as email_policy
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from urllib.parse import parse_qs, quote_plus, urlparse
+from urllib.parse import parse_qs, parse_qsl, quote_plus, urlparse
 
 from cios.applications.flora.live.collect import collect, current_status
 from cios.applications.flora.live.progress import read_state, mark_stale_interrupted
@@ -198,6 +198,32 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                         + "<details><summary>Original Research Intelligence Diagnostic — inventory and registered gaps</summary>"
                         + render(data) + "</details>")
                 self._html(unified_views.page(data['enterprise_name'] + " Research Diagnostic", body, self.headers, "enterprises", parsed.path))
+            elif parsed.path in {
+                '/industries/technology/experience', '/industries/technology/experience/district',
+                '/industries/technology/experience/enterprise', '/industries/technology/experience/operating-model',
+                '/industries/technology/experience/pipeline', '/industries/technology/experience/opportunity',
+                '/industries/technology/experience/assets/artwork',
+                '/industries/technology/experience/assets/styles',
+                '/industries/technology/experience/assets/interactions',
+            }:
+                from cios.applications.flora.research_intelligence import technology_experience
+                try:
+                    if parsed.path in technology_experience.PATHS:
+                        self._html(technology_experience.render(parsed.path, dict(parse_qsl(parsed.query)), self.headers))
+                    else:
+                        body, content_type = technology_experience.asset(parsed.path.rsplit('/', 1)[-1])
+                        self._body(body, content_type, 200)
+                except ValueError:
+                    self.send_error(404, 'Technology experience view unavailable')
+            elif parsed.path in {"/industries/technology", "/industries/technology/providers", "/industries/technology/models", "/industries/technology/timeline", "/industries/technology/evidence", "/industries/technology/handoff"}:
+                from cios.applications.flora.research_intelligence import technology, technology_views
+                try:
+                    if parsed.path.endswith('/handoff'):
+                        self._json(technology.handoff())
+                    else:
+                        self._html(technology_views.render(parsed.path, dict(parse_qsl(parsed.query)), self.headers))
+                except ValueError:
+                    self.send_error(404, 'Technology research view unavailable')
             elif parsed.path in {"/industries","/enterprises","/industries/banking","/industries/banking/visual-specs","/industries/aviation","/industries/aviation/visual-specs"} or parsed.path.startswith("/enterprises/"):
                 from cios.applications.flora.research_intelligence import unified_views
                 try:
@@ -1581,6 +1607,16 @@ app = FloraWebHandler
 
 
 def _content_type_for_path(path: str) -> str | None:
+    from cios.applications.flora.research_intelligence import technology_experience
+    if path in technology_experience.PATHS:
+        return 'text/html; charset=utf-8'
+    for name, content_type in technology_experience.ASSET_TYPES.items():
+        if path == technology_experience.ASSET_BASE + name:
+            return content_type
+    if path == '/industries/technology/handoff':
+        return 'application/json'
+    if path in {'/industries/technology','/industries/technology/providers','/industries/technology/models','/industries/technology/timeline','/industries/technology/evidence'}:
+        return 'text/html; charset=utf-8'
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
     if path in {"/", "/flora", "/flora/", "/pilot-sign-in", "/operations/storage-recovery", "/workspace/reference", "/flora/reference", "/flora/object/BK-ENT-001", "/flora/object/BK-ENT-001/explain", "/flora/object/BK-ENT-001/context-package", "/workspace/enterprise/BK-ENT-001", "/flora/lloyds", "/explore", "/focus", "/shape", "/shape/banking", "/shape/strategic-sales-brief", "/shape/banking/strategic-sales-brief", "/governance", "/ask"} or path.startswith("/flora/object/") or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general" or path.startswith("/evidence/"):

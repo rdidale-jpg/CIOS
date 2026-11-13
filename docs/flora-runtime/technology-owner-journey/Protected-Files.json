@@ -1,0 +1,65 @@
+{
+  "base": "22b8527ba1ce111e366f3b326895a32b7a55140c",
+  "rows": [
+    {
+      "path": "cios/applications/flora/research_intelligence/registry.py",
+      "sha256": "840f5cb8ef66c5ab5947f462b2b5e1acde07e1a186653207323a2a5ef3dfd080",
+      "unchanged": true
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/technology.py",
+      "sha256": "65917a54f1f81505b04969aad26c89c9b629bce4adc300062e9992359f8b04d2",
+      "unchanged": true
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/technology_scene.py",
+      "sha256": "06a32c99e8f72065f8144cf37b065479dfdadc17be82d7a0cc16c2d3e56a3d50",
+      "unchanged": true
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/macro_views.py",
+      "sha256": "79f7589c38dbceb91578570f1cb94ede5fc5a65605b74ca70d3aed9ade935be5",
+      "unchanged": true
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/source_import.py",
+      "sha256": "e851f66a9c4540f538881e60ae451b0ad7c889d20cdd2ae5f4789d6490f7ebc7",
+      "unchanged": true
+    },
+    {
+      "path": "cios/applications/flora/memory/models.py",
+      "sha256": "69e8c03b3873320768240af3772791778eb35660b0f711fd985e28f53191ba33",
+      "unchanged": true
+    },
+    {
+      "path": "cios/applications/flora/blueprint_import/views.py",
+      "sha256": "31bbde3fafcb254d771b68876a7d0eb6d094f7dcd4aca5466e0b0787e3716ad2",
+      "unchanged": true
+    },
+    {
+      "path": "cios/applications/flora/sales_pipeline.py",
+      "sha256": "ac16d29added41baa4f1a640cddd5fa5b8a5e1174291c98536330826b348fb23",
+      "unchanged": true
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/Research-Page.json",
+      "sha256": "e7f0bad8a7451cbb10f65a84b786c8ba4c1b5d634540fd02b660d46c57285b11",
+      "unchanged": true
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/Candidate-Handoff.json",
+      "sha256": "61c4012b5b60fc8219ad7dd8910d455faa11c604e163e83f3117d17d97f2945a",
+      "unchanged": true
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/Coverage-and-Reconciliation.json",
+      "sha256": "b0ef6fcc9f8a33f773d8da11be8e222a0b45b1d8e3fb876187b65f9ded0c2b2e",
+      "unchanged": true
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/Foundation.json",
+      "sha256": "1f332a13026e83d677d3897fcec9bd29c259546b070b9cea23b6b8dcd83c05b5",
+      "unchanged": true
+    }
+  ]
+}

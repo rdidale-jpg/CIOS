@@ -61,6 +61,15 @@ def public_route_catalog():
     add(('/flora/banking/heatmap/detail',), 'heatmap_detail_page', 'Public bank/theme scenario lookup only', ('mode','theme','bank'))
     add(('/flora/banking/explorer',), 'industry_page', 'Repository BANKS public-source fixtures; conceptual ecosystem only')
     add(('/industries','/enterprises'), 'unified_catalogue', 'Repository-owned public research navigation only')
+    add(tuple('/industries/technology/experience'+suffix for suffix in ('','/district','/enterprise','/operating-model','/pipeline','/opportunity')),
+        'technology_owner_experience', 'Public presentation research and browser-tab-only synthetic sales examples; no live stores',
+        ('selected','district','scope','record','detail','area','macro'))
+    add(tuple('/industries/technology/experience/assets/'+name for name in ('artwork','styles','interactions')),
+        'technology_experience_asset', 'Exact repository-owned artwork, styles and interaction code')
+    add(('/industries/technology',), 'technology_research', 'Hash-pinned recovered Page research only; no canonical or private stores', ('lens','segment','relationship','theme'))
+    add(('/industries/technology/providers',), 'technology_directory', 'Unbound provider research views; no Enterprise Model creation', ('provider','segment'))
+    add(('/industries/technology/models',), 'technology_reference_models', 'Hypothetical reference archetypes with attributed draft overlays', ('model',))
+    add(('/industries/technology/timeline','/industries/technology/evidence','/industries/technology/handoff'), 'technology_handoff', 'Finite Page research and pure candidate mapping; no import execution or promotion')
     add(('/enterprises/lloyds/understanding','/enterprises/easyjet/understanding'), 'enterprise_understanding', 'Finite read-only public candidate evidence/review files; no canonical/private stores')
     add(('/enterprises/lloyds/research-diagnostic','/enterprises/easyjet/research-diagnostic'), 'research_diagnostic', 'Read-only finite public research assessment overlay; no protected stores')
     add(('/industries/banking','/industries/aviation'), 'unified_industry', 'Existing public research overlay; no owner records', ('lens',))

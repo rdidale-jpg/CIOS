@@ -7145,6 +7145,213 @@
               "status": "passed"
             }
           }
+        },
+        "technology_visual_foundation_v1": {
+          "selections": [
+            [
+              "tests/test_flora_technology_foundation.py"
+            ]
+          ],
+          "cases": {
+            "tests/test_flora_technology_foundation.py::test_all_80_views_reconcile_exactly_to_the_page_population_with_no_entity_creation": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_population_groups_and_overlapping_segments_have_separate_denominators": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_source_segments_preserve_actual_page_rows_and_never_claim_original_bytes": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_import_mapping_is_deterministic_and_does_not_relabel_date_only_provenance": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_candidate_mapping_rejects_fabricated_or_cross_row_page_passages[other_customer]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_candidate_mapping_rejects_fabricated_or_cross_row_page_passages[cross_join]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_candidate_mapping_rejects_fabricated_or_cross_row_page_passages[made_up_source]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_publisher_policy_and_existing_observation_owners_are_unchanged": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_changed_source_assets_fail_closed[Foundation.json]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_changed_source_assets_fail_closed[Research-Page.json]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_historical_and_prospective_relationship_boundaries_are_not_collapsed": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_existing_navigation_is_exact_and_never_joins_hsbc_group_to_hsbc_uk": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_every_theme_has_its_underlying_research_and_remains_unqualified": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_public_technology_views_work_without_account_or_private_stores[]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_public_technology_views_work_without_account_or_private_stores[?lens=uses]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_public_technology_views_work_without_account_or_private_stores[?lens=work]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_public_technology_views_work_without_account_or_private_stores[/providers]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_public_technology_views_work_without_account_or_private_stores[/providers?provider=pega]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_public_technology_views_work_without_account_or_private_stores[/models]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_public_technology_views_work_without_account_or_private_stores[/timeline]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_public_technology_views_work_without_account_or_private_stores[/evidence]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_public_technology_views_work_without_account_or_private_stores[/handoff]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_unregistered_selectors_or_paths_are_rejected[?workspace=other]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_unregistered_selectors_or_paths_are_rejected[?provider=lloyds]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_unregistered_selectors_or_paths_are_rejected[?lens=how&lens=uses]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_unregistered_selectors_or_paths_are_rejected[?lens=%00]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_unregistered_selectors_or_paths_are_rejected[/../../blueprint-import/history]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_unregistered_selectors_or_paths_are_rejected[/private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_unregistered_selectors_or_paths_are_rejected[/handoff?promote=yes]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_unknown_registered_selection_values_cannot_read_arbitrary_data[?lens=unknown]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_unknown_registered_selection_values_cannot_read_arbitrary_data[?segment=private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_unknown_registered_selection_values_cannot_read_arbitrary_data[?relationship=private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_public_journey_does_not_read_or_mutate_pipeline": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_markup_escapes_source_prose_and_rejects_non_https_links": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_existing_sector_journeys_and_catalogue_entry_are_preserved": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_every_provider_drills_to_its_own_profile_and_explicit_identity_gap": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_head_content_types_match_the_new_finite_http_views": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_new_views_cannot_be_posted_to_import_or_create_opportunities": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_foundation.py::test_all_displayed_relationships_have_source_urls_and_own_temporal_scope": {
+              "status": "passed"
+            }
+          }
+        },
+        "technology_visual_world_v1": {
+          "selections": [
+            [
+              "tests/test_flora_technology_visual_world.py"
+            ]
+          ],
+          "cases": {
+            "tests/test_flora_technology_visual_world.py::test_primary_lenses_are_navigable_svg_scenes_with_no_card_grid[how]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_primary_lenses_are_navigable_svg_scenes_with_no_card_grid[uses]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_primary_lenses_are_navigable_svg_scenes_with_no_card_grid[work]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_every_district_is_a_native_link_with_an_accessible_name[False]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_every_district_is_a_native_link_with_an_accessible_name[True]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[applications]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[cloud]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[ai]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[cyber]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[services]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[channels]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[infrastructure]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[frontier]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_all_six_hypotheses_are_seams_and_retain_evidence_alternatives_and_questions": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_all_programme_ribbons_retain_exact_record_scope_and_evidence": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_provider_drill_retains_scene_and_partial_identity_instead_of_creating_an_enterprise": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_scene_rejects_unknown_selection_instead_of_falling_back[selection0]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_scene_rejects_unknown_selection_instead_of_falling_back[selection1]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_scene_rejects_unknown_selection_instead_of_falling_back[selection2]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_scene_rejects_unknown_selection_instead_of_falling_back[selection3]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_scene_rejects_unknown_selection_instead_of_falling_back[selection4]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_new_theme_selector_remains_finite_and_cannot_request_private_state": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_research_data_and_all_acceptance_navigation_owners_are_byte_preserved": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_svg_escapes_research_text_without_interpreting_it_as_markup": {
+              "status": "passed"
+            }
+          }
         }
       }
     }
