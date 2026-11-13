@@ -267,3 +267,141 @@ Approve the strategic distinction between **Experience Role**, **Theme**, **Enti
 - [Current primary navigation](../../cios/applications/flora/navigation.py) and [Commercial Mission](../../cios/applications/flora/commercial_mission.py).
 - [Existing Offers v1](../../cios/applications/flora/offers.py) — private employer/seller offers and shared matching.
 - [FLORA Offers v2 Sprint A](https://github.com/rdidale-jpg/CIOS/issues/587) — in-progress separate work.
+
+
+## Appendix A — Tools and repeat-value engines by experience (proposed 13 November 2026)
+
+**Product design test:** For every experience ask: *What durable object does a user maintain, what changes between visits, what meaningful action can they take, and why might they pay?* Avoid generic newsfeeds and artificial check-in incentives. These are concepts to validate, not features delivered in current FLORA.
+
+### A1. Sell & Grow
+
+| Role | Signature tool and persistent object | Repeat-value trigger | Potential premium value |
+|---|---|---|---|
+| Business development / strategic sales | **Opportunity Factory:** seller-selected Offers → target-account signals → buyer hypotheses → entry plays → qualification → governed Pipeline | New evidence, changed prospect fit, introduction, pursuit stage or milestone | Ranked, explainable opportunity pipeline and account plans |
+| Account / client director | **Account Growth Map:** relationships, business units, installed services, whitespace, renewal horizon and expansion hypotheses | Account event, service performance, stakeholder change, renewal milestone | Expansion and retention planning |
+| Founder / product strategist | **Market Opportunity Studio:** problem clusters, underserved segments, competitors and product-market hypotheses | Change in demand/competitor offerings, customer experiment result | Product decisions and experiment prioritisation |
+| Alliance/channel development | **Partner Opportunity Map:** complementary offers, partner strengths, account access, channel conflicts and joint plays | Partner announcement, joint opportunity, alliance renewal | Co-sell planning and partnership pipelines |
+
+**Sales north-star:** qualified, seller-reviewed pipeline created or progressed from FLORA-recommended commercial plays, with attributable evidence and user confirmation. Do not count unvalidated hypotheses as real pipeline.
+
+### A2. Learn
+
+| Role | Signature tool and persistent object | Repeat-value trigger | Potential premium value |
+|---|---|---|---|
+| Educator | **Living Case Study Builder:** industry/enterprise cases, learning objectives, exercises, teacher notes and presentation-ready visual journeys | Next class, case update, assignment or curriculum cycle | School/institution lesson packs, class management, educator collaboration |
+| Student | **Industry Learning Path:** industry maps, enterprise case missions, quizzes, feedback and personal mastery record | Next module, examination topic, project milestone | Free basic learning; optional advanced guided study under transparent limits |
+| Explorer | **My World Atlas:** saved markets, comparative journeys, clear economic explainers | Material world change or personal curiosity | Free acquisition funnel, not forced daily use |
+| Workforce/skills leader | **Skills Transition Mapper:** role changes, industry workforce trends, learning and redeployment pathways | Industry skills shift, workforce planning review | Organisational planning and reporting |
+
+**Learning north-star:** meaningful learning outcome (teacher-ready lesson deployed, assessment completed or improved demonstrated understanding), not clicks or time on site. Exercises must not invent business facts.
+
+### A3. Research
+
+| Role | Signature tool and persistent object | Repeat-value trigger | Potential premium value |
+|---|---|---|---|
+| Researcher / analyst | **Living Research Notebook:** question, tracked industry/enterprises, evidence, comparison, hypotheses, counter-evidence and reproducible report | Source update, contradiction, report deadline, new comparable data | Deep source access, exports, larger monitored research universe |
+| Academic / scientific innovator | **Research Ecosystem Explorer:** research programmes, institutions, collaborators, technologies and funding/publication evidence | New grant, paper, programme or collaborator | Specialist collaboration intelligence, institutional access |
+| Journalist / communicator | **Change & Claims Desk:** sourced chronology, cross-check, comparisons, factual explainer and exportable visual | Verifiable material development and publishing deadline | Professional source trails, citations and publishing assets |
+| Policy researcher | **Policy Impact Tracker:** proposal vs effective law, affected markets, alternative scenarios and impact hypotheses | Consultation, law commencement, amendment or review | Policy dossiers and jurisdiction-specific comparison |
+
+**Research north-star:** source-backed decisions or reusable completed research products, with stronger quality and less analyst time; reject volume-only metrics and fabricated certainty.
+
+### A4. Build & Transform
+
+| Role | Signature tool and persistent object | Repeat-value trigger | Potential premium value |
+|---|---|---|---|
+| Technologist / enterprise architect | **Technology Landscape & Decision Studio:** reference architecture, dependency map, product choices, trade-offs, technical debt and option decision log | New architecture constraint, vendor release, programme design gate | Technology decision support and team collaboration |
+| CIO / transformation director | **Transformation Portfolio Navigator:** operating-model baseline, capability maturity, initiative dependencies, measurable benefits and delivery risks | Programme milestone, revised financial or technology pressure | Portfolio decision support and benefit tracking |
+| Procurement / commercial buyer | **Supplier Market & Sourcing Mapper:** supplier capability/relationship evidence, route-to-market and sourcing scenario | Contract renewal, category review or supplier event | Shortlisting and supplier-market analysis |
+| Operations leader | **Operational Opportunity Mapper:** process economics, dependencies, improvement hypotheses and validation plan | Cost-performance change, bottleneck or service change | Evidence-led productivity and operational transformation planning |
+
+**Build north-star:** a decision made or initiative advanced with documented alternatives and usable evidence, not a generated diagram.
+
+### A5. Invest & Advise
+
+| Role | Signature tool and persistent object | Repeat-value trigger | Potential premium value |
+|---|---|---|---|
+| Investor / portfolio manager | **Living Investment Thesis:** watchlists, industry and company fundamentals, catalysts, thesis, challenge evidence and scenario valuation | Earnings, disclosure, sector change, thesis threshold | Comparison, valuation/scenario tools, saved monitoring and transparent risk analysis |
+| Corporate development / M&A | **Strategic Target & Synergy Explorer:** market map, target fit, business economics, overlap and integration hypotheses | Acquisition/disposal, target development, market shifts | Deal-screening and corporate-development workflow |
+| Professional adviser | **Client Strategy Workbench:** governed business-context comparison and recommendation drafts | Client review, regulatory or enterprise change | Repeatable client advice workflows under appropriate professional boundaries |
+
+**Invest north-star:** validated thesis updates and decision-quality research. No claims of investment returns or regulated advice without proper authority, licensing and safeguards.
+
+### A6. Improve Society
+
+Clean Energy, Social Value, Inclusion and Economic Development should be selectable **themes** that can combine with different professional workflows, not necessarily mutually exclusive roles.
+
+| Role/theme | Signature tool and persistent object | Repeat-value trigger | Potential premium value |
+|---|---|---|---|
+| Clean Energy / sustainability | **Transition Pathway Studio:** sector emissions/energy baseline, intervention choices, costs, timing, barriers and measured outcomes | New energy statistics, policy change, project milestone | Scenario models, reporting and stakeholder planning |
+| Social Value / inclusion | **Social Impact & Outcomes Planner:** employment, skills, community benefits, interventions, KPIs and evidence of results | Procurement review, community programme update, reporting deadline | Impact tracking, reporting and multi-team collaboration |
+| Public policy / regulation | **Policy Consequence Navigator:** policy change, affected industry groups, jurisdiction, competing consequences and uncertainties | Consultation deadline, draft/operative change | Comparative policy analysis and briefings |
+| Regional economic development | **Regional Growth Atlas:** industries, jobs, firms, skills, investment, clusters, projects and progress | Local investment, employment release, funding call | Regional intelligence, programme monitoring and evidence-based reports |
+
+**Public-impact north-star:** outcomes or programme decisions supported by sourced evidence. Advocacy lenses must show material counter-evidence and should not masquerade as causal impact measurement.
+
+### A7. Cross-role reusable engines
+
+Rather than build twenty separate applications, reuse a small set of governed product engines:
+1. **Living Watchlist / Change Engine** — authorised, bounded updates on saved industries, enterprises, technologies or policies; source dates and materiality matter more than notification frequency.
+2. **Model & Scenario Studio** — reusable financial, operating, technical, environmental and market scenarios with assumptions, alternatives and uncertainty.
+3. **Visual Knowledge Explorer** — country → industry → enterprise → relationships with image-native insights and clean financial scale.
+4. **Personal Project Workspace** — saved questions, models, decisions, next steps and a history of what changed; individual and team plans differ in sharing rights.
+5. **Guided Playbooks / Journeys** — user-purpose-specific steps: teach a case, research an issue, shape a deal, design a solution, evaluate a policy.
+6. **Source and Method Service** — single discreet access to evidence, provenance, dates and limitations with consistent authorization.
+7. **Outcome & Feedback Recorder** — user-confirmed learning, decisions, completed reports, opportunity actions, impact metrics; never make feedback canonical enterprise truth automatically.
+8. **Permissioned Alerts & Briefing** — user-controlled material-change notifications; digest by explicit cadence, respect consent, costs, privacy and legal boundaries.
+9. **Export & Collaboration** — role-specific reports, slides, worksheets, case packs and approved cross-team projects, subject to source/data licences.
+10. **Entitlement + Quota Layer** — independently gates costly/proprietary functions; no security permission escalation and no hidden usage charges.
+
+### A8. Candidate cadence and retention loops
+
+| Experience | Useful cadence | Trigger/action loop | Worth paying for when… |
+|---|---|---|---|
+| Sales | Daily/weekly around target accounts | New signal → entry-play review → contact/qualification → pipeline progress | It improves qualified pipeline, conversion or time-to-insight |
+| Educator | Weekly/termly | Plan lesson → deliver → assess → update class material | It saves preparation time and improves learning outcomes |
+| Student | Self-paced/course cycle | Study → interact → practice → feedback → next concept | Learning support is measurably useful |
+| Researcher | Project-driven/weekly | Research question → new evidence → thesis update → publish/decide | It saves research time without sacrificing source quality |
+| Technologist | Project milestones/events | Architecture signal → option comparison → decision/implementation | It reduces decision risk or work required |
+| Investor | Earnings/events | Thesis catalyst → challenge → scenario adjustment → portfolio research action | Intelligence is timely, defensible and materially differentiated |
+| Clean Energy | Policy/reporting/project intervals | New evidence → pathway revision → impact comparison → project decision | It supports a real, trusted transition decision |
+| Social Value | Contract/reporting intervals | Commitments → evidence → outcomes → report/adjust | It improves credible outcome tracking and reporting |
+
+**Do not manufacture daily activity where the authentic workflow is weekly, termly, project-driven or event-led.** Value and trust beat forced engagement.
+
+### A9. Product-priority matrix (hypotheses to test)
+
+Prioritise by (a) urgency and willingness-to-pay, (b) fit to existing FLORA intelligence, (c) build/research cost and source rights, (d) user retention/return value, (e) differentiated user outcome, and (f) security/compliance burden.
+
+| Candidate | Existing-platform leverage | Likely implementation complexity | Suggested order |
+|---|---|---|---|
+| **Sales Opportunity Factory** | Very high: Offers, Enterprise Twins and Pipeline exist | Medium for quality; high for scalable research | 1 — continue existing Offers sprints |
+| **Research Notebook + Watchlist** | High: evidence, enterprise comparisons and macro signals | Medium; monitoring cost must be bounded | 2 — reusable across roles |
+| **Educator Case Study Builder** | High: visual industries and enterprise operating models | Medium; pedagogy/content QA required | 3 — contrasting free/education pilot |
+| **Technology Decision Studio** | High: technology landscape and supplier ecosystem | Medium/high; technical depth and validation | 4 |
+| **Investor Thesis Studio** | Medium: finance and industry context | High: data licences, timeliness and regulated-advice issues | Research before delivery |
+| **Transition/Impact Studio** | Medium: PESTLE and some sector data | High: environmental/social measurement rigor | Targeted proof only |
+| **Enterprise collaboration/subscriptions** | High once valuable role tools exist | High IAM, tenancy, billing, support effort | After individual value proven |
+
+The order is a **product hypothesis**, not verified market demand or financial forecast. Interview and pilot users before committing revenue targets or pricing.
+
+### A10. First future proof: two contrasting experiences
+
+After Offers Sprint A and the associated sales development milestones, build a **design pilot** for:
+- **Educator:** open the same UK economy and easyJet pages; create and save a short interactive business case/teaching sequence; choose an assessment and export a source-aware lesson plan.
+- **Sales:** open those same pages; select an authorised Offer; review a supported customer trigger and entry play; save a commercial action and, only after qualification, progress via the existing Pipeline.
+- **Researcher (optional third):** watchlist easyJet and compare its latest source-backed changes to a saved hypothesis.
+
+Demonstrate **shared facts, different tools**. Instrument meaningful completions, retention at natural cadence and compute cost, but preserve access, evidence and data-rights boundaries. No billing implementation or new permissions until reviewed.
+
+### A11. Long-run success measures
+
+Avoid optimising primarily for daily-active-user counts. Prefer:
+- activation: users complete their first **role-relevant valuable artifact**;
+- effectiveness: opportunity progressed, case lesson delivered, thesis updated, decision made or measured impact assessed;
+- retention: return on meaningful event/cadence, not nudges alone;
+- conversion: free-to-paid upgrades **after** users experience a real premium need;
+- economics: gross margin by tier, cost per successful artifact/active paying user, data licence burden and support cost;
+- quality: evidence traceability, material error rate, user correction, abandoned work and trust metrics.
+
+**Architecture rule:** every profession-specific tool must identify the shared FLORA intelligence objects it reuses, new durable user work artifacts it owns, who may access them and a clear outcome metric. If it cannot specify these, it is a navigation lens rather than a separate product.
