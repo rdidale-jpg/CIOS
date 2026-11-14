@@ -1,0 +1,347 @@
+{
+  "design_commit": "c6bf2280594922db6951c5c36205984c85ca4aea",
+  "authority": "Presentation geometry and labels only; never facts, research status, relationships or permissions",
+  "scenes": {
+    "uk-landscape": {
+      "description": "",
+      "spots": [
+        {
+          "id": "uk-sic07-a",
+          "position": "--x:14%;--y:12%;--mx:28%;--fy:6.0%",
+          "label": "Agriculture & fishing",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-b",
+          "position": "--x:38%;--y:12%;--mx:76%;--fy:6.0%",
+          "label": "Mining & quarrying",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-d",
+          "position": "--x:62%;--y:12%;--mx:24%;--fy:56.0%",
+          "label": "Energy supply",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-e",
+          "position": "--x:86%;--y:12%;--mx:72%;--fy:56.0%",
+          "label": "Water & waste",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-c",
+          "position": "--x:14%;--y:32%;--mx:28%;--fy:16.0%",
+          "label": "Manufacturing",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-f",
+          "position": "--x:38%;--y:32%;--mx:76%;--fy:16.0%",
+          "label": "Construction",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-n",
+          "position": "--x:62%;--y:32%;--mx:24%;--fy:66.0%",
+          "label": "Business support",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-h",
+          "position": "--x:86%;--y:32%;--mx:72%;--fy:66.0%",
+          "label": "Transport & logistics",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-p",
+          "position": "--x:14%;--y:53%;--mx:28%;--fy:26.5%",
+          "label": "Education",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-q",
+          "position": "--x:38%;--y:53%;--mx:76%;--fy:26.5%",
+          "label": "Health & social care",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-j",
+          "position": "--x:62%;--y:53%;--mx:24%;--fy:76.5%",
+          "label": "Information & communication",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-m",
+          "position": "--x:86%;--y:53%;--mx:72%;--fy:76.5%",
+          "label": "Professional services",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-l",
+          "position": "--x:14%;--y:73%;--mx:28%;--fy:36.5%",
+          "label": "Real estate",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-k",
+          "position": "--x:38%;--y:73%;--mx:76%;--fy:36.5%",
+          "label": "Finance & insurance",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-o",
+          "position": "--x:62%;--y:73%;--mx:24%;--fy:86.5%",
+          "label": "Public administration",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-g",
+          "position": "--x:86%;--y:73%;--mx:72%;--fy:86.5%",
+          "label": "Retail & wholesale",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-i",
+          "position": "--x:14%;--y:91%;--mx:28%;--fy:45.5%",
+          "label": "Hospitality & food",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-r",
+          "position": "--x:38%;--y:91%;--mx:76%;--fy:45.5%",
+          "label": "Arts & recreation",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-s",
+          "position": "--x:62%;--y:91%;--mx:24%;--fy:95.5%",
+          "label": "Other services",
+          "small": ""
+        },
+        {
+          "id": "uk-sic07-t",
+          "position": "--x:86%;--y:91%;--mx:72%;--fy:95.5%",
+          "label": "Household employment",
+          "small": ""
+        }
+      ]
+    },
+    "uk-forces": {
+      "description": "uk Forces: metaphorical currents and pressure fields; no severity, forecast or geography is implied",
+      "spots": [
+        {
+          "id": "economic",
+          "position": "--x:25%;--y:28%;--mx:50%;--fy:14.0%",
+          "label": "Economic growth",
+          "small": "GDP +0.7% \u00b7 to Sep 2026"
+        },
+        {
+          "id": "technological",
+          "position": "--x:75%;--y:28%;--mx:50%;--fy:64.0%",
+          "label": "Cyber resilience",
+          "small": "UK aggregate \u00b7 Nov 2026 review"
+        },
+        {
+          "id": "legal",
+          "position": "--x:25%;--y:71%;--mx:50%;--fy:35.5%",
+          "label": "Cyber reform",
+          "small": "Proposal \u00b7 Nov 2026 review"
+        },
+        {
+          "id": "environmental",
+          "position": "--x:75%;--y:71%;--mx:50%;--fy:85.5%",
+          "label": "Climate reporting",
+          "small": "2027 accounting periods"
+        }
+      ]
+    },
+    "banking-landscape": {
+      "description": "UK Banking ecosystem",
+      "spots": [
+        {
+          "id": "barclays",
+          "position": "--x:18%;--y:48%;--mx:36%;--fy:24.0%",
+          "label": "Barclays",
+          "small": ""
+        },
+        {
+          "id": "hsbc-uk",
+          "position": "--x:48%;--y:42%;--mx:96%;--fy:21.0%",
+          "label": "HSBC UK",
+          "small": ""
+        },
+        {
+          "id": "lloyds",
+          "position": "--x:80%;--y:48%;--mx:60%;--fy:74.0%",
+          "label": "Lloyds Banking Group",
+          "small": ""
+        },
+        {
+          "id": "natwest",
+          "position": "--x:28%;--y:76%;--mx:56%;--fy:38.0%",
+          "label": "NatWest Group",
+          "small": ""
+        },
+        {
+          "id": "santander-uk",
+          "position": "--x:73%;--y:77%;--mx:46%;--fy:88.5%",
+          "label": "Santander UK",
+          "small": ""
+        },
+        {
+          "id": "boe",
+          "position": "--x:18%;--y:22%;--mx:36%;--fy:11.0%",
+          "label": "Bank of England",
+          "small": ""
+        },
+        {
+          "id": "pra",
+          "position": "--x:38%;--y:20%;--mx:76%;--fy:10.0%",
+          "label": "PRA",
+          "small": ""
+        },
+        {
+          "id": "fca",
+          "position": "--x:87%;--y:22%;--mx:74%;--fy:61.0%",
+          "label": "FCA",
+          "small": ""
+        },
+        {
+          "id": "payments",
+          "position": "--x:53%;--y:65%;--mx:6%;--fy:82.5%",
+          "label": "Payments",
+          "small": ""
+        }
+      ]
+    },
+    "banking-forces": {
+      "description": "banking Forces: metaphorical currents and pressure fields; no severity, forecast or geography is implied",
+      "spots": [
+        {
+          "id": "UK-RATE-NOV26",
+          "position": "--x:25%;--y:28%;--mx:50%;--fy:14.0%",
+          "label": "Rates & margins",
+          "small": "4% Bank Rate \u00b7 Nov 2026"
+        },
+        {
+          "id": "UK-PRA-REPORT27",
+          "position": "--x:75%;--y:28%;--mx:50%;--fy:64.0%",
+          "label": "Resilience reporting",
+          "small": "March 2027 \u00b7 entity scope to check"
+        },
+        {
+          "id": "LBG-ENVOY-CONTROLS",
+          "position": "--x:25%;--y:71%;--mx:50%;--fy:35.5%",
+          "label": "AI & control",
+          "small": "Envoy \u00b7 existing controls"
+        },
+        {
+          "id": "UK-VALUE",
+          "position": "--x:75%;--y:71%;--mx:50%;--fy:85.5%",
+          "label": "Competition & trust",
+          "small": "Customer-value mechanism"
+        }
+      ]
+    },
+    "lloyds-inside": {
+      "description": "Conceptual Inside Lloyds business and operating world, not actual premises, hierarchy or floorplan",
+      "spots": [
+        {
+          "id": "businesses",
+          "position": "--x:25%;--y:27%;--mx:50%;--fy:13.5%",
+          "label": "Businesses & brands",
+          "small": "Halifax branches: 2027 plan"
+        },
+        {
+          "id": "economics",
+          "position": "--x:74%;--y:26%;--mx:48%;--fy:63.0%",
+          "label": "Financial performance",
+          "small": "2030 cost:income target <45%"
+        },
+        {
+          "id": "operations",
+          "position": "--x:24%;--y:68%;--mx:48%;--fy:34.0%",
+          "label": "Service operations",
+          "small": ""
+        },
+        {
+          "id": "technology",
+          "position": "--x:76%;--y:69%;--mx:52%;--fy:84.5%",
+          "label": "Technology & data",
+          "small": "Envoy \u00b7 controls described"
+        },
+        {
+          "id": "governance",
+          "position": "--x:50%;--y:48%;--mx:0%;--fy:74.0%",
+          "label": "Governance & change",
+          "small": ""
+        }
+      ]
+    },
+    "lloyds-landscape": {
+      "description": "Illustrated Lloyds commercial world",
+      "spots": [
+        {
+          "id": "customers",
+          "position": "--x:21%;--y:76%;--mx:42%;--fy:38.0%",
+          "label": "Customer groups",
+          "small": ""
+        },
+        {
+          "id": "businesses",
+          "position": "--x:22%;--y:28%;--mx:44%;--fy:14.0%",
+          "label": "Peers & market context",
+          "small": ""
+        },
+        {
+          "id": "economics",
+          "position": "--x:50%;--y:52%;--mx:0%;--fy:76.0%",
+          "label": "Payments & oversight",
+          "small": ""
+        },
+        {
+          "id": "operations",
+          "position": "--x:80%;--y:26%;--mx:60%;--fy:63.0%",
+          "label": "Business customers",
+          "small": ""
+        },
+        {
+          "id": "technology",
+          "position": "--x:83%;--y:78%;--mx:66%;--fy:89.0%",
+          "label": "Suppliers & partners",
+          "small": "Google Cloud \u2192 Envoy"
+        }
+      ]
+    },
+    "lloyds-forces": {
+      "description": "lloyds Forces: metaphorical currents and pressure fields; no severity, forecast or geography is implied",
+      "spots": [
+        {
+          "id": "LBG-A2030-PLATFORMS",
+          "position": "--x:25%;--y:28%;--mx:50%;--fy:14.0%",
+          "label": "Core modernisation",
+          "small": "2027\u20132030 strategy"
+        },
+        {
+          "id": "LBG-A2030-CIR",
+          "position": "--x:75%;--y:28%;--mx:50%;--fy:64.0%",
+          "label": "Cost discipline",
+          "small": "2030 target below 45%"
+        },
+        {
+          "id": "LBG-ENVOY-CONTROLS",
+          "position": "--x:25%;--y:71%;--mx:50%;--fy:35.5%",
+          "label": "AI benefit & control",
+          "small": "Envoy \u00b7 existing controls"
+        },
+        {
+          "id": "LBG-BRAND26-TIMING",
+          "position": "--x:75%;--y:71%;--mx:50%;--fy:85.5%",
+          "label": "Brand & service change",
+          "small": "Branches \u00b7 2027 plan"
+        }
+      ]
+    }
+  }
+}

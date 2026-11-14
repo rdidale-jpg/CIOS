@@ -1,0 +1,31 @@
+- main:
+  - heading "Lloyds Banking Group" [level=1]
+  - paragraph:
+    - strong: £502.8bn
+    - text: Group deposits · 30 September 2026
+    - strong: £6.6bn
+    - text: Group statutory pretax profit · nine months to 30 September 2026
+  - navigation "Insight streams":
+    - link "Inside":
+      - /url: /enterprises/lloyds?stream=inside
+    - link "Landscape":
+      - /url: /enterprises/lloyds?stream=landscape
+    - link "Forces":
+      - /url: /enterprises/lloyds?stream=forces
+  - figure "Conceptual Inside Lloyds business and operating world, not actual premises, hierarchy or floorplan. Conceptual illustration; labelled controls and text view provide equivalent navigation.":
+    - text: Conceptual Inside Lloyds business and operating world, not actual premises, hierarchy or floorplan. Conceptual illustration; labelled controls and text view provide equivalent navigation.
+    - 'link "Businesses & brands Halifax branches: 2027 plan"':
+      - /url: /enterprises/lloyds?stream=inside&detail=businesses#insight
+    - link "Financial performance 2030 cost:income target <45%":
+      - /url: /enterprises/lloyds?stream=inside&detail=economics#insight
+    - link "Service operations":
+      - /url: /enterprises/lloyds?stream=inside&detail=operations#insight
+    - link "Technology & data Envoy · controls described":
+      - /url: /enterprises/lloyds?stream=inside&detail=technology#insight
+    - link "Governance & change":
+      - /url: /enterprises/lloyds?stream=inside&detail=governance#insight
+  - group: Text view
+  - group: Context layers
+  - group: Sources & detail
+  - link "← Back to Banking":
+    - /url: /industries/banking?stream=landscape&selected=lloyds

@@ -1,0 +1,16 @@
+{
+  "verified_on": "2026-11-14",
+  "repository": "rdidale-jpg/CIOS",
+  "origin_main_sha": "0cb07c2e78ccb16240c799b31cd62736e2135529",
+  "main_workflow_run": "https://github.com/rdidale-jpg/CIOS/actions/runs/43522807793",
+  "main_workflow_event": "push",
+  "main_workflow_branch": "main",
+  "main_workflow_conclusion": "success",
+  "main_security_regression_job": "https://github.com/rdidale-jpg/CIOS/actions/runs/43522807793/job/132221045595",
+  "strict_security_and_versioned_regression_step": "success",
+  "all_other_main_compatibility_steps": "success",
+  "implementation_branch": "codex/flora-vex1-612",
+  "branch_created_from": "origin/main",
+  "design_reference_only": "c6bf2280594922db6951c5c36205984c85ca4aea",
+  "design_branch_merged_or_used_as_implementation_parent": false
+}

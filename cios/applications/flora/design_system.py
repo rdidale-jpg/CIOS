@@ -84,7 +84,7 @@ def section_scale(sic):
     return '<p class="ds-economy-context"><strong>' + f"{row['weight_per_thousand']/10:.1f}%" + '</strong> ' + e(row['label']) + ' · share of UK GVA, ' + str(data['year']) + '</p>'
 
 
-def header(active='home', account_html='', headers=None):
+def header(active='home', account_html='', headers=None, compact=False):
     if not account_html:
         from .access import blueprint_upload_authorisation
         from .web.app import _account_context_html
@@ -103,6 +103,14 @@ def header(active='home', account_html='', headers=None):
         menu += '<section class="view-links"><h2>In this view</h2>' + context + '</section>'
     menu += ('<details class="specialist-menu"><summary>Research & specialist tools</summary><div>'
         '<a href="/research">Research</a><a href="/blueprint-import/history">Import History</a><a href="/intelligence">Advanced intelligence</a><a href="/digital-twins">Canvas & Twins</a><a href="/financial-intelligence">Financial Intelligence</a><a href="/governance">Governance</a><a href="/settings">Settings</a></div></details>' + account_html)
+    if compact:
+        # The image journey has its own contextual stream switcher. Keep all
+        # implemented global destinations and verified account controls in one
+        # existing menu; sources belong to the selected content, not this menu.
+        return ('<header class="product-header vex-global"><a class="wordmark" href="/">FLORA</a>'
+            '<nav aria-label="Primary product navigation"><details class="product-menu" name="flora-header">'
+            '<summary>Explore</summary><div class="menu-sheet"><a data-product-link="true" href="/">Home</a>'
+            '<a data-product-link="true" href="/pestle?market=GB">PESTLE</a>' + menu + '</div></details></nav></header>')
     sources = ''.join(state['sources']) or '<p>Source periods, interpretation and material limitations remain with the existing view and its source owner.</p><a href="/research">Source research</a>'
     return ('<header class="product-header"><span class="wordmark">FLORA</span><nav aria-label="Primary product navigation">'
         '<a data-product-link="true" href="/"' + (' aria-current="page"' if active == 'home' else '') + '>Home</a>'

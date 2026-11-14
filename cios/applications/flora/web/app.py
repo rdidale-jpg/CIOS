@@ -188,6 +188,39 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path in {"/design-system/assets/styles", "/design-system/assets/interactions"}:
                 body, mime = ds.asset(parsed.path.rsplit('/', 1)[-1])
                 self._body(body, mime, 200)
+            elif parsed.path.startswith("/visual-streams/assets/"):
+                from cios.applications.flora import visual_streams
+                name = parsed.path.removeprefix(visual_streams.ASSET_BASE)
+                body, mime = visual_streams.asset(name)
+                if mime == 'image/webp':
+                    # Exact content-addressed public artwork only. Never cache
+                    # rendered research/account HTML or private domain output.
+                    import hashlib
+                    etag = '"' + hashlib.sha256(body).hexdigest() + '"'
+                    unchanged = self.headers.get('If-None-Match') == etag
+                    self.send_response(304 if unchanged else 200)
+                    self.send_header('Content-Type', mime)
+                    self.send_header('Cache-Control', 'public, max-age=31536000, immutable')
+                    self.send_header('ETag', etag)
+                    self.send_header('X-Content-Type-Options', 'nosniff')
+                    if not unchanged: self.send_header('Content-Length', str(len(body)))
+                    self.end_headers()
+                    if not unchanged: self.wfile.write(body)
+                else:
+                    self._body(body, mime, 200)
+            elif parsed.path in {'/industries/banking', '/enterprises/lloyds'}:
+                from cios.applications.flora import visual_streams
+                query = parse_qs(parsed.query, keep_blank_values=True)
+                if 'lens' in query:
+                    # Explicit specialist deep links retain their current owner.
+                    if set(query) != {'lens'} or len(query['lens']) != 1:
+                        raise ValueError('Ambiguous insight selectors')
+                    from cios.applications.flora.research_intelligence import unified_views
+                    lens = query['lens'][0]
+                    self._html(unified_views.industry_page(lens, self.headers) if parsed.path.startswith('/industries/')
+                               else unified_views.enterprise_page('lloyds', lens, self.headers))
+                else:
+                    self._html(visual_streams.render(parsed.path, query, self.headers))
             elif parsed.path == "/pestle":
                 from cios.applications.flora import visual_v2
                 self._html(visual_v2.render(visual_v2.BASE + '/pestle', parse_qs(parsed.query, keep_blank_values=True), self.headers))
@@ -200,7 +233,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                     self._html(visual_v2.render(parsed.path, parse_qs(parsed.query, keep_blank_values=True), self.headers))
             elif parsed.path in {"/", "/flora", "/flora/"}:
                 from cios.applications.flora import visual_v2
-                self._html(_flora_visual_home_page(self.headers))
+                self._html(_flora_visual_home_page(self.headers, parse_qs(parsed.query, keep_blank_values=True)))
             elif parsed.path in ("/enterprises/lloyds/understanding", "/enterprises/easyjet/understanding"):
                 from cios.applications.flora.research_intelligence.understanding_views import understanding_page
                 self._html(understanding_page(parsed.path.split("/")[2], self.headers))
@@ -1140,10 +1173,10 @@ def _industry_import_counts(headers, discovery=None):
     return candidates, partial
 
 
-def _flora_visual_home_page(headers=None) -> str:
-    """Declared canonical read-only UK landscape handler."""
-    from cios.applications.flora import visual_v2
-    return visual_v2.render(visual_v2.BASE, {}, headers)
+def _flora_visual_home_page(headers=None, query=None) -> str:
+    """Declared canonical read-only UK landscape/forces presentation handler."""
+    from cios.applications.flora import visual_streams
+    return visual_streams.render('/', query or {}, headers)
 
 
 def _flora_home_page(headers=None, question_error: str = "") -> str:
@@ -1637,6 +1670,12 @@ app = FloraWebHandler
 
 def _content_type_for_path(path: str) -> str | None:
     from cios.applications.flora.research_intelligence import technology_experience
+    from cios.applications.flora import visual_streams
+    if path.startswith(visual_streams.ASSET_BASE):
+        name = path.removeprefix(visual_streams.ASSET_BASE)
+        if name in visual_streams.asset_files(): return visual_streams.asset_files()[name][1]
+        return None
+    if path in visual_streams.ROUTES: return 'text/html; charset=utf-8'
     if path in technology_experience.PATHS:
         return 'text/html; charset=utf-8'
     for name, content_type in technology_experience.ASSET_TYPES.items():
