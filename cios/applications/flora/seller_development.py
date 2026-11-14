@@ -218,6 +218,14 @@ def reassess(identifier,expected_version,confirmed=False,*,headers=None):
     return _append(env,versions,record,headers,'development_reassessed')
 
 
+def handoff_checks(record,qualification_result):
+    """Actual preconditions shared with read-only inspection; never a write grant."""
+    selected=record.get('state')=='Qualify'
+    return {'ready':selected and qualification_result['ready'], 'explicit_qualify_selected':selected,
+        'qualification_inputs_ready':qualification_result['ready'], 'already_recorded':bool(record.get('pipeline_id')),
+        'separate_confirmation_required':True, 'version_and_authority_checked_at_write':True, 'write_authorised_by_inspection':False}
+
+
 @verified_service_write('commercial_context.edit')
 def handoff(identifier,expected_version,confirmed=False,*,headers=None):
     if confirmed is not True:raise ValueError('Explicit human-reviewed Pipeline hand-off required')
@@ -228,7 +236,7 @@ def handoff(identifier,expected_version,confirmed=False,*,headers=None):
         return pipeline.get_opportunity(record['pipeline_id'],headers=headers)
     if type(expected_version) is not int or record['version']!=expected_version:raise ValueError('Development changed; reload')
     view=_view(record,headers,env,actor,employer)
-    if record['state']!='Qualify' or not view['qualification_review']['ready']:raise ValueError('Qualification incomplete: '+'; '.join(view['qualification_review']['reasons']))
+    if not handoff_checks(record,view['qualification_review'])['ready']:raise ValueError('Qualification incomplete: '+'; '.join(view['qualification_review']['reasons']))
     # The outer verified service transaction journals BOTH stores. Failure in
     # create/update/private link or audit rolls back the complete hand-off.
     opp=pipeline.create_opportunity(record['enterprise_slug'],values={'title':record['offer_name']+' — '+record['enterprise'],

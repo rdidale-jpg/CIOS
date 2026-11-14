@@ -167,7 +167,7 @@ def worker(config_file):
                         challenges[challenge]={'tier':changed['challenged']['buying_trigger']['tier'],'ready':changed['challenged_readiness']['ready'],'changed_dependencies':changed['changed_dependencies']}
                     samples.append({'pilot':name,'enterprise':rec['enterprise'],'offer':rec['offer_name'],'tier':actual['original']['buying_trigger']['tier'],
                         'trace':actual['original']['buying_trigger']['evaluation_trace'],'policy':actual['policy'],'criteria':actual['qualification'],
-                        'gate_readiness':actual['original_readiness'],'reproduced':actual['reproduced'],'handoff':actual['handoff'],'challenges':challenges})
+                        'gate_readiness':actual['original_readiness'],'handoff_checks':actual['original_handoff_checks'],'reproduced':actual['reproduced'],'handoff':actual['handoff'],'challenges':challenges})
                 Path(config['samples']).with_name('Assurance-Pilots.json').write_text(json.dumps({'fixture_only':True,'samples':samples},indent=2)+'\n')
         from cios.applications.flora import sales_pipeline
         pipeline=sales_pipeline.create_opportunity('lloyds',values={'title':'Example independent pre-existing opportunity','problem':'Unvalidated fixture context'},headers=seller)

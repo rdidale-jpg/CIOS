@@ -77,7 +77,7 @@ def overview(cutoff='',*,headers=None):
         'assessments':rows,'development':developments,
         'pipeline':[{'id':r['id'],'enterprise':r['enterprise'],'enterprise_slug':r['enterprise_slug'],'stage':r['stage'],'version':r['version']} for r in pipes],
         'policy':{'matching':offers.TRIGGER_POLICY,'matching_revision':_revision(offers.assess_fit),
-        'development_revision':_revision(dev.qualification_checks),'pipeline_revision':_revision(pipeline.qualification),
+        'development_revision':_revision(dev.qualification_checks),'handoff_revision':_revision(dev.handoff_checks),'pipeline_revision':_revision(pipeline.qualification),
         'source_revision':research.DATA_SHA256},'accuracy':'Unknown; input completeness is not independent buyer verification or opportunity accuracy'}
 
 
@@ -146,7 +146,7 @@ def inspect_pair(offer_id,enterprise_slug,cutoff='',candidate='',challenge='Orig
     linked=pipeline.get_opportunity(link,headers=headers) if link else None
     return {'original':original,'challenged':changed,'reproduced':True,'challenge':challenge,'challenge_note':note,
         'hypothetical_fact_ids':synthetic_ids,'policy':{'id':offers.TRIGGER_POLICY,'matching_revision':_revision(offers.assess_fit),
-        'development_revision':_revision(dev.qualification_checks),'pipeline_revision':_revision(pipeline.qualification),
+        'development_revision':_revision(dev.qualification_checks),'handoff_revision':_revision(dev.handoff_checks),'pipeline_revision':_revision(pipeline.qualification),
         'source_revision':research.DATA_SHA256,'cutoff':cutoff,'input_snapshot_digest':digest(canonical([seller,offer,target])),
         'original_review_days':target['trigger_research']['policy']['catalyst_review_days'],'challenged_review_days':modified['trigger_research']['policy']['catalyst_review_days']},
         'offer':{'id':offer['id'],'version':offer['version'],'state':offer['state'],'name':offer['content']['name'],'evidence':offer['content']['evidence'],'constraints':offer['content']['constraints'],'outcome':offer['content']['outcome'],'target_sectors':offer['content']['icp'],
@@ -155,6 +155,8 @@ def inspect_pair(offer_id,enterprise_slug,cutoff='',candidate='',challenge='Orig
             'template':offer.get('template_source'),'interpretation':'Employer-approved seller proposition; delivery proof and residual customer need still require review'},
         'development':record,'qualification':_criterion_view(record or {},original_q),
         'original_readiness':original_q,'challenged_readiness':changed_q,
+        'original_handoff_checks':dev.handoff_checks(record,original_q) if record else None,
+        'challenged_handoff_checks':dev.handoff_checks(changed_record,changed_q) if changed_record else None,
         'changed_dependencies':dependency_changes,'would_require_reassessment':impacted,
         'pipeline':{'id':linked['id'],'stage':linked['stage'],'version':linked['version'],'evidence_maturity':pipeline.evidence_maturity(linked)} if linked else None,
         'handoff':'Recorded explicit hand-off; current readiness does not independently verify customer need' if linked else 'No recorded hand-off; no write performed',

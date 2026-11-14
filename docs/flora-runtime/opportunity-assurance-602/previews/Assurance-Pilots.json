@@ -71,10 +71,11 @@
         "id": "offers-trigger-intelligence-v1",
         "matching_revision": "ef98249e07eb6661ea0bac5707f0f5aa0ce8fbe55fb8b9a712d408b5ceb758e1",
         "development_revision": "adea735bb75c267301c61a870b1b7789348b1e91b751171da667a74880ca8824",
+        "handoff_revision": "4eb0042689b46fe51a40ea90a71d6cfd7cb22820be1e658dcdea26cd36bcf198",
         "pipeline_revision": "29a7ea31ea6c6c6238b80b401d636746f51a0537efdaa243f7ccc1bb554f5973",
         "source_revision": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
         "cutoff": "2026-11-13",
-        "input_snapshot_digest": "afa39bf1f042689be6a31fa9407ced385d77093139d759195f5b5373449e33ef",
+        "input_snapshot_digest": "6a6753153214e5a244fbddf6d45048b49dc32d0d3b661396b6c9e56411019a11",
         "original_review_days": 90,
         "challenged_review_days": 90
       },
@@ -466,6 +467,15 @@
           }
         ]
       },
+      "handoff_checks": {
+        "ready": true,
+        "explicit_qualify_selected": true,
+        "qualification_inputs_ready": true,
+        "already_recorded": true,
+        "separate_confirmation_required": true,
+        "version_and_authority_checked_at_write": true,
+        "write_authorised_by_inspection": false
+      },
       "reproduced": true,
       "handoff": "Recorded explicit hand-off; current readiness does not independently verify customer need",
       "challenges": {
@@ -618,10 +628,11 @@
         "id": "offers-trigger-intelligence-v1",
         "matching_revision": "ef98249e07eb6661ea0bac5707f0f5aa0ce8fbe55fb8b9a712d408b5ceb758e1",
         "development_revision": "adea735bb75c267301c61a870b1b7789348b1e91b751171da667a74880ca8824",
+        "handoff_revision": "4eb0042689b46fe51a40ea90a71d6cfd7cb22820be1e658dcdea26cd36bcf198",
         "pipeline_revision": "29a7ea31ea6c6c6238b80b401d636746f51a0537efdaa243f7ccc1bb554f5973",
         "source_revision": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
         "cutoff": "2026-11-13",
-        "input_snapshot_digest": "c71dee1bbd826ed94dfee8cf308be0f90cebae554c310748b0209636e6e6b67b",
+        "input_snapshot_digest": "0cb135cf34cc0b1f79317e4466dc627c0ee1adb3bc98363dbf5a836c100b99c9",
         "original_review_days": 90,
         "challenged_review_days": 90
       },
@@ -1026,6 +1037,15 @@
             "reason": "Current separate employer approval required"
           }
         ]
+      },
+      "handoff_checks": {
+        "ready": false,
+        "explicit_qualify_selected": false,
+        "qualification_inputs_ready": false,
+        "already_recorded": false,
+        "separate_confirmation_required": true,
+        "version_and_authority_checked_at_write": true,
+        "write_authorised_by_inspection": false
       },
       "reproduced": true,
       "handoff": "No recorded hand-off; no write performed",
@@ -1168,10 +1188,11 @@
         "id": "offers-trigger-intelligence-v1",
         "matching_revision": "ef98249e07eb6661ea0bac5707f0f5aa0ce8fbe55fb8b9a712d408b5ceb758e1",
         "development_revision": "adea735bb75c267301c61a870b1b7789348b1e91b751171da667a74880ca8824",
+        "handoff_revision": "4eb0042689b46fe51a40ea90a71d6cfd7cb22820be1e658dcdea26cd36bcf198",
         "pipeline_revision": "29a7ea31ea6c6c6238b80b401d636746f51a0537efdaa243f7ccc1bb554f5973",
         "source_revision": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
         "cutoff": "2026-11-13",
-        "input_snapshot_digest": "7e7ff9a2bc0972d295a4ccda1cb0e8733931b8bbdf3722ec9313dc9616410a70",
+        "input_snapshot_digest": "d6e5bf4f0c06ec3739beb7b13fca2c9828f98b80a202f46e708c4fd3f8063fbc",
         "original_review_days": 90,
         "challenged_review_days": 90
       },
@@ -1577,6 +1598,15 @@
           }
         ]
       },
+      "handoff_checks": {
+        "ready": false,
+        "explicit_qualify_selected": false,
+        "qualification_inputs_ready": false,
+        "already_recorded": false,
+        "separate_confirmation_required": true,
+        "version_and_authority_checked_at_write": true,
+        "write_authorised_by_inspection": false
+      },
       "reproduced": true,
       "handoff": "No recorded hand-off; no write performed",
       "challenges": {
@@ -1696,10 +1726,11 @@
         "id": "offers-trigger-intelligence-v1",
         "matching_revision": "ef98249e07eb6661ea0bac5707f0f5aa0ce8fbe55fb8b9a712d408b5ceb758e1",
         "development_revision": "adea735bb75c267301c61a870b1b7789348b1e91b751171da667a74880ca8824",
+        "handoff_revision": "4eb0042689b46fe51a40ea90a71d6cfd7cb22820be1e658dcdea26cd36bcf198",
         "pipeline_revision": "29a7ea31ea6c6c6238b80b401d636746f51a0537efdaa243f7ccc1bb554f5973",
         "source_revision": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
         "cutoff": "2026-11-13",
-        "input_snapshot_digest": "f2feb258fb6ab77c5e729e9e848f8631cbcc076ed56dd5dd4cd415eb1d66f51d",
+        "input_snapshot_digest": "296be5833ec21a5e4a2f81d2b10cba5ba40a457ce6946ff3850b0d9d5e87247c",
         "original_review_days": 90,
         "challenged_review_days": 90
       },
@@ -2106,6 +2137,15 @@
           }
         ]
       },
+      "handoff_checks": {
+        "ready": false,
+        "explicit_qualify_selected": false,
+        "qualification_inputs_ready": false,
+        "already_recorded": false,
+        "separate_confirmation_required": true,
+        "version_and_authority_checked_at_write": true,
+        "write_authorised_by_inspection": false
+      },
       "reproduced": true,
       "handoff": "No recorded hand-off; no write performed",
       "challenges": {
@@ -2215,10 +2255,11 @@
         "id": "offers-trigger-intelligence-v1",
         "matching_revision": "ef98249e07eb6661ea0bac5707f0f5aa0ce8fbe55fb8b9a712d408b5ceb758e1",
         "development_revision": "adea735bb75c267301c61a870b1b7789348b1e91b751171da667a74880ca8824",
+        "handoff_revision": "4eb0042689b46fe51a40ea90a71d6cfd7cb22820be1e658dcdea26cd36bcf198",
         "pipeline_revision": "29a7ea31ea6c6c6238b80b401d636746f51a0537efdaa243f7ccc1bb554f5973",
         "source_revision": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
         "cutoff": "2026-11-13",
-        "input_snapshot_digest": "8be68e19c536cae034c0a12fbb9cd155d2d3037c7325107c37f0cb938b1acf4d",
+        "input_snapshot_digest": "5e5839890ad6532b11eb712f2542a03262a9176499135afaaa406f93264fffc1",
         "original_review_days": 90,
         "challenged_review_days": 90
       },
@@ -2624,6 +2665,15 @@
             "reason": "Current separate employer approval required"
           }
         ]
+      },
+      "handoff_checks": {
+        "ready": false,
+        "explicit_qualify_selected": false,
+        "qualification_inputs_ready": false,
+        "already_recorded": false,
+        "separate_confirmation_required": true,
+        "version_and_authority_checked_at_write": true,
+        "write_authorised_by_inspection": false
       },
       "reproduced": true,
       "handoff": "No recorded hand-off; no write performed",

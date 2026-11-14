@@ -102,3 +102,9 @@ Draft PR only. No merge, Render deployment/restart/configuration, production-dat
 | 320px / zoom | [320px dashboard](previews/mobile-320-overview-after.jpg) | [320px Digital](previews/mobile-320-digital-after.jpg), [200% zoom](previews/zoom-200-digital.jpg) |
 
 [Machine-produced pilot traces/challenges](previews/Assurance-Pilots.json), [browser checks](previews/Browser-Checks.json), [byte-integrity assertions](previews/Read-Only-Integrity.json). Before snapshots show the accepted Sprint C development workspace; the new Command Centre is a separate management view. Source, identity and independent-verification limits remain visible in every applicable drill-down.
+
+## Explicit qualification decision versus complete inputs
+
+A private candidate can contain ten complete, correctly typed inputs and a seller review while still in Investigate. The existing hand-off additionally requires the seller to select Qualify. `seller_development.handoff_checks` now owns that exact existing conjunction for both real hand-off and owner inspection. The explorer shows the explicit-state precondition separately from input completeness, historical hand-off and the still-required separate confirmation. A read-only view never authorises a write. Regression coverage includes complete Investigate inputs that remain blocked.
+
+The final focused assurance selection contains 35 cases, including the complete-Investigate-but-not-Qualify negative. Supplemental workflow coverage is 353 tests plus 39 CI failure-policy tests. The original full regression/security selection remains 1,432 identities.

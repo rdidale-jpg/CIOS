@@ -185,3 +185,14 @@ def test_queue_filters_and_pagination_never_change_scope_or_evaluations(pilot):
     with pytest.raises(ValueError):render(qa.BASE,{'page':['-1']},pilot['owner'])
     with pytest.raises(ValueError):render(qa.BASE,{'tier':['Qualified']},pilot['owner'])
     assert fingerprint()==before
+
+
+def test_complete_reviewed_inputs_without_explicit_qualify_decision_still_block_handoff(pilot):
+    r,args=pair(pilot)
+    dev.save(r['id'],r['version'],validated_values('Investigate'),headers=pilot['owner'])
+    d=qa.inspect_pair(**args)
+    assert d['original_readiness']['ready'] and d['qualification']['percent']==100
+    assert not d['original_handoff_checks']['ready'] and not d['original_handoff_checks']['explicit_qualify_selected']
+    assert not d['original_handoff_checks']['write_authorised_by_inspection']
+    with pytest.raises(ValueError):dev.handoff(r['id'],2,True,headers=pilot['owner'])
+    assert not pipeline._path().exists()
