@@ -1,0 +1,9 @@
+{
+  "html_pages": 19,
+  "local_links_checked": 501,
+  "broken_links": 0,
+  "scripts": 0,
+  "production_changes": false,
+  "browser_report": "previews/Browser-Checks.json",
+  "scope": "Design artifacts and standalone review tool only; no app/workflow/research edits"
+}
