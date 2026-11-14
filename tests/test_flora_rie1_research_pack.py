@@ -34,4 +34,7 @@ def test_existing_import_contract_rehearsal(tmp_path):
  from pathlib import Path
  script=Path(__file__).resolve().parents[1]/'docs/flora-runtime/rie1-617/research-tools/import_dry_run.py'
  # Rehearsal publishes only its sanitized deterministic summary; fixture state is temporary.
+ artifact=script.parents[1]/'Import-Dry-Run.json'
+ before=artifact.read_bytes()
  runpy.run_path(str(script),run_name='__main__')
+ assert artifact.read_bytes()==before, 'Repeated rehearsal changed committed evidence'
