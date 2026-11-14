@@ -1,0 +1,13 @@
+{
+  "html_pages": 21,
+  "local_links_checked": 540,
+  "broken_links": 0,
+  "scripts_in_new_designs": 0,
+  "preserved_baseline_app_routes": 18,
+  "production_changes": false,
+  "browser_reports": [
+    "previews/Browser-Checks.json",
+    "simplicity/previews/Browser-Review.json"
+  ],
+  "scope": "Design artifacts and standalone review tooling only; no app/workflow/research edits"
+}
