@@ -32,7 +32,8 @@ def test_both_sectors_and_all_supported_enterprises_share_the_canonical_catalogu
     for domain,slug in [('banking','lloyds'),('aviation','easyjet')]:
         assert '/enterprises/'+slug in DOM(web('/industries/'+domain)[1]).links
         # VEX-1 return links retain stream and selected enterprise in the query.
-        assert '/industries/'+domain in [urlsplit(href).path for href in DOM(web('/enterprises/'+slug)[1]).links]
+        targets = [urlsplit(href) for href in DOM(web('/enterprises/'+slug)[1]).links]
+        assert any(not target.scheme and not target.netloc and target.path == '/industries/'+domain for target in targets)
 
 
 @pytest.mark.parametrize('domain,slug,origin',[('banking','lloyds','RCO-LBG-002'),('aviation','easyjet','RCO-EJ-001')])
