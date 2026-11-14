@@ -1,6 +1,6 @@
 # FLORA LJ-1 — Combined Visual Journey
 
-**Current design review: [LJ-3 Parallel Insight Streams](lj3/README.md).** UK/Banking Landscape | Forces; Lloyds Inside | Landscape | Forces. Earlier packs remain historical evidence; no implementation acceptance is implied.
+**Current design review: [LJ-3N Parallel Stream Navigation](lj3/navigation/README.md).** UK/Banking Landscape | Forces; Lloyds Inside | Landscape | Forces. Earlier packs remain historical evidence; no implementation acceptance is implied.
 
 **Current design revision: [LJ-2 — three scopes with Landscape / Forces](lj2/README.md).** Earlier LJ-1/LJ-1R are rejected historical design evidence, not accepted implementation briefs.
 

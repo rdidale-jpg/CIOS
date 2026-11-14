@@ -1,5 +1,7 @@
 # FLORA LJ-3 — Parallel Insight Streams
 
+**Latest review: [LJ-3N navigation correction, updated previews and acceptance checklist](navigation/README.md).** The offline ZIP now contains LJ-3N. Images and original content below document the earlier LJ-3 presentation; retain them as before evidence. Current navigation results supersede the earlier navigation assertions.
+
 Design/critique only, continuing PR #610 under the [owner’s semantic decision](https://github.com/rdidale-jpg/CIOS/pull/610#issuecomment-6880657983), Issue #608 and the uploaded LJ-3 brief. **Owner visual and architectural acceptance is pending.** No runtime implementation is authorised.
 
 ## One journey, parallel views
