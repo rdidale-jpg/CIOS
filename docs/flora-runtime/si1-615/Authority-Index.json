@@ -1,0 +1,81 @@
+{
+  "status": "Read-only source pins; resolved authority and status conflicts described in SI-001, never inferred from filename/header alone",
+  "references": [
+    {
+      "path": "architecture/decisions/ADR-001-Observations-as-Atomic-Intelligence-Unit.md",
+      "sha256": "5b60de84f6465d7fb1c8cdde18e4f130f6fb48fe6958626a24bfe6195c9e4fe9"
+    },
+    {
+      "path": "architecture/decisions/ADR-002-Enterprise-Model-as-Durable-Memory.md",
+      "sha256": "4b1ec0881d57bffce703c0faeb717d075c851fb5fc66cc0c9dc9f0e98e270803"
+    },
+    {
+      "path": "architecture/decisions/ADR-003-CIRM-and-EI-Separation.md",
+      "sha256": "1fc6a98a2c59e89ef76fc54f126aad4821c17da2e0958d9f3c2dd0f2658491d2"
+    },
+    {
+      "path": "architecture/decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md",
+      "sha256": "903e176189094c7fa9f41e16d71198e5f1217599fb0adae0070473403a6612d1"
+    },
+    {
+      "path": "architecture/decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md",
+      "sha256": "489cf1e76a6524ab0c575061545d049ab4d0d3d2c44ea1cbf5f7bea9e1df18fa"
+    },
+    {
+      "path": "architecture/decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md",
+      "sha256": "789083dd769ec6f50747909c96107f4ec432cb0c5f6dfd5eeccdd3184d35fe44"
+    },
+    {
+      "path": "architecture/decisions/ADR-010-Structured-Source-First-AI-Assisted-Evidence-Acquisition.md",
+      "sha256": "24f47fe45c962f4a7a1a19deb7e7a0375b96a12ce2b87550a7486f110da61884"
+    },
+    {
+      "path": "architecture/decisions/ADR-011-Dual-Speed-Financial-Intelligence.md",
+      "sha256": "17898c5388c0ad6f130105cfdf5d5616f529f10a8bfb8e6065d3490e1c244de1"
+    },
+    {
+      "path": "architecture/decisions/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md",
+      "sha256": "e99366be281c6fbb5dc65ed6ecd65111dc58ef3cd9a164b4347a9e841c02fb42"
+    },
+    {
+      "path": "architecture/decisions/ADR-013-Enterprise-Canvas-as-Primary-Living-Twin-Navigation.md",
+      "sha256": "32f8c40154d2d95123dd5e470036e7b18ed86da96171bc5e8e99edad3c629c5b"
+    },
+    {
+      "path": "architecture/decisions/ADR-014-Evidence-Governed-Enterprise-Intelligence-Reasoning-Runtime.md",
+      "sha256": "77b60acd612127cb7321ca204db585ec6fc3753984aa9742ef9de6ea3ebb2162"
+    },
+    {
+      "path": "architecture/decisions/ADR-015-Runtime-Mission-Context.md",
+      "sha256": "beeac96ca186a630335675195595ed81ba330d7fb21a3f37f7e4da5c7f5cf0cf"
+    },
+    {
+      "path": "architecture/decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md",
+      "sha256": "d40d4062d3ea62e8a8031e9e1e20296b0686caa9995435c742be1816dce68f5b"
+    },
+    {
+      "path": "architecture/decisions/ADR-023-Enterprise-Understanding-as-the-Primary-Governed-Asset.md",
+      "sha256": "9969d19ee672ba6ecb05c01071818be456d1fd7be7bb63451ccdb32eb8371196"
+    },
+    {
+      "path": "architecture/decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md",
+      "sha256": "eeb7823d290985cc69c60a528bb6936dc2a5ad2c1c88cfec3a16d67973826a09"
+    },
+    {
+      "path": "architecture/decisions/ADR-025-Flora-as-the-Enterprise-Intelligence-Workspace.md",
+      "sha256": "f45488e5d2de2240d5528c1a29ec226c4668571126095e23892370de2afb61ef"
+    },
+    {
+      "path": "architecture/decisions/ADR-026-Material-Pressure-Qualification-and-Ownership.md",
+      "sha256": "3cc8fd7922eb52f315f4d222acb03315da7919174bc892e3719fa249803ffbd1"
+    },
+    {
+      "path": "architecture/reference-architecture/Architecture-Authority-Registry.md",
+      "sha256": "88de0e0df9a8a78ab0a8263c562ff1c3cd02fb8492afa3cf7c99a32a462ec5d7"
+    },
+    {
+      "path": "architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md",
+      "sha256": "11aa8af089b54da0958c7ff96c123fb536b2d88805546e8645335107f588c5ad"
+    }
+  ]
+}
