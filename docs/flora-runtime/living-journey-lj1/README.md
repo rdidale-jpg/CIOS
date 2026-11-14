@@ -1,5 +1,7 @@
 # FLORA LJ-1 — Combined Visual Journey
 
+**Current design review: [LJ-3 Parallel Insight Streams](lj3/README.md).** UK/Banking Landscape | Forces; Lloyds Inside | Landscape | Forces. Earlier packs remain historical evidence; no implementation acceptance is implied.
+
 **Current design revision: [LJ-2 — three scopes with Landscape / Forces](lj2/README.md).** Earlier LJ-1/LJ-1R are rejected historical design evidence, not accepted implementation briefs.
 
 **Historical rejected LJ-1 pack.** The owner required rich independent artwork and a four-level journey. The [current LJ-1R correction, before/after comparisons and evidence audit](rich/README.md) supersede this original five-state design. Original files remain historical evidence, not an accepted implementation brief.

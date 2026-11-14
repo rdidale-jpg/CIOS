@@ -1,0 +1,302 @@
+{
+  "checks": [
+    {
+      "dev": "desktop",
+      "view": "uk-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "desktop",
+      "view": "uk-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "desktop",
+      "view": "banking-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "desktop",
+      "view": "banking-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "desktop",
+      "view": "lloyds-inside",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "desktop",
+      "view": "lloyds-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "desktop",
+      "view": "lloyds-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-landscape",
+      "view": "uk-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-landscape",
+      "view": "uk-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-landscape",
+      "view": "banking-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-landscape",
+      "view": "banking-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-landscape",
+      "view": "lloyds-inside",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-landscape",
+      "view": "lloyds-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-landscape",
+      "view": "lloyds-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-portrait",
+      "view": "uk-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-portrait",
+      "view": "uk-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-portrait",
+      "view": "banking-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-portrait",
+      "view": "banking-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-portrait",
+      "view": "lloyds-inside",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-portrait",
+      "view": "lloyds-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "ipad-portrait",
+      "view": "lloyds-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile",
+      "view": "uk-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile",
+      "view": "uk-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile",
+      "view": "banking-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile",
+      "view": "banking-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile",
+      "view": "lloyds-inside",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile",
+      "view": "lloyds-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile",
+      "view": "lloyds-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile-320",
+      "view": "uk-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile-320",
+      "view": "uk-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile-320",
+      "view": "banking-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile-320",
+      "view": "banking-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile-320",
+      "view": "lloyds-inside",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile-320",
+      "view": "lloyds-landscape",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "mobile-320",
+      "view": "lloyds-forces",
+      "noJS": true,
+      "noOverflow": true,
+      "legibleLabels": true,
+      "noCollision": true
+    },
+    {
+      "dev": "desktop",
+      "journey": true,
+      "threeStreamsSameEnterprise": true,
+      "backSelection": true,
+      "fiveQuestionForceInspection": true
+    },
+    {
+      "dev": "mobile",
+      "journey": true,
+      "threeStreamsSameEnterprise": true,
+      "backSelection": true,
+      "fiveQuestionForceInspection": true
+    }
+  ],
+  "keyboard": true,
+  "selectedEnterpriseWithJS": true,
+  "zoomViews": 7,
+  "limits": "Chromium emulation, not real Safari/VoiceOver; no live authority/data calls. Art is conceptual, no quantified pressure map."
+}
