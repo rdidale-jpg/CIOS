@@ -1,0 +1,144 @@
+{
+  "source_id": "LBG-Q326",
+  "subject": "Lloyds Banking Group plc",
+  "period": "Nine months ended 30 September",
+  "unit": "GBP million unless stated",
+  "underlying": {
+    "net_interest_income": [
+      11084,
+      10106
+    ],
+    "other_income": [
+      4996,
+      4526
+    ],
+    "operating_lease_depreciation": [
+      -1261,
+      -1075
+    ],
+    "net_income": [
+      14819,
+      13557
+    ],
+    "operating_costs": [
+      -7246,
+      -7176
+    ],
+    "remediation": [
+      -61,
+      -912
+    ],
+    "total_costs": [
+      -7307,
+      -8088
+    ],
+    "profit_before_impairment": [
+      7512,
+      5469
+    ],
+    "impairment": [
+      -930,
+      -618
+    ],
+    "underlying_profit": [
+      6582,
+      4851
+    ],
+    "restructuring": [
+      -51,
+      -16
+    ],
+    "volatility_other": [
+      94,
+      -157
+    ],
+    "statutory_pbt": [
+      6625,
+      4678
+    ],
+    "tax": [
+      -1790,
+      -1356
+    ],
+    "statutory_pat": [
+      4835,
+      3322
+    ]
+  },
+  "statutory": {
+    "net_interest_income": [
+      10827,
+      9808
+    ],
+    "other_income": [
+      5257,
+      4444
+    ],
+    "total_income": [
+      16084,
+      14252
+    ],
+    "operating_expenses": [
+      -8533,
+      -8955
+    ],
+    "impairment": [
+      -926,
+      -619
+    ],
+    "pbt": [
+      6625,
+      4678
+    ],
+    "tax": [
+      -1790,
+      -1356
+    ],
+    "pat": [
+      4835,
+      3322
+    ]
+  },
+  "columns": [
+    "2026",
+    "2025"
+  ],
+  "ratios_reported": {
+    "banking_nim_pct": [
+      3.21,
+      3.04
+    ],
+    "cost_income_pct": [
+      49.3,
+      59.7
+    ],
+    "asset_quality_bps": [
+      25,
+      18
+    ],
+    "rote_pct": [
+      17.9,
+      11.9
+    ]
+  },
+  "stocks_30sep2026": {
+    "customer_deposits_GBP_bn": 502.8,
+    "underlying_loans_GBP_bn": 495.5,
+    "cet1_pct": 13.3,
+    "risk_weighted_assets_GBP_bn": 247.4
+  },
+  "deposit_changes_YTD_GBP_bn": {
+    "group": 6.3,
+    "commercial": 9.6,
+    "retail": -3.7,
+    "central_items": 0.4
+  },
+  "restrictions": [
+    "Underlying net income is not statutory total income. Underlying and statutory impairment differ.",
+    "Nine-month flows must not be compared to stocks or annualised here.",
+    "Ratios use issuer definitions; cross-bank ranking is not supported.",
+    "Group deposit increase is not a funding crisis; retail decline does not prove attrition or its cause.",
+    "Central Items deposits rose from GBP0.2bn in December2025 to GBP0.6bn in September2026, completing the Group bridge."
+  ],
+  "canonical_acceptance": false
+}

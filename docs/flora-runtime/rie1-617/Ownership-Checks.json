@@ -1,0 +1,48 @@
+{
+  "baseline_sha": "fe66516c15726dc45de147ede2674c9172f8cac6",
+  "checked_owners": [
+    {
+      "owner_path": "cios/applications/flora/visual_streams.py",
+      "sha256": "d7f3ccc2c62c2d5ba2853407eb4a89138f4cac329a5cc6968ad0f195b9e4ee3a",
+      "matches_validated_main": true
+    },
+    {
+      "owner_path": "cios/applications/flora/visual_v2_assets/economy.json",
+      "sha256": "78b4bb90c02b9af8132d7f8eca3c1832b6a1047feb382f9473d463d44e1f31cd",
+      "matches_validated_main": true
+    },
+    {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "matches_validated_main": true
+    },
+    {
+      "owner_path": "enterprise-knowledge/macro/research-model/Macro-Context-v1.json",
+      "sha256": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9",
+      "matches_validated_main": true
+    },
+    {
+      "owner_path": "cios/contracts/twin_object_profiles/researcher_v1.json",
+      "sha256": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+      "matches_validated_main": true
+    },
+    {
+      "owner_path": "tools/ci/flora-baseline-v1.json",
+      "sha256": "901a6719b6f90247fc0b4daeaaf217e402abf211606394917f59ea67c5f9e7cf",
+      "matches_validated_main": true
+    },
+    {
+      "owner_path": "tools/ci/flora_ci.py",
+      "sha256": "6538c0b1c02aba99e890c026ef633b3f68e740ffd8c54cdfb8eb54068b8817c4",
+      "matches_validated_main": true
+    },
+    {
+      "owner_path": ".github/workflows/flora-validation.yml",
+      "sha256": "f3a398d7c243d845978f3dca195ac6edfa7b9cb50335ea2dfccd2b16dd877fd1",
+      "matches_validated_main": true
+    }
+  ],
+  "canonical_modifications": 0,
+  "runtime_modifications": 0,
+  "inherited_test_or_baseline_modifications": 0
+}

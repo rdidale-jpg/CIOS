@@ -1,0 +1,319 @@
+{
+  "authority": "Nonbinding RIE1 proposals; all originals/statuses unchanged; no accepted gap closure",
+  "owner_digests": {
+    "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+    "cios/applications/flora/visual_streams.py": "d7f3ccc2c62c2d5ba2853407eb4a89138f4cac329a5cc6968ad0f195b9e4ee3a"
+  },
+  "visual_nine": [
+    {
+      "id": "FIN-01",
+      "original_question": "Current income and operating-cost reconciliation",
+      "original_status": "open visual research question",
+      "source_refs": [
+        "LBG-Q326"
+      ],
+      "proposed_disposition": "partially enriched, remains open",
+      "remaining": "Current segment financials, investment/cash-flow detail and cost-to-serve remain open."
+    },
+    {
+      "id": "FIN-02",
+      "original_question": "Comparable growth and profitability",
+      "original_status": "open visual research question",
+      "source_refs": [
+        "LBG-Q326",
+        "NW-Q326",
+        "BAR-Q326"
+      ],
+      "proposed_disposition": "partially enriched, remains open",
+      "remaining": "No matched peer definitions or complete segment growth/returns; no ranking."
+    },
+    {
+      "id": "ORG-01",
+      "original_question": "Current businesses, brands and legal subsidiaries",
+      "original_status": "open visual research question",
+      "source_refs": [
+        "LBG-RING",
+        "LBG-AR25-WEB"
+      ],
+      "proposed_disposition": "partially enriched, remains open",
+      "remaining": "Registry acquisition failed; full current legal hierarchy and dated subsidiaries unresolved."
+    },
+    {
+      "id": "OPS-01",
+      "original_question": "Operations and important technology systems",
+      "original_status": "open visual research question",
+      "source_refs": [
+        "LBG-ENVOY26",
+        "LBG-MS26",
+        "LBG-AR25-WEB"
+      ],
+      "proposed_disposition": "partially enriched, remains open",
+      "remaining": "Specific critical-service maps, system inventory and customer outcome/control effectiveness unacquired."
+    },
+    {
+      "id": "REL-01",
+      "original_question": "Current suppliers, partners and customers",
+      "original_status": "open visual research question",
+      "source_refs": [
+        "LBG-MS26",
+        "LBG-ENVOY26"
+      ],
+      "proposed_disposition": "partially enriched, remains open",
+      "remaining": "Contract value, terms, workshare, exit/renewal, customers and other suppliers unknown."
+    },
+    {
+      "id": "REG-01",
+      "original_question": "Legal-entity regulatory applicability",
+      "original_status": "open visual research question",
+      "source_refs": [
+        "LBG-RING",
+        "FR-CSRD26"
+      ],
+      "proposed_disposition": "partially enriched, remains open",
+      "remaining": "Exact applicable legal-entity rules, effective dates and readiness not established."
+    },
+    {
+      "id": "ORG-02",
+      "original_question": "Current leadership and accountability",
+      "original_status": "open visual research question",
+      "source_refs": [
+        "LBG-LEADERS"
+      ],
+      "proposed_disposition": "partially enriched, remains open",
+      "remaining": "Current public roles acquired, exact programme accountability and buying authority unknown."
+    },
+    {
+      "id": "INF-01",
+      "original_question": "Infrastructure operating relationships",
+      "original_status": "open visual research question",
+      "source_refs": [
+        "BOE-SETTLE"
+      ],
+      "proposed_disposition": "partially enriched, remains open",
+      "remaining": "BoE operator roles acquired, Lloyds-specific participant/operating edge unproved."
+    },
+    {
+      "id": "COM-01",
+      "original_question": "Remaining influence and external need",
+      "original_status": "open visual research question",
+      "source_refs": [],
+      "proposed_disposition": "open",
+      "remaining": "Need, sourcing, funding, buyer, decision criteria, influence and mutual action remain unknown."
+    }
+  ],
+  "overlay_thirteen": [
+    {
+      "id": "G-PRIMARY",
+      "original_status": "partially_resolved",
+      "original_title": "Current primary verification",
+      "source_refs": [
+        "LBG-Q326",
+        "LBG-AR25-WEB"
+      ],
+      "proposed_disposition": "partially enriched; original owner acceptance pending",
+      "remaining": "Retrieve and quote-locate current Lloyds annual, interim and latest trading updates; capture publication dates, periods and content hashes."
+    },
+    {
+      "id": "G-CUSTOMER-EVIDENCE",
+      "original_status": "open",
+      "original_title": "Customer buying evidence",
+      "source_refs": [],
+      "proposed_disposition": "open; no new resolving evidence",
+      "remaining": "Customer meeting/requirement reference; economic buyer, funding, criteria, process, relationship and mutual next action."
+    },
+    {
+      "id": "G-REGULATORY",
+      "original_status": "partially_resolved",
+      "original_title": "Regulatory applicability",
+      "source_refs": [
+        "LBG-RING"
+      ],
+      "proposed_disposition": "partially enriched; original owner acceptance pending",
+      "remaining": "Retrieve FCA Consumer Duty/resilience publications, PRA/BoE rules and HM Treasury designations."
+    },
+    {
+      "id": "G-ALLOCATION",
+      "original_status": "open",
+      "original_title": "Investment allocation",
+      "source_refs": [],
+      "proposed_disposition": "open; no new resolving evidence",
+      "remaining": "Approved programme funding and sourcing scope, distinguishing gross savings, benefits and supplier spend."
+    },
+    {
+      "id": "G-OUTCOMES",
+      "original_status": "open",
+      "original_title": "Channel/customer outcomes",
+      "source_refs": [],
+      "proposed_disposition": "open; no new resolving evidence",
+      "remaining": "Current local access assessments, complaints, vulnerable-customer outcomes, retention and customer journey measures."
+    },
+    {
+      "id": "G-PRIMACY",
+      "original_status": "open",
+      "original_title": "Deposit and relationship behaviour",
+      "source_refs": [
+        "LBG-Q326"
+      ],
+      "proposed_disposition": "partially enriched; original owner acceptance pending",
+      "remaining": "Salary-flow/direct-debit concentration, retention, deposit segment and pricing behaviour."
+    },
+    {
+      "id": "G-WORKLOADS",
+      "original_status": "open",
+      "original_title": "Programme and workload scope",
+      "source_refs": [],
+      "proposed_disposition": "open; no new resolving evidence",
+      "remaining": "Approved roadmap, application dependencies, critical-service mapping, ownership and procurement evidence."
+    },
+    {
+      "id": "G-AI-BENEFITS",
+      "original_status": "open",
+      "original_title": "Net AI benefits",
+      "source_refs": [
+        "LBG-AI26"
+      ],
+      "proposed_disposition": "partially enriched; original owner acceptance pending",
+      "remaining": "Benefit baselines, adoption measures, control costs and benefit ownership; distinguish targets from realised results."
+    },
+    {
+      "id": "G-SUPPLIER",
+      "original_status": "open",
+      "original_title": "Supplier contracts and roles",
+      "source_refs": [
+        "LBG-MS26",
+        "LBG-ENVOY26"
+      ],
+      "proposed_disposition": "partially enriched; original owner acceptance pending",
+      "remaining": "Current customer or supplier primary disclosure, contract scope and terms where authorised."
+    },
+    {
+      "id": "G-CURVE",
+      "original_status": "partially_resolved",
+      "original_title": "Transaction and integration status",
+      "source_refs": [
+        "LBG-Q326"
+      ],
+      "proposed_disposition": "partially enriched; original owner acceptance pending",
+      "remaining": "Completion announcement and customer-approved integration roadmap."
+    },
+    {
+      "id": "G-FRAUD",
+      "original_status": "open",
+      "original_title": "Lloyds-specific fraud evidence",
+      "source_refs": [],
+      "proposed_disposition": "open; no new resolving evidence",
+      "remaining": "Lloyds-specific losses, reimbursement, false positives, complaints and funded response."
+    },
+    {
+      "id": "G-CLIMATE",
+      "original_status": "open",
+      "original_title": "Climate/transition materiality",
+      "source_refs": [],
+      "proposed_disposition": "open; no new resolving evidence",
+      "remaining": "Latest primary sustainability/transition report, financed-emissions scope and portfolio materiality."
+    },
+    {
+      "id": "G-MARKET",
+      "original_status": "open",
+      "original_title": "Market structure",
+      "source_refs": [
+        "NW-Q326",
+        "BAR-Q326"
+      ],
+      "proposed_disposition": "partially enriched; original owner acceptance pending",
+      "remaining": "FCA/CMA and dated primary enterprise disclosures with consistent market/entity boundaries."
+    }
+  ],
+  "rco_nine": [
+    {
+      "id": "RCO-LBG-001",
+      "original_status": "not specified",
+      "original_research_tier": 1,
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "f32dee9b51356b6f47dbe325478ac919ef51088682c3a4b79127fee239ec68eb",
+      "original_title": "Legacy decommissioning and migration benefit assurance",
+      "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+      "source_refs": []
+    },
+    {
+      "id": "RCO-LBG-002",
+      "original_status": "not specified",
+      "original_research_tier": 1,
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "9bf448f2cafeacccebf1efe79665b2a6b56bcd9009ecbe7cc0d4ca5edc43b10e",
+      "original_title": "AI value realisation and operating controls",
+      "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+      "source_refs": []
+    },
+    {
+      "id": "RCO-LBG-003",
+      "original_status": "not specified",
+      "original_research_tier": 1,
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "93ecccfe6e2815228ffa363a52851bee5965d73ad6ccdd328ee5ce0949266018",
+      "original_title": "Brand/app migration customer-outcome assurance",
+      "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+      "source_refs": []
+    },
+    {
+      "id": "RCO-LBG-004",
+      "original_status": "not specified",
+      "original_research_tier": 2,
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "8f0c346d6b1bfc7b6ba07b2234a405f3128ba52be5dc205c96e5a76a16945873",
+      "original_title": "AI model-platform governance and lineage",
+      "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+      "source_refs": []
+    },
+    {
+      "id": "RCO-LBG-005",
+      "original_status": "not specified",
+      "original_research_tier": 1,
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "6e6b76b45f3eff53d22e94a7016867b55267596697336b03d22fd47bc29596bf",
+      "original_title": "Critical-service third-party dependency and exit assurance",
+      "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+      "source_refs": []
+    },
+    {
+      "id": "RCO-LBG-006",
+      "original_status": "not specified",
+      "original_research_tier": 2,
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "e8833a618a25476e35d5c20dd567512823ac1daa51a23764d87dafab20f22e56",
+      "original_title": "Deposit/customer-value and balance-sheet analytics",
+      "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+      "source_refs": []
+    },
+    {
+      "id": "RCO-LBG-007",
+      "original_status": "not specified",
+      "original_research_tier": 3,
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "b965854f6fea67603f306301f276be857a550cac9c4a694efab63bcbbf5e7ef4",
+      "original_title": "Assisted-access service and vulnerability outcomes",
+      "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+      "source_refs": []
+    },
+    {
+      "id": "RCO-LBG-008",
+      "original_status": "not specified",
+      "original_research_tier": 3,
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "eca5b26ee55b1a582bef2b7f3e868336c6e9c11ae3a3e056d6e7700c68a64850",
+      "original_title": "Colleague AI adoption and productivity controls",
+      "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+      "source_refs": []
+    },
+    {
+      "id": "RCO-LBG-009",
+      "original_status": "not specified",
+      "original_research_tier": 1,
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "4b2cc7e7c9532a3924fed0ada6395e018d3554f63e36b684580c76bb8e4642ab",
+      "original_title": "Wallet and Curve integration outcome assurance",
+      "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+      "source_refs": []
+    }
+  ]
+}
