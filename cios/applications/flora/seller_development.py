@@ -65,28 +65,41 @@ def _view(record,headers,envelope,actor,employer):
 
 
 def qualification(record,assessment,employer,headers,stale=False):
-    reasons=[];q=record.get('qualification',{})
-    for key in pipeline.CRITERIA:
-        item=q.get(key,{})
-        if not pipeline._supported(item.get('note')) or not pipeline._supported(item.get('source')):
-            reasons.append('Missing '+pipeline.CRITERIA[key][0]);continue
-        kind=item.get('kind')
-        required=CUSTOMER if key in {'problem','priority','buyer','funding','decision','timing','relationship','next_action'} else CUSTOMER|{'Seller review'}
-        if kind not in required:reasons.append('Customer/seller confirmation required: '+pipeline.CRITERIA[key][0])
-    if not record.get('customer_attested'):reasons.append('Attest that customer evidence was actually received and is permitted')
-    if not record.get('reviewed'):reasons.append('Explicit seller qualification review required')
-    if not pipeline._supported(record.get('next_action')) or not record.get('development_owner'):reasons.append('Accountable next action required')
-    if not pipeline._supported(record.get('proof')) or not pipeline._supported(record.get('alternatives')):reasons.append('Seller proof/rights and competitive alternatives review required')
-    if record['activity']!='Active':reasons.append('Candidate is paused or retired')
-    if stale:reasons.append('Stale — Reassess changed dependencies')
-    if not assessment or assessment['buying_trigger']['tier']=='Research only':reasons.append('Research only; no current supported development basis')
-    if not assessment or assessment['buying_trigger']['identity_scope']['identity_owner'] not in {'existing_banking_reference','existing_aviation_reference'}:
-        reasons.append('Accepted enterprise reference required; unbound identity cannot enter Pipeline')
+    # Authority remains in the existing service. The same pure checks below
+    # drive both real hand-off readiness and owner-only copied-input replay.
     try:
         env=offers._load();actor=_actor(headers);offer=offers._record(env,actor,employer,record['offer_id'])
-        if offer['state']!='employer_approved' or not offers._eligible(env,offer):reasons.append('Current separate employer approval required')
-    except (ValueError,PermissionError):reasons.append('Current approved Offer unavailable')
-    return {'ready':not reasons,'reasons':reasons,'classification':'Seller-reviewed evidence completeness, not independent customer verification'}
+        approved=offer['state']=='employer_approved' and offers._eligible(env,offer)
+    except (ValueError,PermissionError):approved=False
+    return qualification_checks(record,assessment,approved,stale)
+
+
+def qualification_checks(record,assessment,approved,stale=False):
+    """Single development gate evaluator; pure and incapable of authorising writes."""
+    reasons=[];trace=[];criteria=[];q=record.get('qualification',{})
+    def check(key,passed,reason):
+        trace.append({'id':key,'passed':bool(passed),'reason':reason})
+        if not passed:reasons.append(reason)
+    for key in pipeline.CRITERIA:
+        item=q.get(key,{})
+        note=pipeline._supported(item.get('note'));source=pipeline._supported(item.get('source'))
+        required=CUSTOMER if key in {'problem','priority','buyer','funding','decision','timing','relationship','next_action'} else CUSTOMER|{'Seller review'}
+        typed=item.get('kind') in required
+        criteria.append({'id':key,'note_supported':note,'reference_supported':source,'kind_allowed':typed,
+            'required_kinds':sorted(required),'passed':note and source and typed})
+        if not note or not source:reasons.append('Missing '+pipeline.CRITERIA[key][0]);continue
+        if not typed:reasons.append('Customer/seller confirmation required: '+pipeline.CRITERIA[key][0])
+    check('customer_attestation',record.get('customer_attested'),'Attest that customer evidence was actually received and is permitted')
+    check('seller_review',record.get('reviewed'),'Explicit seller qualification review required')
+    check('next_action',pipeline._supported(record.get('next_action')) and record.get('development_owner'),'Accountable next action required')
+    check('seller_proof',pipeline._supported(record.get('proof')) and pipeline._supported(record.get('alternatives')),'Seller proof/rights and competitive alternatives review required')
+    check('active',record['activity']=='Active','Candidate is paused or retired')
+    check('fresh',not stale,'Stale — Reassess changed dependencies')
+    check('research_basis',assessment and assessment['buying_trigger']['tier']!='Research only','Research only; no current supported development basis')
+    check('pipeline_identity',assessment and assessment['buying_trigger']['identity_scope']['identity_owner'] in {'existing_banking_reference','existing_aviation_reference'},'Accepted enterprise reference required; unbound identity cannot enter Pipeline')
+    check('employer_approval',approved,'Current separate employer approval required')
+    return {'ready':not reasons,'reasons':reasons,'classification':'Seller-reviewed evidence completeness, not independent customer verification',
+        'criterion_trace':criteria,'gate_trace':trace}
 
 
 @verified_service_read('commercial_context.view')
