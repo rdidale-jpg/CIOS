@@ -1,0 +1,2722 @@
+{
+  "fixture_only": true,
+  "samples": [
+    {
+      "pilot": "digital",
+      "enterprise": "Santander UK",
+      "offer": "Enterprise Digital Transformation",
+      "tier": "Prioritise",
+      "trace": {
+        "policy": "offers-trigger-intelligence-v1",
+        "review_window_days": 90,
+        "mission_not_excluded": true,
+        "sector_fit": true,
+        "employer_approved": true,
+        "identity_allows_priority": true,
+        "positive_fact_ids": [
+          "BTI-TSB-MIGRATION",
+          "BTI-TSB-APPLICATION"
+        ],
+        "programme_ids": [
+          "BTI-TSB-MIGRATION"
+        ],
+        "catalyst_ids": [
+          "BTI-TSB-APPLICATION"
+        ],
+        "linked_programme_ids": [
+          "BTI-TSB-MIGRATION"
+        ],
+        "closed_programmes": [],
+        "fact_checks": [
+          {
+            "fact_id": "BTI-TSB-APPLICATION",
+            "checks": {
+              "positive_kind": true,
+              "programme_not_closed": true,
+              "dated_or_structural": true,
+              "review_current": true
+            },
+            "admitted": true
+          },
+          {
+            "fact_id": "BTI-TSB-MIGRATION",
+            "checks": {
+              "positive_kind": true,
+              "programme_not_closed": true,
+              "dated_or_structural": true,
+              "review_current": true
+            },
+            "admitted": true
+          },
+          {
+            "fact_id": "BTI-TSB-LEGAL",
+            "checks": {
+              "positive_kind": false,
+              "programme_not_closed": true,
+              "dated_or_structural": true,
+              "review_current": true
+            },
+            "admitted": false
+          }
+        ],
+        "available_relevant_fact_ids": [
+          "BTI-TSB-APPLICATION",
+          "BTI-TSB-MIGRATION",
+          "BTI-TSB-LEGAL"
+        ],
+        "not_available_or_not_relevant": [],
+        "tailored_entry_play": true
+      },
+      "policy": {
+        "id": "offers-trigger-intelligence-v1",
+        "matching_revision": "ef98249e07eb6661ea0bac5707f0f5aa0ce8fbe55fb8b9a712d408b5ceb758e1",
+        "development_revision": "adea735bb75c267301c61a870b1b7789348b1e91b751171da667a74880ca8824",
+        "handoff_revision": "4eb0042689b46fe51a40ea90a71d6cfd7cb22820be1e658dcdea26cd36bcf198",
+        "pipeline_revision": "29a7ea31ea6c6c6238b80b401d636746f51a0537efdaa243f7ccc1bb554f5973",
+        "source_revision": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
+        "cutoff": "2026-11-13",
+        "input_snapshot_digest": "6a6753153214e5a244fbddf6d45048b49dc32d0d3b661396b6c9e56411019a11",
+        "original_review_days": 90,
+        "challenged_review_days": 90
+      },
+      "criteria": {
+        "complete": 10,
+        "total": 10,
+        "percent": 100,
+        "label": "Qualification input completeness",
+        "independently_verified_buyer_need": "Not established",
+        "opportunity_accuracy": "Unknown \u2014 no empirical labelled outcome cohort",
+        "criteria": [
+          {
+            "id": "problem",
+            "label": "Business problem & measurable impact",
+            "input_state": "Pass",
+            "development_state": "Pass",
+            "note": "Example fixture Business problem & measurable impact evidence; not a real customer claim",
+            "reference": "Private example meeting/reference problem",
+            "evidence_kind": "Customer statement",
+            "date": "2026-11-13",
+            "actual_development_check": {
+              "id": "problem",
+              "note_supported": true,
+              "reference_supported": true,
+              "kind_allowed": true,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": true
+            }
+          },
+          {
+            "id": "priority",
+            "label": "Customer strategic priority",
+            "input_state": "Pass",
+            "development_state": "Pass",
+            "note": "Example fixture Customer strategic priority evidence; not a real customer claim",
+            "reference": "Private example meeting/reference priority",
+            "evidence_kind": "Customer statement",
+            "date": "2026-11-13",
+            "actual_development_check": {
+              "id": "priority",
+              "note_supported": true,
+              "reference_supported": true,
+              "kind_allowed": true,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": true
+            }
+          },
+          {
+            "id": "buyer",
+            "label": "Economic buyer & stakeholders",
+            "input_state": "Pass",
+            "development_state": "Pass",
+            "note": "Example fixture Economic buyer & stakeholders evidence; not a real customer claim",
+            "reference": "Private example meeting/reference buyer",
+            "evidence_kind": "Customer statement",
+            "date": "2026-11-13",
+            "actual_development_check": {
+              "id": "buyer",
+              "note_supported": true,
+              "reference_supported": true,
+              "kind_allowed": true,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": true
+            }
+          },
+          {
+            "id": "funding",
+            "label": "Budget or funding evidence",
+            "input_state": "Pass",
+            "development_state": "Pass",
+            "note": "Example fixture Budget or funding evidence evidence; not a real customer claim",
+            "reference": "Private example meeting/reference funding",
+            "evidence_kind": "Customer statement",
+            "date": "2026-11-13",
+            "actual_development_check": {
+              "id": "funding",
+              "note_supported": true,
+              "reference_supported": true,
+              "kind_allowed": true,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": true
+            }
+          },
+          {
+            "id": "decision",
+            "label": "Decision criteria & process",
+            "input_state": "Pass",
+            "development_state": "Pass",
+            "note": "Example fixture Decision criteria & process evidence; not a real customer claim",
+            "reference": "Private example meeting/reference decision",
+            "evidence_kind": "Customer statement",
+            "date": "2026-11-13",
+            "actual_development_check": {
+              "id": "decision",
+              "note_supported": true,
+              "reference_supported": true,
+              "kind_allowed": true,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": true
+            }
+          },
+          {
+            "id": "competition",
+            "label": "Competitive landscape",
+            "input_state": "Pass",
+            "development_state": "Pass",
+            "note": "Example fixture Competitive landscape evidence; not a real customer claim",
+            "reference": "Private example meeting/reference competition",
+            "evidence_kind": "Seller review",
+            "date": "2026-11-13",
+            "actual_development_check": {
+              "id": "competition",
+              "note_supported": true,
+              "reference_supported": true,
+              "kind_allowed": true,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement",
+                "Seller review"
+              ],
+              "passed": true
+            }
+          },
+          {
+            "id": "differentiation",
+            "label": "Potential differentiation",
+            "input_state": "Pass",
+            "development_state": "Pass",
+            "note": "Example fixture Potential differentiation evidence; not a real customer claim",
+            "reference": "Private example meeting/reference differentiation",
+            "evidence_kind": "Seller review",
+            "date": "2026-11-13",
+            "actual_development_check": {
+              "id": "differentiation",
+              "note_supported": true,
+              "reference_supported": true,
+              "kind_allowed": true,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement",
+                "Seller review"
+              ],
+              "passed": true
+            }
+          },
+          {
+            "id": "timing",
+            "label": "Procurement timing",
+            "input_state": "Pass",
+            "development_state": "Pass",
+            "note": "Example fixture Procurement timing evidence; not a real customer claim",
+            "reference": "Private example meeting/reference timing",
+            "evidence_kind": "Customer statement",
+            "date": "2026-11-13",
+            "actual_development_check": {
+              "id": "timing",
+              "note_supported": true,
+              "reference_supported": true,
+              "kind_allowed": true,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": true
+            }
+          },
+          {
+            "id": "relationship",
+            "label": "Relationship strength & champion",
+            "input_state": "Pass",
+            "development_state": "Pass",
+            "note": "Example fixture Relationship strength & champion evidence; not a real customer claim",
+            "reference": "Private example meeting/reference relationship",
+            "evidence_kind": "Customer statement",
+            "date": "2026-11-13",
+            "actual_development_check": {
+              "id": "relationship",
+              "note_supported": true,
+              "reference_supported": true,
+              "kind_allowed": true,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": true
+            }
+          },
+          {
+            "id": "next_action",
+            "label": "Next action & mutual commitment",
+            "input_state": "Pass",
+            "development_state": "Pass",
+            "note": "Example fixture Next action & mutual commitment evidence; not a real customer claim",
+            "reference": "Private example meeting/reference next_action",
+            "evidence_kind": "Customer statement",
+            "date": "2026-11-13",
+            "actual_development_check": {
+              "id": "next_action",
+              "note_supported": true,
+              "reference_supported": true,
+              "kind_allowed": true,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": true
+            }
+          }
+        ]
+      },
+      "gate_readiness": {
+        "ready": true,
+        "reasons": [],
+        "classification": "Seller-reviewed evidence completeness, not independent customer verification",
+        "criterion_trace": [
+          {
+            "id": "problem",
+            "note_supported": true,
+            "reference_supported": true,
+            "kind_allowed": true,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": true
+          },
+          {
+            "id": "priority",
+            "note_supported": true,
+            "reference_supported": true,
+            "kind_allowed": true,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": true
+          },
+          {
+            "id": "buyer",
+            "note_supported": true,
+            "reference_supported": true,
+            "kind_allowed": true,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": true
+          },
+          {
+            "id": "funding",
+            "note_supported": true,
+            "reference_supported": true,
+            "kind_allowed": true,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": true
+          },
+          {
+            "id": "decision",
+            "note_supported": true,
+            "reference_supported": true,
+            "kind_allowed": true,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": true
+          },
+          {
+            "id": "competition",
+            "note_supported": true,
+            "reference_supported": true,
+            "kind_allowed": true,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement",
+              "Seller review"
+            ],
+            "passed": true
+          },
+          {
+            "id": "differentiation",
+            "note_supported": true,
+            "reference_supported": true,
+            "kind_allowed": true,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement",
+              "Seller review"
+            ],
+            "passed": true
+          },
+          {
+            "id": "timing",
+            "note_supported": true,
+            "reference_supported": true,
+            "kind_allowed": true,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": true
+          },
+          {
+            "id": "relationship",
+            "note_supported": true,
+            "reference_supported": true,
+            "kind_allowed": true,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": true
+          },
+          {
+            "id": "next_action",
+            "note_supported": true,
+            "reference_supported": true,
+            "kind_allowed": true,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": true
+          }
+        ],
+        "gate_trace": [
+          {
+            "id": "customer_attestation",
+            "passed": true,
+            "reason": "Attest that customer evidence was actually received and is permitted"
+          },
+          {
+            "id": "seller_review",
+            "passed": true,
+            "reason": "Explicit seller qualification review required"
+          },
+          {
+            "id": "next_action",
+            "passed": true,
+            "reason": "Accountable next action required"
+          },
+          {
+            "id": "seller_proof",
+            "passed": true,
+            "reason": "Seller proof/rights and competitive alternatives review required"
+          },
+          {
+            "id": "active",
+            "passed": true,
+            "reason": "Candidate is paused or retired"
+          },
+          {
+            "id": "fresh",
+            "passed": true,
+            "reason": "Stale \u2014 Reassess changed dependencies"
+          },
+          {
+            "id": "research_basis",
+            "passed": true,
+            "reason": "Research only; no current supported development basis"
+          },
+          {
+            "id": "pipeline_identity",
+            "passed": true,
+            "reason": "Accepted enterprise reference required; unbound identity cannot enter Pipeline"
+          },
+          {
+            "id": "employer_approval",
+            "passed": true,
+            "reason": "Current separate employer approval required"
+          }
+        ]
+      },
+      "handoff_checks": {
+        "ready": true,
+        "explicit_qualify_selected": true,
+        "qualification_inputs_ready": true,
+        "already_recorded": true,
+        "separate_confirmation_required": true,
+        "version_and_authority_checked_at_write": true,
+        "write_authorised_by_inspection": false
+      },
+      "reproduced": true,
+      "handoff": "Recorded explicit hand-off; current readiness does not independently verify customer need",
+      "challenges": {
+        "Original": {
+          "tier": "Prioritise",
+          "ready": true,
+          "changed_dependencies": []
+        },
+        "Withdraw source": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:BTI-TSB-APPLICATION",
+            "fact:BTI-TSB-LEGAL",
+            "fact:BTI-TSB-MIGRATION",
+            "research",
+            "stage",
+            "tier"
+          ]
+        },
+        "Close programme": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:OWNER-CHALLENGE-BTI-TSB-APPLICATION",
+            "research",
+            "stage",
+            "tier"
+          ]
+        },
+        "Contradict programme": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:OWNER-CHALLENGE-BTI-TSB-APPLICATION",
+            "research",
+            "stage",
+            "tier"
+          ]
+        },
+        "Remove Offer approval": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": [
+            "offer",
+            "tier"
+          ]
+        },
+        "Remove customer attestation": {
+          "tier": "Prioritise",
+          "ready": false,
+          "changed_dependencies": []
+        },
+        "Unbind identity": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": [
+            "research",
+            "tier"
+          ]
+        },
+        "Expire sources": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:BTI-TSB-APPLICATION",
+            "fact:BTI-TSB-LEGAL",
+            "fact:BTI-TSB-MIGRATION",
+            "research",
+            "stage",
+            "tier"
+          ]
+        },
+        "60-day review policy": {
+          "tier": "Prioritise",
+          "ready": false,
+          "changed_dependencies": [
+            "research"
+          ]
+        }
+      }
+    },
+    {
+      "pilot": "legacy",
+      "enterprise": "Santander UK",
+      "offer": "Complex Legacy Application Modernisation",
+      "tier": "Prioritise",
+      "trace": {
+        "policy": "offers-trigger-intelligence-v1",
+        "review_window_days": 90,
+        "mission_not_excluded": true,
+        "sector_fit": true,
+        "employer_approved": true,
+        "identity_allows_priority": true,
+        "positive_fact_ids": [
+          "BTI-TSB-MIGRATION",
+          "BTI-TSB-APPLICATION"
+        ],
+        "programme_ids": [
+          "BTI-TSB-MIGRATION"
+        ],
+        "catalyst_ids": [
+          "BTI-TSB-APPLICATION"
+        ],
+        "linked_programme_ids": [
+          "BTI-TSB-MIGRATION"
+        ],
+        "closed_programmes": [],
+        "fact_checks": [
+          {
+            "fact_id": "BTI-TSB-APPLICATION",
+            "checks": {
+              "positive_kind": true,
+              "programme_not_closed": true,
+              "dated_or_structural": true,
+              "review_current": true
+            },
+            "admitted": true
+          },
+          {
+            "fact_id": "BTI-TSB-MIGRATION",
+            "checks": {
+              "positive_kind": true,
+              "programme_not_closed": true,
+              "dated_or_structural": true,
+              "review_current": true
+            },
+            "admitted": true
+          },
+          {
+            "fact_id": "BTI-TSB-LEGAL",
+            "checks": {
+              "positive_kind": false,
+              "programme_not_closed": true,
+              "dated_or_structural": true,
+              "review_current": true
+            },
+            "admitted": false
+          }
+        ],
+        "available_relevant_fact_ids": [
+          "BTI-TSB-APPLICATION",
+          "BTI-TSB-MIGRATION",
+          "BTI-TSB-LEGAL"
+        ],
+        "not_available_or_not_relevant": [],
+        "tailored_entry_play": true
+      },
+      "policy": {
+        "id": "offers-trigger-intelligence-v1",
+        "matching_revision": "ef98249e07eb6661ea0bac5707f0f5aa0ce8fbe55fb8b9a712d408b5ceb758e1",
+        "development_revision": "adea735bb75c267301c61a870b1b7789348b1e91b751171da667a74880ca8824",
+        "handoff_revision": "4eb0042689b46fe51a40ea90a71d6cfd7cb22820be1e658dcdea26cd36bcf198",
+        "pipeline_revision": "29a7ea31ea6c6c6238b80b401d636746f51a0537efdaa243f7ccc1bb554f5973",
+        "source_revision": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
+        "cutoff": "2026-11-13",
+        "input_snapshot_digest": "0cb135cf34cc0b1f79317e4466dc627c0ee1adb3bc98363dbf5a836c100b99c9",
+        "original_review_days": 90,
+        "challenged_review_days": 90
+      },
+      "criteria": {
+        "complete": 0,
+        "total": 10,
+        "percent": 0,
+        "label": "Qualification input completeness",
+        "independently_verified_buyer_need": "Not established",
+        "opportunity_accuracy": "Unknown \u2014 no empirical labelled outcome cohort",
+        "criteria": [
+          {
+            "id": "problem",
+            "label": "Business problem & measurable impact",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "problem",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "priority",
+            "label": "Customer strategic priority",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "priority",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "buyer",
+            "label": "Economic buyer & stakeholders",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "buyer",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "funding",
+            "label": "Budget or funding evidence",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "funding",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "decision",
+            "label": "Decision criteria & process",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "decision",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "competition",
+            "label": "Competitive landscape",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "competition",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement",
+                "Seller review"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "differentiation",
+            "label": "Potential differentiation",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "differentiation",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement",
+                "Seller review"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "timing",
+            "label": "Procurement timing",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "timing",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "relationship",
+            "label": "Relationship strength & champion",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "relationship",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "next_action",
+            "label": "Next action & mutual commitment",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "next_action",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          }
+        ]
+      },
+      "gate_readiness": {
+        "ready": false,
+        "reasons": [
+          "Missing Business problem & measurable impact",
+          "Missing Customer strategic priority",
+          "Missing Economic buyer & stakeholders",
+          "Missing Budget or funding evidence",
+          "Missing Decision criteria & process",
+          "Missing Competitive landscape",
+          "Missing Potential differentiation",
+          "Missing Procurement timing",
+          "Missing Relationship strength & champion",
+          "Missing Next action & mutual commitment",
+          "Attest that customer evidence was actually received and is permitted",
+          "Explicit seller qualification review required",
+          "Seller proof/rights and competitive alternatives review required"
+        ],
+        "classification": "Seller-reviewed evidence completeness, not independent customer verification",
+        "criterion_trace": [
+          {
+            "id": "problem",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "priority",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "buyer",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "funding",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "decision",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "competition",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement",
+              "Seller review"
+            ],
+            "passed": false
+          },
+          {
+            "id": "differentiation",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement",
+              "Seller review"
+            ],
+            "passed": false
+          },
+          {
+            "id": "timing",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "relationship",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "next_action",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          }
+        ],
+        "gate_trace": [
+          {
+            "id": "customer_attestation",
+            "passed": false,
+            "reason": "Attest that customer evidence was actually received and is permitted"
+          },
+          {
+            "id": "seller_review",
+            "passed": false,
+            "reason": "Explicit seller qualification review required"
+          },
+          {
+            "id": "next_action",
+            "passed": true,
+            "reason": "Accountable next action required"
+          },
+          {
+            "id": "seller_proof",
+            "passed": false,
+            "reason": "Seller proof/rights and competitive alternatives review required"
+          },
+          {
+            "id": "active",
+            "passed": true,
+            "reason": "Candidate is paused or retired"
+          },
+          {
+            "id": "fresh",
+            "passed": true,
+            "reason": "Stale \u2014 Reassess changed dependencies"
+          },
+          {
+            "id": "research_basis",
+            "passed": true,
+            "reason": "Research only; no current supported development basis"
+          },
+          {
+            "id": "pipeline_identity",
+            "passed": true,
+            "reason": "Accepted enterprise reference required; unbound identity cannot enter Pipeline"
+          },
+          {
+            "id": "employer_approval",
+            "passed": true,
+            "reason": "Current separate employer approval required"
+          }
+        ]
+      },
+      "handoff_checks": {
+        "ready": false,
+        "explicit_qualify_selected": false,
+        "qualification_inputs_ready": false,
+        "already_recorded": false,
+        "separate_confirmation_required": true,
+        "version_and_authority_checked_at_write": true,
+        "write_authorised_by_inspection": false
+      },
+      "reproduced": true,
+      "handoff": "No recorded hand-off; no write performed",
+      "challenges": {
+        "Original": {
+          "tier": "Prioritise",
+          "ready": false,
+          "changed_dependencies": []
+        },
+        "Withdraw source": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:BTI-TSB-APPLICATION",
+            "fact:BTI-TSB-LEGAL",
+            "fact:BTI-TSB-MIGRATION",
+            "research",
+            "stage",
+            "tier"
+          ]
+        },
+        "Close programme": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:OWNER-CHALLENGE-BTI-TSB-APPLICATION",
+            "research",
+            "stage",
+            "tier"
+          ]
+        },
+        "Contradict programme": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:OWNER-CHALLENGE-BTI-TSB-APPLICATION",
+            "research",
+            "stage",
+            "tier"
+          ]
+        },
+        "Remove Offer approval": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": [
+            "offer",
+            "tier"
+          ]
+        },
+        "Remove customer attestation": {
+          "tier": "Prioritise",
+          "ready": false,
+          "changed_dependencies": []
+        },
+        "Unbind identity": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": [
+            "research",
+            "tier"
+          ]
+        },
+        "Expire sources": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:BTI-TSB-APPLICATION",
+            "fact:BTI-TSB-LEGAL",
+            "fact:BTI-TSB-MIGRATION",
+            "research",
+            "stage",
+            "tier"
+          ]
+        },
+        "60-day review policy": {
+          "tier": "Prioritise",
+          "ready": false,
+          "changed_dependencies": [
+            "research"
+          ]
+        }
+      }
+    },
+    {
+      "pilot": "ai",
+      "enterprise": "Lloyds Banking Group",
+      "offer": "AI-first Business Transformation",
+      "tier": "Investigate",
+      "trace": {
+        "policy": "offers-trigger-intelligence-v1",
+        "review_window_days": 90,
+        "mission_not_excluded": true,
+        "sector_fit": true,
+        "employer_approved": true,
+        "identity_allows_priority": true,
+        "positive_fact_ids": [
+          "BTI-LBG-AI-SCALE",
+          "LBG-A2030-DATA"
+        ],
+        "programme_ids": [
+          "BTI-LBG-AI-SCALE"
+        ],
+        "catalyst_ids": [],
+        "linked_programme_ids": [],
+        "closed_programmes": [],
+        "fact_checks": [
+          {
+            "fact_id": "LBG-A2030-DATA",
+            "checks": {
+              "positive_kind": true,
+              "programme_not_closed": true,
+              "dated_or_structural": true,
+              "review_current": true
+            },
+            "admitted": true
+          },
+          {
+            "fact_id": "BTI-LBG-AI-SCALE",
+            "checks": {
+              "positive_kind": true,
+              "programme_not_closed": true,
+              "dated_or_structural": true,
+              "review_current": true
+            },
+            "admitted": true
+          }
+        ],
+        "available_relevant_fact_ids": [
+          "LBG-A2030-DATA",
+          "BTI-LBG-AI-SCALE"
+        ],
+        "not_available_or_not_relevant": [
+          "BTI-LBG-STRATEGY",
+          "LBG-AR25-MIGRATION",
+          "LBG-ENVOY-CONTROLS"
+        ],
+        "tailored_entry_play": true
+      },
+      "policy": {
+        "id": "offers-trigger-intelligence-v1",
+        "matching_revision": "ef98249e07eb6661ea0bac5707f0f5aa0ce8fbe55fb8b9a712d408b5ceb758e1",
+        "development_revision": "adea735bb75c267301c61a870b1b7789348b1e91b751171da667a74880ca8824",
+        "handoff_revision": "4eb0042689b46fe51a40ea90a71d6cfd7cb22820be1e658dcdea26cd36bcf198",
+        "pipeline_revision": "29a7ea31ea6c6c6238b80b401d636746f51a0537efdaa243f7ccc1bb554f5973",
+        "source_revision": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
+        "cutoff": "2026-11-13",
+        "input_snapshot_digest": "d6e5bf4f0c06ec3739beb7b13fca2c9828f98b80a202f46e708c4fd3f8063fbc",
+        "original_review_days": 90,
+        "challenged_review_days": 90
+      },
+      "criteria": {
+        "complete": 0,
+        "total": 10,
+        "percent": 0,
+        "label": "Qualification input completeness",
+        "independently_verified_buyer_need": "Not established",
+        "opportunity_accuracy": "Unknown \u2014 no empirical labelled outcome cohort",
+        "criteria": [
+          {
+            "id": "problem",
+            "label": "Business problem & measurable impact",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "problem",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "priority",
+            "label": "Customer strategic priority",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "priority",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "buyer",
+            "label": "Economic buyer & stakeholders",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "buyer",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "funding",
+            "label": "Budget or funding evidence",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "funding",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "decision",
+            "label": "Decision criteria & process",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "decision",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "competition",
+            "label": "Competitive landscape",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "competition",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement",
+                "Seller review"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "differentiation",
+            "label": "Potential differentiation",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "differentiation",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement",
+                "Seller review"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "timing",
+            "label": "Procurement timing",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "timing",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "relationship",
+            "label": "Relationship strength & champion",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "relationship",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "next_action",
+            "label": "Next action & mutual commitment",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "next_action",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          }
+        ]
+      },
+      "gate_readiness": {
+        "ready": false,
+        "reasons": [
+          "Missing Business problem & measurable impact",
+          "Missing Customer strategic priority",
+          "Missing Economic buyer & stakeholders",
+          "Missing Budget or funding evidence",
+          "Missing Decision criteria & process",
+          "Missing Competitive landscape",
+          "Missing Potential differentiation",
+          "Missing Procurement timing",
+          "Missing Relationship strength & champion",
+          "Missing Next action & mutual commitment",
+          "Attest that customer evidence was actually received and is permitted",
+          "Explicit seller qualification review required",
+          "Seller proof/rights and competitive alternatives review required"
+        ],
+        "classification": "Seller-reviewed evidence completeness, not independent customer verification",
+        "criterion_trace": [
+          {
+            "id": "problem",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "priority",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "buyer",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "funding",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "decision",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "competition",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement",
+              "Seller review"
+            ],
+            "passed": false
+          },
+          {
+            "id": "differentiation",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement",
+              "Seller review"
+            ],
+            "passed": false
+          },
+          {
+            "id": "timing",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "relationship",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "next_action",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          }
+        ],
+        "gate_trace": [
+          {
+            "id": "customer_attestation",
+            "passed": false,
+            "reason": "Attest that customer evidence was actually received and is permitted"
+          },
+          {
+            "id": "seller_review",
+            "passed": false,
+            "reason": "Explicit seller qualification review required"
+          },
+          {
+            "id": "next_action",
+            "passed": true,
+            "reason": "Accountable next action required"
+          },
+          {
+            "id": "seller_proof",
+            "passed": false,
+            "reason": "Seller proof/rights and competitive alternatives review required"
+          },
+          {
+            "id": "active",
+            "passed": true,
+            "reason": "Candidate is paused or retired"
+          },
+          {
+            "id": "fresh",
+            "passed": true,
+            "reason": "Stale \u2014 Reassess changed dependencies"
+          },
+          {
+            "id": "research_basis",
+            "passed": true,
+            "reason": "Research only; no current supported development basis"
+          },
+          {
+            "id": "pipeline_identity",
+            "passed": true,
+            "reason": "Accepted enterprise reference required; unbound identity cannot enter Pipeline"
+          },
+          {
+            "id": "employer_approval",
+            "passed": true,
+            "reason": "Current separate employer approval required"
+          }
+        ]
+      },
+      "handoff_checks": {
+        "ready": false,
+        "explicit_qualify_selected": false,
+        "qualification_inputs_ready": false,
+        "already_recorded": false,
+        "separate_confirmation_required": true,
+        "version_and_authority_checked_at_write": true,
+        "write_authorised_by_inspection": false
+      },
+      "reproduced": true,
+      "handoff": "No recorded hand-off; no write performed",
+      "challenges": {
+        "Original": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": []
+        },
+        "Withdraw source": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:LBG-A2030-DATA",
+            "research"
+          ]
+        },
+        "Close programme": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:OWNER-CHALLENGE-BTI-LBG-AI-SCALE",
+            "research",
+            "stage"
+          ]
+        },
+        "Contradict programme": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:OWNER-CHALLENGE-BTI-LBG-AI-SCALE",
+            "research",
+            "stage"
+          ]
+        },
+        "Remove Offer approval": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": [
+            "offer"
+          ]
+        },
+        "Remove customer attestation": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": []
+        },
+        "Unbind identity": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": [
+            "research"
+          ]
+        },
+        "Expire sources": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:BTI-LBG-AI-SCALE",
+            "research",
+            "stage",
+            "tier"
+          ]
+        },
+        "60-day review policy": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": [
+            "research"
+          ]
+        }
+      }
+    },
+    {
+      "pilot": "cyber",
+      "enterprise": "Computacenter",
+      "offer": "Enterprise Cybersecurity & Resilience",
+      "tier": "Investigate",
+      "trace": {
+        "policy": "offers-trigger-intelligence-v1",
+        "review_window_days": 90,
+        "mission_not_excluded": true,
+        "sector_fit": true,
+        "employer_approved": true,
+        "identity_allows_priority": false,
+        "positive_fact_ids": [
+          "BTI-CC-CYBER"
+        ],
+        "programme_ids": [
+          "BTI-CC-CYBER"
+        ],
+        "catalyst_ids": [],
+        "linked_programme_ids": [],
+        "closed_programmes": [],
+        "fact_checks": [
+          {
+            "fact_id": "BTI-CC-CYBER",
+            "checks": {
+              "positive_kind": true,
+              "programme_not_closed": true,
+              "dated_or_structural": true,
+              "review_current": true
+            },
+            "admitted": true
+          }
+        ],
+        "available_relevant_fact_ids": [
+          "BTI-CC-CYBER"
+        ],
+        "not_available_or_not_relevant": [
+          "BTI-CC-CRM",
+          "BTI-CC-ERP",
+          "BTI-CC-SERVICE"
+        ],
+        "tailored_entry_play": true
+      },
+      "policy": {
+        "id": "offers-trigger-intelligence-v1",
+        "matching_revision": "ef98249e07eb6661ea0bac5707f0f5aa0ce8fbe55fb8b9a712d408b5ceb758e1",
+        "development_revision": "adea735bb75c267301c61a870b1b7789348b1e91b751171da667a74880ca8824",
+        "handoff_revision": "4eb0042689b46fe51a40ea90a71d6cfd7cb22820be1e658dcdea26cd36bcf198",
+        "pipeline_revision": "29a7ea31ea6c6c6238b80b401d636746f51a0537efdaa243f7ccc1bb554f5973",
+        "source_revision": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
+        "cutoff": "2026-11-13",
+        "input_snapshot_digest": "296be5833ec21a5e4a2f81d2b10cba5ba40a457ce6946ff3850b0d9d5e87247c",
+        "original_review_days": 90,
+        "challenged_review_days": 90
+      },
+      "criteria": {
+        "complete": 0,
+        "total": 10,
+        "percent": 0,
+        "label": "Qualification input completeness",
+        "independently_verified_buyer_need": "Not established",
+        "opportunity_accuracy": "Unknown \u2014 no empirical labelled outcome cohort",
+        "criteria": [
+          {
+            "id": "problem",
+            "label": "Business problem & measurable impact",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "problem",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "priority",
+            "label": "Customer strategic priority",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "priority",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "buyer",
+            "label": "Economic buyer & stakeholders",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "buyer",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "funding",
+            "label": "Budget or funding evidence",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "funding",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "decision",
+            "label": "Decision criteria & process",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "decision",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "competition",
+            "label": "Competitive landscape",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "competition",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement",
+                "Seller review"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "differentiation",
+            "label": "Potential differentiation",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "differentiation",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement",
+                "Seller review"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "timing",
+            "label": "Procurement timing",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "timing",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "relationship",
+            "label": "Relationship strength & champion",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "relationship",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "next_action",
+            "label": "Next action & mutual commitment",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "next_action",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          }
+        ]
+      },
+      "gate_readiness": {
+        "ready": false,
+        "reasons": [
+          "Missing Business problem & measurable impact",
+          "Missing Customer strategic priority",
+          "Missing Economic buyer & stakeholders",
+          "Missing Budget or funding evidence",
+          "Missing Decision criteria & process",
+          "Missing Competitive landscape",
+          "Missing Potential differentiation",
+          "Missing Procurement timing",
+          "Missing Relationship strength & champion",
+          "Missing Next action & mutual commitment",
+          "Attest that customer evidence was actually received and is permitted",
+          "Explicit seller qualification review required",
+          "Seller proof/rights and competitive alternatives review required",
+          "Accepted enterprise reference required; unbound identity cannot enter Pipeline"
+        ],
+        "classification": "Seller-reviewed evidence completeness, not independent customer verification",
+        "criterion_trace": [
+          {
+            "id": "problem",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "priority",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "buyer",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "funding",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "decision",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "competition",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement",
+              "Seller review"
+            ],
+            "passed": false
+          },
+          {
+            "id": "differentiation",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement",
+              "Seller review"
+            ],
+            "passed": false
+          },
+          {
+            "id": "timing",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "relationship",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "next_action",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          }
+        ],
+        "gate_trace": [
+          {
+            "id": "customer_attestation",
+            "passed": false,
+            "reason": "Attest that customer evidence was actually received and is permitted"
+          },
+          {
+            "id": "seller_review",
+            "passed": false,
+            "reason": "Explicit seller qualification review required"
+          },
+          {
+            "id": "next_action",
+            "passed": true,
+            "reason": "Accountable next action required"
+          },
+          {
+            "id": "seller_proof",
+            "passed": false,
+            "reason": "Seller proof/rights and competitive alternatives review required"
+          },
+          {
+            "id": "active",
+            "passed": true,
+            "reason": "Candidate is paused or retired"
+          },
+          {
+            "id": "fresh",
+            "passed": true,
+            "reason": "Stale \u2014 Reassess changed dependencies"
+          },
+          {
+            "id": "research_basis",
+            "passed": true,
+            "reason": "Research only; no current supported development basis"
+          },
+          {
+            "id": "pipeline_identity",
+            "passed": false,
+            "reason": "Accepted enterprise reference required; unbound identity cannot enter Pipeline"
+          },
+          {
+            "id": "employer_approval",
+            "passed": true,
+            "reason": "Current separate employer approval required"
+          }
+        ]
+      },
+      "handoff_checks": {
+        "ready": false,
+        "explicit_qualify_selected": false,
+        "qualification_inputs_ready": false,
+        "already_recorded": false,
+        "separate_confirmation_required": true,
+        "version_and_authority_checked_at_write": true,
+        "write_authorised_by_inspection": false
+      },
+      "reproduced": true,
+      "handoff": "No recorded hand-off; no write performed",
+      "challenges": {
+        "Original": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": []
+        },
+        "Withdraw source": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:BTI-CC-CYBER",
+            "research",
+            "stage",
+            "tier"
+          ]
+        },
+        "Close programme": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:OWNER-CHALLENGE-BTI-CC-CYBER",
+            "research",
+            "stage",
+            "tier"
+          ]
+        },
+        "Contradict programme": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:OWNER-CHALLENGE-BTI-CC-CYBER",
+            "research",
+            "stage",
+            "tier"
+          ]
+        },
+        "Remove Offer approval": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": [
+            "offer"
+          ]
+        },
+        "Remove customer attestation": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": []
+        },
+        "Unbind identity": {
+          "tier": "Investigate",
+          "ready": false,
+          "changed_dependencies": []
+        },
+        "Expire sources": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:BTI-CC-CYBER",
+            "research",
+            "stage",
+            "tier"
+          ]
+        },
+        "60-day review policy": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "fact:BTI-CC-CYBER",
+            "research",
+            "stage",
+            "tier"
+          ]
+        }
+      }
+    },
+    {
+      "pilot": "esg",
+      "enterprise": "Lloyds Banking Group",
+      "offer": "Social Value & ESG Transformation",
+      "tier": "Research only",
+      "trace": {
+        "policy": "offers-trigger-intelligence-v1",
+        "review_window_days": 90,
+        "mission_not_excluded": true,
+        "sector_fit": true,
+        "employer_approved": true,
+        "identity_allows_priority": true,
+        "positive_fact_ids": [],
+        "programme_ids": [],
+        "catalyst_ids": [],
+        "linked_programme_ids": [],
+        "closed_programmes": [],
+        "fact_checks": [],
+        "available_relevant_fact_ids": [],
+        "not_available_or_not_relevant": [
+          "BTI-LBG-AI-SCALE",
+          "BTI-LBG-STRATEGY",
+          "LBG-A2030-DATA",
+          "LBG-AR25-MIGRATION",
+          "LBG-ENVOY-CONTROLS"
+        ],
+        "tailored_entry_play": false
+      },
+      "policy": {
+        "id": "offers-trigger-intelligence-v1",
+        "matching_revision": "ef98249e07eb6661ea0bac5707f0f5aa0ce8fbe55fb8b9a712d408b5ceb758e1",
+        "development_revision": "adea735bb75c267301c61a870b1b7789348b1e91b751171da667a74880ca8824",
+        "handoff_revision": "4eb0042689b46fe51a40ea90a71d6cfd7cb22820be1e658dcdea26cd36bcf198",
+        "pipeline_revision": "29a7ea31ea6c6c6238b80b401d636746f51a0537efdaa243f7ccc1bb554f5973",
+        "source_revision": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
+        "cutoff": "2026-11-13",
+        "input_snapshot_digest": "5e5839890ad6532b11eb712f2542a03262a9176499135afaaa406f93264fffc1",
+        "original_review_days": 90,
+        "challenged_review_days": 90
+      },
+      "criteria": {
+        "complete": 0,
+        "total": 10,
+        "percent": 0,
+        "label": "Qualification input completeness",
+        "independently_verified_buyer_need": "Not established",
+        "opportunity_accuracy": "Unknown \u2014 no empirical labelled outcome cohort",
+        "criteria": [
+          {
+            "id": "problem",
+            "label": "Business problem & measurable impact",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "problem",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "priority",
+            "label": "Customer strategic priority",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "priority",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "buyer",
+            "label": "Economic buyer & stakeholders",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "buyer",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "funding",
+            "label": "Budget or funding evidence",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "funding",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "decision",
+            "label": "Decision criteria & process",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "decision",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "competition",
+            "label": "Competitive landscape",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "competition",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement",
+                "Seller review"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "differentiation",
+            "label": "Potential differentiation",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "differentiation",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement",
+                "Seller review"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "timing",
+            "label": "Procurement timing",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "timing",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "relationship",
+            "label": "Relationship strength & champion",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "relationship",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          },
+          {
+            "id": "next_action",
+            "label": "Next action & mutual commitment",
+            "input_state": "Unknown",
+            "development_state": "Unknown",
+            "note": "",
+            "reference": "",
+            "evidence_kind": "Unknown \u2014 Pipeline stores notes/references only",
+            "date": "Unknown",
+            "actual_development_check": {
+              "id": "next_action",
+              "note_supported": false,
+              "reference_supported": false,
+              "kind_allowed": false,
+              "required_kinds": [
+                "Customer document",
+                "Customer statement"
+              ],
+              "passed": false
+            }
+          }
+        ]
+      },
+      "gate_readiness": {
+        "ready": false,
+        "reasons": [
+          "Missing Business problem & measurable impact",
+          "Missing Customer strategic priority",
+          "Missing Economic buyer & stakeholders",
+          "Missing Budget or funding evidence",
+          "Missing Decision criteria & process",
+          "Missing Competitive landscape",
+          "Missing Potential differentiation",
+          "Missing Procurement timing",
+          "Missing Relationship strength & champion",
+          "Missing Next action & mutual commitment",
+          "Attest that customer evidence was actually received and is permitted",
+          "Explicit seller qualification review required",
+          "Seller proof/rights and competitive alternatives review required",
+          "Research only; no current supported development basis"
+        ],
+        "classification": "Seller-reviewed evidence completeness, not independent customer verification",
+        "criterion_trace": [
+          {
+            "id": "problem",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "priority",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "buyer",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "funding",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "decision",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "competition",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement",
+              "Seller review"
+            ],
+            "passed": false
+          },
+          {
+            "id": "differentiation",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement",
+              "Seller review"
+            ],
+            "passed": false
+          },
+          {
+            "id": "timing",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "relationship",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          },
+          {
+            "id": "next_action",
+            "note_supported": false,
+            "reference_supported": false,
+            "kind_allowed": false,
+            "required_kinds": [
+              "Customer document",
+              "Customer statement"
+            ],
+            "passed": false
+          }
+        ],
+        "gate_trace": [
+          {
+            "id": "customer_attestation",
+            "passed": false,
+            "reason": "Attest that customer evidence was actually received and is permitted"
+          },
+          {
+            "id": "seller_review",
+            "passed": false,
+            "reason": "Explicit seller qualification review required"
+          },
+          {
+            "id": "next_action",
+            "passed": true,
+            "reason": "Accountable next action required"
+          },
+          {
+            "id": "seller_proof",
+            "passed": false,
+            "reason": "Seller proof/rights and competitive alternatives review required"
+          },
+          {
+            "id": "active",
+            "passed": true,
+            "reason": "Candidate is paused or retired"
+          },
+          {
+            "id": "fresh",
+            "passed": true,
+            "reason": "Stale \u2014 Reassess changed dependencies"
+          },
+          {
+            "id": "research_basis",
+            "passed": false,
+            "reason": "Research only; no current supported development basis"
+          },
+          {
+            "id": "pipeline_identity",
+            "passed": true,
+            "reason": "Accepted enterprise reference required; unbound identity cannot enter Pipeline"
+          },
+          {
+            "id": "employer_approval",
+            "passed": true,
+            "reason": "Current separate employer approval required"
+          }
+        ]
+      },
+      "handoff_checks": {
+        "ready": false,
+        "explicit_qualify_selected": false,
+        "qualification_inputs_ready": false,
+        "already_recorded": false,
+        "separate_confirmation_required": true,
+        "version_and_authority_checked_at_write": true,
+        "write_authorised_by_inspection": false
+      },
+      "reproduced": true,
+      "handoff": "No recorded hand-off; no write performed",
+      "challenges": {
+        "Original": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": []
+        },
+        "Remove Offer approval": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "offer"
+          ]
+        },
+        "Remove customer attestation": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": []
+        },
+        "Unbind identity": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "research"
+          ]
+        },
+        "Expire sources": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "research"
+          ]
+        },
+        "60-day review policy": {
+          "tier": "Research only",
+          "ready": false,
+          "changed_dependencies": [
+            "research"
+          ]
+        }
+      }
+    }
+  ]
+}

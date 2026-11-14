@@ -182,6 +182,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                     self.send_error(403, "Storage recovery requires an authorised Flora owner")
                     return
                 self._html(_storage_recovery_page())
+            elif parsed.path in {"/flora/command-centre", "/flora/command-centre/opportunity-assurance"}:
+                from cios.applications.flora.opportunity_assurance_views import render as assurance_render
+                self._html(assurance_render(parsed.path, parse_qs(parsed.query, keep_blank_values=True), self.headers))
             elif parsed.path in {"/flora/offers", "/flora/offers/company", "/flora/offers/edit", "/flora/offers/review", "/flora/offers/discover", "/flora/offers/studio", "/flora/offers/start", "/flora/offers/triggers", "/flora/offers/trigger-detail", "/flora/offers/shortlists", "/flora/offers/development"}:
                 from cios.applications.flora.offers_views import render
                 self._html(render(parsed.path, parse_qs(parsed.query, keep_blank_values=True), self.headers))
