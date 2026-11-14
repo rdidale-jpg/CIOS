@@ -1,8 +1,9 @@
 """Offline integrity/contract QA for RIE2 proposals. No inference, scoring, qualification or persistence engine."""
 from pathlib import Path
 from datetime import date
-import hashlib,json,subprocess
+import hashlib,json,subprocess,sys
 ROOT=Path(__file__).resolve().parents[2];D=ROOT/'docs/flora-runtime/rie2-619'
+if __name__=='__main__':sys.path.insert(0,str(ROOT))
 RIE1='c57ed9728473563b5535db36d5bfbe5e96a8c572';MAIN='fe66516c15726dc45de147ede2674c9172f8cac6'
 def read(name):return json.loads((D/name).read_text())
 def blob(path):return subprocess.check_output(['git','show',RIE1+':'+path],cwd=ROOT)

@@ -8,7 +8,7 @@ The new research suite exercises source/date/rights and no-fabricated-byte-hash 
 
 Mutation negatives reject corrupted financial segment/Group values, period/basis changes, omitted insurance gross-up, target→actual relabelling, FOS→calendarH1, Consumer Credit→all-product totals, wrong closure/uphold denominator, legal-firm→Group join, guessed Ipsos score, bogus FOS/FCA escalation ratio, fabricated£100m value/confirmed buyer/open sourcing, incompatible bank ranking and L&G core→statutory substitution. These checks validate the research proposal; they are not a second qualifier or matching engine.
 
-`tests/test_flora_rie2_research_pack.py` runs **27 checks**. The read-only RIE2 workflow checks the exact PR head and fetches complete repository history so pinned candidate blobs must exist. Existing full FLORA validation is triggered by the new test path and retains its exact-head checkout,388 strict security checks, unchanged versioned failure comparator and extra Offers/visual/seller checks. No existing test, failure/skip baseline, comparator or security workflow was edited.
+`tests/test_flora_rie2_research_pack.py` runs **28 checks**. The read-only RIE2 workflow checks the exact PR head and fetches complete repository history so pinned candidate blobs must exist. Existing full FLORA validation is triggered by the new test path and retains its exact-head checkout,388 strict security checks, unchanged versioned failure comparator and extra Offers/visual/seller checks. No existing test, failure/skip baseline, comparator or security workflow was edited.
 
 ## Controlled import rehearsal
 

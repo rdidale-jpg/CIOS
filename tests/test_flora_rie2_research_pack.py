@@ -50,3 +50,12 @@ def test_existing_import_dry_run_stays_noncanonical_and_evidence_is_byte_stable(
  artifact=script.parents[1]/'Import-Dry-Run.json';before=artifact.read_bytes()
  runpy.run_path(str(script),run_name='__main__')
  assert artifact.read_bytes()==before
+
+
+def test_standalone_report_works_without_pythonpath():
+ import os,subprocess,sys,json
+ root=Path(__file__).resolve().parents[1]
+ env=dict(os.environ);env.pop('PYTHONPATH',None)
+ result=subprocess.run([sys.executable,str(root/'tools/research/rie2_619_validation.py')],cwd=root,env=env,text=True,capture_output=True)
+ assert result.returncode==0,result.stderr
+ assert json.loads(result.stdout)['canonical_mutations']==0
