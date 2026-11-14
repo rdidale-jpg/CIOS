@@ -26,6 +26,7 @@ def test_scope_identity_exact_native_streams_and_single_title(scope,stream):
  if scope!='uk':query.update(layer=['regulators'],selected=['lloyds'])
  ctx=v.resolve(path,query);html=v.render(path,query)
  assert html.count('<h1>')==1
+ assert 'href="#visual-content"'in html and 'id="visual-content" tabindex="-1"'in html
  assert f'data-scope="{scope}"'in html and f'data-stream="{stream}"'in html
  nav=html.split('<nav class="stream-switcher"',1)[1].split('</nav>',1)[0]
  assert nav.count('aria-current="page"')==1
