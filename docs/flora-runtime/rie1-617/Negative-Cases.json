@@ -1,0 +1,57 @@
+[
+  {
+    "id": "NEG-TSB",
+    "source_refs": [
+      "TSB-NOV26"
+    ],
+    "rejected_inference": "Mature Santander/TSB integration announcement establishes early strategic shaping or open procurement.",
+    "reason": "Acquisition complete30April; legal transfer conditional22March2027 and laterH22027 migration. Remaining sourcing/influence unknown.",
+    "preserved_history": "Sprint B tiers and versioned facts unchanged.",
+    "status": "research only; no new sales classification"
+  },
+  {
+    "id": "NEG-FR",
+    "source_refs": [
+      "FR-CSRD26"
+    ],
+    "rejected_inference": "French reporting rule automatically establishes a Lloyds UK legal duty or procurement.",
+    "reason": "Exact legal entity, national law version/phase, thresholds/consolidation/exemptions unverified.",
+    "status": "blocked enterprise transmission"
+  },
+  {
+    "id": "NEG-AI-VALUE",
+    "source_refs": [
+      "LBG-AI26"
+    ],
+    "rejected_inference": "Expected additional AI benefit is realised income or an external GBP100m opportunity.",
+    "reason": "Benefit forecast is not outturn, buyer need, supplier spend or TCV.",
+    "status": "rejected value/intent inference"
+  },
+  {
+    "id": "NEG-PROPERTY",
+    "source_refs": [
+      "LAND-L26"
+    ],
+    "rejected_inference": "Official index excerpt proves complete current real-estate economics.",
+    "reason": "Full original unacquired; section includes imputed rent and far broader activity.",
+    "status": "inadmissible strong agenda support"
+  },
+  {
+    "id": "NEG-HOUSEHOLD",
+    "source_refs": [
+      "HOME-T"
+    ],
+    "rejected_inference": "SIC T household employer can be an automatically generated enterprise prospect.",
+    "reason": "No household profiling or justified enterprise sales agenda.",
+    "status": "no agenda"
+  },
+  {
+    "id": "NEG-PAYMENT",
+    "source_refs": [
+      "BOE-SETTLE"
+    ],
+    "rejected_inference": "BoE operates CHAPS therefore Lloyds is a proven current direct participant/customer.",
+    "reason": "System operator and named participant edges need different evidence.",
+    "status": "blocked specific edge"
+  }
+]

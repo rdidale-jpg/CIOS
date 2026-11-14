@@ -1,0 +1,116 @@
+{
+  "scope": "Disposable existing receipt/staging/planning contracts; explicit service-test authority, not real login/HTTP/production receipt evidence",
+  "source_profile_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+  "input_sha256": "685bfe230ce063c42115c5cb56019aba66374e06576a496e9a34687947ac6230",
+  "source_records": 3,
+  "atomic_observation_proposals": 8,
+  "evidence_proposals": 8,
+  "staging_status_counts": {
+    "accepted": 19,
+    "quarantined": 2
+  },
+  "plan_effect_counts": {
+    "unresolved": 16,
+    "projection": 1,
+    "mapped": 3,
+    "quarantine": 1
+  },
+  "effects_by_original_id": {
+    "RIE1-EVD-GDP-Q3": "unresolved",
+    "PROJECTION-ONLY": "projection",
+    "RIE1-OBS-CPI-SEP": "unresolved",
+    "RIE1-EVD-LBG-NET": "unresolved",
+    "LBG-Q326": "mapped",
+    "NEG-COMPOUND": "quarantine",
+    "RIE1-OBS-GDP-Q3": "unresolved",
+    "RIE1-EVD-LBG-NII": "unresolved",
+    "RIE1-OBS-LBG-DEP": "unresolved",
+    "RIE1-OBS-LBG-COST": "unresolved",
+    "RIE1-OBS-LBG-NII": "unresolved",
+    "RIE1-EVD-LBG-COST": "unresolved",
+    "RIE1-EVD-CPI-SEP": "unresolved",
+    "RIE1-EVD-LBG-DEP": "unresolved",
+    "ONS-CPI-SEP26": "mapped",
+    "RIE1-OBS-LBG-CET1": "unresolved",
+    "RIE1-EVD-LBG-PBT": "unresolved",
+    "RIE1-OBS-LBG-NET": "unresolved",
+    "RIE1-OBS-LBG-PBT": "unresolved",
+    "ONS-GDP-Q326": "mapped",
+    "RIE1-EVD-LBG-CET1": "unresolved"
+  },
+  "adapter_checks": [
+    {
+      "id": "RIE1-OBS-GDP-Q3",
+      "owner_class": "observation",
+      "statement_retained": true,
+      "source_payload_retained": true,
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb"
+    },
+    {
+      "id": "RIE1-OBS-CPI-SEP",
+      "owner_class": "observation",
+      "statement_retained": true,
+      "source_payload_retained": true,
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb"
+    },
+    {
+      "id": "RIE1-OBS-LBG-NII",
+      "owner_class": "observation",
+      "statement_retained": true,
+      "source_payload_retained": true,
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb"
+    },
+    {
+      "id": "RIE1-OBS-LBG-NET",
+      "owner_class": "observation",
+      "statement_retained": true,
+      "source_payload_retained": true,
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb"
+    },
+    {
+      "id": "RIE1-OBS-LBG-COST",
+      "owner_class": "observation",
+      "statement_retained": true,
+      "source_payload_retained": true,
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb"
+    },
+    {
+      "id": "RIE1-OBS-LBG-PBT",
+      "owner_class": "observation",
+      "statement_retained": true,
+      "source_payload_retained": true,
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb"
+    },
+    {
+      "id": "RIE1-OBS-LBG-DEP",
+      "owner_class": "observation",
+      "statement_retained": true,
+      "source_payload_retained": true,
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb"
+    },
+    {
+      "id": "RIE1-OBS-LBG-CET1",
+      "owner_class": "observation",
+      "statement_retained": true,
+      "source_payload_retained": true,
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb"
+    }
+  ],
+  "repeated_plan_idempotent": true,
+  "cross_workspace_inspection_denied": true,
+  "cross_workspace_planning_denied": true,
+  "reviews_created": 0,
+  "approvals_created": 0,
+  "canonical_mutations": 0,
+  "pipeline_writes": 0,
+  "production_receipt_status": "not inspected; unverified",
+  "fact_bundle_limit": "Facts.json is source-bound research notes, sometimes compound; only the eight explicit scalar claims in this rehearsal are Observation proposals. No full-ledger atomicity/import acceptance claim.",
+  "limitations": [
+    "Staging accepted means structurally accepted candidate only.",
+    "Source scope retained as proposal metadata in disposable workspace; no public-to-private entity mapping performed.",
+    "No human evidence acceptance or promotion execution.",
+    "Original byte acquisition/rights acceptance and any real import mappings require owner review.",
+    "The existing lexical atomicity check flags the standard phrase profit before tax. The scalar Observation uses the equivalent PBT abbreviation; meaning and original label remain in the source/evidence and dossier. No validator weakened.",
+    "No temporary archive or private fixture state published."
+  ]
+}

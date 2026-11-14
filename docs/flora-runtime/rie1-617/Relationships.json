@@ -1,0 +1,227 @@
+[
+  {
+    "id": "REL-TESCO-BARCLAYS",
+    "subject": "Tesco",
+    "predicate": "reports_banking_partnership",
+    "object": "Barclays",
+    "source_refs": [
+      "TESCO-G26"
+    ],
+    "evidence_status": "company-reported specific relationship",
+    "scope": "H1 2026/27; terms, workshare and remaining supplier choice unknown; not a UK sector-wide flow",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "REL-TESCO-UBER-EATS",
+    "subject": "Tesco",
+    "predicate": "reports_delivery_platform_launch",
+    "object": "Uber Eats",
+    "source_refs": [
+      "TESCO-G26"
+    ],
+    "evidence_status": "company-reported specific relationship",
+    "scope": "H1 2026/27; terms, workshare and remaining supplier choice unknown; not a UK sector-wide flow",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "REL-TESCO-DELIVEROO",
+    "subject": "Tesco",
+    "predicate": "reports_delivery_platform_launch",
+    "object": "Deliveroo",
+    "source_refs": [
+      "TESCO-G26"
+    ],
+    "evidence_status": "company-reported specific relationship",
+    "scope": "H1 2026/27; terms, workshare and remaining supplier choice unknown; not a UK sector-wide flow",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "REL-BT-MINISTRY-OF-JUSTICE",
+    "subject": "BT",
+    "predicate": "reports_business_contract",
+    "object": "Ministry of Justice",
+    "source_refs": [
+      "BT-J26"
+    ],
+    "evidence_status": "company-reported specific contract",
+    "scope": "H1 FY27 continuing operations; no contract value, renewal or unallocated scope inferred",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "REL-BT-CABINET-OFFICE",
+    "subject": "BT",
+    "predicate": "reports_business_contract",
+    "object": "Cabinet Office",
+    "source_refs": [
+      "BT-J26"
+    ],
+    "evidence_status": "company-reported specific contract",
+    "scope": "H1 FY27 continuing operations; no contract value, renewal or unallocated scope inferred",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "REL-BT-SCOTTISH-WATER",
+    "subject": "BT",
+    "predicate": "reports_business_contract",
+    "object": "Scottish Water",
+    "source_refs": [
+      "BT-J26"
+    ],
+    "evidence_status": "company-reported specific contract",
+    "scope": "H1 FY27 continuing operations; no contract value, renewal or unallocated scope inferred",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "REL-BT-ROYAL-MAIL",
+    "subject": "BT",
+    "predicate": "reports_business_contract",
+    "object": "Royal Mail",
+    "source_refs": [
+      "BT-J26"
+    ],
+    "evidence_status": "company-reported specific contract",
+    "scope": "H1 FY27 continuing operations; no contract value, renewal or unallocated scope inferred",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "REL-LBG-MS",
+    "subject": "Lloyds Banking Group",
+    "predicate": "announces_multi_year_workplace_agreement",
+    "object": "Microsoft",
+    "source_refs": [
+      "LBG-MS26"
+    ],
+    "evidence_status": "company-reported specific relationship",
+    "scope": "4June2026 announcement; no exclusivity/value/expiry disclosed",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "REL-LBG-GC",
+    "subject": "Lloyds Banking Group",
+    "predicate": "describes_envoy_built_on",
+    "object": "Google Cloud",
+    "source_refs": [
+      "LBG-ENVOY26"
+    ],
+    "evidence_status": "company-reported specific relationship",
+    "scope": "Internal agent platform; designed controls not independently verified effectiveness",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "SYS-RTGS",
+    "subject": "Bank of England",
+    "predicate": "operates",
+    "object": "RTGS",
+    "source_refs": [
+      "BOE-SETTLE"
+    ],
+    "evidence_status": "official institutional role",
+    "scope": "No named bank participant/account inferred",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "SYS-CHAPS",
+    "subject": "Bank of England",
+    "predicate": "operates",
+    "object": "CHAPS",
+    "source_refs": [
+      "BOE-SETTLE"
+    ],
+    "evidence_status": "official institutional role",
+    "scope": "Operator distinct from member, supplier or regulator",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "DEP-C-J",
+    "subject": "Rolls-Royce Power Systems",
+    "predicate": "reports_product_demand_exposure_to",
+    "object": "Data centres",
+    "source_refs": [
+      "RR-C26"
+    ],
+    "evidence_status": "reported cross-sector demand exposure",
+    "scope": "Global Power Systems, not identified UK customer order or whole manufacturing dependency",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "DEP-G-J",
+    "subject": "Retail online fulfilment",
+    "predicate": "uses_delivery_platform_mechanism",
+    "object": "Digital services",
+    "source_refs": [
+      "TESCO-G26"
+    ],
+    "evidence_status": "analytical functional dependency",
+    "scope": "Mechanism illustrated by named launches; no national spend/concentration estimate or blanket SIC assignment",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "PRESS-RATES",
+    "subject": "UK monetary conditions",
+    "predicate": "conditional_repricing_transmission",
+    "object": "Customer financing and bank funding",
+    "source_refs": [
+      "BOE-MC-SEP26"
+    ],
+    "evidence_status": "analytical shared-pressure mechanism",
+    "scope": "September rates, predating November move; enterprise effects require hedge/product/customer proof",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  },
+  {
+    "id": "PRESS-WATER",
+    "subject": "Water availability",
+    "predicate": "conditional_resource_dependency",
+    "object": "Farming and industry",
+    "source_refs": [
+      "EA-E26"
+    ],
+    "evidence_status": "analytical functional dependency",
+    "scope": "Named asset/customer exposure and monetary consequence not established",
+    "rights": "public factual relationship candidate; no contract redistribution",
+    "canonical_acceptance": false,
+    "monetary_flow": null,
+    "pipeline_handoff": false
+  }
+]

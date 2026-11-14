@@ -1,0 +1,36 @@
+{
+  "retrieved_at": "2026-11-14",
+  "local_direct_original_fetch": "Seven planned UK source requests failed with URLError; original-byte acquisition unavailable. Web text inspection is separately recorded; no full bytes/hash invented.",
+  "failures": [
+    {
+      "source": "Lloyds full Annual Report 2025 PDF",
+      "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2025/q4/2025-lbg-annual-report.pdf",
+      "result": "Research tool refused oversized original (11,223,828 bytes); web summary inspected separately. No full-report verification."
+    },
+    {
+      "source": "Companies House SC095000",
+      "url": "https://company-information.service.gov.uk/company/SC095000",
+      "result": "502 from research tool; corporate Group disclosure supports number, register not independently reconciled."
+    },
+    {
+      "source": "Ofwat original water performance",
+      "url": "https://www.ofwat.gov.uk/",
+      "result": "Original performance acquisition returned 403; no bypass; EA source uses its own different measurement basis."
+    },
+    {
+      "source": "Tesco original corporate HTML",
+      "url": "https://www.tescoplc.com/",
+      "result": "Corporate results page yielded no readable body; official original PDF via FCA NSM used instead."
+    },
+    {
+      "source": "Landsec original results",
+      "url": "https://www.landsec.com/en/media-insights/press-releases/results-for-the-half-year-ended-30-september-2026",
+      "result": "Original unavailable to tool; official index only, excluded from strong agenda evidence."
+    },
+    {
+      "source": "French public-service article attempted",
+      "url": "https://entreprendre.service-public.gouv.fr/actualites/A16975",
+      "result": "Tool inaccessible; no substantive claim derived from attempted page."
+    }
+  ]
+}

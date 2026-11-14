@@ -1,0 +1,202 @@
+[
+  {
+    "sic": "A",
+    "panorama_id": "uk-sic07-a",
+    "label": "Agriculture & fishing",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "B",
+    "panorama_id": "uk-sic07-b",
+    "label": "Mining & quarrying",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "D",
+    "panorama_id": "uk-sic07-d",
+    "label": "Energy supply",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "E",
+    "panorama_id": "uk-sic07-e",
+    "label": "Water & waste",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "C",
+    "panorama_id": "uk-sic07-c",
+    "label": "Manufacturing",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "F",
+    "panorama_id": "uk-sic07-f",
+    "label": "Construction",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "N",
+    "panorama_id": "uk-sic07-n",
+    "label": "Business support",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "H",
+    "panorama_id": "uk-sic07-h",
+    "label": "Transport & logistics",
+    "represented": true,
+    "navigable_research_subjourney": "Aviation (subsector)",
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "Partial source-linked research for Banking/Technology/Aviation"
+  },
+  {
+    "sic": "P",
+    "panorama_id": "uk-sic07-p",
+    "label": "Education",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "Q",
+    "panorama_id": "uk-sic07-q",
+    "label": "Health & social care",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "J",
+    "panorama_id": "uk-sic07-j",
+    "label": "Information & communication",
+    "represented": true,
+    "navigable_research_subjourney": "Technology (research scope not whole section)",
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "Partial source-linked research for Banking/Technology/Aviation"
+  },
+  {
+    "sic": "M",
+    "panorama_id": "uk-sic07-m",
+    "label": "Professional services",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "L",
+    "panorama_id": "uk-sic07-l",
+    "label": "Real estate",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "K",
+    "panorama_id": "uk-sic07-k",
+    "label": "Finance & insurance",
+    "represented": true,
+    "navigable_research_subjourney": "Banking (subsector)",
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "Partial source-linked research for Banking/Technology/Aviation"
+  },
+  {
+    "sic": "O",
+    "panorama_id": "uk-sic07-o",
+    "label": "Public administration",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "G",
+    "panorama_id": "uk-sic07-g",
+    "label": "Retail & wholesale",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "I",
+    "panorama_id": "uk-sic07-i",
+    "label": "Hospitality & food",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "R",
+    "panorama_id": "uk-sic07-r",
+    "label": "Arts & recreation",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "S",
+    "panorama_id": "uk-sic07-s",
+    "label": "Other services",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  },
+  {
+    "sic": "T",
+    "panorama_id": "uk-sic07-t",
+    "label": "Household employment",
+    "represented": true,
+    "navigable_research_subjourney": null,
+    "existing_source_owner": "cios/applications/flora/visual_v2_assets/economy.json",
+    "baseline_size_status": "Frozen candidate presentation extract; no canonical acceptance asserted",
+    "baseline_depth": "No uniform section-level foundational dossier found in current visual owner"
+  }
+]
