@@ -107,7 +107,7 @@ def test_wrong_candidate_pair_and_other_workspace_pipeline_are_denied(pilot):
 
 
 def test_http_private_caching_unknown_query_and_non_mutating_gets(pilot,web):
-    r,args=pair(pilot);before=fingerprint();route=qa.BASE+'?offer='+r['offer_id']+'&enterprise=santander-uk&candidate='+r['id']+'&cutoff=2026-11-13'
+    r,args=pair(pilot);before=fingerprint();route=qa.BASE+'?view=advanced&offer='+r['offer_id']+'&enterprise=santander-uk&candidate='+r['id']+'&cutoff=2026-11-13'
     assert web(qa.BASE,authenticated=False)[0]==403
     status,html,_=web(route);assert status==200 and 'Actual matcher conditions' in html and 'Qualification input completeness' in html
     assert web.last_headers.get('Cache-Control')=='no-store'
@@ -150,7 +150,7 @@ def test_source_content_and_private_notes_are_plain_text_not_instructions(pilot,
         return targets
     monkeypatch.setattr(qa.research,'accounts',injected)
     from cios.applications.flora import opportunity_assurance_views
-    html=opportunity_assurance_views.render(qa.BASE,{'offer':[r['offer_id']],'enterprise':['santander-uk'],'candidate':[r['id']]},pilot['owner'])
+    html=opportunity_assurance_views.render(qa.BASE,{'offer':[r['offer_id']],'enterprise':['santander-uk'],'candidate':[r['id']],'view':['advanced']},pilot['owner'])
     assert '<script>example</script>' not in html and '<script>source</script>' not in html and '&lt;script&gt;source&lt;/script&gt;' in html
     assert not qa.inspect_pair(**args)['original_readiness']['ready'] and fingerprint()==before
 
@@ -180,10 +180,10 @@ def test_ten_complete_hypothesis_notes_can_still_fail_customer_validation(pilot)
 def test_queue_filters_and_pagination_never_change_scope_or_evaluations(pilot):
     from cios.applications.flora.opportunity_assurance_views import render
     pair(pilot);before=fingerprint()
-    html=render(qa.BASE,{'tier':['Research only'],'sort':['enterprise']},pilot['owner'])
+    html=render(qa.BASE,{'tier':['Research only'],'sort':['enterprise'],'view':['advanced']},pilot['owner'])
     assert html.count('class="assurance-row"')<=10 and 'Research only' in html
     with pytest.raises(ValueError):render(qa.BASE,{'page':['-1']},pilot['owner'])
-    with pytest.raises(ValueError):render(qa.BASE,{'tier':['Qualified']},pilot['owner'])
+    with pytest.raises(ValueError):render(qa.BASE,{'tier':['Qualified'],'view':['advanced']},pilot['owner'])
     assert fingerprint()==before
 
 
@@ -196,3 +196,30 @@ def test_complete_reviewed_inputs_without_explicit_qualify_decision_still_block_
     assert not d['original_handoff_checks']['write_authorised_by_inspection']
     with pytest.raises(ValueError):dev.handoff(r['id'],2,True,headers=pilot['owner'])
     assert not pipeline._path().exists()
+
+
+def test_commercial_default_is_separate_from_forensic_inspection_and_preserves_santander_history(pilot):
+    from cios.applications.flora.opportunity_assurance_views import render
+    from cios.applications.flora.opportunity_assurance_commercial import summary
+    r,args=pair(pilot);before=fingerprint();d=qa.inspect_pair(**args)
+    q={'offer':[r['offer_id']],'enterprise':['santander-uk'],'candidate':[r['id']],'cutoff':['2026-11-13']}
+    html=render(qa.BASE,q,pilot['owner'])
+    for label in ('Potential business challenge','Opportunity to influence','Best next action','Biggest uncertainty','Advanced Inspection'):assert label in html
+    assert 'potentially late' in html and 'open procurement' in html and 'does not establish' in html
+    assert 'BTI-TSB-' not in html and 'evaluation_trace' not in html and 'qualification input completeness' not in html.lower() and 'Prioritise' not in html
+    assert '30 April 2026' in html and 'H2 2027' in html
+    advanced=render(qa.BASE,q|{'view':['advanced']},pilot['owner'])
+    assert 'BTI-TSB-MIGRATION' in advanced and 'research-validation priority' in advanced
+    assert d['original']['buying_trigger']['tier']=='Prioritise' and fingerprint()==before
+    restricted=deepcopy(d['original']);restricted['buying_trigger'].update(tier='Research only',shortlist_eligible=False)
+    assert summary(restricted)['outcome']=='Research only' and 'restrictions' in summary(restricted)['next_action']
+    earlier=qa.inspect_pair(r['offer_id'],'santander-uk','2026-11-09',headers=pilot['owner'])
+    assert summary(earlier['original'])['outcome']=='Research only' and '30 April' not in summary(earlier['original'])['context']
+
+
+def test_editorial_summary_is_not_an_influence_model_or_new_sales_ranking(pilot):
+    from cios.applications.flora.opportunity_assurance_commercial import summary
+    r,args=pair(pilot,4,'lloyds');d=qa.inspect_pair(**args);copy=summary(d['original'])
+    assert copy['outcome']=='Research only' and 'early' not in copy['outcome'].lower()
+    assert not {'score','influence_score','influence_tier','funding','procurement'}&copy.keys()
+    assert d['original']['buying_trigger']['tier']=='Research only'

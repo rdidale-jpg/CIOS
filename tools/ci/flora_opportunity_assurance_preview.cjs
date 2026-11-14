@@ -8,7 +8,7 @@ function check(v,label){assert(v,label);checks.push(label)}
   await p.goto(server.base+'/auth/sign-in');await p.locator('[name=user_id]').fill('preview-strategic');await p.locator('[name=password]').fill(cfg.password);
   await Promise.all([p.waitForURL('**/auth/workspace'),p.getByRole('button',{name:'Sign in',exact:true}).click()]);await Promise.all([p.waitForURL('**/blueprint-import/history'),p.getByRole('button',{name:'Select workspace'}).click()]);
   const base='/flora/command-centre/opportunity-assurance';
-  const routes=after?{overview:base+'?cutoff=2026-11-13',...Object.fromEntries(Object.entries(server.development).map(([key,id])=>[key,base+'?'+new URLSearchParams({offer:server.strategic.offers[{'digital':'tech-strategic-digital-transformation','legacy':'tech-strategic-complex-legacy-modernisation','ai':'tech-strategic-ai-first-transformation','cyber':'tech-strategic-cybersecurity-resilience','esg':'tech-strategic-social-value-esg'}[key]],enterprise:key==='digital'||key==='legacy'?'santander-uk':key==='cyber'?'computacenter':'lloyds',candidate:id,cutoff:'2026-11-13'})]))}:{development:'/flora/offers/development'};
+  const routes={overview:base+'?cutoff=2026-11-13',...Object.fromEntries(Object.entries(server.development).map(([key,id])=>[key,base+'?'+new URLSearchParams({offer:server.strategic.offers[{'digital':'tech-strategic-digital-transformation','legacy':'tech-strategic-complex-legacy-modernisation','ai':'tech-strategic-ai-first-transformation','cyber':'tech-strategic-cybersecurity-resilience','esg':'tech-strategic-social-value-esg'}[key]],enterprise:key==='digital'||key==='legacy'?'santander-uk':key==='cyber'?'computacenter':'lloyds',candidate:id,cutoff:'2026-11-13'})]))};
   for(const [device,size] of Object.entries(sizes)){
    await p.setViewportSize(size);
    for(const [name,route] of Object.entries(routes)){
@@ -16,16 +16,24 @@ function check(v,label){assert(v,label);checks.push(label)}
     check(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),phase+' '+device+' '+name+': no horizontal overflow');
     check(await p.locator('h1').count()===1,phase+' '+device+' '+name+': one heading');check(await p.locator('nav[aria-label="Primary product navigation"]').count()===1,phase+' '+device+' '+name+': one header');
     if(after&&name!=='overview'){
-     const main=await p.locator('main').innerText();check(main.includes('Qualification input completeness'),device+' '+name+': explicit denominator');check(main.includes('Independently verified buyer need: Not established'),device+' '+name+': no false buyer verification');
-     if(name==='digital')check(main.includes('10/10 inputs · 100% input completeness'),device+': ten complete inputs are not accuracy');
+     const main=await p.locator('main').innerText();
+     for(const label of ['Potential business challenge','Opportunity to influence','Best next action','Biggest uncertainty'])check(main.includes(label),device+' '+name+': '+label);
+     check(!/BTI-|evaluation_trace|Qualification input completeness|Prioritise validation/.test(main),device+' '+name+': technical trace absent from default');
+     check(await p.locator('summary').filter({hasText:'Advanced Inspection'}).count()===1,device+' '+name+': optional Advanced Inspection');
+     if(['digital','legacy'].includes(name))check(main.includes('potentially late')&&main.includes('does not establish'),device+' '+name+': no assumed early shaping opportunity');
      if(name==='esg')check(main.includes('Research only'),device+': ESG abstention');
-     await p.locator('[name=challenge]').focus();check(await p.locator('[name=challenge]').evaluate(e=>e===document.activeElement),device+' '+name+': keyboard challenge selector');
     }
     await p.evaluate(()=>{document.activeElement?.blur();scrollTo(0,0)});await p.screenshot({path:path.join(cfg.output,device+'-'+name+'-'+phase+'.jpg'),type:'jpeg',quality:85,fullPage:true});
    }
   }
   if(after){
-   await p.setViewportSize(sizes.desktop);await p.goto(server.base+routes.digital);
+   for(const [device,size] of Object.entries(sizes)){
+    await p.setViewportSize(size);await p.goto(server.base+routes.digital+'&view=advanced');
+    check((await p.locator('main').innerText()).includes('10/10 inputs · 100% input completeness'),device+': preserved ten-criterion detail');
+    await p.locator('[name=challenge]').focus();check(await p.locator('[name=challenge]').evaluate(e=>e===document.activeElement),device+': native advanced keyboard focus');
+    await p.screenshot({path:path.join(cfg.output,device+'-advanced-after.jpg'),type:'jpeg',quality:85,fullPage:true});
+   }
+   await p.setViewportSize(sizes.desktop);await p.goto(server.base+routes.digital+'&view=advanced');
    await p.locator('[name=challenge]').selectOption('Withdraw source');await p.locator('[name=source]').selectOption('BTI-TSB-TRANSFER');
    await Promise.all([p.waitForNavigation(),p.getByRole('button',{name:'Compare without saving'}).click()]);
    check((await p.locator('main').innerText()).includes('Prioritise → Research only'),'Withdrawal weakens real matcher result');check((await p.locator('main').innerText()).includes('Existing Pipeline unchanged'),'Existing Pipeline is not edited');
