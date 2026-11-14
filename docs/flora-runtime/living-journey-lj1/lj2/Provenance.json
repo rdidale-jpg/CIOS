@@ -1,0 +1,15 @@
+{
+  "authority": "Design-only; no original source/status/rights changes",
+  "UK": "Original panorama and 20 positions; registry visual_v2.RESEARCH",
+  "banking": "New image_gen purpose-composition, then image_gen removal of five unwanted empty plaques; no publisher photo, logo, real premises or ownership claim",
+  "lloyds": "Retained independent LJ-1R enterprise world, not a crop of Banking",
+  "assets": {
+    "uk-economy.webp": "ff4f70c21fcfe733affd0405021fa24386f5edaeb3497a10596550d9dbed0567",
+    "lloyds-world.png": "98c0794e6cd78a9658eb00fce7327c9ffa998bcf83256301a513226e85ec0383",
+    "banking-combined.png": "2661db421634f422e571066152450cce92261ff714a4ed34c0bfe1e6a243d0af"
+  },
+  "actor_metric_mapping": "Landscape-Trace.json; all five bank identities now share Banking scene",
+  "force_mapping": "Force-Trace.json",
+  "growth": "Frozen ONS +0.7% real GDP, 3 months to Sep 2026 vs prior 3 months; separate from 2024 current-price GVA",
+  "gaps": "Nine original research gaps unchanged; macro coverage deficiency separately documented"
+}

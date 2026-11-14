@@ -1,0 +1,431 @@
+{
+  "devices": {
+    "desktop": {
+      "width": 1440,
+      "height": 1000
+    },
+    "ipad-landscape": {
+      "width": 1194,
+      "height": 834
+    },
+    "ipad-portrait": {
+      "width": 834,
+      "height": 1194
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844
+    },
+    "mobile-320": {
+      "width": 320,
+      "height": 780
+    }
+  },
+  "checks": [
+    {
+      "device": "desktop",
+      "state": "01-uk",
+      "labels": 20,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "desktop",
+      "state": "02-banking",
+      "labels": 6,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "desktop",
+      "state": "03-groups",
+      "labels": 5,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "desktop",
+      "state": "04-lloyds",
+      "labels": 5,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "desktop",
+      "state": "02-banking",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "desktop",
+      "state": "02-banking",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "desktop",
+      "state": "03-groups",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "desktop",
+      "state": "03-groups",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "desktop",
+      "state": "04-lloyds",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "desktop",
+      "state": "04-lloyds",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "ipad-landscape",
+      "state": "01-uk",
+      "labels": 20,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "ipad-landscape",
+      "state": "02-banking",
+      "labels": 6,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "ipad-landscape",
+      "state": "03-groups",
+      "labels": 5,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "ipad-landscape",
+      "state": "04-lloyds",
+      "labels": 5,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "ipad-landscape",
+      "state": "02-banking",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "ipad-landscape",
+      "state": "02-banking",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "ipad-landscape",
+      "state": "03-groups",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "ipad-landscape",
+      "state": "03-groups",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "ipad-landscape",
+      "state": "04-lloyds",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "ipad-landscape",
+      "state": "04-lloyds",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "ipad-portrait",
+      "state": "01-uk",
+      "labels": 20,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "ipad-portrait",
+      "state": "02-banking",
+      "labels": 6,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "ipad-portrait",
+      "state": "03-groups",
+      "labels": 5,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "ipad-portrait",
+      "state": "04-lloyds",
+      "labels": 5,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "ipad-portrait",
+      "state": "02-banking",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "ipad-portrait",
+      "state": "02-banking",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "ipad-portrait",
+      "state": "03-groups",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "ipad-portrait",
+      "state": "03-groups",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "ipad-portrait",
+      "state": "04-lloyds",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "ipad-portrait",
+      "state": "04-lloyds",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "mobile",
+      "state": "01-uk",
+      "labels": 20,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "mobile",
+      "state": "02-banking",
+      "labels": 6,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "mobile",
+      "state": "03-groups",
+      "labels": 5,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "mobile",
+      "state": "04-lloyds",
+      "labels": 5,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "mobile",
+      "state": "02-banking",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "mobile",
+      "state": "02-banking",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "mobile",
+      "state": "03-groups",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "mobile",
+      "state": "03-groups",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "mobile",
+      "state": "04-lloyds",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "mobile",
+      "state": "04-lloyds",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "mobile-320",
+      "state": "01-uk",
+      "labels": 20,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "mobile-320",
+      "state": "02-banking",
+      "labels": 6,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "mobile-320",
+      "state": "03-groups",
+      "labels": 5,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "mobile-320",
+      "state": "04-lloyds",
+      "labels": 5,
+      "noOverflow": true,
+      "labelBounds": true,
+      "noLabelCollision": true,
+      "minimumLabelFont": 14,
+      "noJS": true
+    },
+    {
+      "device": "mobile-320",
+      "state": "02-banking",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "mobile-320",
+      "state": "02-banking",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "mobile-320",
+      "state": "03-groups",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "mobile-320",
+      "state": "03-groups",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "mobile-320",
+      "state": "04-lloyds",
+      "layer": "suppliers",
+      "pass": true
+    },
+    {
+      "device": "mobile-320",
+      "state": "04-lloyds",
+      "layer": "regulators",
+      "pass": true
+    },
+    {
+      "device": "desktop",
+      "journey": "UK → Banking → neutral five-bank selection → Lloyds; optional future Studio; layer-aware back",
+      "pass": true
+    },
+    {
+      "device": "mobile",
+      "journey": "UK → Banking → neutral five-bank selection → Lloyds; optional future Studio; layer-aware back",
+      "pass": true
+    }
+  ],
+  "accessibility": [
+    "native links and disclosures",
+    "keyboard skip and focusable context targets",
+    "20 unique original UK labels; exactly 3 outlines",
+    "no-JS neutral five-bank selection",
+    "Lloyds optional Studio not implemented",
+    "no overlap, label bounds and >=14px primary labels",
+    "720px zoom-width",
+    "ARIA snapshot retained"
+  ],
+  "limits": [
+    "Not a physical iPad/Safari or NVDA/VoiceOver certification",
+    "New full-resolution art is about 4MB per scene; production responsive encoding remains unimplemented",
+    "Static anonymous design; does not exercise or change live auth/Offers/Pipeline"
+  ]
+}

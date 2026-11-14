@@ -1,0 +1,42 @@
+- main:
+  - navigation "Current scope":
+    - link "UK":
+      - /url: 01-uk.html
+    - text: ›
+    - link "Banking":
+      - /url: 02-banking.html
+    - text: ›
+    - link "Groups":
+      - /url: 03-groups.html
+  - heading "Lloyds Banking Group" [level=1]
+  - group: Layers
+  - paragraph:
+    - strong: £502.8bn
+    - text: Group deposits · 30 Sep 2026
+    - strong: £6.6bn
+    - text: Group statutory pretax profit · nine months to 30 Sep 2026
+  - figure "Illustrated Lloyds commercial world":
+    - link "Explore Household customers":
+      - /url: "#customers"
+      - text: Household customers Deposits, lending & payments
+    - link "Explore Business areas & brands":
+      - /url: "#businesses"
+      - text: "Business areas & brands Halifax branches: 2027 plan"
+    - link "Explore Income & capital":
+      - /url: "#economics"
+      - text: Income & capital 2030 cost:income target <45%
+    - link "Explore Business customers":
+      - /url: "#operations"
+      - text: Business customers Credit, payments & service
+    - link "Explore Data, cloud & AI":
+      - /url: "#technology"
+      - text: Data, cloud & AI Envoy · Google Cloud
+  - region "Commercial interpretation":
+    - paragraph:
+      - strong: Deposits & customer relationships → lending and hedge → interest, fees & capital.
+    - paragraph: Modernise core systems and scale AI while protecting service and proving benefits.
+    - paragraph: What customer outcome remains unresolved beyond existing programmes?
+  - group: Model the Enterprise · future tool
+  - group: Text view
+  - link "← Back":
+    - /url: 03-groups.html

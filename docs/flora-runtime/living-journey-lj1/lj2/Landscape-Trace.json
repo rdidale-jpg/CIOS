@@ -1,0 +1,454 @@
+{
+  "authority": "Design trace map only; not a second evidence, relationship or Twin store",
+  "audit": "Research-Audit.json",
+  "bindings": [
+    {
+      "screen": 1,
+      "label": "Agriculture & fishing",
+      "binding": "uk-sic07-a",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Mining & quarrying",
+      "binding": "uk-sic07-b",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Energy supply",
+      "binding": "uk-sic07-d",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Water & waste",
+      "binding": "uk-sic07-e",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Manufacturing",
+      "binding": "uk-sic07-c",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Construction",
+      "binding": "uk-sic07-f",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Business support",
+      "binding": "uk-sic07-n",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Transport & logistics",
+      "binding": "uk-sic07-h",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": true,
+      "route": [
+        "Aviation",
+        "/industries/aviation"
+      ]
+    },
+    {
+      "screen": 1,
+      "label": "Education",
+      "binding": "uk-sic07-p",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Health & social care",
+      "binding": "uk-sic07-q",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Information & communication",
+      "binding": "uk-sic07-j",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": true,
+      "route": [
+        "Technology",
+        "/industries/technology/experience"
+      ]
+    },
+    {
+      "screen": 1,
+      "label": "Professional services",
+      "binding": "uk-sic07-m",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Real estate",
+      "binding": "uk-sic07-l",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Finance & insurance",
+      "binding": "uk-sic07-k",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": true,
+      "route": [
+        "Banking",
+        "/industries/banking"
+      ]
+    },
+    {
+      "screen": 1,
+      "label": "Public administration",
+      "binding": "uk-sic07-o",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Retail & wholesale",
+      "binding": "uk-sic07-g",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Hospitality & food",
+      "binding": "uk-sic07-i",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Arts & recreation",
+      "binding": "uk-sic07-r",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Other services",
+      "binding": "uk-sic07-s",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 1,
+      "label": "Household employment",
+      "binding": "uk-sic07-t",
+      "owner": "visual_v2_assets/economy.json",
+      "scope": "UK SIC 2007 section; researched link is narrower",
+      "period": "2024 national-accounts basis",
+      "status": "frozen public presentation; no new verification",
+      "rights": "Original approved FLORA art; inherited ONS/OGL source limits",
+      "available": false,
+      "route": null
+    },
+    {
+      "screen": 2,
+      "label": "Bank of England",
+      "binding": "boe",
+      "owner_or_claim": "Banking-Industry-Foundation.md refs [4],[6]",
+      "scope": "Central bank / financial-stability and settlement context; no firm contract",
+      "period": "Inherited industry reference; no new institutional verification",
+      "gap": "REG-01 / INF-01",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 2,
+      "label": "PRA",
+      "binding": "pra",
+      "owner_or_claim": "Foundation ref [10]; PR-PRA-PS726",
+      "scope": "BoE prudential function / sector-policy actor; not independent bank or proven entity-specific supervisor",
+      "period": "2026 policy; prospective implementation 18 Mar 2027",
+      "gap": "REG-01",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 2,
+      "label": "Banking groups",
+      "binding": "groups",
+      "owner_or_claim": "BANKS; enterprise identity references",
+      "scope": "Selected bank enterprises, not a census, ownership assertion or financial ranking",
+      "period": "Historical profile context",
+      "gap": "ORG-01",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 2,
+      "label": "Households & businesses",
+      "binding": "customers",
+      "owner_or_claim": "Foundation customer model / ref [3]",
+      "scope": "Household and business customer categories, no named contracts",
+      "period": "Inherited 2026 research / Financial Lives 2024 reference",
+      "gap": "REL-01",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 2,
+      "label": "Payments",
+      "binding": "payments",
+      "owner_or_claim": "Foundation sections 3/6; ref [4]",
+      "scope": "CHAPS/RTGS, Bacs, Faster Payments as infrastructure roles, not supplier contracts",
+      "period": "Inherited dated references; participation/owner detail unverified",
+      "gap": "INF-01",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 2,
+      "label": "FCA",
+      "binding": "fca",
+      "owner_or_claim": "Foundation refs [2],[3]; PR-FCA-RES26",
+      "scope": "Separate conduct actor; firm/activity applicability unverified",
+      "period": "Original page publication 2017; reviewed 2026 update retained",
+      "gap": "REG-01",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 3,
+      "label": "Barclays",
+      "binding": "barclays",
+      "owner_or_claim": "BANKS / existing Enterprise Twins",
+      "scope": "Portfolio enterprise identity; HSBC UK is not HSBC Group; real HQ/location/height comparisons not asserted",
+      "period": "Profile dates vary; detailed current enrichment incomplete",
+      "gap": "ORG-01 / FIN-02",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 3,
+      "label": "HSBC UK",
+      "binding": "hsbc-uk",
+      "owner_or_claim": "BANKS / existing Enterprise Twins",
+      "scope": "Portfolio enterprise identity; HSBC UK is not HSBC Group; real HQ/location/height comparisons not asserted",
+      "period": "Profile dates vary; detailed current enrichment incomplete",
+      "gap": "ORG-01 / FIN-02",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 3,
+      "label": "Lloyds Banking Group",
+      "binding": "lloyds",
+      "owner_or_claim": "BANKS / existing Enterprise Twins",
+      "scope": "Portfolio enterprise identity; HSBC UK is not HSBC Group; real HQ/location/height comparisons not asserted",
+      "period": "Profile dates vary; detailed current enrichment incomplete",
+      "gap": "ORG-01 / FIN-02",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 3,
+      "label": "NatWest Group",
+      "binding": "natwest",
+      "owner_or_claim": "BANKS / existing Enterprise Twins",
+      "scope": "Portfolio enterprise identity; HSBC UK is not HSBC Group; real HQ/location/height comparisons not asserted",
+      "period": "Profile dates vary; detailed current enrichment incomplete",
+      "gap": "ORG-01 / FIN-02",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 3,
+      "label": "Santander UK",
+      "binding": "santander-uk",
+      "owner_or_claim": "BANKS / existing Enterprise Twins",
+      "scope": "Portfolio enterprise identity; HSBC UK is not HSBC Group; real HQ/location/height comparisons not asserted",
+      "period": "Profile dates vary; detailed current enrichment incomplete",
+      "gap": "ORG-01 / FIN-02",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 4,
+      "label": "Household customers",
+      "binding": "customers",
+      "owner_or_claim": "Lloyds-Enterprise-Twin.md + Foundation customer mechanisms",
+      "scope": "Household deposit, credit/payment roles; not named customer contracts",
+      "period": "Historic Twin effective 17 Jul 2026; not a new current customer count",
+      "gap": "REL-01",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 4,
+      "label": "Business areas & brands",
+      "binding": "businesses",
+      "owner_or_claim": "LBG-BRAND26-TIMING + BANKS historical brands",
+      "scope": "Halifax branch-brand transition planned through 2027; current segment/subsidiary/brand hierarchy unverified",
+      "period": "Announcement 1 Jul 2026; future delivery not assumed",
+      "gap": "ORG-01",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 4,
+      "label": "Income & capital",
+      "binding": "economics",
+      "owner_or_claim": "LBG-Q326-DEPOSITS / LBG-Q326-PROFIT / LBG-A2030-CIR / SAVINGS; Twin economic mechanism",
+      "scope": "Reported stock/flow and explicitly labelled strategy targets; no simulated P&L or savings allocation",
+      "period": "Actuals at/for nine months to Sep 2026; strategy 2027\u20132030",
+      "gap": "FIN-01 / FIN-02",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 4,
+      "label": "Business customers",
+      "binding": "operations",
+      "owner_or_claim": "Foundation customer model; LBG-Q326-INVESTMENT; core-modernisation strategy",
+      "scope": "Business customer roles and operating pressures, not Lloyds ownership of depicted factories or a verified system map",
+      "period": "2026 strategy context; current implementation unverified",
+      "gap": "OPS-01",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    },
+    {
+      "screen": 4,
+      "label": "Data, cloud & AI",
+      "binding": "technology",
+      "owner_or_claim": "LBG-ENVOY-GOOGLE / CONTROLS; older VERTEX / MODELS context",
+      "scope": "Named Envoy platform collaboration only; no exclusivity, renewal or workshare",
+      "period": "HTML 1 May 2026; 2025 Vertex context separate",
+      "gap": "OPS-01 / REL-01",
+      "status": "Existing source-supported / historical context / interpretation as specified in Research-Audit; artwork is not evidence",
+      "rights": "New generated conceptual artwork and paraphrased existing references; source rights unchanged"
+    }
+  ],
+  "relationship_semantics": [
+    {
+      "subject": "BK-ENT-001",
+      "predicate": "reported_uses",
+      "object": "SUP-GOOGLE",
+      "source_relation": "REV-ENVOY-GOOGLE",
+      "claim": "LBG-ENVOY-GOOGLE",
+      "display": "Envoy \u00b7 Google Cloud",
+      "status": "Source-supported announced collaboration; not current contract scope or independent implementation proof"
+    },
+    {
+      "institution": "PRA",
+      "display_role": "Prudential function within Bank of England",
+      "source_context": "Foundation [10] and PRA/Bank of England policy metadata",
+      "verification_boundary": "Institutional/legal detail and firm applicability remain REG-01 gap; no standalone commercial-entity or firm edge"
+    },
+    {
+      "institution": "FCA",
+      "display_role": "Distinct conduct-regulatory context",
+      "source_context": "PR-FCA-RES26 / Foundation [2]",
+      "verification_boundary": "No inferred Lloyds legal-entity obligation"
+    }
+  ]
+}

@@ -1,0 +1,391 @@
+{
+  "authority": "Design read projection only. No Material Pressure qualified; ADR-026 gates and original owners untouched. No second intelligence model.",
+  "scopes": {
+    "uk": [
+      {
+        "id": "political",
+        "title": "Public buying",
+        "text": "From January 2027, the reviewed social-value policy covers specified UK central-government tenders. Contract scope and transition rules matter.",
+        "date": "2026-11-11",
+        "question": "Aviation procurement \u00b7 test the actual tender criteria before shaping a bid.",
+        "counter": "From 1 January 2027, PPN 026 covers specified central-government procurements of \u00a31m or more, inclusive of VAT; framework and transition rules matter. Private utilities and primarily overseas delivery are excluded; transitions and framework/call-off rules require review. French procurements do not inherit this policy. Existing review cutoff: 2026-11-11. This is UK relevance of a wider theme, not global prevalence or verified company impact.",
+        "source_ids": [
+          "GM-SOCIAL"
+        ],
+        "sources": [
+          {
+            "id": "GM-SOCIAL",
+            "title": "PPN 026: Social Value Model",
+            "url": "https://www.gov.uk/government/publications/ppn-026-the-social-value-model/ppn-026-the-social-value-model-html",
+            "publication_date": "2026-08-05"
+          }
+        ],
+        "status": "candidate_intelligence",
+        "kind": "policy_priority"
+      },
+      {
+        "id": "economic",
+        "title": "Economic growth",
+        "text": "Services led UK real GDP growth of 0.7% in the three months to September 2026 versus the previous three months. Volume change, separate from 2024 current-price GVA.",
+        "date": "2026-11-13",
+        "question": "Commercial question \u00b7 which customers face a change in demand or capacity?",
+        "counter": "UK aggregate only; not industry growth, global growth, a forecast or an enterprise buying signal. Publication: 12 November 2026. Preliminary and subject to revision.",
+        "source_ids": [
+          "ONS-GDP-2026-09"
+        ],
+        "sources": [
+          {
+            "id": "ONS-GDP-2026-09",
+            "title": "ONS GDP monthly estimate: September 2026",
+            "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+            "publication_date": "2026-11-12"
+          }
+        ],
+        "status": "public presentation extract; not a canonical accepted observation",
+        "kind": "frozen public extract"
+      },
+      {
+        "id": "social",
+        "title": "Social value",
+        "text": "Covered UK public tenders connect social-value promises to delivery commitments. Start with the outcomes the specific contract requests.",
+        "date": "2026-11-11",
+        "question": "Commercial question \u00b7 how will the proposed outcomes be measured?",
+        "counter": "From 1 January 2027, PPN 026 covers specified central-government procurements of \u00a31m or more, inclusive of VAT; framework and transition rules matter. Private utilities and primarily overseas delivery are excluded; transitions and framework/call-off rules require review. French procurements do not inherit this policy. Existing review cutoff: 2026-11-11. This is UK relevance of a wider theme, not global prevalence or verified company impact.",
+        "source_ids": [
+          "GM-SOCIAL"
+        ],
+        "sources": [
+          {
+            "id": "GM-SOCIAL",
+            "title": "PPN 026: Social Value Model",
+            "url": "https://www.gov.uk/government/publications/ppn-026-the-social-value-model/ppn-026-the-social-value-model-html",
+            "publication_date": "2026-08-05"
+          }
+        ],
+        "status": "candidate_intelligence",
+        "kind": "policy_priority"
+      },
+      {
+        "id": "technological",
+        "title": "Cyber resilience",
+        "text": "UK cyber evidence is aggregate. Trace critical services through technology and supplier dependencies before proposing change.",
+        "date": "2026-11-11",
+        "question": "Banking & Aviation \u00b7 an exposure to test, not evidence of a company incident.",
+        "counter": "Cyber risk crosses markets; the exposure belongs to a specific service and entity. Aggregate threat evidence does not establish an enterprise incident, control weakness or external services gap. Existing review cutoff: 2026-11-11. This is UK relevance of a wider theme, not global prevalence or verified company impact.",
+        "source_ids": [
+          "GM-CYBER-GB"
+        ],
+        "sources": [
+          {
+            "id": "GM-CYBER-GB",
+            "title": "Cyber security breaches survey 2025/2026",
+            "url": "https://www.gov.uk/government/statistics/cyber-security-breaches-survey-20252026/cyber-security-breaches-survey-20252026",
+            "publication_date": "2026-04-30"
+          }
+        ],
+        "status": "candidate_intelligence",
+        "kind": "threat_or_scenario"
+      },
+      {
+        "id": "legal",
+        "title": "Cyber reform",
+        "text": "UK cyber reform was still proposed legislation at the November review. Recheck parliamentary status and the final entity and activity scope.",
+        "date": "2026-11-11",
+        "question": "Banking & Aviation \u00b7 monitor the proposal; do not infer non-compliance.",
+        "counter": "Parliamentary stages still show consideration of Lords amendments pending at this review. No Royal Assent or final enterprise applicability is established by this reviewed passage. Existing review cutoff: 2026-11-11. This is UK relevance of a wider theme, not global prevalence or verified company impact.",
+        "source_ids": [
+          "GM-BILL"
+        ],
+        "sources": [
+          {
+            "id": "GM-BILL",
+            "title": "Cyber Security and Resilience Bill stages",
+            "url": "https://bills.parliament.uk/bills/4035/stages",
+            "publication_date": null
+          }
+        ],
+        "status": "candidate_intelligence",
+        "kind": "proposed_legislation"
+      },
+      {
+        "id": "environmental",
+        "title": "Climate reporting",
+        "text": "Reviewed FCA rules cover specified listed issuers from accounting periods starting January 2027. First reporting is in 2028; reliefs matter.",
+        "date": "2026-11-11",
+        "question": "Banking & Aviation \u00b7 test reporting-data and control needs with the exact issuer.",
+        "counter": "FCA final rules introduce comply-or-explain UK SRS reporting for specified listing categories, for accounting periods starting from 1 January 2027. First reporting is in 2028; reliefs and scope matter. Existing internal teams or advisers may already cover the work. Existing review cutoff: 2026-11-11. This is UK relevance of a wider theme, not global prevalence or verified company impact.",
+        "source_ids": [
+          "GM-SRS"
+        ],
+        "sources": [
+          {
+            "id": "GM-SRS",
+            "title": "PS26/19: listed issuers and UK SRS",
+            "url": "https://www.fca.org.uk/publications/policy-statements/ps26-19-aligning-listed-issuers-sustainability-disclosures-international-standards",
+            "publication_date": "2026-09-30"
+          }
+        ],
+        "status": "candidate_intelligence",
+        "kind": "regulatory_rule"
+      }
+    ],
+    "banking": [
+      {
+        "id": "UK-RATE-NOV26",
+        "title": "Rates & margins",
+        "text": "The November policy decision raises Bank Rate to 4%. Enterprise deposit sensitivity remains an analytical question, not a proven impact.",
+        "date": "Meeting ending 4 November 2026",
+        "question": "Which funding sensitivities apply to this bank?",
+        "counter": "Rate direction alone does not establish lost margin or customer demand.",
+        "source_ids": [
+          "PR-BOE-NOV26"
+        ],
+        "sources": [
+          {
+            "id": "PR-BOE-NOV26",
+            "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+            "title": "Bank of England November rate decision",
+            "publication_date": "2026-11-05"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "reported_fact"
+      },
+      {
+        "id": "UK-PRA-REPORT27",
+        "title": "Resilience reporting",
+        "text": "PRA incident/third-party reporting changes take effect in March 2027. Confirm each regulated entity\u2019s scope and existing readiness.",
+        "date": "Final policy; implementation 18 March 2027",
+        "question": "Which legal entities and existing controls are in scope?",
+        "counter": "The firm may already be ready; deadline is not external scope.",
+        "source_ids": [
+          "PR-PRA-PS726"
+        ],
+        "sources": [
+          {
+            "id": "PR-PRA-PS726",
+            "url": "https://www.bankofengland.co.uk/prudential-regulation/publication/2026/march/operational-incident-and-third-party-reporting-policy-statement",
+            "title": "PRA incident and third-party policy",
+            "publication_date": "2026-03-18"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "regulatory_requirement"
+      },
+      {
+        "id": "UK-FCA-REPORT27",
+        "title": "Customer outcomes",
+        "text": "FCA reporting preparation runs to March 2027; a regulatory deadline does not itself prove Lloyds has an unmet need.",
+        "date": "Page last updated 15 September 2026; March 2027 reporting commencement",
+        "question": "Which service outcome remains unresolved?",
+        "counter": "Industry rule does not prove this bank has an unmet need.",
+        "source_ids": [
+          "PR-FCA-RES26"
+        ],
+        "sources": [
+          {
+            "id": "PR-FCA-RES26",
+            "url": "https://www.fca.org.uk/firms/operational-resilience",
+            "title": "FCA resilience and reporting update",
+            "publication_date": "2017-05-13"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "regulatory_requirement"
+      },
+      {
+        "id": "LBG-ENVOY-CONTROLS",
+        "title": "AI & control",
+        "text": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+        "date": "Announced platform capability; not current effectiveness evidence",
+        "question": "What outcome is not covered by current platforms?",
+        "counter": "Lloyds is an enterprise example, not evidence for every bank; controls already exist.",
+        "source_ids": [
+          "PR-LBG-ENVOY"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-ENVOY",
+            "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+            "title": "Lloyds Envoy announcement",
+            "publication_date": "2026-05-01"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "reported_fact"
+      },
+      {
+        "id": "UK-VALUE",
+        "title": "Competition & trust",
+        "text": "Existing research models customer value through safe money storage, payments, credit, identity, fraud protection and support.",
+        "date": "Industry value-system interpretation",
+        "question": "Which relationship or customer friction is material?",
+        "counter": "Conceptual value-system interpretation, not a dated loss of market share.",
+        "source_ids": [
+          "SRC-FCA-MODELS"
+        ],
+        "sources": [
+          {
+            "id": "SRC-FCA-MODELS",
+            "url": "https://www.fca.org.uk/publications/multi-firm-reviews/strategic-review-retail-banking-business-models",
+            "title": "Strategic review of retail banking business models",
+            "publication_date": null
+          }
+        ],
+        "status": "repository_reported",
+        "kind": "interpretation"
+      },
+      {
+        "id": "UK-CTP",
+        "title": "Technology dependence",
+        "text": "Existing research cites a critical-third-party oversight regime; designation and effective dates are not re-verified.",
+        "date": "Existing industry evidence anchor; dates unverified",
+        "question": "Which specific service has a proven exposure?",
+        "counter": "Older repository reference; designation dates are not newly verified.",
+        "source_ids": [
+          "SRC-HMT-CTP"
+        ],
+        "sources": [
+          {
+            "id": "SRC-HMT-CTP",
+            "url": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+            "title": "Critical third-party safeguards announcement cited by existing research",
+            "publication_date": null
+          }
+        ],
+        "status": "repository_reported",
+        "kind": "reported_fact"
+      }
+    ],
+    "lloyds": [
+      {
+        "id": "LBG-A2030-PLATFORMS",
+        "title": "Core modernisation",
+        "text": "Accelerate 2030 explicitly prioritises core-platform renewal.",
+        "date": "Strategy for 2027\u20132030",
+        "question": "Which migration decision is still open?",
+        "counter": "A stated priority does not reveal supplier scope or decision dates.",
+        "source_ids": [
+          "PR-LBG-A2030"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-A2030",
+            "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+            "title": "Lloyds Accelerate 2030 priorities",
+            "publication_date": null
+          }
+        ],
+        "status": "source_supported",
+        "kind": "management_commitment"
+      },
+      {
+        "id": "LBG-A2030-CIR",
+        "title": "Cost discipline",
+        "text": "The 2030 efficiency ambition is a cost-to-income ratio below 45%; achievement is not assumed.",
+        "date": "Strategy for 2027\u20132030",
+        "question": "What baseline and customer outcome constrain change?",
+        "counter": "Below 45% in 2030 is a target, not achieved performance or a budget.",
+        "source_ids": [
+          "PR-LBG-A2030"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-A2030",
+            "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+            "title": "Lloyds Accelerate 2030 priorities",
+            "publication_date": null
+          }
+        ],
+        "status": "source_supported",
+        "kind": "management_expectation"
+      },
+      {
+        "id": "LBG-ENVOY-CONTROLS",
+        "title": "AI benefit & control",
+        "text": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+        "date": "Announced platform capability; not current effectiveness evidence",
+        "question": "Is a process-only alternative sufficient?",
+        "counter": "Internal teams, controls and existing partners may cover the need.",
+        "source_ids": [
+          "PR-LBG-ENVOY"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-ENVOY",
+            "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+            "title": "Lloyds Envoy announcement",
+            "publication_date": "2026-05-01"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "reported_fact"
+      },
+      {
+        "id": "LBG-BRAND26-TIMING",
+        "title": "Brand & service change",
+        "text": "The announcement schedules branch-brand changes through 2027. Delivery progress and customer outcomes remain to be checked.",
+        "date": "Announced July 2026; branch changes planned through 2027",
+        "question": "Which customer outcomes still need validation?",
+        "counter": "A planned 2027 branch timetable does not prove open procurement.",
+        "source_ids": [
+          "PR-LBG-BRAND26"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-BRAND26",
+            "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/halifax-rebrand-to-lloyds.html",
+            "title": "Lloyds Halifax change announcement",
+            "publication_date": "2026-07-01"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "management_commitment"
+      },
+      {
+        "id": "LBG-Q326-INVESTMENT",
+        "title": "Investment choices",
+        "text": "Quarterly commentary describes investment levelling as the current strategic cycle ends. Do not assume an unrestricted new supplier budget.",
+        "date": "Nine months ended / balance sheet at 30 September 2026",
+        "question": "Which allocation remains undecided?",
+        "counter": "Plateauing investment is current-cycle commentary, not a ban on later investment.",
+        "source_ids": [
+          "PR-LBG-Q326"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-Q326",
+            "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+            "title": "Lloyds Q3 2026 statement",
+            "publication_date": "2026-10-29"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "reported_fact"
+      },
+      {
+        "id": "UK-PRA-REPORT27",
+        "title": "Resilience obligations",
+        "text": "PRA incident/third-party reporting changes take effect in March 2027. Confirm each regulated entity\u2019s scope and existing readiness.",
+        "date": "Final policy; implementation 18 March 2027",
+        "question": "Which Lloyds legal entity and actual readiness evidence apply?",
+        "counter": "Sector context only; entity applicability and external need are unverified.",
+        "source_ids": [
+          "PR-PRA-PS726"
+        ],
+        "sources": [
+          {
+            "id": "PR-PRA-PS726",
+            "url": "https://www.bankofengland.co.uk/prudential-regulation/publication/2026/march/operational-incident-and-third-party-reporting-policy-statement",
+            "title": "PRA incident and third-party policy",
+            "publication_date": "2026-03-18"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "regulatory_requirement"
+      }
+    ]
+  },
+  "nine_gaps": "Research-Gaps.md",
+  "missing_macro_coverage": "No new geopolitical, energy-cost or workforce series fabricated where existing reviewed records do not support a specific claim."
+}

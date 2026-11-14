@@ -1,0 +1,171 @@
+{
+  "checks": [
+    {
+      "dev": "desktop",
+      "id": "uk-landscape",
+      "pass": true
+    },
+    {
+      "dev": "desktop",
+      "id": "uk-forces",
+      "pass": true
+    },
+    {
+      "dev": "desktop",
+      "id": "banking-landscape",
+      "pass": true
+    },
+    {
+      "dev": "desktop",
+      "id": "banking-forces",
+      "pass": true
+    },
+    {
+      "dev": "desktop",
+      "id": "lloyds-landscape",
+      "pass": true
+    },
+    {
+      "dev": "desktop",
+      "id": "lloyds-forces",
+      "pass": true
+    },
+    {
+      "dev": "ipad-landscape",
+      "id": "uk-landscape",
+      "pass": true
+    },
+    {
+      "dev": "ipad-landscape",
+      "id": "uk-forces",
+      "pass": true
+    },
+    {
+      "dev": "ipad-landscape",
+      "id": "banking-landscape",
+      "pass": true
+    },
+    {
+      "dev": "ipad-landscape",
+      "id": "banking-forces",
+      "pass": true
+    },
+    {
+      "dev": "ipad-landscape",
+      "id": "lloyds-landscape",
+      "pass": true
+    },
+    {
+      "dev": "ipad-landscape",
+      "id": "lloyds-forces",
+      "pass": true
+    },
+    {
+      "dev": "ipad-portrait",
+      "id": "uk-landscape",
+      "pass": true
+    },
+    {
+      "dev": "ipad-portrait",
+      "id": "uk-forces",
+      "pass": true
+    },
+    {
+      "dev": "ipad-portrait",
+      "id": "banking-landscape",
+      "pass": true
+    },
+    {
+      "dev": "ipad-portrait",
+      "id": "banking-forces",
+      "pass": true
+    },
+    {
+      "dev": "ipad-portrait",
+      "id": "lloyds-landscape",
+      "pass": true
+    },
+    {
+      "dev": "ipad-portrait",
+      "id": "lloyds-forces",
+      "pass": true
+    },
+    {
+      "dev": "mobile",
+      "id": "uk-landscape",
+      "pass": true
+    },
+    {
+      "dev": "mobile",
+      "id": "uk-forces",
+      "pass": true
+    },
+    {
+      "dev": "mobile",
+      "id": "banking-landscape",
+      "pass": true
+    },
+    {
+      "dev": "mobile",
+      "id": "banking-forces",
+      "pass": true
+    },
+    {
+      "dev": "mobile",
+      "id": "lloyds-landscape",
+      "pass": true
+    },
+    {
+      "dev": "mobile",
+      "id": "lloyds-forces",
+      "pass": true
+    },
+    {
+      "dev": "mobile-320",
+      "id": "uk-landscape",
+      "pass": true
+    },
+    {
+      "dev": "mobile-320",
+      "id": "uk-forces",
+      "pass": true
+    },
+    {
+      "dev": "mobile-320",
+      "id": "banking-landscape",
+      "pass": true
+    },
+    {
+      "dev": "mobile-320",
+      "id": "banking-forces",
+      "pass": true
+    },
+    {
+      "dev": "mobile-320",
+      "id": "lloyds-landscape",
+      "pass": true
+    },
+    {
+      "dev": "mobile-320",
+      "id": "lloyds-forces",
+      "pass": true
+    },
+    {
+      "dev": "desktop",
+      "twoClickJourney": true,
+      "lensScopeRetained": true,
+      "forceEvidence": true
+    },
+    {
+      "dev": "mobile",
+      "twoClickJourney": true,
+      "lensScopeRetained": true,
+      "forceEvidence": true
+    }
+  ],
+  "keyboard": true,
+  "selectedBankWithJS": true,
+  "zoomWidth": 720,
+  "noJSNativeBankContextLink": true,
+  "limits": "Chromium emulation, not physical Safari/VoiceOver; static public design, no app authority exercised"
+}

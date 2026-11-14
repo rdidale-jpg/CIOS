@@ -1,0 +1,75 @@
+{
+  "baseline": "9384071c246ff83acbe134a0864f2ab0520e9b1d",
+  "states": [
+    {
+      "file": "banking-forces-regulators.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "banking-forces-suppliers.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "banking-forces.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "banking-landscape-regulators.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "banking-landscape-suppliers.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "banking-landscape.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "lloyds-forces-regulators.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "lloyds-forces-suppliers.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "lloyds-forces.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "lloyds-inside-regulators.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "lloyds-inside-suppliers.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "lloyds-inside.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "lloyds-landscape-regulators.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "lloyds-landscape-suppliers.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "lloyds-landscape.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "uk-forces.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    },
+    {
+      "file": "uk-landscape.html",
+      "worldLabelsMetricsFocusContentAndSourceBodyUnchanged": true
+    }
+  ],
+  "changedFilesWithinDesignPackOnly": true,
+  "runtimeRoutesCanonicalPermissionsOffersPipelineUntouched": true
+}

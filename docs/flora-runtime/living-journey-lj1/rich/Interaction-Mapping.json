@@ -1,0 +1,332 @@
+{
+  "UK_labels": [
+    {
+      "id": "uk-sic07-a",
+      "label": "Agriculture & fishing",
+      "position": [
+        14,
+        12
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-b",
+      "label": "Mining & quarrying",
+      "position": [
+        38,
+        12
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-d",
+      "label": "Energy supply",
+      "position": [
+        62,
+        12
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-e",
+      "label": "Water & waste",
+      "position": [
+        86,
+        12
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-c",
+      "label": "Manufacturing",
+      "position": [
+        14,
+        32
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-f",
+      "label": "Construction",
+      "position": [
+        38,
+        32
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-n",
+      "label": "Business support",
+      "position": [
+        62,
+        32
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-h",
+      "label": "Transport & logistics",
+      "position": [
+        86,
+        32
+      ],
+      "route": [
+        "Aviation",
+        "/industries/aviation"
+      ]
+    },
+    {
+      "id": "uk-sic07-p",
+      "label": "Education",
+      "position": [
+        14,
+        53
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-q",
+      "label": "Health & social care",
+      "position": [
+        38,
+        53
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-j",
+      "label": "Information & communication",
+      "position": [
+        62,
+        53
+      ],
+      "route": [
+        "Technology",
+        "/industries/technology/experience"
+      ]
+    },
+    {
+      "id": "uk-sic07-m",
+      "label": "Professional services",
+      "position": [
+        86,
+        53
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-l",
+      "label": "Real estate",
+      "position": [
+        14,
+        73
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-k",
+      "label": "Finance & insurance",
+      "position": [
+        38,
+        73
+      ],
+      "route": [
+        "Banking",
+        "/industries/banking"
+      ]
+    },
+    {
+      "id": "uk-sic07-o",
+      "label": "Public administration",
+      "position": [
+        62,
+        73
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-g",
+      "label": "Retail & wholesale",
+      "position": [
+        86,
+        73
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-i",
+      "label": "Hospitality & food",
+      "position": [
+        14,
+        91
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-r",
+      "label": "Arts & recreation",
+      "position": [
+        38,
+        91
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-s",
+      "label": "Other services",
+      "position": [
+        62,
+        91
+      ],
+      "route": null
+    },
+    {
+      "id": "uk-sic07-t",
+      "label": "Household employment",
+      "position": [
+        86,
+        91
+      ],
+      "route": null
+    }
+  ],
+  "scene_nodes": {
+    "2": [
+      [
+        "boe",
+        "Bank of England",
+        20,
+        34,
+        "regulators",
+        null
+      ],
+      [
+        "pra",
+        "PRA",
+        38,
+        23,
+        "regulators",
+        null
+      ],
+      [
+        "groups",
+        "Banking groups",
+        77,
+        36,
+        "enterprises",
+        null
+      ],
+      [
+        "customers",
+        "Households & businesses",
+        18,
+        80,
+        "suppliers",
+        null
+      ],
+      [
+        "payments",
+        "Payments",
+        62,
+        72,
+        "enterprises",
+        null
+      ],
+      [
+        "fca",
+        "FCA",
+        88,
+        66,
+        "regulators",
+        null
+      ]
+    ],
+    "3": [
+      [
+        "barclays",
+        "Barclays",
+        18,
+        39,
+        "enterprises",
+        null
+      ],
+      [
+        "hsbc-uk",
+        "HSBC UK",
+        50,
+        39,
+        "enterprises",
+        30
+      ],
+      [
+        "lloyds",
+        "Lloyds Banking Group",
+        83,
+        39,
+        "enterprises",
+        44
+      ],
+      [
+        "natwest",
+        "NatWest Group",
+        24,
+        75,
+        "enterprises",
+        null
+      ],
+      [
+        "santander-uk",
+        "Santander UK",
+        82,
+        75,
+        "enterprises",
+        null
+      ]
+    ],
+    "4": [
+      [
+        "customers",
+        "Household customers",
+        21,
+        76,
+        "suppliers",
+        null
+      ],
+      [
+        "businesses",
+        "Business areas & brands",
+        22,
+        28,
+        "enterprises",
+        null
+      ],
+      [
+        "economics",
+        "Income & capital",
+        50,
+        52,
+        "enterprises",
+        null
+      ],
+      [
+        "operations",
+        "Business customers",
+        80,
+        26,
+        "enterprises",
+        null
+      ],
+      [
+        "technology",
+        "Data, cloud & AI",
+        83,
+        66,
+        "suppliers",
+        76
+      ]
+    ]
+  },
+  "coordinates": "Percent of own illustration. Mobile preserves both halves; center-edge labels clamp to readable bounds and may use an explicit alternate y.",
+  "semantics": "Generated buildings have no financial, ownership, geographic or legal-entity meaning. Interaction and evidence remain separate from pixels.",
+  "model_studio": "Optional future entry only; Issue #611, no engine or store"
+}
