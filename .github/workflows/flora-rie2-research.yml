@@ -1,0 +1,31 @@
+name: FLORA RIE-2 research integrity
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/flora-runtime/rie2-619/**'
+      - 'tools/research/rie2_619_validation.py'
+      - 'tests/test_flora_rie2_research_pack.py'
+      - '.github/workflows/flora-rie2-research.yml'
+permissions:
+  contents: read
+jobs:
+  research-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Require immutable RIE-1 candidate input fetched with repository history
+        run: git cat-file -e c57ed9728473563b5535db36d5bfbe5e96a8c572^{commit}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Check financial, source, scope, negative-case and isolated import contracts
+        run: python -m pytest tests/test_flora_rie2_research_pack.py -q
+      - name: Report limits without accepting research
+        run: python tools/research/rie2_619_validation.py

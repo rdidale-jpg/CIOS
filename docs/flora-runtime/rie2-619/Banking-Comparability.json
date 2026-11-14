@@ -1,0 +1,121 @@
+{
+  "additional_nonbank_example": {
+    "continuing_pbt": [
+      699,
+      476
+    ],
+    "core_operating_profit": [
+      918,
+      859
+    ],
+    "core_segment_components_2026": [
+      646,
+      222,
+      248,
+      -114,
+      -84
+    ],
+    "id": "LG-Core",
+    "not_comparable": [
+      "Core operating APM not bank statutory PBT",
+      "CSM/SolvencyII not bank income/CET1",
+      "Continuing/discontinued gain boundaries differ"
+    ],
+    "scope": "Global insurance/asset-management core, not UK bank",
+    "source_ref": "R2-LG-H126"
+  },
+  "allowed_use": "Matched within-issuer period changes and mechanism/counter-case comparison only; no cross-bank winner, profit pool or cost-performance rank",
+  "peer_counter_evidence": [
+    "NatWest Retail reports deposit hedge benefits, lower mortgage margins, stable arrears and savings mix; similar mechanisms challenge a uniquely Lloyds-specific problem.",
+    "NatWest Retail impairment280vs226 attributed to unsecured growth/seasoning; an increased charge alone is not proof of failed controls."
+  ],
+  "periods": [
+    "H1 2026",
+    "H1 2025"
+  ],
+  "rows": [
+    {
+      "basis": "Underlying/APM",
+      "expenses": [
+        -2889,
+        -2963
+      ],
+      "financial_level_comparison": "NOT ADMITTED across banks; duration only matches",
+      "id": "LBG-Retail",
+      "impairment": [
+        -565,
+        -342
+      ],
+      "income": [
+        5710,
+        5279
+      ],
+      "perimeter": "Reporting Retail: includes European mortgages/savings and UK motor leasing, not Lloyds Bank plc",
+      "profit": [
+        2256,
+        1974
+      ],
+      "source_ref": "R2-LBG-H126"
+    },
+    {
+      "basis": "Reported segment operating profit; expenses incl litigation/conduct",
+      "expenses": [
+        -1429,
+        -1423
+      ],
+      "financial_level_comparison": "NOT ADMITTED across banks; product and accounting differences",
+      "id": "NW-Retail",
+      "impairment": [
+        -280,
+        -226
+      ],
+      "income": [
+        3438,
+        3134
+      ],
+      "perimeter": "NatWest Retail reporting segment; Boxed reallocation noted",
+      "profit": [
+        1729,
+        1485
+      ],
+      "reported_cir_excl_litigation_pct": [
+        41.6,
+        45.0
+      ],
+      "reported_nim_pct": [
+        2.69,
+        2.58
+      ],
+      "source_ref": "R2-NW-H126"
+    },
+    {
+      "basis": "IFRS8 structured segment note; operating expenses include levies/conduct",
+      "expenses": [
+        -2412,
+        -2355
+      ],
+      "financial_level_comparison": "NOT ADMITTED across banks; scope and basis differ",
+      "id": "BAR-UK",
+      "impairment": [
+        -338,
+        -237
+      ],
+      "income": [
+        4517,
+        4193
+      ],
+      "perimeter": "Barclays UK reporting segment; UK Corporate separate; not globalGroup or BarclaysBankplc",
+      "profit": [
+        1767,
+        1601
+      ],
+      "source_ref": "R2-BAR-H126"
+    }
+  ],
+  "unacquired": [
+    "Banking market shares/profit pool with matched national product perimeter",
+    "Comparable segment economic-capital allocations and supplier-concentration spend",
+    "Current matched building-society finance: no borrowed annual/fiscal-half data used as calendarH1 comparator"
+  ],
+  "unit": "GBP million"
+}

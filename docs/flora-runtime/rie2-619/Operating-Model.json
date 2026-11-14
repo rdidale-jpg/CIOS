@@ -1,0 +1,208 @@
+{
+  "authority": "Research projection, not an accepted legal or EnterpriseModel tree",
+  "brand_warning": "Ring-fencing description includes Halifax activities with LloydsBank/BankOfScotland; no separate Halifax legal entity or automatic reporting-segment join inferred. Current brand transition scope/date remains subject to its original evidence owner.",
+  "capability_dates": {
+    "Envoy_pdf_release": "2026-04-28",
+    "Microsoft_agreement": "2026-06-04",
+    "companion_html_publication": "2026-05-01"
+  },
+  "current_roles": [
+    {
+      "buyer_status": "not established",
+      "person": "Charlie Nunn",
+      "professional_role": "GroupChiefExecutive",
+      "read_date": "2026-11-14",
+      "source_ref": "R2-LBG-LEAD"
+    },
+    {
+      "buyer_status": "not established",
+      "person": "William Chalmers",
+      "professional_role": "CFO",
+      "read_date": "2026-11-14",
+      "source_ref": "R2-LBG-LEAD"
+    },
+    {
+      "buyer_status": "not established",
+      "person": "Ron van Kemenade",
+      "professional_role": "Group COO",
+      "read_date": "2026-11-14",
+      "source_ref": "R2-LBG-LEAD"
+    },
+    {
+      "buyer_status": "not established",
+      "person": "Jasjyot Singh",
+      "professional_role": "CEOConsumer",
+      "read_date": "2026-11-14",
+      "source_ref": "R2-LBG-LEAD"
+    },
+    {
+      "buyer_status": "not established",
+      "person": "Nick Williams",
+      "professional_role": "CEOConnected Finance",
+      "read_date": "2026-11-14",
+      "source_ref": "R2-LBG-LEAD"
+    },
+    {
+      "buyer_status": "not established",
+      "person": "Amanda Murphy",
+      "professional_role": "CEOBusinessCommercialBanking",
+      "read_date": "2026-11-14",
+      "source_ref": "R2-LBG-LEAD"
+    },
+    {
+      "buyer_status": "not established",
+      "person": "John Langley",
+      "professional_role": "CEOCorporateInstitutionalBanking",
+      "read_date": "2026-11-14",
+      "source_ref": "R2-LBG-LEAD"
+    },
+    {
+      "buyer_status": "not established",
+      "person": "Chirantan Barua",
+      "professional_role": "CEOScottish Widows /WealthInsurance",
+      "read_date": "2026-11-14",
+      "source_ref": "R2-LBG-LEAD"
+    },
+    {
+      "buyer_status": "not established",
+      "person": "Javier Rodríguez de Colmenares",
+      "professional_role": "CRO",
+      "read_date": "2026-11-14",
+      "source_ref": "R2-LBG-LEAD"
+    }
+  ],
+  "principal_legal_interests": [
+    {
+      "as_at": "2025-12-31",
+      "business": "Banking/financial services",
+      "entity": "Lloyds Bank plc",
+      "equity_voting_pct": 100,
+      "interest_type": "direct",
+      "intermediate_parent": "Lloyds Banking Group plc",
+      "locator": "Item4.C printed11",
+      "source_ref": "R2-LBG-20F25"
+    },
+    {
+      "as_at": "2025-12-31",
+      "business": "Life assurance",
+      "entity": "Scottish Widows Limited",
+      "equity_voting_pct": 100,
+      "interest_type": "indirect",
+      "intermediate_parent": null,
+      "locator": "Item4.C printed11",
+      "source_ref": "R2-LBG-20F25"
+    },
+    {
+      "as_at": "2025-12-31",
+      "business": "Holding company",
+      "entity": "HBOS plc",
+      "equity_voting_pct": 100,
+      "interest_type": "indirect",
+      "intermediate_parent": null,
+      "locator": "Item4.C printed11",
+      "source_ref": "R2-LBG-20F25"
+    },
+    {
+      "as_at": "2025-12-31",
+      "business": "Banking/financial services",
+      "entity": "Bank of Scotland plc",
+      "equity_voting_pct": 100,
+      "interest_type": "indirect",
+      "intermediate_parent": null,
+      "locator": "Item4.C printed11",
+      "source_ref": "R2-LBG-20F25"
+    },
+    {
+      "as_at": "2025-12-31",
+      "business": "Banking/financial services",
+      "entity": "Lloyds Bank Corporate Markets plc",
+      "equity_voting_pct": 100,
+      "interest_type": "direct",
+      "intermediate_parent": "Lloyds Banking Group plc",
+      "locator": "Item4.C printed11",
+      "source_ref": "R2-LBG-20F25"
+    },
+    {
+      "as_at": "2025-12-31",
+      "business": "Financial services",
+      "entity": "LBG Equity Investments Limited",
+      "equity_voting_pct": 100,
+      "interest_type": "direct",
+      "intermediate_parent": "Lloyds Banking Group plc",
+      "locator": "Item4.C printed11",
+      "source_ref": "R2-LBG-20F25"
+    }
+  ],
+  "processes": [
+    {
+      "journey": "Retail deposits/current accounts/mortgages/cards/vehicle finance",
+      "mechanism": "Origination/pricing/funding → servicing → retention/credit/asset outcomes",
+      "source_ref": "R2-LBG-H126",
+      "unknown": "Actual service owners, costs, technology dependency map and private customer cohorts"
+    },
+    {
+      "journey": "Commercial lending/transaction banking/working capital and risk",
+      "mechanism": "Relationship/product → underwriting/funding → payment/servicing → fees/spreads/capital",
+      "source_ref": "R2-LBG-FY25",
+      "unknown": "BCB/CIB management to legal/segment allocation and exact procurement accountability"
+    },
+    {
+      "journey": "Wealth/pensions/protection",
+      "mechanism": "Contributions/insurance/investment administration → service and deferred-profit release",
+      "source_ref": "R2-LBG-H126",
+      "unknown": "CSM/risk adjustment stock is not income, customer funds are not Group revenue"
+    }
+  ],
+  "regulatory_transmission": {
+    "reason": "Designated provider legal entities do not prove Lloyds contracting entity, service criticality, readiness gap or breach.",
+    "source_ref": "R2-HMT-CTP",
+    "status": "conditional only"
+  },
+  "reporting": {
+    "chief_operating_decision_maker": "Group Executive Committee underIFRS8",
+    "divisions": [
+      "Retail",
+      "Commercial Banking",
+      "Insurance Pensions and Investments"
+    ],
+    "not_automatically_equal": [
+      "Consumer management area",
+      "Connected Finance management area",
+      "Lloyds Bank PLC legal perimeter",
+      "Halifax brand"
+    ],
+    "other_aggregate": "Other includes central/equity activities; not a fourth named legal company",
+    "period": "H12026",
+    "source_ref": "R2-LBG-H126"
+  },
+  "supplier_capabilities": [
+    {
+      "counterparty_legal_entity": null,
+      "exclusivity": null,
+      "remaining_scope": "unknown",
+      "reported_scope": "Company-wide365E7,Agent365,workplace/engineering adoption",
+      "source_ref": "R2-LBG-MS26",
+      "status": "announcedmulti-year agreement",
+      "supplier": "Microsoft",
+      "term_end": null,
+      "value": null
+    },
+    {
+      "counterparty_legal_entity": null,
+      "exclusivity": null,
+      "remaining_scope": "unknown",
+      "reported_scope": "Envoy internal agent platform and designed controls",
+      "source_ref": "R2-LBG-ENVOY-PDF",
+      "status": "reported platform relationship",
+      "supplier": "Google Cloud",
+      "term_end": null,
+      "value": null
+    }
+  ],
+  "unresolved": [
+    "Current complete legal ownership/register verification",
+    "System inventory/service maps, outsourcing contracts/workshare/price/renewal/exit",
+    "Measured net unit cost-to-serve and AI customer benefit",
+    "Exact decision accountability, approved external budget and open sourcing"
+  ]
+}

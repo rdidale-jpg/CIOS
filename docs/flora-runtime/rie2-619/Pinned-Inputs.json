@@ -1,0 +1,83 @@
+{
+  "baseline_counts": {
+    "agenda_candidates": 8,
+    "index_only": 1,
+    "overlay_gaps": 13,
+    "rco": 9,
+    "relationships": 15,
+    "sectors": 20,
+    "sources": 52,
+    "text_inspections": 51,
+    "visual_gaps": 9
+  },
+  "main": "fe66516c15726dc45de147ede2674c9172f8cac6",
+  "rie1": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+  "rie1_inputs": [
+    {
+      "authority": "unmerged candidate research; not canonical acceptance",
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Source-Ledger.json",
+      "repository_blob_content_sha256": "353c636911c34efd02c9777766316fa29595aa97ab9400f8d2636c5980176882",
+      "url": "https://github.com/rdidale-jpg/CIOS/blob/c57ed9728473563b5535db36d5bfbe5e96a8c572/docs/flora-runtime/rie1-617/Source-Ledger.json"
+    },
+    {
+      "authority": "unmerged candidate research; not canonical acceptance",
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Facts.json",
+      "repository_blob_content_sha256": "17175f89cca9746bf6175485f9146e7b496062c9a9d3c411b0448f3186e75f8e",
+      "url": "https://github.com/rdidale-jpg/CIOS/blob/c57ed9728473563b5535db36d5bfbe5e96a8c572/docs/flora-runtime/rie1-617/Facts.json"
+    },
+    {
+      "authority": "unmerged candidate research; not canonical acceptance",
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "repository_blob_content_sha256": "9d18c81e8721b13037d1fd0973c652dd887d6b97d7ca714fdae7bd0c74419455",
+      "url": "https://github.com/rdidale-jpg/CIOS/blob/c57ed9728473563b5535db36d5bfbe5e96a8c572/docs/flora-runtime/rie1-617/Sector-Research.json"
+    },
+    {
+      "authority": "unmerged candidate research; not canonical acceptance",
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Agenda-Candidates.json",
+      "repository_blob_content_sha256": "49c34bbca9b8eea65a3b9a3ab40096ed091a13827da4941f245d0dd2a1dcafe0",
+      "url": "https://github.com/rdidale-jpg/CIOS/blob/c57ed9728473563b5535db36d5bfbe5e96a8c572/docs/flora-runtime/rie1-617/Agenda-Candidates.json"
+    },
+    {
+      "authority": "unmerged candidate research; not canonical acceptance",
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Relationships.json",
+      "repository_blob_content_sha256": "1457bde2996be29cb9536aefbcfd94cc8b7e0eda1b674f5886a5f3314972900b",
+      "url": "https://github.com/rdidale-jpg/CIOS/blob/c57ed9728473563b5535db36d5bfbe5e96a8c572/docs/flora-runtime/rie1-617/Relationships.json"
+    },
+    {
+      "authority": "unmerged candidate research; not canonical acceptance",
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Gap-Disposition.json",
+      "repository_blob_content_sha256": "42910c1bdb5e4d82107ccccf9ed7f4a59cde3acb6657aaca72302307004d9dff",
+      "url": "https://github.com/rdidale-jpg/CIOS/blob/c57ed9728473563b5535db36d5bfbe5e96a8c572/docs/flora-runtime/rie1-617/Gap-Disposition.json"
+    },
+    {
+      "authority": "unmerged candidate research; not canonical acceptance",
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Lloyds-Financial-Reconciliation.json",
+      "repository_blob_content_sha256": "eaf492ebc2e73237316448abf9d237caae7ff258ca2e1b3be9f0193b84c5c2aa",
+      "url": "https://github.com/rdidale-jpg/CIOS/blob/c57ed9728473563b5535db36d5bfbe5e96a8c572/docs/flora-runtime/rie1-617/Lloyds-Financial-Reconciliation.json"
+    },
+    {
+      "authority": "unmerged candidate research; not canonical acceptance",
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Baseline-Sector-Inventory.json",
+      "repository_blob_content_sha256": "46b3b8c05abea18f22b583c3bf93418c871e4dd511c2c3eb55b54c97e3710590",
+      "url": "https://github.com/rdidale-jpg/CIOS/blob/c57ed9728473563b5535db36d5bfbe5e96a8c572/docs/flora-runtime/rie1-617/Baseline-Sector-Inventory.json"
+    },
+    {
+      "authority": "unmerged candidate research; not canonical acceptance",
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Negative-Cases.json",
+      "repository_blob_content_sha256": "7c7e5e2f96287e4ec3a29fe60903958c922cd2a401386c1598bfe319c3aa1e2a",
+      "url": "https://github.com/rdidale-jpg/CIOS/blob/c57ed9728473563b5535db36d5bfbe5e96a8c572/docs/flora-runtime/rie1-617/Negative-Cases.json"
+    }
+  ],
+  "si1": "85317167b4001dc027216c1c4e2faf058f0631a3",
+  "si1_authority": "Draft design proposal, Option A reference only; no runtime schema adopted",
+  "topology": "Independent branch from validated main; RIE1 referenced by pinned Git object, no merge/rebase/copy of its research owners"
+}

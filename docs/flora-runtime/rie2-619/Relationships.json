@@ -1,0 +1,109 @@
+{
+  "baseline_commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+  "baseline_edges": {
+    "authority": "Candidate edges unchanged; not copied/promoted",
+    "count": 15,
+    "path": "docs/flora-runtime/rie1-617/Relationships.json"
+  },
+  "conditional_transmission": [
+    {
+      "from": "UKCTPregime",
+      "source_refs": [
+        "R2-HMT-CTP"
+      ],
+      "status": "source supported designation; bank contract/impact edge unverified",
+      "to": "Named provider legal entities"
+    },
+    {
+      "from": "Used-car price/fleet exposure",
+      "source_refs": [
+        "R2-LBG-H126",
+        "R2-LBG-Q326"
+      ],
+      "status": "company reports specific mechanism; customer need/control-failure edge unverified",
+      "to": "Lloyds Retail lease depreciation"
+    },
+    {
+      "from": "FCA firm complaints",
+      "source_refs": [
+        "R2-FCA-H126"
+      ],
+      "status": "legal firm return supported; RetailGroup/AI harm/cost edge unverified",
+      "to": "Lloyds Bank PLC service workload"
+    }
+  ],
+  "new_edges": [
+    {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "direct",
+      "id": "R2-REL-1",
+      "locator": "Item4.C printed11",
+      "object": "Lloyds Bank plc",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "indirect",
+      "id": "R2-REL-2",
+      "locator": "Item4.C printed11",
+      "object": "Scottish Widows Limited",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "indirect",
+      "id": "R2-REL-3",
+      "locator": "Item4.C printed11",
+      "object": "HBOS plc",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "indirect",
+      "id": "R2-REL-4",
+      "locator": "Item4.C printed11",
+      "object": "Bank of Scotland plc",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "direct",
+      "id": "R2-REL-5",
+      "locator": "Item4.C printed11",
+      "object": "Lloyds Bank Corporate Markets plc",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "direct",
+      "id": "R2-REL-6",
+      "locator": "Item4.C printed11",
+      "object": "LBG Equity Investments Limited",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+[
+  {
+    "id": "NEG-FOS-PERIOD",
+    "inference": "FOS H1 title means January–June, so3764/118762 is an escalation rate",
+    "reason": "Different dates, stages and cohorts; actual source body says April–September.",
+    "source_refs": [
+      "R2-FOS-APRSEP26",
+      "R2-FCA-H126"
+    ],
+    "status": "blocked"
+  },
+  {
+    "id": "NEG-CONSUMER-CREDIT",
+    "inference": "FCA12308received is all Lloyds complaints or additional to118762",
+    "reason": "Separate Consumer Credit table, not the all-product Open table; duplicate/cross-scope addition prohibited.",
+    "source_refs": [
+      "R2-FCA-H126"
+    ],
+    "status": "blocked"
+  },
+  {
+    "id": "NEG-IMPAIRMENT-ROUNDING",
+    "inference": "616versus617m is unexplained rounding/incorrect source",
+    "reason": "Note3 explicitly shows1m insurance gross-up. Preserve statutory versus underlying.",
+    "source_refs": [
+      "R2-LBG-H126"
+    ],
+    "status": "explained_basis_difference"
+  },
+  {
+    "id": "NEG-WHOLESALE-LOSS",
+    "inference": "FY99.4bn versus represented95.6bn December funding proves financial deterioration",
+    "reason": "Wholesale funding definition revisedQ2; original and represented values kept, not compared as an economic movement.",
+    "source_refs": [
+      "R2-LBG-FY25",
+      "R2-LBG-Q326"
+    ],
+    "status": "explained_definition_change"
+  },
+  {
+    "id": "NEG-PARENT-JOIN",
+    "inference": "An indirectly held principal subsidiary has a known immediate parent or currentNovemberownership",
+    "reason": "Principal schedule atDecember 2025 marks indirect interest, not every intermediate edge.",
+    "source_refs": [
+      "R2-LBG-20F25"
+    ],
+    "status": "blocked"
+  },
+  {
+    "id": "NEG-AGENT-FAILURE",
+    "inference": "Complaints prove Microsoft/Envoy ineffective or need a replacement platform",
+    "reason": "No eligible-case technology/causality join; existing capabilities and remedies are counter-evidence.",
+    "source_refs": [
+      "R2-FCA-H126",
+      "R2-LBG-MS26",
+      "R2-LBG-ENVOY-PDF"
+    ],
+    "status": "blocked"
+  },
+  {
+    "id": "NEG-AI-VALUE",
+    "inference": "Expected100m benefits are net realised2026 value, external spend or dealTCV",
+    "reason": "Expectation/benefit/unit economics/supplier budget/TCV are different.",
+    "source_refs": [
+      "R2-LBG-AI26"
+    ],
+    "status": "blocked"
+  },
+  {
+    "id": "NEG-PEER-LEAGUE",
+    "inference": "Lloyds Retail/NatWest Retail/Barclays UK profit levels establish efficiency winner",
+    "reason": "Same duration does not harmonise product geography, leasing, divisions, remediations, levies or accounting basis.",
+    "source_refs": [
+      "R2-LBG-H126",
+      "R2-NW-H126",
+      "R2-BAR-H126"
+    ],
+    "status": "blocked"
+  },
+  {
+    "id": "NEG-INSURANCE",
+    "inference": "CSM/deferred-profit stock, dividend or SolvencyII equals income, supplier spend or bankCET1",
+    "reason": "Different stock/flow/entity/metric bases. Keep risk adjustment included in Lloyds5.2bn deferredprofit.",
+    "source_refs": [
+      "R2-LBG-H126",
+      "R2-LG-H126"
+    ],
+    "status": "blocked"
+  },
+  {
+    "id": "NEG-IPSOS-LABEL",
+    "inference": "Assign unlabeled PDF percentages to banks by guessed chart order",
+    "reason": "Label alignment not inspected; no screenshot available. No numerical survey rank admitted.",
+    "source_refs": [
+      "R2-IPSOS-AUG26",
+      "R2-IPSOS-METHOD"
+    ],
+    "status": "not_admitted"
+  },
+  {
+    "id": "NEG-CTP-CONTRACT",
+    "inference": "A designated supplier legal entity must be Lloyds contract counterparty, or designation means bank control failure",
+    "reason": "Provider legal scope and bank service/contract/readiness require different evidence.",
+    "source_refs": [
+      "R2-HMT-CTP",
+      "R2-LBG-MS26",
+      "R2-LBG-ENVOY-PDF"
+    ],
+    "status": "blocked"
+  },
+  {
+    "id": "NEG-FR-TSB",
+    "inference": "French rule implies Lloyds duty, or a late Santander/TSB programme proves early open sourcing",
+    "reason": "RIE1 pinned negative register and source scope retained; no fresh legal opinion or tier change.",
+    "source_refs": [],
+    "status": "baseline_controls_retained"
+  }
+]
