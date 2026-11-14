@@ -1,5 +1,7 @@
 # FLORA Visual Atlas VA-1 — owner design decision
 
+**Current status: original A/B/C rejected by owner; A is a starting hypothesis only.** The [bounded visual simplicity correction and canonical three-state desktop/iPad/mobile comparisons](simplicity/README.md) supersede the original recommendation below. The simplified revision is also pending owner acceptance. Original studies are preserved as history, not an implementation brief.
+
 Design proposal for [#605](https://github.com/rdidale-jpg/CIOS/issues/605), based on `origin/main` at `0cb07c2e78ccb16240c799b31cd62736e2135529`. No proposed design is accepted by writing this document. The current accepted runtime remains unchanged. PR #603's owner-assurance work is separate and is not incorporated into this branch.
 
 **Recommendation: choose A, Continuous Panorama, for further design development.** Its warm daylight palette and shared sky preserve the approved FLORA world while improving cross-level continuity. Accept a visual direction first, then commission distinct Banking and enterprise artwork with reviewed hotspot geometry. These studies reuse approved conceptual imagery, not newly verified company operating models. Owner acceptance is pending; VA-1 does not authorise implementation.

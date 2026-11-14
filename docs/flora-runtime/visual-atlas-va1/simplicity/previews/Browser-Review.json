@@ -1,0 +1,139 @@
+{
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 1000
+    },
+    "ipad-landscape": {
+      "width": 1194,
+      "height": 834
+    },
+    "ipad-portrait": {
+      "width": 834,
+      "height": 1194
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844
+    }
+  },
+  "scope": "UK economy; top-of-page native framing; originals unmodified; same artwork; no custom recrop or independent zoom",
+  "results": [
+    {
+      "device": "desktop",
+      "state": "baseline",
+      "defaultVisibleWords": 60,
+      "viewportWords": 60,
+      "text": "FLORA Home PESTLE Explore Sources method United Kingdom £2.62tn GVA 2024 current basic prices Agriculture fishing Mining quarrying Manufacturing Construction Education Health social care Real estate 14.2% Finance insurance 8.1% Banking Hospitality food Arts recreation Energy supply Water waste Business support Transport logistics 3.6% Aviation Information communication 6.6% Technology Professional services Public administration Retail wholesale 9.4% Other services Household employment",
+      "labels": 20
+    },
+    {
+      "device": "desktop",
+      "state": "panorama",
+      "defaultVisibleWords": 150,
+      "viewportWords": 88,
+      "text": "FLORA Explore News Signals Opportunities Pipeline SS Strategic Sales Design persona UK United Kingdom An economy of connected possibilities. Explore the industries, enterprises and public institutions shaping the UK. Economy Government £2.62tn UK GVA 2024 current basic prices 100% Whole-economy reference UK GVA +0.7% Real GDP 3 months to Sep 2026 vs previous 3 months Banking Finance, trust everyday commerce Technology Compute, connectivity transformation Government Public services national priorities Follow the context. Find the next useful question. Explore deeper Illustrated context financial basis and sources in Explore deeper. The connected landscape Grouped actors, with an equivalent text journey. Categories do not assert a company-to-company relationship. Industry districts Banking Technology Connected economy Production infrastru Services everyday ec Public institutions Government lens Public services Industry districts Banking Technology Connected economy Production infrastructure Services everyday economy Public institutions Government lens Public services Understand more VA-1 Continuous Panorama design study only Compare three directions",
+      "labels": 0
+    },
+    {
+      "device": "desktop",
+      "state": "refined",
+      "defaultVisibleWords": 53,
+      "viewportWords": 53,
+      "text": "FLORA Explore News Signals Opportunities Pipeline Strategic Sales United Kingdom Agriculture fishing Mining quarrying Manufacturing Construction Education Health social care Real estate Finance insurance Banking Hospitality food Arts recreation Energy supply Water waste Business support Transport logistics Aviation Information communication Technology Professional services Public administration Retail wholesale Other services Household employment Explore deeper",
+      "labels": 20
+    },
+    {
+      "device": "ipad-landscape",
+      "state": "baseline",
+      "defaultVisibleWords": 60,
+      "viewportWords": 60,
+      "text": "FLORA Home PESTLE Explore Sources method United Kingdom £2.62tn GVA 2024 current basic prices Agriculture fishing Mining quarrying Manufacturing Construction Education Health social care Real estate 14.2% Finance insurance 8.1% Banking Hospitality food Arts recreation Energy supply Water waste Business support Transport logistics 3.6% Aviation Information communication 6.6% Technology Professional services Public administration Retail wholesale 9.4% Other services Household employment",
+      "labels": 20
+    },
+    {
+      "device": "ipad-landscape",
+      "state": "panorama",
+      "defaultVisibleWords": 150,
+      "viewportWords": 79,
+      "text": "FLORA Explore News Signals Opportunities Pipeline SS Strategic Sales Design persona UK United Kingdom An economy of connected possibilities. Explore the industries, enterprises and public institutions shaping the UK. Economy Government £2.62tn UK GVA 2024 current basic prices 100% Whole-economy reference UK GVA +0.7% Real GDP 3 months to Sep 2026 vs previous 3 months Banking Finance, trust everyday commerce Technology Compute, connectivity transformation Government Public services national priorities Follow the context. Find the next useful question. Explore deeper Illustrated context financial basis and sources in Explore deeper. The connected landscape Grouped actors, with an equivalent text journey. Categories do not assert a company-to-company relationship. Industry districts Banking Technology Connected economy Production infrastru Services everyday ec Public institutions Government lens Public services Industry districts Banking Technology Connected economy Production infrastructure Services everyday economy Public institutions Government lens Public services Understand more VA-1 Continuous Panorama design study only Compare three directions",
+      "labels": 0
+    },
+    {
+      "device": "ipad-landscape",
+      "state": "refined",
+      "defaultVisibleWords": 53,
+      "viewportWords": 53,
+      "text": "FLORA Explore News Signals Opportunities Pipeline Strategic Sales United Kingdom Agriculture fishing Mining quarrying Manufacturing Construction Education Health social care Real estate Finance insurance Banking Hospitality food Arts recreation Energy supply Water waste Business support Transport logistics Aviation Information communication Technology Professional services Public administration Retail wholesale Other services Household employment Explore deeper",
+      "labels": 20
+    },
+    {
+      "device": "ipad-portrait",
+      "state": "baseline",
+      "defaultVisibleWords": 60,
+      "viewportWords": 60,
+      "text": "FLORA Home PESTLE Explore Sources method United Kingdom £2.62tn GVA 2024 current basic prices Agriculture fishing Mining quarrying Manufacturing Construction Education Health social care Real estate 14.2% Finance insurance 8.1% Banking Hospitality food Arts recreation Energy supply Water waste Business support Transport logistics 3.6% Aviation Information communication 6.6% Technology Professional services Public administration Retail wholesale 9.4% Other services Household employment",
+      "labels": 20
+    },
+    {
+      "device": "ipad-portrait",
+      "state": "panorama",
+      "defaultVisibleWords": 150,
+      "viewportWords": 91,
+      "text": "FLORA Explore News Signals Opportunities Pipeline SS Strategic Sales Design persona UK United Kingdom An economy of connected possibilities. Explore the industries, enterprises and public institutions shaping the UK. Economy Government £2.62tn UK GVA 2024 current basic prices 100% Whole-economy reference UK GVA +0.7% Real GDP 3 months to Sep 2026 vs previous 3 months Banking Finance, trust everyday commerce Technology Compute, connectivity transformation Government Public services national priorities Follow the context. Find the next useful question. Explore deeper Illustrated context financial basis and sources in Explore deeper. The connected landscape Grouped actors, with an equivalent text journey. Categories do not assert a company-to-company relationship. Industry districts Banking Technology Connected economy Production infrastru Services everyday ec Public institutions Government lens Public services Industry districts Banking Technology Connected economy Production infrastructure Services everyday economy Public institutions Government lens Public services Understand more VA-1 Continuous Panorama design study only Compare three directions",
+      "labels": 0
+    },
+    {
+      "device": "ipad-portrait",
+      "state": "refined",
+      "defaultVisibleWords": 53,
+      "viewportWords": 53,
+      "text": "FLORA Explore News Signals Opportunities Pipeline Strategic Sales United Kingdom Agriculture fishing Mining quarrying Manufacturing Construction Education Health social care Real estate Finance insurance Banking Hospitality food Arts recreation Energy supply Water waste Business support Transport logistics Aviation Information communication Technology Professional services Public administration Retail wholesale Other services Household employment Explore deeper",
+      "labels": 20
+    },
+    {
+      "device": "mobile",
+      "state": "baseline",
+      "defaultVisibleWords": 60,
+      "viewportWords": 39,
+      "text": "FLORA Home PESTLE Explore Sources method United Kingdom £2.62tn GVA 2024 current basic prices Agriculture fishing Mining quarrying Manufacturing Construction Education Health social care Real estate 14.2% Finance insurance 8.1% Banking Hospitality food Arts recreation Energy supply Water waste Business support Transport logistics 3.6% Aviation Information communication 6.6% Technology Professional services Public administration Retail wholesale 9.4% Other services Household employment",
+      "labels": 20
+    },
+    {
+      "device": "mobile",
+      "state": "panorama",
+      "defaultVisibleWords": 133,
+      "viewportWords": 60,
+      "text": "FLORA Explore News Signals Opportunities Pipeline SS Strategic Sales Design persona UK United Kingdom An economy of connected possibilities. Explore the industries, enterprises and public institutions shaping the UK. Economy Government £2.62tn UK GVA 2024 current basic prices 100% Whole-economy reference UK GVA +0.7% Real GDP 3 months to Sep 2026 vs previous 3 months Banking Finance, trust everyday commerce Technology Compute, connectivity transformation Government Public services national priorities Follow the context. Find the next useful question. Explore deeper Illustrated context financial basis and sources in Explore deeper. The connected landscape Grouped actors, with an equivalent text journey. Categories do not assert a company-to-company relationship. Industry districts Banking Technology Connected economy Production infrastructure Services everyday economy Public institutions Government lens Public services Understand more VA-1 Continuous Panorama design study only Compare three directions",
+      "labels": 0
+    },
+    {
+      "device": "mobile",
+      "state": "refined",
+      "defaultVisibleWords": 53,
+      "viewportWords": 37,
+      "text": "FLORA Explore News Signals Opportunities Pipeline Strategic Sales United Kingdom Agriculture fishing Mining quarrying Manufacturing Construction Education Health social care Real estate Finance insurance Banking Hospitality food Arts recreation Energy supply Water waste Business support Transport logistics Aviation Information communication Technology Professional services Public administration Retail wholesale Other services Household employment Explore deeper",
+      "labels": 20
+    }
+  ],
+  "checks": [
+    "no horizontal overflow",
+    "20 restored labels",
+    "label bounds and 14px minimum",
+    "no district overlap",
+    "three researched links and 44px targets",
+    "five tools",
+    "one title",
+    "less default-visible text than baseline and A",
+    "technical clutter absent from default",
+    "keyboard skip",
+    "progressive context",
+    "Technology navigation",
+    "720px zoom-width"
+  ],
+  "limitations": [
+    "Chromium emulation; physical iPad/Safari and screen-reader review pending",
+    "Default-visible text includes offscreen page content; first-viewport count reported separately",
+    "No app authority or live records exercised by static studies"
+  ]
+}
