@@ -224,7 +224,7 @@ def _metric(ctx,data):
 def _detail(ctx,spot,data):
  if not ctx.detail:return ''
  close=url(ctx,detail='')+'#label-'+spot['id']
- body='<section class="focus" id="insight" tabindex="-1" aria-labelledby="insight-title"><a class="close" href="'+e(close,quote=True)+'" aria-label="Close '+e(spot['label'],quote=True)+'">×</a><h2 id="insight-title">'+e(spot['label'])+'</h2>'
+ body='<section class="focus" id="insight" tabindex="-1" aria-labelledby="insight-title"><a class="close close-insight" href="'+e(close,quote=True)+'" aria-label="Close '+e(spot['label'],quote=True)+'">×</a><h2 id="insight-title">'+e(spot['label'])+'</h2>'
  if ctx.stream=='forces':
   row=force_row(ctx,spot['id'],data);pathway,question,counter,inside=FORCE_POLICY[spot['id']]
   if SCOPES[ctx.scope]['kind']=='industry' and claim_rows(data,[spot['id']])[0]['asset_id']!=data['industry_twin_id']:

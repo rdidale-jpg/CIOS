@@ -6,7 +6,4 @@ for (const img of document.querySelectorAll('.world img')) {
   img.addEventListener('error', failed);
   if (img.complete && !img.naturalWidth) failed();
 }
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && !document.querySelector('.product-menu[open]'))
-    document.querySelector('#insight .close')?.click();
-});
+// Escape handling uses the existing design-system close-insight/menu owner.

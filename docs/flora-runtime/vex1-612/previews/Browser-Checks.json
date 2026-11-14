@@ -1,5 +1,5 @@
 {
-  "passed": 2577,
+  "passed": 2580,
   "checks": [
     "200 /?stream=landscape",
     "desktop uk-landscape no overflow",
@@ -2554,6 +2554,9 @@
     "touch forces→inside",
     "200 /enterprises/lloyds?stream=forces&detail=LBG-A2030-PLATFORMS",
     "deep-link focus enhancement",
+    "Escape closes global menu",
+    "global-menu Escape retains selected insight",
+    "menu Escape restores focus",
     "Escape closes focused insight",
     "200 /enterprises/lloyds?stream=inside",
     "immutable current artwork reused without transfer",

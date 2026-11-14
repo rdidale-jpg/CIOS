@@ -58,15 +58,15 @@ Cold emulated mobile connection: **1.6 Mbps, 150 ms RTT, DPR 1**, single loopbac
 
 | Entry | Before FCP ms | After FCP ms | Before image KB | After image KB | After art request ms |
 |---|---:|---:|---:|---:|---:|
-| uk-landscape | 532 | 592 | 723.0 | 410.4 | 2375 |
-| banking-landscape | 840 | 596 | 0.0 | 422.3 | 2455 |
-| lloyds-inside | 1964 | 592 | 0.0 | 410.6 | 2394 |
+| uk-landscape | 540 | 608 | 723.0 | 410.4 | 2377 |
+| banking-landscape | 816 | 596 | 0.0 | 422.3 | 2422 |
+| lloyds-inside | 1960 | 588 | 0.0 | 410.6 | 2414 |
 
 [Complete measurements](previews/Performance.json). Baseline Banking/Lloyds used inline graphics, so their image-transfer columns are zero; that is not a zero-cost page. The baseline harness uses HTTP and the candidate uses local TLS. FCP includes text/header paint, not completion of the illustration or LCP. These are single-run observations with local CPU/cache variability, not a statistically controlled production comparison, an SLA or proof of universal FCP improvement. No unapproved numerical performance target is invented. Real Safari/Retina, production network, LCP and image-quality acceptance remain manual.
 
 ## Validation and retained test contracts
 
-[Browser evidence](previews/Browser-Checks.json): **2,577 assertions**, seven primary views at all five sizes, 35 responsive captures, exact native stream destinations with retained layers/selection, two-selection journey, Back/Forward, fresh deep links, no-JS detail, force-to-Inside pathway, sources/unknowns, keyboard/Tab/Enter/focus, touch, missing-image/text fallback, immutable-image reuse, seven effective 200% zoom-width views and forced-colour active state. No horizontal overflow, label collisions, stream/art overlap or application script errors were observed. Labels stay at least 14px; stream and interactive label targets have at least 44px height.
+[Browser evidence](previews/Browser-Checks.json): **2,580 assertions**, seven primary views at all five sizes, 35 responsive captures, exact native stream destinations with retained layers/selection, two-selection journey, Back/Forward, fresh deep links, no-JS detail, force-to-Inside pathway, sources/unknowns, keyboard/Tab/Enter/focus, touch, missing-image/text fallback, immutable-image reuse, global-menu Escape retaining the selected insight, seven effective 200% zoom-width views and forced-colour active state. No horizontal overflow, label collisions, stream/art overlap or application script errors were observed. Labels stay at least 14px; stream and interactive label targets have at least 44px height.
 
 **53 new VEX-1 unit/HTTP cases** cover scope identity, exact sources/assets, active state, selectors/duplicates, private/foreign identity rejection, current-owner source injection escaping, unknowns, source staleness, withdrawn relationship suppression, no private Canvas/matching/network or Offers/Pipeline writes, verified account revocation, no-store HTML, pure public asset cache and unlisted/symlink asset denial. A broader focused run passed **132 tests** including visual-system, existing two-screen study, retained specialist and source-navigation contracts.
 

@@ -4,16 +4,45 @@
       "device": "desktop",
       "view": "uk-landscape",
       "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 288,
+      "fcpMs": 300,
       "artSources": [
         "uk-landscape-1536-8351b4eb8ddc"
+      ],
+      "resources": [
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 21
+        },
+        {
+          "asset": "uk-landscape-1536-8351b4eb8ddc",
+          "bytes": 706968,
+          "transfer": 707268,
+          "durationMs": 23
+        }
+      ]
+    },
+    {
+      "device": "desktop",
+      "view": "uk-forces",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 88,
+      "artSources": [
+        "uk-forces-1536-847d312743bd"
       ],
       "resources": [
         {
           "asset": "styles",
           "bytes": 11924,
           "transfer": 12224,
-          "durationMs": 31
+          "durationMs": 9
         },
         {
           "asset": "interactions",
@@ -22,20 +51,49 @@
           "durationMs": 0
         },
         {
-          "asset": "uk-landscape-1536-8351b4eb8ddc",
-          "bytes": 706968,
-          "transfer": 707268,
-          "durationMs": 47
+          "asset": "uk-forces-1536-847d312743bd",
+          "bytes": 613356,
+          "transfer": 613656,
+          "durationMs": 13
         }
       ]
     },
     {
       "device": "desktop",
-      "view": "uk-forces",
+      "view": "banking-landscape",
       "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 104,
+      "fcpMs": 68,
       "artSources": [
-        "uk-forces-1536-847d312743bd"
+        "banking-landscape-1536-1de7b3640185"
+      ],
+      "resources": [
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 9
+        },
+        {
+          "asset": "banking-landscape-1536-1de7b3640185",
+          "bytes": 674962,
+          "transfer": 675262,
+          "durationMs": 13
+        }
+      ]
+    },
+    {
+      "device": "desktop",
+      "view": "banking-forces",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 76,
+      "artSources": [
+        "banking-forces-1536-2a58ebb939f7"
       ],
       "resources": [
         {
@@ -51,68 +109,10 @@
           "durationMs": 0
         },
         {
-          "asset": "uk-forces-1536-847d312743bd",
-          "bytes": 613356,
-          "transfer": 613656,
-          "durationMs": 17
-        }
-      ]
-    },
-    {
-      "device": "desktop",
-      "view": "banking-landscape",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 84,
-      "artSources": [
-        "banking-landscape-1536-1de7b3640185"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 14
-        },
-        {
-          "asset": "banking-landscape-1536-1de7b3640185",
-          "bytes": 674962,
-          "transfer": 675262,
-          "durationMs": 18
-        }
-      ]
-    },
-    {
-      "device": "desktop",
-      "view": "banking-forces",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 80,
-      "artSources": [
-        "banking-forces-1536-2a58ebb939f7"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 8
-        },
-        {
           "asset": "banking-forces-1536-2a58ebb939f7",
           "bytes": 703706,
           "transfer": 704006,
-          "durationMs": 14
+          "durationMs": 18
         }
       ]
     },
@@ -120,17 +120,11 @@
       "device": "desktop",
       "view": "lloyds-inside",
       "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 88,
+      "fcpMs": 84,
       "artSources": [
         "lloyds-inside-1536-3d6a3c0bd592"
       ],
       "resources": [
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 13
-        },
         {
           "asset": "interactions",
           "bytes": 0,
@@ -138,10 +132,16 @@
           "durationMs": 0
         },
         {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 14
+        },
+        {
           "asset": "lloyds-inside-1536-3d6a3c0bd592",
           "bytes": 688206,
           "transfer": 688506,
-          "durationMs": 15
+          "durationMs": 22
         }
       ]
     },
@@ -149,7 +149,7 @@
       "device": "desktop",
       "view": "lloyds-landscape",
       "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 80,
+      "fcpMs": 76,
       "artSources": [
         "lloyds-landscape-1536-e2710006a387"
       ],
@@ -164,13 +164,13 @@
           "asset": "styles",
           "bytes": 11924,
           "transfer": 12224,
-          "durationMs": 11
+          "durationMs": 19
         },
         {
           "asset": "lloyds-landscape-1536-e2710006a387",
           "bytes": 714582,
           "transfer": 714882,
-          "durationMs": 16
+          "durationMs": 22
         }
       ]
     },
@@ -178,7 +178,7 @@
       "device": "desktop",
       "view": "lloyds-forces",
       "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 72,
+      "fcpMs": 80,
       "artSources": [
         "lloyds-forces-1536-c629f014985a"
       ],
@@ -193,427 +193,21 @@
           "asset": "styles",
           "bytes": 11924,
           "transfer": 12224,
-          "durationMs": 14
+          "durationMs": 16
         },
         {
           "asset": "lloyds-forces-1536-c629f014985a",
           "bytes": 651006,
           "transfer": 651306,
-          "durationMs": 19
+          "durationMs": 18
         }
       ]
     },
     {
       "device": "ipad-landscape",
       "view": "uk-landscape",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 100,
-      "artSources": [
-        "uk-landscape-1152-685df28a3075"
-      ],
-      "resources": [
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 15
-        },
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "uk-landscape-1152-685df28a3075",
-          "bytes": 410442,
-          "transfer": 410742,
-          "durationMs": 17
-        }
-      ]
-    },
-    {
-      "device": "ipad-landscape",
-      "view": "uk-forces",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 120,
-      "artSources": [
-        "uk-forces-1152-b51364843c5d"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 18
-        },
-        {
-          "asset": "uk-forces-1152-b51364843c5d",
-          "bytes": 351160,
-          "transfer": 351460,
-          "durationMs": 20
-        }
-      ]
-    },
-    {
-      "device": "ipad-landscape",
-      "view": "banking-landscape",
       "network": "unthrottled loopback; cold current artwork, DPR 1",
       "fcpMs": 88,
-      "artSources": [
-        "banking-landscape-1152-f4f9b56d78a9"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 21
-        },
-        {
-          "asset": "banking-landscape-1152-f4f9b56d78a9",
-          "bytes": 422290,
-          "transfer": 422590,
-          "durationMs": 25
-        }
-      ]
-    },
-    {
-      "device": "ipad-landscape",
-      "view": "banking-forces",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 72,
-      "artSources": [
-        "banking-forces-1152-46402578a8ed"
-      ],
-      "resources": [
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 17
-        },
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "banking-forces-1152-46402578a8ed",
-          "bytes": 413356,
-          "transfer": 413656,
-          "durationMs": 22
-        }
-      ]
-    },
-    {
-      "device": "ipad-landscape",
-      "view": "lloyds-inside",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 80,
-      "artSources": [
-        "lloyds-inside-1152-a3938046ba72"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 14
-        },
-        {
-          "asset": "lloyds-inside-1152-a3938046ba72",
-          "bytes": 410602,
-          "transfer": 410902,
-          "durationMs": 15
-        }
-      ]
-    },
-    {
-      "device": "ipad-landscape",
-      "view": "lloyds-landscape",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 72,
-      "artSources": [
-        "lloyds-landscape-1152-17ed441fa74d"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 20
-        },
-        {
-          "asset": "lloyds-landscape-1152-17ed441fa74d",
-          "bytes": 417404,
-          "transfer": 417704,
-          "durationMs": 22
-        }
-      ]
-    },
-    {
-      "device": "ipad-landscape",
-      "view": "lloyds-forces",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 280,
-      "artSources": [
-        "lloyds-forces-1152-d7029da317c3"
-      ],
-      "resources": [
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 19
-        },
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "lloyds-forces-1152-d7029da317c3",
-          "bytes": 383048,
-          "transfer": 383348,
-          "durationMs": 22
-        }
-      ]
-    },
-    {
-      "device": "ipad-portrait",
-      "view": "uk-landscape",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 128,
-      "artSources": [
-        "uk-landscape-1152-685df28a3075"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 34
-        },
-        {
-          "asset": "uk-landscape-1152-685df28a3075",
-          "bytes": 410442,
-          "transfer": 410742,
-          "durationMs": 38
-        }
-      ]
-    },
-    {
-      "device": "ipad-portrait",
-      "view": "uk-forces",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 96,
-      "artSources": [
-        "uk-forces-1152-b51364843c5d"
-      ],
-      "resources": [
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 18
-        },
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "uk-forces-1152-b51364843c5d",
-          "bytes": 351160,
-          "transfer": 351460,
-          "durationMs": 20
-        }
-      ]
-    },
-    {
-      "device": "ipad-portrait",
-      "view": "banking-landscape",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 72,
-      "artSources": [
-        "banking-landscape-1152-f4f9b56d78a9"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 18
-        },
-        {
-          "asset": "banking-landscape-1152-f4f9b56d78a9",
-          "bytes": 422290,
-          "transfer": 422590,
-          "durationMs": 21
-        }
-      ]
-    },
-    {
-      "device": "ipad-portrait",
-      "view": "banking-forces",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 68,
-      "artSources": [
-        "banking-forces-1152-46402578a8ed"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 14
-        },
-        {
-          "asset": "banking-forces-1152-46402578a8ed",
-          "bytes": 413356,
-          "transfer": 413656,
-          "durationMs": 17
-        }
-      ]
-    },
-    {
-      "device": "ipad-portrait",
-      "view": "lloyds-inside",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 68,
-      "artSources": [
-        "lloyds-inside-1152-a3938046ba72"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 14
-        },
-        {
-          "asset": "lloyds-inside-1152-a3938046ba72",
-          "bytes": 410602,
-          "transfer": 410902,
-          "durationMs": 21
-        }
-      ]
-    },
-    {
-      "device": "ipad-portrait",
-      "view": "lloyds-landscape",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 120,
-      "artSources": [
-        "lloyds-landscape-1152-17ed441fa74d"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 18
-        },
-        {
-          "asset": "lloyds-landscape-1152-17ed441fa74d",
-          "bytes": 417404,
-          "transfer": 417704,
-          "durationMs": 22
-        }
-      ]
-    },
-    {
-      "device": "ipad-portrait",
-      "view": "lloyds-forces",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 108,
-      "artSources": [
-        "lloyds-forces-1152-d7029da317c3"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 24
-        },
-        {
-          "asset": "lloyds-forces-1152-d7029da317c3",
-          "bytes": 383048,
-          "transfer": 383348,
-          "durationMs": 29
-        }
-      ]
-    },
-    {
-      "device": "mobile",
-      "view": "uk-landscape",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 128,
       "artSources": [
         "uk-landscape-1152-685df28a3075"
       ],
@@ -634,15 +228,15 @@
           "asset": "uk-landscape-1152-685df28a3075",
           "bytes": 410442,
           "transfer": 410742,
-          "durationMs": 26
+          "durationMs": 31
         }
       ]
     },
     {
-      "device": "mobile",
+      "device": "ipad-landscape",
       "view": "uk-forces",
       "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 116,
+      "fcpMs": 80,
       "artSources": [
         "uk-forces-1152-b51364843c5d"
       ],
@@ -651,7 +245,7 @@
           "asset": "styles",
           "bytes": 11924,
           "transfer": 12224,
-          "durationMs": 15
+          "durationMs": 13
         },
         {
           "asset": "interactions",
@@ -663,104 +257,17 @@
           "asset": "uk-forces-1152-b51364843c5d",
           "bytes": 351160,
           "transfer": 351460,
-          "durationMs": 18
+          "durationMs": 17
         }
       ]
     },
     {
-      "device": "mobile",
+      "device": "ipad-landscape",
       "view": "banking-landscape",
       "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 68,
+      "fcpMs": 72,
       "artSources": [
         "banking-landscape-1152-f4f9b56d78a9"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 11
-        },
-        {
-          "asset": "banking-landscape-1152-f4f9b56d78a9",
-          "bytes": 422290,
-          "transfer": 422590,
-          "durationMs": 13
-        }
-      ]
-    },
-    {
-      "device": "mobile",
-      "view": "banking-forces",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 68,
-      "artSources": [
-        "banking-forces-1152-46402578a8ed"
-      ],
-      "resources": [
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 18
-        },
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "banking-forces-1152-46402578a8ed",
-          "bytes": 413356,
-          "transfer": 413656,
-          "durationMs": 21
-        }
-      ]
-    },
-    {
-      "device": "mobile",
-      "view": "lloyds-inside",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 100,
-      "artSources": [
-        "lloyds-inside-1152-a3938046ba72"
-      ],
-      "resources": [
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 36
-        },
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "lloyds-inside-1152-a3938046ba72",
-          "bytes": 410602,
-          "transfer": 410902,
-          "durationMs": 39
-        }
-      ]
-    },
-    {
-      "device": "mobile",
-      "view": "lloyds-landscape",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 76,
-      "artSources": [
-        "lloyds-landscape-1152-17ed441fa74d"
       ],
       "resources": [
         {
@@ -776,6 +283,499 @@
           "durationMs": 10
         },
         {
+          "asset": "banking-landscape-1152-f4f9b56d78a9",
+          "bytes": 422290,
+          "transfer": 422590,
+          "durationMs": 15
+        }
+      ]
+    },
+    {
+      "device": "ipad-landscape",
+      "view": "banking-forces",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 64,
+      "artSources": [
+        "banking-forces-1152-46402578a8ed"
+      ],
+      "resources": [
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 13
+        },
+        {
+          "asset": "banking-forces-1152-46402578a8ed",
+          "bytes": 413356,
+          "transfer": 413656,
+          "durationMs": 14
+        }
+      ]
+    },
+    {
+      "device": "ipad-landscape",
+      "view": "lloyds-inside",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 64,
+      "artSources": [
+        "lloyds-inside-1152-a3938046ba72"
+      ],
+      "resources": [
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 11
+        },
+        {
+          "asset": "lloyds-inside-1152-a3938046ba72",
+          "bytes": 410602,
+          "transfer": 410902,
+          "durationMs": 14
+        }
+      ]
+    },
+    {
+      "device": "ipad-landscape",
+      "view": "lloyds-landscape",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 60,
+      "artSources": [
+        "lloyds-landscape-1152-17ed441fa74d"
+      ],
+      "resources": [
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 15
+        },
+        {
+          "asset": "lloyds-landscape-1152-17ed441fa74d",
+          "bytes": 417404,
+          "transfer": 417704,
+          "durationMs": 18
+        }
+      ]
+    },
+    {
+      "device": "ipad-landscape",
+      "view": "lloyds-forces",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 72,
+      "artSources": [
+        "lloyds-forces-1152-d7029da317c3"
+      ],
+      "resources": [
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 13
+        },
+        {
+          "asset": "lloyds-forces-1152-d7029da317c3",
+          "bytes": 383048,
+          "transfer": 383348,
+          "durationMs": 15
+        }
+      ]
+    },
+    {
+      "device": "ipad-portrait",
+      "view": "uk-landscape",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 104,
+      "artSources": [
+        "uk-landscape-1152-685df28a3075"
+      ],
+      "resources": [
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 23
+        },
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "uk-landscape-1152-685df28a3075",
+          "bytes": 410442,
+          "transfer": 410742,
+          "durationMs": 29
+        }
+      ]
+    },
+    {
+      "device": "ipad-portrait",
+      "view": "uk-forces",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 88,
+      "artSources": [
+        "uk-forces-1152-b51364843c5d"
+      ],
+      "resources": [
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 18
+        },
+        {
+          "asset": "uk-forces-1152-b51364843c5d",
+          "bytes": 351160,
+          "transfer": 351460,
+          "durationMs": 22
+        }
+      ]
+    },
+    {
+      "device": "ipad-portrait",
+      "view": "banking-landscape",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 84,
+      "artSources": [
+        "banking-landscape-1152-f4f9b56d78a9"
+      ],
+      "resources": [
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 15
+        },
+        {
+          "asset": "banking-landscape-1152-f4f9b56d78a9",
+          "bytes": 422290,
+          "transfer": 422590,
+          "durationMs": 17
+        }
+      ]
+    },
+    {
+      "device": "ipad-portrait",
+      "view": "banking-forces",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 64,
+      "artSources": [
+        "banking-forces-1152-46402578a8ed"
+      ],
+      "resources": [
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "banking-forces-1152-46402578a8ed",
+          "bytes": 413356,
+          "transfer": 413656,
+          "durationMs": 12
+        },
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 14
+        }
+      ]
+    },
+    {
+      "device": "ipad-portrait",
+      "view": "lloyds-inside",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 84,
+      "artSources": [
+        "lloyds-inside-1152-a3938046ba72"
+      ],
+      "resources": [
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 15
+        },
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "lloyds-inside-1152-a3938046ba72",
+          "bytes": 410602,
+          "transfer": 410902,
+          "durationMs": 18
+        }
+      ]
+    },
+    {
+      "device": "ipad-portrait",
+      "view": "lloyds-landscape",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 64,
+      "artSources": [
+        "lloyds-landscape-1152-17ed441fa74d"
+      ],
+      "resources": [
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 11
+        },
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "lloyds-landscape-1152-17ed441fa74d",
+          "bytes": 417404,
+          "transfer": 417704,
+          "durationMs": 12
+        }
+      ]
+    },
+    {
+      "device": "ipad-portrait",
+      "view": "lloyds-forces",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 84,
+      "artSources": [
+        "lloyds-forces-1152-d7029da317c3"
+      ],
+      "resources": [
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 16
+        },
+        {
+          "asset": "lloyds-forces-1152-d7029da317c3",
+          "bytes": 383048,
+          "transfer": 383348,
+          "durationMs": 19
+        }
+      ]
+    },
+    {
+      "device": "mobile",
+      "view": "uk-landscape",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 116,
+      "artSources": [
+        "uk-landscape-1152-685df28a3075"
+      ],
+      "resources": [
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 25
+        },
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "uk-landscape-1152-685df28a3075",
+          "bytes": 410442,
+          "transfer": 410742,
+          "durationMs": 34
+        }
+      ]
+    },
+    {
+      "device": "mobile",
+      "view": "uk-forces",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 72,
+      "artSources": [
+        "uk-forces-1152-b51364843c5d"
+      ],
+      "resources": [
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 9
+        },
+        {
+          "asset": "uk-forces-1152-b51364843c5d",
+          "bytes": 351160,
+          "transfer": 351460,
+          "durationMs": 13
+        }
+      ]
+    },
+    {
+      "device": "mobile",
+      "view": "banking-landscape",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 60,
+      "artSources": [
+        "banking-landscape-1152-f4f9b56d78a9"
+      ],
+      "resources": [
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 11
+        },
+        {
+          "asset": "banking-landscape-1152-f4f9b56d78a9",
+          "bytes": 422290,
+          "transfer": 422590,
+          "durationMs": 14
+        }
+      ]
+    },
+    {
+      "device": "mobile",
+      "view": "banking-forces",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 64,
+      "artSources": [
+        "banking-forces-1152-46402578a8ed"
+      ],
+      "resources": [
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 19
+        },
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "banking-forces-1152-46402578a8ed",
+          "bytes": 413356,
+          "transfer": 413656,
+          "durationMs": 22
+        }
+      ]
+    },
+    {
+      "device": "mobile",
+      "view": "lloyds-inside",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 80,
+      "artSources": [
+        "lloyds-inside-1152-a3938046ba72"
+      ],
+      "resources": [
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 16
+        },
+        {
+          "asset": "lloyds-inside-1152-a3938046ba72",
+          "bytes": 410602,
+          "transfer": 410902,
+          "durationMs": 20
+        }
+      ]
+    },
+    {
+      "device": "mobile",
+      "view": "lloyds-landscape",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 80,
+      "artSources": [
+        "lloyds-landscape-1152-17ed441fa74d"
+      ],
+      "resources": [
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 13
+        },
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
           "asset": "lloyds-landscape-1152-17ed441fa74d",
           "bytes": 417404,
           "transfer": 417704,
@@ -793,64 +793,6 @@
       ],
       "resources": [
         {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 16
-        },
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "lloyds-forces-1152-d7029da317c3",
-          "bytes": 383048,
-          "transfer": 383348,
-          "durationMs": 17
-        }
-      ]
-    },
-    {
-      "device": "mobile-320",
-      "view": "uk-landscape",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 84,
-      "artSources": [
-        "uk-landscape-768-507689f8afd8"
-      ],
-      "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
-        {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 18
-        },
-        {
-          "asset": "uk-landscape-768-507689f8afd8",
-          "bytes": 189834,
-          "transfer": 190134,
-          "durationMs": 23
-        }
-      ]
-    },
-    {
-      "device": "mobile-320",
-      "view": "uk-forces",
-      "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 84,
-      "artSources": [
-        "uk-forces-768-0241193578d1"
-      ],
-      "resources": [
-        {
           "asset": "interactions",
           "bytes": 0,
           "transfer": 0,
@@ -861,6 +803,64 @@
           "bytes": 11924,
           "transfer": 12224,
           "durationMs": 12
+        },
+        {
+          "asset": "lloyds-forces-1152-d7029da317c3",
+          "bytes": 383048,
+          "transfer": 383348,
+          "durationMs": 14
+        }
+      ]
+    },
+    {
+      "device": "mobile-320",
+      "view": "uk-landscape",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 224,
+      "artSources": [
+        "uk-landscape-768-507689f8afd8"
+      ],
+      "resources": [
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 100
+        },
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
+          "asset": "uk-landscape-768-507689f8afd8",
+          "bytes": 189834,
+          "transfer": 190134,
+          "durationMs": 138
+        }
+      ]
+    },
+    {
+      "device": "mobile-320",
+      "view": "uk-forces",
+      "network": "unthrottled loopback; cold current artwork, DPR 1",
+      "fcpMs": 92,
+      "artSources": [
+        "uk-forces-768-0241193578d1"
+      ],
+      "resources": [
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 12
+        },
+        {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
         },
         {
           "asset": "uk-forces-768-0241193578d1",
@@ -880,22 +880,22 @@
       ],
       "resources": [
         {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 18
+        },
+        {
           "asset": "interactions",
           "bytes": 0,
           "transfer": 0,
           "durationMs": 0
         },
         {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 16
-        },
-        {
           "asset": "banking-landscape-768-09a6ae4c5b73",
           "bytes": 206666,
           "transfer": 206966,
-          "durationMs": 18
+          "durationMs": 20
         }
       ]
     },
@@ -903,7 +903,7 @@
       "device": "mobile-320",
       "view": "banking-forces",
       "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 72,
+      "fcpMs": 76,
       "artSources": [
         "banking-forces-768-1df482a9583f"
       ],
@@ -918,7 +918,7 @@
           "asset": "styles",
           "bytes": 11924,
           "transfer": 12224,
-          "durationMs": 15
+          "durationMs": 14
         },
         {
           "asset": "banking-forces-768-1df482a9583f",
@@ -932,17 +932,11 @@
       "device": "mobile-320",
       "view": "lloyds-inside",
       "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 84,
+      "fcpMs": 80,
       "artSources": [
         "lloyds-inside-768-8d00816a9ad7"
       ],
       "resources": [
-        {
-          "asset": "interactions",
-          "bytes": 0,
-          "transfer": 0,
-          "durationMs": 0
-        },
         {
           "asset": "styles",
           "bytes": 11924,
@@ -950,10 +944,16 @@
           "durationMs": 15
         },
         {
+          "asset": "interactions",
+          "bytes": 0,
+          "transfer": 0,
+          "durationMs": 0
+        },
+        {
           "asset": "lloyds-inside-768-8d00816a9ad7",
           "bytes": 191576,
           "transfer": 191876,
-          "durationMs": 18
+          "durationMs": 17
         }
       ]
     },
@@ -961,11 +961,17 @@
       "device": "mobile-320",
       "view": "lloyds-landscape",
       "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 64,
+      "fcpMs": 76,
       "artSources": [
         "lloyds-landscape-768-fa44563b2e93"
       ],
       "resources": [
+        {
+          "asset": "styles",
+          "bytes": 11924,
+          "transfer": 12224,
+          "durationMs": 15
+        },
         {
           "asset": "interactions",
           "bytes": 0,
@@ -973,16 +979,10 @@
           "durationMs": 0
         },
         {
-          "asset": "styles",
-          "bytes": 11924,
-          "transfer": 12224,
-          "durationMs": 12
-        },
-        {
           "asset": "lloyds-landscape-768-fa44563b2e93",
           "bytes": 195790,
           "transfer": 196090,
-          "durationMs": 15
+          "durationMs": 19
         }
       ]
     },
@@ -990,7 +990,7 @@
       "device": "mobile-320",
       "view": "lloyds-forces",
       "network": "unthrottled loopback; cold current artwork, DPR 1",
-      "fcpMs": 80,
+      "fcpMs": 72,
       "artSources": [
         "lloyds-forces-768-048af0418b8e"
       ],
@@ -1019,7 +1019,7 @@
       "device": "mobile",
       "view": "lloyds-inside",
       "network": "warm reload",
-      "fcpMs": 72,
+      "fcpMs": 68,
       "artSources": [
         "lloyds-inside-1152-a3938046ba72"
       ],
@@ -1028,19 +1028,19 @@
           "asset": "styles",
           "bytes": 11924,
           "transfer": 12224,
-          "durationMs": 10
+          "durationMs": 12
+        },
+        {
+          "asset": "interactions",
+          "bytes": 483,
+          "transfer": 783,
+          "durationMs": 15
         },
         {
           "asset": "lloyds-inside-1152-a3938046ba72",
           "bytes": 410602,
           "transfer": 0,
           "durationMs": 0
-        },
-        {
-          "asset": "interactions",
-          "bytes": 594,
-          "transfer": 894,
-          "durationMs": 12
         }
       ]
     },
@@ -1049,13 +1049,13 @@
       "device": "mobile",
       "view": "uk-landscape",
       "network": "cold emulated 1.6 Mbps / 150 ms RTT; loopback TLS, DPR 1",
-      "fcpMs": 532,
+      "fcpMs": 540,
       "resources": [
         {
           "asset": "uk-artwork",
           "bytes": 723036,
           "transfer": 723336,
-          "durationMs": 3923
+          "durationMs": 3893
         }
       ]
     },
@@ -1064,7 +1064,7 @@
       "device": "mobile",
       "view": "banking-landscape",
       "network": "cold emulated 1.6 Mbps / 150 ms RTT; loopback TLS, DPR 1",
-      "fcpMs": 840,
+      "fcpMs": 816,
       "resources": []
     },
     {
@@ -1072,7 +1072,7 @@
       "device": "mobile",
       "view": "lloyds-inside",
       "network": "cold emulated 1.6 Mbps / 150 ms RTT; loopback TLS, DPR 1",
-      "fcpMs": 1964,
+      "fcpMs": 1960,
       "resources": []
     },
     {
@@ -1080,13 +1080,13 @@
       "device": "mobile",
       "view": "uk-landscape",
       "network": "cold emulated 1.6 Mbps / 150 ms RTT; loopback TLS, DPR 1",
-      "fcpMs": 592,
+      "fcpMs": 608,
       "resources": [
         {
           "asset": "uk-landscape-1152-685df28a3075",
           "bytes": 410442,
           "transfer": 410742,
-          "durationMs": 2375
+          "durationMs": 2377
         }
       ]
     },
@@ -1101,7 +1101,7 @@
           "asset": "banking-landscape-1152-f4f9b56d78a9",
           "bytes": 422290,
           "transfer": 422590,
-          "durationMs": 2455
+          "durationMs": 2422
         }
       ]
     },
@@ -1110,13 +1110,13 @@
       "device": "mobile",
       "view": "lloyds-inside",
       "network": "cold emulated 1.6 Mbps / 150 ms RTT; loopback TLS, DPR 1",
-      "fcpMs": 592,
+      "fcpMs": 588,
       "resources": [
         {
           "asset": "lloyds-inside-1152-a3938046ba72",
           "bytes": 410602,
           "transfer": 410902,
-          "durationMs": 2394
+          "durationMs": 2414
         }
       ]
     }
