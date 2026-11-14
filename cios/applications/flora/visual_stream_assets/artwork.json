@@ -1,0 +1,223 @@
+{
+  "design_commit": "c6bf2280594922db6951c5c36205984c85ca4aea",
+  "encoding": "Pillow WebP quality 87, method 6; proportional LANCZOS resize, no crop or composition changes",
+  "rights": "Owner-commissioned image_gen conceptual FLORA illustrations; accepted for implementation in #612. Not photographs, source evidence, company premises, ownership, magnitude or geographic maps. Original creation and prior conversion provenance retained in PR #610.",
+  "originals_retained": "Exact seven original files remain unchanged in the pinned Git design commit; runtime serves only deterministic derivatives.",
+  "scenes": {
+    "uk-landscape": {
+      "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/uk-economy.webp",
+      "original_sha256": "ff4f70c21fcfe733affd0405021fa24386f5edaeb3497a10596550d9dbed0567",
+      "original_bytes": 723036,
+      "width": 1536,
+      "height": 1024,
+      "variants": [
+        {
+          "width": 768,
+          "height": 512,
+          "file": "uk-landscape-768-507689f8afd8.webp",
+          "sha256": "507689f8afd86d84bf3d08def11e920e07c511bc9479a68849906708e69abd64",
+          "bytes": 189834
+        },
+        {
+          "width": 1152,
+          "height": 768,
+          "file": "uk-landscape-1152-685df28a3075.webp",
+          "sha256": "685df28a3075ca4e50223ecfbb9258727044bc4c3aa54c3d664c6ab0cb0d3dfa",
+          "bytes": 410442
+        },
+        {
+          "width": 1536,
+          "height": 1024,
+          "file": "uk-landscape-1536-8351b4eb8ddc.webp",
+          "sha256": "8351b4eb8ddcc75edd780e556f52fb169cfd6ebe790403b9c378fa5a37135910",
+          "bytes": 706968
+        }
+      ]
+    },
+    "uk-forces": {
+      "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/uk-forces.png",
+      "original_sha256": "0a8dbc120ecababb297ea1a6eae7fb8a62277322e88bcee1148a3f06342f6a14",
+      "original_bytes": 3841329,
+      "width": 1536,
+      "height": 1024,
+      "variants": [
+        {
+          "width": 768,
+          "height": 512,
+          "file": "uk-forces-768-0241193578d1.webp",
+          "sha256": "0241193578d1f8abb230566cab5a6031ea2e19d81d14a4a1c390568109b653af",
+          "bytes": 165906
+        },
+        {
+          "width": 1152,
+          "height": 768,
+          "file": "uk-forces-1152-b51364843c5d.webp",
+          "sha256": "b51364843c5dff665f40f47b6fb7b199fd6a36c1ac8c15ee502cb4b7335be014",
+          "bytes": 351160
+        },
+        {
+          "width": 1536,
+          "height": 1024,
+          "file": "uk-forces-1536-847d312743bd.webp",
+          "sha256": "847d312743bd3b91f7182eede499c75a1c99f26b57cd39a36797dbb64e975d13",
+          "bytes": 613356
+        }
+      ]
+    },
+    "banking-landscape": {
+      "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/banking-combined.png",
+      "original_sha256": "2661db421634f422e571066152450cce92261ff714a4ed34c0bfe1e6a243d0af",
+      "original_bytes": 3935311,
+      "width": 1536,
+      "height": 1024,
+      "variants": [
+        {
+          "width": 768,
+          "height": 512,
+          "file": "banking-landscape-768-09a6ae4c5b73.webp",
+          "sha256": "09a6ae4c5b7318bac08a1fac563a5e3eec0ff145533e7ad08404c98ef89249e2",
+          "bytes": 206666
+        },
+        {
+          "width": 1152,
+          "height": 768,
+          "file": "banking-landscape-1152-f4f9b56d78a9.webp",
+          "sha256": "f4f9b56d78a918687bf6e3a4170bffed458e66718160a41df87c2c8860a8d193",
+          "bytes": 422290
+        },
+        {
+          "width": 1536,
+          "height": 1024,
+          "file": "banking-landscape-1536-1de7b3640185.webp",
+          "sha256": "1de7b3640185039f27d2101ad4823888b401122d19c1c324f2184e624608fdc9",
+          "bytes": 674962
+        }
+      ]
+    },
+    "banking-forces": {
+      "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/banking-forces.png",
+      "original_sha256": "2cc533ba6b6dfe4ec008192ffe7f71b8e4c978e8d391d128b9395809ae9f3a90",
+      "original_bytes": 4218446,
+      "width": 1536,
+      "height": 1024,
+      "variants": [
+        {
+          "width": 768,
+          "height": 512,
+          "file": "banking-forces-768-1df482a9583f.webp",
+          "sha256": "1df482a9583fc7fb13430d3cb6de37b4b654c3ca2d50fedbf6304ca089ea0fc0",
+          "bytes": 195044
+        },
+        {
+          "width": 1152,
+          "height": 768,
+          "file": "banking-forces-1152-46402578a8ed.webp",
+          "sha256": "46402578a8edf0ae2beb70ed2ad2cce67229f3ac2c2754065ced1991a7ce2a30",
+          "bytes": 413356
+        },
+        {
+          "width": 1536,
+          "height": 1024,
+          "file": "banking-forces-1536-2a58ebb939f7.webp",
+          "sha256": "2a58ebb939f7857a7dd094e46bb888a4736cb3bc8d2928b96ee0d71936cd9c89",
+          "bytes": 703706
+        }
+      ]
+    },
+    "lloyds-inside": {
+      "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/lloyds-inside.png",
+      "original_sha256": "9bbb5b96f5fac6cdf72c9138973ac8f5ee429420ef3fe330ac7ece5072ec0584",
+      "original_bytes": 4081179,
+      "width": 1536,
+      "height": 1024,
+      "variants": [
+        {
+          "width": 768,
+          "height": 512,
+          "file": "lloyds-inside-768-8d00816a9ad7.webp",
+          "sha256": "8d00816a9ad7c2c4662aa573591e155838e71e9b89769dd2ed249d89943c55a0",
+          "bytes": 191576
+        },
+        {
+          "width": 1152,
+          "height": 768,
+          "file": "lloyds-inside-1152-a3938046ba72.webp",
+          "sha256": "a3938046ba72ccf8774747afd3e0e949590a0f0e01714e1040255997b2e243b2",
+          "bytes": 410602
+        },
+        {
+          "width": 1536,
+          "height": 1024,
+          "file": "lloyds-inside-1536-3d6a3c0bd592.webp",
+          "sha256": "3d6a3c0bd5927fab299a9cab334341b77b2d752b6ee3d3f5e2a0cffef9189f3c",
+          "bytes": 688206
+        }
+      ]
+    },
+    "lloyds-landscape": {
+      "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/lloyds-world.png",
+      "original_sha256": "98c0794e6cd78a9658eb00fce7327c9ffa998bcf83256301a513226e85ec0383",
+      "original_bytes": 4243024,
+      "width": 1536,
+      "height": 1024,
+      "variants": [
+        {
+          "width": 768,
+          "height": 512,
+          "file": "lloyds-landscape-768-fa44563b2e93.webp",
+          "sha256": "fa44563b2e93f9fe1bdd9505e870d80ca635b59812ba0781c2426c069efb7675",
+          "bytes": 195790
+        },
+        {
+          "width": 1152,
+          "height": 768,
+          "file": "lloyds-landscape-1152-17ed441fa74d.webp",
+          "sha256": "17ed441fa74d5855149107fc21e9950dad71f738041ba832dbf8978b9e693387",
+          "bytes": 417404
+        },
+        {
+          "width": 1536,
+          "height": 1024,
+          "file": "lloyds-landscape-1536-e2710006a387.webp",
+          "sha256": "e2710006a387ef3c4251aa6fd2e4574e576129e209a191d0e9053f6b9d8010b7",
+          "bytes": 714582
+        }
+      ]
+    },
+    "lloyds-forces": {
+      "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/lloyds-forces.png",
+      "original_sha256": "47292147cf6c06dcb5b1d7807e75178d256c9dc8d43bb3fb01a0a85906ccc5db",
+      "original_bytes": 4094604,
+      "width": 1536,
+      "height": 1024,
+      "variants": [
+        {
+          "width": 768,
+          "height": 512,
+          "file": "lloyds-forces-768-048af0418b8e.webp",
+          "sha256": "048af0418b8efe8f9e2ad7f541f1eb130d24b88e6d1dfa51a91e4c6d8599c447",
+          "bytes": 178514
+        },
+        {
+          "width": 1152,
+          "height": 768,
+          "file": "lloyds-forces-1152-d7029da317c3.webp",
+          "sha256": "d7029da317c32c87aba442e85ef94d1c4a20f7b83c0a0ca4bddf6348daad714e",
+          "bytes": 383048
+        },
+        {
+          "width": 1536,
+          "height": 1024,
+          "file": "lloyds-forces-1536-c629f014985a.webp",
+          "sha256": "c629f014985a1e65e586b09cd396d088879b0e75fef172f1fd68e40466b0d8a2",
+          "bytes": 651006
+        }
+      ]
+    }
+  },
+  "caption_source_pins": {
+    "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+    "cios/applications/flora/visual_v2_assets/economy.json": "78b4bb90c02b9af8132d7f8eca3c1832b6a1047feb382f9473d463d44e1f31cd",
+    "enterprise-knowledge/macro/research-model/Macro-Context-v1.json": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9"
+  }
+}

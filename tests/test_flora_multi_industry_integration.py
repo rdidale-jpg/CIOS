@@ -2,6 +2,7 @@
 from html.parser import HTMLParser
 import json
 from pathlib import Path
+from urllib.parse import urlsplit
 import subprocess
 import pytest
 from cios.applications.flora.research_intelligence import model,unified_views as views
@@ -30,7 +31,8 @@ def test_both_sectors_and_all_supported_enterprises_share_the_canonical_catalogu
         assert '/enterprises/'+slug in DOM(html).links
     for domain,slug in [('banking','lloyds'),('aviation','easyjet')]:
         assert '/enterprises/'+slug in DOM(web('/industries/'+domain)[1]).links
-        assert '/industries/'+domain in DOM(web('/enterprises/'+slug)[1]).links
+        # VEX-1 return links retain stream and selected enterprise in the query.
+        assert '/industries/'+domain in [urlsplit(href).path for href in DOM(web('/enterprises/'+slug)[1]).links]
 
 
 @pytest.mark.parametrize('domain,slug,origin',[('banking','lloyds','RCO-LBG-002'),('aviation','easyjet','RCO-EJ-001')])

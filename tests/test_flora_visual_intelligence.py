@@ -51,7 +51,9 @@ def test_pinned_specs_are_reproducible_and_inputs_are_read_only(domain):
 
 @pytest.mark.parametrize('domain,slug',[('banking','lloyds'),('aviation','easyjet')])
 def test_all_flagship_pages_and_ai_lens_keep_canonical_navigation(web,domain,slug):
-    for path,family in [(f'/industries/{domain}','industry-signature'),(f'/industries/{domain}?lens=ai-disruption','industry-signature'),(f'/enterprises/{slug}','enterprise-story'),(f'/enterprises/{slug}?lens=timeline','strategic-timeline')]:
+    # VEX-1 has new default imagery. Retained specialist deep links continue
+    # to own these existing structured visual families and their evidence.
+    for path,family in [(f'/industries/{domain}?lens=overview','industry-signature'),(f'/industries/{domain}?lens=ai-disruption','industry-signature'),(f'/enterprises/{slug}?lens=operating-model','enterprise-story'),(f'/enterprises/{slug}?lens=timeline','strategic-timeline')]:
         status,html=web(path);assert status==200,path
         assert f"data-visual-family='{family}'" in html
         assert public_request_target(path)

@@ -89,7 +89,7 @@ def test_visuals_use_distinct_framework_geometries_and_keyboard_destinations():
 
 
 def test_industry_lenses_and_enterprise_views_open_each_template(web):
-    for path,kind in [('/industries/banking?lens=pestle','pestle'),('/industries/banking?lens=porter','five-forces'),('/industries/banking?lens=value-chain','value-chain'),('/enterprises/lloyds','operating-model'),('/enterprises/lloyds?lens=ecosystem','ecosystem'),('/enterprises/lloyds?lens=opportunities','opportunities')]:
+    for path,kind in [('/industries/banking?lens=pestle','pestle'),('/industries/banking?lens=porter','five-forces'),('/industries/banking?lens=value-chain','value-chain'),('/enterprises/lloyds?lens=operating-model','operating-model'),('/enterprises/lloyds?lens=ecosystem','ecosystem'),('/enterprises/lloyds?lens=opportunities','opportunities')]:
         status,html=web(path);assert status==200 and "data-diagram-type='"+kind+"'" in html
         assert '/opportunities' in Navigation(html).urls
 
@@ -139,7 +139,9 @@ def test_supplier_visual_preserves_unknown_contracts_and_reported_history():
 
 
 def test_current_historical_and_inferred_evidence_remain_available(web):
-    html=web('/enterprises/lloyds')[1]
+    # VEX-1 defaults to the accepted Inside illustration. This assertion checks
+    # the retained specialist presentation and all historical evidence.
+    html=web('/enterprises/lloyds?lens=operating-model')[1]
     assert 'Key findings &amp; important changes' in html or 'Key findings & important changes' in html
     assert 'Evidence, historical observations & research gaps' in html
     assert 'source-supported disclosure' in html and 'historical' in html
