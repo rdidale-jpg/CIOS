@@ -1,5 +1,7 @@
 # FLORA LJ-1 — Combined Visual Journey
 
+**Current design revision: [LJ-2 — three scopes with Landscape / Forces](lj2/README.md).** Earlier LJ-1/LJ-1R are rejected historical design evidence, not accepted implementation briefs.
+
 **Historical rejected LJ-1 pack.** The owner required rich independent artwork and a four-level journey. The [current LJ-1R correction, before/after comparisons and evidence audit](rich/README.md) supersede this original five-state design. Original files remain historical evidence, not an accepted implementation brief.
 
 Design-only response to [Issue #608](https://github.com/rdidale-jpg/CIOS/issues/608) and its approved LJ-1 commission. Based on original accepted `origin/main` at `0cb07c2e78ccb16240c799b31cd62736e2135529`. **No rejected VA-1 layout or artwork is imported.** Separate branch/PR; #603 and #609 are untouched. Owner visual/architecture acceptance is pending; no production implementation is authorised.

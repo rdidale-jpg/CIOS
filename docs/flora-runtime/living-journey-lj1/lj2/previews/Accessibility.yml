@@ -1,0 +1,39 @@
+- main:
+  - navigation "Current scope":
+    - link "UK":
+      - /url: uk-forces.html
+    - text: ›
+    - link "Banking":
+      - /url: banking-forces.html
+    - text: ›
+    - link "Groups":
+      - /url: banking-forces.html
+  - heading "Lloyds Banking Group" [level=1]
+  - group: Layers
+  - paragraph:
+    - strong: £502.8bn
+    - text: Group deposits · 30 Sep 2026
+    - strong: £6.6bn
+    - text: Group statutory pretax profit · nine months to 30 Sep 2026
+  - navigation "View lens":
+    - link "LANDSCAPE":
+      - /url: lloyds-landscape.html
+    - link "FORCES":
+      - /url: lloyds-forces.html
+  - figure "Illustrated Lloyds commercial world":
+    - link "Core modernisation":
+      - /url: "#force-LBG-A2030-PLATFORMS"
+    - link "Cost discipline":
+      - /url: "#force-LBG-A2030-CIR"
+    - link "AI benefit & control":
+      - /url: "#force-LBG-ENVOY-CONTROLS"
+    - link "Brand & service change":
+      - /url: "#force-LBG-BRAND26-TIMING"
+    - link "Investment choices":
+      - /url: "#force-LBG-Q326-INVESTMENT"
+    - link "Resilience obligations":
+      - /url: "#force-UK-PRA-REPORT27"
+  - group: Enterprise Builder · future tool
+  - group: Text view
+  - link "← Back":
+    - /url: banking-forces.html
