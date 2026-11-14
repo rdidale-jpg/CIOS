@@ -1,0 +1,26 @@
+# Research gaps, contradictions and limitations
+
+The model is complete as an analytical method; the UK, Banking and Lloyds proofs are bounded demonstrations of existing evidence. They are **not** complete research diagnoses or independently verified commercial recommendations. No further source collection or paid call occurred.
+
+| Area | Retained limitation / contradiction | Consequence and targeted next authorised research |
+|---|---|---|
+| UK breadth | Five reviewed themes plus statistical extracts do not cover all national structural issues. Political and Social share one procurement-policy source; not independent corroboration. | Do not imply a national consensus agenda. Obtain broader scoped evidence only under separately authorised enrichment. |
+| GDP/GVA | Real quarterly GDP growth vs 2024 nominal GVA. Blue Book supports total/basis; September GDP appendix supports 2024 sector weights; SIC sources classify. | No conflation with sector growth, sales or bank TAM. The existing appendix source limitation says 1001 while the owner manifest and actual sum say 1002/100.2%; retain discrepancy, never normalise. |
+| Macro dates | Survey fieldwork Aug–Dec 2025, later publication/review; proposed cyber bill has unknown publication date; future reporting/tender periods differ. | Review date cannot become reporting period or proof of a new event. Recheck time-sensitive legal status before any action. |
+| Banking economics | Finance & insurance 8.1% of 2024 GVA is broader than Banking. Current defined-market size, growth, segments, profit pools, costs, capital and relative shares incomplete. | No sector-profit ranking, arbitrary score or source-free estimate. Seek comparable current segment/period evidence. |
+| Regulation | PRA/FCA source dates do not establish every Group entity's duties or readiness; old CTP context is not designation evidence. | Resolve exact regulated entity, final rules, effective dates and current coverage. France-scoped CSRD guidance cannot establish a Lloyds obligation without an exact-entity basis; relevant EU subsidiaries may warrant separate review. |
+| Lloyds financials | Deposits stock, nine-month profit and 2030 target do not provide current income/cost/growth decomposition. Group plans are not external budgets. | FIN-01/02 retained; reconcile actual comparable banking measures before cost, productivity or economic-value claims. |
+| Lloyds operating depth | Art is conceptual, not current premises, legal hierarchy or systems. Brands, business units and subsidiaries differ. | ORG-01/02, OPS-01, REL-01, REG-01, INF-01 retained. Do not invent suppliers, clients, decision owners or named leaders. |
+| Platform announcement | Existing Envoy/Google and built-in controls are company disclosures; effectiveness, adoption, exclusivity and external scope unproven. HTML/PDF publication dates differ (1 May vs 28 April). | Report both source dates, not a synthetic single date. Reject missing-platform/control pitch; investigate a residual outcome only if evidenced. |
+| Historical supersession | Some older Porter/substitute narratives refer to proposed Curve acquisition; later retained research reports completion. | Preserve history, use appropriate current owner version; no revived proposal-based early opportunity. |
+| Santander identity | Public runtime BK-ENT-005 versus repository Twin BK-ENT-007; separate TSB/Santander legal parties. Repository prose reports later-stage facts without proving the same accepted identity/read model. | No name join or promotion. Resolve through identity owner. November transfer/migration announcement does not establish early strategic influence, procurement, supplier scope or budget. |
+| Architecture metadata | ADR-014/024 accepted bodies with Draft headers; EI-001/RA/Doctrine status discrepancies; ADR-026 index implementation note stale vs runtime qualifier. | Record as owner reconciliation work. Do not edit or silently promote an authority in SI-1. |
+| Commercial need | No customer validation, private employer capability, buyer ownership, external requirement, budget, access or qualified opportunity in these public proofs. | COM-01 retained. Use existing authorised Offers/seller validation and Pipeline controls; research importance alone is insufficient. |
+
+## Distinct retained gap sets
+
+The nine visual questions remain exactly: FIN-01, FIN-02, ORG-01, OPS-01, REL-01, REG-01, ORG-02, INF-01, COM-01. The unchanged Banking overlay also owns **13 `G-*` gaps and nine `RCO-*` hypotheses**. They are not collapsed into one list or marked resolved by the new design. All original files, IDs and historical tiers remain unchanged; source-owner hash tests verify that boundary.
+
+## Proof trace limits
+
+Three tailored conditional transmission traces illustrate national context, industry mechanism and enterprise exposure boundaries. All unresolved edges stay ineligible for stronger conclusions. Every admitted issue has an independent source → reported statement → labelled interpretation → agenda question → learning action path. The source supports the disclosure/context, not a causal diagnosis or verified adverse outcome. This is deliberate refusal to fabricate a fully confirmed chain, rather than an assertion that the current research is comprehensive.

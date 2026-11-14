@@ -1,0 +1,762 @@
+{
+  "status": "SI-1 design reference index; not a research/Observation store",
+  "base": "fe66516c15726dc45de147ede2674c9172f8cac6",
+  "references": {
+    "UK-RATE-NOV26": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=UK-RATE-NOV26]",
+      "scope": "United Kingdom monetary policy; no enterprise-specific outcome inferred",
+      "subject_id": "BK-IND-002",
+      "statement": "The November policy decision raises Bank Rate to 4%. Enterprise deposit sensitivity remains an analytical question, not a proven impact.",
+      "original_kind": "reported_fact",
+      "original_verification": "source_supported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Meeting ending 4 November 2026",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "PR-BOE-NOV26",
+          "title": "Bank of England November rate decision",
+          "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+          "published_at": "2026-11-05",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "extent": "reviewed_web_excerpt",
+          "rights": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "UK-PRA-REPORT27": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=UK-PRA-REPORT27]",
+      "scope": "UK regulated firms; legal-entity applicability must be confirmed",
+      "subject_id": "BK-IND-002",
+      "statement": "PRA incident/third-party reporting changes take effect in March 2027. Confirm each regulated entity\u2019s scope and existing readiness.",
+      "original_kind": "regulatory_requirement",
+      "original_verification": "source_supported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Final policy; implementation 18 March 2027",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "PR-PRA-PS726",
+          "title": "PRA incident and third-party policy",
+          "url": "https://www.bankofengland.co.uk/prudential-regulation/publication/2026/march/operational-incident-and-third-party-reporting-policy-statement",
+          "published_at": "2026-03-18",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "extent": "reviewed_web_excerpt",
+          "rights": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "UK-FCA-REPORT27": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=UK-FCA-REPORT27]",
+      "scope": "UK regulated firms; legal-entity applicability must be confirmed",
+      "subject_id": "BK-IND-002",
+      "statement": "FCA reporting preparation runs to March 2027; a regulatory deadline does not itself prove Lloyds has an unmet need.",
+      "original_kind": "regulatory_requirement",
+      "original_verification": "source_supported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Page last updated 15 September 2026; March 2027 reporting commencement",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "PR-FCA-RES26",
+          "title": "FCA resilience and reporting update",
+          "url": "https://www.fca.org.uk/firms/operational-resilience",
+          "published_at": "2017-05-13",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "extent": "reviewed_web_excerpt",
+          "rights": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. First publication 13 May 2017, last update 15 September 2026. Original publication date is not replaced with update or retrieval date.",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. First publication 13 May 2017, last update 15 September 2026. Original publication date is not replaced with update or retrieval date.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "UK-CAPITAL": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=UK-CAPITAL]",
+      "scope": "UK industry context",
+      "subject_id": "BK-IND-001",
+      "statement": "Existing research describes capital and liquidity as constraints on balance-sheet economics.",
+      "original_kind": "interpretation",
+      "original_verification": "repository_reported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Industry mechanism; not a current regulatory threshold",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "SRC-BOE-FSR",
+          "title": "July 2026 Financial Stability Report cited by existing research",
+          "url": "https://www.bankofengland.co.uk/-/media/boe/files/financial-stability-report/2026/financial-stability-report-july-2026.pdf",
+          "published_at": null,
+          "retrieved_at": null,
+          "extent": "citation_only",
+          "rights": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+          "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "UK-VALUE": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=UK-VALUE]",
+      "scope": "UK industry context",
+      "subject_id": "BK-IND-001",
+      "statement": "Existing research models customer value through safe money storage, payments, credit, identity, fraud protection and support.",
+      "original_kind": "interpretation",
+      "original_verification": "repository_reported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Industry value-system interpretation",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "SRC-FCA-MODELS",
+          "title": "Strategic review of retail banking business models",
+          "url": "https://www.fca.org.uk/publications/multi-firm-reviews/strategic-review-retail-banking-business-models",
+          "published_at": null,
+          "retrieved_at": null,
+          "extent": "citation_only",
+          "rights": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+          "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "UK-CTP": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=UK-CTP]",
+      "scope": "UK industry context",
+      "subject_id": "BK-REF-001",
+      "statement": "Existing research cites a critical-third-party oversight regime; designation and effective dates are not re-verified.",
+      "original_kind": "reported_fact",
+      "original_verification": "repository_reported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Existing industry evidence anchor; dates unverified",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "SRC-HMT-CTP",
+          "title": "Critical third-party safeguards announcement cited by existing research",
+          "url": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+          "published_at": null,
+          "retrieved_at": null,
+          "extent": "citation_only",
+          "rights": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+          "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "LBG-Q326-DEPOSITS": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=LBG-Q326-DEPOSITS]",
+      "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "subject_id": "BK-ENT-001",
+      "statement": "Group customer deposits at September-end: GBP502.8bn; retain the FY2025 balance as a separate historical observation.",
+      "original_kind": "reported_fact",
+      "original_verification": "source_supported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "PR-LBG-Q326",
+          "title": "Lloyds Q3 2026 statement",
+          "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+          "published_at": "2026-10-29",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "extent": "reviewed_web_excerpt",
+          "rights": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "LBG-Q326-PROFIT": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=LBG-Q326-PROFIT]",
+      "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "subject_id": "BK-ENT-001",
+      "statement": "Reported nine-month statutory pretax profit: GBP6.6bn. This is not an investment allocation.",
+      "original_kind": "reported_fact",
+      "original_verification": "source_supported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "PR-LBG-Q326",
+          "title": "Lloyds Q3 2026 statement",
+          "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+          "published_at": "2026-10-29",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "extent": "reviewed_web_excerpt",
+          "rights": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "LBG-A2030-CIR": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=LBG-A2030-CIR]",
+      "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "subject_id": "BK-ENT-001",
+      "statement": "The 2030 efficiency ambition is a cost-to-income ratio below 45%; achievement is not assumed.",
+      "original_kind": "management_expectation",
+      "original_verification": "source_supported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Strategy for 2027\u20132030",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "PR-LBG-A2030",
+          "title": "Lloyds Accelerate 2030 priorities",
+          "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+          "published_at": null,
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "extent": "reviewed_web_excerpt",
+          "rights": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. Undated maintained strategy page: observation date is known, original publication date remains Unknown. Targets are forward-looking, not achieved outcomes.",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. Undated maintained strategy page: observation date is known, original publication date remains Unknown. Targets are forward-looking, not achieved outcomes.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "LBG-A2030-PLATFORMS": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=LBG-A2030-PLATFORMS]",
+      "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "subject_id": "BK-ENT-001",
+      "statement": "Accelerate 2030 explicitly prioritises core-platform renewal.",
+      "original_kind": "management_commitment",
+      "original_verification": "source_supported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Strategy for 2027\u20132030",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "PR-LBG-A2030",
+          "title": "Lloyds Accelerate 2030 priorities",
+          "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+          "published_at": null,
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "extent": "reviewed_web_excerpt",
+          "rights": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. Undated maintained strategy page: observation date is known, original publication date remains Unknown. Targets are forward-looking, not achieved outcomes.",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. Undated maintained strategy page: observation date is known, original publication date remains Unknown. Targets are forward-looking, not achieved outcomes.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "LBG-A2030-DATA": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=LBG-A2030-DATA]",
+      "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "subject_id": "BK-ENT-001",
+      "statement": "The strategy makes enterprise data enablement a stated AI priority.",
+      "original_kind": "management_commitment",
+      "original_verification": "source_supported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Strategy for 2027\u20132030",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "PR-LBG-A2030",
+          "title": "Lloyds Accelerate 2030 priorities",
+          "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+          "published_at": null,
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "extent": "reviewed_web_excerpt",
+          "rights": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. Undated maintained strategy page: observation date is known, original publication date remains Unknown. Targets are forward-looking, not achieved outcomes.",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. Undated maintained strategy page: observation date is known, original publication date remains Unknown. Targets are forward-looking, not achieved outcomes.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "LBG-A2030-INVESTMENT": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=LBG-A2030-INVESTMENT]",
+      "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "subject_id": "BK-ENT-001",
+      "statement": "The presentation plans a 2027 investment increase followed by stability, subject to opportunity and return discipline; no candidate allocation is disclosed.",
+      "original_kind": "management_expectation",
+      "original_verification": "source_supported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "2027\u20132030 investment planning",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "PR-LBG-INVEST30",
+          "title": "Lloyds strategy investment discipline",
+          "url": "https://www.lloydsbankinggroup.com/assets/pdfs/who-we-are/accelerate-2030/2026-lbg-hy-strategy-presentation.pdf",
+          "published_at": "2026-07-30",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "extent": "reviewed_web_excerpt",
+          "rights": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "LBG-ENVOY-CONTROLS": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=LBG-ENVOY-CONTROLS]",
+      "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "subject_id": "BK-ENT-001",
+      "statement": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+      "original_kind": "reported_fact",
+      "original_verification": "source_supported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Announced platform capability; not current effectiveness evidence",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "PR-LBG-ENVOY",
+          "title": "Lloyds Envoy announcement",
+          "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+          "published_at": "2026-05-01",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "extent": "reviewed_web_excerpt",
+          "rights": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. HTML date is 1 May 2026; a linked PDF/search result carries 28 April. Retain the HTML date for this HTML source; do not collapse the versions.",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. HTML date is 1 May 2026; a linked PDF/search result carries 28 April. Retain the HTML date for this HTML source; do not collapse the versions.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "LBG-ENVOY-GOOGLE": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=LBG-ENVOY-GOOGLE]",
+      "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "subject_id": "BK-ENT-001",
+      "statement": "The bank identifies Google Cloud as an Envoy platform collaborator. Contract value, exclusivity and renewal are not disclosed.",
+      "original_kind": "reported_fact",
+      "original_verification": "source_supported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Announced platform capability; not current effectiveness evidence",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "PR-LBG-ENVOY",
+          "title": "Lloyds Envoy announcement",
+          "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+          "published_at": "2026-05-01",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "extent": "reviewed_web_excerpt",
+          "rights": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. HTML date is 1 May 2026; a linked PDF/search result carries 28 April. Retain the HTML date for this HTML source; do not collapse the versions.",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. HTML date is 1 May 2026; a linked PDF/search result carries 28 April. Retain the HTML date for this HTML source; do not collapse the versions.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "LBG-BRAND26-TIMING": {
+      "owner_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "owner_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "locator": "claims[id=LBG-BRAND26-TIMING]",
+      "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "subject_id": "BK-ENT-001",
+      "statement": "The announcement schedules branch-brand changes through 2027. Delivery progress and customer outcomes remain to be checked.",
+      "original_kind": "management_commitment",
+      "original_verification": "source_supported",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Announced July 2026; branch changes planned through 2027",
+      "review_cutoff": "2026-11-09",
+      "sources": [
+        {
+          "id": "PR-LBG-BRAND26",
+          "title": "Lloyds Halifax change announcement",
+          "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/halifax-rebrand-to-lloyds.html",
+          "published_at": "2026-07-01",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "extent": "reviewed_web_excerpt",
+          "rights": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "UK-POLITICAL": {
+      "owner_path": "enterprise-knowledge/macro/research-model/Macro-Context-v1.json",
+      "owner_sha256": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9",
+      "locator": "visual_v2.insight(political) / {'force_id': 'social-value', 'source_ids': ['GM-SOCIAL'], 'authority': 'candidate_intelligence', 'as_of': '2026-11-11', 'kind': 'policy_priority'}",
+      "scope": "UK; no automatic industry or enterprise applicability",
+      "subject_id": "GB",
+      "statement": "From January 2027, the reviewed social-value policy covers specified UK central-government tenders. Contract scope and transition rules matter.",
+      "original_kind": "policy_priority",
+      "original_verification": "existing_public_presentation_extract",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Covered UK central-government procurements valued at \u00a31m inclusive of VAT or above; new tender notices from 2027-01-01. Private utilities and primarily overseas delivery excluded; transitions/framework rules require review.",
+      "review_cutoff": "2026-11-11",
+      "sources": [
+        {
+          "id": "GM-SOCIAL",
+          "title": "PPN 026: Social Value Model",
+          "url": "https://www.gov.uk/government/publications/ppn-026-the-social-value-model/ppn-026-the-social-value-model-html",
+          "published_at": "2026-08-05",
+          "retrieved_at": "2026-11-11T12:05:22Z",
+          "extent": "reviewed excerpt; not full original archive",
+          "rights": "Existing public short excerpt and link; no full article redistribution assumed.",
+          "limitation": "From 1 January 2027, PPN 026 covers specified central-government procurements of \u00a31m or more, inclusive of VAT; framework and transition rules matter. Private utilities and primarily overseas delivery are excluded; transitions and framework/call-off rules require review. French procurements do not inherit this policy. Existing review cutoff: 2026-11-11. This is UK relevance of a wider theme, not global prevalence or verified company impact.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "UK-ECONOMIC": {
+      "owner_path": "cios/applications/flora/visual_v2_assets/economy.json",
+      "owner_sha256": "78b4bb90c02b9af8132d7f8eca3c1832b6a1047feb382f9473d463d44e1f31cd",
+      "locator": "visual_v2.insight(economic) / {'source_ids': ['ONS-GDP-2026-09'], 'locator': 'Main points, PDF pages 2\u20133', 'authority': 'public presentation extract; not a canonical accepted observation'}",
+      "scope": "UK; no automatic industry or enterprise applicability",
+      "subject_id": "GB",
+      "statement": "Services led UK real GDP growth of 0.7% in the three months to September 2026 versus the previous three months. Volume change, separate from 2024 current-price GVA.",
+      "original_kind": "reported_GDP_volume_change",
+      "original_verification": "existing_public_presentation_extract",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "three months to September 2026",
+      "review_cutoff": "2026-11-12",
+      "sources": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "published_at": "2026-11-12",
+          "retrieved_at": null,
+          "extent": "reviewed excerpt; not full original archive",
+          "rights": "Existing public short excerpt and link; no full article redistribution assumed.",
+          "limitation": "UK aggregate only; not industry growth, global growth, a forecast or an enterprise buying signal. Publication: 12 November 2026. Preliminary and subject to revision.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "UK-SOCIAL": {
+      "owner_path": "enterprise-knowledge/macro/research-model/Macro-Context-v1.json",
+      "owner_sha256": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9",
+      "locator": "visual_v2.insight(social) / {'force_id': 'social-value', 'source_ids': ['GM-SOCIAL'], 'authority': 'candidate_intelligence', 'as_of': '2026-11-11', 'kind': 'policy_priority'}",
+      "scope": "UK; no automatic industry or enterprise applicability",
+      "subject_id": "GB",
+      "statement": "Covered UK public tenders connect social-value promises to delivery commitments. Start with the outcomes the specific contract requests.",
+      "original_kind": "policy_priority",
+      "original_verification": "existing_public_presentation_extract",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Covered UK central-government procurements valued at \u00a31m inclusive of VAT or above; new tender notices from 2027-01-01. Private utilities and primarily overseas delivery excluded; transitions/framework rules require review.",
+      "review_cutoff": "2026-11-11",
+      "sources": [
+        {
+          "id": "GM-SOCIAL",
+          "title": "PPN 026: Social Value Model",
+          "url": "https://www.gov.uk/government/publications/ppn-026-the-social-value-model/ppn-026-the-social-value-model-html",
+          "published_at": "2026-08-05",
+          "retrieved_at": "2026-11-11T12:05:22Z",
+          "extent": "reviewed excerpt; not full original archive",
+          "rights": "Existing public short excerpt and link; no full article redistribution assumed.",
+          "limitation": "From 1 January 2027, PPN 026 covers specified central-government procurements of \u00a31m or more, inclusive of VAT; framework and transition rules matter. Private utilities and primarily overseas delivery are excluded; transitions and framework/call-off rules require review. French procurements do not inherit this policy. Existing review cutoff: 2026-11-11. This is UK relevance of a wider theme, not global prevalence or verified company impact.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "UK-TECHNOLOGICAL": {
+      "owner_path": "enterprise-knowledge/macro/research-model/Macro-Context-v1.json",
+      "owner_sha256": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9",
+      "locator": "visual_v2.insight(technological) / {'force_id': 'cyber', 'source_ids': ['GM-CYBER-GB'], 'authority': 'candidate_intelligence', 'as_of': '2026-11-11', 'kind': 'threat_or_scenario'}",
+      "scope": "UK; no automatic industry or enterprise applicability",
+      "subject_id": "GB",
+      "statement": "UK cyber evidence is aggregate. Trace critical services through technology and supplier dependencies before proposing change.",
+      "original_kind": "threat_or_scenario",
+      "original_verification": "existing_public_presentation_extract",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "UK businesses/charities, August\u2013December 2025 fieldwork; aggregate survey, not bank/airline-specific prevalence or enterprise incident evidence.",
+      "review_cutoff": "2026-11-11",
+      "sources": [
+        {
+          "id": "GM-CYBER-GB",
+          "title": "Cyber security breaches survey 2025/2026",
+          "url": "https://www.gov.uk/government/statistics/cyber-security-breaches-survey-20252026/cyber-security-breaches-survey-20252026",
+          "published_at": "2026-04-30",
+          "retrieved_at": "2026-11-11T12:05:22Z",
+          "extent": "reviewed excerpt; not full original archive",
+          "rights": "Existing public short excerpt and link; no full article redistribution assumed.",
+          "limitation": "Cyber risk crosses markets; the exposure belongs to a specific service and entity. Aggregate threat evidence does not establish an enterprise incident, control weakness or external services gap. Existing review cutoff: 2026-11-11. This is UK relevance of a wider theme, not global prevalence or verified company impact.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "UK-LEGAL": {
+      "owner_path": "enterprise-knowledge/macro/research-model/Macro-Context-v1.json",
+      "owner_sha256": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9",
+      "locator": "visual_v2.insight(legal) / {'force_id': 'cyber-bill', 'source_ids': ['GM-BILL'], 'authority': 'candidate_intelligence', 'as_of': '2026-11-11', 'kind': 'proposed_legislation'}",
+      "scope": "UK; no automatic industry or enterprise applicability",
+      "subject_id": "GB",
+      "statement": "UK cyber reform was still proposed legislation at the November review. Recheck parliamentary status and the final entity and activity scope.",
+      "original_kind": "proposed_legislation",
+      "original_verification": "existing_public_presentation_extract",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Status reviewed 2026-11-11; Lords third reading 2026-11-02, Commons carry-over 2026-11-04. Proposed legislation; not proof of Royal Assent.",
+      "review_cutoff": "2026-11-11",
+      "sources": [
+        {
+          "id": "GM-BILL",
+          "title": "Cyber Security and Resilience Bill stages",
+          "url": "https://bills.parliament.uk/bills/4035/stages",
+          "published_at": null,
+          "retrieved_at": "2026-11-11T12:05:22Z",
+          "extent": "reviewed excerpt; not full original archive",
+          "rights": "Existing public short excerpt and link; no full article redistribution assumed.",
+          "limitation": "Parliamentary stages still show consideration of Lords amendments pending at this review. No Royal Assent or final enterprise applicability is established by this reviewed passage. Existing review cutoff: 2026-11-11. This is UK relevance of a wider theme, not global prevalence or verified company impact.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "UK-ENVIRONMENTAL": {
+      "owner_path": "enterprise-knowledge/macro/research-model/Macro-Context-v1.json",
+      "owner_sha256": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9",
+      "locator": "visual_v2.insight(environmental) / {'force_id': 'uk-srs', 'source_ids': ['GM-SRS'], 'authority': 'candidate_intelligence', 'as_of': '2026-11-11', 'kind': 'regulatory_rule'}",
+      "scope": "UK; no automatic industry or enterprise applicability",
+      "subject_id": "GB",
+      "statement": "Reviewed FCA rules cover specified listed issuers from accounting periods starting January 2027. First reporting is in 2028; reliefs matter.",
+      "original_kind": "regulatory_rule",
+      "original_verification": "existing_public_presentation_extract",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Specified listing categories; comply-or-explain UK SRS; transitional relief. Exact issuer/category and accounting period must be established.",
+      "review_cutoff": "2026-11-11",
+      "sources": [
+        {
+          "id": "GM-SRS",
+          "title": "PS26/19: listed issuers and UK SRS",
+          "url": "https://www.fca.org.uk/publications/policy-statements/ps26-19-aligning-listed-issuers-sustainability-disclosures-international-standards",
+          "published_at": "2026-09-30",
+          "retrieved_at": "2026-11-11T12:05:22Z",
+          "extent": "reviewed excerpt; not full original archive",
+          "rights": "Existing public short excerpt and link; no full article redistribution assumed.",
+          "limitation": "FCA final rules introduce comply-or-explain UK SRS reporting for specified listing categories, for accounting periods starting from 1 January 2027. First reporting is in 2028; reliefs and scope matter. Existing internal teams or advisers may already cover the work. Existing review cutoff: 2026-11-11. This is UK relevance of a wider theme, not global prevalence or verified company impact.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "GM-CSRD-FR": {
+      "owner_path": "enterprise-knowledge/macro/research-model/Macro-Context-v1.json",
+      "owner_sha256": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9",
+      "locator": "sources[id=GM-CSRD-FR]",
+      "scope": "France national implementation guidance; Lloyds exact-entity applicability not established",
+      "subject_id": "FR",
+      "statement": "Existing French guidance says new thresholds require French transposition. It does not determine an obligation for a Lloyds entity.",
+      "original_kind": "national_implementation_notice",
+      "original_verification": "reviewed_excerpt_candidate",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "French guidance last checked official texts 2026-09-02; warns new thresholds require French transposition. Not a fresh legal opinion or verified company determination.",
+      "review_cutoff": "2026-11-11",
+      "sources": [
+        {
+          "id": "GM-CSRD-FR",
+          "title": "CSRD: obligations and French transposition",
+          "url": "https://portail-rse.beta.gouv.fr/fiches-reglementaires/rapport-de-durabilite-csrd/",
+          "published_at": null,
+          "retrieved_at": "2026-11-11T12:05:22Z",
+          "extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+          "rights": "Existing public bounded excerpt and citation only; no new redistribution right.",
+          "limitation": "No verified legal-entity assessment; an EU subsidiary could require separate review. Publication date unknown.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "UK-GVA-2024": {
+      "owner_path": "cios/applications/flora/visual_v2_assets/economy.json",
+      "owner_sha256": "78b4bb90c02b9af8132d7f8eca3c1832b6a1047feb382f9473d463d44e1f31cd",
+      "locator": "published_total_billion / sources[ONS-BB-2026] page 2; districts[*].weight_per_thousand / sources[ONS-GDP-2026-09] GVA2 appendix page index 27",
+      "scope": "UK SIC 2007 sections; 2024 current basic prices",
+      "subject_id": "GB",
+      "statement": "Published UK GVA total GBP2623bn; rounded display GBP2.62tn. Finance & insurance share 8.1%; not Banking-only market size.",
+      "original_kind": "nominal_GVA_statistical_extract",
+      "original_verification": "existing_public_presentation_extract",
+      "authority": "Frozen public presentation extract; no canonical intelligence promotion or independent human acceptance",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "2024",
+      "review_cutoff": "2026-11-12",
+      "sources": [
+        {
+          "id": "ONS-BB-2026",
+          "title": "ONS Blue Book 2026: industrial analysis",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/compendium/unitedkingdomnationalaccountsthebluebook/2026/theindustrialanalysis/pdf",
+          "published_at": "2026-10-30",
+          "retrieved_at": null,
+          "source_role": "total GVA and valuation basis",
+          "original_locator": "Page 2, industrial analysis; pages 6\u20137, SUT and current-price definition",
+          "extent": "reviewed ONS extract",
+          "rights": "Crown copyright / Open Government Licence; original source limits retained",
+          "limitation": "GVA not GDP at market prices, sector sales, profit pool or bank revenue. Rounded section shares sum 100.2%; no normalisation.",
+          "original_bytes_sha256": null
+        },
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "published_at": "2026-11-12",
+          "retrieved_at": null,
+          "source_role": "2024 section weights, GVA2 appendix; GDP growth separate",
+          "original_locator": "GVA2 appendix, PDF page index 27: SIC 2007 2024 weights; main points pages 2\u20133: real GDP growth",
+          "extent": "reviewed ONS extract",
+          "rights": "Crown copyright / Open Government Licence; original source limits retained",
+          "limitation": "GVA not GDP at market prices, sector sales, profit pool or bank revenue. Rounded section shares sum 100.2%; no normalisation.",
+          "original_bytes_sha256": null
+        },
+        {
+          "id": "ONS-SIC",
+          "title": "ONS UK Standard Industrial Classification",
+          "url": "https://www.ons.gov.uk/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities",
+          "published_at": null,
+          "retrieved_at": null,
+          "source_role": "classification context only",
+          "original_locator": "UK SIC 2007 and UK SIC 2026 sections",
+          "extent": "reviewed ONS extract",
+          "rights": "Crown copyright / Open Government Licence; original source limits retained",
+          "limitation": "GVA not GDP at market prices, sector sales, profit pool or bank revenue. Rounded section shares sum 100.2%; no normalisation.",
+          "original_bytes_sha256": null
+        },
+        {
+          "id": "ONS-SIC-2007",
+          "title": "ONS SIC 2007 explanatory notes",
+          "url": "https://www.ons.gov.uk/file?uri=%2Fmethodology%2Fclassificationsandstandards%2Fukstandardindustrialclassificationofeconomicactivities%2Fuksic2007%2Fuksic2007web.pdf",
+          "published_at": null,
+          "retrieved_at": null,
+          "source_role": "classification context only",
+          "original_locator": "Sections A\u2013U; section U: extraterritorial organisations and bodies",
+          "extent": "reviewed ONS extract",
+          "rights": "Crown copyright / Open Government Licence; original source limits retained",
+          "limitation": "GVA not GDP at market prices, sector sales, profit pool or bank revenue. Rounded section shares sum 100.2%; no normalisation.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "BTI-TSB-APPLICATION": {
+      "owner_path": "enterprise-knowledge/technology/research-model/Buying-Trigger-Pilot.json",
+      "owner_sha256": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
+      "locator": "facts[id=BTI-TSB-APPLICATION]",
+      "scope": "Santander UK / TSB separately identified parties; contracting identity unverified",
+      "subject_id": "public_reference:BK-ENT-005",
+      "statement": "Santander UK and TSB report applying for a conditional legal business transfer.",
+      "original_kind": "catalyst",
+      "original_verification": "source_supported_candidate",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Court approval conditional; no exact observed submission date asserted",
+      "review_cutoff": "2026-11-13",
+      "sources": [
+        {
+          "id": "BTI-TSB-TRANSFER",
+          "title": "Santander UK and TSB proposed business transfer",
+          "url": "https://www.tsb.co.uk/news-releases/Santander-UK-and-TSB-apply-to-transfer-the-TSB-business-to-Santander-UK.html",
+          "published_at": "2026-11-10",
+          "retrieved_at": "2026-11-13T19:34:33+00:00",
+          "extent": "bounded reviewed excerpt, not full source archive",
+          "rights": "Public citation and bounded short quotation only; full-text storage, redistribution and canonical import rights are not asserted",
+          "limitation": "A reported fact is not seller access, procurement, funding, urgency or unmet customer need.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "BTI-TSB-MIGRATION": {
+      "owner_path": "enterprise-knowledge/technology/research-model/Buying-Trigger-Pilot.json",
+      "owner_sha256": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
+      "locator": "facts[id=BTI-TSB-MIGRATION]",
+      "scope": "Santander UK / TSB separately identified parties; contracting identity unverified",
+      "subject_id": "public_reference:BK-ENT-005",
+      "statement": "The release describes continuing integration and planned customer migration to Santander UK systems, platforms and channels in H2 2027 after any approved transfer.",
+      "original_kind": "programme",
+      "original_verification": "source_supported_candidate",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Second half of 2027, conditional plan; not completed migration",
+      "review_cutoff": "2026-11-13",
+      "sources": [
+        {
+          "id": "BTI-TSB-TRANSFER",
+          "title": "Santander UK and TSB proposed business transfer",
+          "url": "https://www.tsb.co.uk/news-releases/Santander-UK-and-TSB-apply-to-transfer-the-TSB-business-to-Santander-UK.html",
+          "published_at": "2026-11-10",
+          "retrieved_at": "2026-11-13T19:34:33+00:00",
+          "extent": "bounded reviewed excerpt, not full source archive",
+          "rights": "Public citation and bounded short quotation only; full-text storage, redistribution and canonical import rights are not asserted",
+          "limitation": "A reported fact is not seller access, procurement, funding, urgency or unmet customer need.",
+          "original_bytes_sha256": null
+        }
+      ]
+    },
+    "BTI-TSB-LEGAL": {
+      "owner_path": "enterprise-knowledge/technology/research-model/Buying-Trigger-Pilot.json",
+      "owner_sha256": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
+      "locator": "facts[id=BTI-TSB-LEGAL]",
+      "scope": "Santander UK / TSB separately identified parties; contracting identity unverified",
+      "subject_id": "public_reference:BK-ENT-005",
+      "statement": "The source explicitly says the two banks remain separate legal entities.",
+      "original_kind": "counter",
+      "original_verification": "source_supported_candidate",
+      "authority": "candidate_intelligence",
+      "canonical_acceptance_asserted": false,
+      "reporting_period": "Unknown effective period; source publication and review are separate",
+      "review_cutoff": "2026-11-13",
+      "sources": [
+        {
+          "id": "BTI-TSB-TRANSFER",
+          "title": "Santander UK and TSB proposed business transfer",
+          "url": "https://www.tsb.co.uk/news-releases/Santander-UK-and-TSB-apply-to-transfer-the-TSB-business-to-Santander-UK.html",
+          "published_at": "2026-11-10",
+          "retrieved_at": "2026-11-13T19:34:33+00:00",
+          "extent": "bounded reviewed excerpt, not full source archive",
+          "rights": "Public citation and bounded short quotation only; full-text storage, redistribution and canonical import rights are not asserted",
+          "limitation": "The programme can justify prioritising validation, but seller access, contracting entity, procurement and external scope remain unknown.",
+          "original_bytes_sha256": null
+        }
+      ]
+    }
+  },
+  "scope_limits": [
+    "All pilot references are existing public candidate/presentation records; none is promoted to accepted Evidence or Observation by SI-1.",
+    "No new source retrieval or private data read.",
+    "A report disclosure is evidence of the reported statement, not independently verified business effectiveness."
+  ],
+  "identity_conflicts": [
+    {
+      "runtime_public_reference": "BK-ENT-005",
+      "repository_twin_reference": "BK-ENT-007",
+      "repository_path": "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md",
+      "action": "No name-based identity join. Repository-reported acquisition completion not adopted as verified runtime fact."
+    }
+  ]
+}

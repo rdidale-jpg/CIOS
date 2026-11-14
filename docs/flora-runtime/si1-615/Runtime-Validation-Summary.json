@@ -1,0 +1,110 @@
+{
+  "status": "PASS",
+  "source_sha": "fe66516c15726dc45de147ede2674c9172f8cac6",
+  "scope": "Existing versioned runtime/security comparator; unchanged baseline runtime with uncommitted design-only artifacts present. Distinct from hosted CI on the final documentation SHA.",
+  "profile": "01b",
+  "unique_test_ids": 1432,
+  "totals": {
+    "passed": 1386,
+    "failed": 36,
+    "skipped": 10
+  },
+  "strict_security": {
+    "passed": 388
+  },
+  "comparison_issues": 0,
+  "inherited_failures_and_skips": "All matched approved signatures/status; baseline and comparator unchanged",
+  "suite_counts": {
+    "aviation_twin": {
+      "passed": 13
+    },
+    "banking_explorer": {
+      "passed": 12
+    },
+    "commercial_assessment": {
+      "passed": 8
+    },
+    "domain": {
+      "passed": 425,
+      "failed": 1,
+      "skipped": 10
+    },
+    "financial": {
+      "passed": 35,
+      "failed": 12
+    },
+    "legacy": {
+      "failed": 23,
+      "passed": 4
+    },
+    "multi_industry_integration": {
+      "passed": 8
+    },
+    "primary_enrichment": {
+      "passed": 18
+    },
+    "research_intelligence": {
+      "passed": 18
+    },
+    "sales_pipeline": {
+      "passed": 25
+    },
+    "security": {
+      "passed": 388
+    },
+    "supplemental": {
+      "passed": 39
+    },
+    "unified_experience": {
+      "passed": 15
+    },
+    "research_diagnostic": {
+      "passed": 4
+    },
+    "research_cycle": {
+      "passed": 25
+    },
+    "enterprise_understanding": {
+      "passed": 36
+    },
+    "visual_intelligence": {
+      "passed": 32
+    },
+    "living_industry_maps": {
+      "passed": 29
+    },
+    "commercial_visual_v3": {
+      "passed": 27
+    },
+    "commercial_usability_v31": {
+      "passed": 22
+    },
+    "intelligence_depth": {
+      "passed": 20
+    },
+    "enterprise_opportunity": {
+      "passed": 17
+    },
+    "global_macro": {
+      "passed": 55
+    },
+    "macro_enterprise_v2": {
+      "passed": 33
+    },
+    "unified_integration_v1": {
+      "passed": 15
+    },
+    "technology_visual_foundation_v1": {
+      "passed": 39
+    },
+    "technology_visual_world_v1": {
+      "passed": 24
+    }
+  },
+  "isolation": "Disposable temporary test roots; provider/runtime credentials dropped by existing runner; no production data or raw logs published",
+  "hosted_main": {
+    "sha": "fe66516c15726dc45de147ede2674c9172f8cac6",
+    "status": "success",
+    "url": "https://github.com/rdidale-jpg/CIOS/actions/runs/43632122612"
+  }
+}

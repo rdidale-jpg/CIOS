@@ -1,0 +1,379 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flora:si1:design:issue",
+  "title": "SI-1 authored pilot IssueView \u2014 proposal, not a canonical contract",
+  "type": "object",
+  "properties": {
+    "view_ref": {
+      "type": "string",
+      "pattern": "^design:"
+    },
+    "scope": {
+      "enum": [
+        "uk",
+        "banking",
+        "lloyds"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "why_it_matters": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assertion_class": {
+      "const": "interpretation"
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "horizon": {
+      "type": "string",
+      "minLength": 1
+    },
+    "materiality_argument": {
+      "type": "string",
+      "minLength": 1
+    },
+    "financial_operational_consequence": {
+      "type": "object",
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "class": {
+          "const": "interpretation"
+        },
+        "quantified_external_value": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "statement",
+        "class",
+        "quantified_external_value"
+      ],
+      "additionalProperties": false
+    },
+    "leadership": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "authorised_corporate_priority",
+            "FLORA_derived_issue"
+          ]
+        },
+        "attribution_basis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "named_leader": {
+          "type": "null"
+        },
+        "role_hypotheses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "role_ownership_confirmed": {
+          "const": false
+        }
+      },
+      "required": [
+        "status",
+        "attribution_basis",
+        "named_leader",
+        "role_hypotheses",
+        "role_ownership_confirmed"
+      ],
+      "additionalProperties": false
+    },
+    "decision": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "already_committed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "remaining_choices": {
+          "type": "string",
+          "minLength": 1
+        },
+        "influence": {
+          "const": "Not established"
+        },
+        "decision_date": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "question",
+        "already_committed",
+        "remaining_choices",
+        "influence",
+        "decision_date"
+      ],
+      "additionalProperties": false
+    },
+    "biggest_uncertainty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "counter_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "pain": {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "const": "no_pain_claim"
+        },
+        "adverse_outcome_evidence_refs": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "customer_confirmed": {
+          "const": false
+        }
+      },
+      "required": [
+        "classification",
+        "adverse_outcome_evidence_refs",
+        "customer_confirmed"
+      ],
+      "additionalProperties": false
+    },
+    "commercial": {
+      "type": "object",
+      "properties": {
+        "next_investigation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "disposition": {
+          "const": "Investigate; no qualified opportunity"
+        },
+        "offer_library_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "private_employer_offer_fit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "budget": {
+          "type": "null"
+        },
+        "contract_value": {
+          "type": "null"
+        },
+        "external_need": {
+          "const": "Unknown"
+        },
+        "pipeline_handoff": {
+          "const": false
+        }
+      },
+      "required": [
+        "next_investigation",
+        "disposition",
+        "offer_library_reference",
+        "private_employer_offer_fit",
+        "budget",
+        "contract_value",
+        "external_need",
+        "pipeline_handoff"
+      ],
+      "additionalProperties": false
+    },
+    "analysis": {
+      "type": "object",
+      "properties": {
+        "pestle": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "five_forces": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "value_chain": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "swot": {
+          "type": "object",
+          "properties": {
+            "strengths": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "weaknesses": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "opportunities": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "threats": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "context": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "strategic_responses": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "required": [
+            "strengths",
+            "weaknesses",
+            "opportunities",
+            "threats"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "pestle",
+        "five_forces",
+        "value_chain",
+        "swot"
+      ],
+      "additionalProperties": false
+    },
+    "qualification": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qualified_pressure_refs": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "new_canonical_objects": {
+          "const": false
+        }
+      },
+      "required": [
+        "owner",
+        "qualified_pressure_refs",
+        "new_canonical_objects"
+      ],
+      "additionalProperties": false
+    },
+    "challenges": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "statement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "class": {
+            "enum": [
+              "source_backed_counter_evidence",
+              "alternative_or_methodological_limit"
+            ]
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "statement",
+          "class",
+          "source_refs"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "view_ref",
+    "scope",
+    "title",
+    "why_it_matters",
+    "assertion_class",
+    "source_refs",
+    "as_of",
+    "horizon",
+    "materiality_argument",
+    "financial_operational_consequence",
+    "leadership",
+    "decision",
+    "biggest_uncertainty",
+    "counter_evidence",
+    "pain",
+    "commercial",
+    "analysis",
+    "qualification",
+    "challenges"
+  ],
+  "additionalProperties": false
+}

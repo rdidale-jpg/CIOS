@@ -1,0 +1,70 @@
+{
+  "status": "pass",
+  "checks": 401,
+  "viewports": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "seven_views": "pass",
+      "keyboard": "pass",
+      "sources": "pass",
+      "overflow": "pass"
+    },
+    {
+      "viewport": "ipad_landscape",
+      "width": 1180,
+      "height": 820,
+      "seven_views": "pass",
+      "keyboard": "pass",
+      "sources": "pass",
+      "overflow": "pass"
+    },
+    {
+      "viewport": "ipad_portrait",
+      "width": 820,
+      "height": 1180,
+      "seven_views": "pass",
+      "keyboard": "pass",
+      "sources": "pass",
+      "overflow": "pass"
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "height": 844,
+      "seven_views": "pass",
+      "keyboard": "pass",
+      "sources": "pass",
+      "overflow": "pass"
+    },
+    {
+      "viewport": "narrow",
+      "width": 320,
+      "height": 740,
+      "seven_views": "pass",
+      "keyboard": "pass",
+      "sources": "pass",
+      "overflow": "pass"
+    }
+  ],
+  "additional": [
+    "direct journey",
+    "Back/Forward",
+    "deep links",
+    "selected-bank/layer preservation",
+    "keyboard focus and Escape",
+    "touch",
+    "native no-script static fallback",
+    "200% equivalent reflow",
+    "forced colors/reduced motion"
+  ],
+  "browser": "Chromium 154.0.8037.57",
+  "page_errors": [],
+  "external_requests": [],
+  "limitations": [
+    "Automated structural/interaction checks, not a screen-reader user study or complete WCAG certification.",
+    "200% uses equivalent CSS viewport; physical browser/OS zoom still needs owner testing.",
+    "Static public design proof: no production routes, private IAM or real Pipeline writes exercised."
+  ]
+}

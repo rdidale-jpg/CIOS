@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flora:si1:design:agenda",
+  "title": "SI-1 authored pilot AgendaView \u2014 proposal",
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": "design proposal; no persisted agenda"
+    },
+    "scope": {
+      "enum": [
+        "uk",
+        "banking",
+        "lloyds"
+      ]
+    },
+    "subject_reference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "policy_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dependency_owner_hashes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:flora:si1:design:issue"
+      }
+    },
+    "ordering_basis": {
+      "type": "string",
+      "minLength": 1
+    },
+    "research_completeness": {
+      "const": "Incomplete; no full national/industry/enterprise diagnosis claimed"
+    },
+    "qualified_opportunities_created": {
+      "const": 0
+    }
+  },
+  "required": [
+    "status",
+    "scope",
+    "subject_reference",
+    "as_of",
+    "policy_version",
+    "dependency_owner_hashes",
+    "issues",
+    "ordering_basis",
+    "research_completeness",
+    "qualified_opportunities_created"
+  ],
+  "additionalProperties": false
+}
