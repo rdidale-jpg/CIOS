@@ -35,3 +35,5 @@ Reviewed SHA256 bytes:
 | `visual_panels.py` | `b8b0be91ab4810d7ce8437d022f80fb6a503ec15273faa4eb07871a2029ee5a5` |
 | `bie3_quality.py` | `70892d5e29f2e0b249ef1817c2663e6ad9d8c5f33b63ea21d5c7533b70f21c21` |
 | `test_flora_bie3_637.py` | `33e0d66d196b21df68f793f5e27a161a565ee511a26ef21a9b73620dd5e98b3d` |
+
+Hosted CI subsequently exposed a standalone-CLI import-path dependency at initial head `b2ceeeb8a4883c4e7e319532cd096947e0ff9ca9`. The correction adds only a checkout-relative bootstrap and a foreign-cwd/no-PYTHONPATH subprocess test. The independent reviewer personally verified the CLI from `/tmp` without PYTHONPATH and passed the new test; no source/runtime/rights behaviour changed and no blocker was found. The parent passed all77 BIE-3 tests. Corrected QA SHA256 is `72612eaf081f6229448182f4a07d9e6880c3fa37f460555a5f66a41bc6ca9b98`; corrected test SHA256 is `a0eea4f51f35f2994e7a46fa63d19fe7abbb9fd82b62b4751ac8e6730f8ba90b`. Runtime review hashes above remain exact. Initial-head checks are superseded; final assurance must use the corrected committed head.

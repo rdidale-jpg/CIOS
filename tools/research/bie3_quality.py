@@ -10,6 +10,11 @@ from decimal import Decimal
 import hashlib,json,re
 from pathlib import Path
 from urllib.parse import urlsplit
+import sys
+
+# Standalone CLI (including hosted CI) must resolve this checkout without an
+# inherited PYTHONPATH or dependence on the caller's working directory.
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]))
 
 from cios.applications.flora.memory.service import FactualClaim,validate_factual_claim,CLAIM_VOCABULARY
 from cios.applications.flora.memory.source_contracts import contract_for

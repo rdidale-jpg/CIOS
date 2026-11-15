@@ -3,7 +3,7 @@ from copy import deepcopy
 from dataclasses import replace
 from datetime import date
 from pathlib import Path
-import hashlib,inspect,json,subprocess,types
+import hashlib,inspect,json,os,subprocess,sys,types
 import pytest
 from cios.applications.flora import leadership_agenda as a,visual_streams as v,intelligence_presentation as p
 from cios.applications.flora.research_intelligence import registry,model
@@ -14,6 +14,12 @@ from tests.test_flora_sales_pipeline import actor,web
 from tests.test_flora_security_repair_01b import authority,signed
 
 ROOT=q.ROOT;BASE='c295e056cbae0f1adebc1070eb272d79b650a45f'
+
+def test_standalone_research_cli_works_without_pythonpath_from_another_directory(tmp_path):
+    env=dict(os.environ);env.pop('PYTHONPATH',None)
+    result=subprocess.run([sys.executable,str(ROOT/'tools/research/bie3_quality.py')],cwd=tmp_path,env=env,
+                          capture_output=True,text=True,check=True)
+    assert json.loads(result.stdout)['new_canonical_imports']==0
 
 def test_exact_four_state_inventory_and_unbound_existing_contracts():
     pack=q.load();assert q.validate(pack)=={'reviewed_sources':10,'source_verified_research_proposals':24,'new_permitted_runtime_claims':7,'reused_public_received_claims':2,'differentiated_commercial_cases':3,'new_canonical_approvals':0,'new_canonical_imports':0,'real_canonical_receipt_status':'UNVERIFIED'}

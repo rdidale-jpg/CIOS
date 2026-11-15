@@ -11,6 +11,8 @@ python -m unittest discover -s tests/ci -v
 python tools/ci/flora_ci.py --output /tmp/bie3-final-ci
 ```
 
+The standalone research CLI resolves its checkout from `__file__`; a subprocess test removes `PYTHONPATH` and runs it from a different directory. Hosted CI exposed the missing bootstrap at the initial candidate; the corrective commit changes only CLI portability and its test/documentation. Initial-candidate results are superseded by full validation on the corrected head.
+
 Run the full existing selector list plus BIE-3 from `.github/workflows/flora-isp1-semantics.yml`; none of the existing semantic selectors is removed. Run all seven separate product groups from `.github/workflows/flora-validation.yml`. The original VP-2, EAI-2 and BIE-2 browser scenarios remain and the new BIE-3 scenario uses the same isolated actual-application fixture:
 
 ```sh
