@@ -1,4 +1,4 @@
-name: FLORA INT-1 intelligence semantics and source admission
+name: FLORA VP-2 intelligence semantics and owner access
 on:
   pull_request:
     branches: [main]
@@ -13,6 +13,9 @@ on:
       - 'cios/applications/flora/security_web.py'
       - 'tests/test_flora_intelligence_presentation_623.py'
       - 'tests/test_flora_controlled_integration_625.py'
+      - 'tests/test_flora_visual_panels_632.py'
+      - 'cios/applications/flora/visual_panels.py'
+      - 'docs/flora-runtime/vp2-632/**'
       - 'tests/test_flora_primary_enrichment.py'
       - 'tools/research/history_integrity.py'
       - 'docs/flora-runtime/isp1-623/**'
@@ -35,4 +38,4 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -r requirements.txt
       - name: Test semantics, current views, source integrity, owner access and artwork
-        run: python -m pytest tests/test_flora_controlled_integration_625.py tests/test_flora_intelligence_presentation_623.py tests/test_flora_visual_streams_612.py tests/test_flora_visual_v2_583.py tests/test_flora_research_intelligence.py tests/test_flora_design_system_585.py tests/test_flora_primary_enrichment.py tests/test_flora_unified_integration.py::test_both_reviewed_workstreams_remain_ancestors_with_exact_source_cuts tests/test_flora_unified_integration.py::test_history_guard_rejects_every_unapproved_change tests/test_flora_commercial_visual_v3.py::test_no_existing_research_history_or_source_identity_is_changed -q
+        run: python -m pytest tests/test_flora_visual_panels_632.py tests/test_flora_controlled_integration_625.py tests/test_flora_intelligence_presentation_623.py tests/test_flora_visual_streams_612.py tests/test_flora_visual_v2_583.py tests/test_flora_research_intelligence.py tests/test_flora_design_system_585.py tests/test_flora_primary_enrichment.py tests/test_flora_unified_integration.py::test_both_reviewed_workstreams_remain_ancestors_with_exact_source_cuts tests/test_flora_unified_integration.py::test_history_guard_rejects_every_unapproved_change tests/test_flora_commercial_visual_v3.py::test_no_existing_research_history_or_source_identity_is_changed -q

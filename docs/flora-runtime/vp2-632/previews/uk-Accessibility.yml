@@ -1,0 +1,51 @@
+- banner:
+  - link "Skip to main content":
+    - /url: "#visual-content"
+  - link "FLORA":
+    - /url: /
+  - navigation "Primary product navigation":
+    - group: Explore⌄
+  - text: Guest
+  - navigation "Current scope": United Kingdom
+  - navigation "Insight streams":
+    - link "Landscape":
+      - /url: /?stream=landscape#stream-landscape
+    - link "Forces":
+      - /url: /?stream=forces#stream-forces
+- complementary "Visual exploration":
+  - figure "uk landscape":
+    - text: Conceptual illustration, not actual premises, a legal hierarchy, systems topology or a quantitative pressure map. Labelled navigation remains available without artwork.
+    - 'link "Aviation: open available industry experience; Transport & logistics is its broader section"':
+      - /url: /industries/aviation
+      - text: Aviation
+    - 'link "Technology: open available industry experience; Information & communication is its broader section"':
+      - /url: /industries/technology/experience
+      - text: Technology
+    - 'link "Banking: open available industry experience; Finance & insurance is its broader section"':
+      - /url: /industries/banking
+      - text: Banking
+  - group: All 20 industries
+- main:
+  - article:
+    - paragraph: Economic landscape
+    - heading "The shape of the UK economy" [level=1]
+    - text: Reported · UK GVA
+    - strong: £2.62tn
+    - text: 2024 · current basic prices Reported · real GDP growth
+    - strong: +0.7%
+    - text: three months to September 2026 · versus previous three months
+    - figure "Four comparable sector shares":
+      - text: Four comparable sector shares
+      - group "2024 sector shares of UK GVA":
+        - text: Manufacturing
+        - strong: 8.7%
+        - text: Health & social care
+        - strong: 8.4%
+        - text: Information & communication
+        - strong: 6.6%
+        - text: Finance & insurance
+        - strong: 8.1%
+      - paragraph: Calculated · published 2024 SIC 2007 weights ÷ 10, current basic prices. Linear 0–15% scale; Finance & insurance includes more than Banking.
+    - paragraph: GVA is not company revenue. Real GDP growth is a separate national volume measure, not industry or enterprise growth.
+    - group: Leadership Agenda
+    - group: Sources & detail

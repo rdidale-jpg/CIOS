@@ -1,0 +1,473 @@
+{
+  "baseline": "8a53777d1dec359f56b66e533d512c0a86881939",
+  "labels": 51,
+  "active_destinations": 32,
+  "entries": [
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-a",
+      "label": "Agriculture & fishing",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-b",
+      "label": "Mining & quarrying",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-d",
+      "label": "Energy supply",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-e",
+      "label": "Water & waste",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-c",
+      "label": "Manufacturing",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-f",
+      "label": "Construction",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-n",
+      "label": "Business support",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-h",
+      "label": "Transport & logistics",
+      "href": "/industries/aviation",
+      "active": true
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-p",
+      "label": "Education",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-q",
+      "label": "Health & social care",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-j",
+      "label": "Information & communication",
+      "href": "/industries/technology/experience",
+      "active": true
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-m",
+      "label": "Professional services",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-l",
+      "label": "Real estate",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-k",
+      "label": "Finance & insurance",
+      "href": "/industries/banking",
+      "active": true
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-o",
+      "label": "Public administration",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-g",
+      "label": "Retail & wholesale",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-i",
+      "label": "Hospitality & food",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-r",
+      "label": "Arts & recreation",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-s",
+      "label": "Other services",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-landscape",
+      "scope": "uk",
+      "stream": "landscape",
+      "id": "uk-sic07-t",
+      "label": "Household employment",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "uk-forces",
+      "scope": "uk",
+      "stream": "forces",
+      "id": "economic",
+      "label": "Economic growth",
+      "href": "/?stream=forces&detail=economic#insight",
+      "active": true
+    },
+    {
+      "scene": "uk-forces",
+      "scope": "uk",
+      "stream": "forces",
+      "id": "technological",
+      "label": "Cyber resilience",
+      "href": "/?stream=forces&detail=technological#insight",
+      "active": true
+    },
+    {
+      "scene": "uk-forces",
+      "scope": "uk",
+      "stream": "forces",
+      "id": "legal",
+      "label": "Cyber reform",
+      "href": "/?stream=forces&detail=legal#insight",
+      "active": true
+    },
+    {
+      "scene": "uk-forces",
+      "scope": "uk",
+      "stream": "forces",
+      "id": "environmental",
+      "label": "Climate reporting",
+      "href": "/?stream=forces&detail=environmental#insight",
+      "active": true
+    },
+    {
+      "scene": "banking-landscape",
+      "scope": "banking",
+      "stream": "landscape",
+      "id": "barclays",
+      "label": "Barclays",
+      "href": "/enterprises/barclays",
+      "active": true
+    },
+    {
+      "scene": "banking-landscape",
+      "scope": "banking",
+      "stream": "landscape",
+      "id": "hsbc-uk",
+      "label": "HSBC UK",
+      "href": "/enterprises/hsbc-uk",
+      "active": true
+    },
+    {
+      "scene": "banking-landscape",
+      "scope": "banking",
+      "stream": "landscape",
+      "id": "lloyds",
+      "label": "Lloyds Banking Group",
+      "href": "/enterprises/lloyds",
+      "active": true
+    },
+    {
+      "scene": "banking-landscape",
+      "scope": "banking",
+      "stream": "landscape",
+      "id": "natwest",
+      "label": "NatWest Group",
+      "href": "/enterprises/natwest",
+      "active": true
+    },
+    {
+      "scene": "banking-landscape",
+      "scope": "banking",
+      "stream": "landscape",
+      "id": "santander-uk",
+      "label": "Santander UK",
+      "href": "/enterprises/santander-uk",
+      "active": true
+    },
+    {
+      "scene": "banking-landscape",
+      "scope": "banking",
+      "stream": "landscape",
+      "id": "boe",
+      "label": "Bank of England",
+      "href": "/industries/banking?stream=landscape&detail=boe#insight",
+      "active": true
+    },
+    {
+      "scene": "banking-landscape",
+      "scope": "banking",
+      "stream": "landscape",
+      "id": "pra",
+      "label": "PRA",
+      "href": "/industries/banking?stream=landscape&detail=pra#insight",
+      "active": true
+    },
+    {
+      "scene": "banking-landscape",
+      "scope": "banking",
+      "stream": "landscape",
+      "id": "fca",
+      "label": "FCA",
+      "href": "/industries/banking?stream=landscape&detail=fca#insight",
+      "active": true
+    },
+    {
+      "scene": "banking-landscape",
+      "scope": "banking",
+      "stream": "landscape",
+      "id": "payments",
+      "label": "Payments",
+      "href": "/industries/banking?stream=landscape&detail=payments#insight",
+      "active": true
+    },
+    {
+      "scene": "banking-forces",
+      "scope": "banking",
+      "stream": "forces",
+      "id": "UK-RATE-NOV26",
+      "label": "Rates & margins",
+      "href": "/industries/banking?stream=forces&detail=UK-RATE-NOV26#insight",
+      "active": true
+    },
+    {
+      "scene": "banking-forces",
+      "scope": "banking",
+      "stream": "forces",
+      "id": "UK-PRA-REPORT27",
+      "label": "Resilience reporting",
+      "href": "/industries/banking?stream=forces&detail=UK-PRA-REPORT27#insight",
+      "active": true
+    },
+    {
+      "scene": "banking-forces",
+      "scope": "banking",
+      "stream": "forces",
+      "id": "LBG-ENVOY-CONTROLS",
+      "label": "AI & control",
+      "href": "/industries/banking?stream=forces&detail=LBG-ENVOY-CONTROLS#insight",
+      "active": true
+    },
+    {
+      "scene": "banking-forces",
+      "scope": "banking",
+      "stream": "forces",
+      "id": "UK-VALUE",
+      "label": "Competition & trust",
+      "href": "/industries/banking?stream=forces&detail=UK-VALUE#insight",
+      "active": true
+    },
+    {
+      "scene": "lloyds-inside",
+      "scope": "lloyds",
+      "stream": "inside",
+      "id": "businesses",
+      "label": "Businesses & brands",
+      "href": "/enterprises/lloyds?stream=inside&detail=businesses#insight",
+      "active": true
+    },
+    {
+      "scene": "lloyds-inside",
+      "scope": "lloyds",
+      "stream": "inside",
+      "id": "economics",
+      "label": "Financial performance",
+      "href": "/enterprises/lloyds?stream=inside&detail=economics#insight",
+      "active": true
+    },
+    {
+      "scene": "lloyds-inside",
+      "scope": "lloyds",
+      "stream": "inside",
+      "id": "operations",
+      "label": "Service operations",
+      "href": "/enterprises/lloyds?stream=inside&detail=operations#insight",
+      "active": true
+    },
+    {
+      "scene": "lloyds-inside",
+      "scope": "lloyds",
+      "stream": "inside",
+      "id": "technology",
+      "label": "Technology & data",
+      "href": "/enterprises/lloyds?stream=inside&detail=technology#insight",
+      "active": true
+    },
+    {
+      "scene": "lloyds-inside",
+      "scope": "lloyds",
+      "stream": "inside",
+      "id": "governance",
+      "label": "Governance & change",
+      "href": "/enterprises/lloyds?stream=inside&detail=governance#insight",
+      "active": true
+    },
+    {
+      "scene": "lloyds-landscape",
+      "scope": "lloyds",
+      "stream": "landscape",
+      "id": "customers",
+      "label": "Customer groups",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "lloyds-landscape",
+      "scope": "lloyds",
+      "stream": "landscape",
+      "id": "businesses",
+      "label": "Peers & market context",
+      "href": "/enterprises/lloyds?stream=landscape&detail=businesses#insight",
+      "active": true
+    },
+    {
+      "scene": "lloyds-landscape",
+      "scope": "lloyds",
+      "stream": "landscape",
+      "id": "economics",
+      "label": "Payments & oversight",
+      "href": "/enterprises/lloyds?stream=landscape&detail=economics#insight",
+      "active": true
+    },
+    {
+      "scene": "lloyds-landscape",
+      "scope": "lloyds",
+      "stream": "landscape",
+      "id": "operations",
+      "label": "Business customers",
+      "href": "",
+      "active": false
+    },
+    {
+      "scene": "lloyds-landscape",
+      "scope": "lloyds",
+      "stream": "landscape",
+      "id": "technology",
+      "label": "Suppliers & partners",
+      "href": "/enterprises/lloyds?stream=landscape&detail=technology#insight",
+      "active": true
+    },
+    {
+      "scene": "lloyds-forces",
+      "scope": "lloyds",
+      "stream": "forces",
+      "id": "LBG-A2030-PLATFORMS",
+      "label": "Core modernisation",
+      "href": "/enterprises/lloyds?stream=forces&detail=LBG-A2030-PLATFORMS#insight",
+      "active": true
+    },
+    {
+      "scene": "lloyds-forces",
+      "scope": "lloyds",
+      "stream": "forces",
+      "id": "LBG-A2030-CIR",
+      "label": "Cost discipline",
+      "href": "/enterprises/lloyds?stream=forces&detail=LBG-A2030-CIR#insight",
+      "active": true
+    },
+    {
+      "scene": "lloyds-forces",
+      "scope": "lloyds",
+      "stream": "forces",
+      "id": "LBG-ENVOY-CONTROLS",
+      "label": "AI benefit & control",
+      "href": "/enterprises/lloyds?stream=forces&detail=LBG-ENVOY-CONTROLS#insight",
+      "active": true
+    },
+    {
+      "scene": "lloyds-forces",
+      "scope": "lloyds",
+      "stream": "forces",
+      "id": "LBG-BRAND26-TIMING",
+      "label": "Brand & service change",
+      "href": "/enterprises/lloyds?stream=forces&detail=LBG-BRAND26-TIMING#insight",
+      "active": true
+    }
+  ],
+  "other_retained": [
+    "Six scoped Leadership Agenda keys",
+    "Three context layers",
+    "Four peer-bank exits",
+    "Contextual parent returns",
+    "Actual global/Offers/Pipeline/account destinations"
+  ]
+}

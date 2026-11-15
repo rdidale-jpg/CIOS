@@ -1,0 +1,44 @@
+name: FLORA VP-2 runtime browser proof
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'cios/applications/flora/**'
+      - 'tools/ci/flora_vp2_preview.*'
+      - 'tests/test_flora_visual_panels_632.py'
+      - 'docs/flora-runtime/vp2-632/**'
+      - '.github/workflows/flora-vp2-browser.yml'
+permissions:
+  contents: read
+jobs:
+  runtime-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.txt
+      - name: Install isolated browser tooling
+        run: |
+          npm install --prefix /tmp/flora-vp2-browser playwright@1.62.1
+          /tmp/flora-vp2-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Retain exact validated main for the before comparison
+        run: git worktree add --detach /tmp/flora-vp2-before 8a53777d1dec359f56b66e533d512c0a86881939
+      - name: Actual application journey, source/account boundaries and responsive proof
+        env:
+          NODE_PATH: /tmp/flora-vp2-browser/node_modules
+        run: python tools/ci/flora_vp2_preview.py --output /tmp/flora-vp2-previews --baseline-root /tmp/flora-vp2-before
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flora-vp2-runtime-previews-${{ github.event.pull_request.head.sha }}
+          path: /tmp/flora-vp2-previews/
+          retention-days: 14

@@ -30,8 +30,11 @@ def body(html): return html.split('<main',1)[1].split('>',1)[1].split('</main>',
 @pytest.mark.parametrize('path',['/','/flora','/flora/'])
 def test_candidate_canonical_home_uses_approved_world_without_private_or_old_modules(web,path):
     status,html,_=web(path,authenticated=False)
-    assert status==200 and html.count('data-sic=')==20
-    assert html.count('data-research=')==3 and '£2.62tn' in html
+    assert status==200
+    sectors=[a['data-sic']for t,a in DOM(html).nodes if 'data-sic'in a]
+    assert len(sectors)==40 and set(sectors)==set('ABCDEFGHIJKLMNOPQRST')
+    assert all(sectors.count(s)==2 for s in set(sectors))  # Wide/compact alternatives.
+    assert html.count('data-research=')==6 and '£2.62tn' in html
     assert all(s not in body(html) for s in ['My Commercial Focus','What’s Changing','Recommended Sales Plays','More from','Explore industries'])
     assert '2024 · current basic prices' in html
     assert '/flora/sales/pipeline' in html  # Same protected owner, never a demo replacement.

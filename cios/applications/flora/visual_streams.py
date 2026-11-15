@@ -75,6 +75,11 @@ def asset_files():
    # Existing public route grammar stays extensionless and finite. The file
    # extension is an on-disk concern, not a reason to widen that grammar.
    files[filename.removesuffix('.webp')]=(filename,'image/webp')
+ from .visual_panels import asset_manifest
+ files['panel-styles']=('panels.css','text/css; charset=utf-8')
+ for name,row in asset_manifest()['files'].items():
+  if name in files:raise ValueError('Visual asset identity collision')
+  files[name]=(row['file'],row['mime'])
  return MappingProxyType(files)
 
 
@@ -87,8 +92,13 @@ def asset(name):
  if mime=='image/webp' and not filename.endswith('-'+hashlib.sha256(body).hexdigest()[:12]+'.webp'):
   raise ValueError('Visual asset checksum mismatch')
  if mime=='image/webp':
-  expected=next(v['sha256']for row in artwork()['scenes'].values()for v in row['variants']if v['file']==filename)
+  from .visual_panels import asset_manifest
+  originals=[v['sha256']for row in artwork()['scenes'].values()for v in row['variants']if v['file']==filename]
+  expected=originals[0]if originals else asset_manifest()['files'][name]['sha256']
   if hashlib.sha256(body).hexdigest()!=expected:raise ValueError('Visual asset checksum mismatch')
+ if mime=='image/svg+xml':
+  from .visual_panels import asset_manifest
+  if hashlib.sha256(body).hexdigest()!=asset_manifest()['files'][name]['sha256']:raise ValueError('Visual asset checksum mismatch')
  return body,mime
 
 
@@ -126,10 +136,28 @@ def url(ctx,**changes):
  return SCOPES[ctx.scope]['route']+'?'+urlencode(q)
 
 
+def stream_url(ctx,stream):
+ """Compatible subject across the existing finite scene selectors, no new router."""
+ if stream not in SCOPES[ctx.scope]['streams']:raise ValueError('Insight view unavailable')
+ detail=ctx.detail
+ target={s['id']for s in geometry()[ctx.scope+'-'+stream]['spots']}
+ if detail and stream!=ctx.stream:
+  if ctx.scope=='lloyds':
+   topics={('inside','technology'):'technology',('landscape','technology'):'technology',
+       ('forces','LBG-ENVOY-CONTROLS'):'technology',('forces','LBG-A2030-PLATFORMS'):'technology',
+       ('inside','economics'):'finance',('forces','LBG-A2030-CIR'):'finance',
+       ('inside','businesses'):'brands',('forces','LBG-BRAND26-TIMING'):'brands'}
+   subject=topics.get((ctx.stream,detail))
+   detail=next((key for(s,key),topic in topics.items()if s==stream and subject and topic==subject),'')
+  elif detail not in target:detail=''
+ return url(ctx,stream=stream,detail=detail)
+
+
 def current_data(ctx):
  binding=SCOPES[ctx.scope]
  if binding['kind']=='country':return None
  data=model.load_assessment(binding['domain'])
+ if data.get('owner_only')is True:raise ValueError('Public reference unavailable')
  ref=registry.enterprise_reference(binding.get('slug',registry.DOMAINS[binding['domain']][1]))
  if (not ref or data['enterprise_twin_id']!=ref.id or
      (binding['kind']=='enterprise' and data.get('enterprise_slug','lloyds')!=binding['slug'])):
@@ -191,10 +219,15 @@ def force_view(ctx,key,data):
  if SCOPES[ctx.scope]['kind']!='country':
   return presentation.claim_view(data,claim_rows(data,[key])[0])
  row=visual_v2.insight(key)
+ if any(presentation.restricted_metadata(s)for s in row['sources']):return None
  sources=tuple(Source(s['title'],s['url'],s.get('publisher',''),s.get('publication_date')or'',s.get('reporting_period',''),
               (s.get('excerpts')or[{}])[0].get('quote',''),s.get('locator',''))for s in row['sources'])
  text=re.split(r'(?<=[.!])\s+',row['text'],maxsplit=1)[0]
- period=row['lineage'].get('as_of','Three months to September 2026')
+ # Review timestamps are not the period of the underlying evidence.
+ period=(visual_v2.basis()['growth']['period']if key=='economic'else
+     '; '.join(dict.fromkeys(s.get('reporting_period','')for s in row['sources']if s.get('reporting_period'))))
+ if not period:period='; '.join('Published '+s['publication_date']for s in row['sources']if s.get('publication_date'))
+ if not period:return None
  return Statement(text,'reported','United Kingdom; national or specified issuer scope',period,sources,
                   'reviewed_excerpt','candidate_intelligence',
                   measurement_state='proposal'if key=='legal'else'not_applicable',
@@ -215,6 +248,22 @@ def has_detail(ctx,spot,data):
   if ctx.stream=='landscape'and spot['id']=='businesses':return True
   return any(presentation.claim_view(data,c)for c in detail_claims(ctx,spot,data))
  return True
+
+
+def destinations(ctx,data):
+ """Existing scene addressability, independent of portrait placement."""
+ rows=[]
+ for spot in geometry()[ctx.scope+'-'+ctx.stream]['spots']:
+  sid=spot['id'];href='';research='';sic=''
+  if ctx.scope=='uk'and ctx.stream=='landscape':
+   district=next(d for d in visual_v2.basis()['districts']if d['id']==sid);sic=district['sic']
+   from .public_routes import public_read_path
+   if sic in visual_v2.RESEARCH and public_read_path(visual_v2.RESEARCH[sic][1]):research,href=visual_v2.RESEARCH[sic]
+  elif ctx.scope=='banking'and ctx.stream=='landscape'and sid in BANKS:href='/enterprises/'+sid
+  elif has_detail(ctx,spot,data):href=url(ctx,detail=sid,selected=sid if ctx.scope=='banking'and sid in BANKS else ctx.selected)+'#insight'
+  rows.append({'id':sid,'label':spot['label'],'href':href,'sic':sic,'research':research,
+      'selected':sid==ctx.detail or sid==ctx.selected or bool(research and ctx.selected==research.lower())})
+ return rows
 
 
 def _metric(ctx,data):
@@ -243,7 +292,7 @@ def _metric(ctx,data):
 
 def _detail(ctx,spot,data):
  if not ctx.detail or not has_detail(ctx,spot,data):return ''
- close=url(ctx,detail='')+'#label-'+spot['id']
+ close=url(ctx,detail='')+'#visual-content'
  body='<section class="focus" id="insight" tabindex="-1" aria-labelledby="insight-title"><a class="close close-insight" href="'+e(close,quote=True)+'" aria-label="Close '+e(spot['label'],quote=True)+'">×</a><h2 id="insight-title">'+e(spot['label'])+'</h2>'
  if ctx.stream=='forces':
   item=force_view(ctx,spot['id'],data)
@@ -272,7 +321,8 @@ def _detail(ctx,spot,data):
 
 def _proof(ctx,data):
  body='<details class="proof"><summary>Sources & detail</summary>'
- if SCOPES[ctx.scope]['kind']in {'country','industry'}:
+ if (SCOPES[ctx.scope]['kind']in {'country','industry'}
+     and leadership_agenda.fingerprint(visual_v2.basis())==leadership_agenda._pins().get('existing_economy')):
   basis=visual_v2.basis()
   body+='<p>UK GVA uses 2024 current basic prices. The displayed total is rounded from £2,623bn. GVA is not company revenue or GDP at market prices.</p><p>Industry shares are the published SIC2007 section weights divided by ten; rounded sections total 100.2%. Finance & insurance includes more than Banking. No sales-market value is inferred.</p>'
   if SCOPES[ctx.scope]['kind']=='industry':
@@ -287,59 +337,5 @@ def _proof(ctx,data):
 
 @ds.view_scope
 def render(path,query,headers=None):
- ctx=resolve(path,query);binding=SCOPES[ctx.scope];data=current_data(ctx);scene=geometry()[ctx.scope+'-'+ctx.stream];art=artwork()['scenes'][ctx.scope+'-'+ctx.stream]
- title=binding.get('title') or data['industry_name'if binding['kind']=='industry'else 'enterprise_name']
- identity=binding.get('identity') or data[binding['identity_key']]
- # Frozen annotations are supplementary presentation, never an updated source.
- # Hide them if any underlying public research/basis pin changes. Detailed
- # facts below always come from current validated owners, not these captions.
- caption_pins=artwork()['caption_source_pins']
- caption_current=all(hashlib.sha256((model.REPO/p).read_bytes()).hexdigest()==digest for p,digest in caption_pins.items())
- if binding['kind']=='country' and ctx.stream=='forces':visual_v2.macro.load_context()
- body='<div class="page-title"><h1>'+e(title)+'</h1></div>'+_metric(ctx,data)
- body+='<nav class="stream-switcher" aria-label="Insight streams">'+''.join('<a href="'+e(url(ctx,stream=s,detail=''),quote=True)+'"'+(' aria-current="page"'if ctx.stream==s else '')+'>'+s.title()+'</a>'for s in binding['streams'])+'</nav>'
- issues=leadership_agenda.agenda(ctx.scope,data)
- body+=leadership_agenda.navigation(ctx,url,issues)
- body+='<figure class="world" aria-labelledby="world-description"><figcaption class="sr-only" id="world-description">'+e(scene['description'])+'. Conceptual illustration; labelled controls and text view provide equivalent navigation.</figcaption>'
- variants=art['variants'];srcset=', '.join(ASSET_BASE+v['file'].removesuffix('.webp')+' '+str(v['width'])+'w'for v in variants)
- sizes='(max-width:600px) 200vw, (min-width:1000px) min(100vw, calc(150vh - 300px)), 100vw'
- for side in ('left','right'):
-  body+='<div class="half '+side+'"><img src="'+ASSET_BASE+variants[-1]['file'].removesuffix('.webp')+'" srcset="'+srcset+'" sizes="'+sizes+'" width="'+str(art['width'])+'" height="'+str(art['height'])+'" alt="" decoding="async"'+(' fetchpriority="high"'if side=='left'else ' loading="lazy"')+'></div>'
- text_entries=[]
- for spot in scene['spots']:
-  sid=spot['id'];label=spot['label'];href='';attrs='';classes='spot'
-  selected=sid==ctx.selected
-  if binding['kind']=='country' and ctx.stream=='landscape':
-   district=next(d for d in visual_v2.basis()['districts']if d['id']==sid);sic=district['sic'];attrs=' data-sic="'+sic+'"'
-   from .public_routes import public_read_path
-   if sic in visual_v2.RESEARCH and public_read_path(visual_v2.RESEARCH[sic][1]):
-    name,href=visual_v2.RESEARCH[sic];attrs+=' data-research="'+name.lower()+'" aria-label="'+e(name+': open available industry experience; '+label+' is its broader section',quote=True)+'"';classes+=' available'
-    selected=ctx.selected==name.lower()
-   else:classes+=' inert'
-  elif binding['kind']=='industry' and ctx.stream=='landscape' and sid in BANKS:
-   href='/enterprises/'+sid
-   # Lloyds enters Inside directly. Other banks retain their current public views.
-  elif has_detail(ctx,spot,data):href=url(ctx,detail=sid,selected=sid if binding['kind']=='industry' and sid in BANKS else ctx.selected)+'#insight'
-  if href:classes+=' active'
-  text_entries.append((href,label))
-  if selected:classes+=' selected'
-  layer_focus=(ctx.layer=='regulators' and (sid in ROLE_CONTEXT or sid=='economics'))or(ctx.layer=='suppliers'and sid in ('technology','customers','operations','payments'))
-  if layer_focus:classes+=' layer-focus'
-  attrs+=' data-label-id="'+e(sid,quote=True)+'" id="label-'+e(sid,quote=True)+'" style="'+e(spot['position'],quote=True)+'"'
-  tag='a'if href else 'span'
-  body+='<'+tag+' class="'+classes+'"'+attrs+(' href="'+e(href,quote=True)+'"'if href else '')+'>'+e(label)+(' <span aria-hidden="true">›</span>'if href else '')
-  # Approved annotations are backed by the unchanged, validated research review.
-  # Drop frozen mini-captions if the research cutoff changes, rather than infer updates.
-  if spot['small'] and caption_current and not presentation.NON_CORE.search(spot['small']) and 'to check'not in spot['small']:body+='<small>'+e(spot['small'])+'</small>'
-  body+='</'+tag+'>'
- body+='</figure><p class="art-fallback">Artwork could not load. All labelled links and the text view remain available.</p>'
- if ctx.selected and binding['kind']=='industry':body+='<p class="selection-note">Selected: '+e(registry.enterprise_reference(ctx.selected).name)+'</p>'
- if ctx.detail:body+=_detail(ctx,next(s for s in scene['spots']if s['id']==ctx.detail),data)
- body+=leadership_agenda.detail(ctx,url,issues)
- body+='<details class="text-view"><summary>Text view</summary><ul>'+''.join('<li>'+('<a href="'+e(h,quote=True)+'">'+e(l)+'</a>'if h else e(l))+'</li>'for h,l in text_entries)+'</ul></details>'
- if binding['kind']!='country':
-  body+='<details class="layer-options"><summary>Context layers</summary><nav aria-label="Context layers">'+''.join('<a href="'+e(url(ctx,layer=k),quote=True)+'"'+(' aria-current="page"'if ctx.layer==k else '')+'>'+e(v)+'</a>'for k,v in LAYERS.items())+'</nav></details>'
- body+=_proof(ctx,data)
- if binding['kind']=='enterprise':body+='<footer><a href="'+e(url(Context('banking','landscape',ctx.layer,binding['slug'])),quote=True)+'">← Back to Banking</a></footer>'
- elif binding['kind']=='industry':body+='<footer><a href="'+e(url(Context('uk','landscape',selected=ctx.scope)),quote=True)+'">← Back to United Kingdom</a></footer>'
- return '<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+ds.head()+'<link rel="stylesheet" href="'+ASSET_BASE+'styles"><script defer src="'+ASSET_BASE+'interactions"></script></head><body class="ds-page vex-page"><a class="skip" href="#visual-content">Skip to main content</a>'+ds.header(headers=headers,compact=True)+'<main id="visual-content" tabindex="-1" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+body+'</main></body></html>'
+ from .visual_panels import render as panels
+ return panels(resolve(path,query),headers)

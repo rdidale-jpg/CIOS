@@ -31,7 +31,7 @@ def test_scope_identity_exact_native_streams_and_single_title(scope,stream):
  nav=html.split('<nav class="stream-switcher"',1)[1].split('</nav>',1)[0]
  assert nav.count('aria-current="page"')==1
  for dest in v.SCOPES[scope]['streams']:
-  expected=v.url(ctx,stream=dest,detail='').replace('&','&amp;')
+  expected=(v.stream_url(ctx,dest)+'#stream-'+dest).replace('&','&amp;')
   assert f'href="{expected}"'in nav
  assert 'Sources & method</summary>'not in html
  assert 'Primary product navigation'in html and 'Sources & detail</summary>'in html
@@ -51,11 +51,15 @@ def test_exact_accepted_seven_sources_and_only_responsive_current_scene_loaded()
    assert len(raw)==variant['bytes'] and variant['bytes']<row['original_bytes']
  for scope,stream in CASES:
   html=v.render(v.SCOPES[scope]['route'],{'stream':[stream]})
-  images=[a for t,a in DOM(html).nodes if t=='img'];assert len(images)==2
-  current=v.artwork()['scenes'][scope+'-'+stream]
-  assert all(current['variants'][-1]['file'].removesuffix('.webp')in a['src']for a in images)
-  assert all('768w'in a['srcset'] and '1152w'in a['srcset'] and '1536w'in a['srcset']for a in images)
-  assert images[0]['fetchpriority']=='high' and images[1]['loading']=='lazy'
+  images=[a for t,a in DOM(html).nodes if t=='img'];assert len(images)==3
+  from cios.applications.flora.visual_panels import asset_manifest
+  current=asset_manifest()['portraits'][scope+'-'+stream]
+  portraits=[a for a in images if a.get('class')!='watermark']
+  assert len(portraits)==2  # One responsive subtree is hidden at each size.
+  assert all(current['variants'][0]['file'].removesuffix('.webp')in a['src']for a in portraits)
+  assert all('384w'in a['srcset'] and '768w'in a['srcset']for a in portraits)
+  assert all(a['loading']=='lazy'for a in portraits)
+  assert next(a for a in images if a.get('class')=='watermark')['aria-hidden']=='true'
   assert 'width'in images[0]and'height'in images[0]
   assert not any('preload'in a.get('rel','')for t,a in DOM(html).nodes)
 
@@ -63,10 +67,12 @@ def test_exact_accepted_seven_sources_and_only_responsive_current_scene_loaded()
 def test_twenty_original_labels_available_industries_and_two_selection_journey():
  html=v.render('/',{});dom=DOM(html)
  labels=[a for t,a in dom.nodes if 'data-sic'in a]
- assert len(labels)==20 and {a['data-sic']for a in labels}==set('ABCDEFGHIJKLMNOPQRST')
+ assert len(labels)==40 and {a['data-sic']for a in labels}==set('ABCDEFGHIJKLMNOPQRST')
  links=[a for t,a in dom.nodes if 'data-research'in a]
  assert {a['data-research']for a in links}=={'banking','aviation','technology'}
- assert all(t=='span'for t,a in dom.nodes if 'data-sic'in a and 'data-research'not in a)
+ assert all(t=='span'for t,a in dom.nodes if 'data-sic'in a and 'href'not in a)
+ assert {a['data-sic']for t,a in dom.nodes if 'data-sic'in a and 'href'in a}=={'H','J','K'}
+ assert len(links)==6  # Same three real exits in mutually exclusive responsive scenes.
  assert all('available'in a['class']and'broader section'in a['aria-label']for a in links)
  bank=v.render('/industries/banking',{})
  for slug in v.BANKS:assert 'href="/enterprises/'+slug+'"'in bank

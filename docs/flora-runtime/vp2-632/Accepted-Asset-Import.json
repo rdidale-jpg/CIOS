@@ -1,0 +1,200 @@
+{
+  "design_commit": "f4059a34a55277adbd2a2337239827cab96d962e",
+  "original_master_provenance_sha256": "f66b27b759caafe05ee1875ceb5de48ac09663ecb493c4d8bc1c675d7a902a5f",
+  "files": {
+    "vp2-uk-landscape-384-84a37760e3e8": {
+      "file": "vp2-uk-landscape-384-84a37760e3e8.webp",
+      "sha256": "84a37760e3e89556727e60003a23f38c3f3f0255050ad1fcc6be62b09c12a25f",
+      "bytes": 108258,
+      "width": 384,
+      "height": 576,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/uk-landscape-384.webp",
+      "mime": "image/webp"
+    },
+    "vp2-uk-landscape-768-73f0ba099fbc": {
+      "file": "vp2-uk-landscape-768-73f0ba099fbc.webp",
+      "sha256": "73f0ba099fbcbd5f9201360870c917c9e53f3966127d0caf3024b522f2930fb4",
+      "bytes": 415040,
+      "width": 768,
+      "height": 1152,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/uk-landscape-768.webp",
+      "mime": "image/webp"
+    },
+    "vp2-uk-forces-384-fa241b77924d": {
+      "file": "vp2-uk-forces-384-fa241b77924d.webp",
+      "sha256": "fa241b77924d085ced99b2027f1ab94a813dcd78977751c2aff2d989df3c770a",
+      "bytes": 88324,
+      "width": 384,
+      "height": 576,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/uk-forces-384.webp",
+      "mime": "image/webp"
+    },
+    "vp2-uk-forces-768-a67e2ac95b52": {
+      "file": "vp2-uk-forces-768-a67e2ac95b52.webp",
+      "sha256": "a67e2ac95b527af0967211487b407162c3258d63fa78f7650c53030d10bef9a0",
+      "bytes": 321434,
+      "width": 768,
+      "height": 1152,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/uk-forces-768.webp",
+      "mime": "image/webp"
+    },
+    "vp2-banking-landscape-384-18fe29a66bb6": {
+      "file": "vp2-banking-landscape-384-18fe29a66bb6.webp",
+      "sha256": "18fe29a66bb682225badfa13a5563d9a94a9e54086b1cc2514f27a8068fdcedb",
+      "bytes": 125396,
+      "width": 384,
+      "height": 576,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/banking-landscape-384.webp",
+      "mime": "image/webp"
+    },
+    "vp2-banking-landscape-768-b59e48e78a00": {
+      "file": "vp2-banking-landscape-768-b59e48e78a00.webp",
+      "sha256": "b59e48e78a00bbe22a42450883f72d855e767be772fa136d4b0c037069288167",
+      "bytes": 440682,
+      "width": 768,
+      "height": 1152,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/banking-landscape-768.webp",
+      "mime": "image/webp"
+    },
+    "vp2-banking-forces-384-12cea0c2400a": {
+      "file": "vp2-banking-forces-384-12cea0c2400a.webp",
+      "sha256": "12cea0c2400a53ece89bcb8b97fe946bc6fcbdad1c8fd142454175d6c3c58b42",
+      "bytes": 115572,
+      "width": 384,
+      "height": 576,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/banking-forces-384.webp",
+      "mime": "image/webp"
+    },
+    "vp2-banking-forces-768-772726f361a3": {
+      "file": "vp2-banking-forces-768-772726f361a3.webp",
+      "sha256": "772726f361a3f38f514e51b65d955620c44f2bef7378964f5b1d839e6ed6322e",
+      "bytes": 437242,
+      "width": 768,
+      "height": 1152,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/banking-forces-768.webp",
+      "mime": "image/webp"
+    },
+    "vp2-lloyds-inside-384-12d9a56acd25": {
+      "file": "vp2-lloyds-inside-384-12d9a56acd25.webp",
+      "sha256": "12d9a56acd25c1fc7ef673130c20ca30cf86083485e866ba9360282f175d47dc",
+      "bytes": 110268,
+      "width": 384,
+      "height": 576,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/lloyds-inside-384.webp",
+      "mime": "image/webp"
+    },
+    "vp2-lloyds-inside-768-13827db67c30": {
+      "file": "vp2-lloyds-inside-768-13827db67c30.webp",
+      "sha256": "13827db67c3077e5a390965499c38ec2a93d3003cde580895d86eac82140d80f",
+      "bytes": 389678,
+      "width": 768,
+      "height": 1152,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/lloyds-inside-768.webp",
+      "mime": "image/webp"
+    },
+    "vp2-lloyds-landscape-384-358069bf4f4c": {
+      "file": "vp2-lloyds-landscape-384-358069bf4f4c.webp",
+      "sha256": "358069bf4f4c424ae2cbe8a1f06ffbf75364731f527c208bda8ba703e56e76b3",
+      "bytes": 114154,
+      "width": 384,
+      "height": 576,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/lloyds-landscape-384.webp",
+      "mime": "image/webp"
+    },
+    "vp2-lloyds-landscape-768-e58d32043d99": {
+      "file": "vp2-lloyds-landscape-768-e58d32043d99.webp",
+      "sha256": "e58d32043d99ebfe411a10b0ca01fddeb1b8e0464afa0447feb65d824a39deb7",
+      "bytes": 409040,
+      "width": 768,
+      "height": 1152,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/lloyds-landscape-768.webp",
+      "mime": "image/webp"
+    },
+    "vp2-lloyds-forces-384-2ffca0158cd7": {
+      "file": "vp2-lloyds-forces-384-2ffca0158cd7.webp",
+      "sha256": "2ffca0158cd78943d3b20b176bd4bc50bc7d6d944ec11d13cd2ce15f3478367d",
+      "bytes": 97652,
+      "width": 384,
+      "height": 576,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/lloyds-forces-384.webp",
+      "mime": "image/webp"
+    },
+    "vp2-lloyds-forces-768-8fca8b08527a": {
+      "file": "vp2-lloyds-forces-768-8fca8b08527a.webp",
+      "sha256": "8fca8b08527af1da381e97145e383c2461144f7a00f334867b7310ee4fec6ce7",
+      "bytes": 355572,
+      "width": 768,
+      "height": 1152,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/lloyds-forces-768.webp",
+      "mime": "image/webp"
+    },
+    "vp2-uk-skyline-1280-21e9c5d3fc39": {
+      "file": "vp2-uk-skyline-1280-21e9c5d3fc39.webp",
+      "sha256": "21e9c5d3fc39c340d39d77324c5444a33784c788eb262751383972d36c47d507",
+      "bytes": 55486,
+      "width": 1280,
+      "height": 427,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/uk-skyline-1280.webp",
+      "mime": "image/webp"
+    },
+    "vp2-uk-skyline-2172-219747b1c362": {
+      "file": "vp2-uk-skyline-2172-219747b1c362.webp",
+      "sha256": "219747b1c362cec411920a80967633c4048c603205c5a5e2f9d9aa8305218ae0",
+      "bytes": 142184,
+      "width": 2172,
+      "height": 724,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/uk-skyline-2172.webp",
+      "mime": "image/webp"
+    },
+    "vp2-watermark-uk-landscape-f4e632a4bc93": {
+      "file": "vp2-watermark-uk-landscape-f4e632a4bc93.svg",
+      "sha256": "f4e632a4bc93b15bed0bb94f751e566d7f9fe84cde71541ceec104e67a0a38e6",
+      "bytes": 3558,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/watermark-uk-landscape.svg",
+      "mime": "image/svg+xml"
+    },
+    "vp2-watermark-uk-forces-d526b33fbdbf": {
+      "file": "vp2-watermark-uk-forces-d526b33fbdbf.svg",
+      "sha256": "d526b33fbdbfd126f6427c9b885d19746442299416d44c0964a05a40a5a6fd2e",
+      "bytes": 2574,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/watermark-uk-forces.svg",
+      "mime": "image/svg+xml"
+    },
+    "vp2-watermark-banking-landscape-67aebb381b71": {
+      "file": "vp2-watermark-banking-landscape-67aebb381b71.svg",
+      "sha256": "67aebb381b7143eb67a7f8ddcdd8d985b796f98f14f7ffbd380cff195f07c7ad",
+      "bytes": 2808,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/watermark-banking-landscape.svg",
+      "mime": "image/svg+xml"
+    },
+    "vp2-watermark-banking-forces-0ef8d745948a": {
+      "file": "vp2-watermark-banking-forces-0ef8d745948a.svg",
+      "sha256": "0ef8d745948a5765eb9d884f5b5e475b1460f9206eb7f06b0dd349a5b3fec460",
+      "bytes": 2581,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/watermark-banking-forces.svg",
+      "mime": "image/svg+xml"
+    },
+    "vp2-watermark-lloyds-inside-2d134ba93cb7": {
+      "file": "vp2-watermark-lloyds-inside-2d134ba93cb7.svg",
+      "sha256": "2d134ba93cb7e17a5060ac8463b17adfea2d7a49491e3015b44b7fbc8e91f726",
+      "bytes": 1014,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/watermark-lloyds-inside.svg",
+      "mime": "image/svg+xml"
+    },
+    "vp2-watermark-lloyds-landscape-fdd9d9a0bc60": {
+      "file": "vp2-watermark-lloyds-landscape-fdd9d9a0bc60.svg",
+      "sha256": "fdd9d9a0bc60e32a0f466c94a8a696599c743ee1cdb5b79ff594f120420f9d96",
+      "bytes": 2804,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/watermark-lloyds-landscape.svg",
+      "mime": "image/svg+xml"
+    },
+    "vp2-watermark-lloyds-forces-06a4619df21b": {
+      "file": "vp2-watermark-lloyds-forces-06a4619df21b.svg",
+      "sha256": "06a4619df21b01894c2baa72d0c18d6c1794dedfc65a583ca16a1ac034e9930a",
+      "bytes": 2584,
+      "design_path": "docs/flora-design/vp1-629/prototype/assets/watermark-lloyds-forces.svg",
+      "mime": "image/svg+xml"
+    }
+  },
+  "excluded": "Generated static HTML, SnapshotDate, candidate sources, master PNG duplicates, future News/Tools concepts and draft workflow are not imported"
+}

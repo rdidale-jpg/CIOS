@@ -164,8 +164,19 @@ CAVEATS={
 
 DISCLOSURE_PINS = {'LBG-DEPOSITS': 'f9a7dac5b0a86729a905069f2b5dae59091528b18dd77bcb3941eb8ee1e7a955', 'LBG-CUSTOMERS': '5483896c45a44970333df20a990fede6a8701d7ef9e07efc1181f2b135b787f0', 'LBG-HEDGE': '37b2f0425b52139345229e51fd93f5cdc0961fd3f93170c408bdb1a65d639bcd', 'LBG-TECH-COST': '92e83a373d8a45620a01975e2c0293f6cc840b8417189fbac23f3e516628838e', 'LBG-MIGRATION': '359769c8fce44750ef24b9caf4730be9fa4769b41ea8fec9f8cb31162b7a777f', 'LBG-AI-USE': '88b384d424fd1233bb7f579e714a30c063d7221918e4552b8e2d9e21623fd418', 'LBG-AI-VALUE': 'eb0a7857fb5b16dfb86ad3da2defc6a7f23478d3ec28caf1e9fd38bd5c2a34c8', 'LBG-AI-TARGET': '076326a4b1a4fa5419976e249a3762e2ba075c7893360a8704ce767bf06f1d24', 'LBG-VERTEX': '3b58f80458408f96163840b5711f80ecaf4d1c79f5ae29b21476b97fc0871828', 'LBG-MODELS': '8295972220aee189a60deba82a7b8a58c1045d680372aeb86647da51eadde6a9', 'LBG-COPILOT': 'f436b0366dddae267c8bbae65fecab94c266fd2e3bc985dd05809e1df0f55433', 'LBG-BRAND': 'a8c3db07428b05dc9a7c3e42e10f3fa96bdbf6c72795c039fe3ebfdcd42bab31', 'LBG-ACCESS': '36acbe82e454dba0472ac1d9ebcbc3eb447b833a1ad92b1e24855f40af25bd43', 'LBG-SUPPLIER-RISK': '8d55264fa74d0edc962fbb0e8d00b2a156bce447b7472bb8277b11b446c0c8c5', 'LBG-PRIMACY-GAP': 'edd45ff28a3790e0c2271d6e06911a0abbbd9b649a28e5b3fca45a1c3a035d9a', 'LBG-BPO-GAP': '3a984cd28cac93e3aebb99369050e717e27005bd7632dab75d2070ca9af5ef4d', 'LBG-FRAUD-GAP': '5ad3c62ec92ec880780fdbafd8ba3f90bf42e4bb639b63f78a957b8ab3bcba54', 'LBG-CURVE': 'ddb0ed836d295c8c3fd050fc5d3d58198c4a893de544831cab137bb2f4b3882c', 'UK-CTP': 'aa2c27adac174bb4bbe0e01a35b77ad8abdf563181a95b08b3a8491e3e5096e2', 'UK-CAPITAL': 'e607086ba25d655d0125471787deb06b9438aec7139e195744e03ba2d48a4c26', 'UK-VALUE': '83e031f057bfbf078ae150a1a709bed43e2a31d35c76b20e909d7303d8dfcfe9', 'LBG-Q326-PROFIT': 'd82972b2248ffa8e6fa7913df48d7ad9c4827a1a5d436a8c9dfd978f0513c4c9', 'LBG-Q326-DEPOSITS': 'f3746247b80755c67bcbe2ca791bd1d01555750c2103098501c70d101922cea2', 'LBG-Q326-CURVE': '36c70a38095379f801a9324f87aaa078e0e0250bde23e7452a04404a6cd96ca8', 'LBG-Q326-INVESTMENT': '72b5c0656891ea4ea7beb7fbbe7f53b2589d0c5affda9e440d7433205407bc55', 'LBG-AR25-DEPOSITS': '12999eda8fb9ce3b72c0a2f340b8f1cfd135b6435464b5793aabe7b6257650b8', 'LBG-AR25-COPILOT': 'bc50df400746f038858f1a196c4f4e04f21529fb815b06842871617632d59350', 'LBG-AR25-MIGRATION': '9e240bb1cb7409ab6b95008ede4058ac26a067a83d0200a54d46f358ef2695ed', 'LBG-A2030-PLATFORMS': 'ea2d9c0eb360b8de4403ffdca30b8a20f54064f9079402ab297e6dc704059c10', 'LBG-A2030-DATA': '3327445d6c4d3e99e6291a0aae6591deda6c65382fd0195fa4fae70d2f233c1b', 'LBG-A2030-SAVINGS': '9f0593a5c719cf44a6977dee26abaf5911ac57be609d787609ac4a5540aabb99', 'LBG-A2030-CIR': '9b7f624d9c15e6d727dd7eec814a9a617794252e01875a692d40c69f947b9788', 'LBG-A2030-WALLET': '846e020988b605f7f95a129fd5cdd26476939ba430b9d4c5672f482e07dab5d4', 'LBG-A2030-INVESTMENT': '318a1192f332d4842090401b164a116a7effefaeae41605d18abc5f5dd97ba56', 'LBG-ENVOY-GOOGLE': 'd879922f09591cfee3e8671b8a8cd28ae8e5d9214d715684ef6c70ac507257af', 'LBG-ENVOY-CONTROLS': '563e97eb48b3587bc0de0677af0953b37f555927dfba38dbcbeff5d76e3b0d8a', 'LBG-BRAND26-TIMING': '774ba34311c5be0062fa9d7880067b4535d7c93cd655e79d6d15e78c3fe1a279', 'LBG-BRAND26-NO-ROLES': 'c5943e89906cf5eac66484948ff888a34c8ae126fca79833e2ba519e13c28856', 'LBG-AI26-REPORTED': '47368f0080b99690b767449143327f22c9c4d8373414362cbb59cceb4e02e597', 'LBG-AI26-EXPECTED': '7a461947ac92d677b4bbb9b51311cfef96085afd41aa6a6267a792dbf700c8f9', 'UK-RATE-NOV26': 'bbf238daba15cb43ee9effaefde475d6edaf78be3fb8bcc555bcb25457066cbb', 'UK-PRA-REPORT27': 'a225ee6ddebf47f56a221be46a52caa23f18e01d60831a8ac3b85f510f664437', 'UK-FCA-REPORT27': '2bd2c6052534799b5b1aef38d7dd150b104f1158bcc523179a2ec3be81252011', 'LBG-FSQS-ACCESS': '6f88b1689128d49898cecf171a026e00fe2c46aa44ce40928db910f4e98579b2', 'LBG-SOURCING-ACCESS': 'd0e32d6b4fca98d0234212d9d3ccd2fc5b8f9d08a22cbca0e06a94af616507eb'}
 
+def restricted_metadata(item) -> bool:
+    """Deny an explicit restriction; never grant source or canonical authority."""
+    rights=item.get('rights',{})
+    return bool(item.get('owner_only')is True or item.get('withdrawn')or item.get('retracted')
+        or item.get('core_contradiction')or item.get('freshness')in {'stale','superseded','withdrawn'}
+        or not isinstance(rights,dict)or rights.get('status')in {'revoked','denied','unknown'})
+
+
 def claim_view(data, claim) -> Statement | None:
     """Existing validated public research adapter, not a new fact extractor."""
+    # Presentation cannot turn a public owner's later restriction/revocation
+    # into reusable core intelligence. Metadata collections are not booleans.
+    if data.get('owner_only')is True or restricted_metadata(claim):return None
     kind=KINDS.get(claim.get('kind'))
     if not kind or claim.get('verification')!='source_supported' and kind!='insight':return None
     if any(c.get('supersedes')==claim['id']or c.get('updates')==claim['id']for c in data['claims']):return None
@@ -173,6 +184,7 @@ def claim_view(data, claim) -> Statement | None:
     sources=[]
     for sid in claim['source_ids']:
         s=source_by_id[sid]
+        if restricted_metadata(s):return None
         if 'search-index'in s.get('retrieval_extent',''):return None
         sources.append(Source(s['title'],s['url'],s.get('publisher',''),s.get('publication_date')or'',s.get('reporting_period',''),claim.get('primary_quotes',{}).get(sid,''),claim.get('quote_locator','')))
     # Curated adapter permits only a disclosure before a distinct research-task

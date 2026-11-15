@@ -1,0 +1,16 @@
+{
+  "mission": "VP-2 accepted three-panel runtime implementation; draft PR only",
+  "research_policy": "Assurance / bounded implementation",
+  "baseline_main": "8a53777d1dec359f56b66e533d512c0a86881939",
+  "main_ci": 43709888042,
+  "design_commit": "f4059a34a55277adbd2a2337239827cab96d962e",
+  "owner_acceptance_comment": 6896760263,
+  "design_pr": 631,
+  "implementation_issue": 632,
+  "evidence_admission_pr": 630,
+  "evidence_admission_kept_separate": true,
+  "production_version": "UNVERIFIED: public deployment/health URLError and approved web deployment read inaccessible; no Render connector or authenticated service available",
+  "capability": "Local isolated implementation/tests/browser, GitHub draft/CI, existing read-only independent review. No paid calls, source imports, canonical/production writes or deployment.",
+  "scope": "Existing visual_streams Context/resolve/url, permitted owners and verified account navigation. 51 labels,32 baseline active destinations,6 agenda keys,3 context layers.",
+  "stop": "Draft implementation PR for explicit owner review; no merge or Render."
+}
