@@ -15,9 +15,9 @@ Tests cover claim/source/entity/date/status/rights pin changes; denied/withdrawn
 
 ## Browser findings
 
-Committed proof: [Browser-Checks.json](previews/Browser-Checks.json), [Performance.json](previews/Performance.json), three scope accessibility snapshots and76 before/after JPGs. **482 checks passed**, four screenshot sizes plus320px, iPad DPR2,720px effective zoom, forced colours, keyboard/touch, no-JS two-selection journey, history, deep links, source activation and selected context. A browser harness navigation race was corrected by awaiting native navigation; it was not an application data/control exception.
+Committed proof: [Browser-Checks.json](previews/Browser-Checks.json), [Performance.json](previews/Performance.json), three scope accessibility snapshots and76 before/after JPGs. **486 checks passed**, four screenshot sizes plus320px, iPad DPR2,720px effective zoom, forced colours, keyboard/touch, no-JS two-selection journey, history, deep links, source activation and selected context. A browser harness navigation race was corrected by awaiting native navigation; it was not an application data/control exception.
 
-Cold emulation,1.6Mbps/150ms RTT,DPR1, one run per scope: before/after art bytes unchanged410,442 UK /422,290 Banking /410,602 Lloyds. FCP before572/560/576ms, after644/596/604ms; art request durations before2350/2434/2368ms, after2378/2427/2375ms. FCP includes header/text and is **not** full-art readiness. No performance SLA or production speed claim; original responsive cache/asset policy is retained.
+Cold emulation,1.6Mbps/150ms RTT,DPR1, one run per scope: before/after art bytes unchanged410,442 UK /422,290 Banking /410,602 Lloyds. FCP before564/572/612ms, after624/628/624ms; art request durations before2349/2418/2366ms, after2371/2451/2371ms. FCP includes header/text and is **not** full-art readiness. No performance SLA or production speed claim; original responsive cache/asset policy is retained.
 
 ## Compatibility finding and correction
 

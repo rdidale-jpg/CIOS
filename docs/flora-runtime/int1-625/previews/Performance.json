@@ -5,13 +5,13 @@
       "device": "mobile",
       "view": "uk-landscape",
       "network": "cold emulated 1.6 Mbps / 150 ms RTT; loopback, DPR1",
-      "fcpMs": 572,
+      "fcpMs": 564,
       "resources": [
         {
           "asset": "uk-landscape-1152-685df28a3075",
           "bytes": 410442,
           "transfer": 410742,
-          "durationMs": 2350
+          "durationMs": 2349
         }
       ]
     },
@@ -20,13 +20,13 @@
       "device": "mobile",
       "view": "banking-landscape",
       "network": "cold emulated 1.6 Mbps / 150 ms RTT; loopback, DPR1",
-      "fcpMs": 560,
+      "fcpMs": 572,
       "resources": [
         {
           "asset": "banking-landscape-1152-f4f9b56d78a9",
           "bytes": 422290,
           "transfer": 422590,
-          "durationMs": 2434
+          "durationMs": 2418
         }
       ]
     },
@@ -35,13 +35,13 @@
       "device": "mobile",
       "view": "lloyds-inside",
       "network": "cold emulated 1.6 Mbps / 150 ms RTT; loopback, DPR1",
-      "fcpMs": 576,
+      "fcpMs": 612,
       "resources": [
         {
           "asset": "lloyds-inside-1152-a3938046ba72",
           "bytes": 410602,
           "transfer": 410902,
-          "durationMs": 2368
+          "durationMs": 2366
         }
       ]
     },
@@ -50,13 +50,13 @@
       "device": "mobile",
       "view": "uk-landscape",
       "network": "cold emulated 1.6 Mbps / 150 ms RTT; loopback, DPR1",
-      "fcpMs": 644,
+      "fcpMs": 624,
       "resources": [
         {
           "asset": "uk-landscape-1152-685df28a3075",
           "bytes": 410442,
           "transfer": 410742,
-          "durationMs": 2378
+          "durationMs": 2371
         }
       ]
     },
@@ -65,13 +65,13 @@
       "device": "mobile",
       "view": "banking-landscape",
       "network": "cold emulated 1.6 Mbps / 150 ms RTT; loopback, DPR1",
-      "fcpMs": 596,
+      "fcpMs": 628,
       "resources": [
         {
           "asset": "banking-landscape-1152-f4f9b56d78a9",
           "bytes": 422290,
           "transfer": 422590,
-          "durationMs": 2427
+          "durationMs": 2451
         }
       ]
     },
@@ -80,13 +80,13 @@
       "device": "mobile",
       "view": "lloyds-inside",
       "network": "cold emulated 1.6 Mbps / 150 ms RTT; loopback, DPR1",
-      "fcpMs": 604,
+      "fcpMs": 624,
       "resources": [
         {
           "asset": "lloyds-inside-1152-a3938046ba72",
           "bytes": 410602,
           "transfer": 410902,
-          "durationMs": 2375
+          "durationMs": 2371
         }
       ]
     }

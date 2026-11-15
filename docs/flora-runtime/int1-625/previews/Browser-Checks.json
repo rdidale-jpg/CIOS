@@ -1,5 +1,5 @@
 {
-  "passed": 482,
+  "passed": 486,
   "checks": [
     "200 /?stream=landscape",
     "before desktop uk-landscape no overflow",
@@ -142,6 +142,7 @@
     "desktop lloyds-service no overflow",
     "keyboard source disclosure desktop",
     "original attributed FCA link desktop",
+    "numerical-data licence available on demand desktop",
     "200 /enterprises/lloyds?stream=inside&selected=lloyds&agenda=ai-benefits",
     "selected issue lloyds-ai",
     "clean full markup lloyds-ai",
@@ -196,6 +197,7 @@
     "ipad-landscape lloyds-service no overflow",
     "keyboard source disclosure ipad-landscape",
     "original attributed FCA link ipad-landscape",
+    "numerical-data licence available on demand ipad-landscape",
     "200 /enterprises/lloyds?stream=inside&selected=lloyds&agenda=ai-benefits",
     "selected issue lloyds-ai",
     "clean full markup lloyds-ai",
@@ -250,6 +252,7 @@
     "ipad-portrait lloyds-service no overflow",
     "keyboard source disclosure ipad-portrait",
     "original attributed FCA link ipad-portrait",
+    "numerical-data licence available on demand ipad-portrait",
     "200 /enterprises/lloyds?stream=inside&selected=lloyds&agenda=ai-benefits",
     "selected issue lloyds-ai",
     "clean full markup lloyds-ai",
@@ -304,6 +307,7 @@
     "mobile lloyds-service no overflow",
     "keyboard source disclosure mobile",
     "original attributed FCA link mobile",
+    "numerical-data licence available on demand mobile",
     "200 /enterprises/lloyds?stream=inside&selected=lloyds&agenda=ai-benefits",
     "selected issue lloyds-ai",
     "clean full markup lloyds-ai",

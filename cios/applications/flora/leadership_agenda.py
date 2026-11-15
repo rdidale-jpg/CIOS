@@ -195,5 +195,8 @@ def detail(ctx,link,issues):
     body='<section class="focus agenda-focus" id="agenda-insight" tabindex="-1" aria-labelledby="agenda-title"><a class="close close-insight" href="'+e(link(ctx,agenda='')+'#visual-content',quote=True)+'" aria-label="Close Leadership Agenda">×</a><h2 id="agenda-title">'+e(row.title)+'</h2>'
     body+=p.render(row.conclusion)
     body+='<details class="agenda-basis"><summary>Reported basis &amp; perspective</summary>'
-    body+=''.join(p.render(f)for f in row.facts)+'<p>'+e(row.analysis)+'</p></details>'
+    body+=''.join(p.render(f)for f in row.facts)+'<p>'+e(row.analysis)+'</p>'
+    if row.key=='service-recovery':
+        body+='<p class="source-licence">Contains Financial Conduct Authority information licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="noreferrer">Open Government Licence v3.0</a>.</p>'
+    body+='</details>'
     return body+'</section>'

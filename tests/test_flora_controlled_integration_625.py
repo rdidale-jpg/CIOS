@@ -72,6 +72,9 @@ def test_numerical_source_original_entity_period_rights_and_unaccepted_authority
  row=next(r for r in a.agenda('lloyds')if r.key=='service-recovery')
  assert row.facts[0].canonical_status=='candidate_intelligence'
  assert 'deterioration'in row.conclusion.text and 'FOS'in p.render(row.conclusion)
+ html=v.render('/enterprises/lloyds',{'agenda':['service-recovery']})
+ assert 'Contains Financial Conduct Authority information licensed under the'in html
+ assert 'href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"'in html
 
 def test_no_h1_financial_proxy_or_unaccepted_eight_record_import():
  data=model.load_assessment();delta=json.loads((ROOT/'docs/flora-runtime/int1-625/Research-Owner-Delta.json').read_text())
