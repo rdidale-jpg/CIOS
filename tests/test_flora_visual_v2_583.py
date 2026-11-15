@@ -201,6 +201,12 @@ def test_runtime_source_preserves_canonical_home_and_domain_owners():
         if revision:
             assert revision['baseline_sha256'] == digest, name
             digest = revision['candidate_sha256']
+        isp=json.loads((root/'docs/flora-runtime/isp1-623/Owner-Compatibility.json').read_text())
+        assert set(isp['owner_boundary_revisions'])=={'cios/applications/flora/security_web.py'}
+        if name in isp['owner_boundary_revisions']:
+            amended=isp['owner_boundary_revisions'][name]
+            assert amended['baseline_sha256']==digest,name
+            digest=amended['candidate_sha256']
         if name in unified['presentation_exceptions']:
             assert name.endswith(('offers_views.py','banking_explorer.py','unified_views.py','visual_intelligence.py','living_map.py','sales_views.py','workspace/views.py','navigation.py'))
             continue

@@ -18,8 +18,8 @@ class PublicRoute:
     query_keys: frozenset[str] = frozenset()
 
 
-@lru_cache(maxsize=1)
-def public_route_catalog():
+@lru_cache(maxsize=2)
+def public_route_catalog(include_owner_inspection=False):
     routes = {}
     def add(paths, handler, source, keys=()):
         for path in paths:
@@ -132,6 +132,11 @@ def public_route_catalog():
     from .enterprise_intelligence.explain import explain_lloyds_changes
     for change in explain_lloyds_changes().changes:
         add(('/flora/object/BK-ENT-001/lineage/'+change.change_id,), '_flora_increment2_lineage_page', 'Exact fixed-dataset claim; no arbitrary lineage lookup')
+    if not include_owner_inspection:
+        routes={path:row for path,row in routes.items() if not owner_inspection_path(path)}
+        for path in ('/industries/banking','/enterprises/lloyds'):
+            row=routes[path]
+            routes[path]=PublicRoute(row.handler,row.source_boundary,row.query_keys-{'lens'})
     return MappingProxyType(routes)
 
 
@@ -143,19 +148,36 @@ def public_read_path(path: str) -> bool:
     return path in public_route_catalog()
 
 
+def owner_inspection_path(path):
+    """Existing finite repository inspection views, not a new data/ACL owner."""
+    return (path=='/flora/banking/research' or path.startswith('/flora/banking/research/')
+            or path in {'/industries/banking/visual-specs','/enterprises/lloyds/understanding',
+                        '/enterprises/lloyds/research-diagnostic','/flora/banking/lloyds/research-backlog'})
+
+
+def owner_inspection_request_target(target):
+    if not _request_target(target,public_route_catalog(True)):return False
+    parts=urlsplit(target)
+    return owner_inspection_path(parts.path) or (parts.path in {'/industries/banking','/enterprises/lloyds'} and 'lens' in dict(parse_qsl(parts.query)))
+
+
 def public_request_target(target: str) -> bool:
+    return _request_target(target,public_route_catalog())
+
+
+def _request_target(target, catalog):
     if type(target) is not str or len(target)>4096 or not target.startswith('/') or target.startswith('//'):
         return False
     if any(ord(c)<32 or ord(c)==127 for c in target):
         return False
     try:
         parts=urlsplit(target)
-        if parts.scheme or parts.netloc or parts.fragment or not public_read_path(parts.path):
+        if parts.scheme or parts.netloc or parts.fragment or parts.path not in catalog or not re.fullmatch(r'/[A-Za-z0-9/_-]*',parts.path) or '//'in parts.path:
             return False
         if re.search(r'%(?![0-9A-Fa-f]{2})',parts.query):
             return False
         pairs=parse_qsl(parts.query,keep_blank_values=True,strict_parsing=True,encoding='utf-8',errors='strict',max_num_fields=16)
-        policy=public_route_catalog()[parts.path]
+        policy=catalog[parts.path]
         keys=[k for k,v in pairs]
         if len(keys)!=len(set(keys)) or any(k not in policy.query_keys or len(v)>1024 or any(ord(c)<32 or ord(c)==127 for c in v) for k,v in pairs):
             return False

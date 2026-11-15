@@ -1,0 +1,13 @@
+{
+  "base_sha": "fe66516c15726dc45de147ede2674c9172f8cac6",
+  "issue": 623,
+  "owner_boundary_revisions": {
+    "cios/applications/flora/security_web.py": {
+      "baseline_sha256": "667ff0eb9c4ab28565148de91454853d702b0e0a5b63bdd0d8845e8ac1ec9cd1",
+      "candidate_sha256": "8e83859a36623f8e0cfdeb794204b9785b65895025cc3ac72fef70462140e558",
+      "reason": "Existing verified cios_owner check for finite research inspection GET routes. No mutation capability, source-rights, canonical acceptance or Pipeline change."
+    }
+  },
+  "security_tests_unchanged": true,
+  "comparator_and_baseline_unchanged": true
+}

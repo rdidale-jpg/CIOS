@@ -1,0 +1,165 @@
+{
+  "base_sha": "fe66516c15726dc45de147ede2674c9172f8cac6",
+  "unchanged": [
+    {
+      "path": "cios/applications/flora/research_intelligence/model.py",
+      "sha256": "079c15058a8b88d9695b8575ab8351e50a043233793220b8cb7fafc5db7c0519"
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/source_import.py",
+      "sha256": "e851f66a9c4540f538881e60ae451b0ad7c889d20cdd2ae5f4789d6490f7ebc7"
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/macro_intelligence.py",
+      "sha256": "82d6b9831f46646e4f7fd831c2a534c5ee5feb6cee007a97063f303b82bd56a3"
+    },
+    {
+      "path": "cios/applications/flora/memory/models.py",
+      "sha256": "69e8c03b3873320768240af3772791778eb35660b0f711fd985e28f53191ba33"
+    },
+    {
+      "path": "cios/applications/flora/memory/service.py",
+      "sha256": "f13fad1f762162e564e98c1a0fc799ba2588498b94e0885857f5ef0a1bc3bb88"
+    },
+    {
+      "path": "cios/applications/flora/financial_intelligence/schema.py",
+      "sha256": "f189da100cefde38d5c51f987c1b3817169d3247c1b01a7458c9dd782152e3a4"
+    },
+    {
+      "path": "cios/applications/flora/offers.py",
+      "sha256": "f693717c924ac53d6da3bf9206b5546aa040bc296625f2b4401be70fb09e0358"
+    },
+    {
+      "path": "cios/applications/flora/sales_pipeline.py",
+      "sha256": "ac16d29added41baa4f1a640cddd5fa5b8a5e1174291c98536330826b348fb23"
+    },
+    {
+      "path": "cios/applications/flora/access.py",
+      "sha256": "da0abc2923c2c02d93e65c3ba986df879c6a71946b2e6b567dfca08c0c8ceb51"
+    },
+    {
+      "path": "cios/applications/flora/security.py",
+      "sha256": "1aded78551cbf8d0272dd36d55a8ff3b5249383f688aac7943abd436c246e94d"
+    },
+    {
+      "path": "cios/applications/flora/security_store.py",
+      "sha256": "1d096ac0d335fee0a8da41c389780e764b1707c8ba046962cb1bef503750863e"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/Macro-Context-v1.json",
+      "sha256": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9"
+    },
+    {
+      "path": "cios/applications/flora/visual_v2_assets/economy.json",
+      "sha256": "78b4bb90c02b9af8132d7f8eca3c1832b6a1047feb382f9473d463d44e1f31cd"
+    },
+    {
+      "path": "tools/ci/flora_ci.py",
+      "sha256": "6538c0b1c02aba99e890c026ef633b3f68e740ffd8c54cdfb8eb54068b8817c4"
+    },
+    {
+      "path": "tools/ci/flora-baseline-v1.json",
+      "sha256": "901a6719b6f90247fc0b4daeaaf217e402abf211606394917f59ea67c5f9e7cf"
+    },
+    {
+      "path": ".github/workflows/flora-validation.yml",
+      "sha256": "f3a398d7c243d845978f3dca195ac6edfa7b9cb50335ea2dfccd2b16dd877fd1"
+    },
+    {
+      "path": "tests/test_flora_security_independent_readiness.py",
+      "sha256": "4591fc2c5b8db9f00257cc32658652dae5e68fc9dafec7df1e2ed00fea066a0a"
+    },
+    {
+      "path": "tests/test_flora_security_legacy_obligations.py",
+      "sha256": "014f99dff14d8fea223670cf8630620f8d057556703a5cf6234839cd170c5ba4"
+    },
+    {
+      "path": "tests/test_flora_security_review_closure.py",
+      "sha256": "f391076a811508bb334659a31c722f8e6b33a621425a07561d75e52f03982312"
+    },
+    {
+      "path": "tests/test_flora_security_integrity_repair.py",
+      "sha256": "0eb6940f575a826bf64400c28a789ff954b6e0d21285b87cb5fcf80770b5611e"
+    },
+    {
+      "path": "tests/test_flora_security_adversarial_remediation.py",
+      "sha256": "64353c123d7b9754aea215def6b4a19e38f98e4d0ffa063165d06db89fcc7ac6"
+    },
+    {
+      "path": "tests/test_flora_security_01d_pr_review.py",
+      "sha256": "c19d93e82c516a9ea15a501cd11b43b92e35f65c8e141824c8da4ee7e076be13"
+    },
+    {
+      "path": "tests/test_flora_security_01d_final_acceptance.py",
+      "sha256": "0e547a7f495972a4dd5aef2fd485379d0b88168adbc69fd321737ed99ed6de0b"
+    },
+    {
+      "path": "tests/test_flora_security_admin_policy.py",
+      "sha256": "9e461b15345d4601b2754bcfeac5499c207219986c5da5479eea38593ae96c71"
+    },
+    {
+      "path": "tests/test_flora_security_service_contracts.py",
+      "sha256": "e3b158f61d7b2d818afac406ee82e544a34bbdfe47848415e7af077a272a8180"
+    },
+    {
+      "path": "tests/test_flora_security_repair_01a.py",
+      "sha256": "674e2f783baeea186cd11cfe3b41ee9dda4ba0d8e4df7faa752b86545732994b"
+    },
+    {
+      "path": "tests/test_flora_security_release_review.py",
+      "sha256": "1c69117484f1cdd4604ef469c5285aa76110ec05269a5cfd8b48786c48b963e1"
+    },
+    {
+      "path": "tests/test_flora_security_01e_bounded_remediation.py",
+      "sha256": "d840206fbd609b181e9533eeac225bb1cb0473a8313a59245e2810fe98afed97"
+    },
+    {
+      "path": "tests/test_flora_security_repair_01b.py",
+      "sha256": "e07b6a686091d7a7253d5c70abb286aea94312759d84e6b036f7040912434ef1"
+    },
+    {
+      "path": "tests/test_flora_security_owner_journey.py",
+      "sha256": "ab44c6c0e0ce9fd90d79717a66ef70b6985a80c492f2400edba65f78d0652c0b"
+    },
+    {
+      "path": "tests/test_flora_security_workspace_boundary.py",
+      "sha256": "75877588578812e294f015a9c758179759d3b9e63d39bf89c5acaec6018c633d"
+    }
+  ],
+  "original_artwork": {
+    "uk-landscape": "ff4f70c21fcfe733affd0405021fa24386f5edaeb3497a10596550d9dbed0567",
+    "uk-forces": "0a8dbc120ecababb297ea1a6eae7fb8a62277322e88bcee1148a3f06342f6a14",
+    "banking-landscape": "2661db421634f422e571066152450cce92261ff714a4ed34c0bfe1e6a243d0af",
+    "banking-forces": "2cc533ba6b6dfe4ec008192ffe7f71b8e4c978e8d391d128b9395809ae9f3a90",
+    "lloyds-inside": "9bbb5b96f5fac6cdf72c9138973ac8f5ee429420ef3fe330ac7ece5072ec0584",
+    "lloyds-landscape": "98c0794e6cd78a9658eb00fce7327c9ffa998bcf83256301a513226e85ec0383",
+    "lloyds-forces": "47292147cf6c06dcb5b1d7807e75178d256c9dc8d43bb3fb01a0a85906ccc5db"
+  },
+  "delivered_images": {
+    "uk-landscape-768-507689f8afd8.webp": "507689f8afd86d84bf3d08def11e920e07c511bc9479a68849906708e69abd64",
+    "uk-landscape-1152-685df28a3075.webp": "685df28a3075ca4e50223ecfbb9258727044bc4c3aa54c3d664c6ab0cb0d3dfa",
+    "uk-landscape-1536-8351b4eb8ddc.webp": "8351b4eb8ddcc75edd780e556f52fb169cfd6ebe790403b9c378fa5a37135910",
+    "uk-forces-768-0241193578d1.webp": "0241193578d1f8abb230566cab5a6031ea2e19d81d14a4a1c390568109b653af",
+    "uk-forces-1152-b51364843c5d.webp": "b51364843c5dff665f40f47b6fb7b199fd6a36c1ac8c15ee502cb4b7335be014",
+    "uk-forces-1536-847d312743bd.webp": "847d312743bd3b91f7182eede499c75a1c99f26b57cd39a36797dbb64e975d13",
+    "banking-landscape-768-09a6ae4c5b73.webp": "09a6ae4c5b7318bac08a1fac563a5e3eec0ff145533e7ad08404c98ef89249e2",
+    "banking-landscape-1152-f4f9b56d78a9.webp": "f4f9b56d78a918687bf6e3a4170bffed458e66718160a41df87c2c8860a8d193",
+    "banking-landscape-1536-1de7b3640185.webp": "1de7b3640185039f27d2101ad4823888b401122d19c1c324f2184e624608fdc9",
+    "banking-forces-768-1df482a9583f.webp": "1df482a9583fc7fb13430d3cb6de37b4b654c3ca2d50fedbf6304ca089ea0fc0",
+    "banking-forces-1152-46402578a8ed.webp": "46402578a8edf0ae2beb70ed2ad2cce67229f3ac2c2754065ced1991a7ce2a30",
+    "banking-forces-1536-2a58ebb939f7.webp": "2a58ebb939f7857a7dd094e46bb888a4736cb3bc8d2928b96ee0d71936cd9c89",
+    "lloyds-inside-768-8d00816a9ad7.webp": "8d00816a9ad7c2c4662aa573591e155838e71e9b89769dd2ed249d89943c55a0",
+    "lloyds-inside-1152-a3938046ba72.webp": "a3938046ba72ccf8774747afd3e0e949590a0f0e01714e1040255997b2e243b2",
+    "lloyds-inside-1536-3d6a3c0bd592.webp": "3d6a3c0bd5927fab299a9cab334341b77b2d752b6ee3d3f5e2a0cffef9189f3c",
+    "lloyds-landscape-768-fa44563b2e93.webp": "fa44563b2e93f9fe1bdd9505e870d80ca635b59812ba0781c2426c069efb7675",
+    "lloyds-landscape-1152-17ed441fa74d.webp": "17ed441fa74d5855149107fc21e9950dad71f738041ba832dbf8978b9e693387",
+    "lloyds-landscape-1536-e2710006a387.webp": "e2710006a387ef3c4251aa6fd2e4574e576129e209a191d0e9053f6b9d8010b7",
+    "lloyds-forces-768-048af0418b8e.webp": "048af0418b8efe8f9e2ad7f541f1eb130d24b88e6d1dfa51a91e4c6d8599c447",
+    "lloyds-forces-1152-d7029da317c3.webp": "d7029da317c32c87aba442e85ef94d1c4a20f7b83c0a0ca4bddf6348daad714e",
+    "lloyds-forces-1536-c629f014985a.webp": "c629f014985a1e65e586b09cd396d088879b0e75fef172f1fd68e40466b0d8a2"
+  }
+}

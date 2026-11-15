@@ -130,7 +130,7 @@ def _sources(factor):
     body += '</tbody></table></details>'
     if factor:
         row = insight(factor)
-        body += '<h3>' + e(FACTORS[factor][0]) + '</h3><p>' + e(row['details']) + '</p><p class="source-lineage">' + e(json.dumps(row['lineage'], sort_keys=True)) + '</p>'
+        body += '<h3>' + e(FACTORS[factor][0]) + '</h3><p>' + e(row['details']) + '</p>'
         data['sources'] += row['sources']
     seen = set()
     for source in data['sources']:
@@ -138,7 +138,7 @@ def _sources(factor):
             continue
         seen.add(source['id'])
         body += '<p><a href="' + e(source['url'], quote=True) + '" rel="noreferrer">' + e(source['title']) + '</a><br><small>' + e(source.get('publication_date') or source.get('reviewed_at') or '') + ' · ' + e(source.get('locator') or source.get('limitation') or '') + '</small></p>'
-    return body + '<p>ONS data: Crown copyright, Open Government Licence. Public source excerpts and existing macro review retain their original limitations; no canonical research status is changed. Defensible estimates, when introduced, require EST, range and method. None are used in this study.</p>'
+    return body + '<p>ONS data: Crown copyright, Open Government Licence. Public source excerpts retain their original scope and limitations. Defensible estimates, when introduced, require EST, range and method. None are used in this study.</p>'
 
 
 
@@ -169,7 +169,17 @@ def _pestle(factor):
         body += '<a class="factor" id="factor-' + key + '" href="' + url(True, factor=key) + '#insight" style="--x:' + str(x) + '%;--y:' + str(y) + '%;--mx:' + str(mx) + '%;--my:' + str(my) + '%"' + (' aria-current="true"' if key == factor else '') + '>' + label + '<span aria-hidden="true"> +</span></a>'
     if factor:
         row = insight(factor)
-        body += '<aside class="image-insight" id="insight" tabindex="-1" aria-labelledby="insight-title" data-factor="' + factor + '"><a class="close-insight" href="' + url(True) + '#factor-' + factor + '" aria-label="Close ' + e(FACTORS[factor][0]) + ' insight">×</a><p class="insight-label">' + e(FACTORS[factor][0]) + ' · UK</p><h2 id="insight-title">' + e(row['title']) + '</h2><p>' + e(row['text']) + '</p><p class="insight-effect">' + e(row['effect']) + '</p></aside>'
+        from .intelligence_presentation import Source, Statement, render as statement_html
+        import re
+        text=re.split(r'(?<=[.!])\s+',row['text'],maxsplit=1)[0]
+        sources=tuple(Source(s['title'],s['url'],s.get('publisher',''),s.get('publication_date')or'',s.get('reporting_period',''),
+                            (s.get('excerpts')or[{}])[0].get('quote',''),s.get('locator',''))for s in row['sources'])
+        item=Statement(text,'reported','United Kingdom; specified policy or national scope',row['lineage'].get('as_of','Three months to September 2026'),sources,
+                       'reviewed_excerpt','candidate_intelligence',measurement_state='proposal'if factor=='legal'else'not_applicable',caveats=(row['details'],))
+        content=statement_html(item)
+        if content:
+            body += '<aside class="image-insight" id="insight" tabindex="-1" aria-labelledby="insight-title" data-factor="' + factor + '"><a class="close-insight" href="' + url(True) + '#factor-' + factor + '" aria-label="Close ' + e(FACTORS[factor][0]) + ' insight">×</a><p class="insight-label">' + e(FACTORS[factor][0]) + ' · UK</p><h2 id="insight-title">' + e(row['title']) + '</h2>'+content+'</aside>'
+
     return body + '</figure>'
 
 
