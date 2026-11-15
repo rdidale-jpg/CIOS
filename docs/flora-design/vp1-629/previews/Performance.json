@@ -2,7 +2,7 @@
   "measurements": [
     {
       "view": "uk-landscape",
-      "fcpMs": 464,
+      "fcpMs": 500,
       "images": [
         {
           "file": "watermark-uk-landscape.svg",
@@ -12,23 +12,23 @@
         {
           "file": "uk-skyline-2172.webp",
           "bytes": 142184,
-          "durationMs": 868
+          "durationMs": 859
         }
       ]
     },
     {
       "view": "lloyds-inside-economics",
-      "fcpMs": 456,
+      "fcpMs": 452,
       "images": [
         {
           "file": "watermark-lloyds-inside.svg",
           "bytes": 1014,
-          "durationMs": 162
+          "durationMs": 160
         },
         {
           "file": "uk-skyline-2172.webp",
           "bytes": 142184,
-          "durationMs": 861
+          "durationMs": 883
         }
       ]
     }

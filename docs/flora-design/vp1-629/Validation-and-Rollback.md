@@ -31,7 +31,7 @@ Cold performance observations are single-run loopback emulation at1.6Mbps/150msR
 
 ## QA corrections
 
-The initial FCP collector raced the first paint entry. An explicit paint/resource completion wait corrected the harness; no threshold or assertion was removed. A uniqueness check found two identical Main landscape watermarks; subject-specific line geometry corrected the assets. Source-master captions, source/event dating, focus targets, all-text enlargement and on-demand OGL attribution were corrected during review. Final exact-head results supersede preliminary reports.
+The initial FCP collector raced the first paint entry. An explicit paint/resource completion wait corrected the harness; no threshold or assertion was removed. A uniqueness check found two identical Main landscape watermarks; subject-specific line geometry corrected the assets. Source-master captions, source/event dating, focus targets, all-text enlargement and on-demand OGL attribution were corrected during review. An exact-head replay also found a transient native touch highlight in one expanded-iPad capture; captures now wait for visible-image decoding and a50ms compositor-settle delay (independent of page JavaScript), and those two touch-expansion screenshots also wait400ms for the highlight to clear. This changes capture timing, not the design or test assertions. Final exact-head results supersede preliminary reports.
 
 ## Stop and rollback
 
