@@ -11,6 +11,7 @@ This implementation carries the reviewed ISP-1 policy and finite verified-owner 
 - [Commercial challenge and comparison](Commercial-Review.md)
 - [Application previews and walkthrough](Acceptance-Walkthrough.md)
 - [Validation and rollback](Validation-and-Rollback.md)
+- [Per-case history-inventory reconciliation](History-Inventory-Reconciliation.md)
 
 The original research packages retain A/B/C/D/E dispositions. A means eligible for individual owner evidence review, never accepted. Production acceptance remains **UNVERIFIED**: no authorised authenticated read-only production receipts are available in this session. Repository fixtures are not production evidence. No import, acceptance, private data reconciliation or deduplication is inferred.
 

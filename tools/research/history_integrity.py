@@ -10,6 +10,15 @@ MACRO = '111600a56ca0edba0d47d1a8a0c92068060d83a8'
 # #591 owner-authorised candidate-only addition; every earlier byte remains pinned.
 TRIGGER_SHA256 = '2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927'
 TRIGGER_ADDITIONS = ('enterprise-knowledge/technology/research-model/Buying-Trigger-Pilot.json',)
+# #625 permits a bounded public presentation candidate, NOT canonical Evidence
+# acceptance. Pin exactly its proposal and numerical excerpt. Never admit an
+# unknown path, refresh historical bytes or approve a future source revision.
+INT1_CANDIDATE_ADDITIONS = {
+    'enterprise-knowledge/banking/research-model/source-snapshots/INT1-FCA-Candidate.json':
+        '511b5f5225fa6fc005ebdc5484aad75539c1f9e64df8201591a5c628aedec63b',
+    'enterprise-knowledge/banking/research-model/source-snapshots/PR-FCA-COMPLAINTS-H126.txt':
+        'b1ca214f97c51e0375d054a879d2e01f71c34697bdf26f040953c7a91d98905b',
+}
 REVIEW = 'enterprise-knowledge/banking/research-model/Understanding-Review.json'
 DEPTH_ADDITIONS = tuple('enterprise-knowledge/banking/research-model/source-snapshots/'+name+'.txt'
                         for name in ('DEPTH-LBG-AI','DEPTH-LBG-LEGACY','DEPTH-LBG-WALLET','DEPTH-LBG-CURVE'))
@@ -44,6 +53,13 @@ def approved_history(root):
     assert hashlib.sha256(content).hexdigest()==TRIGGER_SHA256, 'Approved candidate source changed'
     assert TRIGGER_ADDITIONS[0] not in expected, 'Existing identity cannot become an addition'
     expected[TRIGGER_ADDITIONS[0]]=content
+    for path,digest in INT1_CANDIDATE_ADDITIONS.items():
+        candidate=Path(root)/path
+        assert not candidate.is_symlink(), 'Candidate source symlink is not admitted'
+        content=candidate.read_bytes()
+        assert hashlib.sha256(content).hexdigest()==digest, 'INT-1 candidate proposal/excerpt changed'
+        assert path not in expected, 'Existing identity cannot become an addition'
+        expected[path]=content
     return expected
 
 
@@ -61,6 +77,7 @@ def verify_history(root):
     assert not any(p.is_symlink() for p in files), 'Research symlink is not a reviewed source'
     actual={str(p.relative_to(root)):p.read_bytes() for p in files if p.is_file()}
     compare_history(expected,actual)
-    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS),
+    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS),
             'depth_additions':len(DEPTH_ADDITIONS),'macro_additions':len(MACRO_ADDITIONS),
-            'trigger_candidate_additions':len(TRIGGER_ADDITIONS),'total':len(expected),'old_review_records_retained':True}
+            'trigger_candidate_additions':len(TRIGGER_ADDITIONS),'int1_presentation_candidate_additions':len(INT1_CANDIDATE_ADDITIONS),
+            'total':len(expected),'old_review_records_retained':True}

@@ -32,3 +32,5 @@ An optional native Leadership Agenda disclosure sits beside/below contextual str
 ## Integration audit
 
 ISP, SI-1 and RIC-1 have no common changed paths against current main: SI/RIC are design/research only. ISP runtime changes to visual streams, finite route catalog, source policy renderer and security read boundary were applied selectively at its exact reviewed head. SI renderer snapshots and RIC byte-pin invariants are not installed as runtime truth. Their pinned branches remain unchanged. Original semantic tests and all 388 security tests are retained. The sole intentional security-code revision is ISP's existing verified-owner inspection check, recorded in its reviewed compatibility artifact. Baseline/comparator bytes are unchanged.
+
+The existing domain research inventory admits the two proposed FCA candidate files by exact path/digest, separately from the unchanged161 historical expectations. Its byte comparator and the full CI failure baseline/comparator are unchanged. This candidate-file inventory admission is not Evidence acceptance; see the per-case History-Inventory-Reconciliation report.
