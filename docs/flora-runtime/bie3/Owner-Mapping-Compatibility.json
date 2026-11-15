@@ -1,0 +1,70 @@
+[
+  {
+    "actor_ref": "actor:nw-group",
+    "owner_class": "enterprise_twin",
+    "profile_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+    "mapped_fields": [
+      "description",
+      "enterprise_name",
+      "financial_context"
+    ],
+    "unmapped_fields": [],
+    "canonical_enterprise_id": null,
+    "accepted_evidence_refs": [],
+    "status": "source-preserving mapping preview only; no receipt, staging, approval or promotion",
+    "candidate_claim_refs": [
+      "BIE3-NW-PBT",
+      "BIE3-NW-CIR",
+      "BIE3-NW-SAVINGS",
+      "BIE3-NW-CAL-CLOSE",
+      "BIE3-NW-CAL-OPEN",
+      "BIE3-NW-CAL-HEADLINE",
+      "BIE3-NW-DEPOSITS-TOTAL",
+      "BIE3-NW-DEPOSITS-EX-CENTRAL"
+    ]
+  },
+  {
+    "actor_ref": "actor:hsbc-uk",
+    "owner_class": "enterprise_twin",
+    "profile_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+    "mapped_fields": [
+      "description",
+      "enterprise_name",
+      "financial_context"
+    ],
+    "unmapped_fields": [],
+    "canonical_enterprise_id": null,
+    "accepted_evidence_refs": [],
+    "status": "source-preserving mapping preview only; no receipt, staging, approval or promotion",
+    "candidate_claim_refs": [
+      "BIE3-HS-REV",
+      "BIE3-HS-ECL",
+      "BIE3-HS-COST",
+      "BIE3-HS-ASSOC",
+      "BIE3-HS-PBT"
+    ]
+  },
+  {
+    "actor_ref": "actor:san-group",
+    "owner_class": "enterprise_twin",
+    "profile_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+    "mapped_fields": [
+      "description",
+      "enterprise_name",
+      "financial_context"
+    ],
+    "unmapped_fields": [],
+    "canonical_enterprise_id": null,
+    "accepted_evidence_refs": [],
+    "status": "source-preserving mapping preview only; no receipt, staging, approval or promotion",
+    "candidate_claim_refs": [
+      "BIE3-SA-NOI",
+      "BIE3-SA-OPEX",
+      "BIE3-SA-CREDIT",
+      "BIE3-SA-RESTRUCT",
+      "BIE3-SA-PBT",
+      "BIE3-SA-TSB-PBT",
+      "BIE3-SA-TSB-COST"
+    ]
+  }
+]

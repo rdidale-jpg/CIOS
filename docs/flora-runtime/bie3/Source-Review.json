@@ -1,0 +1,294 @@
+[
+  {
+    "id": "BIE3-NW-Q3",
+    "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf",
+    "publisher": "NatWest Group plc",
+    "source_type": "investor_results",
+    "publication_date": "2026-10-30",
+    "publication_date_precision": "day",
+    "reporting_period": "Nine months to 30 September 2026; stock dates separately stated",
+    "locator": "PDF pp3–6 and36, printed reporting definitions",
+    "retrieved_on": "2026-11-15",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn188796view0 / turn949754view0 / turn504551view0 / turn946540view2",
+    "verification": "original_content_rechecked",
+    "original_bytes_sha256": null,
+    "retained_excerpt_sha256": "4ec8584008fab5e8202490bb1df5b977d6fa1e6aeb1c00dc2c00341176cd2038",
+    "rights_review": "Exact commercial numerical-fact/attribution/link use unresolved; no broad reproduction grant inferred",
+    "technical_publisher_admitted": false,
+    "canonical_acceptance": "UNVERIFIED; no authorised production receipt read",
+    "canonical_approval_executed": false,
+    "retained_excerpt_path": "docs/flora-runtime/bie3/reviewed-cells/BIE3-NW-Q3.txt",
+    "reviewed_cells": [
+      {
+        "locator": "p4 operating PBT /9M2026 /GBP million",
+        "quote": "6,543"
+      },
+      {
+        "locator": "p4 cost:income ex litigation/conduct /9M2026",
+        "quote": "45.7%"
+      },
+      {
+        "locator": "p3 gross savings /year to date /GBP million",
+        "quote": "420"
+      },
+      {
+        "locator": "p5 CAL /30Sep2026 /GBP billion",
+        "quote": "1,002.6"
+      },
+      {
+        "locator": "p5 CAL /31Dec2025 /GBP billion",
+        "quote": "891.7"
+      },
+      {
+        "locator": "p3 headline CAL growth /including Evelyn FY2025 comparator /GBP billion",
+        "quote": "42.3"
+      },
+      {
+        "locator": "p5 customer deposits /30Sep2026 /GBP billion",
+        "quote": "454.3"
+      },
+      {
+        "locator": "p5 customer deposits excluding central items /30Sep2026 /GBP billion",
+        "quote": "453.4"
+      }
+    ],
+    "extent": "Original PDF text inspected; located cells retained separately; original bytes not retained/archived. Review notes are not source quotations."
+  },
+  {
+    "id": "BIE3-NW-DATE",
+    "url": "https://www.natwestgroup.com/news-and-insights/news-room/natwest-group-results-news.html",
+    "publisher": "NatWest Group",
+    "source_type": "official_newsroom",
+    "publication_date": "2026-10-30",
+    "publication_date_precision": "day",
+    "reporting_period": "Q3 results publication date, not an accounting period",
+    "locator": "Q3 heading/date",
+    "retrieved_on": "2026-11-15",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn876183view2",
+    "verification": "original_content_rechecked",
+    "original_bytes_sha256": null,
+    "retained_excerpt_sha256": null,
+    "rights_review": "Date corroboration only; no reuse grant inferred",
+    "technical_publisher_admitted": false,
+    "canonical_acceptance": "UNVERIFIED; no authorised production receipt read",
+    "canonical_approval_executed": false
+  },
+  {
+    "id": "BIE3-HSBC-Q3",
+    "url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/3q/pdfs/hsbc-holdings-plc/261027-3q-2026-data-pack-pdf-file.pdf",
+    "publisher": "HSBC Holdings plc; selected table HSBC UK Bank plc",
+    "source_type": "investor_results",
+    "publication_date": "2026-10-27",
+    "publication_date_precision": "day",
+    "reporting_period": "HSBC UK Bank plc all-businesses, reported nine months to 30 September 2026, USD million",
+    "locator": "PDF p20, printed18, reported YTD2026 column",
+    "retrieved_on": "2026-11-15",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn949754view2 / turn534874view3",
+    "verification": "original_content_rechecked",
+    "original_bytes_sha256": null,
+    "retained_excerpt_sha256": "ea6049fd82d030a0934f9605513c6efe844fbb4898d43ccbf4309f9961772607",
+    "rights_review": "Personal-use extraction terms do not establish commercial republication/link permission; isolated factual measurements require exact-use review",
+    "technical_publisher_admitted": false,
+    "canonical_acceptance": "UNVERIFIED; no authorised production receipt read",
+    "canonical_approval_executed": false,
+    "retained_excerpt_path": "docs/flora-runtime/bie3/reviewed-cells/BIE3-HSBC-Q3.txt",
+    "reviewed_cells": [
+      {
+        "locator": "p20 reported revenue /YTD2026 /USD million",
+        "quote": "11,054"
+      },
+      {
+        "locator": "p20 reported ECL /YTD2026 /USD million",
+        "quote": "(701)"
+      },
+      {
+        "locator": "p20 reported operating expenses /YTD2026 /USD million",
+        "quote": "(4,270)"
+      },
+      {
+        "locator": "p20 associates/joint ventures /YTD2026 /USD million",
+        "quote": "1"
+      },
+      {
+        "locator": "p20 reported PBT /YTD2026 /USD million",
+        "quote": "6,084"
+      }
+    ],
+    "extent": "Original PDF text inspected; located cells retained separately; original bytes not retained/archived. Review notes are not source quotations."
+  },
+  {
+    "id": "BIE3-HSBC-DATE",
+    "url": "https://www.hsbc.com/news-and-views/news/media-releases/2026/hsbc-holdings-plc-3q-2026-earnings-release",
+    "publisher": "HSBC Holdings plc",
+    "source_type": "official_newsroom",
+    "publication_date": "2026-10-27",
+    "publication_date_precision": "day",
+    "reporting_period": "Group release date; not UK-bank quarterly performance",
+    "locator": "Release date",
+    "retrieved_on": "2026-11-15",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn219329view1",
+    "verification": "original_content_rechecked",
+    "original_bytes_sha256": null,
+    "retained_excerpt_sha256": null,
+    "rights_review": "Date corroboration only; Group release cannot substitute UK legal-bank figures",
+    "technical_publisher_admitted": false,
+    "canonical_acceptance": "UNVERIFIED; no authorised production receipt read",
+    "canonical_approval_executed": false
+  },
+  {
+    "id": "BIE3-SAN-Q3",
+    "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:65eface3-a6db-48c5-8506-460893b3385f/original/as/Santander%20UK%20Q3-26%20QMS.pdf",
+    "publisher": "Santander UK Group Holdings plc",
+    "source_type": "investor_results",
+    "publication_date": null,
+    "publication_date_precision": "not_independently_verified",
+    "reporting_period": "Group9M to 30 September 2026; TSB contribution1 May–30 September 2026",
+    "locator": "PDF pp2–3 and14; source financial, integration and acquisition notes",
+    "retrieved_on": "2026-11-15",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn949754view1 / turn188796view2 / turn876183view3 / turn597283view0",
+    "verification": "original_content_rechecked",
+    "original_bytes_sha256": null,
+    "retained_excerpt_sha256": "1005900a4787f4f2f3c3243f6a00e7ab75e5f6ebabf183e890c42cbc50a1dbe0",
+    "rights_review": "Exact licence/use grant for this issuer asset not verified; absence of a grant is not a finding that all numerical facts are legally prohibited",
+    "technical_publisher_admitted": false,
+    "canonical_acceptance": "UNVERIFIED; no authorised production receipt read",
+    "canonical_approval_executed": false,
+    "retained_excerpt_path": "docs/flora-runtime/bie3/reviewed-cells/BIE3-SAN-Q3.txt",
+    "reviewed_cells": [
+      {
+        "locator": "p3 net operating income /9M2026 /GBP million",
+        "quote": "4,117"
+      },
+      {
+        "locator": "p3 operating expenses pre specified charges /9M2026 /GBP million",
+        "quote": "(2,122)"
+      },
+      {
+        "locator": "p3 credit impairment /9M2026 /GBP million",
+        "quote": "(342)"
+      },
+      {
+        "locator": "p3 restructuring and specific provisions /9M2026 /GBP million",
+        "quote": "(495)"
+      },
+      {
+        "locator": "p3 PBT /9M2026 /GBP million",
+        "quote": "1,158"
+      },
+      {
+        "locator": "p2 TSB PBT contribution /1May–30Sep2026 /GBP million",
+        "quote": "96"
+      },
+      {
+        "locator": "p3 TSB costs contribution /1May–30Sep2026 /GBP million",
+        "quote": "327"
+      }
+    ],
+    "extent": "Original PDF text inspected; located cells retained separately; original bytes not retained/archived. Review notes are not source quotations."
+  },
+  {
+    "id": "BIE3-FCA-H126",
+    "url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+    "publisher": "Financial Conduct Authority",
+    "source_type": "regulatory_data",
+    "publication_date": "2026-10-22",
+    "publication_date_precision": "day",
+    "reporting_period": "Selected three legal banks:1 January–30 June 2026",
+    "locator": "Open/Closed/Upheld all-product Total cells; no timing columns",
+    "retrieved_on": "2026-11-15",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn844266view2 / turn534874view1 / turn499223view0–4",
+    "verification": "original_content_rechecked",
+    "original_bytes_sha256": null,
+    "retained_excerpt_sha256": null,
+    "rights_review": "FCA legal2.2 numerical Data under OGLv3; narrative excluded2.3; no third-party notice observed for selected cells",
+    "technical_publisher_admitted": true,
+    "canonical_acceptance": "UNVERIFIED; no authorised production receipt read",
+    "canonical_approval_executed": false
+  },
+  {
+    "id": "BIE3-FCA-TERMS",
+    "url": "https://www.fca.org.uk/legal",
+    "publisher": "Financial Conduct Authority",
+    "source_type": "terms",
+    "publication_date": null,
+    "publication_date_precision": "not_independently_verified",
+    "reporting_period": "Terms inspected15 November 2026",
+    "locator": "2.2 /2.3",
+    "retrieved_on": "2026-11-15",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn499223view5",
+    "verification": "original_content_rechecked",
+    "original_bytes_sha256": null,
+    "retained_excerpt_sha256": null,
+    "rights_review": "Licence review, not Evidence approval",
+    "technical_publisher_admitted": true,
+    "canonical_acceptance": "UNVERIFIED; no authorised production receipt read",
+    "canonical_approval_executed": false
+  },
+  {
+    "id": "BIE3-NW-TERMS",
+    "url": "https://www.natwestgroup.com/hygiene/legal-information.html",
+    "publisher": "NatWest Group plc",
+    "source_type": "terms",
+    "publication_date": null,
+    "publication_date_precision": "not_independently_verified",
+    "reporting_period": "Terms inspected15 November 2026",
+    "locator": "Clause13, reproduction/personal use",
+    "retrieved_on": "2026-11-15",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn597283view2",
+    "verification": "original_content_rechecked",
+    "original_bytes_sha256": null,
+    "retained_excerpt_sha256": null,
+    "rights_review": "Personal-use exception; exact factual commercial use and applicability to investor subdomain require owner/rights review",
+    "technical_publisher_admitted": false,
+    "canonical_acceptance": "UNVERIFIED; no authorised production receipt read",
+    "canonical_approval_executed": false
+  },
+  {
+    "id": "BIE3-HSBC-TERMS",
+    "url": "https://www.hsbc.com/terms-and-conditions",
+    "publisher": "HSBC",
+    "source_type": "terms",
+    "publication_date": null,
+    "publication_date_precision": "not_independently_verified",
+    "reporting_period": "Terms inspected15 November 2026",
+    "locator": "Copyright, distribution/other use and external linking",
+    "retrieved_on": "2026-11-15",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn597283view1",
+    "verification": "original_content_rechecked",
+    "original_bytes_sha256": null,
+    "retained_excerpt_sha256": null,
+    "rights_review": "Personal extracts only grant does not authorise distribution/other use or linking; no general legal conclusion about facts",
+    "technical_publisher_admitted": false,
+    "canonical_acceptance": "UNVERIFIED; no authorised production receipt read",
+    "canonical_approval_executed": false
+  },
+  {
+    "id": "BIE3-PRA-ID",
+    "url": "https://www.bankofengland.co.uk/prudential-regulation/authorisations/which-firms-does-the-pra-regulate",
+    "publisher": "Bank of England / PRA",
+    "source_type": "regulatory_register",
+    "publication_date": null,
+    "publication_date_precision": "not_independently_verified",
+    "reporting_period": "November 2026 UK-incorporated deposit-taker list",
+    "locator": "HSBC UK / Santander UK FRN/LEI; Group is a separate subject",
+    "retrieved_on": "2026-11-15",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn946540view0 / turn946540view1",
+    "verification": "original_content_rechecked",
+    "original_bytes_sha256": null,
+    "retained_excerpt_sha256": null,
+    "rights_review": "Identity review only; no new public release or source import",
+    "technical_publisher_admitted": true,
+    "canonical_acceptance": "UNVERIFIED; no authorised production receipt read",
+    "canonical_approval_executed": false
+  }
+]

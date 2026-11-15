@@ -1,0 +1,48 @@
+name: FLORA BIE-3 admission trace and selected-bank runtime proof
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'cios/applications/flora/**'
+      - 'enterprise-knowledge/banking/research-model/**'
+      - 'docs/flora-runtime/bie3/**'
+      - 'tests/test_flora_bie3_637.py'
+      - 'tools/research/bie3_quality.py'
+      - 'tools/ci/flora_bie3_preview.cjs'
+      - 'tools/ci/flora_vp2_preview.py'
+      - '.github/workflows/flora-bie3-browser.yml'
+permissions:
+  contents: read
+jobs:
+  admission-and-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.txt
+      - run: python tools/research/bie3_quality.py
+      - run: python -m pytest tests/test_flora_bie3_637.py -q
+      - name: Install isolated browser tooling
+        run: |
+          npm install --prefix /tmp/flora-vp2-browser playwright@1.62.1
+          /tmp/flora-vp2-browser/node_modules/.bin/playwright install --with-deps chromium
+      - run: git worktree add --detach /tmp/flora-bie3-before c295e056cbae0f1adebc1070eb272d79b650a45f
+      - name: Selected legal-bank service views and approved visual journey
+        env:
+          NODE_PATH: /tmp/flora-vp2-browser/node_modules
+        run: python tools/ci/flora_vp2_preview.py --scenario bie3 --output /tmp/flora-bie3-previews --baseline-root /tmp/flora-bie3-before
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flora-bie3-runtime-previews-${{ github.event.pull_request.head.sha }}
+          path: /tmp/flora-bie3-previews/
+          retention-days: 14

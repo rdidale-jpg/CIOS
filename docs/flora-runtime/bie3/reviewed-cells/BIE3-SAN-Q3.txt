@@ -1,0 +1,15 @@
+BIE-3 individually located reviewed cells. Locators are reviewer notes, not contiguous original text.
+p3 net operating income /9M2026 /GBP million
+4,117
+p3 operating expenses pre specified charges /9M2026 /GBP million
+(2,122)
+p3 credit impairment /9M2026 /GBP million
+(342)
+p3 restructuring and specific provisions /9M2026 /GBP million
+(495)
+p3 PBT /9M2026 /GBP million
+1,158
+p2 TSB PBT contribution /1May–30Sep2026 /GBP million
+96
+p3 TSB costs contribution /1May–30Sep2026 /GBP million
+327

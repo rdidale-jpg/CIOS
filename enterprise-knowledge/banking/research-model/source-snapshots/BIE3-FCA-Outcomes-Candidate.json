@@ -1,0 +1,229 @@
+{
+  "authority": "candidate_intelligence",
+  "scope": "banking",
+  "subject_ref": "BK-IND-002",
+  "source": {
+    "id": "BIE3-FCA-H126-OUTCOMES",
+    "title": "FCA selected UK banks: complaints closed and firm-upheld outcomes,2026H1",
+    "publisher": "Financial Conduct Authority",
+    "url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+    "retrieval_url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+    "publication_date": "2026-10-22",
+    "publication_date_evidence": "Published/updated22 October 2026 on original table page",
+    "reporting_period": "1 January–30 June 2026, selected legal banks; all-product totals",
+    "retrieved_at": "2026-11-15T00:00:00+00:00",
+    "retrieval_timestamp_precision": "day_normalised_UTC_not_server_timestamp",
+    "reviewed_by": "Codex original numerical-cell/rights review; no owner Evidence approval",
+    "review_notes": "Original table tabs, firm labels, period and Total cells inspected. No timing column, received-to-closed cohort join, Group ranking or harm/cost calculation. BIE2 NatWest/HSBC received identities reused, not duplicated.",
+    "research_domain": "banking",
+    "verification": "primary_retrieved",
+    "content_kind": "reviewed_web_excerpt",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn844266view2 / turn534874view1 / turn499223view0–4",
+    "retrieval_extent": "Three individually located firm labels and seven numerical cells; original bytes not retained, no full-row reconstruction",
+    "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/BIE3-FCA-Outcomes.txt",
+    "text_sha256": "9fa20943561b0f87d3605d12f36fb26ec9e31ff9ba5f3d683a00c8da2f8099da",
+    "primary_content_sha256": null,
+    "excerpts": [
+      {
+        "locator": "Firm-name cell for the corresponding selected Open/Closed/Upheld rows",
+        "quote": "HSBC UK Bank Plc"
+      },
+      {
+        "locator": "Firm-name cell for the corresponding selected Open/Closed/Upheld rows",
+        "quote": "NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY"
+      },
+      {
+        "locator": "Firm-name cell for the corresponding selected Open/Closed/Upheld rows",
+        "quote": "Santander UK Plc"
+      },
+      {
+        "locator": "FCA2026H1 Closed table, source HTML line885, all-product Total cell;1 January–30 June 2026",
+        "quote": "76,912"
+      },
+      {
+        "locator": "FCA2026H1 Upheld table, source HTML line1558, all-product Total cell;1 January–30 June 2026",
+        "quote": "59.09%"
+      },
+      {
+        "locator": "FCA2026H1 Closed table, source HTML line923, all-product Total cell;1 January–30 June 2026",
+        "quote": "101,586"
+      },
+      {
+        "locator": "FCA2026H1 Upheld table, source HTML line1596, all-product Total cell;1 January–30 June 2026",
+        "quote": "55.31%"
+      },
+      {
+        "locator": "FCA2026H1 Open table, source HTML line729, all-product Total cell;1 January–30 June 2026",
+        "quote": "61,365"
+      },
+      {
+        "locator": "FCA2026H1 Closed table, source HTML line957, all-product Total cell;1 January–30 June 2026",
+        "quote": "60,615"
+      },
+      {
+        "locator": "FCA2026H1 Upheld table, source HTML line1629, all-product Total cell;1 January–30 June 2026",
+        "quote": "48.06%"
+      }
+    ],
+    "rights": {
+      "status": "permitted_numerical_data",
+      "licence": "UK Open Government Licence v3.0",
+      "terms_url": "https://www.fca.org.uk/legal",
+      "terms_clause": "2.2 numerical Data;2.3 narrative exclusion",
+      "reviewed_at": "2026-11-15",
+      "review_reference": "turn499223view5",
+      "attribution": "Contains Financial Conduct Authority information licensed under the Open Government Licence v3.0.",
+      "extent": "Selected numerical cells and reporting firm labels only; no copied narrative, logo, full article or feed; no third-party notice observed for these cells.",
+      "permission_is_not_acceptance": true
+    },
+    "supported_force_kinds": [
+      "observed_trend"
+    ]
+  },
+  "claims": [
+    {
+      "id": "BIE3-HSBC-CLOSED",
+      "asset_id": "BK-IND-002",
+      "statement": "The FCA published 76,912 complaints closed by HSBC UK Bank Plc in January–June 2026.",
+      "domain": "customer_outcomes",
+      "kind": "reported_fact",
+      "reporting_period": "1 January–30 June 2026",
+      "entity_scope": "HSBC UK Bank Plc only; not its consolidated Group or other bank subsidiaries",
+      "source_ids": [
+        "BIE3-FCA-H126-OUTCOMES"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "BIE3-FCA-H126-OUTCOMES": "76,912"
+      },
+      "quote_locator": "FCA2026H1 Closed table, HTML line885, Total cell; named legal firm and period as reviewed",
+      "metric_value": 76912,
+      "metric_unit": "complaints closed; all-product total",
+      "canonical_acceptance": "not_accepted"
+    },
+    {
+      "id": "BIE3-HSBC-UPHELD",
+      "asset_id": "BK-IND-002",
+      "statement": "The FCA reports 59.09% of complaints closed by HSBC UK Bank Plc in January–June 2026 as upheld by the firm.",
+      "domain": "customer_outcomes",
+      "kind": "reported_fact",
+      "reporting_period": "1 January–30 June 2026",
+      "entity_scope": "HSBC UK Bank Plc only; not its consolidated Group or other bank subsidiaries",
+      "source_ids": [
+        "BIE3-FCA-H126-OUTCOMES"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "BIE3-FCA-H126-OUTCOMES": "59.09%"
+      },
+      "quote_locator": "FCA2026H1 Upheld table, HTML line1558, Total cell; named legal firm and period as reviewed",
+      "metric_value": 59.09,
+      "metric_unit": "percent of closed complaints upheld by firm; FCA table total",
+      "canonical_acceptance": "not_accepted"
+    },
+    {
+      "id": "BIE3-NATWEST-CLOSED",
+      "asset_id": "BK-IND-002",
+      "statement": "The FCA published 101,586 complaints closed by NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY in January–June 2026.",
+      "domain": "customer_outcomes",
+      "kind": "reported_fact",
+      "reporting_period": "1 January–30 June 2026",
+      "entity_scope": "NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY only; not its consolidated Group or other bank subsidiaries",
+      "source_ids": [
+        "BIE3-FCA-H126-OUTCOMES"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "BIE3-FCA-H126-OUTCOMES": "101,586"
+      },
+      "quote_locator": "FCA2026H1 Closed table, HTML line923, Total cell; named legal firm and period as reviewed",
+      "metric_value": 101586,
+      "metric_unit": "complaints closed; all-product total",
+      "canonical_acceptance": "not_accepted"
+    },
+    {
+      "id": "BIE3-NATWEST-UPHELD",
+      "asset_id": "BK-IND-002",
+      "statement": "The FCA reports 55.31% of complaints closed by NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY in January–June 2026 as upheld by the firm.",
+      "domain": "customer_outcomes",
+      "kind": "reported_fact",
+      "reporting_period": "1 January–30 June 2026",
+      "entity_scope": "NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY only; not its consolidated Group or other bank subsidiaries",
+      "source_ids": [
+        "BIE3-FCA-H126-OUTCOMES"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "BIE3-FCA-H126-OUTCOMES": "55.31%"
+      },
+      "quote_locator": "FCA2026H1 Upheld table, HTML line1596, Total cell; named legal firm and period as reviewed",
+      "metric_value": 55.31,
+      "metric_unit": "percent of closed complaints upheld by firm; FCA table total",
+      "canonical_acceptance": "not_accepted"
+    },
+    {
+      "id": "BIE3-SANTANDER-RECEIVED",
+      "asset_id": "BK-IND-002",
+      "statement": "The FCA published 61,365 complaints received by Santander UK Plc in January–June 2026.",
+      "domain": "customer_outcomes",
+      "kind": "reported_fact",
+      "reporting_period": "1 January–30 June 2026",
+      "entity_scope": "Santander UK Plc only; not Santander UK Group Holdings plc or TSB Bank plc",
+      "source_ids": [
+        "BIE3-FCA-H126-OUTCOMES"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "BIE3-FCA-H126-OUTCOMES": "61,365"
+      },
+      "quote_locator": "FCA2026H1 Open table, HTML line729, Total cell; named legal firm and period as reviewed",
+      "metric_value": 61365,
+      "metric_unit": "complaints received; all-product total",
+      "canonical_acceptance": "not_accepted"
+    },
+    {
+      "id": "BIE3-SANTANDER-CLOSED",
+      "asset_id": "BK-IND-002",
+      "statement": "The FCA published 60,615 complaints closed by Santander UK Plc in January–June 2026.",
+      "domain": "customer_outcomes",
+      "kind": "reported_fact",
+      "reporting_period": "1 January–30 June 2026",
+      "entity_scope": "Santander UK Plc only; not Santander UK Group Holdings plc or TSB Bank plc",
+      "source_ids": [
+        "BIE3-FCA-H126-OUTCOMES"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "BIE3-FCA-H126-OUTCOMES": "60,615"
+      },
+      "quote_locator": "FCA2026H1 Closed table, HTML line957, Total cell; named legal firm and period as reviewed",
+      "metric_value": 60615,
+      "metric_unit": "complaints closed; all-product total",
+      "canonical_acceptance": "not_accepted"
+    },
+    {
+      "id": "BIE3-SANTANDER-UPHELD",
+      "asset_id": "BK-IND-002",
+      "statement": "The FCA reports 48.06% of complaints closed by Santander UK Plc in January–June 2026 as upheld by the firm.",
+      "domain": "customer_outcomes",
+      "kind": "reported_fact",
+      "reporting_period": "1 January–30 June 2026",
+      "entity_scope": "Santander UK Plc only; not Santander UK Group Holdings plc or TSB Bank plc",
+      "source_ids": [
+        "BIE3-FCA-H126-OUTCOMES"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "BIE3-FCA-H126-OUTCOMES": "48.06%"
+      },
+      "quote_locator": "FCA2026H1 Upheld table, HTML line1629, Total cell; named legal firm and period as reviewed",
+      "metric_value": 48.06,
+      "metric_unit": "percent of closed complaints upheld by firm; FCA table total",
+      "canonical_acceptance": "not_accepted"
+    }
+  ],
+  "canonical_mutation": false,
+  "cutoff": "2026-11-15",
+  "production_acceptance": "UNVERIFIED"
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "actor_ref": "actor:nw-group",
+    "subject": "NatWest Group plc",
+    "title": "Growth and productivity need acquisition-adjusted attribution",
+    "fact_ids": [
+      "BIE3-NW-PBT",
+      "BIE3-NW-CIR",
+      "BIE3-NW-SAVINGS",
+      "BIE3-NW-CAL-CLOSE",
+      "BIE3-NW-CAL-OPEN",
+      "BIE3-NW-CAL-HEADLINE",
+      "BIE3-NW-DEPOSITS-TOTAL",
+      "BIE3-NW-DEPOSITS-EX-CENTRAL"
+    ],
+    "economic_mechanism": "Published CAL stocks increased by£110.9bn, while the stated£42.3bn growth measure uses an Evelyn FY2025-inclusive comparator. Neither is an organic deposit-flow measure. Central-item deposit treatment separately changes the defined stock.",
+    "existing_response": "Evelyn integration, reported gross cost savings and positive Group profit are existing responses and counterevidence to a generic missing-transformation thesis.",
+    "counter": "Gross savings are not net financial benefit; no failure, unmet external scope or incremental budget is established.",
+    "falsifier": "A source-matched organic/acquired bridge and net-benefit reconciliation could show the remaining attribution issue is already resolved.",
+    "role": "Group finance/integration roles; no purchasing authority or named buyer inferred",
+    "possible_open_decision": "Measurement and remaining integration choices may remain; no unallocated supplier decision is proven.",
+    "semantic_type": "insight",
+    "canonical_status": "research_candidate_not_accepted",
+    "visibility": "owner_review_only",
+    "buyer_need": "not established",
+    "pipeline_effect": "none"
+  },
+  {
+    "actor_ref": "actor:hsbc-uk",
+    "subject": "HSBC UK Bank plc",
+    "title": "UK-bank earnings require a USD legal-entity bridge",
+    "fact_ids": [
+      "BIE3-HS-REV",
+      "BIE3-HS-ECL",
+      "BIE3-HS-COST",
+      "BIE3-HS-ASSOC",
+      "BIE3-HS-PBT"
+    ],
+    "economic_mechanism": "USD 11054m revenue minus701m ECL and4270m costs plus1m associates reconciles to 6084m PBT. These are UK legal-bank9M results, not Group-quarter earnings or GBP.",
+    "existing_response": "A positive-profit UK franchise and existing legal-entity reporting are evidenced. Global organisational simplification cannot be asserted as a specific UK-bank remedy without applicability evidence.",
+    "counter": "Aggregate ECL and expense levels do not establish a process/control defect, external delivery requirement or open procurement.",
+    "falsifier": "UK-specific segment, operating-model and benefit disclosures may explain the movements without any residual commercial problem.",
+    "role": "UK bank finance/credit/operations roles; Group CEO is not assumed to be UK-bank decision owner",
+    "possible_open_decision": "UK-specific operating or investment choices remain unproven; only an evidence demand is justified.",
+    "semantic_type": "insight",
+    "canonical_status": "research_candidate_not_accepted",
+    "visibility": "owner_review_only",
+    "buyer_need": "not established",
+    "pipeline_effect": "none"
+  },
+  {
+    "actor_ref": "actor:san-group",
+    "subject": "Santander UK Group Holdings plc",
+    "title": "TSB earnings contribution and integration phases are different decisions",
+    "fact_ids": [
+      "BIE3-SA-NOI",
+      "BIE3-SA-OPEX",
+      "BIE3-SA-CREDIT",
+      "BIE3-SA-RESTRUCT",
+      "BIE3-SA-PBT",
+      "BIE3-SA-TSB-PBT",
+      "BIE3-SA-TSB-COST",
+      "BIE3-SA-ACQUISITION",
+      "BIE3-SA-CONSOLIDATION",
+      "BIE3-SA-EMPLOYER",
+      "BIE3-SA-PARTVII"
+    ],
+    "economic_mechanism": "Group income less separately stated expense, impairment and restructuring/provisions reconciles to£1158m PBT. TSB contribution£96m and costs£327m cover May–September, not nine months or standalone TSB accounts.",
+    "existing_response": "Acquisition, consolidation and central employer transfer are already completed as reported; proposed legal transfer remains conditional and subsequent systems/customer-data migration is distinct.",
+    "counter": "Decided acquisition/integration is not an early strategic sales opening. Provisions and integration costs are not supplier funding or currently unallocated scope.",
+    "falsifier": "Detailed disclosed migration/design responsibilities and contracts may show all material choices already allocated internally or to incumbents.",
+    "role": "Group finance/integration and legal-entity operations roles; no buying authority inferred",
+    "possible_open_decision": "Some detailed migration decisions may remain, but no external scope, open procurement or opportunity to shape is established.",
+    "semantic_type": "insight",
+    "canonical_status": "research_candidate_not_accepted",
+    "visibility": "owner_review_only",
+    "buyer_need": "not established",
+    "pipeline_effect": "none"
+  }
+]

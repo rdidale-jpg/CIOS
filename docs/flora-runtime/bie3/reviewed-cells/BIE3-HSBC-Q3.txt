@@ -1,0 +1,11 @@
+BIE-3 individually located reviewed cells. Locators are reviewer notes, not contiguous original text.
+p20 reported revenue /YTD2026 /USD million
+11,054
+p20 reported ECL /YTD2026 /USD million
+(701)
+p20 reported operating expenses /YTD2026 /USD million
+(4,270)
+p20 associates/joint ventures /YTD2026 /USD million
+1
+p20 reported PBT /YTD2026 /USD million
+6,084
