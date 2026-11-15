@@ -218,6 +218,12 @@ def test_protected_intelligence_security_permissions_matching_and_pipeline_bytes
         if revision:
             assert revision['baseline_sha256']==digest,path
             digest=revision['candidate_sha256']
+        isp=json.loads((root/'docs/flora-runtime/isp1-623/Owner-Compatibility.json').read_text())
+        assert set(isp['owner_boundary_revisions'])=={'cios/applications/flora/security_web.py'}
+        if path in isp['owner_boundary_revisions']:
+            amended=isp['owner_boundary_revisions'][path]
+            assert amended['baseline_sha256']==digest,path
+            digest=amended['candidate_sha256']
         assert hashlib.sha256((root/path).read_bytes()).hexdigest()==digest,path
     assert manifest['base_sha']=='19ab36d241dbca2099ffb9b5d519c68c493a914a'
 

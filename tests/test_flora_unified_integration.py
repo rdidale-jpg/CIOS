@@ -46,7 +46,8 @@ def test_baseline_union_keeps_original_cases_signatures_and_skip_reasons():
 
 
 def test_cyber_reuses_one_visual_story_cockpit_and_deliberate_full_evidence(web):
-    status,html,_=web('/flora/banking/research/candidates/RCO-LBG-005',authenticated=False)
+    assert web('/flora/banking/research/candidates/RCO-LBG-005',authenticated=False)[0]==403
+    status,html,_=web('/flora/banking/research/candidates/RCO-LBG-005')
     assert status==200
     assert html.count("class='eo-module'")==8 and html.count("class='eo-story-node'")==4
     assert html.count("id='full-research-evidence'")==1
@@ -72,8 +73,14 @@ def test_integrated_public_journey_cannot_enumerate_or_modify_private_pipeline(w
     for path in ('/macro?market=GB&offering=cyber','/macro?market=GB&view=industry','/macro?market=GB&view=enterprise',
                  '/industries/banking','/industries/aviation','/enterprises/lloyds','/enterprises/lloyds?lens=opportunities',
                  '/enterprises/easyjet','/flora/banking/research/candidates/RCO-LBG-005'):
-        status,html,_=web(path,authenticated=False)
-        assert status==200 and record['id'] not in html and 'synthetic-workspace' not in html
+        from cios.applications.flora.public_routes import owner_inspection_request_target
+        if owner_inspection_request_target(path):
+            assert web(path,authenticated=False)[0]==403
+            status,html,_=web(path)
+            assert status==200 and record['id']not in html
+        else:
+            status,html,_=web(path,authenticated=False)
+            assert status==200 and record['id']not in html and 'synthetic-workspace'not in html
     assert store_hash()==before
 
 

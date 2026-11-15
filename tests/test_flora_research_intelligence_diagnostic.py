@@ -1,14 +1,14 @@
 """Read-only Research Intelligence Diagnostic regression tests."""
 import html
 
-from cios.applications.flora.public_routes import public_request_target
+from cios.applications.flora.public_routes import public_request_target, owner_inspection_request_target
 from cios.applications.flora.research_intelligence.diagnostic import assess, render
 from cios.applications.flora.research_intelligence.model import load_assessment
 
 
 def test_diagnostic_available_for_exact_registered_enterprises_only():
     for slug in ("lloyds", "easyjet"):
-        assert public_request_target(f"/enterprises/{slug}/research-diagnostic")
+        assert (owner_inspection_request_target(f"/enterprises/{slug}/research-diagnostic") if slug=="lloyds" else public_request_target(f"/enterprises/{slug}/research-diagnostic"))
         assert not public_request_target(f"/enterprises/{slug}/research-diagnostic?lens=opportunities")
     assert not public_request_target("/enterprises/unknown/research-diagnostic")
     assert not public_request_target("/enterprises/lloyds/research-diagnostic/secret")

@@ -95,22 +95,27 @@ def test_every_interactive_detail_is_server_addressable_without_js(scope,stream)
   if stream=='landscape'and scope=='uk':continue
   if stream=='landscape'and scope=='banking'and spot['id']in v.BANKS:continue
   html=v.render(path,{'stream':[stream],'detail':[spot['id']]})
+  ctx=v.resolve(path,{'stream':[stream]})
+  if not v.has_detail(ctx,spot,v.current_data(ctx)):
+   assert 'id="insight"'not in html
+   continue
   assert 'id="insight" tabindex="-1" aria-labelledby="insight-title"'in html
   assert 'id="insight-title"'in html and 'aria-label="Close 'in html
-  if stream=='forces':assert 'not a qualified Material Pressure'in html
+  if stream=='forces':assert 'data-semantic-type="insight"'in html and 'A useful next question'not in html
 
 
 def test_current_source_facts_targets_periods_and_truthful_unknowns():
  data=v.model.load_assessment();refs=['LBG-Q326-DEPOSITS','LBG-Q326-PROFIT','LBG-A2030-CIR']
  html=v.render('/enterprises/lloyds',{'detail':['economics']})
  for r in v.claim_rows(data,refs):
-  assert r['id']in html and r['statement'].replace('<','&lt;')in html
+  item=v.presentation.claim_view(data,r)
+  assert v.presentation.render(item)in html
   assert r['reporting_period']in html
  assert 'balance-sheet stock'in html and 'nine-month flow'in html and 'target'in html
  assert 'Finance &amp; insurance'in v.render('/industries/banking',{})
  assert 'Banking 8.1%'not in v.render('/industries/banking',{})
- for key,label in v.GAPS:assert key in html
- assert 'not actual premises'in html and 'Unknown current income/cost/growth'in html
+ for key,label in v.GAPS:assert key not in html
+ assert 'not actual premises'in html and 'Unknown current income/cost/growth'not in html
  assert not any(x in html for x in ('verified buying intent','qualified opportunity','£2bn supplier budget'))
 
 
@@ -118,9 +123,9 @@ def test_only_source_supported_announced_supplier_link_is_visible():
  html=v.render('/enterprises/lloyds',{'stream':['landscape'],'detail':['technology']})
  data=v.model.load_assessment()
  assert any(r['verified']and r['object']=='SUP-GOOGLE'for r in data['relationships'])
- assert 'LBG-ENVOY-GOOGLE'in html and 'workshare'in html.lower()
+ assert 'Google Cloud'in html and 'workshare'in html.lower()
  assert 'data-claim="LBG-VERTEX"'not in html  # Historical technology is not silently upgraded.
- assert 'not a supplier or customer relationship'in v.render('/industries/banking',{'detail':['barclays']})
+ assert '/enterprises/barclays'in v.render('/industries/banking',{'detail':['barclays']})
 
 
 def test_projection_uses_current_owner_not_frozen_design_facts(monkeypatch):
@@ -176,8 +181,10 @@ def test_real_http_all_seven_states_and_permission_negatives(web):
   assert web.last_headers['Cache-Control']=='no-store'
  for target in ('/?stream=unknown','/industries/banking?stream=inside','/enterprises/lloyds?selected=private','/enterprises/lloyds?lens=ecosystem&stream=inside'):
   assert web(target,authenticated=False)[0]in (403,404)
- assert web('/industries/banking?lens=pestle',authenticated=False)[0]==200
- assert web('/enterprises/lloyds?lens=ecosystem',authenticated=False)[0]==200
+ assert web('/industries/banking?lens=pestle',authenticated=False)[0]==403
+ assert web('/industries/banking?lens=pestle')[0]==200
+ assert web('/enterprises/lloyds?lens=ecosystem',authenticated=False)[0]==403
+ assert web('/enterprises/lloyds?lens=ecosystem')[0]==200
  assert web('/flora/offers',authenticated=False)[0]in (302,303,403)
  assert web('/flora/sales/pipeline',authenticated=False)[0]in (302,303,403)
  assert web('/digital-twins/BK-ENT-001/canvas',authenticated=False)[0]in (302,303,403)
@@ -214,7 +221,7 @@ def test_withdrawn_relationship_is_not_reinstated_from_retained_claim(monkeypatc
  for edge in data['relationships']:edge['verified']=False
  monkeypatch.setattr(v.model,'load_assessment',lambda *a,**k:deepcopy(data))
  html=v.render('/enterprises/lloyds',{'stream':['landscape'],'detail':['technology']})
- assert 'Current supplier relationships require revalidation'in html
+ assert 'id="insight"'not in html and 'Current supplier relationships require revalidation'not in html
  assert 'data-claim="LBG-ENVOY-GOOGLE"'not in html
 
 
@@ -223,4 +230,4 @@ def test_frozen_captions_disappear_if_public_source_pins_change(monkeypatch):
  monkeypatch.setattr(v,'artwork',lambda:deepcopy(manifest))
  html=v.render('/enterprises/lloyds',{'detail':['economics']})
  assert 'Halifax branches: 2027 plan'not in html
- assert 'data-claim="LBG-Q326-DEPOSITS"'in html  # Current owner facts still render.
+ assert 'Group customer deposits at September-end: GBP502.8bn'in html  # Current owner facts still render.

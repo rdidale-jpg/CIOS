@@ -6,6 +6,8 @@ import subprocess
 import sys
 
 import pytest
+from tests.flora_owner_inspection_fixtures import authority, actor, owner_http, inspection_web
+from cios.applications.flora.public_routes import owner_inspection_request_target
 from cios.applications.flora.research_intelligence import cycle
 from cios.applications.flora.research_intelligence.model import load_assessment, REPO
 from cios.applications.flora.research_intelligence.mission_adapter import manifest, mission_owner
@@ -193,8 +195,8 @@ def test_cli_exports_reproducible_local_bundle_and_refuses_overwrite(tmp_path):
 
 
 @pytest.mark.parametrize('slug', ['lloyds', 'easyjet'])
-def test_existing_diagnostic_route_renders_research_cycle_and_evidence_links(web, slug):
-    status, page = web('/enterprises/' + slug + '/research-diagnostic')
+def test_existing_diagnostic_route_renders_research_cycle_and_evidence_links(web,inspection_web, slug):
+    status, page = inspection_web('/enterprises/' + slug + '/research-diagnostic')
     assert status == 200
     assert 'Research Intelligence v2' in page and 'Next evidence wave' in page
     assert 'fourteen existing contract dimensions' in page

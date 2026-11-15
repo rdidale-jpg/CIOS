@@ -1,0 +1,3 @@
+FCA Data — 2026 H1, Open (complaints received) table
+Columns: Firm Name | Group | Joint Reporting | Reporting period | Banking and credit cards | Decumulation & pensions | Home finance | Insurance & pure protection | Investments | Total
+Lloyds Bank PLC | LLOYDS BANKING GROUP PLC | no | 2026-01-01 to 2026-06-30 | 115,687 | 31 | 2,679 | 339 | 26 | 118,762

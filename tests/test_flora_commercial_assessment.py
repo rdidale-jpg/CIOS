@@ -8,7 +8,7 @@ import pytest
 from cios.applications.flora.research_intelligence import model, views
 from tests.test_flora_research_intelligence import web
 from tests.test_flora_security_repair_01b import authority
-from tests.test_flora_sales_pipeline import actor
+from tests.test_flora_sales_pipeline import actor, web as owner_web
 
 
 def test_three_dimensions_remain_separate_and_all_nine_are_assessed():
@@ -79,15 +79,16 @@ def test_commercial_evidence_must_resolve_and_cover_every_candidate_once():
     with pytest.raises(ValueError):model.validate(bad)
 
 
-def test_public_shortlist_and_customer_briefs_are_navigable(web):
-    status,html=web(model.ROOT+'/opportunities')
+def test_public_shortlist_and_customer_briefs_are_navigable(owner_web):
+    # ISP-1: preserve the positive inspection contract with a real owner session.
+    status,html,_=owner_web(model.ROOT+'/opportunities')
     assert status==200 and 'Commercial opportunity shortlist' in html and 'zero confirmed contract opportunities' in html
     for row in model.commercial_candidates():
-        status,body=web(model.ROOT+'/candidates/'+row['id'])
+        status,body,_=owner_web(model.ROOT+'/candidates/'+row['id'])
         assert status==200 and 'Potential buyer / decision function' in body
         assert 'Contract value and procurement date' in body and row['commercial']['offer'] in body
     for ref in model.load_assessment()['commercial_assessment']['access_claim_ids']:
-        assert web(model.ROOT+'/evidence/'+ref)[0]==200
+        assert owner_web(model.ROOT+'/evidence/'+ref)[0]==200
 
 
 def test_reading_shortlist_cannot_create_or_qualify_pipeline_records(actor):

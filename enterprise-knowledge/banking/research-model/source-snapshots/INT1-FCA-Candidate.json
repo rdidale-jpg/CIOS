@@ -1,0 +1,71 @@
+{
+  "authority": "candidate_intelligence",
+  "scope": "Lloyds Bank PLC within the existing public Lloyds context; not an asserted legal-entity Twin mapping",
+  "cutoff": "2026-11-15",
+  "source": {
+    "id": "PR-FCA-COMPLAINTS-H126",
+    "title": "FCA firm-level complaints data: 2026 H1",
+    "publisher": "Financial Conduct Authority",
+    "url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+    "retrieval_url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+    "reporting_period": "1 January–30 June 2026; Lloyds Bank PLC; Open table, total complaints received",
+    "publication_date": "2026-10-22",
+    "publication_date_evidence": "Official Data page first-published and updated dates",
+    "retrieved_at": "2026-11-15T09:51:57.715808+00:00",
+    "primary_content_sha256": null,
+    "text_sha256": "b1ca214f97c51e0375d054a879d2e01f71c34697bdf26f040953c7a91d98905b",
+    "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-FCA-COMPLAINTS-H126.txt",
+    "verification": "primary_retrieved",
+    "content_kind": "reviewed_web_excerpt",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn553351view1 / turn312630view0, Open table HTML line 680",
+    "reviewed_by": "Codex source-content and numerical-data rights review; no owner Evidence acceptance",
+    "review_notes": "Original FCA table independently inspected, not a source-byte archive. Retains only one numerical row and column context; no narrative republication. Cross-checked against pinned RIC-1/RIE-2; no private entity resolution or canonical import.",
+    "limitation": "FCA-published firm-reported data, not independently verified customer harm, causality, trend, handling cost or supplier demand. Lloyds Bank PLC is narrower than Lloyds Banking Group. Received and closed complaints are not one matched cohort.",
+    "excerpts": [
+      {
+        "quote": "Lloyds Bank PLC | LLOYDS BANKING GROUP PLC | no | 2026-01-01 to 2026-06-30 | 115,687 | 31 | 2,679 | 339 | 26 | 118,762",
+        "locator": "Open table, Lloyds Bank PLC row, Total; HTML line 680; period 2026-01-01 to 2026-06-30"
+      }
+    ],
+    "rights": {
+      "status": "permitted_numerical_data",
+      "licence": "UK Open Government Licence v3.0",
+      "terms_url": "https://www.fca.org.uk/legal",
+      "terms_clause": "2.2 (Data tables); narrative excluded by 2.3",
+      "review_reference": "turn312630view1",
+      "reviewed_at": "2026-11-15",
+      "attribution": "Contains Financial Conduct Authority information licensed under the Open Government Licence v3.0.",
+      "third_party_notice": "No third-party copyright notice identified for this table; remove if an applicable restriction is identified.",
+      "extent": "One numerical row only; no logos, narrative, images or data feed",
+      "permission_is_not_acceptance": true
+    }
+  },
+  "claim": {
+    "id": "LBG-FCA-H126-RECEIVED",
+    "asset_id": "BK-ENT-001",
+    "statement": "The FCA published 118,762 complaints received by Lloyds Bank PLC from 1 January to 30 June 2026.",
+    "domain": "customer_outcomes",
+    "kind": "reported_fact",
+    "reporting_period": "1 January–30 June 2026",
+    "entity_scope": "Lloyds Bank PLC only; not consolidated Lloyds Banking Group or its Retail reporting division",
+    "source_ids": [
+      "PR-FCA-COMPLAINTS-H126"
+    ],
+    "verification": "source_supported",
+    "primary_quotes": {
+      "PR-FCA-COMPLAINTS-H126": "Lloyds Bank PLC | LLOYDS BANKING GROUP PLC | no | 2026-01-01 to 2026-06-30 | 115,687 | 31 | 2,679 | 339 | 26 | 118,762"
+    },
+    "quote_locator": "Open table, Lloyds Bank PLC row, Total; HTML line 680; period 2026-01-01 to 2026-06-30",
+    "metric_value": 118762,
+    "metric_unit": "complaints received; FCA Open table total",
+    "canonical_acceptance": "not_accepted",
+    "research_origin": {
+      "RIC-1": "9db8253b23deefac00022716c53311472203aec7",
+      "RIE-2": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+      "review": "Independently re-inspected original FCA table; RIC A remains owner-review eligibility only."
+    }
+  },
+  "canonical_mutation": false,
+  "production_acceptance": "unverified"
+}

@@ -184,17 +184,16 @@ def test_date_and_entity_scope_are_not_confused():
 
 
 def test_public_research_navigation_reaches_all_lenses_claims_and_candidates(web):
-    for path in [model.ROOT,model.ROOT+'?lens=porter',model.ROOT+'?lens=value-chain',model.ROOT+'/lloyds',model.ROOT+'/sources',model.ROOT+'/gaps',model.ROOT+'/opportunities']:
-        status,html=web(path);assert status==200,path
-        assert 'Primary-source re-verification partially complete' in html
-        assert 'name=\'viewport\'' in html
+    # ISP-1 moves research administration to verified owner inspection.
+    paths=[model.ROOT,model.ROOT+'?lens=porter',model.ROOT+'?lens=value-chain',model.ROOT+'/lloyds',model.ROOT+'/sources',model.ROOT+'/gaps',model.ROOT+'/opportunities']
     data=model.load_assessment()
-    for item in data['claims']:
-        assert web(model.ROOT+'/evidence/'+item['id'])[0]==200
-    for item in data['candidates']:
-        status,html=web(model.ROOT+'/candidates/'+item['id'])
-        assert status==200 and 'Estimated deal value:</strong> Unknown' in html
-        assert 'Sign in to develop this opportunity' in html
+    paths += [model.ROOT+'/evidence/'+c['id'] for c in data['claims']]
+    paths += [model.ROOT+'/candidates/'+c['id'] for c in data['candidates']]
+    for path in paths:
+        status,html=web(path)
+        assert status==403,path
+        assert 'Primary-source re-verification partially complete'not in html
+    # Positive real authenticated-owner HTTP and revocation cases are in #623.
 
 
 def test_research_links_and_diagram_nodes_have_destinations():
@@ -202,7 +201,10 @@ def test_research_links_and_diagram_nodes_have_destinations():
     for page in [views.industry_page(),views.enterprise_page(),views.opportunities_page(),views.candidate_page('RCO-LBG-001')]:
         for url in Links(page).urls:
             path=urlsplit(url).path
-            if path.startswith(model.ROOT):assert public_request_target(url.split('#',1)[0])
+            if path.startswith(model.ROOT):
+                from cios.applications.flora.public_routes import owner_inspection_request_target
+                assert owner_inspection_request_target(url.split('#',1)[0])
+                assert not public_request_target(url.split('#',1)[0])
     for key in ['frameworks','capabilities','programmes','suppliers']:
         for node in data[key]:assert node['title'] in unescape(views.node_page(node['id']))
 

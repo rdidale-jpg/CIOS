@@ -3,6 +3,8 @@ from copy import deepcopy
 from html import unescape
 import json,subprocess
 import pytest
+from tests.flora_owner_inspection_fixtures import authority, actor, owner_http, inspection_web
+from cios.applications.flora.public_routes import owner_inspection_request_target
 from cios.applications.flora.research_intelligence import model,understanding as u
 from cios.applications.flora.research_intelligence.living_map_specs import build_living_map,load_mapping,validate_living_map
 from cios.applications.flora.research_intelligence.living_map import render_living_map
@@ -33,13 +35,13 @@ def test_map_is_pinned_repeatable_read_only_and_canonical_ids_retained(domain):
 
 @pytest.mark.parametrize('domain',['banking','aviation'])
 @pytest.mark.parametrize('lens',['overview','ai-disruption','regulation'])
-def test_each_layer_uses_one_map_and_contextual_inspection_with_original_routes(web,domain,lens):
-    status,h=web(f'/industries/{domain}?lens={lens}');assert status==200
+def test_each_layer_uses_one_map_and_contextual_inspection_with_original_routes(web,inspection_web,domain,lens):
+    status,h=inspection_web(f'/industries/{domain}?lens={lens}');assert status==200
     assert h.count("data-living-map='2'")==1
     assert "class='lm-inspector'" in h and "aria-label='Contextual intelligence inspection'" in h
     ids=Links(h).ids
     assert all('lm-'+domain+'-'+n['id'] in ids for n in spec(domain)['map_nodes'])
-    assert public_request_target(f'/industries/{domain}?lens={lens}')
+    assert (public_request_target(f'/industries/{domain}?lens={lens}')or owner_inspection_request_target(f'/industries/{domain}?lens={lens}'))
     assert not public_request_target('/industries/'+domain+'?workspace_id=private')
     assert not public_request_target('/flora/sales/pipeline')
     assert web('/flora/sales/pipeline')[0] in (401,403)
@@ -48,7 +50,7 @@ def test_each_layer_uses_one_map_and_contextual_inspection_with_original_routes(
 
 
 @pytest.mark.parametrize('domain',['banking','aviation'])
-def test_every_major_activity_has_meaningful_scoped_content_and_evidence_link(web,domain):
+def test_every_major_activity_has_meaningful_scoped_content_and_evidence_link(web,inspection_web,domain):
     s=spec(domain);h=render_living_map(s);links=Links(h)
     for n in s['map_nodes']:
         assert n['purpose'] and n['pressure']
@@ -56,7 +58,7 @@ def test_every_major_activity_has_meaningful_scoped_content_and_evidence_link(we
         assert n['evidence'] and n['capability_links']
         assert all(p['passage'] and p['source_ids'] and p['period'] for p in n['evidence'])
     first=next(p for n in s['map_nodes'] for p in n['evidence'] if p['supported'])
-    path,_,fragment=first['url'].partition('#');status,body=web(path)
+    path,_,fragment=first['url'].partition('#');status,body=inspection_web(path)
     assert status==200 and (not fragment or fragment in Links(body).ids)
     assert first['url'] in links.urls
 
@@ -133,13 +135,13 @@ def test_conflicts_remain_visible_and_are_not_erased_by_the_industry_model():
 
 
 @pytest.mark.parametrize('domain',['banking','aviation'])
-def test_ai_and_regulation_are_exposure_mappings_with_real_timeline_links_only(web,domain):
+def test_ai_and_regulation_are_exposure_mappings_with_real_timeline_links_only(web,inspection_web,domain):
     s=spec(domain);h=render_living_map(s,'ai-disruption')
     assert any(n['ai_scenarios'] for n in s['map_nodes'])
     assert 'Analytical scenario — not a proven threat' in h
     assert 'not proven harm' in h
     n=next(n for n in s['map_nodes'] if n['timeline_events']);event=n['timeline_events'][0]
-    path=s['timeline_url'];status,html=web(path);assert status==200
+    path=s['timeline_url'];status,html=inspection_web(path);assert status==200
     assert 'vi-strategic-timeline-'+domain+'-'+event['id'] in Links(html).ids
     assert all(t['start_year'] is None for t in s['timeline_events'] if t['temporal_kind'] in ('unknown','scenario'))
 

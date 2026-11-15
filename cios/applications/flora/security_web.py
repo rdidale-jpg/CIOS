@@ -119,6 +119,10 @@ def private_read(handler):
     context=verified_context(handler.headers)
     if context is None:
         return False
+    from .public_routes import owner_inspection_request_target
+    if owner_inspection_request_target(handler.path):
+        from .access import is_cios_owner
+        return is_cios_owner(handler.headers)
     ident=r'[A-Za-z0-9][A-Za-z0-9_.:@-]{0,127}'
     path=parsed.path
     if path in {'/blueprint-import','/blueprint-import/history','/digital-twins'} or re.fullmatch(r'/blueprint-import/'+ident+r'(?:/(?:inspect|review|promote|intelligence|explore|health|research-brief|diagnostics|mission|restage|staging-history|archive|cancel|delete)|/aspects/'+ident+r'|/enterprises/'+ident+r')?',path):

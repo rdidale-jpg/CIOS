@@ -6,3 +6,7 @@
 .sr-only{top:0;left:0}.pestle-scene picture{position:absolute;inset:0;display:block;width:100%;height:100%}.pestle-scene{overflow:hidden}
 .pestle-scene{width:100%}@media(max-width:600px){.pestle-scene{min-height:720px}.pestle-art{object-fit:cover}}
 figure:after{content:'';position:absolute;inset:0;box-shadow:inset 0 0 24px 10px var(--paper);pointer-events:none}@media(min-width:1000px) and (min-height:700px){.economy-scene,.pestle-scene{max-width:min(1600px,calc((100svh - 172px)*1.5))}}@media print{figure:after{display:none}}
+/* ISP-1 quiet semantic context; source disclosure remains native and optional. */
+.image-insight .intelligence-statement{font-size:inherit}.image-insight .intelligence-label,.image-insight .intelligence-state{font-size:.78rem;font-weight:600;color:#355c4d}
+.image-insight .intelligence-source{font-size:.86rem}.image-insight .intelligence-source summary{min-height:44px;cursor:pointer}
+.image-insight .intelligence-source blockquote{margin:10px 0;border-left:2px solid #879c83;padding-left:12px}
