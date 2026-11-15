@@ -1,0 +1,69 @@
+[
+  {
+    "actor_id": "actor:monzo",
+    "source_ids": [
+      "MONZO-FY",
+      "MONZO-PIN"
+    ],
+    "coverage": "HTML highlights only; exact FY dates/legal consolidation unresolved",
+    "reported": {
+      "revenue_GBP_bn": 1.7,
+      "gross_profit_GBP_bn": 1.0,
+      "adjusted_PBT_GBP_m": 172.6,
+      "deposits_GBP_bn": 25.7,
+      "customers_m": 15.2,
+      "monthly_active_m": 10.4
+    },
+    "insight": "Primary-account engagement and deposit growth are different from registered-customer count; trial fraud controls address an existing customer-friction problem.",
+    "counter": "Adjusted PBT is not statutory profit; contactless trial results are not population-wide or independent proof.",
+    "owner_next": "Obtain exact period/perimeter and statutory reconciliation before peer comparison.",
+    "public": false
+  },
+  {
+    "actor_id": "actor:oaknorth",
+    "source_ids": [
+      "OAK-FY"
+    ],
+    "coverage": "Specialist credit model; no reconciled profit claim",
+    "reported": {
+      "gross_originations_GBP_bn": 2.8,
+      "facilities_GBP_bn": 7.2,
+      "US_share_originations_percent": 40
+    },
+    "insight": "US exposure means UK-bank identity does not make all loan growth domestic.",
+    "counter": "Profit before/after tax labels across report leads unresolved; exclude comparative profitability.",
+    "owner_next": "Resolve original accounts tax/perimeter definitions.",
+    "public": false
+  },
+  {
+    "actor_id": "actor:barclays-uk",
+    "source_ids": [
+      "PRA-NOV",
+      "FCA-H126"
+    ],
+    "coverage": "Legal identity and complaint activity; no independently reconciled financial dossier",
+    "insight": "Barclays Bank UK PLC complaint count cannot be substituted for Barclays PLC Group results or Barclays UK management-segment earnings.",
+    "public": false
+  },
+  {
+    "actor_id": "actor:metro",
+    "source_ids": [
+      "PRA-NOV",
+      "METRO-REVIEW"
+    ],
+    "coverage": "Identity and strategic review",
+    "insight": "Formal Sale Process is an observed corporate event; no Rule2.7 offer or completion is established.",
+    "counter": "Standalone plan remains; future RoTE ambitions are forecasts.",
+    "public": false
+  },
+  {
+    "actor_id": "actor:revolut-uk",
+    "source_ids": [
+      "PRA-NOV",
+      "REV-UK"
+    ],
+    "coverage": "UK authorisation transition",
+    "insight": "March mobilisation exit permits a gradual bank rollout; existing UK app users are not automatically UK bank deposit customers.",
+    "public": false
+  }
+]

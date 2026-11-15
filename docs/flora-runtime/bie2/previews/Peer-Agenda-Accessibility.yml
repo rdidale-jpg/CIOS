@@ -1,0 +1,53 @@
+- banner:
+  - link "Skip to main content":
+    - /url: "#visual-content"
+  - link "FLORA":
+    - /url: /
+  - navigation "Primary product navigation":
+    - group: Explore⌄
+  - text: Guest
+  - navigation "Current scope":
+    - link "UK":
+      - /url: /?stream=landscape&selected=banking
+    - text: Banking
+  - navigation "Insight streams":
+    - link "Landscape":
+      - /url: /industries/banking?stream=landscape&agenda=service-landscape#stream-landscape
+    - link "Forces":
+      - /url: /industries/banking?stream=forces&agenda=service-landscape#stream-forces
+- complementary "Visual exploration":
+  - figure "banking landscape":
+    - text: Conceptual illustration, not actual premises, a legal hierarchy, systems topology or a quantitative pressure map. Labelled navigation remains available without artwork.
+    - link "Lloyds Banking Group":
+      - /url: /enterprises/lloyds
+    - link "Bank of England":
+      - /url: /industries/banking?stream=landscape&detail=boe&agenda=service-landscape#insight
+    - link "Payments":
+      - /url: /industries/banking?stream=landscape&detail=payments&agenda=service-landscape#insight
+  - group: Explore deeper
+- main:
+  - article:
+    - heading "Leadership Agenda" [level=1]
+    - region "Complaint activity spans distinct banking entities":
+      - link "Close Leadership Agenda":
+        - /url: /industries/banking?stream=landscape#visual-content
+        - text: ×
+      - heading "Complaint activity spans distinct banking entities" [level=2]
+      - article:
+        - paragraph: FLORA Insight In January–June 2026, Barclays Bank UK PLC received 90,678 complaints, HSBC UK Bank Plc 79,323 and National Westminster Bank PLC 92,548. These are service-handling volumes, not a service-quality ranking.
+        - paragraph: 1 January–30 June 2026
+        - group: Sources & reasoning
+      - group: Basis & perspective
+    - group:
+      - text: Leadership Agenda
+      - navigation "Leadership Agenda":
+        - link "Funding repricing connects customer choice and bank economics":
+          - /url: /industries/banking?stream=landscape&agenda=funding-economics#agenda-insight
+        - link "Incident and third-party reporting change in March 2027":
+          - /url: /industries/banking?stream=landscape&agenda=reporting-change#agenda-insight
+        - link "Technology oversight extends to the provider layer":
+          - /url: /industries/banking?stream=landscape&agenda=provider-oversight#agenda-insight
+        - link "Complaint activity spans distinct banking entities":
+          - /url: /industries/banking?stream=landscape&agenda=service-landscape#agenda-insight
+    - group: Context layers
+    - group: Sources & detail

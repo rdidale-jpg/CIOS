@@ -1,0 +1,2376 @@
+{
+  "owner_only": true,
+  "method": "Dimension status over inspectable source/dossier/edge/event references; no document-count completeness score",
+  "rows": [
+    {
+      "actor_id": "actor:aib",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:030"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:aldermore",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:allica",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:atom",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:boi",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:031"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:bos",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:barclays",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:barclays-uk",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:023"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:cass-quarter",
+          "event:fca-h1-complaints"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:clearbank",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "source_bound_legal_bank_metrics_within_group_dossier",
+        "dossier_ids": [
+          "dossier:clearbank"
+        ],
+        "metric_subject_ids": [
+          "actor:clearbank"
+        ],
+        "reported_metric_names": [
+          "UK bank profit before tax",
+          "UK normalised revenue"
+        ]
+      },
+      "operating_model": {
+        "status": "economic_mechanism_and_existing_response"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:029"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:clydesdale",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:coutts",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:hsbc-bank",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:hsbc-innovation",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:hsbc-uk",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "original_period_reporting_subject_dossier_with_limits",
+        "dossier_ids": [
+          "dossier:hsbc-uk"
+        ],
+        "metric_subject_ids": [
+          "actor:hsbc-uk"
+        ],
+        "reported_metric_names": [
+          "Revenue",
+          "Expected credit losses",
+          "Operating expenses",
+          "Associates income",
+          "Profit before tax",
+          "Gross customer loans",
+          "External customer accounts"
+        ]
+      },
+      "operating_model": {
+        "status": "economic_mechanism_and_existing_response"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:024"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:hsbc-q3",
+          "event:fca-h1-complaints"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:lbg-cm",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:lloyds",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:fca-h1-complaints"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:metro",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:metro-strategic-review"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:monzo",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "bounded_highlights_not_reconciled",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:026"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:monzo-contactless",
+          "event:cass-quarter"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:natwest",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "related_group_financials_only_not_this_legal_bank",
+        "dossier_ids": [
+          "dossier:natwest"
+        ],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "economic_mechanism_and_existing_response"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:025"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:cass-quarter",
+          "event:fca-h1-complaints"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:nw-markets",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:oaknorth",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "bounded_highlights_not_reconciled",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:osb",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:paragon",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:revolut-uk",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:027"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:revolut-mobilisation"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:santander-uk",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "related_group_financials_only_not_this_legal_bank",
+        "dossier_ids": [
+          "dossier:santander-uk"
+        ],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "economic_mechanism_and_existing_response"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:018"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:san-tsb-employer-transfer"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:shawbrook",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:starling",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "related_group_financials_only_not_this_legal_bank",
+        "dossier_ids": [
+          "dossier:starling"
+        ],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "economic_mechanism_and_existing_response"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:012",
+          "edge:013",
+          "edge:014",
+          "edge:028"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:star-voice",
+          "event:star-business-card",
+          "event:star-sovereign-model",
+          "event:star-business-ai"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:coop",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:rbs",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:tsb",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:zopa",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:nationwide",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "related_group_financials_only_not_this_legal_bank",
+        "dossier_ids": [
+          "dossier:nationwide"
+        ],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "economic_mechanism_and_existing_response"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:cass-quarter"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:coventry",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:yorkshire",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:skipton",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:leeds",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:nw-group",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "NW-Q3"
+        ]
+      },
+      "financials": {
+        "status": "original_period_reporting_subject_dossier_with_limits",
+        "dossier_ids": [
+          "dossier:natwest"
+        ],
+        "metric_subject_ids": [
+          "actor:nw-group"
+        ],
+        "reported_metric_names": [
+          "Operating profit before tax",
+          "Attributable profit",
+          "Income",
+          "Operating expenses",
+          "CET1 ratio",
+          "Customer deposits",
+          "Gross customer loans"
+        ]
+      },
+      "operating_model": {
+        "status": "economic_mechanism_and_existing_response"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:015",
+          "edge:016",
+          "edge:017"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:nw-results"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:hsbc-group",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "HSBC-RELEASE"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:hsbc-q3"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:san-group",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "SAN-Q3"
+        ]
+      },
+      "financials": {
+        "status": "original_period_reporting_subject_dossier_with_limits",
+        "dossier_ids": [
+          "dossier:santander-uk"
+        ],
+        "metric_subject_ids": [
+          "actor:san-group"
+        ],
+        "reported_metric_names": [
+          "Profit before tax",
+          "Net interest income",
+          "Banking NIM",
+          "Customer loans",
+          "Customer deposits"
+        ]
+      },
+      "operating_model": {
+        "status": "economic_mechanism_and_existing_response"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:tsb-group",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "SAN-Q3"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:018"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:san-tsb-employer-transfer"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:nbs-group",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "NBS-FY"
+        ]
+      },
+      "financials": {
+        "status": "original_period_reporting_subject_dossier_with_limits",
+        "dossier_ids": [
+          "dossier:nationwide"
+        ],
+        "metric_subject_ids": [
+          "actor:nbs-group"
+        ],
+        "reported_metric_names": [
+          "Underlying income",
+          "Underlying administrative expenses",
+          "Credit impairment",
+          "Underlying profit before tax",
+          "Statutory profit before tax",
+          "Retail deposits",
+          "Mortgage balances",
+          "Integration expenses"
+        ]
+      },
+      "operating_model": {
+        "status": "economic_mechanism_and_existing_response"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:019"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:virgin",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "NBS-FY"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:019"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:star-group",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "STAR-FY"
+        ]
+      },
+      "financials": {
+        "status": "original_period_reporting_subject_dossier_with_limits",
+        "dossier_ids": [
+          "dossier:starling"
+        ],
+        "metric_subject_ids": [
+          "actor:star-group"
+        ],
+        "reported_metric_names": [
+          "Revenue",
+          "Profit before tax",
+          "Deposits",
+          "Platform accounts"
+        ]
+      },
+      "operating_model": {
+        "status": "economic_mechanism_and_existing_response"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:engine",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "STAR-FY"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:clear-group",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CLEAR-RESULTS"
+        ]
+      },
+      "financials": {
+        "status": "original_period_reporting_subject_dossier_with_limits",
+        "dossier_ids": [
+          "dossier:clearbank"
+        ],
+        "metric_subject_ids": [
+          "actor:clear-group"
+        ],
+        "reported_metric_names": [
+          "Group normalised revenue",
+          "Group deposits",
+          "Payment volume",
+          "Clients",
+          "Platform accounts",
+          "Group statutory profit before tax"
+        ]
+      },
+      "operating_model": {
+        "status": "economic_mechanism_and_existing_response"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:001",
+          "edge:002",
+          "edge:003",
+          "edge:004",
+          "edge:005",
+          "edge:006",
+          "edge:007",
+          "edge:008",
+          "edge:009",
+          "edge:010",
+          "edge:011"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:clear-eu",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CLEAR-PAY"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:boe",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "MPC-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:020",
+          "edge:021"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:mpc-rate",
+          "event:rtgs-forum"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:pra",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PRA-NOV"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:026",
+          "edge:027",
+          "edge:028",
+          "edge:029",
+          "edge:030",
+          "edge:031"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:fca",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "FCA-H126"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:023",
+          "edge:024",
+          "edge:025"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:fca-h1-complaints"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:psr",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "PSR-ROLE"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:fscs",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "FSCS-ROLE"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:fos",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "FOS-Q2"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:fos-quarter"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:uk-finance",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "UKF-ROLE"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:payuk",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CASS-Q3"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:022"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:cass-quarter"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:cass",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CASS-Q3"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:022"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:cass-quarter"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:fps",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CLEAR-PAY"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:008"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:bacs",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CLEAR-PAY"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:009"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:ics",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CLEAR-PAY"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:011"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:chaps",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "RTGS-FORUM"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:010",
+          "edge:021"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:rtgs-forum"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:rtgs",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "RTGS-FORUM"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:020"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:rtgs-forum"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:swift",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "RTGS-FORUM"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:rtgs-forum"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:obl",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "OB-MILESTONE"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:open-banking-milestone"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:google",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "STAR-AI"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:012"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:star-business-ai"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:nvidia",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "STAR-CLOUD"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:013"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:star-sovereign-model"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:civo",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "STAR-CLOUD"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:014"
+        ]
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:star-sovereign-model"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:aws",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "NW-TECH"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:015"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:accenture",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "NW-TECH"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:016"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:openai",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "NW-TECH"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:017"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:revolut-brand",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CLEAR-FY"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:001"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:lemfi",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CLEAR-FY"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:002"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:coinbase",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CLEAR-FY"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:003"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:paycaptain",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CLEAR-FY"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:004"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:airwallex",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CLEAR-FY"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:005"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:kraken",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CLEAR-FY"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:006"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:pingpong",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "CLEAR-FY"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "source_reported_candidate",
+        "edge_ids": [
+          "edge:007"
+        ]
+      },
+      "news": {
+        "status": "not_collected",
+        "event_ids": []
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    },
+    {
+      "actor_id": "actor:nt",
+      "identity": {
+        "status": "primary_source_named",
+        "source_ids": [
+          "NT-RELEASE"
+        ]
+      },
+      "financials": {
+        "status": "not_deepened",
+        "dossier_ids": [],
+        "metric_subject_ids": [],
+        "reported_metric_names": []
+      },
+      "operating_model": {
+        "status": "source_named_role_or_pending"
+      },
+      "relationships": {
+        "status": "not_verified",
+        "edge_ids": []
+      },
+      "news": {
+        "status": "dated_or_date_pending_candidate",
+        "event_ids": [
+          "event:nt-banking-resolution"
+        ]
+      },
+      "canonical_acceptance": "not_accepted",
+      "complete_research_claim": false
+    }
+  ]
+}

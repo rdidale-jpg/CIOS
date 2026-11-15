@@ -1,0 +1,191 @@
+{
+  "authority": "candidate_intelligence",
+  "canonical_mutation": false,
+  "insights": [
+    {
+      "id": "industry:funding",
+      "title": "Common policy rates transmit through different bank business models",
+      "semantic_type": "insight",
+      "subjects": [
+        "UK Banking"
+      ],
+      "source_ids": [
+        "MPC-NOV",
+        "NBS-FY",
+        "CLEAR-RESULTS",
+        "STAR-FY"
+      ],
+      "method": "PESTLE economic / value chain / profit pools",
+      "economic_mechanism": "Deposit price/pass-through, lending duration and credit cost affect spread banks; payment fees and software royalties affect infrastructure/platform businesses differently.",
+      "existing_response": "Banks already manage funding, product mix and platform development.",
+      "timing": "Dated source periods, not inferred urgency",
+      "counter_evidence": "A 4% rate is not evidence that every bank margin falls; historical annual results predate the November decision.",
+      "decision_boundary": "Bank-specific repricing elasticity, hedges and capacity remain unproven.",
+      "canonical_id": null,
+      "visibility": "owner_research_candidate"
+    },
+    {
+      "id": "industry:customer-choice",
+      "title": "Switching and complaints illuminate different customer mechanisms",
+      "semantic_type": "insight",
+      "subjects": [
+        "UK Banking"
+      ],
+      "source_ids": [
+        "CASS-Q3",
+        "FCA-H126",
+        "FOS-Q2"
+      ],
+      "method": "Five Forces buyer power / customer outcomes",
+      "economic_mechanism": "Switches measure account movement, received complaints measure handling volume, and independent disputes measure a different escalation process.",
+      "existing_response": "CASS and bank complaint operations are existing capabilities.",
+      "timing": "Dated source periods, not inferred urgency",
+      "counter_evidence": "No common customer denominator or matched cohort; Q3 switch totals andQ2 bank net positions cannot be joined as same-period bank performance.",
+      "decision_boundary": "No measured churn cost, harmed-customer percentage or unmet remedial need established.",
+      "canonical_id": null,
+      "visibility": "owner_research_candidate"
+    },
+    {
+      "id": "industry:platform",
+      "title": "Infrastructure and AI dependencies form distinct relational exposures",
+      "semantic_type": "insight",
+      "subjects": [
+        "UK Banking"
+      ],
+      "source_ids": [
+        "RTGS-FORUM",
+        "STAR-AI",
+        "STAR-CLOUD",
+        "NW-TECH",
+        "CLEAR-PAY"
+      ],
+      "method": "PESTLE technological/legal / supplier power / relational SWOT",
+      "economic_mechanism": "Settlement availability, messaging standards and outsourced model/cloud dependencies sit at different layers of the operating value chain.",
+      "existing_response": "Existing bank collaborations, payment access and central-bank sequencing are documented.",
+      "timing": "Dated source periods, not inferred urgency",
+      "counter_evidence": "A named partner or designated provider is not proof of contract size, control failure or unallocated external scope.",
+      "decision_boundary": "Supplier concentration and resilience consequences require exact workload/legal-entity evidence.",
+      "canonical_id": null,
+      "visibility": "owner_research_candidate"
+    },
+    {
+      "id": "industry:consolidation",
+      "title": "Acquisitions distort simple growth and productivity comparisons",
+      "semantic_type": "insight",
+      "subjects": [
+        "Santander UK",
+        "Nationwide",
+        "NatWest"
+      ],
+      "source_ids": [
+        "SAN-Q3",
+        "NBS-FY",
+        "NW-Q3"
+      ],
+      "method": "Industry economics / competitive positioning / value chain",
+      "economic_mechanism": "Acquired balances, partial-year consolidation and acquired wealth assets can raise stock measures without organic customer growth.",
+      "existing_response": "Acquisitions/integration programmes and member/business plans are already announced.",
+      "timing": "Dated source periods, not inferred urgency",
+      "counter_evidence": "Completed corporate choices limit strategic influence; targets are not achieved results.",
+      "decision_boundary": "Incremental integration choices may remain but require source-specific confirmation.",
+      "canonical_id": null,
+      "visibility": "owner_research_candidate"
+    },
+    {
+      "id": "industry:competition",
+      "title": "Distinct strategic groups compete for different economic returns",
+      "semantic_type": "insight",
+      "subjects": [
+        "UK Banking"
+      ],
+      "source_ids": [
+        "NBS-FY",
+        "STAR-FY",
+        "CLEAR-RESULTS",
+        "HSBC-Q3",
+        "OAK-FY"
+      ],
+      "method": "Porter rivalry / strategic groups / industry economics",
+      "economic_mechanism": "Mutual member value, platform licensing, infrastructure fees, ring-fenced lending and specialist cross-border credit are different profit pools.",
+      "existing_response": "Existing business models and capabilities explain differentiated responses.",
+      "timing": "Dated source periods, not inferred urgency",
+      "counter_evidence": "Do not aggregate Group, UK bank, USD/GBP, annual/9-month or normalised/statutory metrics into a ranking or total market value.",
+      "decision_boundary": "No bank-wide universal margin, TAM or available seller revenue is estimated.",
+      "canonical_id": null,
+      "visibility": "owner_research_candidate"
+    }
+  ],
+  "pestle": {
+    "political": [
+      "National Payments Vision and proposed PSR/FCA consolidation: future legal state, not completed abolition (PSR-ACCESS)."
+    ],
+    "economic": [
+      "Rate repricing and heterogeneous funding/credit/fee economics (MPC-NOV, NBS-FY, CLEAR-RESULTS)."
+    ],
+    "social": [
+      "Switching choice, complaint handling, mutual member value and bank-client environmental alignment are different signals (CASS-Q3, FCA-H126, NT-RELEASE)."
+    ],
+    "technological": [
+      "AI/channel capabilities and separate payment/settlement dependencies (STAR-AI, NW-TECH, RTGS-FORUM)."
+    ],
+    "legal": [
+      "PRA legal identity and future conditional PartVII transfer differ from current Group ownership (PRA-NOV, SAN-Q3)."
+    ],
+    "environmental": [
+      "National Trust member resolution expresses a client governance preference; no verified bank breach or contract award (NT-RELEASE)."
+    ]
+  },
+  "porter": {
+    "rivalry": "Incumbents, mutuals, digital, specialist and infrastructure banks have overlapping but distinct markets; no unsourced concentration share.",
+    "entrants": "Revolut mobilisation exit shows a regulated entry pathway; not frictionless entry or immediate mass migration (REV-UK).",
+    "buyers": "Switching volumes and member value show mechanisms, not a measured universal bargaining elasticity (CASS-Q3, NBS-MEMBER).",
+    "suppliers": "Explicit technology collaborations and settlement dependencies matter; no contract/concentration share invented (NW-TECH, STAR-CLOUD, RTGS-FORUM).",
+    "substitutes": "Open Banking account-to-account usage offers an alternative interaction/payment route; cumulative payments are not displaced card revenue (OB-MILESTONE)."
+  },
+  "value_chain": [
+    "Funding and capital → credit origination/risk → servicing and payments → customer outcomes",
+    "Settlement/messaging, fraud controls, cloud/data and software support multiple stages; arrows are analytical functions, not bilateral contracts"
+  ],
+  "profit_pools": [
+    {
+      "pool": "Deposit/lending spread",
+      "scope": "Bank legal entity",
+      "sources": [
+        "HSBC-Q3",
+        "SAN-Q3"
+      ],
+      "limitation": "Stock balances are not revenue or addressable supplier budget"
+    },
+    {
+      "pool": "Payments and embedded infrastructure fees",
+      "scope": "ClearBank Group versus UK bank",
+      "sources": [
+        "CLEAR-RESULTS"
+      ],
+      "limitation": "Normalised and statutory definitions not interchangeable"
+    },
+    {
+      "pool": "Platform licensing",
+      "scope": "Engine business",
+      "sources": [
+        "STAR-FY"
+      ],
+      "limitation": "Platform accounts are not UK banking customers"
+    },
+    {
+      "pool": "Member value and retained surplus",
+      "scope": "Nationwide Group",
+      "sources": [
+        "NBS-FY",
+        "NBS-MEMBER"
+      ],
+      "limitation": "Not a shareholder profit-maximisation ranking"
+    }
+  ],
+  "relational_swot": {
+    "strength": "Existing capital, profitable operations, technology responses and customer franchises contradict universal distress (NW-Q3, HSBC-Q3, STAR-FY).",
+    "weakness_hypothesis": "Attribution of integration/platform net benefits can be difficult; missing disclosure is not an established control deficiency.",
+    "opportunity_hypothesis": "Better measurement of client/product economics could aid decisions; no bank demand, scope or budget established.",
+    "threat": "Funding competition, credit outcomes and infrastructure dependencies can affect different models; exposure and consequence require entity-specific evidence."
+  }
+}

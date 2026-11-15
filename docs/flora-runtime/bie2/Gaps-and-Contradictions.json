@@ -1,0 +1,61 @@
+{
+  "owner_only": true,
+  "canonical_mutation": false,
+  "items": [
+    {
+      "id": "gap:runtime",
+      "issue": "Owner-reported deployedb5b source not independently proven: authorised /deployment and /health reads returned URLError",
+      "disposition": "No live release assurance claimed; local fixture and hosted CI only"
+    },
+    {
+      "id": "gap:rights",
+      "issue": "Issuer sites and candidate relationship facts are not existing admitted source permissions",
+      "disposition": "Research-only links and limited paraphrases; individual rights/source/acceptance review before runtime"
+    },
+    {
+      "id": "gap:periods",
+      "issue": "Monzo exactFY dates/perimeter and OakNorth profit tax/basis unresolved",
+      "disposition": "Not counted among six reconciled deep exemplars; do not peer-rank"
+    },
+    {
+      "id": "gap:clearbank",
+      "issue": "Issuer growth percentages differ:66/65 deposits,58/57 payments,54/53 UK profit; fee share47%statutory versus~75%normalised",
+      "disposition": "Use disclosed levels and retain definition/rounding uncertainty; no fabricated reconciliation"
+    },
+    {
+      "id": "gap:dates",
+      "issue": "NatWest and Santander Q3 exact publication days; FOS release exact day unresolved",
+      "disposition": "Day-qualified news counts exclude these publication dates; source reporting periods retained"
+    },
+    {
+      "id": "gap:nt-bank",
+      "issue": "Primary National Trust AGM pages do not name Barclays; checkpoint/secondary headlines do",
+      "disposition": "No verified National Trust→Barclays customer edge; resolve primary current banking identity separately"
+    },
+    {
+      "id": "gap:participants",
+      "issue": "Current operator CHAPS participant page and Pay.UK participant URL not retrievable; ClearBank issuer provides bounded access claim",
+      "disposition": "Label issuer-reported access, not operator-certified membership; do not infer other bank membership"
+    },
+    {
+      "id": "gap:cohorts",
+      "issue": "Major/specialist/mutual breadth includes identity-only actors; Visa/Mastercard/BPO and nonbank counterparts not comprehensively source-verified",
+      "disposition": "Named remaining tranche; no 100% research claim"
+    },
+    {
+      "id": "gap:pdf",
+      "issue": "Monzo58.7MB and ClearBank22.2MB originals exceed reader limit; Investegate summaries/gate not original sources",
+      "disposition": "No bypass/download, no source-byte hashes or claimed archive; retain exact limits and use permitted issuer HTML"
+    },
+    {
+      "id": "gap:current-window",
+      "issue": "Owner16Oct–15Nov inclusive is31days although described as30day",
+      "disposition": "Retain literal commission bounds and separate event/publication windows"
+    },
+    {
+      "id": "gap:canonical",
+      "issue": "Eight prior EAI forms unexecuted; Proposed ADR027; SEC/ONS source gates unchanged",
+      "disposition": "No owner acceptance, import or publisher admission performed"
+    }
+  ]
+}

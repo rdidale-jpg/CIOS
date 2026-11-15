@@ -17,7 +17,7 @@ ROOT=Path(__file__).resolve().parents[1]
 
 @pytest.mark.parametrize('scope',a.KEYS)
 def test_same_agenda_across_lenses_preserves_issue_subject_selection_and_native_urls(scope):
- rows=a.agenda(scope);assert len(rows)==3  # One bounded EAI-1 addition per scope.
+ rows=a.agenda(scope);assert len(rows)==(4 if scope=='banking'else 3)  # BIE-2 adds one bounded Banking view.
  for stream in v.SCOPES[scope]['streams']:
   q={'stream':[stream],'agenda':[rows[0].key]}
   if scope!='uk':q.update(selected=['lloyds'],layer=['regulators'])
@@ -174,9 +174,9 @@ def test_all_161_prior_history_expectations_and_comparator_are_exactly_preserved
  original=subprocess.check_output(['git','show','fe66516:tools/research/history_integrity.py'],cwd=ROOT).decode()
  historical=types.ModuleType('int1_historical_source_guard');exec(compile(original,'historical_source_guard','exec'),historical.__dict__)
  old=historical.approved_history(ROOT);new=current.approved_history(ROOT)
- assert len(old)==161 and len(new)==169
+ assert len(old)==161 and len(new)==171
  assert {k:new[k] for k in old}==old
- assert set(new)-set(old)==set(current.INT1_CANDIDATE_ADDITIONS)|set(current.EAI1_CANDIDATE_ADDITIONS)
+ assert set(new)-set(old)==set(current.INT1_CANDIDATE_ADDITIONS)|set(current.EAI1_CANDIDATE_ADDITIONS)|set(current.BIE2_CANDIDATE_ADDITIONS)
  # The byte comparator itself is untouched, not replaced by an exclusion.
  section=original.split('def compare_history(',1)[1].split('\n\ndef verify_history',1)[0]
  assert inspect.getsource(current.compare_history).split('def compare_history(',1)[1].strip()==section.strip()
