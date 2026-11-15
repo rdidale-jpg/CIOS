@@ -1,0 +1,28 @@
+- region "Financial performance":
+  - link "Close Financial performance":
+    - /url: /enterprises/lloyds?stream=inside#label-economics
+    - text: ×
+  - heading "Financial performance" [level=2]
+  - article:
+    - paragraph: "Reported: Group customer deposits at September-end: GBP502.8bn."
+    - paragraph: Nine months ended / balance sheet at 30 September 2026
+    - group:
+      - text: Sources & reasoning
+      - paragraph: Lloyds Banking Group plc, consolidated Group unless stated · Nine months ended / balance sheet at 30 September 2026
+      - paragraph: GBP billion; balance at 30 September 2026
+      - paragraph: Published source · reviewed excerpt
+      - paragraph: Deposits are a balance-sheet stock, not income or a supplier budget.
+      - paragraph:
+        - link "Lloyds Q3 2026 statement":
+          - /url: https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf
+        - text: · 2026-10-29
+      - blockquote: Customer deposits of £502.8 billion
+      - paragraph: PDF page 2 / printed page 1, deposits paragraph
+  - article:
+    - paragraph: "Reported: Reported nine-month statutory pretax profit: GBP6.6bn."
+    - paragraph: Nine months ended / balance sheet at 30 September 2026
+    - group: Sources & reasoning
+  - article:
+    - paragraph: "Reported: Management target The 2030 efficiency ambition is a cost-to-income ratio below 45%."
+    - paragraph: Strategy for 2027–2030
+    - group: Sources & reasoning

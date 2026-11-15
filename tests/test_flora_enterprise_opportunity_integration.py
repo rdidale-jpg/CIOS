@@ -117,7 +117,8 @@ import re
 
 @pytest.mark.parametrize('cid',['RCO-LBG-002','RCO-LBG-001','RCO-LBG-009'])
 def test_priority_route_has_one_principal_dossier_and_visible_controlled_capture(web,cid):
-    status,html,_=web('/flora/banking/research/candidates/'+cid,authenticated=False)
+    assert web('/flora/banking/research/candidates/'+cid,authenticated=False)[0]==403
+    status,html,_=web('/flora/banking/research/candidates/'+cid)
     assert status==200
     assert "id='full-research-evidence'" in html
     assert "class='cv-full-research' id='full-research-evidence' open" not in html
@@ -131,7 +132,7 @@ def test_priority_route_has_one_principal_dossier_and_visible_controlled_capture
     owner=re.search("id='eo-module-owner'>(.*?)</article>",html,re.S).group(1)
     assert 'Unknown' in financials and 'unverified' in owner
     capture=html.split("id='commercial-capture'",1)[1].split('</section>',1)[0]
-    assert '<form' not in capture
+    assert '<form'in capture and 'csrf'in capture and '/flora/sales/capture'in capture
 
 
 def test_overlay_candidate_inspectors_preserve_all_identities_and_separate_ratings():

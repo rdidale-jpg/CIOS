@@ -29,3 +29,12 @@
 @media(max-width:900px){.vex-page .vex-global{padding:12px 24px}}
 @media(max-width:600px){.vex-page .vex-global{padding:10px 18px;min-height:64px;align-items:center}.vex-page .vex-global .wordmark{font-size:17px;letter-spacing:2px}.vex-page .vex-global .menu-sheet{top:66px;max-height:calc(100svh - 85px)}.vex-page .selection-note{margin:10px 20px}}
 @media(forced-colors:active){.vex-page .stream-switcher a[aria-current]{background:Canvas;color:CanvasText;border:2px solid Highlight}.vex-page .spot{background:Canvas;color:CanvasText}}
+/* ISP-1: semantic labels are quiet text, independent of evidence/authority. */
+.vex-page .intelligence-label,.vex-page .intelligence-state{font-size:.78rem;font-weight:600;color:#355c4d;letter-spacing:.02em}
+.vex-page .intelligence-statement{max-width:880px;margin:16px 0;padding:4px 0}
+.vex-page .intelligence-statement>p:first-child{line-height:1.6;margin-bottom:6px}
+.vex-page .intelligence-source{font-size:.88rem;color:#36564a}
+.vex-page .intelligence-source summary{min-height:44px;cursor:pointer;display:list-item;align-content:center}
+.vex-page .intelligence-source blockquote{margin:12px 0;padding-left:14px;border-left:2px solid #a0b19c}
+.vex-page .intelligence-source p{font-size:.9rem}
+@media(forced-colors:active){.vex-page .intelligence-label,.vex-page .intelligence-state{color:CanvasText}}

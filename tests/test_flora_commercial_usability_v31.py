@@ -116,5 +116,6 @@ def test_public_summary_does_not_lookup_private_records(web,actor,monkeypatch):
     def forbidden(*a,**k):raise AssertionError('Public page attempted private lookup')
     monkeypatch.setattr(sales,'list_opportunities',forbidden);monkeypatch.setattr(sales,'get_opportunity',forbidden)
     for path in ('/industries/banking?lens=commercial','/flora/banking/research/candidates/'+ORIGIN):
-        status,h,_=web(path,authenticated=False);assert status==200 and r['id'] not in h
+        assert web(path,authenticated=False)[0]==403
+        status,h,_=web(path);assert status==200 and r['id'] not in h
     assert store_hash()==before

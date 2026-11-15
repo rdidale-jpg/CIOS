@@ -83,7 +83,9 @@ def test_public_depth_inspection_never_creates_or_reads_private_pipeline(web,act
     def forbidden(*a,**k):raise AssertionError('Private enumeration from public research')
     monkeypatch.setattr(sales,'list_opportunities',forbidden)
     for path in ['/enterprises/lloyds','/industries/banking?lens=pestle','/opportunities','/flora/banking/research/candidates/RCO-LBG-009']:
-        assert web(path,authenticated=False)[0]==200
+        from cios.applications.flora.public_routes import owner_inspection_request_target
+        assert web(path,authenticated=False)[0]==(403 if owner_inspection_request_target(path)else 200)
+        assert web(path)[0]==200
     assert store_hash()==before
 
 
