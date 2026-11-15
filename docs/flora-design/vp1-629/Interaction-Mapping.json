@@ -1,0 +1,364 @@
+{
+  "baseline": "8a53777d1dec359f56b66e533d512c0a86881939",
+  "kind": "Acceptance planning map, not a second route/identity registry",
+  "geometry_changed": false,
+  "subjects": [
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-a",
+      "label": "Agriculture & fishing",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-b",
+      "label": "Mining & quarrying",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-d",
+      "label": "Energy supply",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-e",
+      "label": "Water & waste",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-c",
+      "label": "Manufacturing",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-f",
+      "label": "Construction",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-n",
+      "label": "Business support",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-h",
+      "label": "Transport & logistics",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-p",
+      "label": "Education",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-q",
+      "label": "Health & social care",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-j",
+      "label": "Information & communication",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-m",
+      "label": "Professional services",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-l",
+      "label": "Real estate",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-k",
+      "label": "Finance & insurance",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-o",
+      "label": "Public administration",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-g",
+      "label": "Retail & wholesale",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-i",
+      "label": "Hospitality & food",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-r",
+      "label": "Arts & recreation",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-s",
+      "label": "Other services",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-landscape",
+      "accepted_subject": "uk-sic07-t",
+      "label": "Household employment",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-forces",
+      "accepted_subject": "economic",
+      "label": "Economic growth",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-forces",
+      "accepted_subject": "technological",
+      "label": "Cyber resilience",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-forces",
+      "accepted_subject": "legal",
+      "label": "Cyber reform",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "uk-forces",
+      "accepted_subject": "environmental",
+      "label": "Climate reporting",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "banking-landscape",
+      "accepted_subject": "barclays",
+      "label": "Barclays",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "banking-landscape",
+      "accepted_subject": "hsbc-uk",
+      "label": "HSBC UK",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "banking-landscape",
+      "accepted_subject": "lloyds",
+      "label": "Lloyds Banking Group",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Prototype direct journey"
+    },
+    {
+      "accepted_scene": "banking-landscape",
+      "accepted_subject": "natwest",
+      "label": "NatWest Group",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "banking-landscape",
+      "accepted_subject": "santander-uk",
+      "label": "Santander UK",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "banking-landscape",
+      "accepted_subject": "boe",
+      "label": "Bank of England",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "banking-landscape",
+      "accepted_subject": "pra",
+      "label": "PRA",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "banking-landscape",
+      "accepted_subject": "fca",
+      "label": "FCA",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "banking-landscape",
+      "accepted_subject": "payments",
+      "label": "Payments",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "banking-forces",
+      "accepted_subject": "UK-RATE-NOV26",
+      "label": "Rates & margins",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "banking-forces",
+      "accepted_subject": "UK-PRA-REPORT27",
+      "label": "Resilience reporting",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "banking-forces",
+      "accepted_subject": "LBG-ENVOY-CONTROLS",
+      "label": "AI & control",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "banking-forces",
+      "accepted_subject": "UK-VALUE",
+      "label": "Competition & trust",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-inside",
+      "accepted_subject": "businesses",
+      "label": "Businesses & brands",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-inside",
+      "accepted_subject": "economics",
+      "label": "Financial performance",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-inside",
+      "accepted_subject": "operations",
+      "label": "Service operations",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-inside",
+      "accepted_subject": "technology",
+      "label": "Technology & data",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-inside",
+      "accepted_subject": "governance",
+      "label": "Governance & change",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-landscape",
+      "accepted_subject": "customers",
+      "label": "Customer groups",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-landscape",
+      "accepted_subject": "businesses",
+      "label": "Peers & market context",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-landscape",
+      "accepted_subject": "economics",
+      "label": "Payments & oversight",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-landscape",
+      "accepted_subject": "operations",
+      "label": "Business customers",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-landscape",
+      "accepted_subject": "technology",
+      "label": "Suppliers & partners",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-forces",
+      "accepted_subject": "LBG-A2030-PLATFORMS",
+      "label": "Core modernisation",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-forces",
+      "accepted_subject": "LBG-A2030-CIR",
+      "label": "Cost discipline",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-forces",
+      "accepted_subject": "LBG-ENVOY-CONTROLS",
+      "label": "AI benefit & control",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    },
+    {
+      "accepted_scene": "lloyds-forces",
+      "accepted_subject": "LBG-BRAND26-TIMING",
+      "label": "Brand & service change",
+      "existing_geometry_preserved": true,
+      "design_disposition": "Static Main/topic reference where demonstrated; retain existing address in any later implementation. Not all accepted hotspots are wired in this bounded prototype."
+    }
+  ]
+}

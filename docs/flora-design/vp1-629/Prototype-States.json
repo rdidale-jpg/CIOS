@@ -1,0 +1,155 @@
+{
+  "baseline": "8a53777d1dec359f56b66e533d512c0a86881939",
+  "as_of": "2026-11-15",
+  "states": [
+    {
+      "file": "uk-landscape.html",
+      "scope": "uk",
+      "stream": "landscape",
+      "focus": "overview"
+    },
+    {
+      "file": "uk-landscape-economics.html",
+      "scope": "uk",
+      "stream": "landscape",
+      "focus": "economics"
+    },
+    {
+      "file": "uk-landscape-agenda.html",
+      "scope": "uk",
+      "stream": "landscape",
+      "focus": "agenda"
+    },
+    {
+      "file": "uk-forces.html",
+      "scope": "uk",
+      "stream": "forces",
+      "focus": "overview"
+    },
+    {
+      "file": "uk-forces-economics.html",
+      "scope": "uk",
+      "stream": "forces",
+      "focus": "economics"
+    },
+    {
+      "file": "uk-forces-agenda.html",
+      "scope": "uk",
+      "stream": "forces",
+      "focus": "agenda"
+    },
+    {
+      "file": "banking-landscape.html",
+      "scope": "banking",
+      "stream": "landscape",
+      "focus": "overview"
+    },
+    {
+      "file": "banking-landscape-regulation.html",
+      "scope": "banking",
+      "stream": "landscape",
+      "focus": "regulation"
+    },
+    {
+      "file": "banking-landscape-agenda.html",
+      "scope": "banking",
+      "stream": "landscape",
+      "focus": "agenda"
+    },
+    {
+      "file": "banking-forces.html",
+      "scope": "banking",
+      "stream": "forces",
+      "focus": "overview"
+    },
+    {
+      "file": "banking-forces-regulation.html",
+      "scope": "banking",
+      "stream": "forces",
+      "focus": "regulation"
+    },
+    {
+      "file": "banking-forces-agenda.html",
+      "scope": "banking",
+      "stream": "forces",
+      "focus": "agenda"
+    },
+    {
+      "file": "lloyds-inside.html",
+      "scope": "lloyds",
+      "stream": "inside",
+      "focus": "overview"
+    },
+    {
+      "file": "lloyds-inside-economics.html",
+      "scope": "lloyds",
+      "stream": "inside",
+      "focus": "economics"
+    },
+    {
+      "file": "lloyds-inside-technology.html",
+      "scope": "lloyds",
+      "stream": "inside",
+      "focus": "technology"
+    },
+    {
+      "file": "lloyds-inside-agenda.html",
+      "scope": "lloyds",
+      "stream": "inside",
+      "focus": "agenda"
+    },
+    {
+      "file": "lloyds-landscape.html",
+      "scope": "lloyds",
+      "stream": "landscape",
+      "focus": "overview"
+    },
+    {
+      "file": "lloyds-landscape-economics.html",
+      "scope": "lloyds",
+      "stream": "landscape",
+      "focus": "economics"
+    },
+    {
+      "file": "lloyds-landscape-technology.html",
+      "scope": "lloyds",
+      "stream": "landscape",
+      "focus": "technology"
+    },
+    {
+      "file": "lloyds-landscape-agenda.html",
+      "scope": "lloyds",
+      "stream": "landscape",
+      "focus": "agenda"
+    },
+    {
+      "file": "lloyds-forces.html",
+      "scope": "lloyds",
+      "stream": "forces",
+      "focus": "overview"
+    },
+    {
+      "file": "lloyds-forces-economics.html",
+      "scope": "lloyds",
+      "stream": "forces",
+      "focus": "economics"
+    },
+    {
+      "file": "lloyds-forces-technology.html",
+      "scope": "lloyds",
+      "stream": "forces",
+      "focus": "technology"
+    },
+    {
+      "file": "lloyds-forces-agenda.html",
+      "scope": "lloyds",
+      "stream": "forces",
+      "focus": "agenda"
+    }
+  ],
+  "concepts": [
+    "concept-news.html",
+    "concept-tools.html"
+  ],
+  "entry": "index.html"
+}

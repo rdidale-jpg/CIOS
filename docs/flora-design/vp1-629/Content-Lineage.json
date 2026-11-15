@@ -1,0 +1,30 @@
+{
+  "baseline": "8a53777d1dec359f56b66e533d512c0a86881939",
+  "as_of": "2026-11-15",
+  "kind": "Static design export, not a source registry or new intelligence owner",
+  "source_owners": [
+    {
+      "path": "cios/applications/flora/visual_v2_assets/economy.json",
+      "sha256": "78b4bb90c02b9af8132d7f8eca3c1832b6a1047feb382f9473d463d44e1f31cd"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/Macro-Context-v1.json",
+      "sha256": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/INT1-FCA-Candidate.json",
+      "sha256": "511b5f5225fa6fc005ebdc5484aad75539c1f9e64df8201591a5c628aedec63b"
+    }
+  ],
+  "new_measurements": false,
+  "canonical_mutation": false,
+  "pending_branch_content_incorporated": false,
+  "design_derivatives": {
+    "rounding_estimate": "Existing frozen public ONS extract only; estimated \u00a3212bn, conditional \u00a3211\u2013214bn rounding range. Assumption is not a published confidence interval. No new ONS import.",
+    "hypothesis": "Static illustrative, falsifiable AI-adoption hypothesis over existing merged disclosures, not proven demand or an accepted finding."
+  }
+}
