@@ -1,0 +1,410 @@
+{
+  "authority": "candidate_intelligence",
+  "scope": "uk",
+  "subject_ref": "GB",
+  "source": {
+    "id": "EAI-UK-CYBER26",
+    "title": "DSIT Cyber Security Breaches Survey 2025/2026",
+    "publisher": "UK government / DSIT",
+    "url": "https://www.gov.uk/government/statistics/cyber-security-breaches-survey-20252026/cyber-security-breaches-survey-20252026",
+    "retrieval_url": "https://www.gov.uk/government/statistics/cyber-security-breaches-survey-20252026/cyber-security-breaches-survey-20252026",
+    "publication_date": "2026-04-30",
+    "publication_date_evidence": "Date stated on the inspected official source",
+    "reporting_period": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+    "retrieved_at": "2026-11-15T12:07:22.935143+00:00",
+    "reviewed_by": "Codex source-content/rights review; no owner Evidence acceptance",
+    "review_notes": "Original source inspected through approved web research tool; bounded reviewed excerpt only, not an original-file archive. Independent review correction: retained methodology/exclusions, weighting, large-business definition and recall window, not just headline estimates.",
+    "research_domain": "macro",
+    "verification": "primary_retrieved",
+    "content_kind": "reviewed_web_excerpt",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn903038view3 / turn497635view0 / turn497635view1",
+    "retrieval_extent": "Located reviewed web passages; separators normalised for numerical rows; original bytes unavailable",
+    "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt",
+    "text_sha256": "b9abe8eb681cb0310dbf7eec719fc66de5bda0fca2920b0cc02a94a7efc92646",
+    "primary_content_sha256": null,
+    "limitation": "Weighted self-reported survey estimates; August–December2025 fieldwork, preceding12months per interview. Identified/reported events only, not every hidden attack or a named bank incident. Aggregate prevalence remained in line with prior year.",
+    "excerpts": [
+      {
+        "locator": "Summary line112; prevalence fragment",
+        "quote": "Just over four in ten businesses (43%)"
+      },
+      {
+        "locator": "Summary line113; trend fragment",
+        "quote": "Overall prevalence of cyber breaches or attacks has remained in line with last year"
+      },
+      {
+        "locator": "Summary line114; size comparison",
+        "quote": "medium (65%) and large (69%) businesses were more likely to have experienced a cyber breach or attack in the last 12 months compared to micro (42%) and small (46%) businesses."
+      },
+      {
+        "locator": "Methodology1.3 line206; fieldwork fragment",
+        "quote": "Between August to December 2025"
+      },
+      {
+        "locator": "Methodology1.3 line206; weighting",
+        "quote": "The data for businesses and charities have been weighted to be statistically representative of these two populations."
+      },
+      {
+        "locator": "Methodology1.3 line208; eligibility",
+        "quote": "Sole traders and public-sector organisations (excluding education) are outside the scope of the survey. In addition, businesses with no IT (Information Technology) capacity or online presence were deemed ineligible."
+      },
+      {
+        "locator": "Subgroups1.6 line262; large-business definition",
+        "quote": "large businesses (250 or more employees)"
+      },
+      {
+        "locator": "Footnote3 line1800; recall window",
+        "quote": "where organisations were asked about their cyber security experiences over the preceding 12 months."
+      },
+      {
+        "locator": "Summary line111; identification limitation",
+        "quote": "The survey only includes the breaches or attacks that organisations were able to identify and willing to report."
+      }
+    ],
+    "rights": {
+      "status": "permitted_ogl_factual_extract",
+      "licence": "UK Open Government Licence v3.0",
+      "terms_url": "https://www.gov.uk/government/statistics/cyber-security-breaches-survey-20252026/cyber-security-breaches-survey-20252026",
+      "terms_clause": "Official GOV.UK OGL footer; source statistics only",
+      "reviewed_at": "2026-11-15",
+      "review_reference": "turn903038view3",
+      "attribution": "Contains public sector information licensed under the Open Government Licence v3.0.",
+      "extent": "Nine short located summary/methodology fragments; under200 quoted words, no images/logos/full report.",
+      "limitations": "Weighted self-reported survey estimates; August–December2025 fieldwork, preceding12months per interview. Identified/reported events only, not every hidden attack or a named bank incident. Aggregate prevalence remained in line with prior year.",
+      "permission_is_not_acceptance": true
+    },
+    "supported_force_kinds": [
+      "observed_trend"
+    ]
+  },
+  "observations": [
+    {
+      "source_id": "EAI-UK-CYBER26",
+      "segment": {
+        "segment_id": "EAI-UK-CYBER26::quote-a5fcc847ff696f98",
+        "asset_id": "EAI-UK-CYBER26",
+        "section_heading": "Summary line112; prevalence fragment",
+        "content": "Just over four in ten businesses (43%)",
+        "content_hash": "a5fcc847ff696f98f71ba16d19920f8f808263b6b9266a21f9f8dc7c7f68b5d8",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "EAI-UK-CYBER-1",
+        "claim_type": "survey_estimate_and_context",
+        "statement": "Just over four in ten businesses (43%)",
+        "source_asset_id": "EAI-UK-CYBER26",
+        "source_segment_id": "EAI-UK-CYBER26::quote-a5fcc847ff696f98",
+        "scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "subject": "EAI-UK-CYBER26",
+        "predicate": "reports",
+        "object": "Just over four in ten businesses (43%)",
+        "time_scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "participant_scope": "UK eligible surveyed businesses/charities only",
+        "enterprise_scope": "",
+        "confidence": "Source passage reviewed; retain survey scope and uncertainty",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "EAI-UK-CYBER26::quote-a5fcc847ff696f98"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "EAI-UK-CYBER26",
+      "segment": {
+        "segment_id": "EAI-UK-CYBER26::quote-ae6c5214d1819bfc",
+        "asset_id": "EAI-UK-CYBER26",
+        "section_heading": "Summary line113; trend fragment",
+        "content": "Overall prevalence of cyber breaches or attacks has remained in line with last year",
+        "content_hash": "ae6c5214d1819bfc491da16f26f51906fbe87bb598903501d40df415e842eadf",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "EAI-UK-CYBER-2",
+        "claim_type": "survey_estimate_and_context",
+        "statement": "Overall prevalence of cyber breaches or attacks has remained in line with last year",
+        "source_asset_id": "EAI-UK-CYBER26",
+        "source_segment_id": "EAI-UK-CYBER26::quote-ae6c5214d1819bfc",
+        "scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "subject": "EAI-UK-CYBER26",
+        "predicate": "reports",
+        "object": "Overall prevalence of cyber breaches or attacks has remained in line with last year",
+        "time_scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "participant_scope": "UK eligible surveyed businesses/charities only",
+        "enterprise_scope": "",
+        "confidence": "Source passage reviewed; retain survey scope and uncertainty",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "EAI-UK-CYBER26::quote-ae6c5214d1819bfc"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "EAI-UK-CYBER26",
+      "segment": {
+        "segment_id": "EAI-UK-CYBER26::quote-2ea7ddafc34831ca",
+        "asset_id": "EAI-UK-CYBER26",
+        "section_heading": "Summary line114; size comparison",
+        "content": "medium (65%) and large (69%) businesses were more likely to have experienced a cyber breach or attack in the last 12 months compared to micro (42%) and small (46%) businesses.",
+        "content_hash": "2ea7ddafc34831ca0fa3df084f9721f36f2439b74f56642ae3d82237fe0bb345",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "EAI-UK-CYBER-3",
+        "claim_type": "survey_estimate_and_context",
+        "statement": "medium (65%) and large (69%) businesses were more likely to have experienced a cyber breach or attack in the last 12 months compared to micro (42%) and small (46%) businesses.",
+        "source_asset_id": "EAI-UK-CYBER26",
+        "source_segment_id": "EAI-UK-CYBER26::quote-2ea7ddafc34831ca",
+        "scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "subject": "EAI-UK-CYBER26",
+        "predicate": "reports",
+        "object": "medium (65%) and large (69%) businesses were more likely to have experienced a cyber breach or attack in the last 12 months compared to micro (42%) and small (46%) businesses.",
+        "time_scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "participant_scope": "UK eligible surveyed businesses/charities only",
+        "enterprise_scope": "",
+        "confidence": "Source passage reviewed; retain survey scope and uncertainty",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "EAI-UK-CYBER26::quote-2ea7ddafc34831ca"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "EAI-UK-CYBER26",
+      "segment": {
+        "segment_id": "EAI-UK-CYBER26::quote-2b6e0dd7839988c2",
+        "asset_id": "EAI-UK-CYBER26",
+        "section_heading": "Methodology1.3 line206; fieldwork fragment",
+        "content": "Between August to December 2025",
+        "content_hash": "2b6e0dd7839988c2e57105809246c68fe5513472ff3d6324b4aea396144df446",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "EAI-UK-CYBER-4",
+        "claim_type": "survey_estimate_and_context",
+        "statement": "Between August to December 2025",
+        "source_asset_id": "EAI-UK-CYBER26",
+        "source_segment_id": "EAI-UK-CYBER26::quote-2b6e0dd7839988c2",
+        "scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "subject": "EAI-UK-CYBER26",
+        "predicate": "reports",
+        "object": "Between August to December 2025",
+        "time_scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "participant_scope": "UK eligible surveyed businesses/charities only",
+        "enterprise_scope": "",
+        "confidence": "Source passage reviewed; retain survey scope and uncertainty",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "EAI-UK-CYBER26::quote-2b6e0dd7839988c2"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "EAI-UK-CYBER26",
+      "segment": {
+        "segment_id": "EAI-UK-CYBER26::quote-3447c95d1de9c9ef",
+        "asset_id": "EAI-UK-CYBER26",
+        "section_heading": "Methodology1.3 line206; weighting",
+        "content": "The data for businesses and charities have been weighted to be statistically representative of these two populations.",
+        "content_hash": "3447c95d1de9c9efd34b9c38b562879937dbcf9583c5b7cb3d95094fbff0ac77",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "EAI-UK-CYBER-5",
+        "claim_type": "survey_estimate_and_context",
+        "statement": "The data for businesses and charities have been weighted to be statistically representative of these two populations.",
+        "source_asset_id": "EAI-UK-CYBER26",
+        "source_segment_id": "EAI-UK-CYBER26::quote-3447c95d1de9c9ef",
+        "scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "subject": "EAI-UK-CYBER26",
+        "predicate": "reports",
+        "object": "The data for businesses and charities have been weighted to be statistically representative of these two populations.",
+        "time_scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "participant_scope": "UK eligible surveyed businesses/charities only",
+        "enterprise_scope": "",
+        "confidence": "Source passage reviewed; retain survey scope and uncertainty",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "EAI-UK-CYBER26::quote-3447c95d1de9c9ef"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "EAI-UK-CYBER26",
+      "segment": {
+        "segment_id": "EAI-UK-CYBER26::quote-62e0de506507c59e",
+        "asset_id": "EAI-UK-CYBER26",
+        "section_heading": "Methodology1.3 line208; eligibility",
+        "content": "Sole traders and public-sector organisations (excluding education) are outside the scope of the survey. In addition, businesses with no IT (Information Technology) capacity or online presence were deemed ineligible.",
+        "content_hash": "62e0de506507c59ed5fb478ce8d4032a85fcf54a484f4cda1db869e29e50f5c7",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "EAI-UK-CYBER-6",
+        "claim_type": "survey_estimate_and_context",
+        "statement": "Sole traders and public-sector organisations (excluding education) are outside the scope of the survey. In addition, businesses with no IT (Information Technology) capacity or online presence were deemed ineligible.",
+        "source_asset_id": "EAI-UK-CYBER26",
+        "source_segment_id": "EAI-UK-CYBER26::quote-62e0de506507c59e",
+        "scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "subject": "EAI-UK-CYBER26",
+        "predicate": "reports",
+        "object": "Sole traders and public-sector organisations (excluding education) are outside the scope of the survey. In addition, businesses with no IT (Information Technology) capacity or online presence were deemed ineligible.",
+        "time_scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "participant_scope": "UK eligible surveyed businesses/charities only",
+        "enterprise_scope": "",
+        "confidence": "Source passage reviewed; retain survey scope and uncertainty",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "EAI-UK-CYBER26::quote-62e0de506507c59e"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "EAI-UK-CYBER26",
+      "segment": {
+        "segment_id": "EAI-UK-CYBER26::quote-fa30a9f46899bdef",
+        "asset_id": "EAI-UK-CYBER26",
+        "section_heading": "Subgroups1.6 line262; large-business definition",
+        "content": "large businesses (250 or more employees)",
+        "content_hash": "fa30a9f46899bdef7d6379e4f5284459d5a0fcd39c71034d722cd0f13aa29f77",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "EAI-UK-CYBER-7",
+        "claim_type": "survey_estimate_and_context",
+        "statement": "large businesses (250 or more employees)",
+        "source_asset_id": "EAI-UK-CYBER26",
+        "source_segment_id": "EAI-UK-CYBER26::quote-fa30a9f46899bdef",
+        "scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "subject": "EAI-UK-CYBER26",
+        "predicate": "reports",
+        "object": "large businesses (250 or more employees)",
+        "time_scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "participant_scope": "UK eligible surveyed businesses/charities only",
+        "enterprise_scope": "",
+        "confidence": "Source passage reviewed; retain survey scope and uncertainty",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "EAI-UK-CYBER26::quote-fa30a9f46899bdef"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "EAI-UK-CYBER26",
+      "segment": {
+        "segment_id": "EAI-UK-CYBER26::quote-38e1124f54924580",
+        "asset_id": "EAI-UK-CYBER26",
+        "section_heading": "Footnote3 line1800; recall window",
+        "content": "where organisations were asked about their cyber security experiences over the preceding 12 months.",
+        "content_hash": "38e1124f54924580ad4070a485f8007fbac51edc5fb75d8069c5598b4f925eb5",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "EAI-UK-CYBER-8",
+        "claim_type": "survey_estimate_and_context",
+        "statement": "where organisations were asked about their cyber security experiences over the preceding 12 months.",
+        "source_asset_id": "EAI-UK-CYBER26",
+        "source_segment_id": "EAI-UK-CYBER26::quote-38e1124f54924580",
+        "scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "subject": "EAI-UK-CYBER26",
+        "predicate": "reports",
+        "object": "where organisations were asked about their cyber security experiences over the preceding 12 months.",
+        "time_scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "participant_scope": "UK eligible surveyed businesses/charities only",
+        "enterprise_scope": "",
+        "confidence": "Source passage reviewed; retain survey scope and uncertainty",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "EAI-UK-CYBER26::quote-38e1124f54924580"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "EAI-UK-CYBER26",
+      "segment": {
+        "segment_id": "EAI-UK-CYBER26::quote-84c95509f8147d63",
+        "asset_id": "EAI-UK-CYBER26",
+        "section_heading": "Summary line111; identification limitation",
+        "content": "The survey only includes the breaches or attacks that organisations were able to identify and willing to report.",
+        "content_hash": "84c95509f8147d6392a180c7fb677538d752c6e660e9746751b4ba6e004d27d7",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "EAI-UK-CYBER-9",
+        "claim_type": "survey_estimate_and_context",
+        "statement": "The survey only includes the breaches or attacks that organisations were able to identify and willing to report.",
+        "source_asset_id": "EAI-UK-CYBER26",
+        "source_segment_id": "EAI-UK-CYBER26::quote-84c95509f8147d63",
+        "scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "subject": "EAI-UK-CYBER26",
+        "predicate": "reports",
+        "object": "The survey only includes the breaches or attacks that organisations were able to identify and willing to report.",
+        "time_scope": "UK eligible business/charity survey; August–December 2025 fieldwork; preceding 12 months per interview",
+        "participant_scope": "UK eligible surveyed businesses/charities only",
+        "enterprise_scope": "",
+        "confidence": "Source passage reviewed; retain survey scope and uncertainty",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "EAI-UK-CYBER26::quote-84c95509f8147d63"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    }
+  ],
+  "canonical_mutation": false,
+  "cutoff": "2026-11-15",
+  "production_acceptance": "unverified"
+}

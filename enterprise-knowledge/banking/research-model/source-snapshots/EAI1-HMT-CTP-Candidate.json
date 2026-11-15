@@ -1,0 +1,72 @@
+{
+  "authority": "candidate_intelligence",
+  "scope": "banking",
+  "subject_ref": "BK-IND-002",
+  "source": {
+    "id": "EAI-HMT-CTP26",
+    "title": "HM Treasury critical third-party designation",
+    "publisher": "HM Treasury",
+    "url": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+    "retrieval_url": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+    "publication_date": "2026-07-10",
+    "publication_date_evidence": "Date stated on the inspected official source",
+    "reporting_period": "UK financial-system CTP designations effective 13 July 2026",
+    "retrieved_at": "2026-11-15T12:07:22.935143+00:00",
+    "reviewed_by": "Codex source-content/rights review; no owner Evidence acceptance",
+    "review_notes": "Original source inspected through approved web research tool; bounded reviewed excerpt only, not an original-file archive.",
+    "research_domain": "banking",
+    "verification": "primary_retrieved",
+    "content_kind": "reviewed_web_excerpt",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn248771view3 / turn342616view3",
+    "retrieval_extent": "Located reviewed web passages; separators normalised for numerical rows; original bytes unavailable",
+    "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-HMT-CTP.txt",
+    "text_sha256": "42cef2b7ca812c83551a89bd6500b3884b21e87972f6b0c670951c8acb9bf63f",
+    "primary_content_sha256": null,
+    "limitation": "Publication10July2026 is separate from effective designation13July2026. Provider designation establishes no contract, workload, spend or failure at any bank.",
+    "excerpts": [
+      {
+        "locator": "Official announcement, designation list; HTML lines85–90",
+        "quote": "The following firms will be designated as Critical Third Parties from 13 July 2026:\nMicrosoft Ireland Operations Limited\nGoogle Cloud EMEA Limited\nAmazon Web Services EMEA SARL\nOracle Corporation UK Limited"
+      }
+    ],
+    "rights": {
+      "status": "permitted_ogl_factual_extract",
+      "licence": "UK Open Government Licence v3.0",
+      "terms_url": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+      "terms_clause": "Official GOV.UK footer: OGL except where otherwise stated",
+      "reviewed_at": "2026-11-15",
+      "review_reference": "turn342616view3",
+      "attribution": "Contains public sector information licensed under the Open Government Licence v3.0.",
+      "extent": "Designation date and four named legal providers only. No images, logos, ministerial/third-party quotations or full article.",
+      "limitations": "Publication10July2026 is separate from effective designation13July2026. Provider designation establishes no contract, workload, spend or failure at any bank.",
+      "permission_is_not_acceptance": true
+    },
+    "supported_force_kinds": [
+      "observed_trend"
+    ]
+  },
+  "claims": [
+    {
+      "id": "EAI-UK-CTP-DESIGNATION",
+      "asset_id": "BK-IND-002",
+      "statement": "HM Treasury designated Microsoft Ireland Operations Limited, Google Cloud EMEA Limited, Amazon Web Services EMEA SARL and Oracle Corporation UK Limited as Critical Third Parties from 13 July 2026.",
+      "domain": "regulation",
+      "kind": "reported_fact",
+      "reporting_period": "Effective 13 July 2026; announced 10 July 2026",
+      "entity_scope": "Four named technology-provider legal entities; UK financial-system oversight context, not bank-specific contractual applicability",
+      "source_ids": [
+        "EAI-HMT-CTP26"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "EAI-HMT-CTP26": "The following firms will be designated as Critical Third Parties from 13 July 2026:\nMicrosoft Ireland Operations Limited\nGoogle Cloud EMEA Limited\nAmazon Web Services EMEA SARL\nOracle Corporation UK Limited"
+      },
+      "quote_locator": "Official announcement, designation list; HTML lines85–90",
+      "canonical_acceptance": "not_accepted"
+    }
+  ],
+  "canonical_mutation": false,
+  "cutoff": "2026-11-15",
+  "production_acceptance": "unverified"
+}

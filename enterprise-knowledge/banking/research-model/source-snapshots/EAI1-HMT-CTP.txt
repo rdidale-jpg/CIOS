@@ -1,0 +1,6 @@
+Official announcement, designation list; HTML lines85–90
+The following firms will be designated as Critical Third Parties from 13 July 2026:
+Microsoft Ireland Operations Limited
+Google Cloud EMEA Limited
+Amazon Web Services EMEA SARL
+Oracle Corporation UK Limited

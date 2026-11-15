@@ -1,0 +1,98 @@
+{
+  "authority": "candidate_intelligence",
+  "scope": "lloyds",
+  "subject_ref": "BK-ENT-001",
+  "source": {
+    "id": "EAI-FCA-H126-SERVICE",
+    "title": "FCA Lloyds Bank PLC service measures: 2026 H1",
+    "publisher": "Financial Conduct Authority",
+    "url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+    "retrieval_url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+    "publication_date": "2026-10-22",
+    "publication_date_evidence": "Date stated on the inspected official source",
+    "reporting_period": "1 January–30 June 2026; Lloyds Bank PLC, all-product totals",
+    "retrieved_at": "2026-11-15T12:07:22.935143+00:00",
+    "reviewed_by": "Codex source-content/rights review; no owner Evidence acceptance",
+    "review_notes": "Original source inspected through approved web research tool; bounded reviewed excerpt only, not an original-file archive. Independent review: current table labels3days without business/calendar definition; that metric is excluded from this runtime candidate. Original historical research is retained.",
+    "research_domain": "banking",
+    "verification": "primary_retrieved",
+    "content_kind": "reviewed_web_excerpt",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn903038view2 / turn342616view0 / turn342616view1",
+    "retrieval_extent": "Located reviewed web passages; separators normalised for numerical rows; original bytes unavailable",
+    "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-FCA-Service.txt",
+    "text_sha256": "015a657f4f7cc232037879c652a8cbb3da91865ede073dfb6186de54f278773d",
+    "primary_content_sha256": null,
+    "limitation": "Firm-reported FCA-published data, not independent harm or cost evidence. Lloyds Bank PLC only. Received and closed cases are not a matched cohort; firm-upheld is not independent adjudication. The3-day field is withheld pending exact2026 time-unit confirmation.",
+    "excerpts": [
+      {
+        "locator": "Closed table, total; official HTML line908",
+        "quote": "Lloyds Bank PLC | LLOYDS BANKING GROUP PLC | no | 2026-01-01 to 2026-06-30 | 115,798 | 33 | 2,680 | 324 | 26 | 118,861"
+      },
+      {
+        "locator": "Upheld table, total; official HTML line1581",
+        "quote": "Lloyds Bank PLC | LLOYDS BANKING GROUP PLC | no | 2026-01-01 to 2026-06-30 | 66.37% | 30.30% | 62.57% | 11.42% | 19.23% | 66.12%"
+      }
+    ],
+    "rights": {
+      "status": "permitted_numerical_data",
+      "licence": "UK Open Government Licence v3.0",
+      "terms_url": "https://www.fca.org.uk/legal",
+      "terms_clause": "2.2 numerical Data tables; narrative excluded by2.3",
+      "reviewed_at": "2026-11-15",
+      "review_reference": "turn342616view2",
+      "attribution": "Contains Financial Conduct Authority information licensed under the Open Government Licence v3.0.",
+      "extent": "Two numerical rows and their table/total locators only; no narrative, graphics, logos or feed. No third-party notice identified for these rows.",
+      "limitations": "Firm-reported FCA-published data, not independent harm or cost evidence. Lloyds Bank PLC only. Received and closed cases are not a matched cohort; firm-upheld is not independent adjudication. The3-day field is withheld pending exact2026 time-unit confirmation.",
+      "permission_is_not_acceptance": true
+    },
+    "supported_force_kinds": [
+      "observed_trend"
+    ]
+  },
+  "claims": [
+    {
+      "id": "EAI-LBG-CLOSED",
+      "asset_id": "BK-ENT-001",
+      "statement": "The FCA published 118,861 complaints closed by Lloyds Bank PLC in January–June 2026.",
+      "domain": "customer_outcomes",
+      "kind": "reported_fact",
+      "reporting_period": "1 January–30 June 2026",
+      "entity_scope": "Lloyds Bank PLC only; not Lloyds Banking Group or Retail reporting segment",
+      "source_ids": [
+        "EAI-FCA-H126-SERVICE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "EAI-FCA-H126-SERVICE": "Lloyds Bank PLC | LLOYDS BANKING GROUP PLC | no | 2026-01-01 to 2026-06-30 | 115,798 | 33 | 2,680 | 324 | 26 | 118,861"
+      },
+      "quote_locator": "Closed table, total; official HTML line908",
+      "metric_value": 118861,
+      "metric_unit": "complaints closed; all-product total",
+      "canonical_acceptance": "not_accepted"
+    },
+    {
+      "id": "EAI-LBG-UPHELD",
+      "asset_id": "BK-ENT-001",
+      "statement": "The FCA table reports 66.12% of Lloyds Bank PLC closed complaints as upheld by the firm in January–June 2026.",
+      "domain": "customer_outcomes",
+      "kind": "reported_fact",
+      "reporting_period": "1 January–30 June 2026",
+      "entity_scope": "Lloyds Bank PLC only; not Lloyds Banking Group or Retail reporting segment",
+      "source_ids": [
+        "EAI-FCA-H126-SERVICE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "EAI-FCA-H126-SERVICE": "Lloyds Bank PLC | LLOYDS BANKING GROUP PLC | no | 2026-01-01 to 2026-06-30 | 66.37% | 30.30% | 62.57% | 11.42% | 19.23% | 66.12%"
+      },
+      "quote_locator": "Upheld table, total; official HTML line1581",
+      "metric_value": 66.12,
+      "metric_unit": "percent of closed complaints upheld by firm; FCA table total",
+      "canonical_acceptance": "not_accepted"
+    }
+  ],
+  "canonical_mutation": false,
+  "cutoff": "2026-11-15",
+  "production_acceptance": "unverified"
+}
