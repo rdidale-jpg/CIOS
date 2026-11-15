@@ -1,0 +1,24 @@
+{
+  "canonical_mutations": 0,
+  "current_issue_identities": 8,
+  "exact_url_reinspections": 6,
+  "issue_version_records": 12,
+  "matrix_counts": {
+    "A": 8,
+    "B": 445,
+    "C": 11,
+    "D": 17,
+    "E": 4
+  },
+  "matrix_note": "Counts include parent bundles, relationship proposals, context, interpretations and rejected uses; do not present as independent facts or accepted Observations.",
+  "original_claim_records": 362,
+  "original_document_urls": 65,
+  "original_scalar_financial_candidates": 250,
+  "owner_review_atom_proposals": 8,
+  "pipeline_writes": 0,
+  "retained_reconciliation_context_records": 69,
+  "same_event_different_surfaces": [
+    "LBG-ENVOY26 / R2-LBG-ENVOY-PDF"
+  ],
+  "source_inspections": 71
+}

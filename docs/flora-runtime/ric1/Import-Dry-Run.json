@@ -1,0 +1,63 @@
+{
+  "adapter_checks": [
+    {
+      "atomic": true,
+      "id": "OBS-SIC-K-WEIGHT24",
+      "source_payload_lossless": true
+    },
+    {
+      "atomic": true,
+      "id": "OBS-R2-FIN-H12026-0-LEASE_DEPRECIATION",
+      "source_payload_lossless": true
+    },
+    {
+      "atomic": true,
+      "id": "OBS-R2-FIN-H12026-0-NET_INCOME",
+      "source_payload_lossless": true
+    },
+    {
+      "atomic": true,
+      "id": "OBS-R2-FIN-H12026-4-NET_INCOME",
+      "source_payload_lossless": true
+    },
+    {
+      "atomic": true,
+      "id": "OBS-R2-FIN-H12026-0-OPERATING_COSTS",
+      "source_payload_lossless": true
+    },
+    {
+      "atomic": true,
+      "id": "OBS-R2-FIN-H12026-0-UNDERLYING_PROFIT",
+      "source_payload_lossless": true
+    },
+    {
+      "atomic": true,
+      "id": "OBS-R2-FIN-H12026-4-UNDERLYING_PROFIT",
+      "source_payload_lossless": true
+    },
+    {
+      "atomic": true,
+      "id": "OBS-FCA-RECEIVED",
+      "source_payload_lossless": true
+    }
+  ],
+  "approvals_created": 0,
+  "atomic_observation_proposals": 8,
+  "canonical_mutations": 0,
+  "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+  "cross_workspace_inspection_denied": true,
+  "cross_workspace_planning_denied": true,
+  "effect_counts": {
+    "mapped": 3,
+    "projection": 1,
+    "quarantine": 1,
+    "unresolved": 16
+  },
+  "pipeline_writes": 0,
+  "production_acceptance": "UNVERIFIED",
+  "proposed_payload_sha256": "c8e295b34583502c7787b3b72bc10c98b175a6454d0f15f46a6575eb6c9ec920",
+  "repeated_plan_idempotent": true,
+  "reviews_created": 0,
+  "scope": "Disposable existing import services with explicit SERVICE-TEST fixture; not production or real-login verification",
+  "source_registrations": 0
+}

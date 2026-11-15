@@ -1,0 +1,172 @@
+[
+  {
+    "accounting_basis": "GVA at basic prices",
+    "canonical_acceptance": false,
+    "canonical_entity_id": null,
+    "claim_ref": "RIE1:SIC-K-WEIGHT24",
+    "excerpt_ref": "EX-ONS",
+    "financial_measurement_state": "actual",
+    "id": "OBS-SIC-K-WEIGHT24",
+    "metric": "rounded_GVA_weight",
+    "owner_evidence_acceptance": false,
+    "period_end": null,
+    "period_start": null,
+    "reporting_period": "2024",
+    "scope": "UK SIC 2007 section K",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "statement": "UK SIC2007 Section K had a rounded 2024 GVA weight of 81 per thousand.",
+    "unit": "GVA weight per thousand",
+    "value": 81
+  },
+  {
+    "accounting_basis": "alternative_performance_measure",
+    "canonical_acceptance": false,
+    "canonical_entity_id": null,
+    "claim_ref": "RIE2:R2-FIN-H12026-0-LEASE_DEPRECIATION",
+    "excerpt_ref": "EX-H126",
+    "financial_measurement_state": "actual",
+    "id": "OBS-R2-FIN-H12026-0-LEASE_DEPRECIATION",
+    "metric": "lease_depreciation",
+    "owner_evidence_acceptance": false,
+    "period_end": "2026-06-30",
+    "period_start": "2026-01-01",
+    "reporting_period": "H12026",
+    "scope": "Lloyds Banking Group reporting segment Retail",
+    "source_refs": [
+      "R2-LBG-H126"
+    ],
+    "statement": "Lloyds Banking Group Retail underlying lease depreciation was GBP835m in H1 2026.",
+    "unit": "GBP million",
+    "value": -835
+  },
+  {
+    "accounting_basis": "alternative_performance_measure",
+    "canonical_acceptance": false,
+    "canonical_entity_id": null,
+    "claim_ref": "RIE2:R2-FIN-H12026-0-NET_INCOME",
+    "excerpt_ref": "EX-H126",
+    "financial_measurement_state": "actual",
+    "id": "OBS-R2-FIN-H12026-0-NET_INCOME",
+    "metric": "net_income",
+    "owner_evidence_acceptance": false,
+    "period_end": "2026-06-30",
+    "period_start": "2026-01-01",
+    "reporting_period": "H12026",
+    "scope": "Lloyds Banking Group reporting segment Retail",
+    "source_refs": [
+      "R2-LBG-H126"
+    ],
+    "statement": "Lloyds Banking Group Retail underlying net income was GBP5710m in H1 2026.",
+    "unit": "GBP million",
+    "value": 5710
+  },
+  {
+    "accounting_basis": "alternative_performance_measure",
+    "canonical_acceptance": false,
+    "canonical_entity_id": null,
+    "claim_ref": "RIE2:R2-FIN-H12026-4-NET_INCOME",
+    "excerpt_ref": "EX-H126",
+    "financial_measurement_state": "actual",
+    "id": "OBS-R2-FIN-H12026-4-NET_INCOME",
+    "metric": "net_income",
+    "original_scope_label": "Lloyds Banking Group reporting segment Group total",
+    "owner_evidence_acceptance": false,
+    "period_end": "2026-06-30",
+    "period_start": "2026-01-01",
+    "reporting_period": "H12026",
+    "scope": "Lloyds Banking Group consolidated total",
+    "source_refs": [
+      "R2-LBG-H126"
+    ],
+    "statement": "Lloyds Banking Group underlying net income was GBP9747m in H1 2026.",
+    "unit": "GBP million",
+    "value": 9747
+  },
+  {
+    "accounting_basis": "alternative_performance_measure",
+    "canonical_acceptance": false,
+    "canonical_entity_id": null,
+    "claim_ref": "RIE2:R2-FIN-H12026-0-OPERATING_COSTS",
+    "excerpt_ref": "EX-H126",
+    "financial_measurement_state": "actual",
+    "id": "OBS-R2-FIN-H12026-0-OPERATING_COSTS",
+    "metric": "operating_costs",
+    "owner_evidence_acceptance": false,
+    "period_end": "2026-06-30",
+    "period_start": "2026-01-01",
+    "reporting_period": "H12026",
+    "scope": "Lloyds Banking Group reporting segment Retail",
+    "source_refs": [
+      "R2-LBG-H126"
+    ],
+    "statement": "Lloyds Banking Group Retail underlying operating costs were GBP2872m in H1 2026.",
+    "unit": "GBP million",
+    "value": -2872
+  },
+  {
+    "accounting_basis": "alternative_performance_measure",
+    "canonical_acceptance": false,
+    "canonical_entity_id": null,
+    "claim_ref": "RIE2:R2-FIN-H12026-0-UNDERLYING_PROFIT",
+    "excerpt_ref": "EX-H126",
+    "financial_measurement_state": "actual",
+    "id": "OBS-R2-FIN-H12026-0-UNDERLYING_PROFIT",
+    "metric": "underlying_profit",
+    "owner_evidence_acceptance": false,
+    "period_end": "2026-06-30",
+    "period_start": "2026-01-01",
+    "reporting_period": "H12026",
+    "scope": "Lloyds Banking Group reporting segment Retail",
+    "source_refs": [
+      "R2-LBG-H126"
+    ],
+    "statement": "Lloyds Banking Group Retail underlying pre-tax profit was GBP2256m in H1 2026.",
+    "unit": "GBP million",
+    "value": 2256
+  },
+  {
+    "accounting_basis": "alternative_performance_measure",
+    "canonical_acceptance": false,
+    "canonical_entity_id": null,
+    "claim_ref": "RIE2:R2-FIN-H12026-4-UNDERLYING_PROFIT",
+    "excerpt_ref": "EX-H126",
+    "financial_measurement_state": "actual",
+    "id": "OBS-R2-FIN-H12026-4-UNDERLYING_PROFIT",
+    "metric": "underlying_profit",
+    "original_scope_label": "Lloyds Banking Group reporting segment Group total",
+    "owner_evidence_acceptance": false,
+    "period_end": "2026-06-30",
+    "period_start": "2026-01-01",
+    "reporting_period": "H12026",
+    "scope": "Lloyds Banking Group consolidated total",
+    "source_refs": [
+      "R2-LBG-H126"
+    ],
+    "statement": "Lloyds Banking Group underlying pre-tax profit was GBP4215m in H1 2026.",
+    "unit": "GBP million",
+    "value": 4215
+  },
+  {
+    "accounting_basis": "not applicable",
+    "canonical_acceptance": false,
+    "canonical_entity_id": null,
+    "claim_ref": "RIE2:R2-OBS-FCA-COMPLAINTS",
+    "excerpt_ref": "EX-FCA",
+    "financial_measurement_state": "not applicable",
+    "id": "OBS-FCA-RECEIVED",
+    "metric": "complaints_received",
+    "owner_evidence_acceptance": false,
+    "period_end": "2026-06-30",
+    "period_start": "2026-01-01",
+    "reporting_period": "January–June2026",
+    "scope": "Lloyds Bank PLC legal entity, all-product Open table",
+    "source_refs": [
+      "R2-FCA-H126"
+    ],
+    "statement": "Lloyds Bank PLC received 118762 all-product complaints in January to June 2026.",
+    "unit": "complaints",
+    "value": 118762
+  }
+]

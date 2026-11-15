@@ -1,0 +1,26 @@
+[
+  {
+    "acceptance_class": "E",
+    "id": "USE-COMPOUND-PROMOTION",
+    "proposed_use": "Promote compound research prose as an atomic Observation",
+    "reason": "Existing blueprint_import.atomicity/EI-012 contract forbids non-atomic Observation promotion."
+  },
+  {
+    "acceptance_class": "E",
+    "id": "USE-FULL-SOURCE-REDISTRIBUTION",
+    "proposed_use": "Redistribute full publisher files under the bounded fact/citation permission asserted in these packs",
+    "reason": "No full-source redistribution grant exists in the supplied packages; do not infer it from public access."
+  },
+  {
+    "acceptance_class": "E",
+    "id": "USE-PRIVATE-NAME-JOIN",
+    "proposed_use": "Use public names to write into a private employer/Twin without authorised identity mapping",
+    "reason": "Existing verified workspace/resource scope and explicit canonical mapping authority required."
+  },
+  {
+    "acceptance_class": "E",
+    "id": "USE-UNAPPROVED-VISUAL-PUBLISHER",
+    "proposed_use": "Pass SEC or ONS URLs directly into the current visual research source adapter without an authority decision",
+    "reason": "research_intelligence.source_import.official_url currently permits neither SEC nor ONS. Evidence review eligibility does not authorise bypassing that publisher policy."
+  }
+]

@@ -1,0 +1,1995 @@
+[
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Lloyds-Financial-Reconciliation.json#/source_id",
+    "input": "RIE1:Lloyds-Financial-Reconciliation.json",
+    "pointer": "/source_id",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "LBG-Q326"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Lloyds-Financial-Reconciliation.json#/subject",
+    "input": "RIE1:Lloyds-Financial-Reconciliation.json",
+    "pointer": "/subject",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "Lloyds Banking Group plc"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Lloyds-Financial-Reconciliation.json#/period",
+    "input": "RIE1:Lloyds-Financial-Reconciliation.json",
+    "pointer": "/period",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "Nine months ended 30 September"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Lloyds-Financial-Reconciliation.json#/unit",
+    "input": "RIE1:Lloyds-Financial-Reconciliation.json",
+    "pointer": "/unit",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "GBP million unless stated"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Lloyds-Financial-Reconciliation.json#/underlying",
+    "input": "RIE1:Lloyds-Financial-Reconciliation.json",
+    "pointer": "/underlying",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "impairment": [
+        -930,
+        -618
+      ],
+      "net_income": [
+        14819,
+        13557
+      ],
+      "net_interest_income": [
+        11084,
+        10106
+      ],
+      "operating_costs": [
+        -7246,
+        -7176
+      ],
+      "operating_lease_depreciation": [
+        -1261,
+        -1075
+      ],
+      "other_income": [
+        4996,
+        4526
+      ],
+      "profit_before_impairment": [
+        7512,
+        5469
+      ],
+      "remediation": [
+        -61,
+        -912
+      ],
+      "restructuring": [
+        -51,
+        -16
+      ],
+      "statutory_pat": [
+        4835,
+        3322
+      ],
+      "statutory_pbt": [
+        6625,
+        4678
+      ],
+      "tax": [
+        -1790,
+        -1356
+      ],
+      "total_costs": [
+        -7307,
+        -8088
+      ],
+      "underlying_profit": [
+        6582,
+        4851
+      ],
+      "volatility_other": [
+        94,
+        -157
+      ]
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Lloyds-Financial-Reconciliation.json#/statutory",
+    "input": "RIE1:Lloyds-Financial-Reconciliation.json",
+    "pointer": "/statutory",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "impairment": [
+        -926,
+        -619
+      ],
+      "net_interest_income": [
+        10827,
+        9808
+      ],
+      "operating_expenses": [
+        -8533,
+        -8955
+      ],
+      "other_income": [
+        5257,
+        4444
+      ],
+      "pat": [
+        4835,
+        3322
+      ],
+      "pbt": [
+        6625,
+        4678
+      ],
+      "tax": [
+        -1790,
+        -1356
+      ],
+      "total_income": [
+        16084,
+        14252
+      ]
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Lloyds-Financial-Reconciliation.json#/columns",
+    "input": "RIE1:Lloyds-Financial-Reconciliation.json",
+    "pointer": "/columns",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      "2026",
+      "2025"
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Lloyds-Financial-Reconciliation.json#/ratios_reported",
+    "input": "RIE1:Lloyds-Financial-Reconciliation.json",
+    "pointer": "/ratios_reported",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "asset_quality_bps": [
+        25,
+        18
+      ],
+      "banking_nim_pct": [
+        3.21,
+        3.04
+      ],
+      "cost_income_pct": [
+        49.3,
+        59.7
+      ],
+      "rote_pct": [
+        17.9,
+        11.9
+      ]
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Lloyds-Financial-Reconciliation.json#/stocks_30sep2026",
+    "input": "RIE1:Lloyds-Financial-Reconciliation.json",
+    "pointer": "/stocks_30sep2026",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "cet1_pct": 13.3,
+      "customer_deposits_GBP_bn": 502.8,
+      "risk_weighted_assets_GBP_bn": 247.4,
+      "underlying_loans_GBP_bn": 495.5
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Lloyds-Financial-Reconciliation.json#/deposit_changes_YTD_GBP_bn",
+    "input": "RIE1:Lloyds-Financial-Reconciliation.json",
+    "pointer": "/deposit_changes_YTD_GBP_bn",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "central_items": 0.4,
+      "commercial": 9.6,
+      "group": 6.3,
+      "retail": -3.7
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Lloyds-Financial-Reconciliation.json#/restrictions",
+    "input": "RIE1:Lloyds-Financial-Reconciliation.json",
+    "pointer": "/restrictions",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      "Underlying net income is not statutory total income. Underlying and statutory impairment differ.",
+      "Nine-month flows must not be compared to stocks or annualised here.",
+      "Ratios use issuer definitions; cross-bank ranking is not supported.",
+      "Group deposit increase is not a funding crisis; retail decline does not prove attrition or its cause.",
+      "Central Items deposits rose from GBP0.2bn in December2025 to GBP0.6bn in September2026, completing the Group bridge."
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Lloyds-Financial-Reconciliation.json#/canonical_acceptance",
+    "input": "RIE1:Lloyds-Financial-Reconciliation.json",
+    "pointer": "/canonical_acceptance",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": false
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Statistical-Extraction.json#/source",
+    "input": "RIE1:Statistical-Extraction.json",
+    "pointer": "/source",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "ONS-GDP-SEP26"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Statistical-Extraction.json#/scope",
+    "input": "RIE1:Statistical-Extraction.json",
+    "pointer": "/scope",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "UK SIC 2007"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Statistical-Extraction.json#/periods",
+    "input": "RIE1:Statistical-Extraction.json",
+    "pointer": "/periods",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "growth": "September 2026 vs September 2025",
+      "weights": "2024"
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Statistical-Extraction.json#/locator",
+    "input": "RIE1:Statistical-Extraction.json",
+    "pointer": "/locator",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "GVA3 PDF page index 29"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Statistical-Extraction.json#/columns",
+    "input": "RIE1:Statistical-Extraction.json",
+    "pointer": "/columns",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      "A-T",
+      "A",
+      "B-E",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G-T",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T"
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Statistical-Extraction.json#/weights_per_thousand",
+    "input": "RIE1:Statistical-Extraction.json",
+    "pointer": "/weights_per_thousand",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      1000,
+      7,
+      124,
+      7,
+      87,
+      19,
+      12,
+      57,
+      812,
+      94,
+      36,
+      28,
+      66,
+      81,
+      142,
+      87,
+      54,
+      51,
+      59,
+      84,
+      15,
+      15,
+      1
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Statistical-Extraction.json#/september_yoy_volume_pct",
+    "input": "RIE1:Statistical-Extraction.json",
+    "pointer": "/september_yoy_volume_pct",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      2.1,
+      -2.2,
+      3.1,
+      1.2,
+      4.4,
+      5.0,
+      -7.5,
+      -1.5,
+      2.2,
+      2.6,
+      1.4,
+      -2.0,
+      5.6,
+      1.1,
+      0.8,
+      7.4,
+      0.7,
+      0.9,
+      0.1,
+      2.0,
+      -0.7,
+      6.8,
+      -5.4
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Statistical-Extraction.json#/verification",
+    "input": "RIE1:Statistical-Extraction.json",
+    "pointer": "/verification",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "Fresh official PDF text inspected; screenshot tool returned text-only placeholders, so no visual screenshot inspection claimed. Direct full-byte retrieval failed; no source byte hash fabricated."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE1:Statistical-Extraction.json#/rounding",
+    "input": "RIE1:Statistical-Extraction.json",
+    "pointer": "/rounding",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "Twenty disjoint section weights sum 1002, not 1000. Preserve original rounding; do not normalise. Composite B–E/G–T/A–T not added as extra sectors."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Financial-Reconciliation.json#/annual_bridge_source",
+    "input": "RIE2:Financial-Reconciliation.json",
+    "pointer": "/annual_bridge_source",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "R2-LBG-FY25 PDF index15"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Financial-Reconciliation.json#/annual_bridges",
+    "input": "RIE2:Financial-Reconciliation.json",
+    "pointer": "/annual_bridges",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "FY2024": {
+        "pat": 4477,
+        "restructuring": -40,
+        "statutory_pbt": 5971,
+        "tax": -1494,
+        "underlying_profit": 6343,
+        "volatility_other": -332
+      },
+      "FY2025": {
+        "pat": 4757,
+        "restructuring": -46,
+        "statutory_pbt": 6661,
+        "tax": -1904,
+        "underlying_profit": 6777,
+        "volatility_other": -70
+      }
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Financial-Reconciliation.json#/authority",
+    "input": "RIE2:Financial-Reconciliation.json",
+    "pointer": "/authority",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "Candidate research, not EI001 projection or accepted financial facts"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Financial-Reconciliation.json#/current_capital_liquidity",
+    "input": "RIE2:Financial-Reconciliation.json",
+    "pointer": "/current_capital_liquidity",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "cet1_pct": 13.3,
+      "date": "2026-09-30",
+      "lcr_pct_12_month_average": 143,
+      "nsfr_pct_4_quarter_average": 123,
+      "rwa_GBP_bn": 247.4,
+      "source_ref": "R2-LBG-Q326",
+      "warning": "Wholesale funding definition changed in Q2; December comparative represented95.6bn versus originalFY99.4bn. Not a financial loss or supplier budget.",
+      "wholesale_funding_GBP_bn": 109.9
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Financial-Reconciliation.json#/guidance_2026",
+    "input": "RIE2:Financial-Reconciliation.json",
+    "pointer": "/guidance_2026",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "capital_generation_bps": "greater than200, excluding distributions",
+      "cet1_pct": "circa13",
+      "cost_income_pct": "less than50",
+      "measurement_state": "guidance",
+      "operating_cost_GBP_bn": "less than9.9",
+      "rote_pct": "greater than16",
+      "source_ref": "R2-LBG-Q326"
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Financial-Reconciliation.json#/periods",
+    "input": "RIE2:Financial-Reconciliation.json",
+    "pointer": "/periods",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      {
+        "accounting_basis": "alternative_performance_measure",
+        "columns": [
+          "Retail",
+          "Commercial Banking",
+          "Insurance Pensions and Investments",
+          "Equity Investments and Central Items",
+          "Group total"
+        ],
+        "duration_months": 12,
+        "financial_measurement_state": "prior_period_comparator",
+        "id": "FY2024",
+        "period_end": "2024-12-31",
+        "period_start": "2024-01-01",
+        "presentation_warning": "Operating division is not legal entity; inter-segment income allocation matters. FY2024 variable-pay costs/other-income and capital transfer pricing represented in FY25; do not mix old unrepresented values.",
+        "source_locator": "PDF index19",
+        "source_ref": "R2-LBG-FY25",
+        "unit": "GBP million",
+        "values": {
+          "impairment": [
+            -457,
+            14,
+            7,
+            3,
+            -433
+          ],
+          "lease_depreciation": [
+            -1319,
+            -6,
+            0,
+            0,
+            -1325
+          ],
+          "net_income": [
+            9965,
+            5243,
+            1156,
+            753,
+            17117
+          ],
+          "net_interest_income": [
+            8930,
+            3434,
+            -136,
+            617,
+            12845
+          ],
+          "operating_costs": [
+            -5566,
+            -2752,
+            -924,
+            -200,
+            -9442
+          ],
+          "other_income": [
+            2354,
+            1815,
+            1292,
+            136,
+            5597
+          ],
+          "profit_before_impairment": [
+            3649,
+            2387,
+            213,
+            527,
+            6776
+          ],
+          "remediation": [
+            -750,
+            -104,
+            -19,
+            -26,
+            -899
+          ],
+          "total_costs": [
+            -6316,
+            -2856,
+            -943,
+            -226,
+            -10341
+          ],
+          "underlying_profit": [
+            3192,
+            2401,
+            220,
+            530,
+            6343
+          ]
+        }
+      },
+      {
+        "accounting_basis": "alternative_performance_measure",
+        "columns": [
+          "Retail",
+          "Commercial Banking",
+          "Insurance Pensions and Investments",
+          "Equity Investments and Central Items",
+          "Group total"
+        ],
+        "duration_months": 12,
+        "financial_measurement_state": "actual",
+        "id": "FY2025",
+        "period_end": "2025-12-31",
+        "period_start": "2025-01-01",
+        "presentation_warning": "Operating division is not legal entity; inter-segment income allocation matters. FY2024 variable-pay costs/other-income and capital transfer pricing represented in FY25; do not mix old unrepresented values.",
+        "source_locator": "PDF index19",
+        "source_ref": "R2-LBG-FY25",
+        "unit": "GBP million",
+        "values": {
+          "impairment": [
+            -734,
+            -60,
+            -2,
+            1,
+            -795
+          ],
+          "lease_depreciation": [
+            -1445,
+            -9,
+            0,
+            0,
+            -1454
+          ],
+          "net_income": [
+            10828,
+            5486,
+            1280,
+            707,
+            18301
+          ],
+          "net_interest_income": [
+            9637,
+            3670,
+            -151,
+            479,
+            13635
+          ],
+          "operating_costs": [
+            -5807,
+            -2853,
+            -933,
+            -168,
+            -9761
+          ],
+          "other_income": [
+            2636,
+            1825,
+            1431,
+            228,
+            6120
+          ],
+          "profit_before_impairment": [
+            4090,
+            2606,
+            332,
+            544,
+            7572
+          ],
+          "remediation": [
+            -931,
+            -27,
+            -15,
+            5,
+            -968
+          ],
+          "total_costs": [
+            -6738,
+            -2880,
+            -948,
+            -163,
+            -10729
+          ],
+          "underlying_profit": [
+            3356,
+            2546,
+            330,
+            545,
+            6777
+          ]
+        }
+      },
+      {
+        "accounting_basis": "alternative_performance_measure",
+        "columns": [
+          "Retail",
+          "Commercial Banking",
+          "Insurance Pensions and Investments",
+          "Other",
+          "Group total"
+        ],
+        "duration_months": 6,
+        "financial_measurement_state": "prior_period_comparator",
+        "id": "H12025",
+        "period_end": "2025-06-30",
+        "period_start": "2025-01-01",
+        "presentation_warning": "Operating division is not legal entity; inter-segment income allocation matters. FY2024 variable-pay costs/other-income and capital transfer pricing represented in FY25; do not mix old unrepresented values.",
+        "source_locator": "Note3 printed42–43",
+        "source_ref": "R2-LBG-H126",
+        "unit": "GBP million",
+        "values": {
+          "impairment": [
+            -342,
+            -100,
+            1,
+            -1,
+            -442
+          ],
+          "lease_depreciation": [
+            -706,
+            -4,
+            0,
+            0,
+            -710
+          ],
+          "net_income": [
+            5279,
+            2688,
+            611,
+            336,
+            8914
+          ],
+          "net_interest_income": [
+            4709,
+            1766,
+            -78,
+            258,
+            6655
+          ],
+          "operating_costs": [
+            -2922,
+            -1394,
+            -466,
+            -92,
+            -4874
+          ],
+          "other_income": [
+            1276,
+            926,
+            689,
+            78,
+            2969
+          ],
+          "profit_before_impairment": [
+            2316,
+            1294,
+            143,
+            250,
+            4003
+          ],
+          "remediation": [
+            -41,
+            0,
+            -2,
+            6,
+            -37
+          ],
+          "total_costs": [
+            -2963,
+            -1394,
+            -468,
+            -86,
+            -4911
+          ],
+          "underlying_profit": [
+            1974,
+            1194,
+            144,
+            249,
+            3561
+          ]
+        }
+      },
+      {
+        "accounting_basis": "alternative_performance_measure",
+        "columns": [
+          "Retail",
+          "Commercial Banking",
+          "Insurance Pensions and Investments",
+          "Other",
+          "Group total"
+        ],
+        "duration_months": 6,
+        "financial_measurement_state": "prior_period_comparator",
+        "id": "H22025",
+        "period_end": "2025-12-31",
+        "period_start": "2025-07-01",
+        "presentation_warning": "Operating division is not legal entity; inter-segment income allocation matters. FY2024 variable-pay costs/other-income and capital transfer pricing represented in FY25; do not mix old unrepresented values.",
+        "source_locator": "Note3 printed42–43",
+        "source_ref": "R2-LBG-H126",
+        "unit": "GBP million",
+        "values": {
+          "impairment": [
+            -392,
+            40,
+            -3,
+            2,
+            -353
+          ],
+          "lease_depreciation": [
+            -739,
+            -5,
+            0,
+            0,
+            -744
+          ],
+          "net_income": [
+            5549,
+            2798,
+            669,
+            371,
+            9387
+          ],
+          "net_interest_income": [
+            4928,
+            1904,
+            -73,
+            221,
+            6980
+          ],
+          "operating_costs": [
+            -2885,
+            -1459,
+            -467,
+            -76,
+            -4887
+          ],
+          "other_income": [
+            1360,
+            899,
+            742,
+            150,
+            3151
+          ],
+          "profit_before_impairment": [
+            1774,
+            1312,
+            189,
+            294,
+            3569
+          ],
+          "remediation": [
+            -890,
+            -27,
+            -13,
+            -1,
+            -931
+          ],
+          "total_costs": [
+            -3775,
+            -1486,
+            -480,
+            -77,
+            -5818
+          ],
+          "underlying_profit": [
+            1382,
+            1352,
+            186,
+            296,
+            3216
+          ]
+        }
+      },
+      {
+        "accounting_basis": "alternative_performance_measure",
+        "columns": [
+          "Retail",
+          "Commercial Banking",
+          "Insurance Pensions and Investments",
+          "Other",
+          "Group total"
+        ],
+        "duration_months": 6,
+        "financial_measurement_state": "actual",
+        "id": "H12026",
+        "period_end": "2026-06-30",
+        "period_start": "2026-01-01",
+        "presentation_warning": "Operating division is not legal entity; inter-segment income allocation matters. FY2024 variable-pay costs/other-income and capital transfer pricing represented in FY25; do not mix old unrepresented values.",
+        "source_locator": "Note3 printed42–43",
+        "source_ref": "R2-LBG-H126",
+        "unit": "GBP million",
+        "values": {
+          "impairment": [
+            -565,
+            -51,
+            -1,
+            0,
+            -617
+          ],
+          "lease_depreciation": [
+            -835,
+            -6,
+            0,
+            0,
+            -841
+          ],
+          "net_income": [
+            5710,
+            2897,
+            747,
+            393,
+            9747
+          ],
+          "net_interest_income": [
+            5139,
+            2014,
+            -71,
+            196,
+            7278
+          ],
+          "operating_costs": [
+            -2872,
+            -1409,
+            -494,
+            -101,
+            -4876
+          ],
+          "other_income": [
+            1406,
+            889,
+            818,
+            197,
+            3310
+          ],
+          "profit_before_impairment": [
+            2821,
+            1476,
+            246,
+            289,
+            4832
+          ],
+          "remediation": [
+            -17,
+            -12,
+            -7,
+            -3,
+            -39
+          ],
+          "total_costs": [
+            -2889,
+            -1421,
+            -501,
+            -104,
+            -4915
+          ],
+          "underlying_profit": [
+            2256,
+            1425,
+            245,
+            289,
+            4215
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Financial-Reconciliation.json#/q3_nine_months_pinned_input",
+    "input": "RIE2:Financial-Reconciliation.json",
+    "pointer": "/q3_nine_months_pinned_input",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "source_ref": "R2-LBG-Q326",
+      "values": {
+        "canonical_acceptance": false,
+        "columns": [
+          "2026",
+          "2025"
+        ],
+        "deposit_changes_YTD_GBP_bn": {
+          "central_items": 0.4,
+          "commercial": 9.6,
+          "group": 6.3,
+          "retail": -3.7
+        },
+        "period": "Nine months ended 30 September",
+        "ratios_reported": {
+          "asset_quality_bps": [
+            25,
+            18
+          ],
+          "banking_nim_pct": [
+            3.21,
+            3.04
+          ],
+          "cost_income_pct": [
+            49.3,
+            59.7
+          ],
+          "rote_pct": [
+            17.9,
+            11.9
+          ]
+        },
+        "restrictions": [
+          "Underlying net income is not statutory total income. Underlying and statutory impairment differ.",
+          "Nine-month flows must not be compared to stocks or annualised here.",
+          "Ratios use issuer definitions; cross-bank ranking is not supported.",
+          "Group deposit increase is not a funding crisis; retail decline does not prove attrition or its cause.",
+          "Central Items deposits rose from GBP0.2bn in December2025 to GBP0.6bn in September2026, completing the Group bridge."
+        ],
+        "source_id": "LBG-Q326",
+        "statutory": {
+          "impairment": [
+            -926,
+            -619
+          ],
+          "net_interest_income": [
+            10827,
+            9808
+          ],
+          "operating_expenses": [
+            -8533,
+            -8955
+          ],
+          "other_income": [
+            5257,
+            4444
+          ],
+          "pat": [
+            4835,
+            3322
+          ],
+          "pbt": [
+            6625,
+            4678
+          ],
+          "tax": [
+            -1790,
+            -1356
+          ],
+          "total_income": [
+            16084,
+            14252
+          ]
+        },
+        "stocks_30sep2026": {
+          "cet1_pct": 13.3,
+          "customer_deposits_GBP_bn": 502.8,
+          "risk_weighted_assets_GBP_bn": 247.4,
+          "underlying_loans_GBP_bn": 495.5
+        },
+        "subject": "Lloyds Banking Group plc",
+        "underlying": {
+          "impairment": [
+            -930,
+            -618
+          ],
+          "net_income": [
+            14819,
+            13557
+          ],
+          "net_interest_income": [
+            11084,
+            10106
+          ],
+          "operating_costs": [
+            -7246,
+            -7176
+          ],
+          "operating_lease_depreciation": [
+            -1261,
+            -1075
+          ],
+          "other_income": [
+            4996,
+            4526
+          ],
+          "profit_before_impairment": [
+            7512,
+            5469
+          ],
+          "remediation": [
+            -61,
+            -912
+          ],
+          "restructuring": [
+            -51,
+            -16
+          ],
+          "statutory_pat": [
+            4835,
+            3322
+          ],
+          "statutory_pbt": [
+            6625,
+            4678
+          ],
+          "tax": [
+            -1790,
+            -1356
+          ],
+          "total_costs": [
+            -7307,
+            -8088
+          ],
+          "underlying_profit": [
+            6582,
+            4851
+          ],
+          "volatility_other": [
+            94,
+            -157
+          ]
+        },
+        "unit": "GBP million unless stated"
+      }
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Financial-Reconciliation.json#/statutory_bridges",
+    "input": "RIE2:Financial-Reconciliation.json",
+    "pointer": "/statutory_bridges",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "H12025": {
+        "locator": "Note3 printed44",
+        "source_ref": "R2-LBG-H126",
+        "statutory": {
+          "impairment": -442,
+          "net_interest_income": 6478,
+          "operating_expenses": -5440,
+          "other_income": 2908,
+          "pbt": 3504,
+          "total_income": 9386
+        },
+        "statutory_to_underlying": {
+          "impairment": [
+            0,
+            0,
+            0
+          ],
+          "net_interest_income": [
+            0,
+            177,
+            0
+          ],
+          "operating_expenses": [
+            9,
+            649,
+            -129
+          ],
+          "other_income": [
+            0,
+            -68,
+            129
+          ],
+          "pbt": [
+            9,
+            48,
+            0
+          ],
+          "total_income": [
+            0,
+            -601,
+            129
+          ]
+        },
+        "underlying": {
+          "impairment": -442,
+          "lease_depreciation": -710,
+          "net_income": 8914,
+          "net_interest_income": 6655,
+          "other_income": 2969,
+          "pbt": 3561,
+          "total_costs": -4911
+        }
+      },
+      "H12026": {
+        "locator": "Note3 printed44",
+        "source_ref": "R2-LBG-H126",
+        "statutory": {
+          "impairment": -616,
+          "net_interest_income": 7105,
+          "operating_expenses": -5717,
+          "other_income": 3521,
+          "pbt": 4293,
+          "total_income": 10626
+        },
+        "statutory_to_underlying": {
+          "impairment": [
+            0,
+            0,
+            -1
+          ],
+          "net_interest_income": [
+            0,
+            172,
+            1
+          ],
+          "operating_expenses": [
+            34,
+            891,
+            -123
+          ],
+          "other_income": [
+            0,
+            -334,
+            123
+          ],
+          "pbt": [
+            34,
+            -112,
+            0
+          ],
+          "total_income": [
+            0,
+            -1003,
+            124
+          ]
+        },
+        "underlying": {
+          "impairment": -617,
+          "lease_depreciation": -841,
+          "net_income": 9747,
+          "net_interest_income": 7278,
+          "other_income": 3310,
+          "pbt": 4215,
+          "total_costs": -4915
+        }
+      }
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Financial-Reconciliation.json#/statutory_to_underlying_column_order",
+    "input": "RIE2:Financial-Reconciliation.json",
+    "pointer": "/statutory_to_underlying_column_order",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      "restructuring_removed",
+      "volatility_other_removed",
+      "insurance_gross_up"
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Financial-Reconciliation.json#/targets_2030",
+    "input": "RIE2:Financial-Reconciliation.json",
+    "pointer": "/targets_2030",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "capital_generation_bps": "greater than225",
+      "cost_income_pct": "less than45",
+      "gross_cost_savings_GBP_bn": "circa2",
+      "measurement_state": "target",
+      "rote_pct": "circa20",
+      "source_ref": "R2-LBG-STRATEGY"
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Financial-Reconciliation.json#/unknowns",
+    "input": "RIE2:Financial-Reconciliation.json",
+    "pointer": "/unknowns",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      "No Q3 segment P&L inferred from H1 or Group nine-month values.",
+      "Segment-specific economic capital/returns, unit cost-to-serve and fully reconciled investment allocation remain unacquired.",
+      "Underlying segment profits are not independently published statutory legal-company PBT."
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/banking_credit_cards_received",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/banking_credit_cards_received",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": 115687
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/canonical_acceptance",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/canonical_acceptance",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": false
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/closed_after_3_days_within_8_weeks_pct",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/closed_after_3_days_within_8_weeks_pct",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": 31.49
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/closed_within_3_days_pct",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/closed_within_3_days_pct",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": 55.25
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/complaints_closed",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/complaints_closed",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": 118861
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/complaints_received",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/complaints_received",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": 118762
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/complaints_upheld_by_firm_pct",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/complaints_upheld_by_firm_pct",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": 66.12
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/consumer_credit_separate_table",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/consumer_credit_separate_table",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "closed": 12222,
+      "received": 12308,
+      "upheld_pct": 21.5,
+      "warning": "Different activity/product table; never substitute for or add to all-product total."
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/counter_evidence",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/counter_evidence",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "Company reports existing digital/customer capability; closures and positive survey methodology do not establish all customers dissatisfied. No matched prior-period trend acquired."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/denominator_notes",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/denominator_notes",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "Closure/uphold measures refer to complaints closed, not the incoming cohort, accounts or unique customers. No trend/harm/customer need or per-complaint cost established."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/entity",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/entity",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "Lloyds Bank PLC"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/fos",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/fos",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "banking_credit": 3612,
+      "entity": "Lloyds Bank PLC",
+      "general_insurance": 14,
+      "investments": 10,
+      "mortgages_home_finance": 117,
+      "new_cases": 3764,
+      "pensions": 11,
+      "period_end": "2026-09-30",
+      "period_start": "2026-04-01",
+      "publication_date": null,
+      "source_ref": "R2-FOS-APRSEP26",
+      "warning": "Not FCA calendarH1, not resolved/upheld cohort, not an escalation/conversion rate."
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/material_consequence",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/material_consequence",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "Observed complaint-handling workload and firm-upheld complaints; monetary cost and direct customer harm not established from these aggregates."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/period_end",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/period_end",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "2026-06-30"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/period_start",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/period_start",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "2026-01-01"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/pipeline_writes",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/pipeline_writes",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": 0
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/remaining",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/remaining",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      "Permitted complaint root causes/repeats/affected journeys and outcome by cohort",
+      "Cost-to-serve and remediation effectiveness, without private personal case records",
+      "Matched historical windows and correctly labelled survey values before trend/rank inference"
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/scope",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/scope",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "All product groups in Open/Closed/Upheld tables, not consumer-credit-only table, brand or Group"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/source_ref",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/source_ref",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "R2-FCA-H126"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Customer-Outcomes.json#/survey",
+    "input": "RIE2:Customer-Outcomes.json",
+    "pointer": "/survey",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "blocking_reason": "PDF text loses provider labels; screenshot capability unavailable. No percentage mapped to a brand from ordered unlabelled values.",
+      "metric": "Very/extremely likely to recommend; service-specific eligible users, excludes dont-know",
+      "scope": "GB personal current accounts, July 2025–June 2026",
+      "scores_admitted": [],
+      "source_refs": [
+        "R2-IPSOS-AUG26",
+        "R2-IPSOS-METHOD"
+      ]
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Operating-Model.json#/authority",
+    "input": "RIE2:Operating-Model.json",
+    "pointer": "/authority",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "Research projection, not an accepted legal or EnterpriseModel tree"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Operating-Model.json#/brand_warning",
+    "input": "RIE2:Operating-Model.json",
+    "pointer": "/brand_warning",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "Ring-fencing description includes Halifax activities with LloydsBank/BankOfScotland; no separate Halifax legal entity or automatic reporting-segment join inferred. Current brand transition scope/date remains subject to its original evidence owner."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Operating-Model.json#/capability_dates",
+    "input": "RIE2:Operating-Model.json",
+    "pointer": "/capability_dates",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "Envoy_pdf_release": "2026-04-28",
+      "Microsoft_agreement": "2026-06-04",
+      "companion_html_publication": "2026-05-01"
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Operating-Model.json#/current_roles",
+    "input": "RIE2:Operating-Model.json",
+    "pointer": "/current_roles",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      {
+        "buyer_status": "not established",
+        "person": "Charlie Nunn",
+        "professional_role": "GroupChiefExecutive",
+        "read_date": "2026-11-14",
+        "source_ref": "R2-LBG-LEAD"
+      },
+      {
+        "buyer_status": "not established",
+        "person": "William Chalmers",
+        "professional_role": "CFO",
+        "read_date": "2026-11-14",
+        "source_ref": "R2-LBG-LEAD"
+      },
+      {
+        "buyer_status": "not established",
+        "person": "Ron van Kemenade",
+        "professional_role": "Group COO",
+        "read_date": "2026-11-14",
+        "source_ref": "R2-LBG-LEAD"
+      },
+      {
+        "buyer_status": "not established",
+        "person": "Jasjyot Singh",
+        "professional_role": "CEOConsumer",
+        "read_date": "2026-11-14",
+        "source_ref": "R2-LBG-LEAD"
+      },
+      {
+        "buyer_status": "not established",
+        "person": "Nick Williams",
+        "professional_role": "CEOConnected Finance",
+        "read_date": "2026-11-14",
+        "source_ref": "R2-LBG-LEAD"
+      },
+      {
+        "buyer_status": "not established",
+        "person": "Amanda Murphy",
+        "professional_role": "CEOBusinessCommercialBanking",
+        "read_date": "2026-11-14",
+        "source_ref": "R2-LBG-LEAD"
+      },
+      {
+        "buyer_status": "not established",
+        "person": "John Langley",
+        "professional_role": "CEOCorporateInstitutionalBanking",
+        "read_date": "2026-11-14",
+        "source_ref": "R2-LBG-LEAD"
+      },
+      {
+        "buyer_status": "not established",
+        "person": "Chirantan Barua",
+        "professional_role": "CEOScottish Widows /WealthInsurance",
+        "read_date": "2026-11-14",
+        "source_ref": "R2-LBG-LEAD"
+      },
+      {
+        "buyer_status": "not established",
+        "person": "Javier Rodríguez de Colmenares",
+        "professional_role": "CRO",
+        "read_date": "2026-11-14",
+        "source_ref": "R2-LBG-LEAD"
+      }
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Operating-Model.json#/principal_legal_interests",
+    "input": "RIE2:Operating-Model.json",
+    "pointer": "/principal_legal_interests",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      {
+        "as_at": "2025-12-31",
+        "business": "Banking/financial services",
+        "entity": "Lloyds Bank plc",
+        "equity_voting_pct": 100,
+        "interest_type": "direct",
+        "intermediate_parent": "Lloyds Banking Group plc",
+        "locator": "Item4.C printed11",
+        "source_ref": "R2-LBG-20F25"
+      },
+      {
+        "as_at": "2025-12-31",
+        "business": "Life assurance",
+        "entity": "Scottish Widows Limited",
+        "equity_voting_pct": 100,
+        "interest_type": "indirect",
+        "intermediate_parent": null,
+        "locator": "Item4.C printed11",
+        "source_ref": "R2-LBG-20F25"
+      },
+      {
+        "as_at": "2025-12-31",
+        "business": "Holding company",
+        "entity": "HBOS plc",
+        "equity_voting_pct": 100,
+        "interest_type": "indirect",
+        "intermediate_parent": null,
+        "locator": "Item4.C printed11",
+        "source_ref": "R2-LBG-20F25"
+      },
+      {
+        "as_at": "2025-12-31",
+        "business": "Banking/financial services",
+        "entity": "Bank of Scotland plc",
+        "equity_voting_pct": 100,
+        "interest_type": "indirect",
+        "intermediate_parent": null,
+        "locator": "Item4.C printed11",
+        "source_ref": "R2-LBG-20F25"
+      },
+      {
+        "as_at": "2025-12-31",
+        "business": "Banking/financial services",
+        "entity": "Lloyds Bank Corporate Markets plc",
+        "equity_voting_pct": 100,
+        "interest_type": "direct",
+        "intermediate_parent": "Lloyds Banking Group plc",
+        "locator": "Item4.C printed11",
+        "source_ref": "R2-LBG-20F25"
+      },
+      {
+        "as_at": "2025-12-31",
+        "business": "Financial services",
+        "entity": "LBG Equity Investments Limited",
+        "equity_voting_pct": 100,
+        "interest_type": "direct",
+        "intermediate_parent": "Lloyds Banking Group plc",
+        "locator": "Item4.C printed11",
+        "source_ref": "R2-LBG-20F25"
+      }
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Operating-Model.json#/processes",
+    "input": "RIE2:Operating-Model.json",
+    "pointer": "/processes",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      {
+        "journey": "Retail deposits/current accounts/mortgages/cards/vehicle finance",
+        "mechanism": "Origination/pricing/funding → servicing → retention/credit/asset outcomes",
+        "source_ref": "R2-LBG-H126",
+        "unknown": "Actual service owners, costs, technology dependency map and private customer cohorts"
+      },
+      {
+        "journey": "Commercial lending/transaction banking/working capital and risk",
+        "mechanism": "Relationship/product → underwriting/funding → payment/servicing → fees/spreads/capital",
+        "source_ref": "R2-LBG-FY25",
+        "unknown": "BCB/CIB management to legal/segment allocation and exact procurement accountability"
+      },
+      {
+        "journey": "Wealth/pensions/protection",
+        "mechanism": "Contributions/insurance/investment administration → service and deferred-profit release",
+        "source_ref": "R2-LBG-H126",
+        "unknown": "CSM/risk adjustment stock is not income, customer funds are not Group revenue"
+      }
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Operating-Model.json#/regulatory_transmission",
+    "input": "RIE2:Operating-Model.json",
+    "pointer": "/regulatory_transmission",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "reason": "Designated provider legal entities do not prove Lloyds contracting entity, service criticality, readiness gap or breach.",
+      "source_ref": "R2-HMT-CTP",
+      "status": "conditional only"
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Operating-Model.json#/reporting",
+    "input": "RIE2:Operating-Model.json",
+    "pointer": "/reporting",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "chief_operating_decision_maker": "Group Executive Committee underIFRS8",
+      "divisions": [
+        "Retail",
+        "Commercial Banking",
+        "Insurance Pensions and Investments"
+      ],
+      "not_automatically_equal": [
+        "Consumer management area",
+        "Connected Finance management area",
+        "Lloyds Bank PLC legal perimeter",
+        "Halifax brand"
+      ],
+      "other_aggregate": "Other includes central/equity activities; not a fourth named legal company",
+      "period": "H12026",
+      "source_ref": "R2-LBG-H126"
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Operating-Model.json#/supplier_capabilities",
+    "input": "RIE2:Operating-Model.json",
+    "pointer": "/supplier_capabilities",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      {
+        "counterparty_legal_entity": null,
+        "exclusivity": null,
+        "remaining_scope": "unknown",
+        "reported_scope": "Company-wide365E7,Agent365,workplace/engineering adoption",
+        "source_ref": "R2-LBG-MS26",
+        "status": "announcedmulti-year agreement",
+        "supplier": "Microsoft",
+        "term_end": null,
+        "value": null
+      },
+      {
+        "counterparty_legal_entity": null,
+        "exclusivity": null,
+        "remaining_scope": "unknown",
+        "reported_scope": "Envoy internal agent platform and designed controls",
+        "source_ref": "R2-LBG-ENVOY-PDF",
+        "status": "reported platform relationship",
+        "supplier": "Google Cloud",
+        "term_end": null,
+        "value": null
+      }
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Operating-Model.json#/unresolved",
+    "input": "RIE2:Operating-Model.json",
+    "pointer": "/unresolved",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      "Current complete legal ownership/register verification",
+      "System inventory/service maps, outsourcing contracts/workshare/price/renewal/exit",
+      "Measured net unit cost-to-serve and AI customer benefit",
+      "Exact decision accountability, approved external budget and open sourcing"
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Banking-Comparability.json#/additional_nonbank_example",
+    "input": "RIE2:Banking-Comparability.json",
+    "pointer": "/additional_nonbank_example",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": {
+      "continuing_pbt": [
+        699,
+        476
+      ],
+      "core_operating_profit": [
+        918,
+        859
+      ],
+      "core_segment_components_2026": [
+        646,
+        222,
+        248,
+        -114,
+        -84
+      ],
+      "id": "LG-Core",
+      "not_comparable": [
+        "Core operating APM not bank statutory PBT",
+        "CSM/SolvencyII not bank income/CET1",
+        "Continuing/discontinued gain boundaries differ"
+      ],
+      "scope": "Global insurance/asset-management core, not UK bank",
+      "source_ref": "R2-LG-H126"
+    }
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Banking-Comparability.json#/allowed_use",
+    "input": "RIE2:Banking-Comparability.json",
+    "pointer": "/allowed_use",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "Matched within-issuer period changes and mechanism/counter-case comparison only; no cross-bank winner, profit pool or cost-performance rank"
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Banking-Comparability.json#/peer_counter_evidence",
+    "input": "RIE2:Banking-Comparability.json",
+    "pointer": "/peer_counter_evidence",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      "NatWest Retail reports deposit hedge benefits, lower mortgage margins, stable arrears and savings mix; similar mechanisms challenge a uniquely Lloyds-specific problem.",
+      "NatWest Retail impairment280vs226 attributed to unsecured growth/seasoning; an increased charge alone is not proof of failed controls."
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Banking-Comparability.json#/periods",
+    "input": "RIE2:Banking-Comparability.json",
+    "pointer": "/periods",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      "H1 2026",
+      "H1 2025"
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Banking-Comparability.json#/rows",
+    "input": "RIE2:Banking-Comparability.json",
+    "pointer": "/rows",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      {
+        "basis": "Underlying/APM",
+        "expenses": [
+          -2889,
+          -2963
+        ],
+        "financial_level_comparison": "NOT ADMITTED across banks; duration only matches",
+        "id": "LBG-Retail",
+        "impairment": [
+          -565,
+          -342
+        ],
+        "income": [
+          5710,
+          5279
+        ],
+        "perimeter": "Reporting Retail: includes European mortgages/savings and UK motor leasing, not Lloyds Bank plc",
+        "profit": [
+          2256,
+          1974
+        ],
+        "source_ref": "R2-LBG-H126"
+      },
+      {
+        "basis": "Reported segment operating profit; expenses incl litigation/conduct",
+        "expenses": [
+          -1429,
+          -1423
+        ],
+        "financial_level_comparison": "NOT ADMITTED across banks; product and accounting differences",
+        "id": "NW-Retail",
+        "impairment": [
+          -280,
+          -226
+        ],
+        "income": [
+          3438,
+          3134
+        ],
+        "perimeter": "NatWest Retail reporting segment; Boxed reallocation noted",
+        "profit": [
+          1729,
+          1485
+        ],
+        "reported_cir_excl_litigation_pct": [
+          41.6,
+          45.0
+        ],
+        "reported_nim_pct": [
+          2.69,
+          2.58
+        ],
+        "source_ref": "R2-NW-H126"
+      },
+      {
+        "basis": "IFRS8 structured segment note; operating expenses include levies/conduct",
+        "expenses": [
+          -2412,
+          -2355
+        ],
+        "financial_level_comparison": "NOT ADMITTED across banks; scope and basis differ",
+        "id": "BAR-UK",
+        "impairment": [
+          -338,
+          -237
+        ],
+        "income": [
+          4517,
+          4193
+        ],
+        "perimeter": "Barclays UK reporting segment; UK Corporate separate; not globalGroup or BarclaysBankplc",
+        "profit": [
+          1767,
+          1601
+        ],
+        "source_ref": "R2-BAR-H126"
+      }
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Banking-Comparability.json#/unacquired",
+    "input": "RIE2:Banking-Comparability.json",
+    "pointer": "/unacquired",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": [
+      "Banking market shares/profit pool with matched national product perimeter",
+      "Comparable segment economic-capital allocations and supplier-concentration spend",
+      "Current matched building-society finance: no borrowed annual/fiscal-half data used as calendarH1 comparator"
+    ]
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "duplicate_policy": "Where this repeats a Claim-Ledger metric, that claim is the sole scalar proposal; this record is reconciliation context, not another finding count.",
+    "id": "RIE2:Banking-Comparability.json#/unit",
+    "input": "RIE2:Banking-Comparability.json",
+    "pointer": "/unit",
+    "reason": "Preserved reconciliation/context record; individual definitions/locators and rights must be verified before an atomic Evidence/Observation proposal. No wholesale table ingestion.",
+    "record": "GBP million"
+  }
+]

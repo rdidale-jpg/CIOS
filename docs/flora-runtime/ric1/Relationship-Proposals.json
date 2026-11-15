@@ -1,0 +1,509 @@
+[
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-fd72ede820eb60b0"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:REL-TESCO-BARCLAYS",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "company-reported specific relationship",
+      "id": "REL-TESCO-BARCLAYS",
+      "monetary_flow": null,
+      "object": "Barclays",
+      "pipeline_handoff": false,
+      "predicate": "reports_banking_partnership",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "H1 2026/27; terms, workshare and remaining supplier choice unknown; not a UK sector-wide flow",
+      "source_refs": [
+        "TESCO-G26"
+      ],
+      "subject": "Tesco"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-fd72ede820eb60b0"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:REL-TESCO-UBER-EATS",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "company-reported specific relationship",
+      "id": "REL-TESCO-UBER-EATS",
+      "monetary_flow": null,
+      "object": "Uber Eats",
+      "pipeline_handoff": false,
+      "predicate": "reports_delivery_platform_launch",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "H1 2026/27; terms, workshare and remaining supplier choice unknown; not a UK sector-wide flow",
+      "source_refs": [
+        "TESCO-G26"
+      ],
+      "subject": "Tesco"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-fd72ede820eb60b0"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:REL-TESCO-DELIVEROO",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "company-reported specific relationship",
+      "id": "REL-TESCO-DELIVEROO",
+      "monetary_flow": null,
+      "object": "Deliveroo",
+      "pipeline_handoff": false,
+      "predicate": "reports_delivery_platform_launch",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "H1 2026/27; terms, workshare and remaining supplier choice unknown; not a UK sector-wide flow",
+      "source_refs": [
+        "TESCO-G26"
+      ],
+      "subject": "Tesco"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-b409316ba782419e"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:REL-BT-MINISTRY-OF-JUSTICE",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "company-reported specific contract",
+      "id": "REL-BT-MINISTRY-OF-JUSTICE",
+      "monetary_flow": null,
+      "object": "Ministry of Justice",
+      "pipeline_handoff": false,
+      "predicate": "reports_business_contract",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "H1 FY27 continuing operations; no contract value, renewal or unallocated scope inferred",
+      "source_refs": [
+        "BT-J26"
+      ],
+      "subject": "BT"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-b409316ba782419e"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:REL-BT-CABINET-OFFICE",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "company-reported specific contract",
+      "id": "REL-BT-CABINET-OFFICE",
+      "monetary_flow": null,
+      "object": "Cabinet Office",
+      "pipeline_handoff": false,
+      "predicate": "reports_business_contract",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "H1 FY27 continuing operations; no contract value, renewal or unallocated scope inferred",
+      "source_refs": [
+        "BT-J26"
+      ],
+      "subject": "BT"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-b409316ba782419e"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:REL-BT-SCOTTISH-WATER",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "company-reported specific contract",
+      "id": "REL-BT-SCOTTISH-WATER",
+      "monetary_flow": null,
+      "object": "Scottish Water",
+      "pipeline_handoff": false,
+      "predicate": "reports_business_contract",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "H1 FY27 continuing operations; no contract value, renewal or unallocated scope inferred",
+      "source_refs": [
+        "BT-J26"
+      ],
+      "subject": "BT"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-b409316ba782419e"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:REL-BT-ROYAL-MAIL",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "company-reported specific contract",
+      "id": "REL-BT-ROYAL-MAIL",
+      "monetary_flow": null,
+      "object": "Royal Mail",
+      "pipeline_handoff": false,
+      "predicate": "reports_business_contract",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "H1 FY27 continuing operations; no contract value, renewal or unallocated scope inferred",
+      "source_refs": [
+        "BT-J26"
+      ],
+      "subject": "BT"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-87db320c5b0a53d1"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:REL-LBG-MS",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "company-reported specific relationship",
+      "id": "REL-LBG-MS",
+      "monetary_flow": null,
+      "object": "Microsoft",
+      "pipeline_handoff": false,
+      "predicate": "announces_multi_year_workplace_agreement",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "4June2026 announcement; no exclusivity/value/expiry disclosed",
+      "source_refs": [
+        "LBG-MS26"
+      ],
+      "subject": "Lloyds Banking Group"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-91b2a024b105d9fd"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:REL-LBG-GC",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "company-reported specific relationship",
+      "id": "REL-LBG-GC",
+      "monetary_flow": null,
+      "object": "Google Cloud",
+      "pipeline_handoff": false,
+      "predicate": "describes_envoy_built_on",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "Internal agent platform; designed controls not independently verified effectiveness",
+      "source_refs": [
+        "LBG-ENVOY26"
+      ],
+      "subject": "Lloyds Banking Group"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-f8ae147dc8bf9c3e"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:SYS-RTGS",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "official institutional role",
+      "id": "SYS-RTGS",
+      "monetary_flow": null,
+      "object": "RTGS",
+      "pipeline_handoff": false,
+      "predicate": "operates",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "No named bank participant/account inferred",
+      "source_refs": [
+        "BOE-SETTLE"
+      ],
+      "subject": "Bank of England"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-f8ae147dc8bf9c3e"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:SYS-CHAPS",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "official institutional role",
+      "id": "SYS-CHAPS",
+      "monetary_flow": null,
+      "object": "CHAPS",
+      "pipeline_handoff": false,
+      "predicate": "operates",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "Operator distinct from member, supplier or regulator",
+      "source_refs": [
+        "BOE-SETTLE"
+      ],
+      "subject": "Bank of England"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-e19e10e3469cd382"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:DEP-C-J",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "reported cross-sector demand exposure",
+      "id": "DEP-C-J",
+      "monetary_flow": null,
+      "object": "Data centres",
+      "pipeline_handoff": false,
+      "predicate": "reports_product_demand_exposure_to",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "Global Power Systems, not identified UK customer order or whole manufacturing dependency",
+      "source_refs": [
+        "RR-C26"
+      ],
+      "subject": "Rolls-Royce Power Systems"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-fd72ede820eb60b0"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:DEP-G-J",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "analytical functional dependency",
+      "id": "DEP-G-J",
+      "monetary_flow": null,
+      "object": "Digital services",
+      "pipeline_handoff": false,
+      "predicate": "uses_delivery_platform_mechanism",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "Mechanism illustrated by named launches; no national spend/concentration estimate or blanket SIC assignment",
+      "source_refs": [
+        "TESCO-G26"
+      ],
+      "subject": "Retail online fulfilment"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-2d9f2bf332e1c92a"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:PRESS-RATES",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "analytical shared-pressure mechanism",
+      "id": "PRESS-RATES",
+      "monetary_flow": null,
+      "object": "Customer financing and bank funding",
+      "pipeline_handoff": false,
+      "predicate": "conditional_repricing_transmission",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "September rates, predating November move; enterprise effects require hedge/product/customer proof",
+      "source_refs": [
+        "BOE-MC-SEP26"
+      ],
+      "subject": "UK monetary conditions"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-8642cc9378e3a549"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE1:PRESS-WATER",
+    "record": {
+      "canonical_acceptance": false,
+      "evidence_status": "analytical functional dependency",
+      "id": "PRESS-WATER",
+      "monetary_flow": null,
+      "object": "Farming and industry",
+      "pipeline_handoff": false,
+      "predicate": "conditional_resource_dependency",
+      "rights": "public factual relationship candidate; no contract redistribution",
+      "scope": "Named asset/customer exposure and monetary consequence not established",
+      "source_refs": [
+        "EA-E26"
+      ],
+      "subject": "Water availability"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-07558e40f2efbdc0"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE2:R2-REL-1",
+    "record": {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "direct",
+      "id": "R2-REL-1",
+      "locator": "Item4.C printed11",
+      "object": "Lloyds Bank plc",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-07558e40f2efbdc0"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE2:R2-REL-2",
+    "record": {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "indirect",
+      "id": "R2-REL-2",
+      "locator": "Item4.C printed11",
+      "object": "Scottish Widows Limited",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-07558e40f2efbdc0"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE2:R2-REL-3",
+    "record": {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "indirect",
+      "id": "R2-REL-3",
+      "locator": "Item4.C printed11",
+      "object": "HBOS plc",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-07558e40f2efbdc0"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE2:R2-REL-4",
+    "record": {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "indirect",
+      "id": "R2-REL-4",
+      "locator": "Item4.C printed11",
+      "object": "Bank of Scotland plc",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-07558e40f2efbdc0"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE2:R2-REL-5",
+    "record": {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "direct",
+      "id": "R2-REL-5",
+      "locator": "Item4.C printed11",
+      "object": "Lloyds Bank Corporate Markets plc",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  },
+  {
+    "acceptance_class": "B",
+    "canonical_acceptance": false,
+    "document_refs": [
+      "DOC-07558e40f2efbdc0"
+    ],
+    "endpoint_mapping": null,
+    "id": "RIE2:R2-REL-6",
+    "record": {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "direct",
+      "id": "R2-REL-6",
+      "locator": "Item4.C printed11",
+      "object": "LBG Equity Investments Limited",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    "restriction": "A supported endpoint does not prove an edge; role, date, legal perimeter, directness and both authorised canonical endpoint mappings require review."
+  }
+]

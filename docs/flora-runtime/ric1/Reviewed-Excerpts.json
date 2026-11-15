@@ -1,0 +1,50 @@
+[
+  {
+    "canonical_acceptance": false,
+    "content_kind": "reviewed_web_excerpt",
+    "document_id": "DOC-c3ad0d86073d3196",
+    "excerpt_content_sha256": "df9f861af81c2f1b815b4f72f71175e22048dca537cb30d21e749f6926433fb1",
+    "id": "EX-H126",
+    "limitations": "Selected table rows, normalised rendered separators; underlying pre-tax IFRS8 reporting divisions, not standalone legal entity/statutory P&Ls. Costs include lower severance and exclude separate remediation; not fully recurring/normalised costs.",
+    "locator": "SEC rendered lines2544,2549–2551,2555; Note3 printed42",
+    "primary_content_sha256": null,
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn339283view0",
+    "retrieved_at": "2026-11-15",
+    "rights": "Bounded factual table citation for owner review; publisher rights retained. No original-file or ingestion/redistribution permission asserted.",
+    "source_id": "R2-LBG-H126",
+    "text": "Half-year to 30 June 2026 | Retail£m | Commercial Banking£m | Insurance, Pensions and Investments£m | Other£m | Total£m\nUnderlying operating lease depreciation 1 | (835) | (6) | – | – | (841)\nUnderlying income, net of underlying operating lease depreciation | 5,710 | 2,897 | 747 | 393 | 9,747\nUnderlying operating costs | (2,872) | (1,409) | (494) | (101) | (4,876)\nUnderlying profit before tax | 2,256 | 1,425 | 245 | 289 | 4,215"
+  },
+  {
+    "canonical_acceptance": false,
+    "content_kind": "reviewed_web_excerpt",
+    "document_id": "DOC-ce1ab140499fab2b",
+    "excerpt_content_sha256": "f3a323107cf77b178c4a3720b21a716bad6cff63a6d3524d5f15b673d6862d8f",
+    "id": "EX-FCA",
+    "limitations": "Firm all-product received complaints total, not Group, unique persons, closed cohort, cause, financial loss or customer demand.",
+    "locator": "All-product Open table, Lloyds Bank PLC row, rendered680; method title2026H1",
+    "primary_content_sha256": null,
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn544033view2",
+    "retrieved_at": "2026-11-15",
+    "rights": "Bounded factual table citation for owner review; publisher rights retained. No original-file or ingestion/redistribution permission asserted.",
+    "source_id": "R2-FCA-H126",
+    "text": "Lloyds Bank PLC | LLOYDS BANKING GROUP PLC | no | 2026-01-01 to 2026-06-30 | 115,687 | 31 | 2,679 | 339 | 26 | 118,762"
+  },
+  {
+    "canonical_acceptance": false,
+    "content_kind": "reviewed_web_excerpt",
+    "document_id": "DOC-999b6a130e1db832",
+    "excerpt_content_sha256": "f9040bf2e3c911026c239bd41a6e6740e4d7559d422d14d972e8354fc51917e1",
+    "id": "EX-ONS",
+    "limitations": "SIC2007 rounded GVA basic-price weight per thousand, not banking-only revenue, turnover, GDP market-price share or TAM. Disjoint weights sum1002 through rounding; no renormalisation.",
+    "locator": "PDF index29, GVA3, rendered715–716",
+    "primary_content_sha256": null,
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn339283view2",
+    "retrieved_at": "2026-11-15",
+    "rights": "Bounded factual table citation for owner review; publisher rights retained. No original-file or ingestion/redistribution permission asserted.",
+    "source_id": "ONS-GDP-SEP26",
+    "text": "Section A-T A B-E B C D E F G-T G H I J K L M N O P Q R S T\n2024 weights 1000 7 124 7 87 19 12 57 812 94 36 28 66 81 142 87 54 51 59 84 15 15 1"
+  }
+]

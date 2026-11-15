@@ -1,0 +1,27 @@
+[
+  {
+    "from": "UKCTPregime",
+    "source_refs": [
+      "R2-HMT-CTP"
+    ],
+    "status": "source supported designation; bank contract/impact edge unverified",
+    "to": "Named provider legal entities"
+  },
+  {
+    "from": "Used-car price/fleet exposure",
+    "source_refs": [
+      "R2-LBG-H126",
+      "R2-LBG-Q326"
+    ],
+    "status": "company reports specific mechanism; customer need/control-failure edge unverified",
+    "to": "Lloyds Retail lease depreciation"
+  },
+  {
+    "from": "FCA firm complaints",
+    "source_refs": [
+      "R2-FCA-H126"
+    ],
+    "status": "legal firm return supported; RetailGroup/AI harm/cost edge unverified",
+    "to": "Lloyds Bank PLC service workload"
+  }
+]
