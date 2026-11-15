@@ -19,6 +19,22 @@ INT1_CANDIDATE_ADDITIONS = {
     'enterprise-knowledge/banking/research-model/source-snapshots/PR-FCA-COMPLAINTS-H126.txt':
         'b1ca214f97c51e0375d054a879d2e01f71c34697bdf26f040953c7a91d98905b',
 }
+# #628 bounded presentation-only public candidates. Rights are separately
+# reviewed; these exact inventory bytes do not approve canonical Evidence.
+EAI1_CANDIDATE_ADDITIONS = {
+    'enterprise-knowledge/banking/research-model/source-snapshots/EAI1-FCA-Service-Candidate.json':
+        '953d7e15fae078295ca21bf6fd4d874ad142f3b813656ba474be789ee670ef9b',
+    'enterprise-knowledge/banking/research-model/source-snapshots/EAI1-FCA-Service.txt':
+        '015a657f4f7cc232037879c652a8cbb3da91865ede073dfb6186de54f278773d',
+    'enterprise-knowledge/banking/research-model/source-snapshots/EAI1-HMT-CTP-Candidate.json':
+        '05202f75fe8bf4594d0843a9e224ab18b02d422030ec89b166d678d1f11f175f',
+    'enterprise-knowledge/banking/research-model/source-snapshots/EAI1-HMT-CTP.txt':
+        '42cef2b7ca812c83551a89bd6500b3884b21e87972f6b0c670951c8acb9bf63f',
+    'enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber-Candidate.json':
+        '74ec38444ef79f6a5273306e8e93c86a06562647a7865d30145ef035136f9267',
+    'enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt':
+        'b9abe8eb681cb0310dbf7eec719fc66de5bda0fca2920b0cc02a94a7efc92646',
+}
 REVIEW = 'enterprise-knowledge/banking/research-model/Understanding-Review.json'
 DEPTH_ADDITIONS = tuple('enterprise-knowledge/banking/research-model/source-snapshots/'+name+'.txt'
                         for name in ('DEPTH-LBG-AI','DEPTH-LBG-LEGACY','DEPTH-LBG-WALLET','DEPTH-LBG-CURVE'))
@@ -60,6 +76,13 @@ def approved_history(root):
         assert hashlib.sha256(content).hexdigest()==digest, 'INT-1 candidate proposal/excerpt changed'
         assert path not in expected, 'Existing identity cannot become an addition'
         expected[path]=content
+    for path,digest in EAI1_CANDIDATE_ADDITIONS.items():
+        candidate=Path(root)/path
+        assert not candidate.is_symlink(), 'Candidate source symlink is not admitted'
+        content=candidate.read_bytes()
+        assert hashlib.sha256(content).hexdigest()==digest, 'EAI-1 candidate proposal/excerpt changed'
+        assert path not in expected, 'Existing identity cannot become an addition'
+        expected[path]=content
     return expected
 
 
@@ -77,7 +100,8 @@ def verify_history(root):
     assert not any(p.is_symlink() for p in files), 'Research symlink is not a reviewed source'
     actual={str(p.relative_to(root)):p.read_bytes() for p in files if p.is_file()}
     compare_history(expected,actual)
-    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS),
+    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS)-len(EAI1_CANDIDATE_ADDITIONS),
             'depth_additions':len(DEPTH_ADDITIONS),'macro_additions':len(MACRO_ADDITIONS),
             'trigger_candidate_additions':len(TRIGGER_ADDITIONS),'int1_presentation_candidate_additions':len(INT1_CANDIDATE_ADDITIONS),
+            'eai1_presentation_candidate_additions':len(EAI1_CANDIDATE_ADDITIONS),
             'total':len(expected),'old_review_records_retained':True}

@@ -1,0 +1,55 @@
+- banner:
+  - link "Skip to main content":
+    - /url: "#visual-content"
+  - link "FLORA":
+    - /url: /
+  - navigation "Primary product navigation":
+    - group: Explore⌄
+  - text: Guest
+  - navigation "Current scope":
+    - link "UK":
+      - /url: /?stream=landscape&selected=banking
+    - link "Banking":
+      - /url: /industries/banking?stream=landscape&selected=lloyds
+    - text: Lloyds Banking Group
+  - navigation "Insight streams":
+    - link "Inside":
+      - /url: /enterprises/lloyds?stream=inside&agenda=service-recovery#stream-inside
+    - link "Landscape":
+      - /url: /enterprises/lloyds?stream=landscape&agenda=service-recovery#stream-landscape
+    - link "Forces":
+      - /url: /enterprises/lloyds?stream=forces&agenda=service-recovery#stream-forces
+- complementary "Visual exploration":
+  - figure "lloyds inside":
+    - text: Conceptual illustration, not actual premises, a legal hierarchy, systems topology or a quantitative pressure map. Labelled navigation remains available without artwork.
+    - link "Financial performance":
+      - /url: /enterprises/lloyds?stream=inside&detail=economics&agenda=service-recovery#insight
+    - link "Technology & data":
+      - /url: /enterprises/lloyds?stream=inside&detail=technology&agenda=service-recovery#insight
+    - link "Leadership Agenda":
+      - /url: /enterprises/lloyds?stream=inside&agenda=service-recovery#agenda-insight
+  - group: Explore deeper
+- main:
+  - article:
+    - heading "Leadership Agenda" [level=1]
+    - region "Complaint volumes and upheld outcomes are distinct":
+      - link "Close Leadership Agenda":
+        - /url: /enterprises/lloyds?stream=inside#visual-content
+        - text: ×
+      - heading "Complaint volumes and upheld outcomes are distinct" [level=2]
+      - article:
+        - paragraph: FLORA Insight Lloyds Bank PLC received 118,762 complaints in January–June 2026; 66.12% of complaints closed during that period were upheld by the firm. These describe activity and resolution outcomes separately.
+        - paragraph: 1 January–30 June 2026
+        - group: Sources & reasoning
+      - group: Basis & perspective
+    - group:
+      - text: Leadership Agenda
+      - navigation "Leadership Agenda":
+        - link "Complaint volumes and upheld outcomes are distinct":
+          - /url: /enterprises/lloyds?stream=inside&agenda=service-recovery#agenda-insight
+        - link "AI benefit ambitions sit on existing capabilities":
+          - /url: /enterprises/lloyds?stream=inside&agenda=ai-benefits#agenda-insight
+        - link "Published Group deposits are £6.3bn higher":
+          - /url: /enterprises/lloyds?stream=inside&agenda=funding-base#agenda-insight
+    - group: Context layers
+    - group: Sources & detail

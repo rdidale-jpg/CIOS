@@ -1,0 +1,20 @@
+{
+  "mission": "EAI-2 governed integration into accepted VP-2; draft PR only",
+  "research_policy": "Assurance",
+  "capability_profile": "Isolated local runtime/test/browser, authorised GitHub draft/CI, independent read-only critique; no paid/external-model or production/canonical operation",
+  "baseline_main": "ce4314c3528d5f4beae6e0e4fa53209ddb56ff5c",
+  "main_full_push_ci": 43739461424,
+  "main_ci_conclusion": "success",
+  "vp2_merge": "ce4314c3528d5f4beae6e0e4fa53209ddb56ff5c",
+  "vp2_head": "2b33fa81622529dc653c387542a5e62d3f5ca121",
+  "eai1_head": "678412a4320b5d13d88ffe66592e7a225cc4817c",
+  "eai1_merge_base": "8a53777d1dec359f56b66e533d512c0a86881939",
+  "new_branch": "codex/flora-eai2-vp2",
+  "eai1_merged_or_closed": false,
+  "production_identity": "UNVERIFIED: read-only /deployment and /health returned URLError; no authorised authenticated Render service available",
+  "canonical_receipts": "UNVERIFIED: no authorised owner receipt service/session; no fabricated identity or probe",
+  "canonical_imports": false,
+  "source_policy_change": false,
+  "adr027_status": "Proposed; unchanged",
+  "stop": "New draft PR for explicit owner approval; no merge/deploy"
+}

@@ -1,0 +1,348 @@
+{
+  "status": "Candidate News-ready handoff for future review; no News UI/ingestion",
+  "cutoff": "2026-11-15",
+  "publication_windows": {
+    "last30_inclusive": [
+      "2026-10-17",
+      "2026-11-15"
+    ],
+    "prior90_inclusive": [
+      "2026-08-18",
+      "2026-11-15"
+    ],
+    "week_inclusive": [
+      "2026-11-09",
+      "2026-11-15"
+    ]
+  },
+  "external_report": {
+    "reported_completed_by_owner": true,
+    "actual_original_report_retrieved": false,
+    "GitHub_research_PR_identified": false,
+    "available_material": "Issue626 and its public source-checkpoint comment; selected original sources independently inspected",
+    "canonical_import_or_acceptance": "UNVERIFIED; not presumed from ChatGPT completion or GitHub prose",
+    "blocker": "Original report/source pack still needed to audit the full claimed breadth and preserve its actual records; do not reconstruct50 profiles from hints"
+  },
+  "actors": [
+    {
+      "source_name": "Lloyds Bank PLC",
+      "kind": "UK-incorporated bank on PRA current list",
+      "FRN": "119278",
+      "LEI": "H7FNTJ4851HG0EXQ1Z70",
+      "source": "https://www.bankofengland.co.uk/prudential-regulation/authorisations/which-firms-does-the-pra-regulate",
+      "as_of": "November2026 list; reviewed2026-11-15",
+      "source_reference": "turn157449view0 / turn157449view1 / turn342616view4",
+      "canonical_id": null,
+      "limits": "Monthly guide to deposit-taking banks; not all permissions, group results, brand ownership or a canonical identity mapping. March2026 licence-milestone date not independently reverified here.",
+      "this_handoff_import_executed": false,
+      "canonical_record_presence": "UNVERIFIED"
+    },
+    {
+      "source_name": "MONZO BANK LIMITED",
+      "kind": "UK-incorporated bank on PRA current list",
+      "FRN": "730427",
+      "LEI": "213800PLUYXGZ8LU7T61",
+      "source": "https://www.bankofengland.co.uk/prudential-regulation/authorisations/which-firms-does-the-pra-regulate",
+      "as_of": "November2026 list; reviewed2026-11-15",
+      "source_reference": "turn157449view0 / turn157449view1 / turn342616view4",
+      "canonical_id": null,
+      "limits": "Monthly guide to deposit-taking banks; not all permissions, group results, brand ownership or a canonical identity mapping. March2026 licence-milestone date not independently reverified here.",
+      "this_handoff_import_executed": false,
+      "canonical_record_presence": "UNVERIFIED"
+    },
+    {
+      "source_name": "Revolut Bank UK Ltd",
+      "kind": "UK-incorporated bank on PRA current list",
+      "FRN": "981170",
+      "LEI": "2138003LXONKR247S255",
+      "source": "https://www.bankofengland.co.uk/prudential-regulation/authorisations/which-firms-does-the-pra-regulate",
+      "as_of": "November2026 list; reviewed2026-11-15",
+      "source_reference": "turn157449view0 / turn157449view1 / turn342616view4",
+      "canonical_id": null,
+      "limits": "Monthly guide to deposit-taking banks; not all permissions, group results, brand ownership or a canonical identity mapping. March2026 licence-milestone date not independently reverified here.",
+      "this_handoff_import_executed": false,
+      "canonical_record_presence": "UNVERIFIED"
+    },
+    {
+      "source_name": "Starling Bank Limited",
+      "kind": "UK-incorporated bank on PRA current list",
+      "FRN": "730166",
+      "LEI": "213800AE5VSF3V1PAV23",
+      "source": "https://www.bankofengland.co.uk/prudential-regulation/authorisations/which-firms-does-the-pra-regulate",
+      "as_of": "November2026 list; reviewed2026-11-15",
+      "source_reference": "turn157449view0 / turn157449view1 / turn342616view4",
+      "canonical_id": null,
+      "limits": "Monthly guide to deposit-taking banks; not all permissions, group results, brand ownership or a canonical identity mapping. March2026 licence-milestone date not independently reverified here.",
+      "this_handoff_import_executed": false,
+      "canonical_record_presence": "UNVERIFIED"
+    },
+    {
+      "source_name": "ClearBank Limited",
+      "kind": "UK-incorporated bank on PRA current list",
+      "FRN": "754568",
+      "LEI": "213800PERENGATFCHD95",
+      "source": "https://www.bankofengland.co.uk/prudential-regulation/authorisations/which-firms-does-the-pra-regulate",
+      "as_of": "November2026 list; reviewed2026-11-15",
+      "source_reference": "turn157449view0 / turn157449view1 / turn342616view4",
+      "canonical_id": null,
+      "limits": "Monthly guide to deposit-taking banks; not all permissions, group results, brand ownership or a canonical identity mapping. March2026 licence-milestone date not independently reverified here.",
+      "this_handoff_import_executed": false,
+      "canonical_record_presence": "UNVERIFIED"
+    },
+    {
+      "source_name": "Microsoft Ireland Operations Limited",
+      "kind": "Designated critical third-party legal provider",
+      "source": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+      "effective_from": "2026-07-13",
+      "publication_date": "2026-07-10",
+      "canonical_id": null,
+      "limits": "Designation is not a contract with any named bank. Microsoft Ireland Operations Ltd in the BoE companion is a source alias, not another independently designated actor.",
+      "this_handoff_import_executed": false,
+      "canonical_record_presence": "UNVERIFIED"
+    },
+    {
+      "source_name": "Google Cloud EMEA Limited",
+      "kind": "Designated critical third-party legal provider",
+      "source": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+      "effective_from": "2026-07-13",
+      "publication_date": "2026-07-10",
+      "canonical_id": null,
+      "limits": "Designation is not a contract with any named bank. Microsoft Ireland Operations Ltd in the BoE companion is a source alias, not another independently designated actor.",
+      "this_handoff_import_executed": false,
+      "canonical_record_presence": "UNVERIFIED"
+    },
+    {
+      "source_name": "Amazon Web Services EMEA SARL",
+      "kind": "Designated critical third-party legal provider",
+      "source": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+      "effective_from": "2026-07-13",
+      "publication_date": "2026-07-10",
+      "canonical_id": null,
+      "limits": "Designation is not a contract with any named bank. Microsoft Ireland Operations Ltd in the BoE companion is a source alias, not another independently designated actor.",
+      "this_handoff_import_executed": false,
+      "canonical_record_presence": "UNVERIFIED"
+    },
+    {
+      "source_name": "Oracle Corporation UK Limited",
+      "kind": "Designated critical third-party legal provider",
+      "source": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+      "effective_from": "2026-07-13",
+      "publication_date": "2026-07-10",
+      "canonical_id": null,
+      "limits": "Designation is not a contract with any named bank. Microsoft Ireland Operations Ltd in the BoE companion is a source alias, not another independently designated actor.",
+      "this_handoff_import_executed": false,
+      "canonical_record_presence": "UNVERIFIED"
+    },
+    {
+      "source_name": "Bank of England / PRA / FCA",
+      "kind": "Distinct central-bank/prudential/conduct roles; PRA within BoE",
+      "source": "https://www.bankofengland.co.uk/news/2026/july/uk-financial-regulators-to-begin-overseeing-critical-third-parties-announced-by-hmt",
+      "canonical_id": null,
+      "limits": "Joint CTP oversight is distinct from bank permissions, MPC policy and RTGS/CHAPS operator roles.",
+      "this_handoff_import_executed": false,
+      "canonical_record_presence": "UNVERIFIED"
+    },
+    {
+      "source_name": "Pay.UK / Current Account Switch Service",
+      "kind": "Published switching-service operator context",
+      "source": "https://www.wearepay.uk/current-account-switch-service-records-highest-quarter-of-switching-since-2023/",
+      "canonical_id": null,
+      "limits": "CASS switching does not establish every bank\u2019s scheme participation or current supplier/client contracts.",
+      "this_handoff_import_executed": false,
+      "canonical_record_presence": "UNVERIFIED"
+    },
+    {
+      "source_name": "Starling (press-release label), Civo, NVIDIA",
+      "kind": "Announced development collaboration; exact contracting/legal endpoints unresolved",
+      "source": "https://www.starlingbank.com/news/starling-backs-uk-sovereign-cloud/",
+      "canonical_id": null,
+      "limits": "Do not automatically attach a Group announcement to Starling Bank Limited or infer contracts, spend, installed estate or production delivery.",
+      "this_handoff_import_executed": false,
+      "canonical_record_presence": "UNVERIFIED"
+    }
+  ],
+  "relationships": [
+    {
+      "subject": "HM Treasury designation",
+      "predicate": "designates_as_critical_third_party",
+      "object": "Microsoft Ireland Operations Limited",
+      "effective_date": "2026-07-13",
+      "source": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+      "status": "source-backed candidate; no canonical edge or bank contract"
+    },
+    {
+      "subject": "HM Treasury designation",
+      "predicate": "designates_as_critical_third_party",
+      "object": "Google Cloud EMEA Limited",
+      "effective_date": "2026-07-13",
+      "source": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+      "status": "source-backed candidate; no canonical edge or bank contract"
+    },
+    {
+      "subject": "HM Treasury designation",
+      "predicate": "designates_as_critical_third_party",
+      "object": "Amazon Web Services EMEA SARL",
+      "effective_date": "2026-07-13",
+      "source": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+      "status": "source-backed candidate; no canonical edge or bank contract"
+    },
+    {
+      "subject": "HM Treasury designation",
+      "predicate": "designates_as_critical_third_party",
+      "object": "Oracle Corporation UK Limited",
+      "effective_date": "2026-07-13",
+      "source": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+      "status": "source-backed candidate; no canonical edge or bank contract"
+    },
+    {
+      "subject": "BoE / PRA / FCA",
+      "predicate": "jointly_oversee_designated_CTPs",
+      "object": "Named designated legal providers",
+      "source": "https://www.bankofengland.co.uk/news/2026/july/uk-financial-regulators-to-begin-overseeing-critical-third-parties-announced-by-hmt",
+      "status": "Candidate institutional role; not bilateral bank sourcing"
+    },
+    {
+      "subject": "Starling issuer label",
+      "predicate": "announced_development_with",
+      "object": "Civo / NVIDIA",
+      "source": "https://www.starlingbank.com/news/starling-backs-uk-sovereign-cloud/",
+      "status": "Defer exact legal endpoint and rights; no canonical edge, contract or achieved production claim"
+    }
+  ],
+  "events": [
+    {
+      "event_key": "MPC-2026-11-04",
+      "title": "Bank Rate raised to4%",
+      "publication_date": "2026-11-05",
+      "event_date": "2026-11-04",
+      "effective_date": null,
+      "reporting_period": "MPC meeting ending4November2026",
+      "source_urls": [
+        "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026"
+      ],
+      "scope": [
+        "GB",
+        "UK Banking context"
+      ],
+      "source_review": "Existing admitted source, rechecked against original owner record",
+      "interpretation": "Funding transmission depends on individual bank repricing and customer behaviour; rate direction is not a measured margin loss.",
+      "counter_evidence": "The policy decision does not establish a firm-level margin effect or company-specific demand.",
+      "rights": "Existing public context; no new full-text/news-display licence inferred",
+      "runtime_news_admission": false
+    },
+    {
+      "event_key": "CASS-Q3-2026-RELEASE",
+      "title": "Pay.UK reports411384 third-quarter switches",
+      "publication_date": "2026-11-05",
+      "event_date": null,
+      "effective_date": null,
+      "reporting_period": "Total switches July\u2013September2026; named-bank net gains April\u2013June2026",
+      "source_urls": [
+        "https://www.wearepay.uk/current-account-switch-service-records-highest-quarter-of-switching-since-2023/"
+      ],
+      "scope": [
+        "GB",
+        "UK current-account switching"
+      ],
+      "source_review": "Primary source inspected; turn342616view5",
+      "interpretation": "Switching activity provides competition context; the differently dated participant data cannot establish Q3 bank winners.",
+      "counter_evidence": "No revenue, deposit or customer-pain effect is measured; switches are not unique customers or a bank\u2019s organic inflows.",
+      "rights": "Publisher not admitted by current visual official_url; no republication grant verified; short factual handoff only, no full prose/images",
+      "runtime_news_admission": false
+    },
+    {
+      "event_key": "RTGS-CHAPS-FORUM-2026-10-13",
+      "title": "Published forum records payments-modernisation discussions",
+      "publication_date": "2026-11-04",
+      "event_date": "2026-10-13",
+      "effective_date": null,
+      "reporting_period": "Meeting13October2026, minutes published4November",
+      "source_urls": [
+        "https://www.bankofengland.co.uk/minutes/2026/october/rtgs-chaps-industry-forum-13-october-2026"
+      ],
+      "scope": [
+        "GB",
+        "RTGS/CHAPS industry context"
+      ],
+      "source_review": "Primary minutes inspected; turn698193view2",
+      "interpretation": "Settlement-hour sequencing and operating implications were discussed; no specific bank implementation or new procurement is established.",
+      "counter_evidence": "Minutes say sequencing conclusions had not been reached. A planned roadmap is not a bank contract or effective rule.",
+      "rights": "Official publisher is admitted; proposed News use/excerpt rights and audience still need review; no new live source candidate installed",
+      "runtime_news_admission": false
+    },
+    {
+      "event_key": "CTP-DESIGNATION-2026-07-13",
+      "title": "Four provider entities designated for financial-system oversight",
+      "publication_date": "2026-07-10",
+      "event_date": "2026-07-10",
+      "effective_date": "2026-07-13",
+      "reporting_period": "Designation effective13July2026",
+      "source_urls": [
+        "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+        "https://www.bankofengland.co.uk/news/2026/july/uk-financial-regulators-to-begin-overseeing-critical-third-parties-announced-by-hmt"
+      ],
+      "scope": [
+        "GB",
+        "Named provider legal entities",
+        "UK financial system"
+      ],
+      "source_review": "Both primary publications inspected; turn248771view3 / turn157449view2",
+      "interpretation": "One designation event with two official sources, not two independent events.",
+      "counter_evidence": "Existing banks retain their own third-party responsibilities; no named-bank contract or failure follows.",
+      "rights": "Bounded HMT factual extract permitted under GOV.UK OGL in EAI pilot. No News implementation or publisher image use.",
+      "runtime_news_admission": false,
+      "date_correction": "Both original pages say10July publication;13July is commencement. The #626 checkpoint shorthand must not become a false publication date."
+    },
+    {
+      "event_key": "STARLING-CIVO-NVIDIA-2026-10-14",
+      "title": "Starling announces sovereign-cloud AI development",
+      "publication_date": "2026-10-14",
+      "event_date": "2026-10-14",
+      "effective_date": null,
+      "reporting_period": "Announced development; not verified production outcome",
+      "source_urls": [
+        "https://www.starlingbank.com/news/starling-backs-uk-sovereign-cloud/"
+      ],
+      "scope": [
+        "Starling issuer label; exact legal endpoint unresolved",
+        "Civo / NVIDIA named counterparts"
+      ],
+      "source_review": "Original press release inspected; turn698193view3",
+      "interpretation": "An attributed development collaboration; no delivered benefits, contractual workshare or open supplier scope.",
+      "counter_evidence": "A development announcement is not actual production adoption, independently measured model effectiveness or a shaping window.",
+      "rights": "Starling host not admitted; rights/use/endpoint review outstanding. No copied image or full prose.",
+      "runtime_news_admission": false
+    },
+    {
+      "event_key": "FCA-H126-FIRM-DATA-2026-10-22",
+      "title": "FCA publishes first-half firm complaints data",
+      "publication_date": "2026-10-22",
+      "event_date": "2026-10-22",
+      "effective_date": null,
+      "reporting_period": "January\u2013June2026 for Lloyds Bank PLC row; other firms can differ",
+      "source_urls": [
+        "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table"
+      ],
+      "scope": [
+        "Lloyds Bank PLC for selected rows; not Group-wide or all-bank common cohorts"
+      ],
+      "source_review": "Original numerical rows and terms rechecked; source candidates separately validated",
+      "interpretation": "Publication timing and the six-month observed window are different; service volume/speed/outcome measures require separate definitions.",
+      "counter_evidence": "No inferred cause, cost, harm rate, worsening trend or FOS-cohort ratio.",
+      "rights": "FCA numerical Data-table OGL2.2 only; narrative excluded2.3; no publisher photo",
+      "runtime_news_admission": false,
+      "withheld_metric": {
+        "value": 55.25,
+        "source_column": "Closed within3days",
+        "reason": "Exact2026 Data-table business/calendar time-unit method unresolved; excluded from runtime and future News until resolved"
+      }
+    }
+  ],
+  "news_ui_implemented": false,
+  "collector_or_schedule_created": false,
+  "canonical_mutations": false,
+  "pipeline_mutations": false,
+  "images_copied": false,
+  "selected_weekly_edition_claim": "None. This selected handoff is not a complete search of all weekly news; dates do not support presenting it as a current weekly edition.",
+  "future_contract": "Issue628 six declarative types supersede old614 questions/actions/empty-state copy for core views; resolve that product contract before a later News implementation."
+}

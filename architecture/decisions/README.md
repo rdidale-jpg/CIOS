@@ -2,7 +2,7 @@
 
 **Status:** Living index
 **Owner:** Rob / CIOS
-**Last updated:** 2026-08-16
+**Last updated:** 2026-11-15
 
 Architecture Decision Records preserve enduring decisions affecting doctrine, core objects, reasoning, trust, governance, terminology and cross-cutting runtime obligations. Historical and proposed decisions are listed explicitly and are not authoritative until accepted.
 
@@ -29,6 +29,7 @@ Architecture Decision Records preserve enduring decisions affecting doctrine, co
 | [ADR-024](ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md) | Hybrid Enterprise Intelligence Runtime | Accepted | 2026-07-18 | Rob / CIOS | None | None | FEIR-001 | Accepted Flora runtime architecture |
 | [ADR-025](ADR-025-Flora-as-the-Enterprise-Intelligence-Workspace.md) | Flora as the Enterprise Intelligence Workspace | Proposed | 2026-07-19 | Rob / CIOS | None | None | Architecture decision record | Proposed parent Flora workspace decision; not authoritative |
 | [ADR-026](ADR-026-Material-Pressure-Qualification-and-Ownership.md) | Material Pressure Qualification and Ownership | Accepted | 2026-08-16 | Rob / CIOS | Proposed Material Pressure contract in TEL-001 governance assessment | None | EI-001 durable model; ADR-024 runtime | Runtime implementation authorised; not implemented |
+| [ADR-027](ADR-027-Document-Scoped-Publisher-Admission-Proposal.md) | Document-scoped publisher admission and permitted use | Proposed | 2026-11-15 | Rob / CIOS | None | None | Existing source/Evidence owners; EAI-1 #628 | Decision proposal only; SEC/ONS policy unchanged |
 
 ## Reconciliation notes
 

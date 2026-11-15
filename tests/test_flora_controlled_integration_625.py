@@ -17,7 +17,7 @@ ROOT=Path(__file__).resolve().parents[1]
 
 @pytest.mark.parametrize('scope',a.KEYS)
 def test_same_agenda_across_lenses_preserves_issue_subject_selection_and_native_urls(scope):
- rows=a.agenda(scope);assert len(rows)==2
+ rows=a.agenda(scope);assert len(rows)==3  # One bounded EAI-1 addition per scope.
  for stream in v.SCOPES[scope]['streams']:
   q={'stream':[stream],'agenda':[rows[0].key]}
   if scope!='uk':q.update(selected=['lloyds'],layer=['regulators'])
@@ -71,7 +71,9 @@ def test_numerical_source_original_entity_period_rights_and_unaccepted_authority
  assert s['rights']['extent'].startswith('One numerical row only')
  row=next(r for r in a.agenda('lloyds')if r.key=='service-recovery')
  assert row.facts[0].canonical_status=='candidate_intelligence'
- assert 'deterioration'in row.conclusion.text and 'FOS'in p.render(row.conclusion)
+ assert 'No deterioration' in p.render(row.conclusion) and 'FOS'in p.render(row.conclusion)
+ assert '118,762'in row.conclusion.text and '66.12%'in row.conclusion.text
+ assert '55.25%'not in p.render(row.conclusion)
  html=v.render('/enterprises/lloyds',{'agenda':['service-recovery']})
  assert 'Contains Financial Conduct Authority information licensed under the'in html
  assert 'href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"'in html
@@ -112,7 +114,7 @@ def test_missing_or_unreadable_candidate_omits_service_without_hiding_existing_a
  path=tmp_path/'unavailable.json'
  if contents is not None:path.write_text(contents)
  monkeypatch.setattr(a,'CANDIDATE',path)
- assert [r.key for r in a.agenda('lloyds')]==['ai-benefits']
+ assert [r.key for r in a.agenda('lloyds')]==['ai-benefits','funding-base']
 
 
 def test_read_only_native_app_views_exclude_owner_metadata_hidden_sources_and_actions(monkeypatch):
@@ -172,9 +174,9 @@ def test_all_161_prior_history_expectations_and_comparator_are_exactly_preserved
  original=subprocess.check_output(['git','show','fe66516:tools/research/history_integrity.py'],cwd=ROOT).decode()
  historical=types.ModuleType('int1_historical_source_guard');exec(compile(original,'historical_source_guard','exec'),historical.__dict__)
  old=historical.approved_history(ROOT);new=current.approved_history(ROOT)
- assert len(old)==161 and len(new)==163
+ assert len(old)==161 and len(new)==169
  assert {k:new[k] for k in old}==old
- assert set(new)-set(old)==set(current.INT1_CANDIDATE_ADDITIONS)
+ assert set(new)-set(old)==set(current.INT1_CANDIDATE_ADDITIONS)|set(current.EAI1_CANDIDATE_ADDITIONS)
  # The byte comparator itself is untouched, not replaced by an exclusion.
  section=original.split('def compare_history(',1)[1].split('\n\ndef verify_history',1)[0]
  assert inspect.getsource(current.compare_history).split('def compare_history(',1)[1].strip()==section.strip()

@@ -22,6 +22,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--output', required=True)
     parser.add_argument('--baseline-root')
+    parser.add_argument('--scenario', choices=('vp2','eai2'), default='vp2')
     args = parser.parse_args()
     output = Path(args.output).resolve(); output.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='flora-vp2-fixture-') as scratch:
@@ -61,7 +62,8 @@ def main():
         config = root/'config.json'
         config.write_text(json.dumps({'base':'https://127.0.0.1:8996','output':str(output),'password':password,'baseline':'http://127.0.0.1:8997' if baseline else None}))
         try:
-            subprocess.run(['node',str(Path(__file__).with_suffix('.cjs')),str(config)],check=True)
+            scenario=Path(__file__).with_name('flora_eai2_preview.cjs')if args.scenario=='eai2'else Path(__file__).with_suffix('.cjs')
+            subprocess.run(['node',str(scenario),str(config)],check=True)
         finally:
             server.shutdown(); server.server_close(); thread.join(2)
             if baseline: baseline.terminate(); baseline.wait(timeout=5)
