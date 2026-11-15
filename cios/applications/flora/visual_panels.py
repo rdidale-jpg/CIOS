@@ -85,10 +85,17 @@ def _entry(row,ctx,*,primary=False,position=None,suffix=''):
     if primary and row['research']:attrs+=' data-research="'+row['research'].lower()+'" aria-label="'+e(row['research']+': open available industry experience; '+row['label']+' is its broader section',quote=True)+'"'
     cls='subject spot'if primary else'exploration-link'
     cls+=(' available active'if row['href']else' inert')+(' selected'if row['selected']else'')
+    if _layer_focus(ctx,row['id']):
+        cls+=' layer-focus';attrs+=' aria-description="Highlighted for '+e(v.LAYERS[ctx.layer],quote=True)+' context"'
     if position:attrs+=' style="--x:'+str(position[0])+'%;--y:'+str(position[1])+'%"'
     if row['selected']:attrs+=' aria-current="true"'
     tag='a'if row['href']else'span'
     return '<'+tag+' class="'+cls+'"'+attrs+(' href="'+e(row['href'],quote=True)+'"'if row['href']else'')+'>'+e(label)+'</'+tag+'>'
+
+
+def _layer_focus(ctx,sid):
+    return ((ctx.layer=='regulators'and(sid in v.ROLE_CONTEXT or sid=='economics'))
+        or(ctx.layer=='suppliers'and sid in {'technology','customers','operations','payments'}))
 
 
 def _scene(ctx,rows,suffix,issues):
@@ -104,7 +111,7 @@ def _scene(ctx,rows,suffix,issues):
     # exits. Other scenes disclose only supplementary/inert labels once.
     extra=rows if scene=='uk-landscape'else[r for r in rows if r['id']not in positions or not r['href']]
     if extra:
-        body+='<details class="text-view"'+(' open'if any(r['selected']for r in extra)else'')+'><summary>'+('All 20 industries'if scene=='uk-landscape'else'Explore deeper')+'</summary><nav aria-label="All scene subjects">'
+        body+='<details class="text-view"'+(' open'if any(r['selected']or _layer_focus(ctx,r['id'])for r in extra)else'')+'><summary>'+('All 20 industries'if scene=='uk-landscape'else'Explore deeper')+'</summary><nav aria-label="All scene subjects">'
         body+=''.join(_entry(r,ctx,suffix=suffix+'-text')for r in extra)+'</nav></details>'
     # Compact extra nav does not serialize intelligence or owner metadata.
     return body
@@ -220,7 +227,7 @@ def render(ctx,headers=None):
         body='<h1>Leadership Agenda</h1>'+agenda.detail(ctx,v.url,issues)
     elif ctx.detail:
         spot=next(s for s in v.geometry()[ctx.scope+'-'+ctx.stream]['spots']if s['id']==ctx.detail)
-        if ctx.scope=='lloyds'and ctx.stream=='inside'and ctx.detail=='economics':
+        if ctx.scope=='lloyds'and ctx.stream=='inside'and ctx.detail=='economics'and v.has_detail(ctx,spot,data):
             body='<section class="focus" id="insight" tabindex="-1" aria-labelledby="insight-title"><a class="close close-insight" href="'+e(v.url(ctx,detail='')+'#visual-content',quote=True)+'" aria-label="Close Financial performance">×</a>'+_financial(ctx,data).replace('<h1>','<h1 id="insight-title">',1)+'</section>'
         elif v.has_detail(ctx,spot,data):
             content=v._detail(ctx,spot,data)
@@ -234,5 +241,5 @@ def render(ctx,headers=None):
     identity=v.SCOPES[ctx.scope].get('identity')or data[v.SCOPES[ctx.scope]['identity_key']]
     title='United Kingdom'if ctx.scope=='uk'else data['industry_name'if ctx.scope=='banking'else'enterprise_name']
     head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'
-    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+head+'</head><body class="ds-page vp-page">'
+    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+v.SCOPES[ctx.scope]['route']+"'>"+head+'</head><body class="ds-page vp-page">'
         +_top(ctx,headers)+_left(ctx,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'"><img class="watermark" src="'+_asset(watermark)+'" alt="" aria-hidden="true"><article class="workspace">'+body+'</article></main></body></html>')

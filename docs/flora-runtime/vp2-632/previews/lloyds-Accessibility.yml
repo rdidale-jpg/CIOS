@@ -1,0 +1,67 @@
+- banner:
+  - link "Skip to main content":
+    - /url: "#visual-content"
+  - link "FLORA":
+    - /url: /
+  - navigation "Primary product navigation":
+    - group: Explore⌄
+  - text: Guest
+  - navigation "Current scope":
+    - link "UK":
+      - /url: /?stream=landscape&selected=banking
+    - link "Banking":
+      - /url: /industries/banking?stream=landscape&selected=lloyds
+    - text: Lloyds Banking Group
+  - navigation "Insight streams":
+    - link "Inside":
+      - /url: /enterprises/lloyds?stream=inside#stream-inside
+    - link "Landscape":
+      - /url: /enterprises/lloyds?stream=landscape#stream-landscape
+    - link "Forces":
+      - /url: /enterprises/lloyds?stream=forces#stream-forces
+- complementary "Visual exploration":
+  - figure "lloyds inside":
+    - text: Conceptual illustration, not actual premises, a legal hierarchy, systems topology or a quantitative pressure map. Labelled navigation remains available without artwork.
+    - link "Financial performance":
+      - /url: /enterprises/lloyds?stream=inside&detail=economics#insight
+    - link "Technology & data":
+      - /url: /enterprises/lloyds?stream=inside&detail=technology#insight
+    - link "Leadership Agenda":
+      - /url: /enterprises/lloyds?stream=inside&agenda=service-recovery#agenda-insight
+  - group: Explore deeper
+- main:
+  - article:
+    - paragraph: Financial analysis · consolidated Group
+    - heading "Customer funding and earnings" [level=1]
+    - paragraph: Published balances and reported earnings, alongside the Group’s efficiency ambition.
+    - text: Reported · Group customer deposits
+    - strong: £502.8bn
+    - text: 30 September 2026 · balance-sheet stock Reported · Group statutory pretax profit
+    - strong: £6.6bn
+    - text: Nine months to 30 September 2026 · nine-month flow
+    - figure "Customer-deposit stocks · Group":
+      - text: Customer-deposit stocks · Group
+      - checkbox "2025 reference" [checked]
+      - text: 2025 reference
+      - group "Group customer deposits in GBP billion":
+        - text: 31 December 2025
+        - strong: 496.5bn
+        - text: 30 September 2026
+        - strong: 502.8bn
+      - paragraph: Reported · GBP billion, linear 0–600bn scale. Published balances; composition and transfer effects are not reconciled. No organic-flow claim.
+      - group: Chart data
+    - heading "Efficiency ambition" [level=2]
+    - article:
+      - paragraph: "Reported: Management target The 2030 efficiency ambition is a cost-to-income ratio below 45%."
+      - paragraph: Strategy for 2027–2030
+      - group: Sources & reasoning
+    - heading "Investment discipline" [level=2]
+    - article:
+      - paragraph: "Reported: Management expectation The presentation plans a 2027 investment increase followed by stability, subject to opportunity and return discipline."
+      - paragraph: 2027–2030 investment planning
+      - group: Sources & reasoning
+    - paragraph: Deposits and statutory pretax profit do not establish an investment allocation or external supplier budget.
+    - group: Sources & basis
+    - group: Leadership Agenda
+    - group: Context layers
+    - group: Sources & detail

@@ -77,3 +77,8 @@ h1,h2,h3,.identity,.metric-label,.metric-period,.bar-row>span{overflow-wrap:anyw
 @media(forced-colors:active){.vp-page .global .menu-sheet{border:1px solid CanvasText}.vp-page .subject,.vp-page .exploration-link.available{border-color:CanvasText}}
 
 .vp-page .portrait .subject{width:max-content;max-width:calc(100% - 24px)}
+
+/* Retain the existing context-layer effect, including supplementary labels. */
+.vp-page .portrait .subject.layer-focus{border-width:3px;border-color:#89733c;box-shadow:0 0 0 2px #faf7efcc;font-weight:700}
+.vp-page .exploration-link.layer-focus{border-left:3px solid #89733c;padding-left:10px;font-weight:700}
+@media(forced-colors:active){.vp-page .portrait .subject.layer-focus,.vp-page .exploration-link.layer-focus{border-color:CanvasText;border-style:double}}

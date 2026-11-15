@@ -250,3 +250,35 @@ def test_external_supplier_visibility_retains_existing_verified_relationship_gat
  html=v.render('/enterprises/lloyds',{'stream':['landscape']})
  assert 'Google Cloud'not in html
  assert not next(r for r in v.destinations(v.Context('lloyds','landscape'),data)if r['id']=='technology')['href']
+
+
+@pytest.mark.parametrize('scope,stream',[('banking','landscape'),('banking','forces'),('lloyds','inside'),('lloyds','landscape'),('lloyds','forces')])
+@pytest.mark.parametrize('layer',['regulators','suppliers'])
+def test_context_layers_keep_original_visible_emphasis_and_supplementary_disclosure(scope,stream,layer):
+ ctx=v.Context(scope,stream,layer);rows=v.destinations(ctx,v.current_data(ctx))
+ expected={r['id']for r in rows if (layer=='regulators'and(r['id']in v.ROLE_CONTEXT or r['id']=='economics'))or(layer=='suppliers'and r['id']in {'technology','customers','operations','payments'})}
+ html=v.render(v.SCOPES[scope]['route'],{'stream':[stream],'layer':[layer]})
+ actual={a['data-label-id']for t,a in DOM(html).nodes if 'layer-focus'in a.get('class','')}
+ assert actual==expected
+ assert all('aria-description'in a for t,a in DOM(html).nodes if 'layer-focus'in a.get('class',''))
+ css=(v.ASSETS/'panels.css').read_text()
+ assert '.subject.layer-focus'in css and '.exploration-link.layer-focus'in css
+
+
+@pytest.mark.parametrize('key',['technological','legal','environmental'])
+def test_uk_force_uses_source_reporting_scope_not_bare_review_date(key):
+ fact=v.force_view(v.Context('uk','forces'),key,None);row=v.visual_v2.insight(key)
+ assert fact.period!=row['lineage']['as_of']
+ assert any(source.get('reporting_period','')in fact.period for source in row['sources']if source.get('reporting_period'))
+ if key=='technological':
+  assert 'August–December 2025'in fact.period
+  assert fact.sources[0].published=='2026-04-30'
+
+
+def test_unavailable_financial_topic_does_not_get_a_selected_detail_wrapper(monkeypatch):
+ data=deepcopy(v.model.load_assessment())
+ for c in data['claims']:
+  if c['id']in {'LBG-Q326-DEPOSITS','LBG-Q326-PROFIT','LBG-A2030-CIR'}:c['owner_only']=True
+ monkeypatch.setattr(v.model,'load_assessment',lambda *a,**k:deepcopy(data))
+ html=v.render('/enterprises/lloyds',{'stream':['inside'],'detail':['economics']})
+ assert 'id="insight"'not in html

@@ -223,7 +223,11 @@ def force_view(ctx,key,data):
  sources=tuple(Source(s['title'],s['url'],s.get('publisher',''),s.get('publication_date')or'',s.get('reporting_period',''),
               (s.get('excerpts')or[{}])[0].get('quote',''),s.get('locator',''))for s in row['sources'])
  text=re.split(r'(?<=[.!])\s+',row['text'],maxsplit=1)[0]
- period=row['lineage'].get('as_of','Three months to September 2026')
+ # Review timestamps are not the period of the underlying evidence.
+ period=(visual_v2.basis()['growth']['period']if key=='economic'else
+     '; '.join(dict.fromkeys(s.get('reporting_period','')for s in row['sources']if s.get('reporting_period'))))
+ if not period:period='; '.join('Published '+s['publication_date']for s in row['sources']if s.get('publication_date'))
+ if not period:return None
  return Statement(text,'reported','United Kingdom; national or specified issuer scope',period,sources,
                   'reviewed_excerpt','candidate_intelligence',
                   measurement_state='proposal'if key=='legal'else'not_applicable',
@@ -335,5 +339,3 @@ def _proof(ctx,data):
 def render(path,query,headers=None):
  from .visual_panels import render as panels
  return panels(resolve(path,query),headers)
-
-

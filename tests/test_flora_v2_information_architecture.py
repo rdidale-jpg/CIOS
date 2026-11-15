@@ -68,7 +68,11 @@ def test_primary_workspace_routes_are_served_without_replacing_deep_links():
             assert response.status == 200
             assert expected in body
             if path == "/":
-                assert body.count("data-sic=") == 20
+                # Two mutually exclusive responsive subtrees retain the same twenty labels.
+                import re
+                sectors=re.findall(r'data-sic="([A-T])"',body)
+                assert len(sectors)==40 and set(sectors)==set('ABCDEFGHIJKLMNOPQRST')
+                assert all(sectors.count(s)==2 for s in set(sectors))
                 assert 'data-stream="landscape"' in body
     finally:
         server.shutdown()

@@ -1,0 +1,83 @@
+{
+  "measurements": [
+    {
+      "view": "uk-mobile",
+      "visibleArtReadyMs": 1590,
+      "fcpMs": 724,
+      "images": [
+        {
+          "file": "vp2-watermark-uk-landscape-f4e632a4bc93",
+          "bytes": 3558,
+          "durationMs": 224
+        },
+        {
+          "file": "vp2-uk-skyline-2172-219747b1c362",
+          "bytes": 142184,
+          "durationMs": 867
+        }
+      ]
+    },
+    {
+      "view": "lloyds-mobile",
+      "visibleArtReadyMs": 1471,
+      "fcpMs": 628,
+      "images": [
+        {
+          "file": "vp2-watermark-lloyds-inside-2d134ba93cb7",
+          "bytes": 1014,
+          "durationMs": 188
+        },
+        {
+          "file": "vp2-uk-skyline-2172-219747b1c362",
+          "bytes": 142184,
+          "durationMs": 869
+        }
+      ]
+    },
+    {
+      "view": "uk-desktop",
+      "visibleArtReadyMs": 2012,
+      "fcpMs": 612,
+      "images": [
+        {
+          "file": "vp2-watermark-uk-landscape-f4e632a4bc93",
+          "bytes": 3558,
+          "durationMs": 217
+        },
+        {
+          "file": "vp2-uk-skyline-2172-219747b1c362",
+          "bytes": 142184,
+          "durationMs": 1415
+        },
+        {
+          "file": "vp2-uk-landscape-384-84a37760e3e8",
+          "bytes": 108258,
+          "durationMs": 1245
+        }
+      ]
+    },
+    {
+      "view": "lloyds-desktop",
+      "visibleArtReadyMs": 1988,
+      "fcpMs": 584,
+      "images": [
+        {
+          "file": "vp2-watermark-lloyds-inside-2d134ba93cb7",
+          "bytes": 1014,
+          "durationMs": 187
+        },
+        {
+          "file": "vp2-uk-skyline-2172-219747b1c362",
+          "bytes": 142184,
+          "durationMs": 1423
+        },
+        {
+          "file": "vp2-lloyds-inside-384-12d9a56acd25",
+          "bytes": 110268,
+          "durationMs": 1260
+        }
+      ]
+    }
+  ],
+  "method": "Single cold loopback 1.6Mbps/150ms RTT sample per scope/viewport; visibleArtReadyMs waits visible illustration decode. Collapsed mobile Left is intentionally deferred. No production SLA claim."
+}
