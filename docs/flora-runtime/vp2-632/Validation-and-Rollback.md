@@ -35,8 +35,11 @@ Earlier focused presentation checks were reconciled individually, without changi
 | Same file, image delivery | Two mutually exclusive portrait subtrees and decorative watermark replace one full-scene image; assert responsive accepted 384/768 assets and preserve all 21 historical variant hash checks |
 | Same file, UK labels/exits | 40 serialized SIC / six researched markers across two subtrees; assert original 20 unique sections / three researched exits and inert unsupported subjects |
 | `test_flora_design_system_585.py`, three Home aliases | Same responsive duplicate-marker accounting, retaining exact unique section set and per-marker cardinality |
+| `test_flora_web.py::test_home_accessibility_basics`, subsequent product compatibility run | Same responsive accounting: exactly 20 unique section markers and three researched exits, each twice; retain one h1, primary navigation and focusable main assertions |
 
 No inherited failing assertion/headline was rewritten. The comparator, baseline file, approved failures/skips and strict security suite are unchanged. Final exact-head gate must report zero unexplained changes; any real regression must be fixed in scope before delivery.
+
+The first hosted browser attempt at `969e2aedd975976dc9df1a3a3aaa19e6e799c9b8` failed at startup with `ModuleNotFoundError: cios`: direct Python script invocation did not include the checkout root on its import path. The preview wrapper now resolves its own repository root, rather than depending on a caller's `PYTHONPATH`. No application path, permission or browser assertion was relaxed. The final corrected SHA is rerun locally and on hosted CI; the completion comment records the final results rather than presenting the earlier attempt as green.
 
 ## Evidence and performance limits
 

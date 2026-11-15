@@ -394,12 +394,19 @@ def test_empty_question_state_is_accessible() -> None:
 
 
 def test_home_accessibility_basics() -> None:
+    import re
     status, _, body = _get("/")
     html = body.decode("utf-8")
     assert status == 200
     assert html.count("<h1") == 1
     assert 'aria-label="Primary product navigation"' in html
-    assert html.count('data-sic=') == 20 and html.count('data-research=') == 3
+    # Wide and collapsed scenes are mutually exclusive in the accessible UI.
+    sections = re.findall(r'data-sic="([A-T])"', html)
+    researched = re.findall(r'data-research="([a-z]+)"', html)
+    assert set(sections) == set('ABCDEFGHIJKLMNOPQRST') and len(sections) == 40
+    assert all(sections.count(section) == 2 for section in set(sections))
+    assert set(researched) == {'banking', 'technology', 'aviation'} and len(researched) == 6
+    assert all(researched.count(industry) == 2 for industry in set(researched))
     assert 'id="visual-content" tabindex="-1"' in html
 
 

@@ -13,6 +13,10 @@ import time
 import urllib.request
 from http.server import ThreadingHTTPServer
 
+# Direct script execution starts sys.path in tools/ci, including on hosted CI.
+# Resolve only this checkout's application; do not depend on caller PYTHONPATH.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 
 def main():
     parser = argparse.ArgumentParser()
