@@ -1,0 +1,12 @@
+{
+  "base_sha": "fe66516c15726dc45de147ede2674c9172f8cac6",
+  "original_assessment": "unchanged, including assessed_at and historical review baseline",
+  "original_claims": 45,
+  "original_sources": 24,
+  "candidate_proposal_path": "enterprise-knowledge/banking/research-model/source-snapshots/INT1-FCA-Candidate.json",
+  "candidate_status": "Unaccepted attributed public data, composed in memory through existing model.validate only for Leadership Agenda",
+  "new_claim": "LBG-FCA-H126-RECEIVED",
+  "new_source": "PR-FCA-COMPLAINTS-H126",
+  "canonical_imports": 0,
+  "existing_artwork_manifest_and_pins": "unchanged"
+}

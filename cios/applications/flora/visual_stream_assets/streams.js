@@ -1,6 +1,8 @@
 // Focus and missing-art feedback only. All navigation is native, server-first.
 const insight = document.getElementById('insight');
 if (insight) insight.focus({preventScroll: false});
+const agendaInsight = document.getElementById('agenda-insight');
+if (agendaInsight) agendaInsight.focus({preventScroll: false});
 for (const img of document.querySelectorAll('.world img')) {
   const failed = () => document.body.classList.add('art-missing');
   img.addEventListener('error', failed);

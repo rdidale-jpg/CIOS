@@ -13,6 +13,11 @@ from tests.test_flora_security_repair_01b import authority
 from tests.test_flora_sales_pipeline import actor,complete,web as sales_web
 
 
+@pytest.fixture
+def inspection_web(sales_web):
+    return lambda path:sales_web(path)[:2]
+
+
 class DOM(HTMLParser):
     def __init__(self,html):
         super().__init__();self.ids=[];self.links=[];self.feed(html)
@@ -43,11 +48,16 @@ def test_complete_sector_to_evidence_to_confirmed_pipeline_journey(domain,slug,o
         db.execute('UPDATE memberships SET enterprises=?',(canonical(['BK-ENT-001','AV-ENT-001']),))
     request=sales_web;data=model.load_assessment(domain);routes=views.routes_for(data)
     for path in [routes['industry'],routes['enterprise'],routes['enterprise']+'?lens=opportunities']:
-        assert request(path,authenticated=False)[0]==200
+        if domain=='banking'and '?lens='in path:
+            assert request(path,authenticated=False)[0]==403
+            assert request(path)[0]==200
+        else:assert request(path,authenticated=False)[0]==200
     candidate=routes['candidates']+'/'+origin;status,html,_=request(candidate)
     assert status==200 and origin in html
     row=next(r for r in data['candidates'] if r['id']==origin)
-    assert request(routes['evidence']+'/'+row['claim_ids'][0],authenticated=False)[0]==200
+    evidence_path=routes['evidence']+'/'+row['claim_ids'][0]
+    assert request(evidence_path,authenticated=False)[0]==(403 if domain=='banking'else 200)
+    assert request(evidence_path)[0]==200
     assert sales.list_opportunities(headers=actor[3])==[]
     status,_,location=request('/flora/sales/capture',{'enterprise':slug,'origin':origin});assert status==303
     path=location.split('#')[0];record=sales.get_opportunity(path.rsplit('/',1)[1],headers=actor[3])
@@ -62,18 +72,18 @@ def test_complete_sector_to_evidence_to_confirmed_pipeline_journey(domain,slug,o
     assert data['enterprise_name'] in request('/flora/sales/pipeline?stage=Qualified')[1]
 
 
-def test_every_sector_uses_all_six_shared_templates_and_retains_score_dimensions(web):
+def test_every_sector_uses_all_six_shared_templates_and_retains_score_dimensions(inspection_web):
     for domain,slug in [('banking','lloyds'),('aviation','easyjet')]:
         data=model.load_assessment(domain);specs=views.specs(data)
         assert set(specs)=={'pestle','five-forces','value-chain','operating-model','ecosystem','opportunities'}
         for lens,kind in [('pestle','pestle'),('porter','five-forces'),('value-chain','value-chain')]:
-            assert "data-diagram-type='"+kind+"'" in web('/industries/'+domain+'?lens='+lens)[1]
+            assert "data-diagram-type='"+kind+"'" in inspection_web('/industries/'+domain+'?lens='+lens)[1]
         for kind in ['operating-model','ecosystem','opportunities']:
-            assert "data-diagram-type='"+kind+"'" in web('/enterprises/'+slug+'?lens='+kind)[1]
-        status,payload=web('/industries/'+domain+'/visual-specs');assert status==200 and json.loads(payload)==specs
+            assert "data-diagram-type='"+kind+"'" in inspection_web('/enterprises/'+slug+'?lens='+kind)[1]
+        status,payload=inspection_web('/industries/'+domain+'/visual-specs');assert status==200 and json.loads(payload)==specs
         assert len(specs['opportunities']['nodes'])==(9 if domain=='banking' else 6)
         assert all(len(n['ratings'])==(3 if domain=='banking' else 4) for n in specs['opportunities']['nodes'])
-    html=web('/opportunities')[1];dom=DOM(html)
+    html=inspection_web('/opportunities')[1];dom=DOM(html)
     assert len(dom.ids)==len(set(dom.ids))
     assert 'opportunities-banking' in dom.ids and 'opportunities-aviation' in dom.ids
     assert 'Seller fit' in html and 'no cross-industry aggregate score' in html

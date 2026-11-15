@@ -5,6 +5,8 @@ from html import unescape
 import json
 
 import pytest
+from tests.flora_owner_inspection_fixtures import authority, actor, owner_http, inspection_web
+from cios.applications.flora.public_routes import owner_inspection_request_target
 from cios.applications.flora.research_intelligence import model, understanding as u
 from cios.applications.flora.research_intelligence.visual_intelligence_specs import (
     build_intelligence_specs, validate_intelligence_specs, load_profile, FAMILIES, LANES)
@@ -50,39 +52,39 @@ def test_pinned_specs_are_reproducible_and_inputs_are_read_only(domain):
 
 
 @pytest.mark.parametrize('domain,slug',[('banking','lloyds'),('aviation','easyjet')])
-def test_all_flagship_pages_and_ai_lens_keep_canonical_navigation(web,domain,slug):
+def test_all_flagship_pages_and_ai_lens_keep_canonical_navigation(web,inspection_web,domain,slug):
     # VEX-1 has new default imagery. Retained specialist deep links continue
     # to own these existing structured visual families and their evidence.
     for path,family in [(f'/industries/{domain}?lens=overview','industry-signature'),(f'/industries/{domain}?lens=ai-disruption','industry-signature'),(f'/enterprises/{slug}?lens=operating-model','enterprise-story'),(f'/enterprises/{slug}?lens=timeline','strategic-timeline')]:
-        status,html=web(path);assert status==200,path
+        status,html=inspection_web(path);assert status==200,path
         assert f"data-visual-family='{family}'" in html
-        assert public_request_target(path)
+        assert (public_request_target(path)or owner_inspection_request_target(path))
         assert all(label in html for label in ['Home','Industries','Enterprises','Opportunities','Pipeline'])
         ids=Elements(html).ids;assert len(ids)==len(set(ids))
     assert not public_request_target('/flora/sales/pipeline')
     assert web('/flora/sales/pipeline')[0] in (401,403)
-    assert web(f'/enterprises/{slug}?lens=not-registered')[0]==404
+    assert inspection_web(f'/enterprises/{slug}?lens=not-registered')[0]==404
 
 
 @pytest.mark.parametrize('domain,slug',[('banking','lloyds'),('aviation','easyjet')])
-def test_every_family_reaches_actual_evidence_and_resolvable_fragment(web,domain,slug):
+def test_every_family_reaches_actual_evidence_and_resolvable_fragment(web,inspection_web,domain,slug):
     for spec in build(domain).values():
         proof=next(e for n in spec['nodes'] for e in n['evidence'] if e['supported'])
-        path,_,fragment=proof['url'].partition('#');status,html=web(path)
+        path,_,fragment=proof['url'].partition('#');status,html=inspection_web(path)
         assert status==200,proof['url']
         if fragment:assert fragment in Elements(html).ids
         assert proof['passage'] and proof['locator'] and proof['source_ids']
         assert proof['url'] in Elements(render_intelligence(spec)).links
 
 
-def test_original_six_spec_api_and_explicit_lenses_are_preserved(web):
+def test_original_six_spec_api_and_explicit_lenses_are_preserved(web,inspection_web):
     for domain in ('banking','aviation'):
         data=model.load_assessment(domain);original=build_visual_specs(data,routes_for(data))
-        status,raw=web('/industries/'+domain+'/visual-specs')
+        status,raw=inspection_web('/industries/'+domain+'/visual-specs')
         assert status==200 and set(json.loads(raw))==set(original)
         assert set(original)=={'pestle','five-forces','value-chain','operating-model','ecosystem','opportunities'}
         for lens in ('pestle','porter','value-chain'):
-            html=web(f'/industries/{domain}?lens={lens}')[1]
+            html=inspection_web(f'/industries/{domain}?lens={lens}')[1]
             assert 'data-diagram-type=' in html and 'data-visual-family=' not in html
 
 
