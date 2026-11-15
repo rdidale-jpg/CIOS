@@ -1,0 +1,133 @@
+{
+  "authority": "candidate_intelligence",
+  "scope": "banking",
+  "subject_ref": "BK-IND-002",
+  "source": {
+    "id": "BIE2-FCA-H126-PEERS",
+    "title": "FCA selected UK bank complaint-received totals:2026H1",
+    "publisher": "Financial Conduct Authority",
+    "url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+    "retrieval_url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+    "publication_date": "2026-10-22",
+    "publication_date_evidence": "Published/updated22October 2026 on inspected official page",
+    "reporting_period": "1 January–30 June 2026; three individually named UK banks, all-product Open totals",
+    "retrieved_at": "2026-11-15T00:00:00+00:00",
+    "reviewed_by": "Codex bounded numerical source review; no owner Evidence acceptance",
+    "review_notes": "Individual firm-name and Total cells inspected with table/period headers; no copied narrative or fabricated contiguous row. Retrieval day verified; time is day-normalised record time, not asserted server timestamp.",
+    "research_domain": "banking",
+    "verification": "primary_retrieved",
+    "content_kind": "reviewed_web_excerpt",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn113686view4 / turn832124view5 / turn832124view6",
+    "retrieval_extent": "Six individually located cells, not a full source archive; original bytes unavailable",
+    "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/BIE2-FCA-Peers.txt",
+    "text_sha256": "dd68d2c507bea63b5d33f9932dee0c8fa0fbe9053f1aa3289f81822e9dda0338",
+    "primary_content_sha256": null,
+    "excerpts": [
+      {
+        "locator": "FCA2026H1 Open table, source HTML line595, Firm name cell",
+        "quote": "Barclays Bank UK PLC"
+      },
+      {
+        "locator": "FCA2026H1 Open table, source HTML line595, Total cell",
+        "quote": "90,678"
+      },
+      {
+        "locator": "FCA2026H1 Open table, source HTML line657, Firm name cell",
+        "quote": "HSBC UK Bank Plc"
+      },
+      {
+        "locator": "FCA2026H1 Open table, source HTML line657, Total cell",
+        "quote": "79,323"
+      },
+      {
+        "locator": "FCA2026H1 Open table, source HTML line695, Firm name cell",
+        "quote": "NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY"
+      },
+      {
+        "locator": "FCA2026H1 Open table, source HTML line695, Total cell",
+        "quote": "92,548"
+      }
+    ],
+    "rights": {
+      "status": "permitted_numerical_data",
+      "licence": "UK Open Government Licence v3.0",
+      "terms_url": "https://www.fca.org.uk/legal",
+      "terms_clause": "2.2 numerical Data;2.3 excludes narrative",
+      "reviewed_at": "2026-11-15",
+      "review_reference": "turn113686view5",
+      "attribution": "Contains Financial Conduct Authority information licensed under the Open Government Licence v3.0.",
+      "extent": "Three numerical totals and legal-entity label cells, no graphics, prose, logos or feed. No third-party notice observed for these numerical cells.",
+      "permission_is_not_acceptance": true
+    },
+    "supported_force_kinds": [
+      "observed_trend"
+    ],
+    "retrieval_timestamp_precision": "day_normalised_UTC_not_server_timestamp"
+  },
+  "claims": [
+    {
+      "id": "BIE2-BARCLAYS-RECEIVED",
+      "asset_id": "BK-IND-002",
+      "statement": "The FCA published 90,678 complaints received by Barclays Bank UK PLC in January–June 2026.",
+      "domain": "customer_outcomes",
+      "kind": "reported_fact",
+      "reporting_period": "1 January–30 June 2026",
+      "entity_scope": "Barclays Bank UK PLC only; not its consolidated Group or other bank subsidiaries",
+      "source_ids": [
+        "BIE2-FCA-H126-PEERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "BIE2-FCA-H126-PEERS": "90,678"
+      },
+      "quote_locator": "FCA2026H1 Open table, source HTML line595, firm-name and all-product Total cells; period 1 January–30 June 2026",
+      "metric_value": 90678,
+      "metric_unit": "complaints received; all-product total",
+      "canonical_acceptance": "not_accepted"
+    },
+    {
+      "id": "BIE2-HSBC-RECEIVED",
+      "asset_id": "BK-IND-002",
+      "statement": "The FCA published 79,323 complaints received by HSBC UK Bank Plc in January–June 2026.",
+      "domain": "customer_outcomes",
+      "kind": "reported_fact",
+      "reporting_period": "1 January–30 June 2026",
+      "entity_scope": "HSBC UK Bank Plc only; not its consolidated Group or other bank subsidiaries",
+      "source_ids": [
+        "BIE2-FCA-H126-PEERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "BIE2-FCA-H126-PEERS": "79,323"
+      },
+      "quote_locator": "FCA2026H1 Open table, source HTML line657, firm-name and all-product Total cells; period 1 January–30 June 2026",
+      "metric_value": 79323,
+      "metric_unit": "complaints received; all-product total",
+      "canonical_acceptance": "not_accepted"
+    },
+    {
+      "id": "BIE2-NATWEST-RECEIVED",
+      "asset_id": "BK-IND-002",
+      "statement": "The FCA published 92,548 complaints received by NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY in January–June 2026.",
+      "domain": "customer_outcomes",
+      "kind": "reported_fact",
+      "reporting_period": "1 January–30 June 2026",
+      "entity_scope": "NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY only; not its consolidated Group or other bank subsidiaries",
+      "source_ids": [
+        "BIE2-FCA-H126-PEERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "BIE2-FCA-H126-PEERS": "92,548"
+      },
+      "quote_locator": "FCA2026H1 Open table, source HTML line695, firm-name and all-product Total cells; period 1 January–30 June 2026",
+      "metric_value": 92548,
+      "metric_unit": "complaints received; all-product total",
+      "canonical_acceptance": "not_accepted"
+    }
+  ],
+  "canonical_mutation": false,
+  "cutoff": "2026-11-15",
+  "production_acceptance": "unverified"
+}

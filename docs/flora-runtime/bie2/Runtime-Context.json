@@ -1,0 +1,18 @@
+{
+  "mission": "BIE-2 Issue635 Banking research candidate corpus and bounded existing-owner read-only presentation",
+  "research_policy": "Research + Assurance",
+  "capability_profile": "Public approved web research, local code/tests, GitHub draft PR and hosted CI; no paid calls/production writes",
+  "branch": "codex/flora-bie2-635",
+  "base": "b5b05f841bc6f17f5ffe3286a65e8745e7c79ec3",
+  "main_ci": "https://github.com/rdidale-jpg/CIOS/actions/runs/43745079701",
+  "main_ci_conclusion": "success",
+  "deployed_identity": "UNVERIFIED: owner reportsb5b; authorised HTTP reads unavailable",
+  "source_cuts": {
+    "RIE1": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+    "RIE2": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+    "RIC1": "9db8253b23deefac00022716c53311472203aec7",
+    "EAI1": "678412a4320b5d13d88ffe66592e7a225cc4817c",
+    "EAI2": "c0ae093e697dd0003df97727b3fb24a924f4f65b"
+  },
+  "acceptance": "None; no durable canonical observations instantiated"
+}

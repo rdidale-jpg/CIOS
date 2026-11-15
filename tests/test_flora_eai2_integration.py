@@ -40,9 +40,9 @@ def changed_release(key,mutation,tmp_path,monkeypatch):
  monkeypatch.setattr(registry,'snapshot_boundary',lambda d,repo=None:tmp_path if d==domain and repo is None else original(d,repo))
 
 @pytest.mark.parametrize('scope,stream',[(s,t)for s,b in v.SCOPES.items()for t in b['streams']])
-def test_three_regions_unchanged_exploration_and_nine_singular_agenda_keys(scope,stream):
+def test_three_regions_unchanged_exploration_and_singular_agenda_keys(scope,stream):
  ctx=v.Context(scope,stream);issues=a.agenda(scope);html=v.render(v.SCOPES[scope]['route'],{'stream':[stream]})
- assert len(issues)==3 and len({r.key for r in issues})==3
+ assert len(issues)==len({r.key for r in issues})==(4 if scope=='banking'else 3)
  assert html.count('data-region=')==3 and html.count('<h1')==1
  assert html.count('aria-label="Leadership Agenda"')==1
  assert html.count('class="portrait"')==2

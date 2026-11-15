@@ -17,21 +17,23 @@ from . import intelligence_presentation as p, visual_v2
 from .research_intelligence import model
 from .research_intelligence.source_import import official_url
 
-POLICY = 'EAI-2/1.0'
+POLICY = 'BIE-2/1.0'
 CUTOFF = '2026-11-15'
 REVIEW_UNTIL = '2026-12-15'
 KEYS = MappingProxyType({'uk':('growth-mix','public-value','cyber-resilience'),
-    'banking':('funding-economics','reporting-change','provider-oversight'),
+    'banking':('funding-economics','reporting-change','provider-oversight','service-landscape'),
     'lloyds':('service-recovery','ai-benefits','funding-base')})
 # These are dependency fingerprints, not copies of evidence or acceptance.
 PINS = Path(__file__).with_name('visual_stream_assets') / 'agenda-dependencies.json'
 CANDIDATE = model.REPO / 'enterprise-knowledge/banking/research-model/source-snapshots/INT1-FCA-Candidate.json'
-# Three explicitly reviewed public releases within the existing source owners.
+# Explicitly reviewed public releases within the existing source owners.
 # No directory scanning, user-selected path, private query or new source engine.
 EAI_RELEASES = MappingProxyType({
     'service':('banking','EAI1-FCA-Service-Candidate.json','lloyds','BK-ENT-001',('EAI-LBG-CLOSED','EAI-LBG-UPHELD')),
     'provider':('banking','EAI1-HMT-CTP-Candidate.json','banking','BK-IND-002',('EAI-UK-CTP-DESIGNATION',)),
     'cyber':('macro','EAI1-UK-Cyber-Candidate.json','uk','GB',()),
+    'peer-service':('banking','BIE2-FCA-Peers-Candidate.json','banking','BK-IND-002',
+                    ('BIE2-BARCLAYS-RECEIVED','BIE2-HSBC-RECEIVED','BIE2-NATWEST-RECEIVED')),
 })
 
 
@@ -169,7 +171,7 @@ def _claims(data, ids):
             or not model.freshness(data)['eligible']):
         return ()
     if 'LBG-FCA-H126-RECEIVED'in ids:data=_public_data(data)
-    for release in ('service','provider'):
+    for release in ('service','provider','peer-service'):
         if set(ids).intersection(EAI_RELEASES[release][4]):data=_eai_bank_data(data,release)
     by_id={c['id']:c for c in data['claims']};sources={s['id']:s for s in data['sources']}
     rows=[]
@@ -182,7 +184,7 @@ def _claims(data, ids):
             if not s or fingerprint(s)!=pins['sources'].get(sid):return ()
             official_url(s['url'])
             if p.restricted_metadata(s):return ()
-            if (sid in {'PR-FCA-COMPLAINTS-H126','EAI-FCA-H126-SERVICE'}
+            if (sid in {'PR-FCA-COMPLAINTS-H126','EAI-FCA-H126-SERVICE','BIE2-FCA-H126-PEERS'}
                     and s.get('rights',{}).get('status')!='permitted_numerical_data'):return ()
             if sid=='EAI-HMT-CTP26'and s.get('rights',{}).get('status')!='permitted_ogl_factual_extract':return ()
         item=p.claim_view(data,c)
@@ -268,6 +270,15 @@ def agenda(scope,data=None):
                 'The designation identifies a regulated provider layer in financial-system resilience; it is distinct from a particular bank’s supplier contract.',
                 ('Designation does not identify a bank customer, workload, spend, concentration exposure, service failure or open procurement. The announcement was published on 10 July, not 13 July.',),
                 'PESTLE · legal and technological; value chain · critical service providers.'))
+            facts=_claims(data,EAI_RELEASES['peer-service'][4])
+            if facts:
+                facts=tuple(replace(f,caveats=('Received complaints are activity counts, not a customer-harm rate, cost or service-quality ranking.',
+                    'Contains Financial Conduct Authority information licensed under the Open Government Licence v3.0.'))for f in facts)
+            rows.append(_issue('service-landscape','Complaint activity spans distinct banking entities',
+                'In January–June 2026, Barclays Bank UK PLC received 90,678 complaints, HSBC UK Bank Plc 79,323 and National Westminster Bank PLC 92,548. These are service-handling volumes, not a service-quality ranking.',
+                facts,'The FCA Open table publishes all-product totals for the same six-month period, with each count retained against its reporting legal entity.',
+                ('These counts do not establish relative service quality, deterioration, customer harm, cost or unmet supplier need. Customer bases and product mixes differ; no denominator, backlog subtraction or Group aggregation is used.',),
+                'Industry operating model · customer service activity; separate legal-entity reporting.'))
         else:
             facts=_claims(data,('LBG-FCA-H126-RECEIVED','EAI-LBG-CLOSED','EAI-LBG-UPHELD'))
             if facts:
@@ -330,7 +341,7 @@ def basis(row):
     e=escape
     body='<details class="agenda-basis"><summary>Basis &amp; perspective</summary>'
     body+=''.join(p.render(f)for f in row.facts)+'<p>'+e(row.analysis)+'</p>'
-    if row.key=='service-recovery':
+    if row.key in {'service-recovery','service-landscape'}:
         body+='<p class="source-licence">Contains Financial Conduct Authority information licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="noreferrer">Open Government Licence v3.0</a>.</p>'
     if row.key in {'cyber-resilience','provider-oversight'}:
         body+='<p class="source-licence">Contains public sector information licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="noreferrer">Open Government Licence v3.0</a>.</p>'

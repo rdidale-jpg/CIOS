@@ -35,6 +35,8 @@ EAI1_CANDIDATE_ADDITIONS = {
     'enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt':
         'b9abe8eb681cb0310dbf7eec719fc66de5bda0fca2920b0cc02a94a7efc92646',
 }
+# #635 bounded FCA numerical presentation candidate; every earlier byte stays pinned.
+BIE2_CANDIDATE_ADDITIONS = {'enterprise-knowledge/banking/research-model/source-snapshots/BIE2-FCA-Peers-Candidate.json': 'd2536d42b5fcdc8ef3ebf59bd42564dd93d1648ee73b6f05b6ce14497394666d', 'enterprise-knowledge/banking/research-model/source-snapshots/BIE2-FCA-Peers.txt': 'dd68d2c507bea63b5d33f9932dee0c8fa0fbe9053f1aa3289f81822e9dda0338'}
 REVIEW = 'enterprise-knowledge/banking/research-model/Understanding-Review.json'
 DEPTH_ADDITIONS = tuple('enterprise-knowledge/banking/research-model/source-snapshots/'+name+'.txt'
                         for name in ('DEPTH-LBG-AI','DEPTH-LBG-LEGACY','DEPTH-LBG-WALLET','DEPTH-LBG-CURVE'))
@@ -83,6 +85,13 @@ def approved_history(root):
         assert hashlib.sha256(content).hexdigest()==digest, 'EAI-1 candidate proposal/excerpt changed'
         assert path not in expected, 'Existing identity cannot become an addition'
         expected[path]=content
+    for path,digest in BIE2_CANDIDATE_ADDITIONS.items():
+        candidate=Path(root)/path
+        assert not candidate.is_symlink(), 'BIE-2 candidate source symlink is not admitted'
+        content=candidate.read_bytes()
+        assert hashlib.sha256(content).hexdigest()==digest, 'BIE-2 candidate proposal/excerpt changed'
+        assert path not in expected, 'Existing identity cannot become an addition'
+        expected[path]=content
     return expected
 
 
@@ -100,8 +109,9 @@ def verify_history(root):
     assert not any(p.is_symlink() for p in files), 'Research symlink is not a reviewed source'
     actual={str(p.relative_to(root)):p.read_bytes() for p in files if p.is_file()}
     compare_history(expected,actual)
-    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS)-len(EAI1_CANDIDATE_ADDITIONS),
+    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS)-len(EAI1_CANDIDATE_ADDITIONS)-len(BIE2_CANDIDATE_ADDITIONS),
             'depth_additions':len(DEPTH_ADDITIONS),'macro_additions':len(MACRO_ADDITIONS),
             'trigger_candidate_additions':len(TRIGGER_ADDITIONS),'int1_presentation_candidate_additions':len(INT1_CANDIDATE_ADDITIONS),
             'eai1_presentation_candidate_additions':len(EAI1_CANDIDATE_ADDITIONS),
+            'bie2_presentation_candidate_additions':len(BIE2_CANDIDATE_ADDITIONS),
             'total':len(expected),'old_review_records_retained':True}

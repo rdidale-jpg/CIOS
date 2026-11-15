@@ -1,0 +1,662 @@
+{
+  "authority": "candidate_intelligence",
+  "canonical_mutation": false,
+  "anchor": "2026-11-15",
+  "literal_current_window": [
+    "2026-10-16",
+    "2026-11-15"
+  ],
+  "literal_current_window_inclusive_days": 31,
+  "prior_structural_window": [
+    "2026-08-18",
+    "2026-10-15"
+  ],
+  "ninety_day_window": [
+    "2026-08-18",
+    "2026-11-15"
+  ],
+  "date_policy": "Literal owner bounds retained; publication recency and underlying event recency are separate. Missing day is not inferred from retrieval, URL or checkpoint. No future-effective item represented as completed.",
+  "events": [
+    {
+      "id": "event:star-voice",
+      "dedup_key": "star-voice",
+      "aliases": [],
+      "event_date": "2026-11-13",
+      "event_date_precision": "day",
+      "publication_date": "2026-11-13",
+      "publication_date_precision": "day",
+      "reporting_period": null,
+      "effective_date": "Rollout by year-end2026; not immediate universal availability",
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "STAR-VOICE"
+      ],
+      "original_url": "https://www.starlingbank.com/news/-talk-to-transact-starling-customers-can-use-their-voice-to-send-money/",
+      "issuer": "Starling Bank",
+      "actors": [
+        "actor:starling"
+      ],
+      "title": "Starling announced retail voice-transfer rollout",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "Voice instruction with retained tap authorisation is a product/control design change.",
+        "counter_evidence": "Year-end rollout is not all customers live on announcement day; no procurement inferred."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "current_literal_window",
+      "event_window": "current_literal_window"
+    },
+    {
+      "id": "event:monzo-contactless",
+      "dedup_key": "monzo-contactless",
+      "aliases": [],
+      "event_date": "2026-11-12",
+      "event_date_precision": "day",
+      "publication_date": "2026-11-12",
+      "publication_date_precision": "day",
+      "reporting_period": null,
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "MONZO-PIN"
+      ],
+      "original_url": "https://monzo.com/blog/removing-default-cumulative-contactless-limit",
+      "issuer": "Monzo",
+      "actors": [
+        "actor:monzo"
+      ],
+      "title": "Monzo described cumulative contactless-limit trial",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "Issuer trial reports less PIN friction and lower fraud value.",
+        "counter_evidence": "54% and30% changes are initial trial findings, not independently verified all-customer outcomes; transaction limits are a different measure."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "current_literal_window",
+      "event_window": "current_literal_window"
+    },
+    {
+      "id": "event:metro-strategic-review",
+      "dedup_key": "metro-strategic-review",
+      "aliases": [],
+      "event_date": "2026-11-12",
+      "event_date_precision": "day",
+      "publication_date": "2026-11-12",
+      "publication_date_precision": "day",
+      "reporting_period": null,
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "METRO-REVIEW"
+      ],
+      "original_url": "https://www.metrobankonline.co.uk/globalassets/documents/investor_documents/2026/announcement-november-2026.pdf",
+      "issuer": "Metro Bank",
+      "actors": [
+        "actor:metro"
+      ],
+      "title": "Metro began strategic review and Formal Sale Process",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "A corporate decision environment changed while the standalone plan continues.",
+        "counter_evidence": "No firm offer, completion, external supplier scope or buyer budget is established."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "current_literal_window",
+      "event_window": "current_literal_window"
+    },
+    {
+      "id": "event:nt-banking-resolution",
+      "dedup_key": "nt-banking-resolution",
+      "aliases": [
+        "NT-AGM vote-results page",
+        "NT-RELEASE issuer media release"
+      ],
+      "event_date": "2026-11-07",
+      "event_date_precision": "day",
+      "publication_date": "2026-11-07",
+      "publication_date_precision": "day",
+      "reporting_period": null,
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "NT-RELEASE",
+        "NT-AGM"
+      ],
+      "original_url": "https://www.nationaltrust.org.uk/services/media/2026/november/outcomes-of-national-trust-annual-general-meeting-2026",
+      "issuer": "National Trust",
+      "actors": [
+        "actor:nt"
+      ],
+      "title": "National Trust members supported a banking tender resolution",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "A non-bank client governance signal can affect bank relationship priorities.",
+        "counter_evidence": "Nonbinding resolution is not a launched tender, award or verified Barclays legal-entity relationship."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "reported_votes": {
+        "for": 53257,
+        "against": 4905
+      },
+      "publication_window": "current_literal_window",
+      "event_window": "current_literal_window"
+    },
+    {
+      "id": "event:star-business-card",
+      "dedup_key": "star-business-card",
+      "aliases": [],
+      "event_date": "2026-11-06",
+      "event_date_precision": "day",
+      "publication_date": "2026-11-06",
+      "publication_date_precision": "day",
+      "reporting_period": null,
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "STAR-CARD"
+      ],
+      "original_url": "https://www.starlingbank.com/news/starling-to-launch-fee-free-business-credit-card-with-uncapped-1-cashback/",
+      "issuer": "Starling Bank",
+      "actors": [
+        "actor:starling"
+      ],
+      "title": "Starling announced selected-business credit-card early access",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "New lending product extends beyond its existing business-account proposition.",
+        "counter_evidence": "Selected limited companies only; not universal launch or demonstrated demand."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "current_literal_window",
+      "event_window": "current_literal_window"
+    },
+    {
+      "id": "event:mpc-rate",
+      "dedup_key": "mpc-rate",
+      "aliases": [],
+      "event_date": "2026-11-04",
+      "event_date_precision": "day",
+      "publication_date": "2026-11-05",
+      "publication_date_precision": "day",
+      "reporting_period": null,
+      "effective_date": "2026-11-05",
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "MPC-NOV"
+      ],
+      "original_url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+      "issuer": "Bank of England",
+      "actors": [
+        "actor:boe"
+      ],
+      "title": "MPC increased Bank Rate to4%",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "A common funding/repricing input changed.",
+        "counter_evidence": "Vote8–1; rate change alone does not establish bank margin loss or a preset path."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "current_literal_window",
+      "event_window": "current_literal_window"
+    },
+    {
+      "id": "event:cass-quarter",
+      "dedup_key": "cass-quarter",
+      "aliases": [],
+      "event_date": null,
+      "event_date_precision": "reporting_period",
+      "publication_date": "2026-11-05",
+      "publication_date_precision": "day",
+      "reporting_period": "Q3 totalJuly–September 2026; bank net positionsApril–June 2026",
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "CASS-Q3"
+      ],
+      "original_url": "https://www.wearepay.uk/current-account-switch-service-records-highest-quarter-of-switching-since-2023/",
+      "issuer": "Pay.UK",
+      "actors": [
+        "actor:payuk",
+        "actor:cass",
+        "actor:nationwide",
+        "actor:barclays-uk",
+        "actor:natwest",
+        "actor:monzo"
+      ],
+      "title": "CASS reported411384 Q3 switches",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "Switching activity provides a customer-choice signal.",
+        "counter_evidence": "Named bank net gains referApril–June, notJuly–September; not revenues or customer-harm counts."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "current_literal_window",
+      "event_window": "outside_or_unverified"
+    },
+    {
+      "id": "event:rtgs-forum",
+      "dedup_key": "rtgs-forum",
+      "aliases": [],
+      "event_date": "2026-10-13",
+      "event_date_precision": "day",
+      "publication_date": "2026-11-04",
+      "publication_date_precision": "day",
+      "reporting_period": "Meeting13 October 2026",
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "RTGS-FORUM"
+      ],
+      "original_url": "https://www.bankofengland.co.uk/minutes/2026/october/rtgs-chaps-industry-forum-13-october-2026",
+      "issuer": "Bank of England",
+      "actors": [
+        "actor:boe",
+        "actor:rtgs",
+        "actor:chaps",
+        "actor:swift"
+      ],
+      "title": "RTGS/CHAPS forum discussed hours and standards sequencing",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "Infrastructure timing affects bank operating dependencies.",
+        "counter_evidence": "Extended-hours decision remains pending; delayed standards release is not evidence of a bank outage or contract."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "current_literal_window",
+      "event_window": "prior_90_day_event"
+    },
+    {
+      "id": "event:hsbc-q3",
+      "dedup_key": "hsbc-q3",
+      "aliases": [
+        "HSBC earnings release",
+        "HSBC3Q data pack UK legal-entity table"
+      ],
+      "event_date": "2026-10-27",
+      "event_date_precision": "day",
+      "publication_date": "2026-10-27",
+      "publication_date_precision": "day",
+      "reporting_period": "Quarter/9 months to30 September 2026",
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "HSBC-RELEASE",
+        "HSBC-Q3"
+      ],
+      "original_url": "https://www.hsbc.com/news-and-views/news/media-releases/2026/hsbc-holdings-plc-3q-2026-earnings-release",
+      "issuer": "HSBC Holdings plc",
+      "actors": [
+        "actor:hsbc-group",
+        "actor:hsbc-uk"
+      ],
+      "title": "HSBC published Q3 Group results and UK legal-entity supplement",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "The UK supplement enables perimeter-correct earnings analysis.",
+        "counter_evidence": "UK9-month US$6084m PBT is not Group Q3 PBT or GBP; source pack is unaudited."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "current_literal_window",
+      "event_window": "current_literal_window"
+    },
+    {
+      "id": "event:fca-h1-complaints",
+      "dedup_key": "fca-h1-complaints",
+      "aliases": [],
+      "event_date": "2026-10-22",
+      "event_date_precision": "day",
+      "publication_date": "2026-10-22",
+      "publication_date_precision": "day",
+      "reporting_period": "Selected firms1 January–30 June 2026",
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "FCA-H126"
+      ],
+      "original_url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+      "issuer": "Financial Conduct Authority",
+      "actors": [
+        "actor:fca",
+        "actor:barclays-uk",
+        "actor:hsbc-uk",
+        "actor:natwest",
+        "actor:lloyds"
+      ],
+      "title": "FCA published H1 firm complaint tables",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "Bank legal-entity complaint handling has measurable activity.",
+        "counter_evidence": "Received, closed, upheld and FOS adjudication are different cohorts; no service-quality ranking."
+      },
+      "rights": "permitted_numerical_data",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "current_literal_window",
+      "event_window": "current_literal_window"
+    },
+    {
+      "id": "event:star-sovereign-model",
+      "dedup_key": "star-sovereign-model",
+      "aliases": [],
+      "event_date": "2026-10-14",
+      "event_date_precision": "day",
+      "publication_date": "2026-10-14",
+      "publication_date_precision": "day",
+      "reporting_period": null,
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "STAR-CLOUD"
+      ],
+      "original_url": "https://www.starlingbank.com/news/starling-backs-uk-sovereign-cloud/",
+      "issuer": "Starling Bank",
+      "actors": [
+        "actor:starling",
+        "actor:nvidia",
+        "actor:civo"
+      ],
+      "title": "Starling described UK model development",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "Named development dependencies provide technology operating context.",
+        "counter_evidence": "Development is not production deployment or available supplier scope."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "prior_90_day_publication",
+      "event_window": "prior_90_day_event"
+    },
+    {
+      "id": "event:open-banking-milestone",
+      "dedup_key": "open-banking-milestone",
+      "aliases": [],
+      "event_date": "2026-06",
+      "event_date_precision": "month",
+      "publication_date": "2026-09-21",
+      "publication_date_precision": "day",
+      "reporting_period": "MilestoneJune 2026; flowsAugust 2025–July 2026",
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "OB-MILESTONE"
+      ],
+      "original_url": "https://www.openbanking.org.uk/insights/1-billion-payments-and-counting-for-uk-open-banking/",
+      "issuer": "Open Banking Limited",
+      "actors": [
+        "actor:obl"
+      ],
+      "title": "Open Banking reported June cumulative payment milestone",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "Cumulative usage and annual flows measure different adoption dimensions.",
+        "counter_evidence": "One billion is since inception inJune, not aSeptember monthly flow or bank revenue."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "prior_90_day_publication",
+      "event_window": "outside_or_unverified"
+    },
+    {
+      "id": "event:star-business-ai",
+      "dedup_key": "star-business-ai",
+      "aliases": [],
+      "event_date": "2026-08-24",
+      "event_date_precision": "day",
+      "publication_date": "2026-08-24",
+      "publication_date_precision": "day",
+      "reporting_period": null,
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "STAR-AI"
+      ],
+      "original_url": "https://www.starlingbank.com/news/starling-launches-agentic-ai-assistant-for-business/",
+      "issuer": "Starling Bank",
+      "actors": [
+        "actor:starling",
+        "actor:google"
+      ],
+      "title": "Starling launched business AI assistant",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "An existing opt-in capability is counter-evidence to assuming no AI response.",
+        "counter_evidence": "Issuer announcement is not independent efficacy or unmet customer demand."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "prior_90_day_publication",
+      "event_window": "prior_90_day_event"
+    },
+    {
+      "id": "event:san-tsb-employer-transfer",
+      "dedup_key": "san-tsb-employer-transfer",
+      "aliases": [],
+      "event_date": "2026-10-01",
+      "event_date_precision": "day",
+      "publication_date": null,
+      "publication_date_precision": "not_verified",
+      "reporting_period": null,
+      "effective_date": "2026-10-01",
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "SAN-Q3"
+      ],
+      "original_url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:65eface3-a6db-48c5-8506-460893b3385f/original/as/Santander%20UK%20Q3-26%20QMS.pdf",
+      "issuer": "Santander UK Group Holdings plc",
+      "actors": [
+        "actor:santander-uk",
+        "actor:tsb-group"
+      ],
+      "title": "Santander reported TSB central-colleague employer transfer",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "Employer transfer is a completed integration step.",
+        "counter_evidence": "Not completion of PartVII business transfer or all technology migration."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "outside_or_unverified",
+      "event_window": "prior_90_day_event"
+    },
+    {
+      "id": "event:fos-quarter",
+      "dedup_key": "fos-quarter",
+      "aliases": [],
+      "event_date": null,
+      "event_date_precision": "reporting_period",
+      "publication_date": null,
+      "publication_date_precision": "not_verified",
+      "reporting_period": "1 July–30 September 2026",
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "FOS-Q2"
+      ],
+      "original_url": "https://www.financial-ombudsman.org.uk/who-we-are/data-insight/news/financial-ombudsman-service-received-57000-cases-second-quarter-202627",
+      "issuer": "Financial Ombudsman Service",
+      "actors": [
+        "actor:fos"
+      ],
+      "title": "FOS reported57000 second-quarter cases",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "Independent disputes have a distinct adjudication and reporting perimeter.",
+        "counter_evidence": "Rounded counts and changed financial-year reporting prevent cross-period complaint ratios."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "outside_or_unverified",
+      "event_window": "outside_or_unverified"
+    },
+    {
+      "id": "event:nw-results",
+      "dedup_key": "nw-results",
+      "aliases": [],
+      "event_date": null,
+      "event_date_precision": "not_verified",
+      "publication_date": null,
+      "publication_date_precision": "not_verified",
+      "reporting_period": "Nine months to30 September 2026",
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "NW-Q3"
+      ],
+      "original_url": "https://www.natwestgroup.com/news-and-insights/latest-stories/2026/q3-2026-natwest-group-results.html",
+      "issuer": "NatWest Group",
+      "actors": [
+        "actor:nw-group"
+      ],
+      "title": "NatWest Q3 financial disclosure verified; publication day pending",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "Group acquisition and operating performance can be analysed from original figures.",
+        "counter_evidence": "Checkpoint30 October is not independently established publication proof; exclude from day-qualified news count."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "outside_or_unverified",
+      "event_window": "outside_or_unverified"
+    },
+    {
+      "id": "event:revolut-mobilisation",
+      "dedup_key": "revolut-mobilisation",
+      "aliases": [],
+      "event_date": "2026-03-11",
+      "event_date_precision": "day",
+      "publication_date": "2026-03-11",
+      "publication_date_precision": "day",
+      "reporting_period": null,
+      "effective_date": null,
+      "retrieved_on": "2026-11-15",
+      "source_ids": [
+        "REV-UK"
+      ],
+      "original_url": "https://www.revolut.com/news/revolut_launches_uk_bank/",
+      "issuer": "Revolut",
+      "actors": [
+        "actor:revolut-uk"
+      ],
+      "title": "Revolut announced UK mobilisation exit",
+      "semantic_type": "reported",
+      "interpretation": {
+        "semantic_type": "insight",
+        "text": "UK banking rollout is distinct from the existing fintech user base.",
+        "counter_evidence": "Outside90-day window; gradual migration does not establish all UK users as bank customers."
+      },
+      "rights": "research_only_unresolved",
+      "verification": "original_source_inspected_candidate",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "retraction_status": "none_observed_at_retrieval_not_exhaustive",
+      "supersedes": [],
+      "production_news_eligible": false,
+      "publication_window": "outside_or_unverified",
+      "event_window": "outside_or_unverified"
+    }
+  ]
+}

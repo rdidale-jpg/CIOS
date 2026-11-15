@@ -1,0 +1,682 @@
+{
+  "authority": "candidate_intelligence",
+  "canonical_mutation": false,
+  "edges": [
+    {
+      "id": "edge:001",
+      "subject": "actor:clear-group",
+      "predicate": "reported_embedded_or_payment_client",
+      "object": "actor:revolut-brand",
+      "source_ids": [
+        "CLEAR-FY"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "ClearBank Group issuer names customer brands; bank-legal endpoint not resolved",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:002",
+      "subject": "actor:clear-group",
+      "predicate": "reported_embedded_or_payment_client",
+      "object": "actor:lemfi",
+      "source_ids": [
+        "CLEAR-FY"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "ClearBank Group issuer names customer brands; bank-legal endpoint not resolved",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:003",
+      "subject": "actor:clear-group",
+      "predicate": "reported_embedded_or_payment_client",
+      "object": "actor:coinbase",
+      "source_ids": [
+        "CLEAR-FY"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "ClearBank Group issuer names customer brands; bank-legal endpoint not resolved",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:004",
+      "subject": "actor:clear-group",
+      "predicate": "reported_embedded_or_payment_client",
+      "object": "actor:paycaptain",
+      "source_ids": [
+        "CLEAR-FY"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "ClearBank Group issuer names customer brands; bank-legal endpoint not resolved",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:005",
+      "subject": "actor:clear-group",
+      "predicate": "reported_embedded_or_payment_client",
+      "object": "actor:airwallex",
+      "source_ids": [
+        "CLEAR-FY"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "ClearBank Group issuer names customer brands; bank-legal endpoint not resolved",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:006",
+      "subject": "actor:clear-group",
+      "predicate": "reported_embedded_or_payment_client",
+      "object": "actor:kraken",
+      "source_ids": [
+        "CLEAR-FY"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "ClearBank Group issuer names customer brands; bank-legal endpoint not resolved",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:007",
+      "subject": "actor:clear-group",
+      "predicate": "reported_embedded_or_payment_client",
+      "object": "actor:pingpong",
+      "source_ids": [
+        "CLEAR-FY"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "ClearBank Group issuer names customer brands; bank-legal endpoint not resolved",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:008",
+      "subject": "actor:clear-group",
+      "predicate": "issuer_reported_direct_payment_access",
+      "object": "actor:fps",
+      "source_ids": [
+        "CLEAR-PAY"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "Product page distinguishes ClearBank Limited and ClearBank Europe; GBP schemes shown; not an operator-verified participant register",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:009",
+      "subject": "actor:clear-group",
+      "predicate": "issuer_reported_direct_payment_access",
+      "object": "actor:bacs",
+      "source_ids": [
+        "CLEAR-PAY"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "Product page distinguishes ClearBank Limited and ClearBank Europe; GBP schemes shown; not an operator-verified participant register",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:010",
+      "subject": "actor:clear-group",
+      "predicate": "issuer_reported_direct_payment_access",
+      "object": "actor:chaps",
+      "source_ids": [
+        "CLEAR-PAY"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "Product page distinguishes ClearBank Limited and ClearBank Europe; GBP schemes shown; not an operator-verified participant register",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:011",
+      "subject": "actor:clear-group",
+      "predicate": "issuer_reported_direct_payment_access",
+      "object": "actor:ics",
+      "source_ids": [
+        "CLEAR-PAY"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "Product page distinguishes ClearBank Limited and ClearBank Europe; GBP schemes shown; not an operator-verified participant register",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:012",
+      "subject": "actor:starling",
+      "predicate": "reported_assistant_technology_use",
+      "object": "actor:google",
+      "source_ids": [
+        "STAR-AI"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": "2026-08-24",
+      "effective_date": null,
+      "date_precision": "announcement_day_only; actual relationship commencement not established",
+      "entity_scope": "Source-named entities/brands only; no inferred legal contracting endpoint",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "Google Gemini on Google Cloud in opt-in business assistant; no spend or full bank cloud migration asserted; announcement date is not a vendor-contract or collaboration commencement date",
+      "observed_or_announced_on": "2026-08-24"
+    },
+    {
+      "id": "edge:013",
+      "subject": "actor:starling",
+      "predicate": "announced_model_development_collaboration",
+      "object": "actor:nvidia",
+      "source_ids": [
+        "STAR-CLOUD"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "announced_development",
+      "publication_date": "2026-10-14",
+      "effective_date": null,
+      "date_precision": "announcement_day_only; actual relationship commencement not established",
+      "entity_scope": "Source-named entities/brands only; no inferred legal contracting endpoint",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced; announcement date is not a vendor-contract or collaboration commencement date",
+      "observed_or_announced_on": "2026-10-14"
+    },
+    {
+      "id": "edge:014",
+      "subject": "actor:starling",
+      "predicate": "announced_model_training_hosting",
+      "object": "actor:civo",
+      "source_ids": [
+        "STAR-CLOUD"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "announced_development",
+      "publication_date": "2026-10-14",
+      "effective_date": null,
+      "date_precision": "announcement_day_only; actual relationship commencement not established",
+      "entity_scope": "Source-named entities/brands only; no inferred legal contracting endpoint",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced; announcement date is not a vendor-contract or collaboration commencement date",
+      "observed_or_announced_on": "2026-10-14"
+    },
+    {
+      "id": "edge:015",
+      "subject": "actor:nw-group",
+      "predicate": "reported_technology_collaboration",
+      "object": "actor:aws",
+      "source_ids": [
+        "NW-TECH"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "Source-named entities/brands only; no inferred legal contracting endpoint",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:016",
+      "subject": "actor:nw-group",
+      "predicate": "reported_technology_collaboration",
+      "object": "actor:accenture",
+      "source_ids": [
+        "NW-TECH"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "Source-named entities/brands only; no inferred legal contracting endpoint",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:017",
+      "subject": "actor:nw-group",
+      "predicate": "reported_technology_collaboration",
+      "object": "actor:openai",
+      "source_ids": [
+        "NW-TECH"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "Source-named entities/brands only; no inferred legal contracting endpoint",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:018",
+      "subject": "actor:santander-uk",
+      "predicate": "completed_share_acquisition",
+      "object": "actor:tsb-group",
+      "source_ids": [
+        "SAN-Q3"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "completed",
+      "publication_date": null,
+      "effective_date": "2026-04-30",
+      "date_precision": "day",
+      "entity_scope": "Santander UK plc acquired all ordinary shares of TSB Banking Group plc; different from business transfer",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "Consolidation from 1 May; PartVII business transfer proposedH1 2027, not completed"
+    },
+    {
+      "id": "edge:019",
+      "subject": "actor:nbs-group",
+      "predicate": "acquired_business_consolidation",
+      "object": "actor:virgin",
+      "source_ids": [
+        "NBS-FY"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "reported_consolidation",
+      "publication_date": "2026-05-21",
+      "effective_date": "2024-10-01",
+      "date_precision": "day",
+      "entity_scope": "Source-named entities/brands only; no inferred legal contracting endpoint",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "FY2026 full year versus six months in prior comparison; majority business transferApril 2026 is a separate milestone"
+    },
+    {
+      "id": "edge:020",
+      "subject": "actor:boe",
+      "predicate": "operates_settlement_system",
+      "object": "actor:rtgs",
+      "source_ids": [
+        "RTGS-FORUM"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": "2026-11-04",
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "Source-named entities/brands only; no inferred legal contracting endpoint",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:021",
+      "subject": "actor:boe",
+      "predicate": "operates_high_value_payment_system",
+      "object": "actor:chaps",
+      "source_ids": [
+        "RTGS-FORUM"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": "2026-11-04",
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "Source-named entities/brands only; no inferred legal contracting endpoint",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:022",
+      "subject": "actor:payuk",
+      "predicate": "operates_switch_service",
+      "object": "actor:cass",
+      "source_ids": [
+        "CASS-Q3"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": "2026-11-05",
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "Source-named entities/brands only; no inferred legal contracting endpoint",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "No contract value, duration, exclusivity, workload or buying intent evidenced"
+    },
+    {
+      "id": "edge:023",
+      "subject": "actor:fca",
+      "predicate": "publishes_firm_reported_complaint_data",
+      "object": "actor:barclays-uk",
+      "source_ids": [
+        "FCA-H126"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": "2026-10-22",
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "Named legal entity, Jan–Jun2026 all-product Open total",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "Publication is not independent adjudication, quality ranking or contract"
+    },
+    {
+      "id": "edge:024",
+      "subject": "actor:fca",
+      "predicate": "publishes_firm_reported_complaint_data",
+      "object": "actor:hsbc-uk",
+      "source_ids": [
+        "FCA-H126"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": "2026-10-22",
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "Named legal entity, Jan–Jun2026 all-product Open total",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "Publication is not independent adjudication, quality ranking or contract"
+    },
+    {
+      "id": "edge:025",
+      "subject": "actor:fca",
+      "predicate": "publishes_firm_reported_complaint_data",
+      "object": "actor:natwest",
+      "source_ids": [
+        "FCA-H126"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": "2026-10-22",
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "Named legal entity, Jan–Jun2026 all-product Open total",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "Publication is not independent adjudication, quality ranking or contract"
+    },
+    {
+      "id": "edge:026",
+      "subject": "actor:pra",
+      "predicate": "lists_uk_incorporated_deposit_taker",
+      "object": "actor:monzo",
+      "source_ids": [
+        "PRA-NOV"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "November 2026 PRA register identity only",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "Does not prove Group ownership, all product permissions, operating readiness or a supplier relationship"
+    },
+    {
+      "id": "edge:027",
+      "subject": "actor:pra",
+      "predicate": "lists_uk_incorporated_deposit_taker",
+      "object": "actor:revolut-uk",
+      "source_ids": [
+        "PRA-NOV"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "November 2026 PRA register identity only",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "Does not prove Group ownership, all product permissions, operating readiness or a supplier relationship"
+    },
+    {
+      "id": "edge:028",
+      "subject": "actor:pra",
+      "predicate": "lists_uk_incorporated_deposit_taker",
+      "object": "actor:starling",
+      "source_ids": [
+        "PRA-NOV"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "November 2026 PRA register identity only",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "Does not prove Group ownership, all product permissions, operating readiness or a supplier relationship"
+    },
+    {
+      "id": "edge:029",
+      "subject": "actor:pra",
+      "predicate": "lists_uk_incorporated_deposit_taker",
+      "object": "actor:clearbank",
+      "source_ids": [
+        "PRA-NOV"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "November 2026 PRA register identity only",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "Does not prove Group ownership, all product permissions, operating readiness or a supplier relationship"
+    },
+    {
+      "id": "edge:030",
+      "subject": "actor:pra",
+      "predicate": "lists_uk_incorporated_deposit_taker",
+      "object": "actor:aib",
+      "source_ids": [
+        "PRA-NOV"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "November 2026 PRA register identity only",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "Does not prove Group ownership, all product permissions, operating readiness or a supplier relationship"
+    },
+    {
+      "id": "edge:031",
+      "subject": "actor:pra",
+      "predicate": "lists_uk_incorporated_deposit_taker",
+      "object": "actor:boi",
+      "source_ids": [
+        "PRA-NOV"
+      ],
+      "verification": "source_reported_primary",
+      "relationship_status": "source_reported_current",
+      "publication_date": null,
+      "effective_date": null,
+      "date_precision": "source_period_or_not_stated",
+      "entity_scope": "November 2026 PRA register identity only",
+      "canonical_id": null,
+      "canonical_acceptance": "not_accepted",
+      "contract_value": null,
+      "contract_duration": null,
+      "exclusivity": null,
+      "limitation": "Does not prove Group ownership, all product permissions, operating readiness or a supplier relationship"
+    }
+  ],
+  "rejected": [
+    {
+      "subject": "actor:nt",
+      "object": "actor:barclays-uk",
+      "reason": "Reopened primary AGM source does not name Barclays; secondary headline is insufficient for verified current customer edge"
+    },
+    {
+      "subject": "actor:starling",
+      "object": "actor:nvidia",
+      "reason": "Reject production_deployed or awarded_contract status: source describes development"
+    },
+    {
+      "subject": "actor:revolut-uk",
+      "object": "actor:clearbank",
+      "reason": "Revolut customer brand cannot silently resolve to newly authorised UK legal bank"
+    },
+    {
+      "subject": "all_banks",
+      "object": "critical_cloud_providers",
+      "reason": "Existing HMT designation is not evidence of bilateral bank contracts"
+    }
+  ]
+}

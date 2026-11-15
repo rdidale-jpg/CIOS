@@ -1,0 +1,393 @@
+{
+  "owner_only": true,
+  "authority": "candidate_intelligence",
+  "canonical_mutation": false,
+  "items": [
+    {
+      "source_id": "PRA-NOV",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "FCA-H126",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": true,
+      "decision": "bounded three-cell numerical presentation release only",
+      "blocker": null,
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "FCA-TERMS",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "licence_review_only",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "NW-Q3",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "NW-TECH",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "HSBC-Q3",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "HSBC-RELEASE",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "SAN-Q3",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "NBS-FY",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "NBS-MEMBER",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "STAR-FY",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "STAR-AI",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "STAR-CLOUD",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "STAR-VOICE",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "STAR-CARD",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "CLEAR-FY",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "CLEAR-RESULTS",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "CLEAR-PAY",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "MONZO-FY",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "MONZO-PIN",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "OAK-FY",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "REV-UK",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "MPC-NOV",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "CASS-Q3",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "RTGS-FORUM",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "OB-MILESTONE",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "NT-AGM",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "NT-RELEASE",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "METRO-REVIEW",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "FOS-Q2",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "PSR-ACCESS",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "PSR-ROLE",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "FSCS-ROLE",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "research_only_unresolved",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    },
+    {
+      "source_id": "UKF-ROLE",
+      "candidate": true,
+      "source_verified": "original_content_inspected",
+      "existing_owner": "Existing Banking research SourceSegment/CandidateClaim proposal ownership; no new registry",
+      "canonical_evidence_accepted": false,
+      "visible_in_runtime": false,
+      "decision": "research review only; not runtime admitted",
+      "blocker": "identity_link_only_no_content_republication",
+      "next_authority": "Owner source/evidence review, not automatic import"
+    }
+  ],
+  "retained": [
+    "All original EAI2 intelligence, sources and51/32 navigation addresses",
+    "Seven original illustrations,21variants, seven portraits and accepted skyline/delivery assets",
+    "Eight unchanged EAI evidence proposals, selected:null/import_executed:false",
+    "ADR027 remains Proposed; SEC/ONS policies unchanged"
+  ],
+  "excluded": [
+    "No public News feature/collector or future stream buttons",
+    "No new bank routes or canonical enterprise registrations",
+    "No broad issuer admission or source-registry/graph model",
+    "No procurement, buyer, demand, deal value, automatic Pipeline or Material Pressure qualification"
+  ]
+}

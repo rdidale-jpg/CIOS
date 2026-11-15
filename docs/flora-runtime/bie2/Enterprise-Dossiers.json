@@ -1,0 +1,747 @@
+[
+  {
+    "id": "dossier:natwest",
+    "actor_id": "actor:nw-group",
+    "authority": "candidate_intelligence",
+    "canonical_id": null,
+    "canonical_acceptance": "not_accepted",
+    "scope": "NatWest Group; not National Westminster Bank plc alone",
+    "period": "Nine months ended 30 September 2026; stocks at period end",
+    "currency": "GBP",
+    "source_ids": [
+      "NW-Q3",
+      "NW-TECH"
+    ],
+    "metrics": [
+      {
+        "name": "Operating profit before tax",
+        "value": 6.5,
+        "unit": "GBP billion",
+        "basis": "Group reported operating PBT",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NW-Q3"
+        ],
+        "subject_actor_id": "actor:nw-group",
+        "entity_scope": "NatWest Group; not National Westminster Bank plc alone"
+      },
+      {
+        "name": "Attributable profit",
+        "value": 4.6,
+        "unit": "GBP billion",
+        "basis": "Group attributable to ordinary shareholders",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NW-Q3"
+        ],
+        "subject_actor_id": "actor:nw-group",
+        "entity_scope": "NatWest Group; not National Westminster Bank plc alone"
+      },
+      {
+        "name": "Income",
+        "value": 13.3,
+        "unit": "GBP billion",
+        "basis": "Excluding notable items",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NW-Q3"
+        ],
+        "subject_actor_id": "actor:nw-group",
+        "entity_scope": "NatWest Group; not National Westminster Bank plc alone"
+      },
+      {
+        "name": "Operating expenses",
+        "value": 6.2,
+        "unit": "GBP billion",
+        "basis": "Excluding litigation and conduct",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NW-Q3"
+        ],
+        "subject_actor_id": "actor:nw-group",
+        "entity_scope": "NatWest Group; not National Westminster Bank plc alone"
+      },
+      {
+        "name": "CET1 ratio",
+        "value": 13.5,
+        "unit": "percent",
+        "basis": "Group regulatory capital ratio",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NW-Q3"
+        ],
+        "subject_actor_id": "actor:nw-group",
+        "entity_scope": "NatWest Group; not National Westminster Bank plc alone"
+      },
+      {
+        "name": "Customer deposits",
+        "value": 453.4,
+        "unit": "GBP billion",
+        "basis": "Period-end Group stock",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NW-Q3"
+        ],
+        "subject_actor_id": "actor:nw-group",
+        "entity_scope": "NatWest Group; not National Westminster Bank plc alone"
+      },
+      {
+        "name": "Gross customer loans",
+        "value": 417.8,
+        "unit": "GBP billion",
+        "basis": "Period-end Group stock",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NW-Q3"
+        ],
+        "subject_actor_id": "actor:nw-group",
+        "entity_scope": "NatWest Group; not National Westminster Bank plc alone"
+      }
+    ],
+    "economic_mechanism": "Retail, Commercial & Institutional and Private Banking connect deposit funding, credit, payments and wealth fees. Customer assets/liabilities includes AUMA; it is not a bank balance-sheet total or market size.",
+    "strategic_issue": {
+      "title": "Acquisition-led wealth expansion makes organic productivity attribution important",
+      "semantic_type": "insight",
+      "role_accountability": "Group CEO Paul Thwaite and finance/technology executive roles; no buyer authority asserted",
+      "existing_response": "Evelyn acquisition and Sainsbury’s-branded products accompany an existing modular-platform, Bankline, AWS and Accenture programme.",
+      "timing": "As disclosed in the dated/period-bound sources; not evidence of sales urgency",
+      "counter_evidence": "20.2% reported RoTE and 45.7% cost:income indicate existing performance; acquired assets cannot be counted as organic growth or unaddressed failure.",
+      "potentially_open_decision": "Incremental integration/control choices may remain, but the disclosed technology relationships and strategic direction are already in place.",
+      "buying_intent": "not established",
+      "next_investigation_owner_only": "Reconcile acquired versus organic AUMA, income and delivery benefits before attributing incremental productivity."
+    },
+    "gaps": [
+      "Reconcile acquired versus organic AUMA, income and delivery benefits before attributing incremental productivity.",
+      "Exact Q3 publication day not independently located; omit from day-qualified news count.",
+      "Group CIO Scott Marcar is a disclosed role, not evidence of purchasing authority or a named opportunity."
+    ],
+    "comparability": "Do not rank across currencies, Group/legal bank/segment perimeters, annual/nine-month periods, underlying/statutory or reported/normalised definitions",
+    "visibility": "owner_research_artifact_only",
+    "related_legal_bank_actor_ids": [
+      "actor:natwest"
+    ],
+    "falsifier_owner_only": "A source-matched reconciliation showing that the relevant period/entity distinction has no material effect on the proposed issue would weaken this interpretation; no absence of disclosure is treated as business failure."
+  },
+  {
+    "id": "dossier:hsbc-uk",
+    "actor_id": "actor:hsbc-uk",
+    "authority": "candidate_intelligence",
+    "canonical_id": null,
+    "canonical_acceptance": "not_accepted",
+    "scope": "HSBC UK Bank plc legal entity, UK ring-fenced bank; all businesses",
+    "period": "Nine months ended 30 September 2026; stocks at30 September 2026",
+    "currency": "USD",
+    "source_ids": [
+      "HSBC-Q3",
+      "HSBC-RELEASE"
+    ],
+    "metrics": [
+      {
+        "name": "Revenue",
+        "value": 11054,
+        "unit": "USD million",
+        "basis": "Reported legal-entity results, not constant currency",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "HSBC-Q3"
+        ],
+        "subject_actor_id": "actor:hsbc-uk",
+        "entity_scope": "HSBC UK Bank plc legal entity, UK ring-fenced bank; all businesses"
+      },
+      {
+        "name": "Expected credit losses",
+        "value": 701,
+        "unit": "USD million",
+        "basis": "Expense magnitude; table displays negative",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "HSBC-Q3"
+        ],
+        "subject_actor_id": "actor:hsbc-uk",
+        "entity_scope": "HSBC UK Bank plc legal entity, UK ring-fenced bank; all businesses"
+      },
+      {
+        "name": "Operating expenses",
+        "value": 4270,
+        "unit": "USD million",
+        "basis": "Expense magnitude; table displays negative",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "HSBC-Q3"
+        ],
+        "subject_actor_id": "actor:hsbc-uk",
+        "entity_scope": "HSBC UK Bank plc legal entity, UK ring-fenced bank; all businesses"
+      },
+      {
+        "name": "Associates income",
+        "value": 1,
+        "unit": "USD million",
+        "basis": "Share of profit from associates",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "HSBC-Q3"
+        ],
+        "subject_actor_id": "actor:hsbc-uk",
+        "entity_scope": "HSBC UK Bank plc legal entity, UK ring-fenced bank; all businesses"
+      },
+      {
+        "name": "Profit before tax",
+        "value": 6084,
+        "unit": "USD million",
+        "basis": "Reported legal-entity results",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "HSBC-Q3"
+        ],
+        "subject_actor_id": "actor:hsbc-uk",
+        "entity_scope": "HSBC UK Bank plc legal entity, UK ring-fenced bank; all businesses"
+      },
+      {
+        "name": "Gross customer loans",
+        "value": 330101,
+        "unit": "USD million",
+        "basis": "Legal-entity stock",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "HSBC-Q3"
+        ],
+        "subject_actor_id": "actor:hsbc-uk",
+        "entity_scope": "HSBC UK Bank plc legal entity, UK ring-fenced bank; all businesses"
+      },
+      {
+        "name": "External customer accounts",
+        "value": 373218,
+        "unit": "USD million",
+        "basis": "Legal-entity stock",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "HSBC-Q3"
+        ],
+        "subject_actor_id": "actor:hsbc-uk",
+        "entity_scope": "HSBC UK Bank plc legal entity, UK ring-fenced bank; all businesses"
+      }
+    ],
+    "economic_mechanism": "A UK ring-fenced deposit and lending franchise is reported within a global Group in US dollars. Funding, credit losses and costs affect UK legal-entity earnings; Group international earnings are not UK bank economics.",
+    "strategic_issue": {
+      "title": "UK entity earnings require a separate perimeter from global HSBC performance",
+      "semantic_type": "insight",
+      "role_accountability": "UK bank finance, credit-risk and operations roles; current individual UK executive identity not verified",
+      "existing_response": "The issuer publishes a dedicated UK legal-entity supplement; global leadership and Group strategy are not automatically UK operating responsibilities.",
+      "timing": "As disclosed in the dated/period-bound sources; not evidence of sales urgency",
+      "counter_evidence": "Positive reported PBT contradicts a generic loss-making-bank thesis. Revenue minus ECL and expenses plus associates reconciles; it does not establish an external cost opportunity.",
+      "potentially_open_decision": "No unallocated UK transformation decision or external supplier scope is evidenced by the supplement.",
+      "buying_intent": "not established",
+      "next_investigation_owner_only": "Obtain UK-specific operating-model and current executive-role disclosures before assigning decision accountability."
+    },
+    "gaps": [
+      "Obtain UK-specific operating-model and current executive-role disclosures before assigning decision accountability.",
+      "Unaudited data pack supplements rather than replaces full financial statements.",
+      "No USD-to-GBP conversion or global Group Q3 profit substitution."
+    ],
+    "comparability": "Do not rank across currencies, Group/legal bank/segment perimeters, annual/nine-month periods, underlying/statutory or reported/normalised definitions",
+    "visibility": "owner_research_artifact_only",
+    "related_legal_bank_actor_ids": [
+      "actor:hsbc-uk"
+    ],
+    "falsifier_owner_only": "A source-matched reconciliation showing that the relevant period/entity distinction has no material effect on the proposed issue would weaken this interpretation; no absence of disclosure is treated as business failure."
+  },
+  {
+    "id": "dossier:santander-uk",
+    "actor_id": "actor:san-group",
+    "authority": "candidate_intelligence",
+    "canonical_id": null,
+    "canonical_acceptance": "not_accepted",
+    "scope": "Financials: Santander UK Group Holdings plc; acquisition buyer: Santander UK plc",
+    "period": "Nine months ended 30 September 2026; TSB results consolidated from 1 May 2026",
+    "currency": "GBP",
+    "source_ids": [
+      "SAN-Q3"
+    ],
+    "metrics": [
+      {
+        "name": "Profit before tax",
+        "value": 1158,
+        "unit": "GBP million",
+        "basis": "Group Holdings nine-month PBT",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "SAN-Q3"
+        ],
+        "subject_actor_id": "actor:san-group",
+        "entity_scope": "Financials: Santander UK Group Holdings plc; acquisition buyer: Santander UK plc"
+      },
+      {
+        "name": "Net interest income",
+        "value": 3854,
+        "unit": "GBP million",
+        "basis": "Group Holdings nine-month income",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "SAN-Q3"
+        ],
+        "subject_actor_id": "actor:san-group",
+        "entity_scope": "Financials: Santander UK Group Holdings plc; acquisition buyer: Santander UK plc"
+      },
+      {
+        "name": "Banking NIM",
+        "value": 2.31,
+        "unit": "percent",
+        "basis": "Non-IFRS issuer banking margin",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "SAN-Q3"
+        ],
+        "subject_actor_id": "actor:san-group",
+        "entity_scope": "Financials: Santander UK Group Holdings plc; acquisition buyer: Santander UK plc"
+      },
+      {
+        "name": "Customer loans",
+        "value": 240.3,
+        "unit": "GBP billion",
+        "basis": "Period-end stock including TSB",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "SAN-Q3"
+        ],
+        "subject_actor_id": "actor:san-group",
+        "entity_scope": "Financials: Santander UK Group Holdings plc; acquisition buyer: Santander UK plc"
+      },
+      {
+        "name": "Customer deposits",
+        "value": 229.2,
+        "unit": "GBP billion",
+        "basis": "Period-end stock including TSB",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "SAN-Q3"
+        ],
+        "subject_actor_id": "actor:san-group",
+        "entity_scope": "Financials: Santander UK Group Holdings plc; acquisition buyer: Santander UK plc"
+      }
+    ],
+    "economic_mechanism": "Mortgage/deposit spread economics now include acquired TSB balances. Consolidation, redress and integration costs affect comparability; the acquisition is not organic deposit growth.",
+    "strategic_issue": {
+      "title": "TSB consolidation separates acquisition execution from later legal and technology integration",
+      "semantic_type": "insight",
+      "role_accountability": "Group CEO and integration/finance roles; appointment effective dates retained",
+      "existing_response": "Acquisition completed30 April; results from 1 May; central-colleague employer transfer1 October; proposed PartVII business transferH1 2027 remains conditional.",
+      "timing": "As disclosed in the dated/period-bound sources; not evidence of sales urgency",
+      "counter_evidence": "Strategic acquisition and integration direction are already decided. The £400m-plus 2028 synergy ambition is a target, not achieved savings or a supplier budget.",
+      "potentially_open_decision": "Detailed migration decisions may remain inside an established programme; no open procurement, external scope or influence window is established.",
+      "buying_intent": "not established",
+      "next_investigation_owner_only": "Obtain current legal-transfer and technology sequencing evidence before identifying any still-open commercial decision."
+    },
+    "gaps": [
+      "Obtain current legal-transfer and technology sequencing evidence before identifying any still-open commercial decision.",
+      "Exact Q3 publication day unresolved; do not infer it from an aggregator.",
+      "Mahesh Aditya is CEO; CFO Angel Santodomingo remains until 31 December 2026, Tom Ranger appointment effective 1 January 2027.",
+      "Motor-finance remaining provision is not freely available transformation funding."
+    ],
+    "comparability": "Do not rank across currencies, Group/legal bank/segment perimeters, annual/nine-month periods, underlying/statutory or reported/normalised definitions",
+    "visibility": "owner_research_artifact_only",
+    "related_legal_bank_actor_ids": [
+      "actor:santander-uk"
+    ],
+    "falsifier_owner_only": "A source-matched reconciliation showing that the relevant period/entity distinction has no material effect on the proposed issue would weaken this interpretation; no absence of disclosure is treated as business failure."
+  },
+  {
+    "id": "dossier:nationwide",
+    "actor_id": "actor:nbs-group",
+    "authority": "candidate_intelligence",
+    "canonical_id": null,
+    "canonical_acceptance": "not_accepted",
+    "scope": "Nationwide Building Society consolidated Group, including Virgin Money",
+    "period": "1 April 2025–31 March 2026; prior 361 days to31 March 2025 includes only6 months Virgin Money",
+    "currency": "GBP",
+    "source_ids": [
+      "NBS-FY",
+      "NBS-MEMBER"
+    ],
+    "metrics": [
+      {
+        "name": "Underlying income",
+        "value": 6378,
+        "unit": "GBP million",
+        "basis": "Underlying Group flow",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NBS-FY"
+        ],
+        "subject_actor_id": "actor:nbs-group",
+        "entity_scope": "Nationwide Building Society consolidated Group, including Virgin Money"
+      },
+      {
+        "name": "Underlying administrative expenses",
+        "value": 4021,
+        "unit": "GBP million",
+        "basis": "Underlying Group expense",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NBS-FY"
+        ],
+        "subject_actor_id": "actor:nbs-group",
+        "entity_scope": "Nationwide Building Society consolidated Group, including Virgin Money"
+      },
+      {
+        "name": "Credit impairment",
+        "value": 331,
+        "unit": "GBP million",
+        "basis": "Group charge",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NBS-FY"
+        ],
+        "subject_actor_id": "actor:nbs-group",
+        "entity_scope": "Nationwide Building Society consolidated Group, including Virgin Money"
+      },
+      {
+        "name": "Underlying profit before tax",
+        "value": 2026,
+        "unit": "GBP million",
+        "basis": "Underlying Group flow",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NBS-FY"
+        ],
+        "subject_actor_id": "actor:nbs-group",
+        "entity_scope": "Nationwide Building Society consolidated Group, including Virgin Money"
+      },
+      {
+        "name": "Statutory profit before tax",
+        "value": 1490,
+        "unit": "GBP million",
+        "basis": "Statutory Group flow, different basis",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NBS-FY"
+        ],
+        "subject_actor_id": "actor:nbs-group",
+        "entity_scope": "Nationwide Building Society consolidated Group, including Virgin Money"
+      },
+      {
+        "name": "Retail deposits",
+        "value": 270.8,
+        "unit": "GBP billion",
+        "basis": "Period-end stock",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NBS-FY"
+        ],
+        "subject_actor_id": "actor:nbs-group",
+        "entity_scope": "Nationwide Building Society consolidated Group, including Virgin Money"
+      },
+      {
+        "name": "Mortgage balances",
+        "value": 286.3,
+        "unit": "GBP billion",
+        "basis": "Period-end stock",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NBS-FY"
+        ],
+        "subject_actor_id": "actor:nbs-group",
+        "entity_scope": "Nationwide Building Society consolidated Group, including Virgin Money"
+      },
+      {
+        "name": "Integration expenses",
+        "value": 127,
+        "unit": "GBP million",
+        "basis": "Disclosed integration expense",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "NBS-FY"
+        ],
+        "subject_actor_id": "actor:nbs-group",
+        "entity_scope": "Nationwide Building Society consolidated Group, including Virgin Money"
+      }
+    ],
+    "economic_mechanism": "Member-owned deposit and mortgage economics must balance retained capital, member value and integration spending. Shareholder RoTE is not a universal objective for this mutual.",
+    "strategic_issue": {
+      "title": "Member value and Virgin integration require separate economic measures",
+      "semantic_type": "insight",
+      "role_accountability": "CEO Debbie Crosbie / CFO Muir Mathieson as disclosed; member and capital stewardship responsibilities",
+      "existing_response": "Virgin Money integration and the April 2026 majority-business transfer accompany planned business-banking launchH1 2027.",
+      "timing": "As disclosed in the dated/period-bound sources; not evidence of sales urgency",
+      "counter_evidence": "Underlying profit£2026m and statutory£1490m differ; prior statutory profit includes acquisition gain. Reported member benefits contradict treating all income foregone as inefficiency.",
+      "potentially_open_decision": "Benefit measurement and remaining integration sequencing require source review; ownership integration is not an undecided acquisition.",
+      "buying_intent": "not established",
+      "next_investigation_owner_only": "Reconcile like-for-like Virgin contribution and member distributions before comparing productivity or growth."
+    },
+    "gaps": [
+      "Reconcile like-for-like Virgin contribution and member distributions before comparing productivity or growth.",
+      "Integration costs are disclosed expenditure, not proof of a new supplier buying need.",
+      "Fairer Share payment eligibility is conditional; business-banking launch is future, not current availability."
+    ],
+    "comparability": "Do not rank across currencies, Group/legal bank/segment perimeters, annual/nine-month periods, underlying/statutory or reported/normalised definitions",
+    "visibility": "owner_research_artifact_only",
+    "related_legal_bank_actor_ids": [
+      "actor:nationwide"
+    ],
+    "falsifier_owner_only": "A source-matched reconciliation showing that the relevant period/entity distinction has no material effect on the proposed issue would weaken this interpretation; no absence of disclosure is treated as business failure."
+  },
+  {
+    "id": "dossier:starling",
+    "actor_id": "actor:star-group",
+    "authority": "candidate_intelligence",
+    "canonical_id": null,
+    "canonical_acceptance": "not_accepted",
+    "scope": "Starling Group; UK bank and Engine platform metrics distinguished",
+    "period": "12 months ended 31 March 2026",
+    "currency": "GBP",
+    "source_ids": [
+      "STAR-FY",
+      "STAR-AI",
+      "STAR-CLOUD",
+      "STAR-VOICE",
+      "STAR-CARD"
+    ],
+    "metrics": [
+      {
+        "name": "Revenue",
+        "value": 887.4,
+        "unit": "GBP million",
+        "basis": "Group annual revenue",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "STAR-FY"
+        ],
+        "subject_actor_id": "actor:star-group",
+        "entity_scope": "Starling Group; UK bank and Engine platform metrics distinguished"
+      },
+      {
+        "name": "Profit before tax",
+        "value": 217.1,
+        "unit": "GBP million",
+        "basis": "Group annual PBT",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "STAR-FY"
+        ],
+        "subject_actor_id": "actor:star-group",
+        "entity_scope": "Starling Group; UK bank and Engine platform metrics distinguished"
+      },
+      {
+        "name": "Deposits",
+        "value": 12.7,
+        "unit": "GBP billion",
+        "basis": "Group reported stock",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "STAR-FY"
+        ],
+        "subject_actor_id": "actor:star-group",
+        "entity_scope": "Starling Group; UK bank and Engine platform metrics distinguished"
+      },
+      {
+        "name": "Platform accounts",
+        "value": 6.2,
+        "unit": "million accounts",
+        "basis": "Group platform accounts, includes Engine client scope; not UK bank customers",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "STAR-FY"
+        ],
+        "subject_actor_id": "actor:star-group",
+        "entity_scope": "Starling Group; UK bank and Engine platform metrics distinguished"
+      }
+    ],
+    "economic_mechanism": "Deposit-funded banking and Engine software revenue create distinct capital and platform economics. Licensing reach cannot be treated as UK deposit-customer acquisition.",
+    "strategic_issue": {
+      "title": "Platform expansion and bank earnings need distinct benefit attribution",
+      "semantic_type": "insight",
+      "role_accountability": "Group CEO Raman Bhatia; CIO Harriet Rees for technology statement, not purchasing authority",
+      "existing_response": "Engine expansion, Google-powered business assistant, NVIDIA/Civo model development and selected-business card early access are already described responses.",
+      "timing": "As disclosed in the dated/period-bound sources; not evidence of sales urgency",
+      "counter_evidence": "Five consecutive profitable years and Engine revenue growth do not imply failing capability. Group revenue£887.4m and PBT£217.1m are below£940.0m and£223.4m prior comparators.",
+      "potentially_open_decision": "Allocation between bank products and platform expansion remains an analytical issue; no customer demand or unallocated supplier work is established.",
+      "buying_intent": "not established",
+      "next_investigation_owner_only": "Separate bank lending/funding returns from Engine recurring economics and development costs."
+    },
+    "gaps": [
+      "Separate bank lending/funding returns from Engine recurring economics and development costs.",
+      "6.2m platform accounts are not equivalent to active UK customers.",
+      "Sovereign model development is not completed production deployment; voice rollout and card eligibility remain bounded."
+    ],
+    "comparability": "Do not rank across currencies, Group/legal bank/segment perimeters, annual/nine-month periods, underlying/statutory or reported/normalised definitions",
+    "visibility": "owner_research_artifact_only",
+    "related_legal_bank_actor_ids": [
+      "actor:starling"
+    ],
+    "falsifier_owner_only": "A source-matched reconciliation showing that the relevant period/entity distinction has no material effect on the proposed issue would weaken this interpretation; no absence of disclosure is treated as business failure."
+  },
+  {
+    "id": "dossier:clearbank",
+    "actor_id": "actor:clear-group",
+    "authority": "candidate_intelligence",
+    "canonical_id": null,
+    "canonical_acceptance": "not_accepted",
+    "scope": "UK bank profitability versus Group operating volumes and normalised revenue",
+    "period": "Year ended 31 December 2025",
+    "currency": "GBP",
+    "source_ids": [
+      "CLEAR-FY",
+      "CLEAR-RESULTS",
+      "CLEAR-PAY"
+    ],
+    "metrics": [
+      {
+        "name": "UK bank profit before tax",
+        "value": 12.2,
+        "unit": "GBP million",
+        "basis": "UK bank; not consolidated Group PBT",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "CLEAR-RESULTS"
+        ],
+        "subject_actor_id": "actor:clearbank",
+        "entity_scope": "ClearBank Limited UK bank"
+      },
+      {
+        "name": "UK normalised revenue",
+        "value": 117.7,
+        "unit": "GBP million",
+        "basis": "Normalised UK basis",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "CLEAR-RESULTS"
+        ],
+        "subject_actor_id": "actor:clearbank",
+        "entity_scope": "ClearBank Limited UK bank"
+      },
+      {
+        "name": "Group normalised revenue",
+        "value": 121.6,
+        "unit": "GBP million",
+        "basis": "Normalised Group basis",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "CLEAR-RESULTS"
+        ],
+        "subject_actor_id": "actor:clear-group",
+        "entity_scope": "UK bank profitability versus Group operating volumes and normalised revenue"
+      },
+      {
+        "name": "Group deposits",
+        "value": 17.8,
+        "unit": "GBP billion",
+        "basis": "Period-end Group stock",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "CLEAR-FY"
+        ],
+        "subject_actor_id": "actor:clear-group",
+        "entity_scope": "UK bank profitability versus Group operating volumes and normalised revenue"
+      },
+      {
+        "name": "Payment volume",
+        "value": 262,
+        "unit": "million payments",
+        "basis": "Group annual volume",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "CLEAR-FY"
+        ],
+        "subject_actor_id": "actor:clear-group",
+        "entity_scope": "UK bank profitability versus Group operating volumes and normalised revenue"
+      },
+      {
+        "name": "Clients",
+        "value": 279,
+        "unit": "clients",
+        "basis": "Group client count, not retail bank accounts",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "CLEAR-FY"
+        ],
+        "subject_actor_id": "actor:clear-group",
+        "entity_scope": "UK bank profitability versus Group operating volumes and normalised revenue"
+      },
+      {
+        "name": "Platform accounts",
+        "value": 17.1,
+        "unit": "million accounts",
+        "basis": "Group platform accounts",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "CLEAR-FY"
+        ],
+        "subject_actor_id": "actor:clear-group",
+        "entity_scope": "UK bank profitability versus Group operating volumes and normalised revenue"
+      },
+      {
+        "name": "Group statutory profit before tax",
+        "value": -16.7,
+        "unit": "GBP million",
+        "basis": "Consolidated Group statutory pretax loss, not UK bank profit",
+        "semantic_type": "reported",
+        "measurement_state": "actual",
+        "source_ids": [
+          "CLEAR-RESULTS"
+        ],
+        "subject_actor_id": "actor:clear-group",
+        "entity_scope": "ClearBank consolidated Group"
+      }
+    ],
+    "economic_mechanism": "Clearing, embedded banking and fee-based infrastructure monetise client integrations and payment volume; they are not the same spread/lending model as a mortgage bank.",
+    "strategic_issue": {
+      "title": "Fee-led infrastructure growth must be separated from deposit-interest effects",
+      "semantic_type": "insight",
+      "role_accountability": "Group CEO Mark Fairless and infrastructure/finance roles; no buyer authority inferred",
+      "existing_response": "Named embedded partners and direct-access payment capabilities describe existing routes to market, not new contracts available to other sellers.",
+      "timing": "As disclosed in the dated/period-bound sources; not evidence of sales urgency",
+      "counter_evidence": "The UK bank reported £12.2m PBT while the consolidated Group reported a £16.7m statutory pretax loss. UK profitability does not establish Group profitability. Normalised and statutory revenue/fee definitions differ.",
+      "potentially_open_decision": "Client mix, unit processing economics and Group versus UK costs need original-statement reconciliation before attributing scalable profit or available spend.",
+      "buying_intent": "not established",
+      "next_investigation_owner_only": "Retrieve original accounts through an authorised size-supported channel; reconcile statutory versus normalised fee income and Group/UK costs."
+    },
+    "gaps": [
+      "Retrieve original accounts through an authorised size-supported channel; reconcile statutory versus normalised fee income and Group/UK costs.",
+      "Landing66%/58%/54% growth versus press65%/57%/53% remains unresolved; use levels, not growth ranking.",
+      "Brand-level client names do not establish exact contracting entities, value, duration, workload or exclusivity."
+    ],
+    "comparability": "Do not rank across currencies, Group/legal bank/segment perimeters, annual/nine-month periods, underlying/statutory or reported/normalised definitions",
+    "visibility": "owner_research_artifact_only",
+    "related_legal_bank_actor_ids": [
+      "actor:clearbank"
+    ],
+    "falsifier_owner_only": "A source-matched reconciliation showing that the relevant period/entity distinction has no material effect on the proposed issue would weaken this interpretation; no absence of disclosure is treated as business failure."
+  }
+]

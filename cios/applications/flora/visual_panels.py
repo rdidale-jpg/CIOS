@@ -223,7 +223,7 @@ def _banking(ctx,data,issues):
     body+=_metrics(values)
     body+='<div class="value-chain" aria-label="Conceptual banking value system"><span>Deposits</span><b aria-hidden="true">→</b><span>Credit &amp; payments</span><b aria-hidden="true">→</b><span>Households &amp; businesses</span></div><p class="chart-note">FLORA Insight · sector functions, not bilateral contracts or quantified value flows.</p>'
     body+='<div class="analysis-grid"><section><h2>Funding economics</h2><p>Deposit pricing, lending and operating resilience connect the banking system with the wider economy.</p><p class="perspective">A rate decision does not establish a particular bank’s margin loss or buying demand.</p></section><section><h2>Distinct responsibilities</h2><dl class="roles"><dt>Bank of England</dt><dd>Central-bank and monetary-policy context.</dd><dt>PRA</dt><dd>Prudential supervision; part of the Bank of England.</dd><dt>FCA</dt><dd>Conduct supervision, distinct from prudential supervision.</dd></dl></section></div>'
-    return body+_basis(facts)+_issue_preview(issues,'provider-oversight')
+    return body+_basis(facts)+_issue_preview(issues,'provider-oversight')+_issue_preview(issues,'service-landscape')
 
 
 def _overview(ctx,data,issues):

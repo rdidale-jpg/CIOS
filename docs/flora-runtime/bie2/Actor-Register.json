@@ -1,0 +1,1064 @@
+{
+  "authority": "candidate_intelligence",
+  "canonical_mutation": false,
+  "as_of": "2026-11-15",
+  "actors": [
+    {
+      "id": "actor:aib",
+      "name": "AIB GROUP (UK) P.L.C.",
+      "kind": "legal_deposit_taker",
+      "frn": "122088",
+      "lei": "54930061N57ORAEPGX16",
+      "cohort": "cross-border",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:aldermore",
+      "name": "Aldermore Bank Plc",
+      "kind": "legal_deposit_taker",
+      "frn": "204503",
+      "lei": "2138009CAEGO41Q6HB61",
+      "cohort": "specialist",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:allica",
+      "name": "ALLICA BANK LIMITED",
+      "kind": "legal_deposit_taker",
+      "frn": "821851",
+      "lei": "8945008WK6DNAUZQ7L32",
+      "cohort": "challenger",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:atom",
+      "name": "Atom Bank PLC",
+      "kind": "legal_deposit_taker",
+      "frn": "661960",
+      "lei": "213800YWQOYL4VQODV50",
+      "cohort": "challenger",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:boi",
+      "name": "Bank of Ireland (UK) Plc",
+      "kind": "legal_deposit_taker",
+      "frn": "512956",
+      "lei": "213800OOT97XZGKQPY40",
+      "cohort": "cross-border",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:bos",
+      "name": "Bank of Scotland plc",
+      "kind": "legal_deposit_taker",
+      "frn": "169628",
+      "lei": "OQ3T05P7YR8P5YJEVI93",
+      "cohort": "major-bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:barclays",
+      "name": "Barclays Bank Plc",
+      "kind": "legal_deposit_taker",
+      "frn": "122702",
+      "lei": "G5GSEF7VJP5I7OUK5573",
+      "cohort": "major-bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:barclays-uk",
+      "name": "Barclays Bank UK PLC",
+      "kind": "legal_deposit_taker",
+      "frn": "759676",
+      "lei": "213800UUGANOMFJ9X769",
+      "cohort": "major-bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "bounded_profile_or_event",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:clearbank",
+      "name": "ClearBank Limited",
+      "kind": "legal_deposit_taker",
+      "frn": "754568",
+      "lei": "213800PERENGATFCHD95",
+      "cohort": "infrastructure-bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "deep_dossier_with_explicit_limits",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:clydesdale",
+      "name": "Clydesdale Bank Limited",
+      "kind": "legal_deposit_taker",
+      "frn": "121873",
+      "lei": "NHXOBHMY8K53VRC7MZ54",
+      "cohort": "bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:coutts",
+      "name": "Coutts & Company",
+      "kind": "legal_deposit_taker",
+      "frn": "122287",
+      "lei": "549300OLXJ4Y010LOT34",
+      "cohort": "private-bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:hsbc-bank",
+      "name": "HSBC Bank Plc",
+      "kind": "legal_deposit_taker",
+      "frn": "114216",
+      "lei": "MP6I5ZYZBEU3UXPYFY54",
+      "cohort": "major-bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:hsbc-innovation",
+      "name": "HSBC INNOVATION BANK LIMITED",
+      "kind": "legal_deposit_taker",
+      "frn": "543146",
+      "lei": "213800LH7QCHIR3JI632",
+      "cohort": "specialist",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:hsbc-uk",
+      "name": "HSBC UK Bank Plc",
+      "kind": "legal_deposit_taker",
+      "frn": "765112",
+      "lei": "21380081EP12LC86CB82",
+      "cohort": "major-bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "deep_dossier_with_explicit_limits",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:lbg-cm",
+      "name": "Lloyds Bank Corporate Markets Plc",
+      "kind": "legal_deposit_taker",
+      "frn": "763256",
+      "lei": "213800MBWEIJDM5CU638",
+      "cohort": "major-bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:lloyds",
+      "name": "Lloyds Bank PLC",
+      "kind": "legal_deposit_taker",
+      "frn": "119278",
+      "lei": "H7FNTJ4851HG0EXQ1Z70",
+      "cohort": "major-bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:metro",
+      "name": "Metro Bank PLC",
+      "kind": "legal_deposit_taker",
+      "frn": "488982",
+      "lei": "213800X5WU57YL9GPK89",
+      "cohort": "challenger",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "bounded_profile_or_event",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:monzo",
+      "name": "MONZO BANK LIMITED",
+      "kind": "legal_deposit_taker",
+      "frn": "730427",
+      "lei": "213800PLUYXGZ8LU7T61",
+      "cohort": "challenger",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "bounded_profile_or_event",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:natwest",
+      "name": "NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY",
+      "kind": "legal_deposit_taker",
+      "frn": "121878",
+      "lei": "213800IBT39XQ9C4CP71",
+      "cohort": "major-bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "deep_dossier_with_explicit_limits",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:nw-markets",
+      "name": "NatWest Markets Plc",
+      "kind": "legal_deposit_taker",
+      "frn": "121882",
+      "lei": "RR3QWICWWIPCS8A4S074",
+      "cohort": "markets-bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:oaknorth",
+      "name": "OakNorth Bank plc",
+      "kind": "legal_deposit_taker",
+      "frn": "629564",
+      "lei": "213800A7BOPQRC475O81",
+      "cohort": "specialist",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "bounded_profile_or_event",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:osb",
+      "name": "OneSavings Bank Plc",
+      "kind": "legal_deposit_taker",
+      "frn": "530504",
+      "lei": "213800WTQKOQI8ELD692",
+      "cohort": "specialist",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:paragon",
+      "name": "Paragon Bank Plc",
+      "kind": "legal_deposit_taker",
+      "frn": "604551",
+      "lei": "213800ZD686TR7FEP983",
+      "cohort": "specialist",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:revolut-uk",
+      "name": "Revolut Bank UK Ltd",
+      "kind": "legal_deposit_taker",
+      "frn": "981170",
+      "lei": "2138003LXONKR247S255",
+      "cohort": "challenger",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "bounded_profile_or_event",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:santander-uk",
+      "name": "Santander UK Plc",
+      "kind": "legal_deposit_taker",
+      "frn": "106054",
+      "lei": "PTCQB104N23FMNK2RZ28",
+      "cohort": "major-bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "deep_dossier_with_explicit_limits",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:shawbrook",
+      "name": "Shawbrook Bank Limited",
+      "kind": "legal_deposit_taker",
+      "frn": "204574",
+      "lei": "213800XSHRKUIZK86B68",
+      "cohort": "specialist",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:starling",
+      "name": "Starling Bank Limited",
+      "kind": "legal_deposit_taker",
+      "frn": "730166",
+      "lei": "213800AE5VSF3V1PAV23",
+      "cohort": "challenger",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "deep_dossier_with_explicit_limits",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:coop",
+      "name": "THE CO-OPERATIVE BANK P.L.C.",
+      "kind": "legal_deposit_taker",
+      "frn": "121885",
+      "lei": "213800TLZ6PCLYPSR448",
+      "cohort": "bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:rbs",
+      "name": "THE ROYAL BANK OF SCOTLAND PUBLIC LIMITED COMPANY",
+      "kind": "legal_deposit_taker",
+      "frn": "114724",
+      "lei": "549300WHU4EIHRP28H10",
+      "cohort": "major-bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:tsb",
+      "name": "TSB Bank plc",
+      "kind": "legal_deposit_taker",
+      "frn": "191240",
+      "lei": "549300XP222MV7P3CC54",
+      "cohort": "bank",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:zopa",
+      "name": "Zopa Bank Limited",
+      "kind": "legal_deposit_taker",
+      "frn": "800542",
+      "lei": "213800QW7QJVVCL9RZ56",
+      "cohort": "challenger",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:nationwide",
+      "name": "Nationwide Building Society",
+      "kind": "legal_deposit_taker",
+      "frn": "106078",
+      "lei": "549300XFX12G42QIKN82",
+      "cohort": "mutual",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "deep_dossier_with_explicit_limits",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:coventry",
+      "name": "Coventry Building Society",
+      "kind": "legal_deposit_taker",
+      "frn": "150892",
+      "lei": "2138004G59FXEAZ6IO10",
+      "cohort": "mutual",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:yorkshire",
+      "name": "Yorkshire Building Society",
+      "kind": "legal_deposit_taker",
+      "frn": "106085",
+      "lei": "WXD0EHQRPI7HKN3I5T57",
+      "cohort": "mutual",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:skipton",
+      "name": "Skipton Building Society",
+      "kind": "legal_deposit_taker",
+      "frn": "153706",
+      "lei": "66AGRETLUXS4YO5MUH35",
+      "cohort": "mutual",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:leeds",
+      "name": "Leeds Building Society",
+      "kind": "legal_deposit_taker",
+      "frn": "164992",
+      "lei": "O8VR8MK4M5SM9ZVEFS35",
+      "cohort": "mutual",
+      "cohort_authority": "research grouping; not a regulatory permission",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "identity_as_of": "2026-11",
+      "identity_date_precision": "month",
+      "canonical_id": null,
+      "coverage_tier": "identity_only",
+      "perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products"
+    },
+    {
+      "id": "actor:nw-group",
+      "name": "NatWest Group",
+      "kind": "reporting_group",
+      "identity_sources": [
+        "NW-Q3"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "deep_reporting_group_dossier_with_explicit_limits",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:hsbc-group",
+      "name": "HSBC Holdings plc",
+      "kind": "reporting_group",
+      "identity_sources": [
+        "HSBC-RELEASE"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:san-group",
+      "name": "Santander UK Group Holdings plc",
+      "kind": "reporting_group",
+      "identity_sources": [
+        "SAN-Q3"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "deep_reporting_group_dossier_with_explicit_limits",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:tsb-group",
+      "name": "TSB Banking Group plc",
+      "kind": "acquisition_company",
+      "identity_sources": [
+        "SAN-Q3"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:nbs-group",
+      "name": "Nationwide Group",
+      "kind": "reporting_group",
+      "identity_sources": [
+        "NBS-FY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "deep_reporting_group_dossier_with_explicit_limits",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:virgin",
+      "name": "Virgin Money",
+      "kind": "brand_and_acquired_business",
+      "identity_sources": [
+        "NBS-FY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:star-group",
+      "name": "Starling Group",
+      "kind": "reporting_group",
+      "identity_sources": [
+        "STAR-FY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "deep_reporting_group_dossier_with_explicit_limits",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:engine",
+      "name": "Engine by Starling",
+      "kind": "platform_business",
+      "identity_sources": [
+        "STAR-FY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:clear-group",
+      "name": "ClearBank Group",
+      "kind": "reporting_group",
+      "identity_sources": [
+        "CLEAR-RESULTS"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "deep_reporting_group_dossier_with_explicit_limits",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:clear-eu",
+      "name": "ClearBank Europe N.V.",
+      "kind": "legal_bank_non_uk",
+      "identity_sources": [
+        "CLEAR-PAY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:boe",
+      "name": "Bank of England",
+      "kind": "central_bank",
+      "identity_sources": [
+        "MPC-NOV"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:pra",
+      "name": "Prudential Regulation Authority",
+      "kind": "prudential_regulator",
+      "identity_sources": [
+        "PRA-NOV"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:fca",
+      "name": "Financial Conduct Authority",
+      "kind": "conduct_regulator",
+      "identity_sources": [
+        "FCA-H126"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:psr",
+      "name": "Payment Systems Regulator",
+      "kind": "payments_regulator",
+      "identity_sources": [
+        "PSR-ROLE"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:fscs",
+      "name": "Financial Services Compensation Scheme",
+      "kind": "compensation_scheme",
+      "identity_sources": [
+        "FSCS-ROLE"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:fos",
+      "name": "Financial Ombudsman Service",
+      "kind": "independent_dispute_resolution",
+      "identity_sources": [
+        "FOS-Q2"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:uk-finance",
+      "name": "UK Finance",
+      "kind": "trade_association",
+      "identity_sources": [
+        "UKF-ROLE"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:payuk",
+      "name": "Pay.UK",
+      "kind": "payment_system_operator",
+      "identity_sources": [
+        "CASS-Q3"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:cass",
+      "name": "Current Account Switch Service",
+      "kind": "switching_service",
+      "identity_sources": [
+        "CASS-Q3"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:fps",
+      "name": "Faster Payments",
+      "kind": "payment_scheme",
+      "identity_sources": [
+        "CLEAR-PAY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:bacs",
+      "name": "Bacs",
+      "kind": "payment_scheme",
+      "identity_sources": [
+        "CLEAR-PAY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:ics",
+      "name": "Image Clearing System",
+      "kind": "payment_scheme",
+      "identity_sources": [
+        "CLEAR-PAY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:chaps",
+      "name": "CHAPS",
+      "kind": "high_value_payment_system",
+      "identity_sources": [
+        "RTGS-FORUM"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:rtgs",
+      "name": "Bank of England RTGS",
+      "kind": "central_bank_settlement_system",
+      "identity_sources": [
+        "RTGS-FORUM"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:swift",
+      "name": "Swift",
+      "kind": "financial_messaging_standards_actor",
+      "identity_sources": [
+        "RTGS-FORUM"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:obl",
+      "name": "Open Banking Limited",
+      "kind": "standards_and_ecosystem_body",
+      "identity_sources": [
+        "OB-MILESTONE"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:google",
+      "name": "Google Cloud",
+      "kind": "provider_brand",
+      "identity_sources": [
+        "STAR-AI"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:nvidia",
+      "name": "NVIDIA",
+      "kind": "technology_provider_brand",
+      "identity_sources": [
+        "STAR-CLOUD"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:civo",
+      "name": "Civo",
+      "kind": "cloud_provider_brand",
+      "identity_sources": [
+        "STAR-CLOUD"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:aws",
+      "name": "Amazon Web Services",
+      "kind": "provider_brand",
+      "identity_sources": [
+        "NW-TECH"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:accenture",
+      "name": "Accenture",
+      "kind": "integration_provider_brand",
+      "identity_sources": [
+        "NW-TECH"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:openai",
+      "name": "OpenAI",
+      "kind": "technology_provider_brand",
+      "identity_sources": [
+        "NW-TECH"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:revolut-brand",
+      "name": "Revolut",
+      "kind": "customer_brand_unresolved_legal_endpoint",
+      "identity_sources": [
+        "CLEAR-FY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:lemfi",
+      "name": "LemFi",
+      "kind": "customer_brand_unresolved_legal_endpoint",
+      "identity_sources": [
+        "CLEAR-FY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:coinbase",
+      "name": "Coinbase",
+      "kind": "customer_brand_unresolved_legal_endpoint",
+      "identity_sources": [
+        "CLEAR-FY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:paycaptain",
+      "name": "PayCaptain",
+      "kind": "customer_brand_unresolved_legal_endpoint",
+      "identity_sources": [
+        "CLEAR-FY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:airwallex",
+      "name": "Airwallex",
+      "kind": "customer_brand_unresolved_legal_endpoint",
+      "identity_sources": [
+        "CLEAR-FY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:kraken",
+      "name": "Kraken",
+      "kind": "customer_brand_unresolved_legal_endpoint",
+      "identity_sources": [
+        "CLEAR-FY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:pingpong",
+      "name": "PingPong",
+      "kind": "customer_brand_unresolved_legal_endpoint",
+      "identity_sources": [
+        "CLEAR-FY"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    },
+    {
+      "id": "actor:nt",
+      "name": "National Trust",
+      "kind": "non_bank_customer_sector_actor",
+      "identity_sources": [
+        "NT-RELEASE"
+      ],
+      "canonical_id": null,
+      "coverage_tier": "source_reported_role",
+      "perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands"
+    }
+  ],
+  "unresolved_cohorts": [
+    "Visa and Mastercard current legal scheme/issuer relationships: named cohort, original participant evidence still required",
+    "Nonbank insurers, wealth firms and BPO providers: not exhaustively researched",
+    "AIB UK, Bank of Ireland UK, specialists and mutuals beyond Nationwide: identity verified, substantive dossiers not claimed"
+  ]
+}

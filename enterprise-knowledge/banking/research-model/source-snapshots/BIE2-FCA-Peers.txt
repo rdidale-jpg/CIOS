@@ -1,0 +1,14 @@
+BIE-2 reviewed individual numerical cells; source bytes unavailable.
+Open table / all-product Total; selected firms1 January–30 June2026.
+FCA2026H1 Open table, source HTML line595, Firm name cell
+Barclays Bank UK PLC
+FCA2026H1 Open table, source HTML line595, Total cell
+90,678
+FCA2026H1 Open table, source HTML line657, Firm name cell
+HSBC UK Bank Plc
+FCA2026H1 Open table, source HTML line657, Total cell
+79,323
+FCA2026H1 Open table, source HTML line695, Firm name cell
+NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY
+FCA2026H1 Open table, source HTML line695, Total cell
+92,548
