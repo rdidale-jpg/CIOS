@@ -1,0 +1,82 @@
+name: FLORA EAR-1 document-use and governed admission proof
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/flora-runtime/ear1/**'
+      - 'tools/research/ear1_proof.py'
+      - 'tests/test_flora_ear1_639.py'
+      - 'cios/applications/flora/**'
+      - 'enterprise-knowledge/banking/research-model/**'
+      - '.github/workflows/flora-ear1-proof.yml'
+permissions:
+  contents: read
+jobs:
+  admission-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Read-only two-assertion contract observations
+        run: python tools/research/ear1_proof.py > "$RUNNER_TEMP/ear1-proof.json"
+      - name: Real-boundary two-assertion proof without fixture authority
+        run: python -m pytest tests/test_flora_ear1_639.py -q
+      - name: Existing-owner legacy service compatibility in isolated example storage
+        env:
+          FLORA_DATA_DIR: ${{ runner.temp }}/ear1-domain-fixtures
+          FLORA_PILOT_DIR: ${{ runner.temp }}/ear1-pilot-fixtures
+        run: python -m pytest tests/test_flora_blueprint_import_review_planning.py tests/test_flora_blueprint_import_promotion.py tests/test_flora_import_model_reconciliation.py tests/test_financial_intelligence_normalisation.py -o usefixtures=verified_flora_test_authority -q
+      - name: Unchanged semantic, source-rights, tenant, artwork and history contracts
+        run: python -m pytest tests/test_flora_bie3_637.py tests/test_flora_bie2_635.py tests/test_flora_eai2_integration.py tests/test_flora_evidence_expansion_628.py tests/test_flora_visual_panels_632.py tests/test_flora_controlled_integration_625.py tests/test_flora_intelligence_presentation_623.py tests/test_flora_visual_streams_612.py tests/test_flora_visual_v2_583.py tests/test_flora_research_intelligence.py tests/test_flora_design_system_585.py tests/test_flora_primary_enrichment.py tests/test_flora_unified_integration.py::test_both_reviewed_workstreams_remain_ancestors_with_exact_source_cuts tests/test_flora_unified_integration.py::test_history_guard_rejects_every_unapproved_change tests/test_flora_commercial_visual_v3.py::test_no_existing_research_history_or_source_identity_is_changed -q
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flora-ear1-read-only-proof-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/ear1-proof.json
+          retention-days: 14
+  browser-preservation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.txt
+      - name: Install isolated browser tooling
+        run: |
+          npm install --prefix /tmp/flora-vp2-browser playwright@1.62.1
+          /tmp/flora-vp2-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Preserve original comparison baselines
+        run: |
+          git worktree add --detach /tmp/ear1-vp2-before 8a53777d1dec359f56b66e533d512c0a86881939
+          git worktree add --detach /tmp/ear1-eai2-before ce4314c3528d5f4beae6e0e4fa53209ddb56ff5c
+          git worktree add --detach /tmp/ear1-bie2-before b5b05f841bc6f17f5ffe3286a65e8745e7c79ec3
+          git worktree add --detach /tmp/ear1-bie3-before c295e056cbae0f1adebc1070eb272d79b650a45f
+      - name: Rerun all existing visual journeys without runtime changes
+        env:
+          NODE_PATH: /tmp/flora-vp2-browser/node_modules
+        run: |
+          python tools/ci/flora_vp2_preview.py --scenario vp2 --output /tmp/ear1-browser/vp2 --baseline-root /tmp/ear1-vp2-before
+          python tools/ci/flora_vp2_preview.py --scenario eai2 --output /tmp/ear1-browser/eai2 --baseline-root /tmp/ear1-eai2-before
+          python tools/ci/flora_vp2_preview.py --scenario bie2 --output /tmp/ear1-browser/bie2 --baseline-root /tmp/ear1-bie2-before
+          python tools/ci/flora_vp2_preview.py --scenario bie3 --output /tmp/ear1-browser/bie3 --baseline-root /tmp/ear1-bie3-before
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flora-ear1-browser-preservation-${{ github.event.pull_request.head.sha }}
+          path: /tmp/ear1-browser/
+          retention-days: 14
