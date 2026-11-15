@@ -136,6 +136,16 @@ def _metrics(rows):
     return '<div class="metrics">'+''.join('<div><span class="metric-label">'+e(label)+'</span><strong>'+e(value)+'</strong><span class="metric-period">'+e(period)+'</span></div>'for label,value,period in rows)+'</div>'if rows else''
 
 
+def _issue_preview(issues,key):
+    """Recompose one already resolved agenda view; never admit or infer facts."""
+    row=next((row for row in issues if row.key==key),None)
+    if row is None:return ''
+    statement=row.facts[0]if key=='cyber-resilience'else row.conclusion
+    return ('<section class="editorial-issue" data-intelligence="'+key+'" aria-labelledby="preview-'+key+'">'
+        +'<h2 id="preview-'+key+'">'+e(row.title)+'</h2>'+p.render(statement)
+        +agenda.basis(row)+'</section>')
+
+
 def _shares(basis):
     districts=[d for d in basis['districts']if d['sic']in {'C','J','K','Q'}]
     body='<figure class="chart"><figcaption>Four comparable sector shares</figcaption><div class="bars" role="group" aria-label="2024 sector shares of UK GVA">'
@@ -145,7 +155,7 @@ def _shares(basis):
     return body+'</div><p class="chart-note">Calculated · published 2024 SIC 2007 weights ÷ 10, current basic prices. Linear 0–15% scale; Finance &amp; insurance includes more than Banking.</p></figure>'
 
 
-def _uk(ctx):
+def _uk(ctx,issues):
     basis=v.visual_v2.basis();valid=agenda.fingerprint(basis)==agenda._pins().get('existing_economy')
     body='<p class="eyebrow">'+('Economic landscape'if ctx.stream=='landscape'else'National forces')+'</p><h1>'+('The shape of the UK economy'if ctx.stream=='landscape'else'The UK’s economic context')+'</h1>'
     if valid:
@@ -153,10 +163,11 @@ def _uk(ctx):
             ('Reported · real GDP growth','+'+str(basis['growth']['value_pct'])+'%',basis['growth']['period']+' · versus previous three months')])+_shares(basis)
         body+='<p class="material">GVA is not company revenue. Real GDP growth is a separate national volume measure, not industry or enterprise growth.</p>'
     if ctx.stream=='forces':body+=_forces(ctx,None)
+    else:body+=_issue_preview(issues,'cyber-resilience')
     return body
 
 
-def _financial(ctx,data):
+def _financial(ctx,data,issues=()):
     ids=['LBG-Q326-DEPOSITS','LBG-Q326-PROFIT','LBG-AR25-DEPOSITS','LBG-A2030-CIR','LBG-A2030-INVESTMENT']
     group='Lloyds Banking Group plc, consolidated Group unless stated'
     facts=[r for r in _facts(data,ids)if r.scope==group]
@@ -177,6 +188,11 @@ def _financial(ctx,data):
             body+='<div class="bar-row"><span>'+label+'</span><div class="track" aria-hidden="true"><i style="--value:'+str(row.value/600*100)+'%"></i></div><strong>'+str(row.value)+'bn</strong></div>'
         body+='</div><p class="chart-note">Reported · GBP billion, linear 0–600bn scale. Published balances; composition and transfer effects are not reconciled. No organic-flow claim.</p><details class="chart-data"><summary>Chart data</summary><table><caption>Group customer-deposit stocks · GBP billion</caption><tbody>'
         body+=''.join('<tr><th scope="row">'+label+'</th><td>'+str(row.value)+'</td></tr>'for row,label in [(opening,'31 December 2025'),(stock,'30 September 2026')])+'</tbody></table></details></figure>'
+    funding=next((row for row in issues if row.key=='funding-base'),None)
+    if funding:
+        movement=funding.facts[-1]
+        if movement.semantic_type=='calculated'and p.eligible(movement):
+            body+='<div data-intelligence="funding-base">'+p.render(movement)+'</div>'
     body+='<div class="analysis-grid">'
     for key,title in [('LBG-A2030-CIR','Efficiency ambition'),('LBG-A2030-INVESTMENT','Investment discipline')]:
         if by[key]:body+='<section><h2>'+title+'</h2>'+p.render(by[key])+'</section>'
@@ -193,7 +209,7 @@ def _forces(ctx,data):
     return body+'</div>'
 
 
-def _banking(ctx,data):
+def _banking(ctx,data,issues):
     body='<p class="eyebrow">'+('Industry landscape'if ctx.stream=='landscape'else'Industry forces')+'</p><h1>'+('The UK Banking ecosystem'if ctx.stream=='landscape'else'Funding conditions and resilience')+'</h1>'
     if ctx.stream=='forces':return body+_forces(ctx,data)
     facts=_facts(data,['UK-RATE-NOV26','UK-PRA-REPORT27','UK-FCA-REPORT27','UK-VALUE'])
@@ -207,13 +223,13 @@ def _banking(ctx,data):
     body+=_metrics(values)
     body+='<div class="value-chain" aria-label="Conceptual banking value system"><span>Deposits</span><b aria-hidden="true">→</b><span>Credit &amp; payments</span><b aria-hidden="true">→</b><span>Households &amp; businesses</span></div><p class="chart-note">FLORA Insight · sector functions, not bilateral contracts or quantified value flows.</p>'
     body+='<div class="analysis-grid"><section><h2>Funding economics</h2><p>Deposit pricing, lending and operating resilience connect the banking system with the wider economy.</p><p class="perspective">A rate decision does not establish a particular bank’s margin loss or buying demand.</p></section><section><h2>Distinct responsibilities</h2><dl class="roles"><dt>Bank of England</dt><dd>Central-bank and monetary-policy context.</dd><dt>PRA</dt><dd>Prudential supervision; part of the Bank of England.</dd><dt>FCA</dt><dd>Conduct supervision, distinct from prudential supervision.</dd></dl></section></div>'
-    return body+_basis(facts)
+    return body+_basis(facts)+_issue_preview(issues,'provider-oversight')
 
 
-def _overview(ctx,data):
-    if ctx.scope=='uk':return _uk(ctx)
-    if ctx.scope=='banking':return _banking(ctx,data)
-    if ctx.stream=='inside':return _financial(ctx,data)
+def _overview(ctx,data,issues):
+    if ctx.scope=='uk':return _uk(ctx,issues)
+    if ctx.scope=='banking':return _banking(ctx,data,issues)
+    if ctx.stream=='inside':return _financial(ctx,data,issues)+_issue_preview(issues,'service-recovery')
     if ctx.stream=='forces':return '<p class="eyebrow">Enterprise forces</p><h1>Strategy and existing capabilities</h1>'+_forces(ctx,data)
     supplier=v.detail_claims(ctx,{'id':'technology'},data)
     facts=[r for c in supplier if(r:=p.claim_view(data,c))is not None]+_facts(data,['LBG-Q326-DEPOSITS','LBG-A2030-PLATFORMS'])
@@ -228,11 +244,11 @@ def render(ctx,headers=None):
     elif ctx.detail:
         spot=next(s for s in v.geometry()[ctx.scope+'-'+ctx.stream]['spots']if s['id']==ctx.detail)
         if ctx.scope=='lloyds'and ctx.stream=='inside'and ctx.detail=='economics'and v.has_detail(ctx,spot,data):
-            body='<section class="focus" id="insight" tabindex="-1" aria-labelledby="insight-title"><a class="close close-insight" href="'+e(v.url(ctx,detail='')+'#visual-content',quote=True)+'" aria-label="Close Financial performance">×</a>'+_financial(ctx,data).replace('<h1>','<h1 id="insight-title">',1)+'</section>'
+            body='<section class="focus" id="insight" tabindex="-1" aria-labelledby="insight-title"><a class="close close-insight" href="'+e(v.url(ctx,detail='')+'#visual-content',quote=True)+'" aria-label="Close Financial performance">×</a>'+_financial(ctx,data,issues).replace('<h1>','<h1 id="insight-title">',1)+'</section>'
         elif v.has_detail(ctx,spot,data):
             content=v._detail(ctx,spot,data)
             body=content.replace('<h2 id="insight-title">','<h1 id="insight-title">',1).replace('</h2>','</h1>',1)
-    if not body:body=_overview(ctx,data)
+    if not body:body=_overview(ctx,data,issues)
     body+=agenda.navigation(ctx,v.url,issues)
     if ctx.scope!='uk':
         body+='<details class="layer-options"><summary>Context layers</summary><nav aria-label="Context layers">'+''.join('<a href="'+e(v.url(ctx,layer=k),quote=True)+'"'+(' aria-current="page"'if ctx.layer==k else'')+'>'+e(label)+'</a>'for k,label in v.LAYERS.items())+'</nav></details>'

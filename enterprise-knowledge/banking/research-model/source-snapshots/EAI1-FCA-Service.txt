@@ -1,0 +1,5 @@
+Closed table, total; official HTML line908
+Lloyds Bank PLC | LLOYDS BANKING GROUP PLC | no | 2026-01-01 to 2026-06-30 | 115,798 | 33 | 2,680 | 324 | 26 | 118,861
+
+Upheld table, total; official HTML line1581
+Lloyds Bank PLC | LLOYDS BANKING GROUP PLC | no | 2026-01-01 to 2026-06-30 | 66.37% | 30.30% | 62.57% | 11.42% | 19.23% | 66.12%

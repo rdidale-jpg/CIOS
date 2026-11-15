@@ -69,7 +69,7 @@ def test_exact_accepted_derivatives_selective_import_and_originals_retained():
   assert mime==row['mime']and hashlib.sha256(raw).hexdigest()==row['sha256']
   original=subprocess.check_output(['git','show',DESIGN+':'+row['design_path']],cwd=ROOT)
   assert raw==original
- for path in ['artwork.json','scenes.json','agenda-dependencies.json']:
+ for path in ['artwork.json','scenes.json']:
   file='cios/applications/flora/visual_stream_assets/'+path
   assert (ROOT/file).read_bytes()==subprocess.check_output(['git','show',BASE+':'+file],cwd=ROOT)
  for scene,row in v.artwork()['scenes'].items():
@@ -234,7 +234,7 @@ def test_no_pending_evidence_source_or_frozen_design_data_dependency():
   assert (ROOT/path).read_bytes()==subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
  for scope,stream in CASES:
   html=v.render(v.SCOPES[scope]['route'],{'stream':[stream]})
-  assert all(s not in html for s in ['EAI1-','118,861','66.12%','£212bn','SnapshotDate','canonical_acceptance','data-claim='])
+  assert all(s not in html for s in ['EAI1-REVIEW','£130m','£129m','£1m','£212bn','SnapshotDate','canonical_acceptance','data-claim='])
   assert 'Future concept'not in html
 
 

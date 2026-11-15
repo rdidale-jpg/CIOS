@@ -1,0 +1,748 @@
+[
+  {
+    "form_id": "EAI1-REVIEW-01",
+    "original_proposal_id": "OBS-SIC-K-WEIGHT24",
+    "original_claim_ref": "RIE1:SIC-K-WEIGHT24",
+    "original_proposal": {
+      "accounting_basis": "GVA at basic prices",
+      "canonical_acceptance": false,
+      "canonical_entity_id": null,
+      "claim_ref": "RIE1:SIC-K-WEIGHT24",
+      "excerpt_ref": "EX-ONS",
+      "financial_measurement_state": "actual",
+      "id": "OBS-SIC-K-WEIGHT24",
+      "metric": "rounded_GVA_weight",
+      "owner_evidence_acceptance": false,
+      "period_end": null,
+      "period_start": null,
+      "reporting_period": "2024",
+      "scope": "UK SIC 2007 section K",
+      "source_refs": [
+        "ONS-GDP-SEP26"
+      ],
+      "statement": "UK SIC2007 Section K had a rounded 2024 GVA weight of 81 per thousand.",
+      "unit": "GVA weight per thousand",
+      "value": 81
+    },
+    "original_proposal_digest": "704d0348b56f0eebd4cc18b2dfd9417e4c5d1fb35f3cbe02ab14d9a6343c88bc",
+    "primary_review": {
+      "original_url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+      "publication_date": "2026-11-12",
+      "reviewed_at": "2026-11-15T12:19:35.342014+00:00",
+      "source_rechecked": true,
+      "source_reference": "turn903038view1 / turn926934view2",
+      "locator": "GVA2 appendix, PDF page index27, section/weight rows",
+      "extent": "Located primary web/PDF text inspected; no full original bytes captured",
+      "original_content_sha256": null,
+      "prior_RIC_excerpt_sha256": "f9040bf2e3c911026c239bd41a6e6740e4d7559d422d14d972e8354fc51917e1",
+      "issuer_or_entity_verified": {
+        "country": "GB",
+        "classification": "UK SIC2007 section K; finance and insurance, broader than Banking"
+      },
+      "period_start": null,
+      "period_end": null,
+      "reporting_period": "2024",
+      "accounting_basis": "GVA at basic prices",
+      "measurement_state": "actual",
+      "value": 81,
+      "unit": "GVA weight per thousand",
+      "sign_rule": "Positive published scalar",
+      "measurement_definition": "Rounded2024 GVA weight81 per thousand; not an £81bn value, Banking TAM or real-growth rate."
+    },
+    "rights_and_admission": {
+      "licence": "ONS Crown copyright / OGLv3.0 for the reviewed numerical table; third-party images/content excluded",
+      "terms_url": "https://www.ons.gov.uk/help/terms-conditions",
+      "review_reference": "turn330671view1",
+      "visual_publisher_admitted": false,
+      "remaining_gate": "Explicit document-scoped publisher-admission decision; canonical target and authorised receipt reconciliation"
+    },
+    "existing_state_reconciliation": {
+      "canonical_target_id": null,
+      "owner_workspace_id": null,
+      "production_receipt_status": "UNVERIFIED; no authenticated owner read service available",
+      "dedup_status": "UNVERIFIED; do not infer accepted presence or absence from public views",
+      "public_presentation": "Same weight is in the pre-existing frozen public ONS view, not accepted Evidence"
+    },
+    "proposed_owner_research_evidence_decision": "Accept bounded reported scalar with these definitions and rights limits",
+    "canonical_execution_recommendation": "Defer pending actual owner decision, target binding, receipt reconciliation and remaining source/rights gates",
+    "owner_decision_form": {
+      "choices": [
+        "Accept",
+        "Defer",
+        "Reject"
+      ],
+      "selected": null,
+      "owner_rationale": null,
+      "owner_actor_reference": null,
+      "signed_at": null,
+      "decision_recorded": false,
+      "import_executed": false,
+      "canonical_mutation": false
+    },
+    "execution_requirements": [
+      "Use normal authenticated owner workspace and current CandidateReviewService; no public-name-only mapping",
+      "Reconcile actual source/entity/period/basis fingerprints with existing canonical receipts before proposing duplicates",
+      "An owner Evidence decision is separate from Source admission and from plan approval/execution",
+      "Do not fabricate FoundationFact original-byte/extraction metadata; do not invoke promotion in EAI1"
+    ]
+  },
+  {
+    "form_id": "EAI1-REVIEW-02",
+    "original_proposal_id": "OBS-R2-FIN-H12026-0-LEASE_DEPRECIATION",
+    "original_claim_ref": "RIE2:R2-FIN-H12026-0-LEASE_DEPRECIATION",
+    "original_proposal": {
+      "accounting_basis": "alternative_performance_measure",
+      "canonical_acceptance": false,
+      "canonical_entity_id": null,
+      "claim_ref": "RIE2:R2-FIN-H12026-0-LEASE_DEPRECIATION",
+      "excerpt_ref": "EX-H126",
+      "financial_measurement_state": "actual",
+      "id": "OBS-R2-FIN-H12026-0-LEASE_DEPRECIATION",
+      "metric": "lease_depreciation",
+      "owner_evidence_acceptance": false,
+      "period_end": "2026-06-30",
+      "period_start": "2026-01-01",
+      "reporting_period": "H12026",
+      "scope": "Lloyds Banking Group reporting segment Retail",
+      "source_refs": [
+        "R2-LBG-H126"
+      ],
+      "statement": "Lloyds Banking Group Retail underlying lease depreciation was GBP835m in H1 2026.",
+      "unit": "GBP million",
+      "value": -835
+    },
+    "original_proposal_digest": "681e83ac04285aad5a429356d1ccb93142c88cf7e571e218f1b5defb33ba7c6c",
+    "primary_review": {
+      "original_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "publication_date": "2026-07-30",
+      "reviewed_at": "2026-11-15T12:19:35.342014+00:00",
+      "source_rechecked": true,
+      "source_reference": "turn330671view2 / turn248771view1 / turn926934view0",
+      "locator": "Note3 Segmental analysis, half-year to30June2026, Retail/Total columns, HTML lines2544–2555; footnote2566",
+      "extent": "Located primary web/PDF text inspected; no full original bytes captured",
+      "original_content_sha256": null,
+      "prior_RIC_excerpt_sha256": "df9f861af81c2f1b815b4f72f71175e22048dca537cb30d21e749f6926433fb1",
+      "issuer_or_entity_verified": {
+        "legal_issuer": "LLOYDS BANKING GROUP PLC",
+        "SEC_CIK": "1160106",
+        "SEC_file_number": "001-15246",
+        "companies_house_number": "SC095000",
+        "reporting_perimeter": "Retail reporting segment",
+        "identity_evidence": [
+          "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+          "https://find-and-update.company-information.service.gov.uk/company/SC095000"
+        ]
+      },
+      "period_start": "2026-01-01",
+      "period_end": "2026-06-30",
+      "reporting_period": "H12026",
+      "accounting_basis": "alternative_performance_measure",
+      "measurement_state": "actual",
+      "value": -835,
+      "unit": "GBP million",
+      "sign_rule": "Source P&L expenses retained negative; spoken charge amount positive",
+      "measurement_definition": "Signed underlying operating lease depreciation line, net of losses on disposal of operating lease assets per note1; £32m disposal losses disclosed. Not a gross depreciation-only charge or leasing profit."
+    },
+    "rights_and_admission": {
+      "licence": "Issuer-filed document hosted by SEC; no blanket government-work or prose redistribution permission inferred. Bounded factual review only; downstream use requires a specific rights decision.",
+      "terms_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "review_reference": "Issuer Form6-K header/source; SEC website-policy retrieval unavailable; no licence fabricated",
+      "visual_publisher_admitted": false,
+      "remaining_gate": "Rights/use decision for exact issuer-filed material plus explicit document-scoped publisher decision, identity and receipt reconciliation"
+    },
+    "existing_state_reconciliation": {
+      "canonical_target_id": null,
+      "owner_workspace_id": null,
+      "production_receipt_status": "UNVERIFIED; no authenticated owner read service available",
+      "dedup_status": "UNVERIFIED; do not infer accepted presence or absence from public views",
+      "public_presentation": "Not admitted to live presentation"
+    },
+    "proposed_owner_research_evidence_decision": "Defer until exact issuer-content rights/use and publisher decision are resolved",
+    "canonical_execution_recommendation": "Defer pending actual owner decision, target binding, receipt reconciliation and remaining source/rights gates",
+    "owner_decision_form": {
+      "choices": [
+        "Accept",
+        "Defer",
+        "Reject"
+      ],
+      "selected": null,
+      "owner_rationale": null,
+      "owner_actor_reference": null,
+      "signed_at": null,
+      "decision_recorded": false,
+      "import_executed": false,
+      "canonical_mutation": false
+    },
+    "execution_requirements": [
+      "Use normal authenticated owner workspace and current CandidateReviewService; no public-name-only mapping",
+      "Reconcile actual source/entity/period/basis fingerprints with existing canonical receipts before proposing duplicates",
+      "An owner Evidence decision is separate from Source admission and from plan approval/execution",
+      "Do not fabricate FoundationFact original-byte/extraction metadata; do not invoke promotion in EAI1"
+    ]
+  },
+  {
+    "form_id": "EAI1-REVIEW-03",
+    "original_proposal_id": "OBS-R2-FIN-H12026-0-NET_INCOME",
+    "original_claim_ref": "RIE2:R2-FIN-H12026-0-NET_INCOME",
+    "original_proposal": {
+      "accounting_basis": "alternative_performance_measure",
+      "canonical_acceptance": false,
+      "canonical_entity_id": null,
+      "claim_ref": "RIE2:R2-FIN-H12026-0-NET_INCOME",
+      "excerpt_ref": "EX-H126",
+      "financial_measurement_state": "actual",
+      "id": "OBS-R2-FIN-H12026-0-NET_INCOME",
+      "metric": "net_income",
+      "owner_evidence_acceptance": false,
+      "period_end": "2026-06-30",
+      "period_start": "2026-01-01",
+      "reporting_period": "H12026",
+      "scope": "Lloyds Banking Group reporting segment Retail",
+      "source_refs": [
+        "R2-LBG-H126"
+      ],
+      "statement": "Lloyds Banking Group Retail underlying net income was GBP5710m in H1 2026.",
+      "unit": "GBP million",
+      "value": 5710
+    },
+    "original_proposal_digest": "3ad2b68d41a86cdbdfaed6212ba9c1ffe262956e25471196a77d88adc950cb74",
+    "primary_review": {
+      "original_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "publication_date": "2026-07-30",
+      "reviewed_at": "2026-11-15T12:19:35.342014+00:00",
+      "source_rechecked": true,
+      "source_reference": "turn330671view2 / turn248771view1 / turn926934view0",
+      "locator": "Note3 Segmental analysis, half-year to30June2026, Retail/Total columns, HTML lines2544–2555; footnote2566",
+      "extent": "Located primary web/PDF text inspected; no full original bytes captured",
+      "original_content_sha256": null,
+      "prior_RIC_excerpt_sha256": "df9f861af81c2f1b815b4f72f71175e22048dca537cb30d21e749f6926433fb1",
+      "issuer_or_entity_verified": {
+        "legal_issuer": "LLOYDS BANKING GROUP PLC",
+        "SEC_CIK": "1160106",
+        "SEC_file_number": "001-15246",
+        "companies_house_number": "SC095000",
+        "reporting_perimeter": "Retail reporting segment",
+        "identity_evidence": [
+          "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+          "https://find-and-update.company-information.service.gov.uk/company/SC095000"
+        ]
+      },
+      "period_start": "2026-01-01",
+      "period_end": "2026-06-30",
+      "reporting_period": "H12026",
+      "accounting_basis": "alternative_performance_measure",
+      "measurement_state": "actual",
+      "value": 5710,
+      "unit": "GBP million",
+      "sign_rule": "Positive published scalar",
+      "measurement_definition": "Underlying income net of underlying operating lease depreciation; not net interest income, statutory revenue or profit."
+    },
+    "rights_and_admission": {
+      "licence": "Issuer-filed document hosted by SEC; no blanket government-work or prose redistribution permission inferred. Bounded factual review only; downstream use requires a specific rights decision.",
+      "terms_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "review_reference": "Issuer Form6-K header/source; SEC website-policy retrieval unavailable; no licence fabricated",
+      "visual_publisher_admitted": false,
+      "remaining_gate": "Rights/use decision for exact issuer-filed material plus explicit document-scoped publisher decision, identity and receipt reconciliation"
+    },
+    "existing_state_reconciliation": {
+      "canonical_target_id": null,
+      "owner_workspace_id": null,
+      "production_receipt_status": "UNVERIFIED; no authenticated owner read service available",
+      "dedup_status": "UNVERIFIED; do not infer accepted presence or absence from public views",
+      "public_presentation": "Not admitted to live presentation"
+    },
+    "proposed_owner_research_evidence_decision": "Defer until exact issuer-content rights/use and publisher decision are resolved",
+    "canonical_execution_recommendation": "Defer pending actual owner decision, target binding, receipt reconciliation and remaining source/rights gates",
+    "owner_decision_form": {
+      "choices": [
+        "Accept",
+        "Defer",
+        "Reject"
+      ],
+      "selected": null,
+      "owner_rationale": null,
+      "owner_actor_reference": null,
+      "signed_at": null,
+      "decision_recorded": false,
+      "import_executed": false,
+      "canonical_mutation": false
+    },
+    "execution_requirements": [
+      "Use normal authenticated owner workspace and current CandidateReviewService; no public-name-only mapping",
+      "Reconcile actual source/entity/period/basis fingerprints with existing canonical receipts before proposing duplicates",
+      "An owner Evidence decision is separate from Source admission and from plan approval/execution",
+      "Do not fabricate FoundationFact original-byte/extraction metadata; do not invoke promotion in EAI1"
+    ]
+  },
+  {
+    "form_id": "EAI1-REVIEW-04",
+    "original_proposal_id": "OBS-R2-FIN-H12026-4-NET_INCOME",
+    "original_claim_ref": "RIE2:R2-FIN-H12026-4-NET_INCOME",
+    "original_proposal": {
+      "accounting_basis": "alternative_performance_measure",
+      "canonical_acceptance": false,
+      "canonical_entity_id": null,
+      "claim_ref": "RIE2:R2-FIN-H12026-4-NET_INCOME",
+      "excerpt_ref": "EX-H126",
+      "financial_measurement_state": "actual",
+      "id": "OBS-R2-FIN-H12026-4-NET_INCOME",
+      "metric": "net_income",
+      "original_scope_label": "Lloyds Banking Group reporting segment Group total",
+      "owner_evidence_acceptance": false,
+      "period_end": "2026-06-30",
+      "period_start": "2026-01-01",
+      "reporting_period": "H12026",
+      "scope": "Lloyds Banking Group consolidated total",
+      "source_refs": [
+        "R2-LBG-H126"
+      ],
+      "statement": "Lloyds Banking Group underlying net income was GBP9747m in H1 2026.",
+      "unit": "GBP million",
+      "value": 9747
+    },
+    "original_proposal_digest": "1623365a1c222204568239bd174f518d7461f3542d0c0ab4237b8f0ccdb59048",
+    "primary_review": {
+      "original_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "publication_date": "2026-07-30",
+      "reviewed_at": "2026-11-15T12:19:35.342014+00:00",
+      "source_rechecked": true,
+      "source_reference": "turn330671view2 / turn248771view1 / turn926934view0",
+      "locator": "Note3 Segmental analysis, half-year to30June2026, Retail/Total columns, HTML lines2544–2555; footnote2566",
+      "extent": "Located primary web/PDF text inspected; no full original bytes captured",
+      "original_content_sha256": null,
+      "prior_RIC_excerpt_sha256": "df9f861af81c2f1b815b4f72f71175e22048dca537cb30d21e749f6926433fb1",
+      "issuer_or_entity_verified": {
+        "legal_issuer": "LLOYDS BANKING GROUP PLC",
+        "SEC_CIK": "1160106",
+        "SEC_file_number": "001-15246",
+        "companies_house_number": "SC095000",
+        "reporting_perimeter": "consolidated Group total",
+        "identity_evidence": [
+          "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+          "https://find-and-update.company-information.service.gov.uk/company/SC095000"
+        ]
+      },
+      "period_start": "2026-01-01",
+      "period_end": "2026-06-30",
+      "reporting_period": "H12026",
+      "accounting_basis": "alternative_performance_measure",
+      "measurement_state": "actual",
+      "value": 9747,
+      "unit": "GBP million",
+      "sign_rule": "Positive published scalar",
+      "measurement_definition": "Underlying income net of underlying operating lease depreciation; not net interest income, statutory revenue or profit."
+    },
+    "rights_and_admission": {
+      "licence": "Issuer-filed document hosted by SEC; no blanket government-work or prose redistribution permission inferred. Bounded factual review only; downstream use requires a specific rights decision.",
+      "terms_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "review_reference": "Issuer Form6-K header/source; SEC website-policy retrieval unavailable; no licence fabricated",
+      "visual_publisher_admitted": false,
+      "remaining_gate": "Rights/use decision for exact issuer-filed material plus explicit document-scoped publisher decision, identity and receipt reconciliation"
+    },
+    "existing_state_reconciliation": {
+      "canonical_target_id": null,
+      "owner_workspace_id": null,
+      "production_receipt_status": "UNVERIFIED; no authenticated owner read service available",
+      "dedup_status": "UNVERIFIED; do not infer accepted presence or absence from public views",
+      "public_presentation": "Not admitted to live presentation"
+    },
+    "proposed_owner_research_evidence_decision": "Defer until exact issuer-content rights/use and publisher decision are resolved",
+    "canonical_execution_recommendation": "Defer pending actual owner decision, target binding, receipt reconciliation and remaining source/rights gates",
+    "owner_decision_form": {
+      "choices": [
+        "Accept",
+        "Defer",
+        "Reject"
+      ],
+      "selected": null,
+      "owner_rationale": null,
+      "owner_actor_reference": null,
+      "signed_at": null,
+      "decision_recorded": false,
+      "import_executed": false,
+      "canonical_mutation": false
+    },
+    "execution_requirements": [
+      "Use normal authenticated owner workspace and current CandidateReviewService; no public-name-only mapping",
+      "Reconcile actual source/entity/period/basis fingerprints with existing canonical receipts before proposing duplicates",
+      "An owner Evidence decision is separate from Source admission and from plan approval/execution",
+      "Do not fabricate FoundationFact original-byte/extraction metadata; do not invoke promotion in EAI1"
+    ]
+  },
+  {
+    "form_id": "EAI1-REVIEW-05",
+    "original_proposal_id": "OBS-R2-FIN-H12026-0-OPERATING_COSTS",
+    "original_claim_ref": "RIE2:R2-FIN-H12026-0-OPERATING_COSTS",
+    "original_proposal": {
+      "accounting_basis": "alternative_performance_measure",
+      "canonical_acceptance": false,
+      "canonical_entity_id": null,
+      "claim_ref": "RIE2:R2-FIN-H12026-0-OPERATING_COSTS",
+      "excerpt_ref": "EX-H126",
+      "financial_measurement_state": "actual",
+      "id": "OBS-R2-FIN-H12026-0-OPERATING_COSTS",
+      "metric": "operating_costs",
+      "owner_evidence_acceptance": false,
+      "period_end": "2026-06-30",
+      "period_start": "2026-01-01",
+      "reporting_period": "H12026",
+      "scope": "Lloyds Banking Group reporting segment Retail",
+      "source_refs": [
+        "R2-LBG-H126"
+      ],
+      "statement": "Lloyds Banking Group Retail underlying operating costs were GBP2872m in H1 2026.",
+      "unit": "GBP million",
+      "value": -2872
+    },
+    "original_proposal_digest": "094eb723f1015627b63bd10ed4c02c63f34d585ec55d5d08d42f726cf42b8a3b",
+    "primary_review": {
+      "original_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "publication_date": "2026-07-30",
+      "reviewed_at": "2026-11-15T12:19:35.342014+00:00",
+      "source_rechecked": true,
+      "source_reference": "turn330671view2 / turn248771view1 / turn926934view0",
+      "locator": "Note3 Segmental analysis, half-year to30June2026, Retail/Total columns, HTML lines2544–2555; footnote2566",
+      "extent": "Located primary web/PDF text inspected; no full original bytes captured",
+      "original_content_sha256": null,
+      "prior_RIC_excerpt_sha256": "df9f861af81c2f1b815b4f72f71175e22048dca537cb30d21e749f6926433fb1",
+      "issuer_or_entity_verified": {
+        "legal_issuer": "LLOYDS BANKING GROUP PLC",
+        "SEC_CIK": "1160106",
+        "SEC_file_number": "001-15246",
+        "companies_house_number": "SC095000",
+        "reporting_perimeter": "Retail reporting segment",
+        "identity_evidence": [
+          "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+          "https://find-and-update.company-information.service.gov.uk/company/SC095000"
+        ]
+      },
+      "period_start": "2026-01-01",
+      "period_end": "2026-06-30",
+      "reporting_period": "H12026",
+      "accounting_basis": "alternative_performance_measure",
+      "measurement_state": "actual",
+      "value": -2872,
+      "unit": "GBP million",
+      "sign_rule": "Source P&L expenses retained negative; spoken charge amount positive",
+      "measurement_definition": "Underlying operating costs exclude the separately reported £17m Retail remediation charge. Not total underlying costs or statutory operating expense."
+    },
+    "rights_and_admission": {
+      "licence": "Issuer-filed document hosted by SEC; no blanket government-work or prose redistribution permission inferred. Bounded factual review only; downstream use requires a specific rights decision.",
+      "terms_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "review_reference": "Issuer Form6-K header/source; SEC website-policy retrieval unavailable; no licence fabricated",
+      "visual_publisher_admitted": false,
+      "remaining_gate": "Rights/use decision for exact issuer-filed material plus explicit document-scoped publisher decision, identity and receipt reconciliation"
+    },
+    "existing_state_reconciliation": {
+      "canonical_target_id": null,
+      "owner_workspace_id": null,
+      "production_receipt_status": "UNVERIFIED; no authenticated owner read service available",
+      "dedup_status": "UNVERIFIED; do not infer accepted presence or absence from public views",
+      "public_presentation": "Not admitted to live presentation"
+    },
+    "proposed_owner_research_evidence_decision": "Defer until exact issuer-content rights/use and publisher decision are resolved",
+    "canonical_execution_recommendation": "Defer pending actual owner decision, target binding, receipt reconciliation and remaining source/rights gates",
+    "owner_decision_form": {
+      "choices": [
+        "Accept",
+        "Defer",
+        "Reject"
+      ],
+      "selected": null,
+      "owner_rationale": null,
+      "owner_actor_reference": null,
+      "signed_at": null,
+      "decision_recorded": false,
+      "import_executed": false,
+      "canonical_mutation": false
+    },
+    "execution_requirements": [
+      "Use normal authenticated owner workspace and current CandidateReviewService; no public-name-only mapping",
+      "Reconcile actual source/entity/period/basis fingerprints with existing canonical receipts before proposing duplicates",
+      "An owner Evidence decision is separate from Source admission and from plan approval/execution",
+      "Do not fabricate FoundationFact original-byte/extraction metadata; do not invoke promotion in EAI1"
+    ]
+  },
+  {
+    "form_id": "EAI1-REVIEW-06",
+    "original_proposal_id": "OBS-R2-FIN-H12026-0-UNDERLYING_PROFIT",
+    "original_claim_ref": "RIE2:R2-FIN-H12026-0-UNDERLYING_PROFIT",
+    "original_proposal": {
+      "accounting_basis": "alternative_performance_measure",
+      "canonical_acceptance": false,
+      "canonical_entity_id": null,
+      "claim_ref": "RIE2:R2-FIN-H12026-0-UNDERLYING_PROFIT",
+      "excerpt_ref": "EX-H126",
+      "financial_measurement_state": "actual",
+      "id": "OBS-R2-FIN-H12026-0-UNDERLYING_PROFIT",
+      "metric": "underlying_profit",
+      "owner_evidence_acceptance": false,
+      "period_end": "2026-06-30",
+      "period_start": "2026-01-01",
+      "reporting_period": "H12026",
+      "scope": "Lloyds Banking Group reporting segment Retail",
+      "source_refs": [
+        "R2-LBG-H126"
+      ],
+      "statement": "Lloyds Banking Group Retail underlying pre-tax profit was GBP2256m in H1 2026.",
+      "unit": "GBP million",
+      "value": 2256
+    },
+    "original_proposal_digest": "0b20284663068d3c56f0dcd98d40738523610407d799e99d6a63a350cbce9801",
+    "primary_review": {
+      "original_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "publication_date": "2026-07-30",
+      "reviewed_at": "2026-11-15T12:19:35.342014+00:00",
+      "source_rechecked": true,
+      "source_reference": "turn330671view2 / turn248771view1 / turn926934view0",
+      "locator": "Note3 Segmental analysis, half-year to30June2026, Retail/Total columns, HTML lines2544–2555; footnote2566",
+      "extent": "Located primary web/PDF text inspected; no full original bytes captured",
+      "original_content_sha256": null,
+      "prior_RIC_excerpt_sha256": "df9f861af81c2f1b815b4f72f71175e22048dca537cb30d21e749f6926433fb1",
+      "issuer_or_entity_verified": {
+        "legal_issuer": "LLOYDS BANKING GROUP PLC",
+        "SEC_CIK": "1160106",
+        "SEC_file_number": "001-15246",
+        "companies_house_number": "SC095000",
+        "reporting_perimeter": "Retail reporting segment",
+        "identity_evidence": [
+          "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+          "https://find-and-update.company-information.service.gov.uk/company/SC095000"
+        ]
+      },
+      "period_start": "2026-01-01",
+      "period_end": "2026-06-30",
+      "reporting_period": "H12026",
+      "accounting_basis": "alternative_performance_measure",
+      "measurement_state": "actual",
+      "value": 2256,
+      "unit": "GBP million",
+      "sign_rule": "Positive published scalar",
+      "measurement_definition": "Underlying profit before tax, not statutory profit, net profit, spend or customer demand."
+    },
+    "rights_and_admission": {
+      "licence": "Issuer-filed document hosted by SEC; no blanket government-work or prose redistribution permission inferred. Bounded factual review only; downstream use requires a specific rights decision.",
+      "terms_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "review_reference": "Issuer Form6-K header/source; SEC website-policy retrieval unavailable; no licence fabricated",
+      "visual_publisher_admitted": false,
+      "remaining_gate": "Rights/use decision for exact issuer-filed material plus explicit document-scoped publisher decision, identity and receipt reconciliation"
+    },
+    "existing_state_reconciliation": {
+      "canonical_target_id": null,
+      "owner_workspace_id": null,
+      "production_receipt_status": "UNVERIFIED; no authenticated owner read service available",
+      "dedup_status": "UNVERIFIED; do not infer accepted presence or absence from public views",
+      "public_presentation": "Not admitted to live presentation"
+    },
+    "proposed_owner_research_evidence_decision": "Defer until exact issuer-content rights/use and publisher decision are resolved",
+    "canonical_execution_recommendation": "Defer pending actual owner decision, target binding, receipt reconciliation and remaining source/rights gates",
+    "owner_decision_form": {
+      "choices": [
+        "Accept",
+        "Defer",
+        "Reject"
+      ],
+      "selected": null,
+      "owner_rationale": null,
+      "owner_actor_reference": null,
+      "signed_at": null,
+      "decision_recorded": false,
+      "import_executed": false,
+      "canonical_mutation": false
+    },
+    "execution_requirements": [
+      "Use normal authenticated owner workspace and current CandidateReviewService; no public-name-only mapping",
+      "Reconcile actual source/entity/period/basis fingerprints with existing canonical receipts before proposing duplicates",
+      "An owner Evidence decision is separate from Source admission and from plan approval/execution",
+      "Do not fabricate FoundationFact original-byte/extraction metadata; do not invoke promotion in EAI1"
+    ]
+  },
+  {
+    "form_id": "EAI1-REVIEW-07",
+    "original_proposal_id": "OBS-R2-FIN-H12026-4-UNDERLYING_PROFIT",
+    "original_claim_ref": "RIE2:R2-FIN-H12026-4-UNDERLYING_PROFIT",
+    "original_proposal": {
+      "accounting_basis": "alternative_performance_measure",
+      "canonical_acceptance": false,
+      "canonical_entity_id": null,
+      "claim_ref": "RIE2:R2-FIN-H12026-4-UNDERLYING_PROFIT",
+      "excerpt_ref": "EX-H126",
+      "financial_measurement_state": "actual",
+      "id": "OBS-R2-FIN-H12026-4-UNDERLYING_PROFIT",
+      "metric": "underlying_profit",
+      "original_scope_label": "Lloyds Banking Group reporting segment Group total",
+      "owner_evidence_acceptance": false,
+      "period_end": "2026-06-30",
+      "period_start": "2026-01-01",
+      "reporting_period": "H12026",
+      "scope": "Lloyds Banking Group consolidated total",
+      "source_refs": [
+        "R2-LBG-H126"
+      ],
+      "statement": "Lloyds Banking Group underlying pre-tax profit was GBP4215m in H1 2026.",
+      "unit": "GBP million",
+      "value": 4215
+    },
+    "original_proposal_digest": "1dafb6d27a181d48e293ada166ec70eccc0b7f578d793bbd533e485d586bc726",
+    "primary_review": {
+      "original_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "publication_date": "2026-07-30",
+      "reviewed_at": "2026-11-15T12:19:35.342014+00:00",
+      "source_rechecked": true,
+      "source_reference": "turn330671view2 / turn248771view1 / turn926934view0",
+      "locator": "Note3 Segmental analysis, half-year to30June2026, Retail/Total columns, HTML lines2544–2555; footnote2566",
+      "extent": "Located primary web/PDF text inspected; no full original bytes captured",
+      "original_content_sha256": null,
+      "prior_RIC_excerpt_sha256": "df9f861af81c2f1b815b4f72f71175e22048dca537cb30d21e749f6926433fb1",
+      "issuer_or_entity_verified": {
+        "legal_issuer": "LLOYDS BANKING GROUP PLC",
+        "SEC_CIK": "1160106",
+        "SEC_file_number": "001-15246",
+        "companies_house_number": "SC095000",
+        "reporting_perimeter": "consolidated Group total",
+        "identity_evidence": [
+          "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+          "https://find-and-update.company-information.service.gov.uk/company/SC095000"
+        ]
+      },
+      "period_start": "2026-01-01",
+      "period_end": "2026-06-30",
+      "reporting_period": "H12026",
+      "accounting_basis": "alternative_performance_measure",
+      "measurement_state": "actual",
+      "value": 4215,
+      "unit": "GBP million",
+      "sign_rule": "Positive published scalar",
+      "measurement_definition": "Underlying profit before tax, not statutory profit, net profit, spend or customer demand."
+    },
+    "rights_and_admission": {
+      "licence": "Issuer-filed document hosted by SEC; no blanket government-work or prose redistribution permission inferred. Bounded factual review only; downstream use requires a specific rights decision.",
+      "terms_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "review_reference": "Issuer Form6-K header/source; SEC website-policy retrieval unavailable; no licence fabricated",
+      "visual_publisher_admitted": false,
+      "remaining_gate": "Rights/use decision for exact issuer-filed material plus explicit document-scoped publisher decision, identity and receipt reconciliation"
+    },
+    "existing_state_reconciliation": {
+      "canonical_target_id": null,
+      "owner_workspace_id": null,
+      "production_receipt_status": "UNVERIFIED; no authenticated owner read service available",
+      "dedup_status": "UNVERIFIED; do not infer accepted presence or absence from public views",
+      "public_presentation": "Not admitted to live presentation"
+    },
+    "proposed_owner_research_evidence_decision": "Defer until exact issuer-content rights/use and publisher decision are resolved",
+    "canonical_execution_recommendation": "Defer pending actual owner decision, target binding, receipt reconciliation and remaining source/rights gates",
+    "owner_decision_form": {
+      "choices": [
+        "Accept",
+        "Defer",
+        "Reject"
+      ],
+      "selected": null,
+      "owner_rationale": null,
+      "owner_actor_reference": null,
+      "signed_at": null,
+      "decision_recorded": false,
+      "import_executed": false,
+      "canonical_mutation": false
+    },
+    "execution_requirements": [
+      "Use normal authenticated owner workspace and current CandidateReviewService; no public-name-only mapping",
+      "Reconcile actual source/entity/period/basis fingerprints with existing canonical receipts before proposing duplicates",
+      "An owner Evidence decision is separate from Source admission and from plan approval/execution",
+      "Do not fabricate FoundationFact original-byte/extraction metadata; do not invoke promotion in EAI1"
+    ]
+  },
+  {
+    "form_id": "EAI1-REVIEW-08",
+    "original_proposal_id": "OBS-FCA-RECEIVED",
+    "original_claim_ref": "RIE2:R2-OBS-FCA-COMPLAINTS",
+    "original_proposal": {
+      "accounting_basis": "not applicable",
+      "canonical_acceptance": false,
+      "canonical_entity_id": null,
+      "claim_ref": "RIE2:R2-OBS-FCA-COMPLAINTS",
+      "excerpt_ref": "EX-FCA",
+      "financial_measurement_state": "not applicable",
+      "id": "OBS-FCA-RECEIVED",
+      "metric": "complaints_received",
+      "owner_evidence_acceptance": false,
+      "period_end": "2026-06-30",
+      "period_start": "2026-01-01",
+      "reporting_period": "January–June2026",
+      "scope": "Lloyds Bank PLC legal entity, all-product Open table",
+      "source_refs": [
+        "R2-FCA-H126"
+      ],
+      "statement": "Lloyds Bank PLC received 118762 all-product complaints in January to June 2026.",
+      "unit": "complaints",
+      "value": 118762
+    },
+    "original_proposal_digest": "6ff1160be0748fae6f12284b70ec064943698adfdb09d918ae3ad54cf8de4eed",
+    "primary_review": {
+      "original_url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+      "publication_date": "2026-10-22",
+      "reviewed_at": "2026-11-15T12:19:35.342014+00:00",
+      "source_rechecked": true,
+      "source_reference": "turn248771view2 / turn157449view1 / turn926934view1",
+      "locator": "Open table Lloyds Bank PLC, Total, HTML line680",
+      "extent": "Located primary web/PDF text inspected; no full original bytes captured",
+      "original_content_sha256": null,
+      "prior_RIC_excerpt_sha256": "f3a323107cf77b178c4a3720b21a716bad6cff63a6d3524d5f15b673d6862d8f",
+      "issuer_or_entity_verified": {
+        "legal_name": "LLOYDS BANK PLC",
+        "companies_house_number": "00002065",
+        "FRN": "119278",
+        "LEI": "H7FNTJ4851HG0EXQ1Z70",
+        "identity_evidence": [
+          "https://www.bankofengland.co.uk/prudential-regulation/authorisations/which-firms-does-the-pra-regulate",
+          "https://find-and-update.company-information.service.gov.uk/company/00002065"
+        ]
+      },
+      "period_start": "2026-01-01",
+      "period_end": "2026-06-30",
+      "reporting_period": "January–June2026",
+      "accounting_basis": "not applicable",
+      "measurement_state": "not applicable",
+      "value": 118762,
+      "unit": "complaints",
+      "sign_rule": "Positive published scalar",
+      "measurement_definition": "All-product received complaints in the Open table. Not closed cases, upheld cases, Group complaints, customer-harm rate or FOS referrals."
+    },
+    "rights_and_admission": {
+      "licence": "FCA numerical Data table, OGLv3.0 under clause2.2; narrative excluded by2.3",
+      "terms_url": "https://www.fca.org.uk/legal",
+      "review_reference": "turn342616view2",
+      "visual_publisher_admitted": true,
+      "remaining_gate": "Individual owner Evidence decision, exact authorised canonical entity/receipt reconciliation; INT1 display is not acceptance"
+    },
+    "existing_state_reconciliation": {
+      "canonical_target_id": null,
+      "owner_workspace_id": null,
+      "production_receipt_status": "UNVERIFIED; no authenticated owner read service available",
+      "dedup_status": "UNVERIFIED; do not infer accepted presence or absence from public views",
+      "public_presentation": "Same scalar already appears as an unaccepted INT1 FCA candidate"
+    },
+    "proposed_owner_research_evidence_decision": "Accept bounded reported scalar with these definitions and rights limits",
+    "canonical_execution_recommendation": "Defer pending actual owner decision, target binding, receipt reconciliation and remaining source/rights gates",
+    "owner_decision_form": {
+      "choices": [
+        "Accept",
+        "Defer",
+        "Reject"
+      ],
+      "selected": null,
+      "owner_rationale": null,
+      "owner_actor_reference": null,
+      "signed_at": null,
+      "decision_recorded": false,
+      "import_executed": false,
+      "canonical_mutation": false
+    },
+    "execution_requirements": [
+      "Use normal authenticated owner workspace and current CandidateReviewService; no public-name-only mapping",
+      "Reconcile actual source/entity/period/basis fingerprints with existing canonical receipts before proposing duplicates",
+      "An owner Evidence decision is separate from Source admission and from plan approval/execution",
+      "Do not fabricate FoundationFact original-byte/extraction metadata; do not invoke promotion in EAI1"
+    ]
+  }
+]

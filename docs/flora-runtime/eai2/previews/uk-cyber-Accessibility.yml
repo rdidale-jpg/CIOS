@@ -1,0 +1,50 @@
+- banner:
+  - link "Skip to main content":
+    - /url: "#visual-content"
+  - link "FLORA":
+    - /url: /
+  - navigation "Primary product navigation":
+    - group: Explore⌄
+  - text: Guest
+  - navigation "Current scope": United Kingdom
+  - navigation "Insight streams":
+    - link "Landscape":
+      - /url: /?stream=landscape&agenda=cyber-resilience#stream-landscape
+    - link "Forces":
+      - /url: /?stream=forces&agenda=cyber-resilience#stream-forces
+- complementary "Visual exploration":
+  - figure "uk landscape":
+    - text: Conceptual illustration, not actual premises, a legal hierarchy, systems topology or a quantitative pressure map. Labelled navigation remains available without artwork.
+    - 'link "Aviation: open available industry experience; Transport & logistics is its broader section"':
+      - /url: /industries/aviation
+      - text: Aviation
+    - 'link "Technology: open available industry experience; Information & communication is its broader section"':
+      - /url: /industries/technology/experience
+      - text: Technology
+    - 'link "Banking: open available industry experience; Finance & insurance is its broader section"':
+      - /url: /industries/banking
+      - text: Banking
+  - group: All 20 industries
+- main:
+  - article:
+    - heading "Leadership Agenda" [level=1]
+    - region "Cyber exposure remains widespread across UK businesses":
+      - link "Close Leadership Agenda":
+        - /url: /?stream=landscape#visual-content
+        - text: ×
+      - heading "Cyber exposure remains widespread across UK businesses" [level=2]
+      - article:
+        - paragraph: FLORA Insight The survey estimates indicate broad cyber exposure, especially among large businesses, while overall prevalence remained in line with the prior year.
+        - paragraph: August–December 2025 fieldwork; preceding 12 months per interview
+        - group: Sources & reasoning
+      - group: Basis & perspective
+    - group:
+      - text: Leadership Agenda
+      - navigation "Leadership Agenda":
+        - link "Services lead the latest UK expansion":
+          - /url: /?stream=landscape&agenda=growth-mix#agenda-insight
+        - link "Public-contract value extends into delivery":
+          - /url: /?stream=landscape&agenda=public-value#agenda-insight
+        - link "Cyber exposure remains widespread across UK businesses":
+          - /url: /?stream=landscape&agenda=cyber-resilience#agenda-insight
+    - group: Sources & detail

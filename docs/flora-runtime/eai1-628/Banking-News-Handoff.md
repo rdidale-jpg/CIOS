@@ -1,0 +1,13 @@
+# Banking ecosystem and future News handoff
+
+This is a bounded source-backed candidate handoff, **not implementation of News, canonical actor import or the completed external research report**. The original BIE-1 ChatGPT report was not retrieved from GitHub or the accessible FLORA Page search. Only #626 and its checkpoint comment were available; selected primary originals were independently inspected. This does not prove the report is absent elsewhere. Do not claim its full analysis/50 profiles are imported or accepted.
+
+[Banking-News-Handoff.json](Banking-News-Handoff.json) records12 actor/cohort entries,6 proposed relationships and6 event clusters, exact URLs and source limits. No canonical IDs, contracts, financial rankings or image rights are invented. The PRA November list independently confirms selected legal names/FRNs/LEIs, including Revolut Bank UK Ltd; a current list is not proof of the March licensing-event date or every product permission. Bank Group, licensed legal entity and brand remain different.
+
+The designation cluster uses **one event/two original sources**. Both HM Treasury and BoE pages were published **10July2026**; commencement was **13July**. This corrects the checkpoint's shorthand without overwriting historical research. It is outside the90-day window, not fresh weekly news. Microsoft Ltd/Limited wording is a source alias, not a second provider or a bank contract.
+
+Pay.UK's411,384 total switches are Q3 July–September; participant net gains are the lagged April–June quarter. Do not declare Q3 bank winners or infer deposits/revenue/pain. RTGS/CHAPS minutes were published4November for a13October meeting; discussion and planned sequencing are not new bank procurement. Starling/Civo/NVIDIA is an attributed development announcement with unresolved exact contracting endpoints, not installed estate or delivered benefits.
+
+The selected event set supplies **no current-week edition** and is not a comprehensive news search. A future weekly edition needs the actual full BIE source pack, fresh primary sourcing, document-specific rights, entity/applicability review, alias/event dedupe, counter-evidence and an owner-approved publication workflow. No filler stories, copyrighted publisher photos, autonomous collector or recurring paid job.
+
+#614 contains earlier question/action/empty-state requirements. #628 now governs core seller presentation: six declarative semantic types only; questions, recommendations and research administration stay owner-side/#621. Resolve that product-contract difference before implementing News; no new stream/tab, Event store, pressure qualification or matching engine is added here. Existing Evidence/Observation and source owners remain authoritative.

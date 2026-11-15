@@ -1,0 +1,659 @@
+{
+  "source_commit": "678412a4320b5d13d88ffe66592e7a225cc4817c",
+  "source_merge_base": "8a53777d1dec359f56b66e533d512c0a86881939",
+  "validated_main_base": "ce4314c3528d5f4beae6e0e4fa53209ddb56ff5c",
+  "main_ci": 43739461424,
+  "strategy": "Selective reconstruction; source branch not merged/cherry-picked",
+  "paths": [
+    {
+      "path": ".github/workflows/flora-isp1-semantics.yml",
+      "eai1_sha256": "053126e39421df46f86dc16ccdca05cb4c615d671ea4feae872236d99cc134f3",
+      "disposition": "adapted to merged VP-2"
+    },
+    {
+      "path": "architecture/decisions/ADR-027-Document-Scoped-Publisher-Admission-Proposal.md",
+      "eai1_sha256": "a6d597c0b9e6b998d23850e10d88469d4c4a6d04949f970ed392b697fdf57f14",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "architecture/decisions/README.md",
+      "eai1_sha256": "9e9847905e8d3918b84bdfb239a9207972627d8120d8750a9de9c9ed43f30163",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "cios/applications/flora/leadership_agenda.py",
+      "eai1_sha256": "5d5a61d41a3c74bc64834ce58518f6fb151c0bb425b71fb6362aa7e01e1f2953",
+      "disposition": "adapted to merged VP-2"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/agenda-dependencies.json",
+      "eai1_sha256": "d8d65d3b23f5498a29f11cbd997d04ca1b4e7202444f073be53a82b561c62757",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Acceptance-Walkthrough.md",
+      "eai1_sha256": "5fd9c33c5651748448ecd5e280c662506d56aec6d595f9d86e09f4e37583e0a4",
+      "disposition": "historical EAI-1 report preserved at source SHA; superseded for this integration by EAI-2 report"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Banking-News-Handoff.json",
+      "eai1_sha256": "d3552749e8fefe55c0c73bada24b0f1d6cd392628b7f0ec3918d5a2df9e51d27",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Banking-News-Handoff.md",
+      "eai1_sha256": "f40bd3000353231a26df8019b19283fe6b8fd95fae24a245e364f805c6162e37",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Commercial-Review.md",
+      "eai1_sha256": "0e512e6fadf430f1aaa765e1a4159bf1b66f4bdd976a4a0c5285e8fff4f1f6b0",
+      "disposition": "historical EAI-1 report preserved at source SHA; superseded for this integration by EAI-2 report"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Eight-Evidence-Review-Proposals.json",
+      "eai1_sha256": "80afbcc76a3a163ca2658c98ec4c07d37ce7e401a114add55f937e210e3f16b2",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Eight-Evidence-Reviews.md",
+      "eai1_sha256": "1abf66fc5f2df5b19f92522a167cbe5b67eeb608e1d5867ec2803792189e5f2f",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Financial-Reconciliation.json",
+      "eai1_sha256": "e8f7758240de58958669c1b1e1311fae556c127e44d9d43246c01f3fd57bd609",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Independent-Critique.md",
+      "eai1_sha256": "9c6c6b69501d13c1e0e3f5f611c8db4c04e19d9e0ec862806434e9f46170eaf3",
+      "disposition": "historical EAI-1 report preserved at source SHA; superseded for this integration by EAI-2 report"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Integration-Inventory.json",
+      "eai1_sha256": "ed361a47441a8138343f646cf0ff01dab03b36db9089df5cfe52ca180b22d7d0",
+      "disposition": "historical EAI-1 report preserved at source SHA; superseded for this integration by EAI-2 report"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Integration-Status.md",
+      "eai1_sha256": "b79f7e5b4e2992799a9c0547d7286d573786cbf8510838bf91da4444427f828a",
+      "disposition": "historical EAI-1 report preserved at source SHA; superseded for this integration by EAI-2 report"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Preserved-Owners.json",
+      "eai1_sha256": "3636ebb189417e4b61739179a1fabe865314e09250634020c6cd37ecc06f1a2d",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/README.md",
+      "eai1_sha256": "93d08ece8aa0813328d453d6f677d5206f03ead684e8e48407c02c72b337b43e",
+      "disposition": "historical EAI-1 report preserved at source SHA; superseded for this integration by EAI-2 report"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Runtime-Context.md",
+      "eai1_sha256": "c83fff21741e14d0be4f20a0a1465e73403055b5942005cdf0abb8bafc3f5d21",
+      "disposition": "historical EAI-1 report preserved at source SHA; superseded for this integration by EAI-2 report"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Source-Admission-Review.md",
+      "eai1_sha256": "1b7d1c6f0d8361e67d0f0c9416f7b4f123a7ea7737854a46e45a9fd29a36b6b6",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Source-Ledger.json",
+      "eai1_sha256": "65704a7eaeed2637e0bcf271435f769ada117d1535fb9df03ee00d889a847979",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Validation-and-Rollback.md",
+      "eai1_sha256": "c76846322b1f3251138b89e11e4f2550f67a04997237e4706c9877f9362a322b",
+      "disposition": "historical EAI-1 report preserved at source SHA; superseded for this integration by EAI-2 report"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/Browser-Checks.json",
+      "eai1_sha256": "c424f66db4b3f67ab51c61950e3d82df78c2bd33f33b2ddaec496243b4383e13",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/Performance.json",
+      "eai1_sha256": "dec76cef61445dd908c26af292a045f67de9c412b1b06a865f147b770f56bd40",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-desktop-banking-forces.jpg",
+      "eai1_sha256": "251b905ca9eb1738c8a25c1dfed8dcc1376b8ffad7a257f7019d875a7ec367e5",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-desktop-banking-landscape.jpg",
+      "eai1_sha256": "a58b9a4a354585828ba50c1b82850abd249da7656cb86b49dae1560193660095",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-desktop-banking-provider.jpg",
+      "eai1_sha256": "148b057f4a2ff6498886856160c8e348e82dcfcb05e23a0c4f3654b610111a3c",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-desktop-lloyds-forces.jpg",
+      "eai1_sha256": "c25d58d0ddcb0e031e540c8a8f0069a0ae9124087fa1589ca5caa496bc8c8efe",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-desktop-lloyds-funding.jpg",
+      "eai1_sha256": "9b63ade760c00e63ba923cae73bb6d7900fc7ec62a6ff9f7b8ab34272efd19c7",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-desktop-lloyds-inside.jpg",
+      "eai1_sha256": "1b8005f3df2b6f25fcd5642188a9ccd61e1e81b29fd09aed3afdf0496cb417db",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-desktop-lloyds-landscape.jpg",
+      "eai1_sha256": "fdac62c0e63416604c551d42e09e539bd3f2c966fbd6ea64429631c74acfff0f",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-desktop-lloyds-service.jpg",
+      "eai1_sha256": "4a700d53599095f38dae7501211e2cc87f322bf1b24ae1929abee05cdc207df3",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-desktop-lloyds-source.jpg",
+      "eai1_sha256": "2dfb82798c21729376a22b0ddf277ab31a055b3973972b7a2a9fdae37c5b3162",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-desktop-uk-cyber.jpg",
+      "eai1_sha256": "fe222d6d26dcbdfae01e0bf335079fcf235f73592d8c78bea73217c39b9d4876",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-desktop-uk-forces.jpg",
+      "eai1_sha256": "8ad2e0a713bf1e375da9de444d45ff479d6ae3353442c40fe25bb434722e9736",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-desktop-uk-landscape.jpg",
+      "eai1_sha256": "0c45dc1e02677f128a9ff539e9504d980b4be36881063451731713137970a67c",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-landscape-banking-forces.jpg",
+      "eai1_sha256": "f77ef06a984690a473ca8faa6562ce87147f15e804fc22d659a855b7f91602f5",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-landscape-banking-landscape.jpg",
+      "eai1_sha256": "58d0a11d477254be79e997c491cf9305c572e9557a5cfa994410ce06b5aacae0",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-landscape-banking-provider.jpg",
+      "eai1_sha256": "67789b9a827c06cd3a83ed306ffd69eba2c1c4403a6bb0e6eacb487ae066e21f",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-landscape-lloyds-forces.jpg",
+      "eai1_sha256": "40bcb81543622cc2208e0be7d2f8e93967e056f7b78cd4f339d646f11880e247",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-landscape-lloyds-funding.jpg",
+      "eai1_sha256": "104dc114847e625126e5529045c2d0810cf8a1f1e3434aa918b577650d2d9c57",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-landscape-lloyds-inside.jpg",
+      "eai1_sha256": "c2cbc6075b7d4f66237f7785f1a8667f7277d8d4cc5390046b0179e482292f89",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-landscape-lloyds-landscape.jpg",
+      "eai1_sha256": "97e487cc864b25def2cfbcd6545c71683c5d372300701f15f31e3876df5c7dbe",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-landscape-lloyds-service.jpg",
+      "eai1_sha256": "e86326426493f6e69db70af15c2de2c01f4d26d93350d46ce80de8d458c5834d",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-landscape-lloyds-source.jpg",
+      "eai1_sha256": "866b172c90248898089b8fe694012e268bc34a8d4c8f3129aecca32b6be13eb1",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-landscape-uk-cyber.jpg",
+      "eai1_sha256": "53b4b60b191b067e18a98eb5e4ce5b3477b3d49e14bf1ca7f323ce790e7be227",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-landscape-uk-forces.jpg",
+      "eai1_sha256": "b0e23f0524670e562e5c93f858c796b5229fc925c9f340b8aabe77a061b25e84",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-landscape-uk-landscape.jpg",
+      "eai1_sha256": "e9cb89f4f5992bae22b4a338c225cb8cc04c77e215fee140df988d52b2107f3e",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-portrait-banking-forces.jpg",
+      "eai1_sha256": "cbba45326da5c0d7cf712e1961cb759784dfb9cd84d0d41e72091f89c151e0ef",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-portrait-banking-landscape.jpg",
+      "eai1_sha256": "71a9f7dfcfb0aa483f920c6d94bab3214ac3878e651a57a4415ffd66aa17c190",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-portrait-banking-provider.jpg",
+      "eai1_sha256": "f5cf39ba484351c29dca88a919acec2961c9880f5b46ad382fb2a87ed046542e",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-portrait-lloyds-forces.jpg",
+      "eai1_sha256": "ea23aca0b4b177107e60d243cd444d451dc82f7422da94c48a9e1ec70fa7b198",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-portrait-lloyds-funding.jpg",
+      "eai1_sha256": "12e41d7e3c96d841897760bc6994f967373f54718323ff350e40dfbbf6aca63f",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-portrait-lloyds-inside.jpg",
+      "eai1_sha256": "fc19258149ea88fd897f419b1c94ad660c7b0a31dd4cc157dc3b0f823b274a35",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-portrait-lloyds-landscape.jpg",
+      "eai1_sha256": "e3db5961a639c9a9de85eacacb196bf4bc20ab9b08238bf5a5ae94602befd945",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-portrait-lloyds-service.jpg",
+      "eai1_sha256": "79f4bc023b31643f169e7992d3dc27e9460e443df161c2dd1ef5f683c536fad7",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-portrait-lloyds-source.jpg",
+      "eai1_sha256": "00d6b3b4de9b2e05953e7770aa0c142342f17a5ed2762219d234d1000fd9bc60",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-portrait-uk-cyber.jpg",
+      "eai1_sha256": "bca10e3e3f589b97783c6a0b73583122da79869f250fff365532c2ccd7ffe806",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-portrait-uk-forces.jpg",
+      "eai1_sha256": "3efc02442d203b1992dc1a0b2296321acb429f29fd7a5324ab3a38d0652bd825",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-ipad-portrait-uk-landscape.jpg",
+      "eai1_sha256": "88e2e225a7e6e057e341fa92cb960889494e4224c824c822494b6eb515866659",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-mobile-banking-forces.jpg",
+      "eai1_sha256": "ba67e8517cabb1e210e3d21b946ec4052cfa8012844dfed359806b6996619506",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-mobile-banking-landscape.jpg",
+      "eai1_sha256": "d5c927aca114f97c3f1cd9b2239827c6010890a188b73f4d982dffb8109b85bf",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-mobile-banking-provider.jpg",
+      "eai1_sha256": "365f44728ada591f495d48e4e13cbea9ae060afc1cdc5ec89cf5877a797ad239",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-mobile-lloyds-forces.jpg",
+      "eai1_sha256": "b4675f554c5fd446ff8daccbcdda29ef0003ead21610d491d1d76a07fd37669b",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-mobile-lloyds-funding.jpg",
+      "eai1_sha256": "e971981c7577ae00653ec947fd97048a59de1031682aa2f7f0dee3877bfa71c1",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-mobile-lloyds-inside.jpg",
+      "eai1_sha256": "cffc7546a3547893926a364697862fd663d9e683f54f46f81bdfad13d3137a27",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-mobile-lloyds-landscape.jpg",
+      "eai1_sha256": "e814f344bb3e5fb40cd787a89255c33d29f0a763a54fdc2d96097706a50750ad",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-mobile-lloyds-service.jpg",
+      "eai1_sha256": "88f4c643f54ae4f40c61652e7b845cb598c12854c0440bf152b4f8c2fb526466",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-mobile-lloyds-source.jpg",
+      "eai1_sha256": "b8dbc6a7945211914a4b5752c6d16c341dfecf33813255607ee613c6ab57f431",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-mobile-uk-cyber.jpg",
+      "eai1_sha256": "b967e9bb33c3c52405590da1b1c557385f7bb2435d36c5314026a2ba29f5baa0",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-mobile-uk-forces.jpg",
+      "eai1_sha256": "4b94bae31438ce54006f46ec710bbf1afe872d4b52b50b2e32d1a4fc08529029",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/after-mobile-uk-landscape.jpg",
+      "eai1_sha256": "070df844c2129700db4b28b5542df81c4ec62ade422e016a1ea32da450c8ebbe",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/banking-Accessibility.yml",
+      "eai1_sha256": "397fd153e30c0ed09216fa218870c0d826079fbfb1c56e4e6e3968c05fbaf7c1",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-desktop-banking-forces.jpg",
+      "eai1_sha256": "251b905ca9eb1738c8a25c1dfed8dcc1376b8ffad7a257f7019d875a7ec367e5",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-desktop-banking-landscape.jpg",
+      "eai1_sha256": "a58b9a4a354585828ba50c1b82850abd249da7656cb86b49dae1560193660095",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-desktop-banking-provider.jpg",
+      "eai1_sha256": "69cf830c0fa222680f3824a0571105390e439c5130d8d761112cb870aded2f7a",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-desktop-lloyds-forces.jpg",
+      "eai1_sha256": "c25d58d0ddcb0e031e540c8a8f0069a0ae9124087fa1589ca5caa496bc8c8efe",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-desktop-lloyds-funding.jpg",
+      "eai1_sha256": "808874e07c407ec28b2cdd49240ce628b7f94dbb519e4e4087b89c0fc9baea2d",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-desktop-lloyds-inside.jpg",
+      "eai1_sha256": "1b8005f3df2b6f25fcd5642188a9ccd61e1e81b29fd09aed3afdf0496cb417db",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-desktop-lloyds-landscape.jpg",
+      "eai1_sha256": "fdac62c0e63416604c551d42e09e539bd3f2c966fbd6ea64429631c74acfff0f",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-desktop-lloyds-service.jpg",
+      "eai1_sha256": "dc70d46281110807958045387668769bb189637938ce9b51dbdb47d266e21759",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-desktop-uk-cyber.jpg",
+      "eai1_sha256": "d7b81cdd972ea8ac7b026c60bba62ce2ba413eaec39cbee0521c7537fd6b383d",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-desktop-uk-forces.jpg",
+      "eai1_sha256": "8ad2e0a713bf1e375da9de444d45ff479d6ae3353442c40fe25bb434722e9736",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-desktop-uk-landscape.jpg",
+      "eai1_sha256": "0c45dc1e02677f128a9ff539e9504d980b4be36881063451731713137970a67c",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-landscape-banking-forces.jpg",
+      "eai1_sha256": "f77ef06a984690a473ca8faa6562ce87147f15e804fc22d659a855b7f91602f5",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-landscape-banking-landscape.jpg",
+      "eai1_sha256": "58d0a11d477254be79e997c491cf9305c572e9557a5cfa994410ce06b5aacae0",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-landscape-banking-provider.jpg",
+      "eai1_sha256": "10a415d8aacc423809ec6a7f58efeb0af01f7f499de6636f63222236606ba575",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-landscape-lloyds-forces.jpg",
+      "eai1_sha256": "40bcb81543622cc2208e0be7d2f8e93967e056f7b78cd4f339d646f11880e247",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-landscape-lloyds-funding.jpg",
+      "eai1_sha256": "441cd8ce0c9d7df259dade1f1b4e5255299fdbba95e960857e0774c8cf3dd27c",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-landscape-lloyds-inside.jpg",
+      "eai1_sha256": "c2cbc6075b7d4f66237f7785f1a8667f7277d8d4cc5390046b0179e482292f89",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-landscape-lloyds-landscape.jpg",
+      "eai1_sha256": "97e487cc864b25def2cfbcd6545c71683c5d372300701f15f31e3876df5c7dbe",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-landscape-lloyds-service.jpg",
+      "eai1_sha256": "83711446c86092647959dbe1f547b2d362912ffbd86445db54d455f7eaf5c535",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-landscape-uk-cyber.jpg",
+      "eai1_sha256": "c9f82a6ca8137a3e506c4b8b6c6a04d546e6f6fe14147a152b0a4424e9113496",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-landscape-uk-forces.jpg",
+      "eai1_sha256": "b0e23f0524670e562e5c93f858c796b5229fc925c9f340b8aabe77a061b25e84",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-landscape-uk-landscape.jpg",
+      "eai1_sha256": "e9cb89f4f5992bae22b4a338c225cb8cc04c77e215fee140df988d52b2107f3e",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-portrait-banking-forces.jpg",
+      "eai1_sha256": "cbba45326da5c0d7cf712e1961cb759784dfb9cd84d0d41e72091f89c151e0ef",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-portrait-banking-landscape.jpg",
+      "eai1_sha256": "71a9f7dfcfb0aa483f920c6d94bab3214ac3878e651a57a4415ffd66aa17c190",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-portrait-banking-provider.jpg",
+      "eai1_sha256": "300037a7a70bc7f2b2336b567f8a9dc5309d0875ad8385666ef3a5448c998e5d",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-portrait-lloyds-forces.jpg",
+      "eai1_sha256": "ea23aca0b4b177107e60d243cd444d451dc82f7422da94c48a9e1ec70fa7b198",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-portrait-lloyds-funding.jpg",
+      "eai1_sha256": "939dfa5477c4d573add33064704e027d135838c5739452bffd514fc20c815187",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-portrait-lloyds-inside.jpg",
+      "eai1_sha256": "fc19258149ea88fd897f419b1c94ad660c7b0a31dd4cc157dc3b0f823b274a35",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-portrait-lloyds-landscape.jpg",
+      "eai1_sha256": "e3db5961a639c9a9de85eacacb196bf4bc20ab9b08238bf5a5ae94602befd945",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-portrait-lloyds-service.jpg",
+      "eai1_sha256": "2c282ae2242239ea1af36cba64438539d4c41474f1f925ca9a5311a7aff148a5",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-portrait-uk-cyber.jpg",
+      "eai1_sha256": "4a0fa7527d22a406197c6184a61cc2c9984360c7b4f302fcd8e63fb14f7c8d68",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-portrait-uk-forces.jpg",
+      "eai1_sha256": "3efc02442d203b1992dc1a0b2296321acb429f29fd7a5324ab3a38d0652bd825",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-ipad-portrait-uk-landscape.jpg",
+      "eai1_sha256": "88e2e225a7e6e057e341fa92cb960889494e4224c824c822494b6eb515866659",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-mobile-banking-forces.jpg",
+      "eai1_sha256": "ba67e8517cabb1e210e3d21b946ec4052cfa8012844dfed359806b6996619506",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-mobile-banking-landscape.jpg",
+      "eai1_sha256": "d5c927aca114f97c3f1cd9b2239827c6010890a188b73f4d982dffb8109b85bf",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-mobile-banking-provider.jpg",
+      "eai1_sha256": "4dbfa5b614fe64c9f5b5df21960018f130c68f67028b305e968512694ad3607c",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-mobile-lloyds-forces.jpg",
+      "eai1_sha256": "b4675f554c5fd446ff8daccbcdda29ef0003ead21610d491d1d76a07fd37669b",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-mobile-lloyds-funding.jpg",
+      "eai1_sha256": "3f18e19ef9f53e71fd15c1890b3b6b399eabfb2a8e453d707ceec8e16265951d",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-mobile-lloyds-inside.jpg",
+      "eai1_sha256": "cffc7546a3547893926a364697862fd663d9e683f54f46f81bdfad13d3137a27",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-mobile-lloyds-landscape.jpg",
+      "eai1_sha256": "e814f344bb3e5fb40cd787a89255c33d29f0a763a54fdc2d96097706a50750ad",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-mobile-lloyds-service.jpg",
+      "eai1_sha256": "cb42c753dacfc7c41b36c4cb62f1341be9ebaffe9cab697799746c07b7a2440e",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-mobile-uk-cyber.jpg",
+      "eai1_sha256": "464282162163405fceb44ebf196a5f7cc526c12a1b70ad4368c343c3c0ee79d0",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-mobile-uk-forces.jpg",
+      "eai1_sha256": "4b94bae31438ce54006f46ec710bbf1afe872d4b52b50b2e32d1a4fc08529029",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/before-mobile-uk-landscape.jpg",
+      "eai1_sha256": "070df844c2129700db4b28b5542df81c4ec62ade422e016a1ea32da450c8ebbe",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/lloyds-Accessibility.yml",
+      "eai1_sha256": "f7943f5d89d9effa725fea4b673ddfe7c482852620bb7c4631ec6159577d661f",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/previews/uk-Accessibility.yml",
+      "eai1_sha256": "1ba8e76458f3f0710be32eea7d7095e5ee42b63a876ee20461a9553f44b3130d",
+      "disposition": "historical old-layout proof preserved in #630; not copied"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-FCA-Service-Candidate.json",
+      "eai1_sha256": "953d7e15fae078295ca21bf6fd4d874ad142f3b813656ba474be789ee670ef9b",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-FCA-Service.txt",
+      "eai1_sha256": "015a657f4f7cc232037879c652a8cbb3da91865ede073dfb6186de54f278773d",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-HMT-CTP-Candidate.json",
+      "eai1_sha256": "05202f75fe8bf4594d0843a9e224ab18b02d422030ec89b166d678d1f11f175f",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-HMT-CTP.txt",
+      "eai1_sha256": "42cef2b7ca812c83551a89bd6500b3884b21e87972f6b0c670951c8acb9bf63f",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber-Candidate.json",
+      "eai1_sha256": "74ec38444ef79f6a5273306e8e93c86a06562647a7865d30145ef035136f9267",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt",
+      "eai1_sha256": "b9abe8eb681cb0310dbf7eec719fc66de5bda0fca2920b0cc02a94a7efc92646",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "tests/test_flora_controlled_integration_625.py",
+      "eai1_sha256": "adb48f63fb55dbc285d8902ac0dc67ec0d4fa1a0f13fc198b4ef500005632898",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "tests/test_flora_evidence_expansion_628.py",
+      "eai1_sha256": "fc076973ac0aae0e80569d9bc8e78be45a9392c268430d9fc8b13826ae800f22",
+      "disposition": "adapted to merged VP-2"
+    },
+    {
+      "path": "tests/test_flora_unified_integration.py",
+      "eai1_sha256": "4f932b4360ddd29736ffe16b3055caa1c6aebab71aa16b2924366954db415956",
+      "disposition": "exact selective copy"
+    },
+    {
+      "path": "tools/ci/flora_eai1_preview.cjs",
+      "eai1_sha256": "73fbb40c190e60bb2697445b3ee6b5a66bc25fcf28893db5d4e13dd0669f766c",
+      "disposition": "obsolete renderer harness replaced by VP-2 shared fixture and new EAI-2 scenario"
+    },
+    {
+      "path": "tools/ci/flora_eai1_preview.py",
+      "eai1_sha256": "f269fb142bdf3b8e616baa32d8477406d34fb4ebd95300e5fed4cc9253699c33",
+      "disposition": "obsolete renderer harness replaced by VP-2 shared fixture and new EAI-2 scenario"
+    },
+    {
+      "path": "tools/research/history_integrity.py",
+      "eai1_sha256": "f9c310cbcc17ec675bb71acb64ec5b6c3b9861b50a0e1e701b9ebff02bc52426",
+      "disposition": "exact selective copy"
+    }
+  ]
+}
