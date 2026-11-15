@@ -271,6 +271,9 @@ def _proof(ctx,data):
  if SCOPES[ctx.scope]['kind']in {'country','industry'}:
   basis=visual_v2.basis()
   body+='<p>UK GVA uses 2024 current basic prices. The displayed total is rounded from £2,623bn. GVA is not company revenue or GDP at market prices.</p><p>Industry shares are the published SIC2007 section weights divided by ten; rounded sections total 100.2%. Finance & insurance includes more than Banking. No sales-market value is inferred.</p>'
+  if SCOPES[ctx.scope]['kind']=='industry':
+   district=next(d for d in basis['districts']if d['sic']==SCOPES[ctx.scope]['sic'])
+   body+='<p>Calculation: SIC '+e(district['sic'])+' published weight '+str(district['weight_per_thousand'])+' per thousand ÷ 10 = '+str(district['weight_per_thousand']/10)+'% of UK GVA.</p>'
   for source in basis['sources']:
    body+='<p><a href="'+e(source['url'],quote=True)+'" rel="noreferrer">'+e(source['title'])+'</a>'+(' · '+e(source['publication_date'])if source.get('publication_date')else'')+'</p>'
   body+='<p>ONS data: Crown copyright / Open Government Licence. Real GDP growth is a separate volume measure; the preliminary estimate is subject to revision.</p>'

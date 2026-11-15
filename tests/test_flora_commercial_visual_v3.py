@@ -12,7 +12,7 @@ from cios.applications.flora.research_intelligence.living_map import render_livi
 from cios.applications.flora import sales_pipeline as sales
 from cios.applications.flora.storage import data_path
 from cios.applications.flora.security_store import canonical
-from cios.applications.flora.public_routes import public_request_target
+from cios.applications.flora.public_routes import public_request_target, owner_inspection_request_target
 from tests.test_flora_security_repair_01b import authority
 from tests.test_flora_sales_pipeline import actor,web,complete
 from tests.test_flora_research_intelligence import Links
@@ -86,7 +86,8 @@ def test_core_platform_counterevidence_keeps_exact_source_scope_and_lineage(web)
     assert len(r['counterevidence'])==2 and r['conflicts']
     for proof in r['counterevidence']:
         assert proof['passage'] and proof['locator'] and proof['source_ids'] and proof['period']
-        path,_,fragment=proof['url'].partition('#');status,html,_=web(path,authenticated=False)
+        path,_,fragment=proof['url'].partition('#');assert web(path,authenticated=False)[0]==403
+        status,html,_=web(path)
         assert status==200 and fragment in Links(html).ids
     h=candidate_overview(model.load_assessment(),r,projection())
     assert 'Counterevidence, contradictions' in h and 'Competing periods or denominators' in h
@@ -114,11 +115,14 @@ def test_historical_supplier_context_and_current_contract_uncertainty_are_preser
 @pytest.mark.parametrize('domain,slug',[('banking','lloyds'),('aviation','easyjet')])
 def test_public_commercial_routes_and_other_lenses_remain_available(web,domain,slug):
     for lens in ('overview','ai-disruption','regulation','commercial'):
-        path=f'/industries/{domain}?lens={lens}';status,h,_=web(path,authenticated=False)
-        assert status==200 and public_request_target(path)
+        path=f'/industries/{domain}?lens={lens}'
+        assert web(path,authenticated=False)[0]==(403 if domain=='banking'else 200)
+        status,h,_=web(path)
+        assert status==200 and (public_request_target(path)or owner_inspection_request_target(path))
         assert "data-living-map='2'" in h
-    assert web(f'/enterprises/{slug}?lens=commercial',authenticated=False)[0]==200
-    status,h,_=web(f'/industries/{domain}/visual-specs',authenticated=False)
+    assert web(f'/enterprises/{slug}?lens=commercial',authenticated=False)[0]==(403 if domain=='banking'else 200)
+    assert web(f'/enterprises/{slug}?lens=commercial')[0]==200
+    status,h,_=web(f'/industries/{domain}/visual-specs')
     assert status==200 and set(json.loads(h))=={'pestle','five-forces','value-chain','operating-model','ecosystem','opportunities'}
     assert not public_request_target(f'/industries/{domain}?lens=commercial&workspace_id=other')
 
@@ -130,7 +134,7 @@ def test_exploration_never_reads_or_creates_private_pipeline_records(web,actor):
     r=sales.create_opportunity('lloyds',ORIGIN,headers=actor[3]);frozen=store_hash()
     for authenticated in (True,False):
         status,h,_=web('/flora/banking/research/candidates/'+ORIGIN,authenticated=authenticated)
-        assert status==200 and r['id'] not in h
+        assert status==(200 if authenticated else 403)and r['id']not in h
     assert store_hash()==frozen
 
 

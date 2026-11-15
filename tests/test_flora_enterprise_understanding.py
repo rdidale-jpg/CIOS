@@ -5,6 +5,8 @@ import hashlib
 import json
 
 import pytest
+from tests.flora_owner_inspection_fixtures import authority, actor, owner_http, inspection_web
+from cios.applications.flora.public_routes import owner_inspection_request_target
 from cios.applications.flora.research_intelligence import understanding as u, model, cycle
 from cios.applications.flora.research_intelligence.understanding_views import render
 from cios.applications.flora.research_intelligence.source_import import official_url
@@ -201,15 +203,16 @@ def test_cycle_revisit_preserves_history_and_requires_bound_reason():
 
 
 @pytest.mark.parametrize('slug',['lloyds','easyjet'])
-def test_finite_public_understanding_route_and_navigation(web,slug):
+def test_finite_public_understanding_route_and_navigation(web,inspection_web,slug):
     path='/enterprises/'+slug+'/understanding'
-    assert public_request_target(path)
+    assert (public_request_target(path)or owner_inspection_request_target(path))
     for suffix in ('?workspace_id=private','/private','?enterprise_id=other'):
         assert not public_request_target(path+suffix)
-    status,html=web(path);assert status==200
+    status,html=inspection_web(path);assert status==200
     assert 'What the evidence supports' in html and 'Question map, not a proven causal chain' in html
     assert 'Text alternative to relationship map' in html and 'No canonical acceptance' in html
-    status,enterprise=web('/enterprises/'+slug);assert status==200 and path in enterprise
+    status,enterprise=web('/enterprises/'+slug);assert status==200
+    assert (path not in enterprise if slug=='lloyds'else path in enterprise)
 
 
 def test_html_safety_and_conclusion_lineage_are_enforced():

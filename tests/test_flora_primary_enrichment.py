@@ -13,7 +13,7 @@ from cios.applications.flora.research_intelligence import model, views
 from cios.applications.flora.research_intelligence.source_import import import_proposal
 from tests.test_flora_research_intelligence import web
 from tests.test_flora_security_repair_01b import authority
-from tests.test_flora_sales_pipeline import actor
+from tests.test_flora_sales_pipeline import actor, web as owner_web
 
 
 def prior():
@@ -165,9 +165,9 @@ def test_completion_resolves_only_transaction_status_not_customer_integration_ne
     assert 'does not evidence an outsourcing mandate' in next(c['statement'] for c in data['claims'] if c['id']=='LBG-BRAND26-NO-ROLES')
 
 
-def test_public_views_expose_updated_provenance_comparison_and_full_original_limit(web):
+def test_public_views_expose_updated_provenance_comparison_and_full_original_limit(owner_web):
     for path in ['/lloyds','/opportunities','/candidates/RCO-LBG-009','/evidence/LBG-Q326-CURVE','/sources']:
-        status,body=web(model.ROOT+path)
+        status,body,_=owner_web(model.ROOT+path)
         assert status==200 and '12 reviewed primary-source records' in body
     assert 'Before and after primary research' in views.opportunities_page()
     assert 'full original PDF/HTML bytes were not downloaded' in views.evidence_page('LBG-Q326-CURVE')

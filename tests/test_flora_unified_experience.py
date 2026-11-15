@@ -7,10 +7,15 @@ import pytest
 from cios.applications.flora.research_intelligence import model, unified_views as views
 from cios.applications.flora.research_intelligence.visual_specs import build_visual_specs,validate_visual_spec
 from cios.applications.flora.research_intelligence.visual_templates import render_visual
-from cios.applications.flora.public_routes import public_request_target
+from cios.applications.flora.public_routes import public_request_target, owner_inspection_request_target
 from tests.test_flora_research_intelligence import web
 from tests.test_flora_security_repair_01b import authority
-from tests.test_flora_sales_pipeline import actor
+from tests.test_flora_sales_pipeline import actor, web as owner_web
+
+
+@pytest.fixture
+def inspection_web(owner_web):
+    return lambda path:owner_web(path)[:2]
 
 
 class Navigation(HTMLParser):
@@ -29,9 +34,9 @@ class Navigation(HTMLParser):
         if self.primary and self.in_link:self.labels.append(text)
 
 
-def test_primary_navigation_is_consistent_and_specialist_tools_are_contextual(web):
+def test_primary_navigation_is_consistent_and_specialist_tools_are_contextual(web,inspection_web):
     for path in ['/','/industries','/enterprises','/opportunities','/industries/banking','/enterprises/lloyds','/flora/banking','/flora/banking/research/sources']:
-        status,html=web(path);assert status==200,path
+        status,html=(inspection_web(path)if owner_inspection_request_target(path)else web(path));assert status==200,path
         assert Navigation(html).labels==['Home','PESTLE','Industries','Enterprises','Offers','Opportunities','Pipeline']
         assert html.count('aria-label="Primary product navigation"')==1
         assert '/flora/sales/pipeline' in Navigation(html).urls
@@ -39,14 +44,14 @@ def test_primary_navigation_is_consistent_and_specialist_tools_are_contextual(we
     assert not public_request_target('/flora/sales/pipeline')
 
 
-def test_canonical_home_industry_enterprise_opportunity_journey(web):
+def test_canonical_home_industry_enterprise_opportunity_journey(web,inspection_web):
     for path,required in [('/', '/industries'),('/industries','/industries/banking'),('/industries/banking','/enterprises/lloyds'),('/enterprises/lloyds','/opportunities')]:
-        status,html=web(path);assert status==200 and required in Navigation(html).urls
+        status,html=(inspection_web(path)if owner_inspection_request_target(path)else web(path));assert status==200 and required in Navigation(html).urls
     html=web('/opportunities')[1]
     for row in model.commercial_candidates(shortlisted_only=True):
         target=views.ROUTES['candidates']+'/'+row['id'];assert target in Navigation(html).urls
-        status,detail=web(target);assert status==200
-        for c in row['claim_ids'][:1]:assert web(views.ROUTES['evidence']+'/'+c)[0]==200
+        status,detail=inspection_web(target);assert status==200
+        for c in row['claim_ids'][:1]:assert inspection_web(views.ROUTES['evidence']+'/'+c)[0]==200
 
 
 def test_canonical_bank_pages_and_other_historical_profiles_are_explicit(web):
@@ -56,9 +61,9 @@ def test_canonical_bank_pages_and_other_historical_profiles_are_explicit(web):
         assert 'Historical supporting profile' in web('/enterprises/'+slug)[1]
 
 
-def test_legacy_entry_urls_retain_supporting_content_and_canonical_destinations(web):
+def test_legacy_entry_urls_retain_supporting_content_and_canonical_destinations(web,inspection_web):
     for path,target in [('/flora/banking','/industries/banking'),('/flora/banking/explorer','/industries/banking'),('/flora/banking/research','/industries/banking'),('/flora/banking/lloyds','/industries/banking'),('/flora/banking/explorer/lloyds','/enterprises/lloyds'),('/flora/banking/research/lloyds','/enterprises/lloyds')]:
-        status,html=web(path);assert status==200 and "data-legacy-compatibility='true'" in html
+        status,html=(inspection_web(path)if owner_inspection_request_target(path)else web(path));assert status==200 and "data-legacy-compatibility='true'" in html
         assert target in Navigation(html).urls and 'Open retained' in html
     assert web('/flora/banking/explorer/lloyds/insights')[0]==200
 
@@ -88,29 +93,30 @@ def test_visuals_use_distinct_framework_geometries_and_keyboard_destinations():
         for node in s[k]['nodes']:assert node['url'] in Navigation(html).urls
 
 
-def test_industry_lenses_and_enterprise_views_open_each_template(web):
+def test_industry_lenses_and_enterprise_views_open_each_template(inspection_web):
     for path,kind in [('/industries/banking?lens=pestle','pestle'),('/industries/banking?lens=porter','five-forces'),('/industries/banking?lens=value-chain','value-chain'),('/enterprises/lloyds?lens=operating-model','operating-model'),('/enterprises/lloyds?lens=ecosystem','ecosystem'),('/enterprises/lloyds?lens=opportunities','opportunities')]:
-        status,html=web(path);assert status==200 and "data-diagram-type='"+kind+"'" in html
+        status,html=inspection_web(path);assert status==200 and "data-diagram-type='"+kind+"'" in html
         assert '/opportunities' in Navigation(html).urls
 
 
-def test_specification_json_endpoint_matches_page_inputs_and_is_public(web):
-    status,body=web('/industries/banking/visual-specs');assert status==200
+def test_specification_json_endpoint_matches_page_inputs_and_is_public(inspection_web):
+    status,body=inspection_web('/industries/banking/visual-specs');assert status==200
     assert json.loads(body)==views.specs()
-    assert public_request_target('/industries/banking/visual-specs')
+    assert owner_inspection_request_target('/industries/banking/visual-specs')
+    assert not public_request_target('/industries/banking/visual-specs')
     for bad in ['/industries/banking/visual-specs?workspace=private','/enterprises/private','/industries/../../private','/industries/banking?lens=porter&lens=pestle']:
         assert not public_request_target(bad)
-    assert web('/industries/banking?lens=unimplemented')[0]==404
+    assert inspection_web('/industries/banking?lens=unimplemented')[0]==404
 
 
-def test_visual_nodes_only_link_to_existing_finite_public_evidence_and_research(web):
+def test_visual_nodes_only_link_to_existing_finite_public_evidence_and_research(inspection_web):
     for spec in views.specs().values():
         for node in spec['nodes']:
-            assert public_request_target(node['url']) and web(node['url'])[0]==200
+            assert (public_request_target(node['url'])or owner_inspection_request_target(node['url'])) and inspection_web(node['url'])[0]==200
             for edge in node['evidence']:
-                assert public_request_target(edge['url']) and web(edge['url'])[0]==200
+                assert (public_request_target(edge['url'])or owner_inspection_request_target(edge['url'])) and inspection_web(edge['url'])[0]==200
             for edge in node['opportunity_links']:
-                assert public_request_target(edge['url']) and web(edge['url'])[0]==200
+                assert (public_request_target(edge['url'])or owner_inspection_request_target(edge['url'])) and inspection_web(edge['url'])[0]==200
 
 
 def test_visual_contract_rejects_invented_labels_edges_and_claim_upgrades():
@@ -138,15 +144,15 @@ def test_supplier_visual_preserves_unknown_contracts_and_reported_history():
     assert any(e['verified'] for e in spec['relationships']) and any(not e['verified'] for e in spec['relationships'])
 
 
-def test_current_historical_and_inferred_evidence_remain_available(web):
+def test_current_historical_and_inferred_evidence_remain_available(inspection_web):
     # VEX-1 defaults to the accepted Inside illustration. This assertion checks
     # the retained specialist presentation and all historical evidence.
-    html=web('/enterprises/lloyds?lens=operating-model')[1]
+    html=inspection_web('/enterprises/lloyds?lens=operating-model')[1]
     assert 'Key findings &amp; important changes' in html or 'Key findings & important changes' in html
     assert 'Evidence, historical observations & research gaps' in html
     assert 'source-supported disclosure' in html and 'historical' in html
     assert '/flora/banking/research/sources' in html and '/flora/banking/research/gaps' in html
-    assert 'Historical Horizon scenarios' in web('/opportunities')[1]
+    assert 'Historical Horizon scenarios' in inspection_web('/opportunities')[1]
 
 
 def test_visual_reading_preserves_existing_pipeline_and_qualification(actor):

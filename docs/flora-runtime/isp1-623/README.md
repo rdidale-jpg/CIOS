@@ -14,7 +14,7 @@ All seven accepted original artwork hashes and all21 delivered responsive varian
 - [Intelligence presentation contract](Presentation-Contract.md)
 - [Before/after visual review](Visual-Review.md) and [previews](previews/)
 - [Source, authority and research compatibility](Source-and-Compatibility.md)
-- [Validation and reproducibility](Validation.md)
+- [Validation and reproducibility](Validation.md) and [per-case inspection-fixture reconciliation](Inspection-Fixture-Reconciliation.md)
 - [Versioned security-owner compatibility](Owner-Compatibility.json)
 - [Rollback](Rollback.md)
 

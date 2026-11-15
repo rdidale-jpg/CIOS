@@ -107,13 +107,17 @@ def test_supplier_edges_preserve_historical_and_planned_scope():
     assert not any('incumbent'==r['predicate'] for r in d['relationships'])
 
 
-def test_industry_home_navigation_reaches_easyjet_and_existing_banking(web):
+def test_industry_home_navigation_reaches_easyjet_and_existing_banking(web,sales_web):
     status,home=web('/')
     assert status==200 and '/industries' in home and '/industries/aviation' in home
     status,html=web('/flora/industries')
     assert status==200 and ROOT in html and model.ROOT in html
     for path,text in [(ROOT,'Aviation.'),(ROOT+'/easyjet','easyJet.'),(model.ROOT,'Banking.'),(model.ROOT+'/lloyds','Lloyds.')]:
-        status,html=web(path);assert status==200 and text in html
+        status,html=web(path)
+        if path.startswith(model.ROOT):
+            assert status==403  # Research inspection now requires the existing owner role.
+            status,html,_=sales_web(path)
+        assert status==200 and text in html
 
 
 def test_lenses_svg_keyboard_and_mobile_navigation_open_knowledge_nodes(web):
