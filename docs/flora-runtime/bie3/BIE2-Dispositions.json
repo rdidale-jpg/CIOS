@@ -1,0 +1,64 @@
+{
+  "owner_only": true,
+  "history_edited": false,
+  "items": [
+    {
+      "input": "Enterprise-Dossiers.json NatWest customer deposits453.4",
+      "status": "definition_correction_proposed",
+      "new_refs": [
+        "BIE3-NW-DEPOSITS-TOTAL",
+        "BIE3-NW-DEPOSITS-EX-CENTRAL"
+      ],
+      "reason": "Original financial table separately reports total454.3 and excluding-central453.4. Prior number is supported only with the narrower definition; frozen BIE2 artifact is unchanged."
+    },
+    {
+      "input": "Source-Ledger.json NW-Q3 publication day /gap:dates",
+      "status": "source_date_resolved_in_new_review",
+      "new_sources": [
+        "BIE3-NW-Q3",
+        "BIE3-NW-DATE"
+      ],
+      "reason": "Original issuer PDF p36 and results-news date corroborate30 October 2026. Original ledger is not overwritten."
+    },
+    {
+      "input": "NatWest CAL paragraph",
+      "status": "basis_deepened",
+      "new_refs": [
+        "BIE3-NW-CAL-CLOSE",
+        "BIE3-NW-CAL-OPEN",
+        "BIE3-NW-CAL-HEADLINE"
+      ],
+      "reason": "Published stock bridge110.9 differs from headline42.3 because comparison bases differ; not an unexplained contradiction."
+    },
+    {
+      "input": "HSBC UK five financial rows",
+      "status": "reverified_and_atomised",
+      "reason": "USD reported legal-entity YTD column; no Group-quarter substitution or GBP conversion."
+    },
+    {
+      "input": "Santander integration narrative",
+      "status": "reverified_and_deepened",
+      "reason": "TSB post-acquisition profit/cost contributions now explicit; acquisition, consolidation, employer transfer, legal transfer and later IT migration remain distinct."
+    },
+    {
+      "input": "Nationwide / Starling / ClearBank dossiers",
+      "status": "retained_candidate_worklist",
+      "reason": "Existing explicit financial and rights limitations preserved. ClearBank UK profit versus Group loss is not collapsed. No false dropped-coverage or re-verification claim."
+    },
+    {
+      "input": "31 relationship candidates",
+      "status": "retained_not_promoted",
+      "reason": "No newly permitted canonical bilateral supplier/customer edge. Selected acquisition phase has explicit buyer/target but real graph endpoints and source-use approval remain unresolved."
+    },
+    {
+      "input": "17 event candidates",
+      "status": "retained_research_only",
+      "reason": "No News launch or collector; new source-date disposition does not rewrite original ledger or duplicate a news signal."
+    },
+    {
+      "input": "76 actors",
+      "status": "retained_identity_and_coverage_boundaries",
+      "reason": "No new actors or canonical identity imports. Public navigation reference IDs are not workspace-authorised model IDs."
+    }
+  ]
+}

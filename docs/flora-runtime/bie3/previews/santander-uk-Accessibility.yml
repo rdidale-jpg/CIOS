@@ -1,0 +1,52 @@
+- banner:
+  - link "Skip to main content":
+    - /url: "#visual-content"
+  - link "FLORA":
+    - /url: /
+  - navigation "Primary product navigation":
+    - group: Explore⌄
+  - text: Guest
+  - navigation "Current scope":
+    - link "UK":
+      - /url: /?stream=landscape&selected=banking
+    - text: Banking
+  - navigation "Insight streams":
+    - link "Landscape":
+      - /url: /industries/banking?stream=landscape&layer=regulators&selected=santander-uk&agenda=service-landscape#stream-landscape
+    - link "Forces":
+      - /url: /industries/banking?stream=forces&layer=regulators&selected=santander-uk&agenda=service-landscape#stream-forces
+- complementary "Visual exploration":
+  - group: Explore the scene
+- main:
+  - article:
+    - heading "Leadership Agenda" [level=1]
+    - 'region "Santander UK Plc: complaint activity and resolution"':
+      - link "Close Leadership Agenda":
+        - /url: /industries/banking?stream=landscape&layer=regulators&selected=santander-uk#visual-content
+        - text: ×
+      - 'heading "Santander UK Plc: complaint activity and resolution" [level=2]'
+      - article:
+        - paragraph: FLORA Insight Santander UK Plc received 61,365 complaints and closed 60,615 in January–June 2026; 48.06% of closed complaints were upheld by the firm. These are different cohorts, not a service-quality ranking or backlog measure.
+        - paragraph: 1 January–30 June 2026
+        - group: Sources & reasoning
+      - group: Basis & perspective
+    - navigation "Bank complaint profiles":
+      - link "National Westminster Bank PLC":
+        - /url: /industries/banking?stream=landscape&layer=regulators&selected=natwest&agenda=service-landscape#agenda-insight
+      - link "HSBC UK Bank Plc":
+        - /url: /industries/banking?stream=landscape&layer=regulators&selected=hsbc-uk&agenda=service-landscape#agenda-insight
+      - link "Santander UK Plc":
+        - /url: /industries/banking?stream=landscape&layer=regulators&selected=santander-uk&agenda=service-landscape#agenda-insight
+    - group:
+      - text: Leadership Agenda
+      - navigation "Leadership Agenda":
+        - link "Funding repricing connects customer choice and bank economics":
+          - /url: /industries/banking?stream=landscape&layer=regulators&selected=santander-uk&agenda=funding-economics#agenda-insight
+        - link "Incident and third-party reporting change in March 2027":
+          - /url: /industries/banking?stream=landscape&layer=regulators&selected=santander-uk&agenda=reporting-change#agenda-insight
+        - link "Technology oversight extends to the provider layer":
+          - /url: /industries/banking?stream=landscape&layer=regulators&selected=santander-uk&agenda=provider-oversight#agenda-insight
+        - 'link "Santander UK Plc: complaint activity and resolution"':
+          - /url: /industries/banking?stream=landscape&layer=regulators&selected=santander-uk&agenda=service-landscape#agenda-insight
+    - group: Context layers
+    - group: Sources & detail

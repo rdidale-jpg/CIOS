@@ -1,0 +1,12 @@
+{
+  "mission": "BIE-3: exact source/claim/Enterprise Model acceptance path and narrow permitted selected-bank service view",
+  "research_policy": "Research + Decision + Assurance",
+  "capability_profile": "Approved public web research, read-only existing contracts, code/tests, existing independent reviewer and GitHub draft PR/CI. No paid calls/private production reads/imports.",
+  "base": "c295e056cbae0f1adebc1070eb272d79b650a45f",
+  "branch": "codex/flora-bie3-637",
+  "main_ci": "https://github.com/rdidale-jpg/CIOS/actions/runs/43755306107",
+  "main_ci_result": "success before implementation branching",
+  "deployed_identity": "UNVERIFIED: owner deployment plan is not runtime proof; public /deployment and /health reads returned URLError",
+  "canonical_receipts": "UNVERIFIED: no authorised owner read-only service available; no fixture credentials or guessed IDs used",
+  "canonical_writes": 0
+}

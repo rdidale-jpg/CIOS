@@ -37,6 +37,8 @@ EAI1_CANDIDATE_ADDITIONS = {
 }
 # #635 bounded FCA numerical presentation candidate; every earlier byte stays pinned.
 BIE2_CANDIDATE_ADDITIONS = {'enterprise-knowledge/banking/research-model/source-snapshots/BIE2-FCA-Peers-Candidate.json': 'd2536d42b5fcdc8ef3ebf59bd42564dd93d1648ee73b6f05b6ce14497394666d', 'enterprise-knowledge/banking/research-model/source-snapshots/BIE2-FCA-Peers.txt': 'dd68d2c507bea63b5d33f9932dee0c8fa0fbe9053f1aa3289f81822e9dda0338'}
+# #637 bounded numerical outcomes release; no earlier byte or permission changes.
+BIE3_CANDIDATE_ADDITIONS = {'enterprise-knowledge/banking/research-model/source-snapshots/BIE3-FCA-Outcomes-Candidate.json': 'e8c6b098b0695245b7a47b834ca180fa9d69e430a039affbbb98b46342d4b471', 'enterprise-knowledge/banking/research-model/source-snapshots/BIE3-FCA-Outcomes.txt': '9fa20943561b0f87d3605d12f36fb26ec9e31ff9ba5f3d683a00c8da2f8099da'}
 REVIEW = 'enterprise-knowledge/banking/research-model/Understanding-Review.json'
 DEPTH_ADDITIONS = tuple('enterprise-knowledge/banking/research-model/source-snapshots/'+name+'.txt'
                         for name in ('DEPTH-LBG-AI','DEPTH-LBG-LEGACY','DEPTH-LBG-WALLET','DEPTH-LBG-CURVE'))
@@ -92,6 +94,13 @@ def approved_history(root):
         assert hashlib.sha256(content).hexdigest()==digest, 'BIE-2 candidate proposal/excerpt changed'
         assert path not in expected, 'Existing identity cannot become an addition'
         expected[path]=content
+    for path,digest in BIE3_CANDIDATE_ADDITIONS.items():
+        candidate=Path(root)/path
+        assert not candidate.is_symlink(), 'BIE-3 candidate source symlink is not admitted'
+        content=candidate.read_bytes()
+        assert hashlib.sha256(content).hexdigest()==digest, 'BIE-3 candidate proposal/excerpt changed'
+        assert path not in expected, 'Existing identity cannot become an addition'
+        expected[path]=content
     return expected
 
 
@@ -109,9 +118,10 @@ def verify_history(root):
     assert not any(p.is_symlink() for p in files), 'Research symlink is not a reviewed source'
     actual={str(p.relative_to(root)):p.read_bytes() for p in files if p.is_file()}
     compare_history(expected,actual)
-    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS)-len(EAI1_CANDIDATE_ADDITIONS)-len(BIE2_CANDIDATE_ADDITIONS),
+    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS)-len(EAI1_CANDIDATE_ADDITIONS)-len(BIE2_CANDIDATE_ADDITIONS)-len(BIE3_CANDIDATE_ADDITIONS),
             'depth_additions':len(DEPTH_ADDITIONS),'macro_additions':len(MACRO_ADDITIONS),
             'trigger_candidate_additions':len(TRIGGER_ADDITIONS),'int1_presentation_candidate_additions':len(INT1_CANDIDATE_ADDITIONS),
             'eai1_presentation_candidate_additions':len(EAI1_CANDIDATE_ADDITIONS),
             'bie2_presentation_candidate_additions':len(BIE2_CANDIDATE_ADDITIONS),
+            'bie3_presentation_candidate_additions':len(BIE3_CANDIDATE_ADDITIONS),
             'total':len(expected),'old_review_records_retained':True}

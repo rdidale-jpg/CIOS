@@ -1,0 +1,21 @@
+BIE-3 individually reviewed FCA numerical cells. Locators are review notes, not contiguous source rows.
+Firm-name cell for the corresponding selected Open/Closed/Upheld rows
+HSBC UK Bank Plc
+Firm-name cell for the corresponding selected Open/Closed/Upheld rows
+NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY
+Firm-name cell for the corresponding selected Open/Closed/Upheld rows
+Santander UK Plc
+FCA2026H1 Closed table, source HTML line885, all-product Total cell;1 January–30 June2026
+76,912
+FCA2026H1 Upheld table, source HTML line1558, all-product Total cell;1 January–30 June2026
+59.09%
+FCA2026H1 Closed table, source HTML line923, all-product Total cell;1 January–30 June2026
+101,586
+FCA2026H1 Upheld table, source HTML line1596, all-product Total cell;1 January–30 June2026
+55.31%
+FCA2026H1 Open table, source HTML line729, all-product Total cell;1 January–30 June2026
+61,365
+FCA2026H1 Closed table, source HTML line957, all-product Total cell;1 January–30 June2026
+60,615
+FCA2026H1 Upheld table, source HTML line1629, all-product Total cell;1 January–30 June2026
+48.06%

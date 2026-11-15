@@ -91,9 +91,9 @@ def test_all_169_previous_research_bytes_and_byte_comparator_unchanged():
     source=subprocess.check_output(['git','show',BASE+':tools/research/history_integrity.py'],cwd=ROOT).decode()
     old=types.ModuleType('bie2_base_history');exec(compile(source,'base_history','exec'),old.__dict__)
     previous=old.approved_history(ROOT);current=h.approved_history(ROOT)
-    assert len(previous)==169 and len(current)==171
+    assert len(previous)==169 and len(current)==173
     assert {k:current[k]for k in previous}==previous
-    assert set(current)-set(previous)==set(h.BIE2_CANDIDATE_ADDITIONS)
+    assert set(current)-set(previous)==set(h.BIE2_CANDIDATE_ADDITIONS)|set(h.BIE3_CANDIDATE_ADDITIONS)
     original=source.split('def compare_history(',1)[1].split('\n\ndef verify_history',1)[0]
     assert inspect.getsource(h.compare_history).split('def compare_history(',1)[1].strip()==original.strip()
     for path in h.BIE2_CANDIDATE_ADDITIONS:

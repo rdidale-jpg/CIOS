@@ -223,7 +223,7 @@ def _banking(ctx,data,issues):
     body+=_metrics(values)
     body+='<div class="value-chain" aria-label="Conceptual banking value system"><span>Deposits</span><b aria-hidden="true">→</b><span>Credit &amp; payments</span><b aria-hidden="true">→</b><span>Households &amp; businesses</span></div><p class="chart-note">FLORA Insight · sector functions, not bilateral contracts or quantified value flows.</p>'
     body+='<div class="analysis-grid"><section><h2>Funding economics</h2><p>Deposit pricing, lending and operating resilience connect the banking system with the wider economy.</p><p class="perspective">A rate decision does not establish a particular bank’s margin loss or buying demand.</p></section><section><h2>Distinct responsibilities</h2><dl class="roles"><dt>Bank of England</dt><dd>Central-bank and monetary-policy context.</dd><dt>PRA</dt><dd>Prudential supervision; part of the Bank of England.</dd><dt>FCA</dt><dd>Conduct supervision, distinct from prudential supervision.</dd></dl></section></div>'
-    return body+_basis(facts)+_issue_preview(issues,'provider-oversight')+_issue_preview(issues,'service-landscape')
+    return body+_basis(facts)+_issue_preview(issues,'provider-oversight')+_issue_preview(issues,'service-landscape')+agenda.bank_service_navigation(ctx,v.url,issues,data)
 
 
 def _overview(ctx,data,issues):
@@ -237,10 +237,11 @@ def _overview(ctx,data,issues):
 
 
 def render(ctx,headers=None):
-    data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data);entries=v.destinations(ctx,data)
+    data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected);entries=v.destinations(ctx,data)
     body=''
     if ctx.agenda and any(r.key==ctx.agenda for r in issues):
         body='<h1>Leadership Agenda</h1>'+agenda.detail(ctx,v.url,issues)
+        if ctx.agenda=='service-landscape':body+=agenda.bank_service_navigation(ctx,v.url,issues,data)
     elif ctx.detail:
         spot=next(s for s in v.geometry()[ctx.scope+'-'+ctx.stream]['spots']if s['id']==ctx.detail)
         if ctx.scope=='lloyds'and ctx.stream=='inside'and ctx.detail=='economics'and v.has_detail(ctx,spot,data):

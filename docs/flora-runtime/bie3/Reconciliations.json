@@ -1,0 +1,51 @@
+{
+  "owner_only": true,
+  "derived_view_not_canonical": true,
+  "items": [
+    {
+      "id": "HSBC-UK-PBT",
+      "input_ids": [
+        "BIE3-HS-REV",
+        "BIE3-HS-ECL",
+        "BIE3-HS-COST",
+        "BIE3-HS-ASSOC"
+      ],
+      "reported_result_id": "BIE3-HS-PBT",
+      "operator": "signed_sum",
+      "expected": "6084",
+      "currency": "USD",
+      "unit": "million",
+      "period": "Nine months ended 30 September 2026",
+      "limitation": "Reported UK legal entity, not constant currency or Group quarter"
+    },
+    {
+      "id": "SANTANDER-GROUP-PBT",
+      "input_ids": [
+        "BIE3-SA-NOI",
+        "BIE3-SA-OPEX",
+        "BIE3-SA-CREDIT",
+        "BIE3-SA-RESTRUCT"
+      ],
+      "reported_result_id": "BIE3-SA-PBT",
+      "operator": "signed_sum",
+      "expected": "1158",
+      "currency": "GBP",
+      "unit": "million",
+      "period": "Nine months ended 30 September 2026",
+      "limitation": "Restructuring/specific provisions kept separate; no double subtraction of the TSB expense subset"
+    },
+    {
+      "id": "NATWEST-CAL-STOCK-DIFFERENCE",
+      "input_ids": [
+        "BIE3-NW-CAL-CLOSE",
+        "BIE3-NW-CAL-OPEN"
+      ],
+      "operator": "closing_minus_opening_published_stock",
+      "expected": "110.9",
+      "currency": "GBP",
+      "unit": "billion",
+      "period": "31 December 2025 to 30 September 2026",
+      "limitation": "Not organic growth. Reported42.3 headline growth uses Evelyn FY2025 AUMA comparator; do not subtract across unlike bases to invent an unexplained gap."
+    }
+  ]
+}

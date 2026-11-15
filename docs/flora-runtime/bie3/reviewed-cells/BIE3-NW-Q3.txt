@@ -1,0 +1,17 @@
+BIE-3 individually located reviewed cells. Locators are reviewer notes, not contiguous original text.
+p4 operating PBT /9M2026 /GBP million
+6,543
+p4 cost:income ex litigation/conduct /9M2026
+45.7%
+p3 gross savings /year to date /GBP million
+420
+p5 CAL /30Sep2026 /GBP billion
+1,002.6
+p5 CAL /31Dec2025 /GBP billion
+891.7
+p3 headline CAL growth /including Evelyn FY2025 comparator /GBP billion
+42.3
+p5 customer deposits /30Sep2026 /GBP billion
+454.3
+p5 customer deposits excluding central items /30Sep2026 /GBP billion
+453.4

@@ -1,0 +1,74 @@
+- banner:
+  - link "Skip to main content":
+    - /url: "#visual-content"
+  - link "FLORA":
+    - /url: /
+  - navigation "Primary product navigation":
+    - group: Explore⌄
+  - text: Guest
+  - navigation "Current scope":
+    - link "UK":
+      - /url: /?stream=landscape&selected=banking
+    - text: Banking
+  - navigation "Insight streams":
+    - link "Landscape":
+      - /url: /industries/banking?stream=landscape&layer=regulators&selected=natwest&agenda=service-landscape#stream-landscape
+    - link "Forces":
+      - /url: /industries/banking?stream=forces&layer=regulators&selected=natwest&agenda=service-landscape#stream-forces
+- complementary "Visual exploration":
+  - figure "banking landscape":
+    - text: Conceptual illustration, not actual premises, a legal hierarchy, systems topology or a quantitative pressure map. Labelled navigation remains available without artwork.
+    - link "Lloyds Banking Group":
+      - /url: /enterprises/lloyds
+    - link "Bank of England":
+      - /url: /industries/banking?stream=landscape&layer=regulators&selected=natwest&detail=boe&agenda=service-landscape#insight
+    - link "Payments":
+      - /url: /industries/banking?stream=landscape&layer=regulators&selected=natwest&detail=payments&agenda=service-landscape#insight
+  - group:
+    - text: Explore deeper
+    - navigation "All scene subjects":
+      - link "Barclays":
+        - /url: /enterprises/barclays
+      - link "HSBC UK":
+        - /url: /enterprises/hsbc-uk
+      - link "NatWest Group":
+        - /url: /enterprises/natwest
+      - link "Santander UK":
+        - /url: /enterprises/santander-uk
+      - link "PRA":
+        - /url: /industries/banking?stream=landscape&layer=regulators&selected=natwest&detail=pra&agenda=service-landscape#insight
+      - link "FCA":
+        - /url: /industries/banking?stream=landscape&layer=regulators&selected=natwest&detail=fca&agenda=service-landscape#insight
+- main:
+  - article:
+    - heading "Leadership Agenda" [level=1]
+    - 'region "National Westminster Bank PLC: complaint activity and resolution"':
+      - link "Close Leadership Agenda":
+        - /url: /industries/banking?stream=landscape&layer=regulators&selected=natwest#visual-content
+        - text: ×
+      - 'heading "National Westminster Bank PLC: complaint activity and resolution" [level=2]'
+      - article:
+        - paragraph: FLORA Insight National Westminster Bank PLC received 92,548 complaints and closed 101,586 in January–June 2026; 55.31% of closed complaints were upheld by the firm. These are different cohorts, not a service-quality ranking or backlog measure.
+        - paragraph: 1 January–30 June 2026
+        - group: Sources & reasoning
+      - group: Basis & perspective
+    - navigation "Bank complaint profiles":
+      - link "National Westminster Bank PLC":
+        - /url: /industries/banking?stream=landscape&layer=regulators&selected=natwest&agenda=service-landscape#agenda-insight
+      - link "HSBC UK Bank Plc":
+        - /url: /industries/banking?stream=landscape&layer=regulators&selected=hsbc-uk&agenda=service-landscape#agenda-insight
+      - link "Santander UK Plc":
+        - /url: /industries/banking?stream=landscape&layer=regulators&selected=santander-uk&agenda=service-landscape#agenda-insight
+    - group:
+      - text: Leadership Agenda
+      - navigation "Leadership Agenda":
+        - link "Funding repricing connects customer choice and bank economics":
+          - /url: /industries/banking?stream=landscape&layer=regulators&selected=natwest&agenda=funding-economics#agenda-insight
+        - link "Incident and third-party reporting change in March 2027":
+          - /url: /industries/banking?stream=landscape&layer=regulators&selected=natwest&agenda=reporting-change#agenda-insight
+        - link "Technology oversight extends to the provider layer":
+          - /url: /industries/banking?stream=landscape&layer=regulators&selected=natwest&agenda=provider-oversight#agenda-insight
+        - 'link "National Westminster Bank PLC: complaint activity and resolution"':
+          - /url: /industries/banking?stream=landscape&layer=regulators&selected=natwest&agenda=service-landscape#agenda-insight
+    - group: Context layers
+    - group: Sources & detail
