@@ -1014,7 +1014,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         html = decorate_forms(html, self.headers)
         auto_status = pilot_auto_sign_in_status()
         if auto_status.active and resolve_pilot_session(self.headers) and "</body" in html.lower():
-            html = re.sub(r"</body\s*>", pilot_banner_html() + "</body>", html, count=1, flags=re.IGNORECASE)
+            if '<!--flora-system-notice-->' in html:
+                html = html.replace('<!--flora-system-notice-->', pilot_banner_html(), 1)
+            else:
+                html = re.sub(r"</body\s*>", pilot_banner_html() + "</body>", html, count=1, flags=re.IGNORECASE)
         self._body(html.encode("utf-8"), "text/html; charset=utf-8", status, set_cookie=set_cookie)
 
     def _json(self, payload: dict, status: int = 200) -> None:
