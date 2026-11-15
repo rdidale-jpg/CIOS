@@ -17,15 +17,102 @@ from . import intelligence_presentation as p, visual_v2
 from .research_intelligence import model
 from .research_intelligence.source_import import official_url
 
-POLICY = 'INT-1/1.0'
+POLICY = 'EAI-1/1.0'
 CUTOFF = '2026-11-15'
 REVIEW_UNTIL = '2026-12-15'
-KEYS = MappingProxyType({'uk':('growth-mix','public-value'),
-    'banking':('funding-economics','reporting-change'),
-    'lloyds':('service-recovery','ai-benefits')})
+KEYS = MappingProxyType({'uk':('growth-mix','public-value','cyber-resilience'),
+    'banking':('funding-economics','reporting-change','provider-oversight'),
+    'lloyds':('service-recovery','ai-benefits','funding-base')})
 # These are dependency fingerprints, not copies of evidence or acceptance.
 PINS = Path(__file__).with_name('visual_stream_assets') / 'agenda-dependencies.json'
 CANDIDATE = model.REPO / 'enterprise-knowledge/banking/research-model/source-snapshots/INT1-FCA-Candidate.json'
+# Three explicitly reviewed public releases within the existing source owners.
+# No directory scanning, user-selected path, private query or new source engine.
+EAI_RELEASES = MappingProxyType({
+    'service':('banking','EAI1-FCA-Service-Candidate.json','lloyds','BK-ENT-001',('EAI-LBG-CLOSED','EAI-LBG-UPHELD')),
+    'provider':('banking','EAI1-HMT-CTP-Candidate.json','banking','BK-IND-002',('EAI-UK-CTP-DESIGNATION',)),
+    'cyber':('macro','EAI1-UK-Cyber-Candidate.json','uk','GB',()),
+})
+
+
+def _eai_release(key):
+    from .research_intelligence.registry import snapshot_boundary
+    domain,name,scope,subject,ids=EAI_RELEASES[key]
+    path=snapshot_boundary(domain)/name
+    try:
+        if path.is_symlink():return None
+        package=json.loads(path.read_text())
+    except (OSError,ValueError):return None
+    if (fingerprint(package)!=_pins().get('eai_releases',{}).get(key)
+            or package.get('authority')!='candidate_intelligence'
+            or package.get('canonical_mutation')is not False
+            or package.get('owner_only')
+            or package.get('scope')!=scope or package.get('subject_ref')!=subject):return None
+    source=package['source']
+    if (source.get('owner_only')or source.get('withdrawn') or source.get('retracted') or source.get('core_contradiction')
+            or source.get('freshness')in {'stale','superseded','withdrawn'}
+            or package.get('freshness')in {'stale','superseded','withdrawn'}
+            or source.get('rights',{}).get('status')not in
+            {'permitted_numerical_data','permitted_ogl_factual_extract'}):return None
+    try:model.primary_text(source)
+    except (OSError,ValueError,KeyError):return None
+    return package
+
+
+def _eai_bank_data(data,key):
+    package=_eai_release(key)
+    if package is None:return data
+    _,_,_,subject,ids=EAI_RELEASES[key]
+    if (tuple(c['id']for c in package['claims'])!=ids
+            or any(c['asset_id']!=subject for c in package['claims'])):return data
+    result=deepcopy(data);result['assessed_at']=CUTOFF
+    result['sources'].append(package['source']);result['claims'].extend(package['claims'])
+    try:model.validate(result)
+    except (OSError,ValueError,KeyError):return data
+    return result
+
+
+def _cyber_estimate():
+    package=_eai_release('cyber')
+    if package is None:return None
+    # The existing Macro contract checks source/segment/claim/date/authority;
+    # only a disposable copy receives the proposed source and observations.
+    context=deepcopy(visual_v2.macro.load_context());context['as_of']=CUTOFF
+    context['sources'].append(package['source']);context['observations'].extend(package['observations'])
+    try:visual_v2.macro.validate_context(context)
+    except (OSError,ValueError,KeyError,TypeError):return None
+    s=package['source']
+    return p.Statement('The 2025/26 survey estimated that 43% of eligible UK businesses and 69% of large businesses identified a cyber breach or attack in their preceding 12 months.',
+        'estimated','UK surveyed businesses; not an individual bank','August–December 2025 fieldwork; preceding 12 months per interview',
+        (p.Source(s['title'],s['url'],s['publisher'],s['publication_date'],s['reporting_period'],locator='Summary / Methodology1.3 / Subgroups1.6 / Footnote3'),),
+        'reviewed_excerpt','candidate_intelligence',method='Weighted, self-reported survey estimates. Large businesses have 250 or more employees; size groups are not matched enterprise cohorts.',
+        caveats=('Only identified and reported events are captured; hidden attacks can be missed. These are population estimates, not a bank incident census.',
+            'The survey excludes sole traders, public-sector organisations outside education, and businesses without IT capacity or online presence.'),
+        counter_evidence=('Overall prevalence remained in line with the prior year; the publication does not establish a new surge or a named company control failure.',))
+
+
+def _deposit_change(facts):
+    """One explicit stock-date bridge over two pinned, already public owners.
+
+    Original unit/period strings are checked before mapping their common
+    customer-deposit meaning. Not an expression engine or like-for-like flow.
+    """
+    if len(facts)!=2:return None
+    opening,closing=facts
+    expected=((opening,'GBP billion; year-end balance','31 December 2025'),
+              (closing,'GBP billion; balance at 30 September 2026','Nine months ended / balance sheet at 30 September 2026'))
+    if (opening.scope!=closing.scope or any(not p.eligible(f)or f.semantic_type!='reported'
+            or f.measurement_state not in {'actual','not_applicable'}or f.value is None
+            or f.unit!=unit or f.basis!=unit or f.period!=period for f,unit,period in expected)):return None
+    value=closing.value-opening.value
+    return p.Statement('The difference between the published Group customer-deposit stocks is £'+str(value)+'bn.',
+        'calculated',closing.scope,'31 December 2025 to 30 September 2026; two balance-sheet dates',
+        tuple(dict.fromkeys((*opening.sources,*closing.sources))),'derived_from_inputs','derived_view_not_canonical',
+        measurement_state='actual',value=value,unit='GBP billion',basis='Consolidated Group customer-deposit stocks at the two stated dates',
+        method=f'{closing.value} − {opening.value} = {value} GBP billion; arithmetic comparison of the published stocks.',
+        dependencies=(opening.text,closing.text),dependency_types=('reported','reported'),
+        input_authorities=(opening.canonical_status,closing.canonical_status),
+        caveats=('Not adjusted for consolidation changes, transfers or other balance-sheet effects. This is not an organic inflow, interest-income, margin or supplier-budget measure.',))
 
 
 def fingerprint(value):
@@ -78,18 +165,22 @@ def _claims(data, ids):
             or not model.freshness(data)['eligible']):
         return ()
     if 'LBG-FCA-H126-RECEIVED'in ids:data=_public_data(data)
+    for release in ('service','provider'):
+        if set(ids).intersection(EAI_RELEASES[release][4]):data=_eai_bank_data(data,release)
     by_id={c['id']:c for c in data['claims']};sources={s['id']:s for s in data['sources']}
     rows=[]
     for key in ids:
         c=by_id.get(key)
         if not c or fingerprint(c)!=pins['claims'].get(key):return ()
-        if c.get('freshness') in {'stale','withdrawn','superseded'} or c.get('retracted'):return ()
+        if c.get('owner_only')or c.get('freshness') in {'stale','withdrawn','superseded'} or c.get('retracted')or c.get('core_contradiction'):return ()
         for sid in c['source_ids']:
             s=sources.get(sid)
             if not s or fingerprint(s)!=pins['sources'].get(sid):return ()
             official_url(s['url'])
             if s.get('withdrawn') or s.get('rights',{}).get('status') in {'revoked','denied','unknown'}:return ()
-            if sid=='PR-FCA-COMPLAINTS-H126' and s.get('rights',{}).get('status')!='permitted_numerical_data':return ()
+            if (sid in {'PR-FCA-COMPLAINTS-H126','EAI-FCA-H126-SERVICE'}
+                    and s.get('rights',{}).get('status')!='permitted_numerical_data'):return ()
+            if sid=='EAI-HMT-CTP26'and s.get('rights',{}).get('status')!='permitted_ogl_factual_extract':return ()
         item=p.claim_view(data,c)
         if item is None:return ()
         # Existing owner validates the excerpt; agenda does not republish the
@@ -104,7 +195,8 @@ def _issue(key,title,text,facts,reason,counter,analysis):
     conclusion=p.Statement(text,'insight',facts[0].scope,'; '.join(dict.fromkeys(f.period for f in facts)),
         tuple(dict.fromkeys(s for f in facts for s in f.sources)),
         'repository_interpretation','derived_view_not_canonical',reasoning=reason,
-        dependencies=tuple(f.text for f in facts),counter_evidence=tuple(counter))
+        dependencies=tuple(f.text for f in facts),counter_evidence=tuple(counter),
+        dependency_types=tuple(dict.fromkeys(t for f in facts for t in (f.semantic_type,*f.dependency_types))))
     if p.NON_CORE.search(title) or not p.eligible(conclusion):return None
     return Issue(key,title,conclusion,facts,analysis)
 
@@ -145,6 +237,12 @@ def agenda(scope,data=None):
                     'The existing procurement policy links evaluation commitments with contract delivery; it is not a universal requirement on UK enterprises.',
                     ('Covered tenders and transition rules differ; existing delivery teams may already satisfy the commitments. No Lloyds contract is asserted.',),
                     'PESTLE · political and social; value chain · bid to delivery.'))
+        fact=_cyber_estimate()
+        rows.append(_issue('cyber-resilience','Cyber exposure remains widespread across UK businesses',
+            'The survey estimates indicate broad cyber exposure, especially among large businesses, while overall prevalence remained in line with the prior year.',
+            (fact,)if fact else (), 'The same survey reports prevalence by business size. This describes national exposure, not the cause, loss or control effectiveness at an individual enterprise.',
+            ('The percentages are weighted self-reported estimates from August–December 2025 fieldwork. They establish neither a fresh incident nor an unmet supplier need at a named bank.',),
+            'PESTLE · technological; enterprise-size exposure.'))
     else:
         data=data if data is not None else model.load_assessment()
         if scope=='banking':
@@ -160,15 +258,21 @@ def agenda(scope,data=None):
                 'The common timetable connects operational incident information and third-party reporting, within each regulator’s scope.',
                 ('Sector policy does not establish an individual legal entity’s duties, readiness, supplier shortfall or open procurement.',),
                 'PESTLE · legal and technological; value chain · resilience and suppliers.'))
+            facts=_claims(data,('EAI-UK-CTP-DESIGNATION',))
+            rows.append(_issue('provider-oversight','Technology oversight extends to the provider layer',
+                'The UK critical third-party regime designated four named technology-provider legal entities from 13 July 2026, extending oversight beyond banks’ own controls.',facts,
+                'The designation identifies a regulated provider layer in financial-system resilience; it is distinct from a particular bank’s supplier contract.',
+                ('Designation does not identify a bank customer, workload, spend, concentration exposure, service failure or open procurement. The announcement was published on 10 July, not 13 July.',),
+                'PESTLE · legal and technological; value chain · critical service providers.'))
         else:
-            facts=_claims(data,('LBG-FCA-H126-RECEIVED',))
+            facts=_claims(data,('LBG-FCA-H126-RECEIVED','EAI-LBG-CLOSED','EAI-LBG-UPHELD'))
             if facts:
                 facts=(replace(facts[0],caveats=('Lloyds Bank PLC only, not consolidated Group. A received-complaint count is neither a customer-harm rate nor a cost measure.',
-                    'Contains Financial Conduct Authority information licensed under the Open Government Licence v3.0.')),)
-            rows.append(_issue('service-recovery','Complaint handling is a substantial service activity',
-                'Lloyds Bank PLC’s 118,762 received complaints in January–June 2026 identify a substantial service-handling volume, without establishing deterioration or avoidable cost.',
-                facts,'An observed received-complaint volume supports service-activity scale, not the cause, cost per case, customer harm or a case for an external supplier.',
-                ('No matched historical or customer denominator is used. Closed cases can include earlier complaints; FOS April–September cases are a different window and cohort.',),
+                    'Contains Financial Conduct Authority information licensed under the Open Government Licence v3.0.')),*facts[1:])
+            rows.append(_issue('service-recovery','Complaint volumes and upheld outcomes are distinct',
+                'Lloyds Bank PLC received 118,762 complaints in January–June 2026; 66.12% of complaints closed during that period were upheld by the firm. These describe activity and resolution outcomes separately.',
+                facts,'The FCA published 118,762 received and 118,861 closed complaints. Different cohorts prevent treating their difference as backlog clearance or treating upheld cases as a cost measure.',
+                ('No deterioration, avoidable cost or customer-harm rate is established. Firm-upheld is not independent adjudication. FOS April–September cases are a different window and cohort.',),
                 'Enterprise operating model · service recovery; customer outcomes.'))
             facts=_claims(data,('LBG-AI26-REPORTED','LBG-AI26-EXPECTED','LBG-ENVOY-GOOGLE','LBG-ENVOY-CONTROLS'))
             rows.append(_issue('ai-benefits','AI benefit ambitions sit on existing capabilities',
@@ -176,6 +280,13 @@ def agenda(scope,data=None):
                 facts,'Reported value, future expectation and announced platform capabilities are separate measures. They support a benefit-realisation theme within an existing technology response.',
                 ('Expected 2026 value is not achieved net benefit, supplier revenue or a budget. Company-described controls do not establish effectiveness; internal teams and incumbents may already cover delivery.',),
                 'Enterprise economics · actual versus expected; relational SWOT · existing capability and benefit realisation.'))
+            facts=_claims(data,('LBG-AR25-DEPOSITS','LBG-Q326-DEPOSITS'))
+            movement=_deposit_change(facts)
+            rows.append(_issue('funding-base','Published Group deposits are £6.3bn higher',
+                'Published Group customer deposits rose from £496.5bn at 31 December 2025 to £502.8bn at 30 September 2026, a £6.3bn stock difference; this describes funding scale, not interest-income growth.',
+                (*facts,movement)if movement else (), 'The arithmetic uses two dated, already-public Group customer-deposit disclosures and keeps balance-sheet stocks separate from profit flows.',
+                ('The comparison is not adjusted for consolidation changes, transfers or other balance-sheet effects. It establishes no organic inflow, price sensitivity, margin effect or available supplier budget.',),
+                'Enterprise economics · deposits and funding; stock-date bridge.'))
     return tuple(r for r in rows if r is not None)
 
 
@@ -194,9 +305,11 @@ def detail(ctx,link,issues):
     e=escape
     body='<section class="focus agenda-focus" id="agenda-insight" tabindex="-1" aria-labelledby="agenda-title"><a class="close close-insight" href="'+e(link(ctx,agenda='')+'#visual-content',quote=True)+'" aria-label="Close Leadership Agenda">×</a><h2 id="agenda-title">'+e(row.title)+'</h2>'
     body+=p.render(row.conclusion)
-    body+='<details class="agenda-basis"><summary>Reported basis &amp; perspective</summary>'
+    body+='<details class="agenda-basis"><summary>Basis &amp; perspective</summary>'
     body+=''.join(p.render(f)for f in row.facts)+'<p>'+e(row.analysis)+'</p>'
     if row.key=='service-recovery':
         body+='<p class="source-licence">Contains Financial Conduct Authority information licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="noreferrer">Open Government Licence v3.0</a>.</p>'
+    if row.key in {'cyber-resilience','provider-oversight'}:
+        body+='<p class="source-licence">Contains public sector information licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="noreferrer">Open Government Licence v3.0</a>.</p>'
     body+='</details>'
     return body+'</section>'

@@ -1,0 +1,104 @@
+{
+  "base_sha": "8a53777d1dec359f56b66e533d512c0a86881939",
+  "unchanged": [
+    {
+      "path": "cios/applications/flora/research_intelligence/source_import.py",
+      "sha256": "e851f66a9c4540f538881e60ae451b0ad7c889d20cdd2ae5f4789d6490f7ebc7"
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/model.py",
+      "sha256": "079c15058a8b88d9695b8575ab8351e50a043233793220b8cb7fafc5db7c0519"
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/macro_intelligence.py",
+      "sha256": "82d6b9831f46646e4f7fd831c2a534c5ee5feb6cee007a97063f303b82bd56a3"
+    },
+    {
+      "path": "cios/applications/flora/live/source_registry.py",
+      "sha256": "5179424df77ca5c21ca65ec10dfb41709cdf68be76652581992581ee90a9125b"
+    },
+    {
+      "path": "cios/applications/flora/public_routes.py",
+      "sha256": "a06028a19e2f6a858927ae5591937152beaa33b6490884130b681334a3def755"
+    },
+    {
+      "path": "cios/applications/flora/security_web.py",
+      "sha256": "8e83859a36623f8e0cfdeb794204b9785b65895025cc3ac72fef70462140e558"
+    },
+    {
+      "path": "cios/applications/flora/access.py",
+      "sha256": "da0abc2923c2c02d93e65c3ba986df879c6a71946b2e6b567dfca08c0c8ceb51"
+    },
+    {
+      "path": "cios/applications/flora/offers.py",
+      "sha256": "f693717c924ac53d6da3bf9206b5546aa040bc296625f2b4401be70fb09e0358"
+    },
+    {
+      "path": "cios/applications/flora/seller_development.py",
+      "sha256": "c6dfd126de96b1b30a222c43bfcea579f5ea15c810e38a9c80b4be2f3d9e647d"
+    },
+    {
+      "path": "cios/applications/flora/sales_pipeline.py",
+      "sha256": "ac16d29added41baa4f1a640cddd5fa5b8a5e1174291c98536330826b348fb23"
+    },
+    {
+      "path": "cios/applications/flora/memory/models.py",
+      "sha256": "69e8c03b3873320768240af3772791778eb35660b0f711fd985e28f53191ba33"
+    },
+    {
+      "path": "cios/applications/flora/memory/service.py",
+      "sha256": "f13fad1f762162e564e98c1a0fc799ba2588498b94e0885857f5ef0a1bc3bb88"
+    },
+    {
+      "path": "cios/applications/flora/blueprint_import/review.py",
+      "sha256": "e78e1cd126b781883c378f9bb2c55073dfc861ffcdef6f01ac8e59e8cdc62ad9"
+    },
+    {
+      "path": "cios/applications/flora/blueprint_import/promotion.py",
+      "sha256": "3cc1f396203addffe92f93b1a8173ad4edb7a9db55b02b7c2308455d40d441c2"
+    },
+    {
+      "path": "cios/applications/flora/visual_streams.py",
+      "sha256": "0c1097339397ae05c6e55860cc20113457b009cd7046899d43a34f1d50c546a1"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/artwork.json",
+      "sha256": "210107bfbee2efc8ca11f4b144337831b5c3835068f1bdeb26a9a16e5072d634"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/scenes.json",
+      "sha256": "b6ba643e911446ac3c80d0fb4ced40eeaac451d970dbd3381bf96d2ca088a3bd"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Understanding-Review.json",
+      "sha256": "66209037db188db27b216574076b71a818cf0f290245791fbe2945f0162e7fcd"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/Macro-Context-v1.json",
+      "sha256": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9"
+    },
+    {
+      "path": "cios/applications/flora/visual_v2_assets/economy.json",
+      "sha256": "78b4bb90c02b9af8132d7f8eca3c1832b6a1047feb382f9473d463d44e1f31cd"
+    },
+    {
+      "path": "tools/ci/flora_ci.py",
+      "sha256": "6538c0b1c02aba99e890c026ef633b3f68e740ffd8c54cdfb8eb54068b8817c4"
+    },
+    {
+      "path": "tools/ci/flora-baseline-v1.json",
+      "sha256": "901a6719b6f90247fc0b4daeaaf217e402abf211606394917f59ea67c5f9e7cf"
+    },
+    {
+      "path": ".github/workflows/flora-validation.yml",
+      "sha256": "f3a398d7c243d845978f3dca195ac6edfa7b9cb50335ea2dfccd2b16dd877fd1"
+    }
+  ],
+  "original_source_expectations": 163,
+  "new_exact_proposal_and_excerpt_files": 6,
+  "canonical_mutation": false
+}

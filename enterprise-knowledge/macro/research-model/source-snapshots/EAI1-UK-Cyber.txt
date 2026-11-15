@@ -1,0 +1,26 @@
+Summary line112; prevalence fragment
+Just over four in ten businesses (43%)
+
+Summary line113; trend fragment
+Overall prevalence of cyber breaches or attacks has remained in line with last year
+
+Summary line114; size comparison
+medium (65%) and large (69%) businesses were more likely to have experienced a cyber breach or attack in the last 12 months compared to micro (42%) and small (46%) businesses.
+
+Methodology1.3 line206; fieldwork fragment
+Between August to December 2025
+
+Methodology1.3 line206; weighting
+The data for businesses and charities have been weighted to be statistically representative of these two populations.
+
+Methodology1.3 line208; eligibility
+Sole traders and public-sector organisations (excluding education) are outside the scope of the survey. In addition, businesses with no IT (Information Technology) capacity or online presence were deemed ineligible.
+
+Subgroups1.6 line262; large-business definition
+large businesses (250 or more employees)
+
+Footnote3 line1800; recall window
+where organisations were asked about their cyber security experiences over the preceding 12 months.
+
+Summary line111; identification limitation
+The survey only includes the breaches or attacks that organisations were able to identify and willing to report.

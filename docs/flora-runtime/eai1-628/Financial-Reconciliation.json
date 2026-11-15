@@ -1,0 +1,46 @@
+{
+  "authority": "Owner-side research QA only; not admitted runtime financial facts",
+  "source_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+  "source_review_reference": "turn330671view2",
+  "publication_date": "2026-07-30",
+  "issuer": "LLOYDS BANKING GROUP PLC",
+  "basis": "Underlying/APM; half-years Jan1–Jun30, GBPmillion; expense lines negative",
+  "Retail_H126": {
+    "net_interest_income": 5139,
+    "other_income": 1406,
+    "lease_depreciation": -835,
+    "net_income": 5710,
+    "operating_costs": -2872,
+    "remediation": -17,
+    "impairment": -565,
+    "underlying_profit_before_tax": 2256
+  },
+  "Retail_H125": {
+    "net_interest_income": 4709,
+    "other_income": 1276,
+    "lease_depreciation": -706,
+    "net_income": 5279,
+    "operating_costs": -2922,
+    "remediation": -41,
+    "impairment": -342,
+    "underlying_profit_before_tax": 1974
+  },
+  "Group_H126": {
+    "net_income": 9747,
+    "operating_costs": -4876,
+    "remediation": -39,
+    "impairment": -617,
+    "underlying_profit_before_tax": 4215
+  },
+  "definitions": [
+    "Retail lease-depreciation line carries note1: net of £32m disposal losses; do not present as pure gross depreciation",
+    "Retail operating costs exclude £17m separately reported remediation; total underlying costs are£2889m",
+    "Group lease depreciation and Retail lease depreciation are different scopes",
+    "£130m other-income increase minus £129m increased lease charge equals£1m arithmetic difference, not a leasing margin",
+    "Retail underlying profit increased£282m; do not selectively present only adverse expense movement",
+    "No H1 actuals are compared with nine-month Q3 flows or 2030 targets as if periods matched"
+  ],
+  "runtime_admission": false,
+  "original_byte_hash": null,
+  "canonical_import": false
+}
