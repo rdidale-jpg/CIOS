@@ -12,10 +12,10 @@ async function shot(p,name){await p.screenshot({path:path.join(cfg.output,name+'
  for(const[device,size]of Object.entries(sizes)){
   await p.setViewportSize(size);
   if(cfg.baseline){await loaded(p,cfg.baseline+'/industries/banking');check(await p.getByRole('link',{name:'Nationwide · earnings and integration economics',exact:true}).count()===0,device+' baseline no issuer earnings entry');await shot(p,'before-'+device)}
-  await loaded(p,cfg.base+'/industries/banking?selected=nationwide');check((await p.locator('#visual-content').innerText()).includes('100,886'),device+' selected legal-bank service insight');
+  await loaded(p,cfg.base+'/industries/banking?selected=nationwide');check((await p.locator('#visual-content').innerText()).includes('100,886'),device+' selected legal-bank service insight');check((await p.locator('#visual-content').innerText()).split('100,886').length===2,device+' default figures appear once');
   await p.getByRole('link',{name:'Nationwide · earnings and integration economics',exact:true}).click();check(new URL(p.url()).searchParams.get('selected')==='nationwide',device+' enterprise selection retained');
   check(await p.locator('body>[data-region]').count()===3,device+' exactly Top Left Main');check(await p.locator('h1').count()===1,device+' one title');
-  const text=await p.locator('#visual-content').innerText();check(text.includes('£2.026bn')&&text.includes('£1.49bn')&&text.includes('£399m member reward')&&text.includes('FLORA INSIGHT'),device+' real earnings and mutual context');
+  const text=await p.locator('#visual-content').innerText();check(text.includes('£2.026bn')&&text.includes('£1.49bn')&&text.includes('£399m member reward')&&await p.locator('.intelligence-statement[data-semantic-type=insight]').isVisible(),device+' real earnings and mutual context');
   check(!await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),device+' no overflow');await shot(p,'after-'+device);
   await p.locator('.chart-data>summary').first().focus();await p.keyboard.press('Enter');check(await p.locator('.chart-data').first().evaluate(e=>e.open),device+' keyboard exact data');
   await p.locator('.financial-basis>summary').tap();check(await p.locator('.financial-basis').evaluate(e=>e.open),device+' touch source details');check((await p.locator('.financial-basis').innerText()).includes('2026-05-21'),device+' original source date');await shot(p,'inspection-'+device);

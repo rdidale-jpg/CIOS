@@ -170,3 +170,10 @@ def test_source_missing_identity_does_not_block_unrelated_research(retained):
     mutate(retained,lambda d:d['sources'].append({'withdrawn':True}))
     assert agenda.routine_service_issue('starling')
     assert f._current_inputs(KEY).measurements
+
+
+
+def test_selected_service_default_uses_progressive_detail_instead_of_repeating_figures():
+    html=visual.render('/industries/banking',{'selected':['starling']})
+    assert '<details><summary>Measurements and sources</summary>' in html
+    assert '15,223' in html and '14,362' in html and '44.49%' in html

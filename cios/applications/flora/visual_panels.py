@@ -216,7 +216,7 @@ def _banking(ctx,data,issues):
     selected = agenda.bank_service_issue(ctx.selected, data) if independent or any(r.key=='service-landscape' for r in issues) else None
     if selected:
         return ('<p class="eyebrow">Banking · enterprise intelligence</p><h1>'+e(agenda.BANK_SERVICE[ctx.selected][0])+'</h1>'
-                +p.render(selected.conclusion)+''.join(p.render(f) for f in selected.facts)
+                +'<section class="editorial-issue" data-intelligence="service-landscape">'+p.render(selected.conclusion)+'<details><summary>Measurements and sources</summary>'+''.join(p.render(f) for f in selected.facts)+'</details></section>'
                 +agenda.bank_service_navigation(ctx,v.url,issues,data))
     facts=_facts(data,['UK-RATE-NOV26','UK-PRA-REPORT27','UK-FCA-REPORT27','UK-VALUE'])
     rate=next((f for f in facts if f.unit=='percent; policy rate at decision'),None)

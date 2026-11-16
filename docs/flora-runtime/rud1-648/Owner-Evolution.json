@@ -40,7 +40,7 @@
       "99470fcfe10b4b3226cb71525c753b25776552ed0e52dbdc439e2fa36a13d5d9",
       "11fe42d9a12839726439f90ab0fa21ab01c5811ee680bf7b1a6ad1dd4718aa7d"
     ],
-    "reviewed_sha256": "8a5dea910e5170dd2a6569320c63d65fb78cdd2347c2856c23dcc967ce7ac31d"
+    "reviewed_sha256": "70df4fcce63fc98d125db0da928a32192f64af8c5a22aa627c0ff14fdc48704c"
   },
   "cios/applications/flora/financial_intelligence/candidate_analytics.py": {
     "reason": "Reusable working Source adapter, immutable Financial persistence and explicit recipe replay; original BoE adapter/identity preserved.",
