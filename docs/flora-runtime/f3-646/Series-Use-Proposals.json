@@ -1,0 +1,312 @@
+[
+  {
+    "proposal_id": "F3-SERIES-NW",
+    "version": "1",
+    "status": "proposed",
+    "category": "issuer_results",
+    "publisher": "NatWest Group plc",
+    "document_series": "Q3 2026 Interim Management Statement selected original series (scope proposed, not admitted)",
+    "reporting_subjects": [
+      "NatWest Group plc and subsidiaries"
+    ],
+    "original_prefixes": [
+      "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/"
+    ],
+    "seed_documents": [
+      "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf"
+    ],
+    "terms_url": "https://www.natwestgroup.com/hygiene/legal-information.html",
+    "terms_review_record_revision": "97f97285366060538e4ab3aabe5640bf46d238ae90ebb8491a1aba7c3ddb26d9",
+    "terms_applicability": "verified_for_series",
+    "reviewed_on": "2026-11-16",
+    "review_due": "2026-12-16",
+    "basis_for_review": "Assess isolated factual numerical reuse separately from protected expression, acquisition copies, database/contract rights and permitted commercial purposes. No basis is accepted here.",
+    "basis_evidence_urls": [
+      "https://www.natwestgroup.com/hygiene/legal-information.html",
+      "https://www.gov.uk/government/publications/report-and-impact-assessment-on-copyright-and-artificial-intelligence/report-on-copyright-and-artificial-intelligence"
+    ],
+    "unresolved_legal_questions": [
+      "Exact original series and use-specific lawful basis, including contract and database rights.",
+      "Access/processing, minimal retention, linking, seller display and exports require separate scope decisions.",
+      "Cumulative extraction and source/terms changes require exception handling; operating caps are not legal safe harbours."
+    ],
+    "proposed_uses": [
+      "access",
+      "processing",
+      "numerical_reuse",
+      "measurement_retention",
+      "source_linking",
+      "seller_display"
+    ],
+    "proposed_audiences": [
+      "owner_review",
+      "private_seller"
+    ],
+    "purpose": "Attributed financial analytical working data and reproducible numerical derivation",
+    "proposed_retention": "Minimal typed measurements, definitions and necessary provenance under the future owner-approved retention decision; no original PDF, table image or prose archive.",
+    "attribution": "Original issuer, exact document/version, financial subject, dates, location and applicable licence/rights basis; no endorsement.",
+    "proposed_link_conditions": "Resolve exact publisher linking restrictions; no framing, graphics redistribution or assumption that citation grants permission.",
+    "exclusions": [
+      "Full text, graphics, logos and complete tables.",
+      "AI training, bulk collection, third-party data and public/third-party export.",
+      "Canonical Evidence acceptance, external supplier scope or commercial demand."
+    ],
+    "maximum_measurements_per_document": 24,
+    "maximum_documents_per_window": 4,
+    "window_days": 366,
+    "required_decisions": [
+      "source_legal",
+      "source_owner",
+      "chief_architect",
+      "resource_owner"
+    ]
+  },
+  {
+    "proposal_id": "F3-SERIES-HS",
+    "version": "1",
+    "status": "proposed",
+    "category": "issuer_results",
+    "publisher": "HSBC Holdings plc",
+    "document_series": "3Q2026 Data Pack selected original series (scope proposed, not admitted)",
+    "reporting_subjects": [
+      "HSBC UK Bank plc; UK ring-fenced bank"
+    ],
+    "original_prefixes": [
+      "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/3q/pdfs/hsbc-holdings-plc/"
+    ],
+    "seed_documents": [
+      "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/3q/pdfs/hsbc-holdings-plc/261027-3q-2026-data-pack-pdf-file.pdf"
+    ],
+    "terms_url": "https://www.hsbc.com/terms-and-conditions",
+    "terms_review_record_revision": "103da099abbec4dd1cfb528830e793a299d58f1e96a68e46bbc1488a4f4d9d6e",
+    "terms_applicability": "verified_for_series",
+    "reviewed_on": "2026-11-16",
+    "review_due": "2026-12-16",
+    "basis_for_review": "Assess isolated factual numerical reuse separately from protected expression, acquisition copies, database/contract rights and permitted commercial purposes. No basis is accepted here.",
+    "basis_evidence_urls": [
+      "https://www.hsbc.com/terms-and-conditions",
+      "https://www.gov.uk/government/publications/report-and-impact-assessment-on-copyright-and-artificial-intelligence/report-on-copyright-and-artificial-intelligence"
+    ],
+    "unresolved_legal_questions": [
+      "Exact original series and use-specific lawful basis, including contract and database rights.",
+      "Access/processing, minimal retention, linking, seller display and exports require separate scope decisions.",
+      "Cumulative extraction and source/terms changes require exception handling; operating caps are not legal safe harbours."
+    ],
+    "proposed_uses": [
+      "access",
+      "processing",
+      "numerical_reuse",
+      "measurement_retention",
+      "source_linking",
+      "seller_display"
+    ],
+    "proposed_audiences": [
+      "owner_review",
+      "private_seller"
+    ],
+    "purpose": "Attributed financial analytical working data and reproducible numerical derivation",
+    "proposed_retention": "Minimal typed measurements, definitions and necessary provenance under the future owner-approved retention decision; no original PDF, table image or prose archive.",
+    "attribution": "Original issuer, exact document/version, financial subject, dates, location and applicable licence/rights basis; no endorsement.",
+    "proposed_link_conditions": "Resolve exact publisher linking restrictions; no framing, graphics redistribution or assumption that citation grants permission.",
+    "exclusions": [
+      "Full text, graphics, logos and complete tables.",
+      "AI training, bulk collection, third-party data and public/third-party export.",
+      "Canonical Evidence acceptance, external supplier scope or commercial demand."
+    ],
+    "maximum_measurements_per_document": 24,
+    "maximum_documents_per_window": 4,
+    "window_days": 366,
+    "required_decisions": [
+      "source_legal",
+      "source_owner",
+      "chief_architect",
+      "resource_owner"
+    ]
+  },
+  {
+    "proposal_id": "F3-SERIES-SA",
+    "version": "1",
+    "status": "proposed",
+    "category": "issuer_results",
+    "publisher": "Santander UK Group Holdings plc",
+    "document_series": "Q3-26 Quarterly Management Statement selected original series (scope proposed, not admitted)",
+    "reporting_subjects": [
+      "Santander UK Group Holdings plc and subsidiaries"
+    ],
+    "original_prefixes": [
+      "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:65eface3-a6db-48c5-8506-460893b3385f/original/as/"
+    ],
+    "seed_documents": [
+      "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:65eface3-a6db-48c5-8506-460893b3385f/original/as/Santander%20UK%20Q3-26%20QMS.pdf"
+    ],
+    "terms_url": "https://www.santander.co.uk/personal/support/customer-support/legal-information",
+    "terms_review_record_revision": "0fa0743d1e977c5f77ade96b6410a0290f2e3ed356f7ff9a9fade5e963f812c7",
+    "terms_applicability": "unresolved",
+    "reviewed_on": "2026-11-16",
+    "review_due": "2026-12-16",
+    "basis_for_review": "Assess isolated factual numerical reuse separately from protected expression, acquisition copies, database/contract rights and permitted commercial purposes. No basis is accepted here.",
+    "basis_evidence_urls": [
+      "https://www.santander.co.uk/personal/support/customer-support/legal-information",
+      "https://www.gov.uk/government/publications/report-and-impact-assessment-on-copyright-and-artificial-intelligence/report-on-copyright-and-artificial-intelligence"
+    ],
+    "unresolved_legal_questions": [
+      "Exact original series and use-specific lawful basis, including contract and database rights.",
+      "Access/processing, minimal retention, linking, seller display and exports require separate scope decisions.",
+      "Cumulative extraction and source/terms changes require exception handling; operating caps are not legal safe harbours."
+    ],
+    "proposed_uses": [
+      "access",
+      "processing",
+      "numerical_reuse",
+      "measurement_retention",
+      "source_linking",
+      "seller_display"
+    ],
+    "proposed_audiences": [
+      "owner_review",
+      "private_seller"
+    ],
+    "purpose": "Attributed financial analytical working data and reproducible numerical derivation",
+    "proposed_retention": "Minimal typed measurements, definitions and necessary provenance under the future owner-approved retention decision; no original PDF, table image or prose archive.",
+    "attribution": "Original issuer, exact document/version, financial subject, dates, location and applicable licence/rights basis; no endorsement.",
+    "proposed_link_conditions": "Resolve exact publisher linking restrictions; no framing, graphics redistribution or assumption that citation grants permission.",
+    "exclusions": [
+      "Full text, graphics, logos and complete tables.",
+      "AI training, bulk collection, third-party data and public/third-party export.",
+      "Canonical Evidence acceptance, external supplier scope or commercial demand."
+    ],
+    "maximum_measurements_per_document": 24,
+    "maximum_documents_per_window": 4,
+    "window_days": 366,
+    "required_decisions": [
+      "source_legal",
+      "source_owner",
+      "chief_architect",
+      "resource_owner"
+    ]
+  },
+  {
+    "proposal_id": "F3-SERIES-NB",
+    "version": "1",
+    "status": "proposed",
+    "category": "issuer_results",
+    "publisher": "Nationwide Building Society",
+    "document_series": "Preliminary Results2026 selected original series (scope proposed, not admitted)",
+    "reporting_subjects": [
+      "Nationwide Building Society Group"
+    ],
+    "original_prefixes": [
+      "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/"
+    ],
+    "seed_documents": [
+      "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf"
+    ],
+    "terms_url": "https://www.nationwide.co.uk/business/terms-and-conditions",
+    "terms_review_record_revision": "97ba64348c3da573e21d97e9d27f32f6cc4d084954eca7695bcd79fa76908a2e",
+    "terms_applicability": "unresolved",
+    "reviewed_on": "2026-11-16",
+    "review_due": "2026-12-16",
+    "basis_for_review": "Assess isolated factual numerical reuse separately from protected expression, acquisition copies, database/contract rights and permitted commercial purposes. No basis is accepted here.",
+    "basis_evidence_urls": [
+      "https://www.nationwide.co.uk/business/terms-and-conditions",
+      "https://www.gov.uk/government/publications/report-and-impact-assessment-on-copyright-and-artificial-intelligence/report-on-copyright-and-artificial-intelligence"
+    ],
+    "unresolved_legal_questions": [
+      "Exact original series and use-specific lawful basis, including contract and database rights.",
+      "Access/processing, minimal retention, linking, seller display and exports require separate scope decisions.",
+      "Cumulative extraction and source/terms changes require exception handling; operating caps are not legal safe harbours."
+    ],
+    "proposed_uses": [
+      "access",
+      "processing",
+      "numerical_reuse",
+      "measurement_retention",
+      "source_linking",
+      "seller_display"
+    ],
+    "proposed_audiences": [
+      "owner_review",
+      "private_seller"
+    ],
+    "purpose": "Attributed financial analytical working data and reproducible numerical derivation",
+    "proposed_retention": "Minimal typed measurements, definitions and necessary provenance under the future owner-approved retention decision; no original PDF, table image or prose archive.",
+    "attribution": "Original issuer, exact document/version, financial subject, dates, location and applicable licence/rights basis; no endorsement.",
+    "proposed_link_conditions": "Resolve exact publisher linking restrictions; no framing, graphics redistribution or assumption that citation grants permission.",
+    "exclusions": [
+      "Full text, graphics, logos and complete tables.",
+      "AI training, bulk collection, third-party data and public/third-party export.",
+      "Canonical Evidence acceptance, external supplier scope or commercial demand."
+    ],
+    "maximum_measurements_per_document": 24,
+    "maximum_documents_per_window": 4,
+    "window_days": 366,
+    "required_decisions": [
+      "source_legal",
+      "source_owner",
+      "chief_architect",
+      "resource_owner"
+    ]
+  },
+  {
+    "proposal_id": "F3-SERIES-ST",
+    "version": "1",
+    "status": "proposed",
+    "category": "issuer_announcement",
+    "publisher": "Starling Group",
+    "document_series": "FY2026 results announcement selected original series (scope proposed, not admitted)",
+    "reporting_subjects": [
+      "Starling Group"
+    ],
+    "original_prefixes": [
+      "https://www.starlingbank.com/news/starling-delivers-fifth-year-of-profitability-and-accelerates-global-growth-strategy/"
+    ],
+    "seed_documents": [
+      "https://www.starlingbank.com/news/starling-delivers-fifth-year-of-profitability-and-accelerates-global-growth-strategy/"
+    ],
+    "terms_url": "https://www.starlingbank.com/legal/terms-of-use/",
+    "terms_review_record_revision": "f113623d9af4bb79875a99ec8a4bf49f5b1f6328f5797e29c3eeae063916aa0f",
+    "terms_applicability": "verified_for_series",
+    "reviewed_on": "2026-11-16",
+    "review_due": "2026-12-16",
+    "basis_for_review": "Assess isolated factual numerical reuse separately from protected expression, acquisition copies, database/contract rights and permitted commercial purposes. No basis is accepted here.",
+    "basis_evidence_urls": [
+      "https://www.starlingbank.com/legal/terms-of-use/",
+      "https://www.gov.uk/government/publications/report-and-impact-assessment-on-copyright-and-artificial-intelligence/report-on-copyright-and-artificial-intelligence"
+    ],
+    "unresolved_legal_questions": [
+      "Exact original series and use-specific lawful basis, including contract and database rights.",
+      "Access/processing, minimal retention, linking, seller display and exports require separate scope decisions.",
+      "Cumulative extraction and source/terms changes require exception handling; operating caps are not legal safe harbours."
+    ],
+    "proposed_uses": [
+      "access",
+      "processing",
+      "numerical_reuse",
+      "measurement_retention",
+      "source_linking",
+      "seller_display"
+    ],
+    "proposed_audiences": [
+      "owner_review",
+      "private_seller"
+    ],
+    "purpose": "Attributed financial analytical working data and reproducible numerical derivation",
+    "proposed_retention": "Minimal typed measurements, definitions and necessary provenance under the future owner-approved retention decision; no original PDF, table image or prose archive.",
+    "attribution": "Original issuer, exact document/version, financial subject, dates, location and applicable licence/rights basis; no endorsement.",
+    "proposed_link_conditions": "Resolve exact publisher linking restrictions; no framing, graphics redistribution or assumption that citation grants permission.",
+    "exclusions": [
+      "Full text, graphics, logos and complete tables.",
+      "AI training, bulk collection, third-party data and public/third-party export.",
+      "Canonical Evidence acceptance, external supplier scope or commercial demand."
+    ],
+    "maximum_measurements_per_document": 24,
+    "maximum_documents_per_window": 4,
+    "window_days": 366,
+    "required_decisions": [
+      "source_legal",
+      "source_owner",
+      "chief_architect",
+      "resource_owner"
+    ]
+  }
+]

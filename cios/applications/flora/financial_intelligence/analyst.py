@@ -196,13 +196,13 @@ def _result_card(result, by_id):
     amount = Decimal(result['value'])
     if not amount.is_finite(): raise ValueError('Invalid result')
     if result['unit']=='%':
-        text=_number(amount,4)+'%'; label='Relative stock difference' if inputs[0].period.kind=='instant' else 'Relative difference'
+        text=_number(amount,4)+'%'; label='Relative stock difference' if inputs[0].period.kind=='instant' else 'Relative annual difference' if result.get('comparison')=='duration_dates' else 'Relative difference'
     else:
         _,factor,suffix = _display_scale(inputs)
         # Calculation's original result uses the original common source scale.
         from .normalisation import SCALE_FACTORS
         text = _money(amount*SCALE_FACTORS[inputs[0].value.scale]/factor,inputs[0].value.currency,suffix,3)
-        label = 'Stock difference' if inputs[0].period.kind=='instant' else 'Reconciled endpoint' if result['formula']=='signed_bridge' else 'Absolute difference'
+        label = 'Stock difference' if inputs[0].period.kind=='instant' else 'Reconciled endpoint' if result['formula']=='signed_bridge' else 'Annual difference' if result.get('comparison')=='duration_dates' else 'Absolute difference'
     state = '' if result['measurement_state']=='actual' else ' · '+result['measurement_state'].title()
     return '<div><span class="metric-label">'+semantics.LABELS[expected]+e(state)+' · '+e(label)+'</span><strong>'+e(text)+'</strong><span class="metric-period">'+e(_period(inputs[0]))+' → '+e(_period(inputs[-1]))+'</span></div>'
 

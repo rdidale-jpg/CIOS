@@ -23,7 +23,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[2]))
 BASE='98fcab91aa94180b11c41c60f4cf7e4d4ad39e40'
 
 
-def run(output,preview=False,baseline_root=None):
+def run(output,preview=False,baseline_root=None,*,baseline_sha=BASE,baseline_financial_main=False):
     output=Path(output).resolve();output.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='flora-f2-isolated-') as scratch:
         root=Path(scratch)
@@ -70,7 +70,7 @@ def run(output,preview=False,baseline_root=None):
             assert review._run_path(run_id).read_bytes()==stored
             source_path.write_bytes(source_bytes)
             proof={'head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=original_repo,text=True).strip(),
-                'base':BASE,'data':'Two actual retained permitted BoE measurements; no new bank financials',
+                'base':baseline_sha,'data':'Two actual retained permitted BoE measurements; no new bank financials',
                 'authority':'Synthetic offline identities/workspace/ACL; no production authority',
                 'storage':'Actual existing Financial ai_financial_reports/runs in temporary FLORA_DATA_DIR',
                 'run_id':run_id,'raw_candidate':raw,'projection_after_reload':projection,
@@ -92,7 +92,7 @@ def run(output,preview=False,baseline_root=None):
                 baseline=None
                 if baseline_root:
                     baseline_path=Path(baseline_root).resolve()
-                    assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=baseline_path,text=True).strip()==BASE
+                    assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=baseline_path,text=True).strip()==baseline_sha
                     code='''import ssl,sys
 from http.server import ThreadingHTTPServer
 from cios.applications.flora.web.app import FloraWebHandler
@@ -110,7 +110,8 @@ s.serve_forever()
                 cfg=root/'browser.json'
                 assert source_path.is_relative_to(root)
                 cfg.write_text(json.dumps({'base':'https://127.0.0.1:8994','baseline':'https://127.0.0.1:8995'if baseline else None,
-                    'password':password,'run_id':run_id,'output':str(output),'source_package':str(source_path)}))
+                    'password':password,'run_id':run_id,'output':str(output),'source_package':str(source_path),
+                    'baseline_financial_main':baseline_financial_main}))
                 try:subprocess.run(['node',str(original_repo/'tools/ci/flora_f2_preview.cjs'),str(cfg)],check=True)
                 finally:
                     server.shutdown();server.server_close();thread.join(2)

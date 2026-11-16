@@ -1,0 +1,1948 @@
+[
+  {
+    "id": "natwest-group",
+    "source_id": "F3-NW-REVIEW",
+    "reported_subject": "NatWest Group plc and subsidiaries",
+    "research_subject_id": "research-subject:natwest-group",
+    "resource_ref": null,
+    "authority": "owner_review_candidate_not_admitted_or_canonical",
+    "states": {
+      "researched": "selected_original_numerical_assertions_reverified",
+      "source_use_eligible": false,
+      "source_use_reason": "unresolved_for_proposed_uses",
+      "technical_origin_admitted": false,
+      "resource_authority_bound": false,
+      "canonical_acceptance": "not_requested",
+      "financial_run_persisted": false,
+      "actually_visible": false
+    },
+    "measurements": [
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NW-total_income-2026-09-30-0",
+        "subject_id": "research-subject:natwest-group",
+        "subject_name": "NatWest Group plc and subsidiaries",
+        "perimeter": "NatWest Group plc and subsidiaries; selected consolidated reporting boundary",
+        "metric": "total_income",
+        "definition": "total income; original selected issuer line",
+        "accounting_basis": "reported_group_operating",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "13502",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 13502 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NW-total_income-2026-09-30-0",
+          "revision": "e60a7421c9de6267a3d02039c9fb7bf2c1654392dd9196a518f2f36e97a31742",
+          "source_id": "F3-NW-REVIEW",
+          "source_revision": "97f97285366060538e4ab3aabe5640bf46d238ae90ebb8491a1aba7c3ddb26d9",
+          "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf",
+          "title": "Q3 2026 Interim Management Statement",
+          "publisher": "NatWest Group plc",
+          "locator": "PDFp4 / printed3; 9M2026 column",
+          "published": "2026-10-30",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NW-operating_costs-2026-09-30-1",
+        "subject_id": "research-subject:natwest-group",
+        "subject_name": "NatWest Group plc and subsidiaries",
+        "perimeter": "NatWest Group plc and subsidiaries; selected consolidated reporting boundary",
+        "metric": "operating_costs",
+        "definition": "operating costs; original selected issuer line",
+        "accounting_basis": "reported_group_operating",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-6259",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP -6259 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NW-operating_costs-2026-09-30-1",
+          "revision": "480749e75ea3f1adf6b916173b04f25742e42d84630afed9998d2e3a521fa53e",
+          "source_id": "F3-NW-REVIEW",
+          "source_revision": "97f97285366060538e4ab3aabe5640bf46d238ae90ebb8491a1aba7c3ddb26d9",
+          "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf",
+          "title": "Q3 2026 Interim Management Statement",
+          "publisher": "NatWest Group plc",
+          "locator": "PDFp4 / printed3; 9M2026 column",
+          "published": "2026-10-30",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NW-credit_impairment-2026-09-30-2",
+        "subject_id": "research-subject:natwest-group",
+        "subject_name": "NatWest Group plc and subsidiaries",
+        "perimeter": "NatWest Group plc and subsidiaries; selected consolidated reporting boundary",
+        "metric": "credit_impairment",
+        "definition": "credit impairment; original selected issuer line",
+        "accounting_basis": "reported_group_operating",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-700",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP -700 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NW-credit_impairment-2026-09-30-2",
+          "revision": "36156c5ab0e4492d00501088d3eb5a7a0bf683328f758a53b78bd45e189ded80",
+          "source_id": "F3-NW-REVIEW",
+          "source_revision": "97f97285366060538e4ab3aabe5640bf46d238ae90ebb8491a1aba7c3ddb26d9",
+          "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf",
+          "title": "Q3 2026 Interim Management Statement",
+          "publisher": "NatWest Group plc",
+          "locator": "PDFp4 / printed3; 9M2026 column",
+          "published": "2026-10-30",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NW-operating_profit_before_tax-2026-09-30-3",
+        "subject_id": "research-subject:natwest-group",
+        "subject_name": "NatWest Group plc and subsidiaries",
+        "perimeter": "NatWest Group plc and subsidiaries; selected consolidated reporting boundary",
+        "metric": "operating_profit_before_tax",
+        "definition": "operating profit before tax; original selected issuer line",
+        "accounting_basis": "reported_group_operating",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "6543",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 6543 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NW-operating_profit_before_tax-2026-09-30-3",
+          "revision": "29b7a773c0dfec5a6d0ba93336105c99989c1379c761876d2c8d55d2407060ad",
+          "source_id": "F3-NW-REVIEW",
+          "source_revision": "97f97285366060538e4ab3aabe5640bf46d238ae90ebb8491a1aba7c3ddb26d9",
+          "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf",
+          "title": "Q3 2026 Interim Management Statement",
+          "publisher": "NatWest Group plc",
+          "locator": "PDFp4 / printed3; 9M2026 column",
+          "published": "2026-10-30",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NW-customer_deposits-2026-09-30-4",
+        "subject_id": "research-subject:natwest-group",
+        "subject_name": "NatWest Group plc and subsidiaries",
+        "perimeter": "NatWest Group plc and subsidiaries; selected consolidated reporting boundary",
+        "metric": "customer_deposits",
+        "definition": "Total Group customer deposits, including central items",
+        "accounting_basis": "reported",
+        "state": "actual",
+        "period": {
+          "kind": "instant",
+          "label": "2026-09-30",
+          "as_at": "2026-09-30",
+          "start": null,
+          "end": null,
+          "fiscal_year_end": null
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "454.3",
+          "scale": "billions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 454.3 billions",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NW-customer_deposits-2026-09-30-4",
+          "revision": "eb1dee93232a523ef8180565b508e94fe197b49d11be2b82ad032371bd317ea3",
+          "source_id": "F3-NW-REVIEW",
+          "source_revision": "97f97285366060538e4ab3aabe5640bf46d238ae90ebb8491a1aba7c3ddb26d9",
+          "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf",
+          "title": "Q3 2026 Interim Management Statement",
+          "publisher": "NatWest Group plc",
+          "locator": "PDFp5 / printed4, separate deposit rows",
+          "published": "2026-10-30",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NW-customer_deposits_ex_central-2026-09-30-5",
+        "subject_id": "research-subject:natwest-group",
+        "subject_name": "NatWest Group plc and subsidiaries",
+        "perimeter": "NatWest Group plc and subsidiaries; selected consolidated reporting boundary",
+        "metric": "customer_deposits_ex_central",
+        "definition": "Customer deposits excluding central items; distinct metric, not interchangeable with total",
+        "accounting_basis": "reported",
+        "state": "actual",
+        "period": {
+          "kind": "instant",
+          "label": "2026-09-30",
+          "as_at": "2026-09-30",
+          "start": null,
+          "end": null,
+          "fiscal_year_end": null
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "453.4",
+          "scale": "billions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 453.4 billions",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NW-customer_deposits_ex_central-2026-09-30-5",
+          "revision": "456e7cd1c9dc5280375b7019fa4e73b188815e1ff7fc9615907212325f1f746c",
+          "source_id": "F3-NW-REVIEW",
+          "source_revision": "97f97285366060538e4ab3aabe5640bf46d238ae90ebb8491a1aba7c3ddb26d9",
+          "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf",
+          "title": "Q3 2026 Interim Management Statement",
+          "publisher": "NatWest Group plc",
+          "locator": "PDFp5 / printed4, separate deposit rows",
+          "published": "2026-10-30",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NW-customer_assets_liabilities-2026-09-30-6",
+        "subject_id": "research-subject:natwest-group",
+        "subject_name": "NatWest Group plc and subsidiaries",
+        "perimeter": "NatWest Group reported 2026 composition including Evelyn Partners",
+        "metric": "customer_assets_liabilities",
+        "definition": "Group customer assets and liabilities (CAL), a non-IFRS measure including AUMA; not deposits",
+        "accounting_basis": "reported",
+        "state": "actual",
+        "period": {
+          "kind": "instant",
+          "label": "2026-09-30",
+          "as_at": "2026-09-30",
+          "start": null,
+          "end": null,
+          "fiscal_year_end": null
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "1002.6",
+          "scale": "billions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 1002.6 billions",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NW-customer_assets_liabilities-2026-09-30-6",
+          "revision": "87113464b078f0e5016ff077af0d3ab2484d94c92222fe438b3a4139c031c420",
+          "source_id": "F3-NW-REVIEW",
+          "source_revision": "97f97285366060538e4ab3aabe5640bf46d238ae90ebb8491a1aba7c3ddb26d9",
+          "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf",
+          "title": "Q3 2026 Interim Management Statement",
+          "publisher": "NatWest Group plc",
+          "locator": "PDFp5 / printed4",
+          "published": "2026-10-30",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NW-customer_assets_liabilities-2025-12-31-7",
+        "subject_id": "research-subject:natwest-group",
+        "subject_name": "NatWest Group plc and subsidiaries",
+        "perimeter": "NatWest Group reported 2025 comparator before Evelyn Partners inclusion",
+        "metric": "customer_assets_liabilities",
+        "definition": "Group customer assets and liabilities (CAL), a non-IFRS measure including AUMA; not deposits",
+        "accounting_basis": "reported",
+        "state": "actual",
+        "period": {
+          "kind": "instant",
+          "label": "2025-12-31",
+          "as_at": "2025-12-31",
+          "start": null,
+          "end": null,
+          "fiscal_year_end": null
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "891.7",
+          "scale": "billions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 891.7 billions",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NW-customer_assets_liabilities-2025-12-31-7",
+          "revision": "504cde44215edfbf470cc2cdf2c26773bf9b140e2b6f069538eb9ebc43578427",
+          "source_id": "F3-NW-REVIEW",
+          "source_revision": "97f97285366060538e4ab3aabe5640bf46d238ae90ebb8491a1aba7c3ddb26d9",
+          "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf",
+          "title": "Q3 2026 Interim Management Statement",
+          "publisher": "NatWest Group plc",
+          "locator": "PDFp5 / printed4, prior unadjusted column",
+          "published": "2026-10-30",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      }
+    ],
+    "recipes": [
+      {
+        "contract": "Reconciliation",
+        "recipe": {
+          "derivation_id": "F3-NW-bridge-0",
+          "formula": "signed_bridge",
+          "version": "1",
+          "mode": "reported_statement",
+          "adjustment_roles": [
+            "operating_costs",
+            "credit_impairment"
+          ],
+          "opening": {
+            "measurement_id": "F3-NW-total_income-2026-09-30-0",
+            "revision": "39eda42ec175972afce0ebcb2572a816be096a927c7797fb884106bbe8666c7b"
+          },
+          "adjustments": [
+            {
+              "measurement_id": "F3-NW-operating_costs-2026-09-30-1",
+              "revision": "94fbed230e867e46b086599d8926305632f78b5a06cad318b0441b5ed9a738a0"
+            },
+            {
+              "measurement_id": "F3-NW-credit_impairment-2026-09-30-2",
+              "revision": "4cfbea06e167d9fc5d4c2e45f79cd6d8a992be39b849932ec34940f397d1da7d"
+            }
+          ],
+          "endpoint": {
+            "measurement_id": "F3-NW-operating_profit_before_tax-2026-09-30-3",
+            "revision": "d347cafda16591936945bb65afa88f55b588725b1991176b7a3b64bc6104995b"
+          },
+          "opening_basis": "reported_group_operating",
+          "adjustment_basis": "reported_group_operating",
+          "endpoint_basis": "reported_group_operating",
+          "precision_rule": "exact_reported_precision"
+        },
+        "expected_value": "6543"
+      }
+    ],
+    "review_arithmetic": [],
+    "context": [
+      "Reported CAL movement is 110.9 GBPbn on the unadjusted comparator; reported 42.3 GBPbn / 4.4% uses FY2025 Evelyn Partners AUMA in the comparator (PDFp3 footnote1 / p6 footnote1). These are different comparisons, neither a deposit-flow measure."
+    ],
+    "counter_evidence": [
+      "Positive operating earnings and a disclosed acquisition/simplification response constrain a generic distress or greenfield opportunity narrative."
+    ],
+    "gaps": [
+      "No accepted issuer-use decision/resource mapping.",
+      "No constant-perimeter CAL/deposit bridge is manufactured; acquisition effects and adjusted comparator definitions require reconciliation."
+    ],
+    "proposal_id": "F3-SERIES-NW"
+  },
+  {
+    "id": "hsbc-uk",
+    "source_id": "F3-HS-REVIEW",
+    "reported_subject": "HSBC UK Bank plc; UK ring-fenced bank",
+    "research_subject_id": "research-subject:hsbc-uk",
+    "resource_ref": null,
+    "authority": "owner_review_candidate_not_admitted_or_canonical",
+    "states": {
+      "researched": "selected_original_numerical_assertions_reverified",
+      "source_use_eligible": false,
+      "source_use_reason": "unresolved_for_proposed_uses",
+      "technical_origin_admitted": false,
+      "resource_authority_bound": false,
+      "canonical_acceptance": "not_requested",
+      "financial_run_persisted": false,
+      "actually_visible": false
+    },
+    "measurements": [
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-HS-revenue-2026-09-30-0",
+        "subject_id": "research-subject:hsbc-uk",
+        "subject_name": "HSBC UK Bank plc; UK ring-fenced bank",
+        "perimeter": "HSBC UK Bank plc; UK ring-fenced bank; selected consolidated reporting boundary",
+        "metric": "revenue",
+        "definition": "Reported legal-bank revenue before ECL, not constant currency",
+        "accounting_basis": "legal_bank_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "11054",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "USD"
+        },
+        "original_display": "USD 11054 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-HS-revenue-2026-09-30-0",
+          "revision": "c60017a0b81c324028a8655d3e5cbe0fb01a4dc61b475646a2584f3b71d07185",
+          "source_id": "F3-HS-REVIEW",
+          "source_revision": "103da099abbec4dd1cfb528830e793a299d58f1e96a68e46bbc1488a4f4d9d6e",
+          "url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/3q/pdfs/hsbc-holdings-plc/261027-3q-2026-data-pack-pdf-file.pdf",
+          "title": "3Q2026 Data Pack",
+          "publisher": "HSBC Holdings plc",
+          "locator": "PDFp20 / printed18; HSBC UK Bank plc, All businesses, Reported YTD2026",
+          "published": "2026-10-27",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-HS-credit_impairment-2026-09-30-1",
+        "subject_id": "research-subject:hsbc-uk",
+        "subject_name": "HSBC UK Bank plc; UK ring-fenced bank",
+        "perimeter": "HSBC UK Bank plc; UK ring-fenced bank; selected consolidated reporting boundary",
+        "metric": "credit_impairment",
+        "definition": "Expected credit losses and other credit impairment charges (ECL), signed",
+        "accounting_basis": "legal_bank_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-701",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "USD"
+        },
+        "original_display": "USD -701 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-HS-credit_impairment-2026-09-30-1",
+          "revision": "548e695052386763b7c0d0b81bcec36c251f307bc6fa6be9521ceadfc5d930a9",
+          "source_id": "F3-HS-REVIEW",
+          "source_revision": "103da099abbec4dd1cfb528830e793a299d58f1e96a68e46bbc1488a4f4d9d6e",
+          "url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/3q/pdfs/hsbc-holdings-plc/261027-3q-2026-data-pack-pdf-file.pdf",
+          "title": "3Q2026 Data Pack",
+          "publisher": "HSBC Holdings plc",
+          "locator": "PDFp20 / printed18; HSBC UK Bank plc, All businesses, Reported YTD2026",
+          "published": "2026-10-27",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-HS-operating_costs-2026-09-30-2",
+        "subject_id": "research-subject:hsbc-uk",
+        "subject_name": "HSBC UK Bank plc; UK ring-fenced bank",
+        "perimeter": "HSBC UK Bank plc; UK ring-fenced bank; selected consolidated reporting boundary",
+        "metric": "operating_costs",
+        "definition": "Total operating expenses, signed",
+        "accounting_basis": "legal_bank_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-4270",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "USD"
+        },
+        "original_display": "USD -4270 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-HS-operating_costs-2026-09-30-2",
+          "revision": "62c7802b12084e91c5bae82470977c533c674cb3c957ee3df45ac124d9677de4",
+          "source_id": "F3-HS-REVIEW",
+          "source_revision": "103da099abbec4dd1cfb528830e793a299d58f1e96a68e46bbc1488a4f4d9d6e",
+          "url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/3q/pdfs/hsbc-holdings-plc/261027-3q-2026-data-pack-pdf-file.pdf",
+          "title": "3Q2026 Data Pack",
+          "publisher": "HSBC Holdings plc",
+          "locator": "PDFp20 / printed18; HSBC UK Bank plc, All businesses, Reported YTD2026",
+          "published": "2026-10-27",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-HS-associate_contribution-2026-09-30-3",
+        "subject_id": "research-subject:hsbc-uk",
+        "subject_name": "HSBC UK Bank plc; UK ring-fenced bank",
+        "perimeter": "HSBC UK Bank plc; UK ring-fenced bank; selected consolidated reporting boundary",
+        "metric": "associate_contribution",
+        "definition": "Share of profit in associates and joint ventures less impairment, signed",
+        "accounting_basis": "legal_bank_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "1",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "USD"
+        },
+        "original_display": "USD 1 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-HS-associate_contribution-2026-09-30-3",
+          "revision": "f593df9122d4e929b9afc1e4754b6556edeabe268f52e9f9c08c81c392f30daa",
+          "source_id": "F3-HS-REVIEW",
+          "source_revision": "103da099abbec4dd1cfb528830e793a299d58f1e96a68e46bbc1488a4f4d9d6e",
+          "url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/3q/pdfs/hsbc-holdings-plc/261027-3q-2026-data-pack-pdf-file.pdf",
+          "title": "3Q2026 Data Pack",
+          "publisher": "HSBC Holdings plc",
+          "locator": "PDFp20 / printed18; HSBC UK Bank plc, All businesses, Reported YTD2026",
+          "published": "2026-10-27",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-HS-profit_before_tax-2026-09-30-4",
+        "subject_id": "research-subject:hsbc-uk",
+        "subject_name": "HSBC UK Bank plc; UK ring-fenced bank",
+        "perimeter": "HSBC UK Bank plc; UK ring-fenced bank; selected consolidated reporting boundary",
+        "metric": "profit_before_tax",
+        "definition": "Profit or loss before tax",
+        "accounting_basis": "legal_bank_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "6084",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "USD"
+        },
+        "original_display": "USD 6084 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-HS-profit_before_tax-2026-09-30-4",
+          "revision": "3b2731f6b3f9049ae219b907e9fe89ac5426e1fc0768b3978b4d9e58e0e12c4d",
+          "source_id": "F3-HS-REVIEW",
+          "source_revision": "103da099abbec4dd1cfb528830e793a299d58f1e96a68e46bbc1488a4f4d9d6e",
+          "url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2026/3q/pdfs/hsbc-holdings-plc/261027-3q-2026-data-pack-pdf-file.pdf",
+          "title": "3Q2026 Data Pack",
+          "publisher": "HSBC Holdings plc",
+          "locator": "PDFp20 / printed18; HSBC UK Bank plc, All businesses, Reported YTD2026",
+          "published": "2026-10-27",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      }
+    ],
+    "recipes": [
+      {
+        "contract": "Reconciliation",
+        "recipe": {
+          "derivation_id": "F3-HS-bridge-0",
+          "formula": "signed_bridge",
+          "version": "1",
+          "mode": "reported_statement",
+          "adjustment_roles": [
+            "credit_impairment",
+            "operating_costs",
+            "associate_contribution"
+          ],
+          "opening": {
+            "measurement_id": "F3-HS-revenue-2026-09-30-0",
+            "revision": "352025aab2087acbf887feb1f2ce0adc4b60a4f5f6ebd297c59f54f7135e7ac1"
+          },
+          "adjustments": [
+            {
+              "measurement_id": "F3-HS-credit_impairment-2026-09-30-1",
+              "revision": "44f74ce90fe7ac6d7dcdafd64c51f286468e2fa265ce557224d3b712604d8062"
+            },
+            {
+              "measurement_id": "F3-HS-operating_costs-2026-09-30-2",
+              "revision": "628d03bbbb5531c272d229116ac207bb5a498a00bbcb0e84faf09d34955f1ded"
+            },
+            {
+              "measurement_id": "F3-HS-associate_contribution-2026-09-30-3",
+              "revision": "187b28c7c201f9ace309356981a8b165637d236879ef88115e84dc8cd3d1bdb1"
+            }
+          ],
+          "endpoint": {
+            "measurement_id": "F3-HS-profit_before_tax-2026-09-30-4",
+            "revision": "6272fcc2addae01743f2f16df7ad520e537e5dde3ff6d0b7ba95018cbf5f3f65"
+          },
+          "opening_basis": "legal_bank_reported",
+          "adjustment_basis": "legal_bank_reported",
+          "endpoint_basis": "legal_bank_reported",
+          "precision_rule": "exact_reported_precision"
+        },
+        "expected_value": "6084"
+      }
+    ],
+    "review_arithmetic": [],
+    "context": [
+      "USD million legal-bank reported results, not HSBC Holdings Group, HSBC Bank plc, UK geographical business or constant-currency results. Unaudited supplement, not complete standalone IFRS accounts."
+    ],
+    "counter_evidence": [
+      "Positive pretax profit does not establish a control failure, buying programme or unallocated transformation budget."
+    ],
+    "gaps": [
+      "Source-use/origin/resource decisions unresolved.",
+      "No FX conversion, annualisation, UK-bank share of global investment or complete cash-flow/capital reconstruction."
+    ],
+    "proposal_id": "F3-SERIES-HS"
+  },
+  {
+    "id": "santander-tsb",
+    "source_id": "F3-SA-REVIEW",
+    "reported_subject": "Santander UK Group Holdings plc and subsidiaries",
+    "research_subject_id": "research-subject:santander-tsb",
+    "resource_ref": null,
+    "authority": "owner_review_candidate_not_admitted_or_canonical",
+    "states": {
+      "researched": "selected_original_numerical_assertions_reverified",
+      "source_use_eligible": false,
+      "source_use_reason": "unresolved_for_proposed_uses",
+      "technical_origin_admitted": false,
+      "resource_authority_bound": false,
+      "canonical_acceptance": "not_requested",
+      "financial_run_persisted": false,
+      "actually_visible": false
+    },
+    "measurements": [
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-SA-net_operating_income-2026-09-30-0",
+        "subject_id": "research-subject:santander-tsb",
+        "subject_name": "Santander UK Group Holdings plc and subsidiaries",
+        "perimeter": "Santander UK Group Holdings consolidated 9M2026; TSB included only from 1 May2026",
+        "metric": "net_operating_income",
+        "definition": "Net operating income",
+        "accounting_basis": "statutory_group_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "4117",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 4117 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-SA-net_operating_income-2026-09-30-0",
+          "revision": "1c378a5b51a7c27e68daf9e50c76debbea3211e33a36bba41f0c924126b76bb0",
+          "source_id": "F3-SA-REVIEW",
+          "source_revision": "0fa0743d1e977c5f77ade96b6410a0290f2e3ed356f7ff9a9fade5e963f812c7",
+          "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:65eface3-a6db-48c5-8506-460893b3385f/original/as/Santander%20UK%20Q3-26%20QMS.pdf",
+          "title": "Q3-26 Quarterly Management Statement",
+          "publisher": "Santander UK Group Holdings plc",
+          "locator": "PDFp3 / printed2; 9M2026 column",
+          "published": null,
+          "retrieved_at": "2026-11-16T14:35:16+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-SA-operating_costs-2026-09-30-1",
+        "subject_id": "research-subject:santander-tsb",
+        "subject_name": "Santander UK Group Holdings plc and subsidiaries",
+        "perimeter": "Santander UK Group Holdings consolidated 9M2026; TSB included only from 1 May2026",
+        "metric": "operating_costs",
+        "definition": "Operating expenses before credit impairment charges, restructuring and specific provisions, signed",
+        "accounting_basis": "statutory_group_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-2122",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP -2122 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-SA-operating_costs-2026-09-30-1",
+          "revision": "07d7a6b3b9848b279d811c15c145c0d1b4d50b09221310e0ca543416c36edf5b",
+          "source_id": "F3-SA-REVIEW",
+          "source_revision": "0fa0743d1e977c5f77ade96b6410a0290f2e3ed356f7ff9a9fade5e963f812c7",
+          "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:65eface3-a6db-48c5-8506-460893b3385f/original/as/Santander%20UK%20Q3-26%20QMS.pdf",
+          "title": "Q3-26 Quarterly Management Statement",
+          "publisher": "Santander UK Group Holdings plc",
+          "locator": "PDFp3 / printed2; 9M2026 column",
+          "published": null,
+          "retrieved_at": "2026-11-16T14:35:16+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-SA-credit_impairment-2026-09-30-2",
+        "subject_id": "research-subject:santander-tsb",
+        "subject_name": "Santander UK Group Holdings plc and subsidiaries",
+        "perimeter": "Santander UK Group Holdings consolidated 9M2026; TSB included only from 1 May2026",
+        "metric": "credit_impairment",
+        "definition": "Credit impairment charges, signed",
+        "accounting_basis": "statutory_group_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-342",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP -342 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-SA-credit_impairment-2026-09-30-2",
+          "revision": "fa9cc30856a640bcdb612f99d518f9b3d4d85a96cf13fe0632481908330b7359",
+          "source_id": "F3-SA-REVIEW",
+          "source_revision": "0fa0743d1e977c5f77ade96b6410a0290f2e3ed356f7ff9a9fade5e963f812c7",
+          "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:65eface3-a6db-48c5-8506-460893b3385f/original/as/Santander%20UK%20Q3-26%20QMS.pdf",
+          "title": "Q3-26 Quarterly Management Statement",
+          "publisher": "Santander UK Group Holdings plc",
+          "locator": "PDFp3 / printed2; 9M2026 column",
+          "published": null,
+          "retrieved_at": "2026-11-16T14:35:16+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-SA-restructuring_provisions-2026-09-30-3",
+        "subject_id": "research-subject:santander-tsb",
+        "subject_name": "Santander UK Group Holdings plc and subsidiaries",
+        "perimeter": "Santander UK Group Holdings consolidated 9M2026; TSB included only from 1 May2026",
+        "metric": "restructuring_provisions",
+        "definition": "Restructuring and specific provisions; not solely integration costs",
+        "accounting_basis": "statutory_group_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-495",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP -495 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-SA-restructuring_provisions-2026-09-30-3",
+          "revision": "3582cf9b901954b32684da7bf635c2df063cc6ecfcc19ce86c1178d938b5157d",
+          "source_id": "F3-SA-REVIEW",
+          "source_revision": "0fa0743d1e977c5f77ade96b6410a0290f2e3ed356f7ff9a9fade5e963f812c7",
+          "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:65eface3-a6db-48c5-8506-460893b3385f/original/as/Santander%20UK%20Q3-26%20QMS.pdf",
+          "title": "Q3-26 Quarterly Management Statement",
+          "publisher": "Santander UK Group Holdings plc",
+          "locator": "PDFp3 / printed2; 9M2026 column",
+          "published": null,
+          "retrieved_at": "2026-11-16T14:35:16+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-SA-profit_before_tax-2026-09-30-4",
+        "subject_id": "research-subject:santander-tsb",
+        "subject_name": "Santander UK Group Holdings plc and subsidiaries",
+        "perimeter": "Santander UK Group Holdings consolidated 9M2026; TSB included only from 1 May2026",
+        "metric": "profit_before_tax",
+        "definition": "Profit before tax",
+        "accounting_basis": "statutory_group_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-01-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "1158",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 1158 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-SA-profit_before_tax-2026-09-30-4",
+          "revision": "baf59c2a3a1853e431b8595d63affb461b9fee59c131050c562ee331ee267f94",
+          "source_id": "F3-SA-REVIEW",
+          "source_revision": "0fa0743d1e977c5f77ade96b6410a0290f2e3ed356f7ff9a9fade5e963f812c7",
+          "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:65eface3-a6db-48c5-8506-460893b3385f/original/as/Santander%20UK%20Q3-26%20QMS.pdf",
+          "title": "Q3-26 Quarterly Management Statement",
+          "publisher": "Santander UK Group Holdings plc",
+          "locator": "PDFp3 / printed2; 9M2026 column",
+          "published": null,
+          "retrieved_at": "2026-11-16T14:35:16+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-SA-profit_before_tax-2026-09-30-5",
+        "subject_id": "research-subject:tsb-contribution",
+        "subject_name": "TSB contribution to Santander UK Group",
+        "perimeter": "TSB contribution within Santander consolidated results; not standalone annual TSB",
+        "metric": "profit_before_tax",
+        "definition": "profit before tax; original selected issuer line",
+        "accounting_basis": "contribution_to_acquiring_group",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-05-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-05-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "96",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 96 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-SA-profit_before_tax-2026-09-30-5",
+          "revision": "a66e6248c1238de78fe51f8b05a30fdddad60f9ef583949241594d4f6d7eb3f2",
+          "source_id": "F3-SA-REVIEW",
+          "source_revision": "0fa0743d1e977c5f77ade96b6410a0290f2e3ed356f7ff9a9fade5e963f812c7",
+          "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:65eface3-a6db-48c5-8506-460893b3385f/original/as/Santander%20UK%20Q3-26%20QMS.pdf",
+          "title": "Q3-26 Quarterly Management Statement",
+          "publisher": "Santander UK Group Holdings plc",
+          "locator": "PDFp2, TSB contribution 1May–30Sep2026",
+          "published": null,
+          "retrieved_at": "2026-11-16T14:35:16+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-SA-operating_cost_contribution-2026-09-30-6",
+        "subject_id": "research-subject:tsb-contribution",
+        "subject_name": "TSB contribution to Santander UK Group",
+        "perimeter": "TSB cost contribution within Santander consolidated results; already included in Group operating expenses",
+        "metric": "operating_cost_contribution",
+        "definition": "Positive disclosed expense magnitude; no second deduction or signed-cost inference",
+        "accounting_basis": "expense_magnitude_contribution",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2026-05-01 to 2026-09-30",
+          "as_at": null,
+          "start": "2026-05-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "327",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 327 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-SA-operating_cost_contribution-2026-09-30-6",
+          "revision": "d33b64b511c3cf97215fcdf86949933b53e069f2eb08e95118d2176f04dac327",
+          "source_id": "F3-SA-REVIEW",
+          "source_revision": "0fa0743d1e977c5f77ade96b6410a0290f2e3ed356f7ff9a9fade5e963f812c7",
+          "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:65eface3-a6db-48c5-8506-460893b3385f/original/as/Santander%20UK%20Q3-26%20QMS.pdf",
+          "title": "Q3-26 Quarterly Management Statement",
+          "publisher": "Santander UK Group Holdings plc",
+          "locator": "PDFp3 / printed2, operating-expense commentary and consolidation note1",
+          "published": null,
+          "retrieved_at": "2026-11-16T14:35:16+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      }
+    ],
+    "recipes": [
+      {
+        "contract": "Reconciliation",
+        "recipe": {
+          "derivation_id": "F3-SA-bridge-0",
+          "formula": "signed_bridge",
+          "version": "1",
+          "mode": "reported_statement",
+          "adjustment_roles": [
+            "operating_costs",
+            "credit_impairment",
+            "restructuring_provisions"
+          ],
+          "opening": {
+            "measurement_id": "F3-SA-net_operating_income-2026-09-30-0",
+            "revision": "62e850b08c77dbab0312bdb448e0adc6f8ae7bb8d64effe5cbb311dfa60098fd"
+          },
+          "adjustments": [
+            {
+              "measurement_id": "F3-SA-operating_costs-2026-09-30-1",
+              "revision": "a3b7b35bddcbbe7938f302edb6abb1f072e04bcd58b3bfcdb14f1ba8871f8d69"
+            },
+            {
+              "measurement_id": "F3-SA-credit_impairment-2026-09-30-2",
+              "revision": "477345603323a24bc62c07028013157f4ebd204623b0930533a94047d7cb1935"
+            },
+            {
+              "measurement_id": "F3-SA-restructuring_provisions-2026-09-30-3",
+              "revision": "248aa31572054bb57b044501e0acbfa93ec6f47b5d2fe570684d669e23dcdb14"
+            }
+          ],
+          "endpoint": {
+            "measurement_id": "F3-SA-profit_before_tax-2026-09-30-4",
+            "revision": "c0d5ffc0719637fd8a6cd059930e5f537c888aa3fc0ed12da36806fa87e1b561"
+          },
+          "opening_basis": "statutory_group_reported",
+          "adjustment_basis": "statutory_group_reported",
+          "endpoint_basis": "statutory_group_reported",
+          "precision_rule": "exact_reported_precision"
+        },
+        "expected_value": "1158"
+      }
+    ],
+    "review_arithmetic": [],
+    "context": [
+      "Operating costs exclude the separately deducted credit and restructuring/provision rows.",
+      "TSB contribution covers May–September; employee legal-employer transfer occurred1October. Proposed PartVII transfer in H12027 remains conditional on court/regulatory decisions; no systems-completion, procurement or open external scope follows."
+    ],
+    "counter_evidence": [
+      "Disclosed integration decisions and consolidated profit contribution limit assumptions that strategic scope is still open."
+    ],
+    "gaps": [
+      "Exact publication day and applicable asset-CDN use terms unresolved.",
+      "£327m TSB cost magnitude located by page-level review after keyword find missed it; tool provides rewritten/indexed extraction, so original-byte/visual verification remains open. It is already included in Group costs, never a second deduction."
+    ],
+    "proposal_id": "F3-SERIES-SA"
+  },
+  {
+    "id": "nationwide",
+    "source_id": "F3-NB-REVIEW",
+    "reported_subject": "Nationwide Building Society Group",
+    "research_subject_id": "research-subject:nationwide",
+    "resource_ref": null,
+    "authority": "owner_review_candidate_not_admitted_or_canonical",
+    "states": {
+      "researched": "selected_original_numerical_assertions_reverified",
+      "source_use_eligible": false,
+      "source_use_reason": "unresolved_for_proposed_uses",
+      "technical_origin_admitted": false,
+      "resource_authority_bound": false,
+      "canonical_acceptance": "not_requested",
+      "financial_run_persisted": false,
+      "actually_visible": false
+    },
+    "measurements": [
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NB-total_income-2026-03-31-0",
+        "subject_id": "research-subject:nationwide",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society Group FY2026; full-year Virgin Money",
+        "metric": "total_income",
+        "definition": "total income; original selected issuer line",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2025-04-01 to 2026-03-31",
+          "as_at": null,
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "6378",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 6378 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NB-total_income-2026-03-31-0",
+          "revision": "ec0b1f2ba961a7167784aefaa7d5313d986e44fad7095366a5af669a76695989",
+          "source_id": "F3-NB-REVIEW",
+          "source_revision": "97ba64348c3da573e21d97e9d27f32f6cc4d084954eca7695bcd79fa76908a2e",
+          "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+          "title": "Preliminary Results2026",
+          "publisher": "Nationwide Building Society",
+          "locator": "Preliminary results printedp10, underlying column",
+          "published": "2026-05-21",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NB-operating_costs-2026-03-31-1",
+        "subject_id": "research-subject:nationwide",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society Group FY2026; full-year Virgin Money",
+        "metric": "operating_costs",
+        "definition": "operating costs; original selected issuer line",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2025-04-01 to 2026-03-31",
+          "as_at": null,
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-4021",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP -4021 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NB-operating_costs-2026-03-31-1",
+          "revision": "b2e22c041d1c57559e34209ad349e0f3e2759c477bceab8a6967be0682804783",
+          "source_id": "F3-NB-REVIEW",
+          "source_revision": "97ba64348c3da573e21d97e9d27f32f6cc4d084954eca7695bcd79fa76908a2e",
+          "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+          "title": "Preliminary Results2026",
+          "publisher": "Nationwide Building Society",
+          "locator": "Preliminary results printedp10, underlying column",
+          "published": "2026-05-21",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NB-credit_impairment-2026-03-31-2",
+        "subject_id": "research-subject:nationwide",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society Group FY2026; full-year Virgin Money",
+        "metric": "credit_impairment",
+        "definition": "credit impairment; original selected issuer line",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2025-04-01 to 2026-03-31",
+          "as_at": null,
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-331",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP -331 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NB-credit_impairment-2026-03-31-2",
+          "revision": "0a4a42285343b4d58755270612346acf3764b48ff7c200605ef20cf08ba2857b",
+          "source_id": "F3-NB-REVIEW",
+          "source_revision": "97ba64348c3da573e21d97e9d27f32f6cc4d084954eca7695bcd79fa76908a2e",
+          "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+          "title": "Preliminary Results2026",
+          "publisher": "Nationwide Building Society",
+          "locator": "Preliminary results printedp10, underlying column",
+          "published": "2026-05-21",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NB-underlying_profit_before_tax-2026-03-31-3",
+        "subject_id": "research-subject:nationwide",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society Group FY2026; full-year Virgin Money",
+        "metric": "underlying_profit_before_tax",
+        "definition": "underlying profit before tax; original selected issuer line",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2025-04-01 to 2026-03-31",
+          "as_at": null,
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "2026",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 2026 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NB-underlying_profit_before_tax-2026-03-31-3",
+          "revision": "1782bf5763e823a377bca43ba0a570337c515398851545c205c95f760720725d",
+          "source_id": "F3-NB-REVIEW",
+          "source_revision": "97ba64348c3da573e21d97e9d27f32f6cc4d084954eca7695bcd79fa76908a2e",
+          "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+          "title": "Preliminary Results2026",
+          "publisher": "Nationwide Building Society",
+          "locator": "Preliminary results printedp10, underlying column",
+          "published": "2026-05-21",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NB-income_adjustment-2026-03-31-4",
+        "subject_id": "research-subject:nationwide",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society Group FY2026; full-year Virgin Money",
+        "metric": "income_adjustment",
+        "definition": "income adjustment; original selected issuer line",
+        "accounting_basis": "disclosed_bridge",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2025-04-01 to 2026-03-31",
+          "as_at": null,
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "1",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 1 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NB-income_adjustment-2026-03-31-4",
+          "revision": "8f3ad6b5dd6e8c4106998a8b228b19bb196c5c02ffd5236452aa43c48416bf82",
+          "source_id": "F3-NB-REVIEW",
+          "source_revision": "97ba64348c3da573e21d97e9d27f32f6cc4d084954eca7695bcd79fa76908a2e",
+          "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+          "title": "Preliminary Results2026",
+          "publisher": "Nationwide Building Society",
+          "locator": "Printedp10, adjustments/statutory reconciliation",
+          "published": "2026-05-21",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NB-expense_adjustment-2026-03-31-5",
+        "subject_id": "research-subject:nationwide",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society Group FY2026; full-year Virgin Money",
+        "metric": "expense_adjustment",
+        "definition": "expense adjustment; original selected issuer line",
+        "accounting_basis": "disclosed_bridge",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2025-04-01 to 2026-03-31",
+          "as_at": null,
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-138",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP -138 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NB-expense_adjustment-2026-03-31-5",
+          "revision": "381e4829065d2982b06a6c308ac5de4dac6022302cea2b77efb226cf5dff3463",
+          "source_id": "F3-NB-REVIEW",
+          "source_revision": "97ba64348c3da573e21d97e9d27f32f6cc4d084954eca7695bcd79fa76908a2e",
+          "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+          "title": "Preliminary Results2026",
+          "publisher": "Nationwide Building Society",
+          "locator": "Printedp10, adjustments/statutory reconciliation",
+          "published": "2026-05-21",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NB-member_reward_expense-2026-03-31-6",
+        "subject_id": "research-subject:nationwide",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society Group FY2026; full-year Virgin Money",
+        "metric": "member_reward_expense",
+        "definition": "member reward expense; original selected issuer line",
+        "accounting_basis": "disclosed_bridge",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2025-04-01 to 2026-03-31",
+          "as_at": null,
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-399",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP -399 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NB-member_reward_expense-2026-03-31-6",
+          "revision": "b7a06f784d7809bd31614ad0bc9c238414140695705dab7b58ff20582e31d97e",
+          "source_id": "F3-NB-REVIEW",
+          "source_revision": "97ba64348c3da573e21d97e9d27f32f6cc4d084954eca7695bcd79fa76908a2e",
+          "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+          "title": "Preliminary Results2026",
+          "publisher": "Nationwide Building Society",
+          "locator": "Printedp10, adjustments/statutory reconciliation",
+          "published": "2026-05-21",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-NB-profit_before_tax-2026-03-31-7",
+        "subject_id": "research-subject:nationwide",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society Group FY2026; full-year Virgin Money",
+        "metric": "profit_before_tax",
+        "definition": "profit before tax; original selected issuer line",
+        "accounting_basis": "statutory",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2025-04-01 to 2026-03-31",
+          "as_at": null,
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "1490",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 1490 millions",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-NB-profit_before_tax-2026-03-31-7",
+          "revision": "8057d858244d9755e2550a0635beb69767d1403592b5acda571b539a658724a9",
+          "source_id": "F3-NB-REVIEW",
+          "source_revision": "97ba64348c3da573e21d97e9d27f32f6cc4d084954eca7695bcd79fa76908a2e",
+          "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+          "title": "Preliminary Results2026",
+          "publisher": "Nationwide Building Society",
+          "locator": "Printedp10 statutory PBT",
+          "published": "2026-05-21",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      }
+    ],
+    "recipes": [
+      {
+        "contract": "Reconciliation",
+        "recipe": {
+          "derivation_id": "F3-NB-bridge-0",
+          "formula": "signed_bridge",
+          "version": "1",
+          "mode": "reported_statement",
+          "adjustment_roles": [
+            "operating_costs",
+            "credit_impairment"
+          ],
+          "opening": {
+            "measurement_id": "F3-NB-total_income-2026-03-31-0",
+            "revision": "7ff07925e0dc4c39071c0f945f0e5a7f598c4dff643d6fcab2c35866f73d9a66"
+          },
+          "adjustments": [
+            {
+              "measurement_id": "F3-NB-operating_costs-2026-03-31-1",
+              "revision": "1575a91ac411a41fdf737e214e3ba9f2cbe01a4ceda4d0ea29965ddbe3c97255"
+            },
+            {
+              "measurement_id": "F3-NB-credit_impairment-2026-03-31-2",
+              "revision": "388c4d9a8f12705faeb16044c5c97391686a0a3e51f996230dca64be59803220"
+            }
+          ],
+          "endpoint": {
+            "measurement_id": "F3-NB-underlying_profit_before_tax-2026-03-31-3",
+            "revision": "90e9e2d641700c34b45749561da766ea3e877c9847ff3b2715100a20451c0d86"
+          },
+          "opening_basis": "underlying",
+          "adjustment_basis": "underlying",
+          "endpoint_basis": "underlying",
+          "precision_rule": "exact_reported_precision"
+        },
+        "expected_value": "2026"
+      },
+      {
+        "contract": "Reconciliation",
+        "recipe": {
+          "derivation_id": "F3-NB-bridge-1",
+          "formula": "signed_bridge",
+          "version": "1",
+          "mode": "basis_reconciliation",
+          "adjustment_roles": [],
+          "opening": {
+            "measurement_id": "F3-NB-underlying_profit_before_tax-2026-03-31-3",
+            "revision": "90e9e2d641700c34b45749561da766ea3e877c9847ff3b2715100a20451c0d86"
+          },
+          "adjustments": [
+            {
+              "measurement_id": "F3-NB-income_adjustment-2026-03-31-4",
+              "revision": "e4abba8f5f89c51ee83cfa222102842cbc66aebe45647bd6eb88c95bf94ba1ca"
+            },
+            {
+              "measurement_id": "F3-NB-expense_adjustment-2026-03-31-5",
+              "revision": "a3e958b76bdbe6ec8cf6722051f8c1bda929597db332fa035ad365275958ec6e"
+            },
+            {
+              "measurement_id": "F3-NB-member_reward_expense-2026-03-31-6",
+              "revision": "31b557b8eb7d4e65e1ac312c12ea002b41952b2cc8b8e2ee4a66de873b56f23c"
+            }
+          ],
+          "endpoint": {
+            "measurement_id": "F3-NB-profit_before_tax-2026-03-31-7",
+            "revision": "1d5bcff41365fb1302cb9625bec11abc7bd36bf977a5615218702603bd2a9c2c"
+          },
+          "opening_basis": "underlying",
+          "adjustment_basis": "disclosed_bridge",
+          "endpoint_basis": "statutory",
+          "precision_rule": "exact_reported_precision"
+        },
+        "expected_value": "1490"
+      }
+    ],
+    "review_arithmetic": [],
+    "context": [
+      "138 GBPm administrative adjustment comprises113 acquired-intangible amortisation and25 trademark costs. Integration expense127 is already in underlying costs; member pricing benefit1365 is separate from399 reward expense and is not deducted again.",
+      "FY2026 includes full-year Virgin Money; the prior361-day5Apr2024–31Mar2025 period includes only six months. Reported growth is not organic/like-for-like."
+    ],
+    "counter_evidence": [
+      "Member distributions and acquisition adjustments explain differences between statutory and underlying profit without establishing a generic productivity failure."
+    ],
+    "gaps": [
+      "Exact report-use basis and issuer origin/resource authority unresolved.",
+      "No industrial FCF invented from deposit growth; complete bank cash-flow/capital/segment analysis remains open."
+    ],
+    "proposal_id": "F3-SERIES-NB"
+  },
+  {
+    "id": "starling",
+    "source_id": "F3-ST-REVIEW",
+    "reported_subject": "Starling Group",
+    "research_subject_id": "research-subject:starling",
+    "resource_ref": null,
+    "authority": "owner_review_candidate_not_admitted_or_canonical",
+    "states": {
+      "researched": "selected_original_numerical_assertions_reverified",
+      "source_use_eligible": false,
+      "source_use_reason": "unresolved_for_proposed_uses",
+      "technical_origin_admitted": false,
+      "resource_authority_bound": false,
+      "canonical_acceptance": "not_requested",
+      "financial_run_persisted": false,
+      "actually_visible": false
+    },
+    "measurements": [
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-ST-revenue-2025-03-31-0",
+        "subject_id": "research-subject:starling",
+        "subject_name": "Starling Group",
+        "perimeter": "Starling Group FY2025 reporting composition; acquisition comparator not reconciled",
+        "metric": "revenue",
+        "definition": "revenue; original selected issuer line",
+        "accounting_basis": "group_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2024-04-01 to 2025-03-31",
+          "as_at": null,
+          "start": "2024-04-01",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "940.0",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 940.0 millions",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-ST-revenue-2025-03-31-0",
+          "revision": "1ed84c7ff7b8f536dfecf499a1036ee0a7c22ce86b8c9bcb68909cd341dbb7a4",
+          "source_id": "F3-ST-REVIEW",
+          "source_revision": "f113623d9af4bb79875a99ec8a4bf49f5b1f6328f5797e29c3eeae063916aa0f",
+          "url": "https://www.starlingbank.com/news/starling-delivers-fifth-year-of-profitability-and-accelerates-global-growth-strategy/",
+          "title": "FY2026 results announcement",
+          "publisher": "Starling Group",
+          "locator": "FY2026 original release highlights; current/prior Group figures",
+          "published": "2026-05-21",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-ST-profit_before_tax-2025-03-31-1",
+        "subject_id": "research-subject:starling",
+        "subject_name": "Starling Group",
+        "perimeter": "Starling Group FY2025 reporting composition; acquisition comparator not reconciled",
+        "metric": "profit_before_tax",
+        "definition": "profit before tax; original selected issuer line",
+        "accounting_basis": "group_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2024-04-01 to 2025-03-31",
+          "as_at": null,
+          "start": "2024-04-01",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "223.4",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 223.4 millions",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-ST-profit_before_tax-2025-03-31-1",
+          "revision": "a1e42bd4eb36f7708f7362ea761266bc0fb4e5ce202953f87359d92cb470175a",
+          "source_id": "F3-ST-REVIEW",
+          "source_revision": "f113623d9af4bb79875a99ec8a4bf49f5b1f6328f5797e29c3eeae063916aa0f",
+          "url": "https://www.starlingbank.com/news/starling-delivers-fifth-year-of-profitability-and-accelerates-global-growth-strategy/",
+          "title": "FY2026 results announcement",
+          "publisher": "Starling Group",
+          "locator": "FY2026 original release highlights; current/prior Group figures",
+          "published": "2026-05-21",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-ST-revenue-2026-03-31-2",
+        "subject_id": "research-subject:starling",
+        "subject_name": "Starling Group",
+        "perimeter": "Starling Group FY2026 reporting composition; Ember acquired during this year",
+        "metric": "revenue",
+        "definition": "revenue; original selected issuer line",
+        "accounting_basis": "group_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2025-04-01 to 2026-03-31",
+          "as_at": null,
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "887.4",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 887.4 millions",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-ST-revenue-2026-03-31-2",
+          "revision": "5d3c3b253c592935034fd63f8e5e97a1f2c467a733997a83183332985c65f362",
+          "source_id": "F3-ST-REVIEW",
+          "source_revision": "f113623d9af4bb79875a99ec8a4bf49f5b1f6328f5797e29c3eeae063916aa0f",
+          "url": "https://www.starlingbank.com/news/starling-delivers-fifth-year-of-profitability-and-accelerates-global-growth-strategy/",
+          "title": "FY2026 results announcement",
+          "publisher": "Starling Group",
+          "locator": "FY2026 original release highlights; current/prior Group figures",
+          "published": "2026-05-21",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      },
+      {
+        "schema_version": 1,
+        "measurement_id": "F3-ST-profit_before_tax-2026-03-31-3",
+        "subject_id": "research-subject:starling",
+        "subject_name": "Starling Group",
+        "perimeter": "Starling Group FY2026 reporting composition; Ember acquired during this year",
+        "metric": "profit_before_tax",
+        "definition": "profit before tax; original selected issuer line",
+        "accounting_basis": "group_reported",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "label": "2025-04-01 to 2026-03-31",
+          "as_at": null,
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "217.1",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "original_display": "GBP 217.1 millions",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "semantic_type": "reported",
+        "source": {
+          "owner": "unadmitted_owner_review",
+          "record_id": "F3-ST-profit_before_tax-2026-03-31-3",
+          "revision": "244bc941809a8cbd729da4708eebe0bf4af42b8456cd9d7b21da7e163bb9edfa",
+          "source_id": "F3-ST-REVIEW",
+          "source_revision": "f113623d9af4bb79875a99ec8a4bf49f5b1f6328f5797e29c3eeae063916aa0f",
+          "url": "https://www.starlingbank.com/news/starling-delivers-fifth-year-of-profitability-and-accelerates-global-growth-strategy/",
+          "title": "FY2026 results announcement",
+          "publisher": "Starling Group",
+          "locator": "FY2026 original release highlights; current/prior Group figures",
+          "published": "2026-05-21",
+          "retrieved_at": "2026-11-16T14:26:44+00:00",
+          "use_reference": "F3 source-use unresolved; typed owner-review candidate only. Review-record revisions are not original-byte hashes or canonical acceptance."
+        },
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Owner-review only: no source-use permission, canonical acceptance, resource authority, persisted issuer run or runtime visibility."
+        ]
+      }
+    ],
+    "recipes": [],
+    "review_arithmetic": [
+      {
+        "type": "calculated_owner_paper_arithmetic_only",
+        "metric": "revenue",
+        "expression": "887.4 - 940.0",
+        "value": "-52.6",
+        "unit": "GBP millions"
+      },
+      {
+        "type": "calculated_owner_paper_arithmetic_only",
+        "metric": "profit_before_tax",
+        "expression": "217.1 - 223.4",
+        "value": "-6.3",
+        "unit": "GBP millions"
+      }
+    ],
+    "context": [
+      "Differences compare reported Group figures. FY2026 includes the Ember acquisition; the strict Financial perimeter guard rejects an unqualified constant-composition derivation. Legal Group identity remains separate from reporting composition.",
+      "Engine received19.7 GBPm investment from Group;70 GBPm committed ARR is not recognised Group revenue or external supplier budget. Neither ARR nor6.2m platform accounts is forced into a balance-sheet-stock/currency chart. The future100 GBPm pathway is not achieved revenue."
+    ],
+    "counter_evidence": [
+      "Profitable Group operations, deposit growth and existing Engine investment constrain a generic financial-distress or greenfield-platform thesis."
+    ],
+    "gaps": [
+      "Bank-only earnings/Engine split and platform-account composition not established in the selected source.",
+      "Full annual PDF exceeded tool limit. No archive/hash, cash-flow statement, acquisition-adjusted trend, original capital-date inference or commercial-use grant claimed."
+    ],
+    "proposal_id": "F3-SERIES-ST"
+  }
+]
