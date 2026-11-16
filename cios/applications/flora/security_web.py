@@ -163,7 +163,7 @@ def mutation_capability(path):
     ident=r'[A-Za-z0-9][A-Za-z0-9_.:@-]{0,127}'
     if path in {'/flora/sales/capture', '/flora/sales/create'} or re.fullmatch(r'/flora/sales/opp-[a-f0-9]{32}/save', path): return 'commercial_context.edit'
     if path=='/operations/storage-recovery': return 'storage.recover'
-    if path=='/blueprint-import/upload': return 'package.upload'
+    if path in {'/blueprint-import/upload', '/financial-research/refresh'}: return 'package.upload'
     if re.fullmatch(r'/blueprint-import/'+ident+r'/(?:approve)',path): return 'candidate.promote'
     if re.fullmatch(r'/blueprint-import/'+ident+r'/(?:prepare-review|mark-reviewed|reviews|evidence-mapping|identity|stage|restage|researcher-observation|mission|decline|cancel|delete)',path): return 'package.review'
     if re.fullmatch(r'/digital-twins/'+ident+r'/executive-intelligence-brief/generate',path): return 'package.review'

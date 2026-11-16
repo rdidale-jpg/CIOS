@@ -1,0 +1,18 @@
+National Westminster Bank PLC;Open table;all-product Total;1 January–30 June 2026 | 92,548
+National Westminster Bank PLC;Closed table;all-product Total;1 January–30 June 2026 | 101,586
+National Westminster Bank PLC;Upheld table;all-product Total;1 January–30 June 2026 | 55.31%
+HSBC UK Bank Plc;Open table;all-product Total;1 January–30 June 2026 | 79,323
+HSBC UK Bank Plc;Closed table;all-product Total;1 January–30 June 2026 | 76,912
+HSBC UK Bank Plc;Upheld table;all-product Total;1 January–30 June 2026 | 59.09%
+Santander UK Plc;Open table;all-product Total;1 January–30 June 2026 | 61,365
+Santander UK Plc;Closed table;all-product Total;1 January–30 June 2026 | 60,615
+Santander UK Plc;Upheld table;all-product Total;1 January–30 June 2026 | 48.06%
+TSB Bank plc;Open table;all-product Total;1 January–30 June 2026 | 29,908
+TSB Bank plc;Closed table;all-product Total;1 January–30 June 2026 | 30,123
+TSB Bank plc;Upheld table;all-product Total;1 January–30 June 2026 | 52.62%
+Nationwide Building Society;Open table;all-product Total;1 October 2025–31 March 2026 | 100,886
+Nationwide Building Society;Closed table;all-product Total;1 October 2025–31 March 2026 | 100,156
+Nationwide Building Society;Upheld table;all-product Total;1 October 2025–31 March 2026 | 55.20%
+Starling Bank Limited;Open table;all-product Total;1 October 2025–31 March 2026 | 15,223
+Starling Bank Limited;Closed table;all-product Total;1 October 2025–31 March 2026 | 14,362
+Starling Bank Limited;Upheld table;all-product Total;1 October 2025–31 March 2026 | 44.49%

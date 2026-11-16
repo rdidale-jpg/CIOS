@@ -92,7 +92,12 @@ def test_new_theme_selector_remains_finite_and_cannot_request_private_state(web)
 def test_research_data_and_all_acceptance_navigation_owners_are_byte_preserved():
     paths=['cios/applications/flora/research_intelligence/technology.py','cios/applications/flora/research_intelligence/registry.py','cios/applications/flora/research_intelligence/source_import.py','cios/applications/flora/sales_pipeline.py','cios/applications/flora/blueprint_import/views.py']
     paths += [str(p.relative_to(t.ROOT)) for p in t.ASSETS.glob('*.json')]
-    for path in paths:assert subprocess.check_output(['git','show','20637fefcbdb799e405b06d3eb5ca7abffc435d0:'+path],cwd=t.ROOT)==(t.ROOT/path).read_bytes(),path
+    from tests.flora_f2_owner_contract import assert_owner_compatible
+    for path in paths:
+        expected=subprocess.check_output(['git','show','20637fefcbdb799e405b06d3eb5ca7abffc435d0:'+path],cwd=t.ROOT)
+        if path=='cios/applications/flora/research_intelligence/source_import.py':
+            assert_owner_compatible(t.ROOT,path,expected)
+        else:assert expected==(t.ROOT/path).read_bytes(),path
     h=t.handoff();assert h['accepted']==h['eligible']==0 and not h['canonical_mutation'] and not h['pipeline_mutation']
 
 

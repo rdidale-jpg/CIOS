@@ -83,12 +83,24 @@ def navigation(ctx, headers=None):
     try:
         data = visual.current_data(ctx)
         resource = _resource(ctx, data)
+        links = []
         for key in financial.permitted_selection_keys():
             run_id = financial.find_existing_run(key, resource, headers=headers)
             if run_id:
                 # Recheck the exact selected run/context before serializing ID.
-                _current(ctx, run_id, headers)
-                return ('<p class="financial-entry"><a href="'+e(visual.url(ctx,stream=visual.SCOPES[ctx.scope]['streams'][0],detail='',agenda='')+'&analysis='+run_id,quote=True)+'">Financial analysis</a></p>')
+                _, projection = _current(ctx, run_id, headers)
+                title = 'Financial analysis' if key == 'boe-household-deposit-stocks' else projection['title']
+                links.append('<p class="financial-entry"><a href="'+e(visual.url(ctx,stream=visual.SCOPES[ctx.scope]['streams'][0],detail='',agenda='')+'&analysis='+run_id,quote=True)+'">'+e(title)+'</a></p>')
+        from ..access import require_resource_scope, active_flora_workspace
+        from ..security_store import cookie_token
+        from ..security_web import form, CSRF_COOKIE
+        try:
+            require_resource_scope(headers, 'package.upload', resource, active_flora_workspace(headers))
+            if ctx.scope == 'banking' and cookie_token(headers, CSRF_COOKIE):
+                links.append(form('/financial-research/refresh', cookie_token(headers, CSRF_COOKIE), '', 'Refresh published research'))
+        except PermissionError:
+            pass
+        return ''.join(links)
     except (OSError, ValueError, TypeError, KeyError, PermissionError):
         pass
     return ''
@@ -163,7 +175,7 @@ def chart(measurements, index, *, show_perimeter=False):
     uid = 'financial-chart-'+str(index)
     unit = ms[0].value.currency+' '+scale
     title = ('Published stocks' if ms[0].period.kind=='instant' else 'Financial statement amounts')+' · '+unit
-    context = ms[0].subject_name+' · '+ms[0].accounting_basis
+    context = ms[0].subject_name+' · '+ms[0].accounting_basis.replace('_',' ')
     if show_perimeter:context+=' · '+ms[0].perimeter
     if ms[0].period.kind=='duration':context+=' · '+_period(ms[0])
     graphic = '<div class="analyst-bars" role="group" aria-labelledby="'+uid+'-title '+uid+'-desc">'
@@ -203,8 +215,13 @@ def _result_card(result, by_id):
         from .normalisation import SCALE_FACTORS
         text = _money(amount*SCALE_FACTORS[inputs[0].value.scale]/factor,inputs[0].value.currency,suffix,3)
         label = 'Stock difference' if inputs[0].period.kind=='instant' else 'Reconciled endpoint' if result['formula']=='signed_bridge' else 'Annual difference' if result.get('comparison')=='duration_dates' else 'Absolute difference'
+    if result['formula']=='signed_bridge':
+        endpoint=inputs[-1]
+        label=endpoint.metric.replace('_',' ').capitalize()
+        if endpoint.accounting_basis=='statutory': label='Statutory '+label.lower()
     state = '' if result['measurement_state']=='actual' else ' · '+result['measurement_state'].title()
-    return '<div><span class="metric-label">'+semantics.LABELS[expected]+e(state)+' · '+e(label)+'</span><strong>'+e(text)+'</strong><span class="metric-period">'+e(_period(inputs[0]))+' → '+e(_period(inputs[-1]))+'</span></div>'
+    period=_period(inputs[0]) if _period(inputs[0])==_period(inputs[-1]) else _period(inputs[0])+' → '+_period(inputs[-1])
+    return '<div'+(' data-method="Reconciled endpoint"' if result['formula']=='signed_bridge' else '')+'><span class="metric-label">'+semantics.LABELS[expected]+e(state)+' · '+e(label)+'</span><strong>'+e(text)+'</strong><span class="metric-period">'+e(period)+'</span></div>'
 
 
 def compose(projection, *, statements=()):
@@ -233,6 +250,14 @@ def compose(projection, *, statements=()):
                 and not (statement.semantic_type in {'reported','calculated'}
                          and {'estimated','assumed'}.intersection(statement.dependency_types))):
             body+=semantics.render(statement)
+    for insight in projection.get('insights', []):
+        statement = semantics.Statement(insight['text'], insight['type'], ms[0].perimeter, _period(ms[0]),
+            tuple(semantics.Source(s['title'], s['url'], ms[0].source.publisher, s['published'], locator=s['locator']) for s in projection['sources']),
+            'reviewed_excerpt', 'candidate_intelligence', reasoning=insight['reasoning'],
+            caveats=ms[0].caveats, dependencies=tuple(insight.get('dependencies', ())),
+            counter_evidence=tuple(insight.get('counter_evidence', ())),
+            dependency_types=tuple(m.semantic_type for m in ms))
+        if semantics.eligible(statement): body += semantics.render(statement)
     caveats=list(dict.fromkeys(c for m in ms for c in m.caveats))
     if caveats: body+='<p class="material">'+e(caveats[0])+'</p>'
     sources=''
@@ -240,7 +265,7 @@ def compose(projection, *, statements=()):
         sources+='<section class="source-entry"><a href="'+e(s['url'],quote=True)+'" rel="noreferrer">'+e(s['title'])+'</a><p>'+e(s['locator'])+'</p><p>Retrieved '+e(s['retrieved_at'][:10])+'. '+e(s['extent'])+'</p>'
         if s.get('published'): sources+='<p>Published '+e(s['published'])+'</p>'
         else: sources+='<p>The original publication day and release vintage are not established.</p>'
-        sources+='<p>'+e(s['attribution'])+' <a href="'+e(s['licence_url'],quote=True)+'">Licence</a></p></section>'
+        sources+='<p>'+e(s['attribution'])+' <a href="'+e(s['licence_url'],quote=True)+'">Source-use basis</a></p></section>'
     methods=''.join('<li>'+e(r['method'])+' · '+e(r['unit'])+' · version '+e(r['formula_version'])+'</li>' for r in projection['results'])
     definitions=''.join('<li>'+e(m.definition)+' · '+e(m.accounting_basis)+' · '+e(m.rounding)+'; '+str(m.precision_dp)+' decimal places at source scale</li>' for m in ms)
     assumptions=''.join('<li>'+e(m.metric.replace('_',' '))+': '+e(m.assumption_owner)+' · version '+e(m.assumption_version)+' · '+e(m.original_display)+'</li>' for m in ms if m.semantic_type in {'estimated','assumed'})

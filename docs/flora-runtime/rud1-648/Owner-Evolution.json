@@ -1,0 +1,109 @@
+{
+  "cios/applications/flora/web/app.py": {
+    "reason": "One authenticated routine refresh POST; existing journal, Origin and CSRF retained.",
+    "prior_sha256": [
+      "b9b2c7718d739b463af6b1ed22417c4f3029339b281e38bcdbe4ca8d2a867a9e",
+      "c37adbaea9dbd521bda8cc11688c164c90c5f0639ad71d6057472573e9904f2d"
+    ],
+    "reviewed_sha256": "2009d43801ac3371f4eae56976e336a969d9fa23dd19c5d1a664a52535b8c412"
+  },
+  "cios/applications/flora/research_intelligence/source_import.py": {
+    "reason": "Narrow Nationwide results origin, bounded routine use and exact located factual bindings. No canonical approval or per-cell human gate.",
+    "prior_sha256": [
+      "e851f66a9c4540f538881e60ae451b0ad7c889d20cdd2ae5f4789d6490f7ebc7"
+    ],
+    "reviewed_sha256": "ad8d15b849713f14a55ee6e5f42d9ef68227d7934d2949910202483ffb3c370b"
+  },
+  "cios/applications/flora/security_web.py": {
+    "reason": "One exact existing package.upload mutation for research refresh; same Origin/CSRF/journal.",
+    "prior_sha256": [
+      "8e83859a36623f8e0cfdeb794204b9785b65895025cc3ac72fef70462140e558",
+      "a56d72fcca7ec31e82650944069126b75195a981e3edb5b84c1cdf8b9daa11af",
+      "667ff0eb9c4ab28565148de91454853d702b0e0a5b63bdd0d8845e8ac1ec9cd1"
+    ],
+    "reviewed_sha256": "e5c54f167f271e35a4306507eec6d8671fa3beaaa85a2819255e5e46193224fc"
+  },
+  "cios/applications/flora/visual_streams.py": {
+    "reason": "Three research selection aliases plus unchanged F2 private dispatch; no new canonical Enterprise destination.",
+    "prior_sha256": [
+      "bfffa2f9ae30cda055941f0d1f8a43429e09199801d04919b04c3586dda897b6",
+      "51426713f316f4ac7eb5212d2b5572714b7c2930c30ba312592c45e605ecfa9f",
+      "d7f3ccc2c62c2d5ba2853407eb4a89138f4cac329a5cc6968ad0f195b9e4ee3a"
+    ],
+    "reviewed_sha256": "65aa080db4e0c6e4f5b530e1e858cff66628f42151bd095c446eb2059891d3c6"
+  },
+  "cios/applications/flora/visual_panels.py": {
+    "reason": "Existing selected legal-bank service insight immediately in Main, same Top/Left/artwork.",
+    "prior_sha256": [
+      "b8b0be91ab4810d7ce8437d022f80fb6a503ec15273faa4eb07871a2029ee5a5",
+      "bd90b503012b64a21e61e11d849f478a069fad2c1a9dd265716f8d42b49a3f5d",
+      "99470fcfe10b4b3226cb71525c753b25776552ed0e52dbdc439e2fa36a13d5d9",
+      "11fe42d9a12839726439f90ab0fa21ab01c5811ee680bf7b1a6ad1dd4718aa7d"
+    ],
+    "reviewed_sha256": "70df4fcce63fc98d125db0da928a32192f64af8c5a22aa627c0ff14fdc48704c"
+  },
+  "cios/applications/flora/financial_intelligence/candidate_analytics.py": {
+    "reason": "Reusable working Source adapter, immutable Financial persistence and explicit recipe replay; original BoE adapter/identity preserved.",
+    "prior_sha256": [
+      "6706dce05714ec4dd13717f6cc112505d62f8ceb0e86a658a1fbaf17bf805921",
+      "9e6503af8e6a6e131f8db9e5ebe12db5088e7cef0f94153b758c0c2d33d65a80",
+      "7ffb7b88d7469ae6c478fc2e9dddf07cb39961e48a18345ab8a2561f84ea2320"
+    ],
+    "reviewed_sha256": "85577b7c348cc2ac8cc19b133366bde7997b1198291e3ab45d04322966d72bee"
+  },
+  "cios/applications/flora/live/source_registry.py": {
+    "reason": "Unchanged existing source owner.",
+    "prior_sha256": [
+      "5179424df77ca5c21ca65ec10dfb41709cdf68be76652581992581ee90a9125b"
+    ],
+    "reviewed_sha256": "5179424df77ca5c21ca65ec10dfb41709cdf68be76652581992581ee90a9125b"
+  },
+  "cios/applications/flora/memory/source_contracts.py": {
+    "reason": "Unchanged canonical source contracts.",
+    "prior_sha256": [
+      "e0ce29b84d42cadddfbe7314082415ebbff720101d4742c2634e306939f330a4"
+    ],
+    "reviewed_sha256": "e0ce29b84d42cadddfbe7314082415ebbff720101d4742c2634e306939f330a4"
+  },
+  "cios/applications/flora/public_routes.py": {
+    "reason": "No public grammar widening.",
+    "prior_sha256": [
+      "a06028a19e2f6a858927ae5591937152beaa33b6490884130b681334a3def755",
+      "b6ae05dc139f13217a725595854f1566a39a6ddb8b8d292ea533bbdf095224f3"
+    ],
+    "reviewed_sha256": "a06028a19e2f6a858927ae5591937152beaa33b6490884130b681334a3def755"
+  },
+  "architecture/decisions/ADR-027-Document-Scoped-Publisher-Admission-Proposal.md": {
+    "reason": "Proposed remains unchanged.",
+    "prior_sha256": [
+      "a6d597c0b9e6b998d23850e10d88469d4c4a6d04949f970ed392b697fdf57f14"
+    ],
+    "reviewed_sha256": "a6d597c0b9e6b998d23850e10d88469d4c4a6d04949f970ed392b697fdf57f14"
+  },
+  "docs/flora-runtime/eai1-628/Eight-Evidence-Review-Proposals.json": {
+    "reason": "Eight unexecuted owner proposals unchanged.",
+    "prior_sha256": [
+      "80afbcc76a3a163ca2658c98ec4c07d37ce7e401a114add55f937e210e3f16b2"
+    ],
+    "reviewed_sha256": "80afbcc76a3a163ca2658c98ec4c07d37ce7e401a114add55f937e210e3f16b2"
+  },
+  "cios/applications/flora/financial_intelligence/analyst.py": {
+    "reason": "Data-driven Main entries, same generic Financial composition with semantic dependencies.",
+    "prior_sha256": [
+      "4296b9f23b712167ad823ab4f01c1787370c426d3ff3a458594a05754a3065e8",
+      "815d3495adb3154071bcf7299d6732fc58464ce119037ceed3f51eb7a1b69751"
+    ],
+    "reviewed_sha256": "9aec9080c12142d79793cf147fcb162641b73a4a1ecbc045d55eb1431da94167"
+  },
+  "tools/research/history_integrity.py": {
+    "reason": "Exactly three new research files, all earlier bytes unchanged.",
+    "prior_sha256": [
+      "f32e755f2492eaa418e7df735d2f182bfc63ecee39294569612350b56c8700c8",
+      "ea190aee0b1072992c45c634ab0b0cf58ed212f695d0794b8f9a40af59641562",
+      "552272180bbf54b8376b90745fd75079dee8ae19b56fbd06e39f63cc11a2e9fb",
+      "f9c310cbcc17ec675bb71acb64ec5b6c3b9861b50a0e1e701b9ebff02bc52426",
+      "f087c9b754209c17a01e0ec769123bb32a63c51d8a15861c12f798592767094f"
+    ],
+    "reviewed_sha256": "530504ffdcaeb22207f48aa35b3aa5ea9bed262812950e37507a95fc0c360e9d"
+  }
+}

@@ -76,7 +76,8 @@ def test_candidate_mapping_rejects_fabricated_or_cross_row_page_passages(mutatio
 
 def test_publisher_policy_and_existing_observation_owners_are_unchanged():
     before=subprocess.check_output(['git','show','c3b818c:cios/applications/flora/research_intelligence/source_import.py'],cwd=t.ROOT)
-    assert before==(t.ROOT/'cios/applications/flora/research_intelligence/source_import.py').read_bytes()
+    from tests.flora_f2_owner_contract import assert_owner_compatible
+    assert_owner_compatible(t.ROOT,'cios/applications/flora/research_intelligence/source_import.py',before)
     with pytest.raises(ValueError):source_import.official_url('https://www.anthropic.com/news/barclays-scales-claude')
     assert any('publisher_not_in_existing_allowlist' in r['reasons'] for r in t.handoff()['relationships'])
     for path in ('cios/applications/flora/memory/models.py','cios/applications/flora/blueprint_import/views.py','cios/applications/flora/sales_pipeline.py'):

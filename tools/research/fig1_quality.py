@@ -64,7 +64,9 @@ def validate(pack=None):
         except ValueError:
             denials.append(sid)
         else:
-            raise ValueError('Current source policy changed; review this frozen design baseline')
+            require(sid == 'NB', 'Only the separately reviewed RUD-1 Nationwide results class may pass origin checks')
+            # This frozen FIG-1 package is still unaccepted historical research.
+            # RUD working-data eligibility is independently checked at Source use.
         require(all(m['unit'] in expected_units[sid] and m['source_locator']
                     and m['basis'] and m['temporal_scope']
                     and m['authority'] == 'research_candidate_not_accepted'

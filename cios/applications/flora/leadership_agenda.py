@@ -44,6 +44,9 @@ BANK_SERVICE = MappingProxyType({
                ('BIE2-NATWEST-RECEIVED','BIE3-NATWEST-CLOSED','BIE3-NATWEST-UPHELD')),
     'hsbc-uk':('HSBC UK Bank Plc','HSBC UK Bank Plc only; not its consolidated Group or other bank subsidiaries',
                ('BIE2-HSBC-RECEIVED','BIE3-HSBC-CLOSED','BIE3-HSBC-UPHELD')),
+    'tsb':('TSB Bank plc','TSB Bank plc only; not TSB Banking Group Limited',()),
+    'nationwide':('Nationwide Building Society','Nationwide Building Society only; not its consolidated Group',()),
+    'starling':('Starling Bank Limited','Starling Bank Limited only; not its consolidated Group',()),
     'santander-uk':('Santander UK Plc','Santander UK Plc only; not Santander UK Group Holdings plc or TSB Bank plc',
                ('BIE3-SANTANDER-RECEIVED','BIE3-SANTANDER-CLOSED','BIE3-SANTANDER-UPHELD')),
 })
@@ -221,8 +224,11 @@ def _issue(key,title,text,facts,reason,counter,analysis):
 
 def bank_service_issue(selected,data):
     """A narrow legal-bank service view, never a complete Enterprise Model."""
-    if selected not in BANK_SERVICE:return None
-    name,scope,ids=BANK_SERVICE[selected];facts=_claims(data,ids)
+    if selected not in BANK_SERVICE or p.restricted_metadata(data):return None
+    name,scope,ids=BANK_SERVICE[selected]
+    if not ids:
+        return routine_service_issue(selected)
+    facts=_claims(data,ids)
     units=('complaints received; all-product total','complaints closed; all-product total',
            'percent of closed complaints upheld by firm; FCA table total')
     if (len(facts)!=3 or any(f.scope!=scope or f.period!='1 January–30 June 2026'
@@ -237,6 +243,38 @@ def bank_service_issue(selected,data):
         'The same FCA period and legal-bank identity support distinct activity and firm-resolution measures. Group financial results and other bank subsidiaries are outside this view.',
         ('No deterioration, customer denominator, cost, independent outcome or external supplier need is established. Santander UK Plc data are not consolidated with TSB Bank plc.',),
         'Legal-bank service operations · received/closed cohorts and firm-upheld outcomes; no Group aggregation.')
+
+
+
+def routine_service_issue(selected):
+    """Authored analysis over lawful public numerical facts; no promotion gate."""
+    from .research_intelligence.source_import import working_facts, bound_facts, working_restricted
+    from decimal import Decimal
+    try:
+        research, sources = working_facts()
+        rows = [r for r in research['service_profiles'] if r['selection'] == selected]
+        if len(rows) != 1: return None
+        row = rows[0]
+        source = sources[row['source_id']]
+        if working_restricted(row) or {k:v for k,v in row.items() if k != 'source_id'} != bound_facts(source, selected, 'service_profile'):
+            return None
+        ref = p.Source(source['title'], source['url'], source['publisher'], source['publication_date'],
+                       locator=row['name']+'; all-product Total; '+row['period'])
+        caveat = 'Received and closed complaints are different cohorts. Firm-upheld is not independent adjudication; no harm rate, cost, service-quality ranking or buying need is established.'
+        facts = tuple(p.Statement(label, 'reported', row['scope'], row['period'], (ref,),
+                    'reviewed_excerpt', 'candidate_intelligence', value=Decimal(str(row[key])), unit=unit,
+                    caveats=(caveat,)) for key,label,unit in (
+                    ('received', row['name']+' received '+format(row['received'],',')+' complaints.', 'complaints received; all-product total'),
+                    ('closed', row['name']+' closed '+format(row['closed'],',')+' complaints.', 'complaints closed; all-product total'),
+                    ('upheld', row['name']+' upheld '+row['upheld']+'% of closed complaints.', 'percent of closed complaints upheld by firm; FCA table total')))
+        if not all(p.eligible(f) for f in facts): return None
+        return _issue('service-landscape', row['name']+': complaint activity and resolution',
+             row['name']+' reported '+format(row['received'],',')+' complaints received and '+format(row['closed'],',')+' closed; '+row['upheld']+'% of closed complaints were upheld by the firm.', facts,
+             'Separate activity and firm-resolution measures for the exact legal entity and reporting period; not a causal diagnosis or cross-bank ranking.',
+             (caveat,'Period: '+row['period']+'. Source publication22October2026. No financial redress or Group earnings is inferred.'),
+             'Service operations · legal-entity facts and authored interpretation.')
+    except (OSError, ValueError, KeyError, TypeError, PermissionError, StopIteration):
+        return None
 
 
 def agenda(scope,data=None,*,selected=''):
@@ -357,12 +395,14 @@ def agenda(scope,data=None,*,selected=''):
 
 
 def bank_service_navigation(ctx,link,issues,data):
-    if ctx.scope!='banking'or not any(r.key=='service-landscape'for r in issues):return ''
-    available=[(slug,name)for slug,(name,_,_)in BANK_SERVICE.items()if bank_service_issue(slug,data)]
+    if ctx.scope!='banking' or p.restricted_metadata(data):return ''
+    available=[(slug,name)for slug,(name,_,ids)in BANK_SERVICE.items()
+               if (not ids or any(r.key=='service-landscape'for r in issues)) and bank_service_issue(slug,data)]
     if not available:return ''
     body='<div class="layer-options bank-service-profiles"><nav aria-label="Bank complaint profiles">'
     for slug,name in available:
-        body+='<a href="'+escape(link(ctx,selected=slug,detail='',agenda='service-landscape')+'#agenda-insight',quote=True)+'"'+(' aria-current="true"'if ctx.selected==slug else'')+'>'+escape(name)+'</a>'
+        target_agenda='service-landscape' if BANK_SERVICE[slug][2] else ''
+        body+='<a href="'+escape(link(ctx,selected=slug,detail='',agenda=target_agenda)+'#agenda-insight',quote=True)+'"'+(' aria-current="true"'if ctx.selected==slug else'')+'>'+escape(name)+'</a>'
     return body+'</nav></div>'
 
 

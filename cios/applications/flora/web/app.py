@@ -857,6 +857,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_home_page(self.headers, question_error="Enter a question before asking Flora."), status=400)
                 return
             self._redirect(f"/ask?question={quote_plus(question)}")
+        elif self.path == "/financial-research/refresh":
+            from cios.applications.flora.financial_intelligence.candidate_analytics import refresh_research
+            if set(form) != {'csrf'}:
+                raise PermissionError('Unexpected research parameter')
+            refresh_research(headers=self.headers)
+            self._redirect('/industries/banking')
         elif self.path == "/blueprint-import/upload":
             fields, files = _parse_multipart(self.headers, raw_body)
             fields["_form_submission"] = "true"

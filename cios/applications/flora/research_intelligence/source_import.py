@@ -22,7 +22,7 @@ def sha(content):
 
 def official_url(value):
     target = urlsplit(value)
-    if (target.scheme != 'https' or target.hostname not in PUBLISHERS
+    if (target.scheme != 'https' or not (target.hostname in PUBLISHERS or (target.hostname == 'www.nationwide.co.uk' and re.fullmatch(r'/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/[0-9-]+/[0-9]{4}-preliminary-results\.pdf', target.path) and not target.query))
             or target.username or target.password or target.port not in (None, 443)
             or target.fragment):
         raise ValueError('Expected an approved official-publisher HTTPS document URL')
@@ -129,3 +129,114 @@ def secondary_excerpt(source, repo):
     if not source.get('excerpts') or any(not e.get('locator') or not e.get('quote') or e['quote'] not in text for e in source['excerpts']):
         raise ValueError('Secondary excerpt requires located retained quotations')
     return text
+
+
+def routine_factual_use(source):
+    """Existing Source owner: use eligibility is separate from canonical status.
+
+    Trusted retained Source metadata, never request parameters. This establishes
+    only a bounded analytical use, not a licence to redistribute expression.
+    Actual source-level restrictions/lifecycle changes isolate that source.
+    """
+    official_url(source['url'])
+    provenance(source)
+    from ..intelligence_presentation import restricted_metadata
+    if (working_restricted(source) or source.get('restrictions')
+            or source.get('third_party_material') is not False
+            or source.get('retained_form') != 'minimal_facts_and_provenance'
+            or source.get('retention') != 'minimal_facts_and_provenance'
+            or source.get('purpose') != 'attributed_analytical_working_views'
+            or source.get('audience') != 'flora_research_views'):
+        raise PermissionError('Source-use exception')
+    rights = source.get('rights', {})
+    url = urlsplit(source['url'])
+    if (rights.get('basis') == 'fca_owned_numerical_data_ogl'
+            and url.hostname == 'www.fca.org.uk' and url.path == '/data/firm-level-complaints-data-sortable-table'
+            and source.get('fact_bindings')
+            and all(b.get('kind') == 'service_profile' for b in source['fact_bindings'])
+            and rights.get('terms_url') == 'https://www.fca.org.uk/legal'):
+        return 'open_numerical_data'
+    if (rights.get('basis') == 'isolated_public_financial_facts'
+            and source.get('source_category') == 'issuer_results'
+            and url.hostname == 'www.nationwide.co.uk'
+            and re.fullmatch(r'/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/[0-9-]+/[0-9]{4}-preliminary-results\.pdf', url.path)
+            and source.get('fact_bindings')
+            and all(b.get('kind') == 'financial_measurement' for b in source['fact_bindings'])
+            and rights.get('expression_reuse') is False
+            and rights.get('contract_restriction_found') is False
+            and rights.get('method_review')
+            and rights.get('legal_basis_url') == 'https://www.gov.uk/government/publications/report-and-impact-assessment-on-copyright-and-artificial-intelligence/report-on-copyright-and-artificial-intelligence'):
+        return 'minimal_factual_analysis'
+    raise PermissionError('Source-use exception requires resolution')
+
+
+def working_facts():
+    """Finite retained research package through the existing snapshot owner.
+
+    No universal release pin, human approval, canonical promotion or URL fetch.
+    Integrity remains content-addressed by primary_text for each source. A
+    source exception omits only its dependent rows, not unrelated research.
+    """
+    import json
+    from . import model
+    from .registry import snapshot_boundary
+    root = snapshot_boundary('banking', model.REPO)
+    path = root / 'RUD1-Public-Facts.json'
+    if path.is_symlink():
+        raise PermissionError('Research unavailable')
+    data = json.loads(path.read_text())
+    from ..intelligence_presentation import restricted_metadata
+    if (data.get('authority') != 'analytical_working_research' or data.get('canonical_mutation') is not False
+            or working_restricted({k:v for k,v in data.items() if k not in {'sources','service_profiles','financial_selections'}})):
+        raise PermissionError('Research authority unavailable')
+    from collections import Counter
+    records = [s for s in data['sources'] if isinstance(s, dict) and isinstance(s.get('id'), str) and s['id']]
+    counts = Counter(s['id'] for s in records)
+    sources = {}
+    for source in records:
+        if counts[source['id']] != 1:
+            continue
+        try:
+            routine_factual_use(source)
+            model.primary_text(source)
+            if source['id'] in sources:
+                raise ValueError('Duplicate source identity')
+            sources[source['id']] = source
+        except (PermissionError, ValueError, OSError, KeyError, TypeError):
+            continue
+    return data, sources
+
+
+def bound_facts(source, key, kind):
+    """Exact located factual axes, not substring support or a new approval.
+
+    The retained source record owns these transcribed cells and their axes.
+    Ordinary derived/display rows must match them, rather than self-admitting.
+    """
+    from ..intelligence_presentation import restricted_metadata
+    bindings = [b for b in source['fact_bindings'] if b['key'] == key and b['kind'] == kind]
+    if len(bindings) != 1 or working_restricted(bindings[0]):
+        raise ValueError('Ambiguous or restricted source fact')
+    binding = bindings[0]
+    indices = binding.get('excerpt_indices', [])
+    if (not indices or any(type(i) is not int or i < 0 or i >= len(source['excerpts']) for i in indices)
+            or len(indices) != len(set(indices))):
+        raise ValueError('Invalid factual-cell locations')
+    entries = [source['excerpts'][i] for i in indices]
+    facts = binding['facts']
+    if kind == 'financial_measurement':
+        from decimal import Decimal
+        if len(entries) != 1 or Decimal(entries[0]['quote'].replace(',', '')) != abs(Decimal(facts['value']['amount'])):
+            raise ValueError('Financial cell differs from located factual value')
+    else:
+        if (len(entries) != 3 or [e['quote'].replace(',', '').removesuffix('%') for e in entries]
+                != [str(facts[k]) for k in ('received','closed','upheld')]
+                or any(facts['name'] not in e['locator'] or facts['period'] not in e['locator'] for e in entries)):
+            raise ValueError('Service cells differ from located entity/period values')
+    return facts
+
+
+def working_restricted(record):
+    from ..intelligence_presentation import restricted_metadata
+    return restricted_metadata(record) or any(record.get(key) is True for key in
+        ('revoked', 'denied', 'contradictory', 'stale', 'superseded'))

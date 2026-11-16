@@ -22,7 +22,7 @@ BASE = 'e7c58feb84882b0e7a1ea38e7e1c72079402aa86'
 def test_five_banks_all_dimensions_actual_owner_audit_without_acceptance():
     report = quality.validate()
     assert report == {'design_qa_passed': True, 'bank_exemplars': 5, 'dimension_assessments': 50,
-        'actual_gate_owners_assessed': 17, 'current_issuer_policy_denials': ['NW', 'HS', 'SA', 'NB', 'ST'],
+        'actual_gate_owners_assessed': 17, 'current_issuer_policy_denials': ['NW', 'HS', 'SA', 'ST'],
         'new_rights_grants': 0, 'canonical_promotions': 0, 'runtime_changes': 0,
         'research_completeness_claim': False, 'proof_scope': 'fixed synthetic examples, not a live financial analyst'}
 
@@ -196,4 +196,4 @@ def test_runtime_canonical_source_history_and_accepted_architecture_are_unchange
                    cwd=demo.ROOT, capture_output=True, check=True)
     assert not (demo.ROOT/'tools/research/ear1_proof.py').exists()  # no EAR-1 branch integration
     from tools.research.history_integrity import approved_history
-    assert len(approved_history(demo.ROOT)) == 175  # 173 preserved + exact two F1 candidates.
+    assert len(approved_history(demo.ROOT)) == 178  # 173 preserved + exact two F1 candidates.

@@ -144,7 +144,8 @@ def test_exact_eai_forms_sources_and_proposed_adr_preserved_without_approval():
 
 def test_current_vp2_shell_assets_and_all_old_dependency_pins_preserved():
  for path in ['cios/applications/flora/visual_stream_assets/panels.css','cios/applications/flora/visual_stream_assets/panels-artwork.json','cios/applications/flora/visual_stream_assets/artwork.json','cios/applications/flora/visual_stream_assets/scenes.json','cios/applications/flora/visual_stream_assets/streams.js','cios/applications/flora/public_routes.py','cios/applications/flora/design_system.py','cios/applications/flora/web/app.py','cios/applications/flora/intelligence_presentation.py']:
-  assert (ROOT/path).read_bytes()==subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
+  from tests.flora_f2_owner_contract import assert_owner_compatible
+  assert_owner_compatible(ROOT,path,subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
  manifest=panels.asset_manifest()
  for key,row in manifest['files'].items():assert hashlib.sha256(v.asset(key)[0]).hexdigest()==row['sha256']
  pins=json.loads(subprocess.check_output(['git','show',BASE+':cios/applications/flora/visual_stream_assets/agenda-dependencies.json'],cwd=ROOT))

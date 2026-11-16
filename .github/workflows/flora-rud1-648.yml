@@ -1,0 +1,66 @@
+name: FLORA RUD-1 routine public factual intelligence
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'cios/applications/flora/**'
+      - 'enterprise-knowledge/banking/research-model/**'
+      - 'tests/test_flora_rud1_648.py'
+      - 'tests/fixtures/financial_analyst.py'
+      - 'tools/research/rud1_quality.py'
+      - 'tests/flora_f2_owner_contract.py'
+      - 'tools/research/rud1_compatibility.py'
+      - 'tools/research/rud1_proof.py'
+      - 'tools/ci/flora_rud1_preview.cjs'
+      - 'docs/flora-runtime/rud1-648/**'
+      - '.github/workflows/flora-rud1-648.yml'
+permissions:
+  contents: read
+jobs:
+  candidate-analytics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.txt
+      - name: Typed meaning, actual run reload, source-use withdrawal and real access boundaries
+        run: python -m pytest tests/test_flora_rud1_648.py tests/test_flora_f3_646.py tests/test_flora_f2_644.py tests/test_flora_f1_642.py -q
+      - name: Routine source eligibility and reproducible financial quality
+        run: python tools/research/rud1_quality.py
+      - name: Install isolated browser tools
+        run: |
+          npm install --prefix "$RUNNER_TEMP/rud1-node" playwright@1.62.1
+          "$RUNNER_TEMP/rud1-node/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Real-source proof and responsive application checks
+        env:
+          NODE_PATH: ${{ runner.temp }}/rud1-node/node_modules
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/rud1-before" b29af81414de2d5fdec769a5d319d58e0e017011
+          python tools/research/rud1_proof.py --output "$RUNNER_TEMP/rud1-proof" --preview --baseline-root "$RUNNER_TEMP/rud1-before"
+      - name: Preserve complete accepted visual browser journey
+        env:
+          NODE_PATH: ${{ runner.temp }}/rud1-node/node_modules
+        run: python tools/ci/flora_vp2_preview.py --output "$RUNNER_TEMP/rud1-visual-regression"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: flora-rud1-proof-${{ github.event.pull_request.head.sha }}
+          path: |
+            ${{ runner.temp }}/rud1-proof/Proof.json
+            ${{ runner.temp }}/rud1-proof/Research-Quality.json
+            ${{ runner.temp }}/rud1-proof/Browser-Checks.json
+            ${{ runner.temp }}/rud1-proof/*.jpg
+            ${{ runner.temp }}/rud1-proof/Accessibility.yml
+            ${{ runner.temp }}/rud1-visual-regression/Browser-Checks.json
+            ${{ runner.temp }}/rud1-visual-regression/Performance.json
+          retention-days: 14

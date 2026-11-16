@@ -1,0 +1,1159 @@
+{
+  "authority": "analytical_working_research",
+  "canonical_mutation": false,
+  "sources": [
+    {
+      "retrieved_at": "2026-11-16T00:00:00+00:00",
+      "retrieval_timestamp_precision": "day_normalised_UTC_not_server_timestamp",
+      "retrieval_method": "approved_web_research_tool",
+      "content_kind": "reviewed_web_excerpt",
+      "primary_content_sha256": null,
+      "research_domain": "banking",
+      "reviewed_by": "RUD-1 factual/source-method assessment; not canonical Evidence acceptance",
+      "verification": "primary_retrieved",
+      "third_party_material": false,
+      "retained_form": "minimal_facts_and_provenance",
+      "restrictions": [],
+      "id": "RUD1-FCA-H126",
+      "title": "FCA firm complaint totals and firm-upheld outcomes",
+      "publisher": "Financial Conduct Authority",
+      "url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+      "publication_date": "2026-10-22",
+      "publication_date_evidence": "Original FCA2026H1 release date",
+      "reporting_period": "Legal-bank reporting periods individually retained; Jan–Jun26 or Oct25–Mar26",
+      "review_notes": "All-product Total columns. Counts are not financial currency or matched cohorts; no redress allocation. FCA Group column is not current ownership authority.",
+      "retrieval_reference": "Original FCA Open/Closed/Upheld tables inspected16Nov2026; independent factual review",
+      "retrieval_extent": "Six firm labels and18 numerical cells, period labels; no narrative/full table or original-byte archive",
+      "rights": {
+        "basis": "fca_owned_numerical_data_ogl",
+        "terms_url": "https://www.fca.org.uk/legal",
+        "licence_url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+        "attribution": "Contains Financial Conduct Authority information licensed under the Open Government Licence v3.0.",
+        "terms_clause": "2.2 numerical Data;2.3 narrative excluded"
+      },
+      "retrieval_url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+      "excerpts": [
+        {
+          "locator": "National Westminster Bank PLC;Open table;all-product Total;1 January–30 June 2026",
+          "quote": "92,548"
+        },
+        {
+          "locator": "National Westminster Bank PLC;Closed table;all-product Total;1 January–30 June 2026",
+          "quote": "101,586"
+        },
+        {
+          "locator": "National Westminster Bank PLC;Upheld table;all-product Total;1 January–30 June 2026",
+          "quote": "55.31%"
+        },
+        {
+          "locator": "HSBC UK Bank Plc;Open table;all-product Total;1 January–30 June 2026",
+          "quote": "79,323"
+        },
+        {
+          "locator": "HSBC UK Bank Plc;Closed table;all-product Total;1 January–30 June 2026",
+          "quote": "76,912"
+        },
+        {
+          "locator": "HSBC UK Bank Plc;Upheld table;all-product Total;1 January–30 June 2026",
+          "quote": "59.09%"
+        },
+        {
+          "locator": "Santander UK Plc;Open table;all-product Total;1 January–30 June 2026",
+          "quote": "61,365"
+        },
+        {
+          "locator": "Santander UK Plc;Closed table;all-product Total;1 January–30 June 2026",
+          "quote": "60,615"
+        },
+        {
+          "locator": "Santander UK Plc;Upheld table;all-product Total;1 January–30 June 2026",
+          "quote": "48.06%"
+        },
+        {
+          "locator": "TSB Bank plc;Open table;all-product Total;1 January–30 June 2026",
+          "quote": "29,908"
+        },
+        {
+          "locator": "TSB Bank plc;Closed table;all-product Total;1 January–30 June 2026",
+          "quote": "30,123"
+        },
+        {
+          "locator": "TSB Bank plc;Upheld table;all-product Total;1 January–30 June 2026",
+          "quote": "52.62%"
+        },
+        {
+          "locator": "Nationwide Building Society;Open table;all-product Total;1 October 2025–31 March 2026",
+          "quote": "100,886"
+        },
+        {
+          "locator": "Nationwide Building Society;Closed table;all-product Total;1 October 2025–31 March 2026",
+          "quote": "100,156"
+        },
+        {
+          "locator": "Nationwide Building Society;Upheld table;all-product Total;1 October 2025–31 March 2026",
+          "quote": "55.20%"
+        },
+        {
+          "locator": "Starling Bank Limited;Open table;all-product Total;1 October 2025–31 March 2026",
+          "quote": "15,223"
+        },
+        {
+          "locator": "Starling Bank Limited;Closed table;all-product Total;1 October 2025–31 March 2026",
+          "quote": "14,362"
+        },
+        {
+          "locator": "Starling Bank Limited;Upheld table;all-product Total;1 October 2025–31 March 2026",
+          "quote": "44.49%"
+        }
+      ],
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/RUD1-FCA-Facts.txt",
+      "text_sha256": "efc71dc5c0f8e3311f5f573b55dcb59570c0a78795d72f75d12fa81e2fb7ef52",
+      "fact_bindings": [
+        {
+          "key": "natwest",
+          "kind": "service_profile",
+          "facts": {
+            "selection": "natwest",
+            "name": "National Westminster Bank PLC",
+            "period": "1 January–30 June 2026",
+            "received": 92548,
+            "closed": 101586,
+            "upheld": "55.31",
+            "scope": "National Westminster Bank PLC only; not a consolidated Group or other subsidiaries"
+          },
+          "excerpt_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "key": "hsbc-uk",
+          "kind": "service_profile",
+          "facts": {
+            "selection": "hsbc-uk",
+            "name": "HSBC UK Bank Plc",
+            "period": "1 January–30 June 2026",
+            "received": 79323,
+            "closed": 76912,
+            "upheld": "59.09",
+            "scope": "HSBC UK Bank Plc only; not a consolidated Group or other subsidiaries"
+          },
+          "excerpt_indices": [
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "key": "santander-uk",
+          "kind": "service_profile",
+          "facts": {
+            "selection": "santander-uk",
+            "name": "Santander UK Plc",
+            "period": "1 January–30 June 2026",
+            "received": 61365,
+            "closed": 60615,
+            "upheld": "48.06",
+            "scope": "Santander UK Plc only; not a consolidated Group or other subsidiaries"
+          },
+          "excerpt_indices": [
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "key": "tsb",
+          "kind": "service_profile",
+          "facts": {
+            "selection": "tsb",
+            "name": "TSB Bank plc",
+            "period": "1 January–30 June 2026",
+            "received": 29908,
+            "closed": 30123,
+            "upheld": "52.62",
+            "scope": "TSB Bank plc only; not a consolidated Group or other subsidiaries"
+          },
+          "excerpt_indices": [
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "key": "nationwide",
+          "kind": "service_profile",
+          "facts": {
+            "selection": "nationwide",
+            "name": "Nationwide Building Society",
+            "period": "1 October 2025–31 March 2026",
+            "received": 100886,
+            "closed": 100156,
+            "upheld": "55.20",
+            "scope": "Nationwide Building Society only; not a consolidated Group or other subsidiaries"
+          },
+          "excerpt_indices": [
+            12,
+            13,
+            14
+          ]
+        },
+        {
+          "key": "starling",
+          "kind": "service_profile",
+          "facts": {
+            "selection": "starling",
+            "name": "Starling Bank Limited",
+            "period": "1 October 2025–31 March 2026",
+            "received": 15223,
+            "closed": 14362,
+            "upheld": "44.49",
+            "scope": "Starling Bank Limited only; not a consolidated Group or other subsidiaries"
+          },
+          "excerpt_indices": [
+            15,
+            16,
+            17
+          ]
+        }
+      ],
+      "purpose": "attributed_analytical_working_views",
+      "audience": "flora_research_views",
+      "retention": "minimal_facts_and_provenance"
+    },
+    {
+      "retrieved_at": "2026-11-16T00:00:00+00:00",
+      "retrieval_timestamp_precision": "day_normalised_UTC_not_server_timestamp",
+      "retrieval_method": "approved_web_research_tool",
+      "content_kind": "reviewed_web_excerpt",
+      "primary_content_sha256": null,
+      "research_domain": "banking",
+      "reviewed_by": "RUD-1 factual/source-method assessment; not canonical Evidence acceptance",
+      "verification": "primary_retrieved",
+      "third_party_material": false,
+      "retained_form": "minimal_facts_and_provenance",
+      "restrictions": [],
+      "id": "RUD1-NATIONWIDE-FY26",
+      "title": "Nationwide Building Society preliminary results, year ended31March2026",
+      "publisher": "Nationwide Building Society",
+      "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+      "retrieval_url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+      "publication_date": "2026-05-21",
+      "publication_date_evidence": "Results responsibility statement, printed100",
+      "reporting_period": "1 April2025–31March2026; Nationwide Building Society consolidated Group",
+      "review_notes": "Minimal isolated own financial facts and authored analysis. No licence grant asserted. Investor PDF no located restriction on isolated own facts; social-feed/HPI/third-party benchmark restrictions excluded. Not copied report prose, graphics, layout or full text.",
+      "retrieval_reference": "Original PDF opened16Nov2026; printed7–10 and100; independent source-method review",
+      "retrieval_extent": "Nine isolated numerical facts and short metric labels; original document bytes not retained",
+      "source_category": "issuer_results",
+      "rights": {
+        "basis": "isolated_public_financial_facts",
+        "expression_reuse": false,
+        "contract_restriction_found": false,
+        "method_review": "Lawful open original investor PDF; minimal factual transcription and independently authored analysis, not a general commercial licence. No recurring bulk extraction. Reassess on actual applicable restriction or aggregate extraction change.",
+        "legal_basis_url": "https://www.gov.uk/government/publications/report-and-impact-assessment-on-copyright-and-artificial-intelligence/report-on-copyright-and-artificial-intelligence",
+        "terms_url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+        "licence_url": "https://www.gov.uk/guidance/exceptions-to-copyright",
+        "attribution": "Source: Nationwide Building Society, FY2026 preliminary results, printed7–10. Factual analysis; no issuer endorsement or expression redistribution."
+      },
+      "excerpts": [
+        {
+          "locator": "Printed10 financial review, underlying/statutory columns FY2026",
+          "quote": "6,378"
+        },
+        {
+          "locator": "Printed10 financial review, underlying/statutory columns FY2026",
+          "quote": "4,021"
+        },
+        {
+          "locator": "Printed10 financial review, underlying/statutory columns FY2026",
+          "quote": "331"
+        },
+        {
+          "locator": "Printed10 financial review, underlying/statutory columns FY2026",
+          "quote": "2,026"
+        },
+        {
+          "locator": "Printed10 financial review, underlying/statutory columns FY2026",
+          "quote": "1,490"
+        },
+        {
+          "locator": "Printed10 financial review, underlying/statutory columns FY2026",
+          "quote": "138"
+        },
+        {
+          "locator": "Printed10 financial review, underlying/statutory columns FY2026",
+          "quote": "399"
+        },
+        {
+          "locator": "Printed10 income underlying-to-statutory adjustment",
+          "quote": "1"
+        },
+        {
+          "locator": "Printed8 administrative expenses, integration-related expenditure already included",
+          "quote": "127"
+        }
+      ],
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/RUD1-Nationwide-Facts.txt",
+      "text_sha256": "690243d6ef1c9acbffe355ec225c05a3da2eafc3b39837319534f5d552602eac",
+      "reported_subject": {
+        "id": "research-subject:nationwide-building-society-group",
+        "name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+        "start": "2025-04-01",
+        "end": "2026-03-31",
+        "currency": "GBP",
+        "scale": "millions",
+        "bases": [
+          "underlying",
+          "statutory",
+          "underlying_to_statutory_adjustment"
+        ]
+      },
+      "fact_bindings": [
+        {
+          "key": "rud1-nationwide-total_income",
+          "kind": "financial_measurement",
+          "facts": {
+            "subject_id": "research-subject:nationwide-building-society-group",
+            "subject_name": "Nationwide Building Society Group",
+            "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+            "metric": "total_income",
+            "definition": "total income; FY2026 results financial review printed10",
+            "accounting_basis": "underlying",
+            "state": "actual",
+            "period": {
+              "kind": "duration",
+              "label": "FY2026",
+              "as_at": null,
+              "start": "2025-04-01",
+              "end": "2026-03-31",
+              "fiscal_year_end": "03-31"
+            },
+            "value": {
+              "kind": "numeric",
+              "amount": "6378",
+              "scale": "millions",
+              "unit": "currency",
+              "currency": "GBP"
+            },
+            "semantic_type": "reported",
+            "precision_dp": 0,
+            "rounding": "reported_rounded"
+          },
+          "excerpt_indices": [
+            0
+          ]
+        },
+        {
+          "key": "rud1-nationwide-operating_costs",
+          "kind": "financial_measurement",
+          "facts": {
+            "subject_id": "research-subject:nationwide-building-society-group",
+            "subject_name": "Nationwide Building Society Group",
+            "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+            "metric": "operating_costs",
+            "definition": "operating costs; FY2026 results financial review printed10",
+            "accounting_basis": "underlying",
+            "state": "actual",
+            "period": {
+              "kind": "duration",
+              "label": "FY2026",
+              "as_at": null,
+              "start": "2025-04-01",
+              "end": "2026-03-31",
+              "fiscal_year_end": "03-31"
+            },
+            "value": {
+              "kind": "numeric",
+              "amount": "-4021",
+              "scale": "millions",
+              "unit": "currency",
+              "currency": "GBP"
+            },
+            "semantic_type": "reported",
+            "precision_dp": 0,
+            "rounding": "reported_rounded"
+          },
+          "excerpt_indices": [
+            1
+          ]
+        },
+        {
+          "key": "rud1-nationwide-credit_impairment",
+          "kind": "financial_measurement",
+          "facts": {
+            "subject_id": "research-subject:nationwide-building-society-group",
+            "subject_name": "Nationwide Building Society Group",
+            "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+            "metric": "credit_impairment",
+            "definition": "credit impairment; FY2026 results financial review printed10",
+            "accounting_basis": "underlying",
+            "state": "actual",
+            "period": {
+              "kind": "duration",
+              "label": "FY2026",
+              "as_at": null,
+              "start": "2025-04-01",
+              "end": "2026-03-31",
+              "fiscal_year_end": "03-31"
+            },
+            "value": {
+              "kind": "numeric",
+              "amount": "-331",
+              "scale": "millions",
+              "unit": "currency",
+              "currency": "GBP"
+            },
+            "semantic_type": "reported",
+            "precision_dp": 0,
+            "rounding": "reported_rounded"
+          },
+          "excerpt_indices": [
+            2
+          ]
+        },
+        {
+          "key": "rud1-nationwide-underlying_profit_before_tax",
+          "kind": "financial_measurement",
+          "facts": {
+            "subject_id": "research-subject:nationwide-building-society-group",
+            "subject_name": "Nationwide Building Society Group",
+            "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+            "metric": "underlying_profit_before_tax",
+            "definition": "underlying profit before tax; FY2026 results financial review printed10",
+            "accounting_basis": "underlying",
+            "state": "actual",
+            "period": {
+              "kind": "duration",
+              "label": "FY2026",
+              "as_at": null,
+              "start": "2025-04-01",
+              "end": "2026-03-31",
+              "fiscal_year_end": "03-31"
+            },
+            "value": {
+              "kind": "numeric",
+              "amount": "2026",
+              "scale": "millions",
+              "unit": "currency",
+              "currency": "GBP"
+            },
+            "semantic_type": "reported",
+            "precision_dp": 0,
+            "rounding": "reported_rounded"
+          },
+          "excerpt_indices": [
+            3
+          ]
+        },
+        {
+          "key": "rud1-nationwide-profit_before_tax",
+          "kind": "financial_measurement",
+          "facts": {
+            "subject_id": "research-subject:nationwide-building-society-group",
+            "subject_name": "Nationwide Building Society Group",
+            "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+            "metric": "profit_before_tax",
+            "definition": "profit before tax; FY2026 results financial review printed10",
+            "accounting_basis": "statutory",
+            "state": "actual",
+            "period": {
+              "kind": "duration",
+              "label": "FY2026",
+              "as_at": null,
+              "start": "2025-04-01",
+              "end": "2026-03-31",
+              "fiscal_year_end": "03-31"
+            },
+            "value": {
+              "kind": "numeric",
+              "amount": "1490",
+              "scale": "millions",
+              "unit": "currency",
+              "currency": "GBP"
+            },
+            "semantic_type": "reported",
+            "precision_dp": 0,
+            "rounding": "reported_rounded"
+          },
+          "excerpt_indices": [
+            4
+          ]
+        },
+        {
+          "key": "rud1-nationwide-income_basis_adjustment",
+          "kind": "financial_measurement",
+          "facts": {
+            "subject_id": "research-subject:nationwide-building-society-group",
+            "subject_name": "Nationwide Building Society Group",
+            "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+            "metric": "income_basis_adjustment",
+            "definition": "income basis adjustment; FY2026 underlying-to-statutory bridge printed10",
+            "accounting_basis": "underlying_to_statutory_adjustment",
+            "state": "actual",
+            "period": {
+              "kind": "duration",
+              "label": "FY2026",
+              "as_at": null,
+              "start": "2025-04-01",
+              "end": "2026-03-31",
+              "fiscal_year_end": "03-31"
+            },
+            "value": {
+              "kind": "numeric",
+              "amount": "1",
+              "scale": "millions",
+              "unit": "currency",
+              "currency": "GBP"
+            },
+            "semantic_type": "reported",
+            "precision_dp": 0,
+            "rounding": "reported_rounded"
+          },
+          "excerpt_indices": [
+            7
+          ]
+        },
+        {
+          "key": "rud1-nationwide-acquisition_expense_adjustment",
+          "kind": "financial_measurement",
+          "facts": {
+            "subject_id": "research-subject:nationwide-building-society-group",
+            "subject_name": "Nationwide Building Society Group",
+            "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+            "metric": "acquisition_expense_adjustment",
+            "definition": "acquisition expense adjustment; FY2026 underlying-to-statutory bridge printed10",
+            "accounting_basis": "underlying_to_statutory_adjustment",
+            "state": "actual",
+            "period": {
+              "kind": "duration",
+              "label": "FY2026",
+              "as_at": null,
+              "start": "2025-04-01",
+              "end": "2026-03-31",
+              "fiscal_year_end": "03-31"
+            },
+            "value": {
+              "kind": "numeric",
+              "amount": "-138",
+              "scale": "millions",
+              "unit": "currency",
+              "currency": "GBP"
+            },
+            "semantic_type": "reported",
+            "precision_dp": 0,
+            "rounding": "reported_rounded"
+          },
+          "excerpt_indices": [
+            5
+          ]
+        },
+        {
+          "key": "rud1-nationwide-member_reward_payments",
+          "kind": "financial_measurement",
+          "facts": {
+            "subject_id": "research-subject:nationwide-building-society-group",
+            "subject_name": "Nationwide Building Society Group",
+            "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+            "metric": "member_reward_payments",
+            "definition": "member reward payments; FY2026 underlying-to-statutory bridge printed10",
+            "accounting_basis": "underlying_to_statutory_adjustment",
+            "state": "actual",
+            "period": {
+              "kind": "duration",
+              "label": "FY2026",
+              "as_at": null,
+              "start": "2025-04-01",
+              "end": "2026-03-31",
+              "fiscal_year_end": "03-31"
+            },
+            "value": {
+              "kind": "numeric",
+              "amount": "-399",
+              "scale": "millions",
+              "unit": "currency",
+              "currency": "GBP"
+            },
+            "semantic_type": "reported",
+            "precision_dp": 0,
+            "rounding": "reported_rounded"
+          },
+          "excerpt_indices": [
+            6
+          ]
+        }
+      ],
+      "purpose": "attributed_analytical_working_views",
+      "audience": "flora_research_views",
+      "retention": "minimal_facts_and_provenance"
+    }
+  ],
+  "service_profiles": [
+    {
+      "selection": "natwest",
+      "name": "National Westminster Bank PLC",
+      "source_id": "RUD1-FCA-H126",
+      "period": "1 January–30 June 2026",
+      "received": 92548,
+      "closed": 101586,
+      "upheld": "55.31",
+      "scope": "National Westminster Bank PLC only; not a consolidated Group or other subsidiaries"
+    },
+    {
+      "selection": "hsbc-uk",
+      "name": "HSBC UK Bank Plc",
+      "source_id": "RUD1-FCA-H126",
+      "period": "1 January–30 June 2026",
+      "received": 79323,
+      "closed": 76912,
+      "upheld": "59.09",
+      "scope": "HSBC UK Bank Plc only; not a consolidated Group or other subsidiaries"
+    },
+    {
+      "selection": "santander-uk",
+      "name": "Santander UK Plc",
+      "source_id": "RUD1-FCA-H126",
+      "period": "1 January–30 June 2026",
+      "received": 61365,
+      "closed": 60615,
+      "upheld": "48.06",
+      "scope": "Santander UK Plc only; not a consolidated Group or other subsidiaries"
+    },
+    {
+      "selection": "tsb",
+      "name": "TSB Bank plc",
+      "source_id": "RUD1-FCA-H126",
+      "period": "1 January–30 June 2026",
+      "received": 29908,
+      "closed": 30123,
+      "upheld": "52.62",
+      "scope": "TSB Bank plc only; not a consolidated Group or other subsidiaries"
+    },
+    {
+      "selection": "nationwide",
+      "name": "Nationwide Building Society",
+      "source_id": "RUD1-FCA-H126",
+      "period": "1 October 2025–31 March 2026",
+      "received": 100886,
+      "closed": 100156,
+      "upheld": "55.20",
+      "scope": "Nationwide Building Society only; not a consolidated Group or other subsidiaries"
+    },
+    {
+      "selection": "starling",
+      "name": "Starling Bank Limited",
+      "source_id": "RUD1-FCA-H126",
+      "period": "1 October 2025–31 March 2026",
+      "received": 15223,
+      "closed": 14362,
+      "upheld": "44.49",
+      "scope": "Starling Bank Limited only; not a consolidated Group or other subsidiaries"
+    }
+  ],
+  "financial_selections": [
+    {
+      "key": "nationwide-fy2026",
+      "resource_ref": "BK-IND-002",
+      "selected": "nationwide",
+      "title": "Nationwide · earnings and integration economics",
+      "source_id": "RUD1-NATIONWIDE-FY26",
+      "measurements": [
+        {
+          "schema_version": 1,
+          "measurement_id": "rud1-nationwide-total_income",
+          "subject_id": "research-subject:nationwide-building-society-group",
+          "subject_name": "Nationwide Building Society Group",
+          "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+          "metric": "total_income",
+          "definition": "total income; FY2026 results financial review printed10",
+          "accounting_basis": "underlying",
+          "state": "actual",
+          "period": {
+            "kind": "duration",
+            "label": "FY2026",
+            "as_at": null,
+            "start": "2025-04-01",
+            "end": "2026-03-31",
+            "fiscal_year_end": "03-31"
+          },
+          "value": {
+            "kind": "numeric",
+            "amount": "6378",
+            "scale": "millions",
+            "unit": "currency",
+            "currency": "GBP"
+          },
+          "original_display": "£6,378m",
+          "precision_dp": 0,
+          "rounding": "reported_rounded",
+          "semantic_type": "reported",
+          "source": {
+            "owner": "banking_research",
+            "record_id": "rud1-nationwide-total_income",
+            "revision": "4d7eaa63de98f9430f9ac962067a034b0399e36c78ce1df16ccd4f7e4921d44b",
+            "source_id": "RUD1-NATIONWIDE-FY26",
+            "source_revision": "e90a0db13d10011397cc09da7f06fd24d7a883d61aab5c5d28bb037466386dc8",
+            "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+            "title": "Nationwide Building Society preliminary results, year ended31March2026",
+            "publisher": "Nationwide Building Society",
+            "locator": "Printed10;FY2026 underlying column",
+            "published": "2026-05-21",
+            "retrieved_at": "2026-11-16T00:00:00+00:00",
+            "use_reference": "RUD-1 minimal isolated factual analysis; not canonical acceptance"
+          },
+          "assumption_owner": "",
+          "assumption_version": "",
+          "caveats": [
+            "Includes a full year of Virgin Money; prior361-day period included six months. No like-for-like growth is calculated.",
+            "£127m integration expenditure is already included in underlying costs; no second deduction.",
+            "Underlying and statutory results are distinct. No customer demand, available budget or procurement is inferred."
+          ]
+        },
+        {
+          "schema_version": 1,
+          "measurement_id": "rud1-nationwide-operating_costs",
+          "subject_id": "research-subject:nationwide-building-society-group",
+          "subject_name": "Nationwide Building Society Group",
+          "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+          "metric": "operating_costs",
+          "definition": "operating costs; FY2026 results financial review printed10",
+          "accounting_basis": "underlying",
+          "state": "actual",
+          "period": {
+            "kind": "duration",
+            "label": "FY2026",
+            "as_at": null,
+            "start": "2025-04-01",
+            "end": "2026-03-31",
+            "fiscal_year_end": "03-31"
+          },
+          "value": {
+            "kind": "numeric",
+            "amount": "-4021",
+            "scale": "millions",
+            "unit": "currency",
+            "currency": "GBP"
+          },
+          "original_display": "£4,021m expense",
+          "precision_dp": 0,
+          "rounding": "reported_rounded",
+          "semantic_type": "reported",
+          "source": {
+            "owner": "banking_research",
+            "record_id": "rud1-nationwide-operating_costs",
+            "revision": "3b276c6787de2c8f9deb3759fbad418498882cb9b6c4f8aa59dbb043be0263e2",
+            "source_id": "RUD1-NATIONWIDE-FY26",
+            "source_revision": "e90a0db13d10011397cc09da7f06fd24d7a883d61aab5c5d28bb037466386dc8",
+            "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+            "title": "Nationwide Building Society preliminary results, year ended31March2026",
+            "publisher": "Nationwide Building Society",
+            "locator": "Printed10;FY2026 underlying column",
+            "published": "2026-05-21",
+            "retrieved_at": "2026-11-16T00:00:00+00:00",
+            "use_reference": "RUD-1 minimal isolated factual analysis; not canonical acceptance"
+          },
+          "assumption_owner": "",
+          "assumption_version": "",
+          "caveats": [
+            "Includes a full year of Virgin Money; prior361-day period included six months. No like-for-like growth is calculated.",
+            "£127m integration expenditure is already included in underlying costs; no second deduction.",
+            "Underlying and statutory results are distinct. No customer demand, available budget or procurement is inferred."
+          ]
+        },
+        {
+          "schema_version": 1,
+          "measurement_id": "rud1-nationwide-credit_impairment",
+          "subject_id": "research-subject:nationwide-building-society-group",
+          "subject_name": "Nationwide Building Society Group",
+          "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+          "metric": "credit_impairment",
+          "definition": "credit impairment; FY2026 results financial review printed10",
+          "accounting_basis": "underlying",
+          "state": "actual",
+          "period": {
+            "kind": "duration",
+            "label": "FY2026",
+            "as_at": null,
+            "start": "2025-04-01",
+            "end": "2026-03-31",
+            "fiscal_year_end": "03-31"
+          },
+          "value": {
+            "kind": "numeric",
+            "amount": "-331",
+            "scale": "millions",
+            "unit": "currency",
+            "currency": "GBP"
+          },
+          "original_display": "£331m expense",
+          "precision_dp": 0,
+          "rounding": "reported_rounded",
+          "semantic_type": "reported",
+          "source": {
+            "owner": "banking_research",
+            "record_id": "rud1-nationwide-credit_impairment",
+            "revision": "22e4b12485964658cb4111e281bd0ef37b23bd2fc6175cd1d434e8794580d3b7",
+            "source_id": "RUD1-NATIONWIDE-FY26",
+            "source_revision": "e90a0db13d10011397cc09da7f06fd24d7a883d61aab5c5d28bb037466386dc8",
+            "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+            "title": "Nationwide Building Society preliminary results, year ended31March2026",
+            "publisher": "Nationwide Building Society",
+            "locator": "Printed10;FY2026 underlying column",
+            "published": "2026-05-21",
+            "retrieved_at": "2026-11-16T00:00:00+00:00",
+            "use_reference": "RUD-1 minimal isolated factual analysis; not canonical acceptance"
+          },
+          "assumption_owner": "",
+          "assumption_version": "",
+          "caveats": [
+            "Includes a full year of Virgin Money; prior361-day period included six months. No like-for-like growth is calculated.",
+            "£127m integration expenditure is already included in underlying costs; no second deduction.",
+            "Underlying and statutory results are distinct. No customer demand, available budget or procurement is inferred."
+          ]
+        },
+        {
+          "schema_version": 1,
+          "measurement_id": "rud1-nationwide-underlying_profit_before_tax",
+          "subject_id": "research-subject:nationwide-building-society-group",
+          "subject_name": "Nationwide Building Society Group",
+          "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+          "metric": "underlying_profit_before_tax",
+          "definition": "underlying profit before tax; FY2026 results financial review printed10",
+          "accounting_basis": "underlying",
+          "state": "actual",
+          "period": {
+            "kind": "duration",
+            "label": "FY2026",
+            "as_at": null,
+            "start": "2025-04-01",
+            "end": "2026-03-31",
+            "fiscal_year_end": "03-31"
+          },
+          "value": {
+            "kind": "numeric",
+            "amount": "2026",
+            "scale": "millions",
+            "unit": "currency",
+            "currency": "GBP"
+          },
+          "original_display": "£2,026m",
+          "precision_dp": 0,
+          "rounding": "reported_rounded",
+          "semantic_type": "reported",
+          "source": {
+            "owner": "banking_research",
+            "record_id": "rud1-nationwide-underlying_profit_before_tax",
+            "revision": "9aba90beee41fdfe28b8d03bf8eaed3c9debf96e1b5911d378c3d85d45f7404f",
+            "source_id": "RUD1-NATIONWIDE-FY26",
+            "source_revision": "e90a0db13d10011397cc09da7f06fd24d7a883d61aab5c5d28bb037466386dc8",
+            "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+            "title": "Nationwide Building Society preliminary results, year ended31March2026",
+            "publisher": "Nationwide Building Society",
+            "locator": "Printed10;FY2026 underlying column",
+            "published": "2026-05-21",
+            "retrieved_at": "2026-11-16T00:00:00+00:00",
+            "use_reference": "RUD-1 minimal isolated factual analysis; not canonical acceptance"
+          },
+          "assumption_owner": "",
+          "assumption_version": "",
+          "caveats": [
+            "Includes a full year of Virgin Money; prior361-day period included six months. No like-for-like growth is calculated.",
+            "£127m integration expenditure is already included in underlying costs; no second deduction.",
+            "Underlying and statutory results are distinct. No customer demand, available budget or procurement is inferred."
+          ]
+        },
+        {
+          "schema_version": 1,
+          "measurement_id": "rud1-nationwide-profit_before_tax",
+          "subject_id": "research-subject:nationwide-building-society-group",
+          "subject_name": "Nationwide Building Society Group",
+          "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+          "metric": "profit_before_tax",
+          "definition": "profit before tax; FY2026 results financial review printed10",
+          "accounting_basis": "statutory",
+          "state": "actual",
+          "period": {
+            "kind": "duration",
+            "label": "FY2026",
+            "as_at": null,
+            "start": "2025-04-01",
+            "end": "2026-03-31",
+            "fiscal_year_end": "03-31"
+          },
+          "value": {
+            "kind": "numeric",
+            "amount": "1490",
+            "scale": "millions",
+            "unit": "currency",
+            "currency": "GBP"
+          },
+          "original_display": "£1,490m",
+          "precision_dp": 0,
+          "rounding": "reported_rounded",
+          "semantic_type": "reported",
+          "source": {
+            "owner": "banking_research",
+            "record_id": "rud1-nationwide-profit_before_tax",
+            "revision": "510aabd2b2bfe26959d6b4af658008a0a69d0da754aa472fc96720688736382b",
+            "source_id": "RUD1-NATIONWIDE-FY26",
+            "source_revision": "e90a0db13d10011397cc09da7f06fd24d7a883d61aab5c5d28bb037466386dc8",
+            "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+            "title": "Nationwide Building Society preliminary results, year ended31March2026",
+            "publisher": "Nationwide Building Society",
+            "locator": "Printed10;FY2026 statutory column",
+            "published": "2026-05-21",
+            "retrieved_at": "2026-11-16T00:00:00+00:00",
+            "use_reference": "RUD-1 minimal isolated factual analysis; not canonical acceptance"
+          },
+          "assumption_owner": "",
+          "assumption_version": "",
+          "caveats": [
+            "Includes a full year of Virgin Money; prior361-day period included six months. No like-for-like growth is calculated.",
+            "£127m integration expenditure is already included in underlying costs; no second deduction.",
+            "Underlying and statutory results are distinct. No customer demand, available budget or procurement is inferred."
+          ]
+        },
+        {
+          "schema_version": 1,
+          "measurement_id": "rud1-nationwide-income_basis_adjustment",
+          "subject_id": "research-subject:nationwide-building-society-group",
+          "subject_name": "Nationwide Building Society Group",
+          "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+          "metric": "income_basis_adjustment",
+          "definition": "income basis adjustment; FY2026 underlying-to-statutory bridge printed10",
+          "accounting_basis": "underlying_to_statutory_adjustment",
+          "state": "actual",
+          "period": {
+            "kind": "duration",
+            "label": "FY2026",
+            "as_at": null,
+            "start": "2025-04-01",
+            "end": "2026-03-31",
+            "fiscal_year_end": "03-31"
+          },
+          "value": {
+            "kind": "numeric",
+            "amount": "1",
+            "scale": "millions",
+            "unit": "currency",
+            "currency": "GBP"
+          },
+          "original_display": "£1m",
+          "precision_dp": 0,
+          "rounding": "reported_rounded",
+          "semantic_type": "reported",
+          "source": {
+            "owner": "banking_research",
+            "record_id": "rud1-nationwide-income_basis_adjustment",
+            "revision": "d271e453f953ddebf1b6b3cbc78dfd8e025bebbc487d699ef7e4542283f52eeb",
+            "source_id": "RUD1-NATIONWIDE-FY26",
+            "source_revision": "e90a0db13d10011397cc09da7f06fd24d7a883d61aab5c5d28bb037466386dc8",
+            "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+            "title": "Nationwide Building Society preliminary results, year ended31March2026",
+            "publisher": "Nationwide Building Society",
+            "locator": "Printed10;FY2026 underlying-to-statutory adjustments",
+            "published": "2026-05-21",
+            "retrieved_at": "2026-11-16T00:00:00+00:00",
+            "use_reference": "RUD-1 minimal isolated factual analysis; not canonical acceptance"
+          },
+          "assumption_owner": "",
+          "assumption_version": "",
+          "caveats": [
+            "Includes a full year of Virgin Money; prior361-day period included six months. No like-for-like growth is calculated.",
+            "£127m integration expenditure is already included in underlying costs; no second deduction.",
+            "Underlying and statutory results are distinct. No customer demand, available budget or procurement is inferred."
+          ]
+        },
+        {
+          "schema_version": 1,
+          "measurement_id": "rud1-nationwide-acquisition_expense_adjustment",
+          "subject_id": "research-subject:nationwide-building-society-group",
+          "subject_name": "Nationwide Building Society Group",
+          "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+          "metric": "acquisition_expense_adjustment",
+          "definition": "acquisition expense adjustment; FY2026 underlying-to-statutory bridge printed10",
+          "accounting_basis": "underlying_to_statutory_adjustment",
+          "state": "actual",
+          "period": {
+            "kind": "duration",
+            "label": "FY2026",
+            "as_at": null,
+            "start": "2025-04-01",
+            "end": "2026-03-31",
+            "fiscal_year_end": "03-31"
+          },
+          "value": {
+            "kind": "numeric",
+            "amount": "-138",
+            "scale": "millions",
+            "unit": "currency",
+            "currency": "GBP"
+          },
+          "original_display": "£138m deduction",
+          "precision_dp": 0,
+          "rounding": "reported_rounded",
+          "semantic_type": "reported",
+          "source": {
+            "owner": "banking_research",
+            "record_id": "rud1-nationwide-acquisition_expense_adjustment",
+            "revision": "15c0eae492d65d9e75d2d1994bdf0fec3a68010786eb70cf6dde58817e62523f",
+            "source_id": "RUD1-NATIONWIDE-FY26",
+            "source_revision": "e90a0db13d10011397cc09da7f06fd24d7a883d61aab5c5d28bb037466386dc8",
+            "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+            "title": "Nationwide Building Society preliminary results, year ended31March2026",
+            "publisher": "Nationwide Building Society",
+            "locator": "Printed10;FY2026 underlying-to-statutory adjustments",
+            "published": "2026-05-21",
+            "retrieved_at": "2026-11-16T00:00:00+00:00",
+            "use_reference": "RUD-1 minimal isolated factual analysis; not canonical acceptance"
+          },
+          "assumption_owner": "",
+          "assumption_version": "",
+          "caveats": [
+            "Includes a full year of Virgin Money; prior361-day period included six months. No like-for-like growth is calculated.",
+            "£127m integration expenditure is already included in underlying costs; no second deduction.",
+            "Underlying and statutory results are distinct. No customer demand, available budget or procurement is inferred."
+          ]
+        },
+        {
+          "schema_version": 1,
+          "measurement_id": "rud1-nationwide-member_reward_payments",
+          "subject_id": "research-subject:nationwide-building-society-group",
+          "subject_name": "Nationwide Building Society Group",
+          "perimeter": "Nationwide Building Society consolidated Group including a full year of Virgin Money",
+          "metric": "member_reward_payments",
+          "definition": "member reward payments; FY2026 underlying-to-statutory bridge printed10",
+          "accounting_basis": "underlying_to_statutory_adjustment",
+          "state": "actual",
+          "period": {
+            "kind": "duration",
+            "label": "FY2026",
+            "as_at": null,
+            "start": "2025-04-01",
+            "end": "2026-03-31",
+            "fiscal_year_end": "03-31"
+          },
+          "value": {
+            "kind": "numeric",
+            "amount": "-399",
+            "scale": "millions",
+            "unit": "currency",
+            "currency": "GBP"
+          },
+          "original_display": "£399m deduction",
+          "precision_dp": 0,
+          "rounding": "reported_rounded",
+          "semantic_type": "reported",
+          "source": {
+            "owner": "banking_research",
+            "record_id": "rud1-nationwide-member_reward_payments",
+            "revision": "ca4847808830e32dd86ba37dfb133cb439dca4360619334d8fdd2e48f5b85434",
+            "source_id": "RUD1-NATIONWIDE-FY26",
+            "source_revision": "e90a0db13d10011397cc09da7f06fd24d7a883d61aab5c5d28bb037466386dc8",
+            "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+            "title": "Nationwide Building Society preliminary results, year ended31March2026",
+            "publisher": "Nationwide Building Society",
+            "locator": "Printed10;FY2026 underlying-to-statutory adjustments",
+            "published": "2026-05-21",
+            "retrieved_at": "2026-11-16T00:00:00+00:00",
+            "use_reference": "RUD-1 minimal isolated factual analysis; not canonical acceptance"
+          },
+          "assumption_owner": "",
+          "assumption_version": "",
+          "caveats": [
+            "Includes a full year of Virgin Money; prior361-day period included six months. No like-for-like growth is calculated.",
+            "£127m integration expenditure is already included in underlying costs; no second deduction.",
+            "Underlying and statutory results are distinct. No customer demand, available budget or procurement is inferred."
+          ]
+        }
+      ],
+      "reconciliations": [
+        {
+          "derivation_id": "nationwide-underlying-pbt-check",
+          "formula": "signed_bridge",
+          "version": "1",
+          "mode": "reported_statement",
+          "adjustment_roles": [
+            "operating_costs",
+            "credit_impairment"
+          ],
+          "opening": {
+            "measurement_id": "rud1-nationwide-total_income",
+            "revision": "e8dd6e88b42b7868020f15adf18ae3b9bbc5680affc09cc374b79926717ac665"
+          },
+          "adjustments": [
+            {
+              "measurement_id": "rud1-nationwide-operating_costs",
+              "revision": "d47ec7639fa25f43d87d9c22b09702b107ad009c444b51372fa6d0aa0a0e3c10"
+            },
+            {
+              "measurement_id": "rud1-nationwide-credit_impairment",
+              "revision": "b410f3daa31429d394ee5b61cfbf6db65bcd49ef50626c10be8e4a2678e31a6f"
+            }
+          ],
+          "endpoint": {
+            "measurement_id": "rud1-nationwide-underlying_profit_before_tax",
+            "revision": "09c08434cd54070a04bce6a7846cbcfbbdf36efb486727e8ff75569191ee27e3"
+          },
+          "opening_basis": "underlying",
+          "adjustment_basis": "underlying",
+          "endpoint_basis": "underlying",
+          "precision_rule": "exact_reported_precision"
+        },
+        {
+          "derivation_id": "nationwide-statutory-pbt-check",
+          "formula": "signed_bridge",
+          "version": "1",
+          "mode": "basis_reconciliation",
+          "adjustment_roles": [],
+          "opening": {
+            "measurement_id": "rud1-nationwide-underlying_profit_before_tax",
+            "revision": "09c08434cd54070a04bce6a7846cbcfbbdf36efb486727e8ff75569191ee27e3"
+          },
+          "adjustments": [
+            {
+              "measurement_id": "rud1-nationwide-income_basis_adjustment",
+              "revision": "6a8c34936a9c5610651cec56047761e897b82fbae6b7fb32000faeb99b4f739a"
+            },
+            {
+              "measurement_id": "rud1-nationwide-acquisition_expense_adjustment",
+              "revision": "567131bd36fd31cf1e79f5be36f4bee2e316f1f98ad1346f7fefec05b7cb576d"
+            },
+            {
+              "measurement_id": "rud1-nationwide-member_reward_payments",
+              "revision": "a85a2fa137f076048b8593a79b2b03c72aaa7408bbbf1394a14563a75288becb"
+            }
+          ],
+          "endpoint": {
+            "measurement_id": "rud1-nationwide-profit_before_tax",
+            "revision": "90c627557a54e7424b30358fd14396aeb9cd633c47027c39173eec92e5d164d9"
+          },
+          "opening_basis": "underlying",
+          "adjustment_basis": "underlying_to_statutory_adjustment",
+          "endpoint_basis": "statutory",
+          "precision_rule": "exact_reported_precision"
+        }
+      ],
+      "insights": [
+        {
+          "type": "insight",
+          "text": "Statutory and underlying profit present distinct views of Nationwide’s earnings.",
+          "reasoning": "The reported £2,026m underlying pretax profit reconciles to £1,490m statutory pretax profit through £1m net income adjustments, £138m acquisition-related expense adjustments and £399m member reward payments.",
+          "dependencies": [
+            "FY2026 underlying pretax profit £2,026m",
+            "FY2026 statutory pretax profit £1,490m"
+          ],
+          "counter_evidence": [
+            "Underlying profit is an alternative performance measure. Neither profit basis establishes cash available for external suppliers."
+          ]
+        },
+        {
+          "type": "reported",
+          "text": "Nationwide reported £399m member reward payments; £127m integration expenditure is already included in underlying administrative expenses.",
+          "reasoning": ""
+        }
+      ]
+    }
+  ]
+}

@@ -64,7 +64,7 @@ def run(output,preview=False,baseline_root=None,*,baseline_sha=BASE,baseline_fin
             source_path=isolated/'enterprise-knowledge/banking/research-model/source-snapshots'/f.SOURCE_FILE
             source_bytes=source_path.read_bytes();package=json.loads(source_bytes);package['source']['withdrawn']=True
             source_path.write_text(json.dumps(package))
-            assert analyst.navigation(visual.Context('banking','landscape'),headers)==''
+            assert run_id not in analyst.navigation(visual.Context('banking','landscape'),headers)
             assert not analyst.authorise_request('/industries/banking?analysis='+run_id,headers=headers)
             assert f.read_analysis(run_id,headers=headers)=={}
             assert review._run_path(run_id).read_bytes()==stored

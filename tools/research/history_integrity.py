@@ -57,6 +57,9 @@ MACRO_ADDITIONS = tuple('enterprise-knowledge/macro/research-model/'+name for na
     ('GM-BILL','GM-CSRD-FR','GM-CSRD','GM-CYBER-FR','GM-CYBER-GB','GM-SOCIAL','GM-SRS',
      'MT-UK-REGISTER','MT-UK-BANK','MT-UK-SS121','MT-FR-CODE'))
 
+# #648 new routine working research only; every earlier source byte is unchanged.
+RUD1_ADDITIONS = {'enterprise-knowledge/banking/research-model/source-snapshots/RUD1-Public-Facts.json': '84777ecb69f2718a28a379c87af81cd7da78114bbb92356d3030f4d350e2ab6b', 'enterprise-knowledge/banking/research-model/source-snapshots/RUD1-FCA-Facts.txt': 'efc71dc5c0f8e3311f5f573b55dcb59570c0a78795d72f75d12fa81e2fb7ef52', 'enterprise-knowledge/banking/research-model/source-snapshots/RUD1-Nationwide-Facts.txt': '690243d6ef1c9acbffe355ec225c05a3da2eafc3b39837319534f5d552602eac'}
+
 
 def _git(root, *args):
     return subprocess.check_output(['git',*args],cwd=root)
@@ -110,6 +113,13 @@ def approved_history(root):
         assert hashlib.sha256(content).hexdigest()==digest, 'BIE-3 candidate proposal/excerpt changed'
         assert path not in expected, 'Existing identity cannot become an addition'
         expected[path]=content
+    for path,digest in RUD1_ADDITIONS.items():
+        candidate=Path(root)/path
+        assert not candidate.is_symlink(), 'RUD-1 source symlink is not permitted'
+        content=candidate.read_bytes()
+        assert hashlib.sha256(content).hexdigest()==digest, 'RUD-1 research revision changed'
+        assert path not in expected, 'Existing identity cannot become an addition'
+        expected[path]=content
     for path,digest in F1_CANDIDATE_ADDITIONS.items():
         candidate=Path(root)/path
         assert not candidate.is_symlink(), 'F1 candidate source symlink is not admitted'
@@ -134,11 +144,12 @@ def verify_history(root):
     assert not any(p.is_symlink() for p in files), 'Research symlink is not a reviewed source'
     actual={str(p.relative_to(root)):p.read_bytes() for p in files if p.is_file()}
     compare_history(expected,actual)
-    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS)-len(EAI1_CANDIDATE_ADDITIONS)-len(BIE2_CANDIDATE_ADDITIONS)-len(BIE3_CANDIDATE_ADDITIONS)-len(F1_CANDIDATE_ADDITIONS),
+    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS)-len(EAI1_CANDIDATE_ADDITIONS)-len(BIE2_CANDIDATE_ADDITIONS)-len(BIE3_CANDIDATE_ADDITIONS)-len(F1_CANDIDATE_ADDITIONS)-len(RUD1_ADDITIONS),
             'depth_additions':len(DEPTH_ADDITIONS),'macro_additions':len(MACRO_ADDITIONS),
             'trigger_candidate_additions':len(TRIGGER_ADDITIONS),'int1_presentation_candidate_additions':len(INT1_CANDIDATE_ADDITIONS),
             'eai1_presentation_candidate_additions':len(EAI1_CANDIDATE_ADDITIONS),
             'bie2_presentation_candidate_additions':len(BIE2_CANDIDATE_ADDITIONS),
             'bie3_presentation_candidate_additions':len(BIE3_CANDIDATE_ADDITIONS),
             'f1_analytical_candidate_additions':len(F1_CANDIDATE_ADDITIONS),
+            'rud1_working_research_additions':len(RUD1_ADDITIONS),
             'total':len(expected),'old_review_records_retained':True}
