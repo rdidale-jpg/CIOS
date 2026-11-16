@@ -1,0 +1,248 @@
+[
+  {
+    "id": "acquisition",
+    "owner": "Existing source acquisition",
+    "path": "cios/applications/flora/financial_intelligence/rapid_sources.py",
+    "symbol": "acquire_rapid_financial_source",
+    "risk": "Unsafe origin/redirect, wrong issuer/period, corrupt bytes",
+    "required_for": [
+      "analysis",
+      "canonical"
+    ],
+    "implemented": "Positive manifest/hosts, identity/period markers, parse and real byte checksum; receipt validation_result accepted means retrieval validation",
+    "proportionality": "Essential checks, narrow receipt route is historical implementation rather than only permitted analyst route",
+    "proposed_simplification": "Reuse source-owner receipts across extraction/verification; explicit acquisition-verified naming; support adequate official HTML/PDF/XHTML routes under ADR011, never fake bytes",
+    "authority_change_executed": false
+  },
+  {
+    "id": "publisher-use",
+    "owner": "Existing source owner and rights/use governance",
+    "path": "cios/applications/flora/research_intelligence/source_import.py",
+    "symbol": "official_url",
+    "risk": "Unapproved processing/reuse or hostile origin",
+    "required_for": [
+      "analysis",
+      "canonical"
+    ],
+    "implemented": "Hard positive publisher host set; distinct registry and rapid manifest host policies",
+    "proportionality": "Transport safety and use permission are distinct; reviewing unchanged licence for each cell is disproportionate",
+    "proposed_simplification": "Qualified category/document-series defaults after actual lawful-use review; reuse purpose/audience decision by reference; human exception handling. No new host admitted here",
+    "authority_change_executed": false
+  },
+  {
+    "id": "source-record",
+    "owner": "Source registry",
+    "path": "cios/applications/flora/live/source_registry.py",
+    "symbol": "SourceRecord",
+    "risk": "Unidentified collection owner/purpose",
+    "required_for": [
+      "analysis",
+      "canonical"
+    ],
+    "implemented": "Source identity, enabled flag, purpose, allowed collection profiles",
+    "proportionality": "Enabled is not a rights grant. Several configuration representations repeat identity",
+    "proposed_simplification": "Same owner contract references one approved use/boundary and version; no new registry",
+    "authority_change_executed": false
+  },
+  {
+    "id": "candidate",
+    "owner": "Existing financial candidate acquisition",
+    "path": "cios/applications/flora/financial_intelligence/rapid.py",
+    "symbol": "run_rapid_financial_intelligence",
+    "risk": "Unlabelled/unattributed AI output",
+    "required_for": [
+      "analysis"
+    ],
+    "implemented": "Candidate-only rapid_runs, accepted_canonical_fact_count0; Slice2A receipt/Slice2B deterministic precondition",
+    "proportionality": "Candidate persistence without canonical update already works. Receipt/extraction precondition is implementation scope, not every allowed route in ADR011",
+    "proposed_simplification": "Reuse existing financial-run storage; validated candidate analytical output before optional canonical verification",
+    "authority_change_executed": false
+  },
+  {
+    "id": "dto-identity",
+    "owner": "Financial candidate boundary",
+    "path": "cios/applications/flora/financial_intelligence/candidate_validation.py",
+    "symbol": "_provider_candidate_with_runtime_context",
+    "risk": "Wrong legal entity/provider trust",
+    "required_for": [
+      "analysis",
+      "canonical"
+    ],
+    "implemented": "Legacy missing entity/subject values default to BT Group",
+    "proportionality": "A historical pilot convenience cannot become an industry-wide identity rule",
+    "proposed_simplification": "Bind real source/issuer and authorised run context; no name guessing or forced canonical target for an analytical candidate",
+    "authority_change_executed": false
+  },
+  {
+    "id": "numeric",
+    "owner": "Financial owner",
+    "path": "cios/applications/flora/financial_intelligence/normalisation.py",
+    "symbol": "canonicalise_financial_claim",
+    "risk": "Wrong scale/sign/currency/basis/period or metric",
+    "required_for": [
+      "analysis",
+      "canonical"
+    ],
+    "implemented": "Eight-metric catalogue; April\u2013March period fallback; canonical normalisation reused by acceptance",
+    "proportionality": "Precision/comparability essential; canonical-only catalogue veto and BT fiscal defaults are not universal analyst requirements",
+    "proposed_simplification": "Typed reported labels/definitions permitted for analysis; explicit instant/duration dates; approved catalogue mapping only when needed for matching/canonical projection",
+    "authority_change_executed": false
+  },
+  {
+    "id": "table",
+    "owner": "Financial acquisition adapter",
+    "path": "cios/applications/flora/financial_intelligence/adapters.py",
+    "symbol": "FinancialTableEvidenceBundle",
+    "risk": "Wrong row/column provenance and fake extraction",
+    "required_for": [
+      "analysis",
+      "canonical"
+    ],
+    "implemented": "PDF bundle and table aliases; deposits missing",
+    "proportionality": "Bundle metadata essential for original-PDF route, not universal demand for fabricated PDF boxes on HTML/excerpt inputs",
+    "proposed_simplification": "Preserve route-specific actual provenance; reuse shared metric definitions; no fake hashes/bboxes or source relabelling",
+    "authority_change_executed": false
+  },
+  {
+    "id": "derivations",
+    "owner": "Existing read-only presentation/financial owners",
+    "path": "cios/applications/flora/intelligence_presentation.py",
+    "symbol": "difference",
+    "risk": "Incompatible arithmetic; assumption laundering",
+    "required_for": [
+      "analysis"
+    ],
+    "implemented": "Compatible same-scope/period/unit/basis calculation produces derived_view_not_canonical; lineage types retained",
+    "proportionality": "Already proves calculations need not become Observations; operation result type alone may hide estimated inputs",
+    "proposed_simplification": "Standard deterministic transforms with explicit temporal/comparison semantics and weakest-input epistemic class; version assumptions/formula/source revisions",
+    "authority_change_executed": false
+  },
+  {
+    "id": "automatic-financial",
+    "owner": "Existing governed financial verification",
+    "path": "cios/applications/flora/document_review.py",
+    "symbol": "_is_auto_acceptable",
+    "risk": "Accepting unsupported numbers",
+    "required_for": [
+      "canonical"
+    ],
+    "implemented": "Deterministic/quality/source/bundle validation; _apply_automatic_claims can update through memory services",
+    "proportionality": "Not all current canonical acceptance is one manual click per record. Source authority still independent",
+    "proposed_simplification": "Reuse automation for unambiguous records, review material exceptions; do not route analysis through the write-oriented acceptance helper",
+    "authority_change_executed": false
+  },
+  {
+    "id": "individual-review",
+    "owner": "Existing governed candidate owner",
+    "path": "cios/applications/flora/blueprint_import/review.py",
+    "symbol": "CandidateReviewService",
+    "risk": "Unauthorised canonical decisions",
+    "required_for": [
+      "canonical"
+    ],
+    "implemented": "Item-level review decisions, verified capability, immutable lineage",
+    "proportionality": "Essential for explicit acceptance path; object-specific validation does not imply per-chart-point manual promotion",
+    "proposed_simplification": "Explicit batch/subset review policy may retain per-item results and attribution; no authority from analysis output",
+    "authority_change_executed": false
+  },
+  {
+    "id": "mapping-plan",
+    "owner": "Existing Blueprint reconciliation/planning",
+    "path": "cios/applications/flora/blueprint_import/mapping.py",
+    "symbol": "evidence_reconciliation",
+    "risk": "Duplicates, cross-owner updates, changed target",
+    "required_for": [
+      "canonical"
+    ],
+    "implemented": "Exact scoped content/revision matching and target fingerprints; planning persists plans/ledger",
+    "proportionality": "Hashes at source and approved target control different risks, not duplicate bureaucracy; no need to plan an ephemeral chart",
+    "proposed_simplification": "Keep for canonical mutations; optional selection from validated analysis, no plan for every view. Consolidate reviewed identity references",
+    "authority_change_executed": false
+  },
+  {
+    "id": "promotion",
+    "owner": "Existing canonical transaction owner",
+    "path": "cios/applications/flora/blueprint_import/promotion.py",
+    "symbol": "CanonicalPromotionService",
+    "risk": "Unapproved/partial canonical mutation",
+    "required_for": [
+      "canonical"
+    ],
+    "implemented": "Verified approval/execution, fingerprints, counts, compensation and Model projection status",
+    "proportionality": "Essential for durable writes; approval success or transaction success is not complete typed Model projection",
+    "proposed_simplification": "Retain unchanged for chosen durable facts; no promotion required merely to render eligible analysis",
+    "authority_change_executed": false
+  },
+  {
+    "id": "observation",
+    "owner": "Existing Observation/memory owner",
+    "path": "cios/applications/flora/memory/models.py",
+    "symbol": "Observation",
+    "risk": "Lost durable numeric state; facts conflated with inference",
+    "required_for": [
+      "canonical"
+    ],
+    "implemented": "Atomic statement/evidence IDs; dynamic numeric field absent in dataclass serialisation; human_provenance dictionary persists",
+    "proportionality": "Atomicity/lineage necessary, reparsing numeric facts from prose is avoidable duplication; not all calculations deserve memory",
+    "proposed_simplification": "Persist a validated typed financial payload under existing owner metadata with schema/version, not an ad-hoc attribute; preserve old records. Separate optional canonical projection",
+    "authority_change_executed": false
+  },
+  {
+    "id": "model",
+    "owner": "Enterprise Model owner",
+    "path": "cios/applications/flora/memory/service.py",
+    "symbol": "_financial_model_value",
+    "risk": "Wrong or nonnumeric financial projection",
+    "required_for": [
+      "canonical"
+    ],
+    "implemented": "Limited regex fallback returns deposit sentence; Model attributes derived from memory",
+    "proportionality": "Missing financial support, not useful governance. Do not call a prose attribute numeric success",
+    "proposed_simplification": "Prefer owned typed payload and explicit as-at identity on reload; eliminate financial numeric regex fallback only after compatibility verification",
+    "authority_change_executed": false
+  },
+  {
+    "id": "presentation",
+    "owner": "Existing FLORA presentation",
+    "path": "cios/applications/flora/leadership_agenda.py",
+    "symbol": "_eai_release",
+    "risk": "Unpermitted/unsupported facts in seller view",
+    "required_for": [
+      "analysis"
+    ],
+    "implemented": "Permitted candidate releases, hard-coded EAI_RELEASES, source/claim/package fingerprints, source checks, six semantics",
+    "proportionality": "Existing noncanonical lane is valid; repeated release-specific code wiring is a scale bottleneck. Integrity itself is essential",
+    "proposed_simplification": "Data-driven source-owned analytical run selection/validation rather than per-release renderer edits; preserve header/artwork/navigation, optional source access and six classifications",
+    "authority_change_executed": false
+  },
+  {
+    "id": "lifecycle",
+    "owner": "Existing source, mapping and presentation owners",
+    "path": "cios/applications/flora/intelligence_presentation.py",
+    "symbol": "restricted_metadata",
+    "risk": "Stale/revoked/contradictory data leaks via derivation/export",
+    "required_for": [
+      "analysis",
+      "canonical"
+    ],
+    "implemented": "Presentation handles explicit source flags; mapping.evidence_is_current supports different lifecycle encodings and misses accepted+stale/boolean flags",
+    "proportionality": "Do not call all repeated checks redundant: recheck authority/revocation at use. Inconsistent encodings are missing compatibility",
+    "proposed_simplification": "Reuse common owning lifecycle semantics and dependency resolution before title/count/cache/export; preserve original history; editorial expiry distinct from legal expiry",
+    "authority_change_executed": false
+  },
+  {
+    "id": "iam",
+    "owner": "Existing IAM/resource scope",
+    "path": "cios/applications/flora/access.py",
+    "symbol": "require_resource_scope",
+    "risk": "Cross-tenant/private seller leakage",
+    "required_for": [
+      "analysis",
+      "canonical"
+    ],
+    "implemented": "Server-verified role/workspace/Enterprise/resource authority; source public status never grants private scope",
+    "proportionality": "Essential, cannot be replaced by source trust, a report title or AI confidence",
+    "proposed_simplification": "Reuse same existing run/resource scope; cache keyed by authorised scope and source/use revision, not public issuer alias",
+    "authority_change_executed": false
+  }
+]

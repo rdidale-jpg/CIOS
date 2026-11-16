@@ -1,0 +1,98 @@
+{
+  "classification": "SYNTHETIC NON-PRODUCTION ARCHITECTURE DEMONSTRATION; no real bank facts",
+  "canonical_writes": 0,
+  "canonical_acceptance_executed": false,
+  "new_source_permissions": 0,
+  "owner_repository_reads": 0,
+  "paid_calls": 0,
+  "receipt_ids": [],
+  "reported_stock": {
+    "as_at": "2026-09-30",
+    "value": "100",
+    "scale": "billion",
+    "currency": "GBP"
+  },
+  "reported_flow": {
+    "start": "2026-01-01",
+    "end": "2026-09-30",
+    "value": "12",
+    "scale": "billion",
+    "currency": "GBP"
+  },
+  "compatible_calculation": {
+    "value": "5",
+    "semantic_type": "calculated",
+    "canonical_status": "derived_view_not_canonical",
+    "method": "12 \u2212 7 GBP billion"
+  },
+  "estimate": {
+    "value": "0.1400",
+    "semantic_type": "estimated",
+    "method": "7 \u00d7 0.40 \u00d7 0.05 = 0.14 GBP billion; fixed example arithmetic",
+    "assumptions": "The example assumes 40% of operating costs are addressable and a 5% change in that share.",
+    "caveats": [
+      "Fictional baseline and explicit working assumptions; gross before implementation costs, timing, feasibility and double counting.",
+      "Not net benefit, cash release, procurement funding, customer intent or an opportunity value."
+    ],
+    "canonical_status": "derived_view_not_canonical"
+  },
+  "conflict": {
+    "primary_omitted": true,
+    "alternative_omitted": true,
+    "historical_positions_preserved_in_this_fixture": [
+      "100",
+      "101"
+    ]
+  },
+  "superseded_omitted": true,
+  "revoked_source_omitted": true,
+  "group_subsidiary_and_comparison_checks": {
+    "subsidiary": "rejected_by_existing_difference",
+    "period": "rejected_by_existing_difference",
+    "currency": "rejected_by_existing_difference",
+    "basis": "rejected_by_existing_difference",
+    "stock_vs_flow": "rejected_by_existing_difference"
+  },
+  "typed_candidate_json_roundtrip": true,
+  "normalised_candidate_value": "100125000000.000",
+  "current_contract_limits": {
+    "deposit_metric_result": "unsupported_metric",
+    "stock_date_misnormalised_currently": {
+      "canonical_period_id": "FY26",
+      "original_period_text": "30 September 2026",
+      "period_start": "2025-04-01",
+      "period_end": "2026-03-31",
+      "fiscal_year_label": "FY26"
+    },
+    "dynamic_numeric_field_survives_observation_reload": false,
+    "existing_provenance_dictionary_can_retain_typed_payload": true,
+    "typed_payload_projection_currently_implemented": false,
+    "deposit_numeric_prose_fallback_supported": false,
+    "mapping_helper_gap": {
+      "stale": true,
+      "withdrawn": true,
+      "retracted": true,
+      "core_contradiction": true
+    },
+    "extent": "Observed format/serialization limits, not a successful canonical financial projection"
+  },
+  "assumption_taint_current_contract": {
+    "semantic_type": "calculated",
+    "dependency_types": [
+      "reported",
+      "assumed"
+    ],
+    "proposed_display_requirement": "Estimated or explicitly assumption-dependent calculation; never Reported or accepted truth"
+  },
+  "rendered_examples": {
+    "stock": "<article class=\"intelligence-statement\" data-semantic-type=\"reported\"><p><span class=\"sr-only\">Reported: </span>Example Group customer deposits were GBP 100 billion at 30 September 2026.</p><p class=\"timing\">30 September 2026 (point-in-time stock)</p><details class=\"intelligence-source\"><summary>Sources &amp; reasoning</summary><p>Fictional Example Banking Group; synthetic fixture only \u00b7 30 September 2026 (point-in-time stock)</p><p>Group total deposit stock</p><p>Attributed published statement</p><p>Fictional example; not actual bank economics or an accepted record.</p><p><a href=\"https://example.invalid/fig1-fixture\" rel=\"noreferrer\">Synthetic worked example; no official-source claim</a> \u00b7 2026-10-30</p><p>Fixed FIG-1 fixture, not a real bank report</p></details></article>",
+    "flow": "<article class=\"intelligence-statement\" data-semantic-type=\"reported\"><p><span class=\"sr-only\">Reported: </span>Example Group income was GBP 12 billion during the stated nine months.</p><p class=\"timing\">1 January\u201330 September 2026 (fictional 9M flow)</p><details class=\"intelligence-source\"><summary>Sources &amp; reasoning</summary><p>Fictional Example Banking Group; synthetic fixture only \u00b7 1 January\u201330 September 2026 (fictional 9M flow)</p><p>Fictional statutory Group period basis</p><p>Attributed published statement</p><p>Fictional example; not actual bank economics or an accepted record.</p><p><a href=\"https://example.invalid/fig1-fixture\" rel=\"noreferrer\">Synthetic worked example; no official-source claim</a> \u00b7 2026-10-30</p><p>Fixed FIG-1 fixture, not a real bank report</p></details></article>",
+    "costs": "<article class=\"intelligence-statement\" data-semantic-type=\"reported\"><p><span class=\"sr-only\">Reported: </span>Example Group operating costs were GBP 7 billion during the stated nine months.</p><p class=\"timing\">1 January\u201330 September 2026 (fictional 9M flow)</p><details class=\"intelligence-source\"><summary>Sources &amp; reasoning</summary><p>Fictional Example Banking Group; synthetic fixture only \u00b7 1 January\u201330 September 2026 (fictional 9M flow)</p><p>Fictional statutory Group period basis</p><p>Attributed published statement</p><p>Fictional example; not actual bank economics or an accepted record.</p><p><a href=\"https://example.invalid/fig1-fixture\" rel=\"noreferrer\">Synthetic worked example; no official-source claim</a> \u00b7 2026-10-30</p><p>Fixed FIG-1 fixture, not a real bank report</p></details></article>",
+    "calculated": "<article class=\"intelligence-statement\" data-semantic-type=\"calculated\"><p><span class=\"intelligence-label\">Calculated</span> Illustrative income less operating costs was GBP 5 billion, before credit charges and other items.</p><p class=\"timing\">1 January\u201330 September 2026 (fictional 9M flow)</p><details class=\"intelligence-source\"><summary>Sources &amp; reasoning</summary><p>Fictional Example Banking Group; synthetic fixture only \u00b7 1 January\u201330 September 2026 (fictional 9M flow)</p><p>Fictional statutory Group period basis</p><p>Derived from the stated inputs</p><p>Method: 12 \u2212 7 GBP billion</p><p>Fictional example; not actual bank economics or an accepted record.</p><p>Input: Example Group income was GBP 12 billion during the stated nine months.</p><p>Input: Example Group operating costs were GBP 7 billion during the stated nine months.</p><p><a href=\"https://example.invalid/fig1-fixture\" rel=\"noreferrer\">Synthetic worked example; no official-source claim</a> \u00b7 2026-10-30</p><p>Fixed FIG-1 fixture, not a real bank report</p></details></article>",
+    "assumption": "<article class=\"intelligence-statement\" data-semantic-type=\"assumed\"><p><span class=\"intelligence-label\">Working assumption</span> The example assumes 40% of operating costs are addressable and a 5% change in that share.</p><p class=\"timing\">1 January\u201330 September 2026 (fictional 9M flow)</p><details class=\"intelligence-source\"><summary>Sources &amp; reasoning</summary><p>Fictional Example Banking Group; synthetic fixture only \u00b7 1 January\u201330 September 2026 (fictional 9M flow)</p><p>Attributed interpretation</p><p>Assumption owner: Example analyst, not a real bank executive \u00b7 version fig1-fixture-v1</p><p>Neither fraction is reported company evidence or a delivery commitment.</p><p><a href=\"https://example.invalid/fig1-fixture\" rel=\"noreferrer\">Synthetic worked example; no official-source claim</a> \u00b7 2026-10-30</p><p>Fixed FIG-1 fixture, not a real bank report</p></details></article>",
+    "estimated": "<article class=\"intelligence-statement\" data-semantic-type=\"estimated\"><p><span class=\"intelligence-label\">Estimated</span> Illustrative gross scenario cost reduction is GBP 0.14 billion; this is not a forecast or buyer budget.</p><p class=\"timing\">1 January\u201330 September 2026 (fictional 9M flow)</p><details class=\"intelligence-source\"><summary>Sources &amp; reasoning</summary><p>Fictional Example Banking Group; synthetic fixture only \u00b7 1 January\u201330 September 2026 (fictional 9M flow)</p><p>Attributed interpretation</p><p>Method: 7 \u00d7 0.40 \u00d7 0.05 = 0.14 GBP billion; fixed example arithmetic</p><p class=\"material-caveat\">Depends on working assumption. The result retains these input limitations.</p><p>Fictional baseline and explicit working assumptions; gross before implementation costs, timing, feasibility and double counting.</p><p>Not net benefit, cash release, procurement funding, customer intent or an opportunity value.</p><p>Input: Example Group operating costs were GBP 7 billion during the stated nine months.</p><p>Input: The example assumes 40% of operating costs are addressable and a 5% change in that share.</p><p><a href=\"https://example.invalid/fig1-fixture\" rel=\"noreferrer\">Synthetic worked example; no official-source claim</a> \u00b7 2026-10-30</p><p>Fixed FIG-1 fixture, not a real bank report</p></details></article>",
+    "insight": "<article class=\"intelligence-statement\" data-semantic-type=\"insight\"><p><span class=\"intelligence-label\">FLORA Insight</span> In this fictional example, the scenario result depends on cost addressability rather than the deposit-stock size.</p><p class=\"timing\">1 January\u201330 September 2026 (fictional 9M flow)</p><details class=\"intelligence-source\"><summary>Sources &amp; reasoning</summary><p>Fictional Example Banking Group; synthetic fixture only \u00b7 1 January\u201330 September 2026 (fictional 9M flow)</p><p>Attributed interpretation</p><p>The fixed cost scenario uses the cost flow and two assumptions, with no deposit-stock input.</p><p>The addressable share or implementation feasibility may not exist.</p><p>Input: Example Group operating costs were GBP 7 billion during the stated nine months.</p><p>Input: The example assumes 40% of operating costs are addressable and a 5% change in that share.</p><p><a href=\"https://example.invalid/fig1-fixture\" rel=\"noreferrer\">Synthetic worked example; no official-source claim</a> \u00b7 2026-10-30</p><p>Fixed FIG-1 fixture, not a real bank report</p></details></article>",
+    "hypothesis": "<article class=\"intelligence-statement\" data-semantic-type=\"hypothesis\"><p><span class=\"intelligence-label\">Hypothesis</span> The fictional addressable-cost scenario may be achievable.</p><p class=\"timing\">1 January\u201330 September 2026 (fictional 9M flow)</p><details class=\"intelligence-source\"><summary>Sources &amp; reasoning</summary><p>Fictional Example Banking Group; synthetic fixture only \u00b7 1 January\u201330 September 2026 (fictional 9M flow)</p><p>Attributed interpretation</p><p>A conditional interpretation of the illustrative scenario only.</p><p>Execution costs and operational constraints could remove the gross effect.</p><p>Falsifier: The example assumption fails if the addressable share is unsupported or implementation costs exceed the gross effect.</p><p>Input: Illustrative gross scenario cost reduction is GBP 0.14 billion; this is not a forecast or buyer budget.</p><p><a href=\"https://example.invalid/fig1-fixture\" rel=\"noreferrer\">Synthetic worked example; no official-source claim</a> \u00b7 2026-10-30</p><p>Fixed FIG-1 fixture, not a real bank report</p></details></article>"
+  },
+  "limits": "No live eligibility, source permission, original source receipt, authenticated owner action, durable numeric Model creation or production UI demonstrated"
+}

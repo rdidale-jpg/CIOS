@@ -1,0 +1,43 @@
+name: FLORA FIG-1 financial architecture challenge
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/flora-runtime/fig1/**'
+      - 'tools/research/fig1_demo.py'
+      - 'tools/research/fig1_quality.py'
+      - 'tests/test_flora_fig1_challenge.py'
+      - 'cios/applications/flora/**'
+      - 'enterprise-knowledge/banking/research-model/**'
+      - '.github/workflows/flora-fig1-challenge.yml'
+permissions:
+  contents: read
+jobs:
+  design-and-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Reproduce fixed synthetic proof and research-design QA
+        run: |
+          python tools/research/fig1_demo.py > "$RUNNER_TEMP/fig1-demo.json"
+          python tools/research/fig1_quality.py > "$RUNNER_TEMP/fig1-quality.json"
+      - name: Financial semantics, no-write boundaries, source integrity and scoped access
+        run: python -m pytest tests/test_flora_fig1_challenge.py -q
+      - name: Preserve existing semantics, source rights, owner access, artwork and research history
+        run: python -m pytest tests/test_flora_bie3_637.py tests/test_flora_bie2_635.py tests/test_flora_eai2_integration.py tests/test_flora_evidence_expansion_628.py tests/test_flora_visual_panels_632.py tests/test_flora_controlled_integration_625.py tests/test_flora_intelligence_presentation_623.py tests/test_flora_visual_streams_612.py tests/test_flora_visual_v2_583.py tests/test_flora_research_intelligence.py tests/test_flora_design_system_585.py tests/test_flora_primary_enrichment.py tests/test_flora_unified_integration.py::test_both_reviewed_workstreams_remain_ancestors_with_exact_source_cuts tests/test_flora_unified_integration.py::test_history_guard_rejects_every_unapproved_change tests/test_flora_commercial_visual_v3.py::test_no_existing_research_history_or_source_identity_is_changed -q
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flora-fig1-design-proof-${{ github.event.pull_request.head.sha }}
+          path: |
+            ${{ runner.temp }}/fig1-demo.json
+            ${{ runner.temp }}/fig1-quality.json
+          retention-days: 14
