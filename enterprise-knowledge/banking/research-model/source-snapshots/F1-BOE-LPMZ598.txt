@@ -1,0 +1,4 @@
+Monthly amounts outstanding of monetary financial institutions' sterling retail deposits (excluding notes and coin) from household sector (in sterling millions) not seasonally adjusted
+LPMZ598
+31 May 26 | 1884726
+30 Jun 26 | 1886281

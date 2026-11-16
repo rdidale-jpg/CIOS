@@ -1,0 +1,58 @@
+name: FLORA F1 typed financial analytics
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'cios/applications/flora/**'
+      - 'enterprise-knowledge/banking/research-model/**'
+      - 'tests/test_flora_f1_642.py'
+      - 'tools/research/f1_proof.py'
+      - 'tools/ci/flora_f1_preview.cjs'
+      - 'docs/flora-runtime/f1-642/**'
+      - '.github/workflows/flora-f1-642.yml'
+permissions:
+  contents: read
+jobs:
+  candidate-analytics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.txt
+      - name: Typed meaning, actual run reload, source-use withdrawal and real access boundaries
+        run: python -m pytest tests/test_flora_f1_642.py -q
+      - name: Install isolated browser tools
+        run: |
+          npm install --prefix "$RUNNER_TEMP/f1-node" playwright@1.62.1
+          "$RUNNER_TEMP/f1-node/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Real-source proof and responsive application checks
+        env:
+          NODE_PATH: ${{ runner.temp }}/f1-node/node_modules
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/f1-before" 9f3dcc5b0577eb0408bc0185f0847de19a5c1f66
+          python tools/research/f1_proof.py --output "$RUNNER_TEMP/f1-proof" --preview --baseline-root "$RUNNER_TEMP/f1-before"
+      - name: Preserve complete accepted visual browser journey
+        env:
+          NODE_PATH: ${{ runner.temp }}/f1-node/node_modules
+        run: python tools/ci/flora_vp2_preview.py --output "$RUNNER_TEMP/f1-visual-regression"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: flora-f1-proof-${{ github.event.pull_request.head.sha }}
+          path: |
+            ${{ runner.temp }}/f1-proof/Proof.json
+            ${{ runner.temp }}/f1-proof/Browser-Checks.json
+            ${{ runner.temp }}/f1-proof/*.jpg
+            ${{ runner.temp }}/f1-visual-regression/Browser-Checks.json
+            ${{ runner.temp }}/f1-visual-regression/Performance.json
+          retention-days: 14
