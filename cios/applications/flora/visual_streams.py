@@ -217,7 +217,7 @@ def claim_html(data,claims):
 
 def force_view(ctx,key,data):
  if SCOPES[ctx.scope]['kind']!='country':
-  return presentation.claim_view(data,claim_rows(data,[key])[0])
+  return presentation.editorial_force(presentation.claim_view(data,claim_rows(data,[key])[0]),key)
  row=visual_v2.insight(key)
  if any(presentation.restricted_metadata(s)for s in row['sources']):return None
  sources=tuple(Source(s['title'],s['url'],s.get('publisher',''),s.get('publication_date')or'',s.get('reporting_period',''),
@@ -228,10 +228,10 @@ def force_view(ctx,key,data):
      '; '.join(dict.fromkeys(s.get('reporting_period','')for s in row['sources']if s.get('reporting_period'))))
  if not period:period='; '.join('Published '+s['publication_date']for s in row['sources']if s.get('publication_date'))
  if not period:return None
- return Statement(text,'reported','United Kingdom; national or specified issuer scope',period,sources,
+ return presentation.editorial_force(Statement(text,'reported','United Kingdom; national or specified issuer scope',period,sources,
                   'reviewed_excerpt','candidate_intelligence',
                   measurement_state='proposal'if key=='legal'else'not_applicable',
-                  caveats=(row['details'],))
+                  caveats=(row['details'],)),key)
 
 
 def detail_claims(ctx,spot,data):

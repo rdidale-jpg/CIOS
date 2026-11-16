@@ -13,6 +13,7 @@ from types import MappingProxyType
 
 from . import visual_streams as v, design_system as ds, leadership_agenda as agenda
 from . import intelligence_presentation as p
+from .security import verified_service_read
 
 DESIGN='f4059a34a55277adbd2a2337239827cab96d962e'
 SCENES=frozenset({'uk-landscape','uk-forces','banking-landscape','banking-forces',
@@ -58,7 +59,7 @@ def _trail(ctx):
 
 def _top(ctx,headers):
     body='<header id="top" data-region="top"><a class="skip" href="#visual-content">Skip to main content</a><div class="global">'
-    body+=ds.header(headers=headers,compact=True,embedded=True)+'<span class="identity" aria-label="Current account role">'+_role(headers)+'</span></div>'
+    body+=ds.header(headers=headers,compact=True,embedded=True,research_tools=__import__('cios.applications.flora.access',fromlist=['is_cios_owner']).is_cios_owner(headers))+'<span class="identity" aria-label="Current account role">'+_role(headers)+'</span>'+('<a class="account-entry" href="/auth/sign-in">Sign in</a>' if _role(headers)=='Guest' else '')+'</div>'
     body+='<div class="context"><nav aria-label="Current scope">'+_trail(ctx)+'</nav><nav class="stream-switcher" aria-label="Insight streams">'
     for stream in v.SCOPES[ctx.scope]['streams']:
         body+='<a id="stream-'+stream+'" href="'+e(v.stream_url(ctx,stream)+'#stream-'+stream,quote=True)+'"'+(' aria-current="page"'if ctx.stream==stream else'')+'>'+stream.title()+'</a>'
@@ -129,6 +130,7 @@ def _facts(data,ids):
 
 
 def _basis(facts,extra=''):
+    if p.is_editorial(): return ''
     return '<details class="financial-basis"><summary>Sources &amp; basis</summary>'+''.join(p.render(f)for f in facts)+extra+'</details>'if facts else''
 
 
@@ -143,7 +145,7 @@ def _issue_preview(issues,key):
     statement=row.facts[0]if key=='cyber-resilience'else row.conclusion
     return ('<section class="editorial-issue" data-intelligence="'+key+'" aria-labelledby="preview-'+key+'">'
         +'<h2 id="preview-'+key+'">'+e(row.title)+'</h2>'+p.render(statement)
-        +agenda.basis(row)+'</section>')
+        +('' if p.is_editorial() else agenda.basis(row))+'</section>')
 
 
 def _shares(basis):
@@ -152,6 +154,7 @@ def _shares(basis):
     for row in districts:
         value=row['weight_per_thousand']/10
         body+='<div class="bar-row"><span>'+e(row['label'])+'</span><div class="track" aria-hidden="true"><i style="--value:'+str(value/15*100)+'%"></i></div><strong>'+str(value)+'%</strong></div>'
+    if p.is_editorial():return body+'</div><p class="chart-note">Calculated · 2024 UK GVA shares. Finance &amp; insurance covers more than Banking.</p></figure>'
     return body+'</div><p class="chart-note">Calculated · published 2024 SIC 2007 weights ÷ 10, current basic prices. Linear 0–15% scale; Finance &amp; insurance includes more than Banking.</p></figure>'
 
 
@@ -159,6 +162,7 @@ def _uk(ctx,issues):
     basis=v.visual_v2.basis();valid=agenda.fingerprint(basis)==agenda._pins().get('existing_economy')
     body='<p class="eyebrow">'+('Economic landscape'if ctx.stream=='landscape'else'National forces')+'</p><h1>'+('The shape of the UK economy'if ctx.stream=='landscape'else'The UK’s economic context')+'</h1>'
     if valid:
+        p.note_editorial_sources(p.Source(s['title'],s['url'],s.get('publisher','Office for National Statistics')) for s in basis['sources'])
         body+=_metrics([('Reported · UK GVA',basis['display_total'],str(basis['year'])+' · current basic prices'),
             ('Reported · real GDP growth','+'+str(basis['growth']['value_pct'])+'%',basis['growth']['period']+' · versus previous three months')])+_shares(basis)
         body+='<p class="material">GVA is not company revenue. Real GDP growth is a separate national volume measure, not industry or enterprise growth.</p>'
@@ -173,6 +177,7 @@ def _financial(ctx,data,issues=()):
     facts=[r for r in _facts(data,ids)if r.scope==group]
     by={key:(r if r and r.scope==group else None)for key,claim in zip(ids,v.claim_rows(data,ids))for r in [p.claim_view(data,claim)]}
     body='<p class="eyebrow">Financial analysis · consolidated Group</p><h1>Customer funding and earnings</h1><p class="lead">Published balances and reported earnings, alongside the Group’s efficiency ambition.</p>'
+    p.note_editorial_sources(s for f in facts for s in f.sources)
     values=[];stock=by['LBG-Q326-DEPOSITS'];profit=by['LBG-Q326-PROFIT'];opening=by['LBG-AR25-DEPOSITS']
     def numeric(row,unit,period):
         return bool(row and p.eligible(row)and row.semantic_type=='reported'and row.value is not None
@@ -205,7 +210,7 @@ def _forces(ctx,data):
     for spot in v.geometry()[ctx.scope+'-forces']['spots']:
         fact=v.force_view(replace(ctx,stream='forces'),spot['id'],data)
         if fact and p.eligible(fact):
-            body+='<section><h2>'+e(spot['label'])+'</h2>'+p.render(fact)+'<p class="perspective">'+e(v.FORCE_POLICY[spot['id']][1])+'</p></section>'
+            body+='<section><h2>'+e(spot['label'])+'</h2>'+p.render(fact)+('' if p.is_editorial() else '<p class="perspective">'+e(v.FORCE_POLICY[spot['id']][1])+'</p>')+'</section>'
     return body+'</div>'
 
 
@@ -242,7 +247,7 @@ def _overview(ctx,data,issues):
     return '<p class="eyebrow">Enterprise landscape</p><h1>An enterprise within a wider ecosystem</h1>'+''.join('<section class="editorial-issue">'+p.render(f)+'</section>'for f in facts)
 
 
-def render(ctx,headers=None,*,financial_run_id=''):
+def _research_render(ctx,headers=None,*,financial_run_id=''):
     if financial_run_id:
         from .financial_intelligence import analyst
         return analyst.render_selected(ctx,financial_run_id,headers=headers)
@@ -261,10 +266,10 @@ def render(ctx,headers=None,*,financial_run_id=''):
     if not body:body=_overview(ctx,data,issues)
     from .financial_intelligence import analyst
     body+=analyst.navigation(ctx,headers)
-    return _frame(ctx,headers,data,issues,entries,body)
+    return _research_frame(ctx,headers,data,issues,entries,body)
 
 
-def _frame(ctx,headers,data,issues,entries,body):
+def _research_frame(ctx,headers,data,issues,entries,body):
     """Accepted Top/Left/Main shell shared by public and authorised Main views."""
     body+=agenda.navigation(ctx,v.url,issues)
     if ctx.scope!='uk':
@@ -276,3 +281,174 @@ def _frame(ctx,headers,data,issues,entries,body):
     head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'
     return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+v.SCOPES[ctx.scope]['route']+"'>"+head+'</head><body class="ds-page vp-page">'
         +_top(ctx,headers)+_left(ctx,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'"><img class="watermark" src="'+_asset(watermark)+'" alt="" aria-hidden="true"><article class="workspace">'+body+'</article></main></body></html>')
+
+
+EDITORIAL_STYLE='''<style>
+.account-entry{font-size:13px;text-decoration:underline;white-space:nowrap}.identity{margin-left:auto}.account-entry+.identity{margin-left:0}
+.editorial-lead{font:clamp(20px,2vw,28px)/1.4 Georgia,serif;max-width:42ch;margin:0 0 26px}.editorial-topics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin:28px 0}.editorial-topics section{border-top:1px solid var(--line);padding-top:18px;margin:0}.editorial-topics h2{font-size:25px;margin:0 0 12px}.editorial-topics p{font-size:16px}.editorial-topics .timing{font-size:12px;margin-top:12px}
+.bank-picker{display:flex;gap:8px;flex-wrap:wrap;margin:25px 0 0;padding:20px 0;border-top:1px solid var(--line)}.bank-picker a{min-height:44px;display:flex;align-items:center;padding:8px 13px;border:1px solid var(--line);border-radius:22px;text-decoration:none;font-size:13px;line-height:1.3}.bank-picker a[aria-current]{background:var(--forest);color:white;border-color:var(--forest)}
+.force-stories{display:grid;grid-template-columns:1fr;gap:0;margin-top:26px}.force-story{display:grid;grid-template-columns:50px minmax(0,1fr);gap:20px;border-top:1px solid var(--line);padding:16px 0;margin:0}.force-number{font:32px Georgia,serif;color:#8c794e}.force-story h2{font-size:26px;margin:0 0 8px}.force-story .intelligence-statement{margin-bottom:0!important}.force-story .timing{margin-top:12px;font-size:12px}
+.earnings-metrics{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:22px!important;margin:25px 0!important}.earnings-metrics strong{font-size:clamp(25px,3vw,40px)!important;white-space:nowrap;letter-spacing:-.04em}.earnings-story{border-top:1px solid var(--line);padding-top:20px;margin:24px 0}.earnings-story h2{font-size:28px}.earnings-equation{font:clamp(15px,1.4vw,20px)/1.6 Georgia,serif;margin:16px 0;overflow-wrap:anywhere}.earnings-context,.shared-period{font-size:14px;color:var(--muted);margin:12px 0}.financial-editorial .lead{font-size:17px}.service-context{border-top:1px solid var(--line);margin-top:28px;padding-top:18px}.service-context h2{font-size:22px}.service-context p{font-size:14px}.workspace-setup{margin:24px 0;padding:20px 0;border-top:1px solid var(--line)}.workspace-setup button{min-height:44px;padding:10px 18px;background:var(--forest);color:white;border:1px solid var(--forest);border-radius:24px;font:inherit}
+.legal-notice{border-top:1px solid var(--line);margin-top:36px;padding-top:12px;font-size:11px!important;line-height:1.5;color:var(--muted);max-width:78ch}.legal-notice a{font-weight:400}.context-nav{display:flex;flex-wrap:wrap;gap:14px;margin:22px 0 0;font-size:12px}.context-nav a{min-height:44px;display:flex;align-items:center}.context-nav a[aria-current]{font-weight:700;text-decoration-thickness:2px}
+@media(max-width:700px){.editorial-topics{grid-template-columns:1fr}.earnings-metrics{grid-template-columns:1fr!important;gap:18px!important}.earnings-metrics>div{padding:7px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) max-content;gap:5px 12px;align-items:center}.earnings-metrics>div strong{grid-column:2;grid-row:1/3;font-size:27px!important}.earnings-metrics>div .metric-period{grid-column:1;font-size:11px}.earnings-metrics{gap:5px!important}.force-story{grid-template-columns:26px minmax(0,1fr);gap:12px}.force-number{font-size:24px}.force-story h2{font-size:25px}.account-entry{font-size:12px}}
+@media print{.focus,.focus:focus,[tabindex]:focus{outline:none!important}.close-insight{display:none!important}.force-story{padding:12px 0}.bank-picker,.context-nav,.account-entry,.workspace-setup{display:none!important}.workspace{padding:15px!important}.force-story,.earnings-story,.earnings-metrics{break-inside:avoid}.legal-notice{font-size:9px!important}.legal-notice a:after{content:none!important}}
+@media(forced-colors:active){.bank-picker a[aria-current]{background:Highlight;color:HighlightText}.force-number{color:CanvasText}}
+</style>'''
+
+
+def _bank_picker(ctx,data,issues):
+    rows=[(slug,name) for slug,(name,_,ids) in agenda.BANK_SERVICE.items()
+          if (not ids or any(r.key=='service-landscape' for r in issues)) and agenda.bank_service_issue(slug,data)]
+    if not rows:return ''
+    return '<nav class="bank-picker" data-intelligence="service-landscape" aria-label="Banking enterprises">'+''.join(
+        '<a href="'+e(v.url(ctx,selected=slug,detail='',agenda=''),quote=True)+'"'+(' aria-current="page"' if ctx.selected==slug else '')+'>'+e(name)+'</a>' for slug,name in rows)+'</nav>'
+
+
+def _editorial_banking(ctx,data,issues,headers):
+    from .financial_intelligence import analyst
+    if ctx.selected=='nationwide' and ctx.stream=='landscape':
+        pass  # Private composition is held within its verified read below.
+    selected=agenda.bank_service_issue(ctx.selected,data) if (ctx.selected in agenda.BANK_SERVICE and
+        (not agenda.BANK_SERVICE[ctx.selected][2] or any(r.key=='service-landscape' for r in issues))) else None
+    if selected and ctx.stream=='landscape':
+        name=agenda.BANK_SERVICE[ctx.selected][0]
+        body='<p class="eyebrow">UK Banking</p><h1>'+e(name)+'</h1>'
+        body+='<p class="editorial-lead">Customer complaints, in perspective.</p>'
+        body+=p.render(selected.conclusion)
+        body+='<p class="material">'+e(selected.facts[0].scope)+'. Received and closed complaints are different cohorts; upheld outcomes are the firm’s own decisions.</p>'
+        if ctx.selected=='nationwide':
+            action=analyst.prepare_action(ctx,headers=headers)
+            if action:body+='<section class="workspace-setup"><h2>Your financial view</h2>'+action+'</section>'
+        return body+_bank_picker(ctx,data,issues)
+    if ctx.stream=='forces':
+        body='<p class="eyebrow">Banking · Forces</p><h1>The forces reshaping banking</h1><div class="force-stories">'
+        items=[('funding-economics','Rates and customer choice'),('reporting-change','A new reporting timetable'),('provider-oversight','Critical providers, closer oversight')]
+        n=0
+        for key,title in items:
+            row=next((r for r in issues if r.key==key),None)
+            if row:
+                n+=1;body+='<section class="force-story" data-intelligence="'+key+'"><span class="force-number" aria-hidden="true">0'+str(n)+'</span><div><h2>'+e(title)+'</h2>'+(p.render(row.facts[0]) if key=='funding-economics' else p.render(_editorial_conclusion(row)))+'</div></section>'
+        fact=v.force_view(ctx,'LBG-ENVOY-CONTROLS',data)
+        if fact and p.eligible(fact):
+            body+='<section class="force-story"><span class="force-number" aria-hidden="true">0'+str(n+1)+'</span><div><h2>Lloyds: AI in the operating model</h2>'+p.render(fact)+'</div></section>'
+        return body+'</div>'+_bank_picker(ctx,data,issues)
+    body='<p class="eyebrow">UK Banking · Landscape</p><h1>Where money meets the economy</h1><p class="editorial-lead">Deposits fund lending. Payments connect households and businesses.</p>'
+    facts=_facts(data,['UK-RATE-NOV26']);rate=next((f for f in facts if f.value is not None),None)
+    metrics=[]
+    if rate:p.note_editorial_sources(rate.sources)
+    if rate:metrics.append(('Reported · Bank Rate',str(rate.value)+'%',rate.period))
+    basis=v.visual_v2.basis()
+    if agenda.fingerprint(basis)==agenda._pins().get('existing_economy'):
+        p.note_editorial_sources(p.Source(s['title'],s['url'],s.get('publisher','Office for National Statistics')) for s in basis['sources'])
+        row=next(d for d in basis['districts']if d['sic']=='K');metrics.append(('Calculated · Finance & insurance',str(row['weight_per_thousand']/10)+'%',str(basis['year'])+' UK GVA · broader than Banking'))
+    body+=_metrics(metrics)+'<div class="editorial-topics">'
+    for key,title in [('provider-oversight','Resilience spans the ecosystem'),('reporting-change','The reporting landscape is changing')]:
+        row=next((r for r in issues if r.key==key),None)
+        if row:body+='<section data-intelligence="'+key+'"><h2>'+title+'</h2>'+p.render(_editorial_conclusion(row))+'</section>'
+    return body+'</div>'+_bank_picker(ctx,data,issues)
+
+
+def _legal_notice(ctx,data):
+    sources=p.editorial_sources()
+    names=[]
+    if any('fca.org.uk/data/'in s.url for s in sources):names.append('Financial Conduct Authority')
+    if any('bankofengland.co.uk/boeapps/database/'in s.url for s in sources):names.append('Bank of England')
+    if any('ons.gov.uk/'in s.url for s in sources):names.append('Office for National Statistics (Crown copyright)')
+    governed_public_urls={package['source']['url'] for key in ('cyber','provider') if (package:=agenda._eai_release(key)) is not None and package['source'].get('rights',{}).get('status') in {'permitted_numerical_data','permitted_ogl_factual_extract'}}
+    if any(s.url in governed_public_urls for s in sources):names.append('public sector information')
+    text=''
+    if names:
+        text='Data: '+e('; '.join(names))+'. Licensed public-sector data under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="noreferrer">Open Government Licence v3.0</a>.'
+        if 'Bank of England'in names:text+=' Copyright the Governor and Company of the Bank of England.'
+    if any('nationwide.co.uk/'in s.url for s in sources):text+=' Financial facts: Nationwide Building Society, FY2026 preliminary results. No issuer endorsement.'
+    if not text:return ''
+    return '<footer class="legal-notice" aria-label="Legal attribution">'+text+'</footer>'
+
+
+def _frame(ctx,headers,data,issues,entries,body):
+    """Ordinary three-panel frame emits no research disclosures or source URLs."""
+    if __import__('cios.applications.flora.access',fromlist=['is_cios_owner']).is_cios_owner(headers):
+        ds.context_link(v.url(ctx)+'&lens=inspection' if ctx.scope in {'banking','lloyds'} else '/research','Research inspection')
+    scene=ctx.scope+'-'+ctx.stream;manifest=asset_manifest();watermark=manifest['watermarks'][scene]
+    identity=v.SCOPES[ctx.scope].get('identity')or data[v.SCOPES[ctx.scope]['identity_key']]
+    title='United Kingdom'if ctx.scope=='uk'else data['industry_name'if ctx.scope=='banking'else'enterprise_name']
+    layers='' if ctx.scope=='uk' else '<nav class="context-nav" aria-label="Context layers">'+''.join('<a href="'+e(v.url(ctx,layer=k),quote=True)+'"'+(' aria-current="page"'if ctx.layer==k else'')+'>'+e(label)+'</a>' for k,label in v.LAYERS.items())+'</nav>'
+    head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'+EDITORIAL_STYLE
+    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(ctx,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'"><img class="watermark" src="'+_asset(watermark)+'" alt="" aria-hidden="true"><article class="workspace editorial-workspace">'+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
+
+
+def render(ctx,headers=None,*,financial_run_id=''):
+    with p.editorial_view():
+        if financial_run_id:
+            from .financial_intelligence import analyst
+            return analyst.render_selected(ctx,financial_run_id,headers=headers)
+        if ctx.scope=='banking' and ctx.selected=='nationwide' and ctx.stream=='landscape' and not ctx.detail and not ctx.agenda:
+            try:
+                private=_authorised_nationwide(ctx,headers)
+                if private:return private
+            except (PermissionError,OSError,ValueError,KeyError,TypeError):pass
+        data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected);entries=v.destinations(ctx,data)
+        if ctx.scope=='banking' and not ctx.detail and not ctx.agenda:
+            body=_editorial_banking(ctx,data,issues,headers)
+        elif ctx.agenda:
+            row=next((r for r in issues if r.key==ctx.agenda),None)
+            body=('<section class="focus agenda-focus" id="agenda-insight" tabindex="-1" aria-label="Leadership insight"><a class="close close-insight" aria-label="Close Leadership Agenda" href="'+e(v.url(ctx,agenda=''),quote=True)+'">×</a><h1>'+e(row.title)+'</h1>'+p.render(_editorial_conclusion(row))+'</section>') if row else _overview(ctx,data,issues)
+            if ctx.scope=='banking':body+=_bank_picker(ctx,data,issues)
+        elif ctx.detail:
+            spot=next(s for s in v.geometry()[ctx.scope+'-'+ctx.stream]['spots']if s['id']==ctx.detail)
+            body=v._detail(ctx,spot,data).replace('<h2 id="insight-title">','<h1 id="insight-title">',1).replace('</h2>','</h1>',1)
+            if ctx.scope=='lloyds' and ctx.detail=='technology' and v.detail_claims(ctx,spot,data):body+='<p class="material">Published partnerships do not specify contract value or workshare.</p>'
+        elif ctx.scope=='lloyds' and ctx.stream=='inside':
+            facts=_facts(data,['LBG-Q326-DEPOSITS','LBG-Q326-PROFIT','LBG-A2030-CIR'])
+            body='<p class="eyebrow">Lloyds Banking Group</p><h1>Funding, earnings and efficiency</h1>'+''.join(p.render(f) for f in facts)
+            row=next((r for r in issues if r.key=='funding-base'),None)
+            if row:body+='<section data-intelligence="funding-base"><h2>Customer funding</h2>'+p.render(_editorial_conclusion(row))+'</section>'
+            service=next((r for r in issues if r.key=='service-recovery'),None)
+            if service:body+='<section data-intelligence="service-recovery"><h2>Customer complaints</h2>'+p.render(service.conclusion)+'</section>'
+        else:body=_overview(ctx,data,issues)
+        return _frame(ctx,headers,data,issues,entries,body)
+
+
+@verified_service_read('package.inspect')
+def research_inspection(path,query,headers=None):
+    """Existing owner inspection boundary; never grants access to a private run."""
+    from .access import is_cios_owner
+    if not is_cios_owner(headers):raise PermissionError('Research access unavailable')
+    query={k:v for k,v in query.items()if k!='lens'}
+    if 'analysis'in query:
+        from .financial_intelligence import analyst
+        ctx,identity=analyst.selection(path,query)
+        data,projection=analyst._current(ctx,identity,headers)
+        issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
+        return _research_frame(ctx,headers,data,issues,v.destinations(ctx,data),analyst.STYLE+'<section class="financial-analyst">'+analyst.compose(projection)+'</section>')
+    ctx=v.resolve(path,query)
+    return _research_render(ctx,headers)
+
+
+@verified_service_read('package.inspect')
+def _authorised_nationwide(ctx,headers):
+    from .financial_intelligence import analyst
+    projection=analyst._selected_financial(ctx,headers=headers)
+    if not projection:return None
+    data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected);entries=v.destinations(ctx,data)
+    from .access import is_cios_owner
+    if is_cios_owner(headers):
+        identity=analyst.financial.find_existing_run('nationwide-fy2026','BK-IND-002',headers=headers)
+        ds.context_link(v.url(ctx)+'&analysis='+identity+'&lens=inspection','Financial research')
+    return _frame(ctx,headers,data,issues,entries,analyst.compose_editorial(projection)+_bank_picker(ctx,data,issues))
+
+
+def _editorial_conclusion(row):
+    item=row.conclusion
+    if not p.is_editorial():return item
+    if row.key=='cyber-resilience':
+        return replace(row.facts[0],material_caveats=('Overall prevalence remained in line with the prior year. Weighted, self-reported estimates; not a census of bank incidents.',))
+    if row.key=='service-recovery' and len(row.facts)==3 and all(f.value is not None for f in row.facts):
+        received,closed,upheld=row.facts
+        return replace(item,text=f'Lloyds Bank PLC received {received.value:,} complaints and closed {closed.value:,} in {received.period}; {upheld.value}% of closed complaints were upheld.',material_caveats=('Received and closed cases are different cohorts. Upheld outcomes are the firm’s decisions, not independent adjudication.',))
+    if row.key=='reporting-change':
+        return replace(item,text='New incident and third-party reporting requirements apply within the respective PRA and FCA scopes.',period='From 18 March 2027')
+    if row.key=='provider-oversight':
+        return replace(item,text='Four named technology-provider legal entities are subject to the UK critical third-party regime.',period='Effective 13 July 2026')
+    if row.key=='funding-base':return replace(item,material_caveats=('Deposit changes include transfers and changes in business composition; they are not an organic-flow measure.',))
+    return item

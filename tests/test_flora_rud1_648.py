@@ -40,9 +40,11 @@ def test_actual_issuer_financials_persist_reload_reproduce_and_enter_main(permit
     assert {m['period']['end']for m in projection['measurements']}=={'2026-03-31'}
     assert {m['value']['currency']for m in projection['measurements']}=={'GBP'}
     html=visual.render('/industries/banking',{'selected':['nationwide'],'analysis':[identity]},headers)
-    for text in ('£2.026bn','£1.49bn','FLORA Insight','£399m member reward','Source-use basis','2026-05-21'):
+    for text in ('£2.026bn','£1.49bn','£399m member reward','Calculated'):
         assert text in html
     detail=review.run_page(identity,headers=headers)
+    assert 'Source-use basis'in detail and '2026-05-21'in detail
+    assert 'Source-use basis'not in html
     assert 'Two reviewed database rows' not in detail and 'Reconciled endpoint' in detail
     assert '(closing − opening)' not in detail
     assert f.refresh_research(headers=headers)==identities
@@ -175,5 +177,5 @@ def test_source_missing_identity_does_not_block_unrelated_research(retained):
 
 def test_selected_service_default_uses_progressive_detail_instead_of_repeating_figures():
     html=visual.render('/industries/banking',{'selected':['starling']})
-    assert '<details><summary>Measurements and sources</summary>' in html
+    assert '<details' not in html.split('<main',1)[1] and 'Measurements and sources'not in html
     assert '15,223' in html and '14,362' in html and '44.49%' in html

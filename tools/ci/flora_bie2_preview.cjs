@@ -16,10 +16,8 @@ async function shot(p,name){await p.screenshot({path:path.join(cfg.output,name+'
   await load(p,cfg.base,'/industries/banking?agenda=service-landscape&selected=lloyds&layer=regulators');
   await layout(p,'agenda '+size);await shot(p,'after-'+size+'-peer-agenda');
   const text=await p.locator('#agenda-insight').innerText();for(const token of ['90,678','79,323','92,548','January–June 2026','not a service-quality ranking'])check(text.includes(token),'default clarity '+size+' '+token);
-  check((await p.locator('nav[aria-label="Leadership Agenda"] a').count())===4,'four distinct Banking concerns '+size);
-  const basis=p.locator('#agenda-insight>.agenda-basis');await p.locator('#agenda-insight>.agenda-basis>summary').focus();await p.keyboard.press('Enter');check(await basis.evaluate(e=>e.open),'keyboard source basis '+size);
-  const detail=await basis.innerText();for(const token of ['Reported','Barclays Bank UK PLC','HSBC UK Bank Plc','NATIONAL WESTMINSTER BANK','Open Government Licence','1 January–30 June 2026'])check(detail.includes(token),'optional evidence '+size+' '+token);
-  const source=await basis.locator('a[href="https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table"]').count();check(source===3,'original source links for all legal firms '+size);
+  check(await p.locator('main a[href^="https:"]').count()<=1,'only separated legal attribution link '+size);
+  check(await p.locator('main details').count()===0,'ordinary agenda has no research expanders '+size);
   for(const stream of ['landscape','forces']){await p.getByRole('link',{name:stream[0].toUpperCase()+stream.slice(1),exact:true}).click();const u=new URL(p.url());check(u.searchParams.get('agenda')==='service-landscape'&&u.searchParams.get('selected')==='lloyds'&&u.searchParams.get('layer')==='regulators','scope subject layer agenda retained '+size+' '+stream)}
   await p.goBack();check(new URL(p.url()).searchParams.get('agenda')==='service-landscape','Back '+size);await p.goForward();check(new URL(p.url()).searchParams.get('agenda')==='service-landscape','Forward '+size);
   await load(p,cfg.base,'/');const scene=size==='mobile'||size==='ipad-portrait'?'.compact-scene':'.wide-scene';
@@ -28,7 +26,7 @@ async function shot(p,name){await p.screenshot({path:path.join(cfg.output,name+'
   if(scene==='.compact-scene')await p.locator(scene+'>summary').tap();
   await p.locator(scene+' [data-label-id=lloyds]').click();check(new URL(p.url()).pathname==='/enterprises/lloyds','UK Banking Lloyds two selections '+size);
   for(const [route,streams]of [['/',['landscape','forces']],['/industries/banking',['landscape','forces']],['/enterprises/lloyds',['inside','landscape','forces']]])for(const stream of streams){await load(p,cfg.base,route+'?stream='+stream);await layout(p,size+' '+route+' '+stream)}
-  const html=await p.content();check(!['gap:','actor:','Banking-Corpus','ADR-027','next_investigation_owner_only'].some(t=>html.includes(t)),'no research administration '+size);
+  const html=await p.content();check(!['actor:','Banking-Corpus','ADR-027','next_investigation_owner_only'].some(t=>html.includes(t))&&!/\bgap:/i.test(await p.locator('main').innerText()),'no research administration '+size);
   await context.close();
  }
  const context=await browser.newContext({ignoreHTTPSErrors:true,viewport:sizes.desktop}),p=await context.newPage();

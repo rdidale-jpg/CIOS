@@ -65,7 +65,7 @@ def run(output,preview=False,baseline_root=None,*,baseline_sha=BASE,baseline_fin
             assert len(projection['measurements'])==8
             assert [r['value']for r in projection['results']]==['2026','1490']
             html=visual.render('/industries/banking',{'selected':['nationwide'],'analysis':[run_id]},headers)
-            assert '£2.026bn'in html and '£1.49bn'in html and 'FLORA Insight'in html
+            assert '£2.026bn'in html and '£1.49bn'in html and 'Statutory profit before tax'in html
             source_path=isolated/'enterprise-knowledge/banking/research-model/source-snapshots/RUD1-Public-Facts.json'
             source_bytes=source_path.read_bytes();package=json.loads(source_bytes);package['sources'][1]['withdrawn']=True
             source_path.write_text(json.dumps(package))
@@ -117,7 +117,7 @@ s.serve_forever()
                 cfg=root/'browser.json'
                 assert source_path.is_relative_to(root)
                 cfg.write_text(json.dumps({'base':'https://127.0.0.1:8992','baseline':'https://127.0.0.1:8993'if baseline else None,
-                    'password':password,'run_id':run_id,'output':str(output),'source_package':str(source_path),
+                    'password':password,'run_id':run_id,'boe_run_id':f.find_existing_run('boe-household-deposit-stocks','BK-IND-002',headers=headers),'output':str(output),'source_package':str(source_path),
                     'baseline_financial_main':baseline_financial_main}))
                 try:subprocess.run(['node',str(original_repo/'tools/ci/flora_rud1_preview.cjs'),str(cfg)],check=True)
                 finally:

@@ -1,4 +1,5 @@
 """EAI-2 adapts permitted candidate views to VP-2; no admission/approval."""
+from tests.flora_editorial_contract import research_render
 from copy import deepcopy
 from datetime import date
 from pathlib import Path
@@ -41,7 +42,7 @@ def changed_release(key,mutation,tmp_path,monkeypatch):
 
 @pytest.mark.parametrize('scope,stream',[(s,t)for s,b in v.SCOPES.items()for t in b['streams']])
 def test_three_regions_unchanged_exploration_and_singular_agenda_keys(scope,stream):
- ctx=v.Context(scope,stream);issues=a.agenda(scope);html=v.render(v.SCOPES[scope]['route'],{'stream':[stream]})
+ ctx=v.Context(scope,stream);issues=a.agenda(scope);html=research_render(v.SCOPES[scope]['route'],{'stream':[stream]})
  assert len(issues)==len({r.key for r in issues})==(4 if scope=='banking'else 3)
  assert html.count('data-region=')==3 and html.count('<h1')==1
  assert html.count('aria-label="Leadership Agenda"')==1
@@ -58,10 +59,10 @@ def test_three_regions_unchanged_exploration_and_singular_agenda_keys(scope,stre
  ('/enterprises/lloyds','funding-base',['Calculated','£6.3bn','31 December 2025','30 September 2026','not an organic inflow']),
 ])
 def test_four_bounded_additions_in_main_and_current_agenda(route,key,tokens):
- html=v.render(route,{})
+ html=research_render(route,{})
  assert 'data-intelligence="'+key+'"'in html
  for token in tokens:assert token in html
- detail=v.render(route,{'agenda':[key]})
+ detail=research_render(route,{'agenda':[key]})
  assert 'id="agenda-insight"'in detail
  assert all(token in detail for token in tokens)
 
@@ -69,7 +70,7 @@ def test_four_bounded_additions_in_main_and_current_agenda(route,key,tokens):
 @pytest.mark.parametrize('mutation',['rights','malformed_rights','private','stale','withdrawn','retracted','contradiction','package_private','wrong_subject','canonical_mutation','source_host','missing'])
 def test_denied_release_removes_inline_title_links_and_dependent_numbers(key,mutation,tmp_path,monkeypatch):
  changed_release(key,mutation,tmp_path,monkeypatch)
- scope,agenda_key=KEYS[key];issues=a.agenda(scope);html=v.render(v.SCOPES[scope]['route'],{})
+ scope,agenda_key=KEYS[key];issues=a.agenda(scope);html=research_render(v.SCOPES[scope]['route'],{})
  if key=='service':
   row=next(r for r in issues if r.key==agenda_key)
   assert len(row.facts)==1 and '118,762'in row.conclusion.text
@@ -108,13 +109,13 @@ def test_denied_deposit_input_omits_delta_and_retains_other_eligible_stock(ident
  data=deepcopy(model.load_assessment())
  next(c for c in data['claims']if c['id']==identifier)['owner_only']=True
  monkeypatch.setattr(model,'load_assessment',lambda *args,**kwargs:deepcopy(data))
- html=v.render('/enterprises/lloyds',{})
+ html=research_render('/enterprises/lloyds',{})
  assert 'data-intelligence="funding-base"'not in html and '£6.3bn'not in html
  assert '£6.6bn'in html
  if identifier=='LBG-AR25-DEPOSITS':assert '£502.8bn'in html
 
 def test_single_chart_and_single_delta_share_existing_qualifiers():
- html=v.render('/enterprises/lloyds',{'detail':['economics']})
+ html=research_render('/enterprises/lloyds',{'detail':['economics']})
  assert html.count('id="deposit-reference"')==1
  assert html.count('data-intelligence="funding-base"')==1
  assert 'composition' in html and 'two balance-sheet dates'in html
@@ -127,7 +128,8 @@ def test_expired_review_omits_all_new_views_without_empty_preview_sections(monke
  monkeypatch.setattr(a,'date',Later)
  for route in ['/','/industries/banking','/enterprises/lloyds']:
   html=v.render(route,{})
-  assert 'data-intelligence='not in html
+  for key in ('cyber-resilience','provider-oversight','service-recovery','funding-base'):
+   assert 'data-intelligence="'+key+'"'not in html
   text=re.sub(r'<[^>]+>','',html)
   assert '£6.3bn'not in text and '66.12%'not in text and '69%'not in text
 

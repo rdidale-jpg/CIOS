@@ -1,4 +1,5 @@
 """VEX-1 integration: native scope navigation, public-source boundaries and assets."""
+from tests.flora_editorial_contract import research_render
 from copy import deepcopy
 from html.parser import HTMLParser
 from pathlib import Path
@@ -24,7 +25,7 @@ CASES=[(s,stream)for s,b in v.SCOPES.items()for stream in b['streams']]
 def test_scope_identity_exact_native_streams_and_single_title(scope,stream):
  path=v.SCOPES[scope]['route'];query={'stream':[stream]}
  if scope!='uk':query.update(layer=['regulators'],selected=['lloyds'])
- ctx=v.resolve(path,query);html=v.render(path,query)
+ ctx=v.resolve(path,query);html=research_render(path,query)
  assert html.count('<h1>')==1
  assert 'href="#visual-content"'in html and 'id="visual-content" tabindex="-1"'in html
  assert f'data-scope="{scope}"'in html and f'data-stream="{stream}"'in html
@@ -112,26 +113,26 @@ def test_every_interactive_detail_is_server_addressable_without_js(scope,stream)
 
 def test_current_source_facts_targets_periods_and_truthful_unknowns():
  data=v.model.load_assessment();refs=['LBG-Q326-DEPOSITS','LBG-Q326-PROFIT','LBG-A2030-CIR']
- html=v.render('/enterprises/lloyds',{'detail':['economics']})
+ html=research_render('/enterprises/lloyds',{'detail':['economics']})
  for r in v.claim_rows(data,refs):
   item=v.presentation.claim_view(data,r)
   assert v.presentation.render(item)in html
   assert r['reporting_period']in html
  assert 'balance-sheet stock'in html and 'nine-month flow'in html and 'target'in html
- assert 'Finance &amp; insurance'in v.render('/industries/banking',{})
- assert 'Banking 8.1%'not in v.render('/industries/banking',{})
+ assert 'Finance &amp; insurance'in research_render('/industries/banking',{})
+ assert 'Banking 8.1%'not in research_render('/industries/banking',{})
  for key,label in v.GAPS:assert key not in html
  assert 'not actual premises'in html and 'Unknown current income/cost/growth'not in html
  assert not any(x in html for x in ('verified buying intent','qualified opportunity','£2bn supplier budget'))
 
 
 def test_only_source_supported_announced_supplier_link_is_visible():
- html=v.render('/enterprises/lloyds',{'stream':['landscape'],'detail':['technology']})
+ html=research_render('/enterprises/lloyds',{'stream':['landscape'],'detail':['technology']})
  data=v.model.load_assessment()
  assert any(r['verified']and r['object']=='SUP-GOOGLE'for r in data['relationships'])
  assert 'Google Cloud'in html and 'workshare'in html.lower()
  assert 'data-claim="LBG-VERTEX"'not in html  # Historical technology is not silently upgraded.
- assert '/enterprises/barclays'in v.render('/industries/banking',{'detail':['barclays']})
+ assert '/enterprises/barclays'in research_render('/industries/banking',{'detail':['barclays']})
 
 
 def test_projection_uses_current_owner_not_frozen_design_facts(monkeypatch):

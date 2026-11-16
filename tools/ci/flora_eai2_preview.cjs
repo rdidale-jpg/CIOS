@@ -5,9 +5,9 @@ const scopes={uk:{route:'/',streams:['landscape','forces']},banking:{route:'/ind
 const views=Object.entries(scopes).flatMap(([scope,s])=>s.streams.map(stream=>({name:scope+'-'+stream,url:s.route+'?stream='+stream,before:s.route+'?stream='+stream})));
 const additions=[
  {scope:'uk',key:'cyber-resilience',name:'uk-cyber',url:'/?agenda=cyber-resilience',before:'/',tokens:['43%','69%','Estimated','August–December 2025','in line with the prior year']},
- {scope:'banking',key:'provider-oversight',name:'banking-provider',url:'/industries/banking?agenda=provider-oversight',before:'/industries/banking',tokens:['13 July 2026','10 July','four named','Microsoft Ireland Operations Limited']},
+ {scope:'banking',key:'provider-oversight',name:'banking-provider',url:'/industries/banking?agenda=provider-oversight',before:'/industries/banking',tokens:['13 July 2026','Four named']},
  {scope:'lloyds',key:'service-recovery',name:'lloyds-service',url:'/enterprises/lloyds?agenda=service-recovery',before:'/enterprises/lloyds?agenda=service-recovery',tokens:['118,762','118,861','66.12%','Lloyds Bank PLC','not independent adjudication']},
- {scope:'lloyds',key:'funding-base',name:'lloyds-funding',url:'/enterprises/lloyds?agenda=funding-base',before:'/enterprises/lloyds?detail=economics',tokens:['£496.5bn','£502.8bn','£6.3bn','Calculated','two balance-sheet dates','not adjusted']},
+ {scope:'lloyds',key:'funding-base',name:'lloyds-funding',url:'/enterprises/lloyds?agenda=funding-base',before:'/enterprises/lloyds?detail=economics',tokens:['£502.8bn','£496.5bn','£6.3bn']},
 ];
 views.push(...additions,{name:'lloyds-financial',url:'/enterprises/lloyds?detail=economics',before:'/enterprises/lloyds?detail=economics'});
 function check(v,label){assert(v,label);checks.push(label)}
@@ -21,9 +21,9 @@ async function shot(p,name){await p.waitForTimeout(50);await p.screenshot({path:
    if(!base)continue;
    for(const v of views){await load(p,base,stage==='before'?v.before:v.url);await layout(p,stage+' '+size+' '+v.name);await shot(p,stage+'-'+size+'-'+v.name)}
   }
-  for(const row of additions){await load(p,cfg.base,row.url);const html=await p.content();for(const token of row.tokens)check(html.includes(token),'permitted detail '+size+' '+row.key+' '+token);const links=await p.locator('nav[aria-label="Leadership Agenda"] a').evaluateAll(es=>es.map(e=>new URL(e.href).searchParams.get('agenda')));const count=row.scope==='banking'?4:3;check(links.length===count&&new Set(links).size===count,'singular agenda keys '+size+' '+row.scope);await p.locator('#agenda-insight>.agenda-basis>summary').focus();await p.keyboard.press('Enter');check(await p.locator('#agenda-insight>.agenda-basis').evaluate(e=>e.open),'keyboard basis '+size+' '+row.key);await layout(p,size+' expanded basis '+row.key);}
+  for(const row of additions){await load(p,cfg.base,row.url);const html=await p.content();for(const token of row.tokens)check(html.includes(token),'permitted detail '+size+' '+row.key+' '+token);check(await p.locator('main details').count()===0,'ordinary insight omits research controls '+size+' '+row.key);await layout(p,size+' concise insight '+row.key);}
   for(const [route,key]of [['/','cyber-resilience'],['/industries/banking','provider-oversight'],['/enterprises/lloyds','service-recovery'],['/enterprises/lloyds','funding-base']]){await load(p,cfg.base,route);check(await p.locator('[data-intelligence="'+key+'"]').count()===1,'one Main addition '+size+' '+key)}
-  await load(p,cfg.base,'/enterprises/lloyds?detail=economics');check(await p.locator('#deposit-reference').count()===1,'single deposit chart '+size);check(await p.locator('[data-intelligence=funding-base]').count()===1,'single stock calculation '+size);
+  await load(p,cfg.base,'/enterprises/lloyds?detail=economics');check(await p.locator('main details').count()===0,'financial detail has no chart/source click tree '+size);
   if(size==='ipad-portrait'||size==='mobile'){check(!await p.locator('.compact-scene').evaluate(e=>e.open),'Left initially collapsed '+size);await p.locator('.compact-scene>summary').tap();check(await p.locator('.compact-scene').evaluate(e=>e.open),'touch scene open '+size);await Promise.all([p.waitForNavigation({waitUntil:'load'}),p.locator('.compact-scene [data-label-id=technology]').tap()]);check(new URL(p.url()).searchParams.get('detail')==='technology','touch existing topic '+size)}
   await context.close();
  }

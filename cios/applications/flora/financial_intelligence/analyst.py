@@ -293,6 +293,93 @@ def render_selected(ctx, run_id, *, headers=None):
     issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
     entries=visual.destinations(ctx,data)
     close='<a class="close close-insight" href="'+e(visual.url(ctx),quote=True)+'" aria-label="Close financial analysis">×</a>'
-    body=STYLE+'<section class="focus financial-analyst" id="insight" tabindex="-1" aria-labelledby="financial-title">'+close+compose(projection)
-    body+='<p><a href="/ai-financial-report/'+e(run_id,quote=True)+'">Open analysis detail</a></p></section>'
+    from ..access import is_cios_owner
+    from .. import design_system
+    if is_cios_owner(headers):design_system.context_link(visual.url(ctx)+'&analysis='+run_id+'&lens=inspection','Financial research')
+    body='<section class="focus financial-analyst" id="insight" tabindex="-1" aria-label="Financial analysis">'+close+compose_editorial(projection)+'</section>'
     return panels._frame(ctx,headers,data,issues,entries,body)
+
+
+@verified_service_read('package.inspect')
+def _selected_financial(ctx, *, headers=None):
+    """Only current, own-workspace Financial data; no creation or discovery."""
+    from ..access import require_resource_scope, active_flora_workspace
+    if ctx.scope!='banking' or ctx.selected!='nationwide': return None
+    workspace=active_flora_workspace(headers)
+    require_resource_scope(headers,'package.inspect','BK-IND-002',workspace)
+    identity=financial.find_existing_run('nationwide-fy2026','BK-IND-002',headers=headers)
+    return _current(ctx,identity,headers)[1] if identity else None
+
+
+def selected_financial(ctx, *, headers=None):
+    try: return _selected_financial(ctx,headers=headers)
+    except (PermissionError,OSError,ValueError,KeyError,TypeError): return None
+
+
+@verified_service_read('package.upload')
+def _prepare_action(ctx, *, headers=None):
+    from ..access import is_cios_owner, require_resource_scope, active_flora_workspace
+    from ..security_store import cookie_token
+    from ..security_web import form, CSRF_COOKIE
+    if ctx.scope!='banking' or ctx.selected!='nationwide' or not is_cios_owner(headers): return ''
+    require_resource_scope(headers,'package.upload','BK-IND-002',active_flora_workspace(headers))
+    # No promise of availability from a withdrawn/denied Source.
+    financial._current_inputs('nationwide-fy2026')
+    csrf=cookie_token(headers,CSRF_COOKIE)
+    return (form('/financial-research/refresh',csrf,'<input type="hidden" name="selected" value="nationwide">','Prepare financial view') if csrf else '')
+
+
+def prepare_action(ctx, *, headers=None):
+    try:return _prepare_action(ctx,headers=headers)
+    except (PermissionError,OSError,ValueError,KeyError,TypeError):return ''
+
+
+def compose_editorial(projection, *, heading=True):
+    """Concise generic Financial view over validated existing owner output.
+
+    Endpoints remain Reported; bridge outputs remain Calculated. Source IDs,
+    URLs, methodology, run IDs and inspector controls are never serialized.
+    """
+    ms=[financial.Measurement.model_validate(m) for m in projection['measurements']]
+    if not ms:raise ValueError('No current financial measurements')
+    semantics.note_editorial_sources(semantics.Source(s['title'],s['url'],ms[0].source.publisher,s.get('published','')) for s in projection['sources'])
+    by_id={m.measurement_id:m for m in ms}
+    # Check every recipe/input through the existing finite composer as well.
+    for r in projection['results']:_result_card(r,by_id)
+    stocks=all(m.period.kind=='instant' for m in ms)
+    name=projection['title'] if stocks else projection['title'].split(' · ')[0]
+    eyebrow='Published balances' if stocks else 'Earnings & member value' if any(m.metric=='member_reward_payments' for m in ms) else 'Financial overview'
+    body=('<p class="eyebrow">'+e(eyebrow)+'</p><h1>'+e(name)+'</h1>' if heading else '')
+    shared_period=len({_period(m) for m in ms})==1
+    scope=('Consolidated Group · FY'+str(ms[0].period.end.year) if not stocks and 'consolidated Group'in ms[0].perimeter else ms[0].perimeter)
+    body+='<p class="lead">'+e(scope)+'</p>'+('<p class="shared-period">'+e(_period(ms[0]))+'</p>' if shared_period else '')
+    chosen=[m for m in ms if m.metric in {'total_income','revenue','underlying_profit_before_tax','profit_before_tax'}]
+    if not chosen:chosen=ms[:3]
+    body+='<div class="metrics earnings-metrics">'
+    for m in chosen:
+        _,factor,suffix=_display_scale(chosen)
+        label=m.metric.replace('_',' ').capitalize()
+        if m.metric=='total_income' and m.accounting_basis=='underlying':label='Underlying income'
+        if m.accounting_basis=='statutory': label='Statutory '+label.lower()
+        if stocks:label=_period(m)
+        body+='<div data-semantic-type="'+m.semantic_type+'"><span class="metric-label">'+e(label)+'</span><strong>'+e(_money(m.base_amount/factor,m.value.currency,suffix))+'</strong><span class="metric-period">'+e(_kind(m)+(' · '+_period(m) if not shared_period and not stocks else ''))+'</span></div>'
+    body+='</div>'
+    if stocks and projection['results']:
+        body+='<div class="metrics stock-movements">'+''.join(_result_card(r,by_id) for r in projection['results'])+'</div><p class="material">Difference between published balances, not an adjusted deposit flow.</p>'
+    bridge=next((r for r in projection['results'] if r['formula']=='signed_bridge' and r.get('basis')=='statutory'),None)
+    if bridge:
+        inputs=[by_id[r['measurement_id']]for r in bridge['inputs']]
+        opening,endpoint=inputs[0],inputs[-1]
+        terms=[]
+        for i,m in enumerate(inputs[:-1]):
+            sign='− 'if m.value.amount<0 else '+ 'if i else ''
+            suffix={'units':'','thousands':'k','millions':'m','billions':'bn'}[m.value.scale]
+            terms.append(sign+_money(abs(m.value.amount),m.value.currency,suffix,m.precision_dp))
+        suffix={'units':'','thousands':'k','millions':'m','billions':'bn'}[endpoint.value.scale]
+        equation=' '.join(terms)+' = '+_money(endpoint.value.amount,endpoint.value.currency,suffix,endpoint.precision_dp)
+        body+='<section class="earnings-story"><h2>'+('Member rewards and integration' if any(m.metric=='member_reward_payments' for m in ms) else 'Earnings and returns')+'</h2><p>'+('Member rewards and acquisition-related adjustments explain the two profit bases.' if any(m.metric=='member_reward_payments' for m in ms) else 'The disclosed adjustments reconcile the reported bases.')+'</p><p class="earnings-equation" data-semantic-type="'+bridge['semantic_type']+'"><span class="intelligence-label">'+semantics.LABELS[bridge['semantic_type']]+'</span> '+e(equation)+'</p></section>'
+    for insight in projection.get('insights',[]):
+        if insight['type']=='reported': body+='<p class="earnings-context">'+e(insight['text'])+'</p>'
+    caveats=list(dict.fromkeys(c for m in ms for c in m.caveats))
+    if caveats:body+='<p class="material">'+e('Virgin Money contributes a full year; the previous reporting period included six months.' if any(m.metric=='member_reward_payments' for m in ms) else caveats[0])+'</p>'
+    return '<section class="financial-editorial" aria-label="Financial overview">'+body+'</section>'

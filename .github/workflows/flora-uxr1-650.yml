@@ -1,0 +1,59 @@
+name: FLORA UX-R1 editorial experience and access
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'cios/applications/flora/**'
+      - 'tests/test_flora_uxr1_650.py'
+      - 'tests/flora_editorial_contract.py'
+      - 'tools/research/uxr1*.py'
+      - 'tools/ci/flora_uxr1_preview.cjs'
+      - 'docs/flora-runtime/uxr1-650/**'
+      - '.github/workflows/flora-uxr1-650.yml'
+permissions:
+  contents: read
+jobs:
+  editorial-and-access:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.txt
+      - name: Editorial, financial meaning and verified access boundaries
+        run: python -m pytest tests/test_flora_uxr1_650.py tests/test_flora_rud1_648.py tests/test_flora_f3_646.py tests/test_flora_f2_644.py tests/test_flora_f1_642.py -q
+      - name: Original artwork, research and explicit owner evolution
+        run: python tools/research/uxr1_quality.py > "$RUNNER_TEMP/uxr1-quality.json"
+      - name: Install isolated browser tools
+        run: |
+          npm install --prefix "$RUNNER_TEMP/uxr1-node" playwright@1.62.1
+          "$RUNNER_TEMP/uxr1-node/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Actual Guest and authorised before-after, print and withdrawal
+        env:
+          NODE_PATH: ${{ runner.temp }}/uxr1-node/node_modules
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/uxr1-before" 93e83d34ee2661ebe17cbc06b047350f6c32e3c3
+          python tools/research/uxr1_proof.py --output "$RUNNER_TEMP/uxr1-proof" --preview --baseline-root "$RUNNER_TEMP/uxr1-before"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: flora-uxr1-proof-${{ github.event.pull_request.head.sha }}
+          path: |
+            ${{ runner.temp }}/uxr1-quality.json
+            ${{ runner.temp }}/uxr1-proof/Proof.json
+            ${{ runner.temp }}/uxr1-proof/Browser-Checks.json
+            ${{ runner.temp }}/uxr1-proof/Disclosure-Metrics.json
+            ${{ runner.temp }}/uxr1-proof/Print-Checks.json
+            ${{ runner.temp }}/uxr1-proof/*.jpg
+            ${{ runner.temp }}/uxr1-proof/*.pdf
+            ${{ runner.temp }}/uxr1-proof/*-print-*.json
+          retention-days: 14

@@ -211,7 +211,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path in {'/industries/banking', '/enterprises/lloyds'}:
                 from cios.applications.flora import visual_streams
                 query = parse_qs(parsed.query, keep_blank_values=True)
-                if 'lens' in query:
+                if query.get('lens')==['inspection']:
+                    from cios.applications.flora.visual_panels import research_inspection
+                    self._html(research_inspection(parsed.path,query,self.headers))
+                elif 'lens' in query:
                     # Explicit specialist deep links retain their current owner.
                     if set(query) != {'lens'} or len(query['lens']) != 1:
                         raise ValueError('Ambiguous insight selectors')
@@ -859,10 +862,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             self._redirect(f"/ask?question={quote_plus(question)}")
         elif self.path == "/financial-research/refresh":
             from cios.applications.flora.financial_intelligence.candidate_analytics import refresh_research
-            if set(form) != {'csrf'}:
+            if set(form) not in ({'csrf'}, {'csrf','selected'}) or ('selected' in form and form['selected']!=['nationwide']):
                 raise PermissionError('Unexpected research parameter')
             refresh_research(headers=self.headers)
-            self._redirect('/industries/banking')
+            self._redirect('/industries/banking?selected=nationwide' if form.get('selected')==['nationwide'] else '/industries/banking')
         elif self.path == "/blueprint-import/upload":
             fields, files = _parse_multipart(self.headers, raw_body)
             fields["_form_submission"] = "true"

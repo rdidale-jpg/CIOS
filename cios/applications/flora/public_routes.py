@@ -132,11 +132,15 @@ def public_route_catalog(include_owner_inspection=False):
     from .enterprise_intelligence.explain import explain_lloyds_changes
     for change in explain_lloyds_changes().changes:
         add(('/flora/object/BK-ENT-001/lineage/'+change.change_id,), '_flora_increment2_lineage_page', 'Exact fixed-dataset claim; no arbitrary lineage lookup')
+    if include_owner_inspection:
+        for path in ('/industries/banking','/enterprises/lloyds'):
+            row=routes[path]
+            routes[path]=PublicRoute(row.handler,row.source_boundary,row.query_keys|{'analysis'})
     if not include_owner_inspection:
         routes={path:row for path,row in routes.items() if not owner_inspection_path(path)}
         for path in ('/industries/banking','/enterprises/lloyds'):
             row=routes[path]
-            routes[path]=PublicRoute(row.handler,row.source_boundary,row.query_keys-{'lens'})
+            routes[path]=PublicRoute(row.handler,row.source_boundary,row.query_keys-{'lens','analysis'})
     return MappingProxyType(routes)
 
 

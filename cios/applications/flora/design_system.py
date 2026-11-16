@@ -84,7 +84,7 @@ def section_scale(sic):
     return '<p class="ds-economy-context"><strong>' + f"{row['weight_per_thousand']/10:.1f}%" + '</strong> ' + e(row['label']) + ' · share of UK GVA, ' + str(data['year']) + '</p>'
 
 
-def header(active='home', account_html='', headers=None, compact=False, embedded=False):
+def header(active='home', account_html='', headers=None, compact=False, embedded=False, research_tools=True):
     if not account_html:
         from .access import blueprint_upload_authorisation
         from .web.app import _account_context_html
@@ -101,8 +101,8 @@ def header(active='home', account_html='', headers=None, compact=False, embedded
             context += '<a href="' + e(href, quote=True) + '">' + e(text) + '</a>'; seen.add(href)
     if context:
         menu += '<section class="view-links"><h2>In this view</h2>' + context + '</section>'
-    menu += ('<details class="specialist-menu"><summary>Research & specialist tools</summary><div>'
-        '<a href="/research">Research</a><a href="/blueprint-import/history">Import History</a><a href="/intelligence">Advanced intelligence</a><a href="/digital-twins">Canvas & Twins</a><a href="/financial-intelligence">Financial Intelligence</a><a href="/governance">Governance</a><a href="/settings">Settings</a></div></details>' + account_html)
+    menu += (('<details class="specialist-menu"><summary>Research & specialist tools</summary><div>'
+        '<a href="/research">Research</a><a href="/blueprint-import/history">Import History</a><a href="/intelligence">Advanced intelligence</a><a href="/digital-twins">Canvas & Twins</a><a href="/financial-intelligence">Financial Intelligence</a><a href="/governance">Governance</a><a href="/settings">Settings</a></div></details>' if research_tools else '') + account_html)
     if compact:
         # The image journey has its own contextual stream switcher. Keep all
         # implemented global destinations and verified account controls in one
