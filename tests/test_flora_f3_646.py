@@ -117,7 +117,7 @@ def test_current_origin_is_neither_source_rights_nor_canonical_authority():
     result=inspect_current_origin('https://www.bankofengland.co.uk/boeapps/database/')
     assert result=={'origin_admission':'current_origin_check_passed','rights_decision':'not_established_by_origin_check'}
     for source in quality.load('Source-Use-Register.json'):
-        assert inspect_current_origin(source['original_url'])['origin_admission']=='blocked'
+        assert inspect_current_origin(source['original_url'])['origin_admission']==('current_origin_check_passed' if source['source_id']=='F3-NB-REVIEW' else 'blocked')
 
 
 def test_explicit_statement_same_basis_signed_roles_and_endpoint_reconcile():

@@ -150,7 +150,8 @@ def test_all_new_surfaces_revalidate_and_never_resurrect_cached_output(permitted
         elif mutation=='value':package['claims'][0]['amount']='1'
         else:package['source'][mutation]=True
         isolated_source.write_text(json.dumps(package))
-    assert a.navigation(CTX,headers)==''
+    navigation=a.navigation(CTX,headers)
+    assert identity not in navigation and 'Financial analysis</a>' not in navigation
     assert not a.authorise_request('/industries/banking?analysis='+identity,headers=headers)
     with pytest.raises(PermissionError):v.render('/industries/banking',selected(identity),headers)
     external=review.read_run(identity,headers=headers)
@@ -222,7 +223,7 @@ def test_duration_basis_scope_and_assumption_versions_are_visible():
     data=example('mutual-bridge');html=a.compose(data)
     assert '01 Jan 2026 – 30 Jun 2026' in html
     assert 'Synthetic mutual-bridge · underlying' in html
-    assert 'Synthetic mutual-bridge · disclosed_bridge' in html
+    assert 'Synthetic mutual-bridge · disclosed bridge' in html
     assert 'Synthetic mutual-bridge · statutory' in html
     scenario=a.compose(example('technology-scenario'))
     assert 'synthetic-scenario-owner · version fixture-v1' in scenario

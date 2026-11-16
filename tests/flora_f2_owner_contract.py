@@ -30,6 +30,13 @@ def assert_owner_compatible(root,path,expected):
     actual=(root/path).read_bytes()
     if actual==expected:
         return
+    from tools.research.rud1_compatibility import assert_evolution
+    import json
+    from tools.research.rud1_compatibility import ROOT
+    changes=json.loads((ROOT/'docs/flora-runtime/rud1-648/Owner-Evolution.json').read_text())
+    if path in changes:
+        assert_evolution(root, path, expected)
+        return
     assert path in GUARDS, 'No F2 exception for this protected owner: '+path
     baseline=subprocess.check_output(['git','show',BASE+':'+path],cwd=root)
     assert baseline==expected, 'Historical owner must match the verified F1 cut'

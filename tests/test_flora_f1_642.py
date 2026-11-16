@@ -372,9 +372,9 @@ def test_all_173_prior_research_files_and_comparator_remain_exactly_preserved():
     source = subprocess.check_output(['git','show',baseline+':tools/research/history_integrity.py'], cwd=root).decode()
     old = types.ModuleType('f1_baseline_history'); exec(compile(source,'baseline_history','exec'),old.__dict__)
     before = old.approved_history(root); after = history.approved_history(root)
-    assert len(before) == 173 and len(after) == 175
+    assert len(before) == 173 and len(after) == 178
     assert {key:after[key] for key in before} == before
-    assert set(after)-set(before) == set(history.F1_CANDIDATE_ADDITIONS)
+    assert set(after)-set(before) == set(history.F1_CANDIDATE_ADDITIONS) | set(history.RUD1_ADDITIONS)
     old_comparator = source.split('def compare_history(',1)[1].split('\n\ndef verify_history',1)[0].strip()
     assert inspect.getsource(history.compare_history).split('def compare_history(',1)[1].strip() == old_comparator
     for path in history.F1_CANDIDATE_ADDITIONS:

@@ -96,9 +96,10 @@ def test_denied_new_release_omits_selected_outcomes_and_selectors_preserving_bie
     for key,(domain,name,*_)in a.EAI_RELEASES.items():
         if domain=='banking'and key!='bank-outcomes':(tmp_path/name).write_bytes((registry.snapshot_boundary(domain)/name).read_bytes())
     changed_release('bank-outcomes',mutation,tmp_path,monkeypatch)
-    for selected in a.BANK_SERVICE:
+    for selected,(_,_,ids) in a.BANK_SERVICE.items():
+        if not ids:continue  # Independently bound RUD sources are tested separately.
         html=v.render('/industries/banking',{'selected':[selected],'agenda':['service-landscape']})
-        assert 'Bank complaint profiles'not in html
+        assert 'National Westminster Bank PLC</a>'not in html and 'HSBC UK Bank Plc</a>'not in html and 'Santander UK Plc</a>'not in html
         assert '55.31%'not in html and '59.09%'not in html and '48.06%'not in html
         assert '90,678'in html and '92,548'in html and '79,323'in html
 
@@ -120,7 +121,7 @@ def test_duplicate_claim_identity_never_becomes_another_source_or_issue(tmp_path
     original=registry.snapshot_boundary;monkeypatch.setattr(registry,'snapshot_boundary',lambda d,repo=None:tmp_path if d=='banking'and repo is None else original(d,repo))
     assert a.bank_service_issue('hsbc-uk',model.load_assessment())is None
 
-@pytest.mark.parametrize('selected',a.BANK_SERVICE)
+@pytest.mark.parametrize('selected',[slug for slug,(_,_,ids)in a.BANK_SERVICE.items()if ids])
 @pytest.mark.parametrize('field,value',[('scope','Foreign Group'),('period','Quarter ended30 September2026'),('unit','percent of received complaints'),('measurement_state','target')])
 def test_service_composer_rejects_incompatible_owner_statements_independently_of_pins(selected,field,value,monkeypatch):
     data=model.load_assessment();facts=list(a.bank_service_issue(selected,data).facts)
@@ -133,7 +134,9 @@ def test_revoking_original_parent_source_removes_all_dependent_selected_views(tm
     changed_release('peer-service','rights',tmp_path,monkeypatch)
     for selected in a.BANK_SERVICE:
         html=v.render('/industries/banking',{'selected':[selected]})
-        assert 'service-landscape'not in html and 'Bank complaint profiles'not in html
+        if a.BANK_SERVICE[selected][2]:
+            assert '55.31%'not in html and '59.09%'not in html and '48.06%'not in html
+        else:assert a.routine_service_issue(selected) is not None
 
 @pytest.mark.parametrize('field,value',[('owner_only',True),('freshness','stale'),('withdrawn',True),('core_contradiction',True)])
 def test_whole_assessment_policy_still_controls_selected_profiles(field,value):
@@ -147,15 +150,16 @@ def test_expired_review_excludes_runtime_but_does_not_claim_copyright_permission
     monkeypatch.setattr(a,'date',Later)
     for bank in a.BANK_SERVICE:
         html=v.render('/industries/banking',{'selected':[bank]})
-        assert 'Bank complaint profiles'not in html and '55.31%'not in html
+        assert '55.31%'not in html
+        assert 'National Westminster Bank PLC</a>'not in html
     report=q.admission_report(q.load());public=report['rows'][24:]
     assert len(public)==7 and all(r['source_permitted']and not r['visible_runtime']for r in public)
 
 def test_old_171_research_bytes_and_exact_comparator_preserved():
     source=subprocess.check_output(['git','show',BASE+':tools/research/history_integrity.py'],cwd=ROOT).decode();old=types.ModuleType('bie3_previous_history');exec(compile(source,'base_history','exec'),old.__dict__)
     before=old.approved_history(ROOT);after=h.approved_history(ROOT)
-    assert len(before)==171 and len(after)==175 and {k:after[k]for k in before}==before
-    assert set(after)-set(before)==set(h.BIE3_CANDIDATE_ADDITIONS) | set(h.F1_CANDIDATE_ADDITIONS)
+    assert len(before)==171 and len(after)==178 and {k:after[k]for k in before}==before
+    assert set(after)-set(before)==set(h.BIE3_CANDIDATE_ADDITIONS) | set(h.F1_CANDIDATE_ADDITIONS) | set(h.RUD1_ADDITIONS)
     section=source.split('def compare_history(',1)[1].split('\n\ndef verify_history',1)[0]
     assert inspect.getsource(h.compare_history).split('def compare_history(',1)[1].strip()==section.strip()
     for path in h.BIE3_CANDIDATE_ADDITIONS:

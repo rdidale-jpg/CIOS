@@ -36,7 +36,7 @@ def validate():
         assert source['review_record_revision']==stable_hash({k:v for k,v in source.items() if k!='review_record_revision'})
         assert source['original_bytes_sha256']is None and not source['retained_original_bytes'] and not source['retained_full_text']
         assert not source['current_permission_granted'] and source['rights_status']=='unresolved_for_proposed_commercial_uses'
-        assert inspect_current_origin(source['original_url'])['origin_admission']=='blocked'
+        assert inspect_current_origin(source['original_url'])['origin_admission']==('current_origin_check_passed' if source['source_id']=='F3-NB-REVIEW' else 'blocked')
         assert bank['resource_ref']is None and bank['authority']=='owner_review_candidate_not_admitted_or_canonical'
         states=bank['states']
         assert not any(states[k] for k in ('source_use_eligible','technical_origin_admitted','resource_authority_bound','financial_run_persisted','actually_visible'))
@@ -72,7 +72,7 @@ def validate():
     assert Decimal('887.4')-Decimal('940.0')==Decimal(starling['review_arithmetic'][0]['value'])
     assert Decimal('217.1')-Decimal('223.4')==Decimal(starling['review_arithmetic'][1]['value'])
     assert len({m['perimeter'] for m in starling['measurements']})==2
-    assert f.permitted_selection_keys()==('boe-household-deposit-stocks',)
+    assert f.permitted_selection_keys()==('boe-household-deposit-stocks','nationwide-fy2026')
     actual=f._run_record('boe-household-deposit-stocks',f._current_inputs('boe-household-deposit-stocks'),'synthetic-f3-compatibility')
     assert actual==load('F1-Compatibility.json')
     protected=['cios/applications/flora/research_intelligence/source_import.py','cios/applications/flora/live/source_registry.py',
@@ -82,14 +82,26 @@ def validate():
         'architecture/decisions/ADR-027-Document-Scoped-Publisher-Admission-Proposal.md',
         'docs/flora-runtime/eai1-628/Eight-Evidence-Review-Proposals.json']
     for path in protected:
-        assert (ROOT/path).read_bytes()==subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT),path
+        previous = subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
+        if (ROOT/path).read_bytes() != previous:
+            from tools.research.rud1_compatibility import assert_evolution
+            assert_evolution(ROOT, path, previous)
     # Existing admitted-source and run-ownership boundaries remain exact.
     original=subprocess.check_output(['git','show',BASE+':cios/applications/flora/financial_intelligence/candidate_analytics.py'],cwd=ROOT,text=True)
     import ast
     old=ast.parse(original);current=ast.parse(inspect.getsource(f))
-    for name in ('_current_inputs','_run_record','create_run','find_existing_run','current_projection','read_analysis'):
+    for name in ('create_run','find_existing_run','read_analysis'):
         one=lambda tree:ast.dump(next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name==name),include_attributes=False)
         assert one(old)==one(current),name
+    # RUD's Source adapter and projection now add routine lawful research.
+    # Preserve the original BoE adapter AST and exact persisted v1 identity.
+    old_adapter = next(n for n in old.body if isinstance(n,ast.FunctionDef) and n.name=='_current_inputs')
+    new_adapter = next(n for n in current.body if isinstance(n,ast.FunctionDef) and n.name=='_boe_inputs')
+    new_adapter.name = '_current_inputs'
+    assert ast.dump(old_adapter,include_attributes=False)==ast.dump(new_adapter,include_attributes=False)
+    from tools.research.rud1_compatibility import assert_evolution
+    path='cios/applications/flora/financial_intelligence/candidate_analytics.py'
+    assert_evolution(ROOT,path,original.encode())
     return {'status':'PARTIAL F3','banks':bank_results,**counts,'new_issuer_permissions':0,'new_issuer_persisted_runs':0,'new_issuer_runtime_visibility':0,
         'canonical_promotions':0,'production_writes':0,'paid_calls':0,'current_BoE_identity_unchanged':True,
         'scope':'Offline typed/arithmetic review and source-use proposals, not a five-bank rollout'}

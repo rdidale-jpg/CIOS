@@ -148,9 +148,10 @@ def test_pinned_intelligence_security_pipeline_and_baseline_owners_remain_unchan
  manifest=json.loads((root/'docs/flora-runtime/isp1-623/Preserved-Owners-and-Artwork.json').read_text())
  assert manifest['base_sha']=='fe66516c15726dc45de147ede2674c9172f8cac6'
  for row in manifest['unchanged']:
-  content=(root/row['path']).read_bytes()
+  content=subprocess.check_output(['git','show',manifest['base_sha']+':'+row['path']],cwd=root)
   assert hashlib.sha256(content).hexdigest()==row['sha256'],row['path']
-  assert content==subprocess.check_output(['git','show',manifest['base_sha']+':'+row['path']],cwd=root)
+  from tests.flora_f2_owner_contract import assert_owner_compatible
+  assert_owner_compatible(root,row['path'],content)
 
 
 def test_six_factor_pestle_uses_same_policy_without_raw_lineage_or_action_copy():

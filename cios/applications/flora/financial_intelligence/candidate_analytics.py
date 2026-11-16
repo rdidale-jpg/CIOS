@@ -228,6 +228,8 @@ class InputBundle:
     title: str
     measurements: tuple[Measurement, ...]
     source: dict
+    reconciliations: tuple[dict, ...] = ()
+    insights: tuple[dict, ...] = ()
 
 
 class Reconciliation(Contract):
@@ -319,10 +321,52 @@ def reconcile(spec: Reconciliation, measurements: list[Measurement]) -> dict:
 
 def permitted_selection_keys() -> tuple[str, ...]:
     """Existing source-owner choices; no new registry or run discovery."""
-    return ('boe-household-deposit-stocks',)
+    from ..research_intelligence.source_import import working_facts, bound_facts, working_restricted
+    try:
+        data, sources = working_facts()
+        keys = tuple(row['key'] for row in data['financial_selections'] if row['source_id'] in sources)
+    except (OSError, ValueError, TypeError, KeyError, PermissionError):
+        keys = ()
+    return ('boe-household-deposit-stocks', *keys)
 
 
 def _current_inputs(selection: str) -> InputBundle:
+    if selection == 'boe-household-deposit-stocks':
+        return _boe_inputs(selection)
+    from ..research_intelligence.source_import import working_facts, bound_facts, working_restricted
+    from ..research_intelligence import model
+    data, sources = working_facts()
+    matches = [r for r in data['financial_selections'] if r['key'] == selection]
+    row = matches[0] if len(matches) == 1 else None
+    if not row or row['source_id'] not in sources:
+        raise PermissionError('Financial source-use exception')
+    if working_restricted(row):
+        raise PermissionError('Restricted research row')
+    source = sources[row['source_id']]
+    ms = tuple(Measurement.model_validate(m) for m in row['measurements'])
+    model.primary_text(source)
+    subject = source['reported_subject']
+    if (not 1 <= len(ms) <= 48 or row['resource_ref'] != 'BK-IND-002'
+            or len({m.measurement_id for m in ms}) != len(ms)
+            or any(m.source.source_id != source['id'] or m.source.source_revision != stable_hash(source)
+                   or m.source.record_id != m.measurement_id
+                   or m.source.revision != stable_hash(bound_facts(source, m.measurement_id, 'financial_measurement'))
+                   or m.source.url != source['url'] or m.source.publisher != source['publisher']
+                   or str(m.source.published) != source['publication_date']
+                   or m.source.retrieved_at != source['retrieved_at']
+                   or any(m.model_dump(mode='json')[field] != value for field, value in bound_facts(source, m.measurement_id, 'financial_measurement').items())
+                   or (m.subject_id, m.subject_name, m.perimeter) != (subject['id'], subject['name'], subject['perimeter'])
+                   or (str(m.period.start), str(m.period.end)) != (subject['start'], subject['end'])
+                   or m.value.currency != subject['currency'] or m.value.scale != subject['scale']
+                   or m.accounting_basis not in subject['bases'] for m in ms)):
+        raise ValueError('Financial source/measurement identity mismatch')
+    recipes = tuple(Reconciliation.model_validate(r).model_dump(mode='json') for r in row['reconciliations'])
+    for recipe in recipes:
+        reconcile(Reconciliation.model_validate(recipe), list(ms))
+    return InputBundle(row['resource_ref'], row['title'], ms, source, recipes, tuple(i for i in row['insights'] if not working_restricted(i)))
+
+
+def _boe_inputs(selection: str) -> InputBundle:
     """Narrow adapter over existing Source snapshot contracts and publisher policy.
 
     Never caller-supplied rights, copied source files, URL acquisition or a new
@@ -389,7 +433,10 @@ def _run_record(selection: str, bundle: InputBundle, workspace: str) -> dict:
     enterprise = bundle.resource_id
     payload = {'schema_version': 1, 'selection': selection,
                'measurements': [m.model_dump(mode='json') for m in measurements],
-               'derivations': [d.model_dump(mode='json') for d in _derivations(measurements)]}
+               'derivations': [] if bundle.reconciliations else [d.model_dump(mode='json') for d in _derivations(measurements)]}
+    if bundle.reconciliations:
+        payload['reconciliations'] = list(bundle.reconciliations)
+        payload['insights'] = list(bundle.insights)
     run_id = 'fi-f1-' + stable_hash({'workspace': workspace, 'enterprise': enterprise, 'payload': payload})[:32]
     run = {'run_id': run_id, 'workflow': WORKFLOW, 'workspace_id': workspace,
            'enterprise_id': enterprise, 'document': {'enterprise_id': enterprise, 'workspace_id': workspace},
@@ -463,12 +510,15 @@ def current_projection(run: dict) -> dict:
         if current != stored or bundle.resource_id != run['enterprise_id']:
             raise ValueError('Source or measurement revision unavailable')
         specs = [Derivation.model_validate(d) for d in payload['derivations']]
-        if specs != _derivations(stored):
+        bridges = [Reconciliation.model_validate(r) for r in payload.get('reconciliations', [])]
+        if (payload != _run_record(payload['selection'], bundle, run['workspace_id'])['analytical_candidate']
+                or specs != ([] if bundle.reconciliations else _derivations(stored))):
             raise ValueError('Unrecognised analytical recipe')
         source = bundle.source
         return {'title': bundle.title,
                 'measurements': [m.model_dump(mode='json') for m in stored],
-                'results': [calculate(d, stored) for d in specs],
+                'results': [calculate(d, stored) for d in specs] + [reconcile(r, stored) for r in bridges],
+                **({'insights': list(bundle.insights)} if bundle.insights else {}),
                 'sources': [{'title': source['title'], 'url': source['url'],
                              'published': source.get('publication_date') or '',
                              'retrieved_at': source['retrieved_at'],
@@ -495,6 +545,9 @@ def read_analysis(run_id: str, *, headers=None) -> dict:
 def _render_projection(projection: dict) -> str:
     if not projection:
         return '<section class="card"><h1>Financial analysis unavailable</h1></section>'
+    if any(r['formula'] == 'signed_bridge' for r in projection['results']):
+        from .analyst import compose, STYLE
+        return STYLE + compose(projection)
     stocks = all(m['period']['kind'] == 'instant' for m in projection['measurements'])
     rows = ''.join('<tr><td>' + presentation.LABELS[m['semantic_type']] + '</td><th scope="row">' + escape(m['original_display']) + '</th><td>' +
                    escape(m['period']['as_at'] or (m['period']['start'] + ' to ' + m['period']['end'])) + '</td></tr>' for m in projection['measurements'])
@@ -524,3 +577,33 @@ def _render_projection(projection: dict) -> str:
 @verified_service_read('package.inspect')
 def render_run(run_id: str, *, headers=None) -> str:
     return _render_projection(read_analysis(run_id, headers=headers))
+
+
+@verified_service_write('package.upload')
+def refresh_research(*, headers=None):
+    """Routine authorised working-data refresh, not an evidence approval.
+
+    No source/metric parameters, external calls or canonical hand-off. Existing
+    per-run workspace/resource authority and immutable persistence do the work.
+    Exceptions are isolated; a failed source never admits a different source.
+    """
+    from ..access import active_flora_workspace, require_resource_scope
+    workspace = active_flora_workspace(headers)
+    require_resource_scope(headers, 'package.upload', 'BK-IND-002', workspace)
+    from .. import document_review as review
+    # Pure preflight isolates ordinary source/row/storage exceptions BEFORE any
+    # nested verified writer. An unexpected write-time race still fails the
+    # enclosing journal atomically; never swallow a poisoned transaction.
+    selections = []
+    for key in permitted_selection_keys():
+        try:
+            bundle = _current_inputs(key)
+            require_resource_scope(headers, 'package.upload', bundle.resource_id, workspace)
+            expected = _run_record(key, bundle, workspace)
+            path = review._run_path(expected['run_id'])
+            if path.exists() and review.load_run(expected['run_id']) != expected:
+                continue
+            selections.append(key)
+        except (PermissionError, ValueError, OSError, KeyError, TypeError):
+            continue
+    return tuple(create_run(key, headers=headers) for key in selections)
