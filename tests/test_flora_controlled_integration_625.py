@@ -174,9 +174,9 @@ def test_all_161_prior_history_expectations_and_comparator_are_exactly_preserved
  original=subprocess.check_output(['git','show','fe66516:tools/research/history_integrity.py'],cwd=ROOT).decode()
  historical=types.ModuleType('int1_historical_source_guard');exec(compile(original,'historical_source_guard','exec'),historical.__dict__)
  old=historical.approved_history(ROOT);new=current.approved_history(ROOT)
- assert len(old)==161 and len(new)==173
+ assert len(old)==161 and len(new)==175
  assert {k:new[k] for k in old}==old
- assert set(new)-set(old)==set(current.INT1_CANDIDATE_ADDITIONS)|set(current.EAI1_CANDIDATE_ADDITIONS)|set(current.BIE2_CANDIDATE_ADDITIONS)|set(current.BIE3_CANDIDATE_ADDITIONS)
+ assert set(new)-set(old)==set(current.INT1_CANDIDATE_ADDITIONS)|set(current.EAI1_CANDIDATE_ADDITIONS)|set(current.BIE2_CANDIDATE_ADDITIONS)|set(current.BIE3_CANDIDATE_ADDITIONS)|set(current.F1_CANDIDATE_ADDITIONS)
  # The byte comparator itself is untouched, not replaced by an exclusion.
  section=original.split('def compare_history(',1)[1].split('\n\ndef verify_history',1)[0]
  assert inspect.getsource(current.compare_history).split('def compare_history(',1)[1].strip()==section.strip()
