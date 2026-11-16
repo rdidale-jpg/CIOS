@@ -1,0 +1,912 @@
+{
+  "base": "98fcab91aa94180b11c41c60f4cf7e4d4ad39e40",
+  "source_files": 175,
+  "asset_files": 51,
+  "all_unchanged": true,
+  "files": [
+    {
+      "path": "enterprise-knowledge/ARCHITECTURE.md",
+      "sha256": "1d01b55442a4fa7ddd54e9f4c407b4c2857af5785f66c79b5ba5dfad1ae50b05"
+    },
+    {
+      "path": "enterprise-knowledge/README.md",
+      "sha256": "60e415f470dcb9fe5c1a46b784690cdd51d265f29139a7778d7275142325e5ee"
+    },
+    {
+      "path": "enterprise-knowledge/REGISTER.md",
+      "sha256": "810ef6c9187a905aafd5511e72ffcb6c23e25ef21239ba666f0c95a229411535"
+    },
+    {
+      "path": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip",
+      "sha256": "25e8ef0f49b4320e3fff2b347b06708ed231a670b5497a7402abf7ca26380371"
+    },
+    {
+      "path": "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt",
+      "sha256": "5fa3dbe874122723e8883e30f0f65ea091b0d4ba45892c64ea3a012be1aa7326"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/Industry-Twin.md",
+      "sha256": "32365fcbc0838af8db42665a12a4c9a48028bd752f4f349e9391b4ed3fa5c573"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/MANIFEST.yaml",
+      "sha256": "fa9f22be5274dc74cdeb6d4b70a31cfa15a571ea5b664c5c2d2fb74393bb4196"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/easyJet-Enterprise-Twin.md",
+      "sha256": "2ba66bedefa3875536d288d5aa3515ceec534192cf56b16479994c3c8f76c8b3"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/Assessment-Overlay.json",
+      "sha256": "b3f395e1deb0b2b545ad4fa02396f6baffbc6d548b19c891315eb6bc8505c3aa"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/Living-Map.json",
+      "sha256": "492ccc88db77e771ef7f64dfdfbaa26271be0f3a632772c2b8e9f683bd564278"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/Research-Cycle-v2-Source.json",
+      "sha256": "c90e92eafb4cce93b99601492a68e57c85deea930c5e2ec7ae7e5d7b84ded000"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/Understanding-Review.json",
+      "sha256": "8ce5ca5ab17464794476dd715d1d72c963aa73a3a39a3e53ef471e7f3a290985"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/Visual-Profile.json",
+      "sha256": "6c97fff91aac950795e90cdbe4aa09c7cd1b19b3d68b35747e1ac4f68c4f1982"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-AI-SAFETY.txt",
+      "sha256": "11d0e4986d69ec1178bb9c877ddd7c57d01a56f784e12dacc2727a89c8974d63"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-AR25.txt",
+      "sha256": "5fefb3d6bc234287136892d079f5e1c1e179c8ebb2523e4ccf346fda6e2912fa"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-CAA25.txt",
+      "sha256": "dfcb43818521fe339585ad024be1d5d09d079d9538fe7c776caf4dadb24ba2a0"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-CHAT26.txt",
+      "sha256": "18407c0d3ee1302b5f870ede4663dd7a062bad8b3a3c0324ebe208ebc33880e9"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-HOL26.txt",
+      "sha256": "86ab9003a3b50a2a2b6fbc3aff09baad3bfc445ef02b6247c3dcd481ac27e990"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-IATA26.txt",
+      "sha256": "9565fdbba06476c505ebd426e3b37ab9b21fdf353ba37556448d3296362bcfbd"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-ICC.txt",
+      "sha256": "6cdd0d89cfadde4bd145d86f249757dae30bcf4046a87a74148a68003f674337"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-OFFER26.txt",
+      "sha256": "5d10b1172b46c175df6917ad52e8080be177af1edfe38a1d7843c3c7ee4cbb98"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-Q326.txt",
+      "sha256": "550c6aca2a48e2802f879e9e94ded544b5ae8a7c7445dfc96fb566457a26780c"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-RIGHTS.txt",
+      "sha256": "b7a98b13d7e1f5bc55115ad8d49bb38a7f87cb2bb796b51ea195bba92cddff97"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-SAF.txt",
+      "sha256": "9e9122983fa92f83a5b5d6ce38a6c69366dbbd7187860dabbbb529a8c45b5313"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-SFP.txt",
+      "sha256": "43ac035af08c414507d0acb0f8dfae25eb0270e44937db7fec1bd21ae583cdd8"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-WIFI26.txt",
+      "sha256": "a09b3ce3feca236690d9615e39dbaa9ea6ae84de70d0f92f673cb072f2aa2f06"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-V2-EJ-MODEL-20261110.txt",
+      "sha256": "fa783d06489a132cba8d2035ea5e81f63dd0a8a3bb7e8f42c8f8a857b3f082cd"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-EJ-H126.txt",
+      "sha256": "1c80ba9954539238ffb71e05dd64e1801c991befbfb39541a1e3fef28fe8a155"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-EJ-ICC.txt",
+      "sha256": "c34f5999916619ffaf597ea1ce75ccbb66bdc92b00925fbe2c58f5084c087247"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-EJ-MRO.txt",
+      "sha256": "10b3113e95e047fb272ff0377a7f6bd05328c64e4c22d810d0e504826bdc6ff8"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-EJ-OUTCOMES.txt",
+      "sha256": "457af8d1d8e18b571cebeaa5651352a1f0aa8539636c88420b4f2de04bd25200"
+    },
+    {
+      "path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-UK-SAF.txt",
+      "sha256": "1d3162246e4e1acb6de0f8b30f594ee390e604d73e97f6a4758c4e6d0d322933"
+    },
+    {
+      "path": "enterprise-knowledge/banking/MANIFEST.yaml",
+      "sha256": "0aca525e6fa9d5f0210677cf1e046a273667c6f8d084024ffc8d9d664d28db33"
+    },
+    {
+      "path": "enterprise-knowledge/banking/README.md",
+      "sha256": "fbbc1659e73fe1d7b1f9d448ed83d522cf055083f064a3981eec39fcff5b9b21"
+    },
+    {
+      "path": "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+      "sha256": "4b11b4458ca1689aae680336bb55bdb623ae9e1cb2b06dfc7044b9cb77064221"
+    },
+    {
+      "path": "enterprise-knowledge/banking/comparisons/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enterprise-knowledge/banking/comparisons/Banking-Mechanism-Differential-Matrix.md",
+      "sha256": "4e0c99a56ffc01d0ed3c612e7b2fe8bd84db925d8e9c77ca2e4fb2a8704242db"
+    },
+    {
+      "path": "enterprise-knowledge/banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md",
+      "sha256": "02e885bff2ff6a24a028dd6db1899bddceb6a81887041b20a513fb92aa2e0946"
+    },
+    {
+      "path": "enterprise-knowledge/banking/comparisons/README.md",
+      "sha256": "904423b2894eb40cdf836100d16e9637e5992fece5f9d99ac19d5b4a725aa83a"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/README.md",
+      "sha256": "087b9599f7619bba836bd4da4b5c704e605b160422351c484ee5657ea005edf6"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/barclays/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+      "sha256": "a991d67ee4409a314f0eb34ce6dc6411882c9ae8440bc253562a31876615c50e"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/barclays/README.md",
+      "sha256": "7ddc4b8528bc40f12282db5de061e4d5a36587ae3b2d46d85c68eaea6523a70a"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/lloyds/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+      "sha256": "cb7b14702a8f1c2cb2d311abfe334977998a4a8091a1f8b2946cd9b35c062cdd"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/lloyds/README.md",
+      "sha256": "ee8f3ba49083bcfb2744431d657a08e3612da58ffacc25fb762ee8efb0477a0c"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/monzo/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/monzo/Monzo-Enterprise-Twin.md",
+      "sha256": "16b780788634b8b9a95ff686fd0259832dc9b72785a2c89683ff27b9f2c6bce9"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/monzo/README.md",
+      "sha256": "addcd403b6ccda9da651675f2fd075035b07af30e00c65cf8bcc22f8a4a71aae"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/nationwide/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md",
+      "sha256": "f6cb57afd526a13a761842eb774fc4b7dd551a3cc2b1d7a66f7ee8bd74067a66"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/nationwide/README.md",
+      "sha256": "935baec6e6454cd5a91602a58cbf6899fd29903d775c46375adc3011cb6bfc40"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/natwest/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+      "sha256": "59c02cd59be8431159d574e277eb32322b3f9b3b99aa6ab4cccf449e2aa4c2e0"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/natwest/README.md",
+      "sha256": "bd091d663940eb6c86619c90430f4fcc69a3bb9253e021cc9b641c0a71e69faa"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/santander-uk/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/santander-uk/README.md",
+      "sha256": "91923a80099287bd59faeb60e9052e39b524ac960c67b3f783a916889c8aa129"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md",
+      "sha256": "904b7cb2d8e00584ec4e5cfabf097fa54640a3257d6bd86ff566e60df54ae2fa"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/starling/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/starling/README.md",
+      "sha256": "6340bfde799709c1ca618f54ed0e10f75eabf176a730aa7b49b4af21180e0079"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/starling/Starling-Enterprise-Twin.md",
+      "sha256": "13bf4946c1aab1759aa6f82a1394691da25fb27d1ac27667e4ac2151e4b9e08b"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/Banking-Knowledge-Manifest.json",
+      "sha256": "39e245b4c9311af53ac9e1ca5dc22a08a933bd78566a557cfaa65dcd29d7b3e7"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/Banking-Knowledge-Register.md",
+      "sha256": "26ee0f603907be343500e4569f74fdb727215e628b6be109d749606e04df1a02"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/Banking-Strategic-Sales-Navigation-Specification.md",
+      "sha256": "f75dd8977afcff07760463d870c51193a5822239c099db1be08503c3f4dd44a7"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/README.md",
+      "sha256": "f6ffcbe45dd7c734a8a922be7f3949bbeaf7e790a9dd99c90a9b14fe4d43af6a"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Content-Understanding-Evaluation.md",
+      "sha256": "6f423ae4fbe4d9ec634243c0ce87422cec27bf87c5b3f10a5e5768a9245a6d9e"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Failure-Analysis.md",
+      "sha256": "726eb99b0d7ee0e1be36df1e822e0bd67f60f21d9fb27997010663d7ce794459"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Increment-2-Readiness-Decision.md",
+      "sha256": "5a183ed231a18446884766595f6acf06441234e3587ad545b0a9ebc56936117c"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+      "sha256": "ae8d39ef54588ec5540f465625916e40582bda25ec533a0b6c49a07949d50e53"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+      "sha256": "ecc8931c302f483647929c8648ca8e4de4672c19c76e65f11d3b6d784a2e3edf"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-B-Outputs.md",
+      "sha256": "22012ca540c37cd4fd2c356baf016b388fad047cb5f2a42ac669c8bdd22b2361"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-C-Outputs.md",
+      "sha256": "a6e8f9b5f94917c9a682675d239348b453d8d8cf7124e625d1cf05d7c8432d0e"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-Comparison.md",
+      "sha256": "aca908feb6569cdf5859047409254c63adfbfc25b3eac8d7f05c9ece35670a0f"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/README.md",
+      "sha256": "f03f03e3fa04d5ed328783a5114ee6bfd243feb1e7617f8796a15e0e77b282e3"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Reviewer-1-Scorecard.md",
+      "sha256": "5038617e39915f4b15961ec45bbb09f83e4bf3b61841c6358c4cc7c98cbc6527"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Reviewer-2-Scorecard.md",
+      "sha256": "f45fbecc63b824eaaa57ba57433a92913da714e6e38bbb4c3e15e0431f79954b"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/execution-artifacts/lloyds-semantic-evaluation-run-2026-07-19.json",
+      "sha256": "c7e2ac1e89ce45f2c99fae9cf0f5fb5d76dbc23def853665a9fc5e55210fddfc"
+    },
+    {
+      "path": "enterprise-knowledge/banking/governance-reports/Banking-Reinvention-Hypotheses-Governance-Report.md",
+      "sha256": "61b73adf4078d2d1402d559267d2bb70c5d688e6bc2b7c279c75c2a4de18e5ee"
+    },
+    {
+      "path": "enterprise-knowledge/banking/governance-reports/Banking-Strategic-Sales-Navigation-Completion-Report.md",
+      "sha256": "139cc3e41904e2c0db648c37642f4702efd5c00d0e0e0103a372424959a91d61"
+    },
+    {
+      "path": "enterprise-knowledge/banking/governance-reports/Banking-Strategic-Sales-Navigation-Validation-Report.md",
+      "sha256": "4de9ce06014fd1c62836641a9d1cd3af14cd0e4801e758cd63e733589c30fc84"
+    },
+    {
+      "path": "enterprise-knowledge/banking/governance-reports/File-Conversion-Report.md",
+      "sha256": "83118ccff1016a50d6da3b0f57efcb8c57fc97316d3e64fff5b6c76da1ddbf7a"
+    },
+    {
+      "path": "enterprise-knowledge/banking/governance-reports/Filename-Mapping-Report.md",
+      "sha256": "3b92f9dd1ad8578e79cfe4355da7e2d59c8a4963fccefd40bdeece937c095859"
+    },
+    {
+      "path": "enterprise-knowledge/banking/governance-reports/README.md",
+      "sha256": "6210880c400777486559f876b42df05aeb944e7669eded2d563e79344fa5e344"
+    },
+    {
+      "path": "enterprise-knowledge/banking/governance-reports/Validation-Report.md",
+      "sha256": "f552be84acd38e21800f1eadc843bfc975c4b6cd947e5652cdb32e19c0eca678"
+    },
+    {
+      "path": "enterprise-knowledge/banking/industry/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+      "sha256": "52f7020634b87f444a561758588892ebfaa8e9784948f3b8df7aa888bbf2aae4"
+    },
+    {
+      "path": "enterprise-knowledge/banking/industry/Banking-Industry-Twin.md",
+      "sha256": "e8ecc5ca0fc9fecdc46a34a20aac6f16bfba3dbe31b2cbf1fc0594b0755573cf"
+    },
+    {
+      "path": "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+      "sha256": "105c9193d80001f846d93bc2df3ddc7f0a5e3b5e6dbb0371534f059e56c3dc8c"
+    },
+    {
+      "path": "enterprise-knowledge/banking/industry/README.md",
+      "sha256": "3ed4f364c32154e71135715395158e5425f72e5504a235af3378b65174b664e5"
+    },
+    {
+      "path": "enterprise-knowledge/banking/infrastructure/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enterprise-knowledge/banking/infrastructure/README.md",
+      "sha256": "966154338b69a31704a920dcebd645c3747476f250cead30c8dd03f6b0e76bb0"
+    },
+    {
+      "path": "enterprise-knowledge/banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md",
+      "sha256": "c2fbd8a6e71b1bb1312f827f7281da543e8139bb5d605b49edb25837205decb8"
+    },
+    {
+      "path": "enterprise-knowledge/banking/provider-offer-twin/Provider-Offer-Twin-Implementation-Report.md",
+      "sha256": "4123141a695013ab72b975c159f277bbc342ecef6572f57e0fe9ae35ceafec97"
+    },
+    {
+      "path": "enterprise-knowledge/banking/provider-offer-twin/banking-provider-offer-twin.json",
+      "sha256": "697ccc9e99d4405a6adabd7cfdcb390ccaaa469b4d00d1f1e372f2d044afe8ab"
+    },
+    {
+      "path": "enterprise-knowledge/banking/provider-offer-twin/commercial-accessibility-seed.json",
+      "sha256": "98b90bd151b0bd065353e8affb3d2cc56c1fc6ee524c5989c0895c68b80bf784"
+    },
+    {
+      "path": "enterprise-knowledge/banking/provider-offer-twin/commercial-conviction-seed.json",
+      "sha256": "58bd7099d8ada4358678df13b10b218907cfbf2e80094677130c61088afe704d"
+    },
+    {
+      "path": "enterprise-knowledge/banking/provider-offer-twin/provider-fit-assessment-seed.json",
+      "sha256": "8f8a0871eb94c25d15b542b792d90eecd6f741f50cb651c95aebdb836db10210"
+    },
+    {
+      "path": "enterprise-knowledge/banking/provider-offer-twin/provider-offer-twin-review-items.json",
+      "sha256": "4099738c7d9c7784b5f777d684778e81e84267dd81caee8492854a9dd65544a0"
+    },
+    {
+      "path": "enterprise-knowledge/banking/reinvention/Architectural-Observations.md",
+      "sha256": "c22ef223855b70c04a9306026f4619df560e78c1b08fc6b50d09ad98798f8df4"
+    },
+    {
+      "path": "enterprise-knowledge/banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md",
+      "sha256": "cba9c89746267d05b5192f0c0567f5a2e8ad9cc5e5d89e775487f9986f80043b"
+    },
+    {
+      "path": "enterprise-knowledge/banking/reinvention/Completion-Report.md",
+      "sha256": "173f1a16f3d0d28d2b20d7b5bad8049ff23eddeb2a0c7e6de2131d7e8b5dce20"
+    },
+    {
+      "path": "enterprise-knowledge/banking/reinvention/Delivery-Manifest.md",
+      "sha256": "afed73e3f9d32d2a51cfac0da838144ea9e3fb8a8798319489fca59b41b662f0"
+    },
+    {
+      "path": "enterprise-knowledge/banking/reinvention/Hypothesis-Statistics.md",
+      "sha256": "54b76328c81c5c2fa2efaa4ca432d4413078576e45446c149d510152eb8e0d9c"
+    },
+    {
+      "path": "enterprise-knowledge/banking/reinvention/README.md",
+      "sha256": "a1dd2a050997847b1190e7d5e99a2f9706a5687e632a7f05fe4ebf76b5e241f6"
+    },
+    {
+      "path": "enterprise-knowledge/banking/reinvention/Validation-Report.md",
+      "sha256": "91f596bb73ccde7f278872e479d3a298c899379556d4c3a97ac9555ca2084b51"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-migration/Banking-Research-Package-Migration-Report.md",
+      "sha256": "c51cc2d0b8d72302496213e1a300bb3c605d34a57848443a96ebd5a06f4cfdbf"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+      "sha256": "9fb4f8ac578ee3ac97b4f9193607214ac6668e7ddec1c2318494f4475370c2a7"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-migration/migration-review-items.json",
+      "sha256": "70919a7194117b46a5bddc13e7ec2dd375dc4dc26d382fdd34099d8f1d3a7242"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-migration/package-validation-inventory.json",
+      "sha256": "37ccca78ea775b590b0f0c544d03ad9abcbb8c31fde2c620f6bd3a0926675fcb"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-migration/source-document-registry.json",
+      "sha256": "a11c7ce9240ad43c5bc263fab31bfcf72cff769173d44540d6955d3cd187f286"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Living-Map.json",
+      "sha256": "f58eacc73345e6a28be6cef51b6ba0c53845ebdcacf75a9036b6d459ea992256"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Research-Cycle-v2-Source.json",
+      "sha256": "e8e17016dba9a3c9e8cc38be9fa670631a62570b3bff493d431055fa30cbab6a"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Understanding-Review.json",
+      "sha256": "66209037db188db27b216574076b71a818cf0f290245791fbe2945f0162e7fcd"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Visual-Profile.json",
+      "sha256": "af2d96c39a0d35e07fd800e2e64a31084ab63139ae7ff704f771e60416717424"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json",
+      "sha256": "5a2a0ed623d7d3fbde1e57f10c76abbf7761d8905692ccaec4d5cd8448a90e0a"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/BIE2-FCA-Peers-Candidate.json",
+      "sha256": "d2536d42b5fcdc8ef3ebf59bd42564dd93d1648ee73b6f05b6ce14497394666d"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/BIE2-FCA-Peers.txt",
+      "sha256": "dd68d2c507bea63b5d33f9932dee0c8fa0fbe9053f1aa3289f81822e9dda0338"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/BIE3-FCA-Outcomes-Candidate.json",
+      "sha256": "e8c6b098b0695245b7a47b834ca180fa9d69e430a039affbbb98b46342d4b471"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/BIE3-FCA-Outcomes.txt",
+      "sha256": "9fa20943561b0f87d3605d12f36fb26ec9e31ff9ba5f3d683a00c8da2f8099da"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-AI.txt",
+      "sha256": "1091b57d5014e8509ff3d277b5eb8e52ca29c6608ae17b22d1478aa41dc639bd"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-CURVE.txt",
+      "sha256": "77556258b687ba14f3fa2d78ff217a2bb81100fbb1dc16a33c244fc87d7a6cca"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-LEGACY.txt",
+      "sha256": "e387e2f8b37215e7046f3c914ef1d0ee930acd434617a8d94df167f14e61f83e"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-WALLET.txt",
+      "sha256": "445b237cbdc111bb790301632d4eb388d960d052f7b9ac367e08e787f7f1f9a7"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-FCA-Service-Candidate.json",
+      "sha256": "953d7e15fae078295ca21bf6fd4d874ad142f3b813656ba474be789ee670ef9b"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-FCA-Service.txt",
+      "sha256": "015a657f4f7cc232037879c652a8cbb3da91865ede073dfb6186de54f278773d"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-HMT-CTP-Candidate.json",
+      "sha256": "05202f75fe8bf4594d0843a9e224ab18b02d422030ec89b166d678d1f11f175f"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-HMT-CTP.txt",
+      "sha256": "42cef2b7ca812c83551a89bd6500b3884b21e87972f6b0c670951c8acb9bf63f"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/F1-BOE-LPMZ598-Candidate.json",
+      "sha256": "f783bdb4b671c8539e02f69a0fab765a12ecf74ad3bc2ec6c191fb900bfa79d2"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/F1-BOE-LPMZ598.txt",
+      "sha256": "8584db998bed1cf6050a8158d17e4c72c097db338d628a2bf67a33d089cd75fa"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/INT1-FCA-Candidate.json",
+      "sha256": "511b5f5225fa6fc005ebdc5484aad75539c1f9e64df8201591a5c628aedec63b"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-BOE-NOV26.txt",
+      "sha256": "2c87189b2a1716249a677409f82aa2ae760170ae98b9cdc77a5298a706b53f23"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-FCA-COMPLAINTS-H126.txt",
+      "sha256": "b1ca214f97c51e0375d054a879d2e01f71c34697bdf26f040953c7a91d98905b"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-FCA-RES26.txt",
+      "sha256": "1f74cd0a83a2ed752558b385265bb42baa0eb83924adbd35ca93fd85ec703182"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-A2030.txt",
+      "sha256": "94e38700408b70ce3e659ca08f5de57b5491795aeda3c9c05cef9061000788f9"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-AI26.txt",
+      "sha256": "a600022c6e585c6fbf257e75c0982b055de92c477dedaf4d77428747de360e77"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-AR25.txt",
+      "sha256": "f655aec6127e46675946e9da094556b896932100dd3a88239121d16da7d10b3f"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-BRAND26.txt",
+      "sha256": "d2a4fff2a18bf79db215f85c79c9644a91b1bc7e1f5775f40b8ad2ecdf6a4158"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-ENVOY.txt",
+      "sha256": "7c33e25cbe44db91eb174d7b6f305ef101f2b593047f05e2fdb1b9071825294a"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-FSQS.txt",
+      "sha256": "0a43a538adffbb8d0d58cf5288ae06ad3715affbbdaa2b7b373628d4949f4a80"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-INVEST30.txt",
+      "sha256": "e839163e79ff3194c7eb9057b412a0e627175361d6cb940a4792761e4c608741"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-Q326.txt",
+      "sha256": "46cdb18eb695dafe256090b21c13a118078628ec1b361cc14ee03baf8cce66d9"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-SOURCING.txt",
+      "sha256": "2fd01db38ebc4d68e5a71b2c3181a01455a652435d0eb6dd4cdfa4fb23ef1daa"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-PRA-PS726.txt",
+      "sha256": "4d4528168b4b17dce563c68b38fe7a3f73f006479f9303189112193794d71ab3"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/SRC-V2-LBG-AI-20261110.txt",
+      "sha256": "fb258968a2968cbf42d3a99d453eb9a5744bc80118128b10909e241904c03f55"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/V3-LBG-ENVOY.txt",
+      "sha256": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/V3-LBG-SECONDARY.txt",
+      "sha256": "58bb046ed5f7d3624b542a7af686c92def997516ef245f9f11213bf5f93c7da2"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/V3-LBG-STRATEGY.txt",
+      "sha256": "ea4d93548d612e350bca3d6840fdd156cadb8732a39e29a713ffedba759e50a1"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/V3-LBG-TECH.txt",
+      "sha256": "90e568f680af60af2dfdf2b488864d952c013167748232d8cd1eb9da326ad919"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/VI2-BOE-CAPITAL-Q226.txt",
+      "sha256": "7323c78caf11ab5541efae1d3a0b89db3db56e9aa4931c9f80e461addfb7e03e"
+    },
+    {
+      "path": "enterprise-knowledge/insurance/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enterprise-knowledge/insurance/README.md",
+      "sha256": "3a65dbc847580fc609fa189876b7672cdb86ac393e10772de740a4fdce86b8e5"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/Entity-Traces-v2.json",
+      "sha256": "4aa9d1f7f790234d6e6460b3121f3bf2601d6a3b5e5bc2ebd19f945e7ed3908d"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/Global-Context-Contracts-v1.schema.json",
+      "sha256": "cda710a04d77a6a5a550e7e9207af585a7b4e1bf7bc8b609abb473f9ef372416"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/Macro-Context-v1.json",
+      "sha256": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber-Candidate.json",
+      "sha256": "74ec38444ef79f6a5273306e8e93c86a06562647a7865d30145ef035136f9267"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/EAI1-UK-Cyber.txt",
+      "sha256": "b9abe8eb681cb0310dbf7eec719fc66de5bda0fca2920b0cc02a94a7efc92646"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-BILL.txt",
+      "sha256": "d1789f10b9037537b481daf55998f913b7b161796c9250ff485ad8d974c46c34"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CSRD-FR.txt",
+      "sha256": "673cf39fe05cc3c6ebf7bfefee0e2b71672dab872770c2a4f906039f177751f3"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CSRD.txt",
+      "sha256": "08982030c80bc9c58dfe208e0bb8f60f1b1e10360074f8867f9d5a2ab1888498"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CYBER-FR.txt",
+      "sha256": "0bdaa127c45bc7dac95e077592281ac9811fb345c5fa8448839928afbd47355c"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CYBER-GB.txt",
+      "sha256": "e669f409fabad08f4ecb5f0341ec2c8171a6ef8aac4db1cdef7e17ef6f4016fc"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-SOCIAL.txt",
+      "sha256": "e1807f1224b707b5f92f3caba5becfb7a4341a1de1ccd992a7c29a0d10d22d47"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-SRS.txt",
+      "sha256": "f0984727e0e290fb1b939f8c64cc7c2561d46f89d726cea16c0924960419ecf2"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/MT-FR-CODE.txt",
+      "sha256": "d8a4aa886f3593ea667f6994581354ee0e5cd02028e8517cd3fd3e13dadcbf6f"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/MT-UK-BANK.txt",
+      "sha256": "ee3c98c12a2720a105f40024f286c8682da281124e1be83d3f701e8099f8d2bf"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/MT-UK-REGISTER.txt",
+      "sha256": "142d2af85272450cce076f3f0017c04c273f1a6c4296b06bd376e5fb53c1848a"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/MT-UK-SS121.txt",
+      "sha256": "33f6d5e16021973d6aacad9a1c7c691df816b77ea56c4441669e69cba37f7efd"
+    },
+    {
+      "path": "enterprise-knowledge/schemas/commercial-reasoning.schema.json",
+      "sha256": "30e7f3979acfcf2da4d7aff604dd29615d44b78a9a3a528de705964719899348"
+    },
+    {
+      "path": "enterprise-knowledge/schemas/provider-offer-twin.schema.json",
+      "sha256": "ee25084dea21e1866ac32fe9424b354ceebaeb61565620d06ca5c2c199a97712"
+    },
+    {
+      "path": "enterprise-knowledge/technology/research-model/Buying-Trigger-Pilot.json",
+      "sha256": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927"
+    },
+    {
+      "path": "enterprise-knowledge/telecommunications/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enterprise-knowledge/telecommunications/README.md",
+      "sha256": "e193e9b1e694397a2e158b35fb129c34e295e274a1b3b7e6ec593bf81ca25d14"
+    },
+    {
+      "path": "enterprise-knowledge/utilities/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enterprise-knowledge/utilities/README.md",
+      "sha256": "26d60dc0657af1be19c670db41205bd969dd7b665c179fb31823010c52ef31df"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/agenda-dependencies.json",
+      "sha256": "a4ce70f8ef94a22a71993053bab30fda21f46d0aa998d4b006fe912021dfdfe6"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/artwork.json",
+      "sha256": "210107bfbee2efc8ca11f4b144337831b5c3835068f1bdeb26a9a16e5072d634"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/banking-forces-1152-46402578a8ed.webp",
+      "sha256": "46402578a8edf0ae2beb70ed2ad2cce67229f3ac2c2754065ced1991a7ce2a30"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/banking-forces-1536-2a58ebb939f7.webp",
+      "sha256": "2a58ebb939f7857a7dd094e46bb888a4736cb3bc8d2928b96ee0d71936cd9c89"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/banking-forces-768-1df482a9583f.webp",
+      "sha256": "1df482a9583fc7fb13430d3cb6de37b4b654c3ca2d50fedbf6304ca089ea0fc0"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/banking-landscape-1152-f4f9b56d78a9.webp",
+      "sha256": "f4f9b56d78a918687bf6e3a4170bffed458e66718160a41df87c2c8860a8d193"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/banking-landscape-1536-1de7b3640185.webp",
+      "sha256": "1de7b3640185039f27d2101ad4823888b401122d19c1c324f2184e624608fdc9"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/banking-landscape-768-09a6ae4c5b73.webp",
+      "sha256": "09a6ae4c5b7318bac08a1fac563a5e3eec0ff145533e7ad08404c98ef89249e2"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-forces-1152-d7029da317c3.webp",
+      "sha256": "d7029da317c32c87aba442e85ef94d1c4a20f7b83c0a0ca4bddf6348daad714e"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-forces-1536-c629f014985a.webp",
+      "sha256": "c629f014985a1e65e586b09cd396d088879b0e75fef172f1fd68e40466b0d8a2"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-forces-768-048af0418b8e.webp",
+      "sha256": "048af0418b8efe8f9e2ad7f541f1eb130d24b88e6d1dfa51a91e4c6d8599c447"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-inside-1152-a3938046ba72.webp",
+      "sha256": "a3938046ba72ccf8774747afd3e0e949590a0f0e01714e1040255997b2e243b2"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-inside-1536-3d6a3c0bd592.webp",
+      "sha256": "3d6a3c0bd5927fab299a9cab334341b77b2d752b6ee3d3f5e2a0cffef9189f3c"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-inside-768-8d00816a9ad7.webp",
+      "sha256": "8d00816a9ad7c2c4662aa573591e155838e71e9b89769dd2ed249d89943c55a0"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-landscape-1152-17ed441fa74d.webp",
+      "sha256": "17ed441fa74d5855149107fc21e9950dad71f738041ba832dbf8978b9e693387"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-landscape-1536-e2710006a387.webp",
+      "sha256": "e2710006a387ef3c4251aa6fd2e4574e576129e209a191d0e9053f6b9d8010b7"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-landscape-768-fa44563b2e93.webp",
+      "sha256": "fa44563b2e93f9fe1bdd9505e870d80ca635b59812ba0781c2426c069efb7675"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/panels-artwork.json",
+      "sha256": "2b6f64160743b963bb16d587e08cdd22fc6aad21aacee3fee875635260bbc960"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/panels.css",
+      "sha256": "97879c43ae9c0338db5d53f4f1a17e9a2c5f05fe0513499e1f02227846a4bb13"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/scenes.json",
+      "sha256": "b6ba643e911446ac3c80d0fb4ced40eeaac451d970dbd3381bf96d2ca088a3bd"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/streams.css",
+      "sha256": "0a722f2c457e780169f0a0971c27a5867e5f6332b105ed85970c4294a2ba6b39"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/streams.js",
+      "sha256": "1dee4de4fbb924ebc42167792293eda6811a3cc243bbb9639f9f7558ef4fe349"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/uk-forces-1152-b51364843c5d.webp",
+      "sha256": "b51364843c5dff665f40f47b6fb7b199fd6a36c1ac8c15ee502cb4b7335be014"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/uk-forces-1536-847d312743bd.webp",
+      "sha256": "847d312743bd3b91f7182eede499c75a1c99f26b57cd39a36797dbb64e975d13"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/uk-forces-768-0241193578d1.webp",
+      "sha256": "0241193578d1f8abb230566cab5a6031ea2e19d81d14a4a1c390568109b653af"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/uk-landscape-1152-685df28a3075.webp",
+      "sha256": "685df28a3075ca4e50223ecfbb9258727044bc4c3aa54c3d664c6ab0cb0d3dfa"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/uk-landscape-1536-8351b4eb8ddc.webp",
+      "sha256": "8351b4eb8ddcc75edd780e556f52fb169cfd6ebe790403b9c378fa5a37135910"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/uk-landscape-768-507689f8afd8.webp",
+      "sha256": "507689f8afd86d84bf3d08def11e920e07c511bc9479a68849906708e69abd64"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-banking-forces-384-12cea0c2400a.webp",
+      "sha256": "12cea0c2400a53ece89bcb8b97fe946bc6fcbdad1c8fd142454175d6c3c58b42"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-banking-forces-768-772726f361a3.webp",
+      "sha256": "772726f361a3f38f514e51b65d955620c44f2bef7378964f5b1d839e6ed6322e"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-banking-landscape-384-18fe29a66bb6.webp",
+      "sha256": "18fe29a66bb682225badfa13a5563d9a94a9e54086b1cc2514f27a8068fdcedb"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-banking-landscape-768-b59e48e78a00.webp",
+      "sha256": "b59e48e78a00bbe22a42450883f72d855e767be772fa136d4b0c037069288167"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-lloyds-forces-384-2ffca0158cd7.webp",
+      "sha256": "2ffca0158cd78943d3b20b176bd4bc50bc7d6d944ec11d13cd2ce15f3478367d"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-lloyds-forces-768-8fca8b08527a.webp",
+      "sha256": "8fca8b08527af1da381e97145e383c2461144f7a00f334867b7310ee4fec6ce7"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-lloyds-inside-384-12d9a56acd25.webp",
+      "sha256": "12d9a56acd25c1fc7ef673130c20ca30cf86083485e866ba9360282f175d47dc"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-lloyds-inside-768-13827db67c30.webp",
+      "sha256": "13827db67c3077e5a390965499c38ec2a93d3003cde580895d86eac82140d80f"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-lloyds-landscape-384-358069bf4f4c.webp",
+      "sha256": "358069bf4f4c424ae2cbe8a1f06ffbf75364731f527c208bda8ba703e56e76b3"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-lloyds-landscape-768-e58d32043d99.webp",
+      "sha256": "e58d32043d99ebfe411a10b0ca01fddeb1b8e0464afa0447feb65d824a39deb7"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-uk-forces-384-fa241b77924d.webp",
+      "sha256": "fa241b77924d085ced99b2027f1ab94a813dcd78977751c2aff2d989df3c770a"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-uk-forces-768-a67e2ac95b52.webp",
+      "sha256": "a67e2ac95b527af0967211487b407162c3258d63fa78f7650c53030d10bef9a0"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-uk-landscape-384-84a37760e3e8.webp",
+      "sha256": "84a37760e3e89556727e60003a23f38c3f3f0255050ad1fcc6be62b09c12a25f"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-uk-landscape-768-73f0ba099fbc.webp",
+      "sha256": "73f0ba099fbcbd5f9201360870c917c9e53f3966127d0caf3024b522f2930fb4"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-uk-skyline-1280-21e9c5d3fc39.webp",
+      "sha256": "21e9c5d3fc39c340d39d77324c5444a33784c788eb262751383972d36c47d507"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-uk-skyline-2172-219747b1c362.webp",
+      "sha256": "219747b1c362cec411920a80967633c4048c603205c5a5e2f9d9aa8305218ae0"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-watermark-banking-forces-0ef8d745948a.svg",
+      "sha256": "0ef8d745948a5765eb9d884f5b5e475b1460f9206eb7f06b0dd349a5b3fec460"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-watermark-banking-landscape-67aebb381b71.svg",
+      "sha256": "67aebb381b7143eb67a7f8ddcdd8d985b796f98f14f7ffbd380cff195f07c7ad"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-watermark-lloyds-forces-06a4619df21b.svg",
+      "sha256": "06a4619df21b01894c2baa72d0c18d6c1794dedfc65a583ca16a1ac034e9930a"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-watermark-lloyds-inside-2d134ba93cb7.svg",
+      "sha256": "2d134ba93cb7e17a5060ac8463b17adfea2d7a49491e3015b44b7fbc8e91f726"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-watermark-lloyds-landscape-fdd9d9a0bc60.svg",
+      "sha256": "fdd9d9a0bc60e32a0f466c94a8a696599c743ee1cdb5b79ff594f120420f9d96"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-watermark-uk-forces-d526b33fbdbf.svg",
+      "sha256": "d526b33fbdbfd126f6427c9b885d19746442299416d44c0964a05a40a5a6fd2e"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-watermark-uk-landscape-f4e632a4bc93.svg",
+      "sha256": "f4e632a4bc93b15bed0bb94f751e566d7f9fe84cde71541ceec104e67a0a38e6"
+    }
+  ]
+}

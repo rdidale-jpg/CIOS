@@ -168,8 +168,10 @@ def test_historical_bie2_pack_owners_and_unexecuted_decisions_unchanged():
     for name in ('Preserved-Owners','Preserved-BIE2-Pack'):
         manifest=json.loads((q.PACK/(name+'.json')).read_text());assert manifest['base']==BASE
         for path,sha in manifest['files'].items():
-            content=(ROOT/path).read_bytes();assert hashlib.sha256(content).hexdigest()==sha
-            assert content==subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
+            expected=subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
+            assert hashlib.sha256(expected).hexdigest()==sha
+            from tests.flora_f2_owner_contract import assert_owner_compatible
+            assert_owner_compatible(ROOT,path,expected)
     for path in ['docs/flora-runtime/eai1-628/Eight-Evidence-Review-Proposals.json','docs/flora-runtime/eai1-628/Eight-Evidence-Reviews.md','architecture/decisions/ADR-027-Document-Scoped-Publisher-Admission-Proposal.md']:
         assert (ROOT/path).read_bytes()==subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
 

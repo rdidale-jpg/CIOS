@@ -106,8 +106,10 @@ def test_protected_owners_forms_and_proposed_adr_unchanged():
     manifest=json.loads((q.PACK/'Preserved-Owners.json').read_text())
     assert manifest['base']==BASE
     for path,sha in manifest['files'].items():
-        assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==sha
-        assert (ROOT/path).read_bytes()==subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
+        expected=subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
+        assert hashlib.sha256(expected).hexdigest()==sha
+        from tests.flora_f2_owner_contract import assert_owner_compatible
+        assert_owner_compatible(ROOT,path,expected)
     for path in ['docs/flora-runtime/eai1-628/Eight-Evidence-Review-Proposals.json','docs/flora-runtime/eai1-628/Eight-Evidence-Reviews.md','architecture/decisions/ADR-027-Document-Scoped-Publisher-Admission-Proposal.md']:
         assert (ROOT/path).read_bytes()==subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
 

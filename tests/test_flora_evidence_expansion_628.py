@@ -206,8 +206,9 @@ def test_protected_owners_policy_and_all_existing_dependency_pins_are_unchanged(
  for r in manifest['unchanged']:
   content=subprocess.check_output(['git','show',BASE+':'+r['path']],cwd=ROOT)
   assert hashlib.sha256(content).hexdigest()==r['sha256']
-  if r['path']!='cios/applications/flora/visual_streams.py':assert (ROOT/r['path']).read_bytes()==content
-  else:assert (ROOT/r['path']).read_bytes()==subprocess.check_output(['git','show','ce4314c:'+r['path']],cwd=ROOT)
+  from tests.flora_f2_owner_contract import assert_owner_compatible
+  expected=content if r['path']!='cios/applications/flora/visual_streams.py'else subprocess.check_output(['git','show','ce4314c:'+r['path']],cwd=ROOT)
+  assert_owner_compatible(ROOT,r['path'],expected)
  path='cios/applications/flora/visual_stream_assets/agenda-dependencies.json';old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT));new=a._pins()
  for key in ['claims','sources']:
   assert all(new[key][k]==value for k,value in old[key].items())

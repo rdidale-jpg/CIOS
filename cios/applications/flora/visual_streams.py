@@ -338,4 +338,8 @@ def _proof(ctx,data):
 @ds.view_scope
 def render(path,query,headers=None):
  from .visual_panels import render as panels
+ if 'analysis'in query:
+  from .financial_intelligence.analyst import selection
+  ctx,run_id=selection(path,query)
+  return panels(ctx,headers,financial_run_id=run_id)
  return panels(resolve(path,query),headers)
