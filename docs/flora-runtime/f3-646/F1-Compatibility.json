@@ -1,0 +1,160 @@
+{
+  "analytical_candidate": {
+    "derivations": [
+      {
+        "comparison": "stock_dates",
+        "derivation_id": "published-stock-difference",
+        "formula": "difference",
+        "inputs": [
+          {
+            "measurement_id": "F1-BOE-LPMZ598-2026-05-31",
+            "revision": "116f4f0183ccc7f328ab8051f715481d31940e4ea3fe89a90c3d3578c03b2b40"
+          },
+          {
+            "measurement_id": "F1-BOE-LPMZ598-2026-06-30",
+            "revision": "7aca659c2bfd8195368bed0080cde9c30a2e411ce5f8b3bb176f7b08bfe9795c"
+          }
+        ],
+        "version": "1"
+      },
+      {
+        "comparison": "stock_dates",
+        "derivation_id": "published-stock-percent-change",
+        "formula": "percent_change",
+        "inputs": [
+          {
+            "measurement_id": "F1-BOE-LPMZ598-2026-05-31",
+            "revision": "116f4f0183ccc7f328ab8051f715481d31940e4ea3fe89a90c3d3578c03b2b40"
+          },
+          {
+            "measurement_id": "F1-BOE-LPMZ598-2026-06-30",
+            "revision": "7aca659c2bfd8195368bed0080cde9c30a2e411ce5f8b3bb176f7b08bfe9795c"
+          }
+        ],
+        "version": "1"
+      }
+    ],
+    "measurements": [
+      {
+        "accounting_basis": "BoE Database LPMZ598; amounts outstanding; not seasonally adjusted",
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Historical UK MFI aggregate, not Lloyds, another named bank or the latest release. Not seasonally adjusted.",
+          "A difference of stocks is not the official adjusted flow or growth series; coverage and sector changes can affect it.",
+          "Reported in GBP millions. Calculations retain source rounding; no annualisation, causal inference or buying need."
+        ],
+        "definition": "Monthly amounts outstanding of monetary financial institutions' sterling retail deposits (excluding notes and coin) from household sector (in sterling millions) not seasonally adjusted",
+        "measurement_id": "F1-BOE-LPMZ598-2026-05-31",
+        "metric": "sterling_household_retail_deposits",
+        "original_display": "\u00a31,884,726m",
+        "perimeter": "UK monetary financial institutions; sterling retail deposits from households; excluding notes and coin; NSA",
+        "period": {
+          "as_at": "2026-05-31",
+          "end": null,
+          "fiscal_year_end": null,
+          "kind": "instant",
+          "label": "2026-05-31",
+          "start": null
+        },
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "schema_version": 1,
+        "semantic_type": "reported",
+        "source": {
+          "locator": "Database LPMZ598 row31 May2026",
+          "owner": "banking_research",
+          "published": null,
+          "publisher": "Bank of England",
+          "record_id": "F1-BOE-LPMZ598-2026-05-31",
+          "retrieved_at": "2026-11-16T10:00:00+00:00",
+          "revision": "f68e3c9fac4877898a3ae6dbeb72ce500283b756c7e0cafc6acc451b158a5746",
+          "source_id": "F1-BOE-LPMZ598",
+          "source_revision": "a27c2e3617cfc413528a68aeef0e60cfe3cc996c6d8ac527f1d64f7833e907da",
+          "title": "Bank of England Database: LPMZ598, selected May/June 2026 stocks",
+          "url": "https://www.bankofengland.co.uk/boeapps/database/fromshowcolumns.asp?CSVF=TT&DAT=RNG&FD=1&FM=Jan&FNY=Y&FY=2021&Filter=N&FromSeries=1&SeriesCodes=LPMZ598&TD=15&TM=Aug&TY=2026&ToSeries=50&Travel=NIxAZxSUx&UsingCodes=Y&VPD=Y&html.x=66&html.y=26&title=LPMZ598",
+          "use_reference": "Bank of England Database OGL numerical-data clause; F1 document-specific review"
+        },
+        "state": "actual",
+        "subject_id": "research-local:BoE-LPMZ598-UK-MFI-household-deposits",
+        "subject_name": "UK monetary financial institutions",
+        "value": {
+          "amount": "1884726",
+          "currency": "GBP",
+          "kind": "numeric",
+          "scale": "millions",
+          "unit": "currency"
+        }
+      },
+      {
+        "accounting_basis": "BoE Database LPMZ598; amounts outstanding; not seasonally adjusted",
+        "assumption_owner": "",
+        "assumption_version": "",
+        "caveats": [
+          "Historical UK MFI aggregate, not Lloyds, another named bank or the latest release. Not seasonally adjusted.",
+          "A difference of stocks is not the official adjusted flow or growth series; coverage and sector changes can affect it.",
+          "Reported in GBP millions. Calculations retain source rounding; no annualisation, causal inference or buying need."
+        ],
+        "definition": "Monthly amounts outstanding of monetary financial institutions' sterling retail deposits (excluding notes and coin) from household sector (in sterling millions) not seasonally adjusted",
+        "measurement_id": "F1-BOE-LPMZ598-2026-06-30",
+        "metric": "sterling_household_retail_deposits",
+        "original_display": "\u00a31,886,281m",
+        "perimeter": "UK monetary financial institutions; sterling retail deposits from households; excluding notes and coin; NSA",
+        "period": {
+          "as_at": "2026-06-30",
+          "end": null,
+          "fiscal_year_end": null,
+          "kind": "instant",
+          "label": "2026-06-30",
+          "start": null
+        },
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "schema_version": 1,
+        "semantic_type": "reported",
+        "source": {
+          "locator": "Database LPMZ598 row30 June2026",
+          "owner": "banking_research",
+          "published": null,
+          "publisher": "Bank of England",
+          "record_id": "F1-BOE-LPMZ598-2026-06-30",
+          "retrieved_at": "2026-11-16T10:00:00+00:00",
+          "revision": "3bd7ba88a39ed2f073a98f167e53f4644a537ac32bc2bfbe99dedf401a3ba055",
+          "source_id": "F1-BOE-LPMZ598",
+          "source_revision": "a27c2e3617cfc413528a68aeef0e60cfe3cc996c6d8ac527f1d64f7833e907da",
+          "title": "Bank of England Database: LPMZ598, selected May/June 2026 stocks",
+          "url": "https://www.bankofengland.co.uk/boeapps/database/fromshowcolumns.asp?CSVF=TT&DAT=RNG&FD=1&FM=Jan&FNY=Y&FY=2021&Filter=N&FromSeries=1&SeriesCodes=LPMZ598&TD=15&TM=Aug&TY=2026&ToSeries=50&Travel=NIxAZxSUx&UsingCodes=Y&VPD=Y&html.x=66&html.y=26&title=LPMZ598",
+          "use_reference": "Bank of England Database OGL numerical-data clause; F1 document-specific review"
+        },
+        "state": "actual",
+        "subject_id": "research-local:BoE-LPMZ598-UK-MFI-household-deposits",
+        "subject_name": "UK monetary financial institutions",
+        "value": {
+          "amount": "1886281",
+          "currency": "GBP",
+          "kind": "numeric",
+          "scale": "millions",
+          "unit": "currency"
+        }
+      }
+    ],
+    "schema_version": 1,
+    "selection": "boe-household-deposit-stocks"
+  },
+  "canonical_update": {
+    "enterprise_model_updated": false,
+    "observations_created": 0
+  },
+  "claims": [],
+  "current_stage": "complete",
+  "document": {
+    "enterprise_id": "BK-IND-002",
+    "workspace_id": "synthetic-f3-compatibility"
+  },
+  "enterprise_id": "BK-IND-002",
+  "run_id": "fi-f1-4fde285accf0fd7a4df13510c6cc310e",
+  "status": "candidate_analytics",
+  "terminal": true,
+  "workflow": "financial_candidate_analytics_v1",
+  "workspace_id": "synthetic-f3-compatibility"
+}

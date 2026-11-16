@@ -11,7 +11,7 @@ async function shot(p,name){await p.screenshot({path:path.join(cfg.output,name+'
  const owner=await browser.newContext({ignoreHTTPSErrors:true,hasTouch:true}),p=await owner.newPage();p.on('pageerror',e=>errors.push(e.message));await login(p,'preview-owner','preview-workspace');
  for(const[device,size]of Object.entries(sizes)){
   await p.setViewportSize(size);
-  if(cfg.baseline&&device!=='laptop'&&device!=='mobile-320'){await loaded(p,cfg.baseline+detail);check(await p.locator('body>[data-region]').count()===0,device+' baseline standalone');await shot(p,'before-'+device)}
+  if(cfg.baseline&&device!=='laptop'&&device!=='mobile-320'){await loaded(p,cfg.baseline+(cfg.baseline_financial_main?run:detail));check(await p.locator('body>[data-region]').count()===(cfg.baseline_financial_main?3:0),device+' validated baseline Financial layout');await shot(p,'before-'+device)}
   await loaded(p,cfg.base+'/industries/banking');await p.getByRole('link',{name:'Financial analysis',exact:true}).click();check(new URL(p.url()).searchParams.get('analysis')===cfg.run_id,device+' owned Main entry');
   check(await p.locator('body>[data-region]').count()===3,device+' exactly Top Left Main');check(await p.locator('h1').count()===1,device+' one title');check(await p.locator('.financial-analyst').isVisible(),device+' analyst in Main');
   const text=await p.locator('#visual-content').innerText();check(text.includes('£1.555bn')&&text.includes('0.0825%')&&text.includes('£1,884.726bn')&&text.includes('£1,886.281bn'),device+' real exact derivation and converted stocks');check(text.includes('0–2,000 GBP billions including zero'),device+' honest zero axis');

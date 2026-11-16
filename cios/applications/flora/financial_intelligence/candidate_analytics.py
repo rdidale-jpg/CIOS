@@ -7,7 +7,7 @@ Pure contracts below also support other industry adapters without issuer rules.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import date, datetime, UTC
+from datetime import date, datetime, timedelta, UTC
 from decimal import Decimal, localcontext
 from html import escape
 import json
@@ -134,7 +134,7 @@ class Derivation(Contract):
     derivation_id: str = Field(min_length=1)
     formula: Literal['difference', 'percent_change']
     version: Literal['1'] = '1'
-    comparison: Literal['same_period', 'stock_dates']
+    comparison: Literal['same_period', 'stock_dates', 'duration_dates']
     inputs: tuple[InputReference, InputReference]
     # No arbitrary expression evaluation, annualisation, FX or peer ranking.
 
@@ -164,6 +164,22 @@ def calculate(spec: Derivation, measurements: list[Measurement]) -> dict:
         if (opening.period.kind != 'instant' or closing.period.kind != 'instant'
                 or opening.period.as_at >= closing.period.as_at):
             raise ValueError('Ordered explicit stock dates required')
+    elif spec.comparison == 'duration_dates':
+        if opening.period.kind != 'duration' or closing.period.kind != 'duration':
+            raise ValueError('Complete annual durations required')
+        if opening.period.fiscal_year_end != closing.period.fiscal_year_end:
+            raise ValueError('Different fiscal calendars')
+        for m in selected:
+            month, day = map(int, m.period.fiscal_year_end.split('-'))
+            if (m.period.end != date(m.period.end.year, month, day)
+                    or m.period.start != date(m.period.end.year-1, month, day)+timedelta(days=1)):
+                raise ValueError('Complete calendar-aligned fiscal year required; no annualisation')
+        if (opening.period.end >= closing.period.start
+                or closing.period.end.year != opening.period.end.year+1):
+            raise ValueError('Ordered adjacent complete fiscal years required')
+        if ((opening.source.owner,opening.source.source_id,opening.source.source_revision)
+                != (closing.source.owner,closing.source.source_id,closing.source.source_revision)):
+            raise ValueError('Annual comparators require the same presented source version')
     elif opening.period.model_dump(exclude={'label'}) != closing.period.model_dump(exclude={'label'}):
         raise ValueError('Incompatible reporting periods')
     elif (opening.semantic_type == closing.semantic_type == 'reported'
@@ -174,7 +190,9 @@ def calculate(spec: Derivation, measurements: list[Measurement]) -> dict:
         # Reuse the existing Statement arithmetic after Financial compatibility
         # validation. A stock-date bridge deliberately describes both dates;
         # neither original stock is relabelled as a duration measurement.
-        period = str(opening.period.as_at) + ' to ' + str(closing.period.as_at) if spec.comparison == 'stock_dates' else opening.period.label
+        period = (str(opening.period.as_at) + ' to ' + str(closing.period.as_at) if spec.comparison == 'stock_dates'
+                  else str(opening.period.start)+'/'+str(opening.period.end)+' to '+str(closing.period.start)+'/'+str(closing.period.end)
+                  if spec.comparison == 'duration_dates' else opening.period.label)
         def statement(m):
             source = presentation.Source(m.source.title, m.source.url, m.source.publisher,
                 str(m.source.published or ''), locator=m.source.locator)
@@ -190,6 +208,7 @@ def calculate(spec: Derivation, measurements: list[Measurement]) -> dict:
             amount = amount / opening.value.amount * Decimal(100)
     weaker = any(m.semantic_type != 'reported' for m in selected)
     return {'derivation_id': spec.derivation_id, 'value': str(amount),
+            **({'comparison':'duration_dates'} if spec.comparison=='duration_dates' else {}),
             'formula': spec.formula,
             'unit': '%' if spec.formula == 'percent_change' else opening.value.currency + ' ' + opening.value.scale,
             'semantic_type': 'estimated' if weaker else 'calculated',
@@ -220,6 +239,8 @@ class Reconciliation(Contract):
     derivation_id: str = Field(min_length=1)
     formula: Literal['signed_bridge'] = 'signed_bridge'
     version: Literal['1'] = '1'
+    mode: Literal['basis_reconciliation', 'reported_statement'] = 'basis_reconciliation'
+    adjustment_roles: tuple[Literal['operating_costs', 'credit_impairment', 'associate_contribution', 'restructuring_provisions'], ...] = ()
     opening: InputReference
     adjustments: tuple[InputReference, ...] = Field(min_length=1, max_length=10)
     endpoint: InputReference
@@ -250,8 +271,23 @@ def reconcile(spec: Reconciliation, measurements: list[Measurement]) -> dict:
             raise ValueError('Bridge input revision unavailable')
         rows.append(m)
     opening, endpoint = rows[0], rows[-1]
-    if opening.period.kind != 'duration' or spec.opening_basis == spec.endpoint_basis:
-        raise ValueError('Explicit duration and different endpoint bases required')
+    if opening.period.kind != 'duration':
+        raise ValueError('Explicit duration required')
+    if spec.mode=='basis_reconciliation':
+        if spec.opening_basis==spec.endpoint_basis or spec.adjustment_roles:
+            raise ValueError('Different endpoint bases required for basis reconciliation')
+    else:
+        if not spec.opening_basis==spec.adjustment_basis==spec.endpoint_basis:
+            raise ValueError('Reported statement requires the same declared accounting basis')
+        roles={'operating_costs','credit_impairment','associate_contribution','restructuring_provisions'}
+        if (len(spec.adjustment_roles)!=len(spec.adjustments)
+                or len(set(spec.adjustment_roles))!=len(spec.adjustment_roles)
+                or not set(spec.adjustment_roles).issubset(roles)
+                or opening.metric not in {'revenue','total_income','net_operating_income'}
+                or endpoint.metric not in {'profit_before_tax','underlying_profit_before_tax','operating_profit_before_tax'}
+                or endpoint.semantic_type!='reported'
+                or any(m.metric!=role for m,role in zip(rows[1:-1],spec.adjustment_roles))):
+            raise ValueError('Explicit unique signed statement roles and separately reported pretax endpoint required')
     for m in rows:
         if (any(getattr(m, field) != getattr(opening, field) for field in ('subject_id','subject_name','perimeter','state'))
                 or m.period.model_dump(exclude={'label'}) != opening.period.model_dump(exclude={'label'})
@@ -334,7 +370,9 @@ def _current_inputs(selection: str) -> InputBundle:
 
 def _derivations(measurements):
     refs = tuple(InputReference(measurement_id=m.measurement_id, revision=m.revision) for m in measurements)
-    comparison = 'stock_dates' if all(m.period.kind == 'instant' for m in measurements) else 'same_period'
+    comparison = ('stock_dates' if all(m.period.kind == 'instant' for m in measurements)
+                  else 'duration_dates' if all(m.period.kind=='duration' for m in measurements)
+                  and len({(m.period.start,m.period.end) for m in measurements})>1 else 'same_period')
     return [Derivation(derivation_id=name, formula=formula, comparison=comparison, inputs=refs)
             for name, formula in (('published-stock-difference', 'difference'), ('published-stock-percent-change', 'percent_change'))]
 
