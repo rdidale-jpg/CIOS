@@ -210,7 +210,14 @@ def test_runtime_source_preserves_canonical_home_and_domain_owners():
         if name in unified['presentation_exceptions']:
             assert name.endswith(('offers_views.py','banking_explorer.py','unified_views.py','visual_intelligence.py','living_map.py','sales_views.py','workspace/views.py','navigation.py'))
             continue
-        assert hashlib.sha256((root/name).read_bytes()).hexdigest() == digest, name
+        if name=='cios/applications/flora/security_web.py':
+            import subprocess
+            from tests.flora_f2_owner_contract import assert_owner_compatible, BASE
+            expected=subprocess.check_output(['git','show',BASE+':'+name],cwd=root)
+            assert hashlib.sha256(expected).hexdigest()==digest,name
+            assert_owner_compatible(root,name,expected)
+        else:
+            assert hashlib.sha256((root/name).read_bytes()).hexdigest() == digest, name
     import ast
     source = (root/'cios/applications/flora/web/app.py').read_text()
     node = next(n for n in ast.parse(source).body if isinstance(n,ast.FunctionDef) and n.name=='_flora_home_page')

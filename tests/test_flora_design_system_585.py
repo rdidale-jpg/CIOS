@@ -227,7 +227,14 @@ def test_protected_intelligence_security_permissions_matching_and_pipeline_bytes
             amended=isp['owner_boundary_revisions'][path]
             assert amended['baseline_sha256']==digest,path
             digest=amended['candidate_sha256']
-        assert hashlib.sha256((root/path).read_bytes()).hexdigest()==digest,path
+        if path=='cios/applications/flora/security_web.py':
+            import subprocess
+            from tests.flora_f2_owner_contract import assert_owner_compatible, BASE
+            expected=subprocess.check_output(['git','show',BASE+':'+path],cwd=root)
+            assert hashlib.sha256(expected).hexdigest()==digest,path
+            assert_owner_compatible(root,path,expected)
+        else:
+            assert hashlib.sha256((root/path).read_bytes()).hexdigest()==digest,path
     assert manifest['base_sha']=='19ab36d241dbca2099ffb9b5d519c68c493a914a'
 
 

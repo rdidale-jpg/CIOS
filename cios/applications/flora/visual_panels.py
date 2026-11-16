@@ -236,7 +236,10 @@ def _overview(ctx,data,issues):
     return '<p class="eyebrow">Enterprise landscape</p><h1>An enterprise within a wider ecosystem</h1>'+''.join('<section class="editorial-issue">'+p.render(f)+'</section>'for f in facts)
 
 
-def render(ctx,headers=None):
+def render(ctx,headers=None,*,financial_run_id=''):
+    if financial_run_id:
+        from .financial_intelligence import analyst
+        return analyst.render_selected(ctx,financial_run_id,headers=headers)
     data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected);entries=v.destinations(ctx,data)
     body=''
     if ctx.agenda and any(r.key==ctx.agenda for r in issues):
@@ -250,6 +253,13 @@ def render(ctx,headers=None):
             content=v._detail(ctx,spot,data)
             body=content.replace('<h2 id="insight-title">','<h1 id="insight-title">',1).replace('</h2>','</h1>',1)
     if not body:body=_overview(ctx,data,issues)
+    from .financial_intelligence import analyst
+    body+=analyst.navigation(ctx,headers)
+    return _frame(ctx,headers,data,issues,entries,body)
+
+
+def _frame(ctx,headers,data,issues,entries,body):
+    """Accepted Top/Left/Main shell shared by public and authorised Main views."""
     body+=agenda.navigation(ctx,v.url,issues)
     if ctx.scope!='uk':
         body+='<details class="layer-options"><summary>Context layers</summary><nav aria-label="Context layers">'+''.join('<a href="'+e(v.url(ctx,layer=k),quote=True)+'"'+(' aria-current="page"'if ctx.layer==k else'')+'>'+e(label)+'</a>'for k,label in v.LAYERS.items())+'</nav></details>'

@@ -125,6 +125,9 @@ def private_read(handler):
         return is_cios_owner(handler.headers)
     ident=r'[A-Za-z0-9][A-Za-z0-9_.:@-]{0,127}'
     path=parsed.path
+    if path in {'/industries/banking','/enterprises/lloyds'}:
+        from .financial_intelligence.analyst import authorise_request
+        return authorise_request(handler.path,headers=handler.headers)
     if path in {'/blueprint-import','/blueprint-import/history','/digital-twins'} or re.fullmatch(r'/blueprint-import/'+ident+r'(?:/(?:inspect|review|promote|intelligence|explore|health|research-brief|diagnostics|mission|restage|staging-history|archive|cancel|delete)|/aspects/'+ident+r'|/enterprises/'+ident+r')?',path):
         require_capability(handler.headers,'package.inspect')
         return True

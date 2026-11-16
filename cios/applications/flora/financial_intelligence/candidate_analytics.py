@@ -190,6 +190,7 @@ def calculate(spec: Derivation, measurements: list[Measurement]) -> dict:
             amount = amount / opening.value.amount * Decimal(100)
     weaker = any(m.semantic_type != 'reported' for m in selected)
     return {'derivation_id': spec.derivation_id, 'value': str(amount),
+            'formula': spec.formula,
             'unit': '%' if spec.formula == 'percent_change' else opening.value.currency + ' ' + opening.value.scale,
             'semantic_type': 'estimated' if weaker else 'calculated',
             'canonical_status': 'derived_view_not_canonical',
@@ -208,6 +209,81 @@ class InputBundle:
     title: str
     measurements: tuple[Measurement, ...]
     source: dict
+
+
+class Reconciliation(Contract):
+    """Finite source-disclosed signed bridge, not an expression language.
+
+    F2 exercises this with explicitly synthetic data only. A real adapter would
+    need its own eligible source/use and pinned recipe, never a request flag.
+    """
+    derivation_id: str = Field(min_length=1)
+    formula: Literal['signed_bridge'] = 'signed_bridge'
+    version: Literal['1'] = '1'
+    opening: InputReference
+    adjustments: tuple[InputReference, ...] = Field(min_length=1, max_length=10)
+    endpoint: InputReference
+    opening_basis: str = Field(min_length=1)
+    adjustment_basis: str = Field(min_length=1)
+    endpoint_basis: str = Field(min_length=1)
+    precision_rule: Literal['exact_reported_precision'] = 'exact_reported_precision'
+
+
+def reconcile(spec: Reconciliation, measurements: list[Measurement]) -> dict:
+    """Validate one explicit bridge against its separately reported endpoint.
+
+    Existing difference guards are unchanged. No residual is invented, no
+    absolute/sign convention inferred, no rounding tolerance auto-plugged.
+    This pure Financial-owner operation supplies neither source-use authority
+    nor permission to persist/promote any result.
+    """
+    by_id = {m.measurement_id: Measurement.model_validate(m.model_dump(mode='json')) for m in measurements}
+    if len(by_id) != len(measurements):
+        raise ValueError('Duplicate measurement identity')
+    refs = (spec.opening, *spec.adjustments, spec.endpoint)
+    if len({ref.measurement_id for ref in refs}) != len(refs):
+        raise ValueError('Each bridge component must be applied exactly once')
+    rows = []
+    for ref in refs:
+        m = by_id.get(ref.measurement_id)
+        if m is None or m.revision != ref.revision:
+            raise ValueError('Bridge input revision unavailable')
+        rows.append(m)
+    opening, endpoint = rows[0], rows[-1]
+    if opening.period.kind != 'duration' or spec.opening_basis == spec.endpoint_basis:
+        raise ValueError('Explicit duration and different endpoint bases required')
+    for m in rows:
+        if (any(getattr(m, field) != getattr(opening, field) for field in ('subject_id','subject_name','perimeter','state'))
+                or m.period.model_dump(exclude={'label'}) != opening.period.model_dump(exclude={'label'})
+                or any(getattr(m.value, field) != getattr(opening.value, field) for field in ('unit','currency','scale'))
+                or (m.source.owner,m.source.source_id,m.source.source_revision) !=
+                   (opening.source.owner,opening.source.source_id,opening.source.source_revision)):
+            raise ValueError('Incompatible bridge subject, period, unit, state or document version')
+    if (opening.accounting_basis != spec.opening_basis or endpoint.accounting_basis != spec.endpoint_basis
+            or any(m.accounting_basis != spec.adjustment_basis for m in rows[1:-1])):
+        raise ValueError('Bridge basis transition is not the declared source reconciliation')
+    with localcontext() as ctx:
+        ctx.prec = 34
+        amount = sum((m.value.amount for m in rows[:-1]), Decimal(0))
+    if amount != endpoint.value.amount:
+        raise ValueError('Bridge does not reconcile at reported precision; no residual allowed')
+    return {'derivation_id':spec.derivation_id,'value':str(amount),
+            'formula':spec.formula,
+            'unit':opening.value.currency+' '+opening.value.scale,
+            'semantic_type':'estimated' if any(m.semantic_type != 'reported' for m in rows) else 'calculated',
+            'canonical_status':'derived_view_not_canonical','measurement_state':opening.state,
+            'basis':spec.endpoint_basis,'method':'Opening amount + explicitly signed adjustments; exact check to separately reported endpoint',
+            'formula_version':spec.version,'precision_rule':spec.precision_rule,
+            'inputs':[ref.model_dump() for ref in refs],
+            'periods':[m.period.model_dump(mode='json') for m in rows],
+            'dependency_types':[m.semantic_type for m in rows],
+            'assumptions':[{'owner':m.assumption_owner,'version':m.assumption_version} for m in rows if m.semantic_type != 'reported'],
+            'caveats':list(dict.fromkeys(c for m in rows for c in m.caveats))}
+
+
+def permitted_selection_keys() -> tuple[str, ...]:
+    """Existing source-owner choices; no new registry or run discovery."""
+    return ('boe-household-deposit-stocks',)
 
 
 def _current_inputs(selection: str) -> InputBundle:
@@ -263,19 +339,16 @@ def _derivations(measurements):
             for name, formula in (('published-stock-difference', 'difference'), ('published-stock-percent-change', 'percent_change'))]
 
 
-@verified_service_write('package.upload')
-def create_run(selection: str, *, headers=None) -> str:
-    """Opt-in trusted service; actual existing Financial repository, no promotion."""
-    from .. import document_review as review
-    from ..access import require_resource_scope, active_flora_workspace
-    from ..storage import atomic_write_json
-    bundle = _current_inputs(selection)
+def _run_record(selection: str, bundle: InputBundle, workspace: str) -> dict:
+    """One v1 identity builder shared by creation and read-only lookup.
+
+    The original F1 payload and run ID stay byte-compatible. No source/run
+    creation, authority or persistence is supplied by this pure helper.
+    """
     measurements = list(bundle.measurements)
     # Access resource is distinct from reported subject; no canonical identity
     # is invented for this statistical aggregate or equated to a named bank.
     enterprise = bundle.resource_id
-    workspace = active_flora_workspace(headers)
-    require_resource_scope(headers, 'package.upload', enterprise, workspace)
     payload = {'schema_version': 1, 'selection': selection,
                'measurements': [m.model_dump(mode='json') for m in measurements],
                'derivations': [d.model_dump(mode='json') for d in _derivations(measurements)]}
@@ -285,6 +358,44 @@ def create_run(selection: str, *, headers=None) -> str:
            'status': 'candidate_analytics', 'terminal': True, 'current_stage': 'complete',
            'claims': [], 'analytical_candidate': payload,
            'canonical_update': {'enterprise_model_updated': False, 'observations_created': 0}}
+    return run
+
+
+@verified_service_read('package.inspect')
+def find_existing_run(selection: str, resource_id: str, *, headers=None) -> str | None:
+    """Resolve only the current known ID in one authorised scope; never scan.
+
+    A missing/old-version/withdrawn/denied run creates no entry. This is a read
+    service: package.upload is not required and no missing run is generated.
+    """
+    from .. import document_review as review
+    from ..access import require_resource_scope, active_flora_workspace
+    workspace = active_flora_workspace(headers)
+    require_resource_scope(headers, 'package.inspect', resource_id, workspace)
+    try:
+        bundle = _current_inputs(selection)
+        if bundle.resource_id != resource_id:
+            return None
+        run_id = _run_record(selection, bundle, workspace)['run_id']
+        if not review._run_path(run_id).is_file():
+            return None
+        return run_id if read_analysis(run_id, headers=headers) else None
+    except (OSError, ValueError, TypeError, KeyError, PermissionError):
+        return None
+
+
+@verified_service_write('package.upload')
+def create_run(selection: str, *, headers=None) -> str:
+    """Opt-in trusted service; actual existing Financial repository, no promotion."""
+    from .. import document_review as review
+    from ..access import require_resource_scope, active_flora_workspace
+    from ..storage import atomic_write_json
+    bundle = _current_inputs(selection)
+    enterprise = bundle.resource_id
+    workspace = active_flora_workspace(headers)
+    require_resource_scope(headers, 'package.upload', enterprise, workspace)
+    run = _run_record(selection, bundle, workspace)
+    run_id = run['run_id']
     path = review._run_path(run_id)
     if path.exists():
         if review.load_run(run_id) != run:
@@ -324,7 +435,8 @@ def current_projection(run: dict) -> dict:
                              'published': source.get('publication_date') or '',
                              'retrieved_at': source['retrieved_at'],
                              'extent': source['retrieval_extent'],
-                             'period': source['reporting_period'], 'locator': 'LPMZ598, May/June 2026 rows',
+                             'period': source['reporting_period'],
+                             'locator': '; '.join(dict.fromkeys(m.source.locator for m in stored)),
                              'attribution': source['rights']['attribution'],
                              'licence_url': source['rights']['licence_url']}]}
     except (OSError, ValueError, KeyError, TypeError, PermissionError):
