@@ -587,6 +587,29 @@ def _run_path(run_id: str) -> Path:
         raise FileNotFoundError(str(run_id))
     return _run_dir() / f'{run_id}.json'
 
+
+def _legacy_run_paths() -> list[Path]:
+    """Keep opt-in scoped analytical runs out of legacy global BT summaries.
+
+    Sharing the existing repository must not turn a global/latest-run scan into
+    access to another workspace's private candidate. Legacy error handling is
+    retained by its callers for malformed pre-existing records.
+    """
+    if not _run_dir().exists():
+        return []
+    result = []
+    for path in sorted(_run_dir().glob('fi-*.json'), key=lambda p: p.stat().st_mtime, reverse=True):
+        if path.name.startswith('fi-f1-'):
+            continue
+        try:
+            row = _read_json(path)
+            if row.get('workflow') == 'financial_candidate_analytics_v1' or 'analytical_candidate' in row:
+                continue
+        except (OSError, ValueError):
+            pass
+        result.append(path)
+    return result
+
 TERMINAL_RUN_STATES = {'completed','completed_with_exceptions','completed_with_no_accepted_intelligence','completed_with_no_new_evidence','structured_source_unavailable','structured_source_identity_failed','structured_source_retrieval_failed','structured_package_invalid','structured_filing_parse_failed','structured_entity_mismatch','structured_scope_ambiguous','structured_facts_unmapped','canonical_validation_failed','failed','candidate_validation_failed','provider_request_failed','provider_response_invalid','provider_response_incomplete','output_token_limit_reached','section_selection_failed','persistence_failed'}
 PROGRESS_ORDER = {'queued':0,'retrieving_source':8,'reading_document':18,'checking_document_quality':18,'selecting_sections':30,'preparing_packets':42,'estimating_cost':52,'analysing':68,'validating':82,'updating_memory':92,'completed':100,'completed_with_exceptions':100,'completed_with_no_accepted_intelligence':100,'failed':100,'candidate_validation_failed':100,'provider_request_failed':100,'provider_response_incomplete':100,'output_token_limit_reached':100,'source_retrieval_failed':100,'source_not_pdf':100,'section_selection_failed':100,'structured_source_unavailable':100,'structured_source_identity_failed':100,'structured_source_retrieval_failed':100,'structured_package_invalid':100,'structured_filing_parse_failed':100,'structured_entity_mismatch':100,'structured_scope_ambiguous':100,'structured_facts_unmapped':100,'canonical_validation_failed':100,'completed_with_no_new_evidence':100,'persistence_failed':100}
 ACTIVE_RUN_STATES = {'queued','running','retrieving_source','reading_document','checking_document_quality','selecting_sections','preparing_packets','estimating_cost','analysing','validating','updating_memory'}
@@ -763,7 +786,7 @@ def _successful_cached_run(document: ExperimentDocument, model: str) -> dict[str
     run_dir = _run_dir()
     if not run_dir.exists():
         return None
-    for path in sorted(run_dir.glob('fi-*.json'), key=lambda p: p.stat().st_mtime, reverse=True):
+    for path in _legacy_run_paths():
         try:
             run = _read_json(path)
         except Exception:
@@ -1404,7 +1427,7 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: 
 
 def _active_refresh_run() -> dict[str, Any] | None:
     if not _run_dir().exists(): return None
-    for path in sorted(_run_dir().glob('fi-*.json'), key=lambda p: p.stat().st_mtime, reverse=True):
+    for path in _legacy_run_paths():
         run = _read_json(path)
         if run.get('status') in ACTIVE_RUN_STATES:
             return run
@@ -1459,6 +1482,10 @@ def financial_intelligence_progress_status(run_id: str, *, headers=None) -> dict
     try: elapsed = int((datetime.now(UTC) - datetime.fromisoformat(created)).total_seconds())
     except Exception: elapsed = 0
     pct = int(run.get('progress_percent') or run.get('percent_complete') or (100 if terminal else 0))
+    if run.get('workflow') == 'financial_candidate_analytics_v1':
+        return {'run_id': run_id, 'state': status, 'terminal': True, 'progress_percent': 100,
+                'current_stage': 'complete', 'facts_valid': 0,
+                'final_result_url': f'/ai-financial-report/{run_id}'}
     return {'run_id': run_id, 'state': status, 'terminal': terminal, 'progress_percent': 100 if terminal else pct, 'current_stage': run.get('current_stage') or status, 'elapsed_time': elapsed, 'packet_count': run.get('packet_count',0), 'packets_completed': len([p for p in run.get('page_packets_submitted',[]) if p.get('status')]), 'facts_valid': len(run.get('claims',[])), 'facts_quarantined': len(run.get('candidate_exceptions') or run.get('exceptions') or []), 'final_result_url': f'/financial-intelligence/{run_id}' if terminal else None}
 
 @verified_service_read('package.inspect')
@@ -1467,6 +1494,9 @@ def financial_intelligence_progress_page(run_id: str, *, headers=None) -> str:
         run = read_run(run_id, headers=headers)
     except FileNotFoundError:
         return missing_run_page(run_id)
+    if run.get('workflow') == 'financial_candidate_analytics_v1':
+        from .financial_intelligence import candidate_analytics as analytics
+        return _page('Financial analysis', analytics._render_projection(run['analysis']))
     labels = {'queued': 'Queued', 'retrieving_source': 'Retrieving the financial report', 'selecting_sections': 'Reading the report structure / Finding relevant financial sections', 'estimating_cost': 'Estimating processing cost', 'analysing': 'Analysing financial sections', 'validating': 'Validating financial facts', 'updating_memory': 'Updating the Commercial Digital Twin', 'completed': 'Complete', 'completed_with_exceptions': 'Needs attention', 'completed_with_no_accepted_intelligence': 'No accepted intelligence', 'checking_document_quality': 'Checking document quality', 'document_parsing_failed': 'Checking document quality — Failed', 'section_selection_failed': 'Finding financial sections — Needs attention', 'provider_response_invalid': 'Needs attention', 'provider_request_failed': 'Failed', 'failed': 'Failed'}
     created = run.get('created_at') or now_iso()
     try: elapsed = int((datetime.now(UTC) - datetime.fromisoformat(created)).total_seconds())
@@ -1503,6 +1533,15 @@ def read_run(run_id: str, *, headers=None) -> dict[str, Any]:
     from .access import require_financial_run_authority
     run = load_run(run_id)
     require_financial_run_authority(headers, 'package.inspect', run)
+    if 'analytical_candidate' in run or run.get('workflow') == 'financial_candidate_analytics_v1':
+        from .financial_intelligence import candidate_analytics as analytics
+        if run.get('workflow') != analytics.WORKFLOW:
+            raise PermissionError('Financial analysis unavailable')
+        # Raw candidate history is an internal repository primitive. Every
+        # external read/export/status path receives current source-use output.
+        projection = analytics.current_projection(run)
+        run = {key: value for key, value in run.items() if key != 'analytical_candidate'}
+        run['analysis'] = projection
     return run
 
 def run_exists(run_id: str) -> bool: return _run_path(run_id).is_file()
@@ -1514,6 +1553,8 @@ def update_reviews(run_id: str, form: dict[str, list[str]], *, headers=None) -> 
     run = load_run(run_id)
     from cios.applications.flora.access import require_financial_run_authority
     require_financial_run_authority(headers, "package.review", run)
+    if 'analytical_candidate' in run or run.get('workflow') == 'financial_candidate_analytics_v1':
+        raise ValueError('Analytical working data has no canonical review operation')
     for claim in run['claims']:
         cid = claim['claim_id']; action = (form.get(f'action_{cid}', ['pending'])[0] or 'pending')
         claim['review_state'] = action
@@ -1530,6 +1571,8 @@ def apply_accepted(run_id: str, *, headers=None) -> dict[str, Any]:
     run = load_run(run_id)
     from cios.applications.flora.access import require_financial_run_authority
     require_financial_run_authority(headers, "candidate.promote", run)
+    if 'analytical_candidate' in run or run.get('workflow') == 'financial_candidate_analytics_v1':
+        raise ValueError('Analytical working data cannot be promoted by this operation')
     svc = ObservationMemoryService(); results=[]; rejected=[]
     for claim in run['claims']:
         if claim.get('review_state') not in {'accept', 'amend'}: continue
@@ -1553,7 +1596,7 @@ def review_home_page(message: str = '') -> str:
 
 def financial_intelligence_admin_health_page() -> str:
     run_dir = _run_dir()
-    runs = sorted(run_dir.glob('fi-*.json'), key=lambda p: p.stat().st_mtime, reverse=True) if run_dir.exists() else []
+    runs = _legacy_run_paths()
     last = _read_json(runs[0]) if runs else {}
     diag = (last.get('provider_diagnostics') or [{}])[-1]
     mode = storage_mode()
@@ -1574,7 +1617,7 @@ def financial_intelligence_admin_health_page() -> str:
 def financial_intelligence_page(message: str = '') -> str:
     source = _bt_annual_report_source()
     run_dir = _run_dir()
-    runs = sorted(run_dir.glob('fi-*.json'), key=lambda p: p.stat().st_mtime, reverse=True) if run_dir.exists() else []
+    runs = _legacy_run_paths()
     last = _read_json(runs[0]) if runs else None
     ready = bool(os.getenv('OPENAI_API_KEY'))
     state = 'Financial intelligence ready' if ready else 'Financial intelligence is temporarily unavailable'
@@ -1671,6 +1714,9 @@ def _render_dual_speed_outcome(run: dict[str, Any], show_support_control: bool =
     return f"""<section class='card warning'><h2>Fixture-only evidence warning</h2><p>This legacy result uses seeded rapid fixture data for local orchestration proof only. It is not verified official evidence and has not updated canonical Evidence, Observations or the Enterprise Model.</p></section><section class='card'><h2>Rapid Financial Pressure and Transformation Outlook</h2><p>Rapid lane status: {escape(_display_enum(str(rapid.get('status'))))} · Evidence status: {escape(_display_enum(str(rapid.get('evidence_status'))))} · Candidate facts: {escape(str(rapid.get('candidate_fact_count', 0)))}</p><pre>{rapid_result}</pre></section>"""
 
 def _outcome_summary(run: dict[str, Any] | None, show_support_control: bool = False) -> str:
+    if run and ('analytical_candidate' in run or run.get('workflow') == 'financial_candidate_analytics_v1'):
+        from .financial_intelligence import candidate_analytics as analytics
+        return analytics._render_projection({})  # Only the scoped read service may render analytical runs.
     support_report_link = financial_intelligence_support_report_link(run.get('run_id')) if (run and show_support_control and run.get('run_id')) else ''
     if not run: return ''
     if run.get('execution_mode') == DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE:
@@ -1707,7 +1753,11 @@ def missing_run_page(run_id: str) -> str:
 @verified_service_read('package.inspect')
 def financial_intelligence_run_page(run_id: str, *, headers=None) -> str:
     try:
-        return _page('Financial Intelligence outcome', _outcome_summary(read_run(run_id, headers=headers)))
+        run = read_run(run_id, headers=headers)
+        if run.get('workflow') == 'financial_candidate_analytics_v1':
+            from .financial_intelligence import candidate_analytics as analytics
+            return _page('Financial analysis', analytics._render_projection(run['analysis']))
+        return _page('Financial Intelligence outcome', _outcome_summary(run))
     except FileNotFoundError:
         print(f"Flora Financial Intelligence requested missing run {run_id}; storage mode={storage_mode()['mode']}")
         return missing_run_page(run_id)
@@ -1715,7 +1765,11 @@ def financial_intelligence_run_page(run_id: str, *, headers=None) -> str:
 @verified_service_read('package.inspect')
 def financial_intelligence_run_response(run_id: str, show_support_control: bool = True, *, headers=None) -> tuple[str, int]:
     try:
-        return _page('Financial Intelligence outcome', _outcome_summary(read_run(run_id, headers=headers), show_support_control=show_support_control)), 200
+        run = read_run(run_id, headers=headers)
+        if run.get('workflow') == 'financial_candidate_analytics_v1':
+            from .financial_intelligence import candidate_analytics as analytics
+            return _page('Financial analysis', analytics._render_projection(run['analysis'])), 200
+        return _page('Financial Intelligence outcome', _outcome_summary(run, show_support_control=show_support_control)), 200
     except FileNotFoundError:
         print(f"Flora Financial Intelligence requested missing run {run_id}; storage mode={storage_mode()['mode']}")
         return missing_run_page(run_id), 410
@@ -1723,6 +1777,9 @@ def financial_intelligence_run_response(run_id: str, show_support_control: bool 
 @verified_service_read('package.inspect')
 def run_page(run_id: str, *, headers=None) -> str:
     run = read_run(run_id, headers=headers)
+    if run.get('workflow') == 'financial_candidate_analytics_v1':
+        from .financial_intelligence import candidate_analytics as analytics
+        return _page('Financial analysis', analytics._render_projection(run['analysis']))
     rows = ''.join(_claim_row(c) for c in run.get('claims', [])) or '<tr><td colspan="7">No claims returned. Check provider status and errors below.</td></tr>'
     applied = ''.join(f"<li>{escape(r.get('observation_id',''))} → {escape(r.get('affected_attribute',''))} ({escape(r.get('update_result',''))})</li>" for r in run.get('applied_results', []))
     body = f"""<section class='hero'><h1>Review extracted factual claims</h1><p>Run {escape(run_id)} · Provider {escape(run.get('provider',''))} · Model {escape(run.get('model',''))} · Status {escape(run.get('provider_status',''))}</p><p class='muted'>{escape('; '.join(run.get('provider_errors') or []))}</p></section><form method='post' action='/ai-financial-report/{escape(run_id)}/review'><section class='card'><table><thead><tr><th>Decision</th><th>Claim</th><th>Amendment</th><th>Type</th><th>Page</th><th>Excerpt</th><th>Confidence</th></tr></thead><tbody>{rows}</tbody></table><p><button>Save review decisions</button></p></section></form><section class='card action'><form method='post' action='/ai-financial-report/{escape(run_id)}/apply'><button>Apply accepted claims to Commercial Digital Twin</button></form><ul>{applied or '<li>No Observations applied yet.</li>'}</ul><p><a href='/digital-twin/bt-group-plc'>Open Commercial Digital Twin</a></p></section>{enterprise_memory_panel(run['document']['enterprise_id'])}"""

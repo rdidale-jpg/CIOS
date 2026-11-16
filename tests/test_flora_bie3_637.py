@@ -154,8 +154,8 @@ def test_expired_review_excludes_runtime_but_does_not_claim_copyright_permission
 def test_old_171_research_bytes_and_exact_comparator_preserved():
     source=subprocess.check_output(['git','show',BASE+':tools/research/history_integrity.py'],cwd=ROOT).decode();old=types.ModuleType('bie3_previous_history');exec(compile(source,'base_history','exec'),old.__dict__)
     before=old.approved_history(ROOT);after=h.approved_history(ROOT)
-    assert len(before)==171 and len(after)==173 and {k:after[k]for k in before}==before
-    assert set(after)-set(before)==set(h.BIE3_CANDIDATE_ADDITIONS)
+    assert len(before)==171 and len(after)==175 and {k:after[k]for k in before}==before
+    assert set(after)-set(before)==set(h.BIE3_CANDIDATE_ADDITIONS) | set(h.F1_CANDIDATE_ADDITIONS)
     section=source.split('def compare_history(',1)[1].split('\n\ndef verify_history',1)[0]
     assert inspect.getsource(h.compare_history).split('def compare_history(',1)[1].strip()==section.strip()
     for path in h.BIE3_CANDIDATE_ADDITIONS:

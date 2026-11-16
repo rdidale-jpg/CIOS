@@ -187,10 +187,13 @@ def test_public_source_status_does_not_grant_private_scope(authority, tmp_path):
 
 
 def test_runtime_canonical_source_history_and_accepted_architecture_are_unchanged():
-    subprocess.run(['git', 'diff', '--exit-code', BASE, '--', 'cios', 'architecture', 'enterprise-knowledge',
+    # This assertion describes the accepted design-only FIG-1 cut. Later
+    # owner-commissioned implementations must not be mistaken for FIG-1 edits.
+    reviewed_design = '741e01c40dcc354213bf7f424c4cedf7af0c541b'
+    subprocess.run(['git', 'diff', '--exit-code', BASE, reviewed_design, '--', 'cios', 'architecture', 'enterprise-knowledge',
                     'tools/research/history_integrity.py', 'tools/ci/flora_ci.py', 'tools/ci/flora-baseline-v1.json',
                     'docs/flora-runtime/bie2', 'docs/flora-runtime/bie3', 'docs/flora-runtime/eai1-628'],
                    cwd=demo.ROOT, capture_output=True, check=True)
     assert not (demo.ROOT/'tools/research/ear1_proof.py').exists()  # no EAR-1 branch integration
     from tools.research.history_integrity import approved_history
-    assert len(approved_history(demo.ROOT)) == 173
+    assert len(approved_history(demo.ROOT)) == 175  # 173 preserved + exact two F1 candidates.

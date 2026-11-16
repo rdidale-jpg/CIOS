@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "authority": "candidate_intelligence",
+  "canonical_mutation": false,
+  "owner_only": false,
+  "resource_ref": "BK-IND-002",
+  "subject_identity": "research-local:BoE-LPMZ598-UK-MFI-household-deposits",
+  "subject_name": "UK monetary financial institutions",
+  "source": {
+    "id": "F1-BOE-LPMZ598",
+    "title": "Bank of England Database: LPMZ598, selected May/June 2026 stocks",
+    "publisher": "Bank of England",
+    "url": "https://www.bankofengland.co.uk/boeapps/database/fromshowcolumns.asp?CSVF=TT&DAT=RNG&FD=1&FM=Jan&FNY=Y&FY=2021&Filter=N&FromSeries=1&SeriesCodes=LPMZ598&TD=15&TM=Aug&TY=2026&ToSeries=50&Travel=NIxAZxSUx&UsingCodes=Y&VPD=Y&html.x=66&html.y=26&title=LPMZ598",
+    "retrieval_url": "https://www.bankofengland.co.uk/boeapps/database/fromshowcolumns.asp?CSVF=TT&DAT=RNG&FD=1&FM=Jan&FNY=Y&FY=2021&Filter=N&FromSeries=1&SeriesCodes=LPMZ598&TD=15&TM=Aug&TY=2026&ToSeries=50&Travel=NIxAZxSUx&UsingCodes=Y&VPD=Y&html.x=66&html.y=26&title=LPMZ598",
+    "publication_date": null,
+    "publication_date_evidence": null,
+    "reporting_period": "31 May 2026 and 30 June 2026; historical monthly stocks, retrieved 16 November 2026",
+    "retrieved_at": "2026-11-16T10:00:00+00:00",
+    "research_domain": "banking",
+    "verification": "primary_retrieved",
+    "content_kind": "reviewed_web_excerpt",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn522556view0; independent same-pair recheck turn705724view0",
+    "retrieval_extent": "Two dated numerical cells and exact series definition; not a full database export, original-file archive or frozen original release vintage",
+    "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/F1-BOE-LPMZ598.txt",
+    "text_sha256": "8584db998bed1cf6050a8158d17e4c72c097db338d628a2bf67a33d089cd75fa",
+    "primary_content_sha256": null,
+    "reviewed_by": "Codex source-content review plus separate factual/commercial reviewer; no canonical Evidence acceptance",
+    "review_notes": "Original official Database response checked against exact series header and May/June rows in the same response. July conflicting response is excluded. Original publication day is unverified; retrieval day is not relabelled publication. No latest-release claim.",
+    "excerpts": [
+      {
+        "quote": "Monthly amounts outstanding of monetary financial institutions' sterling retail deposits (excluding notes and coin) from household sector (in sterling millions) not seasonally adjusted",
+        "locator": "Database header LPMZ598, lines26–27"
+      },
+      {
+        "quote": "31 May 26 | 1884726",
+        "locator": "Database row31 May2026, line93; separators normalised"
+      },
+      {
+        "quote": "30 Jun 26 | 1886281",
+        "locator": "Database row30 June2026, line94; separators normalised"
+      }
+    ],
+    "rights": {
+      "status": "permitted_numerical_data",
+      "terms_url": "https://www.bankofengland.co.uk/legal",
+      "licence_url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "terms_clause": "Bank of England Database section, lines45–54: numerical Database reuse under UK Open Government Licence; not general website prose permission",
+      "reviewed_at": "2026-11-16",
+      "review_reference": "turn227608view0; independent review",
+      "purpose": "Attributed financial analytical working data and reproducible numerical derivation",
+      "audience": "Authorised workspace users with Financial inspection and resource ACL; no public bulk export",
+      "attribution": "Contains Bank of England Database information licensed under the Open Government Licence v3.0. Copyright the Governor and Company of the Bank of England. No endorsement.",
+      "extent": "Two sterling household-deposit stock cells and identifying definition; no photos, logos, narrative or third-party/FX/Crown Dependency data",
+      "limitations": "Historical UK MFI aggregate, not a named-bank or Group balance. No series-specific third-party notice identified; licence exceptions remain excluded. Retain attribution, dates, original definition and derived-result caveats.",
+      "permission_is_not_acceptance": true
+    }
+  },
+  "claims": [
+    {
+      "id": "F1-BOE-LPMZ598-2026-05-31",
+      "as_at": "2026-05-31",
+      "amount": "1884726",
+      "source_id": "F1-BOE-LPMZ598",
+      "locator": "Database LPMZ598 row31 May2026",
+      "semantic_type": "reported",
+      "canonical_status": "candidate_intelligence"
+    },
+    {
+      "id": "F1-BOE-LPMZ598-2026-06-30",
+      "as_at": "2026-06-30",
+      "amount": "1886281",
+      "source_id": "F1-BOE-LPMZ598",
+      "locator": "Database LPMZ598 row30 June2026",
+      "semantic_type": "reported",
+      "canonical_status": "candidate_intelligence"
+    }
+  ],
+  "review_until": "2026-12-16"
+}

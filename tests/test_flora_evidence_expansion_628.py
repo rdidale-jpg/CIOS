@@ -189,9 +189,9 @@ def test_all_163_prior_sources_and_exact_comparator_remain_and_unknown_additions
  source=subprocess.check_output(['git','show',BASE+':tools/research/history_integrity.py'],cwd=ROOT).decode()
  old=types.ModuleType('eai_original_history');exec(compile(source,'original_history','exec'),old.__dict__)
  original=old.approved_history(ROOT);now=current.approved_history(ROOT)
- assert len(original)==163 and len(now)==173
+ assert len(original)==163 and len(now)==175
  assert {k:now[k]for k in original}==original
- assert set(now)-set(original)==set(current.EAI1_CANDIDATE_ADDITIONS)|set(current.BIE2_CANDIDATE_ADDITIONS)|set(current.BIE3_CANDIDATE_ADDITIONS)
+ assert set(now)-set(original)==set(current.EAI1_CANDIDATE_ADDITIONS)|set(current.BIE2_CANDIDATE_ADDITIONS)|set(current.BIE3_CANDIDATE_ADDITIONS)|set(current.F1_CANDIDATE_ADDITIONS)
  body=source.split('def compare_history(',1)[1].split('\n\ndef verify_history',1)[0]
  assert inspect.getsource(current.compare_history).split('def compare_history(',1)[1].strip()==body.strip()
  for path in current.EAI1_CANDIDATE_ADDITIONS:
