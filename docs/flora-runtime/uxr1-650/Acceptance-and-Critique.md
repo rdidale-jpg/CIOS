@@ -2,7 +2,7 @@
 
 ## Independent reviews
 
-Three explicitly authorised review roles inspected the implementation and actual loopback renders. Their recommendations are independent implementation/design critique, not owner acceptance, new source permission or a release approval.
+Three explicitly authorised review roles inspected the implementation and actual loopback renders. The final metadata/navigation correction was also independently reviewed with three targeted HTTP/unified checks passing. Their recommendations are independent implementation/design critique, not owner acceptance, new source permission or a release approval.
 
 | Review | Findings and corrections | Recommendation and limits |
 |---|---|---|

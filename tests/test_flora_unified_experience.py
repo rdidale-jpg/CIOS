@@ -40,7 +40,14 @@ def test_primary_navigation_is_consistent_and_specialist_tools_are_contextual(we
         assert Navigation(html).labels==['Home','PESTLE','Industries','Enterprises','Offers','Opportunities','Pipeline']
         assert html.count('aria-label="Primary product navigation"')==1
         assert '/flora/sales/pipeline' in Navigation(html).urls
-        assert 'Research &amp; specialist tools' in html or 'Research & specialist tools' in html
+        if path in {'/','/industries/banking','/enterprises/lloyds'}:
+            assert 'Research &amp; specialist tools' not in html and 'Research & specialist tools' not in html
+            owner_status,owner_html=inspection_web(path)
+            assert owner_status==200
+            assert 'Research &amp; specialist tools' in owner_html or 'Research & specialist tools' in owner_html
+            assert Navigation(owner_html).labels==Navigation(html).labels
+        else:
+            assert 'Research &amp; specialist tools' in html or 'Research & specialist tools' in html
     assert not public_request_target('/flora/sales/pipeline')
 
 
