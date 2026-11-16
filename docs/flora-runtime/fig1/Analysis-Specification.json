@@ -1,0 +1,288 @@
+{
+  "authority": "FIG1_design_assessment_not_canonical",
+  "dimensions": [
+    {
+      "id": "A",
+      "name": "Income statement and profitability",
+      "minimum_contract": "Reported income/NII/noninterest income,costs,PBT/PAT,ROTE/ROE; signed statutory/APM bridges; no universal profitability threshold"
+    },
+    {
+      "id": "B",
+      "name": "Balance sheet",
+      "minimum_contract": "Assets/liabilities/equity, gross/net lending, carrying values; point-in-time date and accounting/legal perimeter"
+    },
+    {
+      "id": "C",
+      "name": "Deposits,lending,funding",
+      "minimum_contract": "Total/customer/retail/central-items deposits, loans/funding,mix/maturity and stock movements; never equate stock change with cash flow"
+    },
+    {
+      "id": "D",
+      "name": "Capital,liquidity,risk",
+      "minimum_contract": "CET1,leverage,LCR/NSFR,RWA,arrears/credit concentrations; regulatory scope and average/as-at denominators"
+    },
+    {
+      "id": "E",
+      "name": "Revenue and cost structure",
+      "minimum_contract": "NII/fees/otherincome,segment mix,ordinary cost/remediation/restructuring; gross/net efficiency and intragroup treatment"
+    },
+    {
+      "id": "F",
+      "name": "Credit impairment",
+      "minimum_contract": "Signed ECL/impairment charge versus stock allowance,coverage/costofrisk; acquired day-one effects and denominator definitions"
+    },
+    {
+      "id": "G",
+      "name": "Cash flow where meaningful",
+      "minimum_contract": "Actual cash-flow statement and definition where useful; bank funding/liquidity complementary; no deposit-based FCF proxy"
+    },
+    {
+      "id": "H",
+      "name": "Strategic investment and transformation",
+      "minimum_contract": "Incurred expense/capitalised investment/intragroup funding/commitment/target/realised benefit; never addressable supplierbudget by default"
+    },
+    {
+      "id": "I",
+      "name": "Trends",
+      "minimum_contract": "Within-issuer restated same-definition time series, duration,scope,FX and acquisition bridges; no blind annualisation"
+    },
+    {
+      "id": "J",
+      "name": "Comparisons",
+      "minimum_contract": "Comparability dossier before arithmetic/ranking: entity,perimeter,basis,currency,unit,temporal kind/dates and businessmodel; unmatched values sideby-side labelled only"
+    }
+  ],
+  "coverage": [
+    {
+      "exemplar": "natwest-group",
+      "source_id": "NW",
+      "dimensions": {
+        "A": {
+          "status": "partial",
+          "finding": "Selected exact Group9MPBT; report income/segment tables located, full statutory/APM/segment bridges not reconstructed."
+        },
+        "B": {
+          "status": "partial",
+          "finding": "Selected Group deposit stock verified; detailed balance-sheet rows present in report, not all reconciled in this challenge."
+        },
+        "C": {
+          "status": "selected_verified",
+          "finding": "Total and excluding-central deposit definitions separately verified; organic flows and liquidity inference not established."
+        },
+        "D": {
+          "status": "located_not_reconciled",
+          "finding": "Capital/liquidity/risk sections identified; regulatory denominator/average/point dates require individual extraction."
+        },
+        "E": {
+          "status": "partial",
+          "finding": "Cost/income and management gross-savings definitions exist in earlier source-checked BIE3; not a proven net-benefit or supplier-spend model."
+        },
+        "F": {
+          "status": "located_not_reconciled",
+          "finding": "Report has credit/ECL tables; full charge/stock/acquisition attribution not reconstructed."
+        },
+        "G": {
+          "status": "not_in_selected_material",
+          "finding": "No selected cash-flow evidence; do not replace it with deposits/CAL. Retrieve relevant annual/interim statement if required."
+        },
+        "H": {
+          "status": "partial",
+          "finding": "Gross savings and disclosed investment are context; external contracts,capex/opex and net realised benefit remain unverified."
+        },
+        "I": {
+          "status": "not_comparable_without_bridge",
+          "finding": "CAL includes acquired AUMA; published-stock and acquisition-adjusted growth have different comparators."
+        },
+        "J": {
+          "status": "not_comparable_without_bridge",
+          "finding": "Group totals cannot be compared directly to HSBC UK legal-bank USD or mutual retail-only deposits."
+        }
+      }
+    },
+    {
+      "exemplar": "hsbc-uk",
+      "source_id": "HS",
+      "dimensions": {
+        "A": {
+          "status": "selected_verified",
+          "finding": "Reported legal-bank USD YTD income/cost/ECL/associate/PBT bridge verified in original table."
+        },
+        "B": {
+          "status": "partial",
+          "finding": "BIE2 recorded legal-bank stocks; this challenge does not reverify complete legal-bank balance sheet."
+        },
+        "C": {
+          "status": "partial",
+          "finding": "Use legal-bank customer accounts/lending definitions; no substitution from Group geography or global figures."
+        },
+        "D": {
+          "status": "not_in_selected_material",
+          "finding": "Capital/liquidity require legal-bank prudential disclosures; no Group-ratio inheritance."
+        },
+        "E": {
+          "status": "partial",
+          "finding": "Selected reported operating-cost and revenue bridge; complete NII/non-NII/UK transformation allocation not verified."
+        },
+        "F": {
+          "status": "selected_verified",
+          "finding": "ECL701 is a signed YTD charge in USDmillions, not a stock allowance or budget."
+        },
+        "G": {
+          "status": "not_in_selected_material",
+          "finding": "No selected legal-bank cash-flow statement; do not infer from loans/deposits."
+        },
+        "H": {
+          "status": "not_in_selected_material",
+          "finding": "No verified UK-bank investment/benefit split; global announcements do not allocate spend to this entity."
+        },
+        "I": {
+          "status": "partial",
+          "finding": "Source provides reported and constant-currency comparators; do not mix columns or quarters with YTD."
+        },
+        "J": {
+          "status": "not_comparable_without_bridge",
+          "finding": "USD statement of a UK legal bank is not GBP Group economics; no FX assumptions supplied."
+        }
+      }
+    },
+    {
+      "exemplar": "santander-tsb",
+      "source_id": "SA",
+      "dimensions": {
+        "A": {
+          "status": "selected_verified",
+          "finding": "Group Holdings9MGBP signed operating-income/cost/credit/restructuring/PBT bridge verified."
+        },
+        "B": {
+          "status": "partial",
+          "finding": "Acquisition changes consolidated perimeter; selected proof is income bridge, not complete balance-sheet reconciliation."
+        },
+        "C": {
+          "status": "located_not_reconciled",
+          "finding": "Customer lending/deposit/funding disclosures need acquisition/time and perimeter mapping before a bank comparison."
+        },
+        "D": {
+          "status": "located_not_reconciled",
+          "finding": "Regulatory tables require Holdings/Bank/TSB legal scope; no inferred liquidity or capital surplus."
+        },
+        "E": {
+          "status": "selected_verified",
+          "finding": "Ordinary costs exclude credit and restructuring rows; TSBcost327 coversMay\u2013September only."
+        },
+        "F": {
+          "status": "partial",
+          "finding": "Credit342 charge verified; day-one/acquired explanations do not imply underlying organic deterioration or its monetary attribution."
+        },
+        "G": {
+          "status": "not_in_selected_material",
+          "finding": "No verified cash-flow series in this slice; deposit/lending movements are not cash-flow measures."
+        },
+        "H": {
+          "status": "partial",
+          "finding": "Restructuring/provisions495 is combined disclosed charge, not unallocated external transformation budget."
+        },
+        "I": {
+          "status": "not_comparable_without_bridge",
+          "finding": "TSB acquired-period contributions cannot be annualised/compared as nine-month standalone results."
+        },
+        "J": {
+          "status": "not_comparable_without_bridge",
+          "finding": "Holdings Group, SantanderUKplc andTSB Bank are different targets and integration decisions."
+        }
+      }
+    },
+    {
+      "exemplar": "nationwide",
+      "source_id": "NB",
+      "dimensions": {
+        "A": {
+          "status": "selected_verified",
+          "finding": "Underlying2026\u2192statutory1490 bridge verified, including income+1,cost\u2212138,memberreward\u2212399."
+        },
+        "B": {
+          "status": "partial",
+          "finding": "Reported Group assets/liabilities/lending summary inspected; full detailed balance-sheet reconciliation not claimed."
+        },
+        "C": {
+          "status": "selected_verified",
+          "finding": "Retaildeposit270.8bn definition verified, distinct from nonmember/wholesale funding and total liabilities."
+        },
+        "D": {
+          "status": "partial",
+          "finding": "Selected CET1/leverage/LCR disclosed; LCR169 is12monthaverage, denominators/perimeters must stay explicit."
+        },
+        "E": {
+          "status": "selected_verified",
+          "finding": "Income6378,cost4021,credit331 and member rewards explain distinct mutual economics; underlying is not automatically sustainable."
+        },
+        "F": {
+          "status": "partial",
+          "finding": "331 charge verified; prior statutory includes acquisition-related adjustments; compare underlying/statutory consistently."
+        },
+        "G": {
+          "status": "not_in_selected_material",
+          "finding": "No cash-flow statement evidenced in selected preliminary contents/statements; inspect annual source rather than infer FCF."
+        },
+        "H": {
+          "status": "selected_verified",
+          "finding": "Integration expense127 verified as expense; it does not explain full statutory adjustment or establish seller scope."
+        },
+        "I": {
+          "status": "not_comparable_without_bridge",
+          "finding": "Full-yearVirgin versus6months prior361dayperiod; one-off acquisition gain and member rewards change comparisons."
+        },
+        "J": {
+          "status": "not_comparable_without_bridge",
+          "finding": "Member financial benefit/distributions require mutual context, not shareholder-return league tables."
+        }
+      }
+    },
+    {
+      "exemplar": "starling",
+      "source_id": "ST",
+      "dimensions": {
+        "A": {
+          "status": "selected_verified",
+          "finding": "Group revenue887.4 andPBT217.1 with stated prior comparators verified; Bank/Engine financial split not reconstructed."
+        },
+        "B": {
+          "status": "not_in_selected_material",
+          "finding": "Selected resultsHTML does not give complete assets/liabilities/Group/Bank balance sheets."
+        },
+        "C": {
+          "status": "partial",
+          "finding": "Deposit12.7bn verified; source says6.2m Group platform accounts, exact bank/Engine composition unverified, not a verified active UK-bank customer denominator."
+        },
+        "D": {
+          "status": "not_in_selected_material",
+          "finding": "Publication-time capital-surplus comment is not a verified period-end CET1 ratio; retrieve actual prudential accounts."
+        },
+        "E": {
+          "status": "partial",
+          "finding": "Group revenue declines while Engine expands; no Engine-margin or operating-cost allocation is invented."
+        },
+        "F": {
+          "status": "not_in_selected_material",
+          "finding": "No complete impairment charge/stock/denominator from selectedHTML; annual accounts needed."
+        },
+        "G": {
+          "status": "not_in_selected_material",
+          "finding": "No cash-flow statement in selectedHTML; Group revenue,ARR and deposit changes are not FCF."
+        },
+        "H": {
+          "status": "selected_verified",
+          "finding": "Engine19.7m intragroupinvestment and70mcommittedARR have separate definitions; neither is supplierbudget/recognisedrevenue."
+        },
+        "I": {
+          "status": "selected_verified",
+          "finding": "Within-stated-Group revenue\u221252.6m andPBT\u22126.3m arithmetic contrasts with platform/deposit growth; not causal attribution."
+        },
+        "J": {
+          "status": "not_comparable_without_bridge",
+          "finding": "Technologyplatform economics and UKbank spread economics require segment/legal scope and matched denominators."
+        }
+      }
+    }
+  ],
+  "completeness_claim": "No coverage percentage or complete-bank research claim. Selected_verified describes this bounded dimension slice, not every required metric."
+}
