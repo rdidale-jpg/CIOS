@@ -4,7 +4,7 @@ const sizes={desktop:{width:1440,height:900},laptop:{width:1280,height:800},'ipa
 const check=(v,s)=>{assert(v,s);checks.push(s)};
 const run='/industries/banking?stream=landscape&analysis='+cfg.run_id,detail='/ai-financial-report/'+cfg.run_id;
 async function login(p,user,workspace){await p.goto(cfg.base+'/auth/sign-in');await p.locator('input[name=user_id]').fill(user);await p.locator('input[name=password]').fill(cfg.password);await p.getByRole('button',{name:'Sign in',exact:true}).click();await p.locator('select[name=workspace_id]').selectOption(workspace);await p.getByRole('button',{name:'Select workspace',exact:true}).click()}
-async function settled(p){await p.waitForLoadState('load');await p.evaluate(()=>document.fonts.ready);await p.locator('img:visible').evaluateAll(es=>Promise.all(es.map(e=>e.decode().catch(()=>{}))));await p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))))}
+async function settled(p){await p.waitForLoadState('load');await p.evaluate(()=>document.fonts.ready);await p.locator('img:visible').evaluateAll(es=>Promise.all(es.map(e=>e.decode().catch(()=>{}))));await p.locator('body').boundingBox()}
 async function loaded(p,url){const r=await p.goto(url);check(r.status()===200,'200 '+new URL(url).pathname);await settled(p);return r}
 async function shot(p,name){await p.screenshot({path:path.join(cfg.output,name+'.jpg'),fullPage:true,quality:78})}
 (async()=>{const browser=await chromium.launch({executablePath:process.env.VP2_CHROMIUM||(fs.existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox']});try{
