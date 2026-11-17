@@ -12,7 +12,7 @@ merge, deployment, credentials, source grant or production/canonical write.
 - [Owner setup, exact blockers and rollback](Owner-Setup-and-Rollback.md)
 - [Reproducible validation and acceptance checklist](Acceptance-and-Validation.md)
 - [Independent findings and corrections](Independent-Review.md)
-- [Four individually bounded existing-owner changes](Owner-Evolution.json)
+- [Five individually bounded existing-owner changes](Owner-Evolution.json)
 
 ## Actual application before / after
 

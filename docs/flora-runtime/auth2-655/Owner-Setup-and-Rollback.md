@@ -18,6 +18,10 @@ private activation for an explicit approved authorisation-recovery decision. Thi
 PR's binding tool requires an **already existing enabled principal** and gives it
 no new memberships/roles/resources.
 
+With Supabase mode selected, the read-only diagnostic marks local passwords not
+applicable and still reports provider binding/login UNKNOWN; metadata counts are
+not authentication proof. CIOS principal/membership/storage checks remain.
+
 Back up the verified authority, resource ACL and protected working records with
 the existing consistent/quiesced backup process. Keep the encryption key outside
 database backups with appropriately restricted recovery access. Test restore on a
@@ -29,7 +33,10 @@ configuration unchanged during this review.
 Owner creates a separate project using the suitable free/pilot offering; no paid
 services are commissioned here. Do not reuse Elliott's project, users or keys.
 Enable email/password, require confirmed email, disable anonymous sign-ins and
-open signup. Create the intended individual through Supabase's supported private
+open signup. Configure provider password policy to preserve at least the existing
+15-character enrollment minimum (and the provider's stronger available checks);
+verify it before pilot activation rather than relying on project defaults.
+Create the intended individual through Supabase's supported private
 dashboard workflow with a secure confirmed account/password. No automatic Owner
 account is created by FLORA. Email establishes individual sign-in, never CIOS
 privilege. Record the exact Auth user UUID independently.

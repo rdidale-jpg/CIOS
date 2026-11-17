@@ -40,5 +40,13 @@
     "allowed_functions": [
       "public_nationwide_projection"
     ]
+  },
+  "cios/applications/flora/security_readiness.py": {
+    "base": "7b056b21cd5d824bc4359b4e1ed49a1673a7f5fc",
+    "before_sha256": "116b1ebe89f5aa06de0258642501e9f6bbecc0810694f82d0a1996df6fed5a48",
+    "reviewed_sha256": "988450a03dfd4eefbf131fe82ca42e1943500f294e8d135c74c4ed940df04b94",
+    "allowed_functions": [
+      "inspect_security_storage"
+    ]
   }
 }

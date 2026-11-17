@@ -304,3 +304,54 @@ def test_real_transport_contract_is_bounded_verified_https_no_redirect(provider,
     else:
         with pytest.raises(PermissionError,match='^Sign-in unavailable$'):HTTP_REQUEST(p,'GET','/user',token='TEST-NOT-A-REAL-TOKEN')
     assert len(calls)==1
+
+
+@pytest.mark.parametrize('mapped',[False,True])
+def test_managed_identity_diagnostic_never_requires_local_password_or_claims_binding(authority,provider,monkeypatch,mapped):
+    from tests.test_flora_auth1_652 import snapshot
+    from cios.applications.flora.security_readiness import inspect_security_storage
+    store=authority[0]
+    if mapped:bind(store)
+    before=snapshot(store.path.parent.parent)
+    def forbidden(*a,**kw):raise AssertionError('Read-only diagnostic cannot authenticate or mutate')
+    monkeypatch.setattr(identity.Provider,'configured',forbidden)
+    monkeypatch.setattr(identity.Provider,'request',forbidden)
+    monkeypatch.setattr(ss.SecurityStore,'transaction',forbidden)
+    result=inspect_security_storage(store,expected_root=store.path.parent.parent,quiesced=True)
+    assert result['assessment']=='read_only_checks_passed'
+    assert result['counts']['password_configured_principals']==0
+    assert result['checks']['local_password_readiness']=='not_applicable_managed_identity'
+    assert 'account_provisioning_incomplete'not in result['warnings']
+    assert all(result[k]=='UNKNOWN'for k in ('provider_binding_readiness','live_authentication','specific_workspace_and_financial_access'))
+    assert snapshot(store.path.parent.parent)==before
+
+
+def test_local_diagnostic_still_warns_about_missing_password(authority):
+    from cios.applications.flora.security_readiness import inspect_security_storage
+    store=authority[0]
+    result=inspect_security_storage(store,expected_root=store.path.parent.parent,quiesced=True)
+    assert 'account_provisioning_incomplete'in result['warnings']
+
+
+@pytest.mark.parametrize('change',['principal','membership'])
+def test_managed_diagnostic_retains_cios_authorisation_warnings(authority,provider,change):
+    from cios.applications.flora.security_readiness import inspect_security_storage
+    store=authority[0]
+    with store.transaction()as db:
+        db.execute('UPDATE principals SET enabled=0'if change=='principal'else'UPDATE memberships SET active=0')
+    result=inspect_security_storage(store,expected_root=store.path.parent.parent,quiesced=True)
+    assert 'cios_authorisation_provisioning_incomplete'in result['warnings']
+    assert result['provider_binding_readiness']==result['live_authentication']=='UNKNOWN'
+
+
+@pytest.mark.parametrize('target',[
+    '/auth/callback?code=untrusted&next=https://foreign.invalid/',
+    '/auth/sign-in?next=https://foreign.invalid/',
+    '/auth/workspace?next=//foreign.invalid/',
+])
+def test_unimplemented_callbacks_and_redirect_selectors_are_not_authentication(authority,provider,target):
+    from tests.test_flora_auth1_652 import web
+    with web()as get:
+        status,html,headers=get(target)
+    assert status==403 and 'Location'not in headers
+    assert provider['calls']==[]

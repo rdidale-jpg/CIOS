@@ -165,7 +165,15 @@ def inspect_security_storage(store: SecurityStore, *, expected_root: Path, expec
         report['counts']={'principals':principals[0],'enabled_principals':principals[1]or 0,
             'password_configured_principals':principals[2]or 0,'memberships':memberships[0],
             'active_memberships':memberships[1]or 0,'workspaces':memberships[2]}
-        if not report['counts']['password_configured_principals']or not report['counts']['active_memberships']:
+        if os.getenv('FLORA_AUTH_PROVIDER','local') == 'supabase':
+            # Managed identity does not need a bespoke CIOS password. These
+            # counts prove neither provider binding nor successful sign-in.
+            # Never call the provider or inspect credentials in this RO probe.
+            report['checks']['local_password_readiness']='not_applicable_managed_identity'
+            report['provider_binding_readiness']='UNKNOWN'
+            if not report['counts']['enabled_principals']or not report['counts']['active_memberships']:
+                report['warnings'].append('cios_authorisation_provisioning_incomplete')
+        elif not report['counts']['password_configured_principals']or not report['counts']['active_memberships']:
             report['warnings'].append('account_provisioning_incomplete')
         phase='acl';report['counts']['acl']=_acl_counts(root)
         if not report['counts']['acl']['workspace_bound']:report['warnings'].append('workspace_acl_not_observed')

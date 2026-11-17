@@ -15,6 +15,7 @@ BASE='7b056b21cd5d824bc4359b4e1ed49a1673a7f5fc'
 ALLOWED={
  'cios/applications/flora/security_store.py': {'_token','enroll','login','_supabase_login','select','logout','resolve'},
  'cios/applications/flora/security_web.py': {'page','auth_get','auth_post'},
+ 'cios/applications/flora/security_readiness.py': {'inspect_security_storage'},
  'cios/applications/flora/visual_panels.py': {'render','_nationwide_service','_authorised_nationwide'},
  'cios/applications/flora/financial_intelligence/candidate_analytics.py': {'public_nationwide_projection'},
 }

@@ -37,6 +37,10 @@ Implementation corrections below were applied by the implementing agent.
 Non-blocking observation: workspace Select and Sign out have similar visual
 weight. No further visual redesign is necessary for this bounded repair.
 
+- Read-only storage diagnosis no longer suggests local password enrollment for
+  Supabase-only principals. It retains enabled-principal/membership warnings and
+  reports provider binding and live sign-in UNKNOWN, without network or writes.
+
 ## Remaining acceptance limitations
 
 Reviewers recommend draft code/visual review only. Genuine Supabase credentials,

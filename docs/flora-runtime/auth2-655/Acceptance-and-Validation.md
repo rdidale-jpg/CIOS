@@ -38,9 +38,9 @@ workspace/ACL isolation, source withdrawal and anonymous public views.
 | Wrong workspace/resource/revoked member lacked those earnings | Public Source facts remain; direct private run service and URL still deny. |
 | Owner-only/private or withdrawn Source | Both public financial projection and private derivatives still disappear. |
 | AUTH-1 / UX-R1 browser price absence used as a privacy proxy | Replace price-absence with private run identity absence plus retained direct403 checks. No test or security boundary removed. |
-| Historical byte-pinned SecurityStore, web and presentation owners | Four individually SHA256-pinned AUTH-2 owner changes plus exact unlisted-function AST equality; original historical manifests and assertions retained through the immediate AUTH-1 predecessor. Unknown before/after mutations still fail. |
+| Historical byte-pinned SecurityStore, web and presentation owners | Five individually SHA256-pinned AUTH-2 owner changes plus exact unlisted-function AST equality; original historical manifests and assertions retained through the immediate AUTH-1 predecessor. Unknown before/after mutations still fail. |
 
-The four allowed owner evolutions are enumerated in `Owner-Evolution.json`; no
+The five allowed owner evolutions are enumerated in `Owner-Evolution.json`; no
 changed inherited failure or skip is approved. Source files, source permissions,
 canonical owners, Offers, Pipeline, `security.py`, `access.py`, protected storage,
 runtime Render configuration and original artwork remain unchanged.
