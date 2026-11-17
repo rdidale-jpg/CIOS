@@ -34,6 +34,8 @@ def assert_owner_compatible(root,path,expected):
     import json
     from tools.research.rud1_compatibility import ROOT
     changes=json.loads((ROOT/'docs/flora-runtime/rud1-648/Owner-Evolution.json').read_text())
+    ux=ROOT/'docs/flora-runtime/uxr1-650/Owner-Evolution.json'
+    if ux.exists():changes.update(json.loads(ux.read_text()))
     if path in changes:
         assert_evolution(root, path, expected)
         return

@@ -1,4 +1,5 @@
 """INT-1 source admission, agenda semantics, route isolation and owner continuity."""
+from tests.flora_editorial_contract import research_render
 from copy import deepcopy
 from dataclasses import replace
 from datetime import date
@@ -22,7 +23,7 @@ def test_same_agenda_across_lenses_preserves_issue_subject_selection_and_native_
   q={'stream':[stream],'agenda':[rows[0].key]}
   if scope!='uk':q.update(selected=['lloyds'],layer=['regulators'])
   ctx=v.resolve(v.SCOPES[scope]['route'],q)
-  html=v.render(v.SCOPES[scope]['route'],q)
+  html=research_render(v.SCOPES[scope]['route'],q)
   assert 'id="agenda-insight" tabindex="-1"'in html
   assert html.count('aria-label="Leadership Agenda"')==1
   assert all(r.title in html for r in rows)
@@ -74,7 +75,7 @@ def test_numerical_source_original_entity_period_rights_and_unaccepted_authority
  assert 'No deterioration' in p.render(row.conclusion) and 'FOS'in p.render(row.conclusion)
  assert '118,762'in row.conclusion.text and '66.12%'in row.conclusion.text
  assert '55.25%'not in p.render(row.conclusion)
- html=v.render('/enterprises/lloyds',{'agenda':['service-recovery']})
+ html=research_render('/enterprises/lloyds',{'agenda':['service-recovery']})
  assert 'Contains Financial Conduct Authority information licensed under the'in html
  assert 'href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"'in html
 
@@ -125,7 +126,7 @@ def test_read_only_native_app_views_exclude_owner_metadata_hidden_sources_and_ac
   for row in a.agenda(scope,data):
    assert not p.NON_CORE.search(row.title)and not p.NON_CORE.search(row.conclusion.text)
    for stream in v.SCOPES[scope]['streams']:
-    html=v.render(v.SCOPES[scope]['route'],{'stream':[stream],'agenda':[row.key]})
+    html=research_render(v.SCOPES[scope]['route'],{'stream':[stream],'agenda':[row.key]})
     assert not any(t in html for t in ('OWNER_SENTINEL','PRIVATE_RESEARCH','PRIVATE_COMPLETENESS','PRIVATE_ACCEPTANCE','Research gaps','Recommended action','Next question','data-claim='))
     assert row.conclusion.counter_evidence and 'Sources &amp; reasoning'in html
 

@@ -12,6 +12,11 @@ ROOT=Path(__file__).resolve().parents[2]
 
 
 def assert_evolution(root, path, previous):
+    current=(Path(root)/path).read_bytes()
+    ux=ROOT/'docs/flora-runtime/uxr1-650/Owner-Evolution.json'
+    if ux.exists() and path in json.loads(ux.read_text()):
+        from .uxr1_compatibility import assert_evolution as assert_uxr
+        return assert_uxr(root,path,previous)
     changes=json.loads((ROOT/'docs/flora-runtime/rud1-648/Owner-Evolution.json').read_text())
     record=changes[path]
     assert sha256(previous).hexdigest() in record['prior_sha256'], 'Unrecognised historical owner cut: '+path

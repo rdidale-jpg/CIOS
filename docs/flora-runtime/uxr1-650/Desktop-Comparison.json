@@ -1,0 +1,172 @@
+[
+  {
+    "role": "guest",
+    "view": "landscape",
+    "before": {
+      "stage": "before",
+      "role": "guest",
+      "device": "desktop",
+      "view": "landscape",
+      "height": 1902,
+      "words": 228,
+      "details": 16,
+      "openDetails": 0,
+      "sourceLinks": 18,
+      "legalLinks": 0,
+      "visibleSourceLinks": 0,
+      "visibleSourceControls": 7,
+      "sourceControls": 15
+    },
+    "after": {
+      "stage": "after",
+      "role": "guest",
+      "device": "desktop",
+      "view": "landscape",
+      "height": 924,
+      "words": 132,
+      "details": 0,
+      "openDetails": 0,
+      "sourceLinks": 0,
+      "legalLinks": 1,
+      "visibleSourceLinks": 0,
+      "visibleSourceControls": 0,
+      "sourceControls": 0
+    }
+  },
+  {
+    "role": "guest",
+    "view": "forces",
+    "before": {
+      "stage": "before",
+      "role": "guest",
+      "device": "desktop",
+      "view": "forces",
+      "height": 1032,
+      "words": 152,
+      "details": 7,
+      "openDetails": 0,
+      "sourceLinks": 8,
+      "legalLinks": 0,
+      "visibleSourceLinks": 0,
+      "visibleSourceControls": 6,
+      "sourceControls": 6
+    },
+    "after": {
+      "stage": "after",
+      "role": "guest",
+      "device": "desktop",
+      "view": "forces",
+      "height": 1119,
+      "words": 139,
+      "details": 0,
+      "openDetails": 0,
+      "sourceLinks": 0,
+      "legalLinks": 1,
+      "visibleSourceLinks": 0,
+      "visibleSourceControls": 0,
+      "sourceControls": 0
+    }
+  },
+  {
+    "role": "guest",
+    "view": "nationwide",
+    "before": {
+      "stage": "before",
+      "role": "guest",
+      "device": "desktop",
+      "view": "nationwide",
+      "height": 777,
+      "words": 66,
+      "details": 8,
+      "openDetails": 0,
+      "sourceLinks": 8,
+      "legalLinks": 0,
+      "visibleSourceLinks": 0,
+      "visibleSourceControls": 4,
+      "sourceControls": 7
+    },
+    "after": {
+      "stage": "after",
+      "role": "guest",
+      "device": "desktop",
+      "view": "nationwide",
+      "height": 751,
+      "words": 98,
+      "details": 0,
+      "openDetails": 0,
+      "sourceLinks": 0,
+      "legalLinks": 1,
+      "visibleSourceLinks": 0,
+      "visibleSourceControls": 0,
+      "sourceControls": 0
+    }
+  },
+  {
+    "role": "owner",
+    "view": "nationwide",
+    "before": {
+      "stage": "before",
+      "role": "owner",
+      "device": "desktop",
+      "view": "nationwide",
+      "height": 897,
+      "words": 77,
+      "details": 8,
+      "openDetails": 0,
+      "sourceLinks": 8,
+      "legalLinks": 0,
+      "visibleSourceLinks": 0,
+      "visibleSourceControls": 4,
+      "sourceControls": 7
+    },
+    "after": {
+      "stage": "after",
+      "role": "owner",
+      "device": "desktop",
+      "view": "nationwide",
+      "height": 948,
+      "words": 121,
+      "details": 0,
+      "openDetails": 0,
+      "sourceLinks": 0,
+      "legalLinks": 0,
+      "visibleSourceLinks": 0,
+      "visibleSourceControls": 0,
+      "sourceControls": 0
+    }
+  },
+  {
+    "role": "owner",
+    "view": "financial",
+    "before": {
+      "stage": "before",
+      "role": "owner",
+      "device": "desktop",
+      "view": "financial",
+      "height": 2343,
+      "words": 302,
+      "details": 9,
+      "openDetails": 0,
+      "sourceLinks": 8,
+      "legalLinks": 0,
+      "visibleSourceLinks": 0,
+      "visibleSourceControls": 8,
+      "sourceControls": 8
+    },
+    "after": {
+      "stage": "after",
+      "role": "owner",
+      "device": "desktop",
+      "view": "financial",
+      "height": 840,
+      "words": 102,
+      "details": 0,
+      "openDetails": 0,
+      "sourceLinks": 0,
+      "legalLinks": 0,
+      "visibleSourceLinks": 0,
+      "visibleSourceControls": 0,
+      "sourceControls": 0
+    }
+  }
+]

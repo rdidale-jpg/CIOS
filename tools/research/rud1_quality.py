@@ -40,7 +40,11 @@ def validate():
        'docs/flora-runtime/eai1-628/Eight-Evidence-Review-Proposals.json']
     artwork=subprocess.check_output(['git','ls-tree','-r','--name-only',base,'cios/applications/flora/visual_stream_assets'],cwd=ROOT,text=True).splitlines()
     for path in unchanged+artwork:
-        assert (ROOT/path).read_bytes()==subprocess.check_output(['git','show',base+':'+path],cwd=ROOT),path
+        previous=subprocess.check_output(['git','show',base+':'+path],cwd=ROOT)
+        if path=='cios/applications/flora/intelligence_presentation.py':
+            from tools.research.uxr1_compatibility import assert_evolution
+            assert_evolution(ROOT,path,previous)
+        else:assert (ROOT/path).read_bytes()==previous,path
     return {'earnings_banks_visible':1,'service_banking_exemplars':5,'legal_bank_service_profiles':6,'monetary_measurements':8,
        'reproduced_reconciliations':['6378-4021-331=2026','2026+1-138-399=1490'],'unresolved_other_issuer_earnings':4,
        'retained_historical_research_files':175,'new_working_source_files':3,'unchanged_visual_asset_files':len(artwork),

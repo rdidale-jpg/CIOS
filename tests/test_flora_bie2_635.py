@@ -1,4 +1,5 @@
 """BIE-2 source/entity/temporal negatives and existing-owner read-only pilot."""
+from tests.flora_editorial_contract import research_render
 from copy import deepcopy
 from dataclasses import replace
 from datetime import date
@@ -66,7 +67,7 @@ def test_revocation_private_expiry_rights_and_scope_fail_closed_without_erasing_
         domain,name,*_=a.EAI_RELEASES[key]
         (tmp_path/name).write_bytes((registry.snapshot_boundary(domain)/name).read_bytes())
     changed_release('peer-service',mutation,tmp_path,monkeypatch)
-    html=v.render('/industries/banking',{})
+    html=research_render('/industries/banking',{})
     assert 'service-landscape'not in html and '90,678'not in html and '79,323'not in html
     assert 'provider-oversight'in html and 'funding-economics'in html
     assert 'data-region="main"'in html
@@ -78,7 +79,7 @@ def test_existing_assessment_denial_controls_new_peer_projection(field,value):
 
 @pytest.mark.parametrize('scope,stream',[(s,t)for s,b in v.SCOPES.items()for t in b['streams']])
 def test_old_nine_keys_all_addresses_and_context_preserved(scope,stream):
-    ctx=v.Context(scope,stream);html=v.render(v.SCOPES[scope]['route'],{'stream':[stream]})
+    ctx=v.Context(scope,stream);html=research_render(v.SCOPES[scope]['route'],{'stream':[stream]})
     old={'uk':{'growth-mix','public-value','cyber-resilience'},'banking':{'funding-economics','reporting-change','provider-oversight'},'lloyds':{'service-recovery','ai-benefits','funding-base'}}
     keys={r.key for r in a.agenda(scope)}
     assert keys==old[scope]|({'service-landscape'}if scope=='banking'else set())

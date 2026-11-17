@@ -52,12 +52,15 @@ def test_real_existing_run_enters_accepted_main_and_detail(permitted):
     assert sum(tag=='h1' for tag,x in dom.nodes)==1
     assert 'UK household retail-deposit stocks' in html and '0.0825%' in html and '£1.555bn' in html
     assert '£1,884.726bn' in html and '£1,886.281bn' in html
-    assert '0–2,000 GBP billions including zero' in html
-    assert '/ai-financial-report/'+identity in html
+    assert '0–2,000 GBP billions including zero' in a.compose(f.read_analysis(identity,headers=headers))
+    assert '/ai-financial-report/'+identity not in html
+    assert '<details' not in html.split('<main',1)[1]
     assert '2000000' not in html  # Display conversion, not another source fact.
     assert 'banking-landscape' in html and 'watermark' in html
     assert '1,884,726' in review.run_page(identity,headers=headers)
-    assert 'Financial analysis</a>' in v.render('/industries/banking',{},headers)
+    from cios.applications.flora.visual_panels import research_inspection
+    assert 'Financial analysis</a>' in research_inspection('/industries/banking',{'lens':['inspection']},headers)
+    assert 'Financial analysis</a>' not in v.render('/industries/banking',{},headers)
 
 
 def test_lookup_is_read_only_and_no_scan_or_implicit_creation(permitted,monkeypatch):

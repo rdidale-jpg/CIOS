@@ -1,4 +1,5 @@
 """BIE-3 admission/model-boundary negatives and selected legal-bank views."""
+from tests.flora_editorial_contract import research_render
 from copy import deepcopy
 from dataclasses import replace
 from datetime import date
@@ -85,7 +86,7 @@ def test_selected_bank_uses_same_existing_concern_and_exact_legal_entity(selecte
     assert row.title==a.BANK_SERVICE[selected][0]+': complaint activity and resolution'
     assert [float(f.value)for f in row.facts]==values
     assert all(f.scope==a.BANK_SERVICE[selected][1]and f.period=='1 January–30 June 2026'and f.semantic_type=='reported'for f in row.facts)
-    html=v.render('/industries/banking',{'stream':[stream],'selected':[selected],'agenda':['service-landscape']})
+    html=research_render('/industries/banking',{'stream':[stream],'selected':[selected],'agenda':['service-landscape']})
     assert 'different cohorts, not a service-quality ranking or backlog measure'in html
     assert html.count('data-region=')==3 and html.count('<h1')==1
     assert html.count('aria-label="Bank complaint profiles"')==1

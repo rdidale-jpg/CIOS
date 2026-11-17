@@ -1,0 +1,64 @@
+{
+  "cios/applications/flora/design_system.py": {
+    "reason": "Owner-only Research tools in compact ordinary header; all product/account destinations preserved.",
+    "prior_sha256": [
+      "bf1839534c5072e89cecb028db21e6213c09d31613bd33a9292e235b2f4f8a80",
+      "f2ae51089c696b1228dc2d59609ecb1913c698adb15b9e0fd898669368c30a5b"
+    ],
+    "reviewed_sha256": "f570dd032909a27750fc321c5fce9a7d48b0b5908d578e7d8e91bd5ba95e65be"
+  },
+  "cios/applications/flora/financial_intelligence/analyst.py": {
+    "reason": "Existing guarded own-run read, direct selected-Nationwide composition and Owner-only finite setup. Research rendering retained.",
+    "prior_sha256": [
+      "4296b9f23b712167ad823ab4f01c1787370c426d3ff3a458594a05754a3065e8",
+      "815d3495adb3154071bcf7299d6732fc58464ce119037ceed3f51eb7a1b69751",
+      "9aec9080c12142d79793cf147fcb162641b73a4a1ecbc045d55eb1431da94167"
+    ],
+    "reviewed_sha256": "1ac17a5bc7dbb07e5c4b6840859cb06fd31a761a530cc27260bf3bd5651b8ea2"
+  },
+  "cios/applications/flora/intelligence_presentation.py": {
+    "reason": "Same eligibility and six types; separate context-local editorial output without source markup, preserving material qualifiers.",
+    "prior_sha256": [
+      "7fa208cc43dbb5276b948c25437846d296c107de56e87022cc49a91f874922a9"
+    ],
+    "reviewed_sha256": "c140e7e65210e640ce83905f022e555e5378b43a6c04835d0b11436f7337a8ae"
+  },
+  "cios/applications/flora/public_routes.py": {
+    "reason": "Existing Owner-only inspection lens accepts finite context/private locator; public catalogue still excludes both lens and private analysis.",
+    "prior_sha256": [
+      "a06028a19e2f6a858927ae5591937152beaa33b6490884130b681334a3def755",
+      "b6ae05dc139f13217a725595854f1566a39a6ddb8b8d292ea533bbdf095224f3"
+    ],
+    "reviewed_sha256": "d18ae7066f264d730bb903ea2220e370ac59d97e116b990040549e5d91d1df88"
+  },
+  "cios/applications/flora/visual_panels.py": {
+    "reason": "Same approved art/frame; concise editorial Main and original composition for authorised Research.",
+    "prior_sha256": [
+      "11fe42d9a12839726439f90ab0fa21ab01c5811ee680bf7b1a6ad1dd4718aa7d",
+      "70df4fcce63fc98d125db0da928a32192f64af8c5a22aa627c0ff14fdc48704c",
+      "99470fcfe10b4b3226cb71525c753b25776552ed0e52dbdc439e2fa36a13d5d9",
+      "b8b0be91ab4810d7ce8437d022f80fb6a503ec15273faa4eb07871a2029ee5a5",
+      "bd90b503012b64a21e61e11d849f478a069fad2c1a9dd265716f8d42b49a3f5d"
+    ],
+    "reviewed_sha256": "7fa0dd4d5eb9f4d4cee10eb708922158dac193a5b35299ca32ba686a57124069"
+  },
+  "cios/applications/flora/visual_streams.py": {
+    "reason": "Presentation-only material force qualifiers; all source and route semantics preserved.",
+    "prior_sha256": [
+      "51426713f316f4ac7eb5212d2b5572714b7c2930c30ba312592c45e605ecfa9f",
+      "65aa080db4e0c6e4f5b530e1e858cff66628f42151bd095c446eb2059891d3c6",
+      "bfffa2f9ae30cda055941f0d1f8a43429e09199801d04919b04c3586dda897b6",
+      "d7f3ccc2c62c2d5ba2853407eb4a89138f4cac329a5cc6968ad0f195b9e4ee3a"
+    ],
+    "reviewed_sha256": "205517f7a1005bc869216895f4454c40b810e0f1046adfa517c67e826847a55e"
+  },
+  "cios/applications/flora/web/app.py": {
+    "reason": "Existing protected Research lens dispatch and strictly finite selected-Nationwide return after existing CSRF/Origin-protected refresh.",
+    "prior_sha256": [
+      "2009d43801ac3371f4eae56976e336a969d9fa23dd19c5d1a664a52535b8c412",
+      "b9b2c7718d739b463af6b1ed22417c4f3029339b281e38bcdbe4ca8d2a867a9e",
+      "c37adbaea9dbd521bda8cc11688c164c90c5f0639ad71d6057472573e9904f2d"
+    ],
+    "reviewed_sha256": "e9af18c297ed15957e8d6cb29c838c90859d455e76d55cab3b49eb7b2f8eb8cf"
+  }
+}

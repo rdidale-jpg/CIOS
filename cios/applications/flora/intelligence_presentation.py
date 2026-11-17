@@ -5,6 +5,8 @@ Callers must supply already authorised owner projections; this module never
 queries a repository, authenticates a user, qualifies a pressure or writes data.
 """
 from dataclasses import dataclass, replace
+from contextvars import ContextVar
+from contextlib import contextmanager
 from decimal import Decimal, InvalidOperation
 from datetime import date
 import hashlib
@@ -55,6 +57,7 @@ class Statement:
     owner_only: bool = False
     freshness: str = 'current'
     core_contradiction: bool = False
+    material_caveats: tuple[str, ...] = ()
 
 
 def eligible(item: Statement) -> bool:
@@ -108,7 +111,60 @@ def difference(left: Statement, right: Statement, *, text: str) -> Statement:
         input_authorities=(left.canonical_status,right.canonical_status))
 
 
+
+_editorial = ContextVar('flora_editorial_presentation', default=False)
+_editorial_sources = ContextVar('flora_editorial_sources', default=None)
+
+
+@contextmanager
+def editorial_view():
+    token = _editorial.set(True)
+    source_token = _editorial_sources.set([])
+    try:
+        yield
+    finally:
+        _editorial_sources.reset(source_token)
+        _editorial.reset(token)
+
+
+def note_editorial_sources(sources):
+    state = _editorial_sources.get()
+    if state is not None:
+        for source in sources:
+            if source not in state:state.append(source)
+
+
+def editorial_sources():
+    return tuple(_editorial_sources.get() or ())
+
+
+def is_editorial():
+    return _editorial.get()
+
+
+def editorial(item: Statement, *, compact=False):
+    """Ordinary reading: same eligibility, no inspection/provenance markup.
+
+    Full records/rendering stay in the existing Research owner. Material scope,
+    periods and uncertainty are composed explicitly by each existing view.
+    """
+    if not eligible(item): return ''
+    note_editorial_sources(item.sources)
+    label = LABELS[item.semantic_type]
+    state = {'target':'Management target','guidance':'Management guidance',
+             'expectation':'Management expectation','commitment':'Stated priority',
+             'proposal':'Proposed policy','conditional':'Conditional'}.get(item.measurement_state,'')
+    annotation = ('<span class="sr-only">Reported: </span>' if item.semantic_type=='reported'
+                  else '<span class="intelligence-label">'+label+'</span> ')
+    if state: annotation += '<span class="intelligence-state">'+escape(state)+'</span> '
+    return ('<article class="intelligence-statement" data-semantic-type="'+item.semantic_type+'"><p>'
+            +annotation+escape(item.text)+'</p>'
+            +('' if compact else '<p class="timing">'+escape(item.period)+'</p>')
+            +''.join('<p class="material">'+escape(c)+'</p>' for c in item.material_caveats)
+            +('<p class="material">Based on estimates or working assumptions.</p>' if {'estimated','assumed'}.intersection(item.dependency_types) else '')+'</article>')
+
 def render(item: Statement, *, compact=False) -> str:
+    if is_editorial(): return editorial(item, compact=compact)
     if not eligible(item):return ''
     e=escape;kind=item.semantic_type;label=LABELS[kind]
     # Ordinary reported facts retain an accessible type without repeated badges.
@@ -205,3 +261,12 @@ def claim_view(data, claim) -> Statement | None:
         caveats=CAVEATS.get(claim['id'],()))
     if kind=='insight':item=replace(item,reasoning='Interpretation of the cited industry value system.',dependencies=(claim.get('repository_quote',''),),counter_evidence=CAVEATS.get(claim['id'],()))
     return item if eligible(item)else None
+
+
+def editorial_force(item, key):
+    if item is None or not is_editorial():return item
+    if key=='economic':return replace(item,material_caveats=('Preliminary estimate; subject to revision.',))
+    if key=='environmental':return replace(item,text=item.text.removeprefix('Reviewed '),period='Accounting periods from January 2027',material_caveats=('First reporting is in 2028. Listing-category scope and transitional relief apply.',))
+    if key=='legal':return replace(item,period='Proposed legislation at 11 November 2026',material_caveats=('Parliamentary approval was not established at that date.',))
+    if key=='LBG-ENVOY-CONTROLS':return replace(item,period='Company-announced platform',material_caveats=('Company-described controls; independent effectiveness is not established here.',))
+    return item
