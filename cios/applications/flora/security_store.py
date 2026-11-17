@@ -218,8 +218,30 @@ class SecurityStore:
             raise PermissionError("Authentication unavailable or expired")
         if kind == 'session':
             user = db.execute("SELECT * FROM principals WHERE user_id=? AND enabled=1", (row['user_id'],)).fetchone()
-            if not user or not user['password'] or row['version'] != user['version']:
+            from . import supabase_identity as identity
+            external = db.execute('SELECT value FROM meta WHERE key=?', (identity.credential_key(digest(token)),)).fetchone()
+            if not user or row['version'] != user['version']:
                 raise PermissionError("Authentication unavailable or expired")
+            if identity.selected():
+                if not external:
+                    raise PermissionError('Sign-in unavailable')
+                provider = identity.Provider.configured()
+                entry = json.loads(external[0])
+                subject = entry['subject']
+                if identity.read_binding(db, provider, subject) != row['user_id']:
+                    raise PermissionError('Sign-in unavailable')
+                access = provider.open(entry['sealed'], session=digest(token), subject=subject)
+                # One live check within this exact locked transaction only. A
+                # subsequent request always rechecks provider + current CIOS ACL.
+                state = _ACTIVE.get()[2]
+                verified = state.setdefault('supabase_verified', {})
+                if digest(token) not in verified:
+                    actual, expires = provider.verify(access)
+                    if actual != subject or expires < row['expires']:
+                        raise PermissionError('Sign-in unavailable')
+                    verified[digest(token)] = True
+            elif external or not user['password']:
+                raise PermissionError('Sign-in unavailable')
         return row
 
     def preauth(self):
@@ -267,6 +289,9 @@ class SecurityStore:
                 os.close(fd)
 
     def enroll(self, token, password, preauth, csrf):
+        from .supabase_identity import selected
+        if selected():
+            raise PermissionError('Enrollment unavailable')
         result = False
         with self.transaction() as db:
             self.csrf(db, preauth, csrf, 'preauth')
@@ -285,6 +310,9 @@ class SecurityStore:
             raise PermissionError("Authentication failed")
 
     def login(self, user, password, preauth, csrf):
+        from .supabase_identity import selected
+        if selected():
+            return self._supabase_login(user, password, preauth, csrf)
         result = None
         with self.transaction() as db:
             self.csrf(db, preauth, csrf, 'preauth')
@@ -308,6 +336,35 @@ class SecurityStore:
             raise PermissionError("Authentication failed")
         return result
 
+    def _supabase_login(self, email, password, preauth, csrf):
+        from . import supabase_identity as identity
+        result = None
+        with self.transaction() as db:
+            self.csrf(db, preauth, csrf, 'preauth')
+            limited = self._limited(db, 'login:' + digest(email))
+            limited = self._limited(db, 'login:global') or limited
+            try:
+                if limited:
+                    raise PermissionError('Sign-in unavailable')
+                provider = identity.Provider.configured()
+                access, subject, expires = provider.sign_in(email, password)
+                user_id = identity.read_binding(db, provider, subject)
+                user = db.execute('SELECT * FROM principals WHERE user_id=? AND enabled=1', (user_id,)).fetchone()
+                if not user:
+                    raise PermissionError('Sign-in unavailable')
+                issued = self._issue(db, 'session', user_id, ttl=min(ABSOLUTE, expires-time.time()))
+                ref = digest(issued[0])
+                db.execute('UPDATE tokens SET version=?,expires=? WHERE hash=?', (user['version'], min(time.time()+ABSOLUTE, expires), ref))
+                db.execute('INSERT INTO meta VALUES(?,?)', (identity.credential_key(ref), canonical({'subject': subject, 'sealed': provider.seal(access, session=ref, subject=subject)})))
+                db.execute('UPDATE tokens SET revoked=1 WHERE hash=?', (digest(preauth),))
+                self.audit(db, 'sign_in', user_id=user_id, session_ref=ref, authentication_source='supabase_get_user')
+                result = issued
+            except (PermissionError, ValueError, KeyError, TypeError):
+                self.audit(db, 'sign_in_failed')
+        if result is None:
+            raise PermissionError('Sign-in unavailable')
+        return result
+
     def choices(self, token):
         with self.transaction() as db:
             row = self._token(db,token,'session')
@@ -322,14 +379,44 @@ class SecurityStore:
             result = self._issue(db,'session',row['user_id'],workspace,ttl=max(0,row['expires']-time.time()))
             # Workspace rotation preserves authentication age and absolute deadline.
             db.execute("UPDATE tokens SET created=?,expires=?,version=? WHERE hash=?", (row['created'],row['expires'],row['version'],digest(result[0])))
+            from . import supabase_identity as identity
+            external = db.execute('SELECT value FROM meta WHERE key=?', (identity.credential_key(digest(token)),)).fetchone()
+            if external:
+                provider = identity.Provider.configured()
+                entry = json.loads(external[0]); subject = entry['subject']
+                access = provider.open(entry['sealed'], session=digest(token), subject=subject)
+                db.execute('INSERT INTO meta VALUES(?,?)', (identity.credential_key(digest(result[0])), canonical({'subject': subject, 'sealed': provider.seal(access, session=digest(result[0]), subject=subject)})))
+                db.execute('DELETE FROM meta WHERE key=?', (identity.credential_key(digest(token)),))
             self.audit(db,'workspace_selected',user_id=row['user_id'],workspace_id=workspace,session_ref=digest(result[0]))
             return result
 
     def logout(self, token, csrf):
+        from . import supabase_identity as identity
+        access = None
         with self.transaction() as db:
-            row = self.csrf(db,token,csrf)
+            if identity.selected():
+                # Local sign-out must work during provider outage/expiry. It
+                # grants no access: require the existing opaque bearer + CSRF.
+                row = db.execute("SELECT * FROM tokens WHERE hash=? AND kind='session' AND revoked=0", (digest(token),)).fetchone()
+                if not row or not isinstance(csrf, str) or not secrets.compare_digest(row['csrf'], digest(csrf)):
+                    raise PermissionError('Request verification failed')
+                external = db.execute('SELECT value FROM meta WHERE key=?', (identity.credential_key(digest(token)),)).fetchone()
+                try:
+                    provider = identity.Provider.configured()
+                    entry = json.loads(external[0])
+                    access = provider.open(entry['sealed'], session=digest(token), subject=entry['subject'])
+                except (PermissionError, TypeError, ValueError, KeyError):
+                    pass
+                db.execute('DELETE FROM meta WHERE key=?', (identity.credential_key(digest(token)),))
+            else:
+                row = self.csrf(db,token,csrf)
             db.execute("UPDATE tokens SET revoked=1 WHERE hash=?", (digest(token),))
             self.audit(db,'sign_out',user_id=row['user_id'],session_ref=digest(token))
+        if access:
+            try:
+                provider.request('POST', '/logout?scope=local', token=access)
+            except PermissionError:
+                pass  # Local revocation already committed; no false login.
 
     def resolve(self, token, *, touch=False):
         from .access import role_capabilities
@@ -348,7 +435,8 @@ class SecurityStore:
                 db.execute("UPDATE tokens SET touched=? WHERE hash=?", (now,digest(token)))
             membership = Membership(member['membership_id'],row['user_id'],member['workspace_id'],roles,member['version'],True,utc(now))
             session = Session(digest(token),utc(row['created']),utc(row['expires']),utc(min(row['expires'],(now if touch else row['touched'])+IDLE)),utc(row['created']),False,row['version'],utc(now))
-            return Context(row['user_id'],member['workspace_id'],frozenset(m['workspace_id'] for m in memberships),membership,roles,frozenset(capabilities),frozenset(json.loads(member['enterprises'])),session)
+            from .supabase_identity import selected
+            return Context(row['user_id'],member['workspace_id'],frozenset(m['workspace_id'] for m in memberships),membership,roles,frozenset(capabilities),frozenset(json.loads(member['enterprises'])),session,authentication_source='supabase_get_user' if selected() else 'verified_password_argon2id')
 
     @contextmanager
     def mutation(self, headers, csrf, recent=False):

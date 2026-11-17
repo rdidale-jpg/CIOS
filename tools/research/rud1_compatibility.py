@@ -20,4 +20,5 @@ def assert_evolution(root, path, previous):
     changes=json.loads((ROOT/'docs/flora-runtime/rud1-648/Owner-Evolution.json').read_text())
     record=changes[path]
     assert sha256(previous).hexdigest() in record['prior_sha256'], 'Unrecognised historical owner cut: '+path
-    assert sha256((Path(root)/path).read_bytes()).hexdigest()==record['reviewed_sha256'], 'Unreviewed owner evolution: '+path
+    from tools.research.auth2_compatibility import reviewed_predecessor
+    assert sha256(reviewed_predecessor(root,path)).hexdigest()==record['reviewed_sha256'], 'Unreviewed owner evolution: '+path

@@ -378,7 +378,8 @@ def _frame(ctx,headers,data,issues,entries,body):
 
 
 def render(ctx,headers=None,*,financial_run_id=''):
-    with p.editorial_view():
+    from .supabase_identity import public_read
+    with p.editorial_view(), public_read():
         if financial_run_id:
             from .financial_intelligence import analyst
             return analyst.render_selected(ctx,financial_run_id,headers=headers)
@@ -387,6 +388,14 @@ def render(ctx,headers=None,*,financial_run_id=''):
                 private=_authorised_nationwide(ctx,headers)
                 if private:return private
             except (PermissionError,OSError,ValueError,KeyError,TypeError):pass
+            from .financial_intelligence import candidate_analytics as financial, analyst
+            public = financial.public_nationwide_projection()
+            if public:
+                data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
+                body=analyst.compose_editorial(public)+_nationwide_service(data)
+                action=analyst.prepare_action(ctx,headers=headers)
+                if action:body+='<section class="workspace-setup"><h2>Workspace analysis</h2>'+action+'</section>'
+                return _frame(ctx,headers,data,issues,v.destinations(ctx,data),body+_bank_picker(ctx,data,issues))
         data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected);entries=v.destinations(ctx,data)
         if ctx.scope=='banking' and not ctx.detail and not ctx.agenda:
             body=_editorial_banking(ctx,data,issues,headers)
@@ -425,6 +434,12 @@ def research_inspection(path,query,headers=None):
     return _research_render(ctx,headers)
 
 
+def _nationwide_service(data):
+    service=agenda.bank_service_issue('nationwide',data)
+    if not service:return ''
+    return '<section class="service-context"><h2>Customer complaints · Society</h2>'+p.render(service.conclusion)+'<p class="material">Received and closed cases are different cohorts; upheld outcomes are the firm’s own decisions. Separate from Group earnings.</p></section>'
+
+
 @verified_service_read('package.inspect')
 def _authorised_nationwide(ctx,headers):
     from .financial_intelligence import analyst
@@ -435,7 +450,7 @@ def _authorised_nationwide(ctx,headers):
     if is_cios_owner(headers):
         identity=analyst.financial.find_existing_run('nationwide-fy2026','BK-IND-002',headers=headers)
         ds.context_link(v.url(ctx)+'&analysis='+identity+'&lens=inspection','Financial research')
-    return _frame(ctx,headers,data,issues,entries,analyst.compose_editorial(projection)+_bank_picker(ctx,data,issues))
+    return _frame(ctx,headers,data,issues,entries,analyst.compose_editorial(projection)+_nationwide_service(data)+_bank_picker(ctx,data,issues))
 
 
 def _editorial_conclusion(row):

@@ -29,7 +29,7 @@ def clean_target(handler):
 
 
 def page(title, content):
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{escape(title)}</title><style>body{{font:18px system-ui;max-width:40rem;margin:2rem auto;padding:1rem}}input,select,button{{font:inherit;display:block;max-width:100%;padding:.7rem;margin:.7rem 0}}label{{display:block}}a{{display:inline-block;padding:.6rem}}</style></head><body><a href="/flora">Flora</a><h1>{escape(title)}</h1>{content}</body></html>'''
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{escape(title)}</title><style>*{{box-sizing:border-box}}html{{background:#f7f3eb;color:#173e32}}body{{font:18px/1.5 system-ui;max-width:40rem;margin:2rem auto;padding:1rem}}h1{{font:42px/1.15 Georgia,serif;letter-spacing:-.03em}}input,select,button{{font:inherit;display:block;width:100%;max-width:100%;padding:.7rem;margin:.7rem 0;border:1px solid #9aab9c;border-radius:8px;background:#fffdf8;color:#173e32}}label{{display:block;margin-top:1rem}}button{{background:#173e32;color:#fffdf8;cursor:pointer;min-height:48px}}a{{display:inline-block;padding:.6rem;color:#173e32;min-height:44px}}a:first-child{{font-weight:600;letter-spacing:.15em;text-decoration:none}}:focus-visible{{outline:3px solid #996f25;outline-offset:4px}}@media(max-width:420px){{body{{margin:.5rem auto}}h1{{font-size:34px}}}}</style></head><body><a href="/flora">FLORA</a><h1>{escape(title)}</h1>{content}</body></html>'''
 
 
 def form(path, csrf, content, label):
@@ -38,7 +38,19 @@ def form(path, csrf, content, label):
 
 def auth_get(handler, path):
     store = SecurityStore()
+    external = False
     try:
+        from .supabase_identity import selected, Provider
+        external = selected()
+        if external and path == '/auth/enroll':
+            handler._html(page('Sign in','<p>Use your individual account.</p><a href="/auth/sign-in">Sign in</a>'),status=404)
+            return
+        if external and path in {'/auth/sign-in','/pilot-sign-in'}:
+            try:
+                Provider.configured()
+            except PermissionError:
+                handler._html(page('Sign in unavailable','<p>You can continue exploring public intelligence.</p><a href="/flora">Explore FLORA</a>'),status=503)
+                return
         if path in {'/auth/sign-in','/auth/enroll','/pilot-sign-in'}:
             token, csrf = store.preauth()
             if path == '/auth/enroll':
@@ -49,16 +61,21 @@ def auth_get(handler, path):
                 title='Sign in'
                 fields='<label>Account identifier<input name="user_id" autocomplete="username" required></label><label>Password<input type="password" name="password" autocomplete="current-password" required></label><p><a href="/auth/enroll">Use a private enrollment token</a></p>'
                 target='/auth/sign-in'
+                if external:
+                    fields='<p>Explore public intelligence freely. Sign in for your private workspace.</p><label>Email<input type="email" name="user_id" maxlength="254" autocomplete="username" required></label><label>Password<input type="password" name="password" maxlength="1024" autocomplete="current-password" required></label>'
             handler._html(page(title,form(target,csrf,fields,title)),set_cookie=[session_cookie(token,PREAUTH,600),session_cookie(csrf,CSRF_COOKIE,600)])
         elif path == '/auth/workspace':
             csrf=cookie_token(handler.headers,CSRF_COOKIE)
             choices=store.choices(cookie_token(handler.headers))
-            fields='<label>Workspace<select name="workspace_id" required>'+''.join(f'<option value="{escape(w)}">{escape(w)}</option>' for w in choices)+'</select></label>'
+            fields='<label for="flora-workspace">Workspace</label><select id="flora-workspace" name="workspace_id" required>'+''.join(f'<option value="{escape(w)}">{escape(w)}</option>' for w in choices)+'</select>'
             content=form(path,csrf,fields,'Select workspace') if choices else '<p>No active workspace membership. Contact your deployment operator.</p>'
             handler._html(page('Select workspace',content+form('/auth/sign-out',csrf,'','Sign out')))
         else:
             handler._html(page('Sign out',form('/auth/sign-out',cookie_token(handler.headers,CSRF_COOKIE),'','Sign out')))
     except (OSError,sqlite3.Error):
+        if external:
+            handler._html(page('Sign in unavailable','<p>You can continue exploring public intelligence.</p><a href="/flora">Explore FLORA</a>'),status=503)
+            return
         handler._html(page('Privileged operations disabled','<p>Security storage unavailable. Public Banking remains readable.</p><a href="/auth/sign-in">Sign In</a>'),status=200 if path == '/pilot-sign-in' else 503)
     except PermissionError:
         handler._html(page('Session unavailable','<p>Your session is unavailable or expired. <a href="/auth/sign-in">Sign in</a></p>'),status=403)
@@ -101,7 +118,8 @@ def auth_post(handler,path):
         handler._redirect('/auth/workspace',set_cookie=[session_cookie(token),session_cookie(csrf,CSRF_COOKIE),session_cookie('',PREAUTH,0)])
     elif path == '/auth/workspace':
         token,csrf=store.select(cookie_token(handler.headers),csrf,one(fields,'workspace_id'))
-        handler._redirect('/blueprint-import/history',set_cookie=[session_cookie(token),session_cookie(csrf,CSRF_COOKIE)])
+        from .supabase_identity import selected
+        handler._redirect('/flora' if selected() else '/blueprint-import/history',set_cookie=[session_cookie(token),session_cookie(csrf,CSRF_COOKIE)])
     elif path == '/auth/sign-out':
         store.logout(cookie_token(handler.headers),csrf)
         handler._redirect('/flora',set_cookie=[session_cookie('',COOKIE,0),session_cookie('',CSRF_COOKIE,0)])

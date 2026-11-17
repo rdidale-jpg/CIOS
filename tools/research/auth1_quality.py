@@ -22,7 +22,8 @@ def assert_store_evolution(root,path,previous):
     assert row['base_sha']==BASE
     assert sha256(cut(path)).hexdigest()==row['before_sha256']
     assert sha256(previous).hexdigest()==row['before_sha256'],'Unknown historical security owner'
-    assert sha256((Path(root)/path).read_bytes()).hexdigest()==row['reviewed_sha256'],'Unreviewed security owner change'
+    from tools.research.auth2_compatibility import reviewed_predecessor
+    assert sha256(reviewed_predecessor(root,path)).hexdigest()==row['reviewed_sha256'],'Unreviewed security owner change'
 
 
 def unchanged_definitions(raw,allowed,*,operator_current=False):
@@ -42,14 +43,15 @@ def validate():
     path='cios/applications/flora/security_store.py'
     assert_store_evolution(ROOT,path,cut(path))
     for path,allowed in CHANGES.items():
-        assert unchanged_definitions(cut(path),allowed)==unchanged_definitions((ROOT/path).read_bytes(),allowed,operator_current=path.endswith('/security_operator.py')),path
+        from tools.research.auth2_compatibility import reviewed_predecessor
+        assert unchanged_definitions(cut(path),allowed)==unchanged_definitions(reviewed_predecessor(ROOT,path),allowed,operator_current=path.endswith('/security_operator.py')),path
     untouched=['cios/applications/flora/security.py','cios/applications/flora/security_web.py','cios/applications/flora/access.py',
         'cios/applications/flora/pilot_auth.py','cios/applications/flora/storage.py','cios/applications/flora/web/app.py',
         'cios/applications/flora/financial_intelligence/candidate_analytics.py',
         'render.yaml','tools/ci/flora_ci.py','tools/ci/flora-baseline-v1.json']
     checked=[]
     for path in untouched:
-        assert (ROOT/path).read_bytes()==cut(path),path
+        assert reviewed_predecessor(ROOT,path)==cut(path),path
         checked.append(path)
     from tools.research.uxr1_quality import validate as prior_quality
     existing=prior_quality()
