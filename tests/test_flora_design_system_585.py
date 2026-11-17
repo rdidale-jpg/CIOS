@@ -227,7 +227,13 @@ def test_protected_intelligence_security_permissions_matching_and_pipeline_bytes
             amended=isp['owner_boundary_revisions'][path]
             assert amended['baseline_sha256']==digest,path
             digest=amended['candidate_sha256']
-        if path=='cios/applications/flora/security_web.py':
+        if path=='cios/applications/flora/security_store.py':
+            import subprocess
+            from tools.research.auth1_quality import assert_store_evolution,BASE as AUTH_BASE
+            expected=subprocess.check_output(['git','show',AUTH_BASE+':'+path],cwd=root)
+            assert hashlib.sha256(expected).hexdigest()==digest,path
+            assert_store_evolution(root,path,expected)
+        elif path=='cios/applications/flora/security_web.py':
             import subprocess
             from tests.flora_f2_owner_contract import assert_owner_compatible, BASE
             expected=subprocess.check_output(['git','show',BASE+':'+path],cwd=root)

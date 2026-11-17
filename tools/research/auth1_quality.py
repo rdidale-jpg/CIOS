@@ -15,6 +15,16 @@ CHANGES={'cios/applications/flora/security_store.py':{'transaction'},
 def cut(path):return subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
 
 
+def assert_store_evolution(root,path,previous):
+    """One reviewed security-owner evolution; not a comparator exemption."""
+    row=json.loads((ROOT/'docs/flora-runtime/auth1-652/Owner-Compatibility.json').read_text())
+    assert path==row['path']=='cios/applications/flora/security_store.py'
+    assert row['base_sha']==BASE
+    assert sha256(cut(path)).hexdigest()==row['before_sha256']
+    assert sha256(previous).hexdigest()==row['before_sha256'],'Unknown historical security owner'
+    assert sha256((Path(root)/path).read_bytes()).hexdigest()==row['reviewed_sha256'],'Unreviewed security owner change'
+
+
 def unchanged_definitions(raw,allowed,*,operator_current=False):
     tree=ast.parse(raw)
     if operator_current:
@@ -29,6 +39,8 @@ def unchanged_definitions(raw,allowed,*,operator_current=False):
 
 
 def validate():
+    path='cios/applications/flora/security_store.py'
+    assert_store_evolution(ROOT,path,cut(path))
     for path,allowed in CHANGES.items():
         assert unchanged_definitions(cut(path),allowed)==unchanged_definitions((ROOT/path).read_bytes(),allowed,operator_current=path.endswith('/security_operator.py')),path
     untouched=['cios/applications/flora/security.py','cios/applications/flora/security_web.py','cios/applications/flora/access.py',

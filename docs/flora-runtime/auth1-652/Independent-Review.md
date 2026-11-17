@@ -16,7 +16,7 @@ An explicitly authorised separate review agent inspected the Issue #652 baseline
 
 ## Independent results and limits
 
-The reviewer independently ran all45 AUTH-1 tests successfully, including real process-interrupted journal retention. No remaining code/documentation blocker was found. The reviewer inspected the110-check browser harness but did not personally rerun it. Parent/hosted execution and full388 security/comparator results are separately required at the final SHA.
+The reviewer independently ran the45 functional AUTH-1 cases successfully, including real process-interrupted journal retention. The later one-path security-owner compatibility record and unknown-change rejection were also independently reviewed; all four targeted compatibility checks passed. No remaining code/documentation blocker was found. The reviewer inspected the110-check browser harness but did not personally rerun it. Parent/hosted execution and full388 security/comparator results are separately required at the final SHA.
 
 Existing schema/provisioning, membership/resource/source permissions, writer/recovery protocol and public visuals remain with their original owners. No new authority producer, canonical engine, Render mutation or credential change was approved.
 

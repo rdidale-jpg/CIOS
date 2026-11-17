@@ -210,7 +210,13 @@ def test_runtime_source_preserves_canonical_home_and_domain_owners():
         if name in unified['presentation_exceptions']:
             assert name.endswith(('offers_views.py','banking_explorer.py','unified_views.py','visual_intelligence.py','living_map.py','sales_views.py','workspace/views.py','navigation.py'))
             continue
-        if name=='cios/applications/flora/security_web.py':
+        if name=='cios/applications/flora/security_store.py':
+            import subprocess
+            from tools.research.auth1_quality import assert_store_evolution,BASE as AUTH_BASE
+            expected=subprocess.check_output(['git','show',AUTH_BASE+':'+name],cwd=root)
+            assert hashlib.sha256(expected).hexdigest()==digest,name
+            assert_store_evolution(root,name,expected)
+        elif name=='cios/applications/flora/security_web.py':
             import subprocess
             from tests.flora_f2_owner_contract import assert_owner_compatible, BASE
             expected=subprocess.check_output(['git','show',BASE+':'+name],cwd=root)

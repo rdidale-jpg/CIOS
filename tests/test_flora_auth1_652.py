@@ -272,3 +272,13 @@ def test_connection_is_closed_when_early_pragma_fails(empty,monkeypatch):
     with pytest.raises(sqlite3.OperationalError):
         with store.transaction():pytest.fail('Failed setup cannot yield authority')
     assert closed==[True] and ss._ACTIVE.get()is None
+
+
+def test_reviewed_owner_guard_rejects_unknown_before_or_after_source(tmp_path):
+    from tools.research.auth1_quality import assert_store_evolution,ROOT,cut
+    path='cios/applications/flora/security_store.py';before=cut(path)
+    assert_store_evolution(ROOT,path,before)
+    with pytest.raises(AssertionError):assert_store_evolution(ROOT,path,before+b' unknown change')
+    target=tmp_path/path;target.parent.mkdir(parents=True);target.write_bytes((ROOT/path).read_bytes()+b'\n# unreviewed change')
+    with pytest.raises(AssertionError):assert_store_evolution(tmp_path,path,before)
+    with pytest.raises(AssertionError):assert_store_evolution(ROOT,'cios/applications/flora/security.py',before)

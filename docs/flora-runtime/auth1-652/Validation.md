@@ -1,10 +1,10 @@
 # AUTH-1 validation
 
-The final PR comment identifies the frozen SHA and local/hosted results. Committed screenshots are real pre-commit worktree renders; the AUTH-1 workflow reproduces the same journeys at the exact PR head. The full existing validation workflow still runs all27 comparator suites, including388 strict security cases. No failure/skip baseline or comparator changes.
+The final PR comment identifies the frozen SHA and local/hosted results. Committed screenshots are real pre-commit worktree renders; the AUTH-1 workflow reproduces the same journeys at the exact PR head. The full existing validation workflow still runs all27 comparator suites, including388 strict security cases. No failure/skip baseline or comparator changes. Three historical byte-pin checks flagged the authorised security-store safety change; their original manifests remain unchanged. A one-path compatibility record requires the recognised original source and exact independently reviewed repair hash. Unknown before/after sources and other owner paths are rejected; all remaining protected owners stay byte-exact.
 
 ## New fault and positive tests
 
-`tests/test_flora_auth1_652.py` contains45 cases. It uses real disposable SecurityStore/offline authority/ACL services, not production data. Coverage includes:
+`tests/test_flora_auth1_652.py` contains46 cases. It uses real disposable SecurityStore/offline authority/ACL services, not production data. Coverage includes:
 
 - Missing root, security directory and database; mode/owner/symlink/hardlink failure; unchanged missing state rather than replacement files.
 - Actual exclusive SQLite locking, corrupt/empty bytes, unrecognised schema/extra columns/views/tables, missing/wrong schema metadata, invalid membership JSON and filesystem read-only state.
@@ -14,7 +14,7 @@ The final PR comment identifies the frozen SHA and local/hosted results. Committ
 - HTTP failure pages disclose no cause/path/token and issue no cookies; public Banking remains readable and private routes remain denied.
 - PRAGMA setup failure closes its connection and does not leave active authority.
 
-These45 cases combine direct service/metadata assertions and selected actual HTTP probes; they are not all browser tests or production proof.
+These46 cases combine direct service/metadata assertions and selected actual HTTP probes; they are not all browser tests or production proof.
 
 ## Browser proof
 

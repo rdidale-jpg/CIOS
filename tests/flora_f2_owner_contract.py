@@ -2,7 +2,9 @@
 
 All previous statements, imports, decorators, functions and their order remain
 exact AST matches. Only one exact new guard at its specified anchor is allowed.
-This is test assurance, not runtime permission or a baseline/signature refresh.
+AUTH-1 separately permits one exactly pinned security-store safety repair,
+verified against its preserved before-cut. This is test assurance, not runtime
+permission or a baseline/signature refresh.
 """
 import ast
 import subprocess
@@ -29,6 +31,10 @@ def dump(node): return ast.dump(node,include_attributes=False)
 def assert_owner_compatible(root,path,expected):
     actual=(root/path).read_bytes()
     if actual==expected:
+        return
+    if path=='cios/applications/flora/security_store.py':
+        from tools.research.auth1_quality import assert_store_evolution
+        assert_store_evolution(root,path,expected)
         return
     from tools.research.rud1_compatibility import assert_evolution
     import json
