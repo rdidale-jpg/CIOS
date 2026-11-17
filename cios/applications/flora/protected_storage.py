@@ -147,7 +147,12 @@ class ProtectedJournal:
             return
         if self.path.is_symlink():
             raise PermissionError('Unsafe protected journal')
-        manifest = json.loads((self.path / 'manifest.json').read_text())
+        try:
+            manifest = json.loads((self.path / 'manifest.json').read_text())
+            if not isinstance(manifest, dict):
+                raise ValueError('Invalid manifest structure')
+        except (ValueError, UnicodeError) as exc:
+            raise OSError('Invalid protected recovery manifest; evidence retained') from exc
         self.validate_manifest(manifest)
         marker = db.execute("SELECT value FROM meta WHERE key='protected_commit'").fetchone()
         if not marker or marker[0] != manifest['id']:

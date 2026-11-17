@@ -109,7 +109,7 @@ def private_json(path, value):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('command',choices=['inspect','initialize','plan','apply','enroll','revoke','disable'])
+    p.add_argument('command',choices=['inspect','diagnose','initialize','plan','apply','enroll','revoke','disable'])
     p.add_argument('--store',type=Path)
     p.add_argument('--snapshot',type=Path)
     p.add_argument('--manifest',type=Path)
@@ -118,12 +118,22 @@ def main():
     p.add_argument('--confirm')
     p.add_argument('--user')
     p.add_argument('--workspace')
+    p.add_argument('--expected-data-root',type=Path)
+    p.add_argument('--expected-mount',type=Path)
+    p.add_argument('--quiesced',action='store_true',help='Operator attests that the inspected runtime/copy has no concurrent writers; not a write or recovery permission')
     args=p.parse_args()
     if args.command == 'inspect':
         private_json(args.output,reconcile(args.snapshot)); return
     if not args.store:
         p.error('Explicit operational store required')
     store=SecurityStore(args.store)
+    if args.command == 'diagnose':
+        if not args.expected_data_root:
+            p.error('Explicit operator-verified expected data root required')
+        from .security_readiness import inspect_security_storage
+        report=inspect_security_storage(store,expected_root=args.expected_data_root,expected_mount=args.expected_mount,quiesced=args.quiesced)
+        print(json.dumps(report,sort_keys=True))
+        return 0 if report['assessment']=='read_only_checks_passed' else 1
     if args.command == 'initialize':
         if args.confirm != 'CREATE EMPTY SECURITY STORE':
             p.error('Explicit empty-store confirmation required')
@@ -142,4 +152,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())

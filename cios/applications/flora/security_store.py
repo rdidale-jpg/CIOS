@@ -153,12 +153,13 @@ class SecurityStore:
         self._private()
         db = sqlite3.connect(self.path.as_uri() + "?mode=rw", uri=True, timeout=5, isolation_level=None)
         db.row_factory = sqlite3.Row
-        db.execute("PRAGMA foreign_keys=ON")
-        db.execute("PRAGMA synchronous=FULL")
         token = None
         try:
+            db.execute("PRAGMA foreign_keys=ON")
+            db.execute("PRAGMA synchronous=FULL")
             db.execute("BEGIN IMMEDIATE")
-            if db.execute("SELECT value FROM meta WHERE key='schema'").fetchone()[0] != '1':
+            schema = db.execute("SELECT value FROM meta WHERE key='schema'").fetchone()
+            if schema is None or schema[0] != '1':
                 raise PermissionError("Security storage unavailable")
             state = {'failed': False}
             token = _ACTIVE.set((self.path.absolute(), db, state))
