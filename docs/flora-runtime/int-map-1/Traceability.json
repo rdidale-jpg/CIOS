@@ -1,0 +1,453 @@
+{
+  "authority": "design_audit_only_not_runtime_registry",
+  "baseline": "fbac4c37910ed07b2baa516e1a5c8d7f329086de",
+  "prior_draft_head": "3ebdcafa5bd36f00e1a5980a34797e6af3a60457",
+  "code_anchors": [
+    {
+      "id": "source-acquisition",
+      "path": "cios/applications/flora/live/collect.py",
+      "symbol": "collect",
+      "line": 139,
+      "status": "retained",
+      "trigger": "explicit collection",
+      "persistence": "existing live_evidence JSONL",
+      "sha256": "ec0dad684ee5e6f6acee42ddf0406b36fdcfb5dacc1c060facc8cdb46cc2749b"
+    },
+    {
+      "id": "source-identity",
+      "path": "cios/applications/flora/live/source_registry.py",
+      "symbol": "SourceRecord",
+      "line": 20,
+      "status": "implemented",
+      "trigger": "configured source resolution",
+      "persistence": "existing source profiles",
+      "sha256": "5179424df77ca5c21ca65ec10dfb41709cdf68be76652581992581ee90a9125b"
+    },
+    {
+      "id": "working-research",
+      "path": "cios/applications/flora/research_intelligence/model.py",
+      "symbol": "load_assessment",
+      "line": 36,
+      "status": "core",
+      "trigger": "read/repository revision",
+      "persistence": "repository overlays and snapshots",
+      "sha256": "079c15058a8b88d9695b8575ab8351e50a043233793220b8cb7fafc5db7c0519"
+    },
+    {
+      "id": "source-use",
+      "path": "cios/applications/flora/research_intelligence/source_import.py",
+      "symbol": "working_facts",
+      "line": 173,
+      "status": "core",
+      "trigger": "read/revision/withdrawal",
+      "persistence": "existing Source snapshot",
+      "sha256": "ad8d15b849713f14a55ee6e5f42d9ef68227d7934d2949910202483ffb3c370b"
+    },
+    {
+      "id": "canonical-evidence",
+      "path": "cios/applications/flora/memory/repository.py",
+      "symbol": "EvidenceRepository",
+      "line": 153,
+      "status": "available-not-core-wired",
+      "trigger": "authorised ingestion",
+      "persistence": "memory/evidence.jsonl",
+      "sha256": "e46a13b8c817a0c08ff8f70063b23a4f25c5cc0b4fbb8fc366717fef9556400d"
+    },
+    {
+      "id": "observations",
+      "path": "cios/applications/flora/memory/service.py",
+      "symbol": "ObservationMemoryService",
+      "line": 209,
+      "status": "available-not-core-wired",
+      "trigger": "accepted ingestion/lifecycle",
+      "persistence": "memory/observations.jsonl",
+      "sha256": "f13fad1f762162e564e98c1a0fc799ba2588498b94e0885857f5ef0a1bc3bb88"
+    },
+    {
+      "id": "enterprise-memory",
+      "path": "cios/applications/flora/memory/repository.py",
+      "symbol": "EnterpriseModelRepository",
+      "line": 126,
+      "status": "available-not-core-wired",
+      "trigger": "authorised apply/rebuild",
+      "persistence": "memory/enterprise_models/*.json",
+      "sha256": "e46a13b8c817a0c08ff8f70063b23a4f25c5cc0b4fbb8fc366717fef9556400d"
+    },
+    {
+      "id": "macro",
+      "path": "cios/applications/flora/research_intelligence/macro_intelligence.py",
+      "symbol": "context_spec",
+      "line": 214,
+      "status": "core",
+      "trigger": "read/research revision",
+      "persistence": "Macro-Context-v1.json",
+      "sha256": "82d6b9831f46646e4f7fd831c2a534c5ee5feb6cee007a97063f303b82bd56a3"
+    },
+    {
+      "id": "macro-trace",
+      "path": "cios/applications/flora/research_intelligence/macro_trace.py",
+      "symbol": "trace_projection",
+      "line": 112,
+      "status": "retained",
+      "trigger": "explicit read",
+      "persistence": "disposable interpreted graph",
+      "sha256": "1e56a5a3c7d5df4e9f216c9d780cb1339828b60857119ebb3fd986cbc624a6c3"
+    },
+    {
+      "id": "industry-inspection",
+      "path": "cios/applications/flora/twin_inspection/industry.py",
+      "symbol": "industry_inspection_adapter",
+      "line": 12,
+      "status": "retained",
+      "trigger": "explicit inspection",
+      "persistence": "existing repository/package projection",
+      "sha256": "c1ddf739dfcd00f6ccf4e8b3fda7ee2dd5a9f78b664e8c7a6a1a78e2a76a3b57"
+    },
+    {
+      "id": "industry-frameworks",
+      "path": "cios/applications/flora/research_intelligence/unified_views.py",
+      "symbol": "industry_page",
+      "line": 116,
+      "status": "retained",
+      "trigger": "read/research revision",
+      "persistence": "existing overlays",
+      "sha256": "e48401445ff7e3da16102667d84693bd1cbb963793f9d31f1a103a3c3a289511"
+    },
+    {
+      "id": "five-forces",
+      "path": "cios/applications/flora/research_intelligence/visual_templates.py",
+      "symbol": "forces",
+      "line": 44,
+      "status": "retained",
+      "trigger": "read/research revision",
+      "persistence": "pure diagram",
+      "sha256": "f2da423720ee5934554580b19af35174dbd3e241f3df40ed7271ec2a8e9cbcbd"
+    },
+    {
+      "id": "value-chain",
+      "path": "cios/applications/flora/research_intelligence/visual_templates.py",
+      "symbol": "chain",
+      "line": 55,
+      "status": "retained",
+      "trigger": "read/research revision",
+      "persistence": "pure diagram",
+      "sha256": "f2da423720ee5934554580b19af35174dbd3e241f3df40ed7271ec2a8e9cbcbd"
+    },
+    {
+      "id": "operating-model",
+      "path": "cios/applications/flora/research_intelligence/visual_templates.py",
+      "symbol": "operating",
+      "line": 64,
+      "status": "retained",
+      "trigger": "read/research revision",
+      "persistence": "pure diagram",
+      "sha256": "f2da423720ee5934554580b19af35174dbd3e241f3df40ed7271ec2a8e9cbcbd"
+    },
+    {
+      "id": "relationships",
+      "path": "cios/applications/flora/blueprint_import/semantic_twin.py",
+      "symbol": "resolve_relationships",
+      "line": 358,
+      "status": "available-not-core-wired",
+      "trigger": "explicit resolution",
+      "persistence": "existing typed records",
+      "sha256": "0cd8ad48b6b15bc0a5c094b5b02e2e29355924e71fafaa446010fe31397fb4f8"
+    },
+    {
+      "id": "financial",
+      "path": "cios/applications/flora/financial_intelligence/candidate_analytics.py",
+      "symbol": "current_projection",
+      "line": 523,
+      "status": "implemented",
+      "trigger": "read/source/revision/recipe check",
+      "persistence": "existing private document-review runs",
+      "sha256": "54b6cc6169ca01e4083599527a8ae7c239dbd0bcbb705de530985f66768f8cf8"
+    },
+    {
+      "id": "public-financial",
+      "path": "cios/applications/flora/financial_intelligence/candidate_analytics.py",
+      "symbol": "public_nationwide_projection",
+      "line": 449,
+      "status": "core",
+      "trigger": "read/source/revision check",
+      "persistence": "no public run persistence",
+      "sha256": "54b6cc6169ca01e4083599527a8ae7c239dbd0bcbb705de530985f66768f8cf8"
+    },
+    {
+      "id": "leadership",
+      "path": "cios/applications/flora/leadership_agenda.py",
+      "symbol": "agenda",
+      "line": 280,
+      "status": "core",
+      "trigger": "read/pins/policy",
+      "persistence": "read-only derived agenda",
+      "sha256": "30699653637bc8e71770d062811019cd70da0e48ef1f7c02f883578c470b8be5"
+    },
+    {
+      "id": "external-applicability",
+      "path": "cios/applications/flora/enterprise_intelligence/change_interpretation.py",
+      "symbol": "ExternalChangeInterpretationService",
+      "line": 40,
+      "status": "available-not-core-wired",
+      "trigger": "explicit assess/retrieval",
+      "persistence": "no mutation",
+      "sha256": "74455e2e7531a7720177f2ca5747aec1cfa4e79d23b81c9d9e696b2b196a4ff3"
+    },
+    {
+      "id": "dependency-review",
+      "path": "cios/applications/flora/blueprint_import/twin_governance.py",
+      "symbol": "TwinDependencyService",
+      "line": 171,
+      "status": "available-not-core-wired",
+      "trigger": "approved promotion",
+      "persistence": "existing package references",
+      "sha256": "880bdfc7d28c74724bd5943c1aaa5fd2e4b65f5e581fa8ff3d43d32ed96fe46c"
+    },
+    {
+      "id": "downstream-review",
+      "path": "cios/applications/flora/blueprint_import/twin_governance.py",
+      "symbol": "DownstreamReconciliationRepository",
+      "line": 237,
+      "status": "available-not-core-wired",
+      "trigger": "approved promotion",
+      "persistence": "blueprint_import/downstream_reconciliation",
+      "sha256": "880bdfc7d28c74724bd5943c1aaa5fd2e4b65f5e581fa8ff3d43d32ed96fe46c"
+    },
+    {
+      "id": "reasoning",
+      "path": "cios/applications/flora/enterprise_intelligence/runtime.py",
+      "symbol": "EnterpriseIntelligenceRuntime",
+      "line": 44,
+      "status": "available-not-invoked",
+      "trigger": "explicit guarded generation; optional provider",
+      "persistence": "existing briefs/audit owner",
+      "sha256": "e5a9cc702d677cf1c69c37ccd0a59f89625bc9ace63c8da08ab749b6e0341cbd"
+    },
+    {
+      "id": "legacy-timeline",
+      "path": "cios/applications/flora/banking_portfolio.py",
+      "symbol": "enterprise_event_timeline_page",
+      "line": 1630,
+      "status": "historical",
+      "trigger": "read illustrative anchors",
+      "persistence": "repository fixtures",
+      "sha256": "b7f7ef1bfaea78bfa93761d276b3c16f167642b23037d2dcd8ca3277fa27882a"
+    },
+    {
+      "id": "timeline-helper",
+      "path": "cios/applications/flora/intelligence/timeline.py",
+      "symbol": "build_timeline",
+      "line": 16,
+      "status": "retained",
+      "trigger": "explicit build",
+      "persistence": "publication-date sorted in memory",
+      "sha256": "bc4d05b59908c623506918ba38f003a7ad1ad376a913b841a9bf35769adb5e5f"
+    },
+    {
+      "id": "morning-edition",
+      "path": "cios/applications/flora/publisher/morning_edition.py",
+      "symbol": "build_publication_context",
+      "line": 157,
+      "status": "historical",
+      "trigger": "explicit seeded publication generation",
+      "persistence": "existing publications output",
+      "sha256": "e03d68cf9ab2cf9a90c3aa8ab6c53c6652961cb9a6cae5e00e430cc476abe383"
+    },
+    {
+      "id": "shared-match",
+      "path": "cios/applications/flora/offers.py",
+      "symbol": "assess_fit",
+      "line": 519,
+      "status": "implemented",
+      "trigger": "explicit private discovery",
+      "persistence": "existing commercial context",
+      "sha256": "f693717c924ac53d6da3bf9206b5546aa040bc296625f2b4401be70fb09e0358"
+    },
+    {
+      "id": "seller-staleness",
+      "path": "cios/applications/flora/seller_development.py",
+      "symbol": "dependencies",
+      "line": 42,
+      "status": "implemented",
+      "trigger": "read/explicit reassess",
+      "persistence": "existing private versioned records",
+      "sha256": "c6dfd126de96b1b30a222c43bfcea579f5ea15c810e38a9c80b4be2f3d9e647d"
+    },
+    {
+      "id": "pipeline",
+      "path": "cios/applications/flora/sales_pipeline.py",
+      "symbol": "create_opportunity",
+      "line": 138,
+      "status": "implemented",
+      "trigger": "authorised reviewed human hand-off",
+      "persistence": "sales_pipeline/opportunities.json",
+      "sha256": "ac16d29added41baa4f1a640cddd5fa5b8a5e1174291c98536330826b348fb23"
+    },
+    {
+      "id": "presentation",
+      "path": "cios/applications/flora/visual_panels.py",
+      "symbol": "render",
+      "line": 380,
+      "status": "core",
+      "trigger": "request/context/source checks",
+      "persistence": "no intelligence store",
+      "sha256": "65166c040fd70a2c25ce9f34f8c386d3107515611d99d28cc441778e666373cf"
+    },
+    {
+      "id": "navigation",
+      "path": "cios/applications/flora/visual_streams.py",
+      "symbol": "stream_url",
+      "line": 139,
+      "status": "core",
+      "trigger": "navigation action",
+      "persistence": "URL state, not intelligence mutation",
+      "sha256": "205517f7a1005bc869216895f4454c40b810e0f1046adfa517c67e826847a55e"
+    },
+    {
+      "id": "observatory-build",
+      "path": "cios/applications/flora/observatory/engine.py",
+      "symbol": "build_observatory",
+      "line": 43,
+      "status": "retained",
+      "trigger": "explicit owning call; not continuous public-view propagation",
+      "persistence": "existing owners only",
+      "sha256": "f0afd8140dbdab3c7e2965ffe373c638d8d639e733d24aa245d12677181e2b11"
+    },
+    {
+      "id": "observatory-snapshot",
+      "path": "cios/applications/flora/observatory/engine.py",
+      "symbol": "observatory_snapshot",
+      "line": 56,
+      "status": "retained",
+      "trigger": "explicit owning call; not continuous public-view propagation",
+      "persistence": "existing owners only",
+      "sha256": "f0afd8140dbdab3c7e2965ffe373c638d8d639e733d24aa245d12677181e2b11"
+    },
+    {
+      "id": "observatory-diff",
+      "path": "cios/applications/flora/observatory/engine.py",
+      "symbol": "compare_observatory_snapshots",
+      "line": 87,
+      "status": "retained",
+      "trigger": "explicit owning call; not continuous public-view propagation",
+      "persistence": "existing owners only",
+      "sha256": "f0afd8140dbdab3c7e2965ffe373c638d8d639e733d24aa245d12677181e2b11"
+    },
+    {
+      "id": "technology-research",
+      "path": "cios/applications/flora/research_intelligence/technology.py",
+      "symbol": "load",
+      "line": 33,
+      "status": "retained",
+      "trigger": "explicit owning call; not continuous public-view propagation",
+      "persistence": "existing owners only",
+      "sha256": "65917a54f1f81505b04969aad26c89c9b629bce4adc300062e9992359f8b04d2"
+    },
+    {
+      "id": "technology-experience",
+      "path": "cios/applications/flora/research_intelligence/technology_experience.py",
+      "symbol": "render",
+      "line": 342,
+      "status": "retained",
+      "trigger": "explicit owning call; not continuous public-view propagation",
+      "persistence": "existing owners only",
+      "sha256": "55acef0a9c7e5c997944a5419651648a27be3407242de3ff5562e0d3d3653d0b"
+    },
+    {
+      "id": "material-pressure",
+      "path": "cios/applications/flora/blueprint_import/material_pressure.py",
+      "symbol": "qualify_candidates",
+      "line": 180,
+      "status": "available-not-core-wired",
+      "trigger": "explicit owning call; not continuous public-view propagation",
+      "persistence": "existing owners only",
+      "sha256": "2e795e97a750afe3b58e8fc87bbde54bb4dfdbb99db0956eab859912f1f4b2e7"
+    },
+    {
+      "id": "pressure-maintenance",
+      "path": "cios/applications/flora/memory/service.py",
+      "symbol": "ObservationMemoryService.assess_material_pressure",
+      "line": 373,
+      "status": "available-not-core-wired",
+      "trigger": "explicit owning call; not continuous public-view propagation",
+      "persistence": "existing owners only",
+      "sha256": "f13fad1f762162e564e98c1a0fc799ba2588498b94e0885857f5ef0a1bc3bb88"
+    }
+  ],
+  "retained_files": [
+    {
+      "path": "architecture/decisions/README.md",
+      "sha256": "9e9847905e8d3918b84bdfb239a9207972627d8120d8750a9de9c9ed43f30163"
+    },
+    {
+      "path": "architecture/reference-architecture/Architecture-Authority-Registry.md",
+      "sha256": "88de0e0df9a8a78ab0a8263c562ff1c3cd02fb8492afa3cf7c99a32a462ec5d7"
+    },
+    {
+      "path": "architecture/specifications/industry-twins/IT-001-Industry-Twin-Specification.md",
+      "sha256": "f98cb307d7a89aefd8d1a4779bf9c579555b63e896650904fbd0211722fd2f10"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/Macro-Context-v1.json",
+      "sha256": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-HMT-CTP-Candidate.json",
+      "sha256": "05202f75fe8bf4594d0843a9e224ab18b02d422030ec89b166d678d1f11f175f"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/RUD1-Public-Facts.json",
+      "sha256": "84777ecb69f2718a28a379c87af81cd7da78114bbb92356d3030f4d350e2ab6b"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/agenda-dependencies.json",
+      "sha256": "a4ce70f8ef94a22a71993053bab30fda21f46d0aa998d4b006fe912021dfdfe6"
+    },
+    {
+      "path": "docs/flora-runtime/bie2/News-Candidates.json",
+      "sha256": "154e22ce6e476c8f2c761e4a33eae9e226b084c714454bb8ffa4aa9523b2b0ea"
+    },
+    {
+      "path": "docs/flora-runtime/bie2/Relationship-Candidates.json",
+      "sha256": "3461cc8fc9a64bed467a7de0e94d6fd53b4d0f82dc9c8a37991ee367ff70fa20"
+    },
+    {
+      "path": "docs/product/UK-Banking-Industry-Twin-v1-Closure.md",
+      "sha256": "5e1f014614357346cf953c54da32c03a7a74ecff066c8f7c2b933f4fe512a69f"
+    }
+  ],
+  "examples": [
+    {
+      "id": "ctp",
+      "source_file": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-HMT-CTP-Candidate.json",
+      "source_id": "EAI-HMT-CTP26",
+      "claim_id": "EAI-UK-CTP-DESIGNATION",
+      "publication": "2026-07-10",
+      "effective": "2026-07-13",
+      "scope": "four designated provider legal entities; bank exposure not established"
+    },
+    {
+      "id": "nationwide",
+      "source_file": "enterprise-knowledge/banking/research-model/source-snapshots/RUD1-Public-Facts.json",
+      "source_id": "RUD1-NATIONWIDE-FY26",
+      "publication": "2026-05-21",
+      "period": [
+        "2025-04-01",
+        "2026-03-31"
+      ],
+      "scope": "Nationwide Building Society consolidated Group; actual underlying/statutory bases"
+    },
+    {
+      "id": "lloyds",
+      "source_file": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "source_id": "PR-LBG-ENVOY",
+      "publication": "2026-05-01",
+      "conflicting_variant_date": "2026-04-28",
+      "scope": "Lloyds company-described Envoy capability; not verified effectiveness/net benefit"
+    }
+  ]
+}

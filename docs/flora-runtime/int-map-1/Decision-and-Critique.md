@@ -1,63 +1,79 @@
-# Decision options, staged roadmap and critical challenge
+# Two proportionate options and owner decision
 
-**Independent review status:** This is a multi-perspective critical assessment by the author, **not** a completed independent Chief Architect or separate executive/designer review. The decision remains provisional until owner review, and any separate specialist review required by the commission is **outstanding**. Do not claim approvals from simulations or agents that were not actually run.
+Both options reuse existing owners, Source rights, identity/ACL, six semantic
+types, matching and Pipeline boundaries. **A new persistent change graph or ripple
+engine is rejected, not presented as the necessary alternative.** No source or
+model admission requirement is introduced for each ordinary analytical fact.
 
-## Alternative architectures
-
-| Question | A — Existing-owner recomposition (recommended) | B — Generalised persistent change graph (defer) |
+| Decision | A — Contextual change pulse | B — Contextual What's changing? stream |
 | --- | --- | --- |
-| Primary design | Reuse Source/Research events, Financial records, industry and enterprise overlays, existing relationship semantics, finite editorial adapter | New cross-domain event/impact lifecycle with persistent graph-like relationships |
-| Writing | **None for first proof**; read-only calculated change views over permitted existing facts | Requires new ownership/schema/migration and evidence-to-event transactional persistence |
-| Ripple semantics | Supported association vs contextual reassessment, source-key invalidation; canonical pressure stays separate | General graph propagation, risk of automatic/inaccurate inherited enterprise applicability |
-| UX | Small Change pulse or third toggle in existing Top/Left/Main | Broad dashboard/cross-vertical change cockpit |
-| Advantages | Lower risk, fast visible benefit, fewer approval paths | Potential large-scale reuse after event/data volume justifies it |
-| Principal risks | Over-specialising to three Banking stories; hard-coded map; no ongoing refresh | Duplicated stores, incorrect causality, heavier operational/support burden |
-| Release requirement | Real permissible sources, source revision suppression, exact entity/date mapping and clean responsive previews | New domain contract, security/canonical reconciliation, migrations, sustained usage evidence |
-| Decision | Choose and test Option A first | Revisit only after measuring A's real limitations |
+| Product | One small dated composition in the existing Industry view; no new tab | A genuinely distinct time-bounded sibling of Landscape/Forces in Top/Left/Main |
+| Implementation | Existing agenda/presentation owner selects eligible owner outputs; source-sensitive read composition | Same owner outputs plus reusable read-only period/change selection and consistent subject/history state |
+| Persistence | None added | None required for the pilot; reuse existing records/revisions and transient footprints |
+| Benefit | Lowest navigation/code cost; useful even with sparse evidence | Memorable answer to “what changed”, with room for mechanism and supported enterprise reach |
+| Tradeoff | Can bury chronology and repeat today's Forces list; limited space for synthesis | More UI/state and content responsibility; an empty or repetitive stream earns no tab |
+| Entry condition | One or two meaningful dated changes | Distinct useful changes in an explicit period; owner accepts responsive design and sparse-window behaviour |
+| Required tests | Source withdrawal, semantics/dates, scope/privacy, no auto-action | A's tests plus event dedup, history/deep links, period boundaries and selection consistency |
+| Recommendation | Smallest code proof if current source supply is sparse | Preferred product direction, provisionally demonstrated in this design-only concept |
 
-## Proposed incremental roadmap (not authorised yet)
+Reject a global News destination as the primary answer: it loses industry context.
+Reject extra framework tabs, opaque importance/ripple scores, generic feeds and
+causal arrows drawn merely to make the screen look connected. News remains input;
+strategic understanding is the product.
 
-**INT-1 — Model-connected editorial proof (small implementation).** Demonstrate 2–3 current, permitted change stories in a bounded non-production `What's changing` design preview. Use real source IDs and one source→event→industry association→optional enterprise consequence; respect legal/entity applicability. Compare Change pulse versus third toggle with iPad/desktop/mobile and user experience. Test source retraction, time correction and isolation. No fresh autonomous agent or canonical write.
+## Recommended staged plan — separately commissioned implementation
 
-**INT-2 — Reusable researched event registration.** Only if INT-1 proves visual value, let existing Source/Research ownership expose a tested, reusable *read-only* news/event selector and change classification; existing BIE2 event candidates must be revalidated for use and dates. Show the current period with dated boundaries. Retain no public third-party article text. **Do not** build a scraper or schedule under this sprint.
+1. **Accept semantics and ownership.** Resolve authority-header/index discrepancies
+   without changing doctrine here. Confirm one subject selection and the two
+   options. Review the three factual stopping points and independent critiques.
+2. **Bounded existing-owner proof.** Select source-eligible dated changes. Reuse
+   current research/Financial/agenda outputs, existing canonical interpreter where
+   canonical inputs actually exist, and transient input footprints. Implement A
+   if sparse supply warrants it; implement B only after visual/content acceptance.
+   No new collector, store, source permission or pressure/Pipeline automation.
+3. **Prove living behaviour.** Test withdrawal, changed rights, supersession,
+   corrected dates/entity identity and counter-evidence across affected views.
+   Separate working-view invalidation from existing canonical pending-review
+   workflows. Demonstrate a supported downward exposure and a negative near-match.
+4. **Prove upward synthesis.** Declare comparable independent peers, periods,
+   definitions, exclusions and falsifiers. Show an exemplar remaining an exemplar
+   when comparison is insufficient. No automatic industry/UK pattern adoption.
+5. **Only then assess refresh operations.** Audit existing collect/source contracts,
+   costs, rights, coverage, human exceptions, frequency and observability before
+   commissioning monitoring/notifications. Do not invent a weekly edition from
+   retrieval dates or require blanket manual approval of every ordinary fact.
 
-**INT-3 — Bidirectional synthesis.** Derive enterprise→industry candidates from independent peer evidence and downward contextual applicability from UK forces to appropriate industry/enterprise capabilities. Tie into existing PESTLE/Porter/value chain/operating mechanisms; qualified pressure/opportunities stay separately controlled. Introduce only necessary index/refresh support shown by real latency/freshness measurements.
+First release should demonstrate better understanding, not sector/file coverage
+percentages: one defensible industry change, one supported enterprise consequence,
+one withheld near-match, and a visibly corrected/suppressed result after changed
+support. No numerical opportunity/value/urgency metric without evidence.
 
-**INT-4 — Research operations / living refresh.** Explicitly authorise periodic monitoring/refresh only after reliable source/use/time semantics, host/network cost, roles, alert thresholds and historical versioning are demonstrated. Factual research default for views, governance for real exceptions/canonical writes.
+## Independent critiques
 
-## Architecture critique
+Actual separate architectural/security, commercial/source and executive visual
+review agents inspected the repository and then the decision pack/concept.
+[Findings and dispositions](Validation-and-Review.md) distinguish their independent
+work from owner acceptance. No simulated endorsement or completed implementation
+is claimed. Owner remains the architectural decision maker.
 
-- **Challenge 1: A third toggle could be cosmetic.** Four current Forces stories are mostly a dated editorial list. Renaming it “What’s changing” would not create ripple-through. Require an actual change delta, resolved subjects, directional association and invalidation proof before declaring capability.
-- **Challenge 2: Do not turn data layers into independent truth stores.** `Assessment-Overlay.json`, BIE-2 news, public Financial Source bundles and Enterprise Models can contain overlapping statements. A new writeable industry event database duplicates owner revisions. Reuse existing stable identities and only compose projections.
-- **Challenge 3: What is an industry pattern?** Multiple banks discussing AI is insufficient unless comparison is meaningful, independently supported and temporally aligned. Mechanisms and business models matter, not a count of headlines.
-- **Challenge 4: What is actually “new”?** An article published today may discuss an old change; a prospective legal effective date differs from an announced plan. Changing source vintage should cause revision, not silent overwrite.
-- **Challenge 5: Prevent UK force overreach.** CTP designation of technology providers is not universal bank-provider contracting. Industry context is useful before an enterprise applicability test, but cannot be a qualified enterprise pressure.
-- **Challenge 6: Preserve commercial specificity.** When an enterprise is truly exposed, explain relevant capability, accountable role (if evidenced), consequence, current internal response and an investigable next step. Do not invent procurement/funding/urgency.
-- **Challenge 7: Don't let permissions dictate the public view.** Working, lawfully usable research can appear without individual canonical promotion, while protected/private records stay protected. Separate marketing polish from robust provenance underneath.
+## Owner checklist
 
-## Commercial executive challenge
+- [ ] Accept current-state map: working facts, canonical memory, private commerce
+      and presentation are distinct; code presence is not populated live data.
+- [ ] Accept A or B and the clear Landscape / Forces / change distinction.
+- [ ] Accept the historical-period concept without treating it as fresh News;
+      require eligible current supply before activating a current-period stream.
+- [ ] Accept existing-owner transient recomposition; reject a new ripple engine,
+      database or approvals queue for normal working research.
+- [ ] Require exact legal/entity exposure before enterprise consequence, and a
+      comparable independent sample before industry/UK conclusions.
+- [ ] Preserve current source restrictions, private/canonical boundaries, Offers,
+      customer validation, ten criteria and reviewed Pipeline authority.
+- [ ] Confirm source/date/selection/negative cases and responsive design before
+      a bounded implementation commission.
+- [ ] Keep News #614, influence windows #604, Owner #603, Enterprise Builder #611,
+      authentication activation and additional source permissions separate.
+- [ ] Accept or revise the staged plan; separately authorise any implementation.
 
-A salesperson should get an answer to: *which enterprise is changing, what's materially different, why now, which operational or economic mechanism, what existing response, and where could an informed conversation help?* Today's data is strongest at specific reported events, financial bridges and sector regulation. It is weaker at enterprise-level operational consequences, named decision owners, supplier workshare, opportunities and actual dates. Avoid a beautifully illustrated but empty “pulse”. The UI must give one or two authentic insights before inviting more exploration.
-
-## Visual design challenge
-
-- Current two-tone editorial lists improved simplicity, but Forces and selected-bank pages often have limited visual differentiation. A third view must offer a **distinctive time/change visual**, not another heading and list.
-- Proposed visual metaphor: a restrained timeline with 2–3 rings/connection arcs (UK→industry→enterprise where **supported**). Sparse evidence should appear sparsely; do not draw extra arrows to fill space.
-- No source links, evidence tables, nested research expanders or scientific caveat essays in normal Main. Context-specific dates and one material qualifier are enough.
-- Original Top/Left/Main illustrations and accessible active states remain; never mutate original artwork as a shortcut.
-
-## Owner decisions needed before implementation
-
-1. Accept Option A as the minimum-read-only integration strategy or require an architectural change.
-2. Confirm the product question **“What's changing?”** should be tested as a third toggle, not automatically added to navigation.
-3. Choose which 2–3 source-eligible stories to pilot and decide any remaining rights/term exceptions.
-4. Accept source withdrawal and temporal revision invalidating **derived presentation and assessment**, never automatic canonical knowledge mutation.
-5. Require actual independent Chief Architect/executive/design review of the proposed implementation before merge.
-6. Keep authentication rollout, four additional bank earnings admissions, source crawler/agent funding and Pipeline automation out of scope until separately commissioned.
-
-## Validation and completion
-
-- Verified GitHub `main` head before drafting: `fbac4c37910ed07b2baa516e1a5c8d7f329086de`.
-- Reviewed exact code/doc owners through GitHub read-only file operations, including current `SCOPES`, Financial/Source/public rendering, `unified_views`, `visual_templates`, canonical external-change service, ADR-026 and BIE-2 research/event packs.
-- Changes are **new documentation only** under `docs/flora-runtime/int-map-1/`. No tests executed locally, no application code altered, no CI claim. Docs-only PR must still pass any applicable hosted repository checks; report their actual status on PR before owner acceptance.
-- Three scenarios are **repository-grounded existing research interpretations**, not freshly verified 17 November news.
+**Assessment only: no merge, deployment, canonical/production data writes, source
+permission change, automatic qualification or paid autonomous research service.**

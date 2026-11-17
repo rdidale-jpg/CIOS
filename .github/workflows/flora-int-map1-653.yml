@@ -1,0 +1,43 @@
+name: FLORA INT-MAP-1 decision and static concept integrity
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/flora-runtime/int-map-1/**'
+      - '.github/workflows/flora-int-map1-653.yml'
+permissions:
+  contents: read
+jobs:
+  design-only-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Existing ownership anchors, factual dates, unchanged runtime and original artwork
+        run: python docs/flora-runtime/int-map-1/validate.py > "$RUNNER_TEMP/intmap-integrity.json"
+      - name: Install isolated design browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/intmap-node" playwright@1.62.1
+          "$RUNNER_TEMP/intmap-node/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Static concept responsive, history, selection and accessibility checks
+        env:
+          NODE_PATH: ${{ runner.temp }}/intmap-node/node_modules
+        run: python docs/flora-runtime/int-map-1/concept/proof.py --output "$RUNNER_TEMP/intmap-proof"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: flora-intmap-design-${{ github.event.pull_request.head.sha }}
+          path: |
+            ${{ runner.temp }}/intmap-integrity.json
+            ${{ runner.temp }}/intmap-proof/
+          retention-days: 14
