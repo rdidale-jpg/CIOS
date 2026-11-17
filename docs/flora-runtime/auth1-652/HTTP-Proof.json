@@ -1,0 +1,18 @@
+[
+  {
+    "case": "before-missing-authority",
+    "status": 503
+  },
+  {
+    "case": "after-missing-authority",
+    "status": 503
+  },
+  {
+    "case": "before-missing-schema-row",
+    "status": "transport_failure"
+  },
+  {
+    "case": "after-missing-schema-row",
+    "status": 503
+  }
+]

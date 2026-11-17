@@ -1,0 +1,7 @@
+{
+  "base_sha": "836a4c29015c59117b873e6324c9618f7eb41930",
+  "path": "cios/applications/flora/security_store.py",
+  "before_sha256": "1d096ac0d335fee0a8da41c389780e764b1707c8ba046962cb1bef503750863e",
+  "reviewed_sha256": "d0bf3451f8fb467ebf4744c80d6a66555c3d3a12cdef8f4d57c724fc9ca3cbc3",
+  "reason": "AUTH-1 only: include early PRAGMA setup in existing cleanup envelope and explicitly deny absent schema-version row. All other definitions and schema unchanged."
+}

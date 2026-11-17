@@ -1,0 +1,55 @@
+name: FLORA AUTH-1 security storage and owner journey
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'cios/applications/flora/**'
+      - 'tests/test_flora_auth1_652.py'
+      - 'tools/research/auth1*.py'
+      - 'tools/ci/flora_auth1_preview.cjs'
+      - 'docs/flora-runtime/auth1-652/**'
+      - '.github/workflows/flora-auth1-652.yml'
+permissions:
+  contents: read
+jobs:
+  storage-and-authentication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.txt
+      - name: Storage faults, read-only operator checks, authority and existing UX controls
+        run: python -m pytest tests/test_flora_auth1_652.py tests/test_flora_security_repair_01b.py tests/test_flora_security_01e_bounded_remediation.py tests/test_flora_uxr1_650.py -q
+      - name: Narrow existing-owner changes and unchanged controls/artwork/research
+        run: python tools/research/auth1_quality.py > "$RUNNER_TEMP/auth1-quality.json"
+      - name: Install isolated browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/auth1-node" playwright@1.62.1
+          "$RUNNER_TEMP/auth1-node/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Real HTTPS unavailable-store and authorised owner journeys
+        env:
+          NODE_PATH: ${{ runner.temp }}/auth1-node/node_modules
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/auth1-before" 836a4c29015c59117b873e6324c9618f7eb41930
+          python tools/research/auth1_proof.py --output "$RUNNER_TEMP/auth1-proof" --preview --baseline-root "$RUNNER_TEMP/auth1-before"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: flora-auth1-proof-${{ github.event.pull_request.head.sha }}
+          path: |
+            ${{ runner.temp }}/auth1-quality.json
+            ${{ runner.temp }}/auth1-proof/Proof.json
+            ${{ runner.temp }}/auth1-proof/Browser-Checks.json
+            ${{ runner.temp }}/auth1-proof/HTTP-Proof.json
+            ${{ runner.temp }}/auth1-proof/*.jpg
+          retention-days: 14
