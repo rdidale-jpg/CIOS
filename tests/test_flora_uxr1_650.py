@@ -51,7 +51,9 @@ def test_guest_and_forged_headers_never_lookup_or_serialize_private_finance(perm
     monkeypatch.setattr(f,'find_existing_run',forbidden)
     for guest in ({},{'X-Flora-User':'synthetic-human','X-Flora-Roles':'cios_owner'}):
         html=v.render('/industries/banking',{'selected':['nationwide']},guest)
-        assert identity not in html and '£2.026bn'not in html and 'Prepare financial view'not in html
+        # AUTH-2: this figure is now independently projected from public Source
+        # facts. The private run identity and actions must still never appear.
+        assert identity not in html and '£2.026bn'in html and 'Prepare financial view'not in html
         assert '100,886'in html and 'Guest'in html
     monkeypatch.setattr(f,'find_existing_run',original)
 
@@ -61,6 +63,7 @@ def test_authorised_selection_immediately_contains_financials_without_analysis_q
     before=review._run_path(identity).read_bytes()
     html=v.render('/industries/banking',{'selected':['nationwide']},headers);body=main(html)
     for value in ('£6.378bn','£2.026bn','£1.49bn','£127m','2025','2026','Statutory profit before tax'):assert value in body
+    assert 'Customer complaints · Society'in body and '100,886'in body
     assert '<details'not in body and 'Financial analysis</a>'not in body and 'Open analysis detail'not in body
     assert 'Sources &amp; reasoning'not in body
     assert review._run_path(identity).read_bytes()==before
@@ -94,7 +97,13 @@ def test_no_private_financial_fragments_or_setup_escape_scope(permitted,retained
     else:
         p=json.loads(retained.read_text());p['sources'][1]['owner_only'if mutation=='private-source'else'withdrawn']=True;retained.write_text(json.dumps(p))
     body=main(v.render('/industries/banking',{'selected':['nationwide']},headers))
-    assert '£2.026bn'not in body and '£6.378bn'not in body and identity not in body
+    assert identity not in body
+    if mutation in {'private-source','withdrawn-source'}:
+        assert '£2.026bn'not in body and '£6.378bn'not in body
+    else:
+        assert '£2.026bn'in body and '£6.378bn'in body
+        # Public facts do not turn a denied private run into public data.
+        with pytest.raises(PermissionError):f.read_analysis(identity,headers=headers)
     assert '100,886'in body
 
 

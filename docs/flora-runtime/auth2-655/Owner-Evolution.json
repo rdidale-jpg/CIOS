@@ -1,0 +1,52 @@
+{
+  "cios/applications/flora/security_store.py": {
+    "base": "7b056b21cd5d824bc4359b4e1ed49a1673a7f5fc",
+    "before_sha256": "d0bf3451f8fb467ebf4744c80d6a66555c3d3a12cdef8f4d57c724fc9ca3cbc3",
+    "reviewed_sha256": "f73cb35fcc04a51c314657981f8d5c504f100a17e34152f36d4ac1a5dbb09441",
+    "allowed_functions": [
+      "_supabase_login",
+      "_token",
+      "enroll",
+      "login",
+      "logout",
+      "resolve",
+      "select"
+    ]
+  },
+  "cios/applications/flora/security_web.py": {
+    "base": "7b056b21cd5d824bc4359b4e1ed49a1673a7f5fc",
+    "before_sha256": "e5c54f167f271e35a4306507eec6d8671fa3beaaa85a2819255e5e46193224fc",
+    "reviewed_sha256": "c7bc07706382b13fb2de4ad81f1e0d042b809fef65e903bc0181bc560434d868",
+    "allowed_functions": [
+      "auth_get",
+      "auth_post",
+      "page"
+    ]
+  },
+  "cios/applications/flora/visual_panels.py": {
+    "base": "7b056b21cd5d824bc4359b4e1ed49a1673a7f5fc",
+    "before_sha256": "7fa0dd4d5eb9f4d4cee10eb708922158dac193a5b35299ca32ba686a57124069",
+    "reviewed_sha256": "65166c040fd70a2c25ce9f34f8c386d3107515611d99d28cc441778e666373cf",
+    "allowed_functions": [
+      "_authorised_nationwide",
+      "_nationwide_service",
+      "render"
+    ]
+  },
+  "cios/applications/flora/financial_intelligence/candidate_analytics.py": {
+    "base": "7b056b21cd5d824bc4359b4e1ed49a1673a7f5fc",
+    "before_sha256": "85577b7c348cc2ac8cc19b133366bde7997b1198291e3ab45d04322966d72bee",
+    "reviewed_sha256": "54b6cc6169ca01e4083599527a8ae7c239dbd0bcbb705de530985f66768f8cf8",
+    "allowed_functions": [
+      "public_nationwide_projection"
+    ]
+  },
+  "cios/applications/flora/security_readiness.py": {
+    "base": "7b056b21cd5d824bc4359b4e1ed49a1673a7f5fc",
+    "before_sha256": "116b1ebe89f5aa06de0258642501e9f6bbecc0810694f82d0a1996df6fed5a48",
+    "reviewed_sha256": "988450a03dfd4eefbf131fe82ca42e1943500f294e8d135c74c4ed940df04b94",
+    "allowed_functions": [
+      "inspect_security_storage"
+    ]
+  }
+}

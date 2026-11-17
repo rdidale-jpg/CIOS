@@ -446,6 +446,33 @@ def _run_record(selection: str, bundle: InputBundle, workspace: str) -> dict:
     return run
 
 
+def public_nationwide_projection() -> dict:
+    """Finite public Source facts, never private Financial runs or metadata.
+
+    AUTH-2 changes product audience, not publisher permission. Reuse the existing
+    isolated factual-use method, source lifecycle, exact bindings and arithmetic.
+    No run path, lookup, workspace, storage, identity or provider is consulted.
+    """
+    from ..research_intelligence.source_import import routine_factual_use
+    try:
+        bundle = _current_inputs('nationwide-fy2026')
+        if routine_factual_use(bundle.source) != 'minimal_factual_analysis':
+            return {}
+        if (bundle.source['id'] != 'RUD1-NATIONWIDE-FY26' or len(bundle.measurements) != 8
+                or any(m.subject_name != 'Nationwide Building Society Group' for m in bundle.measurements)):
+            return {}
+        measurements = list(bundle.measurements)
+        results = [reconcile(Reconciliation.model_validate(r), measurements) for r in bundle.reconciliations]
+        # Projection contains only the same Source-owned factual slice. No
+        # private run identity, annotation, availability, tenant or overrides.
+        return {'title': bundle.title, 'measurements': [m.model_dump(mode='json') for m in measurements],
+                'results': results, 'insights': list(bundle.insights),
+                'sources': [{'title': bundle.source['title'], 'url': bundle.source['url'],
+                             'published': bundle.source['publication_date']}]}
+    except (OSError, ValueError, KeyError, TypeError, PermissionError):
+        return {}
+
+
 @verified_service_read('package.inspect')
 def find_existing_run(selection: str, resource_id: str, *, headers=None) -> str | None:
     """Resolve only the current known ID in one authorised scope; never scan.
