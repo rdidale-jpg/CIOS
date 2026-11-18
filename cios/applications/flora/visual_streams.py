@@ -147,17 +147,21 @@ def resolve(path,query):
  default='inside' if scope=='lloyds' and 'detail' in query else binding['streams'][0]
  stream=query.get('stream',[default])[0]
  layer=query.get('layer',['enterprises'])[0];selected=query.get('selected',[''])[0];detail=query.get('detail',[''])[0]
- if stream not in binding['streams'] or layer not in LAYERS:raise ValueError('Insight view unavailable')
+ from . import banking_cohort
+ cohort=scope=='banking' and selected in banking_cohort.SUBJECTS
+ if (stream not in binding['streams'] and not (cohort and stream=='inside')) or layer not in LAYERS:raise ValueError('Insight view unavailable')
  if binding['kind']=='country':
   if layer!='enterprises' or selected not in ('','banking','technology','aviation'):raise ValueError('Country context unavailable')
  else:
-  if selected not in ('',*BANKS,'tsb','nationwide','starling'):raise ValueError('Enterprise selection unavailable')
+  if selected not in ('',*BANKS,'tsb','nationwide','starling','boe'):raise ValueError('Enterprise selection unavailable')
   if binding['kind']=='enterprise' and selected not in ('',binding['slug']):raise ValueError('Enterprise context mismatch')
  agenda=query.get('agenda',[''])[0]
  if agenda and agenda not in leadership_agenda.KEYS[scope]:raise ValueError('Leadership view unavailable')
  for key in ('selected','detail','agenda'):
   if key in query and not query[key][0]:raise ValueError('Empty visual selector')
- spots=geometry()[scope+'-'+stream]['spots']
+ if (stream=='inside' and cohort or selected=='boe') and (detail or agenda):
+  raise ValueError('Banking cohort context mismatch')
+ spots=geometry()[scope+'-'+('landscape' if cohort and stream=='inside' else stream)]['spots']
  valid_details={s['id']for s in spots}
  if stream=='forces' and scope in {'uk','banking'}:
   from . import experience_composition
@@ -190,6 +194,10 @@ def url(ctx,**changes):
 
 def stream_url(ctx,stream):
  """Compatible subject across the existing finite scene selectors, no new router."""
+ from . import banking_cohort
+ if ctx.scope=='banking' and ctx.selected in banking_cohort.SUBJECTS and not (ctx.detail or ctx.agenda):
+  if stream not in banking_cohort.STREAMS:raise ValueError('Insight view unavailable')
+  return url(ctx,stream=stream,reading=ctx.reading)
  if stream not in PRESENTATIONS[ctx.scope]['streams']:raise ValueError('Insight view unavailable')
  if ctx.scope=='easyjet':return url(ctx,stream=stream,reading=ctx.reading)
  detail=ctx.detail
