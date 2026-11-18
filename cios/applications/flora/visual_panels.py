@@ -103,6 +103,7 @@ def _entry(row,ctx,*,primary=False,position=None,suffix=''):
 
 
 def _layer_focus(ctx,sid):
+    if ctx.scope=='banking' and sid in ecosystem.STAGES:return False
     return ((ctx.layer=='regulators'and(sid in v.ROLE_CONTEXT or sid=='economics'))
         or(ctx.layer=='suppliers'and sid in {'technology','customers','operations','payments'}))
 

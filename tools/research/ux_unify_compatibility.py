@@ -22,7 +22,7 @@ INTEGRATION = {
 
 BANKING_BASE="12f2aaef2e988222d4c0d79dbcc454ba3603a014"
 BANKING={
-    "cios/applications/flora/visual_panels.py": "6aa55beae7462525052548f59477641e614f0cc1f633b61c1e4201dced224715",
+    "cios/applications/flora/visual_panels.py": "04d1fe6a45004606c111cb72eefce11f56022b20b4d1d7a32d58e08f87dd06b7",
     "cios/applications/flora/visual_streams.py": "a968e8b5849e78789efa1fa0c6b517f241ef08071660f3d357ac7c4951c4682d",
 }
 
