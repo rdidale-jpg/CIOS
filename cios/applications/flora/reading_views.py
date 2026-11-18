@@ -32,6 +32,10 @@ STYLE = """<style>
 .reading-links ul{padding:0;list-style:none;margin:18px 0 0}
 .reading-links a{display:inline-flex;align-items:center;min-height:44px}
 @media(max-width:600px){.reading-sequence{grid-template-columns:1fr;gap:10px}.reading-sequence li:not(:last-child)::after{display:none}}
+.reading-payment-flows{margin:16px 0}
+.reading-payment-flows div{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:4px 14px;padding:12px;border-block-start:2px solid #a68a54}
+.reading-payment-flows div+div{border-block-start-style:dashed}
+.reading-payment-flows dt{font-weight:bold}.reading-payment-flows dd{margin:0}
 .reading-context{font-size:.85em;color:var(--muted)}
 .reading-pulse{border-inline-start:3px solid #ae9158;padding-inline-start:16px;margin:24px 0}
 @media(forced-colors:active){.reading-mode a[aria-current]{background:Highlight;color:HighlightText}}
@@ -74,9 +78,9 @@ def payments(ctx, data):
     body += '<p class="reading-context">Conceptual · UK payment roles</p>'
     if ctx.reading == "facts":
         body += sequence((
-            ("Initiate", "A household or business instructs its payment provider."),
-            ("Clear", "Participants exchange instructions and establish what they owe."),
-            ("Settle", "Settlement discharges the obligations between participants."),
+            ("Initiate", "A household or business authorises a payment and its provider checks and routes the instruction."),
+            ("Clear", "Participants exchange and validate instructions, establishing obligations that may be netted."),
+            ("Settle", "Transfer of settlement funds discharges the obligations. The recipient’s provider makes funds available under the applicable arrangement."),
         ))
         body += (
             '<p class="reading-context">Arrows show the order of activities. Actual access and settlement arrangements vary by system.</p>'
@@ -91,8 +95,9 @@ def payments(ctx, data):
         p.note_editorial_sources(model.sources)
         body += (
             '<section class="reading-economy"><h2>One payment, two economic flows</h2>'
-            '<dl class="reading-drivers"><div><dt>Customer principal</dt><dd>The amount transferred or settled.</dd></div>'
-            '<div><dt>Service income</dt><dd>Charges for providing payment services depend on the arrangement.</dd></div></dl></section>'
+            '<dl class="reading-payment-flows"><div><dt>Customer principal</dt><dd>Money moves to the recipient. '
+            'Settlement discharges obligations between participants, which can represent many payments.</dd></div>'
+            '<div><dt>Service income</dt><dd>Participants or customers may pay service charges under the applicable arrangements. Operators incur costs to run and maintain the service.</dd></div></dl></section>'
             '<h2>What changes the economics?</h2><dl class="reading-drivers">'
             '<div><dt>Service mix</dt><dd>The same volume can produce different income under different pricing and access arrangements.</dd></div>'
             '<div><dt>Continuity</dt><dd>Capacity, monitoring and recovery can incur costs even when traffic is steady.</dd></div></dl>'

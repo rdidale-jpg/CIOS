@@ -16,7 +16,7 @@ class Quiet(FloraWebHandler):
         pass
 
 
-def run(output):
+def run(output, *, depth=False):
     with ThreadingHTTPServer(("127.0.0.1", 0), Quiet) as server, sync_playwright() as playwright:
         Thread(target=server.serve_forever, daemon=True).start()
         root = f"http://127.0.0.1:{server.server_port}"
@@ -61,6 +61,11 @@ def run(output):
                     assert parse_qs(urlsplit(page.url).query)["detail"] == [key]
                     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
                     page.screenshot(path=output / f"{key}-insight-{label}.jpg", quality=76)
+                    if depth and label == "mobile":
+                        page.evaluate("document.documentElement.style.zoom='2'")
+                        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+                        page.screenshot(path=output / f"{key}-insight-200pct.jpg", quality=76)
+                        page.evaluate("document.documentElement.style.zoom=''")
                     page.go_back()
                     assert page.locator(".reading-mode [aria-current]").inner_text() == "Facts"
                     page.go_forward()
@@ -91,4 +96,4 @@ def run(output):
 if __name__ == "__main__":
     destination = Path(sys.argv[1])
     destination.mkdir(parents=True, exist_ok=True)
-    run(destination)
+    run(destination, depth="--depth" in sys.argv)
