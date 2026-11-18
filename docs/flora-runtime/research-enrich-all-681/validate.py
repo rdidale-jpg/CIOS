@@ -115,6 +115,14 @@ def validate():
         with zipfile.ZipFile(ROOT/archive)as z:
             line=z.read(member).decode().splitlines()[row['line']-1]
             assert sha256(line.encode()).hexdigest()==row['row_sha256']and row['state']=='packaged_row_not_live_record'
+    from cios.applications.flora.live.source_registry import SOURCES
+    declared=read('Declared-Runtime-Inputs.json')
+    assert declared['sources']==[s.model_dump(mode='json')for s in SOURCES]
+    assert len(index(declared['sources'],'source_id'))==150
+    assert len(declared['organisation_targets'])==103
+    assert sum(s['enabled']for s in declared['sources'])==118
+    assert len(declared['seeded_watchlist'])==43
+    assert all(t['public_eligibility']=='not_established_by_enabled_flag_or_canonical_reference'and t['status']=='uncertain_stale_contradictory'for t in declared['organisation_targets'])
     subjects=read('Subjects.json')['subjects'];index(subjects,'key')
     tech=[r for r in subjects if r['level']=='enterprise_profile'and r['family']=='technology']
     assert len(tech)==80 and all(r['depth']=='partial profile'and r['object_kind']=='unbound_provider_or_brand'for r in tech)
@@ -149,7 +157,7 @@ def validate():
     changes=subprocess.check_output(['git','diff','--name-status',BASE,'HEAD'],cwd=ROOT,text=True).splitlines()
     for line in changes:
         status,path=line.split('\t',1);assert status=='A'and(path.startswith('docs/flora-runtime/research-enrich-all-681/')or path=='tests/test_flora_research_enrich_all_681.py'),'Out-of-scope mutation'
-    return dict(head_sha=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),base=BASE,baseline_files=len(paths),archives=len(archives['archives']),archive_members=members,ndjson_rows=ndjson,selected_heuristic_records=len(archives['records']),source_reference_occurrences=len(refs),subject_occurrences=len(subjects),requirements=requirements,overlay_claim_rows=len(c['claim_coverage']),public_paths=len(read('Public-Routes.json')['routes']),server_main_probes=len(read('Render-Probes.json')['probes']),wave_sources=len(sources),direct_primary_reviews=sum(s['verification']=='direct_primary_review'for s in sources.values()),wave_claims=len(claims),calculations=values,links=links,scope='research_QA_not_source_admission_or_production_verification',canonical_writes=0,runtime_changes=0)
+    return dict(head_sha=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),base=BASE,declared_sources=150,declared_organisation_targets=103,seeded_watchlist_examples=43,baseline_files=len(paths),archives=len(archives['archives']),archive_members=members,ndjson_rows=ndjson,selected_heuristic_records=len(archives['records']),source_reference_occurrences=len(refs),subject_occurrences=len(subjects),requirements=requirements,overlay_claim_rows=len(c['claim_coverage']),public_paths=len(read('Public-Routes.json')['routes']),server_main_probes=len(read('Render-Probes.json')['probes']),wave_sources=len(sources),direct_primary_reviews=sum(s['verification']=='direct_primary_review'for s in sources.values()),wave_claims=len(claims),calculations=values,links=links,scope='research_QA_not_source_admission_or_production_verification',canonical_writes=0,runtime_changes=0)
 
 
 if __name__=='__main__':print(json.dumps(validate(),indent=2))

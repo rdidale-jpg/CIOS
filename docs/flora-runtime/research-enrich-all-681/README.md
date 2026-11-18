@@ -26,6 +26,7 @@ Machine-readable audit snapshots, **not new Source/Evidence/Model registries**:
 | [Retained source references](Retained-Source-References.json) | 1,290 structured/citation occurrences; citations are not verified publishers or permissions |
 | [Subjects](Subjects.json) | 250 owner-qualified subject occurrences, including profiles, capabilities, actors and legacy packages—not 250 unique enterprises |
 | [Coverage/gaps](Coverage-and-Gaps.json) | 2,597 subject/element requirements and 67 source-linked overlay claim rows; five distinct gap classes |
+| [Declared runtime inputs](Declared-Runtime-Inputs.json) | All 150 configured sources / 103 organisation targets (118 enabled), 43 seeded watchlist examples and fixed pipeline retrieval IDs; no accepted Model or use permission inferred |
 | [Public routes](Public-Routes.json) / [render probes](Render-Probes.json) | All 326 finite public catalogue paths; 36 isolated server-rendered Main compositions, not live/browser proof |
 | [Pending research](Pending-Research-Packs.json) / [open PR inventory](Open-PR-Inventory.json) | Exact source package pins and current draft states, with no automatic integration |
 | [Requirements handoff](Information-Requirements-Handoff.json) | Neutral presentation information requirements shared with #680; no import schema or truth store |

@@ -102,3 +102,14 @@ def test_established_event_dates_are_not_unknown_or_publication_dates(claim_id):
     next(c for c in claims if c['id']==claim_id)['event_date']=None
     with pytest.raises(AssertionError,match='Known event'):
         qa.temporal_integrity(claims,qa.index(qa.read('Wave-1-Sources.json')['sources']))
+
+
+def test_declared_source_configuration_is_complete_and_is_not_permission_or_model_existence():
+    from cios.applications.flora.live.source_registry import SOURCES
+    d=qa.read('Declared-Runtime-Inputs.json')
+    assert d['sources']==[s.model_dump(mode='json')for s in SOURCES]
+    assert len({s['source_id']for s in d['sources']})==150
+    assert len(d['organisation_targets'])==103
+    assert len(d['seeded_watchlist'])==43
+    assert all(t['public_eligibility'].startswith('not_established')and 'not_an_Enterprise_Model'in t['scope']for t in d['organisation_targets'])
+    assert {'Utilities','Energy','Public Sector'}<={s['sector']for s in d['sources']}
