@@ -1,0 +1,22 @@
+# Asset reconciliation and readiness
+
+| Existing owner or artifact | Status and reuse |
+| --- | --- |
+| [Technology visual foundation](../technology-visual-foundation/README.md), Foundation, recovered Page, coverage and candidate handoff | Accepted presentation baseline over candidate material. Preserves 80 partial provider references, 34 relationship/programme records, 24 bounded passages, five hypothetical reference models and six unqualified themes. Handoff records zero accepted/eligible imports. Reuse identities and locators. The [occurrence register](reuse-register.json) preserves each provider and programme key without copying claims or treating the Page as primary evidence. |
+| [Technology visual world](../technology-visual-world-v1/), [Technology owner journey](../technology-owner-journey/) | Existing Technology routes, preview assets and provider experiences. Depth and publication depend on the existing owner. No art or runtime changes. |
+| [Technology buying-trigger pilot](../../../enterprise-knowledge/technology/research-model/Buying-Trigger-Pilot.json) | Existing scenario and qualification context. No commercial state is inferred or promoted. |
+| [Wave 2](../research-enrich-all-w2-685/), [Wave 3](../research-enrich-all-w3-689/) | Research-only wider industry and nine-cohort input, including seven Technology exemplars. Reuse dated source, claim, measurement and dossier references. Add channel/cyber coverage and targeted relationship checks. |
+| [Banking owner handoff](../bnk-cohort-691/source-gate.md) and [accepted global design](../../product/flora-experience/experience-align-all/README.md) | Existing legal/Group split, source withdrawal and Facts/Insight grammar. Reference scoped roles only. Banking and Transport files untouched. Telecoms retains its infrastructure/network record ownership. |
+| [Factory repair](../factory-repair-03/) and [RP-001](../../../architecture/reference-architecture/profiles/RP-001-Enterprise-Blueprint-Researcher-Profile.md) | Retain source→candidate→governed review distinctions and bounded completeness. This review pack warrants no import receipt, durable Model, or accepted Observation. No import package is submitted. |
+
+Historic annual periods, archived case studies, and announced programmes remain dated evidence. Current contract validity, delivery milestones, legal role bindings and rights are unresolved. A blocked source or rejected join is a distinct gap, rather than an assertion of market absence. Seven peer dossiers remain readable through Wave 3. Other provider views remain partial and unaudited in depth for this sprint.
+
+## Readiness decision
+
+**Research in progress for a high-fidelity Industry Twin.** A bounded economics and relationship review can now proceed. The [Researcher gate](../../../knowledge-packs/researcher/operating-guidance/Industry-Twin-Readiness-Gate.md) still needs a decision-complete supplier/contract register and visible human validation. Structural maturity has usable role coverage. Evidence maturity has exact document locators with bounded assurance for selected figures and source-limited links. Commercial and decision maturity remain conditional on buyer-side proof, actual obligations and competing explanations. Operational maturity has no validated import or production receipt. Governance maturity preserves owner boundaries and unresolved scope. No completion percentage.
+
+ADR-002 retains the Enterprise Model as durable memory. ADR-009 supports progressive assurance. ADR-012 separates accepted packages from canonical acceptance. ADR-026 governs Material Pressure. IT-001 status and Source policies remain as checked into the repository. This commission conflicts with no accepted architecture. Apparent differences among UK headline measures and sources are recorded as scope/denominator distinctions in the economics document. A partial profile or disclosure alone cannot establish a qualified opportunity.
+
+## Next bounded sprint
+
+Reconcile UK cloud and channel comparable units, then select a UK data-centre connection/energisation cohort and a small government/health procurement sample. For each, close one trusted buyer–supplier relationship, verify actual delivery or award status, and record an exact operating outcome and counterexample. Characterise the remaining providers against the existing Wave 4 worklist. Ask Source owners to decide exact permitted uses before commissioning a presentation. Stop the next phase at review if legal scope, operative status or acquisition constraints remain decisive.
