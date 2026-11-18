@@ -1,0 +1,323 @@
+{
+  "contract": "bnk_research_handoff_v1_proposed",
+  "authority": "documentation_exchange_not_import_schema",
+  "edges": [
+    {
+      "id": "BE-E01",
+      "subject_ref": "lbg",
+      "predicate": "registered_person_with_significant_control_of",
+      "object_ref": "lloyds-bank",
+      "claim_ids": [
+        "BE-LBG-CONTROL"
+      ],
+      "assertion_kind": "source_reported",
+      "temporal_semantics": "as_of_view",
+      "status": "source_reported_candidate",
+      "public_disposition": "bounded_register_facts_owner_mapping_required",
+      "scope_limit": "At least75% share/vote threshold; not100% exactholding or service contract.",
+      "canonical_acceptance": false,
+      "import_executed": false,
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "notification": "2016-04-06"
+      },
+      "source_use_state": "follow_each_supporting_source_decision; not overridden by edge verification",
+      "endpoint_resolution": "doc_local_exact_subjects; existing_owner_canonical_resolution_not_executed"
+    },
+    {
+      "id": "BE-E02",
+      "subject_ref": "payuk",
+      "predicate": "lists_as_guarantor_member",
+      "object_ref": "lloyds-bank",
+      "claim_ids": [
+        "BE-PAY-GOV"
+      ],
+      "assertion_kind": "source_reported",
+      "temporal_semantics": "as_of_view",
+      "status": "source_reported_candidate",
+      "public_disposition": "owner_review_only",
+      "scope_limit": "Exact legal bank in published operator list, not Group; current list has no membership start date.",
+      "canonical_acceptance": false,
+      "import_executed": false,
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18"
+      },
+      "source_use_state": "follow_each_supporting_source_decision; not overridden by edge verification",
+      "endpoint_resolution": "doc_local_exact_subjects; existing_owner_canonical_resolution_not_executed"
+    },
+    {
+      "id": "BE-E03",
+      "subject_ref": "payuk",
+      "predicate": "lists_as_guarantor_member",
+      "object_ref": "nationwide",
+      "claim_ids": [
+        "BE-PAY-GOV"
+      ],
+      "assertion_kind": "source_reported",
+      "temporal_semantics": "as_of_view",
+      "status": "source_reported_candidate",
+      "public_disposition": "owner_review_only",
+      "scope_limit": "Society is the named member, not a new consolidated Group legal person.",
+      "canonical_acceptance": false,
+      "import_executed": false,
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18"
+      },
+      "source_use_state": "follow_each_supporting_source_decision; not overridden by edge verification",
+      "endpoint_resolution": "doc_local_exact_subjects; existing_owner_canonical_resolution_not_executed"
+    },
+    {
+      "id": "BE-E04",
+      "subject_ref": "lbg",
+      "predicate": "reported_envoy_collaboration_with",
+      "object_ref": "google-brand",
+      "claim_ids": [
+        "BE-LBG-ENVOY"
+      ],
+      "assertion_kind": "source_reported",
+      "temporal_semantics": "announcement_2026-05-01_with_variant_date_conflict",
+      "status": "source_reported_candidate",
+      "public_disposition": "existing_brand_level_fact_only",
+      "scope_limit": "No legal contracting endpoint or workload criticality inferred.",
+      "canonical_acceptance": false,
+      "import_executed": false,
+      "dates": {
+        "published": "2026-05-01",
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "alternative_variant_date": "2026-04-28"
+      },
+      "source_use_state": "follow_each_supporting_source_decision; not overridden by edge verification",
+      "endpoint_resolution": "doc_local_exact_subjects; existing_owner_canonical_resolution_not_executed"
+    },
+    {
+      "id": "BE-E05",
+      "subject_ref": "hmt",
+      "predicate": "designates_critical_third_party",
+      "object_ref": "google-emea",
+      "claim_ids": [
+        "BE-GC-DESIGNATION"
+      ],
+      "assertion_kind": "source_reported",
+      "temporal_semantics": "publication_2026-07-10_effective_2026-07-13",
+      "status": "source_reported_candidate",
+      "public_disposition": "existing_ogl_provider_context",
+      "scope_limit": "Only named provider; does not prove use at a bank.",
+      "canonical_acceptance": false,
+      "import_executed": false,
+      "dates": {
+        "published": "2026-07-10",
+        "event": null,
+        "effective": "2026-07-13",
+        "observed_on": "2026-11-18"
+      },
+      "source_use_state": "follow_each_supporting_source_decision; not overridden by edge verification",
+      "endpoint_resolution": "doc_local_exact_subjects; existing_owner_canonical_resolution_not_executed"
+    },
+    {
+      "id": "BE-E06",
+      "subject_ref": "payuk",
+      "predicate": "reported_operator_of",
+      "object_ref": "fps",
+      "claim_ids": [
+        "BE-PAY-SYSTEMS"
+      ],
+      "assertion_kind": "source_reported",
+      "temporal_semantics": "as_of_view",
+      "status": "source_reported_candidate",
+      "public_disposition": "owner_review_only",
+      "scope_limit": "Operator to payment system, not two companies.",
+      "canonical_acceptance": false,
+      "import_executed": false,
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18"
+      },
+      "source_use_state": "follow_each_supporting_source_decision; not overridden by edge verification",
+      "endpoint_resolution": "doc_local_exact_subjects; existing_owner_canonical_resolution_not_executed"
+    },
+    {
+      "id": "BE-E07",
+      "subject_ref": "payuk",
+      "predicate": "reported_operator_of",
+      "object_ref": "bacs",
+      "claim_ids": [
+        "BE-PAY-SYSTEMS"
+      ],
+      "assertion_kind": "source_reported",
+      "temporal_semantics": "as_of_view",
+      "status": "source_reported_candidate",
+      "public_disposition": "owner_review_only",
+      "scope_limit": "Operator to payment system, not two companies.",
+      "canonical_acceptance": false,
+      "import_executed": false,
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18"
+      },
+      "source_use_state": "follow_each_supporting_source_decision; not overridden by edge verification",
+      "endpoint_resolution": "doc_local_exact_subjects; existing_owner_canonical_resolution_not_executed"
+    },
+    {
+      "id": "BE-E08",
+      "subject_ref": "payuk",
+      "predicate": "reported_operator_of",
+      "object_ref": "ics",
+      "claim_ids": [
+        "BE-PAY-SERVICES"
+      ],
+      "assertion_kind": "source_reported",
+      "temporal_semantics": "as_of_view",
+      "status": "source_reported_candidate",
+      "public_disposition": "owner_review_only",
+      "scope_limit": "Operator to system; recognition/supervision scope not copied fromFPS.",
+      "canonical_acceptance": false,
+      "import_executed": false,
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18"
+      },
+      "source_use_state": "follow_each_supporting_source_decision; not overridden by edge verification",
+      "endpoint_resolution": "doc_local_exact_subjects; existing_owner_canonical_resolution_not_executed"
+    },
+    {
+      "id": "BE-E09",
+      "subject_ref": "payuk",
+      "predicate": "reported_provides_switching_service",
+      "object_ref": "cass",
+      "claim_ids": [
+        "BE-PAY-SERVICES"
+      ],
+      "assertion_kind": "source_reported",
+      "temporal_semantics": "as_of_view",
+      "status": "source_reported_candidate",
+      "public_disposition": "owner_review_only",
+      "scope_limit": "Operator to switching service, not payment settlement rail.",
+      "canonical_acceptance": false,
+      "import_executed": false,
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18"
+      },
+      "source_use_state": "follow_each_supporting_source_decision; not overridden by edge verification",
+      "endpoint_resolution": "doc_local_exact_subjects; existing_owner_canonical_resolution_not_executed"
+    },
+    {
+      "id": "BE-E10",
+      "subject_ref": "google-brand",
+      "predicate": "issuer_lists_affiliate_for_maintenance_support",
+      "object_ref": "google-emea",
+      "claim_ids": [
+        "BE-GC-AFFILIATES"
+      ],
+      "assertion_kind": "source_reported",
+      "temporal_semantics": "as_of_view",
+      "status": "source_reported_candidate",
+      "public_disposition": "owner_review_only",
+      "scope_limit": "Provider disclosure; no customer-specific engagement or direct parenthood inferred.",
+      "canonical_acceptance": false,
+      "import_executed": false,
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18"
+      },
+      "source_use_state": "follow_each_supporting_source_decision; not overridden by edge verification",
+      "endpoint_resolution": "doc_local_exact_subjects; existing_owner_canonical_resolution_not_executed"
+    },
+    {
+      "id": "BE-E11",
+      "subject_ref": "google-brand",
+      "predicate": "issuer_lists_distinct_affiliate",
+      "object_ref": "google-ireland",
+      "claim_ids": [
+        "BE-GC-AFFILIATES"
+      ],
+      "assertion_kind": "source_reported",
+      "temporal_semantics": "as_of_view",
+      "status": "source_reported_candidate",
+      "public_disposition": "owner_review_only",
+      "scope_limit": "Separate issuer-listed Irish entity, not alias/contract successor.",
+      "canonical_acceptance": false,
+      "import_executed": false,
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18"
+      },
+      "source_use_state": "follow_each_supporting_source_decision; not overridden by edge verification",
+      "endpoint_resolution": "doc_local_exact_subjects; existing_owner_canonical_resolution_not_executed"
+    },
+    {
+      "id": "BE-E12",
+      "subject_ref": "nationwide",
+      "predicate": "has_consolidated_reporting_perimeter",
+      "object_ref": "nationwide-group",
+      "claim_ids": [
+        "BE-NBS-FINANCIAL-BASIS"
+      ],
+      "assertion_kind": "source_reported",
+      "temporal_semantics": "as_of_view",
+      "status": "source_reported_candidate",
+      "public_disposition": "owner_review_only",
+      "scope_limit": "Analytical projection only, not creation of another legal company.",
+      "canonical_acceptance": false,
+      "import_executed": false,
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18"
+      },
+      "source_use_state": "follow_each_supporting_source_decision; not overridden by edge verification",
+      "endpoint_resolution": "doc_local_exact_subjects; existing_owner_canonical_resolution_not_executed"
+    }
+  ],
+  "negative_cases": [
+    {
+      "id": "BE-N01",
+      "subject_ref": "lloyds-bank",
+      "predicate": "has_critical_envoy_contract_with",
+      "object_ref": "google-emea",
+      "disposition": "reject_unsupported_join",
+      "reason": "Brand collaboration plus provider designation supplies neither signed legal parties nor service criticality."
+    },
+    {
+      "id": "BE-N02",
+      "subject_ref": "nationwide-group",
+      "predicate": "guarantor_shareholder_of",
+      "object_ref": "payuk",
+      "disposition": "reject_wrong_object_and_predicate",
+      "reason": "Society is listed; consolidated Group is not a legal person; guarantors are not shareholders."
+    },
+    {
+      "id": "BE-N03",
+      "subject_ref": "payuk",
+      "predicate": "operates",
+      "object_ref": "boe",
+      "disposition": "reject_reversed_role",
+      "reason": "System operation, central-bank settlement and supervision are distinct."
+    }
+  ],
+  "owner_handoff": "BNK-IND-1 #663 consumes this independent candidate package after reconciliation; no shared source/actor/overlay edits"
+}

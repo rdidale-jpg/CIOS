@@ -1,0 +1,535 @@
+{
+  "authority": "isolated_research_QA_not_financial_engine",
+  "measurements": [
+    {
+      "id": "LBG25-nii",
+      "subject_ref": "lbg",
+      "metric": "nii",
+      "value": "13635",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "BE-S-LBG-FY25",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "LBG25-other",
+      "subject_ref": "lbg",
+      "metric": "other",
+      "value": "6120",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "BE-S-LBG-FY25",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "LBG25-lease",
+      "subject_ref": "lbg",
+      "metric": "lease",
+      "value": "1454",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "BE-S-LBG-FY25",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "LBG25-net",
+      "subject_ref": "lbg",
+      "metric": "net",
+      "value": "18301",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "BE-S-LBG-FY25",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "LBG25-opex",
+      "subject_ref": "lbg",
+      "metric": "opex",
+      "value": "9761",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying_excluding_remediation",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "BE-S-LBG-FY25",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "LBG25-remediation",
+      "subject_ref": "lbg",
+      "metric": "remediation",
+      "value": "968",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "as_at": null
+      },
+      "accounting_basis": "separately_presented",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "BE-S-LBG-FY25",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "LBG25-impairment",
+      "subject_ref": "lbg",
+      "metric": "impairment",
+      "value": "795",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "BE-S-LBG-FY25",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "LBG25-upbt",
+      "subject_ref": "lbg",
+      "metric": "upbt",
+      "value": "6777",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "BE-S-LBG-FY25",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "LBG25-restructuring",
+      "subject_ref": "lbg",
+      "metric": "restructuring",
+      "value": "46",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying_to_statutory_adjustment",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "BE-S-LBG-FY25",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "LBG25-volatility",
+      "subject_ref": "lbg",
+      "metric": "volatility",
+      "value": "70",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying_to_statutory_adjustment",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "BE-S-LBG-FY25",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "LBG25-spbt",
+      "subject_ref": "lbg",
+      "metric": "spbt",
+      "value": "6661",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "as_at": null
+      },
+      "accounting_basis": "statutory",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "BE-S-LBG-FY25",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "NBS26-income",
+      "subject_ref": "nationwide-group",
+      "metric": "income",
+      "value": "6378",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-04-01",
+        "end": "2026-03-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "RUD1-NATIONWIDE-FY26",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "NBS26-cost",
+      "subject_ref": "nationwide-group",
+      "metric": "cost",
+      "value": "4021",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-04-01",
+        "end": "2026-03-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "RUD1-NATIONWIDE-FY26",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "NBS26-credit",
+      "subject_ref": "nationwide-group",
+      "metric": "credit",
+      "value": "331",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-04-01",
+        "end": "2026-03-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "RUD1-NATIONWIDE-FY26",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "NBS26-upbt",
+      "subject_ref": "nationwide-group",
+      "metric": "upbt",
+      "value": "2026",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-04-01",
+        "end": "2026-03-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "RUD1-NATIONWIDE-FY26",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "NBS26-adj-income",
+      "subject_ref": "nationwide-group",
+      "metric": "adj-income",
+      "value": "1",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-04-01",
+        "end": "2026-03-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying_to_statutory_adjustment",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "RUD1-NATIONWIDE-FY26",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "NBS26-acq-exp",
+      "subject_ref": "nationwide-group",
+      "metric": "acq-exp",
+      "value": "138",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-04-01",
+        "end": "2026-03-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying_to_statutory_adjustment",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "RUD1-NATIONWIDE-FY26",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "NBS26-rewards",
+      "subject_ref": "nationwide-group",
+      "metric": "rewards",
+      "value": "399",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-04-01",
+        "end": "2026-03-31",
+        "as_at": null
+      },
+      "accounting_basis": "underlying_to_statutory_adjustment",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "RUD1-NATIONWIDE-FY26",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "NBS26-spbt",
+      "subject_ref": "nationwide-group",
+      "metric": "spbt",
+      "value": "1490",
+      "currency": "GBP",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2025-04-01",
+        "end": "2026-03-31",
+        "as_at": null
+      },
+      "accounting_basis": "statutory",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "RUD1-NATIONWIDE-FY26",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "GCQ326-revenue",
+      "subject_ref": "google-segment",
+      "metric": "revenue",
+      "value": "30700",
+      "currency": "USD",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2026-07-01",
+        "end": "2026-09-30",
+        "as_at": null
+      },
+      "accounting_basis": "segment_operating",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "BE-S-GC-Q326",
+      "status": "candidate_not_canonical"
+    },
+    {
+      "id": "GCQ326-operating-income",
+      "subject_ref": "google-segment",
+      "metric": "operating-income",
+      "value": "11100",
+      "currency": "USD",
+      "scale": "millions",
+      "unit": "currency",
+      "period": {
+        "kind": "duration",
+        "start": "2026-07-01",
+        "end": "2026-09-30",
+        "as_at": null
+      },
+      "accounting_basis": "segment_operating",
+      "state": "actual",
+      "semantic_type": "reported",
+      "source_id": "BE-S-GC-Q326",
+      "status": "candidate_not_canonical"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "BE-CALC-LBG-NET",
+      "inputs": [
+        "LBG25-nii",
+        "LBG25-other",
+        "LBG25-lease"
+      ],
+      "signs": [
+        1,
+        1,
+        -1
+      ],
+      "expected": "18301",
+      "target": "LBG25-net",
+      "meaning": "Lease depreciation is deducted in net-income bridge, not a net lease profit estimate."
+    },
+    {
+      "id": "BE-CALC-LBG-UPBT",
+      "inputs": [
+        "LBG25-net",
+        "LBG25-opex",
+        "LBG25-remediation",
+        "LBG25-impairment"
+      ],
+      "signs": [
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "expected": "6777",
+      "target": "LBG25-upbt",
+      "meaning": "Operating costs and separately shown remediation both retained."
+    },
+    {
+      "id": "BE-CALC-LBG-SPBT",
+      "inputs": [
+        "LBG25-upbt",
+        "LBG25-restructuring",
+        "LBG25-volatility"
+      ],
+      "signs": [
+        1,
+        -1,
+        -1
+      ],
+      "expected": "6661",
+      "target": "LBG25-spbt",
+      "meaning": "Explicit underlying-to-statutory adjustments, no assumed budget."
+    },
+    {
+      "id": "BE-CALC-NBS-UPBT",
+      "inputs": [
+        "NBS26-income",
+        "NBS26-cost",
+        "NBS26-credit"
+      ],
+      "signs": [
+        1,
+        -1,
+        -1
+      ],
+      "expected": "2026",
+      "target": "NBS26-upbt",
+      "meaning": "£127m integration cost already included in4021, never deducted again."
+    },
+    {
+      "id": "BE-CALC-NBS-SPBT",
+      "inputs": [
+        "NBS26-upbt",
+        "NBS26-adj-income",
+        "NBS26-acq-exp",
+        "NBS26-rewards"
+      ],
+      "signs": [
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "expected": "1490",
+      "target": "NBS26-spbt",
+      "meaning": "Income adjustment+1, acquisition expense138 and member rewards399."
+    }
+  ],
+  "integration_cost_memo": {
+    "amount": "127",
+    "currency": "GBP",
+    "scale": "millions",
+    "included_in": "NBS26-cost",
+    "must_not_be_subtracted_again": true
+  },
+  "comparison_denials": [
+    "Lloyds calendarFY2025 vs Nationwide fiscalFY2026 direct ranking",
+    "Lloyds9M2026 vs Nationwide FY2026 totals",
+    "GoogleCloud global segment income -> GoogleCloudEMEA legal entity profit",
+    "payment value or throughput -> Pay.UK revenue"
+  ],
+  "source_status": "issuer HTML table first numeric column is FY2025; retained Nationwide eight facts remain versioned; no fresh original PDF-byte claim",
+  "ratio_review": {
+    "id": "BE-CALC-GC-MARGIN",
+    "numerator": "GCQ326-operating-income",
+    "denominator": "GCQ326-revenue",
+    "multiplier": "100",
+    "round_places": 1,
+    "expected": "36.2",
+    "semantic_type": "calculated",
+    "meaning": "Global Cloud segment operating-income/revenue ratio; not EMEA return or cash margin"
+  }
+}

@@ -1,0 +1,290 @@
+{
+  "authority": "documentation_candidates_only",
+  "base": "fbac4c37910ed07b2baa516e1a5c8d7f329086de",
+  "entities": [
+    {
+      "ref": "lbg",
+      "name": "Lloyds Banking Group plc",
+      "object_kind": "legal_person",
+      "registration": "SC095000",
+      "jurisdiction": "GB",
+      "scope": "Holding company / consolidated reporting Group",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": [
+        {
+          "owner": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "id": "BK-ENT-001",
+          "status": "existing_reference_not_canonical_receipt"
+        },
+        {
+          "owner": "enterprise-knowledge/banking/flora/Banking-Knowledge-Manifest.json",
+          "id": "BK-ENT-001",
+          "status": "existing_reference_not_canonical_receipt"
+        }
+      ]
+    },
+    {
+      "ref": "lloyds-bank",
+      "name": "Lloyds Bank plc",
+      "object_kind": "legal_person",
+      "registration": "00002065",
+      "jurisdiction": "GB",
+      "scope": "Regulated bank; not the Group",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": [
+        {
+          "owner": "docs/flora-runtime/bie2/Actor-Register.json",
+          "id": "actor:lloyds",
+          "status": "existing_reference_not_canonical_receipt"
+        }
+      ]
+    },
+    {
+      "ref": "nationwide",
+      "name": "Nationwide Building Society",
+      "object_kind": "legal_person",
+      "registration": null,
+      "jurisdiction": "GB",
+      "scope": "Mutual society / regulated deposit taker",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": [
+        {
+          "owner": "docs/flora-runtime/bie2/Actor-Register.json",
+          "id": "actor:nationwide",
+          "status": "existing_reference_not_canonical_receipt"
+        }
+      ]
+    },
+    {
+      "ref": "nationwide-group",
+      "name": "Nationwide Building Society consolidated Group",
+      "object_kind": "reporting_perimeter",
+      "registration": null,
+      "jurisdiction": "GB",
+      "scope": "FY2026 reporting perimeter, not another legal person",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": [
+        {
+          "owner": "docs/flora-runtime/bie2/Actor-Register.json",
+          "id": "actor:nbs-group",
+          "status": "existing_reference_not_canonical_receipt"
+        },
+        {
+          "owner": "enterprise-knowledge/banking/research-model/source-snapshots/RUD1-Public-Facts.json",
+          "id": "research-subject:nationwide-building-society-group",
+          "status": "existing_reference_not_canonical_receipt"
+        }
+      ]
+    },
+    {
+      "ref": "google-brand",
+      "name": "Google Cloud",
+      "object_kind": "brand",
+      "registration": null,
+      "jurisdiction": null,
+      "scope": "Commercial brand; not an exact contracting party",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": [
+        {
+          "owner": "docs/flora-runtime/bie2/Actor-Register.json",
+          "id": "actor:google",
+          "status": "existing_reference_not_canonical_receipt"
+        },
+        {
+          "owner": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+          "id": "SUP-GOOGLE",
+          "status": "existing_reference_not_canonical_receipt"
+        }
+      ]
+    },
+    {
+      "ref": "google-segment",
+      "name": "Google Cloud reporting segment",
+      "object_kind": "reporting_perimeter",
+      "registration": null,
+      "jurisdiction": "Global",
+      "scope": "Alphabet global reporting segment, not EMEA entity revenue",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": []
+    },
+    {
+      "ref": "google-emea",
+      "name": "Google Cloud EMEA Limited",
+      "object_kind": "legal_person",
+      "registration": "660412",
+      "jurisdiction": "IE",
+      "scope": "Named CTP legal provider; issuer-reported Irish company registration",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": []
+    },
+    {
+      "ref": "google-ireland",
+      "name": "Google Ireland Ltd.",
+      "object_kind": "legal_person",
+      "registration": "368047",
+      "jurisdiction": "IE",
+      "scope": "Separately listed affiliate, not Google Cloud EMEA Limited",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": []
+    },
+    {
+      "ref": "google-llc",
+      "name": "Google LLC",
+      "object_kind": "legal_person",
+      "registration": null,
+      "jurisdiction": "US",
+      "scope": "US contracting entity separately listed in issuer terms",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": []
+    },
+    {
+      "ref": "alphabet",
+      "name": "Alphabet Inc.",
+      "object_kind": "legal_person",
+      "registration": null,
+      "jurisdiction": "US",
+      "scope": "Reporting parent; exact intermediate EMEA ownership chain unresolved",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": []
+    },
+    {
+      "ref": "payuk",
+      "name": "Pay.UK Limited",
+      "object_kind": "legal_person",
+      "registration": "10872449",
+      "jurisdiction": "GB",
+      "scope": "Company limited by guarantee / payment system operator",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": [
+        {
+          "owner": "docs/flora-runtime/bie2/Actor-Register.json",
+          "id": "actor:payuk",
+          "status": "existing_reference_not_canonical_receipt"
+        }
+      ]
+    },
+    {
+      "ref": "fps",
+      "name": "Faster Payment System",
+      "object_kind": "payment_system",
+      "registration": null,
+      "jurisdiction": "GB",
+      "scope": "Not a legal company",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": [
+        {
+          "owner": "docs/flora-runtime/bie2/Actor-Register.json",
+          "id": "actor:fps",
+          "status": "existing_reference_not_canonical_receipt"
+        }
+      ]
+    },
+    {
+      "ref": "bacs",
+      "name": "Bacs Payment System",
+      "object_kind": "payment_system",
+      "registration": null,
+      "jurisdiction": "GB",
+      "scope": "Not a legal company",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": [
+        {
+          "owner": "docs/flora-runtime/bie2/Actor-Register.json",
+          "id": "actor:bacs",
+          "status": "existing_reference_not_canonical_receipt"
+        }
+      ]
+    },
+    {
+      "ref": "ics",
+      "name": "Image Clearing System",
+      "object_kind": "payment_system",
+      "registration": null,
+      "jurisdiction": "GB",
+      "scope": "Not a legal company",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": [
+        {
+          "owner": "docs/flora-runtime/bie2/Actor-Register.json",
+          "id": "actor:ics",
+          "status": "existing_reference_not_canonical_receipt"
+        }
+      ]
+    },
+    {
+      "ref": "cass",
+      "name": "Current Account Switch Service",
+      "object_kind": "switching_service",
+      "registration": null,
+      "jurisdiction": "GB",
+      "scope": "Not a legal company or payment rail",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": [
+        {
+          "owner": "docs/flora-runtime/bie2/Actor-Register.json",
+          "id": "actor:cass",
+          "status": "existing_reference_not_canonical_receipt"
+        }
+      ]
+    },
+    {
+      "ref": "boe",
+      "name": "Bank of England",
+      "object_kind": "public_institution",
+      "registration": null,
+      "jurisdiction": "GB",
+      "scope": "Central bank / settlement and supervisory roles distinct",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": [
+        {
+          "owner": "docs/flora-runtime/bie2/Actor-Register.json",
+          "id": "actor:boe",
+          "status": "existing_reference_not_canonical_receipt"
+        }
+      ]
+    },
+    {
+      "ref": "hmt",
+      "name": "HM Treasury",
+      "object_kind": "public_institution",
+      "registration": null,
+      "jurisdiction": "GB",
+      "scope": "Designating authority, not a service consumer",
+      "canonical_id": null,
+      "canonical_existence": "not_verified_through_authorised_production_read",
+      "owner_refs": []
+    }
+  ],
+  "collisions": [
+    {
+      "identifier": "BK-ENT-003",
+      "left_owner": "enterprise-knowledge/banking/flora/Banking-Knowledge-Manifest.json",
+      "left_meaning": "Nationwide Virgin Money Enterprise Twin",
+      "right_owner": "cios/applications/flora/banking_portfolio.py",
+      "right_meaning": "NatWest Group",
+      "disposition": "unresolved_owner_scoped_references_only_no_alias_merge"
+    },
+    {
+      "identifier": "BK-ENT-002",
+      "left_owner": "enterprise-knowledge/banking/flora/Banking-Knowledge-Manifest.json",
+      "left_meaning": "NatWest Enterprise Twin",
+      "disposition": "legacy_scope_not_a_current_resource_binding"
+    }
+  ]
+}

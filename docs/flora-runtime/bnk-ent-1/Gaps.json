@@ -1,0 +1,173 @@
+{
+  "authority": "owner_research_backlog_only",
+  "gaps": [
+    {
+      "id": "G-ID",
+      "subject_ref": "cross-enterprise",
+      "priority": "blocking",
+      "deficiency": "Current/legacyBK-ENT-003 collision",
+      "evidence_needed": "Inspect authorised identity receipts and owner namespaces",
+      "fail_closed_rule": "No merge by bare ID; no generated slug treated as canonical",
+      "existing_responsibility": "identity_owner",
+      "status": "open"
+    },
+    {
+      "id": "G-GC-LEGAL",
+      "subject_ref": "google-brand",
+      "priority": "high",
+      "deficiency": "Exact EMEA ownership chain and legal accounts",
+      "evidence_needed": "Irish company filings plus issuer legal structure; preserve company660412",
+      "fail_closed_rule": "No UK/EMEA revenue or parentage allocation",
+      "existing_responsibility": "source_identity_owner",
+      "status": "open"
+    },
+    {
+      "id": "G-GC-SERVICE",
+      "subject_ref": "google-brand",
+      "priority": "high",
+      "deficiency": "Actual bank legal-provider/service/workload exposure",
+      "evidence_needed": "Authorised executed agreement/service inventory and scoped validation",
+      "fail_closed_rule": "Brand/CTP/general terms never substitute for signed parties",
+      "existing_responsibility": "enterprise_relationship_owner",
+      "status": "open"
+    },
+    {
+      "id": "G-GC-CAPACITY",
+      "subject_ref": "google-brand",
+      "priority": "medium",
+      "deficiency": "Current service-specific capacity, cost and outcome evidence",
+      "evidence_needed": "Dated service metrics and accountable-role validation",
+      "fail_closed_rule": "No customer demand, savings, budget or supplier gap inferred",
+      "existing_responsibility": "enterprise_research_owner",
+      "status": "open"
+    },
+    {
+      "id": "G-PAY-ACCOUNTS",
+      "subject_ref": "payuk",
+      "priority": "high",
+      "deficiency": "Unreadable2025 accounts; missing turnover/cash/surplus",
+      "evidence_needed": "Obtain readable original financial pages through permitted route, verify period/entity/basis",
+      "fail_closed_rule": "No extrapolation from payment values/counters/fee snippets",
+      "existing_responsibility": "financial_source_owner",
+      "status": "open"
+    },
+    {
+      "id": "G-PAY-RIGHTS",
+      "subject_ref": "payuk",
+      "priority": "blocking",
+      "deficiency": "FPS guide Public/confidential conflict and website expression terms",
+      "evidence_needed": "Document-specific intended-use review and clarification where necessary",
+      "fail_closed_rule": "Affected source isolated; no restriction bypass or global admission block",
+      "existing_responsibility": "source_rights_owner",
+      "status": "open"
+    },
+    {
+      "id": "G-PAY-SUPPLIER",
+      "subject_ref": "payuk",
+      "priority": "high",
+      "deficiency": "Exact legal supplier parties/effective dates/current workshare",
+      "evidence_needed": "Review permitted signed/disclosed contract evidence or explicit legal-party announcement",
+      "fail_closed_rule": "Supplier-side extension remains reported context, not procurement",
+      "existing_responsibility": "relationship_owner",
+      "status": "open"
+    },
+    {
+      "id": "G-PAY-OUTCOMES",
+      "subject_ref": "payuk",
+      "priority": "medium",
+      "deficiency": "Delivered-change and service funding evidence",
+      "evidence_needed": "Dated operator/participant outcomes, finance and programme records",
+      "fail_closed_rule": "Programme labels/leadership titles do not prove benefit or buying need",
+      "existing_responsibility": "enterprise_research_owner",
+      "status": "open"
+    },
+    {
+      "id": "G-LBG-AI",
+      "subject_ref": "lbg",
+      "priority": "high",
+      "deficiency": "Net incremental realised AI benefits and control effectiveness",
+      "evidence_needed": "Scoped benefits model, measured baseline/outcomes/costs and incumbent response",
+      "fail_closed_rule": "50m actual claim and>100m expectation not doubled achieved savings",
+      "existing_responsibility": "enterprise_research_owner",
+      "status": "open"
+    },
+    {
+      "id": "G-LBG-ENVOY-DATE",
+      "subject_ref": "lbg",
+      "priority": "high",
+      "deficiency": "HTML1May vs linked variant28April announcement date",
+      "evidence_needed": "Reconcile issuer versions and preserve both; no invented implementation date",
+      "fail_closed_rule": "Use version-specific dates rather than collapse",
+      "existing_responsibility": "source_owner",
+      "status": "open"
+    },
+    {
+      "id": "G-LBG-RACI",
+      "subject_ref": "lbg",
+      "priority": "medium",
+      "deficiency": "Capability/account decision rights",
+      "evidence_needed": "Validate published-role-to-service responsibility and remaining decisions",
+      "fail_closed_rule": "Professional title not buying authority",
+      "existing_responsibility": "enterprise_owner",
+      "status": "open"
+    },
+    {
+      "id": "G-NBS-INTEGRATION",
+      "subject_ref": "nationwide",
+      "priority": "high",
+      "deficiency": "Current legal-to-operating convergence and delivered outcomes",
+      "evidence_needed": "Post-transfer issuer records plus scoped service milestones",
+      "fail_closed_rule": "Legal completion is not systems completion or failure",
+      "existing_responsibility": "enterprise_owner",
+      "status": "open"
+    },
+    {
+      "id": "G-NBS-MORTGAGE",
+      "subject_ref": "nationwide",
+      "priority": "high",
+      "deficiency": "Verified mortgage operating ownership/system/provider map",
+      "evidence_needed": "Current permitted process/accountability and supplier disclosures",
+      "fail_closed_rule": "Conceptual mortgage information needs are not actual platform dependencies",
+      "existing_responsibility": "enterprise_owner",
+      "status": "open"
+    },
+    {
+      "id": "G-NBS-CAPITAL",
+      "subject_ref": "nationwide-group",
+      "priority": "medium",
+      "deficiency": "Detailed current product/capital/cash/member-value model",
+      "evidence_needed": "Comparable legal-period disclosures and existing Financial typed inputs",
+      "fail_closed_rule": "PBT/reward arithmetic not unallocated cash or supplier spend",
+      "existing_responsibility": "financial_owner",
+      "status": "open"
+    }
+  ],
+  "closure_waves": [
+    {
+      "wave": 1,
+      "focus": "Identity collision, source-use exception and readable Pay.UK accounts; exact legal/perimeter readiness before additional metrics",
+      "entities": [
+        "payuk",
+        "google-emea",
+        "nationwide"
+      ]
+    },
+    {
+      "wave": 2,
+      "focus": "Scoped operating/accountability and realised outcomes for existing bank/provider responses",
+      "entities": [
+        "lbg",
+        "nationwide",
+        "google-brand"
+      ]
+    },
+    {
+      "wave": 3,
+      "focus": "Representative expansion: ClearBank clearing/access; Starling/Engine bank/software split; NatWest; then selected Barclays, HSBC UK, Santander/TSB with exact Group/bank periods",
+      "entities": [
+        "cross-enterprise"
+      ]
+    }
+  ],
+  "no_automatic_qualification": true
+}

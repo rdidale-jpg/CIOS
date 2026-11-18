@@ -1,0 +1,481 @@
+{
+  "authority": "analytical_presentation_map_not_taxonomy",
+  "capabilities": [
+    {
+      "id": "BE-CAP-lbg-deposit-franchise",
+      "subject_ref": "lbg",
+      "label": "Customer funding & relationships",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Need → account opening → savings/payments → retention",
+      "economic_mechanism": "Stable funding and customer service can support spread economics; deposit stock is not revenue.",
+      "people_and_accountability": "Customer/channel teams; published Group CFO/COO are relevant inquiry roles, not attested capability owners.",
+      "process": "Onboard, service, price, monitor funding behaviour",
+      "information": "Balances, product rates, account activity; no customer records retrieved",
+      "technology_and_dependencies": "No current account platform supplier/system is established here.",
+      "context_claim_ids": [
+        "BE-LBG-DEPOSITS"
+      ],
+      "existing_reference": "CAP-DEPOSITS",
+      "existing_reference_owner": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-lbg-credit",
+      "subject_ref": "lbg",
+      "label": "Credit allocation & servicing",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Assess need → underwrite → lend → service/recover",
+      "economic_mechanism": "Interest income must be evaluated with funding, impairment, operating costs and capital.",
+      "people_and_accountability": "Lending, risk and servicing roles are analytical placements.",
+      "process": "Credit assessment, affordability, collateral and arrears handling",
+      "information": "Exposure, repayment and risk information categories; no internal decision model acquired",
+      "technology_and_dependencies": "No current underwriting stack or external delivery gap verified.",
+      "context_claim_ids": [
+        "BE-LBG-PBT9M"
+      ],
+      "existing_reference": "CAP-LENDING",
+      "existing_reference_owner": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-lbg-ai-control",
+      "subject_ref": "lbg",
+      "label": "AI platform enablement & control",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Multiple customer/colleague journeys; enabling capability, not a sales activity",
+      "economic_mechanism": "Incremental net benefit depends on adoption, quality, control and ongoing platform cost.",
+      "people_and_accountability": "Published Group COO/CRO/CFO roles provide possible accountability context; Envoy RACI unverified.",
+      "process": "Select use case → apply controls → deploy/monitor → evaluate incremental outcomes",
+      "information": "Model/use-case inventory, permissions, telemetry and benefit evidence are information needs",
+      "technology_and_dependencies": "Envoy / Google Cloud brand collaboration and described controls are reported; exact legal hosting, workload and service architecture unresolved.",
+      "context_claim_ids": [
+        "BE-LBG-ENVOY",
+        "BE-LBG-AI-VALUE"
+      ],
+      "existing_reference": "CAP-TECH",
+      "existing_reference_owner": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-lbg-finance",
+      "subject_ref": "lbg",
+      "label": "Enterprise economics & capital allocation",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Measure → challenge → allocate → monitor returns",
+      "economic_mechanism": "Profit, liquidity, capital and distributable cash are related but distinct resources.",
+      "people_and_accountability": "Group CFO role published; individual investment committee decisions not acquired.",
+      "process": "Reconcile management/statutory views and capital constraints",
+      "information": "Income, lease effects, remediation, impairment, capital and economic assumptions",
+      "technology_and_dependencies": "No budgeting application or supplier allocation inferred from total profit.",
+      "context_claim_ids": [
+        "BE-LBG-PBT9M"
+      ],
+      "existing_reference": "CAP-FINANCE",
+      "existing_reference_owner": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-lbg-customer-outcomes",
+      "subject_ref": "lbg",
+      "label": "Customer outcome assurance",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Use service → raise issue → resolve → learn",
+      "economic_mechanism": "Quality, remediation and customer retention may interact; no causal complaint-cost conversion.",
+      "people_and_accountability": "Published Consumer, Business & Commercial and risk roles; no private caseworker data.",
+      "process": "Operational/service and risk review as conceptual processes",
+      "information": "Service outcomes must be scope/period matched; complaints are not matched cohorts",
+      "technology_and_dependencies": "No asserted failure of current controls, service platform or outsourcer.",
+      "context_claim_ids": [
+        "BE-LBG-CURRENT-BUSINESS"
+      ],
+      "existing_reference": "CAP-SERVICE",
+      "existing_reference_owner": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-lbg-wealth",
+      "subject_ref": "lbg",
+      "label": "Wealth, insurance & pensions propositions",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Plan → contribute/protect → invest → claim/retire",
+      "economic_mechanism": "Different fee/insurance and asset-management mechanisms should not be forced into bank NIM.",
+      "people_and_accountability": "Published Wealth & Insurance / Scottish Widows role; not a legal-entity consolidation map.",
+      "process": "Advice/service, contribution and claims lifecycles are conceptual",
+      "information": "Policy, contribution, assets and customer outcome information categories",
+      "technology_and_dependencies": "No custody, fund-platform or insurer supplier contract inferred.",
+      "context_claim_ids": [
+        "BE-LBG-CURRENT-BUSINESS"
+      ],
+      "existing_reference": "CAP-STRATEGY",
+      "existing_reference_owner": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-nationwide-mortgage",
+      "subject_ref": "nationwide",
+      "label": "Mortgage lending & lifecycle service",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Housing need → affordability/valuation → offer/completion → repayment/support",
+      "economic_mechanism": "Mortgage yield must fund saver returns, losses, service cost and capital; member value can affect pricing choices.",
+      "people_and_accountability": "Mortgage, risk, distribution and treasury are conceptual responsibility groupings; CEO is published, operational owners not verified.",
+      "process": "Origination, underwriting, completion, account servicing and support",
+      "information": "Affordability, property, loan and arrears data categories; no private records or decision policy inspected",
+      "technology_and_dependencies": "No named mortgage platform, cloud or AI exposure established.",
+      "context_claim_ids": [
+        "BE-NBS-MUTUAL",
+        "BE-NBS-FINANCIAL-BASIS"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-nationwide-savings",
+      "subject_ref": "nationwide",
+      "label": "Savings, membership & funding",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Save → access funds → use benefits → renew relationship",
+      "economic_mechanism": "Saver value and retained financial strength constrain pure margin maximisation.",
+      "people_and_accountability": "Treasury/product/service roles conceptual; no named buyer authority.",
+      "process": "Membership eligibility, account service and product economics",
+      "information": "Balances, pricing, eligibility and capital/liquidity information categories",
+      "technology_and_dependencies": "No deposit platform supplier established by Group results.",
+      "context_claim_ids": [
+        "BE-NBS-MUTUAL",
+        "BE-NBS-MEMBER-THESIS"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-nationwide-integration",
+      "subject_ref": "nationwide",
+      "label": "Business integration & customer continuity",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Legal transfer → maintain service → change platforms/products with controls",
+      "economic_mechanism": "Integration expense is not proof of failure or an open work package; delivered benefits and residual decisions need separate proof.",
+      "people_and_accountability": "CEO context published; programme sponsor/RACI remains an evidence gap.",
+      "process": "Plan legal/operational change, reconcile accounts, notify customers, test continuity",
+      "information": "Legal account perimeter, brands, service channels and milestones",
+      "technology_and_dependencies": "Legal transfer occurred; issuer says Virgin Money interfaces initially continue. Architecture consolidation is not thereby verified.",
+      "context_claim_ids": [
+        "BE-NBS-TRANSFER",
+        "BE-NBS-INTEGRATION"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-nationwide-member-value",
+      "subject_ref": "nationwide",
+      "label": "Member value & financial stewardship",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Earn → retain strength → allocate eligible member benefits",
+      "economic_mechanism": "Underlying/statutory reconciliation includes rewards and acquisition adjustments; rewards are not a technology budget.",
+      "people_and_accountability": "CEO/finance/membership governance roles should be confirmed against current responsibilities.",
+      "process": "Balance pricing, rewards, risk and retained capital",
+      "information": "Eight retained financial facts plus separately sourced membership conditions",
+      "technology_and_dependencies": "No inference of every customer being a member or every member receiving payment.",
+      "context_claim_ids": [
+        "BE-NBS-MEMBER-THESIS"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-nationwide-payments",
+      "subject_ref": "nationwide",
+      "label": "Account/payment service coordination",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Initiate → validate → transmit → reconcile/service",
+      "economic_mechanism": "Society customer outcome depends on shared payment services as well as its own operations.",
+      "people_and_accountability": "Payments/service and risk roles are conceptual; no bank-specific vendor map.",
+      "process": "Coordinate account access, external rails and customer support",
+      "information": "Payment status, account and exception categories; no transaction/customer data retained",
+      "technology_and_dependencies": "Pay.UK guarantor membership is verified as a published governance fact, not a technology contract.",
+      "context_claim_ids": [
+        "BE-PAY-GOV"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-nationwide-risk",
+      "subject_ref": "nationwide",
+      "label": "Prudential & operational risk management",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Assess → control → monitor → adapt",
+      "economic_mechanism": "Loss absorption, liquidity and service continuity limit distributable surplus and change capacity.",
+      "people_and_accountability": "Risk/finance/operations role hypotheses, not actual approval authority.",
+      "process": "Assess asset quality, funding and service change within existing controls",
+      "information": "Credit, operational and capital information; no control-effectiveness evidence acquired",
+      "technology_and_dependencies": "No integration incident or missing control claimed from expenditure or legal transfer.",
+      "context_claim_ids": [
+        "BE-NBS-FINANCIAL-BASIS"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-google-brand-platform-operations",
+      "subject_ref": "google-brand",
+      "label": "Cloud platform operations",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Customer workload → provision resources → run/monitor → bill/support",
+      "economic_mechanism": "Capacity utilisation, service mix and delivery costs interact with consumption; TPU system sales add a hardware/inventory mechanism.",
+      "people_and_accountability": "Product, SRE, infrastructure and finance role categories are conceptual; Thomas Kurian title is published.",
+      "process": "Capacity planning, provisioning, secure operation, support and retirement",
+      "information": "Usage/availability/capacity/incident and billing categories; no customer telemetry retrieved",
+      "technology_and_dependencies": "Issuer infrastructure reference layers, not Lloyds deployment or current exact region topology.",
+      "context_claim_ids": [
+        "BE-GC-MIX",
+        "BE-GC-TECH",
+        "BE-GC-VALUE-MODEL"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-google-brand-commercial",
+      "subject_ref": "google-brand",
+      "label": "Contract, consumption & customer value",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Choose service/terms → commit/provision → consume → charge/renew",
+      "economic_mechanism": "Reported global segment results do not disclose UK/EMEA customer prices or legal-entity margin.",
+      "people_and_accountability": "Cloud commercial and finance roles; no named account executive or buying sponsor inferred.",
+      "process": "Select applicable entity/services, meter use, invoice and support",
+      "information": "Agreement scope, billing location and service usage are information needs",
+      "technology_and_dependencies": "Standard terms cannot substitute for actual executed Lloyds or reseller agreement.",
+      "context_claim_ids": [
+        "BE-GC-CONTRACTING",
+        "BE-GC-FINANCIAL-SCOPE"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-google-brand-capacity",
+      "subject_ref": "google-brand",
+      "label": "Infrastructure capacity & lifecycle economics",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Plan capacity → procure/build → deploy → operate → refresh",
+      "economic_mechanism": "Cash for facilities/servers/inventory precedes some revenue and expense recognition; no Cloud-only capex allocation inferred.",
+      "people_and_accountability": "Infrastructure, engineering and finance responsibility hypotheses.",
+      "process": "Plan deployment, lifecycle and energy/maintenance needs",
+      "information": "Asset life, energy/capacity, demand and supplier evidence categories",
+      "technology_and_dependencies": "June2024 reference describes owned and third-party premises; no specific data-centre provider contract asserted.",
+      "context_claim_ids": [
+        "BE-GC-TECH",
+        "BE-GC-MIX"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-google-brand-assurance",
+      "subject_ref": "google-brand",
+      "label": "Provider assurance & regulated service continuity",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Identify service scope → demonstrate controls → test continuity → review changes",
+      "economic_mechanism": "Designation creates provider oversight context; a particular bank’s loss, deficient control or unmet need is not established.",
+      "people_and_accountability": "Company service/risk roles and bank third-party-risk roles remain separate.",
+      "process": "Evidence service boundaries, incidents, subcontracting and continuity",
+      "information": "Legal provider, covered service, criticality and control evidence; no canonical pressure qualified",
+      "technology_and_dependencies": "Google Cloud EMEA is named CTP; Google brand/segment/affiliates remain distinct.",
+      "context_claim_ids": [
+        "BE-GC-DESIGNATION",
+        "BE-GC-ENTITY"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-google-brand-data-ai",
+      "subject_ref": "google-brand",
+      "label": "Managed data & AI services",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Ingest/prepare → govern → train/infer/query → observe",
+      "economic_mechanism": "Service adoption may expand compute/storage consumption, but no customer benefit, savings or budget inferred.",
+      "people_and_accountability": "Product, security, data and customer roles are conceptual.",
+      "process": "Manage customer-configurable service and data boundaries",
+      "information": "Data categories/model/service identities are information needs, not a workload inventory",
+      "technology_and_dependencies": "Global service descriptions and subprocessor scopes are not evidence that Envoy uses any particular service.",
+      "context_claim_ids": [
+        "BE-GC-AFFILIATES",
+        "BE-GC-VALUE-MODEL"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-google-brand-ecosystem",
+      "subject_ref": "google-brand",
+      "label": "Affiliate & third-party service coordination",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Define service → assign bounded processing/support roles → govern/change",
+      "economic_mechanism": "Third-party delivery supports service capability and creates assurance dependencies; company spend/workshare undisclosed.",
+      "people_and_accountability": "Disclosed affiliate/subprocessor functions; no assumed universal staff access.",
+      "process": "Maintain scoped disclosures and customer service arrangements",
+      "information": "Processor/service/region/activity and permission distinctions",
+      "technology_and_dependencies": "Google Cloud EMEA Limited and Google Ireland Ltd. are separate listed entities.",
+      "context_claim_ids": [
+        "BE-GC-AFFILIATES"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-payuk-clearing",
+      "subject_ref": "payuk",
+      "label": "Payment-system operation & service continuity",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "PSP instruction → validate/clear → settle through arrangements → reconcile",
+      "economic_mechanism": "Service funding and network continuity are different economics from lending spreads; transaction value is not operator revenue.",
+      "people_and_accountability": "Published COO David Morris relevant to operational inquiry; not attested every-system owner.",
+      "process": "Operate rules/service, monitor exceptions, manage continuity",
+      "information": "Instruction/status/routing and operational evidence categories; no participant/customer data retrieved",
+      "technology_and_dependencies": "Pay.UK operator, FPS/Bacs/ICS systems, central-bank settlement and participant ledgers are distinct.",
+      "context_claim_ids": [
+        "BE-PAY-SYSTEMS",
+        "BE-PAY-SERVICES"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-payuk-access",
+      "subject_ref": "payuk",
+      "label": "Participant access & assurance",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Request access → satisfy criteria/agreements → connect/test → operate",
+      "economic_mechanism": "Access choices allocate cost, risk and service responsibilities; no published fee applied to a named bank.",
+      "people_and_accountability": "Operations, legal and risk responsibilities are analytical placements.",
+      "process": "Admission and ongoing access lifecycle; no gated documents accessed",
+      "information": "Participant identity, permissions, connectivity and assurance evidence categories",
+      "technology_and_dependencies": "ICS public agreement framework is not a signed named-party contract.",
+      "context_claim_ids": [
+        "BE-PAY-ICS"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-payuk-fraud",
+      "subject_ref": "payuk",
+      "label": "Fraud reimbursement coordination",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Register → exchange claim information → decide/reimburse → monitor",
+      "economic_mechanism": "RCMS common-service cost recovery differs from PSP reimbursement liability and fraud loss.",
+      "people_and_accountability": "Operator COO/risk context published; individual PSP retains its own responsibilities.",
+      "process": "Coordinate service and participant information flow; do not infer adjudication authority",
+      "information": "Claims/status/behaviour information categories; no actual cases or personal information retrieved",
+      "technology_and_dependencies": "RCMS FAQ anticipates billing changes; no exact tariff or customer bill asserted.",
+      "context_claim_ids": [
+        "BE-PAY-ECONOMICS"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-payuk-standards",
+      "subject_ref": "payuk",
+      "label": "Scheme rules & information standards",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Identify need → consult/define → assure implementation → maintain",
+      "economic_mechanism": "Common standards can reduce coordination friction; savings and adoption remain unmeasured.",
+      "people_and_accountability": "Strategy/Transformation and governance role context published.",
+      "process": "Develop rules and standards with distinct participants/regulators",
+      "information": "Definitions, versions, change and conformance evidence categories",
+      "technology_and_dependencies": "No new ISO20022 programme delivery date or supplier workshare invented.",
+      "context_claim_ids": [
+        "BE-PAY-SERVICES"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-payuk-governance",
+      "subject_ref": "payuk",
+      "label": "Stakeholder governance & funding allocation",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Engage service users → challenge priorities → allocate/review → account",
+      "economic_mechanism": "Guarantor accountability and participant interests differ from shareholder return maximisation.",
+      "people_and_accountability": "Board/guarantor roles explicit; CFO Michael Ellis is a published role, not every commercial decision maker.",
+      "process": "Board/member and stakeholder challenge alongside financial stewardship",
+      "information": "Member roles, funding evidence, options and decision records",
+      "technology_and_dependencies": "Lloyds Bank plc / Nationwide are named guarantors; not voting dominance or service exposure.",
+      "context_claim_ids": [
+        "BE-PAY-GOV",
+        "BE-PAY-ROLES"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    },
+    {
+      "id": "BE-CAP-payuk-transformation",
+      "subject_ref": "payuk",
+      "label": "Infrastructure/service change management",
+      "structure_status": "conceptual_capability_not_verified_org_boundary",
+      "value_stream_context": "Maintain continuity → design change → test/adopt → measure outcomes",
+      "economic_mechanism": "Current reliable services and future changes compete for resources; no open procurement or available budget established.",
+      "people_and_accountability": "Published David Crawford Strategy/Transformation; actual programme mandates require evidence.",
+      "process": "Coordinate operator, participants, infrastructure supplier and regulator change",
+      "information": "Roadmap, contract perimeter, migration and readiness evidence categories",
+      "technology_and_dependencies": "Retained supplier leads require scope/date/use verification; old NPA labels are not current procurement authority.",
+      "context_claim_ids": [
+        "BE-PAY-ROLES",
+        "BE-PAY-SYSTEMS"
+      ],
+      "existing_reference": null,
+      "existing_reference_owner": null,
+      "verified_capability_supplier_edges": [],
+      "material_pressure_qualified": false
+    }
+  ],
+  "capability_vs_value_stream": "Durable ability versus a sequence of value-delivery activities; supporting a journey does not prove causal outcomes or a legal organisational boundary.",
+  "frameworks": {
+    "EI-001": "Draft",
+    "EIF-001": "Review/documentation only",
+    "EGM-001": "Founder Review; not public evidence",
+    "BIZBOK": "inspired organising method, no adoption of licensed model or canonical standard"
+  }
+}
