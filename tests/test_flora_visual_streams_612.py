@@ -57,7 +57,8 @@ def test_exact_accepted_seven_sources_and_only_responsive_current_scene_loaded()
   current=asset_manifest()['portraits'][scope+'-'+stream]
   portraits=[a for a in images if a.get('class')!='watermark']
   assert len(portraits)==2  # One responsive subtree is hidden at each size.
-  assert all(current['variants'][0]['file'].removesuffix('.webp')in a['src']for a in portraits)
+  expected_src=v.BANKING_ART_SMALL if (scope,stream)==('banking','landscape') else current['variants'][0]['file'].removesuffix('.webp')
+  assert all(expected_src in a['src']for a in portraits)
   assert all('384w'in a['srcset'] and '768w'in a['srcset']for a in portraits)
   assert all(a['loading']=='lazy'for a in portraits)
   assert next(a for a in images if a.get('class')=='watermark')['aria-hidden']=='true'

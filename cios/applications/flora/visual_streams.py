@@ -28,6 +28,10 @@ SCOPES=MappingProxyType({
  'lloyds':{'route':'/enterprises/lloyds','kind':'enterprise','streams':('landscape','inside','forces'),'domain':'banking','identity_key':'enterprise_twin_id','slug':'lloyds',
            'headline_metrics':(('LBG-Q326-DEPOSITS','Group deposits'),('LBG-Q326-PROFIT','Group statutory pretax profit'))},
 })
+BANKING_ART='banking-ecosystem-557923c065e8'
+BANKING_ART_SHA256='557923c065e88b4ff9abdea68f720fe6e5761bce016de619dbc69395eec3f7c4'
+BANKING_ART_SMALL='banking-ecosystem-384-684c51dd51bf'
+BANKING_ART_SMALL_SHA256='684c51dd51bf7042f77d6d51a77d7daa695bc8c942e524bbbfcee10888e985d6'
 EASYJET_ROUTE='/enterprises/easyjet/preview'
 EASYJET_ART='easyjet-operations-a3ebfbfaca50'
 EASYJET_ART_SHA256='a3ebfbfaca5030fbe35ba49b295714e703a21b2217a0065ac2cb761dfc88c984'
@@ -82,6 +86,8 @@ def asset_files():
    # extension is an on-disk concern, not a reason to widen that grammar.
    files[filename.removesuffix('.webp')]=(filename,'image/webp')
  from .visual_panels import asset_manifest
+ files[BANKING_ART_SMALL]=('banking-ecosystem-384.webp','image/webp')
+ files[BANKING_ART]=('banking-ecosystem.webp','image/webp')
  files[EASYJET_ART]=('easyjet-operations.webp','image/webp')
  files['panel-styles']=('panels.css','text/css; charset=utf-8')
  for name,row in asset_manifest()['files'].items():
@@ -93,12 +99,16 @@ def asset_files():
 def asset(name):
  if name not in asset_files():raise ValueError('Visual asset unavailable')
  filename,mime=asset_files()[name]
- if name==EASYJET_ART:
-  path=ASSETS.parent/'easyjet_art'/filename
+ conceptual_art={EASYJET_ART:('easyjet_art',EASYJET_ART_SHA256),
+                 BANKING_ART:('banking_art',BANKING_ART_SHA256),
+                 BANKING_ART_SMALL:('banking_art',BANKING_ART_SMALL_SHA256)}
+ if name in conceptual_art:
+  directory,digest=conceptual_art[name]
+  path=ASSETS.parent/directory/filename
   if path.is_symlink():raise ValueError('Visual asset unavailable')
   try:body=path.read_bytes()
   except OSError:raise ValueError('Visual asset unavailable') from None
-  if hashlib.sha256(body).hexdigest()!=EASYJET_ART_SHA256:raise ValueError('Visual asset checksum mismatch')
+  if hashlib.sha256(body).hexdigest()!=digest:raise ValueError('Visual asset checksum mismatch')
   return body,mime
  p=ASSETS/filename
  if p.is_symlink() or not p.is_file() or not p.resolve().is_relative_to(ASSETS.resolve()):raise ValueError('Visual asset unavailable')
@@ -148,7 +158,12 @@ def resolve(path,query):
  for key in ('selected','detail','agenda'):
   if key in query and not query[key][0]:raise ValueError('Empty visual selector')
  spots=geometry()[scope+'-'+stream]['spots']
- if detail and detail not in {s['id']for s in spots}:raise ValueError('Selected detail unavailable')
+ valid_details={s['id']for s in spots}
+ if scope=='banking' and stream=='landscape':
+  from .banking_ecosystem import STAGES
+  valid_details.update(STAGES)
+  if detail in STAGES and (agenda or selected):raise ValueError('Industry stage context mismatch')
+ if detail and detail not in valid_details:raise ValueError('Selected detail unavailable')
  if detail and binding['kind']=='country' and stream=='landscape':raise ValueError('District detail unavailable')
  if binding['kind']=='industry' and detail in BANKS and selected not in ('',detail):raise ValueError('Selected bank mismatch')
  reading=query.get('reading',['facts'])[0]

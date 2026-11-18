@@ -1,0 +1,29 @@
+# BNK-VIS-INTEGRATE-1 · Banking economic ecosystem
+
+[Commission #674](https://github.com/rdidale-jpg/CIOS/issues/674) authorises this branch from verified main `12f2aaef2e988222d4c0d79dbcc454ba3603a014`. Facts-first #671 and illustrated easyJet #673 were merged before branching. The easyJet artwork, capability selection and reading semantics are preserved. Drafts #665, #666, #668 and #657 remain research or design references.
+
+From UK Landscape select Banking; choose **Customers & businesses**, **Funding & lending**, **Payments**, or **Technology & infrastructure** on the portrait, or use its text links. Facts shows the selected process and eligible evidence. FLORA Insight uses the same selection and reports conditional economic mechanisms. Follow the existing Nationwide Group earnings or Lloyds technology route, then use Back to return to the same stage and mode. Top remains Landscape / Forces. UK Forces links to Banking Forces for contextual exploration. The retained July 2026 pulse is historical.
+
+The fictional riverside town is AI-generated editorial artwork from the design preflight. Public Banking Landscape uses it as an additive, content-addressed illustration with responsive 384/768px WebP variants. The original Banking portrait remains available in its original assets and Research view. The overlays identify conceptual roles or established navigation destinations. Their spatial placement establishes neither a real-world connection nor a legal relationship. FLORA keeps the existing shared Top/Left/Main and native navigation.
+
+## Actual app captures
+
+| Viewport | Before | Banking overview | Customers | Funding | Payments | Providers |
+| --- | --- | --- | --- | --- | --- | --- |
+| Desktop | [Before](previews/before-desktop.jpg) | [After](previews/after-desktop.jpg) | [Facts](previews/customers-facts-desktop.jpg) · [Insight](previews/customers-insight-desktop.jpg) | [Facts](previews/funding-facts-desktop.jpg) · [Insight](previews/funding-insight-desktop.jpg) | [Facts](previews/payments-facts-desktop.jpg) · [Insight](previews/payments-insight-desktop.jpg) | [Facts](previews/providers-facts-desktop.jpg) · [Insight](previews/providers-insight-desktop.jpg) |
+| iPad landscape | [Before](previews/before-ipad-landscape.jpg) | [After](previews/after-ipad-landscape.jpg) | [Facts](previews/customers-facts-ipad-landscape.jpg) · [Insight](previews/customers-insight-ipad-landscape.jpg) | [Facts](previews/funding-facts-ipad-landscape.jpg) · [Insight](previews/funding-insight-ipad-landscape.jpg) | [Facts](previews/payments-facts-ipad-landscape.jpg) · [Insight](previews/payments-insight-ipad-landscape.jpg) | [Facts](previews/providers-facts-ipad-landscape.jpg) · [Insight](previews/providers-insight-ipad-landscape.jpg) |
+| iPad portrait | [Before](previews/before-ipad-portrait.jpg) | [After](previews/after-ipad-portrait.jpg) | [Facts](previews/customers-facts-ipad-portrait.jpg) · [Insight](previews/customers-insight-ipad-portrait.jpg) | [Facts](previews/funding-facts-ipad-portrait.jpg) · [Insight](previews/funding-insight-ipad-portrait.jpg) | [Facts](previews/payments-facts-ipad-portrait.jpg) · [Insight](previews/payments-insight-ipad-portrait.jpg) | [Facts](previews/providers-facts-ipad-portrait.jpg) · [Insight](previews/providers-insight-ipad-portrait.jpg) |
+| Mobile 390 | [Before](previews/before-mobile.jpg) | [After](previews/after-mobile.jpg) | [Facts](previews/customers-facts-mobile.jpg) · [Insight](previews/customers-insight-mobile.jpg) | [Facts](previews/funding-facts-mobile.jpg) · [Insight](previews/funding-insight-mobile.jpg) | [Facts](previews/payments-facts-mobile.jpg) · [Insight](previews/payments-insight-mobile.jpg) | [Facts](previews/providers-facts-mobile.jpg) · [Insight](previews/providers-insight-mobile.jpg) |
+| Mobile 320 without JS | [Before](previews/before-mobile-320.jpg) | [After](previews/after-mobile-320.jpg) | [Facts](previews/customers-facts-mobile-320.jpg) · [Insight](previews/customers-insight-mobile-320.jpg) | [Facts](previews/funding-facts-mobile-320.jpg) · [Insight](previews/funding-insight-mobile-320.jpg) | [Facts](previews/payments-facts-mobile-320.jpg) · [Insight](previews/payments-insight-mobile-320.jpg) | [Facts](previews/providers-facts-mobile-320.jpg) · [Insight](previews/providers-insight-mobile-320.jpg) |
+
+[Expanded mobile scene](previews/expanded-mobile.jpg) · [Banking Forces at 200% zoom](previews/forces-200pct.jpg)
+
+Run `PYTHONPATH=. python tools/research/bnk_vis_browser.py /tmp/bnk-vis-previews` with Chromium and Playwright. The isolated loopback walkthrough exercises the actual application. It covers both readings, selections, keyboard and touch, same-subject Back/Forward and reload, reduced motion, no JavaScript at 320px, 200% CSS zoom and handoffs to Nationwide and Lloyds. No physical-device or deployed Render claim is made.
+
+## Boundaries and rollback
+
+The accepted Facts-first selector, Industry presentation and current Source/Financial policy stay with their existing owners. Only the public landscape projection changes art. The new stages use finite selectors; incompatible combinations with enterprise and agenda selections are rejected. Read-time source checks retain conceptual art when a claim expires or is withdrawn. Existing auth, Financial private action guards, original visual assets and inherited comparator baselines are unchanged.
+
+The byte-pinned compatibility adapter retains the predecessor chain for historical tests. Reverting the PR restores the original public Banking landscape and removes the additive artwork and stages. No state migration or data rollback is needed.
+
+[Lineage and withheld inputs](Lineage.md). Earlier design reviews informed the work. Fresh independent architectural, source/commercial and artistic critique remains outstanding. Owner review should judge the composition and whether its stage labels are clear on smaller screens.

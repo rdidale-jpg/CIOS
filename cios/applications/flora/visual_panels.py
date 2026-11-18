@@ -14,6 +14,7 @@ from types import MappingProxyType
 from . import visual_streams as v, design_system as ds, leadership_agenda as agenda
 from . import intelligence_presentation as p
 from . import reading_views as reading
+from . import banking_ecosystem as ecosystem
 from . import easyjet_capabilities as easyjet
 from .security import verified_service_read
 
@@ -108,13 +109,24 @@ def _layer_focus(ctx,sid):
 
 def _scene(ctx,rows,suffix,issues):
     scene=ctx.scope+'-'+ctx.stream;positions=POSITIONS[scene]
-    body='<figure class="portrait" aria-label="'+e(scene.replace('-',' '),quote=True)+'">'+_image(scene)
+    ecosystem_scene=scene=='banking-landscape' and p.is_editorial()
+    if ecosystem_scene:
+        positions=ecosystem.POSITIONS
+        rows=rows+ecosystem.extra_entries(ctx)
+        illustration=('<img src="'+_asset(v.BANKING_ART_SMALL)+'" srcset="'+_asset(v.BANKING_ART_SMALL)
+                      +' 384w, '+_asset(v.BANKING_ART)+' 768w" sizes="(min-width:1000px) 310px, 100vw"'
+                      ' alt="Conceptual riverside town showing customers, banking, oversight and infrastructure"'
+                      ' width="768" height="1152" loading="lazy" decoding="async">')
+    else:
+        illustration=_image(scene)
+    body='<figure class="portrait" aria-label="'+e(scene.replace('-',' '),quote=True)+'">'+illustration
     body+='<figcaption class="sr-only">Conceptual illustration, not actual premises, a legal hierarchy, systems topology or a quantitative pressure map. Labelled navigation remains available without artwork.</figcaption>'
     body+=''.join(_entry(r,ctx,primary=True,position=positions[r['id']],suffix=suffix)for r in rows if r['id']in positions and r['href'])
     if scene=='lloyds-inside'and issues:
         href=v.url(ctx,detail='',agenda=ctx.agenda or issues[0].key)+'#agenda-insight'
         body+='<a class="subject spot" data-label-id="leadership-agenda" href="'+e(href,quote=True)+'" style="--x:51%;--y:85%">Leadership Agenda</a>'
     body+='</figure><p class="art-fallback">All subjects remain available below.</p>'
+    if ecosystem_scene:body+=ecosystem.stage_links(ctx,include_payments=True)
     # UK keeps all twenty original section labels, with only three researched
     # exits. Other scenes disclose only supplementary/inert labels once.
     extra=rows if scene=='uk-landscape'else[r for r in rows if r['id']not in positions or not r['href']]
@@ -356,7 +368,7 @@ def _editorial_banking(ctx,data,issues,headers):
     for key,title in [('provider-oversight','Resilience spans the ecosystem'),('reporting-change','The reporting landscape is changing')]:
         row=next((r for r in issues if r.key==key),None)
         if row:body+='<section data-intelligence="'+key+'"><h2>'+title+'</h2>'+p.render(row.facts[0])+'</section>'
-    return body+'</div>'+reading.banking_links()+_bank_picker(ctx,data,issues)
+    return body+'</div>'+ecosystem.overview()+reading.banking_links()+_bank_picker(ctx,data,issues)
 
 
 def _legal_notice(ctx,data):
@@ -390,6 +402,7 @@ def _frame(ctx,headers,data,issues,entries,body):
     layers='' if ctx.scope in {'uk','easyjet'} else '<nav class="context-nav" aria-label="Context layers">'+''.join('<a href="'+e(v.url(ctx,layer=k),quote=True)+'"'+(' aria-current="page"'if ctx.layer==k else'')+'>'+e(label)+'</a>' for k,label in v.LAYERS.items())+'</nav>'
     head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'+EDITORIAL_STYLE+reading.STYLE
     if ctx.scope=='easyjet':head+=easyjet.STYLE
+    if ctx.scope=='banking':head+=ecosystem.STYLE
     return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(ctx,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+watermark+'<article class="workspace editorial-workspace">'+reading.selector(ctx)+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
 
 
@@ -415,8 +428,13 @@ def render(ctx,headers=None,*,financial_run_id=''):
                 if action:body+='<section class="workspace-setup"><h2>Workspace analysis</h2>'+action+'</section>'
                 return _frame(ctx,headers,data,issues,v.destinations(ctx,data),body+_bank_picker(ctx,data,issues))
         data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected);entries=v.destinations(ctx,data)
-        if ctx.reading=='insight':
-            body=reading.insight(ctx,data,issues)
+        if ctx.scope=='banking' and ctx.stream=='landscape' and ctx.detail in ecosystem.STAGES:
+            body=ecosystem.render(ctx,data,issues)
+        elif ctx.reading=='insight':
+            if ctx.scope=='banking' and ctx.stream=='forces' and not (ctx.detail or ctx.agenda or ctx.selected):
+                body='<h1>The forces reshaping banking</h1>'+(
+                    ecosystem.forces(ctx,data,issues) or '<p>No supported FLORA Insight for this selection.</p>')
+            else:body=reading.insight(ctx,data,issues)
         elif ctx.scope=='banking' and ctx.detail=='payments' and ctx.stream=='landscape':
             body=reading.payments(ctx,data)
         elif ctx.scope=='banking' and not ctx.detail and not ctx.agenda:
@@ -441,6 +459,8 @@ def render(ctx,headers=None,*,financial_run_id=''):
             service=next((r for r in issues if r.key=='service-recovery'),None)
             if service:body+='<section data-intelligence="service-recovery"><h2>Customer complaints</h2>'+''.join(p.render(fact) for fact in service.facts)+'</section>'
         else:body=_overview(ctx,data,issues)
+        if ctx.scope=='uk' and ctx.stream=='forces' and not ctx.detail and not ctx.agenda:
+            body+='<p><a href="/industries/banking?stream=forces">Explore these forces in Banking</a></p>'
         return _frame(ctx,headers,data,issues,entries,body)
 
 
@@ -457,6 +477,7 @@ def research_inspection(path,query,headers=None):
         issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
         return _research_frame(ctx,headers,data,issues,v.destinations(ctx,data),analyst.STYLE+'<section class="financial-analyst">'+analyst.compose(projection)+'</section>')
     ctx=v.resolve(path,query)
+    if ctx.scope=='banking' and ctx.detail in ecosystem.STAGES:ctx=replace(ctx,detail='')
     return _research_render(ctx,headers)
 
 

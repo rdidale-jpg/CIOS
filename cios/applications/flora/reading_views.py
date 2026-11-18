@@ -138,9 +138,9 @@ def unavailable(title):
     return f'<h1>{e(title)}</h1><p>No supported FLORA Insight for this selection.</p>'
 
 
-def interpretation(title, facts, text, caveat):
+def interpretation(title, facts, text, caveat, *, heading="h1"):
     if not facts or not all(p.eligible(fact) for fact in facts):
-        return unavailable(title)
+        return f'<{heading}>{e(title)}</{heading}><p>No supported FLORA Insight for this selection.</p>'
     item = p.Statement(
         text, "insight", facts[0].scope, facts[0].period,
         tuple(dict.fromkeys(source for fact in facts for source in fact.sources)),
@@ -150,7 +150,7 @@ def interpretation(title, facts, text, caveat):
         dependency_types=tuple(fact.semantic_type for fact in facts),
         counter_evidence=(caveat,), material_caveats=(caveat,),
     )
-    return f'<h1>{e(title)}</h1>' + (p.render(item) or '<p>No supported FLORA Insight for this selection.</p>')
+    return f'<{heading}>{e(title)}</{heading}>' + (p.render(item) or '<p>No supported FLORA Insight for this selection.</p>')
 
 
 def provider_pulse(issues):
