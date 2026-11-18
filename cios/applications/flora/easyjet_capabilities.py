@@ -204,6 +204,9 @@ def main(ctx):
     from . import reading_views as reading
 
     data = _data()
+    if not ctx.detail:
+        from .experience_composition import easyjet_root
+        return easyjet_root(ctx, data)
     identifiers = FACTS[ctx.detail]
     if ctx.stream == "landscape":
         identifiers = identifiers[:1]

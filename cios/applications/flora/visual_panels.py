@@ -15,6 +15,7 @@ from . import visual_streams as v, design_system as ds, leadership_agenda as age
 from . import intelligence_presentation as p
 from . import reading_views as reading
 from . import banking_ecosystem as ecosystem
+from . import experience_composition as experience
 from . import easyjet_capabilities as easyjet
 from .security import verified_service_read
 
@@ -401,7 +402,7 @@ def _frame(ctx,headers,data,issues,entries,body):
         asset=asset_manifest()['watermarks'][ctx.scope+'-'+ctx.stream]
         watermark='<img class="watermark" src="'+_asset(asset)+'" alt="" aria-hidden="true">'
     layers='' if ctx.scope in {'uk','easyjet'} else '<nav class="context-nav" aria-label="Context layers">'+''.join('<a href="'+e(v.url(ctx,layer=k),quote=True)+'"'+(' aria-current="page"'if ctx.layer==k else'')+'>'+e(label)+'</a>' for k,label in v.LAYERS.items())+'</nav>'
-    head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'+EDITORIAL_STYLE+reading.STYLE
+    head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'+EDITORIAL_STYLE+reading.STYLE+experience.STYLE
     if ctx.scope=='easyjet':head+=easyjet.STYLE
     if ctx.scope=='banking':head+=ecosystem.STYLE
     return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(ctx,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+watermark+'<article class="workspace editorial-workspace">'+reading.selector(ctx)+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
@@ -431,11 +432,39 @@ def render(ctx,headers=None,*,financial_run_id=''):
         data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected);entries=v.destinations(ctx,data)
         if ctx.scope=='banking' and ctx.stream=='landscape' and ctx.detail in ecosystem.STAGES:
             body=ecosystem.render(ctx,data,issues)
-        elif ctx.reading=='insight':
-            if ctx.scope=='banking' and ctx.stream=='forces' and not (ctx.detail or ctx.agenda or ctx.selected):
-                body='<h1>The forces reshaping banking</h1>'+(
-                    ecosystem.forces(ctx,data,issues) or '<p>No supported FLORA Insight for this selection.</p>')
-            else:body=reading.insight(ctx,data,issues)
+        elif ctx.scope=='lloyds' and not (ctx.detail or ctx.agenda):
+            if ctx.stream=='inside':
+                body=experience.lloyds_inside(ctx)
+            else:
+                group="Lloyds Banking Group plc, consolidated Group unless stated"
+                economics=tuple(f for f in _facts(data,['LBG-Q326-DEPOSITS','LBG-Q326-PROFIT'])
+                                if f.scope==group and p.eligible(f))
+                if ctx.stream=='landscape':
+                    body=_financial(ctx,data,issues)
+                    body+='<section><h2>Business model</h2><p>Conceptual · customer deposits support lending and payments services.</p></section>'
+                    if ctx.reading=='insight':
+                        body+=experience._interpret("Funding and earnings mechanisms",
+                            tuple(f for f in economics if f.unit=="GBP billion; balance at 30 September 2026"),
+                            "A deposit franchise can support lending. Its economics depend on deposit mix, pricing and loan yields.",
+                            "Reported Group deposits and statutory profit do not establish the margin effect or business-line earnings.",ctx)
+                    else:body+=_issue_preview(issues,'service-recovery')
+                else:
+                    response=tuple(f for f in _facts(data,['LBG-A2030-CIR']) if f.scope==group and p.eligible(f))
+                    body=experience.enterprise_forces(ctx,"Conditions affecting Lloyds",economics,response,
+                        "A lower cost-to-income ratio may reflect cost reduction or stronger income; investment can change both over time.",
+                        "The Group target is an ambition. Comparable periods and actual cost and income movements are needed to assess delivery.",
+                        dependencies=response)
+        elif ctx.scope=='uk' and ctx.stream=='forces' and not ctx.agenda:
+            body=experience.uk_forces(ctx,data)
+        elif ctx.scope=='banking' and ctx.stream=='forces' and not (ctx.agenda or ctx.selected) and (
+                not ctx.detail or ctx.detail in experience.BANKING_FORCES):
+            body=(_editorial_banking(ctx,data,issues,headers) if ctx.reading=='facts' and not ctx.detail
+                  else '<h1>The forces reshaping banking</h1>')
+            body+=experience.banking_forces(ctx)
+            if ctx.reading=='insight' and not ctx.detail:
+                context=ecosystem.forces(ctx,data,issues)
+                if context:body+='<section aria-label="Separate funding and oversight context"><h2>Funding and oversight context</h2>'+context+'</section>'
+        elif ctx.reading=='insight':body=reading.insight(ctx,data,issues)
         elif ctx.scope=='banking' and ctx.detail=='payments' and ctx.stream=='landscape':
             body=reading.payments(ctx,data)
         elif ctx.scope=='banking' and not ctx.detail and not ctx.agenda:
@@ -452,16 +481,7 @@ def render(ctx,headers=None,*,financial_run_id=''):
             if ctx.scope=='lloyds' and ctx.stream=='inside' and ctx.detail=='technology':
                 if not body:body='<h1>Technology &amp; data</h1><p>No eligible disclosures for this selection.</p>'
                 body+=reading.lloyds_capability(data,insight=False)
-        elif ctx.scope=='lloyds' and ctx.stream=='inside':
-            facts=_facts(data,['LBG-Q326-DEPOSITS','LBG-Q326-PROFIT','LBG-A2030-CIR'])
-            body='<p class="eyebrow">Lloyds Banking Group</p><h1>Funding, earnings and efficiency</h1>'+''.join(p.render(f) for f in facts)
-            row=next((r for r in issues if r.key=='funding-base'),None)
-            if row:body+='<section data-intelligence="funding-base"><h2>Customer funding</h2>'+p.render(row.facts[0])+'</section>'
-            service=next((r for r in issues if r.key=='service-recovery'),None)
-            if service:body+='<section data-intelligence="service-recovery"><h2>Customer complaints</h2>'+''.join(p.render(fact) for fact in service.facts)+'</section>'
         else:body=_overview(ctx,data,issues)
-        if ctx.scope=='uk' and ctx.stream=='forces' and not ctx.detail and not ctx.agenda:
-            body+='<p><a href="/industries/banking?stream=forces">Explore these forces in Banking</a></p>'
         return _frame(ctx,headers,data,issues,entries,body)
 
 

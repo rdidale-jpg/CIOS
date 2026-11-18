@@ -26,8 +26,17 @@ BANKING={
     "cios/applications/flora/visual_streams.py": "a968e8b5849e78789efa1fa0c6b517f241ef08071660f3d357ac7c4951c4682d",
 }
 
+EXPERIENCE_BASE = "c56bd74f130c4d855baf522ba8ba99fe87317fb1"
+EXPERIENCE = {
+    "cios/applications/flora/visual_panels.py": "561425f9d27ce417f427657961905e265e1a6a34c90542f5b4194c0de2c23ef0",
+    "cios/applications/flora/visual_streams.py": "a6e2bd6aaacd2ab32d4b47f61822c756defa8655cfb30c6ffd85b63464e099ea",
+}
+
+
 def predecessor(root, path):
     current = (Path(root) / path).read_bytes()
+    if path in EXPERIENCE and sha256(current).hexdigest() == EXPERIENCE[path]:
+        current = subprocess.check_output(["git", "show", f"{EXPERIENCE_BASE}:{path}"], cwd=root)
     if path in BANKING and sha256(current).hexdigest() == BANKING[path]:
         current = subprocess.check_output(["git", "show", f"{BANKING_BASE}:{path}"], cwd=root)
     if path in INTEGRATION and sha256(current).hexdigest() == INTEGRATION[path]:
