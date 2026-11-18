@@ -25,9 +25,9 @@ Two enterprise archetypes use the same presentation functions for distinct root 
 | View | Inputs and owner | Reading bounds and withdrawal |
 | --- | --- | --- |
 | UK Forces | `visual_v2.insight` via `visual_streams.force_view` and `intelligence_presentation`. ONS real GDP to Sep 2026; existing GB macro records GM-SOCIAL, aggregate cyber, cyber bill and UK sustainability reporting. | Publication, applicability and assessed status retain their meaning. Political and Social discuss different implications of the same tender policy. Sector links give context only; no enterprise applicability. Source-restricted items suppress derived mechanisms. |
-| Banking Forces | Existing agenda projections for funding economics, reporting change, HMT provider oversight, and the existing `UK-VALUE` model for substitutes. | All five models explain conditional mechanisms. No measured market shares, switching statistics, Pay.UK economics or verified Lloyds Bank plc supplier workload. An invalid input removes its interpretation. |
+| Banking Forces | No measured premise is attached to the five Porter interpretations. Existing agenda and legacy routes retain their original scope. | All five models explain conditional mechanisms. No measured market shares, switching statistics, Pay.UK economics or verified Lloyds Bank plc supplier workload. Context can explain rates, regulation or oversight on its own terms without validating these comparisons. |
 | Lloyds Landscape/Forces | Existing Group financial projection and pinned release where applicable. `LBG-Q326-DEPOSITS` is a 30 Sep 2026 stock; `LBG-Q326-PROFIT` is a nine-month statutory pretax flow; `LBG-A2030-CIR` is a 2030 Group management ambition. | The Landscape interpretation depends on eligible customer deposits. Forces interpretation depends on the eligible target. No implied linkage of the target to sized savings or supplier budget. |
-| Lloyds Inside | Existing `leadership_agenda._claims` for `LBG-ENVOY-CONTROLS`. | Group platform controls anchor the mechanism. The service stream and capability links are explicit conceptual structures; keep them if the disclosure is removed. |
+| Lloyds Inside | Existing `leadership_agenda._claims` for `LBG-ENVOY-CONTROLS`. | Group platform controls appear only in the separate Technology & data selection. The service stream and capability links are conceptual and independent of that disclosure. |
 | easyJet roots | Existing `easyjet_capabilities.fact` for `AV-FLEET` and `AV-NETWORK`, at their respective Group snapshot/network reporting scopes. Detailed capability owner unchanged. | Landscape comparison needs both inputs. Inside and Forces interpret the fleet availability mechanism as conditional; no reported disruption, accountable role or contract implied. Conceptual stream survives withdrawal. |
 | Nationwide | Existing Financial projection on `RUD1-NATIONWIDE-FY26`; Society complaints remain separate. | Both signed Group FY2026 reconciliations and included integration cost remain unchanged. |
 
@@ -35,7 +35,7 @@ Reviewed [research-only #683 at its commissioned head](https://github.com/rdidal
 
 ## Browser review and rollback
 
-[Actual application previews](previews/) cover eight scenes in both modes across desktop, iPad landscape/portrait and mobile 390/320. Run `python -m tools.research.experience_684_browser /tmp/flora-684-previews` against an isolated development workspace with Chromium and Playwright installed. Earlier layouts at the same runtime baseline are in the [observed design archive](../../product/flora-experience/experience-align-all/previews/observed/).
+[Actual application previews](previews/) cover nine scenes in both modes across desktop, iPad landscape/portrait and mobile 390/320. Run `python -m tools.research.experience_684_browser /tmp/flora-684-previews` against an isolated development workspace with Chromium and Playwright installed. Earlier layouts at the same runtime baseline are in the [observed design archive](../../product/flora-experience/experience-align-all/previews/observed/).
 
 The review checks native navigation, accessible landmarks and headings, visible focus, touch, history/reload, 320px without JavaScript, 200% CSS zoom, viewport fit and existing specialist examples. Chromium device sizes are simulations. Safari and physical iPad validation remain for owner review. Browser loopback timings are smoke observations and do not establish production latency.
 
@@ -48,6 +48,7 @@ Rollback is a revert of this bounded integration commit. No schema, permissions,
 | Perspective | Desktop | iPad | Mobile |
 | --- | --- | --- | --- |
 | UK Forces | [Facts](previews/uk-forces-facts-desktop.jpg) | [Insight, landscape](previews/uk-forces-insight-ipad-landscape.jpg) | [Facts](previews/uk-forces-facts-mobile.jpg) |
+| UK Social | [Facts](previews/uk-social-facts-desktop.jpg) | [Insight, portrait](previews/uk-social-insight-ipad-portrait.jpg) | [Facts, JS off](previews/uk-social-facts-mobile-320.jpg) |
 | Banking Forces | [Insight](previews/banking-forces-insight-desktop.jpg) | [Facts, portrait](previews/banking-forces-facts-ipad-portrait.jpg) | [Insight, JS off](previews/banking-forces-insight-mobile-320.jpg) |
 | Lloyds Landscape | [Facts](previews/lloyds-landscape-facts-desktop.jpg) | [Insight, portrait](previews/lloyds-landscape-insight-ipad-portrait.jpg) | [Facts](previews/lloyds-landscape-facts-mobile.jpg) |
 | Lloyds Inside | [Facts](previews/lloyds-inside-facts-desktop.jpg) | [Insight, landscape](previews/lloyds-inside-insight-ipad-landscape.jpg) | [Facts, JS off](previews/lloyds-inside-facts-mobile-320.jpg) |
@@ -55,3 +56,16 @@ Rollback is a revert of this bounded integration commit. No schema, permissions,
 | easyJet Landscape | [Facts](previews/easyjet-landscape-facts-desktop.jpg) | [Insight, landscape](previews/easyjet-landscape-insight-ipad-landscape.jpg) | [Facts](previews/easyjet-landscape-facts-mobile.jpg) |
 | easyJet Inside | [Insight](previews/easyjet-inside-insight-desktop.jpg) | [Facts, landscape](previews/easyjet-inside-facts-ipad-landscape.jpg) | [Facts, 200% zoom](previews/easyjet-inside-200pct.jpg) |
 | easyJet Forces | [Facts](previews/easyjet-forces-facts-desktop.jpg) | [Insight, portrait](previews/easyjet-forces-insight-ipad-portrait.jpg) | [Insight, JS off](previews/easyjet-forces-insight-mobile-320.jpg) |
+
+## Source critique after owner review
+
+| Comparison | Evidence boundary and unresolved demand |
+| --- | --- |
+| Rivalry | A policy rate gives funding context. Comparable deposit prices, mix and balance movements would support an actual rivalry comparison. |
+| Buyer power | Bank Rate provides no switching or bargaining measurement. The household/business contrast is conceptual. Comparable product and cohort switching, multi-banking and migration costs remain open. |
+| Supplier power | Critical-third-party designation establishes regulatory status. Actual bargaining requires comparable alternatives, substitutability and contractual evidence. |
+| New entrants | Reporting rules describe regulated obligations. Entry costs, authorisation and service-packaging evidence are needed to establish an entry barrier. |
+| Substitutes | The value-system model identifies banking functions. Scheme roles and observed usage across products are needed to establish substitution. |
+| UK Political and Social | The shared policy concerns qualifying UK central-government tenders. Political covers procurement design; Social covers delivery commitments. Each openly identifies its distinct coverage gap. Other dimensions retain scoped GDP, aggregate cyber, proposed cyber legislation and listed-issuer sustainability inputs respectively. None establishes a company-specific exposure. |
+
+See the [Banking portfolio handoff](banking-portfolio-handoff.md).

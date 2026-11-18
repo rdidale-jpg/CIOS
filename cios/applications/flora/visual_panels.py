@@ -434,7 +434,7 @@ def render(ctx,headers=None,*,financial_run_id=''):
             body=ecosystem.render(ctx,data,issues)
         elif ctx.scope=='lloyds' and not (ctx.detail or ctx.agenda):
             if ctx.stream=='inside':
-                body=experience.lloyds_inside(ctx,data)
+                body=experience.lloyds_inside(ctx)
             else:
                 group="Lloyds Banking Group plc, consolidated Group unless stated"
                 economics=tuple(f for f in _facts(data,['LBG-Q326-DEPOSITS','LBG-Q326-PROFIT'])
@@ -460,9 +460,10 @@ def render(ctx,headers=None,*,financial_run_id=''):
                 not ctx.detail or ctx.detail in experience.BANKING_FORCES):
             body=(_editorial_banking(ctx,data,issues,headers) if ctx.reading=='facts' and not ctx.detail
                   else '<h1>The forces reshaping banking</h1>')
-            body+=experience.banking_forces(ctx,data,issues)
+            body+=experience.banking_forces(ctx)
             if ctx.reading=='insight' and not ctx.detail:
-                body+=ecosystem.forces(ctx,data,issues)
+                context=ecosystem.forces(ctx,data,issues)
+                if context:body+='<section aria-label="Separate funding and oversight context"><h2>Funding and oversight context</h2>'+context+'</section>'
         elif ctx.reading=='insight':body=reading.insight(ctx,data,issues)
         elif ctx.scope=='banking' and ctx.detail=='payments' and ctx.stream=='landscape':
             body=reading.payments(ctx,data)

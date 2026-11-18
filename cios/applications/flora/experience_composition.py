@@ -2,7 +2,6 @@
 from html import escape
 
 from . import intelligence_presentation as p
-from . import leadership_agenda as agenda
 from . import reading_views as reading
 from . import visual_streams as v
 
@@ -11,21 +10,25 @@ UK_DIMENSIONS = {
     "technological": "Technological", "legal": "Legal", "environmental": "Environmental",
 }
 BANKING_FORCES = {
-    "rivalry": ("Rivalry", "funding-economics", "Funding & lending",
+    "rivalry": ("Rivalry", "Funding & lending",
                 "Competition for deposits can increase funding costs. Banks with different deposit mixes and wholesale funding needs can face different costs.",
                 "Comparable pricing, deposit mix and balance movements are needed to distinguish a pricing response from changes in customer balances."),
-    "buyer-power": ("Buyer power", "funding-economics", "Customers & businesses",
+    "buyer-power": ("Buyer power", "Customers & businesses",
                     "Customer choice can discipline pricing. A household moving one product and a business moving linked payments and borrowing face different switching effort.",
                     "Comparable switching, multi-banking and migration costs by cohort remain unverified."),
-    "supplier-power": ("Supplier power", "provider-oversight", "Technology & infrastructure",
+    "supplier-power": ("Supplier power", "Technology & infrastructure",
                        "Shared technology providers may have more bargaining power when switching requires data migration, redesign and continuity testing.",
                        "Designation establishes neither supplier bargaining power nor a contract or workload at an individual bank."),
-    "new-entrants": ("Threat of new entrants", "reporting-change", "Customers & businesses",
+    "new-entrants": ("Threat of new entrants", "Customers & businesses",
                      "Controls and operating resilience can create fixed costs. An entrant serving one product may face different economics from a multi-product bank.",
                      "Entry costs, authorisation scope and service coverage need comparable evidence."),
-    "substitutes": ("Threat of substitutes", "", "Payments & settlement",
+    "substitutes": ("Threat of substitutes", "Payments & settlement",
                     "A payment specialist can substitute for part of an account journey while relying on other institutions for settlement or funding.",
                     "Usage data and exact scheme and operator roles are needed to establish actual substitution."),
+}
+_PARTIAL_PESTLE = {
+    "political": ("Public procurement policy", "Separate evidence is needed on wider fiscal and institutional priorities."),
+    "social": ("Social commitments in public procurement", "Separate population, workforce or service-outcome evidence is needed for broader social conditions."),
 }
 _BANKING_CONTEXT = {
     "rivalry": "Economic · funding costs and the rate environment.",
@@ -76,6 +79,7 @@ def uk_forces(ctx, data):
     fact = v.force_view(ctx, key, data)
     items = (fact,) if fact and p.eligible(fact) else ()
     mechanism, gap, _ = v.FORCE_POLICY[key]
+    partial = _PARTIAL_PESTLE.get(key)
     close = escape(v.url(ctx, detail="") + "#visual-content", quote=True)
     body = (
         '<h1>The UK’s economic context</h1>'
@@ -86,24 +90,25 @@ def uk_forces(ctx, data):
                  f'<a class="close" href="{close}" aria-label="Close {label} conditions">×</a>')
     body += (
         f'<h2 id="insight-title">{label} conditions</h2><ol class="experience-path"><li><strong>UK condition</strong>'
+        + (f'<p><strong>Partial coverage · {partial[0]}</strong></p>' if partial else '')
         + (_facts(items) or '<p>The national evidence for this dimension is unavailable.</p>')
         + '</li><li><strong>Industry context</strong> · Follow the relevant economic channel in '
           '<a href="/industries/banking?stream=forces">Banking</a> or <a href="/industries/aviation?lens=pestle">Aviation</a>. '
           'These links give sector context.</li><li><strong>Enterprise applicability</strong> · Needs evidence about the exact entity and activity.</li></ol>'
         + (_interpret("Sector mechanism", items, mechanism, gap, ctx) if ctx.reading == "insight" else '')
     )
+    if partial:
+        if items:
+            body += '<p>Political and Social use the same procurement policy. The scope and dates above apply to both.</p>'
+        body += f'<p>{partial[1]}</p>'
     if ctx.detail and items:
         body += '</section>'
     return body + '<p><a href="/industries/banking?stream=forces">Explore these forces in Banking</a></p>'
 
 
-def banking_forces(ctx, data, issues):
+def banking_forces(ctx):
     key = ctx.detail or "rivalry"
-    title, anchor, stage, mechanism, gap = BANKING_FORCES[key]
-    items = next((row.facts[:1] for row in issues if row.key == anchor), ())
-    if key == "substitutes":
-        fact = v.force_view(ctx, "UK-VALUE", data)
-        items = (fact,) if fact and p.eligible(fact) else ()
+    title, stage, mechanism, gap = BANKING_FORCES[key]
     href = escape(v.url(ctx, stream="landscape", detail=_STAGE[stage]) + "#visual-content", quote=True)
     body = (
         '<h2>Five Forces</h2>'
@@ -112,12 +117,13 @@ def banking_forces(ctx, data, issues):
         + f'<li><strong>Contextual PESTLE</strong> · {escape(_BANKING_CONTEXT[key])} '
           '<a href="/?stream=forces">See national conditions</a>.</li>'
         + f'<li><strong>Evidence needed</strong> · {escape(gap)}</li></ol>'
-        + _interpret("Competitive mechanism", items, mechanism, gap, ctx)
+        + (f'<h2>Conceptual competitive mechanism</h2><p>{escape(mechanism)}</p>' if ctx.reading == "insight"
+           else '<p>Conceptual framework. Direct evidence for this force is not shown.</p>')
     )
     return body
 
 
-def _capability_root(ctx, title, outcome, activities, abilities, facts, mechanism, gap):
+def _capability_root(ctx, title, outcome, activities, abilities, facts, mechanism, gap, *, conceptual=False):
     targets = {name: f"ability-{index}" for index, (name, _) in enumerate(abilities)}
     sequence = '<ol class="reading-sequence">' + "".join(
         f'<li><strong>{escape(activity)}</strong>Uses '
@@ -132,22 +138,25 @@ def _capability_root(ctx, title, outcome, activities, abilities, facts, mechanis
         + "".join(f'<div id="{targets[label]}" tabindex="-1"><dt>{escape(label)}</dt><dd>{escape(detail)}</dd></div>'
                   for label, detail in abilities)
         + '</dl><h2>Roles, enablers and measures</h2>'
-        + _interpret("Operating mechanism", facts, mechanism, gap, ctx)
-        + (f'<p>{escape(gap)}</p>' if facts and ctx.reading == "facts" else '')
+        + (f'<h2>Conceptual operating mechanism</h2><p>{escape(mechanism)}</p>'
+           if conceptual and ctx.reading == "insight" else
+           '' if conceptual else _interpret("Operating mechanism", facts, mechanism, gap, ctx))
+        + (f'<p>{escape(gap)}</p>' if conceptual or (facts and ctx.reading == "facts") else '')
     )
 
 
-def lloyds_inside(ctx, data):
-    controls = agenda._claims(data, ("LBG-ENVOY-CONTROLS",))
+def lloyds_inside(ctx):
     return _capability_root(
         ctx, "How Lloyds operates", "Resolve a customer request",
         (("Receive", ("Service handling",)), ("Resolve", ("Service handling", "Technology governance")),
          ("Review", ("Technology governance",))),
         (("Service handling", "Customer operations · receive and resolve"),
          ("Technology governance", "Technology & data · resolve and review")),
-        controls, "Controls embedded in operating tools can make monitoring repeatable. The Group’s existing platform disclosure gives a scoped example.",
-        "Accountable teams, capability performance and supplier contracts remain unverified for this example.",
-    ) + f'<p><a href="{escape(v.url(ctx, detail="technology") + "#visual-content", quote=True)}">Explore Technology &amp; data</a></p>'
+        (), "An explicit review step can help teams check how requests were resolved. Whether it improves outcomes depends on what is reviewed and how often.",
+        "The actual Lloyds workflow, accountable teams and performance remain unverified.",
+        conceptual=True,
+    ) + (f'<p>Separate Group technology example · <a href="{escape(v.url(ctx, detail="technology") + "#visual-content", quote=True)}">'
+         'Explore Technology &amp; data</a>. This example does not establish a link to the customer-service workflow.</p>')
 
 
 def enterprise_forces(ctx, title, observed, response, mechanism, gap, *, dependencies=None):

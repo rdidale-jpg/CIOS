@@ -19,6 +19,7 @@ class Quiet(FloraWebHandler):
 
 SCENES = (
     ("uk-forces", "/?stream=forces&detail=political", "Political conditions"),
+    ("uk-social", "/?stream=forces&detail=social", "Social conditions"),
     ("banking-forces", "/industries/banking?stream=forces&detail=buyer-power", "Buyer power"),
     ("lloyds-landscape", "/enterprises/lloyds", "Customer funding and earnings"),
     ("lloyds-inside", "/enterprises/lloyds?stream=inside", "How Lloyds operates"),
