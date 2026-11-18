@@ -35,7 +35,7 @@ EXPERIENCE = {
 
 COHORT_BASE = "9a1e69fed6e1cf25c99476351232d69e9307a610"
 COHORT = {
-    "cios/applications/flora/visual_panels.py": "16821556ea57d00b4e7a667d1cc6af276c6c6471175faf2b4d3508b7b45ddcd3",
+    "cios/applications/flora/visual_panels.py": "ac2b26a81307d3ffe6420e3032dd64fcba9587b7219f5f4a39d7c8c65809cf03",
     "cios/applications/flora/visual_streams.py": "27b74b09e2619d476404739a419379b9945798b1ab55014f02fa778d5a5ec17c",
 }
 

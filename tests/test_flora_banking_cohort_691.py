@@ -60,3 +60,9 @@ def test_infrastructure_is_contextual_and_not_a_participant_register():
 def test_legal_service_period_is_subject_specific(subject, period):
     html = main(v.render("/industries/banking", {"stream": ["inside"], "selected": [subject]}))
     assert period in html
+
+
+def test_specialist_bank_picker_remains_available_at_cohort_landing():
+    html = main(v.render("/industries/banking", {"selected": ["hsbc-uk"], "layer": ["regulators"]}))
+    assert 'aria-label="Banking enterprises"' in html
+    assert 'layer=regulators&amp;selected=santander-uk' in html

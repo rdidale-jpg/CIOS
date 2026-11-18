@@ -2,7 +2,7 @@
 
 [Commission #691](https://github.com/rdidale-jpg/CIOS/issues/691) · baseline `9a1e69fed6e1cf25c99476351232d69e9307a610`
 
-The Banking landscape’s cohort navigation opens a bounded public selection in the accepted Top/Left/Main shell. The existing finite Industry path remains the owner. Facts opens by default and switching to FLORA Insight retains the same exact selection and perspective. Four Industry stages, five Porter mechanisms, existing specialist routes and painterly scenes remain.
+The Banking landscape’s cohort navigation opens a bounded public selection in the accepted Top/Left/Main shell. The existing finite Industry path remains the owner. Facts opens by default and switching to FLORA Insight retains the same exact selection and perspective. Four Industry stages, five Porter mechanisms, existing specialist routes and their bank switcher, and painterly scenes remain.
 
 | Representative subject | Published depth |
 | --- | --- |

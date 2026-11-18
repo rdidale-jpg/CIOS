@@ -437,6 +437,7 @@ def render(ctx,headers=None,*,financial_run_id=''):
         entries=v.destinations(scene,data)
         if ctx.scope=='banking' and ctx.selected in cohort.SUBJECTS and not (ctx.detail or ctx.agenda) and (ctx.selected!='nationwide' or ctx.stream!='landscape'):
             body=cohort.render(ctx,data,issues)
+            if ctx.stream=='landscape' and ctx.reading=='facts' and ctx.selected!='boe':body+=_bank_picker(ctx,data,issues)
         elif ctx.scope=='banking' and ctx.stream=='landscape' and ctx.detail in ecosystem.STAGES:
             body=ecosystem.render(ctx,data,issues)
         elif ctx.scope=='lloyds' and not (ctx.detail or ctx.agenda):
