@@ -245,7 +245,7 @@ def main_content(ctx, data):
             body += '<section class="disclosure"><h2>Disclosed technology</h2>'+p.render(technology)+'</section>'
         body += '<section class="dependency"><h2>Partners &amp; dependencies</h2><p>'+e(row['dependencies'])+'</p></section><p class="boundary">The operating structure is conceptual. It does not identify easyJet’s organisation, system connections or supplier contracts.</p>'
     elif ctx.stream == 'forces':
-        body += '<section class="force"><span class="kind">FLORA Insight · conceptual mechanism</span><h2>'+e(row['forces'][0])+'</h2><p>'+e(row['forces'][1])+'</p></section>'
+        body += '<section class="force"><span class="kind">Conceptual operating mechanism</span><h2>'+e(row['forces'][0])+'</h2><p>'+e(row['forces'][1])+'</p></section>'
         metric = fact(data, row['metric']) if row['metric'] else None
         if metric:
             body += '<section class="disclosure"><h2>The scale in context</h2>'+p.render(metric)+'</section>'

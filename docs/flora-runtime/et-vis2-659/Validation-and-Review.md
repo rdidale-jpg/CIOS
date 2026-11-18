@@ -40,6 +40,7 @@ Three actual separate reviewers inspected the implementation, retained evidence 
 | Visual/UX; inspected actual desktop, iPad both, mobile and enlarged text | Selection could leave new Main below fold | Collapse mobile scene after capability choice; focus and bring Main heading into view; browser checks visible heading. |
 | Visual/UX | 200% labels split into fragments | Wrap whole controls and preserve complete words; corrected actual 200% preview inspected. |
 | Visual/UX and evidence/commercial | Booking/connected-cabin announcements are adjacent, not proven capability change | Label dated company/adjacent channel context and retain unestablished capability effect explicitly. |
+| Architecture/security | Generic conceptual Forces copy was labelled FLORA Insight without the Statement contract | Relabel Conceptual operating mechanism; keep eligible Reported facts separate. |
 | Visual/UX | Repeated defensive explanations cluttered conceptual sections | One model-scope statement; retain material fact/relationship caveats. |
 | Visual/UX | Vector scene flatter than rich approved originals | Open owner artistic-acceptance tradeoff, explicitly disclosed; do not claim visual parity or replace an original asset. |
 | Evidence/commercial | Incomplete compound claim support; source admission is not licence proof | Narrow exact facts; no new rights/grants; source-use limits documented. |

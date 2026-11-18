@@ -196,3 +196,9 @@ def test_source_lineage_and_original_artwork_inventory():
     report=validate()
     assert report['unchanged_visual_stream_files']==51
     assert report['public_disclosures']==7 and report['existing_source_records']==6
+
+
+def test_generic_operating_mechanisms_are_not_misclassified_as_eligible_insights():
+    html=v.render({'stream':['forces']})
+    assert 'Conceptual operating mechanism' in html
+    assert 'FLORA Insight' not in html
