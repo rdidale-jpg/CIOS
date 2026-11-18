@@ -1,0 +1,38 @@
+# Portfolio, current presentation and durable ownership
+
+This audit starts from the complete tracked tree, including ZIPs ignored by ordinary filesystem search. It inventories retained archive members, JSON/NDJSON record occurrences and source citations without importing them. It preserves duplicate owner-qualified identities: a repeated ID/name is not evidence of one accepted enterprise. See the JSON files for hashes, pointers and exact owners.
+
+## Current portfolio
+
+| Family | Verified research/model surface | Current presentation and material gap |
+| --- | --- | --- |
+| Global/Europe/UK/France context | Macro Context: seven sources/observations, four areas, five themes; Entity Traces: two traces | A geographic context/trace is not a researched national Twin or verified company legal applicability. UK Forces exposes four subjects; legacy PESTLE exposes six labels. Workforce, households, fiscal/trade, energy and distinct political/social evidence remain materially thin. |
+| UK SIC A–T | Frozen 2024 GVA sections and September 2026 GDP; four statistical sources | All 20 image labels; C/J/K/Q shares in Main. H/J/K links address Aviation/Technology/Banking subsectors, not entire SIC sections. GVA, revenue, market size and real growth are different measures. RIE-1's separate candidate dossiers prevent false “no research exists” claims. |
+| Banking | 24 overlay sources/45 claims, six PESTLE/five Porter/eight value-chain entries, ten capabilities, four suppliers/five programmes, 123 associations | Existing claim adapter renders 23 statements; canonical acceptance is independent. Funding, payments, customer and provider compositions reuse eligible bounded projections. Full Porter/industry PESTLE composition remains absent. |
+| Banking enterprise/ecosystem | Five finite bank references; seven historical narrative Twins; six differentiated financial dossiers; 76 actor occurrences; 31 candidate edges/17 dated events | Names/actors are not equally deep Twins. BIE-3 has seven permitted visible service cells and 24 withheld research candidates. Nationwide Group financials remain an Industry selection; Society complaints have a different scope. Source/identity restrictions still govern #665/#666 additions. |
+| Aviation/easyJet | Two candidate assets; 14 sources, 22 claims, 19 framework entries, nine capabilities, six suppliers/six programmes and 58 edges | Three source-supported relationships; other edges are analytical/hypothesis. HOL26/Q326 retrieval extent is index-only and EURO26 citation-only. Existing easyJet preview has four pinned disclosures and three selectable capabilities. Landscape remains capability-centric; Forces often repeats scale/history rather than entity-specific conditions. |
+| Technology | 80 partial unbound providers, 34 relationship/programme rows, six themes/five reference models; 11 comparison supplements/one deeper NVIDIA profile | Seven experience endpoints plus foundation views do not mean 80 operating models. Six metrics, three strategy/pressure entries, nine ecosystem relationships and two NVIDIA programmes remain source-use bounded. SEC passages and recovered Page text are not automatically original-source authority. |
+| Telecoms | TEL-W5 archive: six enterprise dossiers, exact package/member hashes; Wave6 references and repair proofs | BT/Openreach, VMO2, VodafoneThree, CityFibre and other dossier scopes retain current-use and legal-version questions. TEL package-envelope `enterprise_id=TEL-001` is an Industry identity, not a company. |
+| Telecoms/Media/Sport | TMS-001 has 14 priority enterprise records across its three domains, not Transport/Mobility | BBC, ITV, Sky, Channel 4, league/governing bodies and regulator records are retained. `mission_outcome=COMPLETE` coexists with `promotion_readiness=fail_not_ready`; neither a generic completion claim nor a new live industry route. |
+| Government/MOD | Retained MOD v1.3 ZIP, manifest, Twin Spine workbook and publications | Package presence and old acceptance documents do not establish current durable/production state. Public plan figures are not a procurement budget or evidence of a specific buying decision. |
+| Energy/Utilities/Insurance | Historical NRG requirement and knowledge placeholders | Actual current NRG package/receipt unavailable in this checkout. A new National Grid research slice does not reconstruct Energy generation/networks/retail or establish a populated Energy Twin. Insurance placeholder is not a completed Industry model. |
+
+## Owners and acceptance boundaries
+
+| Concern | Existing owner/interface | Audit boundary |
+| --- | --- | --- |
+| Sources/collection | live/source_registry.py; existing collection and research source/import/use policies | A URL, recovered Page, allowlisted host or package is not a new permission or independently verified source. |
+| Research claims | research_intelligence/model.py; SourceSegment, CandidateClaim, EvidencePackageItem | Candidate projections retain source/version/extent. Public factual working research does not universally require canonical promotion. |
+| Evidence → Observation → durable Model | Existing memory/service.py and repository.py; governed blueprint import registry/staging/review/mapping/promotion/lifecycle | ADR-002/009/012 remain intact. A generated slug or empty object from get() does not prove an actual stored record. No owner acceptance executed here. |
+| Financial analysis | financial_intelligence/candidate_analytics.py, analyst.py and typed measurement/recipe owners | Period, entity, currency, scale, stock/flow, actual/target and accounting basis remain independent. This pack's arithmetic QA does not create persisted runs or a new engine. |
+| Discovery/access | digital_twins.intelligence_discovery and enterprise_canvas/access | Finite anonymous references are not ACL to private models. Model-backed discovery needs an actual Model and existing access; no production/private inventory is exposed here. |
+| Presentation | visual_streams, visual_panels, reading_views, banking_ecosystem, easyjet_capabilities and Technology adapters | Facts/Insight is an orthogonal mode over existing semantic types. Labels/routes are not automatic data dependencies or model updates. |
+| Material Pressure / commercial action | ADR-026 gates and current authorised seller/Pipeline services | Facts, programmes, metrics, hypotheses and source admission do not qualify an Opportunity or create Pipeline. |
+
+The current checkout has no tracked live Evidence/Observation ledger, actual Enterprise Model directory or production import receipts. That means **production state unverified**, not zero accepted models. Read-only route/render inspection never queried private stores. Factory Repair 02/03's isolated pytest receipts establish bounded import behaviour; BNK subset100 and TEL subset133/143 are not full acceptance. Relationship counts are not canonical relationship writes.
+
+## Identity and version traps
+
+Legacy Register/Manifest `BK-ENT-003=Nationwide`, `004=Monzo`, `005=Starling`; current banking_portfolio uses `003=NatWest`, `004=HSBC UK`, `005=Santander UK`. Retain owner/path namespaces; do not “repair” historical records or join by bare ID. Group, regulated bank/Society, brand, reporting segment, operator and payment system remain distinct.
+
+Pinned #665/#666 are not merged. Main's BNK-DEPTH work explicitly withholds their new source/relationship candidates and reuses older eligible owners. RIE-1/2/RIC packs remain valuable research candidates, including all 20 partial sector foundations. The open PR inventory records design, research and historical branches separately; none is closed or indiscriminately integrated.
