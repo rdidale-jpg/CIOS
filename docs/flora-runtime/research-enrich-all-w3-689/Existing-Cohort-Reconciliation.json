@@ -1,0 +1,173 @@
+{
+  "base": "ecb91591e5abe854a6227ae4ebd21b4aa566cb69",
+  "rows": [
+    {
+      "kind": "finite_bank_reference",
+      "owner": "cios/applications/flora/banking_portfolio.py",
+      "original_id": "BK-ENT-001",
+      "slug": "lloyds",
+      "name": "Lloyds Banking Group",
+      "related_dossier": "lloyds",
+      "interpretation": "Legacy curated/scenario projection is not canonical acceptance or confirmation of any constructed opportunity. W3 does not adopt legacy financial sizing or inferred suppliers."
+    },
+    {
+      "kind": "finite_bank_reference",
+      "owner": "cios/applications/flora/banking_portfolio.py",
+      "original_id": "BK-ENT-006",
+      "slug": "barclays",
+      "name": "Barclays",
+      "related_dossier": "barclays",
+      "interpretation": "Legacy curated/scenario projection is not canonical acceptance or confirmation of any constructed opportunity. W3 does not adopt legacy financial sizing or inferred suppliers."
+    },
+    {
+      "kind": "finite_bank_reference",
+      "owner": "cios/applications/flora/banking_portfolio.py",
+      "original_id": "BK-ENT-003",
+      "slug": "natwest",
+      "name": "NatWest Group",
+      "related_dossier": "natwest",
+      "interpretation": "Legacy curated/scenario projection is not canonical acceptance or confirmation of any constructed opportunity. W3 does not adopt legacy financial sizing or inferred suppliers."
+    },
+    {
+      "kind": "finite_bank_reference",
+      "owner": "cios/applications/flora/banking_portfolio.py",
+      "original_id": "BK-ENT-004",
+      "slug": "hsbc-uk",
+      "name": "HSBC UK",
+      "related_dossier": "hsbc",
+      "interpretation": "Legacy curated/scenario projection is not canonical acceptance or confirmation of any constructed opportunity. W3 does not adopt legacy financial sizing or inferred suppliers."
+    },
+    {
+      "kind": "finite_bank_reference",
+      "owner": "cios/applications/flora/banking_portfolio.py",
+      "original_id": "BK-ENT-005",
+      "slug": "santander-uk",
+      "name": "Santander UK",
+      "related_dossier": "santander",
+      "interpretation": "Legacy curated/scenario projection is not canonical acceptance or confirmation of any constructed opportunity. W3 does not adopt legacy financial sizing or inferred suppliers."
+    },
+    {
+      "kind": "historical_narrative",
+      "owner": "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+      "original_id": "Barclays-Enterprise-Twin",
+      "name": "barclays",
+      "related_dossier": "barclays",
+      "interpretation": "Preserved historical narrative; exact issuer dates, status and legal scope rechecked in new dossier where supported; no wholesale promotion."
+    },
+    {
+      "kind": "historical_narrative",
+      "owner": "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+      "original_id": "Lloyds-Enterprise-Twin",
+      "name": "lloyds",
+      "related_dossier": "lloyds",
+      "interpretation": "Preserved historical narrative; exact issuer dates, status and legal scope rechecked in new dossier where supported; no wholesale promotion."
+    },
+    {
+      "kind": "historical_narrative",
+      "owner": "enterprise-knowledge/banking/enterprises/monzo/Monzo-Enterprise-Twin.md",
+      "original_id": "Monzo-Enterprise-Twin",
+      "name": "monzo",
+      "related_dossier": "monzo",
+      "interpretation": "Preserved historical narrative; exact issuer dates, status and legal scope rechecked in new dossier where supported; no wholesale promotion."
+    },
+    {
+      "kind": "historical_narrative",
+      "owner": "enterprise-knowledge/banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md",
+      "original_id": "Nationwide-Virgin-Money-Enterprise-Twin",
+      "name": "nationwide",
+      "related_dossier": "nationwide",
+      "interpretation": "Preserved historical narrative; exact issuer dates, status and legal scope rechecked in new dossier where supported; no wholesale promotion."
+    },
+    {
+      "kind": "historical_narrative",
+      "owner": "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+      "original_id": "NatWest-Enterprise-Twin",
+      "name": "natwest",
+      "related_dossier": "natwest",
+      "interpretation": "Preserved historical narrative; exact issuer dates, status and legal scope rechecked in new dossier where supported; no wholesale promotion."
+    },
+    {
+      "kind": "historical_narrative",
+      "owner": "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md",
+      "original_id": "Santander-UK-Enterprise-Twin",
+      "name": "santander-uk",
+      "related_dossier": "santander",
+      "interpretation": "Preserved historical narrative; exact issuer dates, status and legal scope rechecked in new dossier where supported; no wholesale promotion."
+    },
+    {
+      "kind": "historical_narrative",
+      "owner": "enterprise-knowledge/banking/enterprises/starling/Starling-Enterprise-Twin.md",
+      "original_id": "Starling-Enterprise-Twin",
+      "name": "starling",
+      "related_dossier": "starling",
+      "interpretation": "Preserved historical narrative; exact issuer dates, status and legal scope rechecked in new dossier where supported; no wholesale promotion."
+    },
+    {
+      "kind": "financial_candidate_dossier",
+      "owner": "docs/flora-runtime/bie2/Enterprise-Dossiers.json",
+      "original_id": "dossier:natwest",
+      "original_actor_id": "actor:nw-group",
+      "scope": "NatWest Group; not National Westminster Bank plc alone",
+      "period": "Nine months ended 30 September 2026; stocks at period end",
+      "related_dossier": "natwest",
+      "interpretation": "Retain original metrics individually; F3/W3 equalities reverified only on explicit matching definitions, never a dossier-wide financial alias."
+    },
+    {
+      "kind": "financial_candidate_dossier",
+      "owner": "docs/flora-runtime/bie2/Enterprise-Dossiers.json",
+      "original_id": "dossier:hsbc-uk",
+      "original_actor_id": "actor:hsbc-uk",
+      "scope": "HSBC UK Bank plc legal entity, UK ring-fenced bank; all businesses",
+      "period": "Nine months ended 30 September 2026; stocks at30 September 2026",
+      "related_dossier": "hsbc",
+      "interpretation": "Retain original metrics individually; F3/W3 equalities reverified only on explicit matching definitions, never a dossier-wide financial alias."
+    },
+    {
+      "kind": "financial_candidate_dossier",
+      "owner": "docs/flora-runtime/bie2/Enterprise-Dossiers.json",
+      "original_id": "dossier:santander-uk",
+      "original_actor_id": "actor:san-group",
+      "scope": "Financials: Santander UK Group Holdings plc; acquisition buyer: Santander UK plc",
+      "period": "Nine months ended 30 September 2026; TSB results consolidated from 1 May 2026",
+      "related_dossier": "santander",
+      "interpretation": "Retain original metrics individually; F3/W3 equalities reverified only on explicit matching definitions, never a dossier-wide financial alias."
+    },
+    {
+      "kind": "financial_candidate_dossier",
+      "owner": "docs/flora-runtime/bie2/Enterprise-Dossiers.json",
+      "original_id": "dossier:nationwide",
+      "original_actor_id": "actor:nbs-group",
+      "scope": "Nationwide Building Society consolidated Group, including Virgin Money",
+      "period": "1 April 2025\u201331 March 2026; prior 361 days to31 March 2025 includes only6 months Virgin Money",
+      "related_dossier": "nationwide",
+      "interpretation": "Retain original metrics individually; F3/W3 equalities reverified only on explicit matching definitions, never a dossier-wide financial alias."
+    },
+    {
+      "kind": "financial_candidate_dossier",
+      "owner": "docs/flora-runtime/bie2/Enterprise-Dossiers.json",
+      "original_id": "dossier:starling",
+      "original_actor_id": "actor:star-group",
+      "scope": "Starling Group; UK bank and Engine platform metrics distinguished",
+      "period": "12 months ended 31 March 2026",
+      "related_dossier": "starling",
+      "interpretation": "Retain original metrics individually; F3/W3 equalities reverified only on explicit matching definitions, never a dossier-wide financial alias."
+    },
+    {
+      "kind": "financial_candidate_dossier",
+      "owner": "docs/flora-runtime/bie2/Enterprise-Dossiers.json",
+      "original_id": "dossier:clearbank",
+      "original_actor_id": "actor:clear-group",
+      "scope": "UK bank profitability versus Group operating volumes and normalised revenue",
+      "period": "Year ended 31 December 2025",
+      "related_dossier": "clearbank",
+      "interpretation": "Retain original metrics individually; F3/W3 equalities reverified only on explicit matching definitions, never a dossier-wide financial alias."
+    }
+  ],
+  "counts": {
+    "historical_narrative": 7,
+    "finite_bank_reference": 5,
+    "financial_candidate_dossier": 6
+  },
+  "not_additive_to_76_actor_occurrences": true,
+  "public_or_canonical_acceptance_inferred": false
+}

@@ -1,0 +1,1293 @@
+{
+  "design_sha256": "7b50880fef675ebb3c6ee8e76964cfa3e036643ee2eeaf426616100c83f60ce7",
+  "rows": [
+    {
+      "requirement": "UK-STRUCT",
+      "design_question": "Where is value generated",
+      "perspective": "Landscape",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [
+        "ONS-BB-2026",
+        "uk-sic07-a\u2026t"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "new_candidate_claims": [],
+      "exact_candidate_slices": [],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "visual_composition": "Existing scoped sector composition; no new W3 national aggregate; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "Finance and insurance is broader than Banking",
+      "decisive_gap": "Frozen2024GVA is eligible, fourMain shares visible; newIC ratios are not yet admitted.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "UK-PESTLE",
+      "design_question": "What changes conditions across each PESTLE dimension",
+      "perspective": "Forces",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [
+        "UK-RATE-NOV26",
+        "UK-PRA-REPORT27",
+        "UK-FCA-REPORT27",
+        "GM-CLAIM-SOCIAL",
+        "GM-CLAIM-SRS",
+        "GM-CLAIM-BILL",
+        "EAI-UK-CYBER26",
+        "EAI-UK-CYBER-1\u20269"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "new_candidate_claims": [
+        "CTP-1",
+        "CTP-2",
+        "PSR-1"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "PSR::Institution",
+          "reporting_period": "consultation2026-10-15/2026-12-10",
+          "semantic_type": "reported",
+          "source_ids": [
+            "PSR-ACCESS"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UK::CTPRegime",
+          "reporting_period": "effective2026-07-13",
+          "semantic_type": "reported",
+          "source_ids": [
+            "CTP-JUL"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UK::CTPRegime",
+          "reporting_period": "announcement2026-11-17",
+          "semantic_type": "reported",
+          "source_ids": [
+            "CTP-NOV"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "visual_composition": "Dated designation timeline with conditional sector channel; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "No direct applicability to an enterprise from a national rule",
+      "decisive_gap": "Six full same-scope conditions/interpretations need newSource mappings; no enterprise exposure inheritance.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "IND-VALUE",
+      "design_question": "Who performs and captures value at each stage",
+      "perspective": "Landscape",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [
+        "cios/applications/flora/banking_ecosystem.py::four_stage_conceptual_composition"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "new_candidate_claims": [
+        "I-CLEAR",
+        "I-BOE",
+        "I-HOL"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "CLEAR::Group",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "CLEAR-1",
+            "CLEAR-2"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "BOE::Operator",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "BOE-1",
+            "BOE-2",
+            "BOE-3"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "EZY::HolidaysSegment",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "EZY-1",
+            "EZY-5",
+            "EZY-6"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Partial"
+      },
+      "visual_composition": "Bank/mutual/operator value-system roles; conceptual stages separated from sourced edges; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "Separate actual commercial relationships from illustrated adjacency",
+      "decisive_gap": "Conceptual role/valueflows differ from companyedges; wholeindustryprofitpools absent.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "IND-FORCES",
+      "design_question": "What drives rivalry and bargaining",
+      "perspective": "Forces",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [
+        "UK-VALUE"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "new_candidate_claims": [
+        "I-NBS",
+        "I-COV",
+        "I-CTP"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "NBS::Group",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "NBS-1",
+            "NBS-2",
+            "NBS-3"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "COV::Group",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "COV-1",
+            "COV-2"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UK::CTPRegime",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "CTP-1",
+            "CTP-2"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Partial"
+      },
+      "visual_composition": "Competitive mechanism with distinct bank/mutual/operator countercases; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "No unsupported market shares or ranked scores",
+      "decisive_gap": "Fivedifferentiated premises nowresearchdocumented; no exhaustiveeligiblecurrentcompetitivecohorts.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "BNK-CUST",
+      "design_question": "What shapes customer choice",
+      "perspective": "Landscape",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [
+        "FCA finite legal-entity complaint cells"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "new_candidate_claims": [
+        "BARC-2",
+        "MONZO-2",
+        "I-HSBC"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "BARC::UKDivision",
+          "reporting_period": "Q3 ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "BARC-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "MONZO::FY26WebScope",
+          "reporting_period": "FY2026 web highlights",
+          "semantic_type": "reported",
+          "source_ids": [
+            "MONZO-FY"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "HSBC::UKBank",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "HSBC-1",
+            "HSBC-3",
+            "HSBC-4"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "visual_composition": "Customer/product cohort and actual journey; no unsupported primacy league table; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "FCA counts are ancillary legal entity cohorts",
+      "decisive_gap": "Complaint denominators are not switching/marketshare; aggregate flowbuckets notcompletebridge.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "BNK-FUND",
+      "design_question": "How funding and credit affect earnings",
+      "perspective": "Landscape",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [
+        "LBG-Q326-DEPOSITS",
+        "LBG-Q326-PROFIT",
+        "RUD1-NATIONWIDE-FY26::eight_measurements_and_two_derivations"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "new_candidate_claims": [
+        "LBG-1",
+        "NWG-1",
+        "NBS-1",
+        "COV-1"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "LBG::Group",
+          "reporting_period": "9M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "LBG-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "NWG::Group",
+          "reporting_period": "9M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "NWG-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "NBS::Group",
+          "reporting_period": "2025-04-01/2026-03-31",
+          "semantic_type": "reported",
+          "source_ids": [
+            "NBS-FY"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "COV::Group",
+          "reporting_period": "6M ended2026-06-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "COV-H1"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "visual_composition": "Matched bank profit bridge and mutual reward/capital context; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "Individual Group is not sector profit pool",
+      "decisive_gap": "Group exactperiod financials eligible; no sectorNIM orcrossbank returnranking.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "BNK-PAY",
+      "design_question": "Who moves principal and who earns service income",
+      "perspective": "Landscape",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [
+        "cios/applications/flora/banking_ecosystem.py::payments_conceptual_composition"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "new_candidate_claims": [
+        "BOE-1",
+        "BOE-2",
+        "PAY-1",
+        "I-CLEAR"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "PAYUK::Limited",
+          "reporting_period": "identity observed2026-11-18",
+          "semantic_type": "reported",
+          "source_ids": [
+            "PAY-CORP"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "BOE::Operator",
+          "reporting_period": "current page at2026-11-18",
+          "semantic_type": "reported",
+          "source_ids": [
+            "BOE-SETTLE"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "CHAPS::System",
+          "reporting_period": "page observed2026-11-18",
+          "semantic_type": "reported",
+          "source_ids": [
+            "BOE-CHAPS"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "CLEAR::Group",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "CLEAR-1",
+            "CLEAR-2"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "visual_composition": "Operator/system/participant settlement diagram; no Pay.UK fees or unadmitted list; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "No draft Pay.UK participation fees or unverified account economics",
+      "decisive_gap": "BoEroles sourceverifiedpending; Pay.UK report/feesrights and namedparticipant bindings unresolved.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "BNK-TECH",
+      "design_question": "Where service dependencies matter",
+      "perspective": "Landscape",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [
+        "EAI-UK-CTP-DESIGNATION",
+        "LBG-ENVOY-GOOGLE",
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "new_candidate_claims": [
+        "LBG-4",
+        "NWG-4",
+        "STAR-4",
+        "CTP-1",
+        "CTP-2"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "LBG::Group",
+          "reporting_period": "announcement2026-04-28",
+          "semantic_type": "reported",
+          "source_ids": [
+            "LBG-ENVOY"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "NWG::Group",
+          "reporting_period": "2025 activity;2026 retrospective",
+          "semantic_type": "reported",
+          "source_ids": [
+            "NWG-TECH",
+            "NWG-AWS"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "STAR::BankBrand",
+          "reporting_period": "announcement2026-10-14",
+          "semantic_type": "reported",
+          "source_ids": [
+            "STAR-CLOUD"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UK::CTPRegime",
+          "reporting_period": "effective2026-07-13",
+          "semantic_type": "reported",
+          "source_ids": [
+            "CTP-JUL"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UK::CTPRegime",
+          "reporting_period": "announcement2026-11-17",
+          "semantic_type": "reported",
+          "source_ids": [
+            "CTP-NOV"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "visual_composition": "Brand-scoped collaboration graph separate from CTP legal-person designation; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "No Lloyds Bank plc Envoy contract inferred",
+      "decisive_gap": "CTP legaldesignation vsGroupcollaboration vsactualbankworkload remain separate.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "AIR-ROTATE",
+      "design_question": "How network and capacity economics differ",
+      "perspective": "Landscape",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [
+        "AV-FLEET",
+        "AV-NETWORK",
+        "AV-MRO",
+        "AV-CHAT"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "new_candidate_claims": [
+        "EZY-1",
+        "EZY-2",
+        "EZY-3",
+        "I-EZY"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "EZY::Group",
+          "reporting_period": "6M ended2026-03-31",
+          "semantic_type": "reported",
+          "source_ids": [
+            "EZY-H1"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "EZY::Airline",
+          "reporting_period": "May2026statement;H12026",
+          "semantic_type": "reported",
+          "source_ids": [
+            "EZY-H1"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "EZY::Airline",
+          "reporting_period": "undated model atcut",
+          "semantic_type": "reported",
+          "source_ids": [
+            "EZY-MODEL"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "EZY::Airline",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "EZY-1",
+            "EZY-2",
+            "EZY-3",
+            "EZY-4"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "visual_composition": "Airline/holidays segment bridge, elimination and conceptual rotation capability map; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "No attribution of group results to a route or capability",
+      "decisive_gap": "Fourexisting source-boundFacts are presented viaeasyjet_capabilities.fact; carrierrouteeconomics stillmissing.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "TECH-SUPPLY",
+      "design_question": "Where capacity and service interdependencies sit",
+      "perspective": "Landscape",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [],
+      "current_owner_permitted_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "new_candidate_claims": [
+        "MS-1",
+        "AWS-1",
+        "GOOG-1",
+        "CCC-1",
+        "EQIX-1",
+        "ARM-1",
+        "NVDA-2"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "MSFT::Global",
+          "reporting_period": "3M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "MS-Q1"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "AWS::GlobalSegment",
+          "reporting_period": "3M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "AWS-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "GOOGLE::GlobalCloudSegment",
+          "reporting_period": "3M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "GOOG-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "CCC::Group",
+          "reporting_period": "6M ended2026-06-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "CCC-H1"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "EQIX::Global",
+          "reporting_period": "3M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "EQIX-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "ARM::Global",
+          "reporting_period": "3M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "ARM-Q2"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "NVDA::Global",
+          "reporting_period": "quarter ended2026-10-25; leadership at2026-11-17",
+          "semantic_type": "reported",
+          "source_ids": [
+            "NVDA-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "visual_composition": "Provider archetype economic mechanisms with exact global/UK and product boundaries; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "Directory membership is not provider-customer evidence",
+      "decisive_gap": "Legacytechnologyrendering is not sourceadmission; eightrole mechanismspartial and80unbound profiles.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "ENT-ECON",
+      "design_question": "How this business earns and deploys capital",
+      "perspective": "Landscape",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [
+        "LBG-Q326-PROFIT",
+        "RUD1-NATIONWIDE-FY26::eight_measurements_and_two_derivations"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "new_candidate_claims": [
+        "LBG-2",
+        "BARC-1",
+        "HSBC-1",
+        "NBS-1",
+        "EZY-1",
+        "I-HOL"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "LBG::Group",
+          "reporting_period": "9M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "LBG-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "HSBC::UKBank",
+          "reporting_period": "9M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "HSBC-UK-DATA"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "BARC::UKDivision",
+          "reporting_period": "9M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "BARC-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "NBS::Group",
+          "reporting_period": "2025-04-01/2026-03-31",
+          "semantic_type": "reported",
+          "source_ids": [
+            "NBS-FY"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "EZY::Group",
+          "reporting_period": "6M ended2026-03-31",
+          "semantic_type": "reported",
+          "source_ids": [
+            "EZY-H1"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "EZY::HolidaysSegment",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "EZY-1",
+            "EZY-5",
+            "EZY-6"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "visual_composition": "Selected issuer/segment waterfall, period and accounting basis; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "Do not substitute Society complaints for Group results",
+      "decisive_gap": "Enterprise breadthWave3; no societycomplaint/groupincome orglobalUKsubstitution.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "ENT-CAP",
+      "design_question": "How the chosen capability supports a value stream",
+      "perspective": "Inside",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [
+        "AV-FLEET",
+        "AV-NETWORK",
+        "AV-MRO",
+        "AV-CHAT"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "new_candidate_claims": [
+        "LBG-4",
+        "NWG-4",
+        "STAR-4",
+        "EZY-3",
+        "I-EQIX"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "LBG::Group",
+          "reporting_period": "announcement2026-04-28",
+          "semantic_type": "reported",
+          "source_ids": [
+            "LBG-ENVOY"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "NWG::Group",
+          "reporting_period": "2025 activity;2026 retrospective",
+          "semantic_type": "reported",
+          "source_ids": [
+            "NWG-TECH",
+            "NWG-AWS"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "STAR::BankBrand",
+          "reporting_period": "announcement2026-10-14",
+          "semantic_type": "reported",
+          "source_ids": [
+            "STAR-CLOUD"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "EZY::Airline",
+          "reporting_period": "undated model atcut",
+          "semantic_type": "reported",
+          "source_ids": [
+            "EZY-MODEL"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "EQIX::Global",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "EQIX-1"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "visual_composition": "Conceptual value chain and distinct durable abilities with actual enablers only where sourced; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "Label reference or conceptual capability and withhold unknown evidence",
+      "decisive_gap": "FourpubliceasyJet capabilityanchors do not prove outcomes/suppliers bycapability.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "ENT-EXPOSURE",
+      "design_question": "What conditions affect this company and why",
+      "perspective": "Forces",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [
+        "LBG-AI26-REPORTED",
+        "LBG-AI26-EXPECTED",
+        "EAI-UK-CTP-DESIGNATION"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "new_candidate_claims": [
+        "I-LBG",
+        "I-NWG",
+        "I-COV",
+        "I-GOOG"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "LBG::Group",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "LBG-1",
+            "LBG-2",
+            "LBG-3",
+            "LBG-4"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "NWG::Group",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "NWG-1",
+            "NWG-2",
+            "NWG-4"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "COV::Group",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "COV-1",
+            "COV-2"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "GOOGLE::GlobalCloudSegment",
+          "reporting_period": "premise-specific; no synthetic common period",
+          "semantic_type": "insight",
+          "source_ids": [],
+          "input_claim_ids": [
+            "GOOG-1",
+            "GOOG-2",
+            "LBG-4"
+          ],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Partial"
+      },
+      "visual_composition": "Observed condition \u2192 existing response \u2192 conditional consequence and countercase; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "No procurement claim or automatic pressure qualification",
+      "decisive_gap": "Matchexactentityresponse andcounterexample; noautomaticPressure oropportunity.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "PROVIDER-TIER",
+      "design_question": "How much of this provider is evidenced",
+      "perspective": "Landscape",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [],
+      "current_owner_permitted_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "new_candidate_claims": [
+        "MS-1",
+        "AWS-1",
+        "GOOG-1",
+        "CCC-1",
+        "EQIX-1",
+        "ARM-1",
+        "NVDA-2"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "MSFT::Global",
+          "reporting_period": "3M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "MS-Q1"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "AWS::GlobalSegment",
+          "reporting_period": "3M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "AWS-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "GOOGLE::GlobalCloudSegment",
+          "reporting_period": "3M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "GOOG-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "CCC::Group",
+          "reporting_period": "6M ended2026-06-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "CCC-H1"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "EQIX::Global",
+          "reporting_period": "3M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "EQIX-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "ARM::Global",
+          "reporting_period": "3M ended2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "ARM-Q2"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "NVDA::Global",
+          "reporting_period": "quarter ended2026-10-25; leadership at2026-11-17",
+          "semantic_type": "reported",
+          "source_ids": [
+            "NVDA-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "visual_composition": "Bounded per-provider source-backed fragments, not directory completion badges; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "No automatic promotion of 80 partial profiles",
+      "decisive_gap": "80profile endpoints need individidualsource/use/identity work; provider tiers unchanged.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "CHANGE-LEASE",
+      "design_question": "What changed when and for whom",
+      "perspective": "What's changing?",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [],
+      "current_owner_permitted_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "new_candidate_claims": [
+        "BARC-3",
+        "SAN-2",
+        "STAR-4",
+        "CTP-2",
+        "NVDA-2"
+      ],
+      "exact_candidate_slices": [
+        {
+          "subject_key": "BARC::BankUK",
+          "reporting_period": "event2026-10-01",
+          "semantic_type": "reported",
+          "source_ids": [
+            "BARC-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SAN::UKGroupHoldings",
+          "reporting_period": "completion2026-04-30; inclusion2026-05-01/2026-09-30",
+          "semantic_type": "reported",
+          "source_ids": [
+            "SAN-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "STAR::BankBrand",
+          "reporting_period": "announcement2026-10-14",
+          "semantic_type": "reported",
+          "source_ids": [
+            "STAR-CLOUD"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UK::CTPRegime",
+          "reporting_period": "announcement2026-11-17",
+          "semantic_type": "reported",
+          "source_ids": [
+            "CTP-NOV"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        },
+        {
+          "subject_key": "NVDA::Global",
+          "reporting_period": "quarter ended2026-10-25; leadership at2026-11-17",
+          "semantic_type": "reported",
+          "source_ids": [
+            "NVDA-Q3"
+          ],
+          "input_claim_ids": [],
+          "Facts": "Unavailable",
+          "FLORA Insight": "Unavailable"
+        }
+      ],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "visual_composition": "Attributed historical pulse/event status; no unearned News tab; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "No automatic News from historical reports",
+      "decisive_gap": "Newpublication andoldmeasurement differ; noeligible deduplicated30/90daystream oractivatedNews.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    },
+    {
+      "requirement": "FACTORY-RECEIPT",
+      "design_question": "What is actually loaded and accepted",
+      "perspective": "Portfolio inventory",
+      "existing_owner": "Existing owner paths in ../research-enrich-all-w2-685/Ownership-and-Readiness.md and W3 Ownership-and-Method.md; never bare legacy IDs",
+      "existing_eligible_premise_references": [],
+      "current_owner_permitted_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "new_candidate_claims": [],
+      "exact_candidate_slices": [],
+      "new_public_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "visual_composition": "Owner-only exact receipt requirement; no public UI or invented Model acceptance; existing Top/Left/Main, Facts first and same subject on Insight.",
+      "negative_proof": "No route or acceptance inferred from package or historical screenshot",
+      "decisive_gap": "Packages/fixtureproofs are notauthorised productionreceipts; NRGfile notfound, importedstateunverified.; W3 claim-specific demands remain in Claims/Dossiers.",
+      "withdrawal": "Remove exact dependent claim, arithmetic, interpretation and proposed label; no unrelated suppression.",
+      "do_not_publish": "Research questions, gaps, admin and pending-use material remain in owner pack; no automatic News tab.",
+      "separate_runtime_owner": "#684/#686 after explicit owner review; no shared files edited"
+    }
+  ]
+}

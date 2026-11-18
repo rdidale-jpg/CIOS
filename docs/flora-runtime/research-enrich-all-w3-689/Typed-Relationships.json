@@ -1,0 +1,487 @@
+[
+  {
+    "id": "e-envoy",
+    "from_subject": "LBG::Group",
+    "predicate": "announced_build_with_brand",
+    "to_subject": "GOOGLE::CloudBrand",
+    "claim_ids": [
+      "LBG-4"
+    ],
+    "date_scope": "2026-04-28",
+    "status": "verified_candidate",
+    "limitation": "Brand collaboration only; not Google Cloud EMEA Limited legal contract.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-nwg-aws",
+    "from_subject": "NWG::Group",
+    "predicate": "announced_data_collaboration_with_brand",
+    "to_subject": "AWS::Brand",
+    "claim_ids": [
+      "NWG-4"
+    ],
+    "date_scope": "July2025;2026 retrospective",
+    "status": "verified_candidate",
+    "limitation": "No National Westminster Bank plc-specific contractual workshare.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-nwg-acc",
+    "from_subject": "NWG::Group",
+    "predicate": "announced_data_collaboration_with_brand",
+    "to_subject": "ACCENTURE::Brand",
+    "claim_ids": [
+      "NWG-4"
+    ],
+    "date_scope": "July2025;2026 retrospective",
+    "status": "verified_candidate",
+    "limitation": "No exact Accenture legal entity, value or exclusive scope.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-star-nvda",
+    "from_subject": "STAR::BankBrand",
+    "predicate": "developing_transaction_model_with_brand",
+    "to_subject": "NVDA::Brand",
+    "claim_ids": [
+      "STAR-4"
+    ],
+    "date_scope": "2026-10-14",
+    "status": "verified_candidate",
+    "limitation": "Research/training, not verified production-wide AI estate.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-star-civo",
+    "from_subject": "STAR::BankBrand",
+    "predicate": "training_model_on_brand_infrastructure",
+    "to_subject": "CIVO::Brand",
+    "claim_ids": [
+      "STAR-4"
+    ],
+    "date_scope": "2026-10-14",
+    "status": "verified_candidate",
+    "limitation": "No legal supplier or contract terms established.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-clear-paycaptain",
+    "from_subject": "CLEAR::Group",
+    "predicate": "issuer_names_embedded_partner_brand",
+    "to_subject": "PAYCAPTAIN::Brand",
+    "claim_ids": [
+      "CLEAR-2"
+    ],
+    "date_scope": "FY2025 release2026-04-15",
+    "status": "verified_candidate",
+    "limitation": "Does not establish precise legal counterparty or end-client scope.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-cov-coop",
+    "from_subject": "COV::Society",
+    "predicate": "acquired_reported_bank_subgroup",
+    "to_subject": "COOP::HoldingsSubgroup",
+    "claim_ids": [
+      "COV-2"
+    ],
+    "date_scope": "2025-01-01",
+    "status": "verified_candidate",
+    "limitation": "Future asset transfer is a separate event; no automatic legal merger.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-san-tsb",
+    "from_subject": "SAN::UKGroupHoldings",
+    "predicate": "reports_post_acquisition_consolidation_of",
+    "to_subject": "TSB::AcquiredBusiness",
+    "claim_ids": [
+      "SAN-2"
+    ],
+    "date_scope": "2026-05-01/2026-09-30",
+    "status": "verified_candidate",
+    "limitation": "Partial original verification; acquisition completion30April; not nine-month standalone financials.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-barc-gohenry",
+    "from_subject": "BARC::BankUK",
+    "predicate": "completed_acquisition_of_brand",
+    "to_subject": "GOHENRY::Brand",
+    "claim_ids": [
+      "BARC-3"
+    ],
+    "date_scope": "2026-10-01",
+    "status": "verified_candidate",
+    "limitation": "GoHenry brand vs exact acquired company remains separate research demand.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-boe-chaps",
+    "from_subject": "BOE::Operator",
+    "predicate": "operates",
+    "to_subject": "CHAPS::System",
+    "claim_ids": [
+      "BOE-1"
+    ],
+    "date_scope": "page atcut",
+    "status": "verified_candidate",
+    "limitation": "System/service, not another corporate enterprise.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-boe-rtgs",
+    "from_subject": "BOE::Operator",
+    "predicate": "operates",
+    "to_subject": "RTGS::Infrastructure",
+    "claim_ids": [
+      "BOE-1"
+    ],
+    "date_scope": "page atcut",
+    "status": "verified_candidate",
+    "limitation": "Infrastructure distinct from a scheme.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-chaps-lloyds",
+    "from_subject": "LBG::Bankplc",
+    "predicate": "listed_direct_participant_of",
+    "to_subject": "CHAPS::System",
+    "claim_ids": [
+      "BOE-2"
+    ],
+    "date_scope": "page observed2026-11-18",
+    "status": "verified_candidate",
+    "limitation": "Participant page is undated; no historical participation start or Pay.UK role inferred.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-chaps-hsbc",
+    "from_subject": "HSBC::UKBank",
+    "predicate": "listed_direct_participant_of",
+    "to_subject": "CHAPS::System",
+    "claim_ids": [
+      "BOE-2"
+    ],
+    "date_scope": "page observed2026-11-18",
+    "status": "verified_candidate",
+    "limitation": "Participant page is undated; no historical participation start or Pay.UK role inferred.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-chaps-natwest",
+    "from_subject": "NWG::NationalWestminsterBank",
+    "predicate": "listed_direct_participant_of",
+    "to_subject": "CHAPS::System",
+    "claim_ids": [
+      "BOE-2"
+    ],
+    "date_scope": "page observed2026-11-18",
+    "status": "verified_candidate",
+    "limitation": "Participant page is undated; no historical participation start or Pay.UK role inferred.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-chaps-clear",
+    "from_subject": "CLEAR::UKLimited",
+    "predicate": "listed_direct_participant_of",
+    "to_subject": "CHAPS::System",
+    "claim_ids": [
+      "BOE-2"
+    ],
+    "date_scope": "page observed2026-11-18",
+    "status": "verified_candidate",
+    "limitation": "Participant page is undated; no historical participation start or Pay.UK role inferred.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-ezyhol",
+    "from_subject": "EZY::AirlineSegment",
+    "predicate": "revenue_eliminated_with",
+    "to_subject": "EZY::HolidaysSegment",
+    "claim_ids": [
+      "EZY-1"
+    ],
+    "date_scope": "H12026",
+    "status": "verified_candidate",
+    "limitation": "Reporting segment mechanism, not supplier/client contract or legal ownership claim.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-ctpg",
+    "from_subject": "UK::CTPRegime",
+    "predicate": "designates_legal_person",
+    "to_subject": "GOOGLE::EMEALimited",
+    "claim_ids": [
+      "CTP-1"
+    ],
+    "date_scope": "effective2026-07-13",
+    "status": "verified_candidate",
+    "limitation": "Covered-service applicability still required for any enterprise exposure.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "e-ctpn",
+    "from_subject": "UK::CTPRegime",
+    "predicate": "announces_additional_designated_person",
+    "to_subject": "FORM3::UKLimited",
+    "claim_ids": [
+      "CTP-2"
+    ],
+    "date_scope": "announced2026-11-17",
+    "status": "verified_candidate",
+    "limitation": "Exact effective instrument not reviewed; no bank-customer inference.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "n-envoy",
+    "from_subject": "LBG::Bankplc",
+    "predicate": "has_critical_contract_with",
+    "to_subject": "GOOGLE::EMEALimited",
+    "claim_ids": [
+      "LBG-4",
+      "CTP-1"
+    ],
+    "date_scope": "negative proof atresearch cut",
+    "status": "rejected_join",
+    "limitation": "Group brand collaboration plus CTP designation cannot prove this legal contract/workload.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "n-payuk",
+    "from_subject": "LBG::Bankplc",
+    "predicate": "direct_FPS_participant_because_CHAPS",
+    "to_subject": "PAYUK::Limited",
+    "claim_ids": [
+      "BOE-2"
+    ],
+    "date_scope": "negative proof atresearch cut",
+    "status": "rejected_join",
+    "limitation": "CHAPS access and Pay.UK roles are separate; participant-list use remains withheld.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "n-guarantor",
+    "from_subject": "PAYUK::GuarantorRole",
+    "predicate": "equals_settlement_participant",
+    "to_subject": "RTGS::Infrastructure",
+    "claim_ids": [
+      "PAY-1",
+      "BOE-1"
+    ],
+    "date_scope": "negative proof atresearch cut",
+    "status": "rejected_join",
+    "limitation": "Governance guarantor is not settlement status; restricted list cannot be imported.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "n-hsbc",
+    "from_subject": "HSBC::UKBank",
+    "predicate": "equals_all_UK_operating_banks",
+    "to_subject": "HSBC::UKOperatingBanks",
+    "claim_ids": [
+      "HSBC-1",
+      "HSBC-3"
+    ],
+    "date_scope": "negative proof atresearch cut",
+    "status": "rejected_join",
+    "limitation": "Ring-fenced legal bank vs combined operating-bank perimeter.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "n-barc",
+    "from_subject": "BARC::UKDivision",
+    "predicate": "equals_legal_entity",
+    "to_subject": "BARC::BankUK",
+    "claim_ids": [
+      "BARC-1"
+    ],
+    "date_scope": "negative proof atresearch cut",
+    "status": "rejected_join",
+    "limitation": "Reporting division is not the full legal bank.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "n-tsb",
+    "from_subject": "TSB::AcquiredBusiness",
+    "predicate": "add_profit_again_to",
+    "to_subject": "SAN::UKGroupHoldings",
+    "claim_ids": [
+      "SAN-1",
+      "SAN-2"
+    ],
+    "date_scope": "negative proof atresearch cut",
+    "status": "rejected_join",
+    "limitation": "Already included only post-acquisition; no double counting.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "n-nbs",
+    "from_subject": "NBS::Society",
+    "predicate": "equals_FY_Group_complaint_population",
+    "to_subject": "NBS::Group",
+    "claim_ids": [
+      "NBS-1",
+      "NBS-3"
+    ],
+    "date_scope": "negative proof atresearch cut",
+    "status": "rejected_join",
+    "limitation": "Group economics and Society/brand complaints have different perimeters and dates.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "n-star",
+    "from_subject": "STAR::BankBrand",
+    "predicate": "production_entire_estate_on",
+    "to_subject": "CIVO::Brand",
+    "claim_ids": [
+      "STAR-4"
+    ],
+    "date_scope": "negative proof atresearch cut",
+    "status": "rejected_join",
+    "limitation": "Model training is narrower than all-bank production hosting.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "n-nvda",
+    "from_subject": "NVDA::Global",
+    "predicate": "proves_bank_GPU_spend",
+    "to_subject": "STAR::BankBrand",
+    "claim_ids": [
+      "NVDA-1",
+      "STAR-4"
+    ],
+    "date_scope": "negative proof atresearch cut",
+    "status": "rejected_join",
+    "limitation": "Platform revenue and research collaboration do not reveal bank budget.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "n-hol",
+    "from_subject": "EZY::HolidaysLegal",
+    "predicate": "has_segment_profit_as_standalone",
+    "to_subject": "EZY::HolidaysSegment",
+    "claim_ids": [
+      "EZY-1",
+      "EZY-6"
+    ],
+    "date_scope": "negative proof atresearch cut",
+    "status": "rejected_join",
+    "limitation": "Reporting segment is not legal-company accounts.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "n-demand",
+    "from_subject": "UK::CTPRegime",
+    "predicate": "creates_qualified_sales_opportunity",
+    "to_subject": "NWG::Group",
+    "claim_ids": [
+      "CTP-1"
+    ],
+    "date_scope": "negative proof atresearch cut",
+    "status": "rejected_join",
+    "limitation": "Regulation is not buyer need, authority, funding or opportunity.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  },
+  {
+    "id": "n-id003",
+    "from_subject": "LegacyManifest::BK-ENT-003",
+    "predicate": "same_entity_as",
+    "to_subject": "BankingPortfolio::BK-ENT-003",
+    "claim_ids": [],
+    "date_scope": "negative proof atresearch cut",
+    "status": "rejected_join",
+    "limitation": "Manifest Nationwide/Virgin vs portfolio NatWest collision; reject bare-ID join without owner namespace.",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "contract_value": null,
+    "buying_intent": null
+  }
+]

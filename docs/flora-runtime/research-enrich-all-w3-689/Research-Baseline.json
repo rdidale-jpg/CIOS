@@ -1,0 +1,31 @@
+{
+  "base": "ecb91591e5abe854a6227ae4ebd21b4aa566cb69",
+  "branch": "codex/research-enrich-all-w3-689",
+  "commission": 689,
+  "programme": 688,
+  "cut": "2026-11-18",
+  "main_ci_at_preflight": {
+    "run": 44387189016,
+    "status": "completed/success",
+    "initial_status": "in_progress",
+    "url": "https://github.com/rdidale-jpg/CIOS/actions/runs/44387189016"
+  },
+  "pins": {
+    "683": "28b1cb9863db15949775881a434c2507f4f0b0d6",
+    "665": "46f0ed42e10f2c8a2cabbf344498898e94072990",
+    "666": "412c086391194ec4e9d2f1b76841b0bb1df8917d",
+    "686": "29f8a2c8049c1ddbc8d1921fe9404e4731cd571d",
+    "687": "67dab5bf484cce793d6d591afc682ee1fc5da133"
+  },
+  "overlapping_populations": {
+    "finite_bank_refs": 5,
+    "historical_narratives": 7,
+    "financial_dossiers": 6,
+    "actor_occurrences": 76,
+    "inherited_candidate_edges": 31
+  },
+  "new_source_admissions": 0,
+  "new_canonical_records": 0,
+  "new_runtime_routes": 0,
+  "live_import_or_deployment_state": "not inspected; no authority/production data access assumed"
+}

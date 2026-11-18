@@ -1,0 +1,1429 @@
+[
+  {
+    "id": "LBG-1",
+    "subject_key": "LBG::Group",
+    "statement": "9M underlying NII11084 + other income4996 − lease depreciation1261 = net income14819 (GBP million).",
+    "semantic_type": "reported",
+    "source_ids": [
+      "LBG-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "9M ended2026-09-30",
+    "legal_scope": "LBG::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "LBG-2",
+    "subject_key": "LBG::Group",
+    "statement": "Net income14819 − costs7246 − remediation61 − impairment930 = underlying profit6582; − restructuring51 + volatility94 = statutory PBT6625 (GBP million).",
+    "semantic_type": "reported",
+    "source_ids": [
+      "LBG-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "9M ended2026-09-30",
+    "legal_scope": "LBG::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "LBG-3",
+    "subject_key": "LBG::Group",
+    "statement": "Mortgage asset-margin compression and deposit competition partly offset higher structural hedge income; lease depreciation rose with fleet mix and used-car effects.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "LBG-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "9M ended2026-09-30",
+    "legal_scope": "LBG::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "LBG-4",
+    "subject_key": "LBG::Group",
+    "statement": "Envoy is an existing internal agent platform built with Google Cloud; templates, internal sharing and monitoring retain human oversight. Ron van Kemenade is identified as Group COO.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "LBG-ENVOY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "announcement2026-04-28",
+    "legal_scope": "LBG::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "No Envoy supplier legal counterparty, spend, workload criticality or net realised customer benefit established.",
+    "next_material_demand": "No Envoy supplier legal counterparty, spend, workload criticality or net realised customer benefit established."
+  },
+  {
+    "id": "NWG-1",
+    "subject_key": "NWG::Group",
+    "statement": "9M income13502 − costs6259 − impairments700 = operating PBT6543 (GBP million); shareholder attributable4567 is a different profit measure.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "NWG-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "9M ended2026-09-30",
+    "legal_scope": "NWG::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "NWG-2",
+    "subject_key": "NWG::Retail",
+    "statement": "Q3 Retail income1721 − expenses678 − impairment192 = operating PBT851 (GBP million). Cora AI fraud triage handled52000 credit-card conversations.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "NWG-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "Q3 ended2026-09-30",
+    "legal_scope": "NWG::Retail",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Conversation volume does not establish fraud loss reduction, control effectiveness or net cash saving.",
+    "next_material_demand": "Conversation volume does not establish fraud loss reduction, control effectiveness or net cash saving."
+  },
+  {
+    "id": "NWG-3",
+    "subject_key": "NWG::Group",
+    "statement": "Paul Thwaite leads three customer franchises: Retail; Private Banking & Wealth; Commercial & Institutional. Evelyn acquisition changes the wealth comparison perimeter.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "NWG-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "9M ended2026-09-30",
+    "legal_scope": "NWG::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "NWG-4",
+    "subject_key": "NWG::Group",
+    "statement": "Bankline is an existing C&I access capability. The issuer describes AWS and Accenture collaboration on its data estate and reports wider coder/colleague AI deployment.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "NWG-TECH",
+      "NWG-AWS"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "2025 activity;2026 retrospective",
+    "legal_scope": "NWG::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Deployment is existing capability, not a missing-platform thesis; legal supplier scope and net benefits unresolved.",
+    "next_material_demand": "Deployment is existing capability, not a missing-platform thesis; legal supplier scope and net benefits unresolved."
+  },
+  {
+    "id": "HSBC-1",
+    "subject_key": "HSBC::UKBank",
+    "statement": "HSBC UK Bank plc all-businesses reported9M revenue11054 − ECL701 − operating expenses4270 + share of profit in associates and joint ventures less impairment1 = PBT6084 (USD million).",
+    "semantic_type": "reported",
+    "source_ids": [
+      "HSBC-UK-DATA"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "9M ended2026-09-30",
+    "legal_scope": "HSBC::UKBank",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "USD legal-entity table is neither GBP UK revenue nor the separate UK business segment/UK geography.",
+    "next_material_demand": "USD legal-entity table is neither GBP UK revenue nor the separate UK business segment/UK geography."
+  },
+  {
+    "id": "HSBC-2",
+    "subject_key": "HSBC::Group",
+    "statement": "Group3Q reported PBTUSD9.6bn differs from the UK legal entity; nonrecurrence of prior legal provisions contributes to the year-on-year movement.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "HSBC-GROUP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "Q3 ended2026-09-30",
+    "legal_scope": "HSBC::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "HSBC-3",
+    "subject_key": "HSBC::UKOperatingBanks",
+    "statement": "HSBC in the UK combines the ring-fenced HSBC UK Bank plc and non-ring-fenced HSBC Bank plc; coordinated coverage does not erase the two legal perimeters.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "HSBC-UK-STRAT"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "November2026briefing",
+    "legal_scope": "HSBC::UKOperatingBanks",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "HSBC-4",
+    "subject_key": "HSBC::UKBusiness",
+    "statement": "Commercial strategy targets larger corporate, mid-market and SME coverage; Retail & Wealth emphasises end-to-end digital journeys, data and personalised banking. These are stated priorities, not failed capabilities.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "HSBC-UK-STRAT"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "November2026briefing",
+    "legal_scope": "HSBC::UKBusiness",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "HSBC-5",
+    "subject_key": "HSBC::UKBank",
+    "statement": "David Lindberg became HSBC UK Bank plc CEO on8December2025. Group and non-ring-fenced leadership are distinct.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "HSBC-UK-CEO"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "effective2025-12-08",
+    "legal_scope": "HSBC::UKBank",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "BARC-1",
+    "subject_key": "BARC::UKDivision",
+    "statement": "Barclays UK9M NII6059 + fees/other807 = income6866; less total expenses3683 and impairment461 gives PBT2722 (GBP million).",
+    "semantic_type": "reported",
+    "source_ids": [
+      "BARC-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "9M ended2026-09-30",
+    "legal_scope": "BARC::UKDivision",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Barclays UK reporting division does not equal Barclays PLC, UK Corporate Bank or the full legal bank accounts.",
+    "next_material_demand": "Barclays UK reporting division does not equal Barclays PLC, UK Corporate Bank or the full legal bank accounts."
+  },
+  {
+    "id": "BARC-2",
+    "subject_key": "BARC::UKDivision",
+    "statement": "UK Retail and Business Banking serve different customers; SME Business Banking scope is annual revenue below£6.5m. The new mobile app launched in Q3.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "BARC-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "Q3 ended2026-09-30",
+    "legal_scope": "BARC::UKDivision",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "BARC-3",
+    "subject_key": "BARC::BankUK",
+    "statement": "Barclays Bank UK PLC completed GoHenry acquisition on1October2026, after the Q3 reporting cut.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "BARC-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "event2026-10-01",
+    "legal_scope": "BARC::BankUK",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Completed acquisition is not open strategic procurement or permission to attribute all Group costs to this entity.",
+    "next_material_demand": "Completed acquisition is not open strategic procurement or permission to attribute all Group costs to this entity."
+  },
+  {
+    "id": "BARC-4",
+    "subject_key": "BARC::Group",
+    "statement": "Anna Cross described expected2027 costs around£18.4bn in the10November meeting; this is management guidance, not actual spend or external supplier addressability.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "BARC-TALK"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "guidance at2026-11-10",
+    "legal_scope": "BARC::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Reported forecast; may change; no actual-cost or budget inference.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "SAN-1",
+    "subject_key": "SAN::UKGroupHoldings",
+    "statement": "QMS text gives9M net operating income4117 − costs2122 − impairment342 − restructuring and specific provisions495 = PBT1158 (GBP million).",
+    "semantic_type": "reported",
+    "source_ids": [
+      "SAN-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "9M ended2026-09-30",
+    "legal_scope": "SAN::UKGroupHoldings",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Tool-normalised original text; full PDF bytes/visual verification still open.",
+    "counter_evidence_or_alternative": "TSB is included only May–September; do not add its contribution again or treat495 as pure integration.",
+    "next_material_demand": "TSB is included only May–September; do not add its contribution again or treat495 as pure integration."
+  },
+  {
+    "id": "SAN-2",
+    "subject_key": "SAN::UKGroupHoldings",
+    "statement": "TSB acquisition completed30April2026; post-acquisition contribution differs from a full nine-month standalone TSB result.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "SAN-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "completion2026-04-30; inclusion2026-05-01/2026-09-30",
+    "legal_scope": "SAN::UKGroupHoldings",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Later legal transfers, data migration and brand changes have separate status and dates.",
+    "next_material_demand": "Later legal transfers, data migration and brand changes have separate status and dates."
+  },
+  {
+    "id": "SAN-3",
+    "subject_key": "SAN::UKGroupHoldings",
+    "statement": "The issuer reports coding capacity equivalent to21000 hours and future TSB synergy targets; capacity and targets do not establish realised net cash benefits.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "SAN-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "9M ended2026-09-30",
+    "legal_scope": "SAN::UKGroupHoldings",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "NBS-1",
+    "subject_key": "NBS::Group",
+    "statement": "Underlying income6378 − administration4021 − impairments331 = underlying PBT2026; +1 derivative adjustment −138 amortisation −399 reward = statutory PBT1490 (GBP million).",
+    "semantic_type": "reported",
+    "source_ids": [
+      "NBS-FY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "2025-04-01/2026-03-31",
+    "legal_scope": "NBS::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "£127m integration expense is already in administration; member financial benefit is not another profit deduction.",
+    "next_material_demand": "£127m integration expense is already in administration; member financial benefit is not another profit deduction."
+  },
+  {
+    "id": "NBS-2",
+    "subject_key": "NBS::Group",
+    "statement": "Group mortgage balances£286.3bn and retail deposits£270.8bn describe member/funding economics, not profit. The comparator includes only six months Virgin Money.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "NBS-FY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "stock2026-03-31;361daypriorperiod",
+    "legal_scope": "NBS::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "NBS-3",
+    "subject_key": "NBS::Group",
+    "statement": "Dame Debbie Crosbie leads Nationwide. The report describes the majority Virgin Money business transfer in April2026 and plans Nationwide-branded business banking in H12027.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "NBS-FY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "postbalanceeventApril2026;planH12027",
+    "legal_scope": "NBS::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "FY Group figures do not establish Society-only customer outcomes; planned brand launch is not achieved benefit.",
+    "next_material_demand": "FY Group figures do not establish Society-only customer outcomes; planned brand launch is not achieved benefit."
+  },
+  {
+    "id": "MONZO-1",
+    "subject_key": "MONZO::FY26WebScope",
+    "statement": "FY2026 web highlights report revenue£1.7bn, gross profit£1.0bn, adjusted PBT£172.6m and deposits£25.7bn.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "MONZO-FY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "FY2026 label; exact fiscal dates unresolved",
+    "legal_scope": "MONZO::FY26WebScope",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Rounded web summary is not audited table/Group parent identity; no fiscal-date assumptions or precise margins from rounded values.",
+    "next_material_demand": "Rounded web summary is not audited table/Group parent identity; no fiscal-date assumptions or precise margins from rounded values."
+  },
+  {
+    "id": "MONZO-2",
+    "subject_key": "MONZO::FY26WebScope",
+    "statement": "The issuer identifies Diana Layfield as Group CEO, Habito acquisition and an Irish banking licence; tax tooling and broader personal/business products already exist.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "MONZO-FY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "FY2026 web highlights",
+    "legal_scope": "MONZO::FY26WebScope",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Do not treat15.2m customers, monthly actives and primary-bank percentage as comparable populations or unverified missing propositions.",
+    "next_material_demand": "Do not treat15.2m customers, monthly actives and primary-bank percentage as comparable populations or unverified missing propositions."
+  },
+  {
+    "id": "STAR-1",
+    "subject_key": "STAR::Group",
+    "statement": "FY2026 revenue£887.4m and PBT£217.1m are Group measures; deposits£12.7bn and platform accounts6.2m are different stocks/counts.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "STAR-FY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "12M ended2026-03-31",
+    "legal_scope": "STAR::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Ember acquisition and Engine platform accounts prevent a like-for-like bank-customer league table.",
+    "next_material_demand": "Ember acquisition and Engine platform accounts prevent a like-for-like bank-customer league table."
+  },
+  {
+    "id": "STAR-2",
+    "subject_key": "STAR::Group",
+    "statement": "Raman Bhatia is Group CEO. Engine sells the banking platform beyond Starling; Ember adds tax/accounting capability already in the proposition.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "STAR-FY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "FY ended2026-03-31",
+    "legal_scope": "STAR::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "STAR-3",
+    "subject_key": "STAR::RetailUsers",
+    "statement": "Web primary relationships34.5% is an issuer estimate based on users with more than£500 monthly credits, not independent measured household primacy.",
+    "semantic_type": "estimated",
+    "source_ids": [
+      "STAR-AR"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "FY2026 web highlights",
+    "legal_scope": "STAR::RetailUsers",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Denominator and estimated proxy differ from SME primacy and Monzo monthly-active measures.",
+    "next_material_demand": "Denominator and estimated proxy differ from SME primacy and Monzo monthly-active measures."
+  },
+  {
+    "id": "STAR-4",
+    "subject_key": "STAR::BankBrand",
+    "statement": "14October announcement describes a Transactional Foundation Model with NVIDIA, trained on Civo UK infrastructure; Harriet Rees is identified as Group CIO.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "STAR-CLOUD"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "announcement2026-10-14",
+    "legal_scope": "STAR::BankBrand",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Development/training is not a bank-wide production migration, critical-service designation, customer contract or realised savings.",
+    "next_material_demand": "Development/training is not a bank-wide production migration, critical-service designation, customer contract or realised savings."
+  },
+  {
+    "id": "COV-1",
+    "subject_key": "COV::Group",
+    "statement": "H12026 underlying income531 − costs350 + impairment release2 = underlying PBT183; acquisition/accounting adjustments−58 produce statutory PBT125 (GBP million).",
+    "semantic_type": "reported",
+    "source_ids": [
+      "COV-H1"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "6M ended2026-06-30",
+    "legal_scope": "COV::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "2025 statutory profit included£584m acquisition gain; no organic collapse inference from722 to125.",
+    "next_material_demand": "2025 statutory profit included£584m acquisition gain; no organic collapse inference from722 to125."
+  },
+  {
+    "id": "COV-2",
+    "subject_key": "COV::Group",
+    "statement": "The Co-operative Bank subgroup was acquired1January2025. Finance, people and procurement systems integration is reported; transfer into the Society is planned for early2027.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "COV-H1"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "H12026; futuretransfer2027",
+    "legal_scope": "COV::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Support-system consolidation is not completed legal transfer or all core-platform migration; named downstream vendors not supplied.",
+    "next_material_demand": "Support-system consolidation is not completed legal transfer or all core-platform migration; named downstream vendors not supplied."
+  },
+  {
+    "id": "CLEAR-1",
+    "subject_key": "CLEAR::Group",
+    "statement": "FY2025 Group normalised revenue£121.6m differs from UK£117.7m; UK PBT£12.2m is not Group profit. Group fees rose and platform/transaction revenues matter.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "CLEAR-FY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "FY ended2025-12-31",
+    "legal_scope": "CLEAR::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "CLEAR-2",
+    "subject_key": "CLEAR::Group",
+    "statement": "The issuer names PayCaptain as its first corporate embedded-banking partner and describes279 clients;262m payment transactions are throughput, not fee revenue.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "CLEAR-FY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "FY ended2025-12-31",
+    "legal_scope": "CLEAR::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Partner announcement does not identify every contracting entity, price, minimum commitment or renewal date.",
+    "next_material_demand": "Partner announcement does not identify every contracting entity, price, minimum commitment or renewal date."
+  },
+  {
+    "id": "OAK-1",
+    "subject_key": "OAK::IssuerScope",
+    "statement": "FY2025 release reports£223m PBT,£2.8bn gross originations and40% originations from the US. Lower-mid-market lending is not a UK retail current-account model.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "OAK-FY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "FY2025",
+    "legal_scope": "OAK::IssuerScope",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Issuer scope/US growth requires legal-account reconciliation before a UK-only comparison or a named-customer edge.",
+    "next_material_demand": "Issuer scope/US growth requires legal-account reconciliation before a UK-only comparison or a named-customer edge."
+  },
+  {
+    "id": "PAY-1",
+    "subject_key": "PAYUK::Limited",
+    "statement": "Pay.UK Limited is a company limited by guarantee, number10872449; schemes/services and guarantor status must not become duplicate corporate Twins.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "PAY-CORP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "identity observed2026-11-18",
+    "legal_scope": "PAYUK::Limited",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Terms exception remains open; no accounts, fees or participant list publicly admitted.",
+    "next_material_demand": "Terms exception remains open; no accounts, fees or participant list publicly admitted."
+  },
+  {
+    "id": "BOE-1",
+    "subject_key": "BOE::Operator",
+    "statement": "The Bank operates RTGS accounts and CHAPS; settlement agent, scheme operator and prudential supervisor are different roles.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "BOE-SETTLE"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "current page at2026-11-18",
+    "legal_scope": "BOE::Operator",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "BOE-2",
+    "subject_key": "CHAPS::System",
+    "statement": "CHAPS settles each participant obligation gross in RTGS. The original list separately names Lloyds Bank plc, HSBC UK Bank plc, National Westminster Bank plc and ClearBank Limited.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "BOE-CHAPS"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "page observed2026-11-18",
+    "legal_scope": "CHAPS::System",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "A CHAPS direct participant is not thereby a Pay.UK guarantor, FPS participant or technology contracting party.",
+    "next_material_demand": "A CHAPS direct participant is not thereby a Pay.UK guarantor, FPS participant or technology contracting party."
+  },
+  {
+    "id": "BOE-3",
+    "subject_key": "BOE::Forum",
+    "statement": "The13October forum, published4November, describes tokenisation work and a planned Q4 roadmap; discussion is not completed live infrastructure.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "BOE-FORUM"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "event2026-10-13;publication2026-11-04",
+    "legal_scope": "BOE::Forum",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "PRA-1",
+    "subject_key": "PRA::Institution",
+    "statement": "PRA is part of the Bank of England and supervises prudential capital and risk controls; it is not an independent bank with a lending margin.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "PRA-ROLE"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "current page at2026-11-18",
+    "legal_scope": "PRA::Institution",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "FCA-1",
+    "subject_key": "FCA::Institution",
+    "statement": "FCA objectives concern consumers, integrity and competition; fees fund its public-body operation. Permission and perimeter must be checked for each regulated activity.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "FCA-ROLE"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "page updated2026-07-09",
+    "legal_scope": "FCA::Institution",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "PSR-1",
+    "subject_key": "PSR::Institution",
+    "statement": "CP26/3 consults on simplifying access regulation and assumes planned Treasury repeal/transfer; it closes10December2026. Proposals are not already effective law.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "PSR-ACCESS"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "consultation2026-10-15/2026-12-10",
+    "legal_scope": "PSR::Institution",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "CTP-1",
+    "subject_key": "UK::CTPRegime",
+    "statement": "July designation identifies Google Cloud EMEA Limited, AWS EMEA SARL, Microsoft Ireland Operations Limited and Oracle Corporation UK Limited as exact legal persons.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "CTP-JUL"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "effective2026-07-13",
+    "legal_scope": "UK::CTPRegime",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Designation neither proves a named bank uses a specific service nor identifies its contract, spend or workload.",
+    "next_material_demand": "Designation neither proves a named bank uses a specific service nor identifies its contract, spend or workload."
+  },
+  {
+    "id": "CTP-2",
+    "subject_key": "UK::CTPRegime",
+    "statement": "17November announcement adds BlackRock Financial Management Inc, Bloomberg LP, Bottomline Technologies Limited, Broadridge Financial Solutions Limited and Form3 UK Limited; oversight concerns specific systemic services.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "CTP-NOV"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "announcement2026-11-17",
+    "legal_scope": "UK::CTPRegime",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Announcement is dated; exact effective instruments and covered services still need verification. It does not replace the July cohort.",
+    "next_material_demand": "Announcement is dated; exact effective instruments and covered services still need verification. It does not replace the July cohort."
+  },
+  {
+    "id": "MS-1",
+    "subject_key": "MSFT::Global",
+    "statement": "FY27Q1 Microsoft global revenueUSD92.3bn and operating incomeUSD45.9bn differ from Microsoft Cloud revenueUSD63.9bn; Azure reported growth48% is not a separately disclosed UK revenue amount.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "MS-Q1"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "3M ended2026-09-30",
+    "legal_scope": "MSFT::Global",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "FY27 segment recast must be retained; old Intelligent Cloud segments cannot be compared unadjusted.",
+    "next_material_demand": "FY27 segment recast must be retained; old Intelligent Cloud segments cannot be compared unadjusted."
+  },
+  {
+    "id": "AWS-1",
+    "subject_key": "AWS::GlobalSegment",
+    "statement": "Amazon Q3 AWS salesUSD46.0bn and segment operating incomeUSD17.8bn are global segment flows;USD184bn annualised sales run rate is not actual full-year revenue.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "AWS-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "3M ended2026-09-30",
+    "legal_scope": "AWS::GlobalSegment",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Amazon consolidated cash flow and capital expenditure cannot be assigned wholly to AWS or a UK legal entity.",
+    "next_material_demand": "Amazon consolidated cash flow and capital expenditure cannot be assigned wholly to AWS or a UK legal entity."
+  },
+  {
+    "id": "GOOG-1",
+    "subject_key": "GOOGLE::GlobalCloudSegment",
+    "statement": "The Q3 call reports Cloud revenueUSD30.7bn and operating incomeUSD11.1bn; TPU system sales contribute alongside cloud services. Backlog is not period revenue.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GOOG-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "3M ended2026-09-30",
+    "legal_scope": "GOOGLE::GlobalCloudSegment",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Reported global segment values are rounded, not Google Cloud EMEA Limited accounts or UK market size.",
+    "next_material_demand": "Reported global segment values are rounded, not Google Cloud EMEA Limited accounts or UK market size."
+  },
+  {
+    "id": "GOOG-2",
+    "subject_key": "GOOGLE::GlobalCloudSegment",
+    "statement": "Thomas Kurian describes an integrated chips/models/data/security/agents portfolio; management expects near-term margin headwinds as third-party compute capacity ramps.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GOOG-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "call2026-10-28",
+    "legal_scope": "GOOGLE::GlobalCloudSegment",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Existing integrated products contradict generic missing-AI-platform claims; supplier capacity cost is not evidence of any bank buying programme.",
+    "next_material_demand": "Existing integrated products contradict generic missing-AI-platform claims; supplier capacity cost is not evidence of any bank buying programme."
+  },
+  {
+    "id": "CCC-1",
+    "subject_key": "CCC::Group",
+    "statement": "Computacenter H1 gross invoiced income8927.5 differs from revenue6845.2; gross profit657.9 and statutory PBT142.6 are GBP million.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "CCC-H1"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "6M ended2026-06-30",
+    "legal_scope": "CCC::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Principal element on agency contracts cannot be labelled incremental revenue, profit, available budget or UK-only market size.",
+    "next_material_demand": "Principal element on agency contracts cannot be labelled incremental revenue, profit, available budget or UK-only market size."
+  },
+  {
+    "id": "CCC-2",
+    "subject_key": "CCC::Group",
+    "statement": "Source, Transform and Manage combine product sourcing, professional and managed services. Mike Norris is CEO; high-volume sourcing mix reduces reported gross margin while gross profit grows.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "CCC-H1"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "H12026",
+    "legal_scope": "CCC::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Record backlog is committed product orders, not realised sales or a newly available customer transformation budget.",
+    "next_material_demand": "Record backlog is committed product orders, not realised sales or a newly available customer transformation budget."
+  },
+  {
+    "id": "EQIX-1",
+    "subject_key": "EQIX::Global",
+    "statement": "Q3 recurring revenueUSD2442m plus nonrecurring129m equals total2571m; colocation and interconnection are distinct service economics. AFFO is a non-GAAP measure, not revenue.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "EQIX-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "3M ended2026-09-30",
+    "legal_scope": "EQIX::Global",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "EMEA is not UK, xScale joint ventures are not automatically consolidated and customer logos do not prove a specific bank workload.",
+    "next_material_demand": "EMEA is not UK, xScale joint ventures are not automatically consolidated and customer logos do not prove a specific bank workload."
+  },
+  {
+    "id": "ARM-1",
+    "subject_key": "ARM::Global",
+    "statement": "Arm Q2FYE27 licensing/other revenueUSD773m plus royalties670m gives1443m, rounded headlineUSD1.44bn. Licensing and royalties have different recognition drivers.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "ARM-Q2"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "3M ended2026-09-30",
+    "legal_scope": "ARM::Global",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Newsroom text/alt text reviewed; shareholder-letter403 remains. Current narrative also includes a new silicon business, so pure-IP-only models are incomplete.",
+    "next_material_demand": "Newsroom text/alt text reviewed; shareholder-letter403 remains. Current narrative also includes a new silicon business, so pure-IP-only models are incomplete."
+  },
+  {
+    "id": "ARM-2",
+    "subject_key": "ARM::Global",
+    "statement": "The issuer describes first AGI CPU commercial deliveries as on track for Q4FYE27; purchase orders and future revenue ambitions are not current delivered silicon revenue.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "ARM-Q2"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "announcement2026-11-04;futureQ4FYE27",
+    "legal_scope": "ARM::Global",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Do not infer named end-bank chip estates from generic Arm architecture use.",
+    "next_material_demand": "Do not infer named end-bank chip estates from generic Arm architecture use."
+  },
+  {
+    "id": "NVDA-1",
+    "subject_key": "NVDA::Global",
+    "statement": "NVIDIA Q2FY27 revenueUSD96221m and GAAP operating income63734m differ from rounded Data Center revenueUSD89.0bn. Quarter ends26July, not30September.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "NVDA-Q2"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "quarter ended2026-07-26",
+    "legal_scope": "NVDA::Global",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Fabrication/assembly/test reliance is a supply dependency; no UK bank GPU estate, supplier contract or budget follows.",
+    "next_material_demand": "Fabrication/assembly/test reliance is a supply dependency; no UK bank GPU estate, supplier contract or budget follows."
+  },
+  {
+    "id": "EZY-1",
+    "subject_key": "EZY::Group",
+    "statement": "H1 Airline revenue3436 + holidays687 − intragroup169 = Group3954 (GBP million); airline headline/statutory loss613 and holidays headline/statutory profit61 reconcile to Group loss552.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "EZY-H1"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "6M ended2026-03-31",
+    "legal_scope": "EZY::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Holidays segment is not standalone EASYJET HOLIDAYS LIMITED accounts; no double-counting flight sales or winter-to-full-year extrapolation.",
+    "next_material_demand": "Holidays segment is not standalone EASYJET HOLIDAYS LIMITED accounts; no double-counting flight sales or winter-to-full-year extrapolation."
+  },
+  {
+    "id": "EZY-2",
+    "subject_key": "EZY::Airline",
+    "statement": "Kenton Jarvis is CEO in the May release. Fuel-price and booking uncertainty coexist with reported load factor90%, on-time78% and positive late demand. Fleet upgauging benefits remain targets.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "EZY-H1"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "May2026statement;H12026",
+    "legal_scope": "EZY::Airline",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "High load factor does not prove yield, profit or supplier need; no net benefit by capability is disclosed.",
+    "next_material_demand": "High load factor does not prove yield, profit or supplier need; no net benefit by capability is disclosed."
+  },
+  {
+    "id": "EZY-3",
+    "subject_key": "EZY::Airline",
+    "statement": "The business model emphasises point-to-point scheduling, aircraft utilisation, dynamic ancillary pricing and self-service disruption management. These are distinct from airport operating economics.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "EZY-MODEL"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "undated model atcut",
+    "legal_scope": "EZY::Airline",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Generic capability decomposition below is analytical, not the issuer organisation chart or a named software inventory.",
+    "next_material_demand": "Generic capability decomposition below is analytical, not the issuer organisation chart or a named software inventory."
+  },
+  {
+    "id": "EZY-4",
+    "subject_key": "EZY::Airline",
+    "statement": "Fleet page reports356 aircraft as at31March2026, with79A319,180A320,75A320neo and22A321neo. This is a dated fleet stock, not daily available capacity.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "EZY-FLEET"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "stock2026-03-31",
+    "legal_scope": "EZY::Airline",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "EZY-5",
+    "subject_key": "EZY::HolidaysSegment",
+    "statement": "The holidays model describes digital distribution and hotel relationships, high variable costs and no resort reps. The page is undated; inventory and customer totals must not be treated as current results.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "EZY-HOL"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "undated page atcut",
+    "legal_scope": "EZY::HolidaysSegment",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Hotel count does not name counterparties or establish contract values; verify revised product scope against dated announcements.",
+    "next_material_demand": "Hotel count does not name counterparties or establish contract values; verify revised product scope against dated announcements."
+  },
+  {
+    "id": "EZY-6",
+    "subject_key": "EZY::HolidaysLegal",
+    "statement": "EASYJET HOLIDAYS LIMITED11927917 is a separate legal identity; registered last accounts date30September2025 is not a review of those accounts.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "EZY-HOL-ID"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "register observed2026-11-18",
+    "legal_scope": "EZY::HolidaysLegal",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Validate exact applicable legal entity, permission and dated premise before any later presentation.",
+    "next_material_demand": "Validate exact applicable legal entity, permission and dated premise before any later presentation."
+  },
+  {
+    "id": "I-LBG",
+    "subject_key": "LBG::Group",
+    "statement": "The commercial issue is attribution of lease/asset returns and net AI benefit within an already improving Group, not a general absence of technology.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "LBG-1",
+      "LBG-2",
+      "LBG-3",
+      "LBG-4"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "LBG::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Asset cohort residual values, service/control outcomes and benefits after run/change costs discriminate the thesis.",
+    "next_material_demand": "Asset cohort residual values, service/control outcomes and benefits after run/change costs discriminate the thesis."
+  },
+  {
+    "id": "I-NWG",
+    "subject_key": "NWG::Group",
+    "statement": "Retail fraud-service execution and Group data reuse create different operating questions; a Group profit bridge cannot measure Cora effectiveness.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "NWG-1",
+      "NWG-2",
+      "NWG-4"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "NWG::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Compare dated case resolution, loss and false-positive outcomes with control/treatment and full operating costs.",
+    "next_material_demand": "Compare dated case resolution, loss and false-positive outcomes with control/treatment and full operating costs."
+  },
+  {
+    "id": "I-HSBC",
+    "subject_key": "HSBC::UKBank",
+    "statement": "Coordinated UK client coverage relies on product/servicing connections across distinct ring-fenced and non-ring-fenced entities.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "HSBC-1",
+      "HSBC-3",
+      "HSBC-4"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "HSBC::UKBank",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Measure the actual client journey, booking entity and control hand-offs; do not assign combined UK returns to one bank.",
+    "next_material_demand": "Measure the actual client journey, booking entity and control hand-offs; do not assign combined UK returns to one bank."
+  },
+  {
+    "id": "I-BARC",
+    "subject_key": "BARC::UKDivision",
+    "statement": "App distribution and GoHenry broaden customer lifecycle reach while structural-hedge support and impairment affect economics differently.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "BARC-1",
+      "BARC-2",
+      "BARC-3"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "BARC::UKDivision",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Separate acquisition integration, organic usage/conversion, servicing cost and credit performance; acquisition does not imply an open supplier window.",
+    "next_material_demand": "Separate acquisition integration, organic usage/conversion, servicing cost and credit performance; acquisition does not imply an open supplier window."
+  },
+  {
+    "id": "I-SAN",
+    "subject_key": "SAN::UKGroupHoldings",
+    "statement": "The integration question is realised operating benefit on a changing perimeter, not proof that TSB costs or supplier scope remain unallocated.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "SAN-1",
+      "SAN-2",
+      "SAN-3"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "SAN::UKGroupHoldings",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Require completed legal/process migration milestones, like-for-like cost base and benefit net of integration and operating costs.",
+    "next_material_demand": "Require completed legal/process migration milestones, like-for-like cost base and benefit net of integration and operating costs."
+  },
+  {
+    "id": "I-NBS",
+    "subject_key": "NBS::Group",
+    "statement": "Member value, resilience and integration economics must be assessed together; lower statutory profit cannot alone indicate a weak mutual model.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "NBS-1",
+      "NBS-2",
+      "NBS-3"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "NBS::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Reconcile reward, capital, cost and service outcomes at the same Society/Group perimeter; preserve acquisition composition effects.",
+    "next_material_demand": "Reconcile reward, capital, cost and service outcomes at the same Society/Group perimeter; preserve acquisition composition effects."
+  },
+  {
+    "id": "I-MONZO",
+    "subject_key": "MONZO::FY26WebScope",
+    "statement": "Product breadth and geographic expansion change the economics of deepening the primary relationship beyond acquiring app users.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "MONZO-1",
+      "MONZO-2"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "MONZO::FY26WebScope",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Need exact fiscal perimeter, retained customer cohorts and unit contribution after product/risk costs; rounded headline growth is insufficient.",
+    "next_material_demand": "Need exact fiscal perimeter, retained customer cohorts and unit contribution after product/risk costs; rounded headline growth is insufficient."
+  },
+  {
+    "id": "I-STAR",
+    "subject_key": "STAR::Group",
+    "statement": "Starling combines a deposit-taking bank, an exported platform and a developing sovereign AI research path; each has a different value mechanism.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "STAR-1",
+      "STAR-2",
+      "STAR-4"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "STAR::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Obtain Bank/Engine segment revenue and attributable costs; research-model performance and deployment controls are not disclosed net savings.",
+    "next_material_demand": "Obtain Bank/Engine segment revenue and attributable costs; research-model performance and deployment controls are not disclosed net savings."
+  },
+  {
+    "id": "I-COV",
+    "subject_key": "COV::Group",
+    "statement": "Support-function consolidation is evidence of progress; planned legal transfer remains a separate execution and member-outcome dependency.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "COV-1",
+      "COV-2"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "COV::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Test actual transfer approvals, customer continuity and reconciled benefits rather than assuming finance integration proves core-bank completion.",
+    "next_material_demand": "Test actual transfer approvals, customer continuity and reconciled benefits rather than assuming finance integration proves core-bank completion."
+  },
+  {
+    "id": "I-CLEAR",
+    "subject_key": "CLEAR::Group",
+    "statement": "ClearBank economics increasingly concern service access, recurring platform fees and throughput, rather than retail loan spread.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "CLEAR-1",
+      "CLEAR-2"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "CLEAR::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Client/cohort fee yield and service availability are discriminators; payment principal or managed deposits are not revenue.",
+    "next_material_demand": "Client/cohort fee yield and service availability are discriminators; payment principal or managed deposits are not revenue."
+  },
+  {
+    "id": "I-OAK",
+    "subject_key": "OAK::IssuerScope",
+    "statement": "The decision environment involves underwriting and distribution into lower-mid-market businesses, with a material US origination contribution.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "OAK-1"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "OAK::IssuerScope",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Use geographic legal accounts and loan-vintage losses; issuer long-run economic-impact estimates are not customer-confirmed demand.",
+    "next_material_demand": "Use geographic legal accounts and loan-vintage losses; issuer long-run economic-impact estimates are not customer-confirmed demand."
+  },
+  {
+    "id": "I-BOE",
+    "subject_key": "BOE::Operator",
+    "statement": "Payment access, liquidity and settlement resilience form a connected value system with separate rule-making and supervision roles.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "BOE-1",
+      "BOE-2",
+      "BOE-3"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "BOE::Operator",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "A scheme-level change must be mapped to a participant, service and effective date before a bank-specific operational consequence is inferred.",
+    "next_material_demand": "A scheme-level change must be mapped to a participant, service and effective date before a bank-specific operational consequence is inferred."
+  },
+  {
+    "id": "I-CTP",
+    "subject_key": "UK::CTPRegime",
+    "statement": "The second designation cohort extends system-level oversight beyond the first cloud providers; it does not identify exposure for every bank.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "CTP-1",
+      "CTP-2"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "UK::CTPRegime",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Obtain exact covered service, institution dependency and tested contingency; no automatic Material Pressure or buying need.",
+    "next_material_demand": "Obtain exact covered service, institution dependency and tested contingency; no automatic Material Pressure or buying need."
+  },
+  {
+    "id": "I-MS",
+    "subject_key": "MSFT::Global",
+    "statement": "Subscription/cloud services and infrastructure scale need a recast-aware economic view; a global cloud total is not the UK bank software estate.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "MS-1"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "MSFT::Global",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Separate consumption, seats, hardware, inference/run cost and legal agreement; segment reshuffle breaks unadjusted historical comparisons.",
+    "next_material_demand": "Separate consumption, seats, hardware, inference/run cost and legal agreement; segment reshuffle breaks unadjusted historical comparisons."
+  },
+  {
+    "id": "I-AWS",
+    "subject_key": "AWS::GlobalSegment",
+    "statement": "AWS capacity/service economics connect to an evidenced NatWest collaboration at Group brand scope, not a bank-specific budget.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "AWS-1",
+      "NWG-4"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "AWS::GlobalSegment",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Assess workload scope, unit usage cost and attributable outcomes only after contract/entity validation.",
+    "next_material_demand": "Assess workload scope, unit usage cost and attributable outcomes only after contract/entity validation."
+  },
+  {
+    "id": "I-GOOG",
+    "subject_key": "GOOGLE::GlobalCloudSegment",
+    "statement": "Hardware-system sales and infrastructure constraints can change Cloud mix and margins while Lloyds already has an announced AI platform.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "GOOG-1",
+      "GOOG-2",
+      "LBG-4"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "GOOGLE::GlobalCloudSegment",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Disaggregate product economics and delivered bank outcomes; a CTP entity is not automatically the Envoy contracting party.",
+    "next_material_demand": "Disaggregate product economics and delivered bank outcomes; a CTP entity is not automatically the Envoy contracting party."
+  },
+  {
+    "id": "I-CCC",
+    "subject_key": "CCC::Group",
+    "statement": "Rapid product fulfilment can grow gross profit while lowering gross margin percentage and absorbing working capital.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "CCC-1",
+      "CCC-2"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "CCC::Group",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Use agency/principal reconciliation, inventory ageing and service mix; do not diagnose falling margin as falling gross profit.",
+    "next_material_demand": "Use agency/principal reconciliation, inventory ageing and service mix; do not diagnose falling margin as falling gross profit."
+  },
+  {
+    "id": "I-EQIX",
+    "subject_key": "EQIX::Global",
+    "statement": "Recurring colocation/interconnection economics depend on installed capacity, connectivity and power rather than cloud compute sales alone.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "EQIX-1"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "EQIX::Global",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Require region/service attribution, energised capacity and contract scope; AFFO and power demand do not establish a UK bank project.",
+    "next_material_demand": "Require region/service attribution, energised capacity and contract scope; AFFO and power demand do not establish a UK bank project."
+  },
+  {
+    "id": "I-ARM",
+    "subject_key": "ARM::Global",
+    "statement": "Arm now needs an IP-and-silicon model; licensing is not the same recurring driver as royalties or future product deliveries.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "ARM-1",
+      "ARM-2"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "ARM::Global",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Validate recognition, delivery dates and product costs; no pure-IP forecast can be substituted for the emerging silicon risk.",
+    "next_material_demand": "Validate recognition, delivery dates and product costs; no pure-IP forecast can be substituted for the emerging silicon risk."
+  },
+  {
+    "id": "I-NVDA",
+    "subject_key": "NVDA::Global",
+    "statement": "NVIDIA platform economics and the Starling training collaboration connect at evidenced brand scope, with different reporting periods and outcome measures.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "NVDA-1",
+      "STAR-4"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "NVDA::Global",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Verify training/deployment boundary, legal counterparties and tested bank results; platform sales do not reveal bank spend.",
+    "next_material_demand": "Verify training/deployment boundary, legal counterparties and tested bank results; platform sales do not reveal bank spend."
+  },
+  {
+    "id": "I-EZY",
+    "subject_key": "EZY::Airline",
+    "statement": "Fleet and network choices jointly affect seat capacity, yield, utilisation and resilience; a fuller aircraft does not automatically improve contribution.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "EZY-1",
+      "EZY-2",
+      "EZY-3",
+      "EZY-4"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "EZY::Airline",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Compare route/rotation contribution after fuel, disruption and ownership costs; holidays profit and airline seasonal loss must remain separate.",
+    "next_material_demand": "Compare route/rotation contribution after fuel, disruption and ownership costs; holidays profit and airline seasonal loss must remain separate."
+  },
+  {
+    "id": "I-HOL",
+    "subject_key": "EZY::HolidaysSegment",
+    "statement": "Holidays layers packaging/distribution economics over airline seats; the intercompany elimination is essential to understanding combined value capture.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "EZY-1",
+      "EZY-5",
+      "EZY-6"
+    ],
+    "reporting_period": "premise-specific; no synthetic common period",
+    "legal_scope": "EZY::HolidaysSegment",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Conditional interpretation of the cited candidates; not established pain, intent or accepted pressure.",
+    "counter_evidence_or_alternative": "Reconcile hotel commitments, cancellations and package margin at segment and legal-company level; no hotel-specific procurement inference.",
+    "next_material_demand": "Reconcile hotel commitments, cancellations and package margin at segment and legal-company level; no hotel-specific procurement inference."
+  },
+  {
+    "id": "NVDA-2",
+    "subject_key": "NVDA::Global",
+    "statement": "17November release reports Q3FY27 revenueUSD115.8bn, Data Center107.6bn and GAAP operating income77.5bn; Colette Kress is interim CEO and CFO.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "NVDA-Q3"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "quarter ended2026-10-25; leadership at2026-11-17",
+    "legal_scope": "NVDA::Global",
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "material_caveat": "Issuer-reported candidate; not independent assurance or accepted canonical knowledge.",
+    "counter_evidence_or_alternative": "Rounded billions cannot support exact margins or identify UK bank spend. Q2 leadership is historical, not current.",
+    "next_material_demand": "Rounded billions cannot support exact margins or identify UK bank spend. Q2 leadership is historical, not current."
+  }
+]
