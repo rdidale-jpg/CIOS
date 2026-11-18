@@ -27,6 +27,9 @@ def old(path):
 
 def reviewed_predecessor(root,path):
     current=(Path(root)/path).read_bytes()
+    if path in {'cios/applications/flora/public_routes.py','cios/applications/flora/web/app.py'}:
+        from tools.research.etvis2_compatibility import reviewed_predecessor as preview_predecessor
+        return preview_predecessor(root,path)
     if path not in ALLOWED:
         return current
     previous=old(path)

@@ -208,6 +208,13 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                     if not unchanged: self.wfile.write(body)
                 else:
                     self._body(body, mime, 200)
+            elif parsed.path == '/enterprises/easyjet/preview':
+                from cios.applications.flora.enterprise_preview import render
+                self._html(render(parse_qs(parsed.query, keep_blank_values=True), self.headers))
+            elif parsed.path in {'/enterprises/easyjet/preview/assets/styles', '/enterprises/easyjet/preview/assets/interactions', '/enterprises/easyjet/preview/assets/artwork'}:
+                from cios.applications.flora.enterprise_preview import asset
+                body, mime = asset(parsed.path.rsplit('/', 1)[-1])
+                self._body(body, mime, 200)
             elif parsed.path in {'/industries/banking', '/enterprises/lloyds'}:
                 from cios.applications.flora import visual_streams
                 query = parse_qs(parsed.query, keep_blank_values=True)
@@ -1681,6 +1688,10 @@ app = FloraWebHandler
 
 
 def _content_type_for_path(path: str) -> str | None:
+    from cios.applications.flora import enterprise_preview
+    if path == enterprise_preview.ROUTE: return 'text/html; charset=utf-8'
+    if path in {enterprise_preview.ASSET_BASE + name for name in enterprise_preview.FILES}:
+        return enterprise_preview.FILES[path.rsplit('/', 1)[-1]][1]
     from cios.applications.flora.research_intelligence import technology_experience
     from cios.applications.flora import visual_streams
     if path.startswith(visual_streams.ASSET_BASE):

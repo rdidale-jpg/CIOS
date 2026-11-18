@@ -1,0 +1,333 @@
+{
+  "purpose": "Finite public editorial projection, no new evidence acceptance or source permission",
+  "baseline": "fbac4c37910ed07b2baa516e1a5c8d7f329086de",
+  "owner_paths": [
+    "enterprise-knowledge/aviation/research-model/Assessment-Overlay.json",
+    "enterprise-knowledge/aviation/research-model/Visual-Profile.json",
+    "cios/applications/flora/research_intelligence/registry.py",
+    "cios/applications/flora/research_intelligence/model.py",
+    "cios/applications/flora/research_intelligence/source_import.py",
+    "cios/applications/flora/intelligence_presentation.py"
+  ],
+  "disclosures": [
+    {
+      "claim_id": "AV-FLEET",
+      "display_text": "356 aircraft",
+      "display_period": "At 30 September 2025 · easyJet Group",
+      "material_caveat": "Historical fleet snapshot; not today’s count.",
+      "claim_digest": "eaf2e07f0c2d96138d4c967b5eaa466f95577ec0be6c9d8df8307c965d5b0d09",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "reporting_period": "Year ended 30 September 2025",
+      "semantic_type": "reported",
+      "canonical_status": "candidate_intelligence",
+      "source_records": [
+        {
+          "id": "SRC-AV-AR25",
+          "title": "easyJet Annual Report and Accounts 2025",
+          "publisher": "easyJet",
+          "url": "https://s203.q4cdn.com/522538739/files/doc_financials/2025/ar/easyJetARA25_DIGITAL_sm.pdf",
+          "publication_date": null,
+          "publication_date_evidence": "Not established from retrieved content",
+          "reporting_period": "Year ended 30 September 2025",
+          "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-AR25.txt",
+          "text_sha256": "5fefb3d6bc234287136892d079f5e1c1e179c8ebb2523e4ccf346fda6e2912fa",
+          "primary_content_sha256": null,
+          "content_kind": "reviewed_web_excerpt",
+          "retrieval_extent": "Direct official document rendered by approved web research tool",
+          "rights": null,
+          "quote_locator": "p3 fleet at 30 September 2025",
+          "retained_quote": "356",
+          "source_digest": "e9e0cda88fdcf26749217f8a206a16b9ea7596e212c8cf0f4d2a4ca776a4dea4"
+        }
+      ]
+    },
+    {
+      "claim_id": "AV-NETWORK",
+      "display_text": "1,202 routes",
+      "display_period": "Winter / summer 2025 · easyJet network",
+      "material_caveat": "Annualised network definition; not daily flights or route profitability.",
+      "claim_digest": "3628d8af41df7654f0fd203b3f32541e5b19cd9ac5315625319c6a50c0348b53",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "reporting_period": "Year ended 30 September 2025",
+      "semantic_type": "reported",
+      "canonical_status": "candidate_intelligence",
+      "source_records": [
+        {
+          "id": "SRC-AV-AR25",
+          "title": "easyJet Annual Report and Accounts 2025",
+          "publisher": "easyJet",
+          "url": "https://s203.q4cdn.com/522538739/files/doc_financials/2025/ar/easyJetARA25_DIGITAL_sm.pdf",
+          "publication_date": null,
+          "publication_date_evidence": "Not established from retrieved content",
+          "reporting_period": "Year ended 30 September 2025",
+          "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-AR25.txt",
+          "text_sha256": "5fefb3d6bc234287136892d079f5e1c1e179c8ebb2523e4ccf346fda6e2912fa",
+          "primary_content_sha256": null,
+          "content_kind": "reviewed_web_excerpt",
+          "retrieval_extent": "Direct official document rendered by approved web research tool",
+          "rights": null,
+          "quote_locator": "p3 network, winter/summer 2025",
+          "retained_quote": "1,202",
+          "source_digest": "e9e0cda88fdcf26749217f8a206a16b9ea7596e212c8cf0f4d2a4ca776a4dea4"
+        }
+      ]
+    },
+    {
+      "claim_id": "AV-MRO",
+      "display_text": "easyJet described the Skywise Core Platform in its S.Fleet Performance + announcement.",
+      "display_period": "3 November 2023",
+      "material_caveat": "Historical announcement; current supplier workshare and contract terms are not established.",
+      "claim_digest": "ad471e5993402d553b05bf3c9b2432674e28900154c430760b50ad231888f9d4",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "reporting_period": "Reported product launch 2023; current commercial scope unknown",
+      "semantic_type": "reported",
+      "canonical_status": "candidate_intelligence",
+      "source_records": [
+        {
+          "id": "SRC-AV-SFP",
+          "title": "S.Fleet Performance + launch",
+          "publisher": "easyJet",
+          "url": "https://www.easyjet.com/en/news/airline/story/easyjet-is-all-set-to-launch-s-fleet-performance",
+          "publication_date": "2023-11-03",
+          "publication_date_evidence": "Publication header on official page",
+          "reporting_period": "Reported product launch 2023; current commercial scope unknown",
+          "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-SFP.txt",
+          "text_sha256": "43ac035af08c414507d0acb0f8dfae25eb0270e44937db7fec1bd21ae583cdd8",
+          "primary_content_sha256": null,
+          "content_kind": "reviewed_web_excerpt",
+          "retrieval_extent": "Direct official document rendered by approved web research tool",
+          "rights": null,
+          "quote_locator": "Technical collaboration, line43",
+          "retained_quote": "Skywise Core Platform",
+          "source_digest": "8930077575a41e58d5a25a6f18b96803547d19c164512d6446b97be05364edf5"
+        }
+      ]
+    },
+    {
+      "claim_id": "AV-ICC",
+      "display_text": "easyJet announced its generative AI tool Jetstream.",
+      "display_period": "22 May 2024",
+      "material_caveat": "An announcement does not demonstrate current adoption or realised operating benefits.",
+      "claim_digest": "c6852692aef0dc22b5d7ad5f802d1ddbea820622d3b39e2ad6e4d79a699e9f26",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "reporting_period": "Reported launch May 2024; 2026 effectiveness unverified",
+      "semantic_type": "reported",
+      "canonical_status": "candidate_intelligence",
+      "source_records": [
+        {
+          "id": "SRC-AV-ICC",
+          "title": "AI-equipped operations control centre",
+          "publisher": "easyJet",
+          "url": "https://www.easyjet.com/en/news/airline/story/easyjet-opens-new-ai-equipped-operations-control-centre",
+          "publication_date": "2024-05-22",
+          "publication_date_evidence": "Publication header on official page",
+          "reporting_period": "Reported launch May 2024; 2026 effectiveness unverified",
+          "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-ICC.txt",
+          "text_sha256": "6cdd0d89cfadde4bd145d86f249757dae30bcf4046a87a74148a68003f674337",
+          "primary_content_sha256": null,
+          "content_kind": "reviewed_web_excerpt",
+          "retrieval_extent": "Direct official document rendered by approved web research tool",
+          "rights": null,
+          "quote_locator": "Launch, lines41–45",
+          "retained_quote": "a new generative AI tool, Jetstream",
+          "source_digest": "87b48db6c9115550eb18c6546bb5853c57dddfaa680f495266f5bb8fa10779ba"
+        }
+      ]
+    },
+    {
+      "claim_id": "AV-CHAT",
+      "display_text": "ChatGPT discovery directs customers to easyJet sites to complete a booking.",
+      "display_period": "5 October 2026",
+      "material_caveat": "The disclosed channel does not establish additional bookings, revenue or demand.",
+      "claim_digest": "45651959a6ffeca32ff5d999e8efddde9b3fe10a2f4b2593711b4c1376d14837",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "reporting_period": "October 2026 channel launch",
+      "semantic_type": "reported",
+      "canonical_status": "candidate_intelligence",
+      "source_records": [
+        {
+          "id": "SRC-AV-CHAT26",
+          "title": "ChatGPT flight and holiday integration",
+          "publisher": "easyJet",
+          "url": "https://www.easyjet.com/en/news/airline/story/easyjet-chatgpt-flights-package-holidays",
+          "publication_date": "2026-10-05",
+          "publication_date_evidence": "Publication header on official page",
+          "reporting_period": "October 2026 channel launch",
+          "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-CHAT26.txt",
+          "text_sha256": "18407c0d3ee1302b5f870ede4663dd7a062bad8b3a3c0324ebe208ebc33880e9",
+          "primary_content_sha256": null,
+          "content_kind": "reviewed_web_excerpt",
+          "retrieval_extent": "Direct official document rendered by approved web research tool",
+          "rights": null,
+          "quote_locator": "Customer journey, lines39–58",
+          "retained_quote": "Continue to easyJet.com or easyJet.com/holidays to complete their booking",
+          "source_digest": "369f555f2f4ba80caf70ecb28d866ba52ba0c5dbdd8e7714fa0f5689eb337f9c"
+        }
+      ]
+    },
+    {
+      "claim_id": "AV-WIFI",
+      "display_text": "easyJet announced connectivity powered by Starlink from SpaceX.",
+      "display_period": "29 October 2026",
+      "material_caveat": "Announced service; the retained evidence does not establish fleet-wide live availability.",
+      "claim_digest": "9fb9e65d98e49a94e27447a1695be8643a7a8af451bd2045b6b9e071bf8ec4d7",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "reporting_period": "Plan: first half 2027 to early 2028; not deployed fleet-wide",
+      "semantic_type": "reported",
+      "canonical_status": "candidate_intelligence",
+      "source_records": [
+        {
+          "id": "SRC-AV-WIFI26",
+          "title": "Onboard Wi-Fi rollout announcement",
+          "publisher": "easyJet",
+          "url": "https://www.easyjet.com/en/news/airline/article/easyjet-wifi-onboard-flights",
+          "publication_date": "2026-10-29",
+          "publication_date_evidence": "Publication header on official page",
+          "reporting_period": "Plan: first half 2027 to early 2028; not deployed fleet-wide",
+          "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-WIFI26.txt",
+          "text_sha256": "a09b3ce3feca236690d9615e39dbaa9ea6ae84de70d0f92f673cb072f2aa2f06",
+          "primary_content_sha256": null,
+          "content_kind": "reviewed_web_excerpt",
+          "retrieval_extent": "Direct official document rendered by approved web research tool",
+          "rights": null,
+          "quote_locator": "Technology and rollout table, lines43–49",
+          "retained_quote": "powered by Starlink from SpaceX",
+          "source_digest": "77a417d4dfad9c43864216e88d9d1b1797656b39f8fdde186052b62b5d8493fd"
+        }
+      ]
+    },
+    {
+      "claim_id": "AV-RIGHTS",
+      "display_text": "CAA passenger-rights guidance addresses refunds, with applicability depending on the flight.",
+      "display_period": "UK flight-specific passenger-rights guidance · reviewed 9 November 2026",
+      "material_caveat": "Applicable rights depend on the flight and disruption circumstances.",
+      "claim_digest": "b45b2bb0da10e5dde9d98aa31268adc6a08d04235556920cec481846889a81ca",
+      "entity_scope": "Commercial aviation / stated geography",
+      "reporting_period": "UK flight-specific passenger-rights guidance reviewed 9 November 2026",
+      "semantic_type": "reported",
+      "canonical_status": "candidate_intelligence",
+      "source_records": [
+        {
+          "id": "SRC-AV-RIGHTS",
+          "title": "Consumer law for airlines and airports",
+          "publisher": "UK Civil Aviation Authority",
+          "url": "https://www.caa.co.uk/commercial-industry/airlines/guidance-on-consumer-law-for-airlines-and-airports/",
+          "publication_date": null,
+          "publication_date_evidence": "Not established from retrieved content",
+          "reporting_period": "UK flight-specific passenger-rights guidance reviewed 9 November 2026",
+          "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-RIGHTS.txt",
+          "text_sha256": "b7a98b13d7e1f5bc55115ad8d49bb38a7f87cb2bb796b51ea195bba92cddff97",
+          "primary_content_sha256": null,
+          "content_kind": "reviewed_web_excerpt",
+          "retrieval_extent": "Direct official document rendered by approved web research tool",
+          "rights": null,
+          "quote_locator": "UK261, lines33–41",
+          "retained_quote": "passengers must be offered the choice of a refund",
+          "source_digest": "51ca8da39519cffde724dcea9d6c32ba1fdce43dc4b6e37d6a3141dffc572cf3"
+        }
+      ]
+    }
+  ],
+  "capability_bindings": [
+    {
+      "selection": "fleet-operations",
+      "label": "Fleet Operations",
+      "profile_activity": "VI-EJ-FLEET",
+      "existing_reference_ids": [
+        "AV-CAP-OPS",
+        "AV-CAP-MRO"
+      ],
+      "structure": "conceptual presentation, not canonical capability topology",
+      "model_fields": {
+        "purpose": "Keep aircraft ready. Deliver the schedule.",
+        "intro": "Fleet Operations connects aircraft readiness, crew coordination and day-of-flight recovery.",
+        "economics": "Aircraft earn through flying, while maintenance, fuel and disruption consume resources. Availability and schedule reliability influence how productive the fleet can be.",
+        "steps": [
+          "Prepare aircraft",
+          "Coordinate crew",
+          "Deliver & recover"
+        ],
+        "people": "Illustrative roles: flight operations, engineering and crew planning. Coordination links aircraft readiness with the flying schedule.",
+        "data": "Illustrative inputs: aircraft condition, maintenance requirements, crew availability and disruption status. ",
+        "dependencies": "Aircraft, airports, air navigation and maintenance are enabling dependencies.",
+        "metric": "AV-FLEET",
+        "technology": "AV-MRO",
+        "forces": [
+          "Aircraft availability meets the flying schedule",
+          "Maintenance constraints and disruption can reduce productive flying time. This is an operating mechanism, not a measured easyJet loss or unmet buying need."
+        ],
+        "events": [
+          "AV-WIFI",
+          "AV-ICC"
+        ],
+        "changing_scope": "Connectivity is passenger-service context; Jetstream is a historical operations announcement. Neither demonstrates current fleet performance."
+      }
+    },
+    {
+      "selection": "network-planning",
+      "label": "Network Planning",
+      "profile_activity": "VI-EJ-PLAN",
+      "existing_reference_ids": [
+        "AV-CAP-NETWORK"
+      ],
+      "structure": "conceptual presentation, not canonical capability topology",
+      "model_fields": {
+        "purpose": "Put capacity where it can create value.",
+        "intro": "Network Planning connects destinations, schedule choices and available aircraft capacity.",
+        "economics": "Route choice and flight timing shape the seats available to sell. Demand, fares, seasonality and operating cost influence route contribution; route counts alone do not measure profitability.",
+        "steps": [
+          "Assess demand",
+          "Design the schedule",
+          "Allocate capacity"
+        ],
+        "people": "Illustrative roles: network planners, commercial teams and operations. Planning reconciles demand expectations with aircraft and airport constraints.",
+        "data": "Illustrative inputs: booking patterns, seasonal demand, schedules and capacity.",
+        "dependencies": "Aircraft capacity and airport access constrain feasible schedules.",
+        "metric": "AV-NETWORK",
+        "technology": null,
+        "forces": [
+          "Seasonality changes the value of capacity",
+          "A route can serve different demand and cost conditions across the year. The retained network count establishes scale, not route-level market share, yield or an available sales opportunity."
+        ],
+        "events": [
+          "AV-CHAT"
+        ],
+        "changing_scope": "Booking discovery is adjacent commercial-channel context; the announcement does not establish a change in this capability."
+      }
+    },
+    {
+      "selection": "customer-service",
+      "label": "Customer Service",
+      "profile_activity": "VI-EJ-RECOVER",
+      "existing_reference_ids": [
+        "AV-CAP-SERVICE"
+      ],
+      "structure": "conceptual presentation, not canonical capability topology",
+      "model_fields": {
+        "purpose": "Help customers keep moving.",
+        "intro": "Customer Service connects booking support with assistance when a journey changes.",
+        "economics": "Resolution effort, refunds and customer experience interact during disruption. Self-service can change the service mix; this prototype does not quantify savings or retention.",
+        "steps": [
+          "Understand the journey",
+          "Resolve the change",
+          "Support recovery"
+        ],
+        "people": "Illustrative roles: customer service teams, digital service and airport operations. Handoffs matter when a flight or booking changes.",
+        "data": "Illustrative inputs: booking details, flight status and customer contact.",
+        "dependencies": "Digital channels and airport operations support the service journey.",
+        "metric": null,
+        "technology": "AV-CHAT",
+        "forces": [
+          "Disruption has a service consequence",
+          "Service obligations depend on the flight and circumstances. A sector obligation does not establish a company failing or a new procurement."
+        ],
+        "events": [
+          "AV-CHAT"
+        ],
+        "changing_scope": "Booking discovery is adjacent commercial-channel context; the announcement does not establish a change in this capability."
+      }
+    }
+  ],
+  "rights_decision": "Reuse only existing bounded public factual research disclosures; no new acquisition, report-expression redistribution, blanket licence or canonical promotion. Original records lack explicit rights objects: not a licence determination. Later restrictions fail closed.",
+  "historical_byte_archive": "None claimed. Digests verify retained short excerpts only, not the original downloaded reports."
+}

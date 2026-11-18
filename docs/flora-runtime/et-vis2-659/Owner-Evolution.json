@@ -1,0 +1,19 @@
+{
+  "cios/applications/flora/web/app.py": {
+    "base": "fbac4c37910ed07b2baa516e1a5c8d7f329086de",
+    "before_sha256": "e9af18c297ed15957e8d6cb29c838c90859d455e76d55cab3b49eb7b2f8eb8cf",
+    "reviewed_sha256": "e6308e8d66b062aebbab8cda2c80ecab5c98fae0fbae3a358d9c9528a4d0370a",
+    "literal_additions": [
+      "            elif parsed.path == '/enterprises/easyjet/preview':\n                from cios.applications.flora.enterprise_preview import render\n                self._html(render(parse_qs(parsed.query, keep_blank_values=True), self.headers))\n            elif parsed.path in {'/enterprises/easyjet/preview/assets/styles', '/enterprises/easyjet/preview/assets/interactions', '/enterprises/easyjet/preview/assets/artwork'}:\n                from cios.applications.flora.enterprise_preview import asset\n                body, mime = asset(parsed.path.rsplit('/', 1)[-1])\n                self._body(body, mime, 200)\n",
+      "    from cios.applications.flora import enterprise_preview\n    if path == enterprise_preview.ROUTE: return 'text/html; charset=utf-8'\n    if path in {enterprise_preview.ASSET_BASE + name for name in enterprise_preview.FILES}:\n        return enterprise_preview.FILES[path.rsplit('/', 1)[-1]][1]\n"
+    ]
+  },
+  "cios/applications/flora/public_routes.py": {
+    "base": "fbac4c37910ed07b2baa516e1a5c8d7f329086de",
+    "before_sha256": "d18ae7066f264d730bb903ea2220e370ac59d97e116b990040549e5d91d1df88",
+    "reviewed_sha256": "3ba446e9a68639ff978d82dbdde29d0568bf337c15c198cfd8ef81b9a65ba4ca",
+    "literal_additions": [
+      "    add(('/enterprises/easyjet/preview',), 'enterprise_preview', 'Finite read-only aviation presentation experiment; no private or canonical lookup', ('stream','capability'))\n    add(tuple('/enterprises/easyjet/preview/assets/'+name for name in ('styles','interactions','artwork')), 'enterprise_preview_asset', 'Exact local conceptual illustration and presentation code only')\n"
+    ]
+  }
+}

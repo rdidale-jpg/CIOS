@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1000" width="720" height="1000">
+<title>A conceptual airline value system</title><desc>Route planning above a layered airport, aircraft stands and engineering hangar. An editorial illustration, not real premises, supplier contracts, aircraft quantity or route geography.</desc>
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#ede7d0"/><stop offset=".55" stop-color="#f8f4e7"/><stop offset="1" stop-color="#faf7ef"/></linearGradient>
+ <linearGradient id="glass" x2="1" y2="1"><stop stop-color="#cbdccf"/><stop offset=".55" stop-color="#7c9b8a"/><stop offset="1" stop-color="#345c4b"/></linearGradient>
+ <linearGradient id="roof" x2=".4" y2="1"><stop stop-color="#fff8df"/><stop offset="1" stop-color="#c7b98e"/></linearGradient>
+ <linearGradient id="apron" x2="1" y2="1"><stop stop-color="#e6e6cf"/><stop offset="1" stop-color="#becdbb"/></linearGradient>
+ <linearGradient id="plane" x2=".7" y2="1"><stop stop-color="#fffdf2"/><stop offset="1" stop-color="#c1d1bf"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#f2e4ac" stop-opacity=".8"/><stop offset="1" stop-color="#f5edcf" stop-opacity="0"/></radialGradient>
+ <filter id="soft"><feGaussianBlur stdDeviation="8"/></filter>
+ <g id="aircraft" stroke="#6b8571" stroke-width="1.6" stroke-linejoin="round"><ellipse cx="0" cy="13" rx="70" ry="13" fill="#53604d" opacity=".12" filter="url(#soft)"/><path d="M-4-113Q0-135 4-113L9-34 81 17 81 25 8 1 5 58 28 81 28 87 1 78-26 87-26 81-5 58-8 1-81 25-81 17-9-34Z" fill="url(#plane)"/><path d="M-3-104H3L5-88-5-88Z" fill="#51725b"/><path d="M-3 45L0 76 3 45" fill="#b18c48"/><path d="M-23-3v20m47-20v20" stroke="#325943" stroke-width="8"/>
+ <path d="M-5-78v35M5-78v35" stroke="#9da999" stroke-dasharray="2 4"/>
+ </g>
+ <g id="tree"><ellipse cy="15" rx="13" ry="6" fill="#9cae85" opacity=".3"/><path d="M0 14V-16" stroke="#73866a"/><ellipse cy="-12" rx="11" ry="17" fill="#91a77c"/><ellipse cx="-5" cy="-10" rx="7" ry="12" fill="#bec59a"/></g>
+</defs>
+<rect width="720" height="1000" fill="url(#sky)"/>
+<circle cx="528" cy="130" r="170" fill="url(#halo)"/>
+<g fill="none" stroke="#9ba88b" stroke-width="1" opacity=".45"><ellipse cx="370" cy="158" rx="220" ry="107"/><ellipse cx="370" cy="158" rx="142" ry="107"/><ellipse cx="370" cy="158" rx="63" ry="107"/><path d="M150 158H590M175 112H564M175 204H564M370 51V264"/></g>
+<g stroke="#b18d4e" fill="none" stroke-width="1.8"><path d="M210 175Q370 25 526 124M210 175Q333 113 464 217M210 175Q275 238 329 246" stroke-dasharray="5 6"/><circle cx="210" cy="175" r="6" fill="#254c39"/><circle cx="526" cy="124" r="4" fill="#c09c59"/><circle cx="464" cy="217" r="4" fill="#c09c59"/><circle cx="329" cy="246" r="4" fill="#c09c59"/></g>
+<g opacity=".45" stroke="#a4ad90" stroke-width="1.3" fill="#e4e2c9"><path d="M70 350L200 309 325 346 444 303 665 353V393H70Z"/><path d="M100 346v-22h35v14m33-15v-35h18v28m260 14v-44h22v38m51 13v-54h21v60m23 7v-24h32v32"/></g>
+<path d="M20 497L406 303 714 466 339 690Z" fill="url(#apron)" stroke="#afbc9d"/>
+<path d="M75 527L437 344 475 363 110 549Z" fill="#aab9a6"/><path d="M91 535L455 353" stroke="#f3e9c7" stroke-width="3" stroke-dasharray="20 14"/>
+<path d="M133 569L480 397 667 493 325 672Z" fill="#eee9d3" stroke="#c7c5aa"/>
+<!-- Faceted terminal: glass, warm stone and a folded roof. -->
+<path d="M107 414L354 295 552 393 304 523Z" fill="url(#roof)" stroke="#948f6a" stroke-width="1.4"/>
+<path d="M107 414V475L304 583V523Z" fill="#c8ccb1" stroke="#8a9e83"/>
+<path d="M304 523V583L552 449V393Z" fill="url(#glass)" stroke="#718a72"/>
+<path d="M130 415L353 309 530 394 304 511Z" fill="#efead4" stroke="#b9b695"/>
+<path d="M161 411L352 321 501 395 304 496Z" fill="#d1d6ba" stroke="#b2b38b"/>
+<path d="M205 408L352 338 463 395 305 478Z" fill="url(#glass)" stroke="#7b947a"/>
+<g stroke="#f2edda" opacity=".85"><path d="M320 514.6v55"/><path d="M336 506.2v55"/><path d="M352 497.8v55"/><path d="M368 489.4v55"/><path d="M384 481.0v55"/><path d="M400 472.6v55"/><path d="M416 464.2v55"/><path d="M432 455.8v55"/><path d="M448 447.4v55"/><path d="M464 439.0v55"/><path d="M480 430.6v55"/><path d="M496 422.2v55"/><path d="M512 413.8v55"/><path d="M528 405.4v55"/><path d="M304 540L552 410M304 560L552 430"/></g>
+<g stroke="#9fae90" fill="#e8e5cb"><path d="M132 449L161 466V495L132 480ZM176 472L205 489V517L176 501ZM221 496L250 512V540L221 525Z"/></g>
+<!-- Control tower and engineering hangar. -->
+<path d="M587 432V321L604 311 618 320V448Z" fill="#c6d0b4" stroke="#87977b"/>
+<path d="M587 321L618 336 636 322V294L602 277 569 294V321Z" fill="url(#glass)" stroke="#798e76"/>
+<path d="M565 294L602 274 639 294 618 306Z" fill="url(#roof)" stroke="#8f9473"/>
+<path d="M602 277V251M618 320V446" stroke="#8e9e7c"/>
+<path d="M72 668V598Q117 526 201 578L297 632V710L181 768Z" fill="#d9d7b8" stroke="#87997b" stroke-width="1.6"/>
+<path d="M72 598Q117 526 201 578L297 632Q229 584 184 658Z" fill="url(#roof)" stroke="#9ea27f"/>
+<path d="M95 666V615Q131 570 177 614V714Z" fill="#6d8c75" stroke="#8c9e7f"/>
+<path d="M95 626L177 673M95 647L177 693M114 605V676M137 598V690M159 605V703" stroke="#aabb98"/>
+<path d="M184 658V735L297 678V632Z" fill="url(#glass)"/>
+<path d="M211 644V721M239 630V706M268 620V691" stroke="#b9c7a5"/>
+<!-- Aircraft are decorative, never a quantity or an actual stand layout. -->
+<use href="#aircraft" transform="translate(412 620) rotate(37) scale(.83)"/>
+<use href="#aircraft" transform="translate(569 533) rotate(37) scale(.52)"/>
+<use href="#aircraft" transform="translate(204 704) rotate(37) scale(.44)"/>
+<path d="M422 787L668 655 681 667 433 800Z" fill="#a9b79e" opacity=".5"/>
+<path d="M432 793L675 660" stroke="#faf5dc" stroke-width="2" stroke-dasharray="14 10"/>
+<g stroke="#bda364" fill="none" opacity=".65"><path d="M328 697L505 787M343 674L521 764M363 651L537 741"/><path d="M469 816L613 742M485 835L631 759"/></g>
+<use href="#tree" transform="translate(43 489) scale(0.9)"/><use href="#tree" transform="translate(63 508) scale(1)"/><use href="#tree" transform="translate(643 478) scale(0.8)"/><use href="#tree" transform="translate(665 488) scale(0.9)"/><use href="#tree" transform="translate(35 675) scale(1.1)"/><use href="#tree" transform="translate(57 692) scale(0.85)"/><use href="#tree" transform="translate(321 805) scale(0.9)"/><use href="#tree" transform="translate(342 817) scale(1)"/><use href="#tree" transform="translate(622 844) scale(0.9)"/><use href="#tree" transform="translate(647 830) scale(1.1)"/><use href="#tree" transform="translate(280 870) scale(0.8)"/><g transform="translate(-44 795) scale(.62)" opacity=".7"><g aria-hidden='true'><path d='M0 274Q260 226 480 253T880 253T1280 268V315H0Z' fill='#dfe8d8'/><path d='M65 261H1220' stroke='#96ada0' stroke-width='3'/><path d='M85 280H1210' stroke='#fffaf0' stroke-width='3' stroke-dasharray='25 20'/><path d='M80 253V188H340V253 M115 188V166H310V188' stroke='#9cb39d' fill='#ede4ce'/><path d='M1015 253V174H1040V253 M1001 151H1053L1045 174H1010Z' stroke='#a2b6a5' fill='#e4e9d7'/><path d='M280 128Q650 25 980 126' fill='none' stroke='#b79d7b' stroke-dasharray='4 9' stroke-width='2'/><g transform='translate(590 94) rotate(65 40 40)' color='#326250'><g transform='translate(0 0) scale(3.8)' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='m2 18 12-4V4l3-2 3 12 11 4v3l-11-2v7l4 3v2l-8-2-8 2v-2l5-3v-7l-11 2Z'/></g></g><g transform='translate(190 190) scale(1.6)' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M2 29V12H30V29 M7 12V5H25V12 M7 19H11 M15 19H19 M23 19H27 M11 29V24H21V29'/></g><g transform='translate(838 198) scale(1.5)' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='m4 28 13-13a9 9 0 0 1 10-12l-6 6 4 4 6-6a9 9 0 0 1-12 10L7 30Z'/></g></g></g></svg>
