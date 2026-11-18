@@ -1,0 +1,2323 @@
+{
+  "baseline": "ecb91591e5abe854a6227ae4ebd21b4aa566cb69",
+  "actor_occurrences": 76,
+  "not_unique_or_accepted_twins": true,
+  "occurrence_rows": [
+    {
+      "original_actor_id": "actor:aib",
+      "original_name": "AIB GROUP (UK) P.L.C.",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "UK-incorporated cross-border banking legal unit; separate from Irish Group",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "AIB GROUP (UK) P.L.C.: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:aldermore",
+      "original_name": "Aldermore Bank Plc",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "specialist credit/deposit franchise; do not borrow other specialist economics",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Aldermore Bank Plc: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:allica",
+      "original_name": "ALLICA BANK LIMITED",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "business-bank competitor to mid-market/SME propositions",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "ALLICA BANK LIMITED: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:atom",
+      "original_name": "Atom Bank PLC",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "digital bank with distinct underwriting/distribution model",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Atom Bank PLC: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:boi",
+      "original_name": "Bank of Ireland (UK) Plc",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "UK legal bank vs Bank of Ireland Group perimeter",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Bank of Ireland (UK) Plc: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:bos",
+      "original_name": "Bank of Scotland plc",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Bank of Scotland plc: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "lloyds",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Bank of Scotland plc: Current division/legal-entity revenue reconciliation remains open",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:barclays",
+      "original_name": "Barclays Bank Plc",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Barclays Bank Plc: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "barclays",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Barclays Bank Plc: UK division vs Bank UK legal financial bridge",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:barclays-uk",
+      "original_name": "Barclays Bank UK PLC",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Barclays Bank UK PLC: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "barclays",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Barclays Bank UK PLC: UK division vs Bank UK legal financial bridge",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": [
+        {
+          "perspective": "Change",
+          "information_element": "dated_programmes/milestones",
+          "claim_ids": [
+            "BARC-3"
+          ],
+          "edge_ids": [],
+          "reporting_period": "event2026-10-01",
+          "candidate_Facts": "Partial",
+          "candidate_Insight": "Unavailable",
+          "public_eligible": false,
+          "financial_metric_binding": false
+        }
+      ]
+    },
+    {
+      "original_actor_id": "actor:clearbank",
+      "original_name": "ClearBank Limited",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "ecosystem_twin_partial",
+      "qualitative_rationale": "ClearBank Limited: material operating/service economics; dossier covers a bounded archetype, legal perimeters remain distinct.",
+      "dossier_id": "clearbank",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "ClearBank Limited: UK/Europe legal-account bridge",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": [
+        {
+          "perspective": "Inside",
+          "information_element": "supplier/customer/participant_relationships",
+          "claim_ids": [
+            "BOE-2"
+          ],
+          "edge_ids": [
+            "e-chaps-clear"
+          ],
+          "reporting_period": "participant page observed2026-11-18; effective start unverified",
+          "candidate_Facts": "Partial",
+          "candidate_Insight": "Unavailable",
+          "public_eligible": false,
+          "financial_metric_binding": false
+        }
+      ]
+    },
+    {
+      "original_actor_id": "actor:clydesdale",
+      "original_name": "Clydesdale Bank Limited",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Clydesdale Bank Limited: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "nationwide",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Clydesdale Bank Limited: Society-only bridge and post-April transfer details",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:coutts",
+      "original_name": "Coutts & Company",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Coutts & Company: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "natwest",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Coutts & Company: National Westminster Bank-specific accounts vs Group",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:hsbc-bank",
+      "original_name": "HSBC Bank Plc",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "HSBC Bank Plc: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "hsbc",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "HSBC Bank Plc: Map actual product booking/entity and geographic attribution",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:hsbc-innovation",
+      "original_name": "HSBC INNOVATION BANK LIMITED",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "innovation-focused UK legal bank; separate from all HSBC UK business metrics",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "HSBC INNOVATION BANK LIMITED: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:hsbc-uk",
+      "original_name": "HSBC UK Bank Plc",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "HSBC UK Bank Plc: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "hsbc",
+      "related_research_claims": [
+        "HSBC-1",
+        "HSBC-5",
+        "I-HSBC"
+      ],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Partial",
+      "next_material_demand": "HSBC UK Bank Plc: Map actual product booking/entity and geographic attribution",
+      "exact_new_research_subject": "HSBC::UKBank",
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": [
+        {
+          "perspective": "Inside",
+          "information_element": "supplier/customer/participant_relationships",
+          "claim_ids": [
+            "BOE-2"
+          ],
+          "edge_ids": [
+            "e-chaps-hsbc"
+          ],
+          "reporting_period": "participant page observed2026-11-18; effective start unverified",
+          "candidate_Facts": "Partial",
+          "candidate_Insight": "Unavailable",
+          "public_eligible": false,
+          "financial_metric_binding": false
+        }
+      ]
+    },
+    {
+      "original_actor_id": "actor:lbg-cm",
+      "original_name": "Lloyds Bank Corporate Markets Plc",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Lloyds Bank Corporate Markets Plc: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "lloyds",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Lloyds Bank Corporate Markets Plc: Current division/legal-entity revenue reconciliation remains open",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:lloyds",
+      "original_name": "Lloyds Bank PLC",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Lloyds Bank PLC: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "lloyds",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Lloyds Bank PLC: Current division/legal-entity revenue reconciliation remains open",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": [
+        {
+          "perspective": "Inside",
+          "information_element": "supplier/customer/participant_relationships",
+          "claim_ids": [
+            "BOE-2"
+          ],
+          "edge_ids": [
+            "e-chaps-lloyds"
+          ],
+          "reporting_period": "participant page observed2026-11-18; effective start unverified",
+          "candidate_Facts": "Partial",
+          "candidate_Insight": "Unavailable",
+          "public_eligible": false,
+          "financial_metric_binding": false
+        }
+      ]
+    },
+    {
+      "original_actor_id": "actor:metro",
+      "original_name": "Metro Bank PLC",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "branch-led incumbent challenger; current strategic-review terms/outcomes remain primary demand",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Metro Bank PLC: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:monzo",
+      "original_name": "MONZO BANK LIMITED",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "MONZO BANK LIMITED: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "monzo",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "MONZO BANK LIMITED: Readable full accounts and fiscal/legal scope",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:natwest",
+      "original_name": "NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "natwest",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "NATIONAL WESTMINSTER BANK PUBLIC LIMITED COMPANY: National Westminster Bank-specific accounts vs Group",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": [
+        {
+          "perspective": "Inside",
+          "information_element": "supplier/customer/participant_relationships",
+          "claim_ids": [
+            "BOE-2"
+          ],
+          "edge_ids": [
+            "e-chaps-natwest"
+          ],
+          "reporting_period": "participant page observed2026-11-18; effective start unverified",
+          "candidate_Facts": "Partial",
+          "candidate_Insight": "Unavailable",
+          "public_eligible": false,
+          "financial_metric_binding": false
+        }
+      ]
+    },
+    {
+      "original_actor_id": "actor:nw-markets",
+      "original_name": "NatWest Markets Plc",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "NatWest Markets Plc: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "natwest",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "NatWest Markets Plc: National Westminster Bank-specific accounts vs Group",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:oaknorth",
+      "original_name": "OakNorth Bank plc",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "OakNorth Bank plc: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "oaknorth",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "OakNorth Bank plc: UK bank vs overseas legal accounts",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:osb",
+      "original_name": "OneSavings Bank Plc",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "specialist mortgage/credit Group versus licensed bank scope",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "OneSavings Bank Plc: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:paragon",
+      "original_name": "Paragon Bank Plc",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "specialist finance/lending and deposit funding; not generic current-account bank",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Paragon Bank Plc: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:revolut-uk",
+      "original_name": "Revolut Bank UK Ltd",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "UK regulated legal entity; current licence/mobilisation status must be established",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Revolut Bank UK Ltd: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:santander-uk",
+      "original_name": "Santander UK Plc",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Santander UK Plc: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "santander",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Santander UK Plc: Full original PDF visual/byte verification",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:shawbrook",
+      "original_name": "Shawbrook Bank Limited",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "specialist lender with own capital/risk model",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Shawbrook Bank Limited: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:starling",
+      "original_name": "Starling Bank Limited",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Starling Bank Limited: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "starling",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Starling Bank Limited: Bank/Engine legal and segment economics",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:coop",
+      "original_name": "THE CO-OPERATIVE BANK P.L.C.",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "THE CO-OPERATIVE BANK P.L.C.: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "coventry",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "THE CO-OPERATIVE BANK P.L.C.: Named role refresh from original report",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:rbs",
+      "original_name": "THE ROYAL BANK OF SCOTLAND PUBLIC LIMITED COMPANY",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "THE ROYAL BANK OF SCOTLAND PUBLIC LIMITED COMPANY: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "natwest",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "THE ROYAL BANK OF SCOTLAND PUBLIC LIMITED COMPANY: National Westminster Bank-specific accounts vs Group",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:tsb",
+      "original_name": "TSB Bank plc",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "TSB Bank plc: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "santander",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "TSB Bank plc: Full original PDF visual/byte verification",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:zopa",
+      "original_name": "Zopa Bank Limited",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "digital consumer banking/credit; product/control economics require issuer research",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Zopa Bank Limited: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:nationwide",
+      "original_name": "Nationwide Building Society",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Nationwide Building Society: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "nationwide",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Nationwide Building Society: Society-only bridge and post-April transfer details",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:coventry",
+      "original_name": "Coventry Building Society",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Coventry Building Society: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "coventry",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Coventry Building Society: Named role refresh from original report",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:yorkshire",
+      "original_name": "Yorkshire Building Society",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "mutual mortgage/savings economics; no shareholder return template",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Yorkshire Building Society: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:skipton",
+      "original_name": "Skipton Building Society",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "mutual group/property-service exposures cannot be assumed Society-only",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Skipton Building Society: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:leeds",
+      "original_name": "Leeds Building Society",
+      "original_kind": "legal_deposit_taker",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "UK-incorporated deposit taker; register entry does not establish Group ownership, all permissions or current products",
+      "original_identity_as_of": "2026-11",
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "mutual housing-finance/savings model needs exact accounts",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Leeds Building Society: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:nw-group",
+      "original_name": "NatWest Group",
+      "original_kind": "reporting_group",
+      "original_identity_sources": [
+        "NW-Q3"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "NatWest Group: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "natwest",
+      "related_research_claims": [
+        "NWG-1",
+        "NWG-3",
+        "NWG-4",
+        "I-NWG"
+      ],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Partial",
+      "next_material_demand": "NatWest Group: National Westminster Bank-specific accounts vs Group",
+      "exact_new_research_subject": "NWG::Group",
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:hsbc-group",
+      "original_name": "HSBC Holdings plc",
+      "original_kind": "reporting_group",
+      "original_identity_sources": [
+        "HSBC-RELEASE"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "HSBC Holdings plc: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "hsbc",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "HSBC Holdings plc: Map actual product booking/entity and geographic attribution",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:san-group",
+      "original_name": "Santander UK Group Holdings plc",
+      "original_kind": "reporting_group",
+      "original_identity_sources": [
+        "SAN-Q3"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Santander UK Group Holdings plc: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "santander",
+      "related_research_claims": [
+        "SAN-1",
+        "SAN-2",
+        "SAN-3",
+        "I-SAN"
+      ],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Partial",
+      "next_material_demand": "Santander UK Group Holdings plc: Full original PDF visual/byte verification",
+      "exact_new_research_subject": "SAN::UKGroupHoldings",
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:tsb-group",
+      "original_name": "TSB Banking Group plc",
+      "original_kind": "acquisition_company",
+      "original_identity_sources": [
+        "SAN-Q3"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "TSB Banking Group plc: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "santander",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "TSB Banking Group plc: Full original PDF visual/byte verification",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:nbs-group",
+      "original_name": "Nationwide Group",
+      "original_kind": "reporting_group",
+      "original_identity_sources": [
+        "NBS-FY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Nationwide Group: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "nationwide",
+      "related_research_claims": [
+        "NBS-1",
+        "NBS-2",
+        "NBS-3",
+        "I-NBS"
+      ],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Partial",
+      "next_material_demand": "Nationwide Group: Society-only bridge and post-April transfer details",
+      "exact_new_research_subject": "NBS::Group",
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:virgin",
+      "original_name": "Virgin Money",
+      "original_kind": "brand_and_acquired_business",
+      "original_identity_sources": [
+        "NBS-FY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Virgin Money: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "nationwide",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Virgin Money: Society-only bridge and post-April transfer details",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:star-group",
+      "original_name": "Starling Group",
+      "original_kind": "reporting_group",
+      "original_identity_sources": [
+        "STAR-FY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "deep_bank_or_mutual_target_partial",
+      "qualitative_rationale": "Starling Group: major customer/funding, acquisition or challenger role; source perimeter may be Group/segment and cannot be assigned automatically to this legal unit.",
+      "dossier_id": "starling",
+      "related_research_claims": [
+        "STAR-1",
+        "STAR-2",
+        "I-STAR"
+      ],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Partial",
+      "next_material_demand": "Starling Group: Bank/Engine legal and segment economics",
+      "exact_new_research_subject": "STAR::Group",
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:engine",
+      "original_name": "Engine by Starling",
+      "original_kind": "platform_business",
+      "original_identity_sources": [
+        "STAR-FY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "ecosystem_twin_partial",
+      "qualitative_rationale": "Engine by Starling: material operating/service economics; dossier covers a bounded archetype, legal perimeters remain distinct.",
+      "dossier_id": "starling",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Engine by Starling: Bank/Engine legal and segment economics",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:clear-group",
+      "original_name": "ClearBank Group",
+      "original_kind": "reporting_group",
+      "original_identity_sources": [
+        "CLEAR-RESULTS"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "ecosystem_twin_partial",
+      "qualitative_rationale": "ClearBank Group: material operating/service economics; dossier covers a bounded archetype, legal perimeters remain distinct.",
+      "dossier_id": "clearbank",
+      "related_research_claims": [
+        "CLEAR-1",
+        "CLEAR-2",
+        "I-CLEAR"
+      ],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Partial",
+      "next_material_demand": "ClearBank Group: UK/Europe legal-account bridge",
+      "exact_new_research_subject": "CLEAR::Group",
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:clear-eu",
+      "original_name": "ClearBank Europe N.V.",
+      "original_kind": "legal_bank_non_uk",
+      "original_identity_sources": [
+        "CLEAR-PAY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "ecosystem_twin_partial",
+      "qualitative_rationale": "ClearBank Europe N.V.: material operating/service economics; dossier covers a bounded archetype, legal perimeters remain distinct.",
+      "dossier_id": "clearbank",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "ClearBank Europe N.V.: UK/Europe legal-account bridge",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:boe",
+      "original_name": "Bank of England",
+      "original_kind": "central_bank",
+      "original_identity_sources": [
+        "MPC-NOV"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "institutional_or_system_support",
+      "qualitative_rationale": "Bank of England: preserve operator/system/authority role; no fictitious bank P&L or separate corporate scheme hierarchy.",
+      "dossier_id": "boe",
+      "related_research_claims": [
+        "BOE-1",
+        "I-BOE"
+      ],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Partial",
+      "next_material_demand": "Bank of England: Current fee/cost-recovery accounts not researched",
+      "exact_new_research_subject": "BOE::Operator",
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:pra",
+      "original_name": "Prudential Regulation Authority",
+      "original_kind": "prudential_regulator",
+      "original_identity_sources": [
+        "PRA-NOV"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "institutional_or_system_support",
+      "qualitative_rationale": "Prudential Regulation Authority: preserve operator/system/authority role; no fictitious bank P&L or separate corporate scheme hierarchy.",
+      "dossier_id": "pra",
+      "related_research_claims": [
+        "PRA-1"
+      ],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Partial",
+      "next_material_demand": "Prudential Regulation Authority: Do not infer a specific institution failure, vendor contract or remedial procurement from general supervision.",
+      "exact_new_research_subject": "PRA::Institution",
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:fca",
+      "original_name": "Financial Conduct Authority",
+      "original_kind": "conduct_regulator",
+      "original_identity_sources": [
+        "FCA-H126"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "institutional_or_system_support",
+      "qualitative_rationale": "Financial Conduct Authority: preserve operator/system/authority role; no fictitious bank P&L or separate corporate scheme hierarchy.",
+      "dossier_id": "fca",
+      "related_research_claims": [
+        "FCA-1"
+      ],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Partial",
+      "next_material_demand": "Financial Conduct Authority: Proposed PSR transfer is not completed institutional merger; sector duties are not proof of bank-specific harm.",
+      "exact_new_research_subject": "FCA::Institution",
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:psr",
+      "original_name": "Payment Systems Regulator",
+      "original_kind": "payments_regulator",
+      "original_identity_sources": [
+        "PSR-ROLE"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "institutional_or_system_support",
+      "qualitative_rationale": "Payment Systems Regulator: preserve operator/system/authority role; no fictitious bank P&L or separate corporate scheme hierarchy.",
+      "dossier_id": "psr",
+      "related_research_claims": [
+        "PSR-1"
+      ],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Partial",
+      "next_material_demand": "Payment Systems Regulator: No already-effective abolition/transfer or supplier project inferred; verify final decision after consultation.",
+      "exact_new_research_subject": "PSR::Institution",
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:fscs",
+      "original_name": "Financial Services Compensation Scheme",
+      "original_kind": "compensation_scheme",
+      "original_identity_sources": [
+        "FSCS-ROLE"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "compensation institution; scheme limits/eligibility not a bank or product guarantee",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Financial Services Compensation Scheme: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:fos",
+      "original_name": "Financial Ombudsman Service",
+      "original_kind": "independent_dispute_resolution",
+      "original_identity_sources": [
+        "FOS-Q2"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "complaint adjudication institution; referrals not bank customer population",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Financial Ombudsman Service: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:uk-finance",
+      "original_name": "UK Finance",
+      "original_kind": "trade_association",
+      "original_identity_sources": [
+        "UKF-ROLE"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "trade association, not regulator or comprehensive firm inventory",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "UK Finance: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:payuk",
+      "original_name": "Pay.UK",
+      "original_kind": "payment_system_operator",
+      "original_identity_sources": [
+        "CASS-Q3"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "ecosystem_twin_partial",
+      "qualitative_rationale": "Pay.UK: material operating/service economics; dossier covers a bounded archetype, legal perimeters remain distinct.",
+      "dossier_id": "payuk",
+      "related_research_claims": [
+        "PAY-1"
+      ],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Partial",
+      "next_material_demand": "Pay.UK: 2025 original accounts tool size10,506,566bytes; normal acquisition tunnel403",
+      "exact_new_research_subject": "PAYUK::Limited",
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:cass",
+      "original_name": "Current Account Switch Service",
+      "original_kind": "switching_service",
+      "original_identity_sources": [
+        "CASS-Q3"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "institutional_or_system_support",
+      "qualitative_rationale": "Current Account Switch Service: preserve operator/system/authority role; no fictitious bank P&L or separate corporate scheme hierarchy.",
+      "dossier_id": "payuk",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Current Account Switch Service: 2025 original accounts tool size10,506,566bytes; normal acquisition tunnel403",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:fps",
+      "original_name": "Faster Payments",
+      "original_kind": "payment_scheme",
+      "original_identity_sources": [
+        "CLEAR-PAY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "institutional_or_system_support",
+      "qualitative_rationale": "Faster Payments: preserve operator/system/authority role; no fictitious bank P&L or separate corporate scheme hierarchy.",
+      "dossier_id": "payuk",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Faster Payments: 2025 original accounts tool size10,506,566bytes; normal acquisition tunnel403",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:bacs",
+      "original_name": "Bacs",
+      "original_kind": "payment_scheme",
+      "original_identity_sources": [
+        "CLEAR-PAY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "institutional_or_system_support",
+      "qualitative_rationale": "Bacs: preserve operator/system/authority role; no fictitious bank P&L or separate corporate scheme hierarchy.",
+      "dossier_id": "payuk",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Bacs: 2025 original accounts tool size10,506,566bytes; normal acquisition tunnel403",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:ics",
+      "original_name": "Image Clearing System",
+      "original_kind": "payment_scheme",
+      "original_identity_sources": [
+        "CLEAR-PAY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "institutional_or_system_support",
+      "qualitative_rationale": "Image Clearing System: preserve operator/system/authority role; no fictitious bank P&L or separate corporate scheme hierarchy.",
+      "dossier_id": "payuk",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Image Clearing System: 2025 original accounts tool size10,506,566bytes; normal acquisition tunnel403",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:chaps",
+      "original_name": "CHAPS",
+      "original_kind": "high_value_payment_system",
+      "original_identity_sources": [
+        "RTGS-FORUM"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "institutional_or_system_support",
+      "qualitative_rationale": "CHAPS: preserve operator/system/authority role; no fictitious bank P&L or separate corporate scheme hierarchy.",
+      "dossier_id": "boe",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "CHAPS: Current fee/cost-recovery accounts not researched",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:rtgs",
+      "original_name": "Bank of England RTGS",
+      "original_kind": "central_bank_settlement_system",
+      "original_identity_sources": [
+        "RTGS-FORUM"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "institutional_or_system_support",
+      "qualitative_rationale": "Bank of England RTGS: preserve operator/system/authority role; no fictitious bank P&L or separate corporate scheme hierarchy.",
+      "dossier_id": "boe",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Bank of England RTGS: Current fee/cost-recovery accounts not researched",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:swift",
+      "original_name": "Swift",
+      "original_kind": "financial_messaging_standards_actor",
+      "original_identity_sources": [
+        "RTGS-FORUM"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "messaging network/provider role distinct from sterling settlement",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Swift: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:obl",
+      "original_name": "Open Banking Limited",
+      "original_kind": "standards_and_ecosystem_body",
+      "original_identity_sources": [
+        "OB-MILESTONE"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "Open Banking operator/standards role distinct from payment principal",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Open Banking Limited: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:google",
+      "original_name": "Google Cloud",
+      "original_kind": "provider_brand",
+      "original_identity_sources": [
+        "STAR-AI"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "ecosystem_twin_partial",
+      "qualitative_rationale": "Google Cloud: material operating/service economics; dossier covers a bounded archetype, legal perimeters remain distinct.",
+      "dossier_id": "google",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Google Cloud: Need exact product mix and legal accounts; no assumed Lloyds Bank critical workload or supplier spend.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": [
+        {
+          "perspective": "Inside",
+          "information_element": "supplier/customer/participant_relationships",
+          "claim_ids": [
+            "LBG-4"
+          ],
+          "edge_ids": [
+            "e-envoy"
+          ],
+          "reporting_period": "announcement2026-04-28; brand scope",
+          "candidate_Facts": "Partial",
+          "candidate_Insight": "Unavailable",
+          "public_eligible": false,
+          "financial_metric_binding": false
+        }
+      ]
+    },
+    {
+      "original_actor_id": "actor:nvidia",
+      "original_name": "NVIDIA",
+      "original_kind": "technology_provider_brand",
+      "original_identity_sources": [
+        "STAR-CLOUD"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "ecosystem_twin_partial",
+      "qualitative_rationale": "NVIDIA: material operating/service economics; dossier covers a bounded archetype, legal perimeters remain distinct.",
+      "dossier_id": "nvidia",
+      "related_research_claims": [
+        "NVDA-1",
+        "I-NVDA",
+        "NVDA-2"
+      ],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Partial",
+      "next_material_demand": "NVIDIA: Quarter ended25October is latest issuer result sampled; July quarter retained as history. Exact million-unit Q3 table and UK/contract attribution remain unverified.",
+      "exact_new_research_subject": "NVDA::Global",
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:civo",
+      "original_name": "Civo",
+      "original_kind": "cloud_provider_brand",
+      "original_identity_sources": [
+        "STAR-CLOUD"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "UK training infrastructure brand evidenced for Starling; contract/legal entity not established",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Civo: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": [
+        {
+          "perspective": "Inside",
+          "information_element": "supplier/customer/participant_relationships",
+          "claim_ids": [
+            "STAR-4"
+          ],
+          "edge_ids": [
+            "e-star-civo"
+          ],
+          "reporting_period": "announcement2026-10-14; brand scope",
+          "candidate_Facts": "Partial",
+          "candidate_Insight": "Unavailable",
+          "public_eligible": false,
+          "financial_metric_binding": false
+        }
+      ]
+    },
+    {
+      "original_actor_id": "actor:aws",
+      "original_name": "Amazon Web Services",
+      "original_kind": "provider_brand",
+      "original_identity_sources": [
+        "NW-TECH"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "ecosystem_twin_partial",
+      "qualitative_rationale": "Amazon Web Services: material operating/service economics; dossier covers a bounded archetype, legal perimeters remain distinct.",
+      "dossier_id": "aws",
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Amazon Web Services: Need customer workload contract, cost and outcome evidence; consolidated Amazon free cash flow is not AWS-only.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Partial",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": [
+        {
+          "perspective": "Inside",
+          "information_element": "supplier/customer/participant_relationships",
+          "claim_ids": [
+            "NWG-4"
+          ],
+          "edge_ids": [
+            "e-nwg-aws"
+          ],
+          "reporting_period": "July2025 announcement/2026retrospective; brand scope",
+          "candidate_Facts": "Partial",
+          "candidate_Insight": "Unavailable",
+          "public_eligible": false,
+          "financial_metric_binding": false
+        }
+      ]
+    },
+    {
+      "original_actor_id": "actor:accenture",
+      "original_name": "Accenture",
+      "original_kind": "integration_provider_brand",
+      "original_identity_sources": [
+        "NW-TECH"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "NatWest Group collaboration brand; exact employer/contracting entity unknown",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Accenture: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": [
+        {
+          "perspective": "Inside",
+          "information_element": "supplier/customer/participant_relationships",
+          "claim_ids": [
+            "NWG-4"
+          ],
+          "edge_ids": [
+            "e-nwg-acc"
+          ],
+          "reporting_period": "July2025 announcement/2026retrospective; brand scope",
+          "candidate_Facts": "Partial",
+          "candidate_Insight": "Unavailable",
+          "public_eligible": false,
+          "financial_metric_binding": false
+        }
+      ]
+    },
+    {
+      "original_actor_id": "actor:openai",
+      "original_name": "OpenAI",
+      "original_kind": "technology_provider_brand",
+      "original_identity_sources": [
+        "NW-TECH"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "historical NatWest collaboration candidate; current rights/client legal scope not reverified here",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "OpenAI: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:revolut-brand",
+      "original_name": "Revolut",
+      "original_kind": "customer_brand_unresolved_legal_endpoint",
+      "original_identity_sources": [
+        "CLEAR-FY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "provider/client brand distinct from UK licensed bank",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Revolut: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:lemfi",
+      "original_name": "LemFi",
+      "original_kind": "customer_brand_unresolved_legal_endpoint",
+      "original_identity_sources": [
+        "CLEAR-FY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "ClearBank historical named customer brand; legal service edge unverified in W3",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "LemFi: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:coinbase",
+      "original_name": "Coinbase",
+      "original_kind": "customer_brand_unresolved_legal_endpoint",
+      "original_identity_sources": [
+        "CLEAR-FY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "digital-asset client brand; not permission to infer product/country/client contract",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Coinbase: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:paycaptain",
+      "original_name": "PayCaptain",
+      "original_kind": "customer_brand_unresolved_legal_endpoint",
+      "original_identity_sources": [
+        "CLEAR-FY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "ClearBank disclosed corporate embedded-banking partner; legal endpoints unresolved",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "PayCaptain: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": [
+        {
+          "perspective": "Inside",
+          "information_element": "supplier/customer/participant_relationships",
+          "claim_ids": [
+            "CLEAR-2"
+          ],
+          "edge_ids": [
+            "e-clear-paycaptain"
+          ],
+          "reporting_period": "FY2025; issuer release2026-04-15; brand scope",
+          "candidate_Facts": "Partial",
+          "candidate_Insight": "Unavailable",
+          "public_eligible": false,
+          "financial_metric_binding": false
+        }
+      ]
+    },
+    {
+      "original_actor_id": "actor:airwallex",
+      "original_name": "Airwallex",
+      "original_kind": "customer_brand_unresolved_legal_endpoint",
+      "original_identity_sources": [
+        "CLEAR-FY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "historical provider/client role; current legal service edge requires original evidence",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Airwallex: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:kraken",
+      "original_name": "Kraken",
+      "original_kind": "customer_brand_unresolved_legal_endpoint",
+      "original_identity_sources": [
+        "CLEAR-FY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "digital-asset brand; no bank licence/client contract assumed",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "Kraken: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:pingpong",
+      "original_name": "PingPong",
+      "original_kind": "customer_brand_unresolved_legal_endpoint",
+      "original_identity_sources": [
+        "CLEAR-FY"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "payment client brand; legal/geographic scope still candidate",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "PingPong: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    },
+    {
+      "original_actor_id": "actor:nt",
+      "original_name": "National Trust",
+      "original_kind": "non_bank_customer_sector_actor",
+      "original_identity_sources": [
+        "NT-RELEASE"
+      ],
+      "original_perimeter": "Source-named scope only; exact contracting legal endpoint unresolved for brands",
+      "original_identity_as_of": null,
+      "identity_verification": "retained BIE2 candidate; not new canonical identity verification",
+      "canonical_id": null,
+      "depth_decision": "supporting_identity_profile_pending_enrichment",
+      "qualitative_rationale": "National Trust retained customer example; not a deposit-taker or sector-wide customer need",
+      "dossier_id": null,
+      "related_research_claims": [],
+      "metric_binding": "explicit claim subject only; dossier reference/route is not an alias or legal-entity financial binding",
+      "public_route_state": "existing route contracts retained; no new route or current deployment claim",
+      "facts_readiness_for_new_W3_supply": "Unavailable",
+      "insight_readiness_for_new_W3_supply": "Unavailable",
+      "candidate_research_readiness": "Unavailable",
+      "next_material_demand": "National Trust: verify original issuer identity/current remit, latest accounts or role economics, leadership, customer/service mechanism and dated change; no borrowed peer profile.",
+      "exact_new_research_subject": null,
+      "related_context_readiness": "Unavailable",
+      "scope_limit": "Linked dossier is context only unless exact_new_research_subject is assigned; legal-unit economics/capability results remain unavailable without an exact matching claim.",
+      "exact_element_bindings": []
+    }
+  ],
+  "additional_dossier_subjects": [
+    {
+      "dossier": "lloyds",
+      "subject_key": "LBG::Group",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "barclays",
+      "subject_key": "BARC::UKDivision",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "natwest",
+      "subject_key": "NWG::Group",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "hsbc",
+      "subject_key": "HSBC::UKBank",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "santander",
+      "subject_key": "SAN::UKGroupHoldings",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "nationwide",
+      "subject_key": "NBS::Group",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "monzo",
+      "subject_key": "MONZO::FY26WebScope",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "starling",
+      "subject_key": "STAR::Group",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "coventry",
+      "subject_key": "COV::Group",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "clearbank",
+      "subject_key": "CLEAR::Group",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "oaknorth",
+      "subject_key": "OAK::IssuerScope",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "payuk",
+      "subject_key": "PAYUK::Limited",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "boe",
+      "subject_key": "BOE::Operator",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "pra",
+      "subject_key": "PRA::Institution",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "fca",
+      "subject_key": "FCA::Institution",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "psr",
+      "subject_key": "PSR::Institution",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "microsoft",
+      "subject_key": "MSFT::Global",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "aws",
+      "subject_key": "AWS::GlobalSegment",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "google",
+      "subject_key": "GOOGLE::GlobalCloudSegment",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "computacenter",
+      "subject_key": "CCC::Group",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "equinix",
+      "subject_key": "EQIX::Global",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "arm",
+      "subject_key": "ARM::Global",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "nvidia",
+      "subject_key": "NVDA::Global",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "easyjet",
+      "subject_key": "EZY::Airline",
+      "not_an_actor_alias": true
+    },
+    {
+      "dossier": "easyjet-holidays",
+      "subject_key": "EZY::HolidaysSegment",
+      "not_an_actor_alias": true
+    }
+  ],
+  "collision_rules": [
+    {
+      "owner": "LegacyManifest",
+      "id": "BK-ENT-003",
+      "meaning": "Nationwide/Virgin Money"
+    },
+    {
+      "owner": "BankingPortfolio",
+      "id": "BK-ENT-003",
+      "meaning": "NatWest"
+    }
+  ],
+  "raw_id_join_allowed": false
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "G-ENVOY-DATE",
+    "history": "Earlier1May/source-labelled accounts may represent secondary publication, not original event",
+    "new_original": "28April2026 dated Lloyds original press PDF",
+    "disposition": "Preserve both provenance records; original announcement28April, do not rewrite historical sources",
+    "closed": false,
+    "next": "Source owner reconcile original/event/publication distinctions"
+  },
+  {
+    "id": "G-NVDA-CURRENT",
+    "history": "Q2CEO and July financials remain valid at historical cut",
+    "new_original": "17Nov original Q3 release;25Octquarter; interimCEOColetteKress",
+    "disposition": "Do not present Q2incumbent or results as current; superseding candidate does not erase prior period",
+    "closed": false,
+    "next": "Existing owner decides exact current projection; no automatic admission"
+  },
+  {
+    "id": "G-NWG-BASIS",
+    "history": "BIE2 rounded income13.3/PBT6.5 and453.4deposit scope",
+    "new_original": "F3/W3 reported income13502/PBT6543;453.4excentral vs454.3total",
+    "disposition": "Different notable-item/rounding/deposit definitions, not automatic contradiction; do not overwrite old records",
+    "closed": false,
+    "next": "Reconcile measure-by-measure to exact issuer footnotes"
+  },
+  {
+    "id": "G-HSBC-PERIMETER",
+    "history": "HSBC UK business vs legal bank vs combined UK operating banks",
+    "new_original": "HSBC legal entity allbusinesses9MPBT6084USDm; combinedUKbriefingdifferent",
+    "disposition": "No cross-perimeter totals or GBP conversion",
+    "closed": false,
+    "next": "Prepare compatible legal/basis bridge, not league table"
+  },
+  {
+    "id": "G-SANTANDER-TSB",
+    "history": "Nine-month UK Group includes only five-month acquiredTSB",
+    "new_original": "30Aprilacquisition/1Mayconsolidation; partialoriginalverification",
+    "disposition": "No add-back of already included TSB contribution; restructuring/provisions not pure integration",
+    "closed": false,
+    "next": "Original PDF plus dated legal/migration milestones"
+  },
+  {
+    "id": "G-NBS-COMPARATOR",
+    "history": "FY26twelvemonths vs361dayprior including6monthVirgin",
+    "new_original": "Group/Society/postApriltransfer differ",
+    "disposition": "No organic-growth or complaint-to-earnings joins",
+    "closed": false,
+    "next": "Same perimeter/period service economics"
+  },
+  {
+    "id": "G-003",
+    "history": "LegacyManifestBK-ENT-003Nationwide/Virgin; runtimeBankingPortfolio003NatWest",
+    "new_original": null,
+    "disposition": "Reject bareIDjoin; preserve all owners and aliases without canonical mutation",
+    "closed": false,
+    "next": "Authorised owner-qualified crosswalk"
+  },
+  {
+    "id": "G-PAYUK",
+    "history": "Public website/document does not grant commercial reuse",
+    "new_original": "Exact terms andGD4contradiction noted",
+    "disposition": "Block only affected use; do not block unrelated permitted research",
+    "closed": false,
+    "next": "ExactSource/legaldecision; no source grant here"
+  },
+  {
+    "id": "G-EZY",
+    "history": "Business-model pageundated; Group/segment/legalcompany boundaries",
+    "new_original": "AuthenticH1FY26accounts with169revenueelimination",
+    "disposition": "No standalonelegalprofit, full-yearprojection or currenthotelcounterparty inference",
+    "closed": false,
+    "next": "Latestannual/Q3, legalaccounts, namedapplicablerelationships"
+  },
+  {
+    "id": "G-CAPABILITIES",
+    "history": "All new analytical capability maps are conceptual",
+    "new_original": "Source facts anchor services/platforms but not complete teams/process/system inventories",
+    "disposition": "Do not label completeverifiedEnterpriseTwins",
+    "closed": false,
+    "next": "Actual stakeholderjourney, accountableowner, system andoutcome percapability"
+  }
+]

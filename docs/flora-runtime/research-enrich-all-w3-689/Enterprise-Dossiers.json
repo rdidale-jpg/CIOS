@@ -1,0 +1,1751 @@
+[
+  {
+    "id": "lloyds",
+    "name": "Lloyds Banking Group / Lloyds Bank",
+    "subject_key": "LBG::Group",
+    "depth": "bounded_deep",
+    "archetype": "bank",
+    "claim_ids": [
+      "LBG-1",
+      "LBG-2",
+      "LBG-3",
+      "LBG-4",
+      "I-LBG"
+    ],
+    "economic_mechanism": "Funding and credit spread coexist with fees, leased-asset exposure and insurance/wealth economics. Use the two profit bridges; lease depreciation belongs above net income. Group profitability is not a capability-level business case.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Attract and retain funding/customer relationship",
+        "Originate and price credit or service",
+        "Fulfil and service",
+        "Manage credit/asset residual risk",
+        "Capture income and reinvest"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Asset lifecycle management",
+        "business_purpose": "Protect vehicle/asset economics through pricing, maintenance and remarketing",
+        "information_needed": "Lease cohorts, residual values, utilisation and disposal proceeds; no customer-level records collected",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Customer servicing",
+        "business_purpose": "Resolve an end-to-end customer need across channels",
+        "information_needed": "Resolution, repeat contact, complaints and fulfilment outcomes by legal entity",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "AI service assurance",
+        "business_purpose": "Reuse controlled agents without losing accountable decisions",
+        "information_needed": "Deployment/use-case registry, benefit attribution and full run/change cost",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Group CEO Charlie Nunn is named in the Q3 statement; Group COO Ron van Kemenade speaks for Envoy. Business roles are accountability hypotheses, not named buyers. Bank plc, Bank of Scotland and Scottish Widows cannot be collapsed into a single legal bank.",
+    "technology_and_information": "Envoy/Google Cloud is a reported Group platform relationship. Customer-data, servicing and leased-asset decomposition is conceptual. No contract counterparty, internal application inventory or outsourced critical workload asserted.",
+    "forces": {
+      "observed_condition": "Lease depreciation and competitive asset/deposit pricing affect the income mechanism.",
+      "existing_response": "Issuer describes mitigation and already-operating AI governance.",
+      "conditional_business_consequence": "Residual-return or servicing productivity might improve only if cohort-level, net-of-cost evidence supports it.",
+      "alternative_or_counter_evidence": "Group income/profit improved; a rising expense is not by itself demonstrated pain.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [
+      "LBG-4"
+    ],
+    "commercial_investigation": "Which leased-asset cohorts explain the return movement, and what net customer/colleague outcome is attributable to already-deployed agents?",
+    "unresolved_demands": [
+      "Current division/legal-entity revenue reconciliation remains open",
+      "Supplier legal scope and contract lifecycle unknown",
+      "No net AI benefit or capability-level cost allocation",
+      "Preserve all prior RIE/BNK-ENT gaps; this pack does not close them by assertion"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "barclays",
+    "name": "Barclays Group / UK banking division",
+    "subject_key": "BARC::UKDivision",
+    "depth": "bounded_deep",
+    "archetype": "bank",
+    "claim_ids": [
+      "BARC-1",
+      "BARC-2",
+      "BARC-3",
+      "BARC-4",
+      "I-BARC"
+    ],
+    "economic_mechanism": "Retail/SME spread and service income are different from UK Corporate Bank, investment banking and US cards. Total expenses include levies/conduct as well as operating costs; gross loans include more than customer loans.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Acquire personal/family or SME relationship",
+        "Fund and originate",
+        "Manage daily money and credit",
+        "Support lifecycle events",
+        "Resolve service and risk"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Customer lifecycle development",
+        "business_purpose": "Retain and deepen a family relationship beyond a single product",
+        "information_needed": "GoHenry-to-core journey, consent and retention cohorts",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Credit portfolio stewardship",
+        "business_purpose": "Balance growth, price and expected loss",
+        "information_needed": "Customer product/segment vintage, impairment and risk-adjusted return",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Digital journey management",
+        "business_purpose": "Deliver a usable app and completed customer outcome",
+        "information_needed": "Funnel, assisted fallback and servicing cost by journey",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Anna Cross is Group Finance Director in the primary documents. Acquisition actor is Bank UK PLC; UK reporting division is not a substitute legal hierarchy or proof of the accountable purchasing team.",
+    "technology_and_information": "New app and acquired money-management platform are existing responses. Internal architecture, migration sequence and vendor allocation are not disclosed in these sampled sources.",
+    "forces": {
+      "observed_condition": "Deposit/mortgage competition and impairments coexist with structural-hedge support.",
+      "existing_response": "App launch and GoHenry acquisition are dated delivered actions.",
+      "conditional_business_consequence": "Integration may affect acquisition/retention economics; no unallocated supplier work follows.",
+      "alternative_or_counter_evidence": "UK division profit rises; 2027 cost expectations are guidance, not a current failure or open budget.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [
+      "BARC-3"
+    ],
+    "commercial_investigation": "Does the acquired family proposition improve retention or service cost within the correct booking entities, compared with the existing proposition and integration costs?",
+    "unresolved_demands": [
+      "UK division vs Bank UK legal financial bridge",
+      "Bank-specific executive allocation",
+      "GoHenry integration outcomes and consent design",
+      "No open procurement or external workshare evidence"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "natwest",
+    "name": "NatWest Group / National Westminster Bank",
+    "subject_key": "NWG::Group",
+    "depth": "bounded_deep",
+    "archetype": "bank",
+    "claim_ids": [
+      "NWG-1",
+      "NWG-2",
+      "NWG-3",
+      "NWG-4",
+      "I-NWG"
+    ],
+    "economic_mechanism": "Separate Retail lending/deposits, Private/Wealth AUMA fees, and C&I transaction/financing economics. Acquired wealth balances change the perimeter; assets under administration are not bank deposits.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Understand household/business/wealth need",
+        "Onboard and maintain identity",
+        "Fund, lend, advise or transact",
+        "Service and monitor risk",
+        "Retain and deepen relationship"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Fraud-service management",
+        "business_purpose": "Resolve a suspected-fraud customer interaction safely",
+        "information_needed": "Time to resolution, false positives, loss avoidance and control exceptions",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Client information integration",
+        "business_purpose": "Reuse an accurate view across products and channels",
+        "information_needed": "Entity identifiers, data lineage, consent and completion rates",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Relationship/wealth integration",
+        "business_purpose": "Deliver an acquired and existing client proposition",
+        "information_needed": "Adjusted AUMA/cohort, adviser coverage and service outcomes",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Paul Thwaite is Group CEO. Retail/C&I/Private-Wealth are franchises, not legal entities. Role hypotheses: Retail service/control owner and Group data leadership; no buyer names or procurement authority inferred.",
+    "technology_and_information": "Bankline, Cora and AWS/Accenture collaboration are reported existing capabilities. The exact cloud legal supplier and workloads are not identified; platform deployment is not proof of net economic outcomes.",
+    "forces": {
+      "observed_condition": "Acquisition integration and operational service execution create different dependencies.",
+      "existing_response": "Bank reports data/technology investment and actual AI deployment.",
+      "conditional_business_consequence": "Reuse may lower friction only with measured journey and control outcomes; no Group profit-to-Cora causal allocation.",
+      "alternative_or_counter_evidence": "Profitable operations, strong existing technology and acquisition composition are counter-evidence to generic distress.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [
+      "NWG-4"
+    ],
+    "commercial_investigation": "Which fraud and onboarding journeys show lower end-to-end resolution cost without increasing loss or customer exclusion?",
+    "unresolved_demands": [
+      "National Westminster Bank-specific accounts vs Group",
+      "Evelyn acquisition comparators",
+      "Supplier contract/permitted data scope",
+      "Net AI outcomes rather than conversation counts"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "hsbc",
+    "name": "HSBC UK, HSBC Bank and HSBC Holdings",
+    "subject_key": "HSBC::UKBank",
+    "depth": "bounded_deep",
+    "archetype": "bank",
+    "claim_ids": [
+      "HSBC-1",
+      "HSBC-2",
+      "HSBC-3",
+      "HSBC-4",
+      "HSBC-5",
+      "I-HSBC"
+    ],
+    "economic_mechanism": "UK legal-bank reported USD income, the UK business and combined UK operating banks are three different perimeters. Transaction banking links domestic coverage to international services; Group legal-item movements cannot explain local client outcomes.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Acquire and understand domestic/international client",
+        "Complete onboarding and book to legal entity",
+        "Provide lending, payments, trade or wealth service",
+        "Coordinate cross-border servicing",
+        "Control risk and retain relationship"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Corporate relationship coordination",
+        "business_purpose": "Connect domestic customer needs with global products within entity rules",
+        "information_needed": "Coverage/booking map, referral completion and client friction",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Digital onboarding",
+        "business_purpose": "Reduce repetition without weakening controls",
+        "information_needed": "Journey duration, data reuse permission and failure reasons",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Trade/payment fulfilment",
+        "business_purpose": "Deliver reliable internationally connected services",
+        "information_needed": "Product-level flows/fees, sanctions checks and failed/repaired transactions",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "David Lindberg is CEO HSBC UK Bank plc from the dated appointment. Global CEO and HSBC Bank leadership are distinct. A customer relationship manager is a service role, not inferred budget authority.",
+    "technology_and_information": "UK strategy describes digital journeys, data foundations and AI. Specific banking systems, implementation suppliers and regional hosting dependencies remain unverified; do not copy the global technology estate into UK bank.",
+    "forces": {
+      "observed_condition": "Coordinated coverage spans ring-fenced and non-ring-fenced entities.",
+      "existing_response": "UK briefing proposes sector/SME growth and more time with clients through simpler journeys.",
+      "conditional_business_consequence": "Cross-entity servicing may create avoidable friction, conditional on actual journey evidence.",
+      "alternative_or_counter_evidence": "Strong reported returns and existing capabilities challenge a missing-platform thesis; constant-currency strategy metrics are not reported legal accounts.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "Do servicing hand-offs between the two UK banks create measurable client friction, or does existing coordinated coverage already resolve it?",
+    "unresolved_demands": [
+      "Map actual product booking/entity and geographic attribution",
+      "UK-specific client outcomes and technology map",
+      "Permission for bank accounts remains separate",
+      "No named supplier contract or customer procurement evidence"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "santander",
+    "name": "Santander UK and TSB",
+    "subject_key": "SAN::UKGroupHoldings",
+    "depth": "bounded_deep",
+    "archetype": "bank",
+    "claim_ids": [
+      "SAN-1",
+      "SAN-2",
+      "SAN-3",
+      "I-SAN"
+    ],
+    "economic_mechanism": "Deposit/mortgage banking is being combined with acquired TSB operations. Post-acquisition contribution is already in Group results. Restructuring/specific items are not all integration, and coding hours are not profit.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Maintain separate customer/booking identity",
+        "Provide daily banking and lending",
+        "Plan and authorise migration",
+        "Transfer and reconcile legally",
+        "Measure service/cost outcomes"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Integration control",
+        "business_purpose": "Change legal/process systems without losing customer continuity",
+        "information_needed": "Approved entity milestones, migration defects and reconciliations",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Service continuity",
+        "business_purpose": "Maintain customer access during change",
+        "information_needed": "Channel availability, failed transactions and complaint cohorts",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Benefits attribution",
+        "business_purpose": "Test gross synergy against full change/run costs",
+        "information_needed": "Baseline perimeter, realised cost removals and timing",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Mahesh Aditya is identified as CEO in QMS text. Central-function transfer, Part VII and customer migration have different approval/date status. Do not treat a leader announcement as open strategic influence.",
+    "technology_and_information": "Source-normalised QMS describes AI coding and integration already in progress. Exact platform/supplier exit decisions, TSB internal organisation and legal system transfer require original accounts/migration evidence.",
+    "forces": {
+      "observed_condition": "Integration has dated completed actions and future target economics.",
+      "existing_response": "Acquisition and stated management plans are existing responses.",
+      "conditional_business_consequence": "Customer continuity and net realised synergies are useful conditional issues; nothing proves remaining external scope.",
+      "alternative_or_counter_evidence": "TSB is profitable in the partial contribution; stated targets and management capability counter generic pain.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [
+      "SAN-2"
+    ],
+    "commercial_investigation": "What has been legally and operationally transferred, and what measured customer/cost effects remain after integration expenditure?",
+    "unresolved_demands": [
+      "Full original PDF visual/byte verification",
+      "TSB standalone perimeter and precise legal transfer instrument",
+      "Like-for-like synergy baseline/outcomes",
+      "No buying window, external budget or supplier scope established"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "nationwide",
+    "name": "Nationwide Group and Society",
+    "subject_key": "NBS::Group",
+    "depth": "bounded_deep",
+    "archetype": "mutual",
+    "claim_ids": [
+      "NBS-1",
+      "NBS-2",
+      "NBS-3",
+      "I-NBS"
+    ],
+    "economic_mechanism": "Mutual value includes member pricing/reward alongside capital strength and retained earnings. A reward distribution and quantified member pricing benefit are not interchangeable expenses. Virgin Money changes reporting composition.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Attract saver/member funding",
+        "Originate and service housing finance",
+        "Provide transaction banking",
+        "Deliver member value",
+        "Maintain capital and integrate acquired operations"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Member value allocation",
+        "business_purpose": "Balance pricing, reward, service and financial resilience",
+        "information_needed": "Same-period benefit definitions, retained profit and capital",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Mortgage/customer servicing",
+        "business_purpose": "Fulfil and maintain a housing relationship",
+        "information_needed": "Completion/service times, arrears and complaints at matched legal scope",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Integration reconciliation",
+        "business_purpose": "Combine operational services under the approved legal transfer",
+        "information_needed": "Transferred accounts, defects, cost and service continuity",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Dame Debbie Crosbie is Group CEO. Member, customer, brand, Society and Group are distinct. Group CEO responsibility is not evidence of a seller purchasing authority.",
+    "technology_and_information": "Virgin Money business transfer and planned business-banking launch are dated separately. Technology estate, supplier renewal and programme outcomes are not reconstructed from acquisition alone.",
+    "forces": {
+      "observed_condition": "Funding competition and integration change both service scope and cost composition.",
+      "existing_response": "Member rewards, strong capital and a stated proposition roadmap are existing responses.",
+      "conditional_business_consequence": "Combined relationship economics may change; determine incremental outcomes before diagnosing integration pain.",
+      "alternative_or_counter_evidence": "Positive underlying profit, resilience and member benefit counter an inference from statutory profit alone.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "How do integration and planned business banking change retained member value and service outcomes at the Society perimeter?",
+    "unresolved_demands": [
+      "Society-only bridge and post-April transfer details",
+      "Customer outcomes by legal entity vs complaint brand",
+      "Realised benefits vs integration cost",
+      "No contract/technology workshare inferred"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "monzo",
+    "name": "Monzo",
+    "subject_key": "MONZO::FY26WebScope",
+    "depth": "bounded_deep",
+    "archetype": "challenger",
+    "claim_ids": [
+      "MONZO-1",
+      "MONZO-2",
+      "I-MONZO"
+    ],
+    "economic_mechanism": "A broader app relationship combines banking spread, card/transaction activity and paid propositions. The rounded summary does not support a precise margin or blended customer economics by cohort.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Acquire user",
+        "Convert to active/main relationship",
+        "Provide lending/payments/savings or subscription",
+        "Support customer safely",
+        "Extend into new product or market"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Primary relationship development",
+        "business_purpose": "Make multiple services useful to a retained customer",
+        "information_needed": "Cohort-level activity, income contribution and retention",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Product expansion control",
+        "business_purpose": "Integrate acquired/foreign propositions within the right licence",
+        "information_needed": "Legal booking, product permissions and customer outcomes",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Financial support",
+        "business_purpose": "Help customers manage tax/credit/money needs",
+        "information_needed": "Resolution, vulnerability and loss/control outcomes",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Diana Layfield is named Group CEO in current issuer highlights. Exact Group parent and FY2026 fiscal dates remain unresolved because the full report exceeds tool size; no legal-bank chart invented.",
+    "technology_and_information": "Habito acquisition, Ireland licence and tax tooling are existing reported capability developments. Internal software/vendor, data estate and delegated decision authorities remain unknown.",
+    "forces": {
+      "observed_condition": "Breadth/geography expansion increases cohort and control complexity.",
+      "existing_response": "Issuer describes profitable growth and existing new propositions.",
+      "conditional_business_consequence": "Cross-product economics could deepen value, conditional on exact costs and legal scope.",
+      "alternative_or_counter_evidence": "Revenue/customer growth does not prove inefficient technology or untapped demand.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "Which existing customer cohorts retain more useful services profitably after credit, support and new-market costs?",
+    "unresolved_demands": [
+      "Readable full accounts and fiscal/legal scope",
+      "Segment product/customer economics",
+      "Current regulatory licence scope and Irish entity",
+      "No bank-level precise margin from rounded web numbers"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "starling",
+    "name": "Starling Bank, Group and Engine",
+    "subject_key": "STAR::Group",
+    "depth": "bounded_deep",
+    "archetype": "challenger/provider",
+    "claim_ids": [
+      "STAR-1",
+      "STAR-2",
+      "STAR-3",
+      "STAR-4",
+      "I-STAR"
+    ],
+    "economic_mechanism": "Deposit bank and exported banking platform have different revenue/cost mechanisms. Engine accounts are not unique bank customers. Estimated primacy is a defined proxy, not a measured comparable household share.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Acquire banking relationship",
+        "Process/retain financial activity",
+        "Deliver tax/service features",
+        "Operate platform for own bank and licensees",
+        "Measure controlled AI experiments"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Platform service delivery",
+        "business_purpose": "Run repeatable client banking processes reliably",
+        "information_needed": "Client/platform service levels, incremental cost and contracted scope",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Customer money/tax support",
+        "business_purpose": "Combine banking information with useful customer outcomes",
+        "information_needed": "Adoption, control errors and support outcomes",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "AI model evaluation",
+        "business_purpose": "Test transaction models within privacy and resilience controls",
+        "information_needed": "Anonymisation, test performance, run cost and production boundary",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Raman Bhatia is Group CEO; Harriet Rees is Group CIO in the dated cloud announcement. Product roles do not establish buying authority or the exact employment/legal-bank perimeter.",
+    "technology_and_information": "Engine, Ember and NVIDIA/Civo training are reported, so a missing-platform or missing-AI thesis is wrong. Research training is not an all-bank hosting migration or achieved economic benefit.",
+    "forces": {
+      "observed_condition": "Group diversification and experimental sovereign training create distinct dependencies.",
+      "existing_response": "Actual platform, tax and AI capabilities are countervailing responses.",
+      "conditional_business_consequence": "Benefits depend on deployment performance and attributable costs rather than generic concentration risk.",
+      "alternative_or_counter_evidence": "Profitability and working features counter a distress thesis; year-to-year Group composition changes.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [
+      "STAR-4"
+    ],
+    "commercial_investigation": "What portion of platform and AI economics is repeatable, attributable and delivered rather than committed or experimental?",
+    "unresolved_demands": [
+      "Bank/Engine legal and segment economics",
+      "Training-vs-production workload scope",
+      "Supplier legal counterparty/contracts",
+      "Comparable primacy methodology and model outcome validation"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "coventry",
+    "name": "Coventry / Co-operative Bank",
+    "subject_key": "COV::Group",
+    "depth": "bounded_deep",
+    "archetype": "mutual",
+    "claim_ids": [
+      "COV-1",
+      "COV-2",
+      "I-COV"
+    ],
+    "economic_mechanism": "Mutual mortgage/savings economics now include a transactional bank. Underlying-to-statutory acquisition adjustments and prior one-off gain explain why unadjusted reported profits mislead.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Fund through savings",
+        "Originate/service mortgage or transaction account",
+        "Integrate shared support",
+        "Authorise legal transfer",
+        "Deliver member/customer outcomes"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Integration execution",
+        "business_purpose": "Consolidate controls/services without erasing entity boundaries",
+        "information_needed": "System milestones, reconciliations and accountability",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Funding and pricing",
+        "business_purpose": "Balance member savings value and mortgage return",
+        "information_needed": "Deposit/product pricing, retention and matched margin",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Customer continuity",
+        "business_purpose": "Bring eligible bank customers into membership safely",
+        "information_needed": "Eligibility, service continuity and legal transfer status",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "The combined Group, Society subgroup and Bank subgroup are separately defined. Current incumbent/role accountability still needs a directly readable original passage; no purchasing authority or named accountable system owner is inferred.",
+    "technology_and_information": "Finance, people and procurement systems are reported integrated. Core banking transfer and vendor map remain separate, not silently completed.",
+    "forces": {
+      "observed_condition": "Competitive deposit pricing and acquisition integration affect returns.",
+      "existing_response": "Issuer reports support-system progress and capital focus.",
+      "conditional_business_consequence": "Realised integration outcomes may improve retained member economics only after matched measurement.",
+      "alternative_or_counter_evidence": "Prior statutory gain explains much of the apparent profit fall; no all-core migration inference.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [
+      "COV-2"
+    ],
+    "commercial_investigation": "Which customer and control outcomes depend on the remaining legal transfer rather than already-completed support integration?",
+    "unresolved_demands": [
+      "Named role refresh from original report",
+      "Early2027 transfer approvals/outcomes",
+      "Core-platform and supplier evidence",
+      "Member-eligibility/value reconciliation"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "clearbank",
+    "name": "ClearBank UK / Europe / Group",
+    "subject_key": "CLEAR::Group",
+    "depth": "bounded_deep",
+    "archetype": "operator/provider",
+    "claim_ids": [
+      "CLEAR-1",
+      "CLEAR-2",
+      "BOE-2",
+      "I-CLEAR"
+    ],
+    "economic_mechanism": "Access/platform fees and transaction services differ from deposit-funded retail lending. UK profit cannot be assigned to the Group; managed balances/payment value are not earned fees.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Onboard regulated/embedded client",
+        "Provide account and scheme access",
+        "Process and settle payment",
+        "Operate controls and service",
+        "Bill platform/transaction service"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Institution onboarding",
+        "business_purpose": "Qualify and connect a client to a permitted banking service",
+        "information_needed": "Legal clients, permissions, technical readiness and time-to-live",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Payment operations",
+        "business_purpose": "Complete transactions reliably under scheme rules",
+        "information_needed": "Service availability, reconciliations and failure outcomes",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Client/platform economics",
+        "business_purpose": "Recover service cost and scale safely",
+        "information_needed": "Fee cohorts, infrastructure run cost and contractual service obligations",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Institutional clients and counterparties differ from underlying account holders. Named PayCaptain collaboration is issuer evidence at brand scope; do not invent end-customer identity or individual contract values.",
+    "technology_and_information": "Cloud/API access is the provider proposition. Actual provider estate/outsourcing responsibility and cross-border services are not inferred from generic API language.",
+    "forces": {
+      "observed_condition": "Client/volume growth increases scale and operational requirements.",
+      "existing_response": "Issuer reports recurring fee growth and UK profitability.",
+      "conditional_business_consequence": "Scalability is an analytical question about cost-to-serve and reliability, not proof of a sales opportunity.",
+      "alternative_or_counter_evidence": "Growing profit and existing infrastructure contradict a deficient-platform assertion.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [
+      "CLEAR-2",
+      "BOE-2"
+    ],
+    "commercial_investigation": "How do recurring platform and transaction cohorts cover operational/control cost as embedded clients scale?",
+    "unresolved_demands": [
+      "UK/Europe legal-account bridge",
+      "Fee yield and contracted scope",
+      "Underlying customer counts vs accounts",
+      "No payment principal treated as revenue"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "oaknorth",
+    "name": "OakNorth",
+    "subject_key": "OAK::IssuerScope",
+    "depth": "bounded_specialist",
+    "archetype": "specialist",
+    "claim_ids": [
+      "OAK-1",
+      "I-OAK"
+    ],
+    "economic_mechanism": "Lower-mid-market lending requires origination, underwriting and servicing, with material US activity in the issuer scope. Loan originations are flow, outstanding loans stock and PBT residual return.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Source entrepreneur financing",
+        "Underwrite and price",
+        "Fund and draw",
+        "Monitor cash flows/covenants",
+        "Repay/restructure"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Commercial underwriting",
+        "business_purpose": "Understand borrower cash generation and downside",
+        "information_needed": "Sector/borrower forecasts, covenants and realised losses",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Portfolio monitoring",
+        "business_purpose": "Detect material changes without assuming default",
+        "information_needed": "Vintage/geographic performance and early warning outcomes",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Geographic expansion control",
+        "business_purpose": "Separate UK and US permissions and operations",
+        "information_needed": "Legal booking entity, funding and service model",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "An entrepreneur customer segment is not a list of named buyers. Executive accountabilities and specific customer relationships require additional primary passages; no invented leadership tree.",
+    "technology_and_information": "Data-led underwriting is an analytical capability model here, not a verified named application or third-party vendor contract.",
+    "forces": {
+      "observed_condition": "Geographic origination mix changes the comparison perimeter.",
+      "existing_response": "Issuer reports profitability and credit discipline.",
+      "conditional_business_consequence": "Expansion execution may matter, conditional on loan-vintage and geographic evidence.",
+      "alternative_or_counter_evidence": "Reported long-run performance counters generic impaired-credit narratives; issuer impact estimates are not independent demand.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "How do US-originated vintages compare on funding, loss and servicing economics within each legal booking entity?",
+    "unresolved_demands": [
+      "UK bank vs overseas legal accounts",
+      "Leadership/current operating structure",
+      "Named product/customer/supplier evidence",
+      "No generic technology or credit pain assumed"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "payuk",
+    "name": "Pay.UK Limited and retail systems",
+    "subject_key": "PAYUK::Limited",
+    "depth": "operator_partial_rights_blocked",
+    "archetype": "operator",
+    "claim_ids": [
+      "PAY-1",
+      "BOE-1",
+      "BOE-2"
+    ],
+    "economic_mechanism": "Company limited by guarantee is not a shareholder-return bank. Operator funding/fees and service delivery must be analysed separately from payment principal and settlement balances. Current accounts are unreadable here; no invented revenue or fee model.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Set permitted system/service rules",
+        "Admit/connect appropriate participants",
+        "Operate or oversee retail clearing",
+        "Manage settlement interface and incidents",
+        "Fund and govern service continuity"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Scheme governance",
+        "business_purpose": "Maintain accountable common rules and access",
+        "information_needed": "Authoritative scheme-specific rules and participant role",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Operational resilience",
+        "business_purpose": "Sustain safe clearing service and recovery",
+        "information_needed": "Permitted service levels, incident/change evidence",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Participant coordination",
+        "business_purpose": "Understand direct/indirect and operator responsibilities",
+        "information_needed": "Rights-cleared membership, settlement and service contracts",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "PRA/FCA/PSR/BoE relationships are role-dependent. Guarantor membership is governance, not automatically direct participation, settlement access or procurement. No participant database copied into this pack.",
+    "technology_and_information": "Bacs/Faster Payments/ICS are systems and CASS is a switching service; infrastructure suppliers and legal contracts remain source-use blocked. Conceptual operating stages are not a verified organisation chart.",
+    "forces": {
+      "observed_condition": "System resilience/access regulation is a dated external context.",
+      "existing_response": "Use existing institutional facts; do not quote the restricted GD4 report into commercial content.",
+      "conditional_business_consequence": "A system change may affect a participant only when role, service and effective date are established.",
+      "alternative_or_counter_evidence": "Restricted source text and unreadable accounts prevent a deep financial/operator performance claim.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "What source-specific rights permit a minimal operator/service and verified participant model, and which roles are actually established?",
+    "unresolved_demands": [
+      "2025 original accounts tool size10,506,566bytes; normal acquisition tunnel403",
+      "Commercial-use/reproduction terms require Source/legal decision",
+      "GD4 public/confidential wording conflict retained as blocked source-use metadata only",
+      "No fees, participant lists or service contracts approved"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "boe",
+    "name": "Bank of England RTGS / CHAPS",
+    "subject_key": "BOE::Operator",
+    "depth": "bounded_deep",
+    "archetype": "institution/operator",
+    "claim_ids": [
+      "BOE-1",
+      "BOE-2",
+      "BOE-3",
+      "I-BOE"
+    ],
+    "economic_mechanism": "Central-bank settlement supports stability and finality, not a retail spread/profit model. Bank-held settlement balances differ from commercial-bank customer deposits and payment throughput.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Maintain eligible settlement accounts",
+        "Receive/validate obligation",
+        "Provide liquidity/control checks",
+        "Settle irrevocably",
+        "Reconcile and maintain service continuity"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Settlement finality",
+        "business_purpose": "Discharge obligations in central-bank money",
+        "information_needed": "Rules, participant account and irrevocability",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Intraday liquidity management",
+        "business_purpose": "Enable settlement without inventing commercial lending",
+        "information_needed": "Collateral/liquidity arrangements and operational use",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Service resilience",
+        "business_purpose": "Recover/operate the end-to-end payment service",
+        "information_needed": "System incident, tested recovery and participant obligations",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "RTGS/CHAPS Board belongs to wider Bank governance; operator and supervisory responsibilities differ. PRA remains within the Bank; a second independent corporate hierarchy would misrepresent ownership.",
+    "technology_and_information": "RTGS, CHAPS and messaging interfaces are evidenced at system scope. A listed direct participant does not prove all its other scheme roles or outsourcing vendors.",
+    "forces": {
+      "observed_condition": "Access/modernisation and tokenisation discussions create potential service changes.",
+      "existing_response": "Renewed services and the October forum are existing mechanisms.",
+      "conditional_business_consequence": "Implications are conditional on actual rules, roadmap and participant implementation.",
+      "alternative_or_counter_evidence": "Forum intentions are not completed live tokenised settlement or a customer-confirmed investment programme.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [
+      "BOE-2"
+    ],
+    "commercial_investigation": "Which published system changes alter a named participant obligation, with what effective date and tested operational consequence?",
+    "unresolved_demands": [
+      "Current fee/cost-recovery accounts not researched",
+      "Roadmap delivery vs planned stages",
+      "Specific institution applicability",
+      "No automatic commercial demand from regulatory context"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "pra",
+    "name": "Prudential Regulation Authority",
+    "subject_key": "PRA::Institution",
+    "depth": "institutional_support",
+    "archetype": "institution",
+    "claim_ids": [
+      "PRA-1",
+      "CTP-1",
+      "CTP-2"
+    ],
+    "economic_mechanism": "Prudential safety, capital and risk controls within the Bank of England; use public mandate/outcomes rather than bank-style P&L or customer sales.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Define rules",
+        "Authorise/supervise",
+        "Assess risk/capital",
+        "Require remedial action"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Prudential supervision",
+        "business_purpose": "Assess institutional resilience",
+        "information_needed": "Applicable firm permissions, rules and dated decisions",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Systemic provider oversight",
+        "business_purpose": "Review specified systemic services",
+        "information_needed": "Exact designation/service scope and cross-authority responsibility",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Institutional governance is not commercial buying authority. Executive/committee names not inferred from general remit.",
+    "technology_and_information": "Policy, permissions, data and supervisory processes; no invented internal vendor estate.",
+    "forces": {
+      "observed_condition": "Provider/firm dependencies may create prudential exposure.",
+      "existing_response": "Capital/risk requirements and CTP oversight already exist.",
+      "conditional_business_consequence": "Only exact applicable and effective decisions can justify a downstream operational interpretation.",
+      "alternative_or_counter_evidence": "Proposal, remit and realised firm-specific consequence remain distinct.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "Which applicable prudential or designated-service requirement changes a named institution’s capital, risk-control or resilience assessment?",
+    "unresolved_demands": [
+      "Do not infer a specific institution failure, vendor contract or remedial procurement from general supervision.",
+      "No internal technology, budget, contract or enforcement target asserted"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "fca",
+    "name": "Financial Conduct Authority",
+    "subject_key": "FCA::Institution",
+    "depth": "institutional_support",
+    "archetype": "institution",
+    "claim_ids": [
+      "FCA-1",
+      "PSR-1",
+      "CTP-2"
+    ],
+    "economic_mechanism": "Conduct, market integrity and competition; fee-funded public regulator; use public mandate/outcomes rather than bank-style P&L or customer sales.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Authorise activity",
+        "Supervise outcomes",
+        "Investigate market harm",
+        "Enforce or revise rules"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Consumer outcome supervision",
+        "business_purpose": "Protect fair treatment and service",
+        "information_needed": "Applicable duty, product and actual customer outcome",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Regulatory perimeter management",
+        "business_purpose": "Separate permissions and activities",
+        "information_needed": "Firm identity, activity scope and current rule",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Institutional governance is not commercial buying authority. Executive/committee names not inferred from general remit.",
+    "technology_and_information": "Policy, permissions, data and supervisory processes; no invented internal vendor estate.",
+    "forces": {
+      "observed_condition": "Conduct and payment-service policy evolve.",
+      "existing_response": "Existing supervisory tools and consultation processes are responses.",
+      "conditional_business_consequence": "Only exact applicable and effective decisions can justify a downstream operational interpretation.",
+      "alternative_or_counter_evidence": "Proposal, remit and realised firm-specific consequence remain distinct.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "Which product/journey customer outcomes demonstrate conduct harm or adequate treatment under the exact applicable duty?",
+    "unresolved_demands": [
+      "Proposed PSR transfer is not completed institutional merger; sector duties are not proof of bank-specific harm.",
+      "No internal technology, budget, contract or enforcement target asserted"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "psr",
+    "name": "Payment Systems Regulator",
+    "subject_key": "PSR::Institution",
+    "depth": "institutional_support",
+    "archetype": "institution",
+    "claim_ids": [
+      "PSR-1"
+    ],
+    "economic_mechanism": "Payment-system access regulation while institutional transfer is proposed; use public mandate/outcomes rather than bank-style P&L or customer sales.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Consult service users",
+        "Assess access framework",
+        "Set directions/guidance",
+        "Monitor compliance"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Access policy design",
+        "business_purpose": "Make access coherent and proportionate",
+        "information_needed": "Final direction/legal basis and affected participant roles",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Consultation assessment",
+        "business_purpose": "Separate proposal from enacted obligation",
+        "information_needed": "Response deadline, final decision and commencement date",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Institutional governance is not commercial buying authority. Executive/committee names not inferred from general remit.",
+    "technology_and_information": "Policy, permissions, data and supervisory processes; no invented internal vendor estate.",
+    "forces": {
+      "observed_condition": "CP26/3 proposes a simpler access framework.",
+      "existing_response": "Existing directions continue unless lawfully changed.",
+      "conditional_business_consequence": "Only exact applicable and effective decisions can justify a downstream operational interpretation.",
+      "alternative_or_counter_evidence": "Proposal, remit and realised firm-specific consequence remain distinct.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "What final legal access obligation, if adopted after consultation, changes a specified participant’s direct or indirect service role?",
+    "unresolved_demands": [
+      "No already-effective abolition/transfer or supplier project inferred; verify final decision after consultation.",
+      "No internal technology, budget, contract or enforcement target asserted"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "microsoft",
+    "name": "Microsoft",
+    "subject_key": "MSFT::Global",
+    "depth": "ecosystem_exemplar",
+    "archetype": "provider",
+    "claim_ids": [
+      "MS-1",
+      "CTP-1",
+      "I-MS"
+    ],
+    "economic_mechanism": "Software subscriptions, cloud consumption and infrastructure/device economics coexist; current segment recast matters.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Build platform",
+        "Provision subscriptions/compute",
+        "Deliver secured service",
+        "Renew/monetise usage",
+        "Account for service investment"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Platform engineering",
+        "business_purpose": "Maintain product/cloud capabilities",
+        "information_needed": "Product service, deployment, security and lifecycle",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Capacity allocation",
+        "business_purpose": "Balance consumption and infrastructure cost",
+        "information_needed": "Region/product compute, energy and utilisation",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Commercial entitlement",
+        "business_purpose": "Match usage/seats to contracted service",
+        "information_needed": "Legal agreement, consumption and recognition",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Satya Nadella / Amy Hood are CEO/CFO in the release; Irish designated legal entity is not global reporting entity.",
+    "technology_and_information": "CTP context identifies a person, not any bank contract. Preserve actual product availability; no missing AI/security-platform thesis.",
+    "forces": {
+      "observed_condition": "Segment recast and infrastructure scale affect comparison and service economics.",
+      "existing_response": "Existing software/cloud portfolio and capacity investment.",
+      "conditional_business_consequence": "Any enterprise-specific consequence requires actual service applicability and measured outcome.",
+      "alternative_or_counter_evidence": "Existing capabilities and commercial success do not establish missing customer capability or demand.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "After the FY27 recast, which subscription/consumption products contribute incremental operating return after capacity and inference cost, on a matched segment basis?",
+    "unresolved_demands": [
+      "Need UK legal/product scope and net customer outcomes; global metrics are not UK supplier spend.",
+      "No budget, procurement, remaining supplier scope or opportunity inferred"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "aws",
+    "name": "Amazon Web Services",
+    "subject_key": "AWS::GlobalSegment",
+    "depth": "ecosystem_exemplar",
+    "archetype": "provider",
+    "claim_ids": [
+      "AWS-1",
+      "NWG-4",
+      "I-AWS"
+    ],
+    "economic_mechanism": "Consumption/platform service fees and infrastructure scale, not Amazon retail gross sales or annualised run rate as actual year revenue.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Engineer services",
+        "Provision capacity",
+        "Run customer workloads",
+        "Meter/charge usage",
+        "Invest in capacity"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Cloud service operations",
+        "business_purpose": "Provide reliable elastic service",
+        "information_needed": "Actual region/service controls and service-level outcomes",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Infrastructure capacity",
+        "business_purpose": "Match demand with powered compute",
+        "information_needed": "Capacity availability, cost and utilisation",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Account/service configuration",
+        "business_purpose": "Deliver governed customer service",
+        "information_needed": "Legal client, permitted data and workload configuration",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Andy Jassy is Amazon CEO in release; NatWest collaboration is Group/brand scope.",
+    "technology_and_information": "AWS EMEA SARL designation and NatWest data collaboration are different predicates. No NatWest bank legal contract, spend or critical-service inference.",
+    "forces": {
+      "observed_condition": "Growth can increase capacity requirements and run cost.",
+      "existing_response": "Issuer reports existing services and continuing infrastructure investment.",
+      "conditional_business_consequence": "Any enterprise-specific consequence requires actual service applicability and measured outcome.",
+      "alternative_or_counter_evidence": "Existing capabilities and commercial success do not establish missing customer capability or demand.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "For the evidenced NatWest Group data collaboration, what service scope and measured data/journey outcomes distinguish useful cloud scale from increased run cost?",
+    "unresolved_demands": [
+      "Need customer workload contract, cost and outcome evidence; consolidated Amazon free cash flow is not AWS-only.",
+      "No budget, procurement, remaining supplier scope or opportunity inferred"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "google",
+    "name": "Google Cloud / Google Cloud EMEA",
+    "subject_key": "GOOGLE::GlobalCloudSegment",
+    "depth": "ecosystem_exemplar",
+    "archetype": "provider",
+    "claim_ids": [
+      "GOOG-1",
+      "GOOG-2",
+      "CTP-1",
+      "LBG-4",
+      "I-GOOG"
+    ],
+    "economic_mechanism": "GCP services and TPU system sales contribute to a global Cloud segment; EMEA legal company and UK market remain separate.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Design platform/system",
+        "Provision capacity",
+        "Serve data/AI/workload",
+        "Monitor and bill",
+        "Expand capacity"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Data/AI platform delivery",
+        "business_purpose": "Connect governed models/data/security",
+        "information_needed": "Service scope, deployment and customer outcome",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Compute supply management",
+        "business_purpose": "Balance own/third-party capacity",
+        "information_needed": "Delivered capacity, costs and timing",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Customer workload assurance",
+        "business_purpose": "Sustain contracted reliable service",
+        "information_needed": "Actual legal counterparty, workload and control evidence",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Thomas Kurian is CEO Google Cloud in original call; EMEA entity role from legislation does not prove Envoy contract ownership.",
+    "technology_and_information": "Group Envoy collaboration is verified at brand scope. Current products contradict a generic missing-AI-platform thesis.",
+    "forces": {
+      "observed_condition": "Third-party compute ramp may affect margins.",
+      "existing_response": "Existing integrated portfolio and added capacity.",
+      "conditional_business_consequence": "Any enterprise-specific consequence requires actual service applicability and measured outcome.",
+      "alternative_or_counter_evidence": "Existing capabilities and commercial success do not establish missing customer capability or demand.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "How much of Cloud growth/margin comes from TPU system sales versus services, and how does added third-party capacity affect attributable cost before any Lloyds-specific inference?",
+    "unresolved_demands": [
+      "Need exact product mix and legal accounts; no assumed Lloyds Bank critical workload or supplier spend.",
+      "No budget, procurement, remaining supplier scope or opportunity inferred"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "computacenter",
+    "name": "Computacenter",
+    "subject_key": "CCC::Group",
+    "depth": "ecosystem_exemplar",
+    "archetype": "provider",
+    "claim_ids": [
+      "CCC-1",
+      "CCC-2",
+      "I-CCC"
+    ],
+    "economic_mechanism": "Sourcing scale and agent/principal recognition coexist with professional/managed services; gross profit matters independently of gross margin percentage.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Source products",
+        "Configure and deliver",
+        "Transform infrastructure",
+        "Manage service",
+        "Renew/collect"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Supply-chain fulfilment",
+        "business_purpose": "Deliver committed technology orders",
+        "information_needed": "Supplier availability, inventory, fulfilment and debtor days",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Infrastructure transformation",
+        "business_purpose": "Deliver professional project outcomes",
+        "information_needed": "Actual scope, milestones and acceptance",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Managed service delivery",
+        "business_purpose": "Maintain customer infrastructure reliably",
+        "information_needed": "Service levels, staff capacity and recurring contribution",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Mike Norris CEO is sourced; customer categories do not identify private buyers.",
+    "technology_and_information": "No named banking client or cloud reseller contract inferred from industry positioning.",
+    "forces": {
+      "observed_condition": "High sourcing volume changes revenue mix and working capital.",
+      "existing_response": "Existing sourcing and services capability with disclosed growth.",
+      "conditional_business_consequence": "Any enterprise-specific consequence requires actual service applicability and measured outcome.",
+      "alternative_or_counter_evidence": "Existing capabilities and commercial success do not establish missing customer capability or demand.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "Does incremental sourcing gross profit cover inventory/receivables funding and fulfilment costs, and how do professional/managed-service contributions differ?",
+    "unresolved_demands": [
+      "Need product/agency reconciliation, services mix and named rights-cleared client evidence.",
+      "No budget, procurement, remaining supplier scope or opportunity inferred"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "equinix",
+    "name": "Equinix",
+    "subject_key": "EQIX::Global",
+    "depth": "ecosystem_exemplar",
+    "archetype": "provider",
+    "claim_ids": [
+      "EQIX-1",
+      "I-EQIX"
+    ],
+    "economic_mechanism": "Recurring colocation/interconnection and non-recurring installations differ from hyperscaler compute consumption; AFFO is not GAAP profit or revenue.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Secure site/power",
+        "Build/energise capacity",
+        "Connect customer",
+        "Operate facility/network",
+        "Renew capacity/service"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Facility operations",
+        "business_purpose": "Sustain power/cooling and physical availability",
+        "information_needed": "Energised capacity, energy and service outcomes",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Interconnection operations",
+        "business_purpose": "Deliver reliable network connections",
+        "information_needed": "Cross-connect/virtual service scope and uptime",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Capacity investment",
+        "business_purpose": "Turn site/power into revenue-bearing capacity",
+        "information_needed": "Capital deployed, energisation and contracted utilisation",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Adaire Fox-Martin CEO is named in original release; global/EMEA scope is not UK-only company economics.",
+    "technology_and_information": "Customer sector, facilities and partners do not identify a named bank contract or workload location.",
+    "forces": {
+      "observed_condition": "Power and capacity are conditional service dependencies.",
+      "existing_response": "Recurring services and investments are existing responses.",
+      "conditional_business_consequence": "Any enterprise-specific consequence requires actual service applicability and measured outcome.",
+      "alternative_or_counter_evidence": "Existing capabilities and commercial success do not establish missing customer capability or demand.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "Which energised sites and interconnection services convert capacity into recurring revenue after power and operating cost, at the correct region/JV perimeter?",
+    "unresolved_demands": [
+      "Need site/legal scope, power availability and confirmed workload; xScale JV cannot be assumed consolidated.",
+      "No budget, procurement, remaining supplier scope or opportunity inferred"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "arm",
+    "name": "Arm",
+    "subject_key": "ARM::Global",
+    "depth": "ecosystem_exemplar",
+    "archetype": "provider",
+    "claim_ids": [
+      "ARM-1",
+      "ARM-2",
+      "I-ARM"
+    ],
+    "economic_mechanism": "Licensing and royalties remain distinct; emerging silicon deliveries add a different fulfilment/cost mechanism to the IP model.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Develop architecture/IP",
+        "License technology",
+        "Support design-in",
+        "Collect royalties",
+        "Design/deliver silicon"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "IP development",
+        "business_purpose": "Enable customer chip designs",
+        "information_needed": "Licensed product and design milestones",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Ecosystem enablement",
+        "business_purpose": "Maintain software/tool compatibility",
+        "information_needed": "Toolchain support and partner implementation",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Silicon execution",
+        "business_purpose": "Deliver emerging products if milestones are met",
+        "information_needed": "Delivery status, manufacturing/cost and contract evidence",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Rene Haas is identified in publisher infographic alt text; this is limited acquisition, not full shareholder-letter assurance.",
+    "technology_and_information": "Partner architecture adoption does not reveal a bank technology estate. Product plans are not delivered revenue.",
+    "forces": {
+      "observed_condition": "New silicon execution changes the historical pure-IP risk model.",
+      "existing_response": "IP licensing, ecosystem and planned deliveries already exist.",
+      "conditional_business_consequence": "Any enterprise-specific consequence requires actual service applicability and measured outcome.",
+      "alternative_or_counter_evidence": "Existing capabilities and commercial success do not establish missing customer capability or demand.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "Which licensing and royalty cohorts sustain IP returns, and what delivered silicon milestones and costs would validate the emerging product economics?",
+    "unresolved_demands": [
+      "Need accessible original letter, revenue recognition, product cost and delivery evidence; no bypass of403.",
+      "No budget, procurement, remaining supplier scope or opportunity inferred"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "nvidia",
+    "name": "NVIDIA",
+    "subject_key": "NVDA::Global",
+    "depth": "ecosystem_exemplar",
+    "archetype": "provider",
+    "claim_ids": [
+      "NVDA-1",
+      "STAR-4",
+      "I-NVDA",
+      "NVDA-2"
+    ],
+    "economic_mechanism": "Platforms/hardware/software ecosystem capture value differently from cloud consumption or bank training costs; Data Center is a category, not a UK geography.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Design platform",
+        "Secure manufacturing/assembly",
+        "Deliver systems/software",
+        "Support deployments",
+        "Advance ecosystem"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Platform design",
+        "business_purpose": "Deliver integrated compute and software",
+        "information_needed": "Product architecture, tested performance and support",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Supply orchestration",
+        "business_purpose": "Bring third-party manufacturing into reliable delivery",
+        "information_needed": "Manufacturing/packaging allocation and delivery risk",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Deployment enablement",
+        "business_purpose": "Help partners operate the platform",
+        "information_needed": "Actual support scope and workload outcomes",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "August source names Jensen Huang CEO / Colette Kress CFO at that time. Original17November release now identifies Colette Kress as interim CEO and CFO. Preserve both versions; do not present the old incumbent as current.",
+    "technology_and_information": "NVIDIA/Civo collaboration establishes a training relationship, not a bank GPU procurement value or legal supplier agreement.",
+    "forces": {
+      "observed_condition": "Third-party manufacturing and delivery are material platform dependencies.",
+      "existing_response": "Existing products and partner deployments counter a generic technology absence.",
+      "conditional_business_consequence": "Any enterprise-specific consequence requires actual service applicability and measured outcome.",
+      "alternative_or_counter_evidence": "Existing capabilities and commercial success do not establish missing customer capability or demand.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "What measured Starling training/model outcome and exact service perimeter, if any, connects to NVIDIA capabilities, independently of global manufacturing and platform sales?",
+    "unresolved_demands": [
+      "Quarter ended25October is latest issuer result sampled; July quarter retained as history. Exact million-unit Q3 table and UK/contract attribution remain unverified.",
+      "No budget, procurement, remaining supplier scope or opportunity inferred"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "easyjet",
+    "name": "easyJet airline / Group",
+    "subject_key": "EZY::Airline",
+    "depth": "cross_sector_deep_exemplar",
+    "archetype": "airline",
+    "claim_ids": [
+      "EZY-1",
+      "EZY-2",
+      "EZY-3",
+      "EZY-4",
+      "I-EZY"
+    ],
+    "economic_mechanism": "Ticket/ancillary yield, route mix, ownership/fuel/airport and disruption cost interact with fleet utilisation. Airline segment, Group and UK operating airline legal entity are different. Winter loss cannot be annualised.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Plan network and schedule",
+        "Sell seat/ancillary",
+        "Prepare aircraft/crew",
+        "Operate rotation and recover disruption",
+        "Support customer and capture contribution"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Network planning",
+        "business_purpose": "Allocate aircraft/slots to an economically coherent schedule",
+        "information_needed": "Route/season contribution, slots, demand/yield and fuel sensitivities",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Fleet operations",
+        "business_purpose": "Provide a safe, available aircraft for the planned rotations",
+        "information_needed": "Maintenance availability, turnaround, crew and disruption performance",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Revenue management",
+        "business_purpose": "Balance price, load and ancillary contribution",
+        "information_needed": "Yield/load and marginal costs by rotation",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Disruption recovery",
+        "business_purpose": "Restore the customer journey after a failure",
+        "information_needed": "Recovery time, compensation/care and repeat contact",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Kenton Jarvis is CEO in dated interim report. Pilots/crew/maintenance/airport roles form an analytical dependency map; no invented direct-report organisation or employer procurement role.",
+    "technology_and_information": "Issuer states app, dynamic ancillary pricing and self-service disruption tooling. No named operations-planning application, cloud contract or outsourced maintenance agreement inferred.",
+    "forces": {
+      "observed_condition": "Fuel/booking uncertainty and winter utilisation can affect contribution despite improved load/service.",
+      "existing_response": "Fleet renewal/upgauging and schedule optimisation are issuer responses; benefits are targets.",
+      "conditional_business_consequence": "A rotation-level view might explain margin/resilience trade-offs, conditional on actual route costs and disruptions.",
+      "alternative_or_counter_evidence": "Positive late demand and reported operational improvements contradict universal distress; summer/annual results may differ.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "Which rotations trade off utilisation, yield and recovery cost, and how do fleet changes alter the net contribution rather than just seats?",
+    "unresolved_demands": [
+      "Latest Q3/FY26 actuals not acquired; no current full-year claim",
+      "Exact airline legal entities and AOCs",
+      "Maintenance/airport/supplier contract scope",
+      "Capability-level costs/outcomes and accountable leaders"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  },
+  {
+    "id": "easyjet-holidays",
+    "name": "easyJet holidays segment / legal company",
+    "subject_key": "EZY::HolidaysSegment",
+    "depth": "cross_sector_deep_exemplar",
+    "archetype": "tour_operator",
+    "claim_ids": [
+      "EZY-1",
+      "EZY-5",
+      "EZY-6",
+      "I-HOL"
+    ],
+    "economic_mechanism": "Package distribution combines airline seats, hotels and services. Segment revenue includes flights eliminated in Group consolidation. Digital/variable-cost model differs from airline fleet ownership and from standalone11927917 accounts.",
+    "value_stream": {
+      "status": "analytical decomposition; not verified company organisation chart",
+      "stages": [
+        "Curate flight/hotel proposition",
+        "Price and distribute package",
+        "Book supplier inventory",
+        "Support travel/customer",
+        "Reconcile supplier and margin"
+      ],
+      "model_type": "conceptual enterprise value chain, not complete verified stakeholder value stream",
+      "stakeholder_journey_demand": "Before an Inside value-stream implementation, identify the named customer/participant, initiating need, ordered fulfilment/control handoffs, delivered outcome and owner; verify rather than infer the organisation."
+    },
+    "capabilities": [
+      {
+        "name": "Package product management",
+        "business_purpose": "Create a saleable combined travel proposition",
+        "information_needed": "Hotel/flight availability, price and cancellation conditions",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Supplier inventory management",
+        "business_purpose": "Secure appropriate capacity without inventing contracts",
+        "information_needed": "Named authorised counterparties, commitments and fulfilment",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      },
+      {
+        "name": "Digital travel servicing",
+        "business_purpose": "Resolve the package journey with a lean delivery model",
+        "information_needed": "Conversion, service incidents, refunds and cost-to-serve",
+        "assurance": "conceptual durable ability anchored to cited business; actual team/system owner unverified"
+      }
+    ],
+    "people_process_governance": "Segment leadership, subsidiaries and legal accountability need primary accounts/role pages. No resort reps is a bounded model statement, not a claim that all human support is absent.",
+    "technology_and_information": "Digital platform and hotel relationships are reported at business-model scope. Inventory page is undated; planned flight-plus-hotel extension has its own dated status.",
+    "forces": {
+      "observed_condition": "Scaling package breadth changes inventory/support economics and airline interdependencies.",
+      "existing_response": "Existing direct hotel relationships and digital distribution are responses.",
+      "conditional_business_consequence": "Growth could dilute or improve unit contribution depending on acquisition, cancellation and supply costs.",
+      "alternative_or_counter_evidence": "Positive segment profit counters a broad airline-loss-to-holidays distress inference; website inventory may lag.",
+      "pressure_status": "unqualified research interpretation; ADR-026 gates not executed"
+    },
+    "relationship_claims": [],
+    "commercial_investigation": "How does incremental package contribution behave after hotel/flight commitments, cancellations and servicing at segment and legal-company scope?",
+    "unresolved_demands": [
+      "Original11927917 accounts contents not reviewed",
+      "Current segment leadership and legal ownership tree",
+      "Named hotel/DMC contracts and commitments absent",
+      "Latest realised product extension/benefits require dated update"
+    ],
+    "canonical_id": null,
+    "canonical_acceptance": false,
+    "new_public_eligible": false,
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "source_lifecycle": "Recheck current Source owner, purpose and entity on later handoff; withdraw dependent facts/insights/visuals if any premise is withdrawn."
+  }
+]

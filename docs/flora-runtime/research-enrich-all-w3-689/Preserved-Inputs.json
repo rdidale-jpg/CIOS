@@ -1,0 +1,16 @@
+{
+  "base": "ecb91591e5abe854a6227ae4ebd21b4aa566cb69",
+  "method": "git ls-tree path/blob identities; no private/live store read",
+  "protected_tracked_paths": 661,
+  "path_blob_manifest_sha256": "eb1f4937f4c3e71d2656f0248645ecfb5aa729da39412fe9fe7f0b98fe4954eb",
+  "source_artifacts": {
+    "docs/flora-runtime/bie2/Actor-Register.json": "94c9bd1cd0e508de428a76634925f01f402f6c1b7a77b4d954b2ef11d8189354",
+    "docs/flora-runtime/bie2/Enterprise-Dossiers.json": "752faa3ef391d36393af121d91d4c6df5be8584f432864ac2ef5ae3b51756ee4",
+    "docs/flora-runtime/bie2/Relationship-Candidates.json": "3461cc8fc9a64bed467a7de0e94d6fd53b4d0f82dc9c8a37991ee367ff70fa20",
+    "docs/product/flora-experience/experience-align-all/requirements.csv": "7b50880fef675ebb3c6ee8e76964cfa3e036643ee2eeaf426616100c83f60ce7",
+    "tools/ci/flora-baseline-v1.json": "901a6719b6f90247fc0b4daeaaf217e402abf211606394917f59ea67c5f9e7cf"
+  },
+  "no_new_canonical_records": true,
+  "no_asset_changes": true,
+  "no_runtime_edits": true
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "MONZO-FULL",
+    "url": "https://monzo.com/annual-report/2026/Monzo-Annual-Report-2026.pdf",
+    "state": "technical_unreadable",
+    "observed": "Web tool reported a58,729,784-byte document exceeding reader capability; ordinary unauthenticated Python download failed at network tunnel403; no archive acquired",
+    "impact": "Fiscal dates, exact parent/basis and full operating/legal model remain open; HTML facts remain bounded candidate",
+    "resolution": "Authorised original-document acquisition/read or narrower issuer original disclosure; no mirror/snippet substitute"
+  },
+  {
+    "id": "PAYUK-ACCOUNTS",
+    "url": "https://www.wearepay.uk/wp-content/uploads/2026/07/2025-Pay.UK-Annual-Report-and-Financial-Statements.pdf",
+    "state": "technical_and_rights_blocked",
+    "observed": "Web tool reported a10,506,566-byte document exceeding reader capability; ordinary unauthenticated download tunnel403. Terms separately restrict use.",
+    "impact": "No audited operator income/fees/costs or full participation data admitted or asserted",
+    "resolution": "Existing Source/legal owner determines exact lawful intended factual use/permission; acquire authentic accounts without bypass"
+  },
+  {
+    "id": "PAYUK-GD4",
+    "url": "https://www.wearepay.uk/wp-content/uploads/2026/10/General-Direction-4-Report.pdf",
+    "state": "document_specific_rights_conflict",
+    "observed": "Document labelled Public but includes confidentiality/no-use wording; only restriction metadata retained, no business propositions taken",
+    "impact": "No GD4 facts, lists or quotes proposed for public integration",
+    "resolution": "Clarify exact document rights/authority; general website availability is insufficient"
+  },
+  {
+    "id": "PAYUK-LISTS",
+    "url": "https://www.wearepay.uk/terms-and-conditions/",
+    "state": "use_restricted_pending_decision",
+    "observed": "Terms restrict commercial use/reproduction; guarantor membership distinct from scheme/settlement participation",
+    "impact": "No copied guarantor/participant database, tariffs or imported list; BOE CHAPS independently sourced role edges remain distinct",
+    "resolution": "Document-specific lawful-use decision or permission; do not generalise another publisher licence"
+  },
+  {
+    "id": "BARCLAYS-INDEX",
+    "url": "https://home.barclays/investor-relations/reports-and-events/financial-results/",
+    "state": "narrowly_resolved_financial_document",
+    "observed": "Prior index403 remains historical; direct original Q326-BPLC-Results-RA.pdf is readable with UK division tables. No mirror/SEC bypass used.",
+    "impact": "W3 original nine-month UK division bridge available as research candidate; legal Bank UK accounts still a separate demand",
+    "resolution": "Use exact document and reporting division; do not claim the entire site/control issue resolved"
+  },
+  {
+    "id": "EZY-ANNUAL",
+    "url": "https://corporate.easyjet.com/investors/reports-and-presentations/",
+    "state": "partial_resolution",
+    "observed": "Dynamic index exposes no accounts links in fetched DOM; authentic issuer CDN H1FY26 original47page report independently readable",
+    "impact": "Airline/holidays H1 segment finance now researched; FY25 full annual and latestQ3/FY26 accounts remain unacquired",
+    "resolution": "Acquire latest authentic issuer document; never infer current full-year from H1 or index snippet"
+  },
+  {
+    "id": "BBC-ACCOUNTS",
+    "url": "https://assets.publishing.service.gov.uk/media/6a55f7fca4890e65cce64ea2/BBC_Annual_Report___Accounts_25_26_accessible__3_.pdf",
+    "state": "inherited_unresolved",
+    "observed": "W2 recorded an11,336,478-byte PDF exceeding reader capability; size is not a universal limit; W3 does not claim acquisition or BBC fact enrichment",
+    "impact": "Media full accounts deferred Wave5; Ofcom W2 evidence remains distinct",
+    "resolution": "Authorised original acquisition/rights review; no sampled financial page or byte hash fabricated"
+  },
+  {
+    "id": "ARM-LETTER",
+    "url": "https://investors.arm.com/static-files/0b5baa2e-fc47-4d05-b724-e49de7bd4356",
+    "state": "original403",
+    "observed": "Original shareholder letter403; separate issuer newsroom text and alt text readable. No retry/header/mirror evasion.",
+    "impact": "Bounded newsroom figures/model are candidate; no complete statement or original-letter assurance",
+    "resolution": "Authorised original access or a readable original issuer equivalent; preserve limited acquisition extent"
+  },
+  {
+    "id": "SAN-ORIGINAL",
+    "url": "https://assets.santandermedia.com/adobe/assets/urn:aaid:aem:65eface3-a6db-48c5-8506-460893b3385f/original/as/Santander%20UK%20Q3-26%20QMS.pdf",
+    "state": "normalised_text_only",
+    "observed": "Tool marks original PDF as rewritten/normalised; screenshot gave text image marker without inspectable image. No original bytes.",
+    "impact": "Financial equality reproducible but exact original financial verification partial; no additional verification status invented",
+    "resolution": "Inspect genuine original PDF/page with authorised access before claiming complete source assurance"
+  },
+  {
+    "id": "SEC-ONS",
+    "url": null,
+    "state": "existing_restrictions_preserved",
+    "observed": "No SEC source adopted to bypass Barclays/issuer restrictions; no ONS permission expansion; ADR027 remains Proposed",
+    "impact": "No public-use or canonical acceptance changes",
+    "resolution": "Use existing finite routine analytical paths where genuinely applicable, with source/purpose/rights checked; no universal per-claim canonical gate created"
+  }
+]
