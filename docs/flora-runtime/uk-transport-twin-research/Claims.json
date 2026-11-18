@@ -625,5 +625,19 @@
     "caveat": "No verified root-cause model, system supplier, customer demand or funding exists in this pack.",
     "status": "research_candidate",
     "canonical_promotion": false
+  },
+  {
+    "id": "FR-1",
+    "entity_id": "GB-RAIL-FREIGHT",
+    "source_ids": [
+      "RAIL-FREIGHT"
+    ],
+    "semantic_type": "reported",
+    "statement": "GB rail freight April-June2026: 4,135m net tonne-km moved, 17.6m tonnes lifted, 7.5m train-km and1.1% cancellations.",
+    "period": "2026-04-01/2026-06-30",
+    "input_claim_ids": [],
+    "caveat": "Financial-year Q1, GB not UK, physical activity not revenue; no annualisation, operator margins or rail-to-road mode-shift causation inferred.",
+    "status": "research_candidate",
+    "canonical_promotion": false
   }
 ]

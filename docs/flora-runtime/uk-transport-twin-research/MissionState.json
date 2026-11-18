@@ -17,9 +17,9 @@
     "enterprise": "AV-ENT-001",
     "authority": "candidate_intelligence; research IDs only"
   },
-  "source_count": 34,
-  "entity_reference_count": 36,
-  "claim_count": 44,
+  "source_count": 35,
+  "entity_reference_count": 37,
+  "claim_count": 45,
   "measurement_count": 44,
   "calculation_count": 10,
   "relationship_count": 22,

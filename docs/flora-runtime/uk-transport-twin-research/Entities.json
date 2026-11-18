@@ -443,5 +443,17 @@
     "identity_basis": "issuer programme description; legal counterparty unresolved",
     "canonical_identity": null,
     "status": "research_reference_only"
+  },
+  {
+    "id": "GB-RAIL-FREIGHT",
+    "name": "Great Britain rail freight activity",
+    "kind": "statistical_perimeter",
+    "scope": "April-June2026; volumes, distance and cancellations",
+    "source_ids": [
+      "RAIL-FREIGHT"
+    ],
+    "identity_basis": "ORR statistical scope, not a legal operator or all-UK company perimeter",
+    "canonical_identity": null,
+    "status": "research_reference_only"
   }
 ]

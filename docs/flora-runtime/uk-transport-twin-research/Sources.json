@@ -542,5 +542,21 @@
     "canonical_acceptance": false,
     "public_source_admission": false,
     "proposed_use": "bounded attributed research and arithmetic only; no source reproduction, import or runtime publication"
+  },
+  {
+    "id": "RAIL-FREIGHT",
+    "title": "ORR freight rail usage and performance, April-June2026",
+    "url": "https://dataportal.orr.gov.uk/statistics/usage/freight-rail-usage-and-performance/",
+    "scope": "Great Britain rail freight, April-June2026 financial Q1, not UK annual rail revenue",
+    "locator": "Latest statistical release and key results; quarterly definitions",
+    "published_on": "2026-09-22",
+    "retrieved_on": "2026-11-18",
+    "acquisition_extent": "original publisher release summary and definitions reviewed",
+    "rights": "official regulator factual research; attribution and applicable source terms retained; no new CIOS permission",
+    "exception": "Next release scheduled15December2026; quarter not annualised or treated as current operator financials",
+    "original_bytes_sha256": null,
+    "canonical_acceptance": false,
+    "public_source_admission": false,
+    "proposed_use": "bounded attributed research and arithmetic only; no source reproduction, import or runtime publication"
   }
 ]

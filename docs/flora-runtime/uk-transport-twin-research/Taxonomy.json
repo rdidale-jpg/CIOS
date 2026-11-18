@@ -6,7 +6,8 @@
     "boundary": "Rail paths, rolling stock, crew, terminals, passenger distribution; avoid double-counting access charges",
     "source_ids": [
       "FIRST",
-      "RAIL-FIN"
+      "RAIL-FIN",
+      "RAIL-FREIGHT"
     ],
     "open_demand": "Freight operator dossiers and NI operator accounts still required",
     "scope": "UK umbrella; programme/issuer-specific geography mandatory"

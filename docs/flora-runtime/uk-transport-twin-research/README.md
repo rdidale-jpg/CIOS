@@ -2,7 +2,7 @@
 
 Research cut **18 November 2026**. Independent branch `codex/uk-transport-twin-research` from verified `origin/main` **2757e459f90fc4e1156180acf5f7ed9a40c292d9** (Banking cohort PR #692 merge). The owner-uploaded Transport commission is the scope; no GitHub issue number has been invented.
 
-This increment supplies **eight subindustry foundations, twelve differentiated dossiers, 34 source records, 44 propositions (30 reported, nine insights, five conditional hypotheses), 44 typed measurements, ten arithmetic reconciliations and 22 directed relationship decisions (14 supported candidates / eight rejected joins)**. A source record is not a complete-document audit: company-overview pages, landing pages, inherited easyJet research and acquisition failures are separately labelled. No original PDF bytes/hashes are fabricated.
+This increment supplies **eight subindustry foundations, twelve differentiated dossiers, 35 source records, 45 propositions (31 reported, nine insights, five conditional hypotheses), 44 typed measurements, ten arithmetic reconciliations and 22 directed relationship decisions (14 supported candidates / eight rejected joins)**. A source record is not a complete-document audit: company-overview pages, landing pages, inherited easyJet research and acquisition failures are separately labelled. No original PDF bytes/hashes are fabricated.
 
 **Foundation ready for owner research review, with conditions; the wider mission remains CONTINUE.** This is not a complete high-fidelity Transport Twin, canonical import, public source admission or live experience implementation. No production import/acceptance status was queried or assumed.
 

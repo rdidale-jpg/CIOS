@@ -1,10 +1,10 @@
 # Bounded coverage and finite next research tranche
 
-**Outcome CONTINUE.** Foundation is Research-ready with conditions; no percentage or high-fidelity completion claim. Thirty-four sources include identity/index/reuse records. Twelve dossiers have different depths. A paragraph or diagram does not complete a capability.
+**Outcome CONTINUE.** Foundation is Research-ready with conditions; no percentage or high-fidelity completion claim. Thirty-five sources include identity/index/reuse records. Twelve dossiers have different depths. A paragraph or diagram does not complete a capability.
 
 |Subindustry|Actual foundation|Material open demand|
 |---|---|---|
-|Rail operators|Whole-system finance; FirstGroup fee/open-access model; rail reform boundaries|Freight operator, current concession legal contracts/transfers, customer outcomes, ROSCO economics|
+|Rail operators|Dated rail finance; GB freight workload/performance; FirstGroup fee/open-access model; rail reform boundaries|Freight operator, current concession legal contracts/transfers, customer outcomes, ROSCO economics|
 |Rail infrastructure|GB regulatory bridges, asset/maintenance model, named Reach participants|Company statutory reconciliation, current asset outcomes, exact contract terms and delivery|
 |Road/logistics/parcels|GB-registered activity; Royal Mail service issue/current identities; DHL global/UK separation|UK legal financials, customers/contracts, current postal obligations and remedies|
 |Public/urban|TfL management economics and historical train award; Scotland sponsorship; NI source route|Statutory TfL reconciliation, Welsh/devolved/local authority and shared-mobility models|
@@ -16,7 +16,7 @@
 ## Six maturity dimensions, assessed without scores
 
 - **Evidence:** original selected passages and precise reuse are recorded; no full report/archive assurance. Outstanding primary sources and rights decisions are named.
-- **Structural:** eight explicit boundaries and 36 endpoint references; legal companies, reporting groups, programmes, brands and proposed institutions remain distinct. Canonical identity/import state is unverified.
+- **Structural:** eight explicit boundaries and 37 endpoint references; legal companies, reporting groups, programmes, brands and proposed institutions remain distinct. Canonical identity/import state is unverified.
 - **Commercial:** enterprise-specific economic mechanisms and countercases; no verified open procurements, renewal dates, contract values or actionable opportunities.
 - **Decision:** owner research review possible now; source publication, identity/membership, current outcome and supplier-scope decisions still open.
 - **Operational:** reproducible offline ledgers, arithmetic/negative tests and persistent resume queue. No continuous update, integration, model mutation or production proof.

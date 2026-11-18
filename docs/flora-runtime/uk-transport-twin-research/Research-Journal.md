@@ -9,3 +9,5 @@ Inventoried tracked Aviation/easyJet and retained research/presentation/factory 
 Reviewed primary publisher/regulator/company-register passages. Recorded exact periods, accounting bases, role scopes and acquisition limits. Corrected ABP current/prior-year lead, retained FirstGroup APM/statutory distinction, TfL rounded bridge, IAG undated platform source and Heathrow source-use exception. No technical rejection retried or bypassed. No inaccessible notice converted into an award.
 
 Produced eight boundaries, twelve dossiers, atomic candidate ledgers, typed financial reconciliation, conceptual capability maps, directed relationship/negative joins and finite open queue. No new canonical model or package root invented. Validation runs and exact candidate SHA are reported in the draft PR to avoid self-referential SHA claims inside the tested commit.
+
+Final coverage check: added ORR’s separately dated GB rail freight activity baseline, FR-1, without treating physical traffic as financial scale or annualising a quarter. Research remains bounded; freight operator accounts/contracts are still open. Exact-head validation rerun for the resulting commit.

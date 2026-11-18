@@ -27,7 +27,8 @@
     "entity_ids": [
       "FIRST",
       "GBR",
-      "DFTO"
+      "DFTO",
+      "GB-RAIL-FREIGHT"
     ],
     "subindustry": "rail-operators",
     "claim_ids": [
@@ -35,7 +36,8 @@
       "FST-1",
       "FST-2",
       "FST-3",
-      "IN-FIRST"
+      "IN-FIRST",
+      "FR-1"
     ],
     "depth": "bounded analytical foundation; not a completed high-fidelity Twin",
     "readiness": "Research-ready with conditions",

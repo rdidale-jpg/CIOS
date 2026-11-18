@@ -9,6 +9,7 @@ Transport connects households and shippers to operators, infrastructure, termina
 |FirstGroup APM vs statutory revenue|Different treatment of gross public-contracted rail flows|A common-denominator margin using mixed accounting bases|
 |TfL management revenue and surplus|Fares plus other income, rates and grants; special renewals/interest treatment|Audited statutory profit or all-UK public transport revenue|
 |Local Authority Bus Grant|England outside London allocations, separate revenue/capital periods|Operator turnover, contract award or discretionary IT spend|
+|GB rail freight quarter|ORR freight moved/lifted, train distance and cancellations; separate from rail finance|Company revenue, annualised demand, all-UK totals or proven modal shift|
 |Road freight tonne-km / port tonnes / TEU|Different physical workload/capacity measures|Revenue, comparable units or additive end-to-end freight demand|
 |ABP company operating profit|Cargo/property activity with valuation effects|Cash handling margin, Group EBITDA or whole UK port economics|
 |Heathrow public results|Airport group revenues and adjusted earnings|Airline turnover, operating legal-company profit or realised expansion returns|
