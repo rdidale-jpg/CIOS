@@ -28,7 +28,7 @@ BANKING={
 
 EXPERIENCE_BASE = "c56bd74f130c4d855baf522ba8ba99fe87317fb1"
 EXPERIENCE = {
-    "cios/applications/flora/visual_panels.py": "48c24a3f139ce180dc5291d644b1815f828b307437c321aa56bcab3ded1d515f",
+    "cios/applications/flora/visual_panels.py": "f99b0ce989410aad79f7c949781c5c2a637093f6602cfc6d7995285e24448c51",
     "cios/applications/flora/visual_streams.py": "a6e2bd6aaacd2ab32d4b47f61822c756defa8655cfb30c6ffd85b63464e099ea",
 }
 

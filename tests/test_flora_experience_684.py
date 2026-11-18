@@ -25,6 +25,7 @@ def test_enterprise_roots_observe_three_different_questions(path):
     assert "Disclosed response" in roots["forces"]
     assert "118,762" not in roots["inside"]
     if path == "/enterprises/lloyds":
+        assert 'data-intelligence="service-recovery"' in roots["landscape"]
         assert "£502.8bn" in roots["landscape"]
         assert "£502.8bn" not in roots["inside"]
 

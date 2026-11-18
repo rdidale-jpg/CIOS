@@ -447,6 +447,7 @@ def render(ctx,headers=None,*,financial_run_id=''):
                             tuple(f for f in economics if f.unit=="GBP billion; balance at 30 September 2026"),
                             "A deposit franchise can support lending. Its economics depend on deposit mix, pricing and loan yields.",
                             "Reported Group deposits and statutory profit do not establish the margin effect or business-line earnings.",ctx)
+                    else:body+=_issue_preview(issues,'service-recovery')
                 else:
                     response=tuple(f for f in _facts(data,['LBG-A2030-CIR']) if f.scope==group and p.eligible(f))
                     body=experience.enterprise_forces(ctx,"Conditions affecting Lloyds",economics,response,
