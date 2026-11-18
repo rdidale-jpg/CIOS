@@ -15,6 +15,7 @@ from . import visual_streams as v, design_system as ds, leadership_agenda as age
 from . import intelligence_presentation as p
 from . import reading_views as reading
 from . import banking_ecosystem as ecosystem
+from . import banking_cohort as cohort
 from . import experience_composition as experience
 from . import easyjet_capabilities as easyjet
 from .security import verified_service_read
@@ -59,8 +60,8 @@ def _trail(ctx):
     if ctx.scope=='easyjet':
         return text+'<a href="/industries/aviation">Aviation</a><span aria-hidden="true">/</span><span>easyJet</span>'
     if ctx.scope=='banking':
-        if ctx.selected=='nationwide':
-            return text+'<a href="/industries/banking">Banking</a><span aria-hidden="true">/</span><span>Nationwide</span>'
+        if ctx.selected in cohort.SUBJECTS:
+            return text+'<a href="/industries/banking">Banking</a><span aria-hidden="true">/</span><span>'+e(cohort.SUBJECTS[ctx.selected][0])+'</span>'
         return text+'<span>Banking</span>'
     bank=v.url(v.Context('banking','landscape',ctx.layer,'lloyds'))
     return text+'<a href="'+e(bank,quote=True)+'">Banking</a><span aria-hidden="true">/</span><span>Lloyds Banking Group</span>'
@@ -70,7 +71,8 @@ def _top(ctx,headers):
     body='<header id="top" data-region="top"><a class="skip" href="#visual-content">Skip to main content</a><div class="global">'
     body+=ds.header(headers=headers,compact=True,embedded=True,research_tools=__import__('cios.applications.flora.access',fromlist=['is_cios_owner']).is_cios_owner(headers))+'<span class="identity" aria-label="Current account role">'+_role(headers)+'</span>'+('<a class="account-entry" href="/auth/sign-in">Sign in</a>' if _role(headers)=='Guest' else '')+'</div>'
     body+='<div class="context"><nav aria-label="Current scope">'+_trail(ctx)+'</nav><nav class="stream-switcher" aria-label="Insight streams">'
-    for stream in v.PRESENTATIONS[ctx.scope]['streams']:
+    streams=cohort.STREAMS if ctx.scope=='banking' and ctx.selected in cohort.SUBJECTS and not (ctx.detail or ctx.agenda) else v.PRESENTATIONS[ctx.scope]['streams']
+    for stream in streams:
         body+='<a id="stream-'+stream+'" href="'+e(v.stream_url(ctx,stream)+'#stream-'+stream,quote=True)+'"'+(' aria-current="page"'if ctx.stream==stream else'')+'>'+stream.title()+'</a>'
     return body+'</nav></div><!--flora-system-notice--></header>'
 
@@ -392,20 +394,21 @@ def _legal_notice(ctx,data):
 
 def _frame(ctx,headers,data,issues,entries,body):
     """Ordinary three-panel frame emits no research disclosures or source URLs."""
+    scene=replace(ctx,stream='landscape') if ctx.scope=='banking' and ctx.stream=='inside' else ctx
     if __import__('cios.applications.flora.access',fromlist=['is_cios_owner']).is_cios_owner(headers):
-        ds.context_link(v.url(ctx)+'&lens=inspection' if ctx.scope in {'banking','lloyds'} else '/research','Research inspection')
+        ds.context_link(v.url(scene)+'&lens=inspection' if ctx.scope in {'banking','lloyds'} else '/research','Research inspection')
     binding=v.PRESENTATIONS[ctx.scope]
     identity=binding.get('identity')or data[binding['identity_key']]
     title=binding['title'] if ctx.scope in {'uk','easyjet'} else data['industry_name'if ctx.scope=='banking'else'enterprise_name']
     watermark=''
     if ctx.scope!='easyjet':
-        asset=asset_manifest()['watermarks'][ctx.scope+'-'+ctx.stream]
+        asset=asset_manifest()['watermarks'][ctx.scope+'-'+scene.stream]
         watermark='<img class="watermark" src="'+_asset(asset)+'" alt="" aria-hidden="true">'
     layers='' if ctx.scope in {'uk','easyjet'} else '<nav class="context-nav" aria-label="Context layers">'+''.join('<a href="'+e(v.url(ctx,layer=k),quote=True)+'"'+(' aria-current="page"'if ctx.layer==k else'')+'>'+e(label)+'</a>' for k,label in v.LAYERS.items())+'</nav>'
     head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'+EDITORIAL_STYLE+reading.STYLE+experience.STYLE
     if ctx.scope=='easyjet':head+=easyjet.STYLE
-    if ctx.scope=='banking':head+=ecosystem.STYLE
-    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(ctx,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+watermark+'<article class="workspace editorial-workspace">'+reading.selector(ctx)+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
+    if ctx.scope=='banking':head+=ecosystem.STYLE+cohort.STYLE
+    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(scene,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+watermark+'<article class="workspace editorial-workspace">'+reading.selector(ctx)+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
 
 
 def render(ctx,headers=None,*,financial_run_id=''):
@@ -428,9 +431,14 @@ def render(ctx,headers=None,*,financial_run_id=''):
                       analyst.compose_editorial(public)+reading.nationwide_facts_bridge(public)+_nationwide_service(data))
                 action=analyst.prepare_action(ctx,headers=headers) if ctx.reading=='facts' else ''
                 if action:body+='<section class="workspace-setup"><h2>Workspace analysis</h2>'+action+'</section>'
-                return _frame(ctx,headers,data,issues,v.destinations(ctx,data),body+_bank_picker(ctx,data,issues))
-        data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected);entries=v.destinations(ctx,data)
-        if ctx.scope=='banking' and ctx.stream=='landscape' and ctx.detail in ecosystem.STAGES:
+                return _frame(ctx,headers,data,issues,v.destinations(ctx,data),cohort.landscape(ctx,body,data,issues)+_bank_picker(ctx,data,issues))
+        data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
+        scene=replace(ctx,stream='landscape') if ctx.scope=='banking' and ctx.stream=='inside' else ctx
+        entries=v.destinations(scene,data)
+        if ctx.scope=='banking' and ctx.selected in cohort.SUBJECTS and not (ctx.detail or ctx.agenda) and (ctx.selected!='nationwide' or ctx.stream!='landscape'):
+            body=cohort.render(ctx,data,issues)
+            if ctx.stream=='landscape' and ctx.reading=='facts' and ctx.selected!='boe':body+=_bank_picker(ctx,data,issues)
+        elif ctx.scope=='banking' and ctx.stream=='landscape' and ctx.detail in ecosystem.STAGES:
             body=ecosystem.render(ctx,data,issues)
         elif ctx.scope=='lloyds' and not (ctx.detail or ctx.agenda):
             if ctx.stream=='inside':
@@ -469,6 +477,7 @@ def render(ctx,headers=None,*,financial_run_id=''):
             body=reading.payments(ctx,data)
         elif ctx.scope=='banking' and not ctx.detail and not ctx.agenda:
             body=_editorial_banking(ctx,data,issues,headers)
+            if ctx.stream=='landscape' and not ctx.selected:body+=cohort.navigation(ctx,data,issues)
         elif ctx.agenda:
             row=next((r for r in issues if r.key==ctx.agenda),None)
             body=('<section class="focus agenda-focus" id="agenda-insight" tabindex="-1" aria-label="Leadership insight"><a class="close close-insight" aria-label="Close Leadership Agenda" href="'+e(v.url(ctx,agenda=''),quote=True)+'">×</a><h1>'+e(row.title)+'</h1>'+reading.agenda_facts(row)+'</section>') if row else _overview(ctx,data,issues)
@@ -498,6 +507,7 @@ def research_inspection(path,query,headers=None):
         issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
         return _research_frame(ctx,headers,data,issues,v.destinations(ctx,data),analyst.STYLE+'<section class="financial-analyst">'+analyst.compose(projection)+'</section>')
     ctx=v.resolve(path,query)
+    if ctx.scope=='banking' and ctx.stream=='inside':ctx=replace(ctx,stream='landscape')
     if ctx.scope=='banking' and ctx.detail in ecosystem.STAGES:ctx=replace(ctx,detail='')
     return _research_render(ctx,headers)
 

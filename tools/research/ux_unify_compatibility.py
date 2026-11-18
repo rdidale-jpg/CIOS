@@ -33,8 +33,17 @@ EXPERIENCE = {
 }
 
 
+COHORT_BASE = "9a1e69fed6e1cf25c99476351232d69e9307a610"
+COHORT = {
+    "cios/applications/flora/visual_panels.py": "ac2b26a81307d3ffe6420e3032dd64fcba9587b7219f5f4a39d7c8c65809cf03",
+    "cios/applications/flora/visual_streams.py": "27b74b09e2619d476404739a419379b9945798b1ab55014f02fa778d5a5ec17c",
+}
+
+
 def predecessor(root, path):
     current = (Path(root) / path).read_bytes()
+    if path in COHORT and sha256(current).hexdigest() == COHORT[path]:
+        current = subprocess.check_output(["git", "show", f"{COHORT_BASE}:{path}"], cwd=root)
     if path in EXPERIENCE and sha256(current).hexdigest() == EXPERIENCE[path]:
         current = subprocess.check_output(["git", "show", f"{EXPERIENCE_BASE}:{path}"], cwd=root)
     if path in BANKING and sha256(current).hexdigest() == BANKING[path]:
