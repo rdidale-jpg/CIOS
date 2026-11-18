@@ -80,6 +80,8 @@ def public_route_catalog(include_owner_inspection=False):
     add(('/enterprises/lloyds/research-diagnostic','/enterprises/easyjet/research-diagnostic'), 'research_diagnostic', 'Read-only finite public research assessment overlay; no protected stores')
     add(('/industries/banking',), 'unified_industry', 'Existing public research overlay; no owner records', ('lens','stream','market','layer','selected','detail','agenda'))
     add(('/industries/aviation',), 'unified_industry', 'Existing public research overlay; no owner records', ('lens',))
+    add(('/enterprises/easyjet/preview',), 'enterprise_preview', 'Finite read-only aviation presentation experiment; no private or canonical lookup', ('stream','capability'))
+    add(tuple('/enterprises/easyjet/preview/assets/'+name for name in ('styles','interactions','artwork')), 'enterprise_preview_asset', 'Exact local conceptual illustration and presentation code only')
     add(('/industries/banking/visual-specs','/industries/aviation/visual-specs'), 'visual_specs', 'Deterministic visual output of existing public research only')
     from .banking_portfolio import BANKS as public_banks
     add(tuple('/enterprises/'+slug for slug in (*public_banks,'easyjet') if slug!='lloyds'), 'unified_enterprise', 'Finite public bank references; not Enterprise Model lookup', ('lens',))
