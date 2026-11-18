@@ -1,0 +1,571 @@
+family,requested_route,http_status,heading,reading_mode,no_insight_message,horizontal_overflow
+uk,/,200,The shape of the UK economy,Facts,False,False
+uk,/?stream=landscape&reading=facts,200,The shape of the UK economy,Facts,False,False
+uk,/?stream=landscape&reading=insight,200,The shape of the UK economy,FLORA Insight,False,False
+uk,/?stream=forces&reading=facts,200,The UK’s economic context,Facts,False,False
+uk,/?stream=forces&reading=insight,200,Forces and their implications,FLORA Insight,False,False
+uk,/?stream=change,404,Error response,,False,False
+banking,/industries/banking,200,Where money meets the economy,Facts,False,False
+banking,/industries/banking?stream=landscape&reading=facts,200,Where money meets the economy,Facts,False,False
+banking,/industries/banking?stream=landscape&reading=insight,200,Where money meets the economy,FLORA Insight,False,False
+banking,/industries/banking?stream=forces&reading=facts,200,The forces reshaping banking,Facts,False,False
+banking,/industries/banking?stream=forces&reading=insight,200,The forces reshaping banking,FLORA Insight,False,False
+banking,/industries/banking?stream=change,404,Error response,,False,False
+banking-enterprise,/enterprises/lloyds,200,Customer funding and earnings,Facts,False,False
+lloyds,/enterprises/lloyds?stream=landscape&reading=facts,200,Customer funding and earnings,Facts,False,False
+lloyds,/enterprises/lloyds?stream=landscape&reading=insight,200,Lloyds Banking Group,FLORA Insight,True,False
+lloyds,/enterprises/lloyds?stream=inside&reading=facts,200,"Funding, earnings and efficiency",Facts,False,False
+lloyds,/enterprises/lloyds?stream=inside&reading=insight,200,Lloyds Banking Group,FLORA Insight,True,False
+lloyds,/enterprises/lloyds?stream=forces&reading=facts,200,Strategy and existing capabilities,Facts,False,False
+lloyds,/enterprises/lloyds?stream=forces&reading=insight,200,Forces and their implications,FLORA Insight,False,False
+lloyds,/enterprises/lloyds?stream=change,404,Error response,,False,False
+easyjet,/enterprises/easyjet/preview,200,Fleet Operations,Facts,False,False
+easyjet,/enterprises/easyjet/preview?stream=landscape&reading=facts,200,Fleet Operations,Facts,False,False
+easyjet,/enterprises/easyjet/preview?stream=landscape&reading=insight,200,Fleet Operations,FLORA Insight,False,False
+easyjet,/enterprises/easyjet/preview?stream=inside&reading=facts,200,Fleet Operations,Facts,False,False
+easyjet,/enterprises/easyjet/preview?stream=inside&reading=insight,200,Fleet Operations,FLORA Insight,False,False
+easyjet,/enterprises/easyjet/preview?stream=forces&reading=facts,200,Fleet Operations,Facts,False,False
+easyjet,/enterprises/easyjet/preview?stream=forces&reading=insight,200,Fleet Operations,FLORA Insight,False,False
+easyjet,/enterprises/easyjet/preview?stream=change,404,Error response,,False,False
+banking-stage,/industries/banking?detail=customers&reading=facts,200,Customers & businesses,Facts,False,False
+banking-stage,/industries/banking?detail=customers&reading=insight,200,Customers & businesses,FLORA Insight,False,False
+banking-stage,/industries/banking?detail=funding&reading=facts,200,Funding & lending,Facts,False,False
+banking-stage,/industries/banking?detail=funding&reading=insight,200,Funding & lending,FLORA Insight,False,False
+banking-stage,/industries/banking?detail=payments&reading=facts,200,Payments & settlement,Facts,False,False
+banking-stage,/industries/banking?detail=payments&reading=insight,200,Payments & settlement,FLORA Insight,False,False
+banking-stage,/industries/banking?detail=providers&reading=facts,200,Technology & infrastructure,Facts,False,False
+banking-stage,/industries/banking?detail=providers&reading=insight,200,Technology & infrastructure,FLORA Insight,False,False
+banking-selection,/industries/banking?selected=lloyds&reading=facts,200,Where money meets the economy,Facts,False,False
+banking-selection,/industries/banking?selected=lloyds&reading=insight,200,UK Banking,FLORA Insight,True,False
+banking-enterprise,/enterprises/barclays,200,Barclays,,False,False
+banking-selection,/industries/banking?selected=barclays&reading=facts,200,Where money meets the economy,Facts,False,False
+banking-selection,/industries/banking?selected=barclays&reading=insight,200,UK Banking,FLORA Insight,True,False
+banking-enterprise,/enterprises/natwest,200,NatWest Group,,False,False
+banking-selection,/industries/banking?selected=natwest&reading=facts,200,National Westminster Bank PLC,Facts,False,False
+banking-selection,/industries/banking?selected=natwest&reading=insight,200,UK Banking,FLORA Insight,True,False
+banking-enterprise,/enterprises/hsbc-uk,200,HSBC UK,,False,False
+banking-selection,/industries/banking?selected=hsbc-uk&reading=facts,200,HSBC UK Bank Plc,Facts,False,False
+banking-selection,/industries/banking?selected=hsbc-uk&reading=insight,200,UK Banking,FLORA Insight,True,False
+banking-enterprise,/enterprises/santander-uk,200,Santander UK,,False,False
+banking-selection,/industries/banking?selected=santander-uk&reading=facts,200,Santander UK Plc,Facts,False,False
+banking-selection,/industries/banking?selected=santander-uk&reading=insight,200,UK Banking,FLORA Insight,True,False
+banking-enterprise,/enterprises/tsb,403,Error response,,False,False
+banking-selection,/industries/banking?selected=tsb&reading=facts,200,TSB Bank plc,Facts,False,False
+banking-selection,/industries/banking?selected=tsb&reading=insight,200,UK Banking,FLORA Insight,True,False
+banking-enterprise,/enterprises/nationwide,403,Error response,,False,False
+banking-selection,/industries/banking?selected=nationwide&reading=facts,200,Nationwide,Facts,False,False
+banking-selection,/industries/banking?selected=nationwide&reading=insight,200,Nationwide Group earnings,FLORA Insight,False,False
+banking-enterprise,/enterprises/starling,403,Error response,,False,False
+banking-selection,/industries/banking?selected=starling&reading=facts,200,Starling Bank Limited,Facts,False,False
+banking-selection,/industries/banking?selected=starling&reading=insight,200,UK Banking,FLORA Insight,True,False
+easyjet-capability,/enterprises/easyjet/preview?stream=inside&detail=fleet-operations&reading=facts,200,Fleet Operations,Facts,False,False
+easyjet-capability,/enterprises/easyjet/preview?stream=inside&detail=fleet-operations&reading=insight,200,Fleet Operations,FLORA Insight,False,False
+easyjet-capability,/enterprises/easyjet/preview?stream=inside&detail=network-planning&reading=facts,200,Network Planning,Facts,False,False
+easyjet-capability,/enterprises/easyjet/preview?stream=inside&detail=network-planning&reading=insight,200,Network Planning,FLORA Insight,False,False
+easyjet-capability,/enterprises/easyjet/preview?stream=inside&detail=customer-service&reading=facts,200,Customer Service,Facts,False,False
+easyjet-capability,/enterprises/easyjet/preview?stream=inside&detail=customer-service&reading=insight,200,Customer Service,FLORA Insight,False,False
+lloyds-capability,/enterprises/lloyds?stream=inside&detail=technology&reading=facts,200,Technology & data,Facts,False,False
+lloyds-capability,/enterprises/lloyds?stream=inside&detail=technology&reading=insight,200,Technology & data,FLORA Insight,False,False
+lloyds-capability,/enterprises/lloyds?stream=inside&detail=customers&reading=facts,404,Error response,,False,False
+lloyds-capability,/enterprises/lloyds?stream=inside&detail=customers&reading=insight,404,Error response,,False,False
+lloyds-capability,/enterprises/lloyds?stream=inside&detail=financial&reading=facts,404,Error response,,False,False
+lloyds-capability,/enterprises/lloyds?stream=inside&detail=financial&reading=insight,404,Error response,,False,False
+specialist-industry,/industries/banking?lens=overview,403,Error response,,False,False
+specialist-industry,/industries/banking?lens=pestle,403,Error response,,False,False
+specialist-industry,/industries/banking?lens=porter,403,Error response,,False,False
+specialist-industry,/industries/banking?lens=value-chain,403,Error response,,False,False
+specialist-industry,/industries/banking?lens=ai-disruption,403,Error response,,False,False
+specialist-industry,/industries/banking?lens=regulation,403,Error response,,False,False
+specialist-industry,/industries/banking?lens=commercial,403,Error response,,False,False
+specialist-industry,/industries/banking/visual-specs,403,Error response,,False,False
+specialist-industry,/flora/banking/research,403,Error response,,False,False
+specialist-industry,/industries/aviation?lens=overview,200,Aviation,,False,False
+specialist-industry,/industries/aviation?lens=pestle,200,"Aviation.
+From forces to commercial relevance.",,False,False
+specialist-industry,/industries/aviation?lens=porter,200,"Aviation.
+From forces to commercial relevance.",,False,False
+specialist-industry,/industries/aviation?lens=value-chain,200,"Aviation.
+From forces to commercial relevance.",,False,False
+specialist-industry,/industries/aviation?lens=ai-disruption,200,Aviation,,False,False
+specialist-industry,/industries/aviation?lens=regulation,200,Aviation,,False,False
+specialist-industry,/industries/aviation?lens=commercial,200,Aviation,,False,False
+specialist-industry,/industries/aviation/visual-specs,200,,,False,False
+specialist-industry,/flora/aviation/research,200,"Aviation.
+From forces to commercial relevance.",,False,False
+specialist-enterprise,/enterprises/easyjet?lens=operating-model,200,easyJet.,,False,False
+specialist-enterprise,/enterprises/easyjet?lens=ecosystem,200,"easyJet.
+Connect strategy to a credible opening.",,False,False
+specialist-enterprise,/enterprises/easyjet?lens=opportunities,200,"easyJet.
+Connect strategy to a credible opening.",,False,False
+specialist-enterprise,/enterprises/easyjet?lens=timeline,200,easyJet.,,False,False
+specialist-enterprise,/enterprises/easyjet?lens=commercial,200,easyJet. From signal to a testable proposition.,,False,False
+specialist-enterprise,/enterprises/easyjet/understanding,200,"easyJet.
+What the evidence supports.",,False,False
+specialist-enterprise,/enterprises/easyjet/research-diagnostic,200,,,False,False
+specialist-enterprise,/enterprises/lloyds?lens=operating-model,403,Error response,,False,False
+specialist-enterprise,/enterprises/lloyds?lens=ecosystem,403,Error response,,False,False
+specialist-enterprise,/enterprises/lloyds?lens=opportunities,403,Error response,,False,False
+specialist-enterprise,/enterprises/lloyds?lens=timeline,403,Error response,,False,False
+specialist-enterprise,/enterprises/lloyds?lens=commercial,403,Error response,,False,False
+specialist-enterprise,/enterprises/lloyds/understanding,403,Error response,,False,False
+specialist-enterprise,/enterprises/lloyds/research-diagnostic,403,Error response,,False,False
+technology,/industries/technology,200,"Technology, connected.",,False,False
+technology,/industries/technology/providers,200,"Technology, connected.",,False,False
+technology,/industries/technology/models,200,"Technology, connected.",,False,False
+technology,/industries/technology/timeline,200,"Technology, connected.",,False,False
+technology,/industries/technology/evidence,200,"Technology, connected.",,False,False
+technology,/industries/technology/handoff,200,,,False,False
+technology,/industries/technology/experience,200,UK Technology,,False,False
+technology,/industries/technology/experience/district,200,Cloud & data centres,,False,False
+technology,/industries/technology/experience/participants,200,Technology participants,,False,False
+technology,/industries/technology/experience/enterprise,200,Equinix,,False,False
+technology,/industries/technology/experience/operating-model,200,Inside Equinix,,False,False
+technology,/industries/technology/experience/pipeline,200,Sales pipeline,,False,False
+technology,/industries/technology/experience/opportunity,200,Cooling optimisation,,False,False
+technology-district,/industries/technology/experience/district?district=applications,200,Applications & software,,False,False
+technology-district,/industries/technology/experience/district?district=cloud,200,Cloud & data centres,,False,False
+technology-district,/industries/technology/experience/district?district=ai,200,AI & data,,False,False
+technology-district,/industries/technology/experience/district?district=cyber,200,Cybersecurity,,False,False
+technology-district,/industries/technology/experience/district?district=services,200,Services & integration,,False,False
+technology-district,/industries/technology/experience/district?district=channels,200,Channels & distribution,,False,False
+technology-district,/industries/technology/experience/district?district=infrastructure,200,Connectivity & infrastructure,,False,False
+technology-district,/industries/technology/experience/district?district=frontier,200,Frontier technology,,False,False
+technology-provider,/industries/technology/providers?provider=microsoft,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=microsoft,200,Microsoft,,False,False
+technology-provider,/industries/technology/providers?provider=sap,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=sap,200,SAP,,False,False
+technology-provider,/industries/technology/providers?provider=oracle,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=oracle,200,Oracle,,False,False
+technology-provider,/industries/technology/providers?provider=salesforce,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=salesforce,200,Salesforce,,False,False
+technology-provider,/industries/technology/providers?provider=servicenow,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=servicenow,200,ServiceNow,,False,False
+technology-provider,/industries/technology/providers?provider=sage,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=sage,200,Sage,,False,False
+technology-provider,/industries/technology/providers?provider=workday,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=workday,200,Workday,,False,False
+technology-provider,/industries/technology/providers?provider=pega,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=pega,200,Pega,,False,False
+technology-provider,/industries/technology/providers?provider=access-group,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=access-group,200,Access Group,,False,False
+technology-provider,/industries/technology/providers?provider=oneadvanced,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=oneadvanced,200,OneAdvanced,,False,False
+technology-provider,/industries/technology/providers?provider=adobe,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=adobe,200,Adobe,,False,False
+technology-provider,/industries/technology/providers?provider=autodesk,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=autodesk,200,Autodesk,,False,False
+technology-provider,/industries/technology/providers?provider=aveva,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=aveva,200,AVEVA,,False,False
+technology-provider,/industries/technology/providers?provider=aws,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=aws,200,AWS,,False,False
+technology-provider,/industries/technology/providers?provider=google-cloud,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=google-cloud,200,Google Cloud,,False,False
+technology-provider,/industries/technology/providers?provider=snowflake,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=snowflake,200,Snowflake,,False,False
+technology-provider,/industries/technology/providers?provider=databricks,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=databricks,200,Databricks,,False,False
+technology-provider,/industries/technology/providers?provider=ovhcloud,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=ovhcloud,200,OVHcloud,,False,False
+technology-provider,/industries/technology/providers?provider=rackspace,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=rackspace,200,Rackspace,,False,False
+technology-provider,/industries/technology/providers?provider=quantexa,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=quantexa,200,Quantexa,,False,False
+technology-provider,/industries/technology/providers?provider=faculty,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=faculty,200,Faculty,,False,False
+technology-provider,/industries/technology/providers?provider=nvidia,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=nvidia,200,NVIDIA,,False,False
+technology-provider,/industries/technology/providers?provider=openai,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=openai,200,OpenAI,,False,False
+technology-provider,/industries/technology/providers?provider=anthropic,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=anthropic,200,Anthropic,,False,False
+technology-provider,/industries/technology/providers?provider=google-deepmind,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=google-deepmind,200,Google DeepMind,,False,False
+technology-provider,/industries/technology/providers?provider=ncc-group,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=ncc-group,200,NCC Group,,False,False
+technology-provider,/industries/technology/providers?provider=sophos,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=sophos,200,Sophos,,False,False
+technology-provider,/industries/technology/providers?provider=darktrace,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=darktrace,200,Darktrace,,False,False
+technology-provider,/industries/technology/providers?provider=palo-alto-networks,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=palo-alto-networks,200,Palo Alto Networks,,False,False
+technology-provider,/industries/technology/providers?provider=crowdstrike,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=crowdstrike,200,CrowdStrike,,False,False
+technology-provider,/industries/technology/providers?provider=fortinet,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=fortinet,200,Fortinet,,False,False
+technology-provider,/industries/technology/providers?provider=rubrik,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=rubrik,200,Rubrik,,False,False
+technology-provider,/industries/technology/providers?provider=accenture,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=accenture,200,Accenture,,False,False
+technology-provider,/industries/technology/providers?provider=ibm,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=ibm,200,IBM,,False,False
+technology-provider,/industries/technology/providers?provider=capgemini,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=capgemini,200,Capgemini,,False,False
+technology-provider,/industries/technology/providers?provider=sopra-steria,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=sopra-steria,200,Sopra Steria,,False,False
+technology-provider,/industries/technology/providers?provider=dxc,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=dxc,200,DXC,,False,False
+technology-provider,/industries/technology/providers?provider=kainos,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=kainos,200,Kainos,,False,False
+technology-provider,/industries/technology/providers?provider=tcs-diligenta,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=tcs-diligenta,200,TCS / Diligenta,,False,False
+technology-provider,/industries/technology/providers?provider=infosys,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=infosys,200,Infosys,,False,False
+technology-provider,/industries/technology/providers?provider=cognizant,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=cognizant,200,Cognizant,,False,False
+technology-provider,/industries/technology/providers?provider=ntt-data,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=ntt-data,200,NTT DATA,,False,False
+technology-provider,/industries/technology/providers?provider=equal-experts,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=equal-experts,200,Equal Experts,,False,False
+technology-provider,/industries/technology/providers?provider=version-1,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=version-1,200,Version 1,,False,False
+technology-provider,/industries/technology/providers?provider=netcompany,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=netcompany,200,Netcompany,,False,False
+technology-provider,/industries/technology/providers?provider=cgi,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=cgi,200,CGI,,False,False
+technology-provider,/industries/technology/providers?provider=fujitsu,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=fujitsu,200,Fujitsu,,False,False
+technology-provider,/industries/technology/providers?provider=hcltech,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=hcltech,200,HCLTech,,False,False
+technology-provider,/industries/technology/providers?provider=wipro,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=wipro,200,Wipro,,False,False
+technology-provider,/industries/technology/providers?provider=tech-mahindra,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=tech-mahindra,200,Tech Mahindra,,False,False
+technology-provider,/industries/technology/providers?provider=atos-eviden,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=atos-eviden,200,Atos / Eviden,,False,False
+technology-provider,/industries/technology/providers?provider=valtech,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=valtech,200,Valtech,,False,False
+technology-provider,/industries/technology/providers?provider=deloitte,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=deloitte,200,Deloitte,,False,False
+technology-provider,/industries/technology/providers?provider=node4,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=node4,200,Node4,,False,False
+technology-provider,/industries/technology/providers?provider=computacenter,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=computacenter,200,Computacenter,,False,False
+technology-provider,/industries/technology/providers?provider=softcat,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=softcat,200,Softcat,,False,False
+technology-provider,/industries/technology/providers?provider=scc,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=scc,200,SCC,,False,False
+technology-provider,/industries/technology/providers?provider=td-synnex,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=td-synnex,200,TD SYNNEX,,False,False
+technology-provider,/industries/technology/providers?provider=ingram-micro,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=ingram-micro,200,Ingram Micro,,False,False
+technology-provider,/industries/technology/providers?provider=equinix,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=equinix,200,Equinix,,False,False
+technology-provider,/industries/technology/providers?provider=telehouse,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=telehouse,200,Telehouse,,False,False
+technology-provider,/industries/technology/providers?provider=bt,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=bt,200,BT,,False,False
+technology-provider,/industries/technology/providers?provider=pulsant,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=pulsant,200,Pulsant,,False,False
+technology-provider,/industries/technology/providers?provider=digital-realty,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=digital-realty,200,Digital Realty,,False,False
+technology-provider,/industries/technology/providers?provider=virtus,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=virtus,200,VIRTUS,,False,False
+technology-provider,/industries/technology/providers?provider=cisco,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=cisco,200,Cisco,,False,False
+technology-provider,/industries/technology/providers?provider=hpe,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=hpe,200,HPE,,False,False
+technology-provider,/industries/technology/providers?provider=dell,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=dell,200,Dell,,False,False
+technology-provider,/industries/technology/providers?provider=broadcom-vmware,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=broadcom-vmware,200,Broadcom / VMware,,False,False
+technology-provider,/industries/technology/providers?provider=lenovo,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=lenovo,200,Lenovo,,False,False
+technology-provider,/industries/technology/providers?provider=vodafonethree,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=vodafonethree,200,VodafoneThree,,False,False
+technology-provider,/industries/technology/providers?provider=virgin-media-o2,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=virgin-media-o2,200,Virgin Media O2,,False,False
+technology-provider,/industries/technology/providers?provider=cityfibre,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=cityfibre,200,CityFibre,,False,False
+technology-provider,/industries/technology/providers?provider=arm,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=arm,200,Arm,,False,False
+technology-provider,/industries/technology/providers?provider=intel,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=intel,200,Intel,,False,False
+technology-provider,/industries/technology/providers?provider=amd,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=amd,200,AMD,,False,False
+technology-provider,/industries/technology/providers?provider=oqc,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=oqc,200,OQC,,False,False
+technology-provider,/industries/technology/providers?provider=riverlane,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=riverlane,200,Riverlane,,False,False
+technology-provider,/industries/technology/providers?provider=quantinuum,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=quantinuum,200,Quantinuum,,False,False
+technology-provider,/industries/technology/providers?provider=nu-quantum,200,"Technology, connected.",,False,False
+technology-provider,/industries/technology/experience/enterprise?enterprise=nu-quantum,200,Nu Quantum,,False,False
+adjacent,/macro,200,"See the forces.
+Follow the evidence.",,False,False
+adjacent,/pestle,200,The forces around us.,,False,False
+adjacent,/visual-v2,200,United Kingdom,,False,False
+adjacent,/visual-v2/pestle,200,The forces around us.,,False,False
+adjacent,/flora,200,The shape of the UK economy,Facts,False,False
+adjacent,/flora/,200,The shape of the UK economy,Facts,False,False
+adjacent,/industries,200,"See the forces.
+Follow the implications.",,False,False
+adjacent,/enterprises,200,Start with the enterprise.,,False,False
+adjacent,/flora/industries,200,"See the forces.
+Follow the implications.",,False,False
+adjacent,/flora/banking,200,,,False,False
+adjacent,/flora/banking/explorer,200,,,False,False
+adjacent,/flora/banking/inspect,200,Twin Intelligence Profile,,False,False
+adjacent,/industries/uk-banking,200,Twin Intelligence Profile,,False,False
+adjacent,/flora/aviation/research/easyjet,200,easyJet.,,False,False
+adjacent,/industries/telecoms,403,Error response,,False,False
+adjacent,/industries/energy,403,Error response,,False,False
+adjacent,/explore,200,What is changing in Banking?,,False,False
+adjacent,/blueprint-import,200,Import Twin,,False,False
+adjacent,/blueprint-import/history,403,Error response,,False,False
+catalogue:digital_twins_landing_page,/digital-twins,200,Digital Twins,,False,False
+catalogue:unified_enterprise,/enterprises/easyjet,200,easyJet.,,False,False
+catalogue:research_detail,/flora/aviation/research/candidates/RCO-EJ-001,200,Operational AI workflow delivery and benefit assurance,,False,False
+catalogue:research_detail,/flora/aviation/research/candidates/RCO-EJ-002,200,Conversational channel integration and conversion assurance,,False,False
+catalogue:research_detail,/flora/aviation/research/candidates/RCO-EJ-003,200,Holiday partner and customer journey orchestration,,False,False
+catalogue:research_detail,/flora/aviation/research/candidates/RCO-EJ-004,200,Connectivity rollout service readiness,,False,False
+catalogue:research_detail,/flora/aviation/research/candidates/RCO-EJ-005,200,Fleet/MRO data and change readiness,,False,False
+catalogue:research_detail,/flora/aviation/research/candidates/RCO-EJ-006,200,Fuel and sustainability evidence reconciliation,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-CHAT,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-DIGITAL,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-ECON,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-FLEET,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-FUEL,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-HOLIDAYS,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-ICC,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-MARKET,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-MRO,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-NETWORK,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-OWNERSHIP,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-PEERS,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-PROCUREMENT,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-PROFIT,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-Q3,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-REVENUE,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-RIGHTS,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-SAF,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-SAFETY,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-STRATEGY,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-SUPPLY-RATING,200,Inspect the evidence boundary.,,False,False
+catalogue:research_detail,/flora/aviation/research/evidence/AV-WIFI,200,Inspect the evidence boundary.,,False,False
+catalogue:research_twin,/flora/aviation/research/gaps,200,"Make the unknowns
+commercially useful.",,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-CAP-DATA,200,"Data, AI & integration",,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-CAP-DIGITAL,200,Customer & digital channels,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-CAP-HOLIDAYS,200,Holiday partner orchestration,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-CAP-MRO,200,Fleet & maintenance,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-CAP-NETWORK,200,Network & revenue planning,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-CAP-OPS,200,Flight & crew operations,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-CAP-PROCURE,200,Procurement & supplier governance,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-CAP-SERVICE,200,Disruption & customer care,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-CAP-SUSTAIN,200,Fuel & sustainability,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-ENT-001,200,AV-ENT-001 / existing knowledge asset,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-FORCE-BUYER,200,Buyer power,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-FORCE-ENTRY,200,New entrants,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-FORCE-RIVALRY,200,Rivalry,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-FORCE-SUBSTITUTE,200,Substitutes,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-FORCE-SUPPLIER,200,Supplier power,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-IND-001,200,AV-IND-001 / existing knowledge asset,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-PESTLE-E,200,Economic,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-PESTLE-ENV,200,Environmental,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-PESTLE-L,200,Legal,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-PESTLE-P,200,Political,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-PESTLE-S,200,Social,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-PESTLE-T,200,Technological,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-PROG-CHANNEL,200,Conversational commerce,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-PROG-CONNECT,200,Onboard connectivity,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-PROG-FLEET,200,Fleet transition & maintenance integration,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-PROG-FUEL,200,Fuel sustainability data,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-PROG-HOLIDAYS,200,Holiday digital experience & partner scale,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-PROG-ICC,200,Operational AI & disruption workflows,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-SUP-AIRBUS,200,Airbus / Skywise,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-SUP-AIRPORTS,200,Airports & air navigation,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-SUP-ECOVADIS,200,EcoVadis,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-SUP-HOTELS,200,Hotels & destination partners,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-SUP-OPENAI,200,ChatGPT / OpenAI,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-SUP-STARLINK,200,SpaceX / Starlink,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-VC-FLY,200,Operate & recover flights,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-VC-FULFIL,200,Deliver holiday experience,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-VC-IMPROVE,200,"Measure, assure & improve",,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-VC-PLAN,200,Plan network & capacity,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-VC-PREPARE,200,Prepare aircraft & crew,,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-VC-SELL,200,"Inspire, price & sell",,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-VC-SERVE,200,"Care, recover & retain",,False,False
+catalogue:research_node,/flora/aviation/research/nodes/AV-VC-TURN,200,Airport & turnaround,,False,False
+catalogue:research_twin,/flora/aviation/research/opportunities,200,Sales opportunities,,False,False
+catalogue:research_twin,/flora/aviation/research/sources,200,"Publication dates.
+Not assumptions.",,False,False
+catalogue:banking_landing_page,/flora/banking/,200,,,False,False
+catalogue:ai_native_page,/flora/banking/ai-native,200,,,False,False
+catalogue:ai_native_capability_model_page,/flora/banking/ai-native/capability-model,200,,,False,False
+catalogue:banks_page,/flora/banking/banks,200,,,False,False
+catalogue:banking_bank_page,/flora/banking/barclays,200,,,False,False
+catalogue:analyst_history_page,/flora/banking/barclays/analyst-history,200,,,False,False
+catalogue:banking_bank_page,/flora/banking/barclays/briefing,200,,,False,False
+catalogue:enterprise_event_timeline_page,/flora/banking/barclays/event-timeline,200,,,False,False
+catalogue:banking_evidence_page,/flora/banking/barclays/evidence,200,,,False,False
+catalogue:financial_history_page,/flora/banking/barclays/financial-performance,200,,,False,False
+catalogue:market_reaction_page,/flora/banking/barclays/market-analyst-view,200,,,False,False
+catalogue:market_reaction_page,/flora/banking/barclays/market-reaction,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/barclays/opportunity/COH-BAR-001,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/barclays/opportunity/COH-BAR-002,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/barclays/opportunity/COH-BAR-003,200,,,False,False
+catalogue:research_backlog_page,/flora/banking/barclays/research-backlog,200,,,False,False
+catalogue:banking_compare_page,/flora/banking/compare,200,,,False,False
+catalogue:banking_competitors_page,/flora/banking/competitors,200,,,False,False
+catalogue:enterprise_page,/flora/banking/explorer/barclays,200,,,False,False
+catalogue:enterprise_page,/flora/banking/explorer/barclays/insights,200,Barclays,,False,False
+catalogue:discovery_page,/flora/banking/explorer/barclays/opportunities,200,"Barclays
+Where could change create value?",,False,False
+catalogue:opportunity_page,/flora/banking/explorer/barclays/opportunities/COH-BAR-001,200,Enterprise Cost and Simplification Programme,,False,False
+catalogue:opportunity_page,/flora/banking/explorer/barclays/opportunities/COH-BAR-002,200,Platform Modernisation and Resilience Assurance,,False,False
+catalogue:opportunity_page,/flora/banking/explorer/barclays/opportunities/COH-BAR-003,200,AI Productivity Factory,,False,False
+catalogue:enterprise_page,/flora/banking/explorer/hsbc-uk,200,,,False,False
+catalogue:enterprise_page,/flora/banking/explorer/hsbc-uk/insights,200,HSBC UK,,False,False
+catalogue:discovery_page,/flora/banking/explorer/hsbc-uk/opportunities,200,"HSBC UK
+Where could change create value?",,False,False
+catalogue:opportunity_page,/flora/banking/explorer/hsbc-uk/opportunities/COH-HBUK-001,200,Operational Resilience and Third-Party Control,,False,False
+catalogue:opportunity_page,/flora/banking/explorer/hsbc-uk/opportunities/COH-HBUK-002,200,UK Digital Service Modernisation,,False,False
+catalogue:opportunity_page,/flora/banking/explorer/hsbc-uk/opportunities/COH-HBUK-003,200,Finance and Risk Control Automation,,False,False
+catalogue:enterprise_page,/flora/banking/explorer/lloyds,200,,,False,False
+catalogue:enterprise_page,/flora/banking/explorer/lloyds/insights,200,Lloyds Banking Group,,False,False
+catalogue:discovery_page,/flora/banking/explorer/lloyds/opportunities,200,"Lloyds Banking Group
+Where could change create value?",,False,False
+catalogue:opportunity_page,/flora/banking/explorer/lloyds/opportunities/COH-LBG-001,200,Customer Experience Transformation and Outsourcing,,False,False
+catalogue:opportunity_page,/flora/banking/explorer/lloyds/opportunities/COH-LBG-002,200,Deposits and Customer Value Management,,False,False
+catalogue:opportunity_page,/flora/banking/explorer/lloyds/opportunities/COH-LBG-003,200,"Cloud, Data and AI Control Tower",,False,False
+catalogue:enterprise_page,/flora/banking/explorer/natwest,200,,,False,False
+catalogue:enterprise_page,/flora/banking/explorer/natwest/insights,200,NatWest Group,,False,False
+catalogue:discovery_page,/flora/banking/explorer/natwest/opportunities,200,"NatWest Group
+Where could change create value?",,False,False
+catalogue:opportunity_page,/flora/banking/explorer/natwest/opportunities/COH-NWG-001,200,Customer Franchise Growth and Service Transformation,,False,False
+catalogue:opportunity_page,/flora/banking/explorer/natwest/opportunities/COH-NWG-002,200,Commercial Banking Data and AI Transformation,,False,False
+catalogue:opportunity_page,/flora/banking/explorer/natwest/opportunities/COH-NWG-003,200,Operating Model Simplification,,False,False
+catalogue:enterprise_page,/flora/banking/explorer/santander-uk,200,,,False,False
+catalogue:enterprise_page,/flora/banking/explorer/santander-uk/insights,200,Santander UK,,False,False
+catalogue:discovery_page,/flora/banking/explorer/santander-uk/opportunities,200,"Santander UK
+Where could change create value?",,False,False
+catalogue:opportunity_page,/flora/banking/explorer/santander-uk/opportunities/COH-SAN-001,200,Channel Productivity and Customer Outcomes,,False,False
+catalogue:opportunity_page,/flora/banking/explorer/santander-uk/opportunities/COH-SAN-002,200,UK Platform Dependency and Modernisation Assessment,,False,False
+catalogue:opportunity_page,/flora/banking/explorer/santander-uk/opportunities/COH-SAN-003,200,Deposits and Customer Value Analytics,,False,False
+catalogue:heatmap_page,/flora/banking/heatmap,200,,,False,False
+catalogue:heatmap_detail_page,/flora/banking/heatmap/detail,200,,,False,False
+catalogue:banking_bank_page,/flora/banking/hsbc-uk,200,,,False,False
+catalogue:analyst_history_page,/flora/banking/hsbc-uk/analyst-history,200,,,False,False
+catalogue:banking_bank_page,/flora/banking/hsbc-uk/briefing,200,,,False,False
+catalogue:enterprise_event_timeline_page,/flora/banking/hsbc-uk/event-timeline,200,,,False,False
+catalogue:banking_evidence_page,/flora/banking/hsbc-uk/evidence,200,,,False,False
+catalogue:financial_history_page,/flora/banking/hsbc-uk/financial-performance,200,,,False,False
+catalogue:market_reaction_page,/flora/banking/hsbc-uk/market-analyst-view,200,,,False,False
+catalogue:market_reaction_page,/flora/banking/hsbc-uk/market-reaction,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/hsbc-uk/opportunity/COH-HBUK-001,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/hsbc-uk/opportunity/COH-HBUK-002,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/hsbc-uk/opportunity/COH-HBUK-003,200,,,False,False
+catalogue:research_backlog_page,/flora/banking/hsbc-uk/research-backlog,200,,,False,False
+catalogue:banking_bank_page,/flora/banking/lloyds,200,,,False,False
+catalogue:analyst_history_page,/flora/banking/lloyds/analyst-history,200,,,False,False
+catalogue:banking_bank_page,/flora/banking/lloyds/briefing,200,,,False,False
+catalogue:enterprise_event_timeline_page,/flora/banking/lloyds/event-timeline,200,,,False,False
+catalogue:banking_evidence_page,/flora/banking/lloyds/evidence,200,,,False,False
+catalogue:financial_history_page,/flora/banking/lloyds/financial-performance,200,,,False,False
+catalogue:market_reaction_page,/flora/banking/lloyds/market-analyst-view,200,,,False,False
+catalogue:market_reaction_page,/flora/banking/lloyds/market-reaction,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/lloyds/opportunity/COH-LBG-001,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/lloyds/opportunity/COH-LBG-002,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/lloyds/opportunity/COH-LBG-003,200,,,False,False
+catalogue:banking_bank_page,/flora/banking/natwest,200,,,False,False
+catalogue:analyst_history_page,/flora/banking/natwest/analyst-history,200,,,False,False
+catalogue:banking_bank_page,/flora/banking/natwest/briefing,200,,,False,False
+catalogue:enterprise_event_timeline_page,/flora/banking/natwest/event-timeline,200,,,False,False
+catalogue:banking_evidence_page,/flora/banking/natwest/evidence,200,,,False,False
+catalogue:financial_history_page,/flora/banking/natwest/financial-performance,200,,,False,False
+catalogue:market_reaction_page,/flora/banking/natwest/market-analyst-view,200,,,False,False
+catalogue:market_reaction_page,/flora/banking/natwest/market-reaction,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/natwest/opportunity/COH-NWG-001,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/natwest/opportunity/COH-NWG-002,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/natwest/opportunity/COH-NWG-003,200,,,False,False
+catalogue:research_backlog_page,/flora/banking/natwest/research-backlog,200,,,False,False
+catalogue:industry_outlook_page,/flora/banking/outlook,200,,,False,False
+catalogue:pipeline_page,/flora/banking/pipeline,200,,,False,False
+catalogue:banking_portfolio_page,/flora/banking/portfolio,200,,,False,False
+catalogue:banking_bank_page,/flora/banking/santander-uk,200,,,False,False
+catalogue:analyst_history_page,/flora/banking/santander-uk/analyst-history,200,,,False,False
+catalogue:banking_bank_page,/flora/banking/santander-uk/briefing,200,,,False,False
+catalogue:enterprise_event_timeline_page,/flora/banking/santander-uk/event-timeline,200,,,False,False
+catalogue:banking_evidence_page,/flora/banking/santander-uk/evidence,200,,,False,False
+catalogue:financial_history_page,/flora/banking/santander-uk/financial-performance,200,,,False,False
+catalogue:market_reaction_page,/flora/banking/santander-uk/market-analyst-view,200,,,False,False
+catalogue:market_reaction_page,/flora/banking/santander-uk/market-reaction,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/santander-uk/opportunity/COH-SAN-001,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/santander-uk/opportunity/COH-SAN-002,200,,,False,False
+catalogue:banking_opportunity_page,/flora/banking/santander-uk/opportunity/COH-SAN-003,200,,,False,False
+catalogue:research_backlog_page,/flora/banking/santander-uk/research-backlog,200,,,False,False
+catalogue:industry_signal_explorer_page,/flora/banking/signals,200,,,False,False
+catalogue:timeline_page,/flora/banking/timeline,200,,,False,False
+catalogue:increment1_workspace_page,/flora/object/BK-ENT-001,200,Lloyds Banking Group,,False,False
+catalogue:_flora_increment2_context_package_page,/flora/object/BK-ENT-001/context-package,200,Inspectable Context Package,,False,False
+catalogue:_flora_increment2_explain_page,/flora/object/BK-ENT-001/explain,200,What has changed at Lloyds?,,False,False
+catalogue:_flora_increment2_lineage_page,/flora/object/BK-ENT-001/lineage/CHG-LBG-001,200,Claim-level lineage,,False,False
+catalogue:_flora_increment2_lineage_page,/flora/object/BK-ENT-001/lineage/CHG-LBG-002,200,Claim-level lineage,,False,False
+catalogue:_flora_increment2_lineage_page,/flora/object/BK-ENT-001/lineage/CHG-LBG-003,200,Claim-level lineage,,False,False
+catalogue:_flora_increment2_lineage_page,/flora/object/BK-ENT-001/lineage/CHG-LBG-004,200,Claim-level lineage,,False,False
+catalogue:unified_industry,/industries/aviation,200,Aviation,,False,False
+catalogue:macro_intelligence,/macro/evidence,200,"See the forces.
+Follow the evidence.",,False,False
+catalogue:macro_intelligence,/macro/spec,200,,,False,False
+uk-geometry,/?stream=forces&reading=facts&detail=economic,200,Economic growth,Facts,False,False
+uk-geometry,/?stream=forces&reading=insight&detail=economic,200,Economic growth,FLORA Insight,False,False
+uk-geometry,/?stream=forces&reading=facts&detail=technological,200,Cyber resilience,Facts,False,False
+uk-geometry,/?stream=forces&reading=insight&detail=technological,200,Cyber resilience,FLORA Insight,False,False
+uk-geometry,/?stream=forces&reading=facts&detail=legal,200,Cyber reform,Facts,False,False
+uk-geometry,/?stream=forces&reading=insight&detail=legal,200,Cyber reform,FLORA Insight,False,False
+uk-geometry,/?stream=forces&reading=facts&detail=environmental,200,Climate reporting,Facts,False,False
+uk-geometry,/?stream=forces&reading=insight&detail=environmental,200,Climate reporting,FLORA Insight,False,False
+banking-geometry,/industries/banking?stream=landscape&reading=facts&detail=barclays,200,Barclays,Facts,False,False
+banking-geometry,/industries/banking?stream=landscape&reading=insight&detail=barclays,200,UK Banking,FLORA Insight,True,False
+banking-geometry,/industries/banking?stream=landscape&reading=facts&detail=hsbc-uk,200,HSBC UK,Facts,False,False
+banking-geometry,/industries/banking?stream=landscape&reading=insight&detail=hsbc-uk,200,UK Banking,FLORA Insight,True,False
+banking-geometry,/industries/banking?stream=landscape&reading=facts&detail=lloyds,200,Lloyds Banking Group,Facts,False,False
+banking-geometry,/industries/banking?stream=landscape&reading=insight&detail=lloyds,200,UK Banking,FLORA Insight,True,False
+banking-geometry,/industries/banking?stream=landscape&reading=facts&detail=natwest,200,NatWest Group,Facts,False,False
+banking-geometry,/industries/banking?stream=landscape&reading=insight&detail=natwest,200,UK Banking,FLORA Insight,True,False
+banking-geometry,/industries/banking?stream=landscape&reading=facts&detail=santander-uk,200,Santander UK,Facts,False,False
+banking-geometry,/industries/banking?stream=landscape&reading=insight&detail=santander-uk,200,UK Banking,FLORA Insight,True,False
+banking-geometry,/industries/banking?stream=landscape&reading=facts&detail=boe,200,Bank of England,Facts,False,False
+banking-geometry,/industries/banking?stream=landscape&reading=insight&detail=boe,200,UK Banking,FLORA Insight,True,False
+banking-geometry,/industries/banking?stream=landscape&reading=facts&detail=pra,200,PRA,Facts,False,False
+banking-geometry,/industries/banking?stream=landscape&reading=insight&detail=pra,200,UK Banking,FLORA Insight,True,False
+banking-geometry,/industries/banking?stream=landscape&reading=facts&detail=fca,200,FCA,Facts,False,False
+banking-geometry,/industries/banking?stream=landscape&reading=insight&detail=fca,200,UK Banking,FLORA Insight,True,False
+banking-geometry,/industries/banking?stream=landscape&reading=facts&detail=payments,200,Payments & settlement,Facts,False,False
+banking-geometry,/industries/banking?stream=landscape&reading=insight&detail=payments,200,Payments & settlement,FLORA Insight,False,False
+banking-geometry,/industries/banking?stream=forces&reading=facts&detail=UK-RATE-NOV26,200,Rates & margins,Facts,False,False
+banking-geometry,/industries/banking?stream=forces&reading=insight&detail=UK-RATE-NOV26,200,Rates & margins,FLORA Insight,False,False
+banking-geometry,/industries/banking?stream=forces&reading=facts&detail=UK-PRA-REPORT27,200,Resilience reporting,Facts,False,False
+banking-geometry,/industries/banking?stream=forces&reading=insight&detail=UK-PRA-REPORT27,200,Resilience reporting,FLORA Insight,False,False
+banking-geometry,/industries/banking?stream=forces&reading=facts&detail=LBG-ENVOY-CONTROLS,200,AI & control,Facts,False,False
+banking-geometry,/industries/banking?stream=forces&reading=insight&detail=LBG-ENVOY-CONTROLS,200,AI & control,FLORA Insight,False,False
+banking-geometry,/industries/banking?stream=forces&reading=facts&detail=UK-VALUE,200,Competition & trust,Facts,False,False
+banking-geometry,/industries/banking?stream=forces&reading=insight&detail=UK-VALUE,200,Competition & trust,FLORA Insight,False,False
+lloyds-geometry,/enterprises/lloyds?stream=landscape&reading=facts&detail=customers,200,,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=landscape&reading=insight&detail=customers,200,Lloyds Banking Group,FLORA Insight,True,False
+lloyds-geometry,/enterprises/lloyds?stream=landscape&reading=facts&detail=businesses,200,Peers & market context,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=landscape&reading=insight&detail=businesses,200,Lloyds Banking Group,FLORA Insight,True,False
+lloyds-geometry,/enterprises/lloyds?stream=landscape&reading=facts&detail=economics,200,Payments & oversight,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=landscape&reading=insight&detail=economics,200,Lloyds Banking Group,FLORA Insight,True,False
+lloyds-geometry,/enterprises/lloyds?stream=landscape&reading=facts&detail=operations,200,,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=landscape&reading=insight&detail=operations,200,Lloyds Banking Group,FLORA Insight,True,False
+lloyds-geometry,/enterprises/lloyds?stream=landscape&reading=facts&detail=technology,200,Suppliers & partners,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=landscape&reading=insight&detail=technology,200,Lloyds Banking Group,FLORA Insight,True,False
+lloyds-geometry,/enterprises/lloyds?stream=inside&reading=facts&detail=businesses,200,Businesses & brands,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=inside&reading=insight&detail=businesses,200,Lloyds Banking Group,FLORA Insight,True,False
+lloyds-geometry,/enterprises/lloyds?stream=inside&reading=facts&detail=economics,200,Financial performance,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=inside&reading=insight&detail=economics,200,Lloyds Banking Group,FLORA Insight,True,False
+lloyds-geometry,/enterprises/lloyds?stream=inside&reading=facts&detail=operations,200,Service operations,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=inside&reading=insight&detail=operations,200,Lloyds Banking Group,FLORA Insight,True,False
+lloyds-geometry,/enterprises/lloyds?stream=inside&reading=facts&detail=technology,200,Technology & data,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=inside&reading=insight&detail=technology,200,Technology & data,FLORA Insight,False,False
+lloyds-geometry,/enterprises/lloyds?stream=inside&reading=facts&detail=governance,200,Governance & change,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=inside&reading=insight&detail=governance,200,Lloyds Banking Group,FLORA Insight,True,False
+lloyds-geometry,/enterprises/lloyds?stream=forces&reading=facts&detail=LBG-A2030-PLATFORMS,200,Core modernisation,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=forces&reading=insight&detail=LBG-A2030-PLATFORMS,200,Core modernisation,FLORA Insight,False,False
+lloyds-geometry,/enterprises/lloyds?stream=forces&reading=facts&detail=LBG-A2030-CIR,200,Cost discipline,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=forces&reading=insight&detail=LBG-A2030-CIR,200,Cost discipline,FLORA Insight,False,False
+lloyds-geometry,/enterprises/lloyds?stream=forces&reading=facts&detail=LBG-ENVOY-CONTROLS,200,AI benefit & control,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=forces&reading=insight&detail=LBG-ENVOY-CONTROLS,200,AI benefit & control,FLORA Insight,False,False
+lloyds-geometry,/enterprises/lloyds?stream=forces&reading=facts&detail=LBG-BRAND26-TIMING,200,Brand & service change,Facts,False,False
+lloyds-geometry,/enterprises/lloyds?stream=forces&reading=insight&detail=LBG-BRAND26-TIMING,200,Brand & service change,FLORA Insight,False,False
