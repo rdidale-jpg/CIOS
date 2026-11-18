@@ -18,9 +18,21 @@ Nationwide is an enterprise financial selection through the existing Banking Fin
 | iPad portrait | [Facts](previews/payments-facts-ipad-portrait.jpg) | [Insight](previews/payments-insight-ipad-portrait.jpg) |
 | 390px mobile | [Facts](previews/payments-facts-mobile.jpg) | [Insight](previews/payments-insight-mobile.jpg) |
 | 320px mobile, JavaScript off | [Facts](previews/payments-facts-mobile-320.jpg) | [Insight](previews/payments-insight-mobile-320.jpg) |
-| Enterprise selections | | [Nationwide earnings](previews/nationwide-insight-desktop.jpg) · [Lloyds capability](previews/lloyds-insight-desktop.jpg) · [Lloyds at 200% zoom](previews/lloyds-insight-mobile.jpg) |
+| Enterprise selections | | [Nationwide earnings](previews/nationwide-insight-desktop.jpg) · [Lloyds capability](previews/lloyds-insight-desktop.jpg) · [Lloyds at 200% zoom](previews/lloyds-insight-mobile-200pct.jpg) |
 
 The proof uses the actual `FloraWebHandler` on isolated loopback. Chromium exercised the journey, keyboard and touch, Back/Forward, reload, reduced motion, 320px with JavaScript disabled, and 200% CSS zoom on mobile. Anonymous Owner inspection was denied. Final local test counts and hosted runs are tracked in the draft PR. Independent reviewers were unavailable. The remaining visual decision is whether the existing Banking and Lloyds Left scenes plus the Main diagrams satisfy the desired operating-system depth.
+
+## Revised Lloyds capability previews
+
+| Viewport | Facts | FLORA Insight |
+| --- | --- | --- |
+| Desktop | [Facts](previews/lloyds-facts-desktop.jpg) | [Insight](previews/lloyds-insight-desktop.jpg) |
+| iPad landscape | [Facts](previews/lloyds-facts-ipad-landscape.jpg) | [Insight](previews/lloyds-insight-ipad-landscape.jpg) |
+| iPad portrait | [Facts](previews/lloyds-facts-ipad-portrait.jpg) | [Insight](previews/lloyds-insight-ipad-portrait.jpg) |
+| Mobile 390px | [Facts](previews/lloyds-facts-mobile.jpg) | [Insight](previews/lloyds-insight-mobile.jpg) |
+| Mobile 320px, JavaScript off | [Facts](previews/lloyds-facts-mobile-320.jpg) | [Insight](previews/lloyds-insight-mobile-320.jpg) |
+
+See the [owner review refinements and seven-scene audit](Review-Refinement.md).
 
 ## Rollback
 

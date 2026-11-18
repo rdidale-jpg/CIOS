@@ -422,9 +422,7 @@ def render(ctx,headers=None,*,financial_run_id=''):
             body=v._detail(ctx,spot,data).replace('<h2 id="insight-title">','<h1 id="insight-title">',1).replace('</h2>','</h1>',1)
             if ctx.scope=='lloyds' and ctx.stream=='inside' and ctx.detail=='technology':
                 if not body:body='<h1>Technology &amp; data</h1><p>No eligible disclosures for this selection.</p>'
-                body+='<p class="reading-context">Conceptual · Group capability</p>'+reading.flow((('Develop','Design platform tools'),('Operate','Apply controls'),('Monitor','Observe and review use')))
-                if agenda._claims(data,('LBG-ENVOY-GOOGLE',)):
-                    body+='<p class="material">Lloyds Banking Group describes Google Cloud as a collaborator. The disclosure is at provider-brand scope.</p>'
+                body+=reading.lloyds_capability(data,insight=False)
         elif ctx.scope=='lloyds' and ctx.stream=='inside':
             facts=_facts(data,['LBG-Q326-DEPOSITS','LBG-Q326-PROFIT','LBG-A2030-CIR'])
             body='<p class="eyebrow">Lloyds Banking Group</p><h1>Funding, earnings and efficiency</h1>'+''.join(p.render(f) for f in facts)

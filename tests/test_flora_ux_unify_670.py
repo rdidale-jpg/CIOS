@@ -95,3 +95,30 @@ def test_payment_insight_suppressed_when_its_model_is_restricted(monkeypatch, fl
     assert "No supported FLORA Insight" in main(html)
     assert "Service income" not in main(html)
     assert "Guest" in html
+
+
+@pytest.mark.parametrize("scope,stream", [
+    (scope, stream)
+    for scope, spec in v.SCOPES.items()
+    for stream in spec["streams"]
+])
+def test_default_scene_has_no_authorial_insight(scope, stream):
+    path = v.SCOPES[scope]["route"]
+    facts = main(v.render(path, {"stream": [stream]}))
+    assert 'aria-current=page>Facts' in facts
+    assert 'data-semantic-type="insight"' not in facts
+    assert "FLORA INSIGHT" not in facts
+    analysis = main(v.render(path, {"stream": [stream], "reading": ["insight"]}))
+    assert 'aria-current=page>FLORA Insight' in analysis
+
+
+def test_lloyds_capability_map_respects_disclosure_lifecycle(monkeypatch):
+    query = {"stream": ["inside"], "detail": ["technology"]}
+    ctx = v.resolve(LLOYDS, query)
+    data = v.current_data(ctx)
+    claim = next(item for item in data["claims"] if item["id"] == "LBG-ENVOY-GOOGLE")
+    claim["withdrawn"] = True
+    monkeypatch.setattr(v, "current_data", lambda ctx: data)
+    analysis = main(v.render(LLOYDS, {**query, "reading": ["insight"]}))
+    assert "Envoy" in analysis and "Disclosed collaboration" not in analysis
+    assert "Google Cloud EMEA Limited" not in analysis

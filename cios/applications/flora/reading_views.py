@@ -17,6 +17,21 @@ STYLE = """<style>
 .reading-flow{display:flex;flex-wrap:wrap;gap:12px;list-style:none;padding:0;margin:24px 0}
 .reading-flow li{flex:1 1 9rem;border-top:2px solid #ae9158;padding:12px 8px;background:#eee8d6}
 .reading-flow strong,.reading-flow span{display:block}.reading-flow span{font-size:.85em}
+.vp-page #visual-content:focus-visible,.vp-page .focus:focus-visible{outline:none}
+.vp-page #visual-content:focus-visible .reading-mode,.vp-page .focus:focus-visible h1{box-shadow:inset 3px 0 #7055a0;padding-inline-start:8px}
+.reading-sequence{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;list-style:none;padding:0;margin:24px 0}
+.reading-sequence li{position:relative;border-top:2px solid #9a8044;padding-block:12px}
+.reading-sequence li:not(:last-child)::after{content:"";position:absolute;right:-15px;top:-6px;width:8px;height:8px;border:solid #9a8044;border-width:2px 2px 0 0;transform:rotate(45deg)}
+.reading-sequence strong,.reading-sequence span{display:block}
+.reading-roles,.reading-drivers,.reading-links ul{display:flex;flex-wrap:wrap;gap:12px 24px}
+.reading-roles>div,.reading-drivers>div{flex:1 1 12rem}
+.reading-roles dt,.reading-drivers dt{font-weight:700}.reading-roles dd,.reading-drivers dd{margin:4px 0 0}
+.reading-economy{margin:24px 0;padding:clamp(12px,3vw,24px);background:#ede8d8;border-inline-start:3px solid #ae9158}
+.reading-economy h2,.reading-capability h2{font-size:1.25rem;margin:0 0 8px}
+.reading-capability{border-top:1px solid var(--line);padding-top:14px;margin-top:20px}
+.reading-links ul{padding:0;list-style:none;margin:18px 0 0}
+.reading-links a{display:inline-flex;align-items:center;min-height:44px}
+@media(max-width:600px){.reading-sequence{grid-template-columns:1fr;gap:10px}.reading-sequence li:not(:last-child)::after{display:none}}
 .reading-context{font-size:.85em;color:var(--muted)}
 .reading-pulse{border-inline-start:3px solid #ae9158;padding-inline-start:16px;margin:24px 0}
 @media(forced-colors:active){.reading-mode a[aria-current]{background:Highlight;color:HighlightText}}
@@ -38,10 +53,11 @@ def flow(stages):
     ) + '</ol>'
 
 
-def banking_links():
+def banking_links(*, include_payments=True):
     return (
         '<nav class="reading-links" aria-label="Banking subjects"><ul>'
-        '<li><a href="/industries/banking?stream=landscape&amp;detail=payments#visual-content">Payments &amp; settlement</a></li>'
+        + ('<li><a href="/industries/banking?stream=landscape&amp;detail=payments#visual-content">Payments &amp; settlement</a></li>' if include_payments else '')
+        +
         '<li><a href="/industries/banking?stream=landscape&amp;selected=nationwide#visual-content">Nationwide Group earnings</a></li>'
         '<li><a href="/enterprises/lloyds?stream=inside&amp;detail=technology#visual-content">Lloyds technology &amp; data</a></li>'
         '</ul></nav>'
@@ -57,27 +73,65 @@ def payments(ctx, data):
     )
     body += '<p class="reading-context">Conceptual · UK payment roles</p>'
     if ctx.reading == "facts":
-        body += flow((
-            ("Initiate", "The payer gives a payment instruction."),
-            ("Clear", "Participants establish what they owe."),
-            ("Settle", "Funds move to discharge obligations."),
+        body += sequence((
+            ("Initiate", "A household or business instructs its payment provider."),
+            ("Clear", "Participants exchange instructions and establish what they owe."),
+            ("Settle", "Settlement discharges the obligations between participants."),
         ))
-        body += '<p>A scheme sets rules. An operator provides the service. A network carries instructions.</p>'
+        body += (
+            '<p class="reading-context">Arrows show the order of activities. Actual access and settlement arrangements vary by system.</p>'
+            '<dl class="reading-roles"><div><dt>Scheme</dt><dd>Sets the rules for participation and processing.</dd></div>'
+            '<div><dt>Operator</dt><dd>Provides and runs the system service.</dd></div>'
+            '<div><dt>Network</dt><dd>Carries messages between participants.</dd></div></dl>'
+        )
     else:
         model = v.force_view(ctx, "UK-VALUE", data)
         if not model or not p.eligible(model):
             return body + '<p>No supported FLORA Insight for this selection.</p></section>'
         p.note_editorial_sources(model.sources)
-        body += flow((
-            ("Customer funds", "The payment amount belongs to the transaction."),
-            ("Service income", "Banks and operators can charge for distinct services."),
-            ("Continuity", "A disruption can delay instructions or settlement."),
-        ))
         body += (
-            '<p>Payment principal is different from fee income. The same volume can support different operator economics '
-            'depending on tariffs, service mix and resilience costs. Actual fees and bank dependencies require separate evidence.</p>'
+            '<section class="reading-economy"><h2>One payment, two economic flows</h2>'
+            '<dl class="reading-drivers"><div><dt>Customer principal</dt><dd>The amount transferred or settled.</dd></div>'
+            '<div><dt>Service income</dt><dd>Charges for providing payment services depend on the arrangement.</dd></div></dl></section>'
+            '<h2>What changes the economics?</h2><dl class="reading-drivers">'
+            '<div><dt>Service mix</dt><dd>The same volume can produce different income under different pricing and access arrangements.</dd></div>'
+            '<div><dt>Continuity</dt><dd>Capacity, monitoring and recovery can incur costs even when traffic is steady.</dd></div></dl>'
+            '<p>Payment volume and principal alone cannot establish operator revenue, actual fees or bank-level dependencies.</p>'
         )
-    return body + banking_links() + '</section>'
+    return body + banking_links(include_payments=False) + '</section>'
+
+
+def sequence(stages):
+    return '<ol class="reading-sequence">' + "".join(
+        f'<li><strong>{e(title)}</strong><span>{e(description)}</span></li>' for title, description in stages
+    ) + '</ol>'
+
+
+def lloyds_capability(data, *, insight):
+    controls = agenda._claims(data, ("LBG-ENVOY-CONTROLS",))
+    if not controls:
+        return unavailable("Technology & data") if insight else ""
+    collaboration = agenda._claims(data, ("LBG-ENVOY-GOOGLE",))
+    if not insight:
+        return (
+            '<section class="reading-capability"><h2>Group capability</h2>'
+            '<p class="reading-context">Conceptual · Group capability operating sequence</p>'
+            + sequence((("Develop", "Build platform tools"), ("Operate", "Use platform controls"),
+                        ("Monitor", "Review activity"))) + '</section>'
+        )
+    body = interpretation(
+        "Technology & data", controls + collaboration,
+        "Platform controls can make monitoring part of the operating process as AI use scales.",
+        "Deployment breadth, control effectiveness, net benefits and the legal contracting entity remain unverified.",
+    )
+    body += (
+        '<section class="reading-capability"><h2>Where the platform supports the capability</h2>'
+        '<dl class="reading-drivers"><div><dt>Capability</dt><dd>Operate and monitor AI use.</dd></div>'
+        '<div><dt>Enabler</dt><dd>Lloyds Banking Group describes Envoy and its controls.</dd></div>'
+    )
+    if collaboration:
+        body += '<div><dt>Disclosed collaboration</dt><dd>Google Cloud at brand scope. Any Google Cloud EMEA Limited contract or Lloyds Bank plc workload remains unverified.</dd></div>'
+    return body + '</dl></section>'
 
 
 def unavailable(title):
@@ -181,11 +235,7 @@ def insight(ctx, data, issues):
             "A designation and a brand collaboration do not establish a Lloyds Bank plc Envoy contract, workload or service exposure.",
         )
     if ctx.scope == "lloyds" and ctx.stream == "inside" and ctx.detail == "technology" and not ctx.agenda:
-        return interpretation(
-            "Technology & data", agenda._claims(data, ("LBG-ENVOY-GOOGLE", "LBG-ENVOY-CONTROLS")),
-            "A platform with controls can make monitoring part of the operating process as AI use scales. The disclosed collaboration is at Group and provider-brand scope.",
-            "Deployment breadth, control effectiveness, net benefits and the legal contracting entity remain unverified.",
-        )
+        return lloyds_capability(data, insight=True)
     if ctx.scope == "banking" and ctx.stream == "landscape" and not (ctx.detail or ctx.agenda or ctx.selected):
         item = v.force_view(ctx, "UK-VALUE", data)
         return interpretation(
