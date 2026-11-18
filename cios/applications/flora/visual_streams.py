@@ -113,8 +113,10 @@ def resolve(path,query):
  if binding['kind']=='country':
   if layer!='enterprises' or selected not in ('','banking','technology','aviation'):raise ValueError('Country context unavailable')
  else:
-  if selected not in ('',*BANKS,'tsb','nationwide','starling'):raise ValueError('Enterprise selection unavailable')
-  if binding['kind']=='enterprise' and selected not in ('',binding['slug']):raise ValueError('Enterprise context mismatch')
+  if scope=='banking':
+   from .banking_value_system import STAGES
+   if selected not in ('',*BANKS,'tsb','nationwide','starling',*STAGES):raise ValueError('Banking selection unavailable')
+  elif selected not in ('',binding['slug']):raise ValueError('Enterprise selection unavailable')
  agenda=query.get('agenda',[''])[0]
  if agenda and agenda not in leadership_agenda.KEYS[scope]:raise ValueError('Leadership view unavailable')
  for key in ('selected','detail','agenda'):

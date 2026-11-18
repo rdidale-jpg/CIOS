@@ -12,6 +12,7 @@ from pathlib import Path
 from types import MappingProxyType
 
 from . import visual_streams as v, design_system as ds, leadership_agenda as agenda
+from . import banking_value_system as banking_value
 from . import intelligence_presentation as p
 from .security import verified_service_read
 
@@ -108,6 +109,7 @@ def _scene(ctx,rows,suffix,issues):
         href=v.url(ctx,detail='',agenda=ctx.agenda or issues[0].key)+'#agenda-insight'
         body+='<a class="subject spot" data-label-id="leadership-agenda" href="'+e(href,quote=True)+'" style="--x:51%;--y:85%">Leadership Agenda</a>'
     body+='</figure><p class="art-fallback">All subjects remain available below.</p>'
+    if ctx.scope=='banking':body+=banking_value.navigation(ctx)
     # UK keeps all twenty original section labels, with only three researched
     # exits. Other scenes disclose only supplementary/inert labels once.
     extra=rows if scene=='uk-landscape'else[r for r in rows if r['id']not in positions or not r['href']]
@@ -266,6 +268,7 @@ def _research_render(ctx,headers=None,*,financial_run_id=''):
     if not body:body=_overview(ctx,data,issues)
     from .financial_intelligence import analyst
     body+=analyst.navigation(ctx,headers)
+    if ctx.scope=='banking':body+=banking_value.review_relationship()
     return _research_frame(ctx,headers,data,issues,entries,body)
 
 
@@ -306,8 +309,8 @@ def _bank_picker(ctx,data,issues):
 
 def _editorial_banking(ctx,data,issues,headers):
     from .financial_intelligence import analyst
-    if ctx.selected=='nationwide' and ctx.stream=='landscape':
-        pass  # Private composition is held within its verified read below.
+    if ctx.stream=='landscape' and ctx.selected in banking_value.STAGES:
+        return banking_value.landscape(ctx)
     selected=agenda.bank_service_issue(ctx.selected,data) if (ctx.selected in agenda.BANK_SERVICE and
         (not agenda.BANK_SERVICE[ctx.selected][2] or any(r.key=='service-landscape' for r in issues))) else None
     if selected and ctx.stream=='landscape':
@@ -331,7 +334,7 @@ def _editorial_banking(ctx,data,issues,headers):
         fact=v.force_view(ctx,'LBG-ENVOY-CONTROLS',data)
         if fact and p.eligible(fact):
             body+='<section class="force-story"><span class="force-number" aria-hidden="true">0'+str(n+1)+'</span><div><h2>Lloyds: AI in the operating model</h2>'+p.render(fact)+'</div></section>'
-        return body+'</div>'+_bank_picker(ctx,data,issues)
+        return body+'</div>'+banking_value.historical_pulse(ctx,issues)+_bank_picker(ctx,data,issues)
     body='<p class="eyebrow">UK Banking · Landscape</p><h1>Where money meets the economy</h1><p class="editorial-lead">Deposits fund lending. Payments connect households and businesses.</p>'
     facts=_facts(data,['UK-RATE-NOV26']);rate=next((f for f in facts if f.value is not None),None)
     metrics=[]
@@ -345,7 +348,7 @@ def _editorial_banking(ctx,data,issues,headers):
     for key,title in [('provider-oversight','Resilience spans the ecosystem'),('reporting-change','The reporting landscape is changing')]:
         row=next((r for r in issues if r.key==key),None)
         if row:body+='<section data-intelligence="'+key+'"><h2>'+title+'</h2>'+p.render(_editorial_conclusion(row))+'</section>'
-    return body+'</div>'+_bank_picker(ctx,data,issues)
+    return body+'</div>'+banking_value.landscape(ctx)+_bank_picker(ctx,data,issues)
 
 
 def _legal_notice(ctx,data):
@@ -373,7 +376,7 @@ def _frame(ctx,headers,data,issues,entries,body):
     identity=v.SCOPES[ctx.scope].get('identity')or data[v.SCOPES[ctx.scope]['identity_key']]
     title='United Kingdom'if ctx.scope=='uk'else data['industry_name'if ctx.scope=='banking'else'enterprise_name']
     layers='' if ctx.scope=='uk' else '<nav class="context-nav" aria-label="Context layers">'+''.join('<a href="'+e(v.url(ctx,layer=k),quote=True)+'"'+(' aria-current="page"'if ctx.layer==k else'')+'>'+e(label)+'</a>' for k,label in v.LAYERS.items())+'</nav>'
-    head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'+EDITORIAL_STYLE
+    head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'+EDITORIAL_STYLE+banking_value.STYLE
     return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+v.SCOPES[ctx.scope]['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(ctx,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'"><img class="watermark" src="'+_asset(watermark)+'" alt="" aria-hidden="true"><article class="workspace editorial-workspace">'+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
 
 
@@ -406,7 +409,8 @@ def render(ctx,headers=None,*,financial_run_id=''):
         elif ctx.detail:
             spot=next(s for s in v.geometry()[ctx.scope+'-'+ctx.stream]['spots']if s['id']==ctx.detail)
             body=v._detail(ctx,spot,data).replace('<h2 id="insight-title">','<h1 id="insight-title">',1).replace('</h2>','</h1>',1)
-            if ctx.scope=='lloyds' and ctx.detail=='technology' and v.detail_claims(ctx,spot,data):body+='<p class="material">Published partnerships do not specify contract value or workshare.</p>'
+            if ctx.scope=='lloyds' and ctx.detail=='technology':
+                body+=banking_value.lloyds_scope(data)
         elif ctx.scope=='lloyds' and ctx.stream=='inside':
             facts=_facts(data,['LBG-Q326-DEPOSITS','LBG-Q326-PROFIT','LBG-A2030-CIR'])
             body='<p class="eyebrow">Lloyds Banking Group</p><h1>Funding, earnings and efficiency</h1>'+''.join(p.render(f) for f in facts)
@@ -414,7 +418,11 @@ def render(ctx,headers=None,*,financial_run_id=''):
             if row:body+='<section data-intelligence="funding-base"><h2>Customer funding</h2>'+p.render(_editorial_conclusion(row))+'</section>'
             service=next((r for r in issues if r.key=='service-recovery'),None)
             if service:body+='<section data-intelligence="service-recovery"><h2>Customer complaints</h2>'+p.render(service.conclusion)+'</section>'
-        else:body=_overview(ctx,data,issues)
+        else:
+            body=_overview(ctx,data,issues)
+            if ctx.scope=='uk' and ctx.stream=='forces':
+                banking_forces=v.url(v.Context('banking','forces'))
+                body+='<nav class="banking-links" aria-label="Industry context"><a href="'+e(banking_forces,quote=True)+'">Explore Banking forces</a></nav>'
         return _frame(ctx,headers,data,issues,entries,body)
 
 
