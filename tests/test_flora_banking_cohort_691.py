@@ -49,3 +49,14 @@ def test_infrastructure_is_contextual_and_not_a_participant_register():
     assert "Conceptual" in html and "bilateral dependencies are unverified" in html
     assert "4 November 2026" not in html and "Pay.UK" not in html
     assert not public_request_target("/industries/banking?selected=boe&stream=inside&workspace=private")
+
+
+@pytest.mark.parametrize("subject,period", [
+    ("natwest", "1 January–30 June 2026"),
+    ("hsbc-uk", "1 January–30 June 2026"),
+    ("nationwide", "1 October 2025–31 March 2026"),
+    ("starling", "1 October 2025–31 March 2026"),
+])
+def test_legal_service_period_is_subject_specific(subject, period):
+    html = main(v.render("/industries/banking", {"stream": ["inside"], "selected": [subject]}))
+    assert period in html
