@@ -1,0 +1,29 @@
+# ET-INTEGRATE-1 · easyJet operating system
+
+Implementation for [#672](https://github.com/rdidale-jpg/CIOS/issues/672) on verified main `ad5345f7379e3b22b4a2ef012b7036170726e8d0`, the merge of the owner-approved Facts-first foundation. [That head's predecessor passed the hosted gate](https://github.com/rdidale-jpg/CIOS/actions/runs/44298670552). [The accepted experience contract](../../product/flora-experience/FLORA-Experience-Contract-v1.0.md) governs this implementation.
+
+Open the existing easyJet Enterprise page, follow **Explore the illustrated easyJet operating system**, select **Inside**, then choose a capability over the illustration. The alternate text links select the same views. Facts is the default. Choosing Insight keeps the exact capability, perspective and evidence scope. The native links support reload, direct sharing, Back/Forward and JavaScript-off browsing. New capability links reset to Facts. Landscape sets business context, Inside shows activities and enablers, and Forces explains relevant constraints. Available dated evidence is labelled within the existing perspectives.
+
+## Actual application previews
+
+The before screenshots show the existing easyJet route on the verified main. The revised screenshots show the bounded native FLORA route in an isolated loopback Chromium app. The pre-integration route had no matching reading-mode or capability states.
+
+| Viewport | Before | Fleet Operations | Network Planning | Customer Service |
+| --- | --- | --- | --- | --- |
+| Desktop | [Before](previews/before-desktop.jpg) | [Facts](previews/fleet-operations-facts-desktop.jpg) · [Insight](previews/fleet-operations-insight-desktop.jpg) | [Facts](previews/network-planning-facts-desktop.jpg) · [Insight](previews/network-planning-insight-desktop.jpg) | [Facts](previews/customer-service-facts-desktop.jpg) · [Insight](previews/customer-service-insight-desktop.jpg) |
+| iPad landscape | [Before](previews/before-ipad-landscape.jpg) | [Facts](previews/fleet-operations-facts-ipad-landscape.jpg) · [Insight](previews/fleet-operations-insight-ipad-landscape.jpg) | [Facts](previews/network-planning-facts-ipad-landscape.jpg) · [Insight](previews/network-planning-insight-ipad-landscape.jpg) | [Facts](previews/customer-service-facts-ipad-landscape.jpg) · [Insight](previews/customer-service-insight-ipad-landscape.jpg) |
+| iPad portrait | [Before](previews/before-ipad-portrait.jpg) | [Facts](previews/fleet-operations-facts-ipad-portrait.jpg) · [Insight](previews/fleet-operations-insight-ipad-portrait.jpg) | [Facts](previews/network-planning-facts-ipad-portrait.jpg) · [Insight](previews/network-planning-insight-ipad-portrait.jpg) | [Facts](previews/customer-service-facts-ipad-portrait.jpg) · [Insight](previews/customer-service-insight-ipad-portrait.jpg) |
+| Mobile 390px | [Before](previews/before-mobile.jpg) | [Facts](previews/fleet-operations-facts-mobile.jpg) · [Insight](previews/fleet-operations-insight-mobile.jpg) | [Facts](previews/network-planning-facts-mobile.jpg) · [Insight](previews/network-planning-insight-mobile.jpg) | [Facts](previews/customer-service-facts-mobile.jpg) · [Insight](previews/customer-service-insight-mobile.jpg) |
+| Mobile 320px, JS off | [Before](previews/before-mobile-320.jpg) | [Facts](previews/fleet-operations-facts-mobile-320.jpg) · [Insight](previews/fleet-operations-insight-mobile-320.jpg) | [Facts](previews/network-planning-facts-mobile-320.jpg) · [Insight](previews/network-planning-insight-mobile-320.jpg) | [Facts](previews/customer-service-facts-mobile-320.jpg) · [Insight](previews/customer-service-insight-mobile-320.jpg) |
+
+[Expanded mobile scene](previews/scene-mobile.jpg) · [Expanded 320px scene](previews/scene-mobile-320.jpg) · [200% zoom](previews/customer-service-insight-200pct.jpg)
+
+## Ownership, design and rollback
+
+The existing `visual_streams` resolves finite links, `visual_panels` renders Top/Left/Main, and `reading_views` composes the existing reading control and interpretation. The easyJet module binds a small set of labels, diagrams and validated disclosures to the existing Aviation registered path. It holds no private or durable model records. `/enterprises/easyjet/preview` is additive. The previous route and original content-addressed paintings remain intact. Native links replace the draft's separate progressive renderer, with the same visual shell and selected subject recovered on page navigation.
+
+[Draft #662](https://github.com/rdidale-jpg/CIOS/pull/662) remains independent at `ab44ca164b3563520ce63c756a0245cf1bc7388c`. We selectively reused its capability labels and four reviewed disclosure bindings. Its renderer, flat vector, JavaScript enhancement and permanent change view are outside the implementation. The new illustration is original AI-generated editorial art for this PR, converted to WebP. It depicts a fictional airport in watercolour/gouache, with accessible overlays positioned near conceptual aircraft, runway and customer areas. The image has no operational labels, real routes, airport layout or quantitative content. Artistic parity requires owner judgment.
+
+Revert this PR to remove the illustrated route, link, presentation bindings and new asset. No migration or operational state rollback is needed. The compatibility adapter checks exact presentation bytes before handing earlier snapshots to the inherited validators. Comparator baselines remain unchanged.
+
+Run `PYTHONPATH=. python tools/research/et_integrate_browser.py /tmp/et-integrate-previews` with Chromium and Playwright, plus the new pytest suite. Browser proof checks all three capabilities, both readings, all three perspectives, focus, touch, viewport fit, 200% CSS zoom, reduced motion, reload, history and JavaScript-off navigation. Browser and test outcomes are tracked on the draft PR. Independent review of the old #662 prototype informed the integration. A fresh independent critique of this head remains outstanding.

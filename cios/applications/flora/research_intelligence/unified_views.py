@@ -173,6 +173,9 @@ def enterprise_page(slug='lloyds',lens='operating-model',headers=None):
     from .visual_specs import build_intelligence_specs
     if lens in ('operating-model','timeline'):
         body=breadcrumb(True,d)+f"<header class='vi-page-head' id='content'><p class='ux-kicker'>Enterprise Twin / {e(d['industry_name'])}</p><h1>{e(d['enterprise_name'])}.</h1><p>How the business works. What is changing. Where the evidence leads.</p></header>"+tabs
+        if slug=='easyjet' and lens=='operating-model':
+            from ..visual_streams import EASYJET_ROUTE
+            body+=f'<p><a href="{EASYJET_ROUTE}">Explore the illustrated easyJet operating system</a></p>'
         if slug=='lloyds' and lens=='operating-model':
             from .intelligence_depth import operating_depth
             body+=operating_depth(d)

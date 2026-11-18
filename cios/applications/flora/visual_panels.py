@@ -14,6 +14,7 @@ from types import MappingProxyType
 from . import visual_streams as v, design_system as ds, leadership_agenda as agenda
 from . import intelligence_presentation as p
 from . import reading_views as reading
+from . import easyjet_capabilities as easyjet
 from .security import verified_service_read
 
 DESIGN='f4059a34a55277adbd2a2337239827cab96d962e'
@@ -53,6 +54,8 @@ def _trail(ctx):
     root=v.url(v.Context('uk','landscape',selected='banking'))
     if ctx.scope=='uk':return '<span>United Kingdom</span>'
     text='<a href="'+e(root,quote=True)+'">UK</a><span aria-hidden="true">/</span>'
+    if ctx.scope=='easyjet':
+        return text+'<a href="/industries/aviation">Aviation</a><span aria-hidden="true">/</span><span>easyJet</span>'
     if ctx.scope=='banking':
         if ctx.selected=='nationwide':
             return text+'<a href="/industries/banking">Banking</a><span aria-hidden="true">/</span><span>Nationwide</span>'
@@ -65,7 +68,7 @@ def _top(ctx,headers):
     body='<header id="top" data-region="top"><a class="skip" href="#visual-content">Skip to main content</a><div class="global">'
     body+=ds.header(headers=headers,compact=True,embedded=True,research_tools=__import__('cios.applications.flora.access',fromlist=['is_cios_owner']).is_cios_owner(headers))+'<span class="identity" aria-label="Current account role">'+_role(headers)+'</span>'+('<a class="account-entry" href="/auth/sign-in">Sign in</a>' if _role(headers)=='Guest' else '')+'</div>'
     body+='<div class="context"><nav aria-label="Current scope">'+_trail(ctx)+'</nav><nav class="stream-switcher" aria-label="Insight streams">'
-    for stream in v.SCOPES[ctx.scope]['streams']:
+    for stream in v.PRESENTATIONS[ctx.scope]['streams']:
         body+='<a id="stream-'+stream+'" href="'+e(v.stream_url(ctx,stream)+'#stream-'+stream,quote=True)+'"'+(' aria-current="page"'if ctx.stream==stream else'')+'>'+stream.title()+'</a>'
     return body+'</nav></div><!--flora-system-notice--></header>'
 
@@ -123,6 +126,7 @@ def _scene(ctx,rows,suffix,issues):
 
 
 def _left(ctx,data,rows,issues):
+    if ctx.scope=='easyjet':return easyjet.left(ctx)
     return ('<aside id="left" data-region="left" aria-label="Visual exploration"><div class="wide-scene">'
         +_scene(ctx,rows,'',issues)+'</div><details class="compact-scene"><summary>Explore the scene</summary>'
         +_scene(ctx,rows,'-compact',issues)+'</details></aside>')
@@ -376,17 +380,23 @@ def _frame(ctx,headers,data,issues,entries,body):
     """Ordinary three-panel frame emits no research disclosures or source URLs."""
     if __import__('cios.applications.flora.access',fromlist=['is_cios_owner']).is_cios_owner(headers):
         ds.context_link(v.url(ctx)+'&lens=inspection' if ctx.scope in {'banking','lloyds'} else '/research','Research inspection')
-    scene=ctx.scope+'-'+ctx.stream;manifest=asset_manifest();watermark=manifest['watermarks'][scene]
-    identity=v.SCOPES[ctx.scope].get('identity')or data[v.SCOPES[ctx.scope]['identity_key']]
-    title='United Kingdom'if ctx.scope=='uk'else data['industry_name'if ctx.scope=='banking'else'enterprise_name']
-    layers='' if ctx.scope=='uk' else '<nav class="context-nav" aria-label="Context layers">'+''.join('<a href="'+e(v.url(ctx,layer=k),quote=True)+'"'+(' aria-current="page"'if ctx.layer==k else'')+'>'+e(label)+'</a>' for k,label in v.LAYERS.items())+'</nav>'
+    binding=v.PRESENTATIONS[ctx.scope]
+    identity=binding.get('identity')or data[binding['identity_key']]
+    title=binding['title'] if ctx.scope in {'uk','easyjet'} else data['industry_name'if ctx.scope=='banking'else'enterprise_name']
+    watermark=''
+    if ctx.scope!='easyjet':
+        asset=asset_manifest()['watermarks'][ctx.scope+'-'+ctx.stream]
+        watermark='<img class="watermark" src="'+_asset(asset)+'" alt="" aria-hidden="true">'
+    layers='' if ctx.scope in {'uk','easyjet'} else '<nav class="context-nav" aria-label="Context layers">'+''.join('<a href="'+e(v.url(ctx,layer=k),quote=True)+'"'+(' aria-current="page"'if ctx.layer==k else'')+'>'+e(label)+'</a>' for k,label in v.LAYERS.items())+'</nav>'
     head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'+EDITORIAL_STYLE+reading.STYLE
-    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+v.SCOPES[ctx.scope]['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(ctx,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'"><img class="watermark" src="'+_asset(watermark)+'" alt="" aria-hidden="true"><article class="workspace editorial-workspace">'+reading.selector(ctx)+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
+    if ctx.scope=='easyjet':head+=easyjet.STYLE
+    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(ctx,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+watermark+'<article class="workspace editorial-workspace">'+reading.selector(ctx)+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
 
 
 def render(ctx,headers=None,*,financial_run_id=''):
     from .supabase_identity import public_read
     with p.editorial_view(ctx.reading), public_read():
+        if ctx.scope=='easyjet':return _frame(ctx,headers,None,(),(),easyjet.main(ctx))
         if financial_run_id:
             from .financial_intelligence import analyst
             return analyst.render_selected(ctx,financial_run_id,headers=headers)

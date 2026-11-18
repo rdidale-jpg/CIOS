@@ -33,8 +33,9 @@ def public_route_catalog(include_owner_inspection=False):
     add(('/visual-v2',), 'visual_v2_economy', 'Finite UK public statistical presentation only; no private owners or canonical promotion', ('market',))
     add(('/pestle','/visual-v2/pestle'), 'visual_v2_pestle', 'UK-only existing macro source adapter; no enterprise applicability or mutation', ('market','factor'))
     add(tuple('/visual-v2/assets/'+name for name in ('styles','interactions','uk-artwork','pestle-artwork','pestle-mobile-artwork')), 'visual_v2_asset', 'Exact conceptual local assets only')
-    from .visual_streams import asset_files, ASSET_BASE
+    from .visual_streams import asset_files, ASSET_BASE, EASYJET_ROUTE
     add(tuple(ASSET_BASE+n for n in asset_files()), 'visual_stream_asset', 'Exact content-addressed public artwork or presentation code only')
+    add((EASYJET_ROUTE,), 'visual_enterprise', 'Finite Aviation research presentation', ('stream','detail','reading'))
     add(('/intelligence',), '_flora_intelligence_page', 'Public source discovery shell; protected owners remain filtered', ('tab',))
     add(('/digital-twins',), 'digital_twins_landing_page', 'Public source discovery shell; protected owners remain filtered')
     add(('/blueprint-import',), 'import_blueprint_entry_page', 'Public closed setup; no protected registry enumeration')
