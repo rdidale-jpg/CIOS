@@ -113,3 +113,14 @@ def test_declared_source_configuration_is_complete_and_is_not_permission_or_mode
     assert len(d['seeded_watchlist'])==43
     assert all(t['public_eligibility'].startswith('not_established')and 'not_an_Enterprise_Model'in t['scope']for t in d['organisation_targets'])
     assert {'Utilities','Energy','Public Sector'}<={s['sector']for s in d['sources']}
+
+
+def test_profile_sources_are_inventoried_separately_without_creating_enterprises_or_permission():
+    import json
+    d=qa.read('Declared-Runtime-Inputs.json')
+    profile=d['collection_profiles'][0]
+    source=json.loads((qa.ROOT/profile['owner']).read_text())
+    assert profile['sources']==source['sources']and len(profile['sources'])==8
+    assert {s['source_id']for s in profile['sources']}.isdisjoint({s['source_id']for s in d['sources']})
+    assert len(d['configuration_files'])==5
+    assert 'not actual collection' in profile['scope']

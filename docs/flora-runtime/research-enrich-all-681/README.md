@@ -44,3 +44,5 @@ Counts identify audit artefacts and scope, not research completion percentages. 
 - [ ] Accept finite follow-on waves; do not interpret this as canonical promotion or public admission.
 
 Rollback: close this draft or revert its additive research folder and isolated tests after any separately authorised future integration. No migration, source deletion, canonical restoration, account change, merge or deployment is involved. **Stop for owner review.**
+
+The native-source census preserves the 150-record `SOURCES` tuple separately from the BT collection profile's **eight additional configured sources**. All five tracked Flora JSON configuration files are inventoried by owner/hash/top-level fields, including Financial calibration inputs. `profile_sources()` can select that profile; neither its declared `live_authoritative` mode nor its identity establishes an actual run, accepted Model or new permission. These are separate owner-qualified namespaces, not eight additional enterprises or a new merged Source registry.
