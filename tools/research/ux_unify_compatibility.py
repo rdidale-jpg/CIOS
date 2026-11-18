@@ -20,8 +20,16 @@ INTEGRATION = {
     "cios/applications/flora/web/app.py": "bec05ce0f6ee8e1a6096e4fa645b136762a6141db1b3e7f410e887c8dadbd925",
 }
 
+BANKING_BASE="12f2aaef2e988222d4c0d79dbcc454ba3603a014"
+BANKING={
+    "cios/applications/flora/visual_panels.py": "04d1fe6a45004606c111cb72eefce11f56022b20b4d1d7a32d58e08f87dd06b7",
+    "cios/applications/flora/visual_streams.py": "a968e8b5849e78789efa1fa0c6b517f241ef08071660f3d357ac7c4951c4682d",
+}
+
 def predecessor(root, path):
     current = (Path(root) / path).read_bytes()
+    if path in BANKING and sha256(current).hexdigest() == BANKING[path]:
+        current = subprocess.check_output(["git", "show", f"{BANKING_BASE}:{path}"], cwd=root)
     if path in INTEGRATION and sha256(current).hexdigest() == INTEGRATION[path]:
         current = subprocess.check_output(["git", "show", f"{INTEGRATION_BASE}:{path}"], cwd=root)
     if path not in PINS or sha256(current).hexdigest() != PINS[path]:
