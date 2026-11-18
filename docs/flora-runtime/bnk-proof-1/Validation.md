@@ -1,0 +1,7 @@
+# Validation and review
+
+The browser proof used Chromium and the actual `FloraWebHandler` on an isolated loopback server. Before captures use the main renderer and resolver at the pinned parent. Desktop, iPad landscape and portrait, 390px and 320px exercised UK → Banking → payment role → Nationwide, and Banking Forces → Lloyds technology. Reload and Back/Forward retained state. Desktop used keyboard activation, tablet/mobile used touch and 320px ran with JavaScript disabled. Width checks cover payment Main and Lloyds at 200% browser CSS zoom. Anonymous direct inspection returned 403. Captures are local application output.
+
+The new regression tests cover finite selection, rejected unknown and duplicate selectors, pin/identity and supersession changes, CTP rights/private/withdrawal/host mutations, independent Banking availability and the authorised review boundary. Existing tests cover private Financial run isolation, exact reconciliations, original scene art, inherited route and access semantics and source withdrawal. See the PR for exact-head hosted and local results.
+
+Independent specialists were unavailable. The implementation review inspected actual screenshots, condensed the change to a historical pulse and kept named candidate evidence behind Owner inspection. A broader bespoke illustration, fuller non-bank capability screens, richer enterprise leadership/operating analysis and additional public evidence are outstanding. The owner should review visual composition and eligible evidence separately before any release.

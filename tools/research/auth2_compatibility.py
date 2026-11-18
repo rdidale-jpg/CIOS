@@ -26,7 +26,8 @@ def old(path):
 
 
 def reviewed_predecessor(root,path):
-    current=(Path(root)/path).read_bytes()
+    from tools.research.bnk_proof_compatibility import predecessor
+    current=predecessor(root,path)
     if path not in ALLOWED:
         return current
     previous=old(path)
