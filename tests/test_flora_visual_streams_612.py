@@ -77,7 +77,8 @@ def test_twenty_original_labels_available_industries_and_two_selection_journey()
  assert all('available'in a['class']and'broader section'in a['aria-label']for a in links)
  bank=v.render('/industries/banking',{})
  for slug in v.BANKS:assert 'href="/enterprises/'+slug+'"'in bank
- assert v.resolve('/enterprises/lloyds',{}).stream=='inside'
+ assert v.resolve('/enterprises/lloyds',{}).stream=='landscape'
+ assert v.resolve('/enterprises/lloyds',{'detail':['economics']}).stream=='inside'
  assert '/groups'not in bank and 'banking-groups'not in bank
 
 
@@ -108,7 +109,10 @@ def test_every_interactive_detail_is_server_addressable_without_js(scope,stream)
    continue
   assert 'id="insight" tabindex="-1" aria-labelledby="insight-title"'in html
   assert 'id="insight-title"'in html and 'aria-label="Close 'in html
-  if stream=='forces':assert 'data-semantic-type="insight"'in html and 'A useful next question'not in html
+  if stream=='forces':
+   assert 'data-semantic-type="insight"'not in html
+   insight=v.render(path,{'stream':[stream],'detail':[spot['id']],'reading':['insight']})
+   assert 'data-semantic-type="insight"'in insight and 'A useful next question'not in insight
 
 
 def test_current_source_facts_targets_periods_and_truthful_unknowns():

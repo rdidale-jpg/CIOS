@@ -117,8 +117,8 @@ _editorial_sources = ContextVar('flora_editorial_sources', default=None)
 
 
 @contextmanager
-def editorial_view():
-    token = _editorial.set(True)
+def editorial_view(reading=True):
+    token = _editorial.set(reading)
     source_token = _editorial_sources.set([])
     try:
         yield
@@ -148,6 +148,7 @@ def editorial(item: Statement, *, compact=False):
     Full records/rendering stay in the existing Research owner. Material scope,
     periods and uncertainty are composed explicitly by each existing view.
     """
+    if _editorial.get()=='facts' and item.semantic_type in {'insight','hypothesis','assumed'}:return ''
     if not eligible(item): return ''
     note_editorial_sources(item.sources)
     label = LABELS[item.semantic_type]

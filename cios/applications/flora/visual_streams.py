@@ -25,7 +25,7 @@ DESIGN='c6bf2280594922db6951c5c36205984c85ca4aea'
 SCOPES=MappingProxyType({
  'uk':{'route':'/','kind':'country','streams':('landscape','forces'),'title':'United Kingdom','identity':'GB'},
  'banking':{'route':'/industries/banking','kind':'industry','streams':('landscape','forces'),'domain':'banking','identity_key':'industry_twin_id','sic':'K'},
- 'lloyds':{'route':'/enterprises/lloyds','kind':'enterprise','streams':('inside','landscape','forces'),'domain':'banking','identity_key':'enterprise_twin_id','slug':'lloyds',
+ 'lloyds':{'route':'/enterprises/lloyds','kind':'enterprise','streams':('landscape','inside','forces'),'domain':'banking','identity_key':'enterprise_twin_id','slug':'lloyds',
            'headline_metrics':(('LBG-Q326-DEPOSITS','Group deposits'),('LBG-Q326-PROFIT','Group statutory pretax profit'))},
 })
 ROUTES={r['route']:key for key,r in SCOPES.items()} | {'/flora':'uk','/flora/':'uk'}
@@ -48,6 +48,7 @@ class Context:
  selected:str=''
  detail:str=''
  agenda:str=''
+ reading:str='facts'
 
 
 def artwork():
@@ -103,11 +104,13 @@ def asset(name):
 
 
 def resolve(path,query):
- if path not in ROUTES or set(query)-{'stream','market','layer','selected','detail','agenda'} or any(not isinstance(v,list) or len(v)!=1 for v in query.values()):
+ if path not in ROUTES or set(query)-{'stream','market','layer','selected','detail','agenda','reading'} or any(not isinstance(v,list) or len(v)!=1 for v in query.values()):
   raise ValueError('Visual journey unavailable')
  scope=ROUTES[path];binding=SCOPES[scope]
  if query.get('market',['GB'])!=['GB']:raise ValueError('Country unavailable')
- stream=query.get('stream',[binding['streams'][0]])[0]
+ # Historic unqualified detail URLs opened the original Inside scene.
+ default='inside' if scope=='lloyds' and 'detail' in query else binding['streams'][0]
+ stream=query.get('stream',[default])[0]
  layer=query.get('layer',['enterprises'])[0];selected=query.get('selected',[''])[0];detail=query.get('detail',[''])[0]
  if stream not in binding['streams'] or layer not in LAYERS:raise ValueError('Insight view unavailable')
  if binding['kind']=='country':
@@ -123,7 +126,9 @@ def resolve(path,query):
  if detail and detail not in {s['id']for s in spots}:raise ValueError('Selected detail unavailable')
  if detail and binding['kind']=='country' and stream=='landscape':raise ValueError('District detail unavailable')
  if binding['kind']=='industry' and detail in BANKS and selected not in ('',detail):raise ValueError('Selected bank mismatch')
- return Context(scope,stream,layer,selected,detail,agenda)
+ reading=query.get('reading',['facts'])[0]
+ if reading not in ('facts','insight'):raise ValueError('Reading mode unavailable')
+ return Context(scope,stream,layer,selected,detail,agenda,reading)
 
 
 def url(ctx,**changes):
@@ -133,6 +138,7 @@ def url(ctx,**changes):
  if ctx.selected:q['selected']=ctx.selected
  if ctx.detail:q['detail']=ctx.detail
  if ctx.agenda:q['agenda']=ctx.agenda
+ if changes.get('reading')=='insight':q['reading']='insight'
  return SCOPES[ctx.scope]['route']+'?'+urlencode(q)
 
 
@@ -150,7 +156,9 @@ def stream_url(ctx,stream):
    subject=topics.get((ctx.stream,detail))
    detail=next((key for(s,key),topic in topics.items()if s==stream and subject and topic==subject),'')
   elif detail not in target:detail=''
- return url(ctx,stream=stream,detail=detail)
+ reading=ctx.reading if detail==ctx.detail or detail else 'facts'
+ agenda=ctx.agenda if stream==ctx.stream else ''
+ return url(ctx,stream=stream,detail=detail,agenda=agenda,reading=reading if agenda==ctx.agenda else 'facts')
 
 
 def current_data(ctx):
