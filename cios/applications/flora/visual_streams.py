@@ -133,9 +133,9 @@ def resolve(path,query):
   if set(query)-{'stream','detail','reading'} or any(not isinstance(values,list) or len(values)!=1 for values in query.values()):
    raise ValueError('Unavailable easyJet selector')
   stream=query.get('stream',['landscape'])[0]
-  detail=query.get('detail',['fleet-operations'])[0]
+  detail=query.get('detail',[''])[0]
   reading=query.get('reading',['facts'])[0]
-  if stream not in PRESENTATIONS['easyjet']['streams'] or detail not in CAPABILITIES or reading not in ('facts','insight'):
+  if stream not in PRESENTATIONS['easyjet']['streams'] or ('detail' in query and detail not in CAPABILITIES) or reading not in ('facts','insight'):
    raise ValueError('Unavailable easyJet view')
   return Context('easyjet',stream,detail=detail,reading=reading)
 
@@ -159,6 +159,12 @@ def resolve(path,query):
   if key in query and not query[key][0]:raise ValueError('Empty visual selector')
  spots=geometry()[scope+'-'+stream]['spots']
  valid_details={s['id']for s in spots}
+ if stream=='forces' and scope in {'uk','banking'}:
+  from . import experience_composition
+  if scope=='uk':
+   valid_details.update(experience_composition.UK_DIMENSIONS)
+  elif not (agenda or selected):
+   valid_details.update(experience_composition.BANKING_FORCES)
  if scope=='banking' and stream=='landscape':
   from .banking_ecosystem import STAGES
   valid_details.update(STAGES)
@@ -218,6 +224,8 @@ def current_data(ctx):
 # Editorial interpretation/question policy from the accepted design. Claims,
 # values, dates, kinds and source rights are always resolved from their owners.
 FORCE_POLICY={
+ 'political':('Tender requirements can change how suppliers demonstrate delivery commitments. Applicability depends on the specific procurement.','Scope and transition rules require a tender-level check.',None),
+ 'social':('Measurable commitments can change how suppliers report social outcomes during delivery.','The policy provides no evidence about delivery outcomes or population-wide social trends.',None),
  'economic':('Growth changes the national output context; enterprise effects depend on actual exposure.','UK GDP is not an industry or enterprise growth rate.',None),
  'technological':('Operational resilience includes technology and supplier dependencies.','Aggregate cyber evidence proves no company incident or unmet need.',None),
  'legal':('The reviewed cyber reform is a legislative proposal.','A proposal is not an effective duty or evidence of non-compliance.',None),
