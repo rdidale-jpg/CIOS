@@ -1,0 +1,122 @@
+[
+  {
+    "id": "G-IDENTITY",
+    "dimension": "identity",
+    "issue": "Transport Industry canonical root, candidate membership and all existing production import/acceptance statuses are unverified.",
+    "disposition": "No portable Enterprise ZIP or canonical import",
+    "next_evidence": "Existing Model/Factory owner selects scope and reconciles exact IDs through authorised read-only service; no invented root.",
+    "status": "open"
+  },
+  {
+    "id": "G-METADATA",
+    "dimension": "authority",
+    "issue": "ADR014/024 headers still say Draft while Architecture Authority Registry and body say Accepted.",
+    "disposition": "Metadata inconsistency recorded; registry resolves current accepted status, no text edited",
+    "next_evidence": "Chief Architect/registry owner reconciles metadata in separate work. IT001 remains Review; no promotion.",
+    "status": "open"
+  },
+  {
+    "id": "G-RAIL-CUT",
+    "dimension": "temporal",
+    "issue": "Whole-rail FY2025/26 release is scheduled26November2026, later than this cut.",
+    "disposition": "Retain FY2024/25 industry baseline alongside separately dated NR2025/26",
+    "next_evidence": "Refresh after actual release, preserve periods/geographies and avoid transfer double-counting.",
+    "status": "open"
+  },
+  {
+    "id": "G-TFL-SIZE",
+    "dimension": "technical",
+    "issue": "TfL annual report API PDF exceeded web text size; original quarter report independently retrieved.",
+    "disposition": "Quarter data explicitly unaudited, not final statutory accounts",
+    "next_evidence": "Obtain accessible statutory report from original publisher; reconcile exact differences, no substitute snippet.",
+    "status": "open"
+  },
+  {
+    "id": "G-FTS",
+    "dimension": "technical",
+    "issue": "Find a Tender notice076586-2026 returned403; no retry or bypass.",
+    "disposition": "No award, value, vendor, term or current opportunity adopted",
+    "next_evidence": "Use authorised access/original notice in later tranche; retain unverified lead only.",
+    "status": "open"
+  },
+  {
+    "id": "G-HA-RIGHTS",
+    "dimension": "source_use",
+    "issue": "Public investor PDF has Confidential/reproduction-recording restriction; public HTML offers separately published facts.",
+    "disposition": "No PDF archive/import/publication; numerical research cites public HTML; publication still unresolved",
+    "next_evidence": "Existing source owner assesses exact permitted use/identity without universal per-metric approvals or expanding rights.",
+    "status": "open"
+  },
+  {
+    "id": "G-UNDATED",
+    "dimension": "temporal",
+    "issue": "IAG SkyBreathe source lacks reliable publication date; stale events widget is not date.",
+    "disposition": "Cannot label 30/90-day catalyst or assign assumed29September date",
+    "next_evidence": "Obtain publisher metadata/dated official release; keep selection as undated reported relationship.",
+    "status": "open"
+  },
+  {
+    "id": "G-GEO",
+    "dimension": "coverage",
+    "issue": "Wales, NI/devolved roads/ferries/local mobility and shipping lines not deeply researched.",
+    "disposition": "UK scope is an explicit umbrella, not uniform verified national coverage",
+    "next_evidence": "Prioritise Transport for Wales, DfI/NITHC, Transport Scotland roads/ferries, one shipping and rail freight operator.",
+    "status": "open"
+  },
+  {
+    "id": "G-LEGAL",
+    "dimension": "identity",
+    "issue": "Brand/programme counterparts lack complete final legal contracts.",
+    "disposition": "No automatic NR/NRIL, Heathrow/SP, DPW/LGP or globalDHL/UK joins",
+    "next_evidence": "Inspect original accounts and executed public legal instruments; add owner-reviewed crosswalk only.",
+    "status": "open"
+  },
+  {
+    "id": "G-RENEWALS",
+    "dimension": "commercial",
+    "issue": "No verified renewal/expiry/open tender for the named supplier commitments.",
+    "disposition": "Commercial watch only, not actionable opportunities",
+    "next_evidence": "Check award notices, options, original schedules and current supplier selection; don’t infer dates from asset age.",
+    "status": "open"
+  },
+  {
+    "id": "G-SYSTEMS",
+    "dimension": "operating_model",
+    "issue": "Most internal teams, processes, systems, data ownership and technology contracts unverified.",
+    "disposition": "Capability maps explicitly conceptual",
+    "next_evidence": "Validate against actual operating manuals, issuer disclosures and separately verified contracts; no architecture invented.",
+    "status": "open"
+  },
+  {
+    "id": "G-UK-FIN",
+    "dimension": "financial",
+    "issue": "DHL UK, Royal Mail operator, London Gateway, TfL statutory accounts and current Network Rail company accounts not reconciled.",
+    "disposition": "Do not fill with global/holding-company financials",
+    "next_evidence": "Obtain original entity accounts, exact reporting periods and accounting definitions; keep unavailable values blank.",
+    "status": "open"
+  },
+  {
+    "id": "G-CROSS",
+    "dimension": "relationships",
+    "issue": "No named Banking/financial-services or Energy utility supply contract verified in this tranche.",
+    "disposition": "No invented finance/energy supplier edges; Sizewell programme association is narrower",
+    "next_evidence": "Research original financing facilities, traction supply/energy agreements and contracting entities.",
+    "status": "open"
+  },
+  {
+    "id": "G-LEADERS",
+    "dimension": "accountability",
+    "issue": "Current named leadership/decision rights uneven; historical roles retained only at source date.",
+    "disposition": "Role hypotheses are not buyer names or authority",
+    "next_evidence": "Reverify current official leadership and responsibility statements; no private contact data.",
+    "status": "open"
+  },
+  {
+    "id": "G-BENEFIT",
+    "dimension": "outcomes",
+    "issue": "Technology/AI deployment does not establish realised net economic benefit.",
+    "disposition": "No customer need, savings, budget or sales valuation invented",
+    "next_evidence": "Find outcome baselines, implementation costs, competing explanations and existing remedies before any seller action.",
+    "status": "open"
+  }
+]

@@ -1,0 +1,26 @@
+name: FLORA Transport research QA
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/flora-runtime/uk-transport-twin-research/**'
+      - 'tests/test_flora_transport_research.py'
+      - '.github/workflows/flora-transport-research.yml'
+permissions:
+  contents: read
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pytest
+      - run: python docs/flora-runtime/uk-transport-twin-research/validate.py
+      - run: python -m pytest tests/test_flora_transport_research.py -q

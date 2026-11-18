@@ -1,0 +1,228 @@
+[
+  {
+    "id": "network-rail",
+    "title": "Network Rail — reliability, renewals and connectivity",
+    "path": "dossiers/network-rail.md",
+    "entity_ids": [
+      "NR",
+      "NRIL",
+      "NR-BRAND"
+    ],
+    "subindustry": "rail-assets",
+    "claim_ids": [
+      "NR-1",
+      "NR-2",
+      "NR-3",
+      "IN-NR",
+      "HY-NR"
+    ],
+    "depth": "bounded analytical foundation; not a completed high-fidelity Twin",
+    "readiness": "Research-ready with conditions",
+    "governance": "candidate only"
+  },
+  {
+    "id": "rail-reform-firstgroup",
+    "title": "Passenger rail and FirstGroup — who carries revenue risk?",
+    "path": "dossiers/rail-reform-firstgroup.md",
+    "entity_ids": [
+      "FIRST",
+      "GBR",
+      "DFTO"
+    ],
+    "subindustry": "rail-operators",
+    "claim_ids": [
+      "GBR-1",
+      "FST-1",
+      "FST-2",
+      "FST-3",
+      "IN-FIRST"
+    ],
+    "depth": "bounded analytical foundation; not a completed high-fidelity Twin",
+    "readiness": "Research-ready with conditions",
+    "governance": "candidate only"
+  },
+  {
+    "id": "national-highways",
+    "title": "National Highways — output, interventions and cost visibility",
+    "path": "dossiers/national-highways.md",
+    "entity_ids": [
+      "NH"
+    ],
+    "subindustry": "highways",
+    "claim_ids": [
+      "NH-1",
+      "NH-2",
+      "IN-NH",
+      "HY-NH"
+    ],
+    "depth": "bounded analytical foundation; not a completed high-fidelity Twin",
+    "readiness": "Research-ready with conditions",
+    "governance": "candidate only"
+  },
+  {
+    "id": "tfl",
+    "title": "Transport for London — integrated mobility and constrained operating headroom",
+    "path": "dossiers/tfl.md",
+    "entity_ids": [
+      "TFL",
+      "LU"
+    ],
+    "subindustry": "urban",
+    "claim_ids": [
+      "TF-1",
+      "TF-2",
+      "TF-3",
+      "IN-TFL",
+      "HY-TFL"
+    ],
+    "depth": "bounded analytical foundation; not a completed high-fidelity Twin",
+    "readiness": "Research-ready with conditions",
+    "governance": "candidate only"
+  },
+  {
+    "id": "heathrow",
+    "title": "Heathrow — hub economics, regulated charges and capacity",
+    "path": "dossiers/heathrow.md",
+    "entity_ids": [
+      "HEATHROW",
+      "HSP"
+    ],
+    "subindustry": "aviation",
+    "claim_ids": [
+      "HA-1",
+      "HA-2",
+      "IN-HA"
+    ],
+    "depth": "bounded analytical foundation; not a completed high-fidelity Twin",
+    "readiness": "Research-ready with conditions",
+    "governance": "candidate only"
+  },
+  {
+    "id": "easyjet",
+    "title": "easyJet — reuse the existing airline/holidays intelligence",
+    "path": "dossiers/easyjet.md",
+    "entity_ids": [
+      "EASYJET"
+    ],
+    "subindustry": "aviation",
+    "claim_ids": [],
+    "depth": "bounded analytical foundation; not a completed high-fidelity Twin",
+    "readiness": "Research-ready with conditions",
+    "governance": "candidate only"
+  },
+  {
+    "id": "iag",
+    "title": "IAG — group fuel efficiency and airline-specific execution",
+    "path": "dossiers/iag.md",
+    "entity_ids": [
+      "IAG",
+      "OPENAIR"
+    ],
+    "subindustry": "aviation",
+    "claim_ids": [
+      "IA-1",
+      "IA-2",
+      "IN-IAG"
+    ],
+    "depth": "bounded analytical foundation; not a completed high-fidelity Twin",
+    "readiness": "Research-ready with conditions",
+    "governance": "candidate only"
+  },
+  {
+    "id": "dp-world",
+    "title": "DP World UK terminals — containers, rail and automation",
+    "path": "dossiers/dp-world.md",
+    "entity_ids": [
+      "DPW-UK",
+      "LGP"
+    ],
+    "subindustry": "maritime",
+    "claim_ids": [
+      "DP-1",
+      "DP-2",
+      "IN-DPW",
+      "HY-DPW"
+    ],
+    "depth": "bounded analytical foundation; not a completed high-fidelity Twin",
+    "readiness": "Research-ready with conditions",
+    "governance": "candidate only"
+  },
+  {
+    "id": "abp",
+    "title": "Associated British Ports — cargo, land and property economics",
+    "path": "dossiers/abp.md",
+    "entity_ids": [
+      "ABP"
+    ],
+    "subindustry": "maritime",
+    "claim_ids": [
+      "AP-1",
+      "AP-2",
+      "IN-ABP"
+    ],
+    "depth": "bounded analytical foundation; not a completed high-fidelity Twin",
+    "readiness": "Research-ready with conditions",
+    "governance": "candidate only"
+  },
+  {
+    "id": "royal-mail",
+    "title": "Royal Mail / IDS — regulated service reality and entity change",
+    "path": "dossiers/royal-mail.md",
+    "entity_ids": [
+      "RM",
+      "IDS"
+    ],
+    "subindustry": "road-logistics",
+    "claim_ids": [
+      "RM-1",
+      "IDS-1",
+      "IN-RM",
+      "HY-RM"
+    ],
+    "depth": "bounded analytical foundation; not a completed high-fidelity Twin",
+    "readiness": "Research-ready with conditions",
+    "governance": "candidate only"
+  },
+  {
+    "id": "dhl",
+    "title": "DHL UK — contract logistics is not global division turnover",
+    "path": "dossiers/dhl.md",
+    "entity_ids": [
+      "DHL-UK",
+      "DHL-GLOBAL"
+    ],
+    "subindustry": "road-logistics",
+    "claim_ids": [
+      "DH-1"
+    ],
+    "depth": "bounded analytical foundation; not a completed high-fidelity Twin",
+    "readiness": "Research-ready with conditions",
+    "governance": "candidate only"
+  },
+  {
+    "id": "devolved-and-institutions",
+    "title": "Devolved transport and institutional boundaries",
+    "path": "dossiers/devolved-and-institutions.md",
+    "entity_ids": [
+      "SCOT-GOV",
+      "SRH",
+      "SCOTRAIL",
+      "SLEEPER",
+      "NITHC",
+      "GBR",
+      "DFTO",
+      "DFT",
+      "ORR",
+      "OFCOM"
+    ],
+    "subindustry": "urban",
+    "claim_ids": [
+      "SC-1",
+      "NI-1",
+      "GBR-1"
+    ],
+    "depth": "bounded analytical foundation; not a completed high-fidelity Twin",
+    "readiness": "Research-ready with conditions",
+    "governance": "candidate only"
+  }
+]

@@ -1,0 +1,104 @@
+[
+  {
+    "id": "rail-operators",
+    "name": "Rail passenger and freight operations",
+    "economic_model": "Farebox/open access; public-service management fees; contracted freight haulage",
+    "boundary": "Rail paths, rolling stock, crew, terminals, passenger distribution; avoid double-counting access charges",
+    "source_ids": [
+      "FIRST",
+      "RAIL-FIN"
+    ],
+    "open_demand": "Freight operator dossiers and NI operator accounts still required",
+    "scope": "UK umbrella; programme/issuer-specific geography mandatory"
+  },
+  {
+    "id": "rail-assets",
+    "name": "Rail infrastructure and asset management",
+    "economic_model": "Public grants, access receipts, renewals and enhancement funding",
+    "boundary": "Infrastructure and possession planning distinct from train operations/rolling-stock lessors",
+    "source_ids": [
+      "NR-REG",
+      "REACH"
+    ],
+    "open_demand": "ROSCOs, HS1/HS2, current asset-condition and freight access contracts",
+    "scope": "UK umbrella; programme/issuer-specific geography mandatory"
+  },
+  {
+    "id": "road-logistics",
+    "name": "Road freight, logistics and parcels",
+    "economic_model": "Contract logistics, shipment/parcel yields and utilisation; regulated letters differ",
+    "boundary": "Exclude shipper turnover and warehoused product value; GB/NI HGV surveys differ",
+    "source_ids": [
+      "ROAD",
+      "DHL",
+      "RM-QOS"
+    ],
+    "open_demand": "UK legal operator financials, subcontractor economics and current postal remedies",
+    "scope": "UK umbrella; programme/issuer-specific geography mandatory"
+  },
+  {
+    "id": "urban",
+    "name": "Public transport and urban mobility",
+    "economic_model": "Fares, local grants, concessions, franchising and authority payments",
+    "boundary": "TfL London, devolved/public bodies, commercial bus and private mobility distinct",
+    "source_ids": [
+      "TFL",
+      "BUS",
+      "SCOT",
+      "NI"
+    ],
+    "open_demand": "Wales, local franchising, active travel, taxi/shared-mobility operator economics",
+    "scope": "UK umbrella; programme/issuer-specific geography mandatory"
+  },
+  {
+    "id": "highways",
+    "name": "Roads and highways infrastructure",
+    "economic_model": "Public settlements, capital and maintenance; no general user farebox",
+    "boundary": "National Highways England is not UK-wide or all local roads",
+    "source_ids": [
+      "NH-ORR",
+      "NH-ARA"
+    ],
+    "open_demand": "Devolved roads, local authorities, PFI and project-specific procurements",
+    "scope": "UK umbrella; programme/issuer-specific geography mandatory"
+  },
+  {
+    "id": "aviation",
+    "name": "Aviation and airports",
+    "economic_model": "Airline seat/ancillary/holiday economics versus airport charges/retail/property",
+    "boundary": "Reuse AV-IND-001 / AV-ENT-001; airline Group ≠ UK airport market",
+    "source_ids": [
+      "IAG",
+      "HEATHROW",
+      "EJ-W3"
+    ],
+    "open_demand": "Other airports, cargo airlines, air navigation and current CAA comparisons",
+    "scope": "UK umbrella; programme/issuer-specific geography mandatory"
+  },
+  {
+    "id": "maritime",
+    "name": "Maritime, ports and shipping",
+    "economic_model": "Handling, storage, property and shipping freight rates are distinct businesses",
+    "boundary": "Major-port tonnes ≠ TEU ≠ shipping-company revenue; inland legs not additive demand",
+    "source_ids": [
+      "PORTS",
+      "ABP",
+      "DPW"
+    ],
+    "open_demand": "Shipping lines, ferries, harbour trust/municipal models, named rail haulage contracts",
+    "scope": "UK umbrella; programme/issuer-specific geography mandatory"
+  },
+  {
+    "id": "transport-digital",
+    "name": "Transport technology and digital infrastructure",
+    "economic_model": "Transport use of signalling, control, ticketing, connectivity and operational data",
+    "boundary": "Cross-sector lens, not a ninth additive market or duplicate Technology Twin",
+    "source_ids": [
+      "REACH",
+      "TFL-PLU",
+      "IAG-SKY"
+    ],
+    "open_demand": "Cyber/resilience, OT integration, systems ownership, terms and actual benefits",
+    "scope": "UK umbrella; programme/issuer-specific geography mandatory"
+  }
+]

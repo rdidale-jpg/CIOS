@@ -1,0 +1,363 @@
+[
+  {
+    "id": "reach-fibre",
+    "from_entity": "NR-BRAND",
+    "to_entity": "NEOS",
+    "predicate": "announced_project_counterparty",
+    "source_ids": [
+      "REACH",
+      "REACH-LEGAL"
+    ],
+    "period": "signed2025-06-26",
+    "scope": "Buyer/infrastructure programme → named fibre participant; exact legal buyer and final signed contract schedule not acquired",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "reach-mobile",
+    "from_entity": "NR-BRAND",
+    "to_entity": "FRESHWAVE",
+    "predicate": "announced_project_counterparty",
+    "source_ids": [
+      "REACH",
+      "REACH-LEGAL"
+    ],
+    "period": "signed2025-06-26",
+    "scope": "Buyer/programme → named mobile participant; no ownership, general outsourcing or extension inference",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "tfl-trains",
+    "from_entity": "LU",
+    "to_entity": "SIEMENS",
+    "predicate": "reported_existing_award_to",
+    "source_ids": [
+      "TFL-PLU"
+    ],
+    "period": "November2018 award, reported2025-07-02",
+    "scope": "Programme buyer context → named manufacturer and maintenance-support supplier; exact signature entity not asserted",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "iag-platform",
+    "from_entity": "IAG",
+    "to_entity": "OPENAIR",
+    "predicate": "selected_platform_provider",
+    "source_ids": [
+      "IAG-SKY"
+    ],
+    "period": "dateunresolved; retrieved2026-11-18",
+    "scope": "Buyer group → supplier brand; rollout stages vary by airline, price/term not disclosed",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "orr-nr",
+    "from_entity": "ORR",
+    "to_entity": "NR",
+    "predicate": "regulatory_financial_monitoring_of",
+    "source_ids": [
+      "NR-REG"
+    ],
+    "period": "FY2025/26",
+    "scope": "Regulator → GB reporting perimeter, not supplier contract",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "orr-nh",
+    "from_entity": "ORR",
+    "to_entity": "NH",
+    "predicate": "performance_monitoring_of",
+    "source_ids": [
+      "NH-ORR"
+    ],
+    "period": "FY2025/26",
+    "scope": "Road monitor → England infrastructure operator",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "ofcom-rm",
+    "from_entity": "OFCOM",
+    "to_entity": "RM",
+    "predicate": "opened_performance_investigation_into",
+    "source_ids": [
+      "RM-QOS"
+    ],
+    "period": "2026-06-01",
+    "scope": "Historical universal service performance; not final finding",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "gov-srh",
+    "from_entity": "SCOT-GOV",
+    "to_entity": "SRH",
+    "predicate": "official_sponsor_reports_ownership_of",
+    "source_ids": [
+      "SCOT"
+    ],
+    "period": "retrieved2026-11-18",
+    "scope": "Government → holding company",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "srh-scot",
+    "from_entity": "SRH",
+    "to_entity": "SCOTRAIL",
+    "predicate": "official_sponsor_reports_ownership_of",
+    "source_ids": [
+      "SCOT"
+    ],
+    "period": "public service since2022-04-01",
+    "scope": "Holding company → operator; not Network Rail acquisition",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "srh-sleep",
+    "from_entity": "SRH",
+    "to_entity": "SLEEPER",
+    "predicate": "official_sponsor_reports_ownership_of",
+    "source_ids": [
+      "SCOT"
+    ],
+    "period": "public service since2023-06-25",
+    "scope": "Holding company → operator; preserve devolved control",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "dft-dfto",
+    "from_entity": "DFT",
+    "to_entity": "DFTO",
+    "predicate": "official_departmental_delivery_body",
+    "source_ids": [
+      "DFTO"
+    ],
+    "period": "retrieved2026-11-18",
+    "scope": "Government → owning group; does not establish exact current subsidiary list",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "lu-airport",
+    "from_entity": "LU",
+    "to_entity": "HEATHROW",
+    "predicate": "transport_service_connects_to",
+    "source_ids": [
+      "TFL-PLU"
+    ],
+    "period": "2025-07-02 description",
+    "scope": "Physical passenger connection, not a supplier/customer contract",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "no-nr-alias",
+    "from_entity": "NR",
+    "to_entity": "NRIL",
+    "predicate": "same_financial_entity",
+    "source_ids": [
+      "NR-REG",
+      "ID-NR"
+    ],
+    "period": "researchcut2026-11-18",
+    "scope": "GB regulatory table is not NRIL standalone statutory accounts",
+    "status": "rejected_join",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "no-gbr-merger",
+    "from_entity": "GBR",
+    "to_entity": "NRIL",
+    "predicate": "completed_acquisition",
+    "source_ids": [
+      "GBR"
+    ],
+    "period": "researchcut2026-11-18",
+    "scope": "Licence consultation is not a completed organisational transfer",
+    "status": "rejected_join",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "no-dpw-abp",
+    "from_entity": "ABP",
+    "to_entity": "DPW-UK",
+    "predicate": "owns_or_has_contract_with",
+    "source_ids": [
+      "ABP",
+      "DPW"
+    ],
+    "period": "researchcut2026-11-18",
+    "scope": "Shared port geography is not proof of ownership or a commercial contract",
+    "status": "rejected_join",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "no-dhl-uk",
+    "from_entity": "DHL-GLOBAL",
+    "to_entity": "DHL-UK",
+    "predicate": "same_financial_entity",
+    "source_ids": [
+      "DHL",
+      "ID-DHL"
+    ],
+    "period": "researchcut2026-11-18",
+    "scope": "Global divisional revenue does not measure UK legal-company sales",
+    "status": "rejected_join",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "no-ids-rm",
+    "from_entity": "IDS",
+    "to_entity": "RM",
+    "predicate": "same_financial_entity",
+    "source_ids": [
+      "ID-IDS",
+      "ID-RM"
+    ],
+    "period": "researchcut2026-11-18",
+    "scope": "Holding-company and operating-company identities/accounts differ",
+    "status": "rejected_join",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "no-heathrow-entity",
+    "from_entity": "HEATHROW",
+    "to_entity": "HSP",
+    "predicate": "automatic_legal_metric_binding",
+    "source_ids": [
+      "HEATHROW",
+      "ID-HSP"
+    ],
+    "period": "researchcut2026-11-18",
+    "scope": "Public brand financial table needs accepted reporting-perimeter resolution",
+    "status": "rejected_join",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "no-open-bid",
+    "from_entity": "IAG",
+    "to_entity": "OPENAIR",
+    "predicate": "open_unallocated_procurement",
+    "source_ids": [
+      "IAG-SKY"
+    ],
+    "period": "researchcut2026-11-18",
+    "scope": "Selected platform establishes existing response, not open buyer demand",
+    "status": "rejected_join",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "no-gbr-scot",
+    "from_entity": "GBR",
+    "to_entity": "SCOTRAIL",
+    "predicate": "owns",
+    "source_ids": [
+      "GBR",
+      "SCOT"
+    ],
+    "period": "researchcut2026-11-18",
+    "scope": "Future GB reforms do not evidence takeover of devolved passenger service",
+    "status": "rejected_join",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "tfl-overground",
+    "from_entity": "TFL",
+    "to_entity": "FIRST",
+    "predicate": "reported_concession_operator_group",
+    "source_ids": [
+      "FIRST",
+      "TFL"
+    ],
+    "period": "commencedMay2026",
+    "scope": "Authority/customer context → operating group; actual concession legal parties/term not acquired",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  },
+  {
+    "id": "sizewell-workers",
+    "from_entity": "FIRST",
+    "to_entity": "SZC-WORK",
+    "predicate": "reports_worker_transport_award_for_programme",
+    "source_ids": [
+      "FIRST"
+    ],
+    "period": "reported2026-11-17",
+    "scope": "Service provider group → Energy construction programme, not proof of the legal customer/signature entity or value",
+    "status": "supported_candidate",
+    "legal_contract_binding": false,
+    "contract_value": null,
+    "expiry": null,
+    "canonical_promotion": false
+  }
+]
