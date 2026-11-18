@@ -43,3 +43,7 @@ The owner’s independent iPad findings and #677 owner-side assessment drive the
 - A smooth industry-to-company journey can overstate applicability. Use the precise legal and reporting owner for each view and contextual links where linkage is unproven. For screenshots, cropped Left on small layouts has no bearing on accessibility or touch until tested in a live implementation.
 
 The observed captures and HTTP sweep use the exact source baseline as Guest. Static proposal captures verify visual fit, not navigation, browser-state preservation, permissions, domain evidence admission or deployment. Those tests are reserved for authorised implementation.
+
+## Revised implementation gate
+
+Use [the readiness matrix](content-readiness.md) together with #681’s pinned 16-key reconciliation. Review readiness separately for both modes by exact subject and period. Validate the [operating-model and force links](operating-model-and-forces.md) for semantic meaning and dependency removal before approving implementation. The previous route count measures coverage of observed paths only.

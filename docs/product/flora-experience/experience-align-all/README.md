@@ -49,3 +49,8 @@ Propose activating a change perspective only where the source owner can return a
 - [Portfolio and owner-feedback audit](scope.md) and [guest route/query sweep](route-audit.csv)
 - [Observed and proposed preview index](previews.md)
 - [Research handoff and acceptance](handoff.md) for [RESEARCH-ENRICH-ALL #681](https://github.com/rdidale-jpg/CIOS/issues/681)
+
+## Owner-review refinements
+
+- [Enterprise Inside root and linked Forces specifications](operating-model-and-forces.md) define the activity/capability distinction, evidence-qualified visual links and responsive treatment.
+- [Perspective readiness and fallback](content-readiness.md) reconciles all 16 existing design requirements against #681's pinned research handoff and defines the threshold for every primary view.
