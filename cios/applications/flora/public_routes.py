@@ -28,7 +28,7 @@ def public_route_catalog(include_owner_inspection=False):
             routes[path] = PublicRoute(handler, source, frozenset(keys))
     add(('/health',), 'health_response', 'Fixed service availability; no owner records')
     add(('/deployment',), 'deployment_payload', 'Allowlisted public code fingerprint only')
-    add(('/', '/flora', '/flora/'), '_flora_visual_home_page', 'Finite UK public statistical presentation; authenticated account controls retain existing authority', ('market','stream','layer','selected','detail','agenda'))
+    add(('/', '/flora', '/flora/'), '_flora_visual_home_page', 'Finite UK public statistical presentation; authenticated account controls retain existing authority', ('market','stream','layer','selected','detail','agenda','reading'))
     add(('/design-system/assets/styles','/design-system/assets/interactions'), 'design_system_asset', 'Exact local presentation assets only; no data or authority')
     add(('/visual-v2',), 'visual_v2_economy', 'Finite UK public statistical presentation only; no private owners or canonical promotion', ('market',))
     add(('/pestle','/visual-v2/pestle'), 'visual_v2_pestle', 'UK-only existing macro source adapter; no enterprise applicability or mutation', ('market','factor'))
@@ -78,12 +78,12 @@ def public_route_catalog(include_owner_inspection=False):
     add(('/industries/technology/timeline','/industries/technology/evidence','/industries/technology/handoff'), 'technology_handoff', 'Finite Page research and pure candidate mapping; no import execution or promotion')
     add(('/enterprises/lloyds/understanding','/enterprises/easyjet/understanding'), 'enterprise_understanding', 'Finite read-only public candidate evidence/review files; no canonical/private stores')
     add(('/enterprises/lloyds/research-diagnostic','/enterprises/easyjet/research-diagnostic'), 'research_diagnostic', 'Read-only finite public research assessment overlay; no protected stores')
-    add(('/industries/banking',), 'unified_industry', 'Existing public research overlay; no owner records', ('lens','stream','market','layer','selected','detail','agenda'))
+    add(('/industries/banking',), 'unified_industry', 'Existing public research overlay; no owner records', ('lens','stream','market','layer','selected','detail','agenda','reading'))
     add(('/industries/aviation',), 'unified_industry', 'Existing public research overlay; no owner records', ('lens',))
     add(('/industries/banking/visual-specs','/industries/aviation/visual-specs'), 'visual_specs', 'Deterministic visual output of existing public research only')
     from .banking_portfolio import BANKS as public_banks
     add(tuple('/enterprises/'+slug for slug in (*public_banks,'easyjet') if slug!='lloyds'), 'unified_enterprise', 'Finite public bank references; not Enterprise Model lookup', ('lens',))
-    add(('/enterprises/lloyds',), 'visual_enterprise', 'Existing public Lloyds research reference, never a private Enterprise Model lookup', ('lens','stream','market','layer','selected','detail','agenda'))
+    add(('/enterprises/lloyds',), 'visual_enterprise', 'Existing public Lloyds research reference, never a private Enterprise Model lookup', ('lens','stream','market','layer','selected','detail','agenda','reading'))
     from .research_intelligence.model import load_assessment
     research=load_assessment()
     add(('/flora/banking/research',), 'research_industry_page', 'Existing public repository research with explicit primary-verification gaps', ('lens',))
@@ -162,6 +162,7 @@ def owner_inspection_path(path):
 def owner_inspection_request_target(target):
     if not _request_target(target,public_route_catalog(True)):return False
     parts=urlsplit(target)
+    if 'reading' in dict(parse_qsl(parts.query)):return False
     return owner_inspection_path(parts.path) or (parts.path in {'/industries/banking','/enterprises/lloyds'} and 'lens' in dict(parse_qsl(parts.query)))
 
 
@@ -184,6 +185,8 @@ def _request_target(target, catalog):
         policy=catalog[parts.path]
         keys=[k for k,v in pairs]
         if len(keys)!=len(set(keys)) or any(k not in policy.query_keys or len(v)>1024 or any(ord(c)<32 or ord(c)==127 for c in v) for k,v in pairs):
+            return False
+        if any(k=='reading' and v not in {'facts','insight'} for k,v in pairs):
             return False
         if parts.path.endswith('/explain') and any(k=='question_id' and v!='Q-LBG-CHANGE-EXPLAIN-001' for k,v in pairs):
             return False

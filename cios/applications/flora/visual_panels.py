@@ -13,6 +13,7 @@ from types import MappingProxyType
 
 from . import visual_streams as v, design_system as ds, leadership_agenda as agenda
 from . import intelligence_presentation as p
+from . import reading_views as reading
 from .security import verified_service_read
 
 DESIGN='f4059a34a55277adbd2a2337239827cab96d962e'
@@ -52,7 +53,10 @@ def _trail(ctx):
     root=v.url(v.Context('uk','landscape',selected='banking'))
     if ctx.scope=='uk':return '<span>United Kingdom</span>'
     text='<a href="'+e(root,quote=True)+'">UK</a><span aria-hidden="true">/</span>'
-    if ctx.scope=='banking':return text+'<span>Banking</span>'
+    if ctx.scope=='banking':
+        if ctx.selected=='nationwide':
+            return text+'<a href="/industries/banking">Banking</a><span aria-hidden="true">/</span><span>Nationwide</span>'
+        return text+'<span>Banking</span>'
     bank=v.url(v.Context('banking','landscape',ctx.layer,'lloyds'))
     return text+'<a href="'+e(bank,quote=True)+'">Banking</a><span aria-hidden="true">/</span><span>Lloyds Banking Group</span>'
 
@@ -142,9 +146,9 @@ def _issue_preview(issues,key):
     """Recompose one already resolved agenda view; never admit or infer facts."""
     row=next((row for row in issues if row.key==key),None)
     if row is None:return ''
-    statement=row.facts[0]if key=='cyber-resilience'else row.conclusion
+    statements=row.facts if p.is_editorial() else (row.facts[0] if key=='cyber-resilience' else row.conclusion,)
     return ('<section class="editorial-issue" data-intelligence="'+key+'" aria-labelledby="preview-'+key+'">'
-        +'<h2 id="preview-'+key+'">'+e(row.title)+'</h2>'+p.render(statement)
+        +'<h2 id="preview-'+key+'">'+e(row.title)+'</h2>'+''.join(p.render(item) for item in statements)
         +('' if p.is_editorial() else agenda.basis(row))+'</section>')
 
 
@@ -191,8 +195,11 @@ def _financial(ctx,data,issues=()):
         body+='<figure class="chart"><figcaption>Customer-deposit stocks · Group</figcaption><input class="reference-control" id="deposit-reference" type="checkbox" checked><label class="reference-label" for="deposit-reference">2025 reference</label><div class="bars" role="group" aria-label="Group customer deposits in GBP billion">'
         for row,label in [(opening,'31 December 2025'),(stock,'30 September 2026')]:
             body+='<div class="bar-row"><span>'+label+'</span><div class="track" aria-hidden="true"><i style="--value:'+str(row.value/600*100)+'%"></i></div><strong>'+str(row.value)+'bn</strong></div>'
-        body+='</div><p class="chart-note">Reported · GBP billion, linear 0–600bn scale. Published balances; composition and transfer effects are not reconciled. No organic-flow claim.</p><details class="chart-data"><summary>Chart data</summary><table><caption>Group customer-deposit stocks · GBP billion</caption><tbody>'
-        body+=''.join('<tr><th scope="row">'+label+'</th><td>'+str(row.value)+'</td></tr>'for row,label in [(opening,'31 December 2025'),(stock,'30 September 2026')])+'</tbody></table></details></figure>'
+        body+='</div><p class="chart-note">Reported · GBP billion, linear 0–600bn scale. Published balances; composition and transfer effects are not reconciled. No organic-flow claim.</p>'
+        if not p.is_editorial():
+            body+='<details class="chart-data"><summary>Chart data</summary><table><caption>Group customer-deposit stocks · GBP billion</caption><tbody>'
+            body+=''.join('<tr><th scope="row">'+label+'</th><td>'+str(row.value)+'</td></tr>'for row,label in [(opening,'31 December 2025'),(stock,'30 September 2026')])+'</tbody></table></details>'
+        body+='</figure>'
     funding=next((row for row in issues if row.key=='funding-base'),None)
     if funding:
         movement=funding.facts[-1]
@@ -200,7 +207,7 @@ def _financial(ctx,data,issues=()):
             body+='<div data-intelligence="funding-base">'+p.render(movement)+'</div>'
     body+='<div class="analysis-grid">'
     for key,title in [('LBG-A2030-CIR','Efficiency ambition'),('LBG-A2030-INVESTMENT','Investment discipline')]:
-        if by[key]:body+='<section><h2>'+title+'</h2>'+p.render(by[key])+'</section>'
+        if by[key] and (key!='LBG-A2030-INVESTMENT' or not p.is_editorial()):body+='<section><h2>'+title+'</h2>'+p.render(by[key])+'</section>'
     body+='</div><p class="material">Deposits and statutory pretax profit do not establish an investment allocation or external supplier budget.</p>'
     return body+_basis([f for f in facts if f not in [by['LBG-A2030-CIR'],by['LBG-A2030-INVESTMENT']]])
 
@@ -221,7 +228,7 @@ def _banking(ctx,data,issues):
     selected = agenda.bank_service_issue(ctx.selected, data) if independent or any(r.key=='service-landscape' for r in issues) else None
     if selected:
         return ('<p class="eyebrow">Banking · enterprise intelligence</p><h1>'+e(agenda.BANK_SERVICE[ctx.selected][0])+'</h1>'
-                +'<section class="editorial-issue" data-intelligence="service-landscape">'+p.render(selected.conclusion)+'<details><summary>Measurements and sources</summary>'+''.join(p.render(f) for f in selected.facts)+'</details></section>'
+                +'<section class="editorial-issue" data-intelligence="service-landscape">'+''.join(p.render(fact) for fact in selected.facts)+'<details><summary>Measurements and sources</summary>'+''.join(p.render(f) for f in selected.facts)+'</details></section>'
                 +agenda.bank_service_navigation(ctx,v.url,issues,data))
     facts=_facts(data,['UK-RATE-NOV26','UK-PRA-REPORT27','UK-FCA-REPORT27','UK-VALUE'])
     rate=next((f for f in facts if f.unit=='percent; policy rate at decision'),None)
@@ -244,7 +251,7 @@ def _overview(ctx,data,issues):
     if ctx.stream=='forces':return '<p class="eyebrow">Enterprise forces</p><h1>Strategy and existing capabilities</h1>'+_forces(ctx,data)
     supplier=v.detail_claims(ctx,{'id':'technology'},data)
     facts=[r for c in supplier if(r:=p.claim_view(data,c))is not None]+_facts(data,['LBG-Q326-DEPOSITS','LBG-A2030-PLATFORMS'])
-    return '<p class="eyebrow">Enterprise landscape</p><h1>An enterprise within a wider ecosystem</h1>'+''.join('<section class="editorial-issue">'+p.render(f)+'</section>'for f in facts)
+    return _financial(ctx,data,issues)+_issue_preview(issues,'service-recovery')+''.join('<section class="editorial-issue">'+p.render(f)+'</section>'for f in facts)
 
 
 def _research_render(ctx,headers=None,*,financial_run_id=''):
@@ -314,7 +321,7 @@ def _editorial_banking(ctx,data,issues,headers):
         name=agenda.BANK_SERVICE[ctx.selected][0]
         body='<p class="eyebrow">UK Banking</p><h1>'+e(name)+'</h1>'
         body+='<p class="editorial-lead">Customer complaints, in perspective.</p>'
-        body+=p.render(selected.conclusion)
+        body+=''.join(p.render(fact) for fact in selected.facts)
         body+='<p class="material">'+e(selected.facts[0].scope)+'. Received and closed complaints are different cohorts; upheld outcomes are the firm’s own decisions.</p>'
         if ctx.selected=='nationwide':
             action=analyst.prepare_action(ctx,headers=headers)
@@ -327,11 +334,11 @@ def _editorial_banking(ctx,data,issues,headers):
         for key,title in items:
             row=next((r for r in issues if r.key==key),None)
             if row:
-                n+=1;body+='<section class="force-story" data-intelligence="'+key+'"><span class="force-number" aria-hidden="true">0'+str(n)+'</span><div><h2>'+e(title)+'</h2>'+(p.render(row.facts[0]) if key=='funding-economics' else p.render(_editorial_conclusion(row)))+'</div></section>'
+                n+=1;body+='<section class="force-story" data-intelligence="'+key+'"><span class="force-number" aria-hidden="true">0'+str(n)+'</span><div><h2>'+e(title)+'</h2>'+(p.render(row.facts[0]))+'</div></section>'
         fact=v.force_view(ctx,'LBG-ENVOY-CONTROLS',data)
         if fact and p.eligible(fact):
             body+='<section class="force-story"><span class="force-number" aria-hidden="true">0'+str(n+1)+'</span><div><h2>Lloyds: AI in the operating model</h2>'+p.render(fact)+'</div></section>'
-        return body+'</div>'+_bank_picker(ctx,data,issues)
+        return body+'</div>'+reading.provider_pulse(issues)+reading.banking_links()+_bank_picker(ctx,data,issues)
     body='<p class="eyebrow">UK Banking · Landscape</p><h1>Where money meets the economy</h1><p class="editorial-lead">Deposits fund lending. Payments connect households and businesses.</p>'
     facts=_facts(data,['UK-RATE-NOV26']);rate=next((f for f in facts if f.value is not None),None)
     metrics=[]
@@ -344,8 +351,8 @@ def _editorial_banking(ctx,data,issues,headers):
     body+=_metrics(metrics)+'<div class="editorial-topics">'
     for key,title in [('provider-oversight','Resilience spans the ecosystem'),('reporting-change','The reporting landscape is changing')]:
         row=next((r for r in issues if r.key==key),None)
-        if row:body+='<section data-intelligence="'+key+'"><h2>'+title+'</h2>'+p.render(_editorial_conclusion(row))+'</section>'
-    return body+'</div>'+_bank_picker(ctx,data,issues)
+        if row:body+='<section data-intelligence="'+key+'"><h2>'+title+'</h2>'+p.render(row.facts[0])+'</section>'
+    return body+'</div>'+reading.banking_links()+_bank_picker(ctx,data,issues)
 
 
 def _legal_notice(ctx,data):
@@ -373,47 +380,56 @@ def _frame(ctx,headers,data,issues,entries,body):
     identity=v.SCOPES[ctx.scope].get('identity')or data[v.SCOPES[ctx.scope]['identity_key']]
     title='United Kingdom'if ctx.scope=='uk'else data['industry_name'if ctx.scope=='banking'else'enterprise_name']
     layers='' if ctx.scope=='uk' else '<nav class="context-nav" aria-label="Context layers">'+''.join('<a href="'+e(v.url(ctx,layer=k),quote=True)+'"'+(' aria-current="page"'if ctx.layer==k else'')+'>'+e(label)+'</a>' for k,label in v.LAYERS.items())+'</nav>'
-    head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'+EDITORIAL_STYLE
-    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+v.SCOPES[ctx.scope]['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(ctx,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'"><img class="watermark" src="'+_asset(watermark)+'" alt="" aria-hidden="true"><article class="workspace editorial-workspace">'+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
+    head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'+EDITORIAL_STYLE+reading.STYLE
+    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+v.SCOPES[ctx.scope]['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(ctx,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'"><img class="watermark" src="'+_asset(watermark)+'" alt="" aria-hidden="true"><article class="workspace editorial-workspace">'+reading.selector(ctx)+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
 
 
 def render(ctx,headers=None,*,financial_run_id=''):
     from .supabase_identity import public_read
-    with p.editorial_view(), public_read():
+    with p.editorial_view(ctx.reading), public_read():
         if financial_run_id:
             from .financial_intelligence import analyst
             return analyst.render_selected(ctx,financial_run_id,headers=headers)
         if ctx.scope=='banking' and ctx.selected=='nationwide' and ctx.stream=='landscape' and not ctx.detail and not ctx.agenda:
             try:
-                private=_authorised_nationwide(ctx,headers)
+                private=_authorised_nationwide(ctx,headers) if ctx.reading=='facts' else None
                 if private:return private
             except (PermissionError,OSError,ValueError,KeyError,TypeError):pass
             from .financial_intelligence import candidate_analytics as financial, analyst
             public = financial.public_nationwide_projection()
             if public:
                 data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
-                body=analyst.compose_editorial(public)+_nationwide_service(data)
-                action=analyst.prepare_action(ctx,headers=headers)
+                body=(reading.nationwide_insight(public) if ctx.reading=='insight' else
+                      analyst.compose_editorial(public)+reading.nationwide_facts_bridge(public)+_nationwide_service(data))
+                action=analyst.prepare_action(ctx,headers=headers) if ctx.reading=='facts' else ''
                 if action:body+='<section class="workspace-setup"><h2>Workspace analysis</h2>'+action+'</section>'
                 return _frame(ctx,headers,data,issues,v.destinations(ctx,data),body+_bank_picker(ctx,data,issues))
         data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected);entries=v.destinations(ctx,data)
-        if ctx.scope=='banking' and not ctx.detail and not ctx.agenda:
+        if ctx.reading=='insight':
+            body=reading.insight(ctx,data,issues)
+        elif ctx.scope=='banking' and ctx.detail=='payments' and ctx.stream=='landscape':
+            body=reading.payments(ctx,data)
+        elif ctx.scope=='banking' and not ctx.detail and not ctx.agenda:
             body=_editorial_banking(ctx,data,issues,headers)
         elif ctx.agenda:
             row=next((r for r in issues if r.key==ctx.agenda),None)
-            body=('<section class="focus agenda-focus" id="agenda-insight" tabindex="-1" aria-label="Leadership insight"><a class="close close-insight" aria-label="Close Leadership Agenda" href="'+e(v.url(ctx,agenda=''),quote=True)+'">×</a><h1>'+e(row.title)+'</h1>'+p.render(_editorial_conclusion(row))+'</section>') if row else _overview(ctx,data,issues)
-            if ctx.scope=='banking':body+=_bank_picker(ctx,data,issues)
+            body=('<section class="focus agenda-focus" id="agenda-insight" tabindex="-1" aria-label="Leadership insight"><a class="close close-insight" aria-label="Close Leadership Agenda" href="'+e(v.url(ctx,agenda=''),quote=True)+'">×</a><h1>'+e(row.title)+'</h1>'+reading.agenda_facts(row)+'</section>') if row else _overview(ctx,data,issues)
+            if ctx.scope=='banking':
+                if ctx.agenda=='provider-oversight':body+=reading.provider_pulse(issues)
+                body+=_bank_picker(ctx,data,issues)
         elif ctx.detail:
             spot=next(s for s in v.geometry()[ctx.scope+'-'+ctx.stream]['spots']if s['id']==ctx.detail)
             body=v._detail(ctx,spot,data).replace('<h2 id="insight-title">','<h1 id="insight-title">',1).replace('</h2>','</h1>',1)
-            if ctx.scope=='lloyds' and ctx.detail=='technology' and v.detail_claims(ctx,spot,data):body+='<p class="material">Published partnerships do not specify contract value or workshare.</p>'
+            if ctx.scope=='lloyds' and ctx.stream=='inside' and ctx.detail=='technology':
+                if not body:body='<h1>Technology &amp; data</h1><p>No eligible disclosures for this selection.</p>'
+                body+=reading.lloyds_capability(data,insight=False)
         elif ctx.scope=='lloyds' and ctx.stream=='inside':
             facts=_facts(data,['LBG-Q326-DEPOSITS','LBG-Q326-PROFIT','LBG-A2030-CIR'])
             body='<p class="eyebrow">Lloyds Banking Group</p><h1>Funding, earnings and efficiency</h1>'+''.join(p.render(f) for f in facts)
             row=next((r for r in issues if r.key=='funding-base'),None)
-            if row:body+='<section data-intelligence="funding-base"><h2>Customer funding</h2>'+p.render(_editorial_conclusion(row))+'</section>'
+            if row:body+='<section data-intelligence="funding-base"><h2>Customer funding</h2>'+p.render(row.facts[0])+'</section>'
             service=next((r for r in issues if r.key=='service-recovery'),None)
-            if service:body+='<section data-intelligence="service-recovery"><h2>Customer complaints</h2>'+p.render(service.conclusion)+'</section>'
+            if service:body+='<section data-intelligence="service-recovery"><h2>Customer complaints</h2>'+''.join(p.render(fact) for fact in service.facts)+'</section>'
         else:body=_overview(ctx,data,issues)
         return _frame(ctx,headers,data,issues,entries,body)
 
@@ -437,7 +453,7 @@ def research_inspection(path,query,headers=None):
 def _nationwide_service(data):
     service=agenda.bank_service_issue('nationwide',data)
     if not service:return ''
-    return '<section class="service-context"><h2>Customer complaints · Society</h2>'+p.render(service.conclusion)+'<p class="material">Received and closed cases are different cohorts; upheld outcomes are the firm’s own decisions. Separate from Group earnings.</p></section>'
+    return '<section class="service-context"><h2>Customer complaints · Society</h2>'+''.join(p.render(fact) for fact in service.facts)+'<p class="material">Received and closed cases are different cohorts; upheld outcomes are the firm’s own decisions. Separate from Group earnings.</p></section>'
 
 
 @verified_service_read('package.inspect')
@@ -450,20 +466,4 @@ def _authorised_nationwide(ctx,headers):
     if is_cios_owner(headers):
         identity=analyst.financial.find_existing_run('nationwide-fy2026','BK-IND-002',headers=headers)
         ds.context_link(v.url(ctx)+'&analysis='+identity+'&lens=inspection','Financial research')
-    return _frame(ctx,headers,data,issues,entries,analyst.compose_editorial(projection)+_nationwide_service(data)+_bank_picker(ctx,data,issues))
-
-
-def _editorial_conclusion(row):
-    item=row.conclusion
-    if not p.is_editorial():return item
-    if row.key=='cyber-resilience':
-        return replace(row.facts[0],material_caveats=('Overall prevalence remained in line with the prior year. Weighted, self-reported estimates; not a census of bank incidents.',))
-    if row.key=='service-recovery' and len(row.facts)==3 and all(f.value is not None for f in row.facts):
-        received,closed,upheld=row.facts
-        return replace(item,text=f'Lloyds Bank PLC received {received.value:,} complaints and closed {closed.value:,} in {received.period}; {upheld.value}% of closed complaints were upheld.',material_caveats=('Received and closed cases are different cohorts. Upheld outcomes are the firm’s decisions, not independent adjudication.',))
-    if row.key=='reporting-change':
-        return replace(item,text='New incident and third-party reporting requirements apply within the respective PRA and FCA scopes.',period='From 18 March 2027')
-    if row.key=='provider-oversight':
-        return replace(item,text='Four named technology-provider legal entities are subject to the UK critical third-party regime.',period='Effective 13 July 2026')
-    if row.key=='funding-base':return replace(item,material_caveats=('Deposit changes include transfers and changes in business composition; they are not an organic-flow measure.',))
-    return item
+    return _frame(ctx,headers,data,issues,entries,analyst.compose_editorial(projection)+reading.nationwide_facts_bridge(projection)+_nationwide_service(data)+_bank_picker(ctx,data,issues))
