@@ -1,0 +1,19 @@
+{
+  "base": "c56bd74f130c4d855baf522ba8ba99fe87317fb1",
+  "branch": "codex/research-enrich-all-w2-685",
+  "prior_research_pr": 683,
+  "prior_research_head": "28b1cb9863db15949775881a434c2507f4f0b0d6",
+  "rie1": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+  "main_runtime_parent": "df475865cc367a28f355c38bc4c23054abe88502",
+  "main_ci": {
+    "exact_base_run": null,
+    "reason": "Merged design-only paths excluded currentbase from workflow; Actions collection was empty. Manualdispatch via gh returnedForbidden; not retried.",
+    "last_runtime_run": "https://github.com/rdidale-jpg/CIOS/actions/runs/44328917352",
+    "last_runtime_sha": "df475865cc367a28f355c38bc4c23054abe88502",
+    "status": "success"
+  },
+  "parallel_issue": 684,
+  "boundary": "New isolated docs and researchQA only; no runtime or shared source/schema edits",
+  "source_cut": "2026-11-18 Europe/London",
+  "production_state": "not inspected; no privateauth/liveconfiguration access orproductionrecordscan"
+}

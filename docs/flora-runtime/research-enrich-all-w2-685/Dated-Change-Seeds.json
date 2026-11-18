@@ -1,0 +1,138 @@
+[
+  {
+    "key": "UK-RATE::policy_decision",
+    "subject": "UK::Economic",
+    "claim_id": "UK-RATE",
+    "publication_or_update": "2026-11-05",
+    "event_date": "2026-11-04",
+    "effective_date": null,
+    "measurement_period": "meeting4Nov2026",
+    "status": "policy_decision",
+    "dedup_key": "UK::Economic::UK-RATE",
+    "source_ids": [
+      "MPC"
+    ],
+    "retrieved_on": "2026-11-18",
+    "public_eligible": false,
+    "stream_readiness": "Unavailable; candidate/historicalseed, not an activated currentNewsstream"
+  },
+  {
+    "key": "UK-TECH::proposed_designation",
+    "subject": "UK::Technological",
+    "claim_id": "UK-TECH",
+    "publication_or_update": "2026-10-16",
+    "event_date": "2026-10-16",
+    "effective_date": null,
+    "measurement_period": "announcement16Oct2026",
+    "status": "proposed_designation",
+    "dedup_key": "UK::Technological::UK-TECH",
+    "source_ids": [
+      "SOFTWARE"
+    ],
+    "retrieved_on": "2026-11-18",
+    "public_eligible": false,
+    "stream_readiness": "Unavailable; candidate/historicalseed, not an activated currentNewsstream"
+  },
+  {
+    "key": "UK-LAW::guidance_reports_effective_subset",
+    "subject": "UK::Legal",
+    "claim_id": "UK-LAW",
+    "publication_or_update": "2026-11-05",
+    "event_date": "2026-10-30",
+    "effective_date": null,
+    "measurement_period": "timeline updated5Nov2026",
+    "status": "guidance_reports_effective_subset",
+    "dedup_key": "UK::Legal::UK-LAW",
+    "source_ids": [
+      "LAW"
+    ],
+    "retrieved_on": "2026-11-18",
+    "public_eligible": false,
+    "stream_readiness": "Unavailable; candidate/historicalseed, not an activated currentNewsstream"
+  },
+  {
+    "key": "SPORT-LICENCE::published_rules_future_application",
+    "subject": "IFR::English-football",
+    "claim_id": "SPORT-LICENCE",
+    "publication_or_update": null,
+    "event_date": "2026-07-01",
+    "effective_date": null,
+    "measurement_period": "before2027/28season",
+    "status": "published_rules_future_application",
+    "dedup_key": "IFR::English-football::SPORT-LICENCE",
+    "source_ids": [
+      "IFR"
+    ],
+    "retrieved_on": "2026-11-18",
+    "public_eligible": false,
+    "stream_readiness": "Unavailable; candidate/historicalseed, not an activated currentNewsstream"
+  },
+  {
+    "key": "AIR-HUB::historical_measurement_release",
+    "subject": "Heathrow::reported-results",
+    "claim_id": "AIR-HUB",
+    "publication_or_update": "2026-10-21",
+    "event_date": null,
+    "effective_date": null,
+    "measurement_period": "nine months ended30Sep2026",
+    "status": "historical_measurement_release",
+    "dedup_key": "Heathrow::reported-results::AIR-HUB",
+    "source_ids": [
+      "HUB"
+    ],
+    "retrieved_on": "2026-11-18",
+    "public_eligible": false,
+    "stream_readiness": "Unavailable; candidate/historicalseed, not an activated currentNewsstream"
+  },
+  {
+    "key": "TEL-UTILISATION::historical_measurement_and_later_milestone",
+    "subject": "BT::Openreach",
+    "claim_id": "TEL-UTILISATION",
+    "publication_or_update": "2026-11-05",
+    "event_date": null,
+    "effective_date": null,
+    "measurement_period": "H1to30Sep2026; October milestone",
+    "status": "historical_measurement_and_later_milestone",
+    "dedup_key": "BT::Openreach::TEL-UTILISATION",
+    "source_ids": [
+      "BT"
+    ],
+    "retrieved_on": "2026-11-18",
+    "public_eligible": false,
+    "stream_readiness": "Unavailable; candidate/historicalseed, not an activated currentNewsstream"
+  },
+  {
+    "key": "MEDIA-MIX::historical_measurement_release",
+    "subject": "UKMedia::commercialTV-onlinevideo",
+    "claim_id": "MEDIA-MIX",
+    "publication_or_update": "2026-07-29",
+    "event_date": null,
+    "effective_date": null,
+    "measurement_period": "calendar2025",
+    "status": "historical_measurement_release",
+    "dedup_key": "UKMedia::commercialTV-onlinevideo::MEDIA-MIX",
+    "source_ids": [
+      "MEDIA"
+    ],
+    "retrieved_on": "2026-11-18",
+    "public_eligible": false,
+    "stream_readiness": "Unavailable; candidate/historicalseed, not an activated currentNewsstream"
+  },
+  {
+    "key": "GRID-COMMITTED::management_claim_about_plan",
+    "subject": "National Grid plc::Group",
+    "claim_id": "GRID-COMMITTED",
+    "publication_or_update": "2026-11-05",
+    "event_date": null,
+    "effective_date": null,
+    "measurement_period": "FY2026/27–2030/31plan",
+    "status": "management_claim_about_plan",
+    "dedup_key": "National Grid plc::Group::GRID-COMMITTED",
+    "source_ids": [
+      "GRID"
+    ],
+    "retrieved_on": "2026-11-18",
+    "public_eligible": false,
+    "stream_readiness": "Unavailable; candidate/historicalseed, not an activated currentNewsstream"
+  }
+]

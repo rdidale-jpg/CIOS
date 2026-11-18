@@ -1,0 +1,139 @@
+[
+  {
+    "id": "RR-UNDERLYING-MARGIN",
+    "input_claim_id": "MFG-RR",
+    "entity": "Rolls-Royce Holdings plc::Group",
+    "period": "sixmonths ended30Jun2026",
+    "basis": "underlying",
+    "unit": "GBP million",
+    "operation": "ratio_percent",
+    "inputs": [
+      "2534",
+      "11279"
+    ],
+    "expected_rounded": "22.47",
+    "display_precision": "22.5% published;22.47% recomputation from roundedmillion inputs",
+    "not_meaning": "statutory margin orUKmanufacturing margin",
+    "output_claim_id": "CALC-RR-UNDERLYING-MARGIN"
+  },
+  {
+    "id": "RR-STATUTORY-MARGIN",
+    "input_claim_id": "MFG-RR",
+    "entity": "Rolls-Royce Holdings plc::Group",
+    "period": "sixmonths ended30Jun2026",
+    "basis": "IFRS",
+    "unit": "GBP million",
+    "operation": "ratio_percent",
+    "inputs": [
+      "2418",
+      "11448"
+    ],
+    "expected_rounded": "21.12",
+    "display_precision": "21.1% published;21.12% recomputation",
+    "not_meaning": "underlying orCivilAerospace margin",
+    "output_claim_id": "CALC-RR-STATUTORY-MARGIN"
+  },
+  {
+    "id": "HOTEL-ROUNDED-BRIDGE",
+    "input_claim_id": "HOTEL-BRIDGE",
+    "entity": "Whitbread::Group",
+    "period": "26weeks ended27Aug2026",
+    "basis": "adjusted-to-statutory bridge",
+    "unit": "GBP million",
+    "operation": "sum",
+    "inputs": [
+      "287",
+      "-178"
+    ],
+    "expected_rounded": "109.00",
+    "display_precision": "rounded reportedheadlines only; not exactunroundedfinancialcells",
+    "not_meaning": "cashburn orUKonlyprofit",
+    "output_claim_id": "CALC-HOTEL-ROUNDED-BRIDGE"
+  },
+  {
+    "id": "CC-GII-DIFFERENCE",
+    "input_claim_id": "TECH-CHANNEL",
+    "entity": "Computacenter plc::Group",
+    "period": "sixmonths ended30Jun2026",
+    "basis": "APM vsIFRS recognition",
+    "unit": "GBP million",
+    "operation": "difference",
+    "inputs": [
+      "8927.5",
+      "6845.2"
+    ],
+    "expected_rounded": "2082.30",
+    "display_precision": "one decimalGBPmillion sourceprecision",
+    "not_meaning": "grossprofit, availableprocurement orUKrevenue",
+    "output_claim_id": "CALC-CC-GII-DIFFERENCE"
+  },
+  {
+    "id": "CC-GROSS-MARGIN",
+    "input_claim_id": "TECH-CHANNEL",
+    "entity": "Computacenter plc::Group",
+    "period": "sixmonths ended30Jun2026",
+    "basis": "IFRS grossprofit/revenue",
+    "unit": "GBP million",
+    "operation": "ratio_percent",
+    "inputs": [
+      "657.9",
+      "6845.2"
+    ],
+    "expected_rounded": "9.61",
+    "display_precision": "9.6% published;9.61%roundedinputs",
+    "not_meaning": "GP/GII, operatingmargin orUKmargin",
+    "output_claim_id": "CALC-CC-GROSS-MARGIN"
+  },
+  {
+    "id": "MORTGAGE-COHORT-GAP",
+    "input_claim_id": "BNK-RATES",
+    "entity": "UKBanking::household-mortgages",
+    "period": "Sep2026",
+    "basis": "newdrawn vsoutstandingstock effective rates",
+    "unit": "percent",
+    "operation": "difference",
+    "inputs": [
+      "4.63",
+      "4.03"
+    ],
+    "expected_rounded": "0.60",
+    "display_precision": "0.60percentagepoints=60basispoints",
+    "not_meaning": "interestmargin orrepricingprofit",
+    "output_claim_id": "CALC-MORTGAGE-COHORT-GAP"
+  },
+  {
+    "id": "HUB-REVENUE-MIX",
+    "input_claim_id": "AIR-HUB",
+    "entity": "Heathrow::reported-results",
+    "period": "ninemonths ended30Sep2026",
+    "basis": "reported streamsum",
+    "unit": "GBP million",
+    "operation": "sum_three",
+    "inputs": [
+      "1620",
+      "592",
+      "472"
+    ],
+    "expected_rounded": "2684.00",
+    "display_precision": "roundedGBPmillions",
+    "not_meaning": "airline ticketrevenue/UKaviationGVA",
+    "output_claim_id": "CALC-HUB-REVENUE-MIX"
+  },
+  {
+    "id": "HUB-EBITDA",
+    "input_claim_id": "AIR-HUB",
+    "entity": "Heathrow::reported-results",
+    "period": "ninemonths ended30Sep2026",
+    "basis": "revenue lessadjustedoperatingcost",
+    "unit": "GBP million",
+    "operation": "difference",
+    "inputs": [
+      "2684",
+      "1243"
+    ],
+    "expected_rounded": "1441.00",
+    "display_precision": "roundedGBPmillions; issuerAPMdefinition remainsrequired",
+    "not_meaning": "statutoryPBT orfreecashflow",
+    "output_claim_id": "CALC-HUB-EBITDA"
+  }
+]

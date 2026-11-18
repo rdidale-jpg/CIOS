@@ -1,0 +1,146 @@
+[
+  {
+    "id": "REL-1",
+    "subject": "Bank of England",
+    "predicate": "operates",
+    "object": "CHAPS",
+    "direction": "subject_to_object",
+    "claim_id": "BNK-SETTLEMENT",
+    "source_ids": [
+      "SETTLE"
+    ],
+    "reporting_period": "maintained page reviewed18Nov2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "source_reported_role",
+    "identity_status": "Document-scoped names; no new canonical ID binding",
+    "material_limit": "No newlyadmitted participant/subsidiary mapping.",
+    "public_eligible": false
+  },
+  {
+    "id": "REL-2",
+    "subject": "Bank of England",
+    "predicate": "operates",
+    "object": "RTGS",
+    "direction": "subject_to_object",
+    "claim_id": "BNK-SETTLEMENT",
+    "source_ids": [
+      "SETTLE"
+    ],
+    "reporting_period": "maintained page reviewed18Nov2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "source_reported_role",
+    "identity_status": "Document-scoped names; no new canonical ID binding",
+    "material_limit": "Infrastructure vs paymentrules/system distinct; no inferred feeincome.",
+    "public_eligible": false
+  },
+  {
+    "id": "REL-3",
+    "subject": "Payment Systems Regulator",
+    "predicate": "issues_pricing_transparency_directions_to",
+    "object": "Visa/Mastercard schemes",
+    "direction": "subject_to_object",
+    "claim_id": "BNK-CARD-FEES",
+    "source_ids": [
+      "CARDS"
+    ],
+    "reporting_period": "updatedJul2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "source_reported_regulatory_action",
+    "identity_status": "Document-scoped names; no new canonical ID binding",
+    "material_limit": "Brand/group endpoints; exactlegal directionaddresses require linkedinstrument.",
+    "public_eligible": false
+  },
+  {
+    "id": "REL-4",
+    "subject": "CMA",
+    "predicate": "proposes_SMS_designation_for",
+    "object": "Microsoft business software",
+    "direction": "subject_to_object",
+    "claim_id": "UK-TECH",
+    "source_ids": [
+      "SOFTWARE"
+    ],
+    "reporting_period": "announcement16Oct2026",
+    "event_date": "2026-10-16",
+    "effective_date": null,
+    "status": "proposal",
+    "identity_status": "Document-scoped names; no new canonical ID binding",
+    "material_limit": "No final designation, bank workload or suppliercontract.",
+    "public_eligible": false
+  },
+  {
+    "id": "REL-5",
+    "subject": "CAA",
+    "predicate": "describes_airport_charge_consultation_obligations_for",
+    "object": "Airports above applicable two-year-prior threshold",
+    "direction": "subject_to_object",
+    "claim_id": "AIR-CHARGES",
+    "source_ids": [
+      "AIRCHARGE"
+    ],
+    "reporting_period": "coverage2026 basedon2024;2027 basedon2025",
+    "event_date": null,
+    "effective_date": null,
+    "status": "regulatory_scope",
+    "identity_status": "Document-scoped names; no new canonical ID binding",
+    "material_limit": "Check actualairport/year; not a customerprovidercontract.",
+    "public_eligible": false
+  },
+  {
+    "id": "REL-6",
+    "subject": "IFR",
+    "predicate": "publishes_provisional_licence_requirements_for",
+    "object": "clubs in the top five divisions of English football",
+    "direction": "subject_to_object",
+    "claim_id": "SPORT-LICENCE",
+    "source_ids": [
+      "IFR"
+    ],
+    "reporting_period": "rulespublished1Jul2026; beforeseason2027/28",
+    "event_date": "2026-07-01",
+    "effective_date": null,
+    "status": "published_future_application",
+    "identity_status": "Document-scoped names; no new canonical ID binding",
+    "material_limit": "No individualclub noncompliance or licence outcome.",
+    "public_eligible": false
+  },
+  {
+    "id": "REL-7",
+    "subject": "BT Group disclosure",
+    "predicate": "reports_operating_metrics_for",
+    "object": "Openreach",
+    "direction": "subject_to_object",
+    "claim_id": "TEL-UTILISATION",
+    "source_ids": [
+      "BT"
+    ],
+    "reporting_period": "H1to30Sep2026; Octmilestone distinct",
+    "event_date": null,
+    "effective_date": null,
+    "status": "reported_operating_perimeter",
+    "identity_status": "Document-scoped names; no new canonical ID binding",
+    "material_limit": "Not a newlegalownership orcustomercontract assertion.",
+    "public_eligible": false
+  },
+  {
+    "id": "REL-8",
+    "subject": "Heathrow results",
+    "predicate": "reports_revenue_stream",
+    "object": "Aeronautical / retail / other",
+    "direction": "subject_to_object",
+    "claim_id": "AIR-HUB",
+    "source_ids": [
+      "HUB"
+    ],
+    "reporting_period": "ninemonths ended30Sep2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "reported_economic_composition",
+    "identity_status": "Document-scoped names; no new canonical ID binding",
+    "material_limit": "Not enterprisecontractor identities; do not equate allthree to airlinefares.",
+    "public_eligible": false
+  }
+]

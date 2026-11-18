@@ -1,0 +1,2053 @@
+[
+  {
+    "wave": 4,
+    "key": "microsoft",
+    "name": "Microsoft",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/microsoft",
+    "memberships": [
+      "applications",
+      "cloud",
+      "ai",
+      "cyber"
+    ],
+    "primary_group": "Software and applications",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.microsoft.com/investor/reports/ar26/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "sap",
+    "name": "SAP",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/sap",
+    "memberships": [
+      "applications"
+    ],
+    "primary_group": "Software and applications",
+    "existing_paragraphs": 3,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.sap.com/uk/about.html",
+      "https://www.sec.gov/Archives/edgar/data/1000184/000110465926020058/sap-20251231x20f.htm",
+      "https://www.sec.gov/Archives/edgar/data/1000184/000110465926024381/tm2529416d2_ex99-1.htm"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "oracle",
+    "name": "Oracle",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/oracle",
+    "memberships": [
+      "applications",
+      "cloud"
+    ],
+    "primary_group": "Software and applications",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.oracle.com/news/announcement/lloyds-banking-group-expands-collaboration-with-oracle-to-support-tech-transformation-2025-03-20/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "salesforce",
+    "name": "Salesforce",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/salesforce",
+    "memberships": [
+      "applications"
+    ],
+    "primary_group": "Software and applications",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://investor.salesforce.com/financials/quarterly-results/default.aspx",
+      "https://www.salesforce.com/news/stories/heathrow-airport-customer/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "servicenow",
+    "name": "ServiceNow",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/servicenow",
+    "memberships": [
+      "applications"
+    ],
+    "primary_group": "Software and applications",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://newsroom.bt.com/bt-group-expands-strategic-relationship-with-servicenow-to-improve-customer-and-employee-experiences/",
+      "https://www.servicenow.com/uk/blogs/2023/what-does-servicenow-do"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "sage",
+    "name": "Sage",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/sage",
+    "memberships": [
+      "applications"
+    ],
+    "primary_group": "Software and applications",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.sage.com/investors/financial-information/financial-performance/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "workday",
+    "name": "Workday",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/workday",
+    "memberships": [
+      "applications"
+    ],
+    "primary_group": "Software and applications",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.kainosworksmart.com/workday",
+      "https://www.workday.com/en-gb/company/about-workday.html"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "pega",
+    "name": "Pega",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/pega",
+    "memberships": [
+      "applications"
+    ],
+    "primary_group": "Software and applications",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.pega.com/about",
+      "https://www.pega.com/about/office-locations"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "access-group",
+    "name": "Access Group",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/access-group",
+    "memberships": [
+      "applications"
+    ],
+    "primary_group": "Software and applications",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://hgcapital.com/portfolio/access"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "oneadvanced",
+    "name": "OneAdvanced",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/oneadvanced",
+    "memberships": [
+      "applications"
+    ],
+    "primary_group": "Software and applications",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://find-and-update.company-information.service.gov.uk/company/03214465",
+      "https://www.oneadvanced.com/about-us/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "adobe",
+    "name": "Adobe",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/adobe",
+    "memberships": [
+      "applications"
+    ],
+    "primary_group": "Software and applications",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.adobe.com/uk/about-adobe.html"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "autodesk",
+    "name": "Autodesk",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/autodesk",
+    "memberships": [
+      "applications"
+    ],
+    "primary_group": "Software and applications",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://find-and-update.company-information.service.gov.uk/company/01839239",
+      "https://www.autodesk.com/company"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "aveva",
+    "name": "AVEVA",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/aveva",
+    "memberships": [
+      "applications",
+      "frontier"
+    ],
+    "primary_group": "Software and applications",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.aveva.com/en/about/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "aws",
+    "name": "AWS",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/aws",
+    "memberships": [
+      "cloud",
+      "ai"
+    ],
+    "primary_group": "Cloud and data platforms",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.aboutamazon.co.uk/news/job-creation-and-investment/aws-plans-to-invest-8-billion-in-the-uk",
+      "https://www.aboutamazon.co.uk/news/job-creation-and-investment/learn-about-awss-long-term-commitment-to-the-uk"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "google-cloud",
+    "name": "Google Cloud",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/google-cloud",
+    "memberships": [
+      "cloud",
+      "ai"
+    ],
+    "primary_group": "Cloud and data platforms",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://cloud.google.com/blog/products/application-development/simplifying-platform-engineering-at-john-lewis-part-one"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "snowflake",
+    "name": "Snowflake",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/snowflake",
+    "memberships": [
+      "cloud",
+      "ai"
+    ],
+    "primary_group": "Cloud and data platforms",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.snowflake.com/en/contact/",
+      "https://www.snowflake.com/en/customers/all-customers/case-study/aviva/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "databricks",
+    "name": "Databricks",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/databricks",
+    "memberships": [
+      "cloud",
+      "ai"
+    ],
+    "primary_group": "Cloud and data platforms",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.databricks.com/customers/rolls-royce",
+      "https://www.deloitte.com/uk/en/about/story/impact/driving-ai-powered-integration-rolls-royce.html"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "ovhcloud",
+    "name": "OVHcloud",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/ovhcloud",
+    "memberships": [
+      "cloud"
+    ],
+    "primary_group": "Cloud and data platforms",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.ovhcloud.com/en-gb/about-us/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "rackspace",
+    "name": "Rackspace",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/rackspace",
+    "memberships": [
+      "cloud",
+      "services"
+    ],
+    "primary_group": "Cloud and data platforms",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.rackspace.com/en-gb/about/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "quantexa",
+    "name": "Quantexa",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/quantexa",
+    "memberships": [
+      "ai"
+    ],
+    "primary_group": "AI and decision intelligence",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.quantexa.com/resources/holistic-view-of-financial-crime/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "faculty",
+    "name": "Faculty",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/faculty",
+    "memberships": [
+      "ai"
+    ],
+    "primary_group": "AI and decision intelligence",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://faculty.ai/en-gb/industries/health-and-care"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "nvidia",
+    "name": "NVIDIA",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/nvidia",
+    "memberships": [
+      "ai",
+      "infrastructure",
+      "frontier"
+    ],
+    "primary_group": "AI and decision intelligence",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "openai",
+    "name": "OpenAI",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/openai",
+    "memberships": [
+      "ai"
+    ],
+    "primary_group": "AI and decision intelligence",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://openai.com/index/introducing-openai-london/",
+      "https://www.natwestgroup.com/news-and-insights/latest-stories/ai-and-data/2025/mar/accelerating-our-ai-transformation-in-banking-with-openai.html"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "anthropic",
+    "name": "Anthropic",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/anthropic",
+    "memberships": [
+      "ai"
+    ],
+    "primary_group": "AI and decision intelligence",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://find-and-update.company-information.service.gov.uk/company/14604577",
+      "https://www.anthropic.com/company",
+      "https://www.anthropic.com/news/barclays-scales-claude",
+      "https://www.anthropic.com/news/tcs-anthropic-partnership"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "google-deepmind",
+    "name": "Google DeepMind",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/google-deepmind",
+    "memberships": [
+      "ai"
+    ],
+    "primary_group": "AI and decision intelligence",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://deepmind.google/about/",
+      "https://www.gov.uk/government/publications/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "ncc-group",
+    "name": "NCC Group",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/ncc-group",
+    "memberships": [
+      "cyber"
+    ],
+    "primary_group": "Cybersecurity",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.nccgroup.com/media/fvle0btz/ncc-interims-h1-fy26-110626.pdf",
+      "https://www.nccgroup.com/newsroom/ncc-group-completes-sale-of-escode/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "sophos",
+    "name": "Sophos",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/sophos",
+    "memberships": [
+      "cyber"
+    ],
+    "primary_group": "Cybersecurity",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.sec.gov/Archives/edgar/data/1468666/000095014225000239/eh250585750_8k.htm",
+      "https://www.sophos.com/en-us/partner-news/sophos-completes-secureworks-acquisition"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "darktrace",
+    "name": "Darktrace",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/darktrace",
+    "memberships": [
+      "cyber"
+    ],
+    "primary_group": "Cybersecurity",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.darktrace.com/customers",
+      "https://www.thomabravo.com/press-releases/thoma-bravo-completes-acquisition-of-darktrace"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "palo-alto-networks",
+    "name": "Palo Alto Networks",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/palo-alto-networks",
+    "memberships": [
+      "cyber"
+    ],
+    "primary_group": "Cybersecurity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.paloaltonetworks.co.uk/company/what-we-do"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "crowdstrike",
+    "name": "CrowdStrike",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/crowdstrike",
+    "memberships": [
+      "cyber"
+    ],
+    "primary_group": "Cybersecurity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.crowdstrike.com/en-us/resources/customer-stories/berkeley-group/",
+      "https://www.ncsc.gov.uk/organisation/crowdstrike-uk-limited"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "fortinet",
+    "name": "Fortinet",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/fortinet",
+    "memberships": [
+      "cyber"
+    ],
+    "primary_group": "Cybersecurity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://find-and-update.company-information.service.gov.uk/company/04570027",
+      "https://www.fortinet.com/uk/corporate/about-us/about-us"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "rubrik",
+    "name": "Rubrik",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/rubrik",
+    "memberships": [
+      "cyber"
+    ],
+    "primary_group": "Cybersecurity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "accenture",
+    "name": "Accenture",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/accenture",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.accenture.com/en/about/company/integrated-reporting",
+      "https://www.gov.uk/government/publications/strategic-suppliers/crown-representatives-and-strategic-suppliers"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "ibm",
+    "name": "IBM",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/ibm",
+    "memberships": [
+      "services",
+      "applications",
+      "cloud",
+      "ai",
+      "infrastructure"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.ibm.com/responsibility/governance/business-segments-innovation"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "capgemini",
+    "name": "Capgemini",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/capgemini",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.capgemini.com/gb-en/about-us/who-we-are/what-we-do/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "sopra-steria",
+    "name": "Sopra Steria",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/sopra-steria",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 3,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.soprasteria.co.uk/about-us/technology-partners",
+      "https://www.soprasteria.com/investors/sopra-steria-overview_/key-figures"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "dxc",
+    "name": "DXC",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/dxc",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 3,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://dxc.com/insights/customer-stories",
+      "https://investors.dxc.com/investor-news/news-details/2026/DXC-Launches-London-Customer-Experience-Center-to-Help-Unlock-AI-Value/default.aspx",
+      "https://www.accenture.com/en/about/company/integrated-reporting",
+      "https://www.gov.uk/government/publications/strategic-suppliers/crown-representatives-and-strategic-suppliers"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "kainos",
+    "name": "Kainos",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/kainos",
+    "memberships": [
+      "services",
+      "applications"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 3,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.kainos.com/investor-relations",
+      "https://www.kainos.com/investor-relations/results-and-presentations",
+      "https://www.kainosworksmart.com/workday"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "tcs-diligenta",
+    "name": "TCS / Diligenta",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/tcs-diligenta",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "infosys",
+    "name": "Infosys",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/infosys",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "cognizant",
+    "name": "Cognizant",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/cognizant",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "ntt-data",
+    "name": "NTT DATA",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/ntt-data",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "equal-experts",
+    "name": "Equal Experts",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/equal-experts",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "version-1",
+    "name": "Version 1",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/version-1",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "netcompany",
+    "name": "Netcompany",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/netcompany",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "cgi",
+    "name": "CGI",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/cgi",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.cgi.com/uk/en-gb/about-us/cgi-at-a-glance"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "fujitsu",
+    "name": "Fujitsu",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/fujitsu",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://global.fujitsu/en-UK/local/about"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "hcltech",
+    "name": "HCLTech",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/hcltech",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.hcltech.com/geo-presence/united-kingdom"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "wipro",
+    "name": "Wipro",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/wipro",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.wipro.com/en-UKI/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "tech-mahindra",
+    "name": "Tech Mahindra",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/tech-mahindra",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://find-and-update.company-information.service.gov.uk/company/BR023076",
+      "https://www.techmahindra.com/contact-us/",
+      "https://www.techmahindra.com/our-capabilities/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "atos-eviden",
+    "name": "Atos / Eviden",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/atos-eviden",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://eviden.com/",
+      "https://find-and-update.company-information.service.gov.uk/company/02017873",
+      "https://www.atosgroup.com/sites/default/files/2026-01/atos-universal-registration-document-en-2024.pdf"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "valtech",
+    "name": "Valtech",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/valtech",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.valtech.com/newsroom/valtech-completes-acquisition-of-kin-carta/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "deloitte",
+    "name": "Deloitte",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/deloitte",
+    "memberships": [
+      "services"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.deloitte.com/uk/en/about/story/impact/driving-ai-powered-integration-rolls-royce.html",
+      "https://www.deloitte.com/uk/en/services.html"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "node4",
+    "name": "Node4",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/node4",
+    "memberships": [
+      "services",
+      "cloud",
+      "cyber"
+    ],
+    "primary_group": "Technology services",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://node4.co.uk/about-us",
+      "https://node4.co.uk/why-node4"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "computacenter",
+    "name": "Computacenter",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/computacenter",
+    "memberships": [
+      "channels",
+      "services"
+    ],
+    "primary_group": "Channels and distribution",
+    "existing_paragraphs": 3,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://investors.computacenter.com/news-releases/news-release-details/computacenter-2026-half-year-results",
+      "https://www.genesys.com/en-gb/customer-stories/computacenter"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "softcat",
+    "name": "Softcat",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/softcat",
+    "memberships": [
+      "channels"
+    ],
+    "primary_group": "Channels and distribution",
+    "existing_paragraphs": 3,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://uk-corp.ingrammicro.com/discover/company",
+      "https://uk.tdsynnex.com/",
+      "https://www.softcat.com/",
+      "https://www.softcat.com/about-us/investor-centre/results-centre"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "scc",
+    "name": "SCC",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/scc",
+    "memberships": [
+      "channels",
+      "services"
+    ],
+    "primary_group": "Channels and distribution",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.scc.com/",
+      "https://www.scc.com/about-scc/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "td-synnex",
+    "name": "TD SYNNEX",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/td-synnex",
+    "memberships": [
+      "channels"
+    ],
+    "primary_group": "Channels and distribution",
+    "existing_paragraphs": 3,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://uk-corp.ingrammicro.com/discover/company",
+      "https://uk.tdsynnex.com/",
+      "https://www.softcat.com/",
+      "https://www.softcat.com/about-us/investor-centre/results-centre"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "ingram-micro",
+    "name": "Ingram Micro",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/ingram-micro",
+    "memberships": [
+      "channels"
+    ],
+    "primary_group": "Channels and distribution",
+    "existing_paragraphs": 3,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://uk-corp.ingrammicro.com/discover/company",
+      "https://uk.tdsynnex.com/",
+      "https://www.softcat.com/",
+      "https://www.softcat.com/about-us/investor-centre/results-centre"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "equinix",
+    "name": "Equinix",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/equinix",
+    "memberships": [
+      "infrastructure"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://investor.equinix.com/sec-filings/all-sec-filings/content/0001101239-26-000032/eqix-20251231.htm",
+      "https://www.equinix.com/data-centers/europe-colocation/united-kingdom-colocation"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "telehouse",
+    "name": "Telehouse",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/telehouse",
+    "memberships": [
+      "infrastructure"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.telehouse.net/data-centre-services/uk/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "bt",
+    "name": "BT",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/bt",
+    "memberships": [
+      "infrastructure",
+      "services"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://newsroom.bt.com/bt-delivered-a-strong-first-half-with-further-strategic-momentum/",
+      "https://www.bt.com/about/bt/our-company/group-businesses"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "pulsant",
+    "name": "Pulsant",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/pulsant",
+    "memberships": [
+      "infrastructure"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "digital-realty",
+    "name": "Digital Realty",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/digital-realty",
+    "memberships": [
+      "infrastructure"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "virtus",
+    "name": "VIRTUS",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/virtus",
+    "memberships": [
+      "infrastructure"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "cisco",
+    "name": "Cisco",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/cisco",
+    "memberships": [
+      "infrastructure",
+      "cyber"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "hpe",
+    "name": "HPE",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/hpe",
+    "memberships": [
+      "infrastructure",
+      "cloud"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "dell",
+    "name": "Dell",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/dell",
+    "memberships": [
+      "infrastructure"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "broadcom-vmware",
+    "name": "Broadcom / VMware",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/broadcom-vmware",
+    "memberships": [
+      "infrastructure"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://node4.co.uk/about-us",
+      "https://www.vmware.com/products/cloud-infrastructure/vmware-cloud-foundation"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "lenovo",
+    "name": "Lenovo",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/lenovo",
+    "memberships": [
+      "infrastructure"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.lenovo.com/gb/en/about/who-we-are/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "vodafonethree",
+    "name": "VodafoneThree",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/vodafonethree",
+    "memberships": [
+      "infrastructure"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.vodafonethree.com/about/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "virgin-media-o2",
+    "name": "Virgin Media O2",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/virgin-media-o2",
+    "memberships": [
+      "infrastructure"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.virginmediao2business.co.uk/about-us/"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "cityfibre",
+    "name": "CityFibre",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/cityfibre",
+    "memberships": [
+      "infrastructure"
+    ],
+    "primary_group": "Physical infrastructure and connectivity",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://cityfibre.com/about-us"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "arm",
+    "name": "Arm",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/arm",
+    "memberships": [
+      "frontier",
+      "infrastructure"
+    ],
+    "primary_group": "Semiconductors and quantum",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.sec.gov/Archives/edgar/data/1973239/000197323926000097/arm-20260331.htm"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "intel",
+    "name": "Intel",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/intel",
+    "memberships": [
+      "frontier"
+    ],
+    "primary_group": "Semiconductors and quantum",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.intel.com/content/www/us/en/content-details/868923/new-registered-address-for-intel-corporation-uk-limited.html"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "amd",
+    "name": "AMD",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/amd",
+    "memberships": [
+      "frontier"
+    ],
+    "primary_group": "Semiconductors and quantum",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.amd.com/en/corporate.html",
+      "https://www.amd.com/en/corporate/locations.html"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "oqc",
+    "name": "OQC",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/oqc",
+    "memberships": [
+      "frontier"
+    ],
+    "primary_group": "Semiconductors and quantum",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://oqc.tech/company/",
+      "https://www.british-business-bank.co.uk/news-and-events/news/british-business-bank-commits-ps100m-oxford-quantum-circuits"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "riverlane",
+    "name": "Riverlane",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/riverlane",
+    "memberships": [
+      "frontier"
+    ],
+    "primary_group": "Semiconductors and quantum",
+    "existing_paragraphs": 1,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://ir.quantinuum.com/news-releases/news-release-details/quantinuum-rolls-royce-riverlane-and-university-edinburgh-sign",
+      "https://www.riverlane.com/about-us"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "quantinuum",
+    "name": "Quantinuum",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/quantinuum",
+    "memberships": [
+      "frontier"
+    ],
+    "primary_group": "Semiconductors and quantum",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://ir.quantinuum.com/news-releases/news-release-details/quantinuum-rolls-royce-riverlane-and-university-edinburgh-sign"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  },
+  {
+    "wave": 4,
+    "key": "nu-quantum",
+    "name": "Nu Quantum",
+    "owner": "docs/flora-runtime/technology-visual-foundation/Foundation.json::providers/nu-quantum",
+    "memberships": [
+      "frontier"
+    ],
+    "primary_group": "Semiconductors and quantum",
+    "existing_paragraphs": 2,
+    "existing_canonical_id": null,
+    "status": "not_started_in_W2; partial existingprofile retained",
+    "discovery_leads_only": [
+      "https://www.nu-quantum.com/about-us",
+      "https://www.nu-quantum.com/technology"
+    ],
+    "closure_demands": [
+      "ExactlegalGroup/UKentity and verifiedownership",
+      "Currentoriginalissuerfinances byapplicablesegment withunit/period/basis",
+      "Currentstrategy/leadership andactualoperatingcapabilities",
+      "Customer/supplierstatement original andexactrelationshippredicate/scope",
+      "Datedprogrammes andmeasuredoutcomes, versusplans",
+      "Source/intended-use review andSourceowner-qualifiedhandoff"
+    ],
+    "acceptance": "Individual bounded dossier+negativecases+eligible/withheld disposition; a landinglink cannotclose sixdemands"
+  }
+]

@@ -1,0 +1,1152 @@
+[
+  {
+    "sic": "A",
+    "panorama_id": "uk-sic07-a",
+    "label": "Agriculture & fishing",
+    "scope": "Farming, forestry and fishing; Defra evidence here is farming only.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/0",
+      "sha256": "594e23aa7dfec0dc931c7d0b611731c0cea4adcd7dbef2870e9a768db6e7a1c9",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.63,
+      "value2024": 0.6,
+      "gva_output_residual2024": 0.4,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-A",
+      "calculated_claim_id": "GVA-RESIDUAL-A"
+    },
+    "claim_ids": [
+      "IC-A",
+      "AGR-INPUT"
+    ],
+    "insight_id": "SECTOR-A-INSIGHT",
+    "value_system": "Land, labour, inputs and water → crops/livestock → processors/retail. Commodity output, subsidies and diversification differ from farm profit.",
+    "new_economic_interpretation": "Crop/input purchasing and livestock commodity prices act on different farm-income mechanisms; one improved aggregate does not resolve farm-type cash exposure.",
+    "material_counter_evidence": "Commodity price recovery, rather than operating productivity, may account for improved farming income.",
+    "material_remaining_demand": "Farm-type output/input prices, subsidy dependence and cash distribution; forestry/fishing remain separate.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "B",
+    "panorama_id": "uk-sic07-b",
+    "label": "Mining & quarrying",
+    "scope": "Oil/gas extraction, mining support, minerals/quarries; NSTA covers upstream offshore only.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/1",
+      "sha256": "c8e2c575f0321da5a7e2cfda5a00f371d5060ead9125ce482c6e5b2ad510a6db",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.47,
+      "value2024": 0.5,
+      "gva_output_residual2024": 0.5,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-B",
+      "calculated_claim_id": "GVA-RESIDUAL-B"
+    },
+    "claim_ids": [
+      "IC-B",
+      "MIN-REMEDY"
+    ],
+    "insight_id": "SECTOR-B-INSIGHT",
+    "value_system": "Resource rights → extraction → transport/refining inputs; price, depletion, capex and decommissioning affect retained value.",
+    "new_economic_interpretation": "Lower absolute emissions can coexist with production depletion and worsening intensity. Assetlife, gridaccess and decommissioning must be considered jointly.",
+    "material_counter_evidence": "Active measures already account for much reduction; treating all reductions as closures is false.",
+    "material_remaining_demand": "Named field production, power options, agreed asset plans and remaining economic decisions; quarry economics separate.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "C",
+    "panorama_id": "uk-sic07-c",
+    "label": "Manufacturing",
+    "scope": "Food, chemicals, materials, machinery and transport equipment; one aerospace/power-systems example does not cover all manufacturing.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/2",
+      "sha256": "260bb878d96927017a07fcb03ac431feef5a3b2c4b7aa41d505775df24c73a80",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.67,
+      "value2024": 0.66,
+      "gva_output_residual2024": 0.34,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-C",
+      "calculated_claim_id": "GVA-RESIDUAL-C"
+    },
+    "claim_ids": [
+      "IC-C",
+      "MFG-RR"
+    ],
+    "insight_id": "SECTOR-C-INSIGHT",
+    "value_system": "Design/manufacture → equipment/service agreements → installed-base aftermarket. Recurring service economics differ from initial equipment sale.",
+    "new_economic_interpretation": "Manufacturing value capture differs between originalequipment and installed-base services; underlying profit and statutory performance answer different questions.",
+    "material_counter_evidence": "A profitable aftermarket example contradicts universal manufacturing distress.",
+    "material_remaining_demand": "UK plant/segment costs, orders, utilisation and disclosed service obligations; do not extrapolate oneglobalissuer.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Partial",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "D",
+    "panorama_id": "uk-sic07-d",
+    "label": "Energy supply",
+    "scope": "Electricity/gas generation, networks and supply; GB default-tariff retail evidence excludes NI and non-domestic pricing.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/3",
+      "sha256": "0c8682abee9cc412e1118ef0778c720514d8dad5e97ab18866b11f98d93476af",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.71,
+      "value2024": 0.76,
+      "gva_output_residual2024": 0.24,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-D",
+      "calculated_claim_id": "GVA-RESIDUAL-D"
+    },
+    "claim_ids": [
+      "IC-D",
+      "ENERGY-CAP"
+    ],
+    "insight_id": "SECTOR-D-INSIGHT",
+    "value_system": "Generate/transport/retail energy → metered use and settlement; regulated allowances, hedging and customer charges are different value mechanisms.",
+    "new_economic_interpretation": "Generation, network allowances and retail hedging are distinct models; a domestic tariff cap transmits only part of sector economics.",
+    "material_counter_evidence": "Regulated recovery, existing hedges and rising generation can offset particular cost shocks.",
+    "material_remaining_demand": "Named regulated asset return/cost bridge or supplier hedge/tariff mix; GB/NI and household/business separated.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "E",
+    "panorama_id": "uk-sic07-e",
+    "label": "Water & waste",
+    "scope": "Water, sewerage, waste and remediation; acquired EA evidence covers water resources in England, not all E.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/4",
+      "sha256": "e4d756c9446324f616afeec52e5c6702abefd6f0ff62c748e836f9d970f3e56d",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.49,
+      "value2024": 0.5,
+      "gva_output_residual2024": 0.5,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-E",
+      "calculated_claim_id": "GVA-RESIDUAL-E"
+    },
+    "claim_ids": [
+      "IC-E",
+      "WATER-LEAK"
+    ],
+    "insight_id": "SECTOR-E-INSIGHT",
+    "value_system": "Collect/treat/distribute water and manage residuals → regulated service outcomes; asset reliability and resource losses affect available supply.",
+    "new_economic_interpretation": "Treatment and pumping create cost before lost water reaches a paying customer; leakage reliability and household demand are related but distinct levers.",
+    "material_counter_evidence": "Better performers and committed investment challenge an industry-wide incapability thesis.",
+    "material_remaining_demand": "Company/asset leakage-volume, supply balance, currentfunded remedy and waste/remediation economics.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "F",
+    "panorama_id": "uk-sic07-f",
+    "label": "Construction",
+    "scope": "Buildings, civil engineering and specialist construction; infrastructure case is not whole UK housing.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/5",
+      "sha256": "ecfe6294507b5e421fbcfc2da0f60729fb2396293433912a3fdad55a683476ac",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.63,
+      "value2024": 0.63,
+      "gva_output_residual2024": 0.37,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-F",
+      "calculated_claim_id": "GVA-RESIDUAL-F"
+    },
+    "claim_ids": [
+      "IC-F",
+      "BUILD-MARGIN"
+    ],
+    "insight_id": "SECTOR-F-INSIGHT",
+    "value_system": "Plan/design/procure/build → handover/service → cash collection. Project risk, working capital and subcontractor performance shape value capture.",
+    "new_economic_interpretation": "Project price, riskallocation and cashconversion matter separately from orderbacklog; comparing adjusted margins needs prior one-offs.",
+    "material_counter_evidence": "Priorcredit can explain headline margin decline; contractor backlog is not technology budget.",
+    "material_remaining_demand": "Named project changecontrols, subcontracting, cash and risk transfer; housing and infrastructure cohorts separated.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "G",
+    "panorama_id": "uk-sic07-g",
+    "label": "Retail & wholesale",
+    "scope": "Wholesale/retail and motor trade; Tesco food/online/Booker is one subset.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/6",
+      "sha256": "c246db8807a239f5140eff4b33d5b24a392276d90967d60bd58b86c70fbddf85",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.45,
+      "value2024": 0.45,
+      "gva_output_residual2024": 0.55,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-G",
+      "calculated_claim_id": "GVA-RESIDUAL-G"
+    },
+    "claim_ids": [
+      "IC-G",
+      "BNK-CARD-FEES"
+    ],
+    "insight_id": "SECTOR-G-INSIGHT",
+    "value_system": "Source/stock/distribute/sell → fulfilment and returns; margin, inventory cash and customer value interact with digital/media services.",
+    "new_economic_interpretation": "Retail sales are goods turnover; wholesale/retail economic output includes trade margins. Paymentacceptance charges consume margin without being the goods principal.",
+    "material_counter_evidence": "Card regulation can improve transparency; no evidence every merchant faces an unchanged high fee.",
+    "material_remaining_demand": "GBretail volumes/prices, wholesale/motor splits, matchedmerchant cardmix and actualtotalfees.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "H",
+    "panorama_id": "uk-sic07-h",
+    "label": "Transport & logistics",
+    "scope": "Road, rail, aviation, shipping, warehousing and postal services; GB traffic includes private cars and excludes NI.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/7",
+      "sha256": "8c653d8514bc7e388020a48ee6fe594d6deaa6ae7ea87a8a90c80e1068a8f2d0",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.6,
+      "value2024": 0.59,
+      "gva_output_residual2024": 0.41,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-H",
+      "calculated_claim_id": "GVA-RESIDUAL-H"
+    },
+    "claim_ids": [
+      "IC-H",
+      "ROAD-MIX"
+    ],
+    "insight_id": "SECTOR-H-INSIGHT",
+    "value_system": "Infrastructure/capacity → movement/storage → delivery/service. Utilisation, fuel, reliability and regulation affect returns.",
+    "new_economic_interpretation": "Van distance and heavygoods movements need different capacity/load denominators; passenger airports, airlines and roadfreight cannot share a revenue proxy.",
+    "material_counter_evidence": "Flatlorry distance with risingvan traffic weakens a universal logistics growth claim.",
+    "material_remaining_demand": "Mode-specific tonnes/passengerkm, utilisation, paidcapacity, costs and NI; preserve separate airportcarriers.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "I",
+    "panorama_id": "uk-sic07-i",
+    "label": "Hospitality & food",
+    "scope": "Accommodation and food services; hotel Group results do not cover all restaurants/caterers.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/8",
+      "sha256": "ea3b3f34281d05f57748ae781048c47ccfa32f628b21a7e5a314db429fa289ef",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.51,
+      "value2024": 0.5,
+      "gva_output_residual2024": 0.5,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-I",
+      "calculated_claim_id": "GVA-RESIDUAL-I"
+    },
+    "claim_ids": [
+      "IC-I",
+      "HOTEL-BRIDGE"
+    ],
+    "insight_id": "SECTOR-I-INSIGHT",
+    "value_system": "Property/capacity and labour → rooms/food/guest service → occupancy, rate and margin; leases and capex affect cash outcomes.",
+    "new_economic_interpretation": "Roomcapacity, rate/occupancy and labour create recurring economics; estate impairments and transition charges need separate analysis from currentservice cash.",
+    "material_counter_evidence": "Growing sales and existing transformation mean profit pressure is not proof of absent management response.",
+    "material_remaining_demand": "UK&Iroomrevenue/RevPAR versus Germany, cashadjustments, labour and restauranttransitionoutcomes.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "J",
+    "panorama_id": "uk-sic07-j",
+    "label": "Information & communication",
+    "scope": "Publishing/media, telecoms and IT services; Technology and Banking platforms are not synonyms for whole J.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/9",
+      "sha256": "573dc32132c0e553393d1512b15cbd19f48c57ee337de5d2ecbe1648dc84e697",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.5,
+      "value2024": 0.5,
+      "gva_output_residual2024": 0.5,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-J",
+      "calculated_claim_id": "GVA-RESIDUAL-J"
+    },
+    "claim_ids": [
+      "IC-J",
+      "MEDIA-MIX"
+    ],
+    "insight_id": "SECTOR-J-INSIGHT",
+    "value_system": "Networks/content/software/data → connectivity and digital service → subscriptions/usage/service income, with high fixed-capacity and operating costs.",
+    "new_economic_interpretation": "Telecoms fixednetwork utilisation, software services and content monetisation overlap SICJ but have distinct revenue/capital drivers.",
+    "material_counter_evidence": "Media aggregate growth coexists with broadcaster decline; no single digitalgrowth narrative coversJ.",
+    "material_remaining_demand": "UK-only segment/value-chain financials acrossIT/media/telecom; currentcustomer/service relationships.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Partial",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "K",
+    "panorama_id": "uk-sic07-k",
+    "label": "Finance & insurance",
+    "scope": "Banking/credit, insurance/pensions and auxiliary finance; asset management/payments require activity/legal mapping. UK financial system is wider than K.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/10",
+      "sha256": "bf450776eea5735e91710be00874496cc4e4addfcc8c6c44b3eca772378f2cbc",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.47,
+      "value2024": 0.47,
+      "gva_output_residual2024": 0.53,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-K",
+      "calculated_claim_id": "GVA-RESIDUAL-K"
+    },
+    "claim_ids": [
+      "IC-K",
+      "BNK-FLOWS"
+    ],
+    "insight_id": "SECTOR-K-INSIGHT",
+    "value_system": "Mobilise savings/capital, price/transfer risk, lend/invest/insure and settle → spreads/fees/premiums subject to funding, capital, claims and service costs.",
+    "new_economic_interpretation": "Bank spread/fee economics, insurance underwriting and assetmanagement must remain separate. Kvalueadded includes services not captured by balance-sheet volumes.",
+    "material_counter_evidence": "Lower newmortgage flows do not prove lower bank profit or system instability.",
+    "material_remaining_demand": "Matched Banking income/funding/capital/service measures; insurance and pension liabilities separately.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Partial",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "L",
+    "panorama_id": "uk-sic07-l",
+    "label": "Real estate",
+    "scope": "Property owning/letting, development services and imputed owner-occupied rent; not a single commercial-service market.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/11",
+      "sha256": "0aaac301819445b65874244de92e677bb1fe7fd2a5dafb01299a243881557d21",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.17,
+      "value2024": 0.17,
+      "gva_output_residual2024": 0.83,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-L",
+      "calculated_claim_id": "GVA-RESIDUAL-L"
+    },
+    "claim_ids": [
+      "IC-L",
+      "PROPERTY-BASIS"
+    ],
+    "insight_id": "SECTOR-L-INSIGHT",
+    "value_system": "Finance/develop/lease/manage property → rental/service/valuation returns; imputed housing service is distinct from cash rent or capex.",
+    "new_economic_interpretation": "Cashrental, EPRA earnings, IFRSvaluation and imputed housingservices belong to different economic views. A large GVA share is not a supplier market.",
+    "material_counter_evidence": "Stable EPRA earnings can coexist with rising IFRSPBT duevaluation, not rentprofit acceleration.",
+    "material_remaining_demand": "Matched rent/occupancy, servicecost and valuation/capital structure perpropertycohort.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "M",
+    "panorama_id": "uk-sic07-m",
+    "label": "Professional services",
+    "scope": "Legal/accounting, consulting, architecture/engineering, R&D and other professional work; audit is one evidenced segment.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/12",
+      "sha256": "0e4493c8f5623fb39f785ce267d0b76103be96ba117261ecf48195c3f89441e8",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.42,
+      "value2024": 0.42,
+      "gva_output_residual2024": 0.58,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-M",
+      "calculated_claim_id": "GVA-RESIDUAL-M"
+    },
+    "claim_ids": [
+      "IC-M",
+      "AUDIT-COHORT"
+    ],
+    "insight_id": "SECTOR-M-INSIGHT",
+    "value_system": "Specialist knowledge/assurance/design → client decision/delivery → fees and recurring trusted relationships; utilisation and quality affect returns.",
+    "new_economic_interpretation": "Professionalservice value depends on scarce expertise, utilisation and assurancequality; auditcount concentration is not consultingfee concentration.",
+    "material_counter_evidence": "Growing challenger auditcount share challenges a static competition thesis.",
+    "material_remaining_demand": "Segmentfee, capacity, quality and clientdecision data acrosslegal/accounting/engineering/R&D.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "N",
+    "panorama_id": "uk-sic07-n",
+    "label": "Business support",
+    "scope": "Staffing, leasing, travel agencies, security, facilities and office support; Hays is specialist recruitment only.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/13",
+      "sha256": "577845ac0f8eb29699f7721c50406ae570d12707359fda390fbeff95dea227ed",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.47,
+      "value2024": 0.46,
+      "gva_output_residual2024": 0.54,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-N",
+      "calculated_claim_id": "GVA-RESIDUAL-N"
+    },
+    "claim_ids": [
+      "IC-N",
+      "STAFF-FEES"
+    ],
+    "insight_id": "SECTOR-N-INSIGHT",
+    "value_system": "Labour/asset coordination → reliable flexible service → fees or rental/contract margin; gross pass-through and net fee value differ.",
+    "new_economic_interpretation": "Recruitment netfees exclude pass-through remuneration; leasing/facilities/security have different assets and labour obligations.",
+    "material_counter_evidence": "Hays already has productivity actions; targetambitions do not show deliveredconversion.",
+    "material_remaining_demand": "UKnetfee-to-profit bridge, candidate/serviceoutcomes and contractlabour scope; avoid globalallocation.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "O",
+    "panorama_id": "uk-sic07-o",
+    "label": "Public administration",
+    "scope": "Public administration, defence and compulsory social security; public education/health remain P/Q, not extra O.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/14",
+      "sha256": "0ddf2b05ef63f044cc2b3492e64dc02970e0a1a8d3a5a056c07242dd51d76c31",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.44,
+      "value2024": 0.43,
+      "gva_output_residual2024": 0.57,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-O",
+      "calculated_claim_id": "GVA-RESIDUAL-O"
+    },
+    "claim_ids": [
+      "IC-O",
+      "DEFENCE-OUTTURN"
+    ],
+    "insight_id": "SECTOR-O-INSIGHT",
+    "value_system": "Tax/authorised resources and administrative capabilities → public/security/social-protection outcomes; nonmarket output is not supplier revenue.",
+    "new_economic_interpretation": "Nonmarket administration turns authorised resources into publicoutcomes; department spending and SICnonmarket GVA are not interchangeable.",
+    "material_counter_evidence": "Appropriations, resource budgets and cashconsumption differ; no available procurement inferred.",
+    "material_remaining_demand": "Outturn-to-service metric bridges, existingprogrammes/awards and lawfuldefence disclosure boundaries.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "P",
+    "panorama_id": "uk-sic07-p",
+    "label": "Education",
+    "scope": "Schools, further/higher education and other teaching; OfS covers English higher education only.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/15",
+      "sha256": "6c6871d6fdbd6d1be9a4c58d2aed93e2b6b33b11f7f78f76095e9625b0460ace",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.28,
+      "value2024": 0.28,
+      "gva_output_residual2024": 0.72,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-P",
+      "calculated_claim_id": "GVA-RESIDUAL-P"
+    },
+    "claim_ids": [
+      "IC-P",
+      "HE-DISTRIBUTION"
+    ],
+    "insight_id": "SECTOR-P-INSIGHT",
+    "value_system": "People/facilities/learning → student/research/public outcomes → tuition/grants/contracts; recruitment, restricted funds and cost base differ.",
+    "new_economic_interpretation": "Tuition, restrictedresearch funding and publiceducation output require separate economicmodels; restructuring spend may be a response rather than recurring deficit.",
+    "material_counter_evidence": "Some institutions improved; forecastdeficits are not realised sectorfailures.",
+    "material_remaining_demand": "Named institution cash/recruitment/restrictedfunds and school/FE service economics.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "Q",
+    "panorama_id": "uk-sic07-q",
+    "label": "Health & social care",
+    "scope": "Health, residential and non-residential social care; English adult social care evidence is narrower than UK Q.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/16",
+      "sha256": "f5c391202f21faaf7eec9ba3fb80a79bdcc1761c842204fa7f8c7f60fd5dfebc",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.39,
+      "value2024": 0.38,
+      "gva_output_residual2024": 0.62,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-Q",
+      "calculated_claim_id": "GVA-RESIDUAL-Q"
+    },
+    "claim_ids": [
+      "IC-Q",
+      "CARE-SAMPLE"
+    ],
+    "insight_id": "SECTOR-Q-INSIGHT",
+    "value_system": "Workforce/capacity and clinical/care processes → safe access, treatment and support → outcomes under public/insurance/self-pay funding.",
+    "new_economic_interpretation": "Publiccommissioning, privatecare and clinical services differ in payment and delivery models. Assessedquality is not sectorfinancial margin.",
+    "material_counter_evidence": "Mostassessedservices are good/outstanding; smallassessedsamples cannot rank allproviders.",
+    "material_remaining_demand": "Exactprovider/pathway funding, workforce, access and serviceoutcomes acrossfourUKnations.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Partial",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "R",
+    "panorama_id": "uk-sic07-r",
+    "label": "Arts & recreation",
+    "scope": "Arts/entertainment, museums/heritage, sports and recreation; broader creative industries cross several SIC sections.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/17",
+      "sha256": "07b8aef30a23e82b508455ee6dfee6e980c1d54e906e26bb5591353be8fac23a",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.46,
+      "value2024": 0.46,
+      "gva_output_residual2024": 0.54,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-R",
+      "calculated_claim_id": "GVA-RESIDUAL-R"
+    },
+    "claim_ids": [
+      "IC-R",
+      "CULTURE-SCOPE"
+    ],
+    "insight_id": "SECTOR-R-INSIGHT",
+    "value_system": "Talent/content/venues → participation/experience → tickets, subscriptions, rights, sponsorship or grants; capacity and audience mix affect returns.",
+    "new_economic_interpretation": "Participation, tickets, media rights and grants are different demand/value measures. Englandadults survey cannot size a UKsports/arts profitpool.",
+    "material_counter_evidence": "Surveychange/update dates can explain apparentchange without any realparticipation shift.",
+    "material_remaining_demand": "Named rights-holder/venue/cohort finances, licenceapplicability and audience-time series oncompatible surveybasis.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "S",
+    "panorama_id": "uk-sic07-s",
+    "label": "Other services",
+    "scope": "Membership bodies, repair and personal services; union-return evidence is only a membership-body subset.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/18",
+      "sha256": "0166def1c7b3d0679a74abe426411f22660661b79b9d38c0b48ce734cc9b2b25",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": {
+      "value2023": 0.32,
+      "value2024": 0.32,
+      "gva_output_residual2024": 0.68,
+      "meaning": "GVA/output residual; not profit margin",
+      "precision": "0.01 reportedratio; residualsameprecision",
+      "semantic_type": "calculated",
+      "calculation": "1 - reported2024 IC/output ratio",
+      "input_claim_id": "IC-S",
+      "calculated_claim_id": "GVA-RESIDUAL-S"
+    },
+    "claim_ids": [
+      "IC-S",
+      "UNION-RETURNS"
+    ],
+    "insight_id": "SECTOR-S-INSIGHT",
+    "value_system": "Membership/skills/repair capacity → representation or personal service → dues/fees; professional and personal-service economics differ.",
+    "new_economic_interpretation": "Membershipdues, repairs and personalservices differ in labour/intangible intensity. Missingreturns can dominate an apparent industry-change story.",
+    "material_counter_evidence": "Absentlargeunion return explains headline decline; this is a data discontinuity, not a verified industry contraction.",
+    "material_remaining_demand": "Complete matchedunion returns plus repair/personalservice cost/customeroutcome data.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  },
+  {
+    "sic": "T",
+    "panorama_id": "uk-sic07-t",
+    "label": "Household employment",
+    "scope": "Households as employers and undifferentiated own-use production; agency employers belong in different activities.",
+    "prior_foundation": {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "locator": "/19",
+      "sha256": "1894f3d9c87d7421fc53eaa8803b757d2a0674619cbb6bada5c8f8111aa0a474",
+      "prior_status": "PARTIAL — not all substantive gates met"
+    },
+    "economic_update": null,
+    "claim_ids": [
+      "IC-T-EXCLUSION",
+      "HOUSEHOLD-BOUNDARY"
+    ],
+    "insight_id": "SECTOR-T-INSIGHT",
+    "value_system": "Household funds and paid domestic labour → care/household services; nonmarket/own-use scope is not a corporate profit pool.",
+    "new_economic_interpretation": "Directhousehold employment is not an agencybusiness model; payroll/socialcare directpayments create employerresponsibilities without a corporate valuepool.",
+    "material_counter_evidence": "NoICratio is published because the sectionhas no intermediateconsumption; it is not an omittedzero-margin company.",
+    "material_remaining_demand": "Aggregate labour/service affordability and employmentstatus only; no householdpersonaldata orsaleslist.",
+    "dimensions": {
+      "identity_boundary": "partial; SICaggregate notlegalentity",
+      "economics": "new comparable annualinputintensity plusboundedanchor",
+      "leadership": "not a single sectorleader; namedaccountability mostlyWave3",
+      "value_system": "conceptualmechanism; monetaryflows incomplete",
+      "competition": "boundedpremise; no force-score/marketshare invented",
+      "technology_capabilities": "partial anchors only; not complete operatingmodels",
+      "relationships": "no additional corporateedge inferred fromsectorcontext",
+      "change": "dated anchors, not a currentdeduplicatedstream",
+      "sources": "directpassages; publicusepending"
+    },
+    "currently_visible_composition": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    },
+    "existing_owner_eligible_baseline": {
+      "Facts": "Partial",
+      "basis": "Frozen UK economic composition contains this scoped district; eligible knowledge is not absent merely because Main does not render its figures"
+    },
+    "candidate_research_readiness": {
+      "Facts": "Partial",
+      "FLORA Insight": "Partial"
+    },
+    "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins",
+    "public_admission": false
+  }
+]

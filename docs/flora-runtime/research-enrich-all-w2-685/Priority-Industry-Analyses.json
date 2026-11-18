@@ -1,0 +1,395 @@
+[
+  {
+    "industry": "UK Banking",
+    "boundary": "Deposit-taking/credit/payment intermediation; excludes whole SIC K insurance/pensions/asset management and distinguishes UK-regulated entity from global Group.",
+    "key_requirements": [
+      "IND-VALUE",
+      "IND-FORCES",
+      "BNK-CUST",
+      "BNK-FUND",
+      "BNK-PAY",
+      "BNK-TECH"
+    ],
+    "economics_claim_ids": [
+      "BNK-FLOWS",
+      "BNK-RATES",
+      "BNK-DEPOSITS",
+      "BNK-SETTLEMENT",
+      "BNK-CARD-FEES"
+    ],
+    "value_system": [
+      {
+        "role": "Depositors and wholesale funders",
+        "value": "Provide balances/capital; funding price, stability and liquidity differ.",
+        "proof": [
+          "BNK-DEPOSITS"
+        ],
+        "limit": "Aggregatebucket flows are not namedbank fundingcost."
+      },
+      {
+        "role": "Deposit-taking lenders",
+        "value": "Transform maturity/credit risk and earn spread/fee income subject to losses/capital/service cost.",
+        "proof": [
+          "BNK-FLOWS",
+          "BNK-RATES"
+        ],
+        "limit": "Conceptual mechanism, not a calculatedsector NIM or profitpool."
+      },
+      {
+        "role": "Borrowers",
+        "value": "Receive credit; approvals, drawdowns, outstandingstocks and interestpaid are distinct.",
+        "proof": [
+          "BNK-FLOWS",
+          "BNK-RATES"
+        ],
+        "limit": "Approvals do not establish future demand from a namedcustomer."
+      },
+      {
+        "role": "Scheme/operator/infrastructure/settlement/participant",
+        "value": "Rules, messaging/clearing and finalsettlement perform different roles. Principal is not feeincome.",
+        "proof": [
+          "BNK-SETTLEMENT",
+          "BNK-CARD-FEES"
+        ],
+        "limit": "BoE RTGS/CHAPS sourcebacked; Pay.UK tariff notacquired/rights unresolved."
+      },
+      {
+        "role": "Technology and service providers",
+        "value": "Provide enabling capabilities; regulator designation and disclosedcollaboration are different predicates.",
+        "proof": [
+          "TECH-CLOUD-SIZE",
+          "UK-TECH"
+        ],
+        "limit": "No bank/provider workload, contract, spend or dependency inferred."
+      }
+    ],
+    "forces": [
+      {
+        "force": "Rivalry",
+        "premise_claim_ids": [
+          "BNK-RATES",
+          "BNK-DEPOSITS"
+        ],
+        "interpretation": "Deposit/productmix and mortgage approval dynamics create distinct arenas for rivalry.",
+        "material_alternative": "Ratelevels can reflect cohortmaturity rather than competitiveweakness.",
+        "outstanding_evidence": "Matchedbank productrates, servicecohorts and flows; no HHI/rank inferred.",
+        "classification": "bounded analyst inference; no force strength score"
+      },
+      {
+        "force": "Buyer power",
+        "premise_claim_ids": [
+          "BNK-FLOWS",
+          "BNK-CARD-FEES"
+        ],
+        "interpretation": "Remortgage approvals capture lenderchanges and merchants face a distinct acquiring/scheme chain.",
+        "material_alternative": "Approval is not completedswitch and cardmerchant is not householdborrower.",
+        "outstanding_evidence": "Switchingcompletion, contract/friction and like-for-like segment costs.",
+        "classification": "bounded analyst inference; no force strength score"
+      },
+      {
+        "force": "Supplier power",
+        "premise_claim_ids": [
+          "BNK-DEPOSITS",
+          "TECH-CLOUD-SIZE"
+        ],
+        "interpretation": "Funding sources and technology complements impose different cost/exitchannels.",
+        "material_alternative": "Existingdeposit franchises and realservicequality may mitigate pressure.",
+        "outstanding_evidence": "Actualfundingmix and sourcegoverned providercontracts/licences bybank.",
+        "classification": "bounded analyst inference; no force strength score"
+      },
+      {
+        "force": "New entrants",
+        "premise_claim_ids": [
+          "BNK-SETTLEMENT"
+        ],
+        "interpretation": "Direct/indirect settlement access is structurally distinct from holding a banking licence.",
+        "material_alternative": "Paymentaccess does not itself permit deposit-taking; no new entrant strength measured.",
+        "outstanding_evidence": "PRA permissions, capital/liquidity and currentlicenced entrants; remain explicit missingprimarydemand.",
+        "classification": "bounded analyst inference; no force strength score"
+      },
+      {
+        "force": "Substitutes",
+        "premise_claim_ids": [
+          "BNK-DEPOSITS",
+          "BNK-SETTLEMENT"
+        ],
+        "interpretation": "Savingsvehicles/paymentmechanisms can substitute for particular functions without replacing the entirebank.",
+        "material_alternative": "ISA is a taxwrapper and may itself be bankdeposit, not a bankingsubstitute.",
+        "outstanding_evidence": "Like-for-like productflows, risk and regulation; noISA outflow-as-disintermediationclaim.",
+        "classification": "bounded analyst inference; no force strength score"
+      }
+    ],
+    "industry_pestle": {
+      "Political": "Skills/policy programme separatefrom realisedbankcapability.",
+      "Economic": "UK-RATE and BNK-RATES; no mechanicalNIM.",
+      "Social": "UK-LABOUR contextual; bankworkforce/cohort unproven.",
+      "Technological": "UK-TECH; actualbankworkload binding absent.",
+      "Legal": "Existing HMT CTP and FCA admissiblefacts remainunderowners; newPSRsourceusepending.",
+      "Environmental": "Borrower/asset physical/transition exposure requires exactapplicability; UK-CARBON alone insufficient."
+    },
+    "deciding_research": "Which matched product/service cohort shows an economic change after management response, rather than merely a national headline?",
+    "negative": "No currentbankmarketshare, sectorprofitpool, Pay.UK fee, buyerintent or procurement inferred."
+  },
+  {
+    "industry": "UK Commercial Aviation",
+    "boundary": "Passenger/cargo airlines, airports, airspace, manufacturing/engine services, leasing/handling/distribution. Not whole SIC H and not a single UKissuer perimeter.",
+    "key_requirements": [
+      "IND-VALUE",
+      "IND-FORCES",
+      "AIR-ROTATE"
+    ],
+    "economics_claim_ids": [
+      "AIR-HUB",
+      "AIR-HUB-TRAFFIC",
+      "AIR-CHARGES",
+      "AIR-SERVICE-ECON"
+    ],
+    "value_system": [
+      {
+        "role": "Passenger and cargo carriers",
+        "value": "Conceptual: sell transport and ancillaries; capacity, load, yield, utilisation and fuel/crew costs jointly affect margin.",
+        "proof": [
+          "AIR-HUB-TRAFFIC"
+        ],
+        "limit": "Airporttraffic does not establish airline yield/loadfactor. easyJet Q3originaltables remain blocked."
+      },
+      {
+        "role": "Airports",
+        "value": "Heathrow aeronautical/retail/other revenue mix and adjustedcost bridge are observed on ninemonthbasis.",
+        "proof": [
+          "AIR-HUB"
+        ],
+        "limit": "Onehub is not allUK airports, and retail/airportincome is not airlinesfare."
+      },
+      {
+        "role": "Airspace and airport service providers",
+        "value": "Conceptual: safeairspace, groundturnaround/security/handling enable reliablecapacity.",
+        "proof": [
+          "AIR-CHARGES"
+        ],
+        "limit": "NATS originalindex verified below; financialreportnotacquired. Specificservices/providercontracts unestablished."
+      },
+      {
+        "role": "Aircraft, engines, lessors and MRO",
+        "value": "RR LTSA flyinghour cash receipts and deferredbalance movements illustrate distinct aftermarket timing.",
+        "proof": [
+          "AIR-SERVICE-ECON"
+        ],
+        "limit": "RR globalcommercialengine case is not an easyJet supplierrelationship, currentengineavailability or entireMROmargin."
+      },
+      {
+        "role": "Distribution and packageholidays",
+        "value": "Conceptual: direct/agency/distribution and hotelpackage economics may combine capacity and demand differently.",
+        "proof": [],
+        "limit": "Holidayssegment margins, originalQ3financials, attribution and namedcommission contracts remain Wave3 demands."
+      }
+    ],
+    "forces": [
+      {
+        "force": "Rivalry",
+        "premise_claim_ids": [
+          "AIR-HUB-TRAFFIC"
+        ],
+        "interpretation": "Airport/cargo and carrier/route competition use different capacities and demandcohorts.",
+        "material_alternative": "Stablehubtraffic may mask route/airline divergence.",
+        "outstanding_evidence": "Matched airport, carrier, route and season capacity/yield.",
+        "classification": "bounded analyst inference; no force strength score"
+      },
+      {
+        "force": "Buyer power",
+        "premise_claim_ids": [
+          "AIR-CHARGES"
+        ],
+        "interpretation": "Airportairline consultation provides a formal pricingchallenge channel.",
+        "material_alternative": "Consultation is not proof of bargainingoutcome orlowercharges at anyotherairport.",
+        "outstanding_evidence": "Actualtariff, slots, carrierchoice and negotiationoutcomes.",
+        "classification": "bounded analyst inference; no force strength score"
+      },
+      {
+        "force": "Supplier power",
+        "premise_claim_ids": [
+          "AIR-SERVICE-ECON"
+        ],
+        "interpretation": "Installedbase engine service obligations can differ from aircraft initialsaleeconomics.",
+        "material_alternative": "Existingservice agreements may already mitigate availability/cost; noeasyJetRRlink.",
+        "outstanding_evidence": "OEM/lessor/MRO exactcontracts, utilisation, deliverytimes and pricing.",
+        "classification": "bounded analyst inference; no force strength score"
+      },
+      {
+        "force": "New entrants",
+        "premise_claim_ids": [
+          "AIR-CHARGES"
+        ],
+        "interpretation": "Network/airportaccess and capacity are relevant entryconstraints, not a newairline demand signal.",
+        "material_alternative": "Thresholdregulation is a procedural rule, not an exclusivebarrier or entry prohibition.",
+        "outstanding_evidence": "CAA licence/slot, aircraftfinancing androuteentry data.",
+        "classification": "bounded analyst inference; no force strength score"
+      },
+      {
+        "force": "Substitutes",
+        "premise_claim_ids": [
+          "ROAD-MIX"
+        ],
+        "interpretation": "Modealternatives must be tested against route distance/time/customerpurpose.",
+        "material_alternative": "GB roadmiles alone cannot measure railvideoconference substitution.",
+        "outstanding_evidence": "Matched route-modal prices, schedules, journeytime anddemand; missingnow.",
+        "classification": "bounded analyst inference; no force strength score"
+      }
+    ],
+    "industry_pestle": {
+      "Political": "Airportexpansion statements remainpolicy/projectclaims, notapprovedeconomicbenefits.",
+      "Economic": "Heathrowfees/retail mix andRRaftermarket separate; airline yield remainsmissing.",
+      "Social": "Journeycounts are notuniquepeople orcustomerpurpose.",
+      "Technological": "HistoricaleasyJetAI/Skywise sourcebound; currentoutcomes absent.",
+      "Legal": "CAA AIR-CHARGES thresholds/dates scoped; no blanket tariff assertion.",
+      "Environmental": "TerritorialGHG excludesinternationalaviation; do not claim zerosectoremissions."
+    },
+    "deciding_research": "Where does a measured route/rotation/service constraint remain after existing remedies, and which role actually bears its cash consequence?",
+    "negative": "No airport→easyJetprofit extrapolation, promised expansionbenefits, suppliercontract or buyerneed."
+  },
+  {
+    "industry": "UK Technology",
+    "boundary": "Eight overlapping role groups; SIC J is incomplete (hardware/manufacturing and professionalservices crossboundaries). Global issuer results never become UK market totals.",
+    "key_requirements": [
+      "IND-VALUE",
+      "IND-FORCES",
+      "TECH-SUPPLY",
+      "PROVIDER-TIER"
+    ],
+    "economics_claim_ids": [
+      "TECH-CLOUD-SIZE",
+      "TECH-CHANNEL",
+      "UK-TECH"
+    ],
+    "value_system": [
+      {
+        "role": "Software and applications",
+        "value": "Conceptual: recurring licence/subscription/consumption; integration and switching costs differ from reportedARR/revenue.",
+        "proof": [
+          "UK-TECH"
+        ],
+        "limit": "Microsoft software proposal is not a completedSMS designation; noallvendor economics."
+      },
+      {
+        "role": "Cloud and data centres",
+        "value": "IaaS/PaaScapacity/platform economics; UKcustomer spending differs from facilityrent/power or globalCloudsegment.",
+        "proof": [
+          "TECH-CLOUD-SIZE"
+        ],
+        "limit": "2024UKspend; UK+EEA provider shares; no providerUK revenue estimate."
+      },
+      {
+        "role": "Data and AI",
+        "value": "Conceptual: modelling/platform/inference consumption and implementation; compute and realisedcustomerbenefit separated.",
+        "proof": [
+          "TECH-CLOUD-SIZE"
+        ],
+        "limit": "CMA historicalcompetitiveassessment not a current2026 AIreturn metric."
+      },
+      {
+        "role": "Cybersecurity",
+        "value": "Conceptual: software/managedsecurity/assurance have different product/labour economics.",
+        "proof": [
+          "UK-TECH"
+        ],
+        "limit": "Security is inCMA software perimeter, not verifiedcapability orcontract of80profiles."
+      },
+      {
+        "role": "Technology services",
+        "value": "Professional and managedservices monetise change/delivery and ongoingoperations; CC Services revenue is separatelyreported.",
+        "proof": [
+          "TECH-CHANNEL"
+        ],
+        "limit": "Groupservices economics cannotbeallocated to aUKcapability/customer."
+      },
+      {
+        "role": "Channels and distribution",
+        "value": "GII and recognisedrevenue differ underprincipal/agency recognition; grossprofit is a separatevalue-capture measure.",
+        "proof": [
+          "TECH-CHANNEL"
+        ],
+        "limit": "Pass-through value is not a supplieropportunity pool."
+      },
+      {
+        "role": "Hardware and infrastructure",
+        "value": "Conceptual: equipment design/supply, installation, power and operationalavailability; inventory andinstalledbase matter.",
+        "proof": [
+          "TECH-CHANNEL",
+          "POWER-MIX"
+        ],
+        "limit": "No vendor shipment/customer capacity/powercontract inferred."
+      },
+      {
+        "role": "Frontier technologies",
+        "value": "Conceptual: R&D, technicalvalidation, manufacturing/scaleup and uncertaincommercialisation.",
+        "proof": [
+          "UK-JOBS"
+        ],
+        "limit": "National skillspledge supplies no frontierenterprise forecast/contract/valuation."
+      }
+    ],
+    "forces": [
+      {
+        "force": "Rivalry",
+        "premise_claim_ids": [
+          "TECH-CLOUD-SIZE"
+        ],
+        "interpretation": "Concentratedcloud IaaS/PaaS differs from wide software/service niches.",
+        "material_alternative": "CMA notesquality/innovation and some fallingprices; no2026wholeTechconcentrationstatistic.",
+        "outstanding_evidence": "MatchedUK marketdefinition/shareyear, customeroutcomes and peer economics.",
+        "classification": "bounded analyst inference; no force strength score"
+      },
+      {
+        "force": "Buyer power",
+        "premise_claim_ids": [
+          "UK-TECH"
+        ],
+        "interpretation": "Interoperability/licensing/switching conditions may shape buyeroptions.",
+        "material_alternative": "Incumbentintegration may be valuable; proposaldoes not prove everycustomer trapped.",
+        "outstanding_evidence": "Exactlicence, workloadegress, migrationcost andactualalternative.",
+        "classification": "bounded analyst inference; no force strength score"
+      },
+      {
+        "force": "Supplier power",
+        "premise_claim_ids": [
+          "TECH-CLOUD-SIZE",
+          "TECH-CHANNEL"
+        ],
+        "interpretation": "Platform complements, componentcapacity and labour are different dependencies.",
+        "material_alternative": "Financialgrowth/capabilitysubstitution may offset a constrainedinput.",
+        "outstanding_evidence": "Named vendor/scope/contract dates and substitutability; noinferrededges.",
+        "classification": "bounded analyst inference; no force strength score"
+      },
+      {
+        "force": "New entrants",
+        "premise_claim_ids": [
+          "TECH-CLOUD-SIZE"
+        ],
+        "interpretation": "Capital-intensiveIaaS differs from capital-lightapplication/service entry.",
+        "material_alternative": "AIproviders orISVs maycomplement, not replace, baseinfrastructure.",
+        "outstanding_evidence": "Comparablecostofcapital/scale, actualtechnicalscope and recententry.",
+        "classification": "bounded analyst inference; no force strength score"
+      },
+      {
+        "force": "Substitutes",
+        "premise_claim_ids": [
+          "TECH-CLOUD-SIZE"
+        ],
+        "interpretation": "Onpremise, hybrid and alternativeplatforms are use-specific choices.",
+        "material_alternative": "Security, scale, existinglicences and applicationintegration may favour incumbentcloud.",
+        "outstanding_evidence": "Matchedtotalcost/servicequality, workloadrights andoperatingmodel.",
+        "classification": "bounded analyst inference; no force strength score"
+      }
+    ],
+    "industry_pestle": {
+      "Political": "UK-JOBS commitment notactualproviderhiring.",
+      "Economic": "CC revenue/GII andCMA UKspend aredifferent denominators.",
+      "Social": "Labourskills/occupation andgeography remainprovider-specific.",
+      "Technological": "SOFTWARE interoperability andCLOUD compute platformcomplements.",
+      "Legal": "ProposedSMS, licence/thirdparty expression rights and sourceadmission separate.",
+      "Environmental": "POWER-MIX contextualgeneration, not a namedproviderpower/carbon contract."
+    },
+    "deciding_research": "Which exact provider/businessline captures value, on what UK/global basis, and which customer dependency is actually sourced?",
+    "negative": "80unbound profiles remainpartial; no new UKrevenues, crossprovidercontract graph or blanketAI buyingneed."
+  }
+]

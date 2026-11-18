@@ -1,0 +1,1281 @@
+{
+  "baseline": "c56bd74f130c4d855baf522ba8ba99fe87317fb1",
+  "design_owner": "docs/product/flora-experience/experience-align-all/requirements.csv",
+  "design_sha256": "7b50880fef675ebb3c6ee8e76964cfa3e036643ee2eeaf426616100c83f60ce7",
+  "research_pack": "28b1cb9863db15949775881a434c2507f4f0b0d6",
+  "rows": [
+    {
+      "requirement": "UK-STRUCT",
+      "level": "UK",
+      "family": "National",
+      "perspective": "Landscape",
+      "subject_or_question": "Where is value generated",
+      "minimum_owner_input": "ONS sector and geographic scope year exact GVA basis",
+      "material_gap_or_negative": "Finance and insurance is broader than Banking",
+      "subject_key": "UK::National::Where is value generated",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [
+        "ONS-BB-2026",
+        "uk-sic07-a…t"
+      ],
+      "new_withheld_candidate_ids": [
+        "IC-A",
+        "IC-B",
+        "IC-C",
+        "IC-D",
+        "IC-E",
+        "IC-F",
+        "IC-G",
+        "IC-H",
+        "IC-I",
+        "IC-J",
+        "IC-K",
+        "IC-L",
+        "IC-M",
+        "IC-N",
+        "IC-O",
+        "IC-P",
+        "IC-Q",
+        "IC-R",
+        "IC-S",
+        "IC-T-EXCLUSION"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "ONS sector and geographic scope year exact GVA basis",
+      "precise_remaining_gap": "Frozen2024GVA is eligible, fourMain shares visible; newIC ratios are not yet admitted.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "SIC2007::A",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-A",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::B",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-B",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::C",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-C",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::D",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-D",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::E",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-E",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::F",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-F",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::G",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-G",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::H",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-H",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::I",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-I",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::J",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-J",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::K",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-K",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::L",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-L",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::M",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-M",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::N",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-N",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::O",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-O",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::P",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-P",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::Q",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-Q",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::R",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-R",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::S",
+          "perspective": "Landscape",
+          "period": "calendar2023 vs2024",
+          "claim_id": "IC-S",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "SIC2007::T",
+          "perspective": "Landscape",
+          "period": "annualICtable2023/24",
+          "claim_id": "IC-T-EXCLUSION",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "UK-PESTLE",
+      "level": "UK",
+      "family": "National",
+      "perspective": "Forces",
+      "subject_or_question": "What changes conditions across each PESTLE dimension",
+      "minimum_owner_input": "Macro policy or measure with jurisdiction date denominator and eligibility",
+      "material_gap_or_negative": "No direct applicability to an enterprise from a national rule",
+      "subject_key": "UK::National::What changes conditions across each PESTLE dimension",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [
+        "UK-RATE-NOV26",
+        "UK-PRA-REPORT27",
+        "UK-FCA-REPORT27"
+      ],
+      "new_withheld_candidate_ids": [
+        "UK-JOBS",
+        "UK-RATE",
+        "UK-LABOUR",
+        "UK-TECH",
+        "UK-LAW",
+        "UK-CARBON"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Macro policy or measure with jurisdiction date denominator and eligibility",
+      "precise_remaining_gap": "Six full same-scope conditions/interpretations need newSource mappings; no enterprise exposure inheritance.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "UK::Political",
+          "perspective": "Forces",
+          "period": "policy updated21Oct2026",
+          "claim_id": "UK-JOBS",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UK::Economic",
+          "perspective": "Forces",
+          "period": "meeting4Nov2026",
+          "claim_id": "UK-RATE",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UK::Social",
+          "perspective": "Forces",
+          "period": "Jul–Sep2026",
+          "claim_id": "UK-LABOUR",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UK::Technological",
+          "perspective": "Forces",
+          "period": "announcement16Oct2026",
+          "claim_id": "UK-TECH",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UK::Legal",
+          "perspective": "Forces",
+          "period": "timeline updated5Nov2026",
+          "claim_id": "UK-LAW",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UK::Environmental",
+          "perspective": "Forces",
+          "period": "calendar2025",
+          "claim_id": "UK-CARBON",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "IND-VALUE",
+      "level": "Industry",
+      "family": "All current",
+      "perspective": "Landscape",
+      "subject_or_question": "Who performs and captures value at each stage",
+      "minimum_owner_input": "Industry value system boundaries roles economics and labelled conceptual edges",
+      "material_gap_or_negative": "Separate actual commercial relationships from illustrated adjacency",
+      "subject_key": "Industry::All current::Who performs and captures value at each stage",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [
+        "cios/applications/flora/banking_ecosystem.py::four_stage_conceptual_composition"
+      ],
+      "new_withheld_candidate_ids": [
+        "BNK-FLOWS",
+        "AIR-HUB",
+        "TECH-CHANNEL"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Industry value system boundaries roles economics and labelled conceptual edges",
+      "precise_remaining_gap": "Conceptual role/valueflows differ from companyedges; wholeindustryprofitpools absent.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "UKBanking::household-mortgages",
+          "perspective": "Landscape",
+          "period": "Sep2026",
+          "claim_id": "BNK-FLOWS",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "Heathrow::reported-results",
+          "perspective": "Landscape",
+          "period": "ninemonths ended30Sep2026",
+          "claim_id": "AIR-HUB",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "Computacenter plc::Group",
+          "perspective": "Landscape",
+          "period": "sixmonths ended30Jun2026",
+          "claim_id": "TECH-CHANNEL",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "IND-FORCES",
+      "level": "Industry",
+      "family": "All current",
+      "perspective": "Forces",
+      "subject_or_question": "What drives rivalry and bargaining",
+      "minimum_owner_input": "Five forces premises and industry PESTLE jurisdiction scope and alternative cause",
+      "material_gap_or_negative": "No unsupported market shares or ranked scores",
+      "subject_key": "Industry::All current::What drives rivalry and bargaining",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [
+        "UK-VALUE"
+      ],
+      "new_withheld_candidate_ids": [
+        "BNK-CARD-FEES",
+        "AIR-CHARGES",
+        "TECH-CLOUD-SIZE"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Five forces premises and industry PESTLE jurisdiction scope and alternative cause",
+      "precise_remaining_gap": "Fivedifferentiated premises nowresearchdocumented; no exhaustiveeligiblecurrentcompetitivecohorts.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "UKPayments::card-schemes",
+          "perspective": "Forces",
+          "period": "updatedJul2026",
+          "claim_id": "BNK-CARD-FEES",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UKAviation::airport-airline",
+          "perspective": "Forces",
+          "period": "coverage2026 basedon2024;2027 basedon2025",
+          "claim_id": "AIR-CHARGES",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UKTechnology::public-cloud",
+          "perspective": "Forces",
+          "period": "calendar2024 measured; decision31Jul2025",
+          "claim_id": "TECH-CLOUD-SIZE",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "BNK-CUST",
+      "level": "Industry",
+      "family": "Banking",
+      "perspective": "Landscape",
+      "subject_or_question": "What shapes customer choice",
+      "minimum_owner_input": "Comparable segment product channel and switching evidence from authorised Source owner",
+      "material_gap_or_negative": "FCA counts are ancillary legal entity cohorts",
+      "subject_key": "Industry::Banking::What shapes customer choice",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [
+        "FCA finite legal-entity complaint cells"
+      ],
+      "new_withheld_candidate_ids": [
+        "BNK-FLOWS",
+        "BNK-DEPOSITS"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Comparable segment product channel and switching evidence from authorised Source owner",
+      "precise_remaining_gap": "Complaint denominators are not switching/marketshare; aggregate flowbuckets notcompletebridge.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "UKBanking::household-mortgages",
+          "perspective": "Landscape",
+          "period": "Sep2026",
+          "claim_id": "BNK-FLOWS",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UKBanking::household-deposits",
+          "perspective": "Landscape",
+          "period": "Sep2026",
+          "claim_id": "BNK-DEPOSITS",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "BNK-FUND",
+      "level": "Industry",
+      "family": "Banking",
+      "perspective": "Landscape",
+      "subject_or_question": "How funding and credit affect earnings",
+      "minimum_owner_input": "Verified Financial calculations on exact Group period units and basis",
+      "material_gap_or_negative": "Individual Group is not sector profit pool",
+      "subject_key": "Industry::Banking::How funding and credit affect earnings",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [
+        "LBG-Q326-DEPOSITS",
+        "LBG-Q326-PROFIT",
+        "RUD1-NATIONWIDE-FY26::eight_measurements_and_two_derivations"
+      ],
+      "new_withheld_candidate_ids": [
+        "BNK-RATES",
+        "BNK-FLOWS"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Verified Financial calculations on exact Group period units and basis",
+      "precise_remaining_gap": "Group exactperiod financials eligible; no sectorNIM orcrossbank returnranking.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "UKBanking::household-mortgages",
+          "perspective": "Landscape",
+          "period": "Sep2026",
+          "claim_id": "BNK-RATES",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UKBanking::household-mortgages",
+          "perspective": "Landscape",
+          "period": "Sep2026",
+          "claim_id": "BNK-FLOWS",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "BNK-PAY",
+      "level": "Industry",
+      "family": "Banking",
+      "perspective": "Landscape",
+      "subject_or_question": "Who moves principal and who earns service income",
+      "minimum_owner_input": "Scheme rule and operator roles with per-document public-use scope",
+      "material_gap_or_negative": "No draft Pay.UK participation fees or unverified account economics",
+      "subject_key": "Industry::Banking::Who moves principal and who earns service income",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [
+        "cios/applications/flora/banking_ecosystem.py::payments_conceptual_composition"
+      ],
+      "new_withheld_candidate_ids": [
+        "BNK-SETTLEMENT",
+        "BNK-CARD-FEES"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Scheme rule and operator roles with per-document public-use scope",
+      "precise_remaining_gap": "BoEroles sourceverifiedpending; Pay.UK report/feesrights and namedparticipant bindings unresolved.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "Bank of England::RTGS-CHAPS",
+          "perspective": "Landscape",
+          "period": "maintained page reviewed18Nov2026",
+          "claim_id": "BNK-SETTLEMENT",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UKPayments::card-schemes",
+          "perspective": "Landscape",
+          "period": "updatedJul2026",
+          "claim_id": "BNK-CARD-FEES",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "BNK-TECH",
+      "level": "Industry",
+      "family": "Banking",
+      "perspective": "Landscape",
+      "subject_or_question": "Where service dependencies matter",
+      "minimum_owner_input": "Issuer disclosure and separate HMT legal designations",
+      "material_gap_or_negative": "No Lloyds Bank plc Envoy contract inferred",
+      "subject_key": "Industry::Banking::Where service dependencies matter",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [
+        "EAI-UK-CTP-DESIGNATION",
+        "LBG-ENVOY-GOOGLE",
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "new_withheld_candidate_ids": [
+        "UK-TECH",
+        "TECH-CLOUD-SIZE"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Issuer disclosure and separate HMT legal designations",
+      "precise_remaining_gap": "CTP legaldesignation vsGroupcollaboration vsactualbankworkload remain separate.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "UK::Technological",
+          "perspective": "Landscape",
+          "period": "announcement16Oct2026",
+          "claim_id": "UK-TECH",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UKTechnology::public-cloud",
+          "perspective": "Landscape",
+          "period": "calendar2024 measured; decision31Jul2025",
+          "claim_id": "TECH-CLOUD-SIZE",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "AIR-ROTATE",
+      "level": "Industry",
+      "family": "Commercial Aviation",
+      "perspective": "Landscape",
+      "subject_or_question": "How network and capacity economics differ",
+      "minimum_owner_input": "Carrier airport and route scope with comparable utilisation periods",
+      "material_gap_or_negative": "No attribution of group results to a route or capability",
+      "subject_key": "Industry::Commercial Aviation::How network and capacity economics differ",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [
+        "AV-FLEET",
+        "AV-NETWORK",
+        "AV-MRO",
+        "AV-CHAT"
+      ],
+      "new_withheld_candidate_ids": [
+        "AIR-HUB",
+        "AIR-HUB-TRAFFIC",
+        "AIR-SERVICE-ECON"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Carrier airport and route scope with comparable utilisation periods",
+      "precise_remaining_gap": "Fourexisting source-boundFacts are presented viaeasyjet_capabilities.fact; carrierrouteeconomics stillmissing.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "Heathrow::reported-results",
+          "perspective": "Landscape",
+          "period": "ninemonths ended30Sep2026",
+          "claim_id": "AIR-HUB",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "Heathrow::airport",
+          "perspective": "Landscape",
+          "period": "ninemonths ended30Sep2026 vs2025",
+          "claim_id": "AIR-HUB-TRAFFIC",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "Rolls-Royce::CivilAerospace",
+          "perspective": "Landscape",
+          "period": "sixmonths ended30Jun2026",
+          "claim_id": "AIR-SERVICE-ECON",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "TECH-SUPPLY",
+      "level": "Industry",
+      "family": "Technology",
+      "perspective": "Landscape",
+      "subject_or_question": "Where capacity and service interdependencies sit",
+      "minimum_owner_input": "Exact provider and UK versus group attribution plus licensed role evidence",
+      "material_gap_or_negative": "Directory membership is not provider-customer evidence",
+      "subject_key": "Industry::Technology::Where capacity and service interdependencies sit",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [],
+      "new_withheld_candidate_ids": [
+        "TECH-CLOUD-SIZE",
+        "TECH-CHANNEL"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Exact provider and UK versus group attribution plus licensed role evidence",
+      "precise_remaining_gap": "Legacytechnologyrendering is not sourceadmission; eightrole mechanismspartial and80unbound profiles.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "UKTechnology::public-cloud",
+          "perspective": "Landscape",
+          "period": "calendar2024 measured; decision31Jul2025",
+          "claim_id": "TECH-CLOUD-SIZE",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "Computacenter plc::Group",
+          "perspective": "Landscape",
+          "period": "sixmonths ended30Jun2026",
+          "claim_id": "TECH-CHANNEL",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "ENT-ECON",
+      "level": "Enterprise",
+      "family": "Lloyds Nationwide easyJet and partial profiles",
+      "perspective": "Landscape",
+      "subject_or_question": "How this business earns and deploys capital",
+      "minimum_owner_input": "Legal identity and Group perimeter business lines and exact reported economics",
+      "material_gap_or_negative": "Do not substitute Society complaints for Group results",
+      "subject_key": "Enterprise::Lloyds Nationwide easyJet and partial profiles::How this business earns and deploys capital",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [
+        "LBG-Q326-PROFIT",
+        "RUD1-NATIONWIDE-FY26::eight_measurements_and_two_derivations"
+      ],
+      "new_withheld_candidate_ids": [
+        "MFG-RR",
+        "HOTEL-BRIDGE",
+        "PROPERTY-BASIS",
+        "TECH-CHANNEL"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Legal identity and Group perimeter business lines and exact reported economics",
+      "precise_remaining_gap": "Enterprise breadthWave3; no societycomplaint/groupincome orglobalUKsubstitution.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "Rolls-Royce Holdings plc::Group",
+          "perspective": "Landscape",
+          "period": "sixmonths ended30Jun2026",
+          "claim_id": "MFG-RR",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "Whitbread::Group",
+          "perspective": "Landscape",
+          "period": "26weeks ended27Aug2026",
+          "claim_id": "HOTEL-BRIDGE",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "Landsec::Group",
+          "perspective": "Landscape",
+          "period": "sixmonths ended30Sep2026",
+          "claim_id": "PROPERTY-BASIS",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "Computacenter plc::Group",
+          "perspective": "Landscape",
+          "period": "sixmonths ended30Jun2026",
+          "claim_id": "TECH-CHANNEL",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "ENT-CAP",
+      "level": "Enterprise",
+      "family": "Lloyds easyJet Equinix and partial profiles",
+      "perspective": "Inside",
+      "subject_or_question": "How the chosen capability supports a value stream",
+      "minimum_owner_input": "Named activity actor data system and measured outcome where expressly supported",
+      "material_gap_or_negative": "Label reference or conceptual capability and withhold unknown evidence",
+      "subject_key": "Enterprise::Lloyds easyJet Equinix and partial profiles::How the chosen capability supports a value stream",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [
+        "AV-FLEET",
+        "AV-NETWORK",
+        "AV-MRO",
+        "AV-CHAT"
+      ],
+      "new_withheld_candidate_ids": [
+        "TEL-UTILISATION",
+        "AIR-SERVICE-ECON"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Named activity actor data system and measured outcome where expressly supported",
+      "precise_remaining_gap": "FourpubliceasyJet capabilityanchors do not prove outcomes/suppliers bycapability.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "BT::Openreach",
+          "perspective": "Inside",
+          "period": "H1to30Sep2026; Octmilestone distinct",
+          "claim_id": "TEL-UTILISATION",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "Rolls-Royce::CivilAerospace",
+          "perspective": "Inside",
+          "period": "sixmonths ended30Jun2026",
+          "claim_id": "AIR-SERVICE-ECON",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "ENT-EXPOSURE",
+      "level": "Enterprise",
+      "family": "Every supported enterprise",
+      "perspective": "Forces",
+      "subject_or_question": "What conditions affect this company and why",
+      "minimum_owner_input": "Explicit entity exposure scope evidence counterexample and disclosed response",
+      "material_gap_or_negative": "No procurement claim or automatic pressure qualification",
+      "subject_key": "Enterprise::Every supported enterprise::What conditions affect this company and why",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [
+        "LBG-AI26-REPORTED",
+        "LBG-AI26-EXPECTED",
+        "EAI-UK-CTP-DESIGNATION"
+      ],
+      "new_withheld_candidate_ids": [
+        "GRID-COMMITTED",
+        "UK-LAW"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Explicit entity exposure scope evidence counterexample and disclosed response",
+      "precise_remaining_gap": "Matchexactentityresponse andcounterexample; noautomaticPressure oropportunity.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "National Grid plc::Group",
+          "perspective": "Forces",
+          "period": "planFY2026/27–2030/31; H1report5Nov2026",
+          "claim_id": "GRID-COMMITTED",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UK::Legal",
+          "perspective": "Forces",
+          "period": "timeline updated5Nov2026",
+          "claim_id": "UK-LAW",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "PROVIDER-TIER",
+      "level": "Enterprise",
+      "family": "Technology providers",
+      "perspective": "Landscape",
+      "subject_or_question": "How much of this provider is evidenced",
+      "minimum_owner_input": "Owner-qualified identity public claims per district and provider tier",
+      "material_gap_or_negative": "No automatic promotion of 80 partial profiles",
+      "subject_key": "Enterprise::Technology providers::How much of this provider is evidenced",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [],
+      "new_withheld_candidate_ids": [
+        "TECH-CHANNEL",
+        "TECH-CLOUD-SIZE"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Owner-qualified identity public claims per district and provider tier",
+      "precise_remaining_gap": "80profile endpoints need individidualsource/use/identity work; provider tiers unchanged.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "Computacenter plc::Group",
+          "perspective": "Landscape",
+          "period": "sixmonths ended30Jun2026",
+          "claim_id": "TECH-CHANNEL",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "UKTechnology::public-cloud",
+          "perspective": "Landscape",
+          "period": "calendar2024 measured; decision31Jul2025",
+          "claim_id": "TECH-CLOUD-SIZE",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "CHANGE-LEASE",
+      "level": "All",
+      "family": "Any enabled family",
+      "perspective": "What's changing?",
+      "subject_or_question": "What changed when and for whom",
+      "minimum_owner_input": "Eligible deduplicated dated material with distinct statuses and lifecycle",
+      "material_gap_or_negative": "No automatic News from historical reports",
+      "subject_key": "All::Any enabled family::What changed when and for whom",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [],
+      "new_withheld_candidate_ids": [
+        "UK-TECH",
+        "SPORT-LICENCE",
+        "AIR-HUB-TRAFFIC"
+      ],
+      "current_owner_permitted_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Partial",
+        "FLORA Insight": "Partial"
+      },
+      "minimum_composition": "Eligible deduplicated dated material with distinct statuses and lifecycle",
+      "precise_remaining_gap": "Newpublication andoldmeasurement differ; noeligible deduplicated30/90daystream oractivatedNews.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": [
+        {
+          "subject_key": "UK::Technological",
+          "perspective": "What's changing?",
+          "period": "announcement16Oct2026",
+          "claim_id": "UK-TECH",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "IFR::English-football",
+          "perspective": "What's changing?",
+          "period": "rulespublished1Jul2026; beforeseason2027/28",
+          "claim_id": "SPORT-LICENCE",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        },
+        {
+          "subject_key": "Heathrow::airport",
+          "perspective": "What's changing?",
+          "period": "ninemonths ended30Sep2026 vs2025",
+          "claim_id": "AIR-HUB-TRAFFIC",
+          "existing_owner": "Source/Research and Financial whereapplicable; current projection owner unchanged",
+          "Facts": "Unavailable",
+          "FLORA_Insight": "Unavailable",
+          "reason": "This exact new premise has not been admitted to publicprojection; older separatelypermitted premises remain available",
+          "candidate_Facts": "Partial",
+          "candidate_FLORA_Insight": "Unavailable"
+        }
+      ]
+    },
+    {
+      "requirement": "FACTORY-RECEIPT",
+      "level": "All",
+      "family": "TEL-001 BNK-001 NRG-001",
+      "perspective": "Portfolio inventory",
+      "subject_or_question": "What is actually loaded and accepted",
+      "minimum_owner_input": "Authorised exact package import receipt and promoted object scope",
+      "material_gap_or_negative": "No route or acceptance inferred from package or historical screenshot",
+      "subject_key": "All::TEL-001 BNK-001 NRG-001::What is actually loaded and accepted",
+      "owner_qualified_scope": "Existing owner paths and scoped projections in Ownership-and-Readiness.md; never bare legacy IDs",
+      "period": "Exact premise-specific reporting/effective periods retained; no single mixed currentyear",
+      "existing_eligible_premise_references": [],
+      "new_withheld_candidate_ids": [],
+      "current_owner_permitted_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "candidate_research_readiness": {
+        "Facts": "Unavailable",
+        "FLORA Insight": "Unavailable"
+      },
+      "minimum_composition": "Authorised exact package import receipt and promoted object scope",
+      "precise_remaining_gap": "Packages/fixtureproofs are notauthorised productionreceipts; NRGfile notfound, importedstateunverified.",
+      "withdrawal_requirement": "Resolve each dependentsource/input; removeFacts/Insight/labels/derivedvalues together; unrelatedsubjects survive",
+      "new_public_permission": false,
+      "canonical_promotion": false,
+      "proposal_scope_assessments": []
+    }
+  ],
+  "meaning": "Static proposal inventory, not runtime policy, permissions, importedobservations or asecondtruthregistry"
+}

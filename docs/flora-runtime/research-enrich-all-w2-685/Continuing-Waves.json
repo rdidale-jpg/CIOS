@@ -1,0 +1,2262 @@
+{
+  "baseline": "c56bd74f130c4d855baf522ba8ba99fe87317fb1",
+  "pinned_audit_pack": "28b1cb9863db15949775881a434c2507f4f0b0d6",
+  "cohort_rule": "Finite existingowner-qualifiedoccurrences; deduplicatelegalentities onlywithprovenidentity, never barelegacycodes",
+  "wave3": {
+    "title": "Enterprise cohorts",
+    "owner_occurrences": [
+      {
+        "key": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json::BK-IND-001",
+        "name": "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+        "owner": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json::BK-REF-001",
+        "name": "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+        "owner": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json::BK-ENT-001",
+        "name": "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+        "owner": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/aviation/research-model/Assessment-Overlay.json::AV-ENT-001",
+        "name": "enterprise-knowledge/aviation/easyJet-Enterprise-Twin.md",
+        "owner": "enterprise-knowledge/aviation/research-model/Assessment-Overlay.json",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "cios/applications/flora/banking_portfolio.py::BK-ENT-001",
+        "name": "Lloyds Banking Group",
+        "owner": "cios/applications/flora/banking_portfolio.py",
+        "kind": "public_reference",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "cios/applications/flora/banking_portfolio.py::BK-ENT-006",
+        "name": "Barclays",
+        "owner": "cios/applications/flora/banking_portfolio.py",
+        "kind": "public_reference",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "cios/applications/flora/banking_portfolio.py::BK-ENT-003",
+        "name": "NatWest Group",
+        "owner": "cios/applications/flora/banking_portfolio.py",
+        "kind": "public_reference",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "cios/applications/flora/banking_portfolio.py::BK-ENT-004",
+        "name": "HSBC UK",
+        "owner": "cios/applications/flora/banking_portfolio.py",
+        "kind": "public_reference",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "cios/applications/flora/banking_portfolio.py::BK-ENT-005",
+        "name": "Santander UK",
+        "owner": "cios/applications/flora/banking_portfolio.py",
+        "kind": "public_reference",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/README.md::README",
+        "name": "README",
+        "owner": "enterprise-knowledge/banking/enterprises/README.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md::Barclays-Enterprise-Twin",
+        "name": "Barclays Enterprise Twin",
+        "owner": "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/barclays/README.md::README",
+        "name": "README",
+        "owner": "enterprise-knowledge/banking/enterprises/barclays/README.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md::Lloyds-Enterprise-Twin",
+        "name": "Lloyds Enterprise Twin",
+        "owner": "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/lloyds/README.md::README",
+        "name": "README",
+        "owner": "enterprise-knowledge/banking/enterprises/lloyds/README.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/monzo/Monzo-Enterprise-Twin.md::Monzo-Enterprise-Twin",
+        "name": "Monzo Enterprise Twin",
+        "owner": "enterprise-knowledge/banking/enterprises/monzo/Monzo-Enterprise-Twin.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/monzo/README.md::README",
+        "name": "README",
+        "owner": "enterprise-knowledge/banking/enterprises/monzo/README.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md::Nationwide-Virgin-Money-Enterprise-Twin",
+        "name": "Nationwide Virgin Money Enterprise Twin",
+        "owner": "enterprise-knowledge/banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/nationwide/README.md::README",
+        "name": "README",
+        "owner": "enterprise-knowledge/banking/enterprises/nationwide/README.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md::NatWest-Enterprise-Twin",
+        "name": "NatWest Enterprise Twin",
+        "owner": "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/natwest/README.md::README",
+        "name": "README",
+        "owner": "enterprise-knowledge/banking/enterprises/natwest/README.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/santander-uk/README.md::README",
+        "name": "README",
+        "owner": "enterprise-knowledge/banking/enterprises/santander-uk/README.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md::Santander-UK-Enterprise-Twin",
+        "name": "Santander UK Enterprise Twin",
+        "owner": "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/starling/README.md::README",
+        "name": "README",
+        "owner": "enterprise-knowledge/banking/enterprises/starling/README.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/banking/enterprises/starling/Starling-Enterprise-Twin.md::Starling-Enterprise-Twin",
+        "name": "Starling Enterprise Twin",
+        "owner": "enterprise-knowledge/banking/enterprises/starling/Starling-Enterprise-Twin.md",
+        "kind": "research_subject",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip::content/source/enterprise_dossiers_wave5.json::ENT-BT",
+        "name": "BT Group",
+        "owner": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip::content/source/enterprise_dossiers_wave5.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip::content/source/enterprise_dossiers_wave5.json::ENT-OPENREACH",
+        "name": "Openreach",
+        "owner": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip::content/source/enterprise_dossiers_wave5.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip::content/source/enterprise_dossiers_wave5.json::ENT-VMO2",
+        "name": "Virgin Media O2",
+        "owner": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip::content/source/enterprise_dossiers_wave5.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip::content/source/enterprise_dossiers_wave5.json::ENT-VODAFONETHREE",
+        "name": "VodafoneThree",
+        "owner": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip::content/source/enterprise_dossiers_wave5.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip::content/source/enterprise_dossiers_wave5.json::ENT-CITYFIBRE",
+        "name": "CityFibre",
+        "owner": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip::content/source/enterprise_dossiers_wave5.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip::content/source/enterprise_dossiers_wave5.json::ENT-TALKTALK",
+        "name": "TalkTalk",
+        "owner": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip::content/source/enterprise_dossiers_wave5.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-TEL-BTOPENREACH",
+        "name": "BT Group / Openreach",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-TEL-VMO2",
+        "name": "Virgin Media O2",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-TEL-VODAFONETHREE",
+        "name": "VodafoneThree",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-TEL-CITYFIBRE",
+        "name": "CityFibre",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-MED-BBC",
+        "name": "BBC",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-MED-ITV",
+        "name": "ITV / ITV Studios / ITV Media & Entertainment",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-MED-SKY",
+        "name": "Sky / Comcast",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-MED-CHANNEL4",
+        "name": "Channel 4",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-SPORT-PL",
+        "name": "Premier League",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-SPORT-FA-WEMBLEY",
+        "name": "Football Association / Wembley",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-SPORT-EFL",
+        "name": "English Football League",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-SPORT-UKSPORT",
+        "name": "UK Sport",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-SPORT-SPORTENGLAND",
+        "name": "Sport England",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      },
+      {
+        "key": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json::ENT-SPORT-IFR",
+        "name": "Independent Football Regulator",
+        "owner": "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip::TMS-001_Final_Package/02_priority_enterprise_twins.json",
+        "kind": "retained_package_enterprise",
+        "work": "Reconcile document/proposal/model identity before enrichment; README/model-file labels are not additionalenterprises"
+      }
+    ],
+    "mandatory_named_cohorts": [
+      "Lloyds Banking Group",
+      "Nationwide Building Society",
+      "Barclays",
+      "NatWest Group",
+      "HSBC UK",
+      "Santander UK andTSB distinctlegaltransition",
+      "Starling",
+      "ClearBank",
+      "Monzo",
+      "OakNorth",
+      "Metro",
+      "Revolut UK",
+      "easyJet andeasyJet holidays distinctperimeters",
+      "Microsoft",
+      "AWS/Amazon",
+      "Google Cloud/Alphabet relevantlegalentities",
+      "Equinix",
+      "Computacenter",
+      "Arm",
+      "NVIDIA"
+    ],
+    "source_dossiers": "All6BIE2dossiers+5limitedprofiles; allcurrentpublicBankrefs; sevenlegacybanknarratives; #666fourenterpriseassessments; retainedTEL/TMS cohorts",
+    "deliverables": [
+      "Oneidentityreconciliation percohort",
+      "Matched economics/strategy/leadership andcurrentoperatingmodel",
+      "Capabilities vsvaluestreams andmeasuredoutcomes",
+      "Exactsource-boundrelationships anddatedchange",
+      "Facts/Insight readiness anddecisivecounterexample"
+    ],
+    "not_done": "Noenterprisecompletion assertedbyW2industrycontext"
+  },
+  "wave4": {
+    "title": "All80Technologyproviders",
+    "worklist": "Wave-4-Provider-Worklist.json",
+    "count": 80,
+    "batches": [
+      {
+        "number": 1,
+        "keys": [
+          "microsoft",
+          "sap",
+          "oracle",
+          "salesforce",
+          "servicenow",
+          "sage",
+          "workday",
+          "pega",
+          "access-group",
+          "oneadvanced"
+        ]
+      },
+      {
+        "number": 2,
+        "keys": [
+          "adobe",
+          "autodesk",
+          "aveva",
+          "aws",
+          "google-cloud",
+          "snowflake",
+          "databricks",
+          "ovhcloud",
+          "rackspace",
+          "quantexa"
+        ]
+      },
+      {
+        "number": 3,
+        "keys": [
+          "faculty",
+          "nvidia",
+          "openai",
+          "anthropic",
+          "google-deepmind",
+          "ncc-group",
+          "sophos",
+          "darktrace",
+          "palo-alto-networks",
+          "crowdstrike"
+        ]
+      },
+      {
+        "number": 4,
+        "keys": [
+          "fortinet",
+          "rubrik",
+          "accenture",
+          "ibm",
+          "capgemini",
+          "sopra-steria",
+          "dxc",
+          "kainos",
+          "tcs-diligenta",
+          "infosys"
+        ]
+      },
+      {
+        "number": 5,
+        "keys": [
+          "cognizant",
+          "ntt-data",
+          "equal-experts",
+          "version-1",
+          "netcompany",
+          "cgi",
+          "fujitsu",
+          "hcltech",
+          "wipro",
+          "tech-mahindra"
+        ]
+      },
+      {
+        "number": 6,
+        "keys": [
+          "atos-eviden",
+          "valtech",
+          "deloitte",
+          "node4",
+          "computacenter",
+          "softcat",
+          "scc",
+          "td-synnex",
+          "ingram-micro",
+          "equinix"
+        ]
+      },
+      {
+        "number": 7,
+        "keys": [
+          "telehouse",
+          "bt",
+          "pulsant",
+          "digital-realty",
+          "virtus",
+          "cisco",
+          "hpe",
+          "dell",
+          "broadcom-vmware",
+          "lenovo"
+        ]
+      },
+      {
+        "number": 8,
+        "keys": [
+          "vodafonethree",
+          "virgin-media-o2",
+          "cityfibre",
+          "arm",
+          "intel",
+          "amd",
+          "oqc",
+          "riverlane",
+          "quantinuum",
+          "nu-quantum"
+        ]
+      }
+    ],
+    "not_done": "Noeightgroups-as80completedprofiles; all80remainpartial"
+  },
+  "wave5": {
+    "title": "Sourceandorganisation populations andlegacy",
+    "targets": [
+      {
+        "name": "Accenture",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "accenture-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://newsroom.accenture.com/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Affinity Water",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "affinity-water-official-newsroom"
+        ],
+        "sectors": [
+          "Utilities"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.affinitywater.co.uk/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Anglian Water",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "anglian-water-official-newsroom"
+        ],
+        "sectors": [
+          "Utilities"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.anglianwater.co.uk/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Atos / Eviden",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "atos-eviden-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://atos.net/en/newsroom"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "BBC",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "bbc-annual-report",
+          "bbc-ofcom",
+          "bbc-rss",
+          "bbc-official-newsroom"
+        ],
+        "sectors": [
+          "Media"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.bbc.com/aboutthebbc/reports/annualreport",
+          "https://www.ofcom.org.uk/news-centre/",
+          "https://feeds.bbci.co.uk/news/rss.xml",
+          "https://www.bbc.co.uk/mediacentre/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "BT",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "bt-investors",
+          "bt-annual-reports",
+          "bt-quarterly-results",
+          "bt-investor-presentations",
+          "bt-consensus",
+          "openreach-investor-context",
+          "ofcom-telecoms-security",
+          "ofcom-service-quality",
+          "dsit-telecoms-policy",
+          "ncsc-cni-guidance",
+          "bt-ofcom",
+          "bt-strategy",
+          "bt-official-newsroom",
+          "taxonomy-official-home",
+          "taxonomy-official-press-release",
+          "taxonomy-official-blog",
+          "taxonomy-official-investor-relations",
+          "taxonomy-official-results",
+          "taxonomy-official-annual-reports",
+          "taxonomy-official-strategy",
+          "taxonomy-official-sustainability",
+          "taxonomy-regulator-publications",
+          "taxonomy-regulator-consultations",
+          "taxonomy-public-body-reports"
+        ],
+        "sectors": [
+          "Context",
+          "Telecommunications"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.bt.com/about/investors",
+          "https://www.bt.com/about/investors/financial-reporting-and-news/annual-reports",
+          "https://www.bt.com/about/investors/financial-reporting-and-news/quarterly-results",
+          "https://www.bt.com/about/investors/financial-reporting-and-news/events-and-presentations",
+          "https://www.bt.com/about/investors/financial-reporting-and-news/consensus",
+          "https://www.openreach.com/news",
+          "https://www.ofcom.org.uk/phones-and-broadband/telecoms-infrastructure/security-resilience/",
+          "https://www.ofcom.org.uk/phones-and-broadband/service-quality/",
+          "https://www.gov.uk/government/collections/telecoms",
+          "https://www.ncsc.gov.uk/section/advice-guidance/all-topics?topics=critical-national-infrastructure",
+          "https://www.ofcom.org.uk/news-centre/",
+          "https://www.bt.com/about/strategy",
+          "https://newsroom.bt.com/",
+          "https://newsroom.bt.com/",
+          "https://newsroom.bt.com/",
+          "https://newsroom.bt.com/",
+          "https://newsroom.bt.com/",
+          "https://newsroom.bt.com/",
+          "https://newsroom.bt.com/",
+          "https://newsroom.bt.com/",
+          "https://newsroom.bt.com/",
+          "https://newsroom.bt.com/",
+          "https://newsroom.bt.com/",
+          "https://newsroom.bt.com/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Bauer Media",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "bauer-media-official-newsroom"
+        ],
+        "sectors": [
+          "Media"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.bauermedia.co.uk/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "British Cycling",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "british-cycling-official-newsroom"
+        ],
+        "sectors": [
+          "Sport"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.britishcycling.org.uk/about/article/bc-news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "British Olympic Association",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "british-olympic-association-official-newsroom"
+        ],
+        "sectors": [
+          "Sport"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.teamgb.com/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "CGI",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "cgi-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.cgi.com/uk/en-gb/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "CMA",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "cma-regulator-news"
+        ],
+        "sectors": [
+          "Regulators"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/competition-and-markets-authority"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Cabinet Office",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "cabinet-office-govuk-organisation",
+          "taxonomy-govuk-news",
+          "taxonomy-govuk-publications",
+          "taxonomy-govuk-policy",
+          "taxonomy-govuk-procurement",
+          "taxonomy-contracts-finder",
+          "taxonomy-find-tender"
+        ],
+        "sectors": [
+          "Context",
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/cabinet-office",
+          "https://www.gov.uk/government/organisations/cabinet-office",
+          "https://www.gov.uk/government/organisations/cabinet-office",
+          "https://www.gov.uk/government/organisations/cabinet-office",
+          "https://www.gov.uk/government/organisations/cabinet-office",
+          "https://www.gov.uk/government/organisations/cabinet-office",
+          "https://www.gov.uk/government/organisations/cabinet-office"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Capgemini",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "capgemini-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.capgemini.com/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Centrica",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "centrica-official-newsroom"
+        ],
+        "sectors": [
+          "Energy"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.centrica.com/media-centre/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Channel 4",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "channel-4-official-newsroom"
+        ],
+        "sectors": [
+          "Media"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.channel4.com/press/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Channel 5 / Paramount UK",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "channel-5-paramount-uk-official-newsroom"
+        ],
+        "sectors": [
+          "Media"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.paramount.com/press"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "CityFibre",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "cityfibre-official-newsroom"
+        ],
+        "sectors": [
+          "Telecommunications"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://cityfibre.com/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Cognizant",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "cognizant-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://news.cognizant.com/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "DEFRA",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "defra-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "DESNZ",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "desnz-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/department-for-energy-security-and-net-zero"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "DMG Media",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "dmg-media-official-newsroom"
+        ],
+        "sectors": [
+          "Media"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.dmgmedia.co.uk/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "DSIT",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "dsit-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/department-for-science-innovation-and-technology"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "DWP",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "dwp-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/department-for-work-pensions"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "DXC Technology",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "dxc-technology-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://dxc.com/us/en/about-us/newsroom"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Deloitte",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "deloitte-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.deloitte.com/uk/en/about/press-room.html"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Department for Education",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "department-for-education-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/department-for-education"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Department for Transport",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "department-for-transport-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/department-for-transport"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Department of Health and Social Care",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "department-of-health-and-social-care-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/department-of-health-and-social-care"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Drax",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "drax-official-newsroom"
+        ],
+        "sectors": [
+          "Energy"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.drax.com/press_release/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "E.ON UK",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "e-on-uk-official-newsroom"
+        ],
+        "sectors": [
+          "Energy"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.eonenergy.com/about-us/media-centre.html"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "EDF Energy UK",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "edf-energy-uk-official-newsroom"
+        ],
+        "sectors": [
+          "Energy"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.edfenergy.com/media-centre"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "England Netball",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "england-netball-official-newsroom"
+        ],
+        "sectors": [
+          "Sport"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.englandnetball.co.uk/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "England and Wales Cricket Board",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "england-and-wales-cricket-board-official-newsroom"
+        ],
+        "sectors": [
+          "Sport"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.ecb.co.uk/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Environment Agency",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "environment-agency-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/environment-agency"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "FCDO",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "fcdo-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Formula 1 / Silverstone",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "formula-1-silverstone-official-newsroom"
+        ],
+        "sectors": [
+          "Sport"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.silverstone.co.uk/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Fujitsu",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "fujitsu-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.fujitsu.com/uk/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Gamma Communications",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "gamma-communications-official-newsroom"
+        ],
+        "sectors": [
+          "Telecommunications"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://gammagroup.co/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Global",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "global-official-newsroom"
+        ],
+        "sectors": [
+          "Media"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://global.com/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "HM Treasury",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "hm-treasury-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/hm-treasury"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "HMRC",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "hmrc-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/hm-revenue-customs"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Home Office",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "home-office-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/home-office"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Hyperoptic",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "hyperoptic-official-newsroom"
+        ],
+        "sectors": [
+          "Telecommunications"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.hyperoptic.com/press/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "IBM",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "ibm-supplier-newsroom",
+          "taxonomy-supplier-case-studies",
+          "taxonomy-supplier-insights",
+          "taxonomy-partner-ecosystem"
+        ],
+        "sectors": [
+          "Competitors",
+          "Context"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://newsroom.ibm.com/",
+          "https://newsroom.ibm.com/",
+          "https://newsroom.ibm.com/",
+          "https://newsroom.ibm.com/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "ICO",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "ico-regulator-news"
+        ],
+        "sectors": [
+          "Regulators"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "ITV",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "itv-official-newsroom"
+        ],
+        "sectors": [
+          "Media"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.itv.com/presscentre"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Infosys",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "infosys-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.infosys.com/newsroom/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Infrastructure and Projects Authority",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "infrastructure-and-projects-authority-regulator-news"
+        ],
+        "sectors": [
+          "Regulators"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/infrastructure-and-projects-authority"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "KCOM",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "kcom-official-newsroom"
+        ],
+        "sectors": [
+          "Telecommunications"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.kcom.com/home/discover/categories/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "KPMG",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "kpmg-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://kpmg.com/uk/en/home/media.html"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "MHCLG",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "mhclg-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/ministry-of-housing-communities-local-government"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Microsoft",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "microsoft-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://news.microsoft.com/en-gb/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Ministry of Defence",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "ministry-of-defence-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/ministry-of-defence"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Ministry of Justice",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "ministry-of-justice-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/ministry-of-justice"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "NHS England",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "nhs-england-official-newsroom"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.england.nhs.uk/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "NTT DATA",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "ntt-data-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://uk.nttdata.com/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "National Audit Office",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "national-audit-office-regulator-news",
+          "taxonomy-nao-reports"
+        ],
+        "sectors": [
+          "Context",
+          "Regulators"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.nao.org.uk/reports/",
+          "https://www.nao.org.uk/reports/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "National Grid",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "national-grid-official-newsroom"
+        ],
+        "sectors": [
+          "Energy"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.nationalgrid.com/media-centre/press-releases"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "News UK",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "news-uk-official-newsroom"
+        ],
+        "sectors": [
+          "Media"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.news.co.uk/latest-news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Northumbrian Water",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "northumbrian-water-official-newsroom"
+        ],
+        "sectors": [
+          "Utilities"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.nwl.co.uk/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "OVO Energy",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "ovo-energy-official-newsroom"
+        ],
+        "sectors": [
+          "Energy"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.ovoenergy.com/press"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Octopus Energy",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "octopus-energy-official-newsroom"
+        ],
+        "sectors": [
+          "Energy"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://octopus.energy/press/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Ofcom",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "ofcom-regulator-news"
+        ],
+        "sectors": [
+          "Regulators"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.ofcom.org.uk/news-centre/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Ofgem",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "ofgem-regulator-news"
+        ],
+        "sectors": [
+          "Regulators"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.ofgem.gov.uk/news-and-views"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Ofwat",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "ofwat-regulator-news"
+        ],
+        "sectors": [
+          "Regulators"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.ofwat.gov.uk/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Openreach",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "openreach-official-newsroom"
+        ],
+        "sectors": [
+          "Telecommunications"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.openreach.com/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Oracle",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "oracle-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.oracle.com/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Portsmouth Water",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "portsmouth-water-official-newsroom"
+        ],
+        "sectors": [
+          "Utilities"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.portsmouthwater.co.uk/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Premier League",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "premier-league-official-newsroom"
+        ],
+        "sectors": [
+          "Sport"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.premierleague.com/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "PwC",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "pwc-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.pwc.co.uk/press-room.html"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "RWE UK",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "rwe-uk-official-newsroom"
+        ],
+        "sectors": [
+          "Energy"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://uk.rwe.com/press-and-news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Reach plc",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "reach-plc-official-newsroom"
+        ],
+        "sectors": [
+          "Media"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.reachplc.com/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Rugby Football Union",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "rugby-football-union-official-newsroom"
+        ],
+        "sectors": [
+          "Sport"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.englandrugby.com/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "SAP",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "sap-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://news.sap.com/uk/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "SES Water",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "ses-water-official-newsroom"
+        ],
+        "sectors": [
+          "Utilities"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://seswater.co.uk/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "SP Energy Networks",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "sp-energy-networks-official-newsroom"
+        ],
+        "sectors": [
+          "Energy"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.spenergynetworks.co.uk/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "SSE",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "sse-results",
+          "sse-ofgem",
+          "sse-official-newsroom"
+        ],
+        "sectors": [
+          "Energy"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.sse.com/investors/results-and-reports/",
+          "https://www.ofgem.gov.uk/news-and-views",
+          "https://www.sse.com/news-and-views/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Salesforce",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "salesforce-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.salesforce.com/uk/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "ScottishPower",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "scottishpower-official-newsroom"
+        ],
+        "sectors": [
+          "Energy"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.scottishpower.com/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "ServiceNow",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "servicenow-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.servicenow.com/uk/company/media/press-room.html"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Severn Trent",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "severn-trent-official-newsroom"
+        ],
+        "sectors": [
+          "Utilities"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.severntrent.com/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Sky",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "sky-results",
+          "sky-ofcom",
+          "sky-official-newsroom"
+        ],
+        "sectors": [
+          "Media"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.cmcsa.com/financials/quarterly-results",
+          "https://www.ofcom.org.uk/news-centre/",
+          "https://www.skygroup.sky/media-centre/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Sopra Steria",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "sopra-steria-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.soprasteria.co.uk/newsroom"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "South West Water / Pennon",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "south-west-water-pennon-official-newsroom"
+        ],
+        "sectors": [
+          "Utilities"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.pennon-group.co.uk/media/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Southern Water",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "southern-water-official-newsroom"
+        ],
+        "sectors": [
+          "Utilities"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.southernwater.co.uk/latest-news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Sport England",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "sport-england-official-newsroom",
+          "sport-england-regulator-news"
+        ],
+        "sectors": [
+          "Regulators",
+          "Sport"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.sportengland.org/news",
+          "https://www.sportengland.org/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "TCS",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "tcs-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.tcs.com/who-we-are/newsroom"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "TalkTalk",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "talktalk-official-newsroom"
+        ],
+        "sectors": [
+          "Telecommunications"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.talktalkgroup.com/newsroom/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Thames Water",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "thames-water-investors",
+          "thames-water-ofwat",
+          "thames-water-official-newsroom"
+        ],
+        "sectors": [
+          "Utilities"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.thameswater.co.uk/about-us/investors",
+          "https://www.ofwat.gov.uk/news/",
+          "https://www.thameswater.co.uk/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "The Football Association",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "the-football-association-official-newsroom"
+        ],
+        "sectors": [
+          "Sport"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.thefa.com/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "The Guardian",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "the-guardian-official-newsroom"
+        ],
+        "sectors": [
+          "Media"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.theguardian.com/gnm-press-office"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Three UK",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "three-uk-official-newsroom"
+        ],
+        "sectors": [
+          "Telecommunications"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.threemediacentre.co.uk/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "UK Power Networks",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "uk-power-networks-official-newsroom"
+        ],
+        "sectors": [
+          "Energy"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.ukpowernetworks.co.uk/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "UK Regulators Network",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "uk-regulators-network-regulator-news"
+        ],
+        "sectors": [
+          "Regulators"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.ukrn.org.uk/news/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "UK Sport",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "uk-sport-official-newsroom",
+          "uk-sport-regulator-news"
+        ],
+        "sectors": [
+          "Regulators",
+          "Sport"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.uksport.gov.uk/news",
+          "https://www.uksport.gov.uk/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "UKHSA",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "ukhsa-govuk-organisation"
+        ],
+        "sectors": [
+          "Public Sector"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.gov.uk/government/organisations/uk-health-security-agency"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "United Utilities",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "united-utilities-results",
+          "united-utilities-news",
+          "united-utilities-ofwat",
+          "united-utilities-official-newsroom"
+        ],
+        "sectors": [
+          "Utilities"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.unitedutilities.com/corporate/investors/results-centre/",
+          "https://www.unitedutilities.com/corporate/newsroom/",
+          "https://www.ofwat.gov.uk/news/",
+          "https://www.unitedutilities.com/corporate/newsroom/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Virgin Media O2",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "virgin-media-o2-official-newsroom"
+        ],
+        "sectors": [
+          "Telecommunications"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://news.virginmediao2.co.uk/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Vodafone",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "vodafone-official-newsroom"
+        ],
+        "sectors": [
+          "Telecommunications"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.vodafone.com/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Wessex Water",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "wessex-water-official-newsroom"
+        ],
+        "sectors": [
+          "Utilities"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.wessexwater.co.uk/news"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Wimbledon / AELTC",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "wimbledon-aeltc-official-newsroom"
+        ],
+        "sectors": [
+          "Sport"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.wimbledon.com/en_GB/news/index.html"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Wipro",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "wipro-supplier-newsroom"
+        ],
+        "sectors": [
+          "Competitors"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.wipro.com/newsroom/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      },
+      {
+        "name": "Yorkshire Water",
+        "wave": 5,
+        "status": "configuredtarget_not_verifiedEnterpriseModel",
+        "source_ids": [
+          "yorkshire-water-official-newsroom"
+        ],
+        "sectors": [
+          "Utilities"
+        ],
+        "owner": "cios/applications/flora/live/source_registry.py::SOURCES",
+        "discovery_leads_only": [
+          "https://www.yorkshirewater.com/news-media/"
+        ],
+        "closure": "Verify actual collection/source-use/legal identity, then quantify capability/economics/change on matched periods; no receipt inferred from configuration"
+      }
+    ],
+    "source_count": 150,
+    "additional_bt_profile_source_count": 8,
+    "additional_bt_profile_rule": "Separatecollectionnamespace; not additionalorgtargets",
+    "banking_actor_register": "All76BIE2actoroccurrences, somegroups/brands/infrastructure notlegalpersons",
+    "retained": [
+      "TELW5sixenterpriseprofiles and1060NDJSONrows (packagedrows, not alluniqueModels)",
+      "TMS14prioritycomposites/institutions; Telecoms Media Sport, notTransport",
+      "MODworkbook/blueprint; privateproductionreceiptunverified",
+      "NRGnotlocated in trackedtree; askexistingownerforauthread-onlyreceipt inlatercommission",
+      "Utilities/insurance/telecomknowledgefolders plusretainedSourceRecords; placeholdersnotcompleteTwins"
+    ],
+    "closure": "Exactsource/provenance/rights/identity disposition perdeclaredtarget andretainedrecord; configenabled≠collected≠accepted"
+  },
+  "wave6": {
+    "title": "Observed outcomes anddated change",
+    "seed_claim_ids": [
+      "TEL-UTILISATION",
+      "GRID-COMMITTED",
+      "UK-LAW",
+      "SPORT-LICENCE",
+      "AIR-HUB",
+      "TECH-CHANNEL"
+    ],
+    "bounded_demands": [
+      "Actualcontract/perimeter/source-use confirmation for candidateedges",
+      "Sourcecadence andpublication/event/effect/measurement dates percohort",
+      "RealisedAI/technologybenefits netofcosts andagainstexistingremedies",
+      "Programmecompletion/customeroutcomes andcrediblealternativecauses",
+      "Deduplicate30/90dayevents withcorrectinclusivewindows andhistoricalstatus",
+      "Reassesssourcewithdrawal/contradictions through existingowners, noautomaticopportunity"
+    ],
+    "closure": "Oneexplicitverified/withheld/unavailableoutcome perseed; noinventedbudget,buyerneed ordealvalue"
+  }
+}
