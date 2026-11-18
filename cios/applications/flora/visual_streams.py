@@ -28,6 +28,11 @@ SCOPES=MappingProxyType({
  'lloyds':{'route':'/enterprises/lloyds','kind':'enterprise','streams':('landscape','inside','forces'),'domain':'banking','identity_key':'enterprise_twin_id','slug':'lloyds',
            'headline_metrics':(('LBG-Q326-DEPOSITS','Group deposits'),('LBG-Q326-PROFIT','Group statutory pretax profit'))},
 })
+EASYJET_ROUTE='/enterprises/easyjet/preview'
+EASYJET_ART='easyjet-operations-a3ebfbfaca50'
+EASYJET_ART_SHA256='a3ebfbfaca5030fbe35ba49b295714e703a21b2217a0065ac2cb761dfc88c984'
+PRESENTATIONS={**SCOPES,'easyjet':{'route':EASYJET_ROUTE,'streams':('landscape','inside','forces'),
+             'title':'easyJet','identity':'AV-ENT-001'}}
 ROUTES={r['route']:key for key,r in SCOPES.items()} | {'/flora':'uk','/flora/':'uk'}
 LAYERS={'enterprises':'Enterprises','suppliers':'Customers & Suppliers','regulators':'Regulators'}
 BANKS=('barclays','hsbc-uk','lloyds','natwest','santander-uk')
@@ -77,6 +82,7 @@ def asset_files():
    # extension is an on-disk concern, not a reason to widen that grammar.
    files[filename.removesuffix('.webp')]=(filename,'image/webp')
  from .visual_panels import asset_manifest
+ files[EASYJET_ART]=('easyjet-operations.webp','image/webp')
  files['panel-styles']=('panels.css','text/css; charset=utf-8')
  for name,row in asset_manifest()['files'].items():
   if name in files:raise ValueError('Visual asset identity collision')
@@ -86,7 +92,15 @@ def asset_files():
 
 def asset(name):
  if name not in asset_files():raise ValueError('Visual asset unavailable')
- filename,mime=asset_files()[name];p=ASSETS/filename
+ filename,mime=asset_files()[name]
+ if name==EASYJET_ART:
+  path=ASSETS.parent/'easyjet_art'/filename
+  if path.is_symlink():raise ValueError('Visual asset unavailable')
+  try:body=path.read_bytes()
+  except OSError:raise ValueError('Visual asset unavailable') from None
+  if hashlib.sha256(body).hexdigest()!=EASYJET_ART_SHA256:raise ValueError('Visual asset checksum mismatch')
+  return body,mime
+ p=ASSETS/filename
  if p.is_symlink() or not p.is_file() or not p.resolve().is_relative_to(ASSETS.resolve()):raise ValueError('Visual asset unavailable')
  try:body=p.read_bytes()
  except OSError:raise ValueError('Visual asset unavailable') from None
@@ -104,6 +118,17 @@ def asset(name):
 
 
 def resolve(path,query):
+ if path==EASYJET_ROUTE:
+  from .easyjet_capabilities import CAPABILITIES
+  if set(query)-{'stream','detail','reading'} or any(not isinstance(values,list) or len(values)!=1 for values in query.values()):
+   raise ValueError('Unavailable easyJet selector')
+  stream=query.get('stream',['landscape'])[0]
+  detail=query.get('detail',['fleet-operations'])[0]
+  reading=query.get('reading',['facts'])[0]
+  if stream not in PRESENTATIONS['easyjet']['streams'] or detail not in CAPABILITIES or reading not in ('facts','insight'):
+   raise ValueError('Unavailable easyJet view')
+  return Context('easyjet',stream,detail=detail,reading=reading)
+
  if path not in ROUTES or set(query)-{'stream','market','layer','selected','detail','agenda','reading'} or any(not isinstance(v,list) or len(v)!=1 for v in query.values()):
   raise ValueError('Visual journey unavailable')
  scope=ROUTES[path];binding=SCOPES[scope]
@@ -139,12 +164,13 @@ def url(ctx,**changes):
  if ctx.detail:q['detail']=ctx.detail
  if ctx.agenda:q['agenda']=ctx.agenda
  if changes.get('reading')=='insight':q['reading']='insight'
- return SCOPES[ctx.scope]['route']+'?'+urlencode(q)
+ return PRESENTATIONS[ctx.scope]['route']+'?'+urlencode(q)
 
 
 def stream_url(ctx,stream):
  """Compatible subject across the existing finite scene selectors, no new router."""
- if stream not in SCOPES[ctx.scope]['streams']:raise ValueError('Insight view unavailable')
+ if stream not in PRESENTATIONS[ctx.scope]['streams']:raise ValueError('Insight view unavailable')
+ if ctx.scope=='easyjet':return url(ctx,stream=stream,reading=ctx.reading)
  detail=ctx.detail
  target={s['id']for s in geometry()[ctx.scope+'-'+stream]['spots']}
  if detail and stream!=ctx.stream:

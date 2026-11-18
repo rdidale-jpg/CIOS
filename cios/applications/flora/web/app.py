@@ -208,6 +208,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                     if not unchanged: self.wfile.write(body)
                 else:
                     self._body(body, mime, 200)
+            elif parsed.path == '/enterprises/easyjet/preview':
+                from cios.applications.flora import visual_streams
+                self._html(visual_streams.render(parsed.path, parse_qs(parsed.query, keep_blank_values=True), self.headers))
             elif parsed.path in {'/industries/banking', '/enterprises/lloyds'}:
                 from cios.applications.flora import visual_streams
                 query = parse_qs(parsed.query, keep_blank_values=True)
@@ -1687,7 +1690,7 @@ def _content_type_for_path(path: str) -> str | None:
         name = path.removeprefix(visual_streams.ASSET_BASE)
         if name in visual_streams.asset_files(): return visual_streams.asset_files()[name][1]
         return None
-    if path in visual_streams.ROUTES: return 'text/html; charset=utf-8'
+    if path in visual_streams.ROUTES or path == visual_streams.EASYJET_ROUTE: return 'text/html; charset=utf-8'
     if path in technology_experience.PATHS:
         return 'text/html; charset=utf-8'
     for name, content_type in technology_experience.ASSET_TYPES.items():

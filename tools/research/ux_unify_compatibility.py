@@ -12,8 +12,18 @@ PINS = {
 }
 
 
+INTEGRATION_BASE = "ad5345f7379e3b22b4a2ef012b7036170726e8d0"
+INTEGRATION = {
+    "cios/applications/flora/visual_panels.py": "d2b99753e31743950732aeefabb5c89cab43a67231991406eec27e35721f69a6",
+    "cios/applications/flora/visual_streams.py": "9ae610b518047ab7155bf5c71a775d76d5b42908bfab55dab7e6555a94a80228",
+    "cios/applications/flora/public_routes.py": "01abad3081e90c828227d7b664a67169a9b261fd98d8eb21a87f53947461a989",
+    "cios/applications/flora/web/app.py": "bec05ce0f6ee8e1a6096e4fa645b136762a6141db1b3e7f410e887c8dadbd925",
+}
+
 def predecessor(root, path):
     current = (Path(root) / path).read_bytes()
+    if path in INTEGRATION and sha256(current).hexdigest() == INTEGRATION[path]:
+        current = subprocess.check_output(["git", "show", f"{INTEGRATION_BASE}:{path}"], cwd=root)
     if path not in PINS or sha256(current).hexdigest() != PINS[path]:
         return current
     return subprocess.check_output(["git", "show", f"{BASE}:{path}"], cwd=root)

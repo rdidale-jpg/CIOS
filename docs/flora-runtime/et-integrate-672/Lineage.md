@@ -1,0 +1,13 @@
+# Evidence-to-view lineage
+
+| Capability / projection | Bound input and scope | Withheld or unknown |
+| --- | --- | --- |
+| Fleet / company-reported fleet size | `AV-FLEET` / `SRC-AV-AR25`, easyJet Group, 356 aircraft at 30 September 2025. | Current count, utilisable fleet, maintenance downtime and realised cost or savings. |
+| Fleet / reported technology announcement | `AV-MRO` / `SRC-AV-SFP`, 3 November 2023, company described Skywise Core Platform in S.Fleet Performance +. | Current workshare, contract, scope and realised outcome. |
+| Network / company-reported network size | `AV-NETWORK` / `SRC-AV-AR25`, winter/summer 2025 easyJet network, 1,202 routes in the annualised network definition. | Daily flights, current routes, demand, route operating cost and profitability. |
+| Service / reported booking handoff | `AV-CHAT` / `SRC-AV-CHAT26`, announcement 5 October 2026, discovery directs users to easyJet sites for booking. | Bookings or incremental revenue attributable to discovery, support workload, and service outcome or cost effects. |
+| Activities, roles and enablers | Conceptual sequences describe how the selected capability could work. Each Insights view presents a conditional mechanism over its eligible Facts universe. | Actual job descriptions, facility layout, route paths, technology ownership, contractual edges and performance. |
+
+The existing Aviation overlay, registered snapshot and primary claim validators retain provenance. Narrow reviewed claim/source digests fail closed after changes, and existing lifecycle/public-use guards run before the semantic presentation policy. Original source URLs, end-user records and protected material do not enter Main. Possible current supplier commitments, measured savings and opportunities are outside the evidence. No additional publisher rights are asserted. Historic measures date their original scope. Withdrawal or restriction removes dependent disclosures and unsupported Insight. Conceptual visual context and independently admissible facts remain.
+
+Issuer and legal scope are retained at easyJet Group unless expressly stated. Aircraft counts and route counts refer to different reporting definitions. The capability and economics views do not compare incompatible periods, extrapolate network or fleet utilisation, or assign individual airport or provider applicability. Full source-use details, retained locators and review limitations for the selected disclosures were recorded in the [pinned #662 evidence review](https://github.com/rdidale-jpg/CIOS/blob/ab44ca164b3563520ce63c756a0245cf1bc7388c/docs/flora-runtime/et-vis2-659/Source-Review.md).
