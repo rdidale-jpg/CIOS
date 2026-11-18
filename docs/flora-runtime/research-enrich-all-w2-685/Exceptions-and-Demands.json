@@ -1,0 +1,107 @@
+[
+  {
+    "id": "X-BBC",
+    "scope": "BBC issuer financials FY2025/26",
+    "original": "https://assets.publishing.service.gov.uk/media/6a55f7fca4890e65cce64ea2/BBC_Annual_Report___Accounts_25_26_accessible__3_.pdf",
+    "state": "Unresolved acquisitionlimit from Wave1; no W2 reacquisition claimed",
+    "known_extent": "Source filesize11,336,478bytes; financialpages unread, not an assertedtoolthreshold",
+    "resolution": "Readable original document through permitted normal acquisition; no snippets/mirrors as replacement",
+    "wave": 5
+  },
+  {
+    "id": "X-BARCLAYS",
+    "scope": "New Barclays original results",
+    "original": "https://home.barclays/investor-relations/reports-and-events/results/",
+    "state": "403 from Wave1, preserved; no retry or bypass",
+    "resolution": "Owner/source service provides accessible original authorised for exactuse; SEC restrictions unchanged",
+    "wave": 3
+  },
+  {
+    "id": "X-EASYJET",
+    "scope": "easyJet laterfinancial/holidays/route economics",
+    "original": "https://corporate.easyjet.com/investors/reports-and-presentations/2024/default.aspx?pubDate=20260820",
+    "state": "Index-only extent; nooriginalQ3financialtables acquired",
+    "resolution": "Actualissueroriginaltables, legalperimeter and currentoutcome data; do not substitute airporttraffic orsnippets",
+    "wave": 3
+  },
+  {
+    "id": "X-PAYUK",
+    "scope": "Pay.UK annualreport andFPS source-use/fees",
+    "state": "PriororiginalPDFsize limitation; guidepermission/confidentiality andwebsiteexpression restrictions preserved",
+    "resolution": "ExactexistingSource/intended-use decision plus originalfinancialpages/tariff; nofeerateinvented",
+    "wave": 3
+  },
+  {
+    "id": "X-CC",
+    "scope": "Computacenter RNSdisclosure factualresearch vsredistribution",
+    "state": "OriginalissuerHTML explicitly retainsRNS distribution terms",
+    "resolution": "ExistingSource owner resolves exactfacts-only intendeduse andnecessary attribution; no blanketpermission",
+    "wave": 3
+  },
+  {
+    "id": "X-ONS",
+    "scope": "New ONS series/table projection",
+    "state": "Research facts/shortextent retained; existingtechnical/publicuse restrictions unchanged",
+    "resolution": "ExistingSource owner scopedmapping; ProposedADR027 remainsProposed, noacceptance required orgranted here",
+    "wave": 3
+  },
+  {
+    "id": "X-SEC",
+    "scope": "SEC-hosted research",
+    "state": "No newSECsource content admitted orusedas Barclaysbypass",
+    "resolution": "Existing sourcepolicy andownerexactuse decision only",
+    "wave": 3
+  },
+  {
+    "id": "X-CPI",
+    "scope": "October2026 CPI",
+    "original": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/october2026",
+    "state": "Original notaccessible viaresearchtool; nofactderived",
+    "resolution": "Originalsource acquisition; do notquote searchforecast/news as verified CPI",
+    "wave": 6
+  },
+  {
+    "id": "X-CYBERSURVEY",
+    "scope": "Guessed2026 cyberbreaches path",
+    "original": "https://www.gov.uk/government/statistics/cyber-security-breaches-survey-2026/cyber-security-breaches-survey-2026",
+    "state": "404; notused",
+    "resolution": "Reuse existingfinite authorisedcybersurveyowner forcurrentcontent; no newbreachclaim",
+    "wave": 6
+  },
+  {
+    "id": "X-NATS",
+    "scope": "NATS2026 financialstatements",
+    "original": "https://www.nats.aero/news/nats-holdings-limited-annual-report-and-accounts-2026/",
+    "state": "Officialannouncement/indexlocated; annualfinancialtables notread",
+    "resolution": "Originalreport acquisition andexactNERL/NSL/Group financial/regulatorybasis; no numbersfromthirdpartysnippets",
+    "wave": 3
+  },
+  {
+    "id": "X-NRG",
+    "scope": "NRG-001 andlegacyproductionacceptance",
+    "state": "Notfoundintrackedtree; productionstateunverified, not zero/absentproof",
+    "resolution": "Existingowner authorisedread-only package/import receipts, notfixturemetadata",
+    "wave": 5
+  },
+  {
+    "id": "X-GVA-WEIGHTS",
+    "scope": "FrozenUKpanorama inputweightnotes",
+    "state": "Retainedsum1002 vsnote1001 remainsunreconciled; no roundingrewrite",
+    "resolution": "Originalsource/provenance reconciliation; no newallocationusing roundedweights",
+    "wave": 6
+  },
+  {
+    "id": "X-COMPETITION",
+    "scope": "Industrylevel rivalcohorts/feeprofitpools",
+    "state": "Meaningful role/premise research, but no exhaustivematchedmarketshares/fees/costofcapital for3industries",
+    "resolution": "Exactlawfulmarket/customer/contract evidence; retainpartialfoundations",
+    "wave": 6
+  },
+  {
+    "id": "X-AUTH",
+    "scope": "NewSourceuse/canonical/liveimports",
+    "state": "No approvals, canonicalbindings, productionreceipts orprivateFinancialruns inspected",
+    "resolution": "Existingowners retain authority; canonicalreceipt absence does not bar separatelyauthorised ordinaryanalyticalresearch",
+    "wave": 5
+  }
+]

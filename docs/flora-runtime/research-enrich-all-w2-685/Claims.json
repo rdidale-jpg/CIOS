@@ -1,0 +1,4611 @@
+[
+  {
+    "id": "UK-JOBS",
+    "subject_key": "UK::Political",
+    "statement": "The jobs-plan programme covers eight growth sectors plus Construction; digital entry-level commitments are planned, not observed jobs.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "JOBS"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "policy updated21Oct2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "reported_plan",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "digital entry-level jobs commitment",
+        "value": 20000,
+        "unit": "jobs/year",
+        "stock_flow": "flow",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_target",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Priority-sector definitions overlap SIC sections; they do not replace the20-sector taxonomy or prove employer vacancies.",
+    "counter_evidence": "Priority-sector definitions overlap SIC sections; they do not replace the20-sector taxonomy or prove employer vacancies.",
+    "design_requirements": [
+      "UK-PESTLE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "UK-RATE",
+    "subject_key": "UK::Economic",
+    "statement": "Bank Rate was raised25basispoints to4% at the meeting ended4Nov2026.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "MPC"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "meeting4Nov2026",
+    "event_date": "2026-11-04",
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "Bank Rate",
+        "value": 4,
+        "unit": "percent",
+        "stock_flow": "rate",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Policy expectations are conditional; fixed-rate debt/hedges change exposure and bank NIM is not Bank Rate.",
+    "counter_evidence": "Policy expectations are conditional; fixed-rate debt/hedges change exposure and bank NIM is not Bank Rate.",
+    "design_requirements": [
+      "UK-PESTLE",
+      "BNK-FUND"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "UK-LABOUR",
+    "subject_key": "UK::Social",
+    "statement": "UK unemployment was estimated at4.6% in July–September2026.",
+    "semantic_type": "estimated",
+    "source_ids": [
+      "LAB"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "Jul–Sep2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "survey_estimate",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "LFS unemployment16+",
+        "value": 4.6,
+        "unit": "percent",
+        "stock_flow": "rate",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "survey_estimate",
+        "semantic_type": "estimated"
+      }
+    ],
+    "material_caveat": "LFS rotating-sample composition affects movements; RTI payroll and LFS definitions differ, so this is a mixed signal, not a universal labour shortage.",
+    "counter_evidence": "LFS rotating-sample composition affects movements; RTI payroll and LFS definitions differ, so this is a mixed signal, not a universal labour shortage.",
+    "design_requirements": [
+      "UK-PESTLE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "UK-TECH",
+    "subject_key": "UK::Technological",
+    "statement": "CMA proposes Microsoft software SMS and identifies switching/integration barriers, while recording cloud-provider steps toward choice.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "SOFTWARE"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "announcement16Oct2026",
+    "event_date": "2026-10-16",
+    "effective_date": null,
+    "status": "proposal",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Proposed designation and possible interventions are not final law or proof that any named enterprise is locked in.",
+    "counter_evidence": "Proposed designation and possible interventions are not final law or proof that any named enterprise is locked in.",
+    "design_requirements": [
+      "UK-PESTLE",
+      "TECH-SUPPLY"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "UK-LAW",
+    "subject_key": "UK::Legal",
+    "statement": "Guidance records harassment/trade-union measures effective30Oct2026, and a planned six-month unfair-dismissal qualifying period from1Jan2027.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "LAW"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "timeline updated5Nov2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "mixed_enacted_guidance_and_future_timetable",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Future dates remain parliamentary-process dependent; check the applicable instrument, jurisdiction and worker/entity before asserting a duty.",
+    "counter_evidence": "Future dates remain parliamentary-process dependent; check the applicable instrument, jurisdiction and worker/entity before asserting a duty.",
+    "design_requirements": [
+      "UK-PESTLE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use",
+    "clauses": [
+      {
+        "scope": "harassment and tradeunion measures perguidance",
+        "effective_date": "2026-10-30",
+        "status": "guidance_reports_effective"
+      },
+      {
+        "scope": "unfairdismissal qualifyingperiod sixmonths",
+        "effective_date": "2027-01-01",
+        "status": "future_timetable_subject_to_parliamentary_process"
+      }
+    ]
+  },
+  {
+    "id": "UK-CARBON",
+    "subject_key": "UK::Environmental",
+    "statement": "Territorial2025 emissions are estimated367MtCO2e; residence-production473MtCO2e. The bases differ and territorial excludes international aviation/shipping.",
+    "semantic_type": "estimated",
+    "source_ids": [
+      "GHG"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2025",
+    "event_date": null,
+    "effective_date": null,
+    "status": "provisional_estimates",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "territorial GHG",
+        "value": 367,
+        "unit": "MtCO2e",
+        "stock_flow": "flow",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "provisional_estimate",
+        "semantic_type": "estimated"
+      },
+      {
+        "name": "resident-production GHG",
+        "value": 473,
+        "unit": "MtCO2e",
+        "stock_flow": "flow",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "provisional_estimate",
+        "semantic_type": "estimated"
+      }
+    ],
+    "material_caveat": "Provisional revisions apply; footprint699MtCO2e is2023 and cannot be compared as a same-year emissions wedge.",
+    "counter_evidence": "Provisional revisions apply; footprint699MtCO2e is2023 and cannot be compared as a same-year emissions wedge.",
+    "design_requirements": [
+      "UK-PESTLE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "AGR-INPUT",
+    "subject_key": "SIC2007::A",
+    "statement": "UK farming2025 intermediate consumption was£21.6bn, while TIFF was£8.4bn; these are different accounting measures.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "DEFRA"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2025",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "intermediate consumption",
+        "value": 21.6,
+        "unit": "billion",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "TIFF",
+        "value": 8.4,
+        "unit": "billion",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Farming excludes forestry/fishing; GB average FBI2024/25 must not be compared as a UK matched-cohort growth rate.",
+    "counter_evidence": "Farming excludes forestry/fishing; GB average FBI2024/25 must not be compared as a UK matched-cohort growth rate.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "MIN-REMEDY",
+    "subject_key": "SIC2007::B",
+    "statement": "NSTA attributes over half of2025 emissions reduction to active measures at operating installations and finds some Central NorthSea platform electrification unreasonable.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "NSTA"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "2025 emissions; maintained2026 account",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Named grid/economic constraints are not every operator’s exposure. Production decline can still worsen emissions intensity; no supplier need is inferred.",
+    "counter_evidence": "Named grid/economic constraints are not every operator’s exposure. Production decline can still worsen emissions intensity; no supplier need is inferred.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "MFG-RR",
+    "subject_key": "Rolls-Royce Holdings plc::Group",
+    "statement": "H1 underlying revenue£11,279m and operating profit£2,534m differ from statutory£11,448m and£2,418m.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "RR"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "sixmonths ended30Jun2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": "underlying and IFRS separate",
+    "measurements": [
+      {
+        "name": "underlying revenue",
+        "value": 11279,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "underlying",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "underlying operating profit",
+        "value": 2534,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "underlying",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "statutory revenue",
+        "value": 11448,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "IFRS",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "statutory operating profit",
+        "value": 2418,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "IFRS",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Global Group results are not UK manufacturing totals; hedge rates and adjustments differ.",
+    "counter_evidence": "Global Group results are not UK manufacturing totals; hedge rates and adjustments differ.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "ENERGY-CAP",
+    "subject_key": "SIC2007::D::GB-default-retail",
+    "statement": "Ofgem announces a4% typical dual-fuel direct-debit price-cap increase forOct–Dec2026.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "CAP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "1Oct–31Dec2026",
+    "event_date": null,
+    "effective_date": "2026-10-01",
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "typical cap change",
+        "value": 4,
+        "unit": "percent",
+        "stock_flow": "change",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Caps constrain unit/standing charges, not individual bills, wholesale hedges, supplier profits or NI/non-domestic tariffs.",
+    "counter_evidence": "Caps constrain unit/standing charges, not individual bills, wholesale hedges, supplier profits or NI/non-domestic tariffs.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "WATER-LEAK",
+    "subject_key": "SIC2007::E::England-water",
+    "statement": "EA reports leakage just under19% of distribution input and household use136.9litres/person/day, with materially divergent company delivery.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "WATER"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "FY2025/26",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "household use",
+        "value": 136.9,
+        "unit": "litres/person/day",
+        "stock_flow": "rate",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "England water-company measures do not cover waste/remediation; metering alone is not a complete demand remedy and funded plans already exist.",
+    "counter_evidence": "England water-company measures do not cover waste/remediation; metering alone is not a complete demand remedy and funded plans already exist.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "BUILD-MARGIN",
+    "subject_key": "Balfour Beatty::UKConstruction",
+    "statement": "UK Construction underlying PFO margin was3.4% versus3.6%; prior period included a£10m one-off credit.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "BUILD"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "HY2026 vsHY2025",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "PFO margin2026",
+        "value": 3.4,
+        "unit": "percent",
+        "stock_flow": "rate",
+        "currency": null,
+        "basis": "underlying",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "PFO margin2025",
+        "value": 3.6,
+        "unit": "percent",
+        "stock_flow": "rate",
+        "currency": null,
+        "basis": "underlying",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "prior one-off credit",
+        "value": 10,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "underlying",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Headline margin contraction does not establish underlying deterioration after the credit; £22.9bn Group orderbook is stock, not UK revenue or free procurement.",
+    "counter_evidence": "Headline margin contraction does not establish underlying deterioration after the credit; £22.9bn Group orderbook is stock, not UK revenue or free procurement.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "ROAD-MIX",
+    "subject_key": "SIC2007::H::GB-road",
+    "statement": "Annual van miles59.6bn rose1.6%; lorry miles16.4bn changed−0.5%, treated as negligible by DfT.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "ROAD"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "rollingyear endedJun2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "van miles",
+        "value": 59.6,
+        "unit": "billion vehicle-miles",
+        "stock_flow": "flow",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "lorry miles",
+        "value": 16.4,
+        "unit": "billion vehicle-miles",
+        "stock_flow": "flow",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Distance is not tonne-km/load factor/revenue; private cars dominate total343.5bn miles and NI is excluded.",
+    "counter_evidence": "Distance is not tonne-km/load factor/revenue; private cars dominate total343.5bn miles and NI is excluded.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "HOTEL-BRIDGE",
+    "subject_key": "Whitbread::Group",
+    "statement": "H1FY27 revenue£1,572m; adjustedPBT£287m, adjusting items−£178m and statutoryPBT£109m.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "HOTEL"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "26weeks ended27Aug2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": "adjusted-to-statutory bridge",
+    "measurements": [
+      {
+        "name": "revenue",
+        "value": 1572,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "statutory",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "adjusted PBT",
+        "value": 287,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "adjusted",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "adjusting items",
+        "value": -178,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "bridge",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "statutory PBT",
+        "value": 109,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "statutory",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Group includes Germany/UK&I. Adjusting items are primarily non-cash impairments; profit decline is not identical to cash burn.",
+    "counter_evidence": "Group includes Germany/UK&I. Adjusting items are primarily non-cash impairments; profit decline is not identical to cash burn.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "PROPERTY-BASIS",
+    "subject_key": "Landsec::Group",
+    "statement": "HY EPRA earnings stayed£192m while IFRSPBT rose to£243m with an£88m valuation surplus.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "PROPERTY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "sixmonths ended30Sep2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "EPRA earnings",
+        "value": 192,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "EPRA",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IFRS PBT",
+        "value": 243,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "IFRS",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "valuation surplus",
+        "value": 88,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "IFRS",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Earnings andPBT have different definitions, not a direct bridge. Postperiod proforma leverage/equity is not30Sepactual; imputed rent not company income.",
+    "counter_evidence": "Earnings andPBT have different definitions, not a direct bridge. Postperiod proforma leverage/equity is not30Sepactual; imputed rent not company income.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "AUDIT-COHORT",
+    "subject_key": "SIC2007::M::PIE-audit",
+    "statement": "Five largest non-BigFour firms’ FTSE250 audit-count share approached18% in2025 versus around13%2024; KFAT uses30of33PIE firms.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "AUDIT"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2025 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Audit-count share is not fee share; not allprofessionalservices, and UK/ROI membership growth is a different population.",
+    "counter_evidence": "Audit-count share is not fee share; not allprofessionalservices, and UK/ROI membership growth is a different population.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "STAFF-FEES",
+    "subject_key": "Hays::Group",
+    "statement": "FY2026 web summary reports£905.5m netfee income and£48.6m operating profit, with a future22–25% conversion target.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "STAFF"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "FY2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_plus_separate_target",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "net fee income",
+        "value": 905.5,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "operating profit",
+        "value": 48.6,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Global recruitment, not gross contractor payroll/UK-only/allN. Website also shows25%+ ambition; target formulations require dated reconciliation, not delivered conversion.",
+    "counter_evidence": "Global recruitment, not gross contractor payroll/UK-only/allN. Website also shows25%+ ambition; target formulations require dated reconciliation, not delivered conversion.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "DEFENCE-OUTTURN",
+    "subject_key": "HM Treasury::Defence-departmental-group",
+    "statement": "First FY2025/26 outturn estimate for Defence totalDEL is£61,994m, separate from multiyear investment plans.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "PUBLIC"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "FY2025/26",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "Defence TDEL",
+        "value": 61994,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "HMT departmental totalDEL",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "This is departmental grouping, not allSICOoutput, NATO spending or unallocated supplier opportunity; July outturn estimate can be revised.",
+    "counter_evidence": "This is departmental grouping, not allSICOoutput, NATO spending or unallocated supplier opportunity; July outturn estimate can be revised.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "HE-DISTRIBUTION",
+    "subject_key": "SIC2007::P::EnglishHE",
+    "statement": "OfS reports£218.2m restructuring costs in2024/25, up20.7%, while deficit incidence35.8% was below earlier expectations.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "HE"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "2024/25 actual,2025/26 forecast distinct",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "restructuring costs",
+        "value": 218.2,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "42.7% deficit incidence for2025/26 remains forecast in thisMayrelease. Institution variation prevents a universal distress thesis.",
+    "counter_evidence": "42.7% deficit incidence for2025/26 remains forecast in thisMayrelease. Institution variation prevents a universal distress thesis.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "CARE-SAMPLE",
+    "subject_key": "SIC2007::Q::England-care",
+    "statement": "Among assessed services, carehomes67%good/3%outstanding and homecare76%good/4%outstanding have different assessed denominators.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "CARE"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "StateofCare2025/26",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "assessed carehomes",
+        "value": 3783,
+        "unit": "services",
+        "stock_flow": "count",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "assessed homecare",
+        "value": 2121,
+        "unit": "services",
+        "stock_flow": "count",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "These assessed samples are not an unbiasedUKsector estimate. Council overspend is not an individual provider’s budget or failure.",
+    "counter_evidence": "These assessed samples are not an unbiasedUKsector estimate. Council overspend is not an individual provider’s budget or failure.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "CULTURE-SCOPE",
+    "subject_key": "SIC2007::R::England-participation",
+    "statement": "CES replaces two predecessor surveys fromOct2025; representative adults16+England, with different collection windows for some engagement measures.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "CES"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "Oct2025–Mar2026; someApr–Sep2025",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Update17Nov2026 is not a new participation event or proof of survey-to-survey trend. Participation is not industry revenue.",
+    "counter_evidence": "Update17Nov2026 is not a new participation event or proof of survey-to-survey trend. Participation is not industry revenue.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "UNION-RETURNS",
+    "subject_key": "SIC2007::S::GB-unions",
+    "statement": "Listed unions numbered131; reportedmembership5.4m excludes an absent Unite2024/25 return, unlike the6.7m prior comparison.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "UNION"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "returns2024/25 vs2023/24",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "listed unions",
+        "value": 131,
+        "unit": "organisations",
+        "stock_flow": "count",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "The19.4% headline fall is not a comparable membership collapse. Unions are a subset, not allpersonal/repairservices.",
+    "counter_evidence": "The19.4% headline fall is not a comparable membership collapse. Unions are a subset, not allpersonal/repairservices.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "HOUSEHOLD-BOUNDARY",
+    "subject_key": "SIC2007::T",
+    "statement": "Guidance distinguishes direct household employment from self-employed/agency arrangements and includes directly paid carers even with public direct payments.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "HOME"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "undated maintainedguidance reviewed18Nov2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Employee rights/payroll duties depend on status and eligibility. No household personal information, enterprise list or sales opportunity is created.",
+    "counter_evidence": "Employee rights/payroll duties depend on status and eligibility. No household personal information, enterprise list or sales opportunity is created.",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "BNK-FLOWS",
+    "subject_key": "UKBanking::household-mortgages",
+    "statement": "September net mortgage borrowing£3.9bn; house-purchase approvals53,400; remortgage approvals42,600 capture switching lenders only.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "MONEY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "Sep2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "net mortgage borrowing",
+        "value": 3.9,
+        "unit": "billion",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "purchase approvals",
+        "value": 53400,
+        "unit": "approvals",
+        "stock_flow": "flow",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "remortgage approvals",
+        "value": 42600,
+        "unit": "approvals",
+        "stock_flow": "flow",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Approval is not drawdown. Gross£24.2bn minus repayments£21.4bn differs from net because seasonal adjustments vary; do not label discrepancy an error.",
+    "counter_evidence": "Approval is not drawdown. Gross£24.2bn minus repayments£21.4bn differs from net because seasonal adjustments vary; do not label discrepancy an error.",
+    "design_requirements": [
+      "BNK-CUST",
+      "BNK-FUND"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "BNK-RATES",
+    "subject_key": "UKBanking::household-mortgages",
+    "statement": "Newly drawn mortgage effective rate4.63% contrasts with4.03% on outstanding stock.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "MONEY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "Sep2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "new mortgage effective rate",
+        "value": 4.63,
+        "unit": "percent",
+        "stock_flow": "rate",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "stock mortgage effective rate",
+        "value": 4.03,
+        "unit": "percent",
+        "stock_flow": "rate",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Different loan cohorts, no deposit cost or matched duration: their difference is not a bank interest margin.",
+    "counter_evidence": "Different loan cohorts, no deposit cost or matched duration: their difference is not a bank interest margin.",
+    "design_requirements": [
+      "BNK-FUND"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "BNK-DEPOSITS",
+    "subject_key": "UKBanking::household-deposits",
+    "statement": "HouseholdISA inflows£5.0bn and sight interest-bearing£0.7bn coexist with withdrawals£2.9bn non-interest-bearing and£0.2bn time deposits.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "MONEY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "Sep2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "ISA inflow",
+        "value": 5.0,
+        "unit": "billion",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "interest-bearing sight inflow",
+        "value": 0.7,
+        "unit": "billion",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "non-interest-bearing withdrawal",
+        "value": -2.9,
+        "unit": "billion",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "time deposit withdrawal",
+        "value": -0.2,
+        "unit": "billion",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Selected account buckets are not a complete household deposit bridge or evidence of any named bank losing deposits.",
+    "counter_evidence": "Selected account buckets are not a complete household deposit bridge or evidence of any named bank losing deposits.",
+    "design_requirements": [
+      "BNK-CUST",
+      "BNK-FUND"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "BNK-SETTLEMENT",
+    "subject_key": "Bank of England::RTGS-CHAPS",
+    "statement": "BoE operates RTGS settlement accounts and CHAPS; rules/operator/infrastructure/participant roles are distinct.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "SETTLE"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "maintained page reviewed18Nov2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Principal settled is not operator revenue. No newBacs/FPS tariff, participant binding or Pay.UK fee figures acquired.",
+    "counter_evidence": "Principal settled is not operator revenue. No newBacs/FPS tariff, participant binding or Pay.UK fee figures acquired.",
+    "design_requirements": [
+      "BNK-PAY"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "BNK-CARD-FEES",
+    "subject_key": "UKPayments::card-schemes",
+    "statement": "PSR distinguishes scheme participation fees from processing fees and has issued transparency/pricing-governance directions to Visa/Mastercard.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "CARDS"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "updatedJul2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Regulatory financial reporting is still consultation on thispage; cardacquiring,interchange,schemefees andBacs/FPS fees must not be conflated.",
+    "counter_evidence": "Regulatory financial reporting is still consultation on thispage; cardacquiring,interchange,schemefees andBacs/FPS fees must not be conflated.",
+    "design_requirements": [
+      "BNK-PAY",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "TECH-CLOUD-SIZE",
+    "subject_key": "UKTechnology::public-cloud",
+    "statement": "CMA reports UK customers spent£10.5bn on publiccloud infrastructure in2024; shares use a widerUK+EEA market.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "CLOUD"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2024 measured; decision31Jul2025",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "UK IaaS/PaaS customer spend",
+        "value": 10.5,
+        "unit": "billion",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Neither wholeTechnology GVA nor global hyperscaler revenue. Share ranges are notUK-only. Quality/innovation and varying service-price movements counter blanket overpricing.",
+    "counter_evidence": "Neither wholeTechnology GVA nor global hyperscaler revenue. Share ranges are notUK-only. Quality/innovation and varying service-price movements counter blanket overpricing.",
+    "design_requirements": [
+      "TECH-SUPPLY",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "TECH-CHANNEL",
+    "subject_key": "Computacenter plc::Group",
+    "statement": "H1Group GII£8,927.5m differs from revenue£6,845.2m; grossprofit£657.9m rose while grossmargin fell.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "CC"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "sixmonths ended30Jun2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "gross invoiced income",
+        "value": 8927.5,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "APM",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "revenue",
+        "value": 6845.2,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "IFRS",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "gross profit",
+        "value": 657.9,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "IFRS",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Gross/net software recognition matters. Growthmix, not proved deterioration; UK/NorthAmerica/Group must not be substituted. RNS redistribution terms remain unresolved.",
+    "counter_evidence": "Gross/net software recognition matters. Growthmix, not proved deterioration; UK/NorthAmerica/Group must not be substituted. RNS redistribution terms remain unresolved.",
+    "design_requirements": [
+      "TECH-SUPPLY",
+      "ENT-ECON"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "MEDIA-MIX",
+    "subject_key": "UKMedia::commercialTV-onlinevideo",
+    "statement": "Ofcom reports UK commercialTV/onlinevideo over£18bn in2025 while commercial broadcaster revenue declined.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "MEDIA"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2025",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Not BBC income or allcreativeindustrysize. Online/linear mix prevents inferring every broadcaster or supplier shares in aggregate growth.",
+    "counter_evidence": "Not BBC income or allcreativeindustrysize. Online/linear mix prevents inferring every broadcaster or supplier shares in aggregate growth.",
+    "design_requirements": [
+      "IND-VALUE",
+      "CHANGE-LEASE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "POWER-MIX",
+    "subject_key": "UKEnergy::electricity",
+    "statement": "Q22026 renewablegeneration38.3TWh comprised55.8% of generation while low-carbon share68.5% fell0.9points as nuclear output fell11%.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "ENERGY"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "Apr–Jun2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "renewable generation",
+        "value": 38.3,
+        "unit": "TWh",
+        "stock_flow": "flow",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "renewable generation share",
+        "value": 55.8,
+        "unit": "percent",
+        "stock_flow": "rate",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "low-carbon share",
+        "value": 68.5,
+        "unit": "percent",
+        "stock_flow": "rate",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Outputflows are not installedGW, retailbillmix or a particular data-centre supply agreement. Primaryenergy production fell7.3% on different units/basis.",
+    "counter_evidence": "Outputflows are not installedGW, retailbillmix or a particular data-centre supply agreement. Primaryenergy production fell7.3% on different units/basis.",
+    "design_requirements": [
+      "UK-PESTLE",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "MOD-ASSETS",
+    "subject_key": "MOD::department",
+    "statement": "MOD reports£60.2bn defence spending in2024/25 and£64.1bn net cash requirement on separate bases.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "MOD"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "FY2024/25",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "defence spending",
+        "value": 60.2,
+        "unit": "billion",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "RDEL+CDEL−depreciation",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "net cash requirement",
+        "value": 64.1,
+        "unit": "billion",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "cash",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Historical, not latestoutturn; incompatible with a simple growth comparison againstHMT2025/26TDEL. Asset stock is not annual procurement.",
+    "counter_evidence": "Historical, not latestoutturn; incompatible with a simple growth comparison againstHMT2025/26TDEL. Asset stock is not annual procurement.",
+    "design_requirements": [
+      "ENT-ECON"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "TEL-UTILISATION",
+    "subject_key": "BT::Openreach",
+    "statement": "H1FTTPconnections9.9m/passings24.1m coexist with366,000broadbandline losses; >10mconnections is an October milestone.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "BT"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "H1to30Sep2026; Octmilestone distinct",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "FTTP connections",
+        "value": 9.9,
+        "unit": "million premises",
+        "stock_flow": "stock",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "FTTP premises passed",
+        "value": 24.1,
+        "unit": "million premises",
+        "stock_flow": "stock",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "H1 broadband line losses",
+        "value": 366000,
+        "unit": "lines",
+        "stock_flow": "flow",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Fibre migration/takeup and totalmarketshare differ. Grossannualised£312msavings is not netperiodprofit or an unserved customer demand.",
+    "counter_evidence": "Fibre migration/takeup and totalmarketshare differ. Grossannualised£312msavings is not netperiodprofit or an unserved customer demand.",
+    "design_requirements": [
+      "IND-VALUE",
+      "ENT-ECON"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GRID-COMMITTED",
+    "subject_key": "National Grid plc::Group",
+    "statement": "Supply-chain/delivery mechanisms are secured for around80% of the£70bn five-year UK/US investment programme, according to management.",
+    "semantic_type": "estimated",
+    "source_ids": [
+      "GRID"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "planFY2026/27–2030/31; H1report5Nov2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "management_estimate_about_plan",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "delivery mechanisms secured",
+        "value": 80,
+        "unit": "percent",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "management_estimate",
+        "semantic_type": "estimated"
+      }
+    ],
+    "material_caveat": "Secured mechanisms do not equal contract award detail or80%spent. Do not call the other20% open procurement orUK-only budget.",
+    "counter_evidence": "Secured mechanisms do not equal contract award detail or80%spent. Do not call the other20% open procurement orUK-only budget.",
+    "design_requirements": [
+      "ENT-EXPOSURE",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SPORT-LICENCE",
+    "subject_key": "IFR::English-football",
+    "statement": "TopfiveEnglishdivisions require provisional licensing before2027/28; strategicbusinessplan andgovernancestatement are application elements.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "IFR"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "rulespublished1Jul2026; beforeseason2027/28",
+    "event_date": "2026-07-01",
+    "effective_date": null,
+    "status": "published_rules_future_application",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "No namedclub noncompliance, currentlicence outcome, buyerneed orsupplier procurement established.",
+    "counter_evidence": "No namedclub noncompliance, currentlicence outcome, buyerneed orsupplier procurement established.",
+    "design_requirements": [
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "AIR-CHARGES",
+    "subject_key": "UKAviation::airport-airline",
+    "statement": "CAA guidance requires annual airline consultation oncharges; >5m passenger threshold uses two-years-prior traffic.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "AIRCHARGE"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "coverage2026 basedon2024;2027 basedon2025",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Different from Heathrow pricecontrol, nationalAPD orcarrier netyield. Namedairport inclusion is not evidence of easyJet’s individual tariff.",
+    "counter_evidence": "Different from Heathrow pricecontrol, nationalAPD orcarrier netyield. Namedairport inclusion is not evidence of easyJet’s individual tariff.",
+    "design_requirements": [
+      "AIR-ROTATE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "AIR-HUB",
+    "subject_key": "Heathrow::reported-results",
+    "statement": "9M2026 revenue£2,684m comprises aeronautical£1,620m, retail£592m and other£472m; adjustedcosts£1,243m and EBITDA£1,441m.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "HUB"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "ninemonths ended30Sep2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "revenue",
+        "value": 2684,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "aeronautical",
+        "value": 1620,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "retail",
+        "value": 592,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "other",
+        "value": 472,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "adjusted costs",
+        "value": 1243,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "adjusted",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "adjusted EBITDA",
+        "value": 1441,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "adjusted",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "This results perimeter is not airline yield, HALstandalone or allUKairports. Footnotedefinitions not fullyacquired; SP/Finance debt and RAB must remain separate. Noexpansion forecast accepted as delivered value.",
+    "counter_evidence": "This results perimeter is not airline yield, HALstandalone or allUKairports. Footnotedefinitions not fullyacquired; SP/Finance debt and RAB must remain separate. Noexpansion forecast accepted as delivered value.",
+    "design_requirements": [
+      "AIR-ROTATE",
+      "ENT-ECON"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "AIR-HUB-TRAFFIC",
+    "subject_key": "Heathrow::airport",
+    "statement": "9Mpassengertraffic62.9m versus63.3m coexists with cargo1.193mtonnes versus1.174m.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "HUB"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "ninemonths ended30Sep2026 vs2025",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "passenger traffic2026",
+        "value": 62.9,
+        "unit": "million passenger journeys",
+        "stock_flow": "flow",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "passenger traffic2025",
+        "value": 63.3,
+        "unit": "million passenger journeys",
+        "stock_flow": "flow",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "cargo2026",
+        "value": 1193,
+        "unit": "thousand tonnes",
+        "stock_flow": "flow",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "cargo2025",
+        "value": 1174,
+        "unit": "thousand tonnes",
+        "stock_flow": "flow",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Airport passenger movements are not unique people/easyJet passengers. No comparatorairportnetwork orrouteprofit established.",
+    "counter_evidence": "Airport passenger movements are not unique people/easyJet passengers. No comparatorairportnetwork orrouteprofit established.",
+    "design_requirements": [
+      "AIR-ROTATE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "AIR-SERVICE-ECON",
+    "subject_key": "Rolls-Royce::CivilAerospace",
+    "statement": "Civil Aerospace LTSA invoiced flyinghour receipts£3.4bn contrast with£86m netLTSA balancegrowth after RRSAs.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "RR"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "sixmonths ended30Jun2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "LTSA invoiced receipts",
+        "value": 3.4,
+        "unit": "billion",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "net LTSA balance growth after RRSAs",
+        "value": 86,
+        "unit": "million",
+        "stock_flow": "change",
+        "currency": "GBP",
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Receipts, deferredbalances and reportedrevenue have different timing; not airline profit or evidence Rolls-Royce supplies easyJet.",
+    "counter_evidence": "Receipts, deferredbalances and reportedrevenue have different timing; not airline profit or evidence Rolls-Royce supplies easyJet.",
+    "design_requirements": [
+      "AIR-ROTATE",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-A",
+    "subject_key": "SIC2007::A",
+    "statement": "Annual intermediate-consumption/output ratio: 0.63 in2023, 0.60 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.63,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.6,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-A-INSIGHT",
+    "subject_key": "SIC2007::A",
+    "statement": "Crop/input purchasing and livestock commodity prices act on different farm-income mechanisms; one improved aggregate does not resolve farm-type cash exposure.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-A",
+      "AGR-INPUT"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Commodity price recovery, rather than operating productivity, may account for improved farming income.",
+    "counter_evidence": "Commodity price recovery, rather than operating productivity, may account for improved farming income.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-B",
+    "subject_key": "SIC2007::B",
+    "statement": "Annual intermediate-consumption/output ratio: 0.47 in2023, 0.50 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.47,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.5,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-B-INSIGHT",
+    "subject_key": "SIC2007::B",
+    "statement": "Lower absolute emissions can coexist with production depletion and worsening intensity. Assetlife, gridaccess and decommissioning must be considered jointly.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-B",
+      "MIN-REMEDY"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Active measures already account for much reduction; treating all reductions as closures is false.",
+    "counter_evidence": "Active measures already account for much reduction; treating all reductions as closures is false.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-C",
+    "subject_key": "SIC2007::C",
+    "statement": "Annual intermediate-consumption/output ratio: 0.67 in2023, 0.66 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.67,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.66,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-C-INSIGHT",
+    "subject_key": "SIC2007::C",
+    "statement": "Manufacturing value capture differs between originalequipment and installed-base services; underlying profit and statutory performance answer different questions.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-C",
+      "MFG-RR"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "A profitable aftermarket example contradicts universal manufacturing distress.",
+    "counter_evidence": "A profitable aftermarket example contradicts universal manufacturing distress.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-D",
+    "subject_key": "SIC2007::D",
+    "statement": "Annual intermediate-consumption/output ratio: 0.71 in2023, 0.76 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.71,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.76,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-D-INSIGHT",
+    "subject_key": "SIC2007::D",
+    "statement": "Generation, network allowances and retail hedging are distinct models; a domestic tariff cap transmits only part of sector economics.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-D",
+      "ENERGY-CAP"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Regulated recovery, existing hedges and rising generation can offset particular cost shocks.",
+    "counter_evidence": "Regulated recovery, existing hedges and rising generation can offset particular cost shocks.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-E",
+    "subject_key": "SIC2007::E",
+    "statement": "Annual intermediate-consumption/output ratio: 0.49 in2023, 0.50 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.49,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.5,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-E-INSIGHT",
+    "subject_key": "SIC2007::E",
+    "statement": "Treatment and pumping create cost before lost water reaches a paying customer; leakage reliability and household demand are related but distinct levers.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-E",
+      "WATER-LEAK"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Better performers and committed investment challenge an industry-wide incapability thesis.",
+    "counter_evidence": "Better performers and committed investment challenge an industry-wide incapability thesis.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-F",
+    "subject_key": "SIC2007::F",
+    "statement": "Annual intermediate-consumption/output ratio: 0.63 in2023, 0.63 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.63,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.63,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-F-INSIGHT",
+    "subject_key": "SIC2007::F",
+    "statement": "Project price, riskallocation and cashconversion matter separately from orderbacklog; comparing adjusted margins needs prior one-offs.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-F",
+      "BUILD-MARGIN"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Priorcredit can explain headline margin decline; contractor backlog is not technology budget.",
+    "counter_evidence": "Priorcredit can explain headline margin decline; contractor backlog is not technology budget.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-G",
+    "subject_key": "SIC2007::G",
+    "statement": "Annual intermediate-consumption/output ratio: 0.45 in2023, 0.45 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.45,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.45,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-G-INSIGHT",
+    "subject_key": "SIC2007::G",
+    "statement": "Retail sales are goods turnover; wholesale/retail economic output includes trade margins. Paymentacceptance charges consume margin without being the goods principal.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-G",
+      "BNK-CARD-FEES"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Card regulation can improve transparency; no evidence every merchant faces an unchanged high fee.",
+    "counter_evidence": "Card regulation can improve transparency; no evidence every merchant faces an unchanged high fee.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-H",
+    "subject_key": "SIC2007::H",
+    "statement": "Annual intermediate-consumption/output ratio: 0.60 in2023, 0.59 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.6,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.59,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-H-INSIGHT",
+    "subject_key": "SIC2007::H",
+    "statement": "Van distance and heavygoods movements need different capacity/load denominators; passenger airports, airlines and roadfreight cannot share a revenue proxy.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-H",
+      "ROAD-MIX"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Flatlorry distance with risingvan traffic weakens a universal logistics growth claim.",
+    "counter_evidence": "Flatlorry distance with risingvan traffic weakens a universal logistics growth claim.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-I",
+    "subject_key": "SIC2007::I",
+    "statement": "Annual intermediate-consumption/output ratio: 0.51 in2023, 0.50 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.51,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.5,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-I-INSIGHT",
+    "subject_key": "SIC2007::I",
+    "statement": "Roomcapacity, rate/occupancy and labour create recurring economics; estate impairments and transition charges need separate analysis from currentservice cash.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-I",
+      "HOTEL-BRIDGE"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Growing sales and existing transformation mean profit pressure is not proof of absent management response.",
+    "counter_evidence": "Growing sales and existing transformation mean profit pressure is not proof of absent management response.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-J",
+    "subject_key": "SIC2007::J",
+    "statement": "Annual intermediate-consumption/output ratio: 0.50 in2023, 0.50 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.5,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.5,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-J-INSIGHT",
+    "subject_key": "SIC2007::J",
+    "statement": "Telecoms fixednetwork utilisation, software services and content monetisation overlap SICJ but have distinct revenue/capital drivers.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-J",
+      "MEDIA-MIX"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Media aggregate growth coexists with broadcaster decline; no single digitalgrowth narrative coversJ.",
+    "counter_evidence": "Media aggregate growth coexists with broadcaster decline; no single digitalgrowth narrative coversJ.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-K",
+    "subject_key": "SIC2007::K",
+    "statement": "Annual intermediate-consumption/output ratio: 0.47 in2023, 0.47 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.47,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.47,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-K-INSIGHT",
+    "subject_key": "SIC2007::K",
+    "statement": "Bank spread/fee economics, insurance underwriting and assetmanagement must remain separate. Kvalueadded includes services not captured by balance-sheet volumes.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-K",
+      "BNK-FLOWS"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Lower newmortgage flows do not prove lower bank profit or system instability.",
+    "counter_evidence": "Lower newmortgage flows do not prove lower bank profit or system instability.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-L",
+    "subject_key": "SIC2007::L",
+    "statement": "Annual intermediate-consumption/output ratio: 0.17 in2023, 0.17 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.17,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.17,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-L-INSIGHT",
+    "subject_key": "SIC2007::L",
+    "statement": "Cashrental, EPRA earnings, IFRSvaluation and imputed housingservices belong to different economic views. A large GVA share is not a supplier market.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-L",
+      "PROPERTY-BASIS"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Stable EPRA earnings can coexist with rising IFRSPBT duevaluation, not rentprofit acceleration.",
+    "counter_evidence": "Stable EPRA earnings can coexist with rising IFRSPBT duevaluation, not rentprofit acceleration.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-M",
+    "subject_key": "SIC2007::M",
+    "statement": "Annual intermediate-consumption/output ratio: 0.42 in2023, 0.42 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.42,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.42,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-M-INSIGHT",
+    "subject_key": "SIC2007::M",
+    "statement": "Professionalservice value depends on scarce expertise, utilisation and assurancequality; auditcount concentration is not consultingfee concentration.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-M",
+      "AUDIT-COHORT"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Growing challenger auditcount share challenges a static competition thesis.",
+    "counter_evidence": "Growing challenger auditcount share challenges a static competition thesis.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-N",
+    "subject_key": "SIC2007::N",
+    "statement": "Annual intermediate-consumption/output ratio: 0.47 in2023, 0.46 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.47,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.46,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-N-INSIGHT",
+    "subject_key": "SIC2007::N",
+    "statement": "Recruitment netfees exclude pass-through remuneration; leasing/facilities/security have different assets and labour obligations.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-N",
+      "STAFF-FEES"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Hays already has productivity actions; targetambitions do not show deliveredconversion.",
+    "counter_evidence": "Hays already has productivity actions; targetambitions do not show deliveredconversion.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-O",
+    "subject_key": "SIC2007::O",
+    "statement": "Annual intermediate-consumption/output ratio: 0.44 in2023, 0.43 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.44,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.43,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-O-INSIGHT",
+    "subject_key": "SIC2007::O",
+    "statement": "Nonmarket administration turns authorised resources into publicoutcomes; department spending and SICnonmarket GVA are not interchangeable.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-O",
+      "DEFENCE-OUTTURN"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Appropriations, resource budgets and cashconsumption differ; no available procurement inferred.",
+    "counter_evidence": "Appropriations, resource budgets and cashconsumption differ; no available procurement inferred.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-P",
+    "subject_key": "SIC2007::P",
+    "statement": "Annual intermediate-consumption/output ratio: 0.28 in2023, 0.28 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.28,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.28,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-P-INSIGHT",
+    "subject_key": "SIC2007::P",
+    "statement": "Tuition, restrictedresearch funding and publiceducation output require separate economicmodels; restructuring spend may be a response rather than recurring deficit.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-P",
+      "HE-DISTRIBUTION"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Some institutions improved; forecastdeficits are not realised sectorfailures.",
+    "counter_evidence": "Some institutions improved; forecastdeficits are not realised sectorfailures.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-Q",
+    "subject_key": "SIC2007::Q",
+    "statement": "Annual intermediate-consumption/output ratio: 0.39 in2023, 0.38 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.39,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.38,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-Q-INSIGHT",
+    "subject_key": "SIC2007::Q",
+    "statement": "Publiccommissioning, privatecare and clinical services differ in payment and delivery models. Assessedquality is not sectorfinancial margin.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-Q",
+      "CARE-SAMPLE"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Mostassessedservices are good/outstanding; smallassessedsamples cannot rank allproviders.",
+    "counter_evidence": "Mostassessedservices are good/outstanding; smallassessedsamples cannot rank allproviders.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-R",
+    "subject_key": "SIC2007::R",
+    "statement": "Annual intermediate-consumption/output ratio: 0.46 in2023, 0.46 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.46,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.46,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-R-INSIGHT",
+    "subject_key": "SIC2007::R",
+    "statement": "Participation, tickets, media rights and grants are different demand/value measures. Englandadults survey cannot size a UKsports/arts profitpool.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-R",
+      "CULTURE-SCOPE"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Surveychange/update dates can explain apparentchange without any realparticipation shift.",
+    "counter_evidence": "Surveychange/update dates can explain apparentchange without any realparticipation shift.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-S",
+    "subject_key": "SIC2007::S",
+    "statement": "Annual intermediate-consumption/output ratio: 0.32 in2023, 0.32 in2024.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "calendar2023 vs2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "IC/output2023",
+        "value": 0.32,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      },
+      {
+        "name": "IC/output2024",
+        "value": 0.32,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_actual",
+        "semantic_type": "reported"
+      }
+    ],
+    "material_caveat": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "counter_evidence": "Rounded annual nationalaccounts ratios; not current2026costs, corporateprofit, procurement orcausal pricepass-through.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-S-INSIGHT",
+    "subject_key": "SIC2007::S",
+    "statement": "Membershipdues, repairs and personalservices differ in labour/intangible intensity. Missingreturns can dominate an apparent industry-change story.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-S",
+      "UNION-RETURNS"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Absentlargeunion return explains headline decline; this is a data discontinuity, not a verified industry contraction.",
+    "counter_evidence": "Absentlargeunion return explains headline decline; this is a data discontinuity, not a verified industry contraction.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "IC-T-EXCLUSION",
+    "subject_key": "SIC2007::T",
+    "statement": "ONS excludes sectionT from theICtable because it has no intermediate consumption.",
+    "semantic_type": "reported",
+    "source_ids": [
+      "GDP"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "annualICtable2023/24",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "No sectorTcorporatemargin/market size inferred.",
+    "counter_evidence": "No sectorTcorporatemargin/market size inferred.",
+    "design_requirements": [
+      "UK-STRUCT"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "SECTOR-T-INSIGHT",
+    "subject_key": "SIC2007::T",
+    "statement": "Directhousehold employment is not an agencybusiness model; payroll/socialcare directpayments create employerresponsibilities without a corporate valuepool.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-T-EXCLUSION",
+      "HOUSEHOLD-BOUNDARY"
+    ],
+    "reporting_period": "annual2024 accounting context plus anchor-specific period",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "NoICratio is published because the sectionhas no intermediateconsumption; it is not an omittedzero-margin company.",
+    "counter_evidence": "NoICratio is published because the sectionhas no intermediateconsumption; it is not an omittedzero-margin company.",
+    "design_requirements": [
+      "IND-VALUE",
+      "IND-FORCES"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "UK-POLITICAL-INSIGHT",
+    "subject_key": "UK::Political",
+    "statement": "Skills-policy commitments may alter training supply and employer coordination; SICmapping and actual sector uptake must be demonstrated.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "UK-JOBS"
+    ],
+    "reporting_period": "18Nov2026 researchcut; anchorperiod retained",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "A published commitment may substitute for existing training or remain undelivered.",
+    "counter_evidence": "A published commitment may substitute for existing training or remain undelivered.",
+    "design_requirements": [
+      "UK-PESTLE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "UK-ECONOMIC-INSIGHT",
+    "subject_key": "UK::Economic",
+    "statement": "Refinancing timing, deposit competition and energy pass-through mediate financialconditions; no uniform corporate consequence.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "UK-RATE"
+    ],
+    "reporting_period": "18Nov2026 researchcut; anchorperiod retained",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Fixed-price contracts, hedges, capital resilience or weakerdemand can offset the expected channel.",
+    "counter_evidence": "Fixed-price contracts, hedges, capital resilience or weakerdemand can offset the expected channel.",
+    "design_requirements": [
+      "UK-PESTLE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "UK-SOCIAL-INSIGHT",
+    "subject_key": "UK::Social",
+    "statement": "Mixed payroll/LFS signals make skills and workforce claims cohort-specific rather than universal.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "UK-LABOUR",
+      "UK-PAYROLL"
+    ],
+    "reporting_period": "18Nov2026 researchcut; anchorperiod retained",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Surveyrotation/composition or a different employment mix may explain the movement.",
+    "counter_evidence": "Surveyrotation/composition or a different employment mix may explain the movement.",
+    "design_requirements": [
+      "UK-PESTLE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "UK-TECHNOLOGICAL-INSIGHT",
+    "subject_key": "UK::Technological",
+    "statement": "Interoperability and licensing can affect options across software/cloud complements, but sectorfindings do not identify a company workload.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "UK-TECH"
+    ],
+    "reporting_period": "18Nov2026 researchcut; anchorperiod retained",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Incumbent integration/quality can create real value and providers are taking steps toward choice.",
+    "counter_evidence": "Incumbent integration/quality can create real value and providers are taking steps toward choice.",
+    "design_requirements": [
+      "UK-PESTLE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "UK-LEGAL-INSIGHT",
+    "subject_key": "UK::Legal",
+    "statement": "Different effective dates create distinct employer implementation periods; legalapplicability is checked before anycompanyexposure.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "UK-LAW"
+    ],
+    "reporting_period": "18Nov2026 researchcut; anchorperiod retained",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Existingcontrols may already meet requirements; future timetable can change.",
+    "counter_evidence": "Existingcontrols may already meet requirements; future timetable can change.",
+    "design_requirements": [
+      "UK-PESTLE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "UK-ENVIRONMENTAL-INSIGHT",
+    "subject_key": "UK::Environmental",
+    "statement": "Production-aligned emissions are relevant to industry economic attribution; territorial and consumption accounts answer different questions.",
+    "semantic_type": "insight",
+    "source_ids": [],
+    "input_claim_ids": [
+      "UK-CARBON"
+    ],
+    "reporting_period": "18Nov2026 researchcut; anchorperiod retained",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [],
+    "material_caveat": "Crossborder activity and differentyears, not operationaldeterioration, explain differences between totals.",
+    "counter_evidence": "Crossborder activity and differentyears, not operationaldeterioration, explain differences between totals.",
+    "design_requirements": [
+      "UK-PESTLE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "UK-PAYROLL",
+    "subject_key": "UK::Social::RTI",
+    "statement": "Matched July–September2026 payrolled employment fell32,000 over the quarter.",
+    "semantic_type": "estimated",
+    "source_ids": [
+      "LAB"
+    ],
+    "input_claim_ids": [],
+    "reporting_period": "Jul–Sep2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "administrative_estimate",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "quarterly payroll employment change",
+        "value": -32000,
+        "unit": "people",
+        "stock_flow": "change",
+        "currency": null,
+        "basis": "reported",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "reported_administrative_estimate",
+        "semantic_type": "estimated"
+      }
+    ],
+    "material_caveat": "Administrative payroll excludes self-employment; not the same universe as LFS unemployment. Latest payroll can be revised.",
+    "counter_evidence": "Administrative payroll excludes self-employment; not the same universe as LFS unemployment. Latest payroll can be revised.",
+    "design_requirements": [
+      "UK-PESTLE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-A",
+    "subject_key": "SIC2007::A",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-A"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.4,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-B",
+    "subject_key": "SIC2007::B",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-B"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.5,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-C",
+    "subject_key": "SIC2007::C",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-C"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.34,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-D",
+    "subject_key": "SIC2007::D",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-D"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.24,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-E",
+    "subject_key": "SIC2007::E",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-E"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.5,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-F",
+    "subject_key": "SIC2007::F",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-F"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.37,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-G",
+    "subject_key": "SIC2007::G",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-G"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.55,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-H",
+    "subject_key": "SIC2007::H",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-H"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.41,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-I",
+    "subject_key": "SIC2007::I",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-I"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.5,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-J",
+    "subject_key": "SIC2007::J",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-J"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.5,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-K",
+    "subject_key": "SIC2007::K",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-K"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.53,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-L",
+    "subject_key": "SIC2007::L",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-L"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.83,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-M",
+    "subject_key": "SIC2007::M",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-M"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.58,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-N",
+    "subject_key": "SIC2007::N",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-N"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.54,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-O",
+    "subject_key": "SIC2007::O",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-O"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.57,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-P",
+    "subject_key": "SIC2007::P",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-P"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.72,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-Q",
+    "subject_key": "SIC2007::Q",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-Q"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.62,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-R",
+    "subject_key": "SIC2007::R",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-R"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.54,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "GVA-RESIDUAL-S",
+    "subject_key": "SIC2007::S",
+    "statement": "Calculated GVA/output residual from the published annual2024 IC/output ratio.",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "IC-S"
+    ],
+    "reporting_period": "calendar2024",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": null,
+    "measurements": [
+      {
+        "name": "GVA/output residual",
+        "value": 0.68,
+        "unit": "ratio",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "1−IC/output",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_ratios",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "counter_evidence": "Labour and other value-added components remain; not operatingprofit, procurement or current2026costs.",
+    "design_requirements": [
+      "UK-STRUCT",
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use"
+  },
+  {
+    "id": "CALC-RR-UNDERLYING-MARGIN",
+    "subject_key": "Rolls-Royce Holdings plc::Group",
+    "statement": "Reproducible bounded calculation: RR-UNDERLYING-MARGIN",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "MFG-RR"
+    ],
+    "reporting_period": "sixmonths ended30Jun2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": "underlying",
+    "measurements": [
+      {
+        "name": "RR-UNDERLYING-MARGIN",
+        "value": 22.47,
+        "unit": "percent",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "underlying",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_inputs",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "22.5% published;22.47% recomputation from roundedmillion inputs; not statutory margin orUKmanufacturing margin",
+    "counter_evidence": "22.5% published;22.47% recomputation from roundedmillion inputs; not statutory margin orUKmanufacturing margin",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use",
+    "calculation_id": "RR-UNDERLYING-MARGIN"
+  },
+  {
+    "id": "CALC-RR-STATUTORY-MARGIN",
+    "subject_key": "Rolls-Royce Holdings plc::Group",
+    "statement": "Reproducible bounded calculation: RR-STATUTORY-MARGIN",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "MFG-RR"
+    ],
+    "reporting_period": "sixmonths ended30Jun2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": "IFRS",
+    "measurements": [
+      {
+        "name": "RR-STATUTORY-MARGIN",
+        "value": 21.12,
+        "unit": "percent",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "IFRS",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_inputs",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "21.1% published;21.12% recomputation; not underlying orCivilAerospace margin",
+    "counter_evidence": "21.1% published;21.12% recomputation; not underlying orCivilAerospace margin",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use",
+    "calculation_id": "RR-STATUTORY-MARGIN"
+  },
+  {
+    "id": "CALC-HOTEL-ROUNDED-BRIDGE",
+    "subject_key": "Whitbread::Group",
+    "statement": "Reproducible bounded calculation: HOTEL-ROUNDED-BRIDGE",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "HOTEL-BRIDGE"
+    ],
+    "reporting_period": "26weeks ended27Aug2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": "adjusted-to-statutory bridge",
+    "measurements": [
+      {
+        "name": "HOTEL-ROUNDED-BRIDGE",
+        "value": 109.0,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "adjusted-to-statutory bridge",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_inputs",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "rounded reportedheadlines only; not exactunroundedfinancialcells; not cashburn orUKonlyprofit",
+    "counter_evidence": "rounded reportedheadlines only; not exactunroundedfinancialcells; not cashburn orUKonlyprofit",
+    "design_requirements": [
+      "IND-VALUE"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use",
+    "calculation_id": "HOTEL-ROUNDED-BRIDGE"
+  },
+  {
+    "id": "CALC-CC-GII-DIFFERENCE",
+    "subject_key": "Computacenter plc::Group",
+    "statement": "Reproducible bounded calculation: CC-GII-DIFFERENCE",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "TECH-CHANNEL"
+    ],
+    "reporting_period": "sixmonths ended30Jun2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": "APM vsIFRS recognition",
+    "measurements": [
+      {
+        "name": "CC-GII-DIFFERENCE",
+        "value": 2082.3,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "APM vsIFRS recognition",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_inputs",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "one decimalGBPmillion sourceprecision; not grossprofit, availableprocurement orUKrevenue",
+    "counter_evidence": "one decimalGBPmillion sourceprecision; not grossprofit, availableprocurement orUKrevenue",
+    "design_requirements": [
+      "TECH-SUPPLY",
+      "ENT-ECON"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use",
+    "calculation_id": "CC-GII-DIFFERENCE"
+  },
+  {
+    "id": "CALC-CC-GROSS-MARGIN",
+    "subject_key": "Computacenter plc::Group",
+    "statement": "Reproducible bounded calculation: CC-GROSS-MARGIN",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "TECH-CHANNEL"
+    ],
+    "reporting_period": "sixmonths ended30Jun2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": "IFRS grossprofit/revenue",
+    "measurements": [
+      {
+        "name": "CC-GROSS-MARGIN",
+        "value": 9.61,
+        "unit": "percent",
+        "stock_flow": "ratio",
+        "currency": null,
+        "basis": "IFRS grossprofit/revenue",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_inputs",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "9.6% published;9.61%roundedinputs; not GP/GII, operatingmargin orUKmargin",
+    "counter_evidence": "9.6% published;9.61%roundedinputs; not GP/GII, operatingmargin orUKmargin",
+    "design_requirements": [
+      "TECH-SUPPLY",
+      "ENT-ECON"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use",
+    "calculation_id": "CC-GROSS-MARGIN"
+  },
+  {
+    "id": "CALC-MORTGAGE-COHORT-GAP",
+    "subject_key": "UKBanking::household-mortgages",
+    "statement": "Reproducible bounded calculation: MORTGAGE-COHORT-GAP",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "BNK-RATES"
+    ],
+    "reporting_period": "Sep2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": "newdrawn vsoutstandingstock effective rates",
+    "measurements": [
+      {
+        "name": "MORTGAGE-COHORT-GAP",
+        "value": 0.6,
+        "unit": "percentage points",
+        "stock_flow": "change",
+        "currency": null,
+        "basis": "newdrawn vsoutstandingstock effective rates",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_inputs",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "0.60percentagepoints=60basispoints; not interestmargin orrepricingprofit",
+    "counter_evidence": "0.60percentagepoints=60basispoints; not interestmargin orrepricingprofit",
+    "design_requirements": [
+      "BNK-FUND"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use",
+    "calculation_id": "MORTGAGE-COHORT-GAP"
+  },
+  {
+    "id": "CALC-HUB-REVENUE-MIX",
+    "subject_key": "Heathrow::reported-results",
+    "statement": "Reproducible bounded calculation: HUB-REVENUE-MIX",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "AIR-HUB"
+    ],
+    "reporting_period": "ninemonths ended30Sep2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": "reported streamsum",
+    "measurements": [
+      {
+        "name": "HUB-REVENUE-MIX",
+        "value": 2684.0,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "reported streamsum",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_inputs",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "roundedGBPmillions; not airline ticketrevenue/UKaviationGVA",
+    "counter_evidence": "roundedGBPmillions; not airline ticketrevenue/UKaviationGVA",
+    "design_requirements": [
+      "AIR-ROTATE",
+      "ENT-ECON"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use",
+    "calculation_id": "HUB-REVENUE-MIX"
+  },
+  {
+    "id": "CALC-HUB-EBITDA",
+    "subject_key": "Heathrow::reported-results",
+    "statement": "Reproducible bounded calculation: HUB-EBITDA",
+    "semantic_type": "calculated",
+    "source_ids": [],
+    "input_claim_ids": [
+      "AIR-HUB"
+    ],
+    "reporting_period": "ninemonths ended30Sep2026",
+    "event_date": null,
+    "effective_date": null,
+    "status": "actual_or_maintained_description",
+    "financial_basis": "revenue lessadjustedoperatingcost",
+    "measurements": [
+      {
+        "name": "HUB-EBITDA",
+        "value": 1441.0,
+        "unit": "million",
+        "stock_flow": "flow",
+        "currency": "GBP",
+        "basis": "revenue lessadjustedoperatingcost",
+        "precision": "as published; rounded inputs not extra economic precision",
+        "measurement_state": "calculated_from_reported_rounded_inputs",
+        "semantic_type": "calculated"
+      }
+    ],
+    "material_caveat": "roundedGBPmillions; issuerAPMdefinition remainsrequired; not statutoryPBT orfreecashflow",
+    "counter_evidence": "roundedGBPmillions; issuerAPMdefinition remainsrequired; not statutoryPBT orfreecashflow",
+    "design_requirements": [
+      "AIR-ROTATE",
+      "ENT-ECON"
+    ],
+    "public_eligible": false,
+    "canonical_acceptance": false,
+    "source_owner": "existing Source/Research; Financial for typed measurements",
+    "dependency_policy": "withdraw any source/input => suppress this candidate and dependent interpretation; retain history",
+    "outstanding_demand": "Existing Source owner document/use mapping and exact subject identity before any runtime use",
+    "calculation_id": "HUB-EBITDA"
+  }
+]

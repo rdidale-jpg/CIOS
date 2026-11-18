@@ -1,0 +1,39 @@
+# Ownership, readiness and the global experience handoff
+
+The merged product contract at `c56bd74f130c4d855baf522ba8ba99fe87317fb1` is the governing experience reference. It is not a new canonical ADR. EI-001 remains Draft, IT/EIF remain Review, EGM remains Founder Review, and ADR-027 remains Proposed. Accepted ADR-002/009/012/026 and current source/security ownership are preserved.
+
+| Existing owner | Relevant authority / connection | This research handoff |
+| --- | --- | --- |
+| `cios/applications/flora/visual_v2.py` and `visual_v2_assets/economy.json` | Frozen UK composition, exact ONS source IDs and bounded public extraction | UK-STRUCT adds candidate annual ratios and preserves the unresolved 1,001/1,002 weight-note conflict. It does not replace frozen GVA, turn GVA into revenue or change images. |
+| `research_intelligence/source_import.py` and current Source policy | Existing document/use, publisher, lifecycle and country boundaries; exact finite routine factual-use pathways | New direct research is retained here; no allowlist, routine-use selector or publisher grant is widened. SEC/ONS and actual document restrictions remain distinct from ordinary analytical research. |
+| `research_intelligence/macro_intelligence.py`, `macro_trace.py`, macro research model | Existing UK/France/Europe/global context and country-scoped relationships | UK-PESTLE has six separate candidate conditions. French CSRD/Cyber records are not inherited by GB. Context links do not prove enterprise duties. |
+| `intelligence_presentation.py`, `banking_ecosystem.py`, `banking_portfolio.py` and their source-bound projections | Six semantic types, Banking value-system and current finite enterprise claims | Banking economics/Porter proposals are read-only inputs to these owners. No second matcher, registry, qualification or ripple engine is created. |
+| Existing `financial_intelligence/` and Financial run services | Typed periods, entity/basis/unit, persisted candidate runs and reproducible calculations | Eight audit examples and 19 GVA residuals are documentary reproducibility proofs. No new Financial run, candidate storage, calculation engine or public Financial permission is created. |
+| `easyjet_capabilities.fact` and existing Aviation research owner | Four pinned capability Facts have actual editorial projections | AV-FLEET/NETWORK/MRO/CHAT are preserved as eligible-presented. Raw-text mismatch is not absence. Heathrow/RR additions do not complete easyJet economics or supply its contracts. |
+| Existing Evidence, Observation, Enterprise Model / memory and blueprint import owners | Source identities, review/promotion and actual import receipts | No writes or acceptance. Actual authorised production import state remains unverified; fixtures, folder names and a successful `get()` are not receipts. Separately permitted ordinary analytical views do not require universal canonical promotion. |
+| Existing IAM, Offers, sales-development and Pipeline services | Workspace/tenant/resource authority and human-reviewed consequential actions | Unchanged. Source-linked interpretation supplies no buyer need, canonical Pressure or qualified opportunity. |
+
+The 16-key [Experience-Readiness-Handoff](Experience-Readiness-Handoff.json) pins the merged CSV by SHA-256 `7b50880fef675ebb3c6ee8e76964cfa3e036643ee2eeaf426616100c83f60ce7`. Each new premise has its own subject, primary perspective and reporting period assessment. All new public Facts/Insight assessments are Unavailable until the existing Source owner supports that exact projection; candidate research can still be Partial. Aggregate requirement summaries are explicitly bounded and are not readiness assertions for every constituent enterprise.
+
+Existing selected Insights remain **Partial and available**, rather than being suppressed because a whole root is incomplete: UK `public-value` and `cyber-resilience`, Banking `funding-economics`, Lloyds `funding-base`, Nationwide's FY2026 Group/reward bridge, and easyJet's same-capability bounded interpretation. Their exact scopes, periods and owner references appear separately in the handoff. None establishes full root/portfolio readiness or admission for a new Wave 2 premise.
+
+Existing permitted premise references remain owner-qualified, not canonical IDs inferred from local names:
+
+- UK composition: `economy.json` sources `ONS-BB-2026`, `ONS-GDP-2026-09`, `ONS-SIC`, `ONS-SIC-2007`, with districts `uk-sic07-a` through `-t`. All districts have a bounded existing eligible baseline; current Main shows only C/J/K/Q share slices. A route to Aviation does not fill section H.
+- Existing Banking presentation: `UK-RATE-NOV26 → PR-BOE-NOV26`; `UK-PRA-REPORT27 → PR-PRA-PS726`; `UK-FCA-REPORT27 → PR-FCA-RES26`; `UK-VALUE → SRC-FCA-MODELS` is an interpretation, not a market-value metric.
+- Technology context: `EAI-UK-CTP-DESIGNATION → EAI-HMT-CTP26`; `LBG-ENVOY-GOOGLE` and `LBG-ENVOY-CONTROLS → PR-LBG-ENVOY`. Group/brand collaboration is not Lloyds Bank plc's legally bound critical workload at Google Cloud EMEA Limited.
+- Lloyds financial/source projections: `LBG-Q326-DEPOSITS/PROFIT → PR-LBG-Q326`; `LBG-AR25-DEPOSITS → PR-LBG-AR25`. `LBG-AI26-REPORTED/EXPECTED → PR-LBG-AI26` remain distinct actuals and expectations. Financial targets do not become delivered results.
+- Nationwide's finite public Financial path: source `RUD1-NATIONWIDE-FY26`; eight measurements `rud1-nationwide-{total_income,operating_costs,credit_impairment,underlying_profit_before_tax,profit_before_tax,income_basis_adjustment,acquisition_expense_adjustment,member_reward_payments}`; derivations `nationwide-underlying-pbt-check` and `nationwide-statutory-pbt-check`. This is not access to a private workspace run.
+- FCA complaint sources retain exact legal-firm/cohort periods, including Nationwide/Starling October–March versus other banks January–June. They are ancillary service measures, not customer population or earnings denominators.
+
+The five gap dispositions are kept separate:
+
+| Disposition | Wave 2 example | Consequence |
+| --- | --- | --- |
+| Eligible and already presented | Four easyJet capability projections; finite Nationwide financials and FCA/HMT/Lloyds projections | Preserve the existing owner's subject and period; no unnecessary new research approval. |
+| Eligible but not presented | Remaining frozen sector-composition values where Main omits detail | A presentation gap, not absence of eligible knowledge. The UX branch may address it using the existing owner. |
+| Researched, awaiting applicable admission/use | New ONS ratios, CMA, BoE, issuer and sector anchors in this pack | Keep candidate content out of the runtime until its existing source-use path supports the intended projection; no universal per-claim canonical approval bureaucracy. |
+| Missing, requires enrichment | Carrier route economics, complete Pay.UK fees, matched rivalry cohorts and company capability outcomes | Finite source/period/identity demand. A source link or conceptual map does not close it. |
+| Uncertain, stale or contradictory | BBC unread pages; barley/forestry/fishing gaps outside farming; old current-leadership assumptions; frozen GVA weight-note discrepancy | Preserve the original history and isolate only the affected claim. Do not replace it with an invented answer. |
+
+On withdrawal, prohibition, retraction or unresolved material contradiction, the affected factual premise and dependent calculation/Insight must be suppressed together in any future projection. Unrelated eligible research survives. The QA walks this **documentary dependency graph only**; existing runtime owners remain responsible for actual source revocation and ACL filtering. Core FLORA remains free of research questions, administration and completeness badges; these demands belong to this owner research pack.
