@@ -157,8 +157,7 @@ def stream_url(ctx,stream):
    detail=next((key for(s,key),topic in topics.items()if s==stream and subject and topic==subject),'')
   elif detail not in target:detail=''
  reading=ctx.reading if detail==ctx.detail or detail else 'facts'
- agenda=ctx.agenda if stream==ctx.stream else ''
- return url(ctx,stream=stream,detail=detail,agenda=agenda,reading=reading if agenda==ctx.agenda else 'facts')
+ return url(ctx,stream=stream,detail=detail,reading=reading)
 
 
 def current_data(ctx):

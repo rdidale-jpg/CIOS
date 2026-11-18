@@ -1,4 +1,5 @@
 """Bounded reading views over the existing FLORA presentation and source owners."""
+from dataclasses import replace
 from decimal import Decimal
 from html import escape as e
 
@@ -106,10 +107,26 @@ def provider_pulse(issues):
     return (
         '<aside class="reading-pulse"><p class="eyebrow">Historical development</p>'
         '<h2>Critical-provider oversight</h2><p>Announced 10 July 2026. Effective '
-        '<time datetime="2026-07-13">13 July 2026</time>. The designated legal entities '
+        '<time datetime="2026-07-13">13 July 2026</time>. Four named legal entities '
         'include Google Cloud EMEA Limited.</p></aside>'
     )
 
+
+
+def agenda_facts(row):
+    facts = row.facts
+    caveat = ""
+    if row.key == "cyber-resilience":
+        caveat = "Overall prevalence remained in line with the prior year. These are weighted, self-reported estimates."
+    if row.key == "service-recovery" and len(facts) == 3:
+        caveat = "Received and closed cases are different cohorts. The firm’s decisions are not independent adjudication."
+    if row.key == "service-landscape":
+        caveat = ("Received and closed cases are different cohorts, not a service-quality ranking or backlog measure."
+                  if len({fact.scope for fact in facts}) == 1 else
+                  "Separate legal-entity counts, not a service-quality ranking.")
+    if row.key == "funding-base":
+        facts = tuple(replace(fact, text=fact.text.replace("GBP", "£")) for fact in facts)
+    return "".join(p.render(fact) for fact in facts) + (f'<p class="material">{e(caveat)}</p>' if caveat else "")
 
 def nationwide_bridge(projection, basis):
     """Display equations from the Financial owner's validated signed recipes."""

@@ -146,9 +146,9 @@ def _issue_preview(issues,key):
     """Recompose one already resolved agenda view; never admit or infer facts."""
     row=next((row for row in issues if row.key==key),None)
     if row is None:return ''
-    statement=row.facts[0]if p.is_editorial() or key=='cyber-resilience'else row.conclusion
+    statements=row.facts if p.is_editorial() else (row.facts[0] if key=='cyber-resilience' else row.conclusion,)
     return ('<section class="editorial-issue" data-intelligence="'+key+'" aria-labelledby="preview-'+key+'">'
-        +'<h2 id="preview-'+key+'">'+e(row.title)+'</h2>'+p.render(statement)
+        +'<h2 id="preview-'+key+'">'+e(row.title)+'</h2>'+''.join(p.render(item) for item in statements)
         +('' if p.is_editorial() else agenda.basis(row))+'</section>')
 
 
@@ -195,8 +195,11 @@ def _financial(ctx,data,issues=()):
         body+='<figure class="chart"><figcaption>Customer-deposit stocks · Group</figcaption><input class="reference-control" id="deposit-reference" type="checkbox" checked><label class="reference-label" for="deposit-reference">2025 reference</label><div class="bars" role="group" aria-label="Group customer deposits in GBP billion">'
         for row,label in [(opening,'31 December 2025'),(stock,'30 September 2026')]:
             body+='<div class="bar-row"><span>'+label+'</span><div class="track" aria-hidden="true"><i style="--value:'+str(row.value/600*100)+'%"></i></div><strong>'+str(row.value)+'bn</strong></div>'
-        body+='</div><p class="chart-note">Reported · GBP billion, linear 0–600bn scale. Published balances; composition and transfer effects are not reconciled. No organic-flow claim.</p><details class="chart-data"><summary>Chart data</summary><table><caption>Group customer-deposit stocks · GBP billion</caption><tbody>'
-        body+=''.join('<tr><th scope="row">'+label+'</th><td>'+str(row.value)+'</td></tr>'for row,label in [(opening,'31 December 2025'),(stock,'30 September 2026')])+'</tbody></table></details></figure>'
+        body+='</div><p class="chart-note">Reported · GBP billion, linear 0–600bn scale. Published balances; composition and transfer effects are not reconciled. No organic-flow claim.</p>'
+        if not p.is_editorial():
+            body+='<details class="chart-data"><summary>Chart data</summary><table><caption>Group customer-deposit stocks · GBP billion</caption><tbody>'
+            body+=''.join('<tr><th scope="row">'+label+'</th><td>'+str(row.value)+'</td></tr>'for row,label in [(opening,'31 December 2025'),(stock,'30 September 2026')])+'</tbody></table></details>'
+        body+='</figure>'
     funding=next((row for row in issues if row.key=='funding-base'),None)
     if funding:
         movement=funding.facts[-1]
@@ -204,7 +207,7 @@ def _financial(ctx,data,issues=()):
             body+='<div data-intelligence="funding-base">'+p.render(movement)+'</div>'
     body+='<div class="analysis-grid">'
     for key,title in [('LBG-A2030-CIR','Efficiency ambition'),('LBG-A2030-INVESTMENT','Investment discipline')]:
-        if by[key]:body+='<section><h2>'+title+'</h2>'+p.render(by[key])+'</section>'
+        if by[key] and (key!='LBG-A2030-INVESTMENT' or not p.is_editorial()):body+='<section><h2>'+title+'</h2>'+p.render(by[key])+'</section>'
     body+='</div><p class="material">Deposits and statutory pretax profit do not establish an investment allocation or external supplier budget.</p>'
     return body+_basis([f for f in facts if f not in [by['LBG-A2030-CIR'],by['LBG-A2030-INVESTMENT']]])
 
@@ -248,7 +251,7 @@ def _overview(ctx,data,issues):
     if ctx.stream=='forces':return '<p class="eyebrow">Enterprise forces</p><h1>Strategy and existing capabilities</h1>'+_forces(ctx,data)
     supplier=v.detail_claims(ctx,{'id':'technology'},data)
     facts=[r for c in supplier if(r:=p.claim_view(data,c))is not None]+_facts(data,['LBG-Q326-DEPOSITS','LBG-A2030-PLATFORMS'])
-    return '<p class="eyebrow">Enterprise landscape</p><h1>An enterprise within a wider ecosystem</h1>'+''.join('<section class="editorial-issue">'+p.render(f)+'</section>'for f in facts)
+    return _financial(ctx,data,issues)+_issue_preview(issues,'service-recovery')+''.join('<section class="editorial-issue">'+p.render(f)+'</section>'for f in facts)
 
 
 def _research_render(ctx,headers=None,*,financial_run_id=''):
@@ -410,9 +413,9 @@ def render(ctx,headers=None,*,financial_run_id=''):
             body=_editorial_banking(ctx,data,issues,headers)
         elif ctx.agenda:
             row=next((r for r in issues if r.key==ctx.agenda),None)
-            body=('<section class="focus agenda-focus" id="agenda-insight" tabindex="-1" aria-label="Leadership insight"><a class="close close-insight" aria-label="Close Leadership Agenda" href="'+e(v.url(ctx,agenda=''),quote=True)+'">×</a><h1>'+e(row.title)+'</h1>'+p.render(row.facts[0])+'</section>') if row else _overview(ctx,data,issues)
+            body=('<section class="focus agenda-focus" id="agenda-insight" tabindex="-1" aria-label="Leadership insight"><a class="close close-insight" aria-label="Close Leadership Agenda" href="'+e(v.url(ctx,agenda=''),quote=True)+'">×</a><h1>'+e(row.title)+'</h1>'+reading.agenda_facts(row)+'</section>') if row else _overview(ctx,data,issues)
             if ctx.scope=='banking':
-                if ctx.stream=='forces' and ctx.agenda=='provider-oversight':body+=reading.provider_pulse(issues)
+                if ctx.agenda=='provider-oversight':body+=reading.provider_pulse(issues)
                 body+=_bank_picker(ctx,data,issues)
         elif ctx.detail:
             spot=next(s for s in v.geometry()[ctx.scope+'-'+ctx.stream]['spots']if s['id']==ctx.detail)
