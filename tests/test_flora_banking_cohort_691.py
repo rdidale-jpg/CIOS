@@ -46,7 +46,7 @@ def test_unsupported_contexts_are_rejected(query):
 
 def test_infrastructure_is_contextual_and_not_a_participant_register():
     html = main(v.render("/industries/banking", {"stream": ["inside"], "selected": ["boe"]}))
-    assert "Conceptual" in html and "bilateral dependencies are unverified" in html
+    assert "Conceptual" in html and "participant links remain unverified" in html
     assert "4 November 2026" not in html and "Pay.UK" not in html
     assert not public_request_target("/industries/banking?selected=boe&stream=inside&workspace=private")
 
@@ -66,3 +66,34 @@ def test_specialist_bank_picker_remains_available_at_cohort_landing():
     html = main(v.render("/industries/banking", {"selected": ["hsbc-uk"], "layer": ["regulators"]}))
     assert 'aria-label="Banking enterprises"' in html
     assert 'layer=regulators&amp;selected=santander-uk' in html
+
+
+def test_hsbc_perspectives_separate_model_activity_and_pressure():
+    query = {"selected": ["hsbc-uk"]}
+    landscape = main(v.render("/industries/banking", query))
+    inside = main(v.render("/industries/banking", {**query, "stream": ["inside"]}))
+    forces = main(v.render("/industries/banking", {**query, "stream": ["forces"], "reading": ["insight"]}))
+    assert landscape.index("How a UK bank inside a wider group earns") < landscape.index("Customer service evidence")
+    assert "Conceptual · activity and capability map" in inside
+    assert "79,323" in forces and "59.09%" not in forces
+    assert "Service workload" in forces and "Company response" in forces
+    assert forces.count("Compare rates on a matched customer base") == 1
+
+
+def test_starling_platform_is_separate_from_scoped_bank_evidence():
+    query = {"selected": ["starling"], "reading": ["insight"]}
+    html = main(v.render("/industries/banking", query))
+    assert "Group and Engine platform economics remain separate research" in html
+    assert "data-semantic-type=\"insight\"" not in html
+    assert "15,223" not in html
+
+
+def test_nationwide_group_and_society_views_remain_separate():
+    path = "/industries/banking"
+    query = {"selected": ["nationwide"]}
+    landscape = main(v.render(path, {**query, "reading": ["insight"]}))
+    inside = main(v.render(path, {**query, "stream": ["inside"]}))
+    assert "6,378 − 4,021 − 331 = 2,026" in landscape
+    assert "2,026 + 1 − 138 − 399 = 1,490" in landscape
+    assert "100,886" not in landscape and "100,886" in inside
+    assert "1 October 2025–31 March 2026" in inside and "6,378" not in inside

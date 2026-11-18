@@ -33,3 +33,7 @@ The Wave 3 [commercial review](../research-enrich-all-w3-689/Commercial-Quality.
 Next cohorts require reusable scoped issuer economics and outcome evidence for major-bank peers, eligible challenger/mutual economics and operating accountabilities, then exact CHAPS/RTGS identities and Pay.UK rights decisions, and provider-specific typed relationships where verified. Follow the [portfolio programme #688](https://github.com/rdidale-jpg/CIOS/issues/688). The #691 cohort remains intentionally partial.
 
 Rollback by reverting the bounded integration commit. This restores the previous presentations and selectors; no schema, evidence, identity, deployment or Pipeline restoration is required.
+
+## Visual review of the refinement
+
+In iPad landscape, NatWest begins with the funding-and-lending question; the three FCA measures sit together with a single scope line and limitation. In iPad portrait, HSBC UK Forces shows intake, an unverified response and the comparator needed to assess pressure. Starling's digital intake map is conceptual. Nationwide's Group bridge and Society complaint evidence remain distinct, and Bank of England Inside keeps policy evidence outside the settlement sequence. Shared Banking artwork and navigation remain. The visual depth reflects partial profiles; operating accountability, segment data and specific response programmes are still limited.
