@@ -1773,7 +1773,7 @@
   {
     "id": "AIR-SERVICE-ECON",
     "subject_key": "Rolls-Royce::CivilAerospace",
-    "statement": "Largeengine LTSA invoiced flyinghour receipts£3.4bn contrast with£86m netLTSA balancegrowth after RRSAs.",
+    "statement": "Civil Aerospace LTSA invoiced flyinghour receipts£3.4bn contrast with£86m netLTSA balancegrowth after RRSAs.",
     "semantic_type": "reported",
     "source_ids": [
       "RR"

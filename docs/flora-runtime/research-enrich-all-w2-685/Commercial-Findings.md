@@ -43,7 +43,7 @@ Heathrow's original nine-month release provides a concrete airport revenue compo
 
 Passenger traffic declined slightly while cargo tonnage increased on the same nine-month basis. This contradicts a single undifferentiated demand narrative. Airport passenger journeys are not unique people or easyJet's traffic. An airport seat factor is not an airline's load factor for an unrelated network.
 
-Rolls-Royce's global Civil Aerospace disclosure distinguishes £3.4bn of large-engine LTSA flying-hour receipts from £86m net LTSA balance growth after RRSAs. Receipts, deferred service balances and revenue have different timing. This is an engine-service economics example, **not an easyJet supplier relationship**.
+Rolls-Royce's global Civil Aerospace disclosure distinguishes £3.4bn of Civil Aerospace LTSA flying-hour receipts from £86m net LTSA balance growth after RRSAs. Receipts, deferred service balances and revenue have different timing. This is an engine-service economics example, **not an easyJet supplier relationship**.
 
 CAA charge-consultation requirements connect airport capacity/service and airline economics without supplying a particular carrier's tariff. Handling, airspace, leasing, distribution, package holidays, route yield and rotation utilisation remain separate mechanisms. NATS' official report announcement was located, but its financial tables were not acquired. Later easyJet financial/holidays tables remain index-only. The pack does not fill those gaps with Heathrow or RR figures.
 

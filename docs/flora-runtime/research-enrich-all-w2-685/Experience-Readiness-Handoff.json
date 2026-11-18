@@ -311,7 +311,12 @@
       "existing_eligible_premise_references": [
         "UK-RATE-NOV26",
         "UK-PRA-REPORT27",
-        "UK-FCA-REPORT27"
+        "UK-FCA-REPORT27",
+        "GM-CLAIM-SOCIAL",
+        "GM-CLAIM-SRS",
+        "GM-CLAIM-BILL",
+        "EAI-UK-CYBER26",
+        "EAI-UK-CYBER-1…9"
       ],
       "new_withheld_candidate_ids": [
         "UK-JOBS",
@@ -323,7 +328,7 @@
       ],
       "current_owner_permitted_readiness": {
         "Facts": "Partial",
-        "FLORA Insight": "Unavailable"
+        "FLORA Insight": "Partial"
       },
       "candidate_research_readiness": {
         "Facts": "Partial",
@@ -407,7 +412,33 @@
           "candidate_Facts": "Partial",
           "candidate_FLORA_Insight": "Unavailable"
         }
-      ]
+      ],
+      "existing_selected_view_assessments": [
+        {
+          "owner": "cios/applications/flora/leadership_agenda.py::agenda(uk)",
+          "selection": "public-value",
+          "period": "January2027 policy implementation; coveredUKcentralgovernmentcontracts",
+          "premises": [
+            "GM-CLAIM-SOCIAL",
+            "GM-CLAIM-SRS",
+            "GM-CLAIM-BILL"
+          ],
+          "Facts": "Partial",
+          "FLORA Insight": "Partial"
+        },
+        {
+          "owner": "cios/applications/flora/leadership_agenda.py::_cyber_estimate",
+          "selection": "cyber-resilience",
+          "period": "August–December2025 surveyfieldwork; preceding12months perinterview",
+          "premises": [
+            "EAI-UK-CYBER26",
+            "EAI-UK-CYBER-1…9"
+          ],
+          "Facts": "Partial",
+          "FLORA Insight": "Partial"
+        }
+      ],
+      "readiness_qualification": "Partial describes these bounded existingselections, not allrootperspectives/enterprises; preserve their availability. NewW2premises remainUnavailable forpublicuse."
     },
     {
       "requirement": "IND-VALUE",
@@ -631,7 +662,7 @@
       ],
       "current_owner_permitted_readiness": {
         "Facts": "Partial",
-        "FLORA Insight": "Unavailable"
+        "FLORA Insight": "Partial"
       },
       "candidate_research_readiness": {
         "Facts": "Partial",
@@ -667,7 +698,21 @@
           "candidate_Facts": "Partial",
           "candidate_FLORA_Insight": "Unavailable"
         }
-      ]
+      ],
+      "existing_selected_view_assessments": [
+        {
+          "owner": "cios/applications/flora/leadership_agenda.py::agenda(banking)",
+          "selection": "funding-economics",
+          "period": "MPCmeetingended4November2026",
+          "premises": [
+            "UK-RATE-NOV26",
+            "PR-BOE-NOV26"
+          ],
+          "Facts": "Partial",
+          "FLORA Insight": "Partial"
+        }
+      ],
+      "readiness_qualification": "Partial describes these bounded existingselections, not allrootperspectives/enterprises; preserve their availability. NewW2premises remainUnavailable forpublicuse."
     },
     {
       "requirement": "BNK-PAY",
@@ -811,7 +856,7 @@
       ],
       "current_owner_permitted_readiness": {
         "Facts": "Partial",
-        "FLORA Insight": "Unavailable"
+        "FLORA Insight": "Partial"
       },
       "candidate_research_readiness": {
         "Facts": "Partial",
@@ -859,7 +904,23 @@
           "candidate_Facts": "Partial",
           "candidate_FLORA_Insight": "Unavailable"
         }
-      ]
+      ],
+      "existing_selected_view_assessments": [
+        {
+          "owner": "cios/applications/flora/easyjet_capabilities.py::main / reading.interpretation",
+          "selection": "samecapability-boundinterpretation; notairlinerouteprofit",
+          "period": "Fleet/networkFY2025; Skywise2023; bookingchannelOctober2026 distinct",
+          "premises": [
+            "AV-FLEET",
+            "AV-NETWORK",
+            "AV-MRO",
+            "AV-CHAT"
+          ],
+          "Facts": "Partial",
+          "FLORA Insight": "Partial"
+        }
+      ],
+      "readiness_qualification": "Partial describes these bounded existingselections, not allrootperspectives/enterprises; preserve their availability. NewW2premises remainUnavailable forpublicuse."
     },
     {
       "requirement": "TECH-SUPPLY",
@@ -940,7 +1001,7 @@
       ],
       "current_owner_permitted_readiness": {
         "Facts": "Partial",
-        "FLORA Insight": "Unavailable"
+        "FLORA Insight": "Partial"
       },
       "candidate_research_readiness": {
         "Facts": "Partial",
@@ -1000,7 +1061,31 @@
           "candidate_Facts": "Partial",
           "candidate_FLORA_Insight": "Unavailable"
         }
-      ]
+      ],
+      "existing_selected_view_assessments": [
+        {
+          "owner": "cios/applications/flora/leadership_agenda.py::agenda(lloyds)",
+          "selection": "funding-base",
+          "period": "31December2025 to30September2026; Groupdepositstockdates",
+          "premises": [
+            "LBG-AR25-DEPOSITS",
+            "LBG-Q326-DEPOSITS"
+          ],
+          "Facts": "Partial",
+          "FLORA Insight": "Partial"
+        },
+        {
+          "owner": "cios/applications/flora/reading_views.py::nationwide_insight",
+          "selection": "NationwideGroup financialbasis andmember-rewardbridge",
+          "period": "GroupFY2026 ended31March2026",
+          "premises": [
+            "RUD1-NATIONWIDE-FY26"
+          ],
+          "Facts": "Partial",
+          "FLORA Insight": "Partial"
+        }
+      ],
+      "readiness_qualification": "Partial describes these bounded existingselections, not allrootperspectives/enterprises; preserve their availability. NewW2premises remainUnavailable forpublicuse."
     },
     {
       "requirement": "ENT-CAP",
@@ -1025,7 +1110,7 @@
       ],
       "current_owner_permitted_readiness": {
         "Facts": "Partial",
-        "FLORA Insight": "Unavailable"
+        "FLORA Insight": "Partial"
       },
       "candidate_research_readiness": {
         "Facts": "Partial",
@@ -1061,7 +1146,23 @@
           "candidate_Facts": "Partial",
           "candidate_FLORA_Insight": "Unavailable"
         }
-      ]
+      ],
+      "existing_selected_view_assessments": [
+        {
+          "owner": "cios/applications/flora/easyjet_capabilities.py::main / reading.interpretation",
+          "selection": "fleet-operations / network-planning / customer-service; individualanchorperiods",
+          "period": "Fleet/networkFY2025; Skywise2023; bookingchannelOctober2026 distinct",
+          "premises": [
+            "AV-FLEET",
+            "AV-NETWORK",
+            "AV-MRO",
+            "AV-CHAT"
+          ],
+          "Facts": "Partial",
+          "FLORA Insight": "Partial"
+        }
+      ],
+      "readiness_qualification": "Partial describes these bounded existingselections, not allrootperspectives/enterprises; preserve their availability. NewW2premises remainUnavailable forpublicuse."
     },
     {
       "requirement": "ENT-EXPOSURE",

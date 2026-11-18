@@ -15,6 +15,8 @@ The merged product contract at `c56bd74f130c4d855baf522ba8ba99fe87317fb1` is the
 
 The 16-key [Experience-Readiness-Handoff](Experience-Readiness-Handoff.json) pins the merged CSV by SHA-256 `7b50880fef675ebb3c6ee8e76964cfa3e036643ee2eeaf426616100c83f60ce7`. Each new premise has its own subject, primary perspective and reporting period assessment. All new public Facts/Insight assessments are Unavailable until the existing Source owner supports that exact projection; candidate research can still be Partial. Aggregate requirement summaries are explicitly bounded and are not readiness assertions for every constituent enterprise.
 
+Existing selected Insights remain **Partial and available**, rather than being suppressed because a whole root is incomplete: UK `public-value` and `cyber-resilience`, Banking `funding-economics`, Lloyds `funding-base`, Nationwide's FY2026 Group/reward bridge, and easyJet's same-capability bounded interpretation. Their exact scopes, periods and owner references appear separately in the handoff. None establishes full root/portfolio readiness or admission for a new Wave 2 premise.
+
 Existing permitted premise references remain owner-qualified, not canonical IDs inferred from local names:
 
 - UK composition: `economy.json` sources `ONS-BB-2026`, `ONS-GDP-2026-09`, `ONS-SIC`, `ONS-SIC-2007`, with districts `uk-sic07-a` through `-t`. All districts have a bounded existing eligible baseline; current Main shows only C/J/K/Q share slices. A route to Aviation does not fill section H.

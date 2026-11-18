@@ -61,3 +61,11 @@ def test_estimate_cannot_become_actual_through_classification():
 def test_self_consistent_wrong_source_denominator_is_rejected():
     row=copy.deepcopy(q.read('Financial-and-Scope-QA.json')[0]);row['inputs'][1]='11448'
     with pytest.raises(AssertionError):q.calculation(row,row)
+
+
+def test_existing_bounded_insights_survive_incomplete_root_assessment():
+    rows={r['requirement']:r for r in q.read('Experience-Readiness-Handoff.json')['rows']}
+    for key in ['UK-PESTLE','BNK-FUND','ENT-ECON','ENT-CAP','AIR-ROTATE']:
+        assert rows[key]['current_owner_permitted_readiness']['FLORA Insight']=='Partial'
+        assert rows[key]['existing_selected_view_assessments']
+        assert all(s['FLORA_Insight']=='Unavailable' for s in rows[key]['proposal_scope_assessments'])

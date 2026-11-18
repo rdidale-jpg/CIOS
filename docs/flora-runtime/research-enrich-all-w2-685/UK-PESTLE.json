@@ -7,10 +7,14 @@
     "alternative": "A published commitment may substitute for existing training or remain undelivered.",
     "next_evidence_demand": "Sector-specific funded actions, signatory entities and measured entryjobs; not a national hiring opportunity.",
     "target": "UK/Forces; Facts or same-subject FLORA Insight",
-    "current_public_facts": "Unavailable",
-    "current_public_insight": "Unavailable",
-    "reason": "Existing frozen GDP/force facts provide an economic anchor only; these six new scoped conditions have not been publicly mapped",
-    "not_automatic_enterprise_applicability": true
+    "current_public_facts": "Partial",
+    "current_public_insight": "Partial",
+    "reason": "Existing bounded public GDP/social-value/cyber/rate context for thisdimension remains available on its own scope/date. This new condition is not admitted; other selections/root gaps remain.",
+    "not_automatic_enterprise_applicability": true,
+    "new_condition_public_readiness": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    }
   },
   {
     "dimension": "Economic",
@@ -21,9 +25,13 @@
     "next_evidence_demand": "Exactdebtmaturity, tariff/hedge exposure, productcohort and realised cash/price data.",
     "target": "UK/Forces; Facts or same-subject FLORA Insight",
     "current_public_facts": "Partial",
-    "current_public_insight": "Unavailable",
-    "reason": "Existing frozen GDP/force facts provide an economic anchor only; these six new scoped conditions have not been publicly mapped",
-    "not_automatic_enterprise_applicability": true
+    "current_public_insight": "Partial",
+    "reason": "Existing bounded public GDP/social-value/cyber/rate context for thisdimension remains available on its own scope/date. This new condition is not admitted; other selections/root gaps remain.",
+    "not_automatic_enterprise_applicability": true,
+    "new_condition_public_readiness": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    }
   },
   {
     "dimension": "Social",
@@ -33,10 +41,14 @@
     "alternative": "Surveyrotation/composition or a different employment mix may explain the movement.",
     "next_evidence_demand": "Occupation/region/industry and labourstatus matchedseries; no invented enterprise vacancy.",
     "target": "UK/Forces; Facts or same-subject FLORA Insight",
-    "current_public_facts": "Unavailable",
-    "current_public_insight": "Unavailable",
-    "reason": "Existing frozen GDP/force facts provide an economic anchor only; these six new scoped conditions have not been publicly mapped",
-    "not_automatic_enterprise_applicability": true
+    "current_public_facts": "Partial",
+    "current_public_insight": "Partial",
+    "reason": "Existing bounded public GDP/social-value/cyber/rate context for thisdimension remains available on its own scope/date. This new condition is not admitted; other selections/root gaps remain.",
+    "not_automatic_enterprise_applicability": true,
+    "new_condition_public_readiness": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    }
   },
   {
     "dimension": "Technological",
@@ -46,10 +58,14 @@
     "alternative": "Incumbent integration/quality can create real value and providers are taking steps toward choice.",
     "next_evidence_demand": "Actualapplication/service/licence terms, migrationcosts and measuredalternatives byenterprise.",
     "target": "UK/Forces; Facts or same-subject FLORA Insight",
-    "current_public_facts": "Unavailable",
-    "current_public_insight": "Unavailable",
-    "reason": "Existing frozen GDP/force facts provide an economic anchor only; these six new scoped conditions have not been publicly mapped",
-    "not_automatic_enterprise_applicability": true
+    "current_public_facts": "Partial",
+    "current_public_insight": "Partial",
+    "reason": "Existing bounded public GDP/social-value/cyber/rate context for thisdimension remains available on its own scope/date. This new condition is not admitted; other selections/root gaps remain.",
+    "not_automatic_enterprise_applicability": true,
+    "new_condition_public_readiness": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    }
   },
   {
     "dimension": "Legal",
@@ -62,7 +78,11 @@
     "current_public_facts": "Unavailable",
     "current_public_insight": "Unavailable",
     "reason": "Existing frozen GDP/force facts provide an economic anchor only; these six new scoped conditions have not been publicly mapped",
-    "not_automatic_enterprise_applicability": true
+    "not_automatic_enterprise_applicability": true,
+    "new_condition_public_readiness": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    }
   },
   {
     "dimension": "Environmental",
@@ -75,6 +95,10 @@
     "current_public_facts": "Unavailable",
     "current_public_insight": "Unavailable",
     "reason": "Existing frozen GDP/force facts provide an economic anchor only; these six new scoped conditions have not been publicly mapped",
-    "not_automatic_enterprise_applicability": true
+    "not_automatic_enterprise_applicability": true,
+    "new_condition_public_readiness": {
+      "Facts": "Unavailable",
+      "FLORA Insight": "Unavailable"
+    }
   }
 ]
