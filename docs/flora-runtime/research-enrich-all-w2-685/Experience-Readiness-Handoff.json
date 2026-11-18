@@ -420,8 +420,7 @@
           "period": "January2027 policy implementation; coveredUKcentralgovernmentcontracts",
           "premises": [
             "GM-CLAIM-SOCIAL",
-            "GM-CLAIM-SRS",
-            "GM-CLAIM-BILL"
+            "GM-SOCIAL"
           ],
           "Facts": "Partial",
           "FLORA Insight": "Partial"
