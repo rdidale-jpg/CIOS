@@ -17,7 +17,7 @@ def test_enterprise_roots_observe_three_different_questions(path):
         assert 'data-semantic-type="insight"' not in facts
         if path == "/enterprises/lloyds":
             expected = {"inside": "Conceptual operating mechanism",
-                        "landscape": "How spread and credit risk can change earnings",
+                        "landscape": "What if the interest gap narrows?",
                         "forces": "If funding costs rise faster than asset yields"}
             assert expected[stream] in insight
             assert expected[stream] not in facts
@@ -37,7 +37,10 @@ def test_enterprise_roots_observe_three_different_questions(path):
     assert "Disclosed response" in roots["forces"]
     assert "118,762" not in roots["inside"]
     if path == "/enterprises/lloyds":
-        assert 'data-intelligence="service-recovery"' in roots["landscape"]
+        assert 'agenda=service-recovery#agenda-insight' in roots["landscape"]
+        assert "118,762" not in roots["landscape"]
+        assert "Conceptual banking model" in roots["landscape"]
+        assert "What Lloyds Group reported" in roots["landscape"]
         assert "£502.8bn" in roots["landscape"]
         assert "£502.8bn" not in roots["inside"]
 

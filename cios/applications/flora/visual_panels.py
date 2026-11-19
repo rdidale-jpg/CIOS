@@ -448,8 +448,6 @@ def render(ctx,headers=None,*,financial_run_id=''):
                 body=recovery.inside(ctx,data)
             elif ctx.stream=='landscape':
                 body=recovery.landscape(ctx,data,issues)
-                if ctx.reading=='facts':
-                    body+=_issue_preview(issues,'service-recovery')
             else:
                 body=recovery.forces(ctx,data)
         elif ctx.scope=='uk' and ctx.stream=='forces' and not ctx.agenda:

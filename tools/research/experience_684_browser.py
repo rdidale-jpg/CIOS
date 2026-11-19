@@ -21,7 +21,7 @@ SCENES = (
     ("uk-forces", "/?stream=forces&detail=political", "Political conditions"),
     ("uk-social", "/?stream=forces&detail=social", "Social conditions"),
     ("banking-forces", "/industries/banking?stream=forces&detail=buyer-power", "Buyer power"),
-    ("lloyds-landscape", "/enterprises/lloyds", "Customer funding and earnings"),
+    ("lloyds-landscape", "/enterprises/lloyds", "How does Lloyds make money?"),
     ("lloyds-inside", "/enterprises/lloyds?stream=inside", "Credit and customer service"),
     ("lloyds-forces", "/enterprises/lloyds?stream=forces", "What can put pressure on earnings?"),
     ("easyjet-landscape", "/enterprises/easyjet/preview", "easyJet’s business and network"),

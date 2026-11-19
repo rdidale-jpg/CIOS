@@ -61,40 +61,60 @@ def _amount(statement, label, date):
 def landscape(ctx, data, issues):
     claims = _claims(data, MEASURES)
     stock, reference, profit = (_measure(claims.get(key), *basis) for key, basis in MEASURES.items())
-    funding = _amount(stock, "customer deposits", "30 September 2026 · balance-sheet stock")
-    if reference:
-        funding += _amount(reference, "customer deposits", "31 December 2025 · balance-sheet stock")
-    earnings = _amount(profit, "statutory pretax profit", "Nine months to 30 September 2026 · earnings flow")
     insight = ctx.reading == "insight"
     funding_context = next((issue.facts[-1] for issue in issues if issue.key == "funding-base"), None)
     comparison = ""
     if (stock and reference and funding_context and funding_context.semantic_type == "calculated"
             and p.eligible(funding_context)):
-        comparison = ('<div class="lv-separate" data-intelligence="funding-base">'
+        comparison = ('<div class="lv-proof-comparison" data-intelligence="funding-base">'
                       + p.render(funding_context, compact=True) + '</div>')
+
+    economics = escape(v.url(ctx, stream="inside", detail="economics", reading=ctx.reading), quote=True)
+    service = ""
+    if any(issue.key == "service-recovery" for issue in issues):
+        service_url = escape(v.url(ctx, agenda="service-recovery"), quote=True)
+        service = f'<a href="{service_url}#agenda-insight">Customer service evidence · Lloyds Bank plc</a>'
+
     return (
-        '<section class="lv lv-landscape"><p class="eyebrow">Lloyds Banking Group plc · consolidated Group</p>'
-        '<h1>Customer funding and earnings</h1>'
-        '<figure class="lv-system"><figcaption>Reported measures and conceptual economics</figcaption>'
-        '<div class="lv-balance"><div><h2>Funding</h2>' + funding
-        + '</div><p class="lv-link">can fund</p><div><h2>Earning assets</h2>'
-        '<p>Conceptual · Loans and other earning assets.</p></div></div>'
-        '<div class="lv-income"><h2>What shapes earnings</h2>'
-        '<ul><li>Interest and other income</li><li>Funding and operating costs</li>'
-        '<li>Credit impairments</li></ul>'
-        '<p>Conceptual drivers. Capital requirements and liquidity constrain deployment.</p></div>'
-        + ('<div class="lv-alternatives" aria-label="Alternative economic mechanisms">'
-           '<h2>How spread and credit risk can change earnings</h2>'
-           '<dl><div><dt>Asset yields reprice first</dt><dd>The spread can widen if funding costs lag.</dd></div>'
-           '<div><dt>Funding reprices first</dt><dd>Higher deposit rates can narrow the spread if asset yields lag.</dd></div>'
-           '<div><dt>Credit losses increase</dt><dd>Impairments can reduce profit and retained capital. Less capital headroom can constrain lending.</dd></div></dl>'
-           '<p>Conceptual alternatives. Group totals do not show which path occurred. Compare yields, funding costs and impairments.</p></div>'
+        '<section class="lv lv-landscape lv-proof">'
+        '<p class="eyebrow">Lloyds Banking Group plc · consolidated Group</p>'
+        '<h1>How does Lloyds make money?</h1>'
+        '<figure class="lv-proof-map">'
+        '<figcaption>Conceptual banking model</figcaption>'
+        '<ol><li><a href="#lv-funding"><span>Deposits help fund</span><strong>Lending</strong></a></li>'
+        '<li><a href="#lv-interest"><span>Borrowers pay</span><strong>Interest</strong></a></li>'
+        '<li><a href="#lv-costs"><span>What remains after costs and losses</span>'
+        '<strong>Profit</strong></a></li></ol>'
+        '<p class="lv-proof-caption">Banks can earn more interest on lending than they pay for funding. '
+        'Fees and other income also contribute.</p></figure>'
+        + ('<div class="lv-proof-lens"><h2>What if the interest gap narrows?</h2>'
+           '<p>If the bank pays more for deposits before it can charge more on loans, it keeps less interest. '
+           'If loan rates rise first, the gap can widen. The Group totals cannot tell us which happened.</p></div>'
            if insight else '')
-        + '<div class="lv-outcome"><h2>Reported Group outcome</h2>' + earnings + '</div></figure>'
-        '<p class="lv-scope">Published stocks and earnings cover different measurement bases. Conceptual flows do not reconcile the reported profit.</p>'
-        + comparison
-        + f'<a href="{escape(v.url(ctx, detail="economics", stream="inside", reading=ctx.reading), quote=True)}#visual-content">Financial analysis and reporting basis</a>'
-        + '</section>'
+        + '<section class="lv-proof-reported" aria-labelledby="lv-group-measures">'
+        '<h2 id="lv-group-measures">What Lloyds Group reported</h2><div>'
+        + _amount(stock, "customer deposits", "30 September 2026 · balance at that date")
+        + _amount(profit, "statutory pretax profit", "Nine months to 30 September 2026 · earned over the period")
+        + '</div><p>These figures show the size of the deposit base and total Group profit. '
+        'They give no breakdown of which activities earned that profit.</p></section>'
+        '<section class="lv-proof-explore" aria-labelledby="lv-explore"><h2 id="lv-explore">Explore what drives earnings</h2>'
+        '<div id="lv-funding" tabindex="-1"><h3>Funding · what the bank pays</h3>'
+        + ('<p>If customers move their money into accounts that pay more, funding can cost more even if total deposits stay flat.</p>'
+           if insight else '<p>Customer deposits are one source of funding. The balance alone says little about what the bank pays for it.</p>')
+        + '</div><div id="lv-interest" tabindex="-1"><h3>Lending · what borrowers pay</h3>'
+        + ('<p>Fixed-rate loans can keep earning the same interest while deposit costs change. '
+           'How long each rate stays fixed can matter as much as the headline rate.</p>' if insight else
+           '<p>Loan interest depends on balances and the rates borrowers pay. These Group figures give no lending yield.</p>')
+        + '</div><div id="lv-costs" tabindex="-1"><h3>Costs, credit losses and capital</h3>'
+        '<p>Running the bank costs money. Expected losses on loans reduce profit. '
+        'Capital helps absorb losses and limits how much risk a bank can take.</p>'
+        + ('<p>Higher expected losses can eat into the benefit of wider interest margins. '
+           'Compare interest earned and paid, loan losses and capital together.</p>' if insight else '')
+        + '</div></section><section class="lv-proof-evidence" aria-labelledby="lv-investigate">'
+        '<h2 id="lv-investigate">Investigate the figures</h2>'
+        + (_amount(reference, "customer deposits", "31 December 2025 · balance at that date") if reference else '')
+        + comparison + f'<a href="{economics}#visual-content">Group financial analysis and reporting basis</a>'
+        + service + '</section></section>'
     )
 
 
