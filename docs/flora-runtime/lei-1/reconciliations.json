@@ -1,0 +1,202 @@
+{
+  "status": "research only; no source or canonical acceptance",
+  "reused_wave3": [
+    "lbg-income",
+    "lbg-profit"
+  ],
+  "checks": [
+    {
+      "id": "q3-net-income-movement",
+      "locator": "S3 p. 2",
+      "subject": "LBG::Group",
+      "period": "9M to 30 Sep 2026 vs 9M to 30 Sep 2025",
+      "basis": "underlying GBP million flow",
+      "operation": "sum",
+      "inputs": [
+        978,
+        470,
+        -186
+      ],
+      "expected": 1262,
+      "interpretation": "Changes in net interest, other income and lease depreciation"
+    },
+    {
+      "id": "q3-statutory-profit-movement",
+      "locator": "S3 pp. 2, 5",
+      "subject": "LBG::Group",
+      "period": "9M to 30 Sep 2026 vs 9M to 30 Sep 2025",
+      "basis": "GBP million flow",
+      "operation": "sum",
+      "inputs": [
+        1262,
+        851,
+        -70,
+        -312,
+        -35,
+        251
+      ],
+      "expected": 1947,
+      "interpretation": "Signed delta across net income, remediation, running costs, impairment, restructuring and volatility"
+    },
+    {
+      "id": "q3-statutory-profit-direct",
+      "locator": "S3 p. 5",
+      "subject": "LBG::Group",
+      "period": "9M to 30 Sep 2026 vs 9M to 30 Sep 2025",
+      "basis": "statutory GBP million flow",
+      "operation": "sum",
+      "inputs": [
+        6625,
+        -4678
+      ],
+      "expected": 1947,
+      "interpretation": "Independent statutory comparator"
+    },
+    {
+      "id": "q3-banking-numerator",
+      "locator": "S3 p. 15",
+      "subject": "LBG::Group banking perimeter",
+      "period": "9M to 30 Sep 2026",
+      "basis": "underlying GBP million flow",
+      "operation": "sum",
+      "inputs": [
+        11084,
+        386
+      ],
+      "expected": 11470,
+      "interpretation": "Remove non-banking net interest expense from Group underlying NII"
+    },
+    {
+      "id": "group-deposit-balance-difference",
+      "locator": "S3 p. 5",
+      "subject": "LBG::Group",
+      "period": "30 Sep 2026 vs 31 Dec 2025",
+      "basis": "statutory GBP million stock difference",
+      "operation": "sum",
+      "inputs": [
+        502777,
+        -496457
+      ],
+      "expected": 6320,
+      "interpretation": "Rounded Group headline 6.3bn; no implication for adjusted flow"
+    },
+    {
+      "id": "half-year-net-fees",
+      "locator": "S2 p. 64 Note 4",
+      "subject": "LBG::Group",
+      "period": "H1 to 30 Jun 2026",
+      "basis": "statutory GBP million flow",
+      "operation": "sum",
+      "inputs": [
+        1752,
+        -750
+      ],
+      "expected": 1002,
+      "interpretation": "Fee income less commission expense"
+    },
+    {
+      "id": "half-year-segment-tie",
+      "locator": "S2 p. 21",
+      "subject": "LBG::Group operating segments plus central",
+      "period": "H1 to 30 Jun 2026",
+      "basis": "underlying GBP million flow",
+      "operation": "sum",
+      "inputs": [
+        2256,
+        1425,
+        245,
+        289
+      ],
+      "expected": 4215,
+      "interpretation": "Retail, Commercial, Insurance Pensions and Investments, Central"
+    },
+    {
+      "id": "half-year-statutory-adjustments",
+      "locator": "S2 p. 2",
+      "subject": "LBG::Group",
+      "period": "H1 to 30 Jun 2026",
+      "basis": "GBP million flow",
+      "operation": "sum",
+      "inputs": [
+        4293,
+        -4215
+      ],
+      "expected": 78,
+      "interpretation": "Group statutory vs underlying, no segment allocation"
+    },
+    {
+      "id": "capital-generation",
+      "locator": "S3 p. 11",
+      "subject": "LBG::Group prudential",
+      "period": "9M to 30 Sep 2026",
+      "basis": "basis points of capital ratio movement",
+      "operation": "sum",
+      "inputs": [
+        188,
+        4,
+        -68,
+        29
+      ],
+      "expected": 153,
+      "interpretation": "Banking build, insurance dividend, RWA and other movements"
+    },
+    {
+      "id": "capital-pro-forma-movement",
+      "locator": "S3 p. 11",
+      "subject": "LBG::Group prudential",
+      "period": "31 Dec 2025 pro forma to 30 Sep 2026",
+      "basis": "basis points of capital ratio movement",
+      "operation": "sum",
+      "inputs": [
+        153,
+        -88,
+        -44,
+        -7
+      ],
+      "expected": 14,
+      "interpretation": "Generation net of dividends, buybacks and Curve; reported ratios rounded"
+    },
+    {
+      "id": "december-to-september-rwa",
+      "locator": "S3 p. 2",
+      "subject": "LBG::Group prudential",
+      "period": "30 Sep 2026 vs 31 Dec 2025",
+      "basis": "GBP billion stock difference",
+      "operation": "sum",
+      "inputs": [
+        "247.4",
+        "-235.5"
+      ],
+      "expected": "11.9",
+      "interpretation": "Non-cash risk-weighted exposure change"
+    },
+    {
+      "id": "fy26-nii-threshold",
+      "locator": "S3 pp. 1–2",
+      "subject": "LBG::Group",
+      "period": "FY to 31 Dec 2026 target less 9M actual",
+      "basis": "underlying GBP million flow",
+      "operation": "sum",
+      "inputs": [
+        14900,
+        -11084
+      ],
+      "expected": 3816,
+      "interpretation": "Q4 must exceed this threshold; no forecast"
+    },
+    {
+      "id": "fy26-cost-threshold",
+      "locator": "S3 pp. 1–2",
+      "subject": "LBG::Group",
+      "period": "FY to 31 Dec 2026 target less 9M actual",
+      "basis": "underlying GBP million flow",
+      "operation": "sum",
+      "inputs": [
+        9900,
+        -7246
+      ],
+      "expected": 2654,
+      "interpretation": "Q4 expense must remain below this threshold; no forecast"
+    }
+  ]
+}
