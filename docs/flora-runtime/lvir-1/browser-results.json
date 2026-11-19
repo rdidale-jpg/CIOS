@@ -451,13 +451,16 @@
     "/industries/banking?selected=nationwide",
     "/industries/banking?selected=starling&stream=inside",
     "/industries/aviation",
-    "/enterprises/easyjet",
-    "/industries/technology",
-    "/pipeline"
+    "/industries/technology"
   ],
   "reading_mode_history": "pass",
   "zoom": "pass",
   "print_main": "pass",
   "no_javascript": "pass",
-  "keyboard_focus_and_emulated_touch": "pass"
+  "keyboard_focus_and_emulated_touch": "pass",
+  "additional_adjacent_guest_parity": {
+    "/enterprises/easyjet/preview": 200,
+    "/industries/technology/experience": 200,
+    "/flora/sales/pipeline": 403
+  }
 }
