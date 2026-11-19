@@ -60,12 +60,8 @@ def test_three_regions_unchanged_exploration_and_singular_agenda_keys(scope,stre
 ])
 def test_four_bounded_additions_in_main_and_current_agenda(route,key,tokens):
  html=research_render(route,{})
- if key=='service-recovery':
-  assert 'agenda=service-recovery#agenda-insight'in html
-  assert '118,762'not in html.split('<main',1)[1] and '118,861'not in html.split('<main',1)[1]
- else:
-  assert 'data-intelligence="'+key+'"'in html
-  for token in tokens:assert token in html
+ assert 'data-intelligence="'+key+'"'in html
+ for token in tokens:assert token in html
  detail=research_render(route,{'agenda':[key]})
  assert 'id="agenda-insight"'in detail
  assert all(token in detail for token in tokens)
@@ -79,8 +75,7 @@ def test_denied_release_removes_inline_title_links_and_dependent_numbers(key,mut
   row=next(r for r in issues if r.key==agenda_key)
   assert len(row.facts)==1 and '118,762'in row.conclusion.text
   assert row.title=='Complaint handling is a substantial service activity'
-  assert 'agenda=service-recovery#agenda-insight'in html
-  assert '118,762'not in html.split('<main',1)[1]
+  assert html.count('id="preview-service-recovery"')==1
   assert '66.12%'not in html and '118,861'not in html
  else:
   assert agenda_key not in [r.key for r in issues]
