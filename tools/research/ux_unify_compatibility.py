@@ -49,6 +49,8 @@ LVIR = {
 
 def predecessor(root, path):
     current = (Path(root) / path).read_bytes()
+    from tools.research.public_financial_compatibility import predecessor as public_predecessor
+    current = public_predecessor(root, path, current)
     if path in LVIR and sha256(current).hexdigest() == LVIR[path]:
         current = subprocess.check_output(["git", "show", f"{LVIR_BASE}:{path}"], cwd=root)
     if path in COHORT and sha256(current).hexdigest() == COHORT[path]:

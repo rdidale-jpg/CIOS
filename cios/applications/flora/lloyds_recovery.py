@@ -94,6 +94,17 @@ def landscape(ctx, data, issues):
         for anchor, (key, (title, summary, *_)) in zip(anchors, LANDSCAPE_COMPONENTS.items())
     )
 
+    if component == "lending-income":
+        from .financial_intelligence.candidate_analytics import public_factual_html
+        factual = public_factual_html(insight=analysis)
+        if factual:
+            simple = ''.join('<a href="'+escape(v.url(ctx,detail=key,reading=ctx.reading),quote=True)+'"'
+                +(' aria-current="page"' if key==component else '')+'>'+escape(values[0])+'</a>'
+                for key,values in LANDSCAPE_COMPONENTS.items())
+            return ('<section class="lv lv-landscape lv-proof"><p class="eyebrow">Lloyds Banking Group</p>'
+                    '<h1>How does Lloyds make money?</h1><nav class="bank-picker" aria-label="Economic components">'
+                    +simple+'</nav>'+factual+'</section>')
+
     funding_context = next((issue.facts[-1] for issue in issues if issue.key == "funding-base"), None)
     comparison = ""
     if (stock and reference and funding_context and funding_context.semantic_type == "calculated"

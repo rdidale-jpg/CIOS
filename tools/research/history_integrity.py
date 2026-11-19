@@ -143,6 +143,16 @@ def verify_history(root):
     files=list((root/'enterprise-knowledge').rglob('*'))
     assert not any(p.is_symlink() for p in files), 'Research symlink is not a reviewed source'
     actual={str(p.relative_to(root)):p.read_bytes() for p in files if p.is_file()}
+    # One explicitly commissioned, inactive factual case is an additive cut,
+    # not a revision of the 178-file historical corpus or a source-use grant.
+    # Unknown additions still reach the exact comparator and fail unchanged.
+    public_path='enterprise-knowledge/banking/research-model/source-snapshots/PFI-Lloyds-Q326.json'
+    if public_path in actual:
+        record=json.loads((root/'docs/flora-runtime/public-financial-intelligence/Source-Addition.json').read_text())
+        assert record['path']==public_path and record['public_activation'] is False
+        assert hashlib.sha256(actual[public_path]).hexdigest()==record['sha256'], 'Unknown public factual candidate cut'
+        assert public_path not in expected
+        actual.pop(public_path)
     compare_history(expected,actual)
     return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS)-len(EAI1_CANDIDATE_ADDITIONS)-len(BIE2_CANDIDATE_ADDITIONS)-len(BIE3_CANDIDATE_ADDITIONS)-len(F1_CANDIDATE_ADDITIONS)-len(RUD1_ADDITIONS),
             'depth_additions':len(DEPTH_ADDITIONS),'macro_additions':len(MACRO_ADDITIONS),
@@ -152,4 +162,6 @@ def verify_history(root):
             'bie3_presentation_candidate_additions':len(BIE3_CANDIDATE_ADDITIONS),
             'f1_analytical_candidate_additions':len(F1_CANDIDATE_ADDITIONS),
             'rud1_working_research_additions':len(RUD1_ADDITIONS),
+            # Preserve this API's historical-cut report. The additional exact
+            # candidate is checked above, not relabelled historical research.
             'total':len(expected),'old_review_records_retained':True}
