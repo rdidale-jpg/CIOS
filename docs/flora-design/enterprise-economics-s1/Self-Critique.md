@@ -1,0 +1,19 @@
+# Self-critique and unresolved visual decisions
+
+This is the implementing agent's self-critique. No independent reviewer or owner acceptance is claimed.
+
+**A is the best starting point.** It answers the executive question quickly, uses the existing Landscape subject grammar and turns three economic stages into useful interactions. Banking and aviation have different mechanisms and imagery while sharing typography, modes and ownership. Its main risk is becoming another financial summary beside the existing analyst. The implementation scope therefore explicitly incorporates Lending & income and composes existing Financial outputs; it does not add another independent financial route or data store.
+
+**B is strongest for operational investigation, not the default economic overview.** The activity spine makes the work comprehensible and retains a selected capability. It also exposes the largest evidence deficiency: actual capability costs, benefits, accountable owners and causal effects are not established by Group accounts. The prototype labels the whole operating structure illustrative and separates Group financial context. More detailed B implementation should wait for genuine existing-owner relationships rather than assign percentages to an attractive diagram.
+
+**C has the most immediate visual theatre and the most design debt.** The local overlay changes no global navigation, yet adds visibility state, annotation overlap and touch/focus complexity. The orbit is explicitly unweighted and conceptual, avoiding fictional suppliers or money flows. It can look like a topology despite the label; a production overlay would need stronger relationship evidence. Portrait/mobile legibility may be less robust than A. It should remain an alternative for owner review rather than be quietly combined into A.
+
+The banking prototype deliberately sacrifices numeric richness to preserve the real §2/§5 restrictions. It proves a visual grammar, not a complete Lloyds financial analysis. Missing values are not replaced by guessed examples. easyJet shows genuine historical Group figures and an existing-recipe growth calculation; it does not demonstrate a public runtime source grant, a complete cost/cash model or current trading. These bounds are inspectable and remain owner decisions.
+
+The Left art is an unchanged accepted/conceptual asset, not actual company premises or a verified legal organisation. New financial diagrams are simple vector/HTML views rather than replacement building art. The header preserves country identity and separate perspective/reading choices. Its compact Offers/Pipeline words are layout references outside this design's interactive scope; they cannot open private controls.
+
+Source inspection remains one optional interaction, with focus/escape support. Concise readable claims retain material period, Group/APM and allocation caveats. The owner should assess whether the 8.56% growth annotation and two financial measures are enough; extra metrics should be admitted only when they add meaning, not fill space.
+
+Browser evidence is Chromium viewport emulation with keyboard/touch checks. It is not physical iPad/Safari or human assistive-technology certification. No user testing, comprehension score, conversion improvement or commercial outcome is claimed. The browser checks guard mechanics and visual reflow; they do not establish beauty. Owner visual acceptance is still required.
+
+Review decisions: choose one option; accept the Landscape/hotspot mapping; confirm portrait collapse versus persistent narrow Left; assess the airline accent against the common forest/ivory/gold palette; keep the optional evidence affordance readable but quiet. **Do not authorise runtime implementation, merge, Source activation or deployment merely because the design tests pass.**
