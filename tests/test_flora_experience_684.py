@@ -15,16 +15,24 @@ def test_enterprise_roots_observe_three_different_questions(path):
         insight = main(v.render(path, {**query, "reading": ["insight"]}))
         assert 'aria-current=page>Facts' in facts
         assert 'data-semantic-type="insight"' not in facts
-        if path == "/enterprises/lloyds" and stream == "inside":
-            assert "Conceptual operating mechanism" in insight
+        if path == "/enterprises/lloyds":
+            expected = {"inside": "Conceptual operating mechanism",
+                        "landscape": "How spread and credit risk can change earnings",
+                        "forces": "If funding costs rise faster than asset yields"}
+            assert expected[stream] in insight
+            assert expected[stream] not in facts
             assert 'data-semantic-type="insight"' not in insight
         else:
             assert 'data-semantic-type="insight"' in insight
         assert "What's changing?" not in facts
         roots[stream] = facts
     assert "Durable capabilities" in roots["inside"]
-    assert roots["inside"].count('href="#ability-0"') == 2
-    assert roots["inside"].count('id="ability-0"') == 1
+    if path == v.EASYJET_ROUTE:
+        assert roots["inside"].count('href="#ability-0"') == 2
+        assert roots["inside"].count('id="ability-0"') == 1
+    else:
+        assert 'class="lv-matrix"' in roots["inside"]
+        assert 'detail=technology-controls' in roots["inside"]
     assert "Durable capabilities" not in roots["landscape"] + roots["forces"]
     assert "Disclosed response" in roots["forces"]
     assert "118,762" not in roots["inside"]
@@ -79,7 +87,8 @@ def test_lloyds_envoy_withdrawal_leaves_independent_conceptual_workflow(monkeypa
     dedicated = {**root, "detail": ["technology"]}
     data = v.current_data(v.resolve(path, dedicated))
     before = main(v.render(path, root))
-    assert "Envoy" not in before and "Separate Group technology example" in before
+    assert "Envoy" in before.split('class="lv-separate"')[1]
+    assert "Envoy" not in before.split('class="lv-separate"')[0]
     assert "Envoy" in main(v.render(path, dedicated))
     next(item for item in data["claims"] if item["id"] == "LBG-ENVOY-CONTROLS")["withdrawn"] = True
     monkeypatch.setattr(v, "current_data", lambda ctx: data)
@@ -120,3 +129,35 @@ def test_withdrawn_procurement_policy_suppresses_both_dimensions(monkeypatch):
         assert 'data-semantic-type="insight"' not in html
     economic = main(v.render("/", {"stream": ["forces"], "detail": ["economic"]}))
     assert "0.7%" in economic
+
+
+@pytest.mark.parametrize("mode", ["facts", "insight"])
+def test_lloyds_capability_preserves_mode_and_selection(mode):
+    path = "/enterprises/lloyds"
+    selector = {"stream": ["inside"], "detail": ["servicing"], "reading": [mode]}
+    html = main(v.render(path, selector))
+    assert "<h2>Servicing</h2>" in html
+    assert "Credit origination and servicing" in html
+    assert "Customer support and service" in html
+    assert 'detail=servicing&amp;reading=insight#visual-content' in html
+    expected = 'detail=risk-assessment&amp;reading=insight#lv-selection' if mode == "insight" else (
+        'detail=risk-assessment#lv-selection'
+    )
+    assert expected in html
+    assert "Lloyds’ thresholds" not in html
+    with pytest.raises(ValueError):
+        v.resolve(path, {**selector, "stream": ["forces"]})
+
+
+def test_lloyds_withdrawn_rate_retains_only_conceptual_transmission(monkeypatch):
+    path = "/enterprises/lloyds"
+    query = {"stream": ["forces"], "reading": ["insight"]}
+    data = v.current_data(v.resolve(path, query))
+    claim = next(row for row in data["claims"] if row["id"] == "UK-RATE-NOV26")
+    claim["owner_only"] = True
+    monkeypatch.setattr(v, "current_data", lambda ctx: data)
+    html = main(v.render(path, query))
+    assert "Eligible policy observation unavailable" in html
+    assert "If funding costs rise faster than asset yields" in html
+    assert "No eligible evidence links a Lloyds response" in html
+    assert "4 November 2026" not in html

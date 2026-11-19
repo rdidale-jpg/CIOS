@@ -145,20 +145,6 @@ def _capability_root(ctx, title, outcome, activities, abilities, facts, mechanis
     )
 
 
-def lloyds_inside(ctx):
-    return _capability_root(
-        ctx, "How Lloyds operates", "Resolve a customer request",
-        (("Receive", ("Service handling",)), ("Resolve", ("Service handling", "Technology governance")),
-         ("Review", ("Technology governance",))),
-        (("Service handling", "Customer operations · receive and resolve"),
-         ("Technology governance", "Technology & data · resolve and review")),
-        (), "An explicit review step can help teams check how requests were resolved. Whether it improves outcomes depends on what is reviewed and how often.",
-        "The actual Lloyds workflow, accountable teams and performance remain unverified.",
-        conceptual=True,
-    ) + (f'<p>Separate Group technology example · <a href="{escape(v.url(ctx, detail="technology") + "#visual-content", quote=True)}">'
-         'Explore Technology &amp; data</a>. This example does not establish a link to the customer-service workflow.</p>')
-
-
 def enterprise_forces(ctx, title, observed, response, mechanism, gap, *, dependencies=None):
     return (
         f'<h1>{escape(title)}</h1><ol class="experience-path">'

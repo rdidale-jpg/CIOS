@@ -163,6 +163,9 @@ def resolve(path,query):
   raise ValueError('Banking cohort context mismatch')
  spots=geometry()[scope+'-'+('landscape' if cohort and stream=='inside' else stream)]['spots']
  valid_details={s['id']for s in spots}
+ if scope=='lloyds' and stream=='inside' and not agenda:
+  from .lloyds_recovery import INSIDE_DETAILS
+  valid_details.update(INSIDE_DETAILS)
  if stream=='forces' and scope in {'uk','banking'}:
   from . import experience_composition
   if scope=='uk':
