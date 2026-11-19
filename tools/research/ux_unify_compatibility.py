@@ -42,8 +42,8 @@ COHORT = {
 
 LVIR_BASE = "2757e459f90fc4e1156180acf5f7ed9a40c292d9"
 LVIR = {
-    "cios/applications/flora/visual_panels.py": "4ebef5e8705fef8862ae36a4d3bfd0a710dee98a8d4208de01858a14178b6bb9",
-    "cios/applications/flora/visual_streams.py": "7825347ee8019bb5e5f9fa5f76dc95b3137b8a739a249dd38a7f8e41c1852908",
+    "cios/applications/flora/visual_panels.py": "c35485b91557d25124ad7a7e2c3b3b268d0e3c11dd3aeadb68df63b63e22429f",
+    "cios/applications/flora/visual_streams.py": "69299c919ecbedd26b50d2f0d1b0ea42ec74e3cf164065ab7e06a17ed1a2f7fe",
 }
 
 

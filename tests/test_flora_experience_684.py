@@ -17,7 +17,7 @@ def test_enterprise_roots_observe_three_different_questions(path):
         assert 'data-semantic-type="insight"' not in facts
         if path == "/enterprises/lloyds":
             expected = {"inside": "Conceptual operating mechanism",
-                        "landscape": "What if the interest gap narrows?",
+                        "landscape": "even when total deposits stay flat",
                         "forces": "If funding costs rise faster than asset yields"}
             assert expected[stream] in insight
             assert expected[stream] not in facts
@@ -164,3 +164,48 @@ def test_lloyds_withdrawn_rate_retains_only_conceptual_transmission(monkeypatch)
     assert "If funding costs rise faster than asset yields" in html
     assert "No eligible evidence links a Lloyds response" in html
     assert "4 November 2026" not in html
+
+
+@pytest.mark.parametrize("key,heading", [
+    ("funding", "Where does the money come from?"),
+    ("lending-income", "What brings income in?"),
+    ("profit-costs", "What is left after costs?"),
+])
+def test_lloyds_economic_selection_is_preserved_in_both_readings(key, heading):
+    path = "/enterprises/lloyds"
+    query = {"stream": ["landscape"], "detail": [key]}
+    facts = main(v.render(path, query))
+    insight = main(v.render(path, {**query, "reading": ["insight"]}))
+    for html in (facts, insight):
+        assert f'data-component="{key}"' in html
+        assert f'detail={key}&amp;reading=insight#visual-content' in html
+        assert heading in html
+        assert "What to investigate" in html
+        assert 'data-identity="BK-ENT-001"' in html
+        assert 'agenda=service-recovery#agenda-insight' in html
+    assert facts != insight
+    with pytest.raises(ValueError):
+        v.resolve(path, {**query, "stream": ["inside"]})
+    with pytest.raises(ValueError):
+        v.resolve(path, {**query, "agenda": ["service-recovery"]})
+
+
+@pytest.mark.parametrize("key,claim,amount", [
+    ("funding", "LBG-Q326-DEPOSITS", "£502.8bn"),
+    ("lending-income", "LBG-Q326-PROFIT", "£6.6bn"),
+    ("profit-costs", "LBG-Q326-PROFIT", "£6.6bn"),
+])
+def test_lloyds_withdrawn_economic_evidence_leaves_conceptual_structure(monkeypatch, key, claim, amount):
+    path = "/enterprises/lloyds"
+    query = {"stream": ["landscape"], "detail": [key]}
+    data = v.current_data(v.resolve(path, query))
+    next(row for row in data["claims"] if row["id"] == claim)["withdrawn"] = True
+    monkeypatch.setattr(v, "current_data", lambda ctx: data)
+    for mode in ("facts", "insight"):
+        html = main(v.render(path, {**query, "reading": [mode]}))
+        assert "Conceptual banking model" in html
+        assert "No eligible reported measure" in html
+        assert amount not in html
+        if key == "funding":
+            assert "£6.3bn" not in html
+        assert "What to investigate" not in html

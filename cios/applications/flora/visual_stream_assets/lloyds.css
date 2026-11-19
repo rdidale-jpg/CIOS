@@ -40,8 +40,12 @@
 .lv-group-context { border-top: 1px solid var(--line); margin-top: .4em; padding-top: .4em; }
 .lv-group-context h3 { margin: 0 0 .3em; }
 
+/*
+ * The three link targets form one system. A filled stop and the adjacent
+ * highlighted connection identify which part is being examined.
+ */
 .lv-proof-map {
-  padding: 1em;
+  padding: .9em 1em;
   background: #e9eddf;
   border-top: 2px solid var(--gold);
 }
@@ -51,7 +55,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.45em;
   padding: 0;
-  margin: .75em 0;
+  margin: .65em 0;
   list-style: none;
 }
 .lv-proof-map li { position: relative; }
@@ -59,45 +63,58 @@
   content: "";
   position: absolute;
   inset-inline-end: -1.12em;
-  top: 50%;
+  top: calc(50% - .35em);
   width: .55em;
   height: .55em;
   border-top: 2px solid #81632b;
   border-right: 2px solid #81632b;
   transform: rotate(45deg);
 }
+.lv-proof-map[data-component="funding"] li:first-child::after,
+.lv-proof-map[data-component="lending-income"] li:nth-child(2)::after,
+.lv-proof-map[data-component="profit-costs"] li:nth-child(2)::after {
+  border-color: var(--forest);
+  border-width: 4px;
+}
 .lv-proof-map a {
   display: flex;
   flex-direction: column;
+  gap: .2em;
   justify-content: center;
   min-height: 100%;
-  padding: .65em;
-  border-inline-start: 2px solid var(--gold);
+  padding: .6em;
+  border-inline-start: 3px solid var(--gold);
   background: var(--ivory);
+  color: var(--forest);
   text-decoration: none;
 }
-.lv-proof-map a:hover strong, .lv-proof-map a:focus-visible strong { text-decoration: underline; }
-.lv-proof-map a span { color: var(--muted); }
-.lv-proof-map a strong { font: 1.4em Georgia, serif; text-decoration: underline; text-underline-offset: .17em; }
+.lv-proof-map a[aria-current] { background: var(--forest); color: white; }
+.lv-proof-map a:focus-visible { outline: 3px solid #81632b; outline-offset: 3px; }
+.lv-proof-map a:hover strong { text-decoration-thickness: 2px; }
+.lv-proof-map a span { font-size: .9em; }
+.lv-proof-map a strong { font: 1.25em Georgia, serif; text-decoration: underline; text-underline-offset: .17em; }
 .lv-proof-caption { font-weight: bold; }
-.lv-proof-lens { border-inline-start: 3px solid var(--gold); padding: .65em .85em; background: #f8f0df; }
-.lv-proof-reported, .lv-proof-explore, .lv-proof-evidence { padding-block: .85em; border-bottom: 1px solid var(--line); }
-.lv-proof-reported > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6em; }
-.lv-proof-reported .lv-amount { border-inline-start: 2px solid var(--gold); padding-inline-start: .6em; }
-.lv-proof-explore > div { padding: .45em .6em; border-inline-start: 2px solid var(--line); scroll-margin-top: 12rem; }
-.lv-proof-explore > div:target { border-inline-start-color: var(--gold); background: #f8f0df; }
-.lv-proof-explore h3 { margin: 0; }
+.lv-proof-explore, .lv-proof-evidence { padding-block: .85em; border-bottom: 1px solid var(--line); }
+.lv-proof-explore { border-inline-start: 3px solid var(--gold); padding-inline-start: .8em; }
+.lv-proof .lv-proof-topic { color: var(--muted); font-size: .82em; font-weight: bold; margin-block: 0 .3em; }
+.lv-proof-context, .lv-proof-measures { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75em 1em; }
+.lv-proof-context { border-top: 1px solid var(--line); margin-top: .6em; padding-top: .65em; }
+.lv-proof-context h3 { margin: 0; }
 .lv-proof-evidence > a { display: flex; align-items: center; min-height: 44px; }
 @media (max-width: 620px) {
-  .lv-proof-map ol { grid-template-columns: minmax(0, 1fr); gap: .63em; }
-  .lv-proof-map a { flex-direction: row; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: .15em .5em; padding: .4em .6em; }
+  .lv-proof-map ol { grid-template-columns: minmax(0, 1fr); gap: .55em; }
+  .lv-proof-map a { flex-direction: row; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: .15em .55em; padding: .45em .6em; }
   .lv-proof-map li:not(:last-child)::after { display: none; }
-  .lv-proof-explore > div { scroll-margin-top: 16rem; }
+  .lv-proof-context { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 365px) {
-  .lv-proof-reported > div { grid-template-columns: minmax(0, 1fr); }
+  .lv-proof-measures { grid-template-columns: minmax(0, 1fr); }
 }
 @media print {
-  .lv-proof-map, .lv-proof-map a { background: white; }
-  .lv-proof-map, .lv-proof-reported { break-inside: avoid; }
+  .lv-proof-map, .lv-proof-map a, .lv-proof-map a[aria-current] { background: white; color: black; }
+  .lv-proof-map a[aria-current] { border: 2px solid black; }
+  .lv-proof-map, .lv-proof-context { break-inside: avoid; }
+}
+@media (forced-colors: active) {
+  .lv-proof-map a[aria-current] { border: 2px solid Highlight; }
 }

@@ -166,6 +166,9 @@ def resolve(path,query):
  if scope=='lloyds' and stream=='inside' and not agenda:
   from .lloyds_recovery import INSIDE_DETAILS
   valid_details.update(INSIDE_DETAILS)
+ if scope=='lloyds' and stream=='landscape' and not agenda:
+  from .lloyds_recovery import LANDSCAPE_COMPONENTS
+  valid_details.update(LANDSCAPE_COMPONENTS)
  if stream=='forces' and scope in {'uk','banking'}:
   from . import experience_composition
   if scope=='uk':

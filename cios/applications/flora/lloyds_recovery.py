@@ -58,10 +58,42 @@ def _amount(statement, label, date):
     return f'<p class="lv-amount"><strong>£{escape(str(statement.value))}bn</strong> {label}<small>{date}</small></p>'
 
 
+LANDSCAPE_COMPONENTS = {
+    "funding": (
+        "Funding", "Deposits and other funding", "Where does the money come from?",
+        "Customer deposits are one source of funding. The bank pays interest on some accounts.",
+        "If customers move into accounts paying more, the bank can pay more for funding even when total deposits stay flat. If the mix stays stable, a change in the rates paid may matter more.",
+        "What share of deposits earns interest, and how quickly are the rates paid on those accounts changing?",
+    ),
+    "lending-income": (
+        "Lending & income", "Loans earn interest. Fees add income.", "What brings income in?",
+        "Loans earn interest. Other assets and services can contribute income too. The Group figures below give no lending yield or split between interest and fees.",
+        "Fixed-rate loans can keep earning the same interest while funding costs rise. New or variable-rate loans can change sooner. The mix can widen or narrow the difference between interest earned and paid.",
+        "What share of lending changes rate in the next year, and how does interest on that lending compare with the cost of funding it?",
+    ),
+    "profit-costs": (
+        "Profit & costs", "Income less costs and credit losses", "What is left after costs?",
+        "Funding and operating costs and expected losses on loans reduce earnings. Capital helps absorb losses and limits how much risk the bank can take.",
+        "Even if interest income rises faster than funding costs, higher loan losses or operating costs can absorb the gain. Lending more can also require more capital.",
+        "How much of the change in Group profit came from interest income, running costs or provisions for expected loan losses?",
+    ),
+}
+
+
 def landscape(ctx, data, issues):
     claims = _claims(data, MEASURES)
     stock, reference, profit = (_measure(claims.get(key), *basis) for key, basis in MEASURES.items())
-    insight = ctx.reading == "insight"
+    component = ctx.detail or "funding"
+    label, _, heading, facts, insight, question = LANDSCAPE_COMPONENTS[component]
+    analysis = ctx.reading == "insight"
+    anchors = ("lv-funding", "lv-interest", "lv-costs")
+    controls = "".join(
+        f'<li id="{anchor}"><a href="{escape(v.url(ctx, detail=key, reading=ctx.reading), quote=True)}#visual-content"'
+        + (' aria-current="page"' if key == component else '')
+        + f'><strong>{escape(title)}</strong><span>{escape(summary)}</span></a></li>'
+        for anchor, (key, (title, summary, *_)) in zip(anchors, LANDSCAPE_COMPONENTS.items())
+    )
+
     funding_context = next((issue.facts[-1] for issue in issues if issue.key == "funding-base"), None)
     comparison = ""
     if (stock and reference and funding_context and funding_context.semantic_type == "calculated"
@@ -69,51 +101,45 @@ def landscape(ctx, data, issues):
         comparison = ('<div class="lv-proof-comparison" data-intelligence="funding-base">'
                       + p.render(funding_context, compact=True) + '</div>')
 
+    deposits = _amount(stock, "customer deposits", "30 September 2026 · balance at that date")
+    earnings = _amount(profit, "statutory pretax profit", "Nine months to 30 September 2026")
+    related = deposits if component == "funding" else earnings
+    supported_question = stock if component == "funding" else profit
+    if profit and component == "lending-income":
+        related += '<p>Group profit covers all activities. Lending income is unavailable in this view.</p>'
+    elif profit and component == "profit-costs":
+        related += '<p>The total gives no breakdown of operating costs or expected loan losses.</p>'
+
     economics = escape(v.url(ctx, stream="inside", detail="economics", reading=ctx.reading), quote=True)
     service = ""
     if any(issue.key == "service-recovery" for issue in issues):
-        service_url = escape(v.url(ctx, agenda="service-recovery"), quote=True)
+        service_url = escape(v.url(ctx, agenda="service-recovery", detail=""), quote=True)
         service = f'<a href="{service_url}#agenda-insight">Customer service evidence · Lloyds Bank plc</a>'
 
     return (
         '<section class="lv lv-landscape lv-proof">'
         '<p class="eyebrow">Lloyds Banking Group plc · consolidated Group</p>'
         '<h1>How does Lloyds make money?</h1>'
-        '<figure class="lv-proof-map">'
+        f'<figure class="lv-proof-map" data-component="{component}">'
         '<figcaption>Conceptual banking model</figcaption>'
-        '<ol><li><a href="#lv-funding"><span>Deposits help fund</span><strong>Lending</strong></a></li>'
-        '<li><a href="#lv-interest"><span>Borrowers pay</span><strong>Interest</strong></a></li>'
-        '<li><a href="#lv-costs"><span>What remains after costs and losses</span>'
-        '<strong>Profit</strong></a></li></ol>'
-        '<p class="lv-proof-caption">Banks can earn more interest on lending than they pay for funding. '
-        'Fees and other income also contribute.</p></figure>'
-        + ('<div class="lv-proof-lens"><h2>What if the interest gap narrows?</h2>'
-           '<p>If the bank pays more for deposits before it can charge more on loans, it keeps less interest. '
-           'If loan rates rise first, the gap can widen. The Group totals cannot tell us which happened.</p></div>'
-           if insight else '')
-        + '<section class="lv-proof-reported" aria-labelledby="lv-group-measures">'
-        '<h2 id="lv-group-measures">What Lloyds Group reported</h2><div>'
-        + _amount(stock, "customer deposits", "30 September 2026 · balance at that date")
-        + _amount(profit, "statutory pretax profit", "Nine months to 30 September 2026 · earned over the period")
-        + '</div><p>These figures show the size of the deposit base and total Group profit. '
-        'They give no breakdown of which activities earned that profit.</p></section>'
-        '<section class="lv-proof-explore" aria-labelledby="lv-explore"><h2 id="lv-explore">Explore what drives earnings</h2>'
-        '<div id="lv-funding" tabindex="-1"><h3>Funding · what the bank pays</h3>'
-        + ('<p>If customers move their money into accounts that pay more, funding can cost more even if total deposits stay flat.</p>'
-           if insight else '<p>Customer deposits are one source of funding. The balance alone says little about what the bank pays for it.</p>')
-        + '</div><div id="lv-interest" tabindex="-1"><h3>Lending · what borrowers pay</h3>'
-        + ('<p>Fixed-rate loans can keep earning the same interest while deposit costs change. '
-           'How long each rate stays fixed can matter as much as the headline rate.</p>' if insight else
-           '<p>Loan interest depends on balances and the rates borrowers pay. These Group figures give no lending yield.</p>')
-        + '</div><div id="lv-costs" tabindex="-1"><h3>Costs, credit losses and capital</h3>'
-        '<p>Running the bank costs money. Expected losses on loans reduce profit. '
-        'Capital helps absorb losses and limits how much risk a bank can take.</p>'
-        + ('<p>Higher expected losses can eat into the benefit of wider interest margins. '
-           'Compare interest earned and paid, loan losses and capital together.</p>' if insight else '')
-        + '</div></section><section class="lv-proof-evidence" aria-labelledby="lv-investigate">'
+        f'<nav aria-label="Economic components"><ol>{controls}</ol></nav>'
+        '<p class="lv-proof-caption">Funding helps support lending and other earning activities. '
+        'Interest and fees bring in income. Funding costs, running costs and loan losses reduce profit.</p></figure>'
+        f'<section class="lv-proof-explore" aria-labelledby="lv-explore">'
+        f'<p class="lv-proof-topic">{escape(label)} · {"FLORA Insight" if analysis else "Facts"}</p>'
+        f'<h2 id="lv-explore">{escape(heading)}</h2>'
+        f'<p>{escape(insight if analysis else facts)}</p>'
+        '<div class="lv-proof-context"><div><h3>What Lloyds Group reported</h3>' + related + '</div>'
+        + ('<div><h3>What to investigate</h3><p>' + escape(question) + '</p></div>' if supported_question else '')
+        + '</div></section>'
+        '<section class="lv-proof-evidence" aria-labelledby="lv-investigate">'
         '<h2 id="lv-investigate">Investigate the figures</h2>'
+        '<div class="lv-proof-measures">'
+        + (deposits if component != "funding" and stock else "")
+        + (earnings if component == "funding" and profit else "")
         + (_amount(reference, "customer deposits", "31 December 2025 · balance at that date") if reference else '')
-        + comparison + f'<a href="{economics}#visual-content">Group financial analysis and reporting basis</a>'
+        + '</div>' + comparison
+        + f'<a href="{economics}#visual-content">Group financial analysis and reporting basis</a>'
         + service + '</section></section>'
     )
 
