@@ -1,0 +1,39 @@
+{
+  "cios/applications/flora/research_intelligence/source_import.py": {
+    "base": "46ed59295abb0259ee09ffa79c778848f170a5eb",
+    "before_sha256": "ad8d15b849713f14a55ee6e5f42d9ef68227d7934d2949910202483ffb3c370b",
+    "after_sha256": "1dd1275768e4b6a6a544cae18cff61911d283bc33d4734c3d0d3e017987df07a",
+    "public_functions": [
+      "routine_factual_use",
+      "_ordinary_factual_method",
+      "minimal_factual_integrity",
+      "public_factual_record",
+      "working_facts"
+    ]
+  },
+  "cios/applications/flora/financial_intelligence/candidate_analytics.py": {
+    "base": "46ed59295abb0259ee09ffa79c778848f170a5eb",
+    "before_sha256": "54b6cc6169ca01e4083599527a8ae7c239dbd0bcbb705de530985f66768f8cf8",
+    "after_sha256": "d4bc2042f33734ad6151b09704314311e94cfa05a358a4e2719ad5702afb4b51",
+    "public_functions": [
+      "public_factual_projection",
+      "public_factual_html"
+    ]
+  },
+  "cios/applications/flora/lloyds_recovery.py": {
+    "base": "46ed59295abb0259ee09ffa79c778848f170a5eb",
+    "before_sha256": "e4a0134089136c955d004a034cdae0243b903740f125eaa543dc142444a224e2",
+    "after_sha256": "51c539b6b4b187a54fde23bf422bfe835ac20ea307c4e2bdc8a3b16c72d11f3f",
+    "public_functions": [
+      "landscape"
+    ]
+  },
+  "tools/research/history_integrity.py": {
+    "base": "46ed59295abb0259ee09ffa79c778848f170a5eb",
+    "before_sha256": "530504ffdcaeb22207f48aa35b3aa5ea9bed262812950e37507a95fc0c360e9d",
+    "after_sha256": "cbfa60b6fade7f73b5e0855aa5d5cd75dae08b28dd8e7b7a3698763880b3d541",
+    "public_functions": [
+      "verify_history"
+    ]
+  }
+}

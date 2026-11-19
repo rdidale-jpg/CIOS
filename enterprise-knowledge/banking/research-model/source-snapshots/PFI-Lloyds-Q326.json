@@ -1,0 +1,165 @@
+{
+  "id": "PFI-LBG-Q326",
+  "authority": "analytical_working_research",
+  "canonical_mutation": false,
+  "title": "Lloyds Banking Group Q3 2026 Interim Management Statement",
+  "publisher": "Lloyds Banking Group plc",
+  "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+  "retrieval_url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+  "retrieved_at": "2026-11-19T00:00:00+00:00",
+  "retrieval_timestamp_precision": "day_normalised_UTC_not_server_timestamp",
+  "publication_date": "2026-10-29",
+  "publication_date_evidence": "LEI-1 S3 original source register and issuer results route",
+  "reporting_period": "Nine months ended 30 September 2026; Group underlying income and separately scoped banking measures",
+  "reviewed_by": "Public Financial Intelligence factual transcription; not canonical Evidence acceptance or a legal clearance",
+  "review_notes": "Three independently stated numerical facts rechecked in original printed page2. No protected table layout, prose or original document retained. Material Lloyds section2 scope remains unresolved.",
+  "retrieval_method": "approved_web_research_tool",
+  "retrieval_reference": "PR698 factual review19November2026; original S3 page2 and APM definitions page15",
+  "retrieval_extent": "Three numerical facts and necessary independently stated meaning/provenance only",
+  "content_kind": "minimal_verified_numerical_facts",
+  "primary_content_sha256": null,
+  "verification": "primary_retrieved",
+  "third_party_material": false,
+  "retained_form": "minimal_facts_and_provenance",
+  "retention": "minimal_facts_and_provenance",
+  "purpose": "attributed_analytical_working_views",
+  "audience": "flora_research_views",
+  "source_category": "issuer_results",
+  "restrictions": [],
+  "document_identity": {
+    "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+    "publisher": "Lloyds Banking Group plc",
+    "title": "Lloyds Banking Group Q3 2026 Interim Management Statement",
+    "published": "2026-10-29",
+    "version": "LBG-2026-Q3-IMS-20261029"
+  },
+  "rights": {
+    "basis": "ordinary_public_factual_analysis",
+    "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+    "expression_reuse": false,
+    "contract_restriction_found": null,
+    "method_review": "Owner accepted PR698 category method. Isolated facts and original analysis differ from protected expression; applicable binding terms and statutory limits still apply. No recurring bulk collection, source-document copy, new Financial-run authority or publisher licence.",
+    "operations": [
+      "read_public",
+      "independent_facts",
+      "minimal_numerical_retention",
+      "public_read_only"
+    ],
+    "attribution_url": "https://www.lloydsbankinggroup.com/",
+    "homepage_conditions_met": true,
+    "material_exceptions": [
+      {
+        "issue": "lloyds_section_2",
+        "operations": [
+          "independent_facts",
+          "minimal_numerical_retention",
+          "public_read_only"
+        ],
+        "status": "unresolved",
+        "basis": "Material applicability to this independently expressed commercial factual method requires existing Source/legal owner resolution.",
+        "source_version": "LBG-2026-Q3-IMS-20261029"
+      },
+      {
+        "issue": "lloyds_section_5_deep_links",
+        "operations": [
+          "public_deep_link"
+        ],
+        "status": "unresolved",
+        "basis": "Homepage attribution only; original PDF locator remains internal."
+      }
+    ]
+  },
+  "fact_bindings": [
+    {
+      "key": "group_underlying_nii",
+      "kind": "financial_measurement",
+      "locator": "Printed page2; nine months ended30September2026 column; Group underlying net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "group_underlying_nii",
+        "definition": "Group underlying net interest income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "11084",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded"
+      }
+    },
+    {
+      "key": "banking_nim",
+      "kind": "financial_measurement",
+      "locator": "Printed page2; nine months ended30September2026 column; Banking net interest margin",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "banking business; not a legal-bank allocation",
+        "metric": "banking_nim",
+        "definition": "Banking net interest margin",
+        "accounting_basis": "issuer banking NIM alternative performance measure",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "3.21",
+          "scale": "units",
+          "unit": "percentage",
+          "currency": null
+        },
+        "semantic_type": "reported",
+        "precision_dp": 2,
+        "rounding": "reported_rounded"
+      }
+    },
+    {
+      "key": "average_banking_assets",
+      "kind": "financial_measurement",
+      "locator": "Printed page2; nine months ended30September2026 column; Average interest-earning banking assets",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "banking business; not a legal-bank allocation",
+        "metric": "average_banking_assets",
+        "definition": "Average interest-earning banking assets",
+        "accounting_basis": "issuer period-average banking assets",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "477.5",
+          "scale": "billions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 1,
+        "rounding": "reported_rounded"
+      }
+    }
+  ],
+  "facts_sha256": "5188de20c3c7092fb68c8bf13297eb4309e2fb699d581f42541d08216680b7e4"
+}

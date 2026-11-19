@@ -150,6 +150,8 @@ def routine_factual_use(source):
         raise PermissionError('Source-use exception')
     rights = source.get('rights', {})
     url = urlsplit(source['url'])
+    if rights.get('basis') == 'ordinary_public_factual_analysis':
+        return _ordinary_factual_method(source)
     if (rights.get('basis') == 'fca_owned_numerical_data_ogl'
             and url.hostname == 'www.fca.org.uk' and url.path == '/data/firm-level-complaints-data-sortable-table'
             and source.get('fact_bindings')
@@ -168,6 +170,134 @@ def routine_factual_use(source):
             and rights.get('legal_basis_url') == 'https://www.gov.uk/government/publications/report-and-impact-assessment-on-copyright-and-artificial-intelligence/report-on-copyright-and-artificial-intelligence'):
         return 'minimal_factual_analysis'
     raise PermissionError('Source-use exception requires resolution')
+
+
+def _ordinary_factual_method(source):
+    """Accepted method in existing Source metadata, not a publisher licence.
+
+    No discretionary decision per number/issuer. Concrete material exceptions
+    must be resolved for the operations requested here. Deep-link permission
+    is deliberately outside this homepage-only public method.
+    """
+    rights = source['rights']
+    if not isinstance(source.get('document_identity'), dict):
+        raise PermissionError('Document identity unavailable')
+    operations = {'read_public', 'independent_facts', 'minimal_numerical_retention', 'public_read_only'}
+    if (source.get('source_category') != 'issuer_results'
+            or rights.get('policy_reference') != 'https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e'
+            or rights.get('expression_reuse') is not False
+            or rights.get('contract_restriction_found') is not False
+            or not rights.get('method_review')
+            or set(rights.get('operations', [])) != operations):
+        raise PermissionError('Factual method scope unavailable')
+    exceptions = rights.get('material_exceptions')
+    if not isinstance(exceptions, list):
+        raise PermissionError('Source-use exceptions unassessed')
+    for item in exceptions:
+        if (not isinstance(item, dict) or not item.get('issue') or not item.get('operations')
+                or not set(item['operations']) <= operations | {'public_deep_link','copy_protected_material','persist_financial_run','bulk_collection','public_export'}):
+            raise PermissionError('Invalid source-use exception')
+        if operations.intersection(item['operations']):
+            if (item.get('status') != 'resolved_for_factual_method' or not item.get('basis')
+                    or not item.get('resolved_by') or not item.get('source_version')
+                    or item['source_version'] != source.get('document_identity', {}).get('version')
+                    or date.fromisoformat(item.get('resolved_on', '')) > date.today()):
+                raise PermissionError('Material source-use exception unresolved')
+    home = urlsplit(rights.get('attribution_url', ''))
+    original = urlsplit(source['url'])
+    if (home.scheme != 'https' or home.netloc != original.netloc or home.path not in {'', '/'}
+            or home.query or home.fragment or home.username or home.password
+            or rights.get('homepage_conditions_met') is not True):
+        raise PermissionError('Homepage attribution unavailable')
+    return 'minimal_factual_analysis'
+
+
+def minimal_factual_integrity(source):
+    """Bind actual minimal numerical data to its inspected document/version.
+
+    This hash covers retained facts, never purported original PDF bytes. Legacy
+    primary_text validation is unchanged and cannot fall back to this form.
+    """
+    import json
+    from decimal import Decimal
+    if (source.get('content_kind') != 'minimal_verified_numerical_facts'
+            or source.get('verification') != 'primary_retrieved'
+            or source.get('primary_content_sha256') is not None
+            or any(k in source for k in ('text_path', 'raw_path', 'text_sha256', 'excerpts'))
+            or source.get('retrieval_method') != 'approved_web_research_tool'
+            or not source.get('retrieval_reference')):
+        raise ValueError('Not a verified minimal factual record')
+    identity = source['document_identity']
+    if (not isinstance(identity, dict) or identity.get('url') != source['url'] or identity.get('publisher') != source['publisher']
+            or identity.get('title') != source['title'] or not identity.get('version')
+            or identity.get('published') != source['publication_date']):
+        raise ValueError('Factual document identity mismatch')
+    bindings = source['fact_bindings']
+    if not isinstance(bindings, list) or not 1 <= len(bindings) <= 48:
+        raise ValueError('Bounded factual extent required')
+    payload = {'document_identity': identity, 'fact_bindings': bindings}
+    encoded = json.dumps(payload, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode()
+    if sha(encoded) != source.get('facts_sha256'):
+        raise ValueError('Retained factual integrity mismatch')
+    keys = set()
+    for binding in bindings:
+        if not isinstance(binding, dict) or not isinstance(binding.get('facts'), dict):
+            raise ValueError('Invalid numerical binding')
+        facts = binding['facts']; period = facts['period']; value = facts['value']
+        if (not isinstance(period, dict) or not isinstance(value, dict)
+                or binding['key'] in keys or binding.get('kind') != 'financial_measurement'
+                or working_restricted(binding) or working_restricted(facts)
+                or binding.get('restrictions') or facts.get('restrictions')
+                or not binding.get('locator') or not facts.get('subject_id') or not facts.get('perimeter')
+                or not facts.get('definition') or not facts.get('accounting_basis')
+                or facts.get('semantic_type') != 'reported' or facts.get('state') != 'actual'
+                or not Decimal(value['amount']).is_finite()
+                or value.get('unit') not in {'currency', 'percentage'}
+                or period.get('kind') != 'duration' or not period.get('fiscal_year_end')
+                or not date.fromisoformat(period['start']) <= date.fromisoformat(period['end'])
+                <= date.fromisoformat(source['retrieved_at'][:10])):
+            raise ValueError('Invalid numerical fact meaning')
+        keys.add(binding['key'])
+    return bindings
+
+
+def public_factual_record():
+    """One finite case in the existing Source snapshot owner; no writes or URL fetch.
+
+    It never joins the Financial-run selection catalogue. Missing, restricted,
+    changed or legally unresolved material yields no public payload.
+    """
+    import json
+    from . import model
+    from .registry import snapshot_boundary
+    root = snapshot_boundary('banking', model.REPO)
+    path = root / 'PFI-Lloyds-Q326.json'
+    # No symlinked directory/file can redirect this finite public case to a
+    # private store. The configured repository root itself remains the owner.
+    relative = path.relative_to(model.REPO)
+    if (any((model.REPO / Path(*relative.parts[:i])).is_symlink() for i in range(1, len(relative.parts)+1))
+            or not path.is_file() or path.stat().st_size > LIMIT):
+        raise ValueError('Public factual source unavailable')
+    source = json.loads(path.read_text())
+    if (not isinstance(source, dict) or not isinstance(source.get('rights'), dict)
+            or source.get('authority') != 'analytical_working_research'
+            or source.get('canonical_mutation') is not False):
+        raise PermissionError('Public factual authority unavailable')
+    if any(not isinstance(source.get(k), str) or not source[k] for k in
+           ('url','retrieval_url','retrieved_at','title','publisher','reporting_period','reviewed_by','review_notes')):
+        raise ValueError('Factual provenance fields unavailable')
+    # Known material issue cannot disappear by deleting its metadata. Resolution
+    # belongs to the Source/legal owner, not the viewer or a category flag.
+    issues = source.get('rights', {}).get('material_exceptions', [])
+    if not isinstance(issues, list):
+        raise PermissionError('Invalid factual source-use scope')
+    matching = [i for i in issues if isinstance(i, dict) and i.get('issue') == 'lloyds_section_2']
+    if (len(matching) != 1 or matching[0].get('status') != 'resolved_for_factual_method'
+            or set(matching[0].get('operations', [])) != {'independent_facts','minimal_numerical_retention','public_read_only'}):
+        raise PermissionError('Lloyds factual output remains inactive')
+    routine_factual_use(source)
+    minimal_factual_integrity(source)
+    return source
 
 
 def working_facts():
@@ -197,6 +327,11 @@ def working_facts():
         if counts[source['id']] != 1:
             continue
         try:
+            # Ordinary public factual scope cannot be laundered into the
+            # existing persisted-run catalogue by relabelling a legacy source.
+            # It is served only by the read-only Source entry point below.
+            if isinstance(source.get('rights'), dict) and source['rights'].get('basis') == 'ordinary_public_factual_analysis':
+                continue
             routine_factual_use(source)
             model.primary_text(source)
             if source['id'] in sources:

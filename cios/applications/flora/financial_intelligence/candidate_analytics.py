@@ -473,6 +473,92 @@ def public_nationwide_projection() -> dict:
         return {}
 
 
+def public_factual_projection() -> dict:
+    """Finite mixed-unit factual view through existing Source/presentation owners.
+
+    No private-run API, identity, storage, URL fetching or reusable payload cache.
+    Currency-only F1 Measurement/run contracts remain unchanged. Existing ISP-1
+    Statement and NumericFactValue describe the margin and monetary facts.
+    """
+    from ..research_intelligence.source_import import public_factual_record
+    try:
+        source = public_factual_record()
+        original = 'https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf'
+        if (source['id'] != 'PFI-LBG-Q326' or source['url'] != original or source['retrieval_url'] != original
+                or source['title'] != 'Lloyds Banking Group Q3 2026 Interim Management Statement'
+                or source['publisher'] != 'Lloyds Banking Group plc'
+                or source['document_identity']['version'] != 'LBG-2026-Q3-IMS-20261029'
+                or source['publication_date'] != '2026-10-29'):
+            return {}
+        # These are the selected metric semantics, not a second fact/rights store.
+        expected = {
+            'group_underlying_nii': ('Group underlying net interest income', 'consolidated Group', 'underlying', 'currency', 'millions', 'GBP', 0),
+            'banking_nim': ('Banking net interest margin', 'banking business; not a legal-bank allocation', 'issuer banking NIM alternative performance measure', 'percentage', 'units', None, 2),
+            'average_banking_assets': ('Average interest-earning banking assets', 'banking business; not a legal-bank allocation', 'issuer period-average banking assets', 'currency', 'billions', 'GBP', 1),
+        }
+        rows = source['fact_bindings']
+        if len(rows) != 3 or {r['key'] for r in rows} != set(expected):
+            return {}
+        facts = []
+        for key, (label, perimeter, basis, unit, scale, currency, precision) in expected.items():
+            row = next(r for r in rows if r['key'] == key); f = row['facts']
+            value = NumericFactValue.model_validate(f['value'])
+            definition = {'group_underlying_nii':'Group underlying net interest income',
+                          'banking_nim':'Banking net interest margin',
+                          'average_banking_assets':'Average interest-earning banking assets'}[key]
+            if (f['subject_id'] != 'research-subject:lloyds-banking-group-plc'
+                    or f['subject_name'] != 'Lloyds Banking Group plc'
+                    or f['metric'] != key or f['definition'] != definition or f['perimeter'] != perimeter
+                    or f['accounting_basis'] != basis
+                    or (value.unit, value.scale, value.currency) != (unit, scale, currency)
+                    or f['precision_dp'] != precision
+                    or value.amount.as_tuple().exponent < -precision
+                    or f['rounding'] != 'reported_rounded'
+                    or f['period'] != {'kind':'duration','start':'2026-01-01','end':'2026-09-30','fiscal_year_end':'12-31'}):
+                return {}
+            public_source = presentation.Source(source['title'], source['rights']['attribution_url'],
+                source['publisher'], source['publication_date'], 'Nine months to 30 September 2026', locator=row['locator'])
+            fact = presentation.Statement(label, 'reported', f['subject_name']+'; '+perimeter,
+                '1 January–30 September 2026', (public_source,), 'reported_source', 'analytical_working_research',
+                'actual', basis=basis, value=value.amount,
+                unit='%' if unit == 'percentage' else currency+' '+scale,
+                caveats=('Group income and banking margin have different perimeters; the asset measure is a period average.',))
+            if not presentation.eligible(fact):return {}
+            facts.append(fact)
+        analysis = presentation.Statement(
+            'Net interest income and the banking margin describe different parts of earnings. The banking margin relates to average earning assets; it is not a Group profit margin or a lending yield.',
+            'insight', 'Lloyds Group and separately scoped banking measures', '1 January–30 September 2026',
+            (public_source,), 'repository_interpretation', 'analytical_working_research',
+            reasoning='Interpretation of the reported income, banking margin and period-average asset definitions; no cross-perimeter ratio is calculated.',
+            dependencies=tuple(f.text for f in facts), dependency_types=('reported',)*3,
+            counter_evidence=('These three measures do not allocate income to a legal bank or establish costs, profit, buyer demand or causal contributions.',))
+        if not presentation.eligible(analysis):return {}
+        # No original PDF locator or source/legal administration escapes this owner.
+        return {'facts':tuple(facts), 'analysis':analysis, 'revision':stable_hash(source)}
+    except (OSError, ValueError, KeyError, TypeError, PermissionError, ArithmeticError):
+        return {}
+
+
+def public_factual_html(*, insight=False) -> str:
+    """Always re-resolve current eligibility; callers cannot render a cached dict."""
+    projection = public_factual_projection()
+    if not projection:return ''
+    facts = projection['facts']; rows = []
+    for f in facts:
+        amount = (f'£{f.value/Decimal(1000):f}bn' if f.unit == 'GBP millions' else
+                  f'£{f.value:f}bn' if f.unit == 'GBP billions' else f'{f.value:f}%')
+        rows.append('<div><dt>'+escape(f.text)+'</dt><dd><strong>'+escape(amount)+'</strong></dd></div>')
+    narrative = ('<p class="eyebrow">FLORA Insight</p><p>'+escape(projection['analysis'].text)+'</p>' if insight else
+                 '<p>Group net interest income is shown alongside the separately scoped banking margin and average earning assets.</p>')
+    return ('<style>.public-financial-facts dt{font-size:14px;line-height:1.4}.public-financial-facts dd{margin:10px 0 0}.public-financial-facts .source-credit{font-size:12px;color:var(--muted)}@media(max-width:700px){.public-financial-facts dd{margin:0}}</style>'
+            '<section class="public-financial-facts" aria-labelledby="public-financial-title">'
+            '<p class="shared-period">Nine months to 30 September 2026</p>'
+            '<h2 id="public-financial-title">Interest income and banking margin</h2>'+narrative+
+            '<p class="eyebrow">Reported</p><dl class="earnings-metrics">'+''.join(rows)+'</dl>'
+            '<p class="earnings-context">Group income and banking measures have different reporting perimeters. Assets are an average over the period.</p>'
+            '<p class="source-credit">Source: <a href="https://www.lloydsbankinggroup.com/">Lloyds Banking Group</a> · Q3 2026 results. No issuer endorsement.</p></section>')
+
+
 @verified_service_read('package.inspect')
 def find_existing_run(selection: str, resource_id: str, *, headers=None) -> str | None:
     """Resolve only the current known ID in one authorised scope; never scan.
