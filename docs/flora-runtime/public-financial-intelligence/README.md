@@ -1,6 +1,8 @@
 # Public Financial Intelligence — bounded implementation
 
-Implementation commissioned against owner-accepted PR #698 at **9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e**. Verified current main/base: **46ed59295abb0259ee09ffa79c778848f170a5eb**. PR #698 is accepted by the owner but remains unmerged on GitHub; its three policy documents are carried here byte-identically, without merging that PR or changing its history. No hosted workflow was present on the documentation-only main SHA. This candidate supplies its own exact-head local/hosted validation.
+Implementation commissioned against owner-accepted PR #698 at **9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e**. Under explicit owner approval limited to that documentation PR, #698 was merged into main as **56965a381caf7adbb9e81b90e121051735c303b9**. This is the verified current integration base. The original accepted implementation is **55949267535555b8121cb86e63521c1ab369b8e5**, originally based on **46ed59295abb0259ee09ffa79c778848f170a5eb**.
+
+PR #699 incorporates the updated main ancestry without rebasing or rewriting the accepted implementation. The three accepted policy documents belong to main and no longer appear in its implementation diff. They remain byte-identical to the accepted policy head. The only content change from the accepted implementation is this reconciliation note; runtime, tests, Source candidate, artwork and legal holds are unchanged. Fresh exact-head local and hosted validation is reported in the PR, rather than substituting earlier-head results.
 
 ## Result and shipping state
 
@@ -44,6 +46,8 @@ Tests inspect current HTML, DOM/accessibility targets, print rendering and repea
 
 No CI baseline, failure/skip allowance, security control or publisher origin policy is changed. The repository's existing historical-cut adapter is extended with exact SHA-256 **and AST proof** for the named public functions only. Private-run functions, imports, constants and all unrelated definitions must match the verified main cut. Every historical cut/pin remains. The historical research report retains its 178-file API; the one additional inactive Source candidate is explicitly checked by exact path/hash before that comparison. Unknown additions still fail. `Source-Addition.json` and `Owner-Evolution.json` are QA evidence, not runtime legal/admission records.
 
+Policy-first reconciliation is conflict-free. Before this documentation update, the combined policy/implementation tree was exactly the accepted implementation tree `399698b82fb848f97c5e8c68f4ca50d563e9d852`. The net implementation scope against policy-integrated main is 27 files: three runtime owners, one inactive Source candidate, one test module, one workflow, five validation/browser tools, three implementation documents/QA manifests and thirteen preview images. There are no changes under `public-facts-policy` in that diff. Historical owner-cut references to the original base remain valid because the policy-only main merge changed no executable or Source bytes.
+
 Reproduce:
 
 ```bash
@@ -78,4 +82,6 @@ Self-critique: the positive main view is compact and readable with three measure
 - [ ] Review exact-head security/regression, preserved private functions, history and artwork.
 - [ ] Existing Source/legal owner resolves §2 before any activation; §5 deep links and Financial-run extensions stay outside this implementation.
 
-Stop at the separate **draft implementation PR**. No merge, deployment, production/canonical write, source import, accepted ADR change, paid service or Pipeline modification. To roll back after a separately authorised integration, revert the bounded implementation commit; keep existing records/history and the accepted policy reference. A later activation can be withdrawn through existing Source lifecycle/exception fields, immediately omitting the new slice on subsequent controlled reads. No database migration is introduced.
+PR #698 alone has been merged under explicit owner authorisation. **PR #699 remains draft and must not be merged or deployed under that authorisation.** No production/canonical write, source import, accepted ADR change, paid service or Pipeline modification is authorised here.
+
+Rollback has been rehearsed by reversing the implementation delta in an isolated temporary Git index: this restores the policy-integrated main tree `5f3eae57e99ff9d2c7d6a46651486d243631f154`, retaining all three accepted policy documents. The reconciled implementation repeats this proof against its current base. After a separately authorised future integration, revert only that implementation integration using its actual merge method; retain the #698 policy, existing records and history. A later activation can be withdrawn through existing Source lifecycle/exception fields, immediately omitting the new slice on subsequent controlled reads. No database migration or authority-store reset is introduced.
