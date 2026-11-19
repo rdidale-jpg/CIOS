@@ -70,8 +70,8 @@ def landscape(ctx, data, issues):
     comparison = ""
     if (stock and reference and funding_context and funding_context.semantic_type == "calculated"
             and p.eligible(funding_context)):
-        comparison = ('<details data-intelligence="funding-base"><summary>Compare the two deposit dates</summary>'
-                      + p.render(funding_context) + '</details>')
+        comparison = ('<div class="lv-separate" data-intelligence="funding-base">'
+                      + p.render(funding_context, compact=True) + '</div>')
     return (
         '<section class="lv lv-landscape"><p class="eyebrow">Lloyds Banking Group plc · consolidated Group</p>'
         '<h1>Customer funding and earnings</h1>'
@@ -156,10 +156,10 @@ def forces(ctx, data):
         '<li><h2>Observed condition</h2><p class="lv-tag">UK monetary policy · industry context</p>' + industry + '</li>'
         f'<li><h2>Transmission</h2>{transmission}</li>'
         '<li><h2>Disclosed response</h2><p>No eligible evidence links a Lloyds response to this rate decision.</p>'
-        '<details><summary>Separate Group efficiency ambition</summary>' + group + '</details></li>'
+        '<div class="lv-group-context"><h3>Separate Group efficiency ambition</h3>' + group + '</div></li>'
         f'<li><h2>Conditional consequence</h2><p>{consequence}</p>'
         '<p>To assess Lloyds’ exposure, compare deposit and asset repricing, income and costs over matching periods.</p></li>'
-        '</ol><details class="lv-separate"><summary>Reported Group performance context</summary>'
+        '</ol><div class="lv-separate"><h2>Reported Group performance context</h2>'
         + _amount(profit, "statutory pretax profit", "Nine months to 30 September 2026 · earnings flow")
-        + '</details></section>'
+        + '</div></section>'
     )

@@ -3,7 +3,6 @@
 .lv h3 { font-size: 1em; }
 .lv p { margin: .4em 0; }
 .lv figcaption { font-weight: bold; margin-block: 0 .6em; }
-.lv summary { cursor: pointer; min-height: 44px; align-content: center; }
 .lv-system { border-top: 2px solid var(--gold); padding-top: .65em; }
 .lv-balance { display: grid; grid-template-columns: 1.35fr auto 1fr; gap: .55em; align-items: stretch; }
 .lv-balance > div, .lv-outcome { background: var(--sage); padding: .75em; border: 1px solid var(--line); }
@@ -56,3 +55,5 @@
 @media (max-width: 350px) {
   .lv-shared, .lv-rate-branches { grid-template-columns: minmax(0, 1fr); }
 }
+.lv-group-context { border-top: 1px solid var(--line); margin-top: .4em; padding-top: .4em; }
+.lv-group-context h3 { margin: 0 0 .3em; }
