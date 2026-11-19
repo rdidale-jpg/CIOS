@@ -15,21 +15,32 @@ def test_enterprise_roots_observe_three_different_questions(path):
         insight = main(v.render(path, {**query, "reading": ["insight"]}))
         assert 'aria-current=page>Facts' in facts
         assert 'data-semantic-type="insight"' not in facts
-        if path == "/enterprises/lloyds" and stream == "inside":
-            assert "Conceptual operating mechanism" in insight
+        if path == "/enterprises/lloyds":
+            expected = {"inside": "Conceptual operating mechanism",
+                        "landscape": "even when total deposits stay flat",
+                        "forces": "If funding costs rise faster than asset yields"}
+            assert expected[stream] in insight
+            assert expected[stream] not in facts
             assert 'data-semantic-type="insight"' not in insight
         else:
             assert 'data-semantic-type="insight"' in insight
         assert "What's changing?" not in facts
         roots[stream] = facts
     assert "Durable capabilities" in roots["inside"]
-    assert roots["inside"].count('href="#ability-0"') == 2
-    assert roots["inside"].count('id="ability-0"') == 1
+    if path == v.EASYJET_ROUTE:
+        assert roots["inside"].count('href="#ability-0"') == 2
+        assert roots["inside"].count('id="ability-0"') == 1
+    else:
+        assert 'class="lv-matrix"' in roots["inside"]
+        assert 'detail=technology-controls' in roots["inside"]
     assert "Durable capabilities" not in roots["landscape"] + roots["forces"]
     assert "Disclosed response" in roots["forces"]
     assert "118,762" not in roots["inside"]
     if path == "/enterprises/lloyds":
-        assert 'data-intelligence="service-recovery"' in roots["landscape"]
+        assert 'agenda=service-recovery#agenda-insight' in roots["landscape"]
+        assert "118,762" not in roots["landscape"]
+        assert "Conceptual banking model" in roots["landscape"]
+        assert "What Lloyds Group reported" in roots["landscape"]
         assert "£502.8bn" in roots["landscape"]
         assert "£502.8bn" not in roots["inside"]
 
@@ -79,7 +90,8 @@ def test_lloyds_envoy_withdrawal_leaves_independent_conceptual_workflow(monkeypa
     dedicated = {**root, "detail": ["technology"]}
     data = v.current_data(v.resolve(path, dedicated))
     before = main(v.render(path, root))
-    assert "Envoy" not in before and "Separate Group technology example" in before
+    assert "Envoy" in before.split('class="lv-separate"')[1]
+    assert "Envoy" not in before.split('class="lv-separate"')[0]
     assert "Envoy" in main(v.render(path, dedicated))
     next(item for item in data["claims"] if item["id"] == "LBG-ENVOY-CONTROLS")["withdrawn"] = True
     monkeypatch.setattr(v, "current_data", lambda ctx: data)
@@ -120,3 +132,80 @@ def test_withdrawn_procurement_policy_suppresses_both_dimensions(monkeypatch):
         assert 'data-semantic-type="insight"' not in html
     economic = main(v.render("/", {"stream": ["forces"], "detail": ["economic"]}))
     assert "0.7%" in economic
+
+
+@pytest.mark.parametrize("mode", ["facts", "insight"])
+def test_lloyds_capability_preserves_mode_and_selection(mode):
+    path = "/enterprises/lloyds"
+    selector = {"stream": ["inside"], "detail": ["servicing"], "reading": [mode]}
+    html = main(v.render(path, selector))
+    assert "<h2>Servicing</h2>" in html
+    assert "Credit origination and servicing" in html
+    assert "Customer support and service" in html
+    assert 'detail=servicing&amp;reading=insight#visual-content' in html
+    expected = 'detail=risk-assessment&amp;reading=insight#lv-selection' if mode == "insight" else (
+        'detail=risk-assessment#lv-selection'
+    )
+    assert expected in html
+    assert "Lloyds’ thresholds" not in html
+    with pytest.raises(ValueError):
+        v.resolve(path, {**selector, "stream": ["forces"]})
+
+
+def test_lloyds_withdrawn_rate_retains_only_conceptual_transmission(monkeypatch):
+    path = "/enterprises/lloyds"
+    query = {"stream": ["forces"], "reading": ["insight"]}
+    data = v.current_data(v.resolve(path, query))
+    claim = next(row for row in data["claims"] if row["id"] == "UK-RATE-NOV26")
+    claim["owner_only"] = True
+    monkeypatch.setattr(v, "current_data", lambda ctx: data)
+    html = main(v.render(path, query))
+    assert "Eligible policy observation unavailable" in html
+    assert "If funding costs rise faster than asset yields" in html
+    assert "No eligible evidence links a Lloyds response" in html
+    assert "4 November 2026" not in html
+
+
+@pytest.mark.parametrize("key,heading", [
+    ("funding", "Where does the money come from?"),
+    ("lending-income", "What brings income in?"),
+    ("profit-costs", "What is left after costs?"),
+])
+def test_lloyds_economic_selection_is_preserved_in_both_readings(key, heading):
+    path = "/enterprises/lloyds"
+    query = {"stream": ["landscape"], "detail": [key]}
+    facts = main(v.render(path, query))
+    insight = main(v.render(path, {**query, "reading": ["insight"]}))
+    for html in (facts, insight):
+        assert f'data-component="{key}"' in html
+        assert f'detail={key}&amp;reading=insight#visual-content' in html
+        assert heading in html
+        assert "What to investigate" in html
+        assert 'data-identity="BK-ENT-001"' in html
+        assert 'agenda=service-recovery#agenda-insight' in html
+    assert facts != insight
+    with pytest.raises(ValueError):
+        v.resolve(path, {**query, "stream": ["inside"]})
+    with pytest.raises(ValueError):
+        v.resolve(path, {**query, "agenda": ["service-recovery"]})
+
+
+@pytest.mark.parametrize("key,claim,amount", [
+    ("funding", "LBG-Q326-DEPOSITS", "£502.8bn"),
+    ("lending-income", "LBG-Q326-PROFIT", "£6.6bn"),
+    ("profit-costs", "LBG-Q326-PROFIT", "£6.6bn"),
+])
+def test_lloyds_withdrawn_economic_evidence_leaves_conceptual_structure(monkeypatch, key, claim, amount):
+    path = "/enterprises/lloyds"
+    query = {"stream": ["landscape"], "detail": [key]}
+    data = v.current_data(v.resolve(path, query))
+    next(row for row in data["claims"] if row["id"] == claim)["withdrawn"] = True
+    monkeypatch.setattr(v, "current_data", lambda ctx: data)
+    for mode in ("facts", "insight"):
+        html = main(v.render(path, {**query, "reading": [mode]}))
+        assert "Conceptual banking model" in html
+        assert "No eligible reported measure" in html
+        assert amount not in html
+        if key == "funding":
+            assert "£6.3bn" not in html
+        assert "What to investigate" not in html

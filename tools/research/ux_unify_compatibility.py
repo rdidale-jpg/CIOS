@@ -40,8 +40,17 @@ COHORT = {
 }
 
 
+LVIR_BASE = "2757e459f90fc4e1156180acf5f7ed9a40c292d9"
+LVIR = {
+    "cios/applications/flora/visual_panels.py": "c35485b91557d25124ad7a7e2c3b3b268d0e3c11dd3aeadb68df63b63e22429f",
+    "cios/applications/flora/visual_streams.py": "69299c919ecbedd26b50d2f0d1b0ea42ec74e3cf164065ab7e06a17ed1a2f7fe",
+}
+
+
 def predecessor(root, path):
     current = (Path(root) / path).read_bytes()
+    if path in LVIR and sha256(current).hexdigest() == LVIR[path]:
+        current = subprocess.check_output(["git", "show", f"{LVIR_BASE}:{path}"], cwd=root)
     if path in COHORT and sha256(current).hexdigest() == COHORT[path]:
         current = subprocess.check_output(["git", "show", f"{COHORT_BASE}:{path}"], cwd=root)
     if path in EXPERIENCE and sha256(current).hexdigest() == EXPERIENCE[path]:

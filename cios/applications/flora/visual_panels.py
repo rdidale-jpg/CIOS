@@ -17,6 +17,7 @@ from . import reading_views as reading
 from . import banking_ecosystem as ecosystem
 from . import banking_cohort as cohort
 from . import experience_composition as experience
+from . import lloyds_recovery as recovery
 from . import easyjet_capabilities as easyjet
 from .security import verified_service_read
 
@@ -408,6 +409,7 @@ def _frame(ctx,headers,data,issues,entries,body):
     head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'+EDITORIAL_STYLE+reading.STYLE+experience.STYLE
     if ctx.scope=='easyjet':head+=easyjet.STYLE
     if ctx.scope=='banking':head+=ecosystem.STYLE+cohort.STYLE
+    if ctx.scope=='lloyds':head+=recovery.STYLE
     return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(scene,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+watermark+'<article class="workspace editorial-workspace">'+reading.selector(ctx)+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
 
 
@@ -440,28 +442,15 @@ def render(ctx,headers=None,*,financial_run_id=''):
             if ctx.stream=='landscape' and ctx.reading=='facts' and ctx.selected!='boe':body+=_bank_picker(ctx,data,issues)
         elif ctx.scope=='banking' and ctx.stream=='landscape' and ctx.detail in ecosystem.STAGES:
             body=ecosystem.render(ctx,data,issues)
-        elif ctx.scope=='lloyds' and not (ctx.detail or ctx.agenda):
+        elif ctx.scope=='lloyds' and not ctx.agenda and (not ctx.detail or (
+                (ctx.stream=='inside' and ctx.detail in recovery.INSIDE_DETAILS) or
+                (ctx.stream=='landscape' and ctx.detail in recovery.LANDSCAPE_COMPONENTS))):
             if ctx.stream=='inside':
-                body=experience.lloyds_inside(ctx)
+                body=recovery.inside(ctx,data)
+            elif ctx.stream=='landscape':
+                body=recovery.landscape(ctx,data,issues)
             else:
-                group="Lloyds Banking Group plc, consolidated Group unless stated"
-                economics=tuple(f for f in _facts(data,['LBG-Q326-DEPOSITS','LBG-Q326-PROFIT'])
-                                if f.scope==group and p.eligible(f))
-                if ctx.stream=='landscape':
-                    body=_financial(ctx,data,issues)
-                    body+='<section><h2>Business model</h2><p>Conceptual · customer deposits support lending and payments services.</p></section>'
-                    if ctx.reading=='insight':
-                        body+=experience._interpret("Funding and earnings mechanisms",
-                            tuple(f for f in economics if f.unit=="GBP billion; balance at 30 September 2026"),
-                            "A deposit franchise can support lending. Its economics depend on deposit mix, pricing and loan yields.",
-                            "Reported Group deposits and statutory profit do not establish the margin effect or business-line earnings.",ctx)
-                    else:body+=_issue_preview(issues,'service-recovery')
-                else:
-                    response=tuple(f for f in _facts(data,['LBG-A2030-CIR']) if f.scope==group and p.eligible(f))
-                    body=experience.enterprise_forces(ctx,"Conditions affecting Lloyds",economics,response,
-                        "A lower cost-to-income ratio may reflect cost reduction or stronger income; investment can change both over time.",
-                        "The Group target is an ambition. Comparable periods and actual cost and income movements are needed to assess delivery.",
-                        dependencies=response)
+                body=recovery.forces(ctx,data)
         elif ctx.scope=='uk' and ctx.stream=='forces' and not ctx.agenda:
             body=experience.uk_forces(ctx,data)
         elif ctx.scope=='banking' and ctx.stream=='forces' and not (ctx.agenda or ctx.selected) and (

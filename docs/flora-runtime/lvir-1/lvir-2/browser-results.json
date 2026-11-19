@@ -1,0 +1,194 @@
+{
+  "viewports": {
+    "desktop": [
+      1440,
+      1000
+    ],
+    "ipad-landscape": [
+      1180,
+      820
+    ],
+    "ipad-portrait": [
+      820,
+      1180
+    ],
+    "mobile": [
+      390,
+      844
+    ],
+    "mobile-320": [
+      320,
+      780
+    ]
+  },
+  "renders": [
+    [
+      "desktop",
+      "funding",
+      "facts"
+    ],
+    [
+      "desktop",
+      "funding",
+      "insight"
+    ],
+    [
+      "desktop",
+      "lending-income",
+      "facts"
+    ],
+    [
+      "desktop",
+      "lending-income",
+      "insight"
+    ],
+    [
+      "desktop",
+      "profit-costs",
+      "facts"
+    ],
+    [
+      "desktop",
+      "profit-costs",
+      "insight"
+    ],
+    [
+      "ipad-landscape",
+      "funding",
+      "facts"
+    ],
+    [
+      "ipad-landscape",
+      "funding",
+      "insight"
+    ],
+    [
+      "ipad-landscape",
+      "lending-income",
+      "facts"
+    ],
+    [
+      "ipad-landscape",
+      "lending-income",
+      "insight"
+    ],
+    [
+      "ipad-landscape",
+      "profit-costs",
+      "facts"
+    ],
+    [
+      "ipad-landscape",
+      "profit-costs",
+      "insight"
+    ],
+    [
+      "ipad-portrait",
+      "funding",
+      "facts"
+    ],
+    [
+      "ipad-portrait",
+      "funding",
+      "insight"
+    ],
+    [
+      "ipad-portrait",
+      "lending-income",
+      "facts"
+    ],
+    [
+      "ipad-portrait",
+      "lending-income",
+      "insight"
+    ],
+    [
+      "ipad-portrait",
+      "profit-costs",
+      "facts"
+    ],
+    [
+      "ipad-portrait",
+      "profit-costs",
+      "insight"
+    ],
+    [
+      "mobile",
+      "funding",
+      "facts"
+    ],
+    [
+      "mobile",
+      "funding",
+      "insight"
+    ],
+    [
+      "mobile",
+      "lending-income",
+      "facts"
+    ],
+    [
+      "mobile",
+      "lending-income",
+      "insight"
+    ],
+    [
+      "mobile",
+      "profit-costs",
+      "facts"
+    ],
+    [
+      "mobile",
+      "profit-costs",
+      "insight"
+    ],
+    [
+      "mobile-320",
+      "funding",
+      "facts"
+    ],
+    [
+      "mobile-320",
+      "funding",
+      "insight"
+    ],
+    [
+      "mobile-320",
+      "lending-income",
+      "facts"
+    ],
+    [
+      "mobile-320",
+      "lending-income",
+      "insight"
+    ],
+    [
+      "mobile-320",
+      "profit-costs",
+      "facts"
+    ],
+    [
+      "mobile-320",
+      "profit-costs",
+      "insight"
+    ]
+  ],
+  "unchanged_status_and_body": {
+    "/": 200,
+    "/industries/banking": 200,
+    "/industries/banking?selected=nationwide": 200,
+    "/industries/banking?selected=starling&stream=inside": 200,
+    "/industries/aviation": 200,
+    "/enterprises/easyjet/preview": 200,
+    "/industries/technology/experience": 200,
+    "/flora/sales/pipeline": 403,
+    "/enterprises/lloyds?stream=inside": 200,
+    "/enterprises/lloyds?stream=forces": 200,
+    "/enterprises/lloyds?stream=landscape&agenda=service-recovery": 200
+  },
+  "keyboard_touch_history_direct_reload_no_js": "pass",
+  "selected_marker_and_color": "pass",
+  "text_200_percent_no_overflow": "pass",
+  "closed_left_ipad_portrait": "pass",
+  "pdf_text_all_components": "pass"
+}

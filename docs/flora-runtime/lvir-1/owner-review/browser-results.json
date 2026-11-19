@@ -1,0 +1,161 @@
+{
+  "viewports": {
+    "desktop": [
+      1440,
+      1000
+    ],
+    "ipad-landscape": [
+      1180,
+      820
+    ],
+    "ipad-portrait": [
+      820,
+      1180
+    ],
+    "mobile": [
+      390,
+      844
+    ],
+    "mobile-320": [
+      320,
+      780
+    ]
+  },
+  "renders": [
+    [
+      "desktop",
+      "facts",
+      "before",
+      200
+    ],
+    [
+      "desktop",
+      "facts",
+      "after",
+      200
+    ],
+    [
+      "desktop",
+      "insight",
+      "before",
+      200
+    ],
+    [
+      "desktop",
+      "insight",
+      "after",
+      200
+    ],
+    [
+      "ipad-landscape",
+      "facts",
+      "before",
+      200
+    ],
+    [
+      "ipad-landscape",
+      "facts",
+      "after",
+      200
+    ],
+    [
+      "ipad-landscape",
+      "insight",
+      "before",
+      200
+    ],
+    [
+      "ipad-landscape",
+      "insight",
+      "after",
+      200
+    ],
+    [
+      "ipad-portrait",
+      "facts",
+      "before",
+      200
+    ],
+    [
+      "ipad-portrait",
+      "facts",
+      "after",
+      200
+    ],
+    [
+      "ipad-portrait",
+      "insight",
+      "before",
+      200
+    ],
+    [
+      "ipad-portrait",
+      "insight",
+      "after",
+      200
+    ],
+    [
+      "mobile",
+      "facts",
+      "before",
+      200
+    ],
+    [
+      "mobile",
+      "facts",
+      "after",
+      200
+    ],
+    [
+      "mobile",
+      "insight",
+      "before",
+      200
+    ],
+    [
+      "mobile",
+      "insight",
+      "after",
+      200
+    ],
+    [
+      "mobile-320",
+      "facts",
+      "before",
+      200
+    ],
+    [
+      "mobile-320",
+      "facts",
+      "after",
+      200
+    ],
+    [
+      "mobile-320",
+      "insight",
+      "before",
+      200
+    ],
+    [
+      "mobile-320",
+      "insight",
+      "after",
+      200
+    ]
+  ],
+  "unchanged_response_status_and_body": {
+    "/": 200,
+    "/industries/banking": 200,
+    "/industries/banking?selected=nationwide": 200,
+    "/enterprises/easyjet/preview": 200,
+    "/industries/technology/experience": 200,
+    "/flora/sales/pipeline": 403,
+    "/enterprises/lloyds?stream=inside": 200,
+    "/enterprises/lloyds?stream=forces": 200,
+    "/enterprises/lloyds?stream=landscape&agenda=service-recovery": 200
+  },
+  "native_explore_keyboard_touch_history_no_js": "pass",
+  "same_subject_and_perspective_by_mode": "pass",
+  "text_200_percent_no_overflow": "pass",
+  "ipad_portrait_opening_visible_with_left_closed": "pass"
+}
