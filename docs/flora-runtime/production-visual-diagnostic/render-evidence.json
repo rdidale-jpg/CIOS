@@ -1,0 +1,3712 @@
+{
+  "origin": "https://flora-current.onrender.com",
+  "viewport": {
+    "desktop": [
+      1440,
+      1000
+    ],
+    "ipad-landscape": [
+      1180,
+      820
+    ],
+    "ipad-portrait": [
+      820,
+      1180
+    ],
+    "mobile": [
+      390,
+      844
+    ]
+  },
+  "requests": {
+    "desktop/uk-landscape/facts": {
+      "heading": "The shape of the UK economy",
+      "titles": [
+        "Cyber exposure remains widespread across UK businesses"
+      ],
+      "mode": "Facts",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-landscape-384-84a37760e3e8",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 993,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/uk-landscape/insight": {
+      "heading": "The shape of the UK economy",
+      "titles": [],
+      "mode": "FLORA Insight",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-landscape-384-84a37760e3e8",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 448,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/uk-forces/facts": {
+      "heading": "The UK\u2019s economic context",
+      "titles": [
+        "Economic conditions"
+      ],
+      "mode": "Facts",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-forces-384-fa241b77924d",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 688,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/uk-forces/insight": {
+      "heading": "The UK\u2019s economic context",
+      "titles": [
+        "Economic conditions",
+        "Sector mechanism"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-forces-384-fa241b77924d",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 896,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/banking-landscape/facts": {
+      "heading": "Where money meets the economy",
+      "titles": [
+        "Resilience spans the ecosystem",
+        "The reporting landscape is changing",
+        "How value moves through Banking"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 1505,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/banking-landscape/insight": {
+      "heading": "Where money meets the economy",
+      "titles": [],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 486,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/banking-forces/facts": {
+      "heading": "The forces reshaping banking",
+      "titles": [
+        "Rates and customer choice",
+        "A new reporting timetable",
+        "Critical providers, closer oversight",
+        "Lloyds: AI in the operating model",
+        "Critical-provider oversight",
+        "Five Forces"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 1820,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/banking-forces/insight": {
+      "heading": "The forces reshaping banking",
+      "titles": [
+        "Five Forces",
+        "Conceptual competitive mechanism",
+        "Funding and oversight context",
+        "Funding conditions",
+        "Shared dependencies",
+        "What designation tells us"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 1994,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/lloyds-landscape/facts": {
+      "heading": "Customer funding and earnings",
+      "titles": [
+        "Efficiency ambition",
+        "Business model",
+        "Complaint volumes and upheld outcomes are distinct"
+      ],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-landscape-384-358069bf4f4c",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 1690,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/lloyds-landscape/insight": {
+      "heading": "Customer funding and earnings",
+      "titles": [
+        "Efficiency ambition",
+        "Business model",
+        "Funding and earnings mechanisms"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-landscape-384-358069bf4f4c",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 1453,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/lloyds-inside/facts": {
+      "heading": "How Lloyds operates",
+      "titles": [
+        "Resolve a customer request",
+        "Durable capabilities",
+        "Roles, enablers and measures"
+      ],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-inside-384-12d9a56acd25",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 658,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/lloyds-inside/insight": {
+      "heading": "How Lloyds operates",
+      "titles": [
+        "Resolve a customer request",
+        "Durable capabilities",
+        "Roles, enablers and measures",
+        "Conceptual operating mechanism"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-inside-384-12d9a56acd25",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 835,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/lloyds-forces/facts": {
+      "heading": "Conditions affecting Lloyds",
+      "titles": [],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-forces-384-2ffca0158cd7",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 632,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/lloyds-forces/insight": {
+      "heading": "Conditions affecting Lloyds",
+      "titles": [
+        "Conditional consequence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-forces-384-2ffca0158cd7",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 931,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/natwest-landscape/facts": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "How a retail and business bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 969,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/natwest-landscape/insight": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "How a retail and business bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 581,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/natwest-inside/facts": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 961,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/natwest-inside/insight": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 943,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/natwest-forces/facts": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 666,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/natwest-forces/insight": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 854,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/hsbc-uk-landscape/facts": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "How a UK bank inside a wider group earns",
+        "Customer service evidence"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 977,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/hsbc-uk-landscape/insight": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "How a UK bank inside a wider group earns",
+        "Customer service evidence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 570,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/hsbc-uk-inside/facts": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 947,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/hsbc-uk-inside/insight": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 930,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/hsbc-uk-forces/facts": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 621,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/hsbc-uk-forces/insight": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 809,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/nationwide-landscape/facts": {
+      "heading": "Nationwide",
+      "titles": [
+        "Member rewards and integration",
+        "Customer complaints \u00b7 Society",
+        "How a mutual allocates value"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 1868,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/nationwide-landscape/insight": {
+      "heading": "Nationwide Group earnings",
+      "titles": [
+        "How a mutual allocates value"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 1171,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/nationwide-inside/facts": {
+      "heading": "Nationwide",
+      "titles": [
+        "Resolve a member service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 985,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/nationwide-inside/insight": {
+      "heading": "Nationwide",
+      "titles": [
+        "Resolve a member service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 966,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/nationwide-forces/facts": {
+      "heading": "Nationwide",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 582,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/nationwide-forces/insight": {
+      "heading": "Nationwide",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 770,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/starling-landscape/facts": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "How a digital bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 962,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/starling-landscape/insight": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "How a digital bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 608,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/starling-inside/facts": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Resolve an account-service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 1001,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/starling-inside/insight": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Resolve an account-service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 984,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/starling-forces/facts": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 595,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/starling-forces/insight": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 783,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/boe-landscape/facts": {
+      "heading": "Bank of England",
+      "titles": [
+        "What the central bank provides",
+        "Monetary policy context"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 549,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/boe-landscape/insight": {
+      "heading": "Bank of England",
+      "titles": [
+        "What the central bank provides",
+        "Monetary policy context"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 557,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/boe-inside/facts": {
+      "heading": "Bank of England",
+      "titles": [
+        "Settle a payment obligation",
+        "Durable capabilities"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 622,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/boe-inside/insight": {
+      "heading": "Bank of England",
+      "titles": [
+        "Settle a payment obligation",
+        "Durable capabilities",
+        "Conceptual operating mechanism"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 749,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/boe-forces/facts": {
+      "heading": "Bank of England",
+      "titles": [
+        "Monetary policy decision"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 385,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "desktop/boe-forces/insight": {
+      "heading": "Bank of England",
+      "titles": [
+        "How policy affects funding"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 524,
+      "overflow": false,
+      "main_equal_to_local": true
+    },
+    "ipad-landscape/uk-landscape/facts": {
+      "heading": "The shape of the UK economy",
+      "titles": [
+        "Cyber exposure remains widespread across UK businesses"
+      ],
+      "mode": "Facts",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-landscape-384-84a37760e3e8",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 993,
+      "overflow": false
+    },
+    "ipad-landscape/uk-landscape/insight": {
+      "heading": "The shape of the UK economy",
+      "titles": [],
+      "mode": "FLORA Insight",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-landscape-384-84a37760e3e8",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 448,
+      "overflow": false
+    },
+    "ipad-landscape/uk-forces/facts": {
+      "heading": "The UK\u2019s economic context",
+      "titles": [
+        "Economic conditions"
+      ],
+      "mode": "Facts",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-forces-384-fa241b77924d",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 688,
+      "overflow": false
+    },
+    "ipad-landscape/uk-forces/insight": {
+      "heading": "The UK\u2019s economic context",
+      "titles": [
+        "Economic conditions",
+        "Sector mechanism"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-forces-384-fa241b77924d",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 896,
+      "overflow": false
+    },
+    "ipad-landscape/banking-landscape/facts": {
+      "heading": "Where money meets the economy",
+      "titles": [
+        "Resilience spans the ecosystem",
+        "The reporting landscape is changing",
+        "How value moves through Banking"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 1505,
+      "overflow": false
+    },
+    "ipad-landscape/banking-landscape/insight": {
+      "heading": "Where money meets the economy",
+      "titles": [],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 486,
+      "overflow": false
+    },
+    "ipad-landscape/banking-forces/facts": {
+      "heading": "The forces reshaping banking",
+      "titles": [
+        "Rates and customer choice",
+        "A new reporting timetable",
+        "Critical providers, closer oversight",
+        "Lloyds: AI in the operating model",
+        "Critical-provider oversight",
+        "Five Forces"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 1820,
+      "overflow": false
+    },
+    "ipad-landscape/banking-forces/insight": {
+      "heading": "The forces reshaping banking",
+      "titles": [
+        "Five Forces",
+        "Conceptual competitive mechanism",
+        "Funding and oversight context",
+        "Funding conditions",
+        "Shared dependencies",
+        "What designation tells us"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 1994,
+      "overflow": false
+    },
+    "ipad-landscape/lloyds-landscape/facts": {
+      "heading": "Customer funding and earnings",
+      "titles": [
+        "Efficiency ambition",
+        "Business model",
+        "Complaint volumes and upheld outcomes are distinct"
+      ],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-landscape-384-358069bf4f4c",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 1690,
+      "overflow": false
+    },
+    "ipad-landscape/lloyds-landscape/insight": {
+      "heading": "Customer funding and earnings",
+      "titles": [
+        "Efficiency ambition",
+        "Business model",
+        "Funding and earnings mechanisms"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-landscape-384-358069bf4f4c",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 1453,
+      "overflow": false
+    },
+    "ipad-landscape/lloyds-inside/facts": {
+      "heading": "How Lloyds operates",
+      "titles": [
+        "Resolve a customer request",
+        "Durable capabilities",
+        "Roles, enablers and measures"
+      ],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-inside-384-12d9a56acd25",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 658,
+      "overflow": false
+    },
+    "ipad-landscape/lloyds-inside/insight": {
+      "heading": "How Lloyds operates",
+      "titles": [
+        "Resolve a customer request",
+        "Durable capabilities",
+        "Roles, enablers and measures",
+        "Conceptual operating mechanism"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-inside-384-12d9a56acd25",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 835,
+      "overflow": false
+    },
+    "ipad-landscape/lloyds-forces/facts": {
+      "heading": "Conditions affecting Lloyds",
+      "titles": [],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-forces-384-2ffca0158cd7",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 632,
+      "overflow": false
+    },
+    "ipad-landscape/lloyds-forces/insight": {
+      "heading": "Conditions affecting Lloyds",
+      "titles": [
+        "Conditional consequence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-forces-384-2ffca0158cd7",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 931,
+      "overflow": false
+    },
+    "ipad-landscape/natwest-landscape/facts": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "How a retail and business bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 969,
+      "overflow": false
+    },
+    "ipad-landscape/natwest-landscape/insight": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "How a retail and business bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 581,
+      "overflow": false
+    },
+    "ipad-landscape/natwest-inside/facts": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 961,
+      "overflow": false
+    },
+    "ipad-landscape/natwest-inside/insight": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 943,
+      "overflow": false
+    },
+    "ipad-landscape/natwest-forces/facts": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 666,
+      "overflow": false
+    },
+    "ipad-landscape/natwest-forces/insight": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 854,
+      "overflow": false
+    },
+    "ipad-landscape/hsbc-uk-landscape/facts": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "How a UK bank inside a wider group earns",
+        "Customer service evidence"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 977,
+      "overflow": false
+    },
+    "ipad-landscape/hsbc-uk-landscape/insight": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "How a UK bank inside a wider group earns",
+        "Customer service evidence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 570,
+      "overflow": false
+    },
+    "ipad-landscape/hsbc-uk-inside/facts": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 947,
+      "overflow": false
+    },
+    "ipad-landscape/hsbc-uk-inside/insight": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 930,
+      "overflow": false
+    },
+    "ipad-landscape/hsbc-uk-forces/facts": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 621,
+      "overflow": false
+    },
+    "ipad-landscape/hsbc-uk-forces/insight": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 809,
+      "overflow": false
+    },
+    "ipad-landscape/nationwide-landscape/facts": {
+      "heading": "Nationwide",
+      "titles": [
+        "Member rewards and integration",
+        "Customer complaints \u00b7 Society",
+        "How a mutual allocates value"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 1868,
+      "overflow": false
+    },
+    "ipad-landscape/nationwide-landscape/insight": {
+      "heading": "Nationwide Group earnings",
+      "titles": [
+        "How a mutual allocates value"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 1171,
+      "overflow": false
+    },
+    "ipad-landscape/nationwide-inside/facts": {
+      "heading": "Nationwide",
+      "titles": [
+        "Resolve a member service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 985,
+      "overflow": false
+    },
+    "ipad-landscape/nationwide-inside/insight": {
+      "heading": "Nationwide",
+      "titles": [
+        "Resolve a member service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 966,
+      "overflow": false
+    },
+    "ipad-landscape/nationwide-forces/facts": {
+      "heading": "Nationwide",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 582,
+      "overflow": false
+    },
+    "ipad-landscape/nationwide-forces/insight": {
+      "heading": "Nationwide",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 770,
+      "overflow": false
+    },
+    "ipad-landscape/starling-landscape/facts": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "How a digital bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 962,
+      "overflow": false
+    },
+    "ipad-landscape/starling-landscape/insight": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "How a digital bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 608,
+      "overflow": false
+    },
+    "ipad-landscape/starling-inside/facts": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Resolve an account-service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 1001,
+      "overflow": false
+    },
+    "ipad-landscape/starling-inside/insight": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Resolve an account-service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 984,
+      "overflow": false
+    },
+    "ipad-landscape/starling-forces/facts": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 595,
+      "overflow": false
+    },
+    "ipad-landscape/starling-forces/insight": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 783,
+      "overflow": false
+    },
+    "ipad-landscape/boe-landscape/facts": {
+      "heading": "Bank of England",
+      "titles": [
+        "What the central bank provides",
+        "Monetary policy context"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 549,
+      "overflow": false
+    },
+    "ipad-landscape/boe-landscape/insight": {
+      "heading": "Bank of England",
+      "titles": [
+        "What the central bank provides",
+        "Monetary policy context"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 557,
+      "overflow": false
+    },
+    "ipad-landscape/boe-inside/facts": {
+      "heading": "Bank of England",
+      "titles": [
+        "Settle a payment obligation",
+        "Durable capabilities"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 622,
+      "overflow": false
+    },
+    "ipad-landscape/boe-inside/insight": {
+      "heading": "Bank of England",
+      "titles": [
+        "Settle a payment obligation",
+        "Durable capabilities",
+        "Conceptual operating mechanism"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 310
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 1,
+      "characters": 749,
+      "overflow": false
+    },
+    "ipad-landscape/boe-forces/facts": {
+      "heading": "Bank of England",
+      "titles": [
+        "Monetary policy decision"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 385,
+      "overflow": false
+    },
+    "ipad-landscape/boe-forces/insight": {
+      "heading": "Bank of England",
+      "titles": [
+        "How policy affects funding"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 320
+        }
+      ],
+      "disclosure": "none",
+      "wide": "block",
+      "flow": 0,
+      "characters": 524,
+      "overflow": false
+    },
+    "ipad-portrait/uk-landscape/facts": {
+      "heading": "The shape of the UK economy",
+      "titles": [
+        "Cyber exposure remains widespread across UK businesses"
+      ],
+      "mode": "Facts",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-landscape-384-84a37760e3e8",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 993,
+      "overflow": false
+    },
+    "ipad-portrait/uk-landscape/insight": {
+      "heading": "The shape of the UK economy",
+      "titles": [],
+      "mode": "FLORA Insight",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-landscape-384-84a37760e3e8",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 448,
+      "overflow": false
+    },
+    "ipad-portrait/uk-forces/facts": {
+      "heading": "The UK\u2019s economic context",
+      "titles": [
+        "Economic conditions"
+      ],
+      "mode": "Facts",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-forces-384-fa241b77924d",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 688,
+      "overflow": false
+    },
+    "ipad-portrait/uk-forces/insight": {
+      "heading": "The UK\u2019s economic context",
+      "titles": [
+        "Economic conditions",
+        "Sector mechanism"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-forces-384-fa241b77924d",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 896,
+      "overflow": false
+    },
+    "ipad-portrait/banking-landscape/facts": {
+      "heading": "Where money meets the economy",
+      "titles": [
+        "Resilience spans the ecosystem",
+        "The reporting landscape is changing",
+        "How value moves through Banking"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 1505,
+      "overflow": false
+    },
+    "ipad-portrait/banking-landscape/insight": {
+      "heading": "Where money meets the economy",
+      "titles": [],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 486,
+      "overflow": false
+    },
+    "ipad-portrait/banking-forces/facts": {
+      "heading": "The forces reshaping banking",
+      "titles": [
+        "Rates and customer choice",
+        "A new reporting timetable",
+        "Critical providers, closer oversight",
+        "Lloyds: AI in the operating model",
+        "Critical-provider oversight",
+        "Five Forces"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 1820,
+      "overflow": false
+    },
+    "ipad-portrait/banking-forces/insight": {
+      "heading": "The forces reshaping banking",
+      "titles": [
+        "Five Forces",
+        "Conceptual competitive mechanism",
+        "Funding and oversight context",
+        "Funding conditions",
+        "Shared dependencies",
+        "What designation tells us"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 1994,
+      "overflow": false
+    },
+    "ipad-portrait/lloyds-landscape/facts": {
+      "heading": "Customer funding and earnings",
+      "titles": [
+        "Efficiency ambition",
+        "Business model",
+        "Complaint volumes and upheld outcomes are distinct"
+      ],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-landscape-384-358069bf4f4c",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 1690,
+      "overflow": false
+    },
+    "ipad-portrait/lloyds-landscape/insight": {
+      "heading": "Customer funding and earnings",
+      "titles": [
+        "Efficiency ambition",
+        "Business model",
+        "Funding and earnings mechanisms"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-landscape-384-358069bf4f4c",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 1453,
+      "overflow": false
+    },
+    "ipad-portrait/lloyds-inside/facts": {
+      "heading": "How Lloyds operates",
+      "titles": [
+        "Resolve a customer request",
+        "Durable capabilities",
+        "Roles, enablers and measures"
+      ],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-inside-384-12d9a56acd25",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 658,
+      "overflow": false
+    },
+    "ipad-portrait/lloyds-inside/insight": {
+      "heading": "How Lloyds operates",
+      "titles": [
+        "Resolve a customer request",
+        "Durable capabilities",
+        "Roles, enablers and measures",
+        "Conceptual operating mechanism"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-inside-384-12d9a56acd25",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 835,
+      "overflow": false
+    },
+    "ipad-portrait/lloyds-forces/facts": {
+      "heading": "Conditions affecting Lloyds",
+      "titles": [],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-forces-384-2ffca0158cd7",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 632,
+      "overflow": false
+    },
+    "ipad-portrait/lloyds-forces/insight": {
+      "heading": "Conditions affecting Lloyds",
+      "titles": [
+        "Conditional consequence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-forces-384-2ffca0158cd7",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 931,
+      "overflow": false
+    },
+    "ipad-portrait/natwest-landscape/facts": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "How a retail and business bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 969,
+      "overflow": false
+    },
+    "ipad-portrait/natwest-landscape/insight": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "How a retail and business bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 581,
+      "overflow": false
+    },
+    "ipad-portrait/natwest-inside/facts": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 961,
+      "overflow": false
+    },
+    "ipad-portrait/natwest-inside/insight": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 943,
+      "overflow": false
+    },
+    "ipad-portrait/natwest-forces/facts": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 666,
+      "overflow": false
+    },
+    "ipad-portrait/natwest-forces/insight": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 854,
+      "overflow": false
+    },
+    "ipad-portrait/hsbc-uk-landscape/facts": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "How a UK bank inside a wider group earns",
+        "Customer service evidence"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 977,
+      "overflow": false
+    },
+    "ipad-portrait/hsbc-uk-landscape/insight": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "How a UK bank inside a wider group earns",
+        "Customer service evidence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 570,
+      "overflow": false
+    },
+    "ipad-portrait/hsbc-uk-inside/facts": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 947,
+      "overflow": false
+    },
+    "ipad-portrait/hsbc-uk-inside/insight": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 930,
+      "overflow": false
+    },
+    "ipad-portrait/hsbc-uk-forces/facts": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 621,
+      "overflow": false
+    },
+    "ipad-portrait/hsbc-uk-forces/insight": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 809,
+      "overflow": false
+    },
+    "ipad-portrait/nationwide-landscape/facts": {
+      "heading": "Nationwide",
+      "titles": [
+        "Member rewards and integration",
+        "Customer complaints \u00b7 Society",
+        "How a mutual allocates value"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 1868,
+      "overflow": false
+    },
+    "ipad-portrait/nationwide-landscape/insight": {
+      "heading": "Nationwide Group earnings",
+      "titles": [
+        "How a mutual allocates value"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 1171,
+      "overflow": false
+    },
+    "ipad-portrait/nationwide-inside/facts": {
+      "heading": "Nationwide",
+      "titles": [
+        "Resolve a member service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 985,
+      "overflow": false
+    },
+    "ipad-portrait/nationwide-inside/insight": {
+      "heading": "Nationwide",
+      "titles": [
+        "Resolve a member service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 966,
+      "overflow": false
+    },
+    "ipad-portrait/nationwide-forces/facts": {
+      "heading": "Nationwide",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 582,
+      "overflow": false
+    },
+    "ipad-portrait/nationwide-forces/insight": {
+      "heading": "Nationwide",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 770,
+      "overflow": false
+    },
+    "ipad-portrait/starling-landscape/facts": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "How a digital bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 962,
+      "overflow": false
+    },
+    "ipad-portrait/starling-landscape/insight": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "How a digital bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 608,
+      "overflow": false
+    },
+    "ipad-portrait/starling-inside/facts": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Resolve an account-service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 1001,
+      "overflow": false
+    },
+    "ipad-portrait/starling-inside/insight": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Resolve an account-service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 984,
+      "overflow": false
+    },
+    "ipad-portrait/starling-forces/facts": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 595,
+      "overflow": false
+    },
+    "ipad-portrait/starling-forces/insight": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 783,
+      "overflow": false
+    },
+    "ipad-portrait/boe-landscape/facts": {
+      "heading": "Bank of England",
+      "titles": [
+        "What the central bank provides",
+        "Monetary policy context"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 549,
+      "overflow": false
+    },
+    "ipad-portrait/boe-landscape/insight": {
+      "heading": "Bank of England",
+      "titles": [
+        "What the central bank provides",
+        "Monetary policy context"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 557,
+      "overflow": false
+    },
+    "ipad-portrait/boe-inside/facts": {
+      "heading": "Bank of England",
+      "titles": [
+        "Settle a payment obligation",
+        "Durable capabilities"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 622,
+      "overflow": false
+    },
+    "ipad-portrait/boe-inside/insight": {
+      "heading": "Bank of England",
+      "titles": [
+        "Settle a payment obligation",
+        "Durable capabilities",
+        "Conceptual operating mechanism"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 749,
+      "overflow": false
+    },
+    "ipad-portrait/boe-forces/facts": {
+      "heading": "Bank of England",
+      "titles": [
+        "Monetary policy decision"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 385,
+      "overflow": false
+    },
+    "ipad-portrait/boe-forces/insight": {
+      "heading": "Bank of England",
+      "titles": [
+        "How policy affects funding"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 524,
+      "overflow": false
+    },
+    "mobile/uk-landscape/facts": {
+      "heading": "The shape of the UK economy",
+      "titles": [
+        "Cyber exposure remains widespread across UK businesses"
+      ],
+      "mode": "Facts",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-landscape-384-84a37760e3e8",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 993,
+      "overflow": false
+    },
+    "mobile/uk-landscape/insight": {
+      "heading": "The shape of the UK economy",
+      "titles": [],
+      "mode": "FLORA Insight",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-landscape-384-84a37760e3e8",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 448,
+      "overflow": false
+    },
+    "mobile/uk-forces/facts": {
+      "heading": "The UK\u2019s economic context",
+      "titles": [
+        "Economic conditions"
+      ],
+      "mode": "Facts",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-forces-384-fa241b77924d",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 688,
+      "overflow": false
+    },
+    "mobile/uk-forces/insight": {
+      "heading": "The UK\u2019s economic context",
+      "titles": [
+        "Economic conditions",
+        "Sector mechanism"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "GB",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-uk-forces-384-fa241b77924d",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 896,
+      "overflow": false
+    },
+    "mobile/banking-landscape/facts": {
+      "heading": "Where money meets the economy",
+      "titles": [
+        "Resilience spans the ecosystem",
+        "The reporting landscape is changing",
+        "How value moves through Banking"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 1505,
+      "overflow": false
+    },
+    "mobile/banking-landscape/insight": {
+      "heading": "Where money meets the economy",
+      "titles": [],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 486,
+      "overflow": false
+    },
+    "mobile/banking-forces/facts": {
+      "heading": "The forces reshaping banking",
+      "titles": [
+        "Rates and customer choice",
+        "A new reporting timetable",
+        "Critical providers, closer oversight",
+        "Lloyds: AI in the operating model",
+        "Critical-provider oversight",
+        "Five Forces"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 1820,
+      "overflow": false
+    },
+    "mobile/banking-forces/insight": {
+      "heading": "The forces reshaping banking",
+      "titles": [
+        "Five Forces",
+        "Conceptual competitive mechanism",
+        "Funding and oversight context",
+        "Funding conditions",
+        "Shared dependencies",
+        "What designation tells us"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 1994,
+      "overflow": false
+    },
+    "mobile/lloyds-landscape/facts": {
+      "heading": "Customer funding and earnings",
+      "titles": [
+        "Efficiency ambition",
+        "Business model",
+        "Complaint volumes and upheld outcomes are distinct"
+      ],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-landscape-384-358069bf4f4c",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 1690,
+      "overflow": false
+    },
+    "mobile/lloyds-landscape/insight": {
+      "heading": "Customer funding and earnings",
+      "titles": [
+        "Efficiency ambition",
+        "Business model",
+        "Funding and earnings mechanisms"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-landscape-384-358069bf4f4c",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 1453,
+      "overflow": false
+    },
+    "mobile/lloyds-inside/facts": {
+      "heading": "How Lloyds operates",
+      "titles": [
+        "Resolve a customer request",
+        "Durable capabilities",
+        "Roles, enablers and measures"
+      ],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-inside-384-12d9a56acd25",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 658,
+      "overflow": false
+    },
+    "mobile/lloyds-inside/insight": {
+      "heading": "How Lloyds operates",
+      "titles": [
+        "Resolve a customer request",
+        "Durable capabilities",
+        "Roles, enablers and measures",
+        "Conceptual operating mechanism"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-inside-384-12d9a56acd25",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 835,
+      "overflow": false
+    },
+    "mobile/lloyds-forces/facts": {
+      "heading": "Conditions affecting Lloyds",
+      "titles": [],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-forces-384-2ffca0158cd7",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 632,
+      "overflow": false
+    },
+    "mobile/lloyds-forces/insight": {
+      "heading": "Conditions affecting Lloyds",
+      "titles": [
+        "Conditional consequence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-forces-384-2ffca0158cd7",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 931,
+      "overflow": false
+    },
+    "mobile/natwest-landscape/facts": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "How a retail and business bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 969,
+      "overflow": false
+    },
+    "mobile/natwest-landscape/insight": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "How a retail and business bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 581,
+      "overflow": false
+    },
+    "mobile/natwest-inside/facts": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 961,
+      "overflow": false
+    },
+    "mobile/natwest-inside/insight": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 943,
+      "overflow": false
+    },
+    "mobile/natwest-forces/facts": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 666,
+      "overflow": false
+    },
+    "mobile/natwest-forces/insight": {
+      "heading": "National Westminster Bank PLC",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 854,
+      "overflow": false
+    },
+    "mobile/hsbc-uk-landscape/facts": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "How a UK bank inside a wider group earns",
+        "Customer service evidence"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 977,
+      "overflow": false
+    },
+    "mobile/hsbc-uk-landscape/insight": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "How a UK bank inside a wider group earns",
+        "Customer service evidence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 570,
+      "overflow": false
+    },
+    "mobile/hsbc-uk-inside/facts": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 947,
+      "overflow": false
+    },
+    "mobile/hsbc-uk-inside/insight": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Resolve a customer complaint",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 930,
+      "overflow": false
+    },
+    "mobile/hsbc-uk-forces/facts": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 621,
+      "overflow": false
+    },
+    "mobile/hsbc-uk-forces/insight": {
+      "heading": "HSBC UK Bank Plc",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 809,
+      "overflow": false
+    },
+    "mobile/nationwide-landscape/facts": {
+      "heading": "Nationwide",
+      "titles": [
+        "Member rewards and integration",
+        "Customer complaints \u00b7 Society",
+        "How a mutual allocates value"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 1868,
+      "overflow": false
+    },
+    "mobile/nationwide-landscape/insight": {
+      "heading": "Nationwide Group earnings",
+      "titles": [
+        "How a mutual allocates value"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 1171,
+      "overflow": false
+    },
+    "mobile/nationwide-inside/facts": {
+      "heading": "Nationwide",
+      "titles": [
+        "Resolve a member service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 985,
+      "overflow": false
+    },
+    "mobile/nationwide-inside/insight": {
+      "heading": "Nationwide",
+      "titles": [
+        "Resolve a member service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 966,
+      "overflow": false
+    },
+    "mobile/nationwide-forces/facts": {
+      "heading": "Nationwide",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 582,
+      "overflow": false
+    },
+    "mobile/nationwide-forces/insight": {
+      "heading": "Nationwide",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 770,
+      "overflow": false
+    },
+    "mobile/starling-landscape/facts": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "How a digital bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 962,
+      "overflow": false
+    },
+    "mobile/starling-landscape/insight": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "How a digital bank earns",
+        "Customer service evidence"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 608,
+      "overflow": false
+    },
+    "mobile/starling-inside/facts": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Resolve an account-service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 1001,
+      "overflow": false
+    },
+    "mobile/starling-inside/insight": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Resolve an account-service issue",
+        "Durable capabilities",
+        "Reported service activity"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 984,
+      "overflow": false
+    },
+    "mobile/starling-forces/facts": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Service workload"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 595,
+      "overflow": false
+    },
+    "mobile/starling-forces/insight": {
+      "heading": "Starling Bank Limited",
+      "titles": [
+        "Service workload",
+        "What complaint intake signals"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 783,
+      "overflow": false
+    },
+    "mobile/boe-landscape/facts": {
+      "heading": "Bank of England",
+      "titles": [
+        "What the central bank provides",
+        "Monetary policy context"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 549,
+      "overflow": false
+    },
+    "mobile/boe-landscape/insight": {
+      "heading": "Bank of England",
+      "titles": [
+        "What the central bank provides",
+        "Monetary policy context"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 557,
+      "overflow": false
+    },
+    "mobile/boe-inside/facts": {
+      "heading": "Bank of England",
+      "titles": [
+        "Settle a payment obligation",
+        "Durable capabilities"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 622,
+      "overflow": false
+    },
+    "mobile/boe-inside/insight": {
+      "heading": "Bank of England",
+      "titles": [
+        "Settle a payment obligation",
+        "Durable capabilities",
+        "Conceptual operating mechanism"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 749,
+      "overflow": false
+    },
+    "mobile/boe-forces/facts": {
+      "heading": "Bank of England",
+      "titles": [
+        "Monetary policy decision"
+      ],
+      "mode": "Facts",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 385,
+      "overflow": false
+    },
+    "mobile/boe-forces/insight": {
+      "heading": "Bank of England",
+      "titles": [
+        "How policy affects funding"
+      ],
+      "mode": "FLORA Insight",
+      "identity": "BK-IND-002",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 0,
+      "characters": 524,
+      "overflow": false
+    }
+  },
+  "mobile_disclosure": {
+    "closed": {
+      "heading": "How Lloyds operates",
+      "titles": [
+        "Resolve a customer request",
+        "Durable capabilities",
+        "Roles, enablers and measures"
+      ],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-inside-384-12d9a56acd25",
+          "width": 0
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 658,
+      "overflow": false
+    },
+    "open": {
+      "heading": "How Lloyds operates",
+      "titles": [
+        "Resolve a customer request",
+        "Durable capabilities",
+        "Roles, enablers and measures"
+      ],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [
+        {
+          "path": "/visual-streams/assets/vp2-lloyds-inside-768-13827db67c30",
+          "width": 390
+        }
+      ],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 658,
+      "overflow": false
+    },
+    "open_print_emulation": {
+      "heading": "How Lloyds operates",
+      "titles": [
+        "Resolve a customer request",
+        "Durable capabilities",
+        "Roles, enablers and measures"
+      ],
+      "mode": "Facts",
+      "identity": "BK-ENT-001",
+      "pictures": [],
+      "disclosure": "block",
+      "wide": "none",
+      "flow": 1,
+      "characters": 612,
+      "overflow": false,
+      "left": "none"
+    }
+  },
+  "assets": {
+    "/visual-streams/assets/banking-ecosystem-384-684c51dd51bf": {
+      "success": true,
+      "bytes": 101208,
+      "sha256": "684c51dd51bf7042f77d6d51a77d7daa695bc8c942e524bbbfcee10888e985d6",
+      "exact_bytes": true
+    },
+    "/visual-streams/assets/vp2-banking-forces-384-12cea0c2400a": {
+      "success": true,
+      "bytes": 115572,
+      "sha256": "12cea0c2400a53ece89bcb8b97fe946bc6fcbdad1c8fd142454175d6c3c58b42",
+      "exact_bytes": true
+    },
+    "/visual-streams/assets/vp2-lloyds-forces-384-2ffca0158cd7": {
+      "success": true,
+      "bytes": 97652,
+      "sha256": "2ffca0158cd78943d3b20b176bd4bc50bc7d6d944ec11d13cd2ce15f3478367d",
+      "exact_bytes": true
+    },
+    "/visual-streams/assets/vp2-lloyds-inside-384-12d9a56acd25": {
+      "success": true,
+      "bytes": 110268,
+      "sha256": "12d9a56acd25c1fc7ef673130c20ca30cf86083485e866ba9360282f175d47dc",
+      "exact_bytes": true
+    },
+    "/visual-streams/assets/vp2-lloyds-landscape-384-358069bf4f4c": {
+      "success": true,
+      "bytes": 114154,
+      "sha256": "358069bf4f4c424ae2cbe8a1f06ffbf75364731f527c208bda8ba703e56e76b3",
+      "exact_bytes": true
+    },
+    "/visual-streams/assets/vp2-uk-forces-384-fa241b77924d": {
+      "success": true,
+      "bytes": 88324,
+      "sha256": "fa241b77924d085ced99b2027f1ab94a813dcd78977751c2aff2d989df3c770a",
+      "exact_bytes": true
+    },
+    "/visual-streams/assets/vp2-uk-landscape-384-84a37760e3e8": {
+      "success": true,
+      "bytes": 108258,
+      "sha256": "84a37760e3e89556727e60003a23f38c3f3f0255050ad1fcc6be62b09c12a25f",
+      "exact_bytes": true
+    }
+  }
+}
