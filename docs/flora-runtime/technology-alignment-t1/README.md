@@ -5,7 +5,7 @@ Baseline `df6173c186e6469783c732247f4c13aaa961aec4` includes #701 and #704. T1 f
 | Entry or capability | T1 treatment |
 | --- | --- |
 | Industry catalogue and UK Technology visual link | Existing destinations. The Technology visual arrival shows its eight original districts on the left and defaults to Landscape / Facts. |
-| District and participant comparison | Same native route, filters, sorting, search, provider population and eleven populated metric rows. Reading mode retains the district and query. |
+| District and participant comparison | Same native route, filters, sorting, search, provider population and eleven supplementary comparison records, preserving blank metric cells. Reading mode retains the district and query. |
 | Provider directory | Existing directory and all 80 retained views. Direct link from the Technology context rail. |
 | NVIDIA | Existing commercial presentation, reporting periods, ecosystem roles, programme detail, unqualified hypotheses and source disclosures. Dedicated Insight uses the retained commercial pressure assessment. |
 | Equinix | Existing global FY2025 USD figures, annual filing, details and conceptual operating areas. Landscape and Inside keep their established native paths. No UK-only value or new source admission. |
@@ -14,7 +14,7 @@ Baseline `df6173c186e6469783c732247f4c13aaa961aec4` includes #701 and #704. T1 f
 
 ## Architectural critique
 
-The alignment is a presentation adapter over the established Technology renderers. It uses the existing reading control style, with finite native links scoped to the five presentation endpoints. The mode preserves accepted URL selectors. Current context shows the district and participant independently. A provider name does not bind legal or canonical identity.
+The alignment is a presentation adapter over the established Technology renderers. It uses the existing reading control style, with finite native links scoped to the five presentation endpoints. The mode preserves accepted URL selectors. Current context shows the district and participant independently. The eleven supplementary records include role and commercial context. On this main cut, one participant has a populated UK numerical cell. A provider name does not bind legal or canonical identity.
 
 Commissioned Technology art stays the arrival anchor. The comparison uses it as context, while enterprise profiles keep their editorial focus and a route back to the district. The existing broad comparison table still needs its own horizontal scrolling on narrow displays. A redesigned mobile comparator is a separate decision.
 
