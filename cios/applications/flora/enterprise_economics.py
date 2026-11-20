@@ -53,7 +53,12 @@ def _basis(facts):
         sources = tuple(replace(s, url='https://www.lloydsbankinggroup.com/', locator='', quote='')
                         if 'lloydsbankinggroup.com' in s.url else replace(s, quote='') for s in fact.sources)
         with p.editorial_view(False):
-            items.append(p.render(replace(fact, sources=sources), compact=True))
+            # Retain the owning semantic formatter and every caveat, but use
+            # one inspection action rather than a disclosure for each fact.
+            rendered = p.render(replace(fact, sources=sources), compact=True)
+            rendered = rendered.replace('<details class="intelligence-source"><summary>Sources &amp; reasoning</summary>',
+                                        '<div class="econ-source">').replace('</details>', '</div>')
+            items.append(rendered)
     return ('<details class="econ-basis"><summary>Source &amp; basis</summary>'
             + ''.join(items) + '</details>')
 
@@ -86,8 +91,12 @@ def _composition(ctx, stages, selected, figures, facts, extra='', related=''):
                      + _icon(i, airline) + '<span class="econ-stage-name">' + escape(name) + '</span>' + amount + '</a></li>')
     active = next(row for row in stages if row[0] == selected)
     analysis = ctx.reading == 'insight'
-    return (STYLE + '<section class="economics ' + ('econ-airline' if airline else 'econ-bank') + '" aria-labelledby="economics-title">'
-            '<p class="eyebrow">' + company + '</p><h1 id="economics-title">' + title + '</h1>'
+    heading_id = 'insight-title' if ctx.detail else 'economics-title'
+    focus = ' id="insight" tabindex="-1"' if ctx.detail else ''
+    close = ('<a class="close close-insight" aria-label="Close economic detail" href="'
+             + escape(v.url(ctx, detail='', reading=ctx.reading), quote=True) + '#visual-content">×</a>') if ctx.detail else ''
+    return (STYLE + '<section class="economics ' + ('econ-airline' if airline else 'econ-bank') + '"' + focus + ' aria-labelledby="' + heading_id + '">'
+            + close + '<p class="eyebrow">' + company + '</p><h1 id="' + heading_id + '">' + title + '</h1>'
             '<figure class="econ-story"><figcaption>Illustrative ' + ('airline' if airline else 'banking') + ' model · not to scale</figcaption>'
             '<nav aria-label="Economic stages"><ol class="econ-stages">' + ''.join(links) + '</ol></nav></figure>'
             '<section class="econ-focus" aria-labelledby="economic-detail"><h2 id="economic-detail">' + escape(active[3]) + '</h2>'
@@ -142,7 +151,8 @@ def banking(ctx, data, issues, *, headers=None):
     claims = lloyds._claims(data, verified)
     stock, opening, profit = (lloyds._measure(claims.get(key), *basis)
                               for key, basis in lloyds.MEASURES.items())
-    change = leadership_agenda._deposit_change((opening, stock)) if opening and stock else None
+    change = (leadership_agenda._deposit_change((opening, stock)) if opening and stock
+              and any(issue.key == 'funding-base' for issue in issues) else None)
     selected = ctx.detail if ctx.detail in lloyds.LANDSCAPE_COMPONENTS else 'funding'
     figures = {}
     if stock:
@@ -153,7 +163,7 @@ def banking(ctx, data, issues, *, headers=None):
     extra = ''
     if selected == 'funding' and change and p.eligible(change):
         facts += [opening, change]
-        extra = ('<p class="econ-change" data-semantic-type="calculated">Calculated · <strong>£'
+        extra = ('<p class="econ-change" data-intelligence="funding-base" data-semantic-type="calculated">Calculated · <strong>£'
                  + escape(str(change.value)) + 'bn</strong> difference in deposits'
                  '<span>31 December 2025 → 30 September 2026 · two balance-sheet dates</span></p>'
                  '<p class="econ-caveat">A difference between reported balances, not an organic inflow or an income measure.</p>')

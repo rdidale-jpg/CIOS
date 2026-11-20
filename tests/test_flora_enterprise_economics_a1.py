@@ -41,6 +41,7 @@ def test_three_connected_stages_share_modes_scope_and_native_urls(path, stages, 
         assert 'Illustrative' in html and 'not to scale' in html
         assert all(word not in html for word in ('What to investigate', 'No eligible reported measure', 'Research gap'))
         assert 'Source &amp; basis' in html
+        assert html.count('<details') == 1  # One inspection, no nested click tree.
         assert ('reading=insight' in html) == (reading == 'insight' or 'FLORA Insight' in html)
 
 
@@ -123,6 +124,13 @@ def test_source_recheck_does_not_trust_stale_calculated_agenda(monkeypatch):
     next(row for row in data['claims'] if row['id'] == 'LBG-AR25-DEPOSITS')['withdrawn'] = True
     html = economics.banking(ctx, data, stale, headers={})
     assert '£6.3bn' not in html and 'Funding perspective' not in html
+
+
+def test_expired_agenda_review_does_not_recreate_the_released_calculation():
+    ctx = v.resolve(BANK, {'stream': ['landscape']})
+    html = economics.banking(ctx, v.current_data(ctx), (), headers={})
+    assert '£502.8bn' in html and '£6.6bn' in html
+    assert '£6.3bn' not in html and 'data-intelligence="funding-base"' not in html
 
 
 @pytest.mark.parametrize('path', [BANK, AIR])

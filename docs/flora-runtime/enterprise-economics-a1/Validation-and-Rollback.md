@@ -20,6 +20,15 @@ The A1 suite checks finite stages/mode URLs, stock/flow/period/entity/basis sema
 
 The inherited public-financial test keeps its original positive/negative/withdrawal assertions; only the fallback title changes to the accepted design. Existing experience tests retain source-withdrawal, identity, route and distinct-perspective checks, replacing obsolete question headings, `data-component` markup, investigation prompts and placeholder expectations with the new headings/stage markup, labelled Insight and omission policy. The existing customer-outcomes link remains. No test is removed, marked skipped or xfailed.
 
+The first hosted head also exposed four specific integration cases, all corrected before final validation:
+
+- `test_customer_markup_has_no_research_controls_even_hidden_or_printable` had the older universal zero-disclosure expectation. Its two Lloyds Landscape cases now permit exactly the **one A1-commissioned** disclosure, require no nested controls/PDF links/private administration, then apply the original clean-editorial assertions to everything outside it. Every other screen retains the original rule.
+- EAI-2's browser requires the existing `data-intelligence="funding-base"` marker. It is retained on the single current calculated comparison, with no duplicate entry.
+- `test_expired_review_omits_all_new_views_without_empty_preview_sections` found that recomputing from still-eligible stock facts could resurrect a comparison after the existing agenda's release review expired. A1 now also requires that current existing-owner agenda entry; the new negative test preserves unrelated facts while suppressing the comparison/link. No review window or source permission is extended.
+- `test_every_interactive_detail_is_server_addressable_without_js[lloyds-landscape]` requires the existing `insight` focus landmark. Selected Economics details retain that landmark and its labelled heading. No detail or accessibility test is removed.
+
+The retained broad browser proof's two root headings are updated to the accepted design; its navigation, source, keyboard, layout and permission checks remain. These are explicit reconciliations, not refreshed inherited-failure signatures.
+
 Exact renderer evolution is bounded by `Renderer-Evolution.json` and an AST comparison that permits only six listed function bodies to differ. Imports, constants and every other function must remain exact. Unknown after-hashes fail validation. Original historical owner pins and their prior checks remain intact; the compatibility chain first validates the current cut then supplies the exact predecessor to historical checks. **This is development assurance, not a runtime rights/approval registry.** Neither `flora_ci.py` nor `flora-baseline-v1.json` changes. Any changed inherited failure/skip signature remains a failure, not an automatically accepted refresh.
 
 ## Withdrawal limits

@@ -65,9 +65,11 @@ docs/flora-runtime/enterprise-economics-a1/previews/zoom-lloyds.jpg
 tests/test_flora_enterprise_economics_a1.py
 tests/test_flora_experience_684.py
 tests/test_flora_public_financial.py
+tests/test_flora_uxr1_650.py
 tools/ci/flora_enterprise_economics_preview.cjs
 tools/research/enterprise_economics_compatibility.py
 tools/research/enterprise_economics_preview.py
 tools/research/enterprise_economics_quality.py
+tools/research/experience_684_browser.py
 tools/research/public_financial_compatibility.py
 tools/research/ux_unify_compatibility.py

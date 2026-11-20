@@ -61,6 +61,9 @@ const airline = '/enterprises/easyjet/preview?stream=landscape';
           await disclosure.click();
         }
         check(!(await page.locator('main').innerText()).match(/£11\.084bn|£477\.5bn|3\.21%|£10,106|£665m/),'no restricted or research-only financial outputs');
+        await page.getByRole('link',{name:'Close economic detail',exact:true}).click();
+        await page.waitForURL(url=>!url.searchParams.has('detail'));
+        check(new URL(page.url()).searchParams.get('reading')==='insight','close preserves subject and reading');
         for(const forbidden of ['workspace=private','run_id=fi-private','export=csv']) {
           check([403,404].includes((await page.request.get(cfg.base+route+'&'+forbidden)).status()),'unsupported/private query denied');
         }
