@@ -1,0 +1,36 @@
+{
+  "base_or_checkout": "8849296488790679d52350e49a603657a6f2b3bb",
+  "runtime": {
+    "cios/applications/flora/web/app.py": "547a14898b829af23e711ff4d97a332dc7f10bfbb5bd9f88b7dd3560f40ca446",
+    "cios/applications/flora/research_intelligence/unified_views.py": "ebe2a39aef75d217c2488536f933e018aebd64b1edb25412970051d6b9634f17"
+  },
+  "observations": [
+    {
+      "viewport": "desktop",
+      "desktop_keyboard_or_tablet_touch": true,
+      "catalogue_and_industry_entry": true,
+      "economics_and_history": true,
+      "legacy_and_detail_routes": true,
+      "private_access_denied": true,
+      "source_withdrawal_back_and_reload": true
+    },
+    {
+      "viewport": "ipad-landscape",
+      "desktop_keyboard_or_tablet_touch": true,
+      "catalogue_and_industry_entry": true,
+      "economics_and_history": true,
+      "legacy_and_detail_routes": true,
+      "private_access_denied": true,
+      "source_withdrawal_back_and_reload": true
+    },
+    {
+      "viewport": "ipad-portrait",
+      "desktop_keyboard_or_tablet_touch": true,
+      "catalogue_and_industry_entry": true,
+      "economics_and_history": true,
+      "legacy_and_detail_routes": true,
+      "private_access_denied": true,
+      "source_withdrawal_back_and_reload": true
+    }
+  ]
+}
