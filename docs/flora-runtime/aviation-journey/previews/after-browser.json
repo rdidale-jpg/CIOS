@@ -1,8 +1,9 @@
 {
-  "base_or_checkout": "8849296488790679d52350e49a603657a6f2b3bb",
+  "base_or_checkout": "a621183b4d3c68264e05d71e412197202d22a676",
   "runtime": {
     "cios/applications/flora/web/app.py": "547a14898b829af23e711ff4d97a332dc7f10bfbb5bd9f88b7dd3560f40ca446",
-    "cios/applications/flora/research_intelligence/unified_views.py": "ebe2a39aef75d217c2488536f933e018aebd64b1edb25412970051d6b9634f17"
+    "cios/applications/flora/research_intelligence/unified_views.py": "ebe2a39aef75d217c2488536f933e018aebd64b1edb25412970051d6b9634f17",
+    "cios/applications/flora/enterprise_economics.py": "6d6e6f2c87321c8c2405788d5dd0114c7a49b0505c96a0444f8ff33673ff413c"
   },
   "observations": [
     {
@@ -11,6 +12,7 @@
       "catalogue_and_industry_entry": true,
       "economics_and_history": true,
       "legacy_and_detail_routes": true,
+      "understanding_link": true,
       "private_access_denied": true,
       "source_withdrawal_back_and_reload": true
     },
@@ -20,6 +22,7 @@
       "catalogue_and_industry_entry": true,
       "economics_and_history": true,
       "legacy_and_detail_routes": true,
+      "understanding_link": true,
       "private_access_denied": true,
       "source_withdrawal_back_and_reload": true
     },
@@ -29,6 +32,7 @@
       "catalogue_and_industry_entry": true,
       "economics_and_history": true,
       "legacy_and_detail_routes": true,
+      "understanding_link": true,
       "private_access_denied": true,
       "source_withdrawal_back_and_reload": true
     }
