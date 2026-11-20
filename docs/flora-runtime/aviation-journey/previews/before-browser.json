@@ -1,0 +1,24 @@
+{
+  "base_or_checkout": "088275e75365f1f251537d21e2601f10aa8e861a",
+  "runtime": {
+    "cios/applications/flora/web/app.py": "bec05ce0f6ee8e1a6096e4fa645b136762a6141db1b3e7f410e887c8dadbd925",
+    "cios/applications/flora/research_intelligence/unified_views.py": "dbf9c71f5fe8eb69cc1660afb2f16a008e7e034ab75359e9396f70dbc7c58806"
+  },
+  "observations": [
+    {
+      "viewport": "desktop",
+      "path": "/enterprises/easyjet",
+      "legacy_before": true
+    },
+    {
+      "viewport": "ipad-landscape",
+      "path": "/enterprises/easyjet",
+      "legacy_before": true
+    },
+    {
+      "viewport": "ipad-portrait",
+      "path": "/enterprises/easyjet",
+      "legacy_before": true
+    }
+  ]
+}

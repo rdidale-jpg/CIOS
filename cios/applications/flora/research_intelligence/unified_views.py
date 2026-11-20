@@ -130,7 +130,8 @@ def industry_page(lens='overview',headers=None,domain='banking'):
         if lens=='commercial':
             from .commercial_intelligence import commercial_projection,commercial_map
             scene=commercial_map(scene,commercial_projection(d))
-        body=breadcrumb(data=d)+f"<header class='lm-page-head' id='content'><p class='ux-kicker'>Industry Twin / {e(d['industry_name'])}</p><h1>{e(short)}</h1></header>"+nav+ds.section_scale('K' if domain=='banking' else 'H')+render_living_map(scene,lens)
+        enterprise_entry = f"<p><a href='{r['enterprise']}'>Explore {e(d['enterprise_name'])} →</a></p>" if domain=='aviation' else ''
+        body=breadcrumb(data=d)+f"<header class='lm-page-head' id='content'><p class='ux-kicker'>Industry Twin / {e(d['industry_name'])}</p><h1>{e(short)}</h1>{enterprise_entry}</header>"+nav+ds.section_scale('K' if domain=='banking' else 'H')+render_living_map(scene,lens)
 
     primary=body if living else ''
     if living: body=''
@@ -144,6 +145,8 @@ def industry_page(lens='overview',headers=None,domain='banking'):
     body+="<details class='ux-fold'><summary>Interpretation, affected capabilities & evidence</summary>"+''.join(f"<article class='ux-claim'><h3>{e(f['title'])}</h3><p>{e(f['assessment'])}</p><a href='{r['nodes']}/{f['id']}'>Follow capabilities, evidence & opportunities →</a></article>" for f in rows)+"</details>"
     body+="<div class='ux-section-head'><h2>Enterprise landscape</h2><a href='/enterprises'>All enterprises →</a></div>"+enterprise_cards(d)+"<h2>Commercial implications</h2>"+opportunity_cards(d,compact=True)+provenance_notice(d)+research_fold(d,d['industry_twin_id'])
     body+=f"<details><summary>Supporting research & legacy intelligence</summary><p><a href='{root}'>Detailed research entry</a> · <a href='{r['industry']}/visual-specs'>Structured visual specifications (JSON)</a></p>"+("<p><a href='/flora/banking'>Historical Banking portfolio</a> · <a href='/flora/banking/explorer'>Earlier Explorer</a></p>" if domain=='banking' else '')+"</details>"
+    if domain=='aviation':
+        body+="<p><a href='/enterprises/easyjet?lens=operating-model'>easyJet detailed operating model and supporting research</a></p>"
     if living: body=primary+ds.source_note(body)
     return page(d['industry_name']+' Industry Twin',body,headers,canonical=r['industry'])
 

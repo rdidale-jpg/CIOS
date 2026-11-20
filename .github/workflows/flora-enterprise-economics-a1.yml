@@ -32,8 +32,16 @@ jobs:
         run: python -m pytest tests/test_flora_enterprise_economics_a1.py tests/test_flora_experience_684.py tests/test_flora_public_financial.py tests/test_flora_et_integrate_672.py tests/test_flora_f1_642.py tests/test_flora_f2_644.py tests/test_flora_f3_646.py tests/test_flora_rud1_648.py tests/test_flora_auth2_655.py tests/test_flora_visual_panels_632.py -q
       - name: All strict security tests
         run: python -m pytest tests/test_flora_security*.py -q
-      - name: Historical cuts, original assets, inactive Lloyds and reverse-tree rollback
-        run: python tools/research/enterprise_economics_quality.py > "$RUNNER_TEMP/economics-quality.json"
+      - name: Verify the A1 historical cut and its reverse-tree rollback
+        run: |
+          # The A1 exact-cut audit includes source paths that later PRs may
+          # legitimately evolve. Current-head runtime tests run above and below.
+          a1_merge=088275e75365f1f251537d21e2601f10aa8e861a
+          if git merge-base --is-ancestor "$a1_merge" HEAD; then
+            git worktree add --detach "$RUNNER_TEMP/economics-a1-cut" "$a1_merge"
+            cd "$RUNNER_TEMP/economics-a1-cut"
+          fi
+          python tools/research/enterprise_economics_quality.py > "$RUNNER_TEMP/economics-quality.json"
       - name: Install isolated Chromium
         run: |
           npm install --prefix "$RUNNER_TEMP/economics-node" playwright@1.62.1

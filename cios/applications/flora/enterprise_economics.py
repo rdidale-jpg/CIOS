@@ -200,5 +200,5 @@ def aviation(ctx, data):
     related = '<nav class="econ-related" aria-label="Related enterprise views">'
     for detail, label in (('network-planning', 'Network Planning'), ('fleet-operations', 'Fleet Operations')):
         related += '<a href="' + escape(v.url(ctx, stream='inside', detail=detail, reading=ctx.reading), quote=True) + '#visual-content">' + label + '</a>'
-    related += '</nav>'
+    related += '<a href="/enterprises/easyjet/understanding">Research and evidence</a></nav>'
     return _composition(ctx, AIRLINE, selected, figures, (fleet, network), caveat, related)

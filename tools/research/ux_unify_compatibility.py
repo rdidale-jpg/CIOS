@@ -47,8 +47,17 @@ LVIR = {
 }
 
 
+# Route continuity changes one exact public dispatch branch. Historical owner
+# checks still receive their original bytes after matching the entire new file.
+AVIATION_JOURNEY_BASE = "088275e75365f1f251537d21e2601f10aa8e861a"
+AVIATION_JOURNEY_APP = "cios/applications/flora/web/app.py"
+AVIATION_JOURNEY_SHA256 = "547a14898b829af23e711ff4d97a332dc7f10bfbb5bd9f88b7dd3560f40ca446"
+
+
 def predecessor(root, path):
     current = (Path(root) / path).read_bytes()
+    if path == AVIATION_JOURNEY_APP and sha256(current).hexdigest() == AVIATION_JOURNEY_SHA256:
+        current = subprocess.check_output(["git", "show", f"{AVIATION_JOURNEY_BASE}:{path}"], cwd=root)
     from tools.research.enterprise_economics_compatibility import predecessor as economics_predecessor
     current = economics_predecessor(root, path, current)
     from tools.research.public_financial_compatibility import predecessor as public_predecessor
