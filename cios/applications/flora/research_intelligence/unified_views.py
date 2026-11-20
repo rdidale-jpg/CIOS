@@ -144,6 +144,8 @@ def industry_page(lens='overview',headers=None,domain='banking'):
     body+="<details class='ux-fold'><summary>Interpretation, affected capabilities & evidence</summary>"+''.join(f"<article class='ux-claim'><h3>{e(f['title'])}</h3><p>{e(f['assessment'])}</p><a href='{r['nodes']}/{f['id']}'>Follow capabilities, evidence & opportunities →</a></article>" for f in rows)+"</details>"
     body+="<div class='ux-section-head'><h2>Enterprise landscape</h2><a href='/enterprises'>All enterprises →</a></div>"+enterprise_cards(d)+"<h2>Commercial implications</h2>"+opportunity_cards(d,compact=True)+provenance_notice(d)+research_fold(d,d['industry_twin_id'])
     body+=f"<details><summary>Supporting research & legacy intelligence</summary><p><a href='{root}'>Detailed research entry</a> · <a href='{r['industry']}/visual-specs'>Structured visual specifications (JSON)</a></p>"+("<p><a href='/flora/banking'>Historical Banking portfolio</a> · <a href='/flora/banking/explorer'>Earlier Explorer</a></p>" if domain=='banking' else '')+"</details>"
+    if domain=='aviation':
+        body+="<p><a href='/enterprises/easyjet?lens=operating-model'>easyJet detailed operating model and supporting research</a></p>"
     if living: body=primary+ds.source_note(body)
     return page(d['industry_name']+' Industry Twin',body,headers,canonical=r['industry'])
 

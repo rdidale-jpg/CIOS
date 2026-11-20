@@ -208,9 +208,15 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                     if not unchanged: self.wfile.write(body)
                 else:
                     self._body(body, mime, 200)
-            elif parsed.path == '/enterprises/easyjet/preview':
+            elif parsed.path == '/enterprises/easyjet/preview' or (
+                parsed.path == '/enterprises/easyjet' and not parsed.query
+            ):
                 from cios.applications.flora import visual_streams
-                self._html(visual_streams.render(parsed.path, parse_qs(parsed.query, keep_blank_values=True), self.headers))
+                # Keep preview URLs as the existing selector owner and explicit
+                # lens URLs with the specialist research dispatcher below.
+                self._html(visual_streams.render(
+                    visual_streams.EASYJET_ROUTE, parse_qs(parsed.query, keep_blank_values=True), self.headers,
+                ))
             elif parsed.path in {'/industries/banking', '/enterprises/lloyds'}:
                 from cios.applications.flora import visual_streams
                 query = parse_qs(parsed.query, keep_blank_values=True)

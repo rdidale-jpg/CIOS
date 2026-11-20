@@ -99,7 +99,12 @@ def test_original_research_and_all_six_easyjet_hypotheses_are_byte_preserved():
 
 
 def test_partial_sources_and_future_supplier_plans_do_not_become_current_verified_contracts(web):
-    html=web('/enterprises/easyjet')[1]
+    status, modern=web('/enterprises/easyjet')
+    assert status==200 and 'data-identity="AV-ENT-001"' in modern
+    assert 'data-stream="landscape"' in modern and 'data-stage="airline-revenue"' in modern
+    assert all(f'data-region="{region}"' in modern for region in ('top','left','main'))
+    assert '/enterprises/easyjet?lens=operating-model' in DOM(web('/industries/aviation')[1]).links
+    html=web('/enterprises/easyjet?lens=operating-model')[1]
     assert '2 official search-index excerpts only' in html and 'original documents not directly verified' in html
     assert 'source citations still require primary verification' in html
     ecosystem=web('/enterprises/easyjet?lens=ecosystem')[1]
