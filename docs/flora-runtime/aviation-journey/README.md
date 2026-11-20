@@ -13,7 +13,7 @@ Baseline `088275e75365f1f251537d21e2601f10aa8e861a` includes #701. The route dec
 | `/enterprises/easyjet/preview` and its `stream`, `detail`, `reading` selectors | Original server-native links and validation. This is the existing canonical presentation address and all generated stateful URLs continue to use it. |
 | `/enterprises/easyjet?lens=operating-model` | Prior default screen, now the detailed operating model linked from Aviation. |
 | `?lens=timeline`, `?lens=ecosystem`, `?lens=opportunities`, `?lens=commercial` on the enterprise path | Same specialist dispatcher and access boundaries. |
-| `/enterprises/easyjet/understanding`, `/enterprises/easyjet/research-diagnostic`, `/industries/aviation/visual-specs` | Existing dedicated handlers. |
+| `/enterprises/easyjet/understanding`, `/enterprises/easyjet/research-diagnostic`, `/industries/aviation/visual-specs` | Existing dedicated handlers. Landscape links directly to Understanding through Research and evidence. |
 | `/flora/aviation/research` and its easyJet, opportunity, source, gap, evidence and candidate destinations | Existing read-only research family. Canonical/Financial-run/Pipeline permissions stay with their current owners. |
 
 ## Architecture review

@@ -84,6 +84,10 @@ with app() as (base, knowledge), sync_playwright() as p:
         expect(page.locator('[data-region="top"]')).to_have_count(1)
         expect(page.locator('[data-region="left"]')).to_have_count(1)
         expect(page.locator('.econ-stages')).to_be_visible()
+        activate(page.get_by_role('link', name='Research and evidence', exact=True), touch)
+        page.wait_for_url(base + root + '/understanding')
+        page.go_back()
+        expect(main).to_be_visible()
         for entry in ('/enterprises', industry + '?lens=pestle'):
             assert page.goto(entry).ok
             activate(page.locator(f'a[href="{root}"]:visible').first, touch)
@@ -154,7 +158,7 @@ with app() as (base, knowledge), sync_playwright() as p:
         assert not errors, errors
         results.append({'viewport': label, 'desktop_keyboard_or_tablet_touch': True,
                         'catalogue_and_industry_entry': True, 'economics_and_history': True,
-                        'legacy_and_detail_routes': True, 'private_access_denied': True,
+                        'legacy_and_detail_routes': True, 'understanding_link': True, 'private_access_denied': True,
                         'source_withdrawal_back_and_reload': True})
         page.close()
     browser.close()
@@ -162,7 +166,8 @@ with app() as (base, knowledge), sync_playwright() as p:
 (output / f'{mode}-browser.json').write_text(json.dumps({
     'base_or_checkout': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
     'runtime': {name: sha256((repo / name).read_bytes()).hexdigest() for name in (
-        'cios/applications/flora/web/app.py', 'cios/applications/flora/research_intelligence/unified_views.py')},
+        'cios/applications/flora/web/app.py', 'cios/applications/flora/research_intelligence/unified_views.py',
+        'cios/applications/flora/enterprise_economics.py')},
     'observations': results,
 }, indent=2) + '\n')
 print(json.dumps(results, indent=2))
