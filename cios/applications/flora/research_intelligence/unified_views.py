@@ -130,7 +130,8 @@ def industry_page(lens='overview',headers=None,domain='banking'):
         if lens=='commercial':
             from .commercial_intelligence import commercial_projection,commercial_map
             scene=commercial_map(scene,commercial_projection(d))
-        body=breadcrumb(data=d)+f"<header class='lm-page-head' id='content'><p class='ux-kicker'>Industry Twin / {e(d['industry_name'])}</p><h1>{e(short)}</h1></header>"+nav+ds.section_scale('K' if domain=='banking' else 'H')+render_living_map(scene,lens)
+        enterprise_entry = f"<p><a href='{r['enterprise']}'>Explore {e(d['enterprise_name'])} →</a></p>" if domain=='aviation' else ''
+        body=breadcrumb(data=d)+f"<header class='lm-page-head' id='content'><p class='ux-kicker'>Industry Twin / {e(d['industry_name'])}</p><h1>{e(short)}</h1>{enterprise_entry}</header>"+nav+ds.section_scale('K' if domain=='banking' else 'H')+render_living_map(scene,lens)
 
     primary=body if living else ''
     if living: body=''
