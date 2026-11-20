@@ -279,7 +279,7 @@ def test_lending_main_withdraws_all_new_visible_hidden_and_accessible_outputs(re
     edit(resolved,lambda s:s.update(withdrawn=True))
     html=visual.render('/enterprises/lloyds',query,{})
     assert all(x not in html for x in ('£11.084bn','£477.5bn','3.21%','public-financial-title'))
-    assert 'How does Lloyds make money?' in html
+    assert 'From funding to earnings' in html
 
 
 def test_http_no_store_revalidation_and_no_new_export_or_rights_override(resolved):

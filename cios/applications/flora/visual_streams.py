@@ -130,12 +130,13 @@ def asset(name):
 def resolve(path,query):
  if path==EASYJET_ROUTE:
   from .easyjet_capabilities import CAPABILITIES
+  from .enterprise_economics import AIRLINE_STAGES
   if set(query)-{'stream','detail','reading'} or any(not isinstance(values,list) or len(values)!=1 for values in query.values()):
    raise ValueError('Unavailable easyJet selector')
   stream=query.get('stream',['landscape'])[0]
   detail=query.get('detail',[''])[0]
   reading=query.get('reading',['facts'])[0]
-  if stream not in PRESENTATIONS['easyjet']['streams'] or ('detail' in query and detail not in CAPABILITIES) or reading not in ('facts','insight'):
+  if stream not in PRESENTATIONS['easyjet']['streams'] or ('detail' in query and detail not in CAPABILITIES and not (stream=='landscape' and detail in AIRLINE_STAGES)) or reading not in ('facts','insight'):
    raise ValueError('Unavailable easyJet view')
   return Context('easyjet',stream,detail=detail,reading=reading)
 
@@ -205,7 +206,9 @@ def stream_url(ctx,stream):
   if stream not in banking_cohort.STREAMS:raise ValueError('Insight view unavailable')
   return url(ctx,stream=stream,reading=ctx.reading)
  if stream not in PRESENTATIONS[ctx.scope]['streams']:raise ValueError('Insight view unavailable')
- if ctx.scope=='easyjet':return url(ctx,stream=stream,reading=ctx.reading)
+ if ctx.scope=='easyjet':
+  from .enterprise_economics import AIRLINE_STAGES
+  return url(ctx,stream=stream,detail='' if ctx.detail in AIRLINE_STAGES and stream!='landscape' else ctx.detail,reading=ctx.reading)
  detail=ctx.detail
  target={s['id']for s in geometry()[ctx.scope+'-'+stream]['spots']}
  if detail and stream!=ctx.stream:

@@ -204,6 +204,9 @@ def main(ctx):
     from . import reading_views as reading
 
     data = _data()
+    from .enterprise_economics import AIRLINE_STAGES, aviation
+    if ctx.stream == 'landscape' and ctx.detail in AIRLINE_STAGES:
+        return aviation(ctx, data)
     if not ctx.detail:
         from .experience_composition import easyjet_root
         return easyjet_root(ctx, data)

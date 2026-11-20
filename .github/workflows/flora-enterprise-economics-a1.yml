@@ -1,0 +1,53 @@
+name: FLORA Enterprise Economics A1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'cios/applications/flora/**'
+      - 'tests/**'
+      - 'tools/research/**'
+      - 'tools/ci/flora_enterprise_economics_preview.cjs'
+      - 'docs/flora-runtime/enterprise-economics-a1/**'
+      - '.github/workflows/flora-enterprise-economics-a1.yml'
+permissions:
+  contents: read
+jobs:
+  economics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.txt
+      - name: Economics, source withdrawal, financial and existing journey boundaries
+        run: python -m pytest tests/test_flora_enterprise_economics_a1.py tests/test_flora_experience_684.py tests/test_flora_public_financial.py tests/test_flora_et_integrate_672.py tests/test_flora_f1_642.py tests/test_flora_f2_644.py tests/test_flora_f3_646.py tests/test_flora_rud1_648.py tests/test_flora_auth2_655.py tests/test_flora_visual_panels_632.py -q
+      - name: All strict security tests
+        run: python -m pytest tests/test_flora_security*.py -q
+      - name: Historical cuts, original assets, inactive Lloyds and reverse-tree rollback
+        run: python tools/research/enterprise_economics_quality.py > "$RUNNER_TEMP/economics-quality.json"
+      - name: Install isolated Chromium
+        run: |
+          npm install --prefix "$RUNNER_TEMP/economics-node" playwright@1.62.1
+          "$RUNNER_TEMP/economics-node/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Desktop, iPads, mobile, keyboard, touch, print and history withdrawal
+        env:
+          NODE_PATH: ${{ runner.temp }}/economics-node/node_modules
+        run: python tools/research/enterprise_economics_preview.py --output "$RUNNER_TEMP/economics-browser"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: flora-enterprise-economics-${{ github.event.pull_request.head.sha }}
+          path: |
+            ${{ runner.temp }}/economics-quality.json
+            ${{ runner.temp }}/economics-browser/*.json
+            ${{ runner.temp }}/economics-browser/*.jpg
+          retention-days: 14

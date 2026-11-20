@@ -49,6 +49,8 @@ LVIR = {
 
 def predecessor(root, path):
     current = (Path(root) / path).read_bytes()
+    from tools.research.enterprise_economics_compatibility import predecessor as economics_predecessor
+    current = economics_predecessor(root, path, current)
     from tools.research.public_financial_compatibility import predecessor as public_predecessor
     current = public_predecessor(root, path, current)
     if path in LVIR and sha256(current).hexdigest() == LVIR[path]:

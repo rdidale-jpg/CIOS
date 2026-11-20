@@ -1,0 +1,43 @@
+{
+  "cios/applications/flora/lloyds_recovery.py": {
+    "base": "03719d7573f087c65d9622719273aa4b89caf7d3",
+    "functions": [
+      "landscape"
+    ],
+    "before_sha256": "51c539b6b4b187a54fde23bf422bfe835ac20ea307c4e2bdc8a3b16c72d11f3f",
+    "after_sha256": "58d38d6f33c904e75776dbbfeee15482f1adafc50e11906675129bc8246c0d49"
+  },
+  "cios/applications/flora/experience_composition.py": {
+    "base": "03719d7573f087c65d9622719273aa4b89caf7d3",
+    "functions": [
+      "easyjet_root"
+    ],
+    "before_sha256": "9f6779356058de78a9a5a6375756c29ee4c3f787f50af9947868d61c775a749a",
+    "after_sha256": "797ce17a001d2916b4e4ccbb12021b2a261f594d3403bb68a91860c4d2fc24a5"
+  },
+  "cios/applications/flora/easyjet_capabilities.py": {
+    "base": "03719d7573f087c65d9622719273aa4b89caf7d3",
+    "functions": [
+      "main"
+    ],
+    "before_sha256": "b0445f388fb10f6ea216a6b963ecca69f600c4ada3ebd889794f9903305d0972",
+    "after_sha256": "b5349d6cd9b5d671da61aaf4b690bd56f66a3c57ef617cb600d3d77d8d32e318"
+  },
+  "cios/applications/flora/visual_panels.py": {
+    "base": "03719d7573f087c65d9622719273aa4b89caf7d3",
+    "functions": [
+      "render"
+    ],
+    "before_sha256": "c35485b91557d25124ad7a7e2c3b3b268d0e3c11dd3aeadb68df63b63e22429f",
+    "after_sha256": "8b197803067c367de17e86f3170fed60bd1a1240587eb502d57a93963f9d896f"
+  },
+  "cios/applications/flora/visual_streams.py": {
+    "base": "03719d7573f087c65d9622719273aa4b89caf7d3",
+    "functions": [
+      "resolve",
+      "stream_url"
+    ],
+    "before_sha256": "69299c919ecbedd26b50d2f0d1b0ea42ec74e3cf164065ab7e06a17ed1a2f7fe",
+    "after_sha256": "0bf232c98639a3a6f45f3ed3d121f0f3a1368705ec3384d3768efdcad490cebb"
+  }
+}

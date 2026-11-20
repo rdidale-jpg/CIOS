@@ -1,0 +1,31 @@
+{
+  "checks": 207,
+  "viewports": [
+    [
+      "desktop",
+      1440,
+      1000
+    ],
+    [
+      "ipad-landscape",
+      1180,
+      820
+    ],
+    [
+      "ipad-portrait",
+      820,
+      1180
+    ],
+    [
+      "mobile",
+      390,
+      844
+    ],
+    [
+      "mobile-320",
+      320,
+      740
+    ]
+  ],
+  "liveServices": false
+}

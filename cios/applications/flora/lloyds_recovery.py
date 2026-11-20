@@ -80,79 +80,9 @@ LANDSCAPE_COMPONENTS = {
 }
 
 
-def landscape(ctx, data, issues):
-    claims = _claims(data, MEASURES)
-    stock, reference, profit = (_measure(claims.get(key), *basis) for key, basis in MEASURES.items())
-    component = ctx.detail or "funding"
-    label, _, heading, facts, insight, question = LANDSCAPE_COMPONENTS[component]
-    analysis = ctx.reading == "insight"
-    anchors = ("lv-funding", "lv-interest", "lv-costs")
-    controls = "".join(
-        f'<li id="{anchor}"><a href="{escape(v.url(ctx, detail=key, reading=ctx.reading), quote=True)}#visual-content"'
-        + (' aria-current="page"' if key == component else '')
-        + f'><strong>{escape(title)}</strong><span>{escape(summary)}</span></a></li>'
-        for anchor, (key, (title, summary, *_)) in zip(anchors, LANDSCAPE_COMPONENTS.items())
-    )
-
-    if component == "lending-income":
-        from .financial_intelligence.candidate_analytics import public_factual_html
-        factual = public_factual_html(insight=analysis)
-        if factual:
-            simple = ''.join('<a href="'+escape(v.url(ctx,detail=key,reading=ctx.reading),quote=True)+'"'
-                +(' aria-current="page"' if key==component else '')+'>'+escape(values[0])+'</a>'
-                for key,values in LANDSCAPE_COMPONENTS.items())
-            return ('<section class="lv lv-landscape lv-proof"><p class="eyebrow">Lloyds Banking Group</p>'
-                    '<h1>How does Lloyds make money?</h1><nav class="bank-picker" aria-label="Economic components">'
-                    +simple+'</nav>'+factual+'</section>')
-
-    funding_context = next((issue.facts[-1] for issue in issues if issue.key == "funding-base"), None)
-    comparison = ""
-    if (stock and reference and funding_context and funding_context.semantic_type == "calculated"
-            and p.eligible(funding_context)):
-        comparison = ('<div class="lv-proof-comparison" data-intelligence="funding-base">'
-                      + p.render(funding_context, compact=True) + '</div>')
-
-    deposits = _amount(stock, "customer deposits", "30 September 2026 · balance at that date")
-    earnings = _amount(profit, "statutory pretax profit", "Nine months to 30 September 2026")
-    related = deposits if component == "funding" else earnings
-    supported_question = stock if component == "funding" else profit
-    if profit and component == "lending-income":
-        related += '<p>Group profit covers all activities. Lending income is unavailable in this view.</p>'
-    elif profit and component == "profit-costs":
-        related += '<p>The total gives no breakdown of operating costs or expected loan losses.</p>'
-
-    economics = escape(v.url(ctx, stream="inside", detail="economics", reading=ctx.reading), quote=True)
-    service = ""
-    if any(issue.key == "service-recovery" for issue in issues):
-        service_url = escape(v.url(ctx, agenda="service-recovery", detail=""), quote=True)
-        service = f'<a href="{service_url}#agenda-insight">Customer service evidence · Lloyds Bank plc</a>'
-
-    return (
-        '<section class="lv lv-landscape lv-proof">'
-        '<p class="eyebrow">Lloyds Banking Group plc · consolidated Group</p>'
-        '<h1>How does Lloyds make money?</h1>'
-        f'<figure class="lv-proof-map" data-component="{component}">'
-        '<figcaption>Conceptual banking model</figcaption>'
-        f'<nav aria-label="Economic components"><ol>{controls}</ol></nav>'
-        '<p class="lv-proof-caption">Funding helps support lending and other earning activities. '
-        'Interest and fees bring in income. Funding costs, running costs and loan losses reduce profit.</p></figure>'
-        f'<section class="lv-proof-explore" aria-labelledby="lv-explore">'
-        f'<p class="lv-proof-topic">{escape(label)} · {"FLORA Insight" if analysis else "Facts"}</p>'
-        f'<h2 id="lv-explore">{escape(heading)}</h2>'
-        f'<p>{escape(insight if analysis else facts)}</p>'
-        '<div class="lv-proof-context"><div><h3>What Lloyds Group reported</h3>' + related + '</div>'
-        + ('<div><h3>What to investigate</h3><p>' + escape(question) + '</p></div>' if supported_question else '')
-        + '</div></section>'
-        '<section class="lv-proof-evidence" aria-labelledby="lv-investigate">'
-        '<h2 id="lv-investigate">Investigate the figures</h2>'
-        '<div class="lv-proof-measures">'
-        + (deposits if component != "funding" and stock else "")
-        + (earnings if component == "funding" and profit else "")
-        + (_amount(reference, "customer deposits", "31 December 2025 · balance at that date") if reference else '')
-        + '</div>' + comparison
-        + f'<a href="{economics}#visual-content">Group financial analysis and reporting basis</a>'
-        + service + '</section></section>'
-    )
+def landscape(ctx, data, issues, *, headers=None):
+    from .enterprise_economics import banking
+    return banking(ctx, data, issues, headers=headers)
 
 
 def inside(ctx, data):

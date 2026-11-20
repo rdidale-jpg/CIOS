@@ -1,0 +1,18 @@
+{
+  "sha": "03719d7573f087c65d9622719273aa4b89caf7d3",
+  "mode": "baseline",
+  "live_services": false,
+  "production_or_canonical_writes": 0,
+  "images": {
+    "before-easyjet-desktop.jpg": "e1d50efb6efbdbe7a3a7e9c2ea18b6a92fc0488fcdb5b68f8545da1ff7881605",
+    "before-easyjet-ipad-landscape.jpg": "7c6beca9ac3fc824a92b747c2a5050ca880ace97b766e3f666134dffdab208c3",
+    "before-easyjet-ipad-portrait.jpg": "a233ae814edfedf66365edd16d1e3802e395f23ddff5f8f9a08283950379c7f4",
+    "before-easyjet-mobile-320.jpg": "b131ccddd9d3b1595410d327dd40598703dcc00965460d520505f238f9ba75ef",
+    "before-easyjet-mobile.jpg": "e358dcbd7b37c5fb6f2bac36b4223eefe4afd2b672df86c6e389289a46c19e72",
+    "before-lloyds-desktop.jpg": "102b0c9ac247b7ba0eb7ca154766900ca351ec83f8811b4cf02763876704272c",
+    "before-lloyds-ipad-landscape.jpg": "f1993446214068e29c53950ceed1aacc69a64456e51f5bcb98dadc6952d94279",
+    "before-lloyds-ipad-portrait.jpg": "4f0b4b798d87344b81be143184092efe8bea044ac59b092158e22743a0ee2743",
+    "before-lloyds-mobile-320.jpg": "609b1e8eeb7aa510c37851d6c3eae0a1189fb25cfb313c6ade2cfca9e96b244e",
+    "before-lloyds-mobile.jpg": "9a3fee55bcdd27d9e117ab5971d8075b9798d8ef29fb0bf1aad1aef7dc591314"
+  }
+}
