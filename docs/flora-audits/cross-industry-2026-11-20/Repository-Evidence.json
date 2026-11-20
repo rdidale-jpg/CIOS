@@ -1,0 +1,252 @@
+{
+  "audited_main": "03719d7573f087c65d9622719273aa4b89caf7d3",
+  "date": "2026-11-20",
+  "counts": {
+    "source_declarations": 150,
+    "exact_source_organisation_labels": 103,
+    "enabled_source_declarations": 118,
+    "disabled_source_declarations": 32,
+    "seed_watchlist": 43,
+    "technology_providers": 80,
+    "technology_relationship_programme_records": 34,
+    "technology_atomic_references": 24,
+    "technology_participant_metric_rows": 11,
+    "technology_data_driven_deep_profiles": 1,
+    "wave3_dossiers": 25,
+    "banking_actor_occurrences": 76,
+    "tel_recorded_semantic_candidates": 647,
+    "tel_recorded_enterprise_candidates": 6,
+    "tel_recorded_participant_candidates": 17,
+    "inventory_rows_not_unique_enterprises": 371,
+    "by_inventory_family": {
+      "banking_actor_occurrence": 76,
+      "curated_bank": 5,
+      "current_cohort_subject": 5,
+      "historical_bank_document": 7,
+      "macro_entity_applicability_trace": 2,
+      "mod_package": 1,
+      "research_supplier_or_role_node": 10,
+      "source_organisation_label": 103,
+      "technology_provider": 80,
+      "tel_recorded_candidate": 23,
+      "tms_priority_subject": 14,
+      "visual_context_or_role": 20,
+      "wave3_dossier": 25
+    }
+  },
+  "uk_sector_foundations": [
+    {
+      "sic": "A",
+      "label": "Agriculture & fishing",
+      "panorama_id": "uk-sic07-a",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "B",
+      "label": "Mining & quarrying",
+      "panorama_id": "uk-sic07-b",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "C",
+      "label": "Manufacturing",
+      "panorama_id": "uk-sic07-c",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "D",
+      "label": "Energy supply",
+      "panorama_id": "uk-sic07-d",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "E",
+      "label": "Water & waste",
+      "panorama_id": "uk-sic07-e",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "F",
+      "label": "Construction",
+      "panorama_id": "uk-sic07-f",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "G",
+      "label": "Retail & wholesale",
+      "panorama_id": "uk-sic07-g",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "H",
+      "label": "Transport & logistics",
+      "panorama_id": "uk-sic07-h",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "I",
+      "label": "Hospitality & food",
+      "panorama_id": "uk-sic07-i",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "J",
+      "label": "Information & communication",
+      "panorama_id": "uk-sic07-j",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "K",
+      "label": "Finance & insurance",
+      "panorama_id": "uk-sic07-k",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "L",
+      "label": "Real estate",
+      "panorama_id": "uk-sic07-l",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "M",
+      "label": "Professional services",
+      "panorama_id": "uk-sic07-m",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "N",
+      "label": "Business support",
+      "panorama_id": "uk-sic07-n",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "O",
+      "label": "Public administration",
+      "panorama_id": "uk-sic07-o",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "P",
+      "label": "Education",
+      "panorama_id": "uk-sic07-p",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "Q",
+      "label": "Health & social care",
+      "panorama_id": "uk-sic07-q",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "R",
+      "label": "Arts & recreation",
+      "panorama_id": "uk-sic07-r",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "S",
+      "label": "Other services",
+      "panorama_id": "uk-sic07-s",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    },
+    {
+      "sic": "T",
+      "label": "Household employment",
+      "panorama_id": "uk-sic07-t",
+      "public_admission": false,
+      "completion": "PARTIAL; every foundation updated, not twenty complete IndustryTwins"
+    }
+  ],
+  "financial_selection_keys": [
+    "boe-household-deposit-stocks",
+    "nationwide-fy2026"
+  ],
+  "three_panel_scope_routes": {
+    "uk": {
+      "route": "/",
+      "streams": [
+        "landscape",
+        "forces"
+      ]
+    },
+    "banking": {
+      "route": "/industries/banking",
+      "streams": [
+        "landscape",
+        "forces"
+      ]
+    },
+    "lloyds": {
+      "route": "/enterprises/lloyds",
+      "streams": [
+        "landscape",
+        "inside",
+        "forces"
+      ]
+    },
+    "easyjet": {
+      "route": "/enterprises/easyjet/preview",
+      "streams": [
+        "landscape",
+        "inside",
+        "forces"
+      ]
+    }
+  },
+  "interpretation": "Counts are owner-qualified artifacts/declarations, not unique legal entities, accepted Twins, lawful-use decisions or completeness scores.",
+  "live_Render_or_canonical_stores_inspected": false,
+  "source_permission_changes": 0,
+  "source_paths_sha256": {
+    "MOD-CDT-v1.3-Flora-Blueprint 2.zip": "63953ac895f996c27d59e8f72c52f3b70a0b34486468947a90da40594bccc4dc",
+    "cios/applications/flora/banking_cohort.py": "78cbfc177b0a6498a64eaa9b3d5f9a55a153942a67aae6a3d7b18ad64754a579",
+    "cios/applications/flora/banking_portfolio.py": "b7f7ef1bfaea78bfa93761d276b3c16f167642b23037d2dcd8ca3277fa27882a",
+    "cios/applications/flora/blueprint_import/semantic_twin.py": "0cd8ad48b6b15bc0a5c094b5b02e2e29355924e71fafaa446010fe31397fb4f8",
+    "cios/applications/flora/experience_composition.py": "9f6779356058de78a9a5a6375756c29ee4c3f787f50af9947868d61c775a749a",
+    "cios/applications/flora/financial_intelligence/candidate_analytics.py": "d4bc2042f33734ad6151b09704314311e94cfa05a358a4e2719ad5702afb4b51",
+    "cios/applications/flora/live/source_registry.py": "5179424df77ca5c21ca65ec10dfb41709cdf68be76652581992581ee90a9125b",
+    "cios/applications/flora/public_routes.py": "01abad3081e90c828227d7b664a67169a9b261fd98d8eb21a87f53947461a989",
+    "cios/applications/flora/research_intelligence/technology_commercial.py": "b4cace45d509a54dcac6276abbc4bc8b761ad06f442a0b292bd691ee006177b5",
+    "cios/applications/flora/research_intelligence/technology_experience.py": "55acef0a9c7e5c997944a5419651648a27be3407242de3ff5562e0d3d3653d0b",
+    "cios/applications/flora/visual_panels.py": "c35485b91557d25124ad7a7e2c3b3b268d0e3c11dd3aeadb68df63b63e22429f",
+    "cios/applications/flora/visual_streams.py": "69299c919ecbedd26b50d2f0d1b0ea42ec74e3cf164065ab7e06a17ed1a2f7fe",
+    "docs/flora-runtime/research-enrich-all-w2-685/Twenty-Sector-Foundations.json": "4d16e9d99a533646f7276dd7c0467e2d23e320992b18f481293c06bb7db013e3",
+    "docs/flora-runtime/research-enrich-all-w3-689/Banking-Portfolio-Crosswalk.json": "998ed280376b3ae9ae5eb924d28271b5fabea722354af6963f1bc1e490d104a9",
+    "docs/flora-runtime/research-enrich-all-w3-689/Enterprise-Dossiers.json": "e0289d960f39106f0824a8339f686d60b553994dc5c086fbe789ed0f40df7d87",
+    "docs/flora-runtime/technology-visual-foundation/Foundation.json": "1f332a13026e83d677d3897fcec9bd29c259546b070b9cea23b6b8dcd83c05b5",
+    "docs/industry-twins/TEL-001-runtime-candidate-inventory.json": "89455c82bb84d8302d8ce2dc99a36c3b91c92804a93c6959304edefa140e50e0",
+    "docs/product/flora-experience/FLORA-Experience-Contract-v1.0.md": "7676617eccc134fdbbb409dfe430d9995e441c4186c7317694166caaa1e05ba4",
+    "enterprise-knowledge/TMS-001_High_Fidelity_Industry_Twin_Upgrade.zip": "25e8ef0f49b4320e3fff2b347b06708ed231a670b5497a7402abf7ca26380371",
+    "enterprise-knowledge/aviation/research-model/Assessment-Overlay.json": "b3f395e1deb0b2b545ad4fa02396f6baffbc6d548b19c891315eb6bc8505c3aa",
+    "enterprise-knowledge/aviation/research-model/Visual-Profile.json": "6c97fff91aac950795e90cdbe4aa09c7cd1b19b3d68b35747e1ac4f68c4f1982",
+    "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json": "4b11b4458ca1689aae680336bb55bdb623ae9e1cb2b06dfc7044b9cb77064221",
+    "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md": "a991d67ee4409a314f0eb34ce6dc6411882c9ae8440bc253562a31876615c50e",
+    "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md": "cb7b14702a8f1c2cb2d311abfe334977998a4a8091a1f8b2946cd9b35c062cdd",
+    "enterprise-knowledge/banking/enterprises/monzo/Monzo-Enterprise-Twin.md": "16b780788634b8b9a95ff686fd0259832dc9b72785a2c89683ff27b9f2c6bce9",
+    "enterprise-knowledge/banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md": "f6cb57afd526a13a761842eb774fc4b7dd551a3cc2b1d7a66f7ee8bd74067a66",
+    "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md": "59c02cd59be8431159d574e277eb32322b3f9b3b99aa6ab4cccf449e2aa4c2e0",
+    "enterprise-knowledge/banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md": "904b7cb2d8e00584ec4e5cfabf097fa54640a3257d6bd86ff566e60df54ae2fa",
+    "enterprise-knowledge/banking/enterprises/starling/Starling-Enterprise-Twin.md": "13bf4946c1aab1759aa6f82a1394691da25fb27d1ac27667e4ac2151e4b9e08b",
+    "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+    "enterprise-knowledge/banking/research-model/Visual-Profile.json": "af2d96c39a0d35e07fd800e2e64a31084ab63139ae7ff704f771e60416717424",
+    "enterprise-knowledge/macro/research-model/Entity-Traces-v2.json": "4aa9d1f7f790234d6e6460b3121f3bf2601d6a3b5e5bc2ebd19f945e7ed3908d"
+  }
+}
