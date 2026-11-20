@@ -130,7 +130,7 @@ def collect(output=HERE):
 
     rows.sort(key=lambda x: (x['family'], x['owner_qualified_id'], x['evidence_path']))
     with (output / 'Enterprise-Inventory.csv').open('w') as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator='\n')
         writer.writeheader()
         writer.writerows(rows)
     sectors = read('docs/flora-runtime/research-enrich-all-w2-685/Twenty-Sector-Foundations.json')
