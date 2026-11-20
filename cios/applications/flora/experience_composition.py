@@ -177,13 +177,5 @@ def easyjet_root(ctx, data):
             "A loss of aircraft availability can constrain scheduled flying. The consequences depend on reserve capacity, network and timing.",
             "Test reserve capacity, maintenance and recovery measures for the same operations. The fleet count does not establish a disruption or how management responded.",
         )
-    return (
-        '<h1>easyJet’s business and network</h1>'
-        '<p class="reading-context">Conceptual · short-haul airline economics</p>'
-        '<p>Routes connect customers to destinations. Fleet capacity determines how much flying can be scheduled.</p>'
-        + _facts((*fleet, *network))
-        + (_interpret("Capacity and commercial reach", (*fleet, *network) if fleet and network else (),
-                      "Fleet and network breadth frame capacity. Frequency, utilisation and demand determine how that capacity translates into earnings.",
-                      "Comparable business-line financials, yields and costs remain outside this projection.", ctx)
-           if ctx.reading == "insight" else '<p>Comparable business-line financials, yields and costs remain outside this projection.</p>')
-    )
+    from .enterprise_economics import aviation
+    return aviation(ctx, data)

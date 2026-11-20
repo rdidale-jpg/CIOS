@@ -444,11 +444,11 @@ def render(ctx,headers=None,*,financial_run_id=''):
             body=ecosystem.render(ctx,data,issues)
         elif ctx.scope=='lloyds' and not ctx.agenda and (not ctx.detail or (
                 (ctx.stream=='inside' and ctx.detail in recovery.INSIDE_DETAILS) or
-                (ctx.stream=='landscape' and ctx.detail in recovery.LANDSCAPE_COMPONENTS))):
+                (ctx.stream=='landscape' and ctx.detail in (*recovery.LANDSCAPE_COMPONENTS,'economics')))):
             if ctx.stream=='inside':
                 body=recovery.inside(ctx,data)
             elif ctx.stream=='landscape':
-                body=recovery.landscape(ctx,data,issues)
+                body=recovery.landscape(ctx,data,issues,headers=headers)
             else:
                 body=recovery.forces(ctx,data)
         elif ctx.scope=='uk' and ctx.stream=='forces' and not ctx.agenda:

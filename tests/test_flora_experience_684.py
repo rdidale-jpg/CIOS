@@ -17,11 +17,11 @@ def test_enterprise_roots_observe_three_different_questions(path):
         assert 'data-semantic-type="insight"' not in facts
         if path == "/enterprises/lloyds":
             expected = {"inside": "Conceptual operating mechanism",
-                        "landscape": "even when total deposits stay flat",
+                        "landscape": "The balance alone does not show funding cost",
                         "forces": "If funding costs rise faster than asset yields"}
             assert expected[stream] in insight
             assert expected[stream] not in facts
-            assert 'data-semantic-type="insight"' not in insight
+            assert ('data-semantic-type="insight"' in insight) == (stream == "landscape")
         else:
             assert 'data-semantic-type="insight"' in insight
         assert "What's changing?" not in facts
@@ -39,8 +39,8 @@ def test_enterprise_roots_observe_three_different_questions(path):
     if path == "/enterprises/lloyds":
         assert 'agenda=service-recovery#agenda-insight' in roots["landscape"]
         assert "118,762" not in roots["landscape"]
-        assert "Conceptual banking model" in roots["landscape"]
-        assert "What Lloyds Group reported" in roots["landscape"]
+        assert "Illustrative banking model" in roots["landscape"]
+        assert 'data-semantic-type="reported"' in roots["landscape"]
         assert "£502.8bn" in roots["landscape"]
         assert "£502.8bn" not in roots["inside"]
 
@@ -167,9 +167,9 @@ def test_lloyds_withdrawn_rate_retains_only_conceptual_transmission(monkeypatch)
 
 
 @pytest.mark.parametrize("key,heading", [
-    ("funding", "Where does the money come from?"),
-    ("lending-income", "What brings income in?"),
-    ("profit-costs", "What is left after costs?"),
+    ("funding", "A foundation for lending"),
+    ("lending-income", "Turning funding into income"),
+    ("profit-costs", "What remains after costs"),
 ])
 def test_lloyds_economic_selection_is_preserved_in_both_readings(key, heading):
     path = "/enterprises/lloyds"
@@ -177,12 +177,12 @@ def test_lloyds_economic_selection_is_preserved_in_both_readings(key, heading):
     facts = main(v.render(path, query))
     insight = main(v.render(path, {**query, "reading": ["insight"]}))
     for html in (facts, insight):
-        assert f'data-component="{key}"' in html
+        assert f'data-stage="{key}"' in html
         assert f'detail={key}&amp;reading=insight#visual-content' in html
         assert heading in html
-        assert "What to investigate" in html
+        assert "What to investigate" not in html
         assert 'data-identity="BK-ENT-001"' in html
-        assert 'agenda=service-recovery#agenda-insight' in html
+        assert 'detail=economics' in html  # Existing financial presentation remains reachable.
     assert facts != insight
     with pytest.raises(ValueError):
         v.resolve(path, {**query, "stream": ["inside"]})
@@ -203,8 +203,8 @@ def test_lloyds_withdrawn_economic_evidence_leaves_conceptual_structure(monkeypa
     monkeypatch.setattr(v, "current_data", lambda ctx: data)
     for mode in ("facts", "insight"):
         html = main(v.render(path, {**query, "reading": [mode]}))
-        assert "Conceptual banking model" in html
-        assert "No eligible reported measure" in html
+        assert "Illustrative banking model" in html
+        assert "No eligible reported measure" not in html  # Omit unavailable values, no admin placeholder.
         assert amount not in html
         if key == "funding":
             assert "£6.3bn" not in html
