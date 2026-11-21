@@ -163,21 +163,16 @@ def render(ctx, data, issues):
         return ''
     facts = _facts(data)
     insight = ctx.reading == 'insight'
-    stages = ''.join('<a href="' + escape(v.url(ctx, stream=stream, detail=detail, reading=ctx.reading), quote=True)
-                     + '#visual-content">' + escape(label) + '</a>'
-                     for label, key, stream, detail in STAGES if key in facts)
-    core = tuple(facts[key] for _, key, _, _ in STAGES if key in facts)
     overview = ('Core renewal and application retirement matter to the cost base. Service continuity and control testing '
                 'shape the pace at which savings could be realised. These disclosures establish management direction and '
                 'sector pressure. They do not establish project-level savings, delivery accountability or a causal outcome.'
-                if insight and len(core) == len(STAGES) else
+                if insight and all(key in facts for _, key, _, _ in STAGES) else
                 'Explore Lloyds’ disclosures on efficiency, platform renewal, existing technology controls and regulatory timing.')
+    from .lloyds_twin_visual import opening
+
     body = (STYLE + '<section class="llf" aria-label="Lloyds flagship overview">'
-            '<div class="llf-header"><p class="eyebrow">Lloyds Banking Group · Flagship prototype</p>'
-            '<h1>Renew the bank while it runs</h1><p>' + escape(overview) + '</p></div>'
-            '<nav class="llf-path" aria-label="Follow the strategic issue">' + stages + '</nav>'
-            + (_basis(core) if core else '')
-            + '<h2>Explore the enterprise</h2>')
+            + opening(ctx, facts, STAGES, _basis, overview)
+            + '<h2 id="ltv-perspectives">Perspectives</h2><div class="ltv-perspectives">')
     for key, title, rows in VIEWS:
         body += f'<details id="llf-{key}"' + (' open' if key == 'swot' and insight else '') + '><summary>' + escape(title) + '</summary>'
         count = 0
@@ -197,6 +192,7 @@ def render(ctx, data, issues):
         body += '</details>'
     body += ('<details id="llf-benchmark"><summary>Peer evidence · service operations</summary>'
              + _benchmark(data, issues) + '</details>')
+    body += '</div>'
     if 'treasury-payments' in facts:
         body += '<p><small>Payments policy excerpt contains HM Treasury information licensed under the Open Government Licence v3.0.</small></p>'
     return body + '</section>'
