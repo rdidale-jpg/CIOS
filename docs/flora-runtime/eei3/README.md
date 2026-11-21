@@ -2,7 +2,7 @@
 
 ## Review boundary
 
-Main is `38ae6acb92d7ffcd6a0b82e162b291e3fd4705ce` including #707. The EEI‑3 draft is stacked on the unchanged #708 head `e6d49f3391f5cd1527ace9010db8ab56f459b87b` so the new implementation and the bounded Nationwide review can be accepted separately. #708 remains pending owner disposition. Reconcile that branch independently, then retarget EEI‑3 and rerun the main gates.
+PR #708 merged into main at `cef08949f511f51604c20009a3df27fd484fe3f2`. The merge tree exactly matches its approved head `e6d49f3391f5cd1527ace9010db8ab56f459b87b`. PR #709 targets that main baseline and its 25-file review delta is the original EEI‑3 delta. The browser captures below are from the earlier review heads. The reconciliation leaves the captured runtime code and Source data byte-identical.
 
 ## The routine path
 
