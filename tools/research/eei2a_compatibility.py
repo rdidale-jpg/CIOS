@@ -6,7 +6,7 @@ import subprocess
 BASE = 'df6173c186e6469783c732247f4c13aaa961aec4'
 CUTS = {
     'cios/applications/flora/research_intelligence/source_import.py': ('74a2faa257f86b4896ccc0afc6edead6444c2d225765dc4b1cd617e0600bec44', 'minimal_factual_integrity'),
-    'cios/applications/flora/visual_panels.py': ('e71647c20953b2f64d56adfa56a669cdd7ecdf23ef572f06e3f7331c8e5c506f', 'render'),
+    'cios/applications/flora/visual_panels.py': ('6235d24dd286a24e4cc21bc1ca76b8ee916c2a97b43986e9673b703e33dc13e7', 'render'),
 }
 
 

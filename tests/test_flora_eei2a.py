@@ -156,3 +156,15 @@ def test_comparison_rejects_different_basis_or_period_length():
         )
         with pytest.raises(ValueError):
             public.compare(lines, spec)
+
+
+def test_nationwide_summary_preserves_customer_view_and_no_private_access(monkeypatch):
+    from cios.applications.flora import visual_streams
+    from cios.applications.flora import document_review
+    def forbidden(*args, **kwargs):
+        raise AssertionError('Private-run service called')
+    monkeypatch.setattr(document_review, 'load_run', forbidden)
+    html = visual_streams.render('/industries/banking', {'selected': ['nationwide']})
+    main = html.split('<main ', 1)[1].split('</main>', 1)[0]
+    assert 'id="eei-summary"' in main and 'class="legal-notice"' in main
+    assert '<details' not in main

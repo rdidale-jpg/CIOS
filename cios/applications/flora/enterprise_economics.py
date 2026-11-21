@@ -204,7 +204,7 @@ def aviation(ctx, data):
     return _composition(ctx, AIRLINE, selected, figures, (fleet, network), caveat, related)
 
 
-def statement_summary(lines, *, insight=False, fixture=False):
+def statement_summary(lines, *, insight=False, fixture=False, inspection=True):
     """One editorial composition for eligible statement lines from any issuer."""
     from .financial_intelligence.public_statements import statements
 
@@ -230,7 +230,9 @@ def statement_summary(lines, *, insight=False, fixture=False):
                 restated = ' · Restated' if line.revision_state == 'restated' else ''
                 body += ('<p><strong>' + escape(line.reported_label) + ' · ' + escape(line.original_display)
                          + '</strong><br><small>' + escape(details + restated) + '</small></p>')
-    return body + _basis(fact for _, fact in eligible) + '</section>'
+    if inspection:
+        body += _basis(fact for _, fact in eligible)
+    return body + '</section>'
 
 
 def source_statement_summary(record, *, subject, insight=False, fixture=False):
