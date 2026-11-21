@@ -1,26 +1,36 @@
-# Lloyds flagship UX refinement
+# Lloyds flagship executive density
 
-Baseline `63df0cbf8e1de98d8a782cd0a448c7ec7bab4147`. Open Lloyds Landscape and select **Explore the Lloyds flagship**. The canonical arrival, original artwork and Facts / FLORA Insight control are reused.
+Current main baseline `63df0cbf8e1de98d8a782cd0a448c7ec7bab4147`. This refinement follows the conditionally accepted #712 head `5eab9fd47f56f3fd67757b0b3ca80f1097de8cee`. Open Lloyds Landscape and select **Explore the Lloyds flagship**.
 
 ## Walkthrough
 
-1. Pick Retail, Commercial Banking, or Insurance, Pensions & Investments. Each choice shows the customer and product context, illustrative economics, and links to the Group operating examples and strategy. Evidence does not support segment allocation or ownership.
-2. Open **Core renewal**. Select Economics, Operations, Technology, Pressure or Strategy. Each choice displays its disclosure and an existing detail link. The sequence is an analytical association. Its order establishes no causal effect.
-3. Switch to **FLORA Insight**, select **Perspectives**, then explore the SWOT quadrants, risk categories, AI and payments, horizontal timeline, options or peer bars. The bars measure complaints received across distinct legal entities and cannot rank service quality.
-4. Select **Sources** in context to open the one inspection panel at the relevant evidence. It includes available publisher, publication date, locator, scope, authority and caveats. Browser Back restores the previous selection. All evidence already passes through the original eligibility gates.
+1. **Overview** shows the three reporting segments, selected customer and product context, and concise funding, efficiency and reporting signals. Funding is a dated Group stock. The efficiency signal is a management ambition. The reporting deadline applies to the sector and does not establish Lloyds readiness.
+2. **Explore** follows branch service, platform renewal and AI controls into the core-renewal map. Step selection retains the existing detail links. The sequence joins related evidence and does not assert causal dependencies.
+3. **Investigate** groups SWOT into four selectable quadrants, with two evidence-backed themes per quadrant when their inputs are eligible. It retains the risk landscape, payment and AI scenarios, horizontal milestone selection, service volumes and alternative responses.
+4. Verified owners can select **Explore → In this view → Research inspection** from the existing shell. The separate inspection route uses the existing entitlement and owner checks. It includes publisher, publication dates, authority, locators and material caveats. Guests have no inspection link or hidden evidence payload.
 
-## Review captures
+## Coverage compared with the accepted reference
+
+| Area | Previous #712 | Refined |
+| --- | --- | --- |
+| Executive canvas | Repeated Sources links and one closed evidence disclosure | No Sources links or evidence disclosure in the visual canvas. Facts, plans and material uncertainty remain visible. |
+| Overview | Segment selector and one Group economics link | Adds source-gated Group funding scale, management efficiency ambition and reporting deadline to the overview. |
+| SWOT | Four themes across four quadrants | Eight themes. Adds deposit base, benefit measurement, data-enabled service and parallel-running exposure. Existing findings remain. |
+| Competition, risk and timing | Established versus hypothetical AI and payments, risk categories, peer counts and milestones | Keeps the same analyses, risk qualifiers and comparable-volume limits, and links the investigation more directly from Overview and Explore. |
+| Evidence | Public panel inside the page | Original served evidence is re-resolved in the existing verified owner inspection view. No new Source admission or new permission grant. |
+
+## Captures
 
 | View | Desktop | iPad landscape | iPad portrait |
 | --- | --- | --- | --- |
 | Before | [Desktop](previews/before-desktop.jpg) | [Landscape](previews/before-ipad-landscape.jpg) | [Portrait](previews/before-ipad-portrait.jpg) |
-| After | [Desktop](previews/after-desktop.jpg) | [Landscape](previews/after-ipad-landscape.jpg) | [Portrait](previews/after-ipad-portrait.jpg) |
-| SWOT | [Desktop](previews/swot-desktop.jpg) | [Landscape](previews/swot-ipad-landscape.jpg) | [Portrait](previews/swot-ipad-portrait.jpg) |
+| Overview | [Desktop](previews/after-desktop.jpg) | [Landscape](previews/after-ipad-landscape.jpg) | [Portrait](previews/after-ipad-portrait.jpg) |
+| Investigate · SWOT | [Desktop](previews/swot-desktop.jpg) | [Landscape](previews/swot-ipad-landscape.jpg) | [Portrait](previews/swot-ipad-portrait.jpg) |
 
-[Browser harness](browser.py) · [Before observations](previews/before.json) · [After observations](previews/after.json). All three viewports went from 31 flagship disclosures to one Sources panel, closed on arrival. Counts exclude the shared shell and the separate accepted Landscape arrival.
+[Loopback harness](browser.py) · [Before observations](previews/before.json) · [After observations](previews/after.json). Chromium emulates the iPad viewports and touch. Physical iPad, Safari and assistive-technology review remain open.
 
-## Critique
+## Commercial and visual critique
 
-The first screen communicates organisation and customer context before supporting evidence. Same-page selections shorten deep reading, while ordinary links preserve the existing route and browser history. The prototype still has an in-page navigation row alongside the established shell, and contextual Sources opens a panel below the perspectives instead of taking over the screen. Without scripting, sections remain readable in document order and Sources remains a native disclosure. Chromium emulates touch and viewport sizes. Physical iPad, Safari and assistive-technology review remain open.
+The additional themes let an executive distinguish funding scale from funding economics, or a disclosed AI contribution from repeatable net benefit. The three short depth labels replace the longer section menu. Removing evidence controls makes the comparisons easier to read. The trade-off is that opening full provenance requires a separate owner view. Even there, evidence can establish the Group’s reported position and plans without proving division-level ownership, migration economics or independent AI benefits.
 
-Existing conclusions and inputs stay with their current owners. The AI view identifies the company-disclosed Envoy capability and separates a policy pilot from a hypothetical assistant. Named entrant launches remain unverified. Disclosed controls, inferred execution risk and dated regulatory pressure retain their separate treatments. Existing private Financial and Pipeline access is outside the visual change. Lloyds §2 stays inactive, §5 PDF links stay deferred and ADR‑027 stays Proposed.
+The analysis uses existing eligible facts. Division-level cost allocation, supplier terms, adoption, matched customer denominators and named AI entrant launches remain unverified. No new TOWS recommendation is needed beyond the existing conditional alternatives. Lloyds §2 remains inactive, §5 PDF links remain deferred and ADR‑027 remains Proposed.

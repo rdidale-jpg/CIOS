@@ -1,25 +1,25 @@
 {
-  "checkout": "00d05999b6d99a3240a0ccdbaf5e74056744d061",
+  "checkout": "13a4d0ab1cee352a90ffd33804ffecade0346968",
   "observations": [
     {
       "viewport": "desktop",
       "phase": "after",
       "no_page_overflow": true,
-      "disclosure_count": 1,
+      "disclosure_count": 0,
       "choices_sources_and_history": true
     },
     {
       "viewport": "ipad-landscape",
       "phase": "after",
       "no_page_overflow": true,
-      "disclosure_count": 1,
+      "disclosure_count": 0,
       "choices_sources_and_history": true
     },
     {
       "viewport": "ipad-portrait",
       "phase": "after",
       "no_page_overflow": true,
-      "disclosure_count": 1,
+      "disclosure_count": 0,
       "choices_sources_and_history": true
     }
   ]
