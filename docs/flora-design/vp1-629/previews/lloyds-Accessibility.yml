@@ -1,0 +1,62 @@
+- banner:
+  - link "Skip to intelligence":
+    - /url: "#main-title"
+  - link "FLORA UK home":
+    - /url: uk-landscape.html
+    - text: FLORA
+  - navigation "Global FLORA":
+    - link "Explore":
+      - /url: uk-landscape.html
+    - text: Offers Pipeline
+  - text: Owner · Design preview
+  - navigation "Current scope":
+    - link "UK":
+      - /url: uk-landscape.html
+    - link "Banking":
+      - /url: banking-landscape.html
+    - text: Lloyds Banking Group
+  - navigation "Insight streams":
+    - link "Inside":
+      - /url: lloyds-inside.html#stream-inside
+    - link "Landscape":
+      - /url: lloyds-landscape.html#stream-landscape
+    - link "Forces":
+      - /url: lloyds-forces.html#stream-forces
+- complementary "Visual exploration":
+  - figure "Purpose-composed lloyds inside illustration. Conceptual environments, not actual premises or a quantitative map.":
+    - text: Purpose-composed lloyds inside illustration. Conceptual environments, not actual premises or a quantitative map.
+    - link "Financial scale":
+      - /url: lloyds-inside-economics.html#main-title
+    - link "Technology & AI":
+      - /url: lloyds-inside-technology.html#main-title
+    - link "Leadership Agenda":
+      - /url: lloyds-inside-agenda.html#main-title
+- main "Customer funding and earnings":
+  - article:
+    - paragraph: Financial analysis · consolidated Group
+    - heading "Customer funding and earnings" [level=1]
+    - paragraph: Current balances and reported earnings, alongside the Group’s 2030 efficiency ambition.
+    - text: Reported · customer deposits
+    - strong: £502.8bn
+    - text: 30 September 2026 · stock Reported · statutory pretax profit
+    - strong: £6.6bn
+    - text: 9 months to 30 September 2026 · flow
+    - figure "Customer-deposit stocks · Group":
+      - text: Customer-deposit stocks · Group
+      - checkbox "2025 reference" [checked]
+      - text: 2025 reference
+      - group "Customer-deposit stocks · Group":
+        - text: 31 December 2025
+        - strong: 496.5bn
+        - text: 30 September 2026
+        - strong: 502.8bn
+      - paragraph: Reported · GBP billion, linear 0–600bn scale. Two published stocks; composition and transfer effects are not reconciled. No organic-flow claim.
+      - group: Chart data
+    - heading "Efficiency ambition" [level=3]
+    - paragraph: Reported Management target The 2030 efficiency ambition is a cost-to-income ratio below 45%.
+    - paragraph: A 2030 management target, not achieved performance.
+    - heading "Investment discipline" [level=3]
+    - paragraph: Reported Management expectation The presentation plans a 2027 investment increase followed by stability, subject to opportunity and return discipline.
+    - paragraph: A management plan does not disclose an allocation to an external supplier.
+    - paragraph: Deposits are a stock; statutory pretax profit is a nine-month flow, not an investment allocation. Neither establishes supplier spending capacity.
+    - group: Sources & basis

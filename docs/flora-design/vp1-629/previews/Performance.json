@@ -1,0 +1,37 @@
+{
+  "measurements": [
+    {
+      "view": "uk-landscape",
+      "fcpMs": 500,
+      "images": [
+        {
+          "file": "watermark-uk-landscape.svg",
+          "bytes": 3558,
+          "durationMs": 196
+        },
+        {
+          "file": "uk-skyline-2172.webp",
+          "bytes": 142184,
+          "durationMs": 859
+        }
+      ]
+    },
+    {
+      "view": "lloyds-inside-economics",
+      "fcpMs": 452,
+      "images": [
+        {
+          "file": "watermark-lloyds-inside.svg",
+          "bytes": 1014,
+          "durationMs": 160
+        },
+        {
+          "file": "uk-skyline-2172.webp",
+          "bytes": 142184,
+          "durationMs": 883
+        }
+      ]
+    }
+  ],
+  "method": "Single cold loopback sample, emulated 1.6Mbps/150ms RTT. FCP is not full-art readiness; no production SLA claim."
+}

@@ -1,0 +1,58 @@
+- banner:
+  - link "Skip to intelligence":
+    - /url: "#main-title"
+  - link "FLORA UK home":
+    - /url: uk-landscape.html
+    - text: FLORA
+  - navigation "Global FLORA":
+    - link "Explore":
+      - /url: uk-landscape.html
+    - text: Offers Pipeline
+  - text: Owner · Design preview
+  - navigation "Current scope": UK
+  - navigation "Insight streams":
+    - link "Landscape":
+      - /url: uk-landscape.html#stream-landscape
+    - link "Forces":
+      - /url: uk-forces.html#stream-forces
+- complementary "Visual exploration":
+  - figure "Purpose-composed uk landscape illustration. Conceptual environments, not actual premises or a quantitative map.":
+    - text: Purpose-composed uk landscape illustration. Conceptual environments, not actual premises or a quantitative map.
+    - link "Banking":
+      - /url: banking-landscape.html#main-title
+    - link "Economy":
+      - /url: uk-landscape-economics.html#main-title
+    - link "Leadership Agenda":
+      - /url: uk-landscape-agenda.html#main-title
+- main "The shape of the UK economy":
+  - article:
+    - paragraph: Economic landscape
+    - heading "The shape of the UK economy" [level=1]
+    - paragraph: A varied economy, connected by services, industry and infrastructure.
+    - text: Reported · UK GVA
+    - strong: £2.62tn
+    - text: 2024 · current basic prices Reported · real GDP growth
+    - strong: +0.7%
+    - text: 3 months to September 2026 · versus prior 3 months
+    - figure "Four comparable sector shares":
+      - text: Four comparable sector shares
+      - group "Four comparable sector shares":
+        - text: Manufacturing
+        - strong: 8.7%
+        - text: Health & social care
+        - strong: 8.4%
+        - text: Information & communication
+        - strong: 6.6%
+        - text: Finance & insurance
+        - strong: 8.1%
+      - paragraph: Calculated · published 2024 SIC 2007 weights ÷ 10. Axis 0–15%; finance & insurance is broader than Banking.
+      - group: Chart data
+    - heading "Financial services in context" [level=3]
+    - paragraph: Calculated Finance & insurance represented 8.1% of UK GVA; this includes more than Banking.
+    - paragraph: Estimated Finance & insurance GVA is approximately £212bn, with an illustrative rounding range of £211–214bn.
+    - paragraph: Estimated range £211–214bn under a nearest-unit rounding assumption; not a Banking market size.
+    - heading "Growth has a different basis" [level=3]
+    - paragraph: FLORA Insight Services led the 0.7% UK real GDP expansion in the three months to September 2026; the aggregate does not establish growth in every industry.
+    - paragraph: UK aggregate volume growth is not an industry or enterprise growth rate. The preliminary estimate is subject to revision.
+    - group: All 20 industry labels
+    - group: Sources & basis

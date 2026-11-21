@@ -1,0 +1,59 @@
+name: FLORA VP-1 design-only assurance
+on:
+  pull_request:
+    branches: [main]
+    paths: ['docs/flora-design/vp1-629/**', '.github/workflows/flora-vp1-design.yml']
+permissions:
+  contents: read
+jobs:
+  static-and-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.txt
+      - name: Original art, static semantics, ownership, source pins and reproducibility
+        run: python docs/flora-design/vp1-629/checks.py
+      - name: Install isolated browser tooling
+        run: |
+          npm install --prefix /tmp/flora-vp1-browser playwright@1.62.1
+          /tmp/flora-vp1-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Responsive navigation, accessibility and original/proposed previews
+        env:
+          NODE_PATH: /tmp/flora-vp1-browser/node_modules
+        run: python docs/flora-design/vp1-629/preview.py --output /tmp/flora-vp1-previews
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flora-vp1-design-previews-${{ github.event.pull_request.head.sha }}
+          path: /tmp/flora-vp1-previews/
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flora-vp1-local-prototype-${{ github.event.pull_request.head.sha }}
+          path: docs/flora-design/vp1-629/prototype/
+          retention-days: 14
+  unchanged-security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Original strict security modules, no baseline or test changes
+        run: python -m pytest tests/test_flora_security*.py -q
