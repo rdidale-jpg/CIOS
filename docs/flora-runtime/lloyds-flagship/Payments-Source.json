@@ -1,0 +1,31 @@
+{
+  "url": "https://www.gov.uk/government/publications/national-payments-vision/national-payments-vision",
+  "retrieval_url": "https://www.gov.uk/government/publications/national-payments-vision/national-payments-vision",
+  "title": "National Payments Vision",
+  "publisher": "HM Treasury",
+  "retrieved_at": "2026-11-21T13:41:06.789339+00:00",
+  "reporting_period": "Government policy as published 14 November 2024",
+  "publication_date": "2024-11-14",
+  "publication_date_evidence": "GOV.UK publication landing page",
+  "reviewed_by": "Lloyds flagship Source review",
+  "review_notes": "HM Treasury policy text carries OGL v3.0. The retained short sentence is first-party policy text. This is historical sector context with no enterprise-specific implementation evidence.",
+  "id": "LLF-HMT-PAYMENTS",
+  "research_domain": "banking",
+  "verification": "primary_retrieved",
+  "content_kind": "reviewed_web_excerpt",
+  "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LLF-HMT-PAYMENTS.txt",
+  "text_sha256": "0b6ba8d32c76e714002792fd84b7f6cbad18e2ac576919a7af0ad87885413a54",
+  "primary_content_sha256": null,
+  "retrieval_method": "approved_web_research_tool",
+  "retrieval_reference": "https://www.gov.uk/government/publications/national-payments-vision/national-payments-vision",
+  "excerpts": [
+    {
+      "quote": "This pilot is focused on a limited number of lower-risk use cases such as paying bills.",
+      "locator": "Delivering seamless account-to-account payments through Open Banking"
+    }
+  ],
+  "rights": {
+    "status": "permitted_ogl_factual_extract",
+    "licence": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+  }
+}

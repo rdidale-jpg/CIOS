@@ -82,7 +82,11 @@ LANDSCAPE_COMPONENTS = {
 
 def landscape(ctx, data, issues, *, headers=None):
     from .enterprise_economics import banking
-    return banking(ctx, data, issues, headers=headers)
+    economics = banking(ctx, data, issues, headers=headers)
+    if ctx.detail:
+        return economics
+    from .lloyds_flagship import render
+    return render(ctx, data, issues) + economics
 
 
 def inside(ctx, data):
