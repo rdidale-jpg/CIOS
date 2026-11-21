@@ -1,0 +1,77 @@
+{
+  "calculations": [
+    {
+      "id": "CAA-DELTA",
+      "inputs": [
+        "81158297",
+        "81035648"
+      ],
+      "operation": "percentage_change",
+      "expected_rounded": "0.15",
+      "unit": "percent",
+      "scale": "journeys",
+      "perimeter": "matched UKairport Apr\u2013Junquarters",
+      "not": "uniquepeople/easyJetgrowth",
+      "source_ids": [
+        "W-CAA"
+      ]
+    },
+    {
+      "id": "NG-UK",
+      "inputs": [
+        "2888",
+        "834"
+      ],
+      "operation": "sum",
+      "expected": "3722",
+      "currency": "GBP",
+      "scale": "million",
+      "perimeter": "UKelectricitytransmission+distribution,GroupAPM,6m30Sep2026actualFX",
+      "not": "entireUKenergycapex",
+      "source_ids": [
+        "W-NG"
+      ]
+    },
+    {
+      "id": "NG-SHARE",
+      "inputs": [
+        "3722",
+        "6707"
+      ],
+      "operation": "ratio_percent",
+      "expected_rounded": "55.49",
+      "unit": "percent",
+      "perimeter": "twoUKsegments / worldwideGroupAPM sameperiod",
+      "not": "marketshare/return/budget",
+      "source_ids": [
+        "W-NG"
+      ]
+    },
+    {
+      "id": "NV-DELTA",
+      "inputs": [
+        "115.8",
+        "96.2"
+      ],
+      "operation": "percentage_change",
+      "expected_rounded": "20.37",
+      "currency": "USD",
+      "scale": "billion",
+      "perimeter": "two successive globalconsolidatedquarterrevenues; roundedinputs",
+      "not": "exact growth from roundedbillions/UKgrowth; issuer20% is compatible wholepercent precision",
+      "source_ids": [
+        "W-NV2",
+        "W-NV3"
+      ]
+    }
+  ],
+  "date_negatives": [
+    "FCA consultation closed is not an effective final rule",
+    "IFR prospective2027/28 is not current clubcompliance",
+    "BT September9.9m versus October>10m are distinctstocks",
+    "NVIDIA Aug26Q2 and Nov17Q3 leadership/period cuts differ",
+    "2023Skywise and2024ICC are not new2026deployments",
+    "Defencefour-yearplan and NationalGridfive-yearguidance are not actualspend"
+  ],
+  "source_withdrawal": "documentary dependency test omits only affected source-linked claims; no productioncascade implemented"
+}

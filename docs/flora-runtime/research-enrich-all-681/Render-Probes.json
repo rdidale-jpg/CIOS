@@ -1,0 +1,330 @@
+{
+  "base": "df475865cc367a28f355c38bc4c23054abe88502",
+  "scope": "36 isolated public server-render probes, not browsers or live deployment",
+  "probes": [
+    {
+      "scope": "uk",
+      "perspective": "landscape",
+      "reading": "facts",
+      "selected": "root",
+      "route": "/?stream=landscape&reading=facts",
+      "html_sha256": "9aea26b53a9984d4d6874f08dad207fa1d4a56c8e765aadb26a079717e2ceca5",
+      "text_characters": 986
+    },
+    {
+      "scope": "uk",
+      "perspective": "landscape",
+      "reading": "insight",
+      "selected": "root",
+      "route": "/?stream=landscape&reading=insight",
+      "html_sha256": "69989c1de55763c92f59053fe947f2a7d6d8a2bbefe0bfb36d94b5059611758b",
+      "text_characters": 446
+    },
+    {
+      "scope": "uk",
+      "perspective": "forces",
+      "reading": "facts",
+      "selected": "root",
+      "route": "/?stream=forces&reading=facts",
+      "html_sha256": "262760ca4afa226a9a5922e59b46cc60a831f88147b2c532cdb898a612061e55",
+      "text_characters": 1583
+    },
+    {
+      "scope": "uk",
+      "perspective": "forces",
+      "reading": "insight",
+      "selected": "root",
+      "route": "/?stream=forces&reading=insight",
+      "html_sha256": "a0b0fa294ff1c70ff71eab065bdd5dad83982eaddcaffbcb037641d0d13a1c6f",
+      "text_characters": 1172
+    },
+    {
+      "scope": "banking",
+      "perspective": "landscape",
+      "reading": "facts",
+      "selected": "root",
+      "route": "/industries/banking?stream=landscape&reading=facts",
+      "html_sha256": "697842f60fb5bb28fcb248df16135541c875f87e5a29aedf1b14c37ec2695eff",
+      "text_characters": 1337
+    },
+    {
+      "scope": "banking",
+      "perspective": "landscape",
+      "reading": "insight",
+      "selected": "root",
+      "route": "/industries/banking?stream=landscape&reading=insight",
+      "html_sha256": "a5acc0cd347a24ca8be14ca40d3c7707339033fba4fabc8d7565a2280c900870",
+      "text_characters": 482
+    },
+    {
+      "scope": "banking",
+      "perspective": "forces",
+      "reading": "facts",
+      "selected": "root",
+      "route": "/industries/banking?stream=forces&reading=facts",
+      "html_sha256": "f8b72105109c8d2e37fe252b7f9ef8bb484c842c7ef8afba088990832e4ae626",
+      "text_characters": 1352
+    },
+    {
+      "scope": "banking",
+      "perspective": "forces",
+      "reading": "insight",
+      "selected": "root",
+      "route": "/industries/banking?stream=forces&reading=insight",
+      "html_sha256": "0b9eebf3ea4361cc04ff3ab1997b9769486a30c1b3bb2befe3c907d4c423e5f1",
+      "text_characters": 1394
+    },
+    {
+      "scope": "lloyds",
+      "perspective": "landscape",
+      "reading": "facts",
+      "selected": "root",
+      "route": "/enterprises/lloyds?stream=landscape&reading=facts",
+      "html_sha256": "3046cdbfb4dc982a0ec88ad5ed210ab6e8151caa248d6a8a9d6fdfe5c234cbc6",
+      "text_characters": 1959
+    },
+    {
+      "scope": "lloyds",
+      "perspective": "landscape",
+      "reading": "insight",
+      "selected": "root",
+      "route": "/enterprises/lloyds?stream=landscape&reading=insight",
+      "html_sha256": "31d991475a6bf0639382e791d7afdfda9e5e0eca17cedfe7ab04a8e7dcc7c75e",
+      "text_characters": 132
+    },
+    {
+      "scope": "lloyds",
+      "perspective": "inside",
+      "reading": "facts",
+      "selected": "root",
+      "route": "/enterprises/lloyds?stream=inside&reading=facts",
+      "html_sha256": "fbaf99fd4f8a84f1951bbab1f4a464b2f0e859278e31c0afddaad8f49b6eb9b3",
+      "text_characters": 1084
+    },
+    {
+      "scope": "lloyds",
+      "perspective": "inside",
+      "reading": "insight",
+      "selected": "root",
+      "route": "/enterprises/lloyds?stream=inside&reading=insight",
+      "html_sha256": "dde395f20c084aea691a6682fc7c14e681966190bab1080075b7a2b6bb2e4066",
+      "text_characters": 132
+    },
+    {
+      "scope": "lloyds",
+      "perspective": "forces",
+      "reading": "facts",
+      "selected": "root",
+      "route": "/enterprises/lloyds?stream=forces&reading=facts",
+      "html_sha256": "e95ab866f7ff24b60c57e11957cf3b2d45674dc3bc119207cd027defee592d38",
+      "text_characters": 742
+    },
+    {
+      "scope": "lloyds",
+      "perspective": "forces",
+      "reading": "insight",
+      "selected": "root",
+      "route": "/enterprises/lloyds?stream=forces&reading=insight",
+      "html_sha256": "c16ac6ba09d7aad828adead305d398793862c41d9b261f3a07cf129c38f81e00",
+      "text_characters": 935
+    },
+    {
+      "scope": "easyjet",
+      "perspective": "landscape",
+      "reading": "facts",
+      "selected": "fleet-operations",
+      "route": "/enterprises/easyjet/preview?stream=landscape&reading=facts&detail=fleet-operations",
+      "html_sha256": "5ddd33493c55b84b17252ce0dd900485d94049d925544817081b2637866fe6e1",
+      "text_characters": 197
+    },
+    {
+      "scope": "easyjet",
+      "perspective": "landscape",
+      "reading": "insight",
+      "selected": "fleet-operations",
+      "route": "/enterprises/easyjet/preview?stream=landscape&reading=insight&detail=fleet-operations",
+      "html_sha256": "9010e75bc795478134f6012a1ba664ec17e8c69d9c383296651e94b401c54719",
+      "text_characters": 375
+    },
+    {
+      "scope": "easyjet",
+      "perspective": "inside",
+      "reading": "facts",
+      "selected": "fleet-operations",
+      "route": "/enterprises/easyjet/preview?stream=inside&reading=facts&detail=fleet-operations",
+      "html_sha256": "23ce4e2fdb730e593dcd13452ffae65d07b366a79f36b2328f73888eb002ce0c",
+      "text_characters": 637
+    },
+    {
+      "scope": "easyjet",
+      "perspective": "inside",
+      "reading": "insight",
+      "selected": "fleet-operations",
+      "route": "/enterprises/easyjet/preview?stream=inside&reading=insight&detail=fleet-operations",
+      "html_sha256": "df59c397922461b1ab1d5fb5ee1f30c7127d8e978fffd4386c7e7d4a1bc4d556",
+      "text_characters": 503
+    },
+    {
+      "scope": "easyjet",
+      "perspective": "forces",
+      "reading": "facts",
+      "selected": "fleet-operations",
+      "route": "/enterprises/easyjet/preview?stream=forces&reading=facts&detail=fleet-operations",
+      "html_sha256": "0961768789e4943139b214ccee00ea57890c69182f7f6e9a9fb06287db2191c1",
+      "text_characters": 329
+    },
+    {
+      "scope": "easyjet",
+      "perspective": "forces",
+      "reading": "insight",
+      "selected": "fleet-operations",
+      "route": "/enterprises/easyjet/preview?stream=forces&reading=insight&detail=fleet-operations",
+      "html_sha256": "55f595946653fb662b5b7f9d5871a7d4bc3322d975a8b9a908409281971b2463",
+      "text_characters": 341
+    },
+    {
+      "scope": "easyjet",
+      "perspective": "inside",
+      "reading": "facts",
+      "selected": "network-planning",
+      "route": "/enterprises/easyjet/preview?stream=inside&detail=network-planning&reading=facts",
+      "html_sha256": "49fab6aaaf5c0d371c186cd0d9d6766ad5ec4bc16ed60ad2d070244bf8217659",
+      "text_characters": 485
+    },
+    {
+      "scope": "easyjet",
+      "perspective": "inside",
+      "reading": "insight",
+      "selected": "network-planning",
+      "route": "/enterprises/easyjet/preview?stream=inside&detail=network-planning&reading=insight",
+      "html_sha256": "1ea10fc36e82e4f64e1de393e824ea7d4d20b8c2c627f41912bc97ae954ebda3",
+      "text_characters": 538
+    },
+    {
+      "scope": "easyjet",
+      "perspective": "inside",
+      "reading": "facts",
+      "selected": "customer-service",
+      "route": "/enterprises/easyjet/preview?stream=inside&detail=customer-service&reading=facts",
+      "html_sha256": "7c675f467b55c0f8eb489c699a9245d5f5270a8a00922d810cd512249f56b59f",
+      "text_characters": 510
+    },
+    {
+      "scope": "easyjet",
+      "perspective": "inside",
+      "reading": "insight",
+      "selected": "customer-service",
+      "route": "/enterprises/easyjet/preview?stream=inside&detail=customer-service&reading=insight",
+      "html_sha256": "c49787efe1afd5e6c7ebd6e10e183474e15f32a408a2a1580180a97d8e323c72",
+      "text_characters": 494
+    },
+    {
+      "scope": "banking",
+      "perspective": "landscape",
+      "reading": "facts",
+      "selected": "funding",
+      "route": "/industries/banking?stream=landscape&detail=funding",
+      "html_sha256": "36068a7299fb4077ca53ceb8a4a699124920f61d04e01b74c55f8ad6c86d0838",
+      "text_characters": 1042
+    },
+    {
+      "scope": "banking",
+      "perspective": "landscape",
+      "reading": "insight",
+      "selected": "funding",
+      "route": "/industries/banking?stream=landscape&detail=funding",
+      "html_sha256": "b8169337efa9415986e290451c92716b6ffb500f3174eea7e814cc56349c0b9f",
+      "text_characters": 1174
+    },
+    {
+      "scope": "banking",
+      "perspective": "landscape",
+      "reading": "facts",
+      "selected": "customers",
+      "route": "/industries/banking?stream=landscape&detail=customers",
+      "html_sha256": "944fa12b4e8c58cf956bcbe7f990d034b970c232ed59ecea057c95a53c2acf29",
+      "text_characters": 1470
+    },
+    {
+      "scope": "banking",
+      "perspective": "landscape",
+      "reading": "insight",
+      "selected": "customers",
+      "route": "/industries/banking?stream=landscape&detail=customers",
+      "html_sha256": "f8789b66cb179ee80b556c3c00d44b5937d4c1b15f20db231a9d104405e54e88",
+      "text_characters": 890
+    },
+    {
+      "scope": "banking",
+      "perspective": "landscape",
+      "reading": "facts",
+      "selected": "payments",
+      "route": "/industries/banking?stream=landscape&detail=payments",
+      "html_sha256": "d2d9ba74cf31871e09b338eb157902b7a7f0df4d1be78b99660ca03120f29591",
+      "text_characters": 785
+    },
+    {
+      "scope": "banking",
+      "perspective": "landscape",
+      "reading": "insight",
+      "selected": "payments",
+      "route": "/industries/banking?stream=landscape&detail=payments",
+      "html_sha256": "7b5cd06d7af21944acf129dd2238812fa22e4c66253f171f641bf8acccb7c320",
+      "text_characters": 850
+    },
+    {
+      "scope": "banking",
+      "perspective": "landscape",
+      "reading": "facts",
+      "selected": "providers",
+      "route": "/industries/banking?stream=landscape&detail=providers",
+      "html_sha256": "2ad0d093f8417c8e568cb0a34b138e99fd0c24cc9cb8dda637653022bac0993f",
+      "text_characters": 1184
+    },
+    {
+      "scope": "banking",
+      "perspective": "landscape",
+      "reading": "insight",
+      "selected": "providers",
+      "route": "/industries/banking?stream=landscape&detail=providers",
+      "html_sha256": "1321724312e0f48fb082d6bfd244cdccc85b476d86f38c69c2012f9af9507586",
+      "text_characters": 1280
+    },
+    {
+      "scope": "banking",
+      "perspective": "landscape",
+      "reading": "facts",
+      "selected": "nationwide",
+      "route": "/industries/banking?stream=landscape&selected=nationwide",
+      "html_sha256": "6b3935bcb9698bcdc7a67781649e46a0fd1b9fb04a07863241da3353424580a6",
+      "text_characters": 1531
+    },
+    {
+      "scope": "banking",
+      "perspective": "landscape",
+      "reading": "insight",
+      "selected": "nationwide",
+      "route": "/industries/banking?stream=landscape&selected=nationwide",
+      "html_sha256": "2870076a0422d9914dcdfb6de7558aaab4272cb2774de95348c5aa6d35c25234",
+      "text_characters": 812
+    },
+    {
+      "scope": "lloyds",
+      "perspective": "inside",
+      "reading": "facts",
+      "selected": "technology",
+      "route": "/enterprises/lloyds?stream=inside&detail=technology",
+      "html_sha256": "667f39f36de17cd76ec20ae34e0456bc2f811506082ca4d3f50d62e408f5b0d7",
+      "text_characters": 621
+    },
+    {
+      "scope": "lloyds",
+      "perspective": "inside",
+      "reading": "insight",
+      "selected": "technology",
+      "route": "/enterprises/lloyds?stream=inside&detail=technology",
+      "html_sha256": "68c7f12036c318afae91ab3406d6b3e94542fe464e130e1a1a34b093d0ec4414",
+      "text_characters": 641
+    }
+  ]
+}

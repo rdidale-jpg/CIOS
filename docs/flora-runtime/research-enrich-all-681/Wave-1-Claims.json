@@ -1,0 +1,804 @@
+{
+  "authority": "documentary_candidate_proposals_not_import_package",
+  "claims": [
+    {
+      "id": "C-GDP",
+      "source_ids": [
+        "W-ONS"
+      ],
+      "subject": "GB",
+      "level": "national",
+      "information_element": "economics",
+      "text": "Real GDP grew 0.7% quarter-on-quarter; services 0.9%,production 0.1%,construction−0.7%.",
+      "period": "Jul–Sep 2026 versusApr–Jun 2026",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Preliminary volume estimates may revise; not current-price GVA or 20 industry growthrates.",
+      "source_dates": {
+        "W-ONS": {
+          "published": "2026-11-12",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-GDP-READING",
+      "source_ids": [
+        "W-ONS"
+      ],
+      "subject": "GB",
+      "level": "national",
+      "information_element": "economic_mechanism",
+      "text": "Services contributed most to reported quarterly growth; broad-sector divergence limits a uniform industry narrative.",
+      "period": "Jul–Sep 2026",
+      "semantic_type": "insight",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "reasoning": "Different reported sector growth and source contribution statement.",
+      "falsifier": "Revisions or matched subsector evidence overturn the stated pattern.",
+      "caveat": "No specific enterprise exposure or buying demand established.",
+      "source_dates": {
+        "W-ONS": {
+          "published": "2026-11-12",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-RATE",
+      "source_ids": [
+        "W-BOE"
+      ],
+      "subject": "GB MPC",
+      "level": "national",
+      "information_element": "economic_conditions",
+      "text": "MPC voted 8–1 for a 0.25 percentage-point rise to 4%.",
+      "period": "Meeting ended 4 Nov 2026",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": "2026-11-04",
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Policy decision, not bank funding cost or forecast.",
+      "source_dates": {
+        "W-BOE": {
+          "published": "2026-11-05",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference.",
+      "event_kind": "policy_meeting_ended"
+    },
+    {
+      "id": "C-MORTGAGE",
+      "source_ids": [
+        "W-FCA"
+      ],
+      "subject": "UK mortgage market",
+      "level": "industry",
+      "information_element": "regulation",
+      "text": "CP26/18 consultation closed 28 July 2026; proposed changes cover borrower/product flexibility while retaining responsible-lending checks.",
+      "period": "Published 9 June 2026; updated 29 July 2026",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": "2026-07-28",
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Proposal and closed consultation; final policy/effective dates not established. Stated H22026 expectation is not delivery proof.",
+      "source_dates": {
+        "W-FCA": {
+          "published": "2026-06-09",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference.",
+      "event_kind": "consultation_closed"
+    },
+    {
+      "id": "C-BANK-MECH",
+      "source_ids": [
+        "W-BOE"
+      ],
+      "subject": "UK Banking",
+      "level": "industry",
+      "information_element": "economic_mechanism",
+      "text": "A policy-rate change alters repricing context, while bank-specific funding mix, hedges and pass-through determine the earnings effect.",
+      "period": "Policycontext 5 Nov 2026",
+      "semantic_type": "insight",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "reasoning": "Banking intermediation mechanism; rate fact alone does not resolve bank asset/liability responses.",
+      "falsifier": "Matched enterprise evidence shows neutralised exposure or a different mechanism.",
+      "caveat": "No quantified margin change, customer problem or supplier need inferred.",
+      "source_dates": {
+        "W-BOE": {
+          "published": "2026-11-05",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-AV-TRAFFIC",
+      "source_ids": [
+        "W-CAA"
+      ],
+      "subject": "UK airports",
+      "level": "industry",
+      "information_element": "market_economics",
+      "text": "Airport passenger journeys were 81,158,297 versus 81,035,648 in the matched 2025 quarter.",
+      "period": "Apr–Jun 2026 versusApr–Jun 2025",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Airport boarding/disembarking counts, not unique people, airline tickets, easyJet passengers or UK-only enterprise revenue.",
+      "source_dates": {
+        "W-CAA": {
+          "published": "2026-08-26",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-EJ-SFP",
+      "source_ids": [
+        "W-EJ-SFP"
+      ],
+      "subject": "easyJet brand/airline disclosure",
+      "level": "enterprise",
+      "information_element": "technology",
+      "text": "easyJet announced launch-customer status for Airbus S.Fleet Performance+ in 2023.",
+      "period": "3 Nov 2023",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": "2023-11-03",
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Historical reported relationship; signed legal parties, current deployment and realised savings not established.",
+      "source_dates": {
+        "W-EJ-SFP": {
+          "published": "2023-11-03",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference.",
+      "event_kind": "launch_customer_announcement_not_proved_deployment_start"
+    },
+    {
+      "id": "C-EJ-ICC",
+      "source_ids": [
+        "W-EJ-ICC"
+      ],
+      "subject": "easyJet operations",
+      "level": "enterprise",
+      "information_element": "capabilities",
+      "text": "The 2024 ICC opening disclosure describes Jetstream and crew/aircraft decision-support activities.",
+      "period": "22 May 2024",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": "2024-05-22",
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Company-described functionality; no independent outcome measurement or current deployment assurance.",
+      "source_dates": {
+        "W-EJ-ICC": {
+          "published": "2024-05-22",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference.",
+      "event_kind": "opening_announced_not_exact_operating_start"
+    },
+    {
+      "id": "C-EJ-MECH",
+      "source_ids": [
+        "W-EJ-ICC"
+      ],
+      "subject": "easyJet operations",
+      "level": "enterprise",
+      "information_element": "capability_mechanism",
+      "text": "Existing decision-support capability makes outcome, baseline and control evidence more useful than an assumed missing-AI narrative.",
+      "period": "Historical 2024 capability context",
+      "semantic_type": "insight",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "reasoning": "Published incumbent tools counter a greenfield need assumption.",
+      "falsifier": "Current service-level evidence establishes a different capability state.",
+      "caveat": "No demonstrated deficiency, net benefit or open sourcing decision.",
+      "source_dates": {
+        "W-EJ-ICC": {
+          "published": "2024-05-22",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-NV2",
+      "source_ids": [
+        "W-NV2"
+      ],
+      "subject": "NVIDIA Corporation consolidated",
+      "level": "enterprise",
+      "information_element": "financials",
+      "text": "Q2 FY27 revenue wasUSD96.2 bn.",
+      "period": "Quarter ended 26 Jul 2026",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Global reported quarter, notUK revenue, annualsales or latestquarter.",
+      "source_dates": {
+        "W-NV2": {
+          "published": "2026-08-26",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-NV3",
+      "source_ids": [
+        "W-NV3"
+      ],
+      "subject": "NVIDIA Corporation consolidated",
+      "level": "enterprise",
+      "information_element": "financials",
+      "text": "Q3 FY27 revenue wasUSD115.8 bn; Data Center revenueUSD107.6 bn; GAAP operating incomeUSD77.5 bn.",
+      "period": "Quarter ended 25 Oct 2026",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Global consolidated and reported Data Center scope; not UK market value or GoogleCloudEMEAaccounts.",
+      "source_dates": {
+        "W-NV3": {
+          "published": "2026-11-17",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-NV-LEAD",
+      "source_ids": [
+        "W-NV3"
+      ],
+      "subject": "NVIDIA business leadership",
+      "level": "enterprise",
+      "information_element": "leadership",
+      "text": "The 17 November issuer release identifies Colette Kress as interim CEO and executive vice president/CFO.",
+      "period": "As stated 17 Nov 2026",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Dated professional role, not inferred permanent appointment, legal signing power or named buyer.",
+      "source_dates": {
+        "W-NV3": {
+          "published": "2026-11-17",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-NV-MECH",
+      "source_ids": [
+        "W-NV3"
+      ],
+      "subject": "NVIDIA Corporation consolidated",
+      "level": "enterprise",
+      "information_element": "economic_mechanism",
+      "text": "Data Center supplies most reported Q3 revenue, while consolidated operating income does not establish individual product margins, UK earnings or local buying decisions.",
+      "period": "Q3 FY27",
+      "semantic_type": "insight",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "reasoning": "Reported Data Center revenue USD107.6bn is most of USD115.8bn consolidated revenue; Group GAAP operating income is separately scoped.",
+      "falsifier": "Exact authorised UK/service disclosures establish narrower applicability.",
+      "caveat": "No invented UKallocation or buying intent.",
+      "source_dates": {
+        "W-NV3": {
+          "published": "2026-11-17",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-BT-FIN",
+      "source_ids": [
+        "W-BT"
+      ],
+      "subject": "BT Group continuing operations",
+      "level": "enterprise",
+      "information_element": "financials",
+      "text": "H1 FY27 revenueGBP8.8 bn rose 1%, while adjusted service revenueGBP7.7 bn fell 1%; reportedPBTGBP1.1 bn.",
+      "period": "Six months ended 30 Sep 2026",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "International discontinued operation excluded; service revenue is an APM, not statutory Group total.",
+      "source_dates": {
+        "W-BT": {
+          "published": "2026-11-05",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-BT-OPS",
+      "source_ids": [
+        "W-BT"
+      ],
+      "subject": "Openreach disclosed by BT Group",
+      "level": "enterprise",
+      "information_element": "operating_model",
+      "text": "9.9 m FTTP premises connected atSeptember,41%take-up; footprint 24.1 m. More than 10 m connections reachedOctober.",
+      "period": "30 Sep 2026 stocks; separateOctmilestone",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Connected and passed premises differ; not all UKpremises or unique customer contracts.",
+      "source_dates": {
+        "W-BT": {
+          "published": "2026-11-05",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-BT-CHANGE",
+      "source_ids": [
+        "W-BT"
+      ],
+      "subject": "BT Group",
+      "level": "enterprise",
+      "information_element": "dated_change",
+      "text": "Company reports TalkTalk acquisition on 5 October while regulatory review remains pending; Verizon JV completion remains a 2027 plan.",
+      "period": "Issuer disclosure 5 Nov 2026",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": "2026-10-05",
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Do not reconcile older TalkTalk refinancing/VirginMediaO2 narratives silently or infer acquired legal parties and procurement scope.",
+      "source_dates": {
+        "W-BT": {
+          "published": "2026-11-05",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference.",
+      "event_kind": "reported_acquisition_regulatory_review_pending",
+      "events": [
+        {
+          "kind": "reported_acquisition",
+          "occurred_on": "2026-10-05",
+          "state": "regulatory_review_pending"
+        },
+        {
+          "kind": "proposed_Verizon_JV",
+          "expected_window": "H2calendar2027",
+          "occurred_on": null,
+          "state": "planned_not_completed"
+        }
+      ]
+    },
+    {
+      "id": "C-BT-LEAD",
+      "source_ids": [
+        "W-BT"
+      ],
+      "subject": "BT Group",
+      "level": "enterprise",
+      "information_element": "leadership_strategy",
+      "text": "Allison Kirkby is the release’s Chief Executive; the continuing-operation cost programme targetsGBP3.5 bn gross annualised savings byFY30.",
+      "period": "Release 5 Nov 2026",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Target differs from delivered net savings and available supplier budget.",
+      "source_dates": {
+        "W-BT": {
+          "published": "2026-11-05",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-OFCOM",
+      "source_ids": [
+        "W-OFCOM"
+      ],
+      "subject": "UK telecoms networks",
+      "level": "industry",
+      "information_element": "market_economics",
+      "text": "Full fibre reached 24.9 m residential premises,82%of homes; take-up was 47%of all covered premises, including commercial.",
+      "period": "SnapshotJan 2026; published 13 May 2026",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Residential availability and all-covered-premises take-up have different denominators; not a November footprint or provider market share.",
+      "source_dates": {
+        "W-OFCOM": {
+          "published": "2026-05-13",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-BT-MECH",
+      "source_ids": [
+        "W-BT"
+      ],
+      "subject": "BT Group continuing operations",
+      "level": "enterprise",
+      "information_element": "economic_mechanism",
+      "text": "Headline revenue growth coexists with service-revenue decline and different wholesale/retail price and volume dynamics.",
+      "period": "H1 FY27",
+      "semantic_type": "insight",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "reasoning": "Issuer reports different total/service revenue directions and Openreach/Consumer metrics.",
+      "falsifier": "Matched restated bases or product disclosures remove the apparent divergence.",
+      "caveat": "No uniform UKindustry profit trend, incremental savings or buyer need inferred.",
+      "source_dates": {
+        "W-BT": {
+          "published": "2026-11-05",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-NG-CAP",
+      "source_ids": [
+        "W-NG"
+      ],
+      "subject": "National Grid plc consolidated",
+      "level": "enterprise",
+      "information_element": "financials",
+      "text": "Group capital investmentAPM wasGBP6,707 m; UKtransmission 2,888 m and distribution 834 m.",
+      "period": "Six months ended 30 Sep 2026",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "GroupincludesUS, actualFX, company-definedAPM; not UKenergy industry total or unallocated external spending.",
+      "source_dates": {
+        "W-NG": {
+          "published": "2026-11-05",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-NG-LEAD",
+      "source_ids": [
+        "W-NG"
+      ],
+      "subject": "National Grid plc",
+      "level": "enterprise",
+      "information_element": "leadership_strategy",
+      "text": "Cover identifies Zoë Yujnovich as Chief Executive; at leastGBP70 bn five-year investment is forward-looking.",
+      "period": "Release 5 Nov 2026; planFY2026/27–2030/31",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "No permanent buyer assignment or supplier scope; do not mix five-year plan with half-year actual.",
+      "source_dates": {
+        "W-NG": {
+          "published": "2026-11-05",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-NG-MECH",
+      "source_ids": [
+        "W-NG"
+      ],
+      "subject": "UK regulated networks / National Grid",
+      "level": "industry",
+      "information_element": "economic_mechanism",
+      "text": "Network investment, regulatory revenues and commissioning periods connect capital delivery with earnings; Group totals do not measure the whole UKpower value system.",
+      "period": "H1 FY2026/27",
+      "semantic_type": "insight",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "reasoning": "Issuer separates UK/US regulatedsegments and attributes revenue change partly to RIIO-T3.",
+      "falsifier": "Matched regulatory/segment records contradict the proposed mechanism.",
+      "caveat": "Generation,retail,NESO and other network enterprises require separate evidence; no automatic data-centre customer join.",
+      "source_dates": {
+        "W-NG": {
+          "published": "2026-11-05",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    },
+    {
+      "id": "C-IFR",
+      "source_ids": [
+        "W-IFR"
+      ],
+      "subject": "English football clubs / IFR",
+      "level": "industry",
+      "information_element": "regulation",
+      "text": "IFR page reports final rules published 1 July 2026 and provisional licences needed before 2027/28 for top-five-division clubs.",
+      "period": "Published rules 1 Jul 2026; prospective 2027/28 requirement",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": "2026-07-01",
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Page publication unknown; actual club compliance and legal commencement must be checked; no leaguewide failure or buying need inferred.",
+      "source_dates": {
+        "W-IFR": {
+          "published": null,
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference.",
+      "event_kind": "reported_rule_publication_not_everyclub_commencement"
+    },
+    {
+      "id": "C-MOD",
+      "source_ids": [
+        "W-MOD"
+      ],
+      "subject": "UK Defence Investment Plan",
+      "level": "institution",
+      "information_element": "strategy_programmes",
+      "text": "Published plan describesGBP298 bn investment over four years and explicitly excludes some budget/capability scope.",
+      "period": "Published 30 Jun 2026; four-year plan",
+      "semantic_type": "reported",
+      "authority": "research_candidate_not_canonical",
+      "public_eligible": false,
+      "public_permission_granted": false,
+      "canonical_evidence_id": null,
+      "observation_imported": false,
+      "material_pressure_qualified": false,
+      "pipeline_created": false,
+      "observed_on": "2026-11-18",
+      "event_date": null,
+      "effective_date": null,
+      "counter_evidence": [],
+      "limits": "Exact source scope only; not customer demand, budget, contract or opportunity.",
+      "caveat": "Not all MODbudget, appropriated cash, a supplier award, open tender or an unallocated opportunity.",
+      "source_dates": {
+        "W-MOD": {
+          "published": "2026-06-30",
+          "observed_on": "2026-11-18"
+        }
+      },
+      "date_null_semantics": "No single established occurrence/effective date for this assertion; publication and measurement period are separate, not missing by inference."
+    }
+  ]
+}
