@@ -1,0 +1,542 @@
+{
+  "scope": "Review handoff only for #663 and #664. IND-* are local references. Other identified actors or objects resolve through existing owners. Missing dates are null. Conceptual predicates describe analysis and may require mapping to an existing vocabulary. No source rights are granted.",
+  "sources": {
+    "EAI-HMT-CTP26": {
+      "url": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+      "locator": "Designation list and timeline",
+      "rights": "Existing OGL v3 designation names/dates with attribution only.",
+      "published": "2026-07-10",
+      "retrieved": "2026-11-18",
+      "repo_anchor": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-HMT-CTP-Candidate.json",
+      "retrieved_html_sha256": "d64ab051d37515d4768a6f36d2fbfe399408c5d4e7d91e75e0428d48165c1790"
+    },
+    "PR-LBG-ENVOY": {
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+      "locator": "Official HTML platform description, retained lines 609–613",
+      "rights": "Existing eligible factual scope subject to current policy and source checks.",
+      "published": "2026-05-01",
+      "retrieved": "2026-11-09",
+      "repo_anchor": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json"
+    },
+    "RUD1-NATIONWIDE-FY26": {
+      "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/2026-preliminary-results.pdf",
+      "locator": "Printed 7–10 and 100",
+      "rights": "Existing limited issuer facts and independently authored analysis.",
+      "published": "2026-05-21",
+      "retrieved": "2026-11-16",
+      "repo_anchor": "enterprise-knowledge/banking/research-model/source-snapshots/RUD1-Public-Facts.json"
+    },
+    "RUD1-FCA-H126": {
+      "url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+      "locator": "Retained selected legal-bank rows",
+      "rights": "OGL FCA-owned numerical cells only.",
+      "published": "2026-10-22",
+      "retrieved": "2026-11-16",
+      "repo_anchor": "enterprise-knowledge/banking/research-model/source-snapshots/RUD1-Public-Facts.json"
+    },
+    "MPC-NOV": {
+      "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+      "locator": "Monetary Policy Summary, first paragraph",
+      "rights": "Research only. Public projection blocked pending exact use review.",
+      "published": "2026-11-05",
+      "retrieved": "2026-11-18",
+      "repo_anchor": "docs/flora-runtime/bie2/Source-Ledger.json",
+      "retrieved_html_sha256": "d1c933e5cd6209848dff318c7d3948736726d7f71060eef9a325a6e957d9c88e"
+    },
+    "PAY-FPS": {
+      "url": "https://www.wearepay.uk/what-we-do/payment-systems/faster-payment-system/",
+      "locator": "Overview, 2025 activity",
+      "rights": "Research only. Public projection blocked pending exact use review.",
+      "published": null,
+      "retrieved": "2026-11-18",
+      "repo_anchor": null,
+      "retrieved_html_sha256": "6a9bb1f2e1dbd0961c91c72b426c3062ae76b4070f350386bed1dffbad5c122b"
+    },
+    "PAY-BACS": {
+      "url": "https://www.wearepay.uk/what-we-do/payment-systems/bacs-payment-system/",
+      "locator": "Overview, 2025 activity",
+      "rights": "Research only. Public projection blocked pending exact use review.",
+      "published": null,
+      "retrieved": "2026-11-18",
+      "repo_anchor": null,
+      "retrieved_html_sha256": "5205477bb41aa07182687c2f4c1c6be64ec566bdb77f1339bcd8396a9807f4c3"
+    },
+    "PAY-ICS": {
+      "url": "https://www.wearepay.uk/what-we-do/payment-systems/image-clearing-system/",
+      "locator": "Overview, role of digital cheque images",
+      "rights": "Research only. Public projection blocked pending exact use review.",
+      "published": null,
+      "retrieved": "2026-11-18",
+      "repo_anchor": null,
+      "retrieved_html_sha256": "be19da406e57ed9faaeeb190c942866c3312b1bc8a85f78b32c261b0c347d14c"
+    },
+    "PAY-PART": {
+      "url": "https://www.wearepay.uk/what-we-do/payment-systems/faster-payment-system/payment-system-participant-list/",
+      "locator": "Faster Payment System list, exact named participant rows",
+      "rights": "Research only. Public projection blocked pending exact use review.",
+      "published": null,
+      "retrieved": "2026-11-18",
+      "repo_anchor": null,
+      "retrieved_html_sha256": "9cbf23364fc198bfe5fb209ee9090fb0399c3ee62f154ba4006653063ea3d303"
+    },
+    "CASS-Q3": {
+      "url": "https://www.wearepay.uk/current-account-switch-service-records-highest-quarter-of-switching-since-2023/",
+      "locator": "Completed switches, lagged net switching, operator statement",
+      "rights": "Research only. Public projection blocked pending exact use review.",
+      "published": "2026-11-05",
+      "retrieved": "2026-11-18",
+      "repo_anchor": "docs/flora-runtime/bie2/Source-Ledger.json",
+      "retrieved_html_sha256": "a00a8ab6475d25ffec6a1592e11297631724a7308fca0ac92b75cf66417c1ed5"
+    },
+    "CH-PAYUK": {
+      "url": "https://find-and-update.company-information.service.gov.uk/company/10872449",
+      "locator": "Company overview, number and form",
+      "rights": "Research only. Public projection blocked pending exact use review.",
+      "published": null,
+      "retrieved": "2026-11-18",
+      "repo_anchor": null,
+      "retrieved_html_sha256": "17832f57f5c65c6125c82c55c75d0680b2089a51d81673e2eddce02d7ec0f78c"
+    },
+    "CH-PAYUK-FILING": {
+      "url": "https://find-and-update.company-information.service.gov.uk/company/10872449/filing-history",
+      "locator": "29 July 2026 AA entry, accounts to 31 December 2025",
+      "rights": "Research only. Public projection blocked pending exact use review.",
+      "published": "2026-07-29",
+      "retrieved": "2026-11-18",
+      "repo_anchor": null,
+      "retrieved_html_sha256": "b18346585123acff04f27c2bec14f8826edfe340bdca58c6132dc613aa88b289"
+    },
+    "RTGS-FORUM": {
+      "url": "https://www.bankofengland.co.uk/minutes/2026/october/rtgs-chaps-industry-forum-13-october-2026",
+      "locator": "Retained BIE-2 source ledger and edges 020/021",
+      "rights": "Research only. Public projection blocked pending exact use review.",
+      "published": "2026-11-04",
+      "retrieved": "2026-11-15",
+      "repo_anchor": "docs/flora-runtime/bie2/Relationship-Candidates.json"
+    }
+  },
+  "rows": [
+    {
+      "id": "IND-CTP",
+      "subject": "HM Treasury",
+      "legal_scope": "UK-regime designation of Google Cloud EMEA Limited and three other exact provider names",
+      "predicate": "designates_critical_third_party",
+      "target": "Google Cloud EMEA Limited",
+      "kind": "reported_fact",
+      "source_ids": [
+        "EAI-HMT-CTP26"
+      ],
+      "status": "existing_eligible",
+      "scene": "UK Forces / Banking Forces / historical pulse",
+      "counter_evidence_or_limit": "No individual-bank applicability, workload or contract.",
+      "dates": {
+        "published": {
+          "EAI-HMT-CTP26": "2026-07-10"
+        },
+        "event": "2026-07-10",
+        "effective": "2026-07-13",
+        "reporting": null,
+        "retrieved": {
+          "EAI-HMT-CTP26": "2026-11-18"
+        }
+      },
+      "existing_refs": [
+        "EAI-UK-CTP-DESIGNATION",
+        "BK-IND-002"
+      ],
+      "invalidation": "On retraction, rights change or conflicting support, suppress the dependent projection and retain source history. Refresh list observations before treating them as current."
+    },
+    {
+      "id": "IND-RESILIENCE",
+      "subject": "BK-IND-002",
+      "legal_scope": "UK Banking context, contingent bank applicability",
+      "predicate": "contextual_reassessment",
+      "target": "provider-dependent continuity",
+      "kind": "inference",
+      "source_ids": [
+        "EAI-HMT-CTP26"
+      ],
+      "status": "derived_review",
+      "scene": "Banking Forces",
+      "counter_evidence_or_limit": "Actual criticality, substitution and controls require service-level evidence.",
+      "dates": {
+        "published": {
+          "EAI-HMT-CTP26": "2026-07-10"
+        },
+        "event": null,
+        "effective": null,
+        "reporting": null,
+        "retrieved": {
+          "EAI-HMT-CTP26": "2026-11-18"
+        }
+      },
+      "existing_refs": [],
+      "invalidation": "On retraction, rights change or conflicting support, suppress the dependent projection and retain source history. Refresh list observations before treating them as current."
+    },
+    {
+      "id": "IND-ENVOY",
+      "subject": "BK-ENT-001",
+      "legal_scope": "Lloyds Banking Group plc; provider brand only",
+      "predicate": "reported_collaboration",
+      "target": "SUP-GOOGLE",
+      "kind": "reported_fact",
+      "source_ids": [
+        "PR-LBG-ENVOY"
+      ],
+      "status": "existing_eligible_without_exact_event_day",
+      "scene": "Enterprise selected capability",
+      "counter_evidence_or_limit": "HTML publication 1 May versus 28 April linked variant. No legal provider or workload join.",
+      "dates": {
+        "published": {
+          "PR-LBG-ENVOY": "2026-05-01"
+        },
+        "event": null,
+        "effective": null,
+        "reporting": null,
+        "retrieved": {
+          "PR-LBG-ENVOY": "2026-11-09"
+        }
+      },
+      "existing_refs": [
+        "LBG-ENVOY-GOOGLE",
+        "LBG-ENVOY-CONTROLS",
+        "actor:google"
+      ],
+      "invalidation": "On retraction, rights change or conflicting support, suppress the dependent projection and retain source history. Refresh list observations before treating them as current."
+    },
+    {
+      "id": "IND-NBS",
+      "subject": "research-subject:nationwide-building-society-group",
+      "legal_scope": "Consolidated Nationwide Group, GBP million",
+      "predicate": "reports_profit_bridges",
+      "target": "funding and member economics",
+      "kind": "calculation",
+      "source_ids": [
+        "RUD1-NATIONWIDE-FY26"
+      ],
+      "status": "existing_eligible",
+      "scene": "Banking Landscape / economic contrast",
+      "counter_evidence_or_limit": "127 integration spend in costs; acquisition comparator changes. Society service outcomes are separate.",
+      "dates": {
+        "published": {
+          "RUD1-NATIONWIDE-FY26": "2026-05-21"
+        },
+        "event": null,
+        "effective": null,
+        "reporting": "2025-04-01/2026-03-31",
+        "retrieved": {
+          "RUD1-NATIONWIDE-FY26": "2026-11-16"
+        }
+      },
+      "existing_refs": [
+        "actor:nbs-group",
+        "nationwide-fy2026"
+      ],
+      "invalidation": "On retraction, rights change or conflicting support, suppress the dependent projection and retain source history. Refresh list observations before treating them as current."
+    },
+    {
+      "id": "IND-FCA",
+      "subject": "actor:natwest",
+      "legal_scope": "National Westminster Bank PLC example, exact legal cohort",
+      "predicate": "reports_service_activity",
+      "target": "received / closed / firm-upheld",
+      "kind": "reported_fact",
+      "source_ids": [
+        "RUD1-FCA-H126"
+      ],
+      "status": "existing_eligible",
+      "scene": "Banking Landscape / servicing",
+      "counter_evidence_or_limit": "No service-quality ranking, cost or harm rate without denominators.",
+      "dates": {
+        "published": {
+          "RUD1-FCA-H126": "2026-10-22"
+        },
+        "event": null,
+        "effective": null,
+        "reporting": "2026-01-01/2026-06-30",
+        "retrieved": {
+          "RUD1-FCA-H126": "2026-11-16"
+        }
+      },
+      "existing_refs": [],
+      "invalidation": "On retraction, rights change or conflicting support, suppress the dependent projection and retain source history. Refresh list observations before treating them as current."
+    },
+    {
+      "id": "IND-OPERATOR",
+      "subject": "actor:payuk",
+      "legal_scope": "Pay.UK Limited 10872449; service separate",
+      "predicate": "reported_owns_and_operates",
+      "target": "actor:cass",
+      "kind": "reported_fact",
+      "source_ids": [
+        "CH-PAYUK",
+        "CASS-Q3"
+      ],
+      "status": "review_only",
+      "scene": "Landscape / ecosystem",
+      "counter_evidence_or_limit": "Operator role gives no supplier terms.",
+      "dates": {
+        "published": {
+          "CH-PAYUK": null,
+          "CASS-Q3": "2026-11-05"
+        },
+        "event": null,
+        "effective": null,
+        "reporting": null,
+        "retrieved": {
+          "CH-PAYUK": "2026-11-18",
+          "CASS-Q3": "2026-11-18"
+        }
+      },
+      "existing_refs": [
+        "edge:022"
+      ],
+      "invalidation": "On retraction, rights change or conflicting support, suppress the dependent projection and retain source history. Refresh list observations before treating them as current."
+    },
+    {
+      "id": "IND-PART-LLOYDS",
+      "subject": "actor:lloyds",
+      "legal_scope": "Lloyds Bank plc; PAY.UK LIMITED publisher, exact name under Faster Payment System",
+      "predicate": "operator_lists_participant_in",
+      "target": "actor:fps",
+      "kind": "reported_fact",
+      "source_ids": [
+        "PAY-PART",
+        "CH-PAYUK"
+      ],
+      "status": "review_only",
+      "scene": "Landscape / payments",
+      "counter_evidence_or_limit": "Positive role evidence. No bilateral contract, settlement access subtype, volume or initial effective date.",
+      "dates": {
+        "published": {
+          "PAY-PART": null,
+          "CH-PAYUK": null
+        },
+        "event": null,
+        "effective": null,
+        "reporting": null,
+        "retrieved": {
+          "PAY-PART": "2026-11-18",
+          "CH-PAYUK": "2026-11-18"
+        }
+      },
+      "existing_refs": [
+        "actor:payuk"
+      ],
+      "invalidation": "On retraction, rights change or conflicting support, suppress the dependent projection and retain source history. Refresh list observations before treating them as current."
+    },
+    {
+      "id": "IND-PART-NATIONWIDE",
+      "subject": "actor:nationwide",
+      "legal_scope": "Nationwide Building Society; PAY.UK LIMITED publisher, exact name under Faster Payment System",
+      "predicate": "operator_lists_participant_in",
+      "target": "actor:fps",
+      "kind": "reported_fact",
+      "source_ids": [
+        "PAY-PART",
+        "CH-PAYUK"
+      ],
+      "status": "review_only",
+      "scene": "Landscape / payments",
+      "counter_evidence_or_limit": "Positive role evidence. No bilateral contract, settlement access subtype, volume or initial effective date.",
+      "dates": {
+        "published": {
+          "PAY-PART": null,
+          "CH-PAYUK": null
+        },
+        "event": null,
+        "effective": null,
+        "reporting": null,
+        "retrieved": {
+          "PAY-PART": "2026-11-18",
+          "CH-PAYUK": "2026-11-18"
+        }
+      },
+      "existing_refs": [
+        "actor:payuk"
+      ],
+      "invalidation": "On retraction, rights change or conflicting support, suppress the dependent projection and retain source history. Refresh list observations before treating them as current."
+    },
+    {
+      "id": "IND-RAILS",
+      "subject": "actor:payuk",
+      "legal_scope": "Two UK payment systems and issuer reported CY2025 traffic",
+      "predicate": "reports_rail_activity",
+      "target": "actor:bacs / actor:fps",
+      "kind": "calculation",
+      "source_ids": [
+        "PAY-BACS",
+        "PAY-FPS"
+      ],
+      "status": "review_only",
+      "scene": "Landscape / payments",
+      "counter_evidence_or_limit": "Rounded throughput and amount per instruction; no fees, margins or full-market shares.",
+      "dates": {
+        "published": {
+          "PAY-BACS": null,
+          "PAY-FPS": null
+        },
+        "event": null,
+        "effective": null,
+        "reporting": "2025-01-01/2025-12-31",
+        "retrieved": {
+          "PAY-BACS": "2026-11-18",
+          "PAY-FPS": "2026-11-18"
+        }
+      },
+      "existing_refs": [],
+      "invalidation": "On retraction, rights change or conflicting support, suppress the dependent projection and retain source history. Refresh list observations before treating them as current."
+    },
+    {
+      "id": "IND-FLOW",
+      "subject": "BK-IND-002",
+      "legal_scope": "Conceptual industry roles",
+      "predicate": "conceptual_value_flow",
+      "target": "customer payment instruction → clearing → settlement → outcome",
+      "kind": "inference",
+      "source_ids": [
+        "PAY-FPS",
+        "PAY-BACS",
+        "PAY-ICS",
+        "RTGS-FORUM"
+      ],
+      "status": "derived_review",
+      "scene": "Landscape / payments",
+      "counter_evidence_or_limit": "Analytical sequence only. Review exact rail claims separately.",
+      "dates": {
+        "published": {
+          "PAY-FPS": null,
+          "PAY-BACS": null,
+          "PAY-ICS": null,
+          "RTGS-FORUM": "2026-11-04"
+        },
+        "event": null,
+        "effective": null,
+        "reporting": null,
+        "retrieved": {
+          "PAY-FPS": "2026-11-18",
+          "PAY-BACS": "2026-11-18",
+          "PAY-ICS": "2026-11-18",
+          "RTGS-FORUM": "2026-11-15"
+        }
+      },
+      "existing_refs": [],
+      "invalidation": "On retraction, rights change or conflicting support, suppress the dependent projection and retain source history. Refresh list observations before treating them as current."
+    },
+    {
+      "id": "IND-MPC",
+      "subject": "Bank of England MPC",
+      "legal_scope": "United Kingdom monetary policy",
+      "predicate": "sets_policy_rate",
+      "target": "4% Bank Rate",
+      "kind": "reported_fact",
+      "source_ids": [
+        "MPC-NOV"
+      ],
+      "status": "review_only",
+      "scene": "Forces / November candidate",
+      "counter_evidence_or_limit": "25 basis point change, not uniform transmission to banks.",
+      "dates": {
+        "published": {
+          "MPC-NOV": "2026-11-05"
+        },
+        "event": "2026-11-04",
+        "effective": null,
+        "reporting": null,
+        "retrieved": {
+          "MPC-NOV": "2026-11-18"
+        }
+      },
+      "existing_refs": [],
+      "invalidation": "On retraction, rights change or conflicting support, suppress the dependent projection and retain source history. Refresh list observations before treating them as current."
+    },
+    {
+      "id": "IND-SWITCH",
+      "subject": "actor:cass",
+      "legal_scope": "Completed switches in Jul–Sep, named flows Apr–Jun",
+      "predicate": "reports_completed_switches",
+      "target": "411384 completed switches",
+      "kind": "reported_fact",
+      "source_ids": [
+        "CASS-Q3"
+      ],
+      "status": "review_only",
+      "scene": "Landscape / dated candidate",
+      "counter_evidence_or_limit": "No same-period bank net flow or market churn inference.",
+      "dates": {
+        "published": {
+          "CASS-Q3": "2026-11-05"
+        },
+        "event": null,
+        "effective": null,
+        "reporting": "2026-07-01/2026-09-30",
+        "retrieved": {
+          "CASS-Q3": "2026-11-18"
+        }
+      },
+      "existing_refs": [],
+      "invalidation": "On retraction, rights change or conflicting support, suppress the dependent projection and retain source history. Refresh list observations before treating them as current."
+    },
+    {
+      "id": "IND-REJECT",
+      "subject": "actor:lloyds",
+      "legal_scope": "Lloyds Bank plc; alleged Google Cloud EMEA Limited contract/workload",
+      "predicate": "contracted_critical_workload",
+      "target": "Google Cloud EMEA Limited",
+      "kind": "unsupported",
+      "source_ids": [
+        "PR-LBG-ENVOY",
+        "EAI-HMT-CTP26"
+      ],
+      "status": "suppress",
+      "scene": "none",
+      "counter_evidence_or_limit": "Brand collaboration and legal-provider designation fail exact-party and predicate tests.",
+      "dates": {
+        "published": {
+          "PR-LBG-ENVOY": "2026-05-01",
+          "EAI-HMT-CTP26": "2026-07-10"
+        },
+        "event": null,
+        "effective": null,
+        "reporting": null,
+        "retrieved": {
+          "PR-LBG-ENVOY": "2026-11-09",
+          "EAI-HMT-CTP26": "2026-11-18"
+        }
+      },
+      "existing_refs": [],
+      "invalidation": "On retraction, rights change or conflicting support, suppress the dependent projection and retain source history. Refresh list observations before treating them as current."
+    }
+  ],
+  "measures": {
+    "nationwide_gbp_million": {
+      "row": "IND-NBS",
+      "income": 6378,
+      "operating_costs": 4021,
+      "impairment": 331,
+      "underlying_pbt": 2026,
+      "income_adjustment": 1,
+      "acquisition_expense_adjustment": 138,
+      "member_rewards": 399,
+      "statutory_pbt": 1490,
+      "integration_in_operating_costs": 127
+    },
+    "rail_principal": {
+      "row": "IND-RAILS",
+      "period": "calendar 2025",
+      "Bacs": {
+        "transaction_billions": 6.86,
+        "principal_gbp_trillions": 6.05
+      },
+      "FPS": {
+        "transaction_billions": 5.55,
+        "principal_gbp_trillions": 4.84
+      }
+    },
+    "cass_switches": {
+      "row": "IND-SWITCH",
+      "2025-Q3": 265083,
+      "2026-Q3": 411384
+    }
+  }
+}
