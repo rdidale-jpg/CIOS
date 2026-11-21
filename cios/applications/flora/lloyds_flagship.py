@@ -60,7 +60,7 @@ VIEWS = (
 STYLE = """<style>
 .llf {margin-block: 1.5rem 2.5rem; color:#12362e}
 .llf-header {background:#133a32;color:#f7f3e8;border-radius:1rem;padding:clamp(1rem,3vw,2rem)}
-.llf-header h2 {color:inherit;margin:.25rem 0 .65rem}
+.llf-header h1 {color:inherit;margin:.25rem 0 .65rem}
 .llf-header .eyebrow {color:#d2e1d0}
 .llf-path {display:flex;gap:.65rem;flex-wrap:wrap;margin:1rem 0}
 .llf-path a {padding:.45rem .65rem;border:1px solid #9fb9a7;border-radius:.45rem}
@@ -98,6 +98,9 @@ def _facts(data):
     ids.update(key for _, _, rows in VIEWS for _, keys, _ in rows for key in keys)
     facts = {}
     source_by_id = {row['id']: row for row in data['sources']}
+    supplier_spot = {'id': 'technology'}
+    if not v.detail_claims(v.Context('lloyds', 'landscape'), supplier_spot, data):
+        ids.discard('LBG-ENVOY-GOOGLE')
     for claim in data['claims']:
         key = claim['id']
         if key not in ids:
@@ -170,8 +173,8 @@ def render(ctx, data, issues):
                 if insight and len(core) == len(STAGES) else
                 'Explore Lloyds’ disclosures on efficiency, platform renewal, existing technology controls and regulatory timing.')
     body = (STYLE + '<section class="llf" aria-label="Lloyds flagship overview">'
-            '<header class="llf-header"><p class="eyebrow">Lloyds Banking Group</p>'
-            '<h2>Renew the bank while it runs</h2><p>' + escape(overview) + '</p></header>'
+            '<div class="llf-header"><p class="eyebrow">Lloyds Banking Group · Flagship prototype</p>'
+            '<h1>Renew the bank while it runs</h1><p>' + escape(overview) + '</p></div>'
             '<nav class="llf-path" aria-label="Follow the strategic issue">' + stages + '</nav>'
             + (_basis(core) if core else '')
             + '<h2>Explore the enterprise</h2>')

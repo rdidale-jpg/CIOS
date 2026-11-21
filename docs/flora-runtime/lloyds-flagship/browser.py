@@ -32,6 +32,7 @@ with TemporaryDirectory() as directory, MonkeyPatch.context() as patch, sync_pla
             page = browser.new_page(base_url=f'http://127.0.0.1:{server.server_port}',
                                     viewport={'width': width, 'height': height}, has_touch=name != 'desktop')
             assert page.goto('/enterprises/lloyds').ok
+            page.get_by_role('link', name='Explore the Lloyds flagship').click()
             panel = page.get_by_role('region', name='Lloyds flagship overview')
             expect(panel.get_by_role('heading', name='Renew the bank while it runs')).to_be_visible()
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')

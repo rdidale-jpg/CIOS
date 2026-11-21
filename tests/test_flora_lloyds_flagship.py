@@ -13,7 +13,7 @@ PATH = '/enterprises/lloyds'
 
 
 def render(mode='facts'):
-    return visual.render(PATH, {'reading': [mode]})
+    return visual.render(PATH, {'stream': ['landscape'], 'detail': ['flagship'], 'reading': [mode]})
 
 
 def test_existing_journey_and_connected_issue():
@@ -24,6 +24,8 @@ def test_existing_journey_and_connected_issue():
     assert 'Scale AI only after benefit' in insight and 'Scale AI only after benefit' not in facts
     for value in ('118,762', '92,548', '79,323', 'HM Treasury', 'Source &amp; basis'):
         assert value in facts
+    root = visual.render(PATH, {})
+    assert 'Explore the Lloyds flagship' in root and '118,762' not in root
     ctx = visual.resolve(PATH, {})
     for _, _, stream, detail in flagship.STAGES:
         route = urlsplit(visual.url(ctx, stream=stream, detail=detail))
@@ -58,3 +60,11 @@ def test_new_policy_excerpt_provenance_and_lifecycle(monkeypatch):
     assert flagship._payments() is None
     assert 'HM Treasury' not in render('insight')
     assert 'Opportunity · payments' not in render('insight')
+
+def test_flagship_preserves_supplier_relationship_gate(monkeypatch):
+    data = deepcopy(visual.current_data(visual.resolve(PATH, {})))
+    for row in data['relationships']:
+        if row['object'] == 'SUP-GOOGLE':
+            row['verified'] = False
+    monkeypatch.setattr(visual, 'current_data', lambda context: data)
+    assert 'Google Cloud' not in render('insight')

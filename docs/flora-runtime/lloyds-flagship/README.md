@@ -1,6 +1,6 @@
 # Lloyds flagship reference twin
 
-Baseline `6af7ef0afeb8e8ad4059fbb27460add7f80d4ec1`. Open [Lloyds Landscape](/enterprises/lloyds) in the local preview or run the loopback Chromium [harness](browser.py). The existing scene, accepted artwork, Left panel, native reading selector and specialist routes remain in place.
+Baseline `6af7ef0afeb8e8ad4059fbb27460add7f80d4ec1`. Open Lloyds Landscape and select **Explore the Lloyds flagship** in the local preview or run the loopback Chromium [harness](browser.py). The existing scene, accepted artwork, Left panel, native reading selector and specialist routes remain in place.
 
 ## What changed
 
@@ -22,7 +22,7 @@ Baseline `6af7ef0afeb8e8ad4059fbb27460add7f80d4ec1`. Open [Lloyds Landscape](/en
 
 ## Walkthrough and previews
 
-Start on Landscape / Facts. The five links open existing Economics, Operations, Technology, Forces and Strategy views. The evidence disclosure identifies issuer, scope, date and aspiration status. Switch to FLORA Insight for the linked issue, conditional risks and possible responses. Open Peer evidence for service counts and comparability limits. Back returns to the flagship. The dual-control usability question remains a separate follow-up.
+Start on Lloyds Landscape, then open the flagship detail in Facts. The accepted Landscape arrival and its single economics evidence disclosure stay in place. The five links open existing Economics, Operations, Technology, Forces and Strategy views. The evidence disclosure identifies issuer, scope, date and aspiration status. Switch to FLORA Insight for the linked issue, conditional risks and possible responses. Open Peer evidence for service counts and comparability limits. Back returns to the flagship. The dual-control usability question remains a separate follow-up.
 
 | Mode | Desktop | iPad landscape | iPad portrait |
 | --- | --- | --- | --- |
