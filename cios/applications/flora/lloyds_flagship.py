@@ -10,7 +10,7 @@ STAGES = (
     ('Economics', 'LBG-A2030-CIR', 'landscape', 'economics'),
     ('Operations', 'LBG-AR25-MIGRATION', 'inside', 'technology-controls'),
     ('Technology', 'LBG-ENVOY-CONTROLS', 'inside', 'technology'),
-    ('Pressure', 'UK-PRA-REPORT27', 'forces', 'UK-PRA-REPORT27'),
+    ('Pressure', 'UK-PRA-REPORT27', 'forces', ''),
     ('Strategy', 'LBG-A2030-PLATFORMS', 'forces', 'LBG-A2030-PLATFORMS'),
 )
 VIEWS = (
@@ -61,6 +61,7 @@ STYLE = """<style>
 .llf {margin-block: 1.5rem 2.5rem; color:#12362e}
 .llf-header {background:#133a32;color:#f7f3e8;border-radius:1rem;padding:clamp(1rem,3vw,2rem)}
 .llf-header h2 {color:inherit;margin:.25rem 0 .65rem}
+.llf-header .eyebrow {color:#d2e1d0}
 .llf-path {display:flex;gap:.65rem;flex-wrap:wrap;margin:1rem 0}
 .llf-path a {padding:.45rem .65rem;border:1px solid #9fb9a7;border-radius:.45rem}
 .llf-path a {flex:1 1 7rem;color:#14382d;background:#e8efe2}
