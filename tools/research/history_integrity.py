@@ -153,6 +153,11 @@ def verify_history(root):
         assert hashlib.sha256(actual[public_path]).hexdigest()==record['sha256'], 'Unknown public factual candidate cut'
         assert public_path not in expected
         actual.pop(public_path)
+    statement_path='enterprise-knowledge/banking/research-model/source-snapshots/EEI2B-Nationwide-AR26.json'
+    if statement_path in actual:
+        assert hashlib.sha256(actual[statement_path]).hexdigest()=='0ed1ae901d94af11be0303b81516ae712a6c09df8b3bc121b9e9eeec1c0ec63a', 'Unknown annual statement source cut'
+        assert statement_path not in expected
+        actual.pop(statement_path)
     compare_history(expected,actual)
     return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS)-len(EAI1_CANDIDATE_ADDITIONS)-len(BIE2_CANDIDATE_ADDITIONS)-len(BIE3_CANDIDATE_ADDITIONS)-len(F1_CANDIDATE_ADDITIONS)-len(RUD1_ADDITIONS),
             'depth_additions':len(DEPTH_ADDITIONS),'macro_additions':len(MACRO_ADDITIONS),

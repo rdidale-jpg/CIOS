@@ -160,3 +160,34 @@ def statements(lines):
             caveats=(line.sign_convention,))
         if isp.eligible(fact):
             yield line, fact
+
+
+def annual_details(selection):
+    """Read through the finite Source owner for every current public render."""
+    try:
+        record, subject = source.public_statement_record(selection)
+        return project(record, subject=subject)
+    except (OSError, KeyError, TypeError, ValueError, PermissionError):
+        return ()
+
+
+def balance_changes(lines, keys):
+    """Project scoped, revision-bound changes between eligible stock dates."""
+    from .candidate_analytics import Derivation, InputReference
+
+    current = _check_history(lines)
+    result = []
+    for key in keys:
+        pair = sorted((line for line in current if line.metric == key
+                       and line.statement == 'balance' and line.value.unit == 'currency'),
+                      key=lambda line: line.period.as_at)
+        if len(pair) != 2:
+            continue
+        spec = Derivation(derivation_id=key + '-balance-change', formula='difference', comparison='stock_dates',
+                          inputs=tuple(InputReference(measurement_id=line.measurement_id, revision=line.revision)
+                                       for line in pair))
+        try:
+            result.append((pair[1].reported_label, compare(lines, spec)))
+        except ValueError:
+            continue
+    return tuple(result)

@@ -11,6 +11,8 @@ CUTS = {
 
 
 def predecessor(root, path, current):
+    from tools.research.eei2b_compatibility import predecessor as annual_predecessor
+    current = annual_predecessor(root, path, current)
     cut = CUTS.get(path)
     if cut is None or sha256(current).hexdigest() != cut[0]:
         return current

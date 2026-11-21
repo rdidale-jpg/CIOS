@@ -1,0 +1,1620 @@
+{
+  "id": "EEI2B-NATIONWIDE-AR26",
+  "authority": "analytical_working_research",
+  "canonical_mutation": false,
+  "title": "Nationwide Building Society Annual Report and Accounts 2026",
+  "publisher": "Nationwide Building Society",
+  "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/annual-report-and-accounts-2026.pdf",
+  "retrieval_url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/annual-report-and-accounts-2026.pdf",
+  "publication_date": "2026-06-08",
+  "publication_date_evidence": "Issuer Review of the Year 2026, printed p. 12, states availability from 8 June 2026.",
+  "retrieved_at": "2026-11-21T08:57:17+00:00",
+  "retrieval_method": "approved_web_research_tool",
+  "retrieval_reference": "Issuer results page and original freely accessible annual-report PDF, verified against Group columns on printed pp. 156, 186, 188 and 191. Accounting/perimeter notes pp. 192–193.",
+  "verification": "primary_retrieved",
+  "content_kind": "minimal_verified_numerical_facts",
+  "primary_content_sha256": null,
+  "reporting_period": "FY2026 ended 31 March 2026 and published FY2025 Group comparatives",
+  "reviewed_by": "EEI-2B repository Source verification",
+  "review_notes": "Selected numerical facts independently transcribed; no copied report layout, prose, publisher logos or third-party material. Only bounded analysis and homepage attribution. More recent interim results are outside the modelled series.",
+  "source_category": "issuer_results",
+  "third_party_material": false,
+  "retained_form": "minimal_facts_and_provenance",
+  "purpose": "attributed_analytical_working_views",
+  "audience": "flora_research_views",
+  "retention": "minimal_facts_and_provenance",
+  "rights": {
+    "basis": "ordinary_public_factual_analysis",
+    "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+    "expression_reuse": false,
+    "contract_restriction_found": false,
+    "method_review": "Open issuer report via ordinary public access; bounded independent numerical facts and original analysis. No applicable term located on the report or public results route for the scoped use. No licence assertion or bulk collection.",
+    "operations": [
+      "read_public",
+      "independent_facts",
+      "minimal_numerical_retention",
+      "public_read_only"
+    ],
+    "material_exceptions": [],
+    "attribution_url": "https://www.nationwide.co.uk/",
+    "homepage_conditions_met": true
+  },
+  "document_identity": {
+    "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/annual-report-and-accounts-2026.pdf",
+    "title": "Nationwide Building Society Annual Report and Accounts 2026",
+    "publisher": "Nationwide Building Society",
+    "published": "2026-06-08",
+    "version": "sha256:8d4e0d7807d4a68164bc8d136702686dbd323cdff78bbc0fa3ec0988770b6587"
+  },
+  "facts_sha256": "70d82cd7fd1a534c6ab9e5cfc4260133d64f3c6b005fa807e5326ca33767cf7e",
+  "fact_bindings": [
+    {
+      "key": "nw-net_interest_income-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 186 · Group 2026 column · Net interest income",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · full-year Virgin Money",
+        "metric": "net_interest_income",
+        "definition": "Net interest income",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "6076",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "6,076",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Net interest income",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-net_interest_income-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 186 · Group 2025 column · Net interest income",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · six months of Virgin Money",
+        "metric": "net_interest_income",
+        "definition": "Net interest income",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-04-05",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "4992",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "4,992",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Net interest income",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": [
+          "The FY2025 reporting period is 361 days and includes Virgin Money from acquisition on 1 October 2024."
+        ]
+      }
+    },
+    {
+      "key": "nw-total_income-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 186 · Group 2026 column · Total income",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · full-year Virgin Money",
+        "metric": "total_income",
+        "definition": "Total income",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "6379",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "6,379",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Total income",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-total_income-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 186 · Group 2025 column · Total income",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · six months of Virgin Money",
+        "metric": "total_income",
+        "definition": "Total income",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-04-05",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "7484",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "7,484",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Total income",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": [
+          "The FY2025 reporting period is 361 days and includes Virgin Money from acquisition on 1 October 2024."
+        ]
+      }
+    },
+    {
+      "key": "nw-admin_expenses-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 186 · Group 2026 column · Administrative expenses",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · full-year Virgin Money",
+        "metric": "admin_expenses",
+        "definition": "Administrative expenses",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "-4159",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(4,159)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Administrative expenses",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-admin_expenses-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 186 · Group 2025 column · Administrative expenses",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · six months of Virgin Money",
+        "metric": "admin_expenses",
+        "definition": "Administrative expenses",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-04-05",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "-3550",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(3,550)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Administrative expenses",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": [
+          "The FY2025 reporting period is 361 days and includes Virgin Money from acquisition on 1 October 2024."
+        ]
+      }
+    },
+    {
+      "key": "nw-pretax-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 186 · Group 2026 column · Profit before tax",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · full-year Virgin Money",
+        "metric": "pretax",
+        "definition": "Profit before tax",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "1490",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "1,490",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Profit before tax",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-pretax-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 186 · Group 2025 column · Profit before tax",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · six months of Virgin Money",
+        "metric": "pretax",
+        "definition": "Profit before tax",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-04-05",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "2302",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "2,302",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Profit before tax",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": [
+          "The FY2025 reporting period is 361 days and includes Virgin Money from acquisition on 1 October 2024."
+        ]
+      }
+    },
+    {
+      "key": "nw-posttax-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 186 · Group 2026 column · Profit after tax",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · full-year Virgin Money",
+        "metric": "posttax",
+        "definition": "Profit after tax",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "1103",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "1,103",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Profit after tax",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-posttax-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 186 · Group 2025 column · Profit after tax",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · six months of Virgin Money",
+        "metric": "posttax",
+        "definition": "Profit after tax",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-04-05",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "2338",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "2,338",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Profit after tax",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": [
+          "The FY2025 reporting period is 361 days and includes Virgin Money from acquisition on 1 October 2024."
+        ]
+      }
+    },
+    {
+      "key": "nw-cash_central-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2026 column · Cash and balances with central banks",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "cash_central",
+        "definition": "Cash and balances with central banks",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-03-31"
+        },
+        "value": {
+          "amount": "38411",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "38,411",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Cash and balances with central banks",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-cash_central-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2025 column · Cash and balances with central banks",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "cash_central",
+        "definition": "Cash and balances with central banks",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-03-31"
+        },
+        "value": {
+          "amount": "29483",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "29,483",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Cash and balances with central banks",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-assets-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2026 column · Total assets",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "assets",
+        "definition": "Total assets",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-03-31"
+        },
+        "value": {
+          "amount": "382328",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "382,328",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Total assets",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-assets-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2025 column · Total assets",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "assets",
+        "definition": "Total assets",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-03-31"
+        },
+        "value": {
+          "amount": "367877",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "367,877",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Total assets",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-loans-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2026 column · Loans and advances to customers",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "loans",
+        "definition": "Loans and advances to customers",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-03-31"
+        },
+        "value": {
+          "amount": "311483",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "311,483",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Loans and advances to customers",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-loans-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2025 column · Loans and advances to customers",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "loans",
+        "definition": "Loans and advances to customers",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-03-31"
+        },
+        "value": {
+          "amount": "300889",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "300,889",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Loans and advances to customers",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-liabilities-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2026 column · Total liabilities",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "liabilities",
+        "definition": "Total liabilities",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-03-31"
+        },
+        "value": {
+          "amount": "361039",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "361,039",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Total liabilities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-liabilities-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2025 column · Total liabilities",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "liabilities",
+        "definition": "Total liabilities",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-03-31"
+        },
+        "value": {
+          "amount": "347395",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "347,395",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Total liabilities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-debt_securities-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2026 column · Debt securities in issue",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "debt_securities",
+        "definition": "Debt securities in issue",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-03-31"
+        },
+        "value": {
+          "amount": "54821",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "54,821",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Debt securities in issue",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-debt_securities-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2025 column · Debt securities in issue",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "debt_securities",
+        "definition": "Debt securities in issue",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-03-31"
+        },
+        "value": {
+          "amount": "51109",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "51,109",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Debt securities in issue",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-member_equity-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2026 column · Total members’ interests and equity",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "member_equity",
+        "definition": "Total members’ interests and equity",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-03-31"
+        },
+        "value": {
+          "amount": "21085",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "21,085",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Total members’ interests and equity",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-member_equity-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2025 column · Total members’ interests and equity",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "member_equity",
+        "definition": "Total members’ interests and equity",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-03-31"
+        },
+        "value": {
+          "amount": "19723",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "19,723",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Total members’ interests and equity",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-intangibles-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2026 column · Intangible assets",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "intangibles",
+        "definition": "Intangible assets",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-03-31"
+        },
+        "value": {
+          "amount": "1265",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "1,265",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Intangible assets",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-intangibles-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2025 column · Intangible assets",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "intangibles",
+        "definition": "Intangible assets",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-03-31"
+        },
+        "value": {
+          "amount": "1481",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "1,481",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Intangible assets",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-member_shares-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2026 column · Shares",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "member_shares",
+        "definition": "Shares",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-03-31"
+        },
+        "value": {
+          "amount": "217052",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "217,052",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Shares",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-member_shares-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 188 · Group 2025 column · Shares",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "member_shares",
+        "definition": "Shares",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-03-31"
+        },
+        "value": {
+          "amount": "207428",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "207,428",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Shares",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-operating_cash-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2026 column · Net cash from operating activities",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · full-year Virgin Money",
+        "metric": "operating_cash",
+        "definition": "Net cash from operating activities",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "3904",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "3,904",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2026,
+        "reported_label": "Net cash from operating activities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-operating_cash-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2025 column · Net cash from operating activities",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · six months of Virgin Money",
+        "metric": "operating_cash",
+        "definition": "Net cash from operating activities",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-04-05",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "-7914",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(7,914)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2025,
+        "reported_label": "Net cash from operating activities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": [
+          "The FY2025 reporting period is 361 days and includes Virgin Money from acquisition on 1 October 2024."
+        ]
+      }
+    },
+    {
+      "key": "nw-investing_cash-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2026 column · Net cash from investing activities",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · full-year Virgin Money",
+        "metric": "investing_cash",
+        "definition": "Net cash from investing activities",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "2331",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "2,331",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2026,
+        "reported_label": "Net cash from investing activities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-investing_cash-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2025 column · Net cash from investing activities",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · six months of Virgin Money",
+        "metric": "investing_cash",
+        "definition": "Net cash from investing activities",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-04-05",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "10773",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "10,773",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2025,
+        "reported_label": "Net cash from investing activities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": [
+          "The FY2025 reporting period is 361 days and includes Virgin Money from acquisition on 1 October 2024."
+        ]
+      }
+    },
+    {
+      "key": "nw-financing_cash-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2026 column · Net cash from financing activities",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · full-year Virgin Money",
+        "metric": "financing_cash",
+        "definition": "Net cash from financing activities",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "2124",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "2,124",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2026,
+        "reported_label": "Net cash from financing activities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-financing_cash-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2025 column · Net cash from financing activities",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · six months of Virgin Money",
+        "metric": "financing_cash",
+        "definition": "Net cash from financing activities",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-04-05",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "1442",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "1,442",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2025,
+        "reported_label": "Net cash from financing activities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": [
+          "The FY2025 reporting period is 361 days and includes Virgin Money from acquisition on 1 October 2024."
+        ]
+      }
+    },
+    {
+      "key": "nw-ppe_purchase-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2026 column · Purchases of property, plant and equipment",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · full-year Virgin Money",
+        "metric": "ppe_purchase",
+        "definition": "Purchases of property, plant and equipment",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "-96",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(96)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2026,
+        "reported_label": "Purchases of property, plant and equipment",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-ppe_purchase-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2025 column · Purchases of property, plant and equipment",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · six months of Virgin Money",
+        "metric": "ppe_purchase",
+        "definition": "Purchases of property, plant and equipment",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-04-05",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "-98",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(98)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2025,
+        "reported_label": "Purchases of property, plant and equipment",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": [
+          "The FY2025 reporting period is 361 days and includes Virgin Money from acquisition on 1 October 2024."
+        ]
+      }
+    },
+    {
+      "key": "nw-debt_issue-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2026 column · Issuance of financing liabilities",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · full-year Virgin Money",
+        "metric": "debt_issue",
+        "definition": "Issuance of financing liabilities",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "4681",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "4,681",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2026,
+        "reported_label": "Issuance of financing liabilities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-debt_issue-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2025 column · Issuance of financing liabilities",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · six months of Virgin Money",
+        "metric": "debt_issue",
+        "definition": "Issuance of financing liabilities",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-04-05",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "4160",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "4,160",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2025,
+        "reported_label": "Issuance of financing liabilities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": [
+          "The FY2025 reporting period is 361 days and includes Virgin Money from acquisition on 1 October 2024."
+        ]
+      }
+    },
+    {
+      "key": "nw-debt_redemption-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2026 column · Redemption of financing liabilities",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · full-year Virgin Money",
+        "metric": "debt_redemption",
+        "definition": "Redemption of financing liabilities",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "-1522",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(1,522)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2026,
+        "reported_label": "Redemption of financing liabilities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-debt_redemption-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2025 column · Redemption of financing liabilities",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · six months of Virgin Money",
+        "metric": "debt_redemption",
+        "definition": "Redemption of financing liabilities",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-04-05",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "-1822",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(1,822)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2025,
+        "reported_label": "Redemption of financing liabilities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": [
+          "The FY2025 reporting period is 361 days and includes Virgin Money from acquisition on 1 October 2024."
+        ]
+      }
+    },
+    {
+      "key": "nw-net_cash_movement-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2026 column · Net increase in cash and cash equivalents",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · full-year Virgin Money",
+        "metric": "net_cash_movement",
+        "definition": "Net increase in cash and cash equivalents",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-04-01",
+          "end": "2026-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "8353",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "8,353",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2026,
+        "reported_label": "Net increase in cash and cash equivalents",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-net_cash_movement-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 191 · Group 2025 column · Net increase in cash and cash equivalents",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group · six months of Virgin Money",
+        "metric": "net_cash_movement",
+        "definition": "Net increase in cash and cash equivalents",
+        "accounting_basis": "statutory consolidated",
+        "accounting_standard": "UK-adopted IAS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-04-05",
+          "end": "2025-03-31",
+          "fiscal_year_end": "03-31"
+        },
+        "value": {
+          "amount": "4180",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "4,180",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2025,
+        "reported_label": "Net increase in cash and cash equivalents",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": [
+          "The FY2025 reporting period is 361 days and includes Virgin Money from acquisition on 1 October 2024."
+        ]
+      }
+    },
+    {
+      "key": "nw-cet1_ratio-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 156 · Group 2026 column · CET1 ratio",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "cet1_ratio",
+        "definition": "Common Equity Tier 1 capital divided by risk-weighted assets",
+        "accounting_basis": "PRA regulatory capital",
+        "accounting_standard": "PRA Rulebook · UK CRR / UK CRD V",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-03-31"
+        },
+        "value": {
+          "amount": "19.1",
+          "unit": "percentage",
+          "currency": null,
+          "scale": "units"
+        },
+        "original_display": "19.1%",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "CET1 ratio",
+        "sign_convention": "Positive ratio as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-cet1_ratio-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 156 · Group 2025 column · CET1 ratio",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "cet1_ratio",
+        "definition": "Common Equity Tier 1 capital divided by risk-weighted assets",
+        "accounting_basis": "PRA regulatory capital",
+        "accounting_standard": "PRA Rulebook · UK CRR / UK CRD V",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-03-31"
+        },
+        "value": {
+          "amount": "19.1",
+          "unit": "percentage",
+          "currency": null,
+          "scale": "units"
+        },
+        "original_display": "19.1%",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "CET1 ratio",
+        "sign_convention": "Positive ratio as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-leverage_ratio-2026",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 156 · Group 2026 column · Leverage ratio",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "leverage_ratio",
+        "definition": "Tier 1 capital divided by leverage exposure as defined by the PRA rules",
+        "accounting_basis": "PRA regulatory capital",
+        "accounting_standard": "PRA Rulebook · UK CRR / UK CRD V",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-03-31"
+        },
+        "value": {
+          "amount": "5.3",
+          "unit": "percentage",
+          "currency": null,
+          "scale": "units"
+        },
+        "original_display": "5.3%",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Leverage ratio",
+        "sign_convention": "Positive ratio as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "nw-leverage_ratio-2025",
+      "kind": "financial_measurement",
+      "locator": "Printed p. 156 · Group 2025 column · Leverage ratio",
+      "facts": {
+        "subject_id": "research-subject:nationwide-building-society-group",
+        "subject_name": "Nationwide Building Society Group",
+        "perimeter": "Nationwide Building Society consolidated Group",
+        "metric": "leverage_ratio",
+        "definition": "Tier 1 capital divided by leverage exposure as defined by the PRA rules",
+        "accounting_basis": "PRA regulatory capital",
+        "accounting_standard": "PRA Rulebook · UK CRR / UK CRD V",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-03-31"
+        },
+        "value": {
+          "amount": "5.2",
+          "unit": "percentage",
+          "currency": null,
+          "scale": "units"
+        },
+        "original_display": "5.2%",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Leverage ratio",
+        "sign_convention": "Positive ratio as reported.",
+        "caveats": []
+      }
+    }
+  ]
+}
