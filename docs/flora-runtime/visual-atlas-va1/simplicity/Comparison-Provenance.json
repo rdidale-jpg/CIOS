@@ -1,0 +1,150 @@
+{
+  "baseline_commit": "0cb07c2e78ccb16240c799b31cd62736e2135529",
+  "previous_A_commit": "034e87735873db441ad2a247f013b8457058262e",
+  "baseline": "Actual anonymous visual_v2.render output, unchanged except local asset URLs; no app server, identity fixture or data record needed",
+  "artwork": "../assets/uk-economy.webp",
+  "artwork_sha256": "ff4f70c21fcfe733affd0405021fa24386f5edaeb3497a10596550d9dbed0567",
+  "original_labels": {
+    "A": {
+      "label": "Agriculture & fishing",
+      "position": [
+        14,
+        12
+      ]
+    },
+    "B": {
+      "label": "Mining & quarrying",
+      "position": [
+        38,
+        12
+      ]
+    },
+    "D": {
+      "label": "Energy supply",
+      "position": [
+        62,
+        12
+      ]
+    },
+    "E": {
+      "label": "Water & waste",
+      "position": [
+        86,
+        12
+      ]
+    },
+    "C": {
+      "label": "Manufacturing",
+      "position": [
+        14,
+        32
+      ]
+    },
+    "F": {
+      "label": "Construction",
+      "position": [
+        38,
+        32
+      ]
+    },
+    "N": {
+      "label": "Business support",
+      "position": [
+        62,
+        32
+      ]
+    },
+    "H": {
+      "label": "Transport & logistics",
+      "position": [
+        86,
+        32
+      ]
+    },
+    "P": {
+      "label": "Education",
+      "position": [
+        14,
+        53
+      ]
+    },
+    "Q": {
+      "label": "Health & social care",
+      "position": [
+        38,
+        53
+      ]
+    },
+    "J": {
+      "label": "Information & communication",
+      "position": [
+        62,
+        53
+      ]
+    },
+    "M": {
+      "label": "Professional services",
+      "position": [
+        86,
+        53
+      ]
+    },
+    "L": {
+      "label": "Real estate",
+      "position": [
+        14,
+        73
+      ]
+    },
+    "K": {
+      "label": "Finance & insurance",
+      "position": [
+        38,
+        73
+      ]
+    },
+    "O": {
+      "label": "Public administration",
+      "position": [
+        62,
+        73
+      ]
+    },
+    "G": {
+      "label": "Retail & wholesale",
+      "position": [
+        86,
+        73
+      ]
+    },
+    "I": {
+      "label": "Hospitality & food",
+      "position": [
+        14,
+        91
+      ]
+    },
+    "R": {
+      "label": "Arts & recreation",
+      "position": [
+        38,
+        91
+      ]
+    },
+    "S": {
+      "label": "Other services",
+      "position": [
+        62,
+        91
+      ]
+    },
+    "T": {
+      "label": "Household employment",
+      "position": [
+        86,
+        91
+      ]
+    }
+  },
+  "scope": "UK economy / original 20 sectors; no new research or relationship data"
+}

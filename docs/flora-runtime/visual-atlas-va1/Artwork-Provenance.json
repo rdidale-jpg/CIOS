@@ -1,0 +1,8 @@
+{
+  "reuse": "Existing approved FLORA conceptual artwork, byte-preserved; no external photography, logos or new rights claim",
+  "source_commit": "0cb07c2e78ccb16240c799b31cd62736e2135529",
+  "files": {
+    "cios/applications/flora/visual_v2_assets/uk-economy.webp": "ff4f70c21fcfe733affd0405021fa24386f5edaeb3497a10596550d9dbed0567",
+    "cios/applications/flora/research_intelligence/technology_experience_assets/uk-technology.webp": "194ff4b1bdfd1899988c5c7b1ed89240d1ef0ef4115670742552120fed8601fe"
+  }
+}
