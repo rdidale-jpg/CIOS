@@ -1,0 +1,21 @@
+{
+  "before_commit": "208015805e12772fb425cb014870db697f878f6d",
+  "before_image_hashes": {
+    "docs/flora-runtime/living-journey-lj1/previews/desktop-02-banking-viewport.jpg": "0f9653a682af6fcd7502f1988d977b4c2ba2f3e39f3bc8234a68a0a796393fa6",
+    "docs/flora-runtime/living-journey-lj1/previews/desktop-03-groups-viewport.jpg": "a7850d9d50995a773f73ad6e2692d901c4e45824d50b0a1d33a2f6cdd550ce6a",
+    "docs/flora-runtime/living-journey-lj1/previews/desktop-04-lloyds-viewport.jpg": "dae045b7db1b5b24aac054ce7d0dd74f1625bd46d44ad97e972c9390e0563c40",
+    "docs/flora-runtime/living-journey-lj1/previews/ipad-landscape-02-banking-viewport.jpg": "2bc022c4a91263798a79e63c13bab159bb95b2f91f2ee9528f31a760e1c27c0e",
+    "docs/flora-runtime/living-journey-lj1/previews/ipad-landscape-03-groups-viewport.jpg": "883077226650cda0d71c00e38e5e7909fcc1bfa1a4c7a7aad307a1d850466aba",
+    "docs/flora-runtime/living-journey-lj1/previews/ipad-landscape-04-lloyds-viewport.jpg": "c8eb18579debb9f1013800e1beddec39e5af5ba97bbc9f9cadf63c8374431f3e",
+    "docs/flora-runtime/living-journey-lj1/previews/ipad-portrait-02-banking-viewport.jpg": "91e59576e82d33d5c5313cecc3a8ed35eec4823842186f943a0fc71b4d2a1f7d",
+    "docs/flora-runtime/living-journey-lj1/previews/ipad-portrait-03-groups-viewport.jpg": "605f4cf4979cde62928cb5036bfe0f09230282e0f7e8a10bedac7f0ef04a9d6a",
+    "docs/flora-runtime/living-journey-lj1/previews/ipad-portrait-04-lloyds-viewport.jpg": "9fa487c5d83a01c00692411bece5f64e2034608a707abbb33d0c2e9219f79b9a",
+    "docs/flora-runtime/living-journey-lj1/previews/mobile-02-banking-viewport.jpg": "e57e8c4199718a6238acf6c23669b922ea0d616b52c085104bb3fec27ab5f18c",
+    "docs/flora-runtime/living-journey-lj1/previews/mobile-03-groups-viewport.jpg": "47d86cb8a6c4f75fa815c1195a153f82f3b4311ec0ab18d984847e89c0d8e3d5",
+    "docs/flora-runtime/living-journey-lj1/previews/mobile-04-lloyds-viewport.jpg": "8b17a333c5ab944117c6edba69c11a125f82883e9eb0e1e693945c0a1ada288c",
+    "docs/flora-runtime/living-journey-lj1/previews/mobile-320-02-banking-viewport.jpg": "8bbc6185a785ef13f7c33fb6f7b7de5ce3cbed4151144f9716dd07271242411c",
+    "docs/flora-runtime/living-journey-lj1/previews/mobile-320-03-groups-viewport.jpg": "bf04fce4d0f5fc34e52c60e09740c01da0849b308e490fd6d988fbd06e777692",
+    "docs/flora-runtime/living-journey-lj1/previews/mobile-320-04-lloyds-viewport.jpg": "e96afe3883abe5a982a15243aedc8828ce2ffe371aa57456602d198a80a39f6e"
+  },
+  "protocol": "Same scope and CSS viewport, original native top-of-page framing, no independent zoom/recrop; full pages also linked. Overlay artwork is new, facts retain audit status."
+}

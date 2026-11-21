@@ -1,0 +1,28 @@
+{
+  "baseline_commit": "208015805e12772fb425cb014870db697f878f6d",
+  "uk_artwork": "cios/applications/flora/visual_v2_assets/uk-economy.webp",
+  "uk_sha256": "ff4f70c21fcfe733affd0405021fa24386f5edaeb3497a10596550d9dbed0567",
+  "generator": "image_gen, 2026-11-14, explicitly commissioned design artwork",
+  "style_reference": "Original accepted UK panorama used for visual language only; not composited, cropped or repeated as deeper artwork",
+  "rights_boundary": "New generated conceptual architectural art; no publisher photo, company logo or claim of real premises. Research/excerpt/source rights remain separate and unchanged. Owner visual acceptance pending.",
+  "scenes": [
+    {
+      "file": "assets/banking-ecosystem.png",
+      "sha256": "9c856ca8cfcec186b8687ca12f2f9d0d4acc995ccc5c165e157d17437f7a7a9e",
+      "composition": "Independent original 1536\u00d71024 scene; no factual label baked into raster",
+      "purpose": "banking-ecosystem"
+    },
+    {
+      "file": "assets/banking-groups.png",
+      "sha256": "18d574a0f3b6e9c5c0e799b923ddcb12ad354c57ff3dc1c1ad005529ee377629",
+      "composition": "Independent original 1536\u00d71024 scene; no factual label baked into raster",
+      "purpose": "banking-groups"
+    },
+    {
+      "file": "assets/lloyds-world.png",
+      "sha256": "98c0794e6cd78a9658eb00fce7327c9ffa998bcf83256301a513226e85ec0383",
+      "composition": "Independent original 1536\u00d71024 scene; no factual label baked into raster",
+      "purpose": "lloyds-world"
+    }
+  ]
+}

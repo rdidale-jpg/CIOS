@@ -1,0 +1,1381 @@
+{
+  "base_commit": "0cb07c2e78ccb16240c799b31cd62736e2135529",
+  "authority": "Static design mapping only; no source/relationship/Twin owner added",
+  "labels": [
+    {
+      "label": "Agriculture & fishing",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-a",
+      "scope": "UK section A GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        14,
+        12
+      ],
+      "weight_per_thousand": 7,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Mining & quarrying",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-b",
+      "scope": "UK section B GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        38,
+        12
+      ],
+      "weight_per_thousand": 7,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Energy supply",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-d",
+      "scope": "UK section D GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        62,
+        12
+      ],
+      "weight_per_thousand": 19,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Water & waste",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-e",
+      "scope": "UK section E GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        86,
+        12
+      ],
+      "weight_per_thousand": 12,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Manufacturing",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-c",
+      "scope": "UK section C GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        14,
+        32
+      ],
+      "weight_per_thousand": 87,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Construction",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-f",
+      "scope": "UK section F GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        38,
+        32
+      ],
+      "weight_per_thousand": 57,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Business support",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-n",
+      "scope": "UK section N GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        62,
+        32
+      ],
+      "weight_per_thousand": 54,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Transport & logistics",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-h",
+      "scope": "UK section H GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        86,
+        32
+      ],
+      "weight_per_thousand": 36,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Education",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-p",
+      "scope": "UK section P GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        14,
+        53
+      ],
+      "weight_per_thousand": 59,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Health & social care",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-q",
+      "scope": "UK section Q GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        38,
+        53
+      ],
+      "weight_per_thousand": 84,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Information & communication",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-j",
+      "scope": "UK section J GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        62,
+        53
+      ],
+      "weight_per_thousand": 66,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Professional services",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-m",
+      "scope": "UK section M GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        86,
+        53
+      ],
+      "weight_per_thousand": 87,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Real estate",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-l",
+      "scope": "UK section L GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        14,
+        73
+      ],
+      "weight_per_thousand": 142,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Finance & insurance",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-k",
+      "scope": "UK section K GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        38,
+        73
+      ],
+      "weight_per_thousand": 81,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Public administration",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-o",
+      "scope": "UK section O GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        62,
+        73
+      ],
+      "weight_per_thousand": 51,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Retail & wholesale",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-g",
+      "scope": "UK section G GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        86,
+        73
+      ],
+      "weight_per_thousand": 94,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Hospitality & food",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-i",
+      "scope": "UK section I GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        14,
+        91
+      ],
+      "weight_per_thousand": 28,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Arts & recreation",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-r",
+      "scope": "UK section R GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        38,
+        91
+      ],
+      "weight_per_thousand": 15,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Other services",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-s",
+      "scope": "UK section S GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        62,
+        91
+      ],
+      "weight_per_thousand": 15,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Household employment",
+      "source": "cios/applications/flora/visual_v2_assets/economy.json",
+      "id": "uk-sic07-t",
+      "scope": "UK section T GVA, 2024; broader than any linked research sub-sector",
+      "position": [
+        86,
+        91
+      ],
+      "weight_per_thousand": 1,
+      "source_records": [
+        {
+          "id": "ONS-GDP-2026-09",
+          "title": "ONS GDP monthly estimate: September 2026",
+          "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+          "publication_date": "2026-11-12",
+          "reviewed_at": "2026-11-13",
+          "limitation": "Rounded official weights per thousand; current release, not a real-time feed. Published weights sum to 1001. Growth is a volume measure, not a current-price GVA change. Full original bytes not archived."
+        }
+      ],
+      "status": "frozen public presentation extract",
+      "rights": "Existing approved conceptual artwork; ONS statistical references retain OGL/recorded limits"
+    },
+    {
+      "label": "Customers & distribution",
+      "source": "enterprise-knowledge/banking/research-model/Living-Map.json",
+      "id": "VI-LBG-CHANNELS",
+      "status": "conceptual activity/role; not ownership or a contract",
+      "scope": "UK Retail/Commercial Banking conceptual system",
+      "evidence_refs": [
+        "LBG-CUSTOMERS",
+        "LBG-BRAND26-NO-ROLES"
+      ],
+      "inherited_evidence": [
+        {
+          "id": "LBG-CUSTOMERS",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+          "period": "2025 year-end",
+          "state": "unverified historical research",
+          "supported": false,
+          "source_ids": [
+            "SRC-LBG-AR"
+          ],
+          "source_dates": [
+            {
+              "publication_date": null,
+              "reporting_period": "FY2025, as described by the existing Twin; current landing-page version unverified",
+              "retrieved_at": null
+            }
+          ],
+          "locator": "1. Deepening conclusion",
+          "url": "/flora/banking/research/evidence/LBG-CUSTOMERS",
+          "temporal_kind": "disclosure",
+          "metric_value": "23.6",
+          "metric_unit": "million customers"
+        },
+        {
+          "id": "LBG-BRAND26-NO-ROLES",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "period": "Announced July 2026; branch changes planned through 2027",
+          "state": "source-supported disclosure",
+          "supported": true,
+          "source_ids": [
+            "PR-LBG-BRAND26"
+          ],
+          "source_dates": [
+            {
+              "publication_date": "2026-07-01",
+              "reporting_period": "Announced July 2026; branch changes planned through 2027",
+              "retrieved_at": "2026-11-09T19:35:29.412049+00:00"
+            }
+          ],
+          "locator": "Official HTML line 619, workforce boundary",
+          "url": "/flora/banking/research/evidence/LBG-BRAND26-NO-ROLES",
+          "temporal_kind": "disclosure",
+          "metric_value": null,
+          "metric_unit": null
+        }
+      ],
+      "source_limits": "Industry-standard explanatory model, not a verified organisation, system or contractual map. Reference-company disclosures illustrate their own entity and period only; they do not prove sector-wide adoption.",
+      "original_conflicts": [],
+      "period": "Inherited source-specific; no new date",
+      "rights": "Existing FLORA SVG illustration primitives; public-source limits unchanged"
+    },
+    {
+      "label": "Deposits & funding",
+      "source": "enterprise-knowledge/banking/research-model/Living-Map.json",
+      "id": "VI-LBG-SAVE",
+      "status": "conceptual activity/role; not ownership or a contract",
+      "scope": "UK Retail/Commercial Banking conceptual system",
+      "evidence_refs": [
+        "LBG-Q326-DEPOSITS",
+        "LBG-PRIMACY-GAP"
+      ],
+      "inherited_evidence": [
+        {
+          "id": "LBG-Q326-DEPOSITS",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "period": "Nine months ended / balance sheet at 30 September 2026",
+          "state": "source-supported disclosure",
+          "supported": true,
+          "source_ids": [
+            "PR-LBG-Q326"
+          ],
+          "source_dates": [
+            {
+              "publication_date": "2026-10-29",
+              "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+              "retrieved_at": "2026-11-09T19:35:29.412049+00:00"
+            }
+          ],
+          "locator": "PDF page 2 / printed page 1, deposits paragraph",
+          "url": "/flora/banking/research/evidence/LBG-Q326-DEPOSITS",
+          "temporal_kind": "disclosure",
+          "metric_value": 502.8,
+          "metric_unit": "GBP billion; balance at 30 September 2026"
+        },
+        {
+          "id": "LBG-PRIMACY-GAP",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+          "period": "Existing research assessment, July 2026",
+          "state": "interpretation",
+          "supported": false,
+          "source_ids": [
+            "SRC-LBG-AR"
+          ],
+          "source_dates": [
+            {
+              "publication_date": null,
+              "reporting_period": "FY2025, as described by the existing Twin; current landing-page version unverified",
+              "retrieved_at": null
+            }
+          ],
+          "locator": "A. Current-account primacy",
+          "url": "/flora/banking/research/evidence/LBG-PRIMACY-GAP",
+          "temporal_kind": "disclosure",
+          "metric_value": null,
+          "metric_unit": null
+        }
+      ],
+      "source_limits": "Industry-standard explanatory model, not a verified organisation, system or contractual map. Reference-company disclosures illustrate their own entity and period only; they do not prove sector-wide adoption.",
+      "original_conflicts": [],
+      "period": "Inherited source-specific; no new date",
+      "rights": "Existing FLORA SVG illustration primitives; public-source limits unchanged"
+    },
+    {
+      "label": "Lending & credit",
+      "source": "enterprise-knowledge/banking/research-model/Living-Map.json",
+      "id": "VI-LBG-LEND",
+      "status": "conceptual activity/role; not ownership or a contract",
+      "scope": "UK Retail/Commercial Banking conceptual system",
+      "evidence_refs": [
+        "LBG-Q326-PROFIT"
+      ],
+      "inherited_evidence": [
+        {
+          "id": "LBG-Q326-PROFIT",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "period": "Nine months ended / balance sheet at 30 September 2026",
+          "state": "source-supported disclosure",
+          "supported": true,
+          "source_ids": [
+            "PR-LBG-Q326"
+          ],
+          "source_dates": [
+            {
+              "publication_date": "2026-10-29",
+              "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+              "retrieved_at": "2026-11-09T19:35:29.412049+00:00"
+            }
+          ],
+          "locator": "PDF page 2 / printed page 1, results summary",
+          "url": "/flora/banking/research/evidence/LBG-Q326-PROFIT",
+          "temporal_kind": "disclosure",
+          "metric_value": 6.6,
+          "metric_unit": "GBP billion; nine-month statutory pretax profit"
+        }
+      ],
+      "source_limits": "Industry-standard explanatory model, not a verified organisation, system or contractual map. Reference-company disclosures illustrate their own entity and period only; they do not prove sector-wide adoption.",
+      "original_conflicts": [],
+      "period": "Inherited source-specific; no new date",
+      "rights": "Existing FLORA SVG illustration primitives; public-source limits unchanged"
+    },
+    {
+      "label": "Payments & settlement",
+      "source": "enterprise-knowledge/banking/research-model/Living-Map.json",
+      "id": "VI-LBG-PAY",
+      "status": "conceptual activity/role; not ownership or a contract",
+      "scope": "UK Retail/Commercial Banking conceptual system",
+      "evidence_refs": [
+        "LBG-A2030-WALLET"
+      ],
+      "inherited_evidence": [
+        {
+          "id": "LBG-A2030-WALLET",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "period": "Strategy for 2027\u20132030",
+          "state": "source-supported disclosure",
+          "supported": true,
+          "source_ids": [
+            "PR-LBG-A2030"
+          ],
+          "source_dates": [
+            {
+              "publication_date": null,
+              "reporting_period": "Strategy for 2027\u20132030",
+              "retrieved_at": "2026-11-09T19:35:29.412049+00:00"
+            }
+          ],
+          "locator": "Strategy page, diversification priorities",
+          "url": "/flora/banking/research/evidence/LBG-A2030-WALLET",
+          "temporal_kind": "disclosure",
+          "metric_value": null,
+          "metric_unit": null
+        }
+      ],
+      "source_limits": "Industry-standard explanatory model, not a verified organisation, system or contractual map. Reference-company disclosures illustrate their own entity and period only; they do not prove sector-wide adoption.",
+      "original_conflicts": [],
+      "period": "Inherited source-specific; no new date",
+      "rights": "Existing FLORA SVG illustration primitives; public-source limits unchanged"
+    },
+    {
+      "label": "Risk, fraud & compliance",
+      "source": "enterprise-knowledge/banking/research-model/Living-Map.json",
+      "id": "VI-LBG-CONTROL",
+      "status": "conceptual activity/role; not ownership or a contract",
+      "scope": "UK Retail/Commercial Banking conceptual system",
+      "evidence_refs": [
+        "LBG-FRAUD-GAP",
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "inherited_evidence": [
+        {
+          "id": "LBG-FRAUD-GAP",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+          "period": "Existing research gap, July 2026",
+          "state": "unknown",
+          "supported": false,
+          "source_ids": [
+            "SRC-LBG-Q1"
+          ],
+          "source_dates": [
+            {
+              "publication_date": null,
+              "reporting_period": "Q1 2026",
+              "retrieved_at": null
+            }
+          ],
+          "locator": "F. Fraud, BPO and supplier gaps",
+          "url": "/flora/banking/research/evidence/LBG-FRAUD-GAP",
+          "temporal_kind": "unknown",
+          "metric_value": null,
+          "metric_unit": null
+        },
+        {
+          "id": "LBG-ENVOY-CONTROLS",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "period": "Announced platform capability; not current effectiveness evidence",
+          "state": "source-supported disclosure",
+          "supported": true,
+          "source_ids": [
+            "PR-LBG-ENVOY"
+          ],
+          "source_dates": [
+            {
+              "publication_date": "2026-05-01",
+              "reporting_period": "Announced platform capability; not current effectiveness evidence",
+              "retrieved_at": "2026-11-09T19:35:29.412049+00:00"
+            }
+          ],
+          "locator": "Official HTML lines 606\u2013607, announcement highlights",
+          "url": "/flora/banking/research/evidence/LBG-ENVOY-CONTROLS",
+          "temporal_kind": "disclosure",
+          "metric_value": null,
+          "metric_unit": null
+        }
+      ],
+      "source_limits": "Industry-standard explanatory model, not a verified organisation, system or contractual map. Reference-company disclosures illustrate their own entity and period only; they do not prove sector-wide adoption.",
+      "original_conflicts": [],
+      "period": "Inherited source-specific; no new date",
+      "rights": "Existing FLORA SVG illustration primitives; public-source limits unchanged"
+    },
+    {
+      "label": "Service & resilience",
+      "source": "enterprise-knowledge/banking/research-model/Living-Map.json",
+      "id": "VI-LBG-RESILIENCE",
+      "status": "conceptual activity/role; not ownership or a contract",
+      "scope": "UK Retail/Commercial Banking conceptual system",
+      "evidence_refs": [
+        "UK-PRA-REPORT27",
+        "UK-FCA-REPORT27"
+      ],
+      "inherited_evidence": [
+        {
+          "id": "UK-PRA-REPORT27",
+          "subject_id": "BK-IND-002",
+          "scope": "UK regulated firms; legal-entity applicability must be confirmed",
+          "period": "Final policy; implementation 18 March 2027",
+          "state": "source-supported disclosure",
+          "supported": true,
+          "source_ids": [
+            "PR-PRA-PS726"
+          ],
+          "source_dates": [
+            {
+              "publication_date": "2026-03-18",
+              "reporting_period": "Final policy; implementation 18 March 2027",
+              "retrieved_at": "2026-11-09T19:35:29.412049+00:00"
+            }
+          ],
+          "locator": "Official policy paragraph 3.6",
+          "url": "/flora/banking/research/evidence/UK-PRA-REPORT27",
+          "temporal_kind": "disclosure",
+          "metric_value": null,
+          "metric_unit": null
+        },
+        {
+          "id": "UK-FCA-REPORT27",
+          "subject_id": "BK-IND-002",
+          "scope": "UK regulated firms; legal-entity applicability must be confirmed",
+          "period": "Page last updated 15 September 2026; March 2027 reporting commencement",
+          "state": "source-supported disclosure",
+          "supported": true,
+          "source_ids": [
+            "PR-FCA-RES26"
+          ],
+          "source_dates": [
+            {
+              "publication_date": "2017-05-13",
+              "reporting_period": "Page last updated 15 September 2026; March 2027 reporting commencement",
+              "retrieved_at": "2026-11-09T19:35:29.412049+00:00"
+            }
+          ],
+          "locator": "Official HTML line 345, new reporting rules",
+          "url": "/flora/banking/research/evidence/UK-FCA-REPORT27",
+          "temporal_kind": "disclosure",
+          "metric_value": null,
+          "metric_unit": null
+        }
+      ],
+      "source_limits": "Industry-standard explanatory model, not a verified organisation, system or contractual map. Reference-company disclosures illustrate their own entity and period only; they do not prove sector-wide adoption.",
+      "original_conflicts": [],
+      "period": "Inherited source-specific; no new date",
+      "rights": "Existing FLORA SVG illustration primitives; public-source limits unchanged"
+    },
+    {
+      "label": "Core platforms",
+      "source": "enterprise-knowledge/banking/research-model/Living-Map.json",
+      "id": "VI-LBG-PLATFORMS",
+      "status": "conceptual activity/role; not ownership or a contract",
+      "scope": "UK Retail/Commercial Banking conceptual system",
+      "evidence_refs": [
+        "LBG-A2030-PLATFORMS",
+        "RC-9a68e9e88d443203a9e8",
+        "RC-3508e63fc114227406a1"
+      ],
+      "inherited_evidence": [
+        {
+          "id": "LBG-A2030-PLATFORMS",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "period": "Strategy for 2027\u20132030",
+          "state": "source-supported disclosure",
+          "supported": true,
+          "source_ids": [
+            "PR-LBG-A2030"
+          ],
+          "source_dates": [
+            {
+              "publication_date": null,
+              "reporting_period": "Strategy for 2027\u20132030",
+              "retrieved_at": "2026-11-09T19:35:29.412049+00:00"
+            }
+          ],
+          "locator": "Strategy page, Simplify priorities",
+          "url": "/flora/banking/research/evidence/LBG-A2030-PLATFORMS",
+          "temporal_kind": "disclosure",
+          "metric_value": null,
+          "metric_unit": null
+        },
+        {
+          "id": "RC-9a68e9e88d443203a9e8",
+          "subject_id": "BK-ENT-001",
+          "scope": "BK-ENT-001",
+          "period": "Undated page, reviewed 2026-11-10",
+          "state": "Exact passage support reviewed; candidate only",
+          "supported": true,
+          "source_ids": [
+            "V3-LBG-TECH"
+          ],
+          "source_dates": [
+            {
+              "publication_date": null,
+              "reporting_period": "Undated page, reviewed 2026-11-10",
+              "retrieved_at": "2026-11-10T09:03:13+00:00"
+            }
+          ],
+          "locator": "Technology, line615",
+          "url": "/enterprises/lloyds/understanding#claim-RC-9a68e9e88d443203a9e8",
+          "temporal_kind": "disclosure",
+          "metric_value": null,
+          "metric_unit": null
+        },
+        {
+          "id": "RC-3508e63fc114227406a1",
+          "subject_id": "BK-ENT-001",
+          "scope": "BK-ENT-001",
+          "period": "2022\u20132026 strategy progress as described on undated page",
+          "state": "Exact passage support reviewed; candidate only",
+          "supported": true,
+          "source_ids": [
+            "V3-LBG-STRATEGY"
+          ],
+          "source_dates": [
+            {
+              "publication_date": null,
+              "reporting_period": "2022\u20132026 strategy progress as described on undated page",
+              "retrieved_at": "2026-11-10T09:03:13+00:00"
+            }
+          ],
+          "locator": "2022\u20132026 progress, line647",
+          "url": "/enterprises/lloyds/understanding#claim-RC-3508e63fc114227406a1",
+          "temporal_kind": "disclosure",
+          "metric_value": null,
+          "metric_unit": null
+        }
+      ],
+      "source_limits": "Industry-standard explanatory model, not a verified organisation, system or contractual map. Reference-company disclosures illustrate their own entity and period only; they do not prove sector-wide adoption.",
+      "original_conflicts": [
+        "LBG-CLOUD-SCOPE-TENSION"
+      ],
+      "period": "Inherited source-specific; no new date",
+      "rights": "Existing FLORA SVG illustration primitives; public-source limits unchanged"
+    },
+    {
+      "label": "Data, cloud & AI",
+      "source": "enterprise-knowledge/banking/research-model/Living-Map.json",
+      "id": "VI-LBG-DATA",
+      "status": "conceptual activity/role; not ownership or a contract",
+      "scope": "UK Retail/Commercial Banking conceptual system",
+      "evidence_refs": [
+        "LBG-ENVOY-GOOGLE",
+        "LBG-ENVOY-CONTROLS",
+        "LBG-AI26-EXPECTED"
+      ],
+      "inherited_evidence": [
+        {
+          "id": "LBG-ENVOY-GOOGLE",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "period": "Announced platform capability; not current effectiveness evidence",
+          "state": "source-supported disclosure",
+          "supported": true,
+          "source_ids": [
+            "PR-LBG-ENVOY"
+          ],
+          "source_dates": [
+            {
+              "publication_date": "2026-05-01",
+              "reporting_period": "Announced platform capability; not current effectiveness evidence",
+              "retrieved_at": "2026-11-09T19:35:29.412049+00:00"
+            }
+          ],
+          "locator": "Official HTML lines 609\u2013613, platform description",
+          "url": "/flora/banking/research/evidence/LBG-ENVOY-GOOGLE",
+          "temporal_kind": "disclosure",
+          "metric_value": null,
+          "metric_unit": null
+        },
+        {
+          "id": "LBG-ENVOY-CONTROLS",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "period": "Announced platform capability; not current effectiveness evidence",
+          "state": "source-supported disclosure",
+          "supported": true,
+          "source_ids": [
+            "PR-LBG-ENVOY"
+          ],
+          "source_dates": [
+            {
+              "publication_date": "2026-05-01",
+              "reporting_period": "Announced platform capability; not current effectiveness evidence",
+              "retrieved_at": "2026-11-09T19:35:29.412049+00:00"
+            }
+          ],
+          "locator": "Official HTML lines 606\u2013607, announcement highlights",
+          "url": "/flora/banking/research/evidence/LBG-ENVOY-CONTROLS",
+          "temporal_kind": "disclosure",
+          "metric_value": null,
+          "metric_unit": null
+        },
+        {
+          "id": "LBG-AI26-EXPECTED",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "period": "2026 expectation",
+          "state": "management expectation",
+          "supported": true,
+          "source_ids": [
+            "PR-LBG-AI26"
+          ],
+          "source_dates": [
+            {
+              "publication_date": null,
+              "reporting_period": "Reported FY2025 value / expected 2026 value",
+              "retrieved_at": "2026-11-09T19:35:29.412049+00:00"
+            }
+          ],
+          "locator": "Official HTML line 607, management expectation",
+          "url": "/flora/banking/research/evidence/LBG-AI26-EXPECTED",
+          "temporal_kind": "forecast",
+          "metric_value": 100,
+          "metric_unit": "GBP million; lower-bound management expectation"
+        }
+      ],
+      "source_limits": "Industry-standard explanatory model, not a verified organisation, system or contractual map. Reference-company disclosures illustrate their own entity and period only; they do not prove sector-wide adoption.",
+      "original_conflicts": [],
+      "period": "Inherited source-specific; no new date",
+      "rights": "Existing FLORA SVG illustration primitives; public-source limits unchanged"
+    },
+    {
+      "label": "People & operating change",
+      "source": "enterprise-knowledge/banking/research-model/Living-Map.json",
+      "id": "VI-LBG-CHANGE",
+      "status": "conceptual activity/role; not ownership or a contract",
+      "scope": "UK Retail/Commercial Banking conceptual system",
+      "evidence_refs": [
+        "LBG-A2030-INVESTMENT",
+        "LBG-AR25-COPILOT"
+      ],
+      "inherited_evidence": [
+        {
+          "id": "LBG-A2030-INVESTMENT",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "period": "2027\u20132030 investment planning",
+          "state": "management expectation",
+          "supported": true,
+          "source_ids": [
+            "PR-LBG-INVEST30"
+          ],
+          "source_dates": [
+            {
+              "publication_date": "2026-07-30",
+              "reporting_period": "2027\u20132030 investment planning",
+              "retrieved_at": "2026-11-09T19:35:29.412049+00:00"
+            }
+          ],
+          "locator": "PDF page 30 / presentation slide 50, execution principles",
+          "url": "/flora/banking/research/evidence/LBG-A2030-INVESTMENT",
+          "temporal_kind": "forecast",
+          "metric_value": null,
+          "metric_unit": null
+        },
+        {
+          "id": "LBG-AR25-COPILOT",
+          "subject_id": "BK-ENT-001",
+          "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "period": "FY2025",
+          "state": "source-supported disclosure",
+          "supported": true,
+          "source_ids": [
+            "PR-LBG-AR25"
+          ],
+          "source_dates": [
+            {
+              "publication_date": "2026-02-13",
+              "reporting_period": "Year ended 31 December 2025; stated 2026 priorities",
+              "retrieved_at": "2026-11-09T19:35:29.412049+00:00"
+            }
+          ],
+          "locator": "Printed page 17, Change / 2025 progress",
+          "url": "/flora/banking/research/evidence/LBG-AR25-COPILOT",
+          "temporal_kind": "disclosure",
+          "metric_value": null,
+          "metric_unit": null
+        }
+      ],
+      "source_limits": "Industry-standard explanatory model, not a verified organisation, system or contractual map. Reference-company disclosures illustrate their own entity and period only; they do not prove sector-wide adoption.",
+      "original_conflicts": [],
+      "period": "Inherited source-specific; no new date",
+      "rights": "Existing FLORA SVG illustration primitives; public-source limits unchanged"
+    },
+    {
+      "label": "Lloyds Banking Group",
+      "id": "lloyds",
+      "source": "cios/applications/flora/banking_portfolio.py / BANKS",
+      "scope": "Selected Banking enterprise identity; HSBC UK is not HSBC Group",
+      "status": "historical curated public-source portfolio; not ranked/size-weighted",
+      "period": "Historical profile; no current primary verification",
+      "rights": "Existing public-source fixture; no logos/new rights"
+    },
+    {
+      "label": "Barclays",
+      "id": "barclays",
+      "source": "cios/applications/flora/banking_portfolio.py / BANKS",
+      "scope": "Selected Banking enterprise identity; HSBC UK is not HSBC Group",
+      "status": "historical curated public-source portfolio; not ranked/size-weighted",
+      "period": "Historical profile; no current primary verification",
+      "rights": "Existing public-source fixture; no logos/new rights"
+    },
+    {
+      "label": "NatWest Group",
+      "id": "natwest",
+      "source": "cios/applications/flora/banking_portfolio.py / BANKS",
+      "scope": "Selected Banking enterprise identity; HSBC UK is not HSBC Group",
+      "status": "historical curated public-source portfolio; not ranked/size-weighted",
+      "period": "Historical profile; no current primary verification",
+      "rights": "Existing public-source fixture; no logos/new rights"
+    },
+    {
+      "label": "HSBC UK",
+      "id": "hsbc-uk",
+      "source": "cios/applications/flora/banking_portfolio.py / BANKS",
+      "scope": "Selected Banking enterprise identity; HSBC UK is not HSBC Group",
+      "status": "historical curated public-source portfolio; not ranked/size-weighted",
+      "period": "Historical profile; no current primary verification",
+      "rights": "Existing public-source fixture; no logos/new rights"
+    },
+    {
+      "label": "Santander UK",
+      "id": "santander-uk",
+      "source": "cios/applications/flora/banking_portfolio.py / BANKS",
+      "scope": "Selected Banking enterprise identity; HSBC UK is not HSBC Group",
+      "status": "historical curated public-source portfolio; not ranked/size-weighted",
+      "period": "Historical profile; no current primary verification",
+      "rights": "Existing public-source fixture; no logos/new rights"
+    },
+    {
+      "label": "Retail",
+      "source": "cios/applications/flora/banking_portfolio.py / BANKS[lloyds].divisions",
+      "scope": "Lloyds historical business-area labels",
+      "status": "profile-supported; current effective segmentation not independently verified",
+      "period": "Not established for division fields",
+      "rights": "Paraphrased existing public-source profile, not new primary research"
+    },
+    {
+      "label": "Commercial Banking",
+      "source": "cios/applications/flora/banking_portfolio.py / BANKS[lloyds].divisions",
+      "scope": "Lloyds historical business-area labels",
+      "status": "profile-supported; current effective segmentation not independently verified",
+      "period": "Not established for division fields",
+      "rights": "Paraphrased existing public-source profile, not new primary research"
+    },
+    {
+      "label": "Insurance, Pensions and Investments",
+      "source": "cios/applications/flora/banking_portfolio.py / BANKS[lloyds].divisions",
+      "scope": "Lloyds historical business-area labels",
+      "status": "profile-supported; current effective segmentation not independently verified",
+      "period": "Not established for division fields",
+      "rights": "Paraphrased existing public-source profile, not new primary research"
+    }
+  ],
+  "claims": {
+    "LBG-Q326-DEPOSITS": {
+      "id": "LBG-Q326-DEPOSITS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Group customer deposits at September-end: GBP502.8bn; retain the FY2025 balance as a separate historical observation.",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "PDF page 2 / printed page 1, deposits paragraph",
+      "metric_value": 502.8,
+      "metric_unit": "GBP billion; balance at 30 September 2026",
+      "updates": "LBG-DEPOSITS",
+      "source_records": [
+        {
+          "id": "PR-LBG-Q326",
+          "title": "Lloyds Q3 2026 statement",
+          "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+          "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+          "publication_date": "2026-10-29",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-Q326.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. "
+        }
+      ]
+    },
+    "LBG-Q326-PROFIT": {
+      "id": "LBG-Q326-PROFIT",
+      "asset_id": "BK-ENT-001",
+      "statement": "Reported nine-month statutory pretax profit: GBP6.6bn. This is not an investment allocation.",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "PDF page 2 / printed page 1, results summary",
+      "metric_value": 6.6,
+      "metric_unit": "GBP billion; nine-month statutory pretax profit",
+      "source_records": [
+        {
+          "id": "PR-LBG-Q326",
+          "title": "Lloyds Q3 2026 statement",
+          "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+          "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+          "publication_date": "2026-10-29",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-Q326.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. "
+        }
+      ]
+    },
+    "LBG-Q326-INVESTMENT": {
+      "id": "LBG-Q326-INVESTMENT",
+      "asset_id": "BK-ENT-001",
+      "statement": "Quarterly commentary describes investment levelling as the current strategic cycle ends. Do not assume an unrestricted new supplier budget.",
+      "domain": "investment",
+      "kind": "reported_fact",
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "PDF page 2 / printed page 1, operating-cost commentary",
+      "source_records": [
+        {
+          "id": "PR-LBG-Q326",
+          "title": "Lloyds Q3 2026 statement",
+          "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+          "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+          "publication_date": "2026-10-29",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-Q326.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. "
+        }
+      ]
+    },
+    "LBG-ENVOY-GOOGLE": {
+      "id": "LBG-ENVOY-GOOGLE",
+      "asset_id": "BK-ENT-001",
+      "statement": "The bank identifies Google Cloud as an Envoy platform collaborator. Contract value, exclusivity and renewal are not disclosed.",
+      "domain": "supplier_relationships",
+      "kind": "reported_fact",
+      "reporting_period": "Announced platform capability; not current effectiveness evidence",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-ENVOY"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "Official HTML lines 609\u2013613, platform description",
+      "relationship": {
+        "subject": "BK-ENT-001",
+        "predicate": "reported_uses",
+        "object": "SUP-GOOGLE"
+      },
+      "source_records": [
+        {
+          "id": "PR-LBG-ENVOY",
+          "title": "Lloyds Envoy announcement",
+          "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+          "reporting_period": "Announced platform capability; not current effectiveness evidence",
+          "publication_date": "2026-05-01",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-ENVOY.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. HTML date is 1 May 2026; a linked PDF/search result carries 28 April. Retain the HTML date for this HTML source; do not collapse the versions."
+        }
+      ]
+    },
+    "LBG-ENVOY-CONTROLS": {
+      "id": "LBG-ENVOY-CONTROLS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+      "domain": "technology",
+      "kind": "reported_fact",
+      "reporting_period": "Announced platform capability; not current effectiveness evidence",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-ENVOY"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "Official HTML lines 606\u2013607, announcement highlights",
+      "source_records": [
+        {
+          "id": "PR-LBG-ENVOY",
+          "title": "Lloyds Envoy announcement",
+          "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+          "reporting_period": "Announced platform capability; not current effectiveness evidence",
+          "publication_date": "2026-05-01",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-ENVOY.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. HTML date is 1 May 2026; a linked PDF/search result carries 28 April. Retain the HTML date for this HTML source; do not collapse the versions."
+        }
+      ]
+    },
+    "LBG-DEPOSITS": {
+      "id": "LBG-DEPOSITS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports Lloyds customer deposits of GBP496.5bn at 2025 year-end.",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "reporting_period": "2025 year-end",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": "496.5",
+      "metric_unit": "GBP bn",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_records": [
+        {
+          "id": "SRC-LBG-AR",
+          "title": "Lloyds annual report landing page",
+          "url": "https://www.lloydsbankinggroup.com/investors/annual-report.html",
+          "reporting_period": "FY2025, as described by the existing Twin; current landing-page version unverified",
+          "publication_date": null,
+          "retrieved_at": null,
+          "verification": "citation_only",
+          "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+        }
+      ]
+    }
+  },
+  "relationships": [
+    {
+      "drawn_direction": "Google Cloud \u2192 Lloyds Envoy",
+      "original_relation_id": "REV-ENVOY-GOOGLE",
+      "original_direction": "BK-ENT-001 reported_uses SUP-GOOGLE",
+      "claim": "LBG-ENVOY-GOOGLE",
+      "source": "PR-LBG-ENVOY",
+      "scope": "May 2026 platform collaboration; not every Group programme",
+      "status": "source_supported_relationship in assessment; not independent implementation proof",
+      "unknown": [
+        "contract value",
+        "renewal",
+        "exclusivity",
+        "current effectiveness"
+      ]
+    },
+    {
+      "drawn": "PRA / FCA sector-policy context; no line to Lloyds legal entity",
+      "sources": [
+        "PR-PRA-PS726",
+        "PR-FCA-RES26"
+      ],
+      "scope": "UK in-scope regulated activities; applicability not established here",
+      "status": "sector context; direct company relationship unverified"
+    },
+    {
+      "drawn": "Customer roles only; no named customer links",
+      "scope": "conceptual industry/business model",
+      "status": "named relationships unavailable"
+    }
+  ],
+  "unavailable": [
+    "Named enterprise customers",
+    "Other bank-specific supplier contracts",
+    "Firm-specific regulatory-register proof",
+    "Current primary-source divisional boundaries",
+    "Comparable company revenue growth",
+    "External scope, procurement, budget and buying intent"
+  ],
+  "metrics": [
+    {
+      "display": "\u00a32.62tn UK GVA",
+      "source": "visual_v2_assets/economy.json / ONS-BB-2026",
+      "scope": "UK; GBP; current basic prices",
+      "period": "2024",
+      "status": "frozen public presentation extract; no fresh verification",
+      "rights": "ONS reference; existing OGL/source limitations"
+    },
+    {
+      "display": "8.1%",
+      "source": "economy.json / SIC K weight 81 per thousand",
+      "scope": "Finance and insurance; broader than Banking",
+      "period": "2024 UK GVA, current basic prices",
+      "status": "frozen published section weight",
+      "rights": "ONS reference; existing OGL/source limitations"
+    },
+    {
+      "display": "\u00a3502.8bn customer deposits",
+      "claim": "LBG-Q326-DEPOSITS",
+      "scope": "Lloyds consolidated Group; balance at 30 Sep 2026",
+      "status": "source-supported reviewed company statement",
+      "rights": "Existing short reviewed excerpts; original-file bytes not archived"
+    },
+    {
+      "display": "\u00a36.6bn statutory pretax profit",
+      "claim": "LBG-Q326-PROFIT",
+      "scope": "Lloyds consolidated Group; nine months to 30 Sep 2026",
+      "status": "source-supported reviewed company statement",
+      "rights": "Existing short reviewed excerpts; original-file bytes not archived"
+    }
+  ],
+  "interpretations": [
+    {
+      "display": "Customer relationships \u2192 funding & lending \u2192 income, risk & capital",
+      "source": "Lloyds-Enterprise-Twin.md structural hedge and customer-primacy mechanisms; Banking-Industry-Foundation.md",
+      "scope": "Explanatory economic mechanism, not a system dataflow or formal organisation chart",
+      "period": "Inherited historical research, not independently updated",
+      "rights": "Paraphrased existing repository research"
+    },
+    {
+      "display": "Modernise and scale AI while protecting live services and proving benefits",
+      "claim_refs": [
+        "LBG-ENVOY-CONTROLS",
+        "LBG-Q326-INVESTMENT"
+      ],
+      "scope": "Commercial interpretation; no verified unmet need or external scope",
+      "period": "2026 reviewed source context",
+      "rights": "Derived question over existing references"
+    },
+    {
+      "display": "Which process decisions, if any, are still open beyond the existing AI rollout?",
+      "source": "Existing Lloyds AI-first validation approach / buying-trigger-591; Envoy controls and investment commentary",
+      "scope": "Human validation question; no early-influence classification or live opportunity",
+      "period": "Existing source cutoffs; no new intelligence",
+      "rights": "Derived interpretation; existing source limits retained"
+    }
+  ]
+}

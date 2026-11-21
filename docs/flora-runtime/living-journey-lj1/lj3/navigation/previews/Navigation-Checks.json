@@ -1,0 +1,713 @@
+{
+  "baseline": "9384071c246ff83acbe134a0864f2ab0520e9b1d",
+  "checks": [
+    {
+      "name": "exact native stream destinations",
+      "file": "banking-forces-regulators.html",
+      "streams": 2,
+      "layer": "-regulators"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "banking-forces-suppliers.html",
+      "streams": 2,
+      "layer": "-suppliers"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "banking-forces.html",
+      "streams": 2,
+      "layer": "enterprises"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "banking-landscape-regulators.html",
+      "streams": 2,
+      "layer": "-regulators"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "banking-landscape-suppliers.html",
+      "streams": 2,
+      "layer": "-suppliers"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "banking-landscape.html",
+      "streams": 2,
+      "layer": "enterprises"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "lloyds-forces-regulators.html",
+      "streams": 3,
+      "layer": "-regulators"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "lloyds-forces-suppliers.html",
+      "streams": 3,
+      "layer": "-suppliers"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "lloyds-forces.html",
+      "streams": 3,
+      "layer": "enterprises"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "lloyds-inside-regulators.html",
+      "streams": 3,
+      "layer": "-regulators"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "lloyds-inside-suppliers.html",
+      "streams": 3,
+      "layer": "-suppliers"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "lloyds-inside.html",
+      "streams": 3,
+      "layer": "enterprises"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "lloyds-landscape-regulators.html",
+      "streams": 3,
+      "layer": "-regulators"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "lloyds-landscape-suppliers.html",
+      "streams": 3,
+      "layer": "-suppliers"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "lloyds-landscape.html",
+      "streams": 3,
+      "layer": "enterprises"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "uk-forces.html",
+      "streams": 2,
+      "layer": "enterprises"
+    },
+    {
+      "name": "exact native stream destinations",
+      "file": "uk-landscape.html",
+      "streams": 2,
+      "layer": "enterprises"
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "desktop",
+      "view": "uk-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "desktop",
+      "view": "uk-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "desktop",
+      "view": "banking-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "desktop",
+      "view": "banking-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "desktop",
+      "view": "lloyds-inside",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "desktop",
+      "view": "lloyds-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "desktop",
+      "view": "lloyds-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-landscape",
+      "view": "uk-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-landscape",
+      "view": "uk-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-landscape",
+      "view": "banking-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-landscape",
+      "view": "banking-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-landscape",
+      "view": "lloyds-inside",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-landscape",
+      "view": "lloyds-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-landscape",
+      "view": "lloyds-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-portrait",
+      "view": "uk-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-portrait",
+      "view": "uk-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-portrait",
+      "view": "banking-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-portrait",
+      "view": "banking-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-portrait",
+      "view": "lloyds-inside",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-portrait",
+      "view": "lloyds-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "ipad-portrait",
+      "view": "lloyds-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile",
+      "view": "uk-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile",
+      "view": "uk-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile",
+      "view": "banking-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile",
+      "view": "banking-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile",
+      "view": "lloyds-inside",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile",
+      "view": "lloyds-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile",
+      "view": "lloyds-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile-320",
+      "view": "uk-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile-320",
+      "view": "uk-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile-320",
+      "view": "banking-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile-320",
+      "view": "banking-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile-320",
+      "view": "lloyds-inside",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile-320",
+      "view": "lloyds-landscape",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "responsive artwork and stream controls",
+      "device": "mobile-320",
+      "view": "lloyds-forces",
+      "noOverflow": true,
+      "targets44px": true,
+      "artUnobstructed": true,
+      "labelsNoCollision": true
+    },
+    {
+      "name": "keyboard stream activation",
+      "view": "uk-landscape",
+      "destination": "uk-forces.html"
+    },
+    {
+      "name": "keyboard stream activation",
+      "view": "uk-forces",
+      "destination": "uk-landscape.html"
+    },
+    {
+      "name": "keyboard stream activation",
+      "view": "banking-landscape",
+      "destination": "banking-forces.html"
+    },
+    {
+      "name": "keyboard stream activation",
+      "view": "banking-forces",
+      "destination": "banking-landscape.html"
+    },
+    {
+      "name": "keyboard stream activation",
+      "view": "lloyds-inside",
+      "destination": "lloyds-landscape.html"
+    },
+    {
+      "name": "keyboard stream activation",
+      "view": "lloyds-landscape",
+      "destination": "lloyds-inside.html"
+    },
+    {
+      "name": "keyboard stream activation",
+      "view": "lloyds-forces",
+      "destination": "lloyds-inside.html"
+    },
+    {
+      "name": "skip link",
+      "native": true
+    },
+    {
+      "name": "direct journey and history",
+      "device": "desktop",
+      "native": true,
+      "selectionOnBack": true
+    },
+    {
+      "name": "direct journey and history",
+      "device": "mobile",
+      "native": true,
+      "selectionOnBack": true
+    },
+    {
+      "name": "optional sources",
+      "view": "uk-landscape"
+    },
+    {
+      "name": "optional sources",
+      "view": "uk-forces"
+    },
+    {
+      "name": "optional sources",
+      "view": "banking-landscape"
+    },
+    {
+      "name": "optional sources",
+      "view": "banking-forces"
+    },
+    {
+      "name": "optional sources",
+      "view": "lloyds-inside"
+    },
+    {
+      "name": "optional sources",
+      "view": "lloyds-landscape"
+    },
+    {
+      "name": "optional sources",
+      "view": "lloyds-forces"
+    },
+    {
+      "name": "no-JS bank panel selection",
+      "bank": "Barclays"
+    },
+    {
+      "name": "zoom reflow",
+      "views": 7,
+      "effectiveViewport": "720x500 (1440 at 200%)"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#bank-barclays",
+      "layer": "enterprises"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#bank-barclays",
+      "layer": "-suppliers"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#bank-barclays",
+      "layer": "-regulators"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#bank-hsbc-uk",
+      "layer": "enterprises"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#bank-hsbc-uk",
+      "layer": "-suppliers"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#bank-hsbc-uk",
+      "layer": "-regulators"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#bank-natwest",
+      "layer": "enterprises"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#bank-natwest",
+      "layer": "-suppliers"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#bank-natwest",
+      "layer": "-regulators"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#bank-santander-uk",
+      "layer": "enterprises"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#bank-santander-uk",
+      "layer": "-suppliers"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#bank-santander-uk",
+      "layer": "-regulators"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#selected-lloyds",
+      "layer": "enterprises"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#selected-lloyds",
+      "layer": "-suppliers"
+    },
+    {
+      "name": "touch bank selection and layer",
+      "hash": "#selected-lloyds",
+      "layer": "-regulators"
+    },
+    {
+      "name": "hashchange selection update",
+      "bank": "Barclays"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "banking-forces-regulators.html",
+      "scope": "banking",
+      "stream": "forces"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "banking-forces-suppliers.html",
+      "scope": "banking",
+      "stream": "forces"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "banking-forces.html",
+      "scope": "banking",
+      "stream": "forces"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "banking-landscape-regulators.html",
+      "scope": "banking",
+      "stream": "landscape"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "banking-landscape-suppliers.html",
+      "scope": "banking",
+      "stream": "landscape"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "banking-landscape.html",
+      "scope": "banking",
+      "stream": "landscape"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "lloyds-forces-regulators.html",
+      "scope": "lloyds",
+      "stream": "forces"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "lloyds-forces-suppliers.html",
+      "scope": "lloyds",
+      "stream": "forces"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "lloyds-forces.html",
+      "scope": "lloyds",
+      "stream": "forces"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "lloyds-inside-regulators.html",
+      "scope": "lloyds",
+      "stream": "inside"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "lloyds-inside-suppliers.html",
+      "scope": "lloyds",
+      "stream": "inside"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "lloyds-inside.html",
+      "scope": "lloyds",
+      "stream": "inside"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "lloyds-landscape-regulators.html",
+      "scope": "lloyds",
+      "stream": "landscape"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "lloyds-landscape-suppliers.html",
+      "scope": "lloyds",
+      "stream": "landscape"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "lloyds-landscape.html",
+      "scope": "lloyds",
+      "stream": "landscape"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "uk-forces.html",
+      "scope": "uk",
+      "stream": "forces"
+    },
+    {
+      "name": "fresh deep link",
+      "file": "uk-landscape.html",
+      "scope": "uk",
+      "stream": "landscape"
+    },
+    {
+      "name": "layer selection retains bank",
+      "bank": "NatWest"
+    },
+    {
+      "name": "forced colours",
+      "activeBorder": true
+    }
+  ],
+  "passed": 106,
+  "exactStateFiles": 17,
+  "protectedHashes": {
+    "banking-combined.png": "2661db421634f422e571066152450cce92261ff714a4ed34c0bfe1e6a243d0af",
+    "banking-forces.png": "2cc533ba6b6dfe4ec008192ffe7f71b8e4c978e8d391d128b9395809ae9f3a90",
+    "lloyds-forces.png": "47292147cf6c06dcb5b1d7807e75178d256c9dc8d43bb3fb01a0a85906ccc5db",
+    "lloyds-inside.png": "9bbb5b96f5fac6cdf72c9138973ac8f5ee429420ef3fe330ac7ece5072ec0584",
+    "lloyds-world.png": "98c0794e6cd78a9658eb00fce7327c9ffa998bcf83256301a513226e85ec0383",
+    "uk-economy.webp": "ff4f70c21fcfe733affd0405021fa24386f5edaeb3497a10596550d9dbed0567",
+    "uk-forces.png": "0a8dbc120ecababb297ea1a6eae7fb8a62277322e88bcee1148a3f06342f6a14"
+  },
+  "sourceMapsAndNineGapsUnchanged": true,
+  "browserErrors": [],
+  "limitations": "Chromium desktop/touch emulation only; no physical Safari/iPad/VoiceOver certification. Static design, no application/security/production validation claimed."
+}

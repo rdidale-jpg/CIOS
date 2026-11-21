@@ -1,0 +1,1085 @@
+{
+  "authority": "Read-only design projections, not independent models, qualification or evidence stores",
+  "source_head": "f4a62d8f0b57968f5cce3d2abcac986dac6ac61d",
+  "bindings": [
+    {
+      "scope": "uk",
+      "stream": "forces",
+      "label": "Economic growth",
+      "source": {
+        "id": "economic",
+        "title": "Economic growth",
+        "text": "Services led UK real GDP growth of 0.7% in the three months to September 2026 versus the previous three months. Volume change, separate from 2024 current-price GVA.",
+        "date": "2026-11-13",
+        "question": "Commercial question \u00b7 which customers face a change in demand or capacity?",
+        "counter": "UK aggregate only; not industry growth, global growth, a forecast or an enterprise buying signal. Publication: 12 November 2026. Preliminary and subject to revision.",
+        "source_ids": [
+          "ONS-GDP-2026-09"
+        ],
+        "sources": [
+          {
+            "id": "ONS-GDP-2026-09",
+            "title": "ONS GDP monthly estimate: September 2026",
+            "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/gdpmonthlyestimateuk/september2026/pdf",
+            "publication_date": "2026-11-12"
+          }
+        ],
+        "status": "public presentation extract; not a canonical accepted observation",
+        "kind": "frozen public extract"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "UK aggregate volume change \u2192 possible industry demand/capacity questions; not inferred Banking growth.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "uk",
+      "stream": "forces",
+      "label": "Cyber resilience",
+      "source": {
+        "id": "technological",
+        "title": "Cyber resilience",
+        "text": "UK cyber evidence is aggregate. Trace critical services through technology and supplier dependencies before proposing change.",
+        "date": "2026-11-11",
+        "question": "Banking & Aviation \u00b7 an exposure to test, not evidence of a company incident.",
+        "counter": "Cyber risk crosses markets; the exposure belongs to a specific service and entity. Aggregate threat evidence does not establish an enterprise incident, control weakness or external services gap. Existing review cutoff: 2026-11-11. This is UK relevance of a wider theme, not global prevalence or verified company impact.",
+        "source_ids": [
+          "GM-CYBER-GB"
+        ],
+        "sources": [
+          {
+            "id": "GM-CYBER-GB",
+            "title": "Cyber security breaches survey 2025/2026",
+            "url": "https://www.gov.uk/government/statistics/cyber-security-breaches-survey-20252026/cyber-security-breaches-survey-20252026",
+            "publication_date": "2026-04-30"
+          }
+        ],
+        "status": "candidate_intelligence",
+        "kind": "threat_or_scenario"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "UK cyber context \u2192 possible digital-service and resilience exposure; no company incident established.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "uk",
+      "stream": "forces",
+      "label": "Cyber reform",
+      "source": {
+        "id": "legal",
+        "title": "Cyber reform",
+        "text": "UK cyber reform was still proposed legislation at the November review. Recheck parliamentary status and the final entity and activity scope.",
+        "date": "2026-11-11",
+        "question": "Banking & Aviation \u00b7 monitor the proposal; do not infer non-compliance.",
+        "counter": "Parliamentary stages still show consideration of Lords amendments pending at this review. No Royal Assent or final enterprise applicability is established by this reviewed passage. Existing review cutoff: 2026-11-11. This is UK relevance of a wider theme, not global prevalence or verified company impact.",
+        "source_ids": [
+          "GM-BILL"
+        ],
+        "sources": [
+          {
+            "id": "GM-BILL",
+            "title": "Cyber Security and Resilience Bill stages",
+            "url": "https://bills.parliament.uk/bills/4035/stages",
+            "publication_date": null
+          }
+        ],
+        "status": "candidate_intelligence",
+        "kind": "proposed_legislation"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Proposed cyber reform \u2192 possible governance/reporting duties; enactment, entity and activity scope need checking.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "uk",
+      "stream": "forces",
+      "label": "Climate reporting",
+      "source": {
+        "id": "environmental",
+        "title": "Climate reporting",
+        "text": "Reviewed FCA rules cover specified listed issuers from accounting periods starting January 2027. First reporting is in 2028; reliefs matter.",
+        "date": "2026-11-11",
+        "question": "Banking & Aviation \u00b7 test reporting-data and control needs with the exact issuer.",
+        "counter": "FCA final rules introduce comply-or-explain UK SRS reporting for specified listing categories, for accounting periods starting from 1 January 2027. First reporting is in 2028; reliefs and scope matter. Existing internal teams or advisers may already cover the work. Existing review cutoff: 2026-11-11. This is UK relevance of a wider theme, not global prevalence or verified company impact.",
+        "source_ids": [
+          "GM-SRS"
+        ],
+        "sources": [
+          {
+            "id": "GM-SRS",
+            "title": "PS26/19: listed issuers and UK SRS",
+            "url": "https://www.fca.org.uk/publications/policy-statements/ps26-19-aligning-listed-issuers-sustainability-disclosures-international-standards",
+            "publication_date": "2026-09-30"
+          }
+        ],
+        "status": "candidate_intelligence",
+        "kind": "regulatory_rule"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Rules for specified issuers \u2192 finance and reporting-data preparation, not every UK enterprise.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "banking",
+      "stream": "forces",
+      "label": "Rates & margins",
+      "source": {
+        "id": "UK-RATE-NOV26",
+        "title": "Rates & margins",
+        "text": "The November policy decision raises Bank Rate to 4%. Enterprise deposit sensitivity remains an analytical question, not a proven impact.",
+        "date": "Meeting ending 4 November 2026",
+        "question": "Which funding sensitivities apply to this bank?",
+        "counter": "Rate direction alone does not establish lost margin or customer demand.",
+        "source_ids": [
+          "PR-BOE-NOV26"
+        ],
+        "sources": [
+          {
+            "id": "PR-BOE-NOV26",
+            "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+            "title": "Bank of England November rate decision",
+            "publication_date": "2026-11-05"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "reported_fact"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Deposit funding, lending and hedge economics \u2192 margin/treasury choices; bank-specific sensitivity differs.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "banking",
+      "stream": "forces",
+      "label": "Resilience reporting",
+      "source": {
+        "id": "UK-PRA-REPORT27",
+        "title": "Resilience reporting",
+        "text": "PRA incident/third-party reporting changes take effect in March 2027. Confirm each regulated entity\u2019s scope and existing readiness.",
+        "date": "Final policy; implementation 18 March 2027",
+        "question": "Which legal entities and existing controls are in scope?",
+        "counter": "The firm may already be ready; deadline is not external scope.",
+        "source_ids": [
+          "PR-PRA-PS726"
+        ],
+        "sources": [
+          {
+            "id": "PR-PRA-PS726",
+            "url": "https://www.bankofengland.co.uk/prudential-regulation/publication/2026/march/operational-incident-and-third-party-reporting-policy-statement",
+            "title": "PRA incident and third-party policy",
+            "publication_date": "2026-03-18"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "regulatory_requirement"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Incident and third-party reporting \u2192 risk, supplier management and resilience processes; legal-entity applicability unverified.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "banking",
+      "stream": "forces",
+      "label": "AI & control",
+      "source": {
+        "id": "LBG-ENVOY-CONTROLS",
+        "title": "AI & control",
+        "text": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+        "date": "Announced platform capability; not current effectiveness evidence",
+        "question": "What outcome is not covered by current platforms?",
+        "counter": "Lloyds is an enterprise example, not evidence for every bank; controls already exist.",
+        "source_ids": [
+          "PR-LBG-ENVOY"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-ENVOY",
+            "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+            "title": "Lloyds Envoy announcement",
+            "publication_date": "2026-05-01"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "reported_fact"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "AI platforms and existing controls \u2192 data teams and frontline service workflows. Lloyds is an example, not proof of a sector-wide gap; effectiveness needs validation.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "banking",
+      "stream": "forces",
+      "label": "Competition & trust",
+      "source": {
+        "id": "UK-VALUE",
+        "title": "Competition & trust",
+        "text": "Existing research models customer value through safe money storage, payments, credit, identity, fraud protection and support.",
+        "date": "Industry value-system interpretation",
+        "question": "Which relationship or customer friction is material?",
+        "counter": "Conceptual value-system interpretation, not a dated loss of market share.",
+        "source_ids": [
+          "SRC-FCA-MODELS"
+        ],
+        "sources": [
+          {
+            "id": "SRC-FCA-MODELS",
+            "url": "https://www.fca.org.uk/publications/multi-firm-reviews/strategic-review-retail-banking-business-models",
+            "title": "Strategic review of retail banking business models",
+            "publication_date": null
+          }
+        ],
+        "status": "repository_reported",
+        "kind": "interpretation"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Current accounts, deposits and lending \u2192 product/customer-service choices. This is a conceptual mechanism, not measured loss of trust.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "banking",
+      "stream": "forces",
+      "label": "Rates & margins",
+      "source": {
+        "id": "UK-RATE-NOV26",
+        "title": "Rates & margins",
+        "text": "The November policy decision raises Bank Rate to 4%. Enterprise deposit sensitivity remains an analytical question, not a proven impact.",
+        "date": "Meeting ending 4 November 2026",
+        "question": "Which funding sensitivities apply to this bank?",
+        "counter": "Rate direction alone does not establish lost margin or customer demand.",
+        "source_ids": [
+          "PR-BOE-NOV26"
+        ],
+        "sources": [
+          {
+            "id": "PR-BOE-NOV26",
+            "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+            "title": "Bank of England November rate decision",
+            "publication_date": "2026-11-05"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "reported_fact"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Deposit funding, lending and hedge economics \u2192 margin/treasury choices; bank-specific sensitivity differs.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "banking",
+      "stream": "forces",
+      "label": "Resilience reporting",
+      "source": {
+        "id": "UK-PRA-REPORT27",
+        "title": "Resilience reporting",
+        "text": "PRA incident/third-party reporting changes take effect in March 2027. Confirm each regulated entity\u2019s scope and existing readiness.",
+        "date": "Final policy; implementation 18 March 2027",
+        "question": "Which legal entities and existing controls are in scope?",
+        "counter": "The firm may already be ready; deadline is not external scope.",
+        "source_ids": [
+          "PR-PRA-PS726"
+        ],
+        "sources": [
+          {
+            "id": "PR-PRA-PS726",
+            "url": "https://www.bankofengland.co.uk/prudential-regulation/publication/2026/march/operational-incident-and-third-party-reporting-policy-statement",
+            "title": "PRA incident and third-party policy",
+            "publication_date": "2026-03-18"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "regulatory_requirement"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Incident and third-party reporting \u2192 risk, supplier management and resilience processes; legal-entity applicability unverified.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "banking",
+      "stream": "forces",
+      "label": "AI & control",
+      "source": {
+        "id": "LBG-ENVOY-CONTROLS",
+        "title": "AI & control",
+        "text": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+        "date": "Announced platform capability; not current effectiveness evidence",
+        "question": "What outcome is not covered by current platforms?",
+        "counter": "Lloyds is an enterprise example, not evidence for every bank; controls already exist.",
+        "source_ids": [
+          "PR-LBG-ENVOY"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-ENVOY",
+            "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+            "title": "Lloyds Envoy announcement",
+            "publication_date": "2026-05-01"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "reported_fact"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "AI platforms and existing controls \u2192 data teams and frontline service workflows. Lloyds is an example, not proof of a sector-wide gap; effectiveness needs validation.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "banking",
+      "stream": "forces",
+      "label": "Competition & trust",
+      "source": {
+        "id": "UK-VALUE",
+        "title": "Competition & trust",
+        "text": "Existing research models customer value through safe money storage, payments, credit, identity, fraud protection and support.",
+        "date": "Industry value-system interpretation",
+        "question": "Which relationship or customer friction is material?",
+        "counter": "Conceptual value-system interpretation, not a dated loss of market share.",
+        "source_ids": [
+          "SRC-FCA-MODELS"
+        ],
+        "sources": [
+          {
+            "id": "SRC-FCA-MODELS",
+            "url": "https://www.fca.org.uk/publications/multi-firm-reviews/strategic-review-retail-banking-business-models",
+            "title": "Strategic review of retail banking business models",
+            "publication_date": null
+          }
+        ],
+        "status": "repository_reported",
+        "kind": "interpretation"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Current accounts, deposits and lending \u2192 product/customer-service choices. This is a conceptual mechanism, not measured loss of trust.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "banking",
+      "stream": "forces",
+      "label": "Rates & margins",
+      "source": {
+        "id": "UK-RATE-NOV26",
+        "title": "Rates & margins",
+        "text": "The November policy decision raises Bank Rate to 4%. Enterprise deposit sensitivity remains an analytical question, not a proven impact.",
+        "date": "Meeting ending 4 November 2026",
+        "question": "Which funding sensitivities apply to this bank?",
+        "counter": "Rate direction alone does not establish lost margin or customer demand.",
+        "source_ids": [
+          "PR-BOE-NOV26"
+        ],
+        "sources": [
+          {
+            "id": "PR-BOE-NOV26",
+            "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+            "title": "Bank of England November rate decision",
+            "publication_date": "2026-11-05"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "reported_fact"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Deposit funding, lending and hedge economics \u2192 margin/treasury choices; bank-specific sensitivity differs.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "banking",
+      "stream": "forces",
+      "label": "Resilience reporting",
+      "source": {
+        "id": "UK-PRA-REPORT27",
+        "title": "Resilience reporting",
+        "text": "PRA incident/third-party reporting changes take effect in March 2027. Confirm each regulated entity\u2019s scope and existing readiness.",
+        "date": "Final policy; implementation 18 March 2027",
+        "question": "Which legal entities and existing controls are in scope?",
+        "counter": "The firm may already be ready; deadline is not external scope.",
+        "source_ids": [
+          "PR-PRA-PS726"
+        ],
+        "sources": [
+          {
+            "id": "PR-PRA-PS726",
+            "url": "https://www.bankofengland.co.uk/prudential-regulation/publication/2026/march/operational-incident-and-third-party-reporting-policy-statement",
+            "title": "PRA incident and third-party policy",
+            "publication_date": "2026-03-18"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "regulatory_requirement"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Incident and third-party reporting \u2192 risk, supplier management and resilience processes; legal-entity applicability unverified.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "banking",
+      "stream": "forces",
+      "label": "AI & control",
+      "source": {
+        "id": "LBG-ENVOY-CONTROLS",
+        "title": "AI & control",
+        "text": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+        "date": "Announced platform capability; not current effectiveness evidence",
+        "question": "What outcome is not covered by current platforms?",
+        "counter": "Lloyds is an enterprise example, not evidence for every bank; controls already exist.",
+        "source_ids": [
+          "PR-LBG-ENVOY"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-ENVOY",
+            "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+            "title": "Lloyds Envoy announcement",
+            "publication_date": "2026-05-01"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "reported_fact"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "AI platforms and existing controls \u2192 data teams and frontline service workflows. Lloyds is an example, not proof of a sector-wide gap; effectiveness needs validation.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "banking",
+      "stream": "forces",
+      "label": "Competition & trust",
+      "source": {
+        "id": "UK-VALUE",
+        "title": "Competition & trust",
+        "text": "Existing research models customer value through safe money storage, payments, credit, identity, fraud protection and support.",
+        "date": "Industry value-system interpretation",
+        "question": "Which relationship or customer friction is material?",
+        "counter": "Conceptual value-system interpretation, not a dated loss of market share.",
+        "source_ids": [
+          "SRC-FCA-MODELS"
+        ],
+        "sources": [
+          {
+            "id": "SRC-FCA-MODELS",
+            "url": "https://www.fca.org.uk/publications/multi-firm-reviews/strategic-review-retail-banking-business-models",
+            "title": "Strategic review of retail banking business models",
+            "publication_date": null
+          }
+        ],
+        "status": "repository_reported",
+        "kind": "interpretation"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Current accounts, deposits and lending \u2192 product/customer-service choices. This is a conceptual mechanism, not measured loss of trust.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "inside",
+      "nodes": [
+        [
+          "businesses",
+          "Businesses & brands",
+          25,
+          27,
+          "Halifax branches: 2027 plan"
+        ],
+        [
+          "economics",
+          "Financial performance",
+          74,
+          26,
+          "2030 cost:income target <45%"
+        ],
+        [
+          "operations",
+          "Service operations",
+          24,
+          68,
+          null
+        ],
+        [
+          "technology",
+          "Technology & data",
+          76,
+          69,
+          "Envoy \u00b7 controls described"
+        ],
+        [
+          "governance",
+          "Governance & change",
+          50,
+          48,
+          null
+        ]
+      ],
+      "owner": "Existing Enterprise Twin / Assessment-Overlay; LJ-1R Research-Audit",
+      "relationships": "External: only announced Google Cloud/Envoy link; internal: conceptual economic/operating mechanism, not actual organisation or system graph",
+      "gaps": "Nine original deficiencies preserved"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "inside",
+      "nodes": [
+        [
+          "businesses",
+          "Businesses & brands",
+          25,
+          27,
+          "Halifax branches: 2027 plan"
+        ],
+        [
+          "economics",
+          "Financial performance",
+          74,
+          26,
+          "2030 cost:income target <45%"
+        ],
+        [
+          "operations",
+          "Service operations",
+          24,
+          68,
+          null
+        ],
+        [
+          "technology",
+          "Technology & data",
+          76,
+          69,
+          "Envoy \u00b7 controls described"
+        ],
+        [
+          "governance",
+          "Governance & change",
+          50,
+          48,
+          null
+        ]
+      ],
+      "owner": "Existing Enterprise Twin / Assessment-Overlay; LJ-1R Research-Audit",
+      "relationships": "External: only announced Google Cloud/Envoy link; internal: conceptual economic/operating mechanism, not actual organisation or system graph",
+      "gaps": "Nine original deficiencies preserved"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "inside",
+      "nodes": [
+        [
+          "businesses",
+          "Businesses & brands",
+          25,
+          27,
+          "Halifax branches: 2027 plan"
+        ],
+        [
+          "economics",
+          "Financial performance",
+          74,
+          26,
+          "2030 cost:income target <45%"
+        ],
+        [
+          "operations",
+          "Service operations",
+          24,
+          68,
+          null
+        ],
+        [
+          "technology",
+          "Technology & data",
+          76,
+          69,
+          "Envoy \u00b7 controls described"
+        ],
+        [
+          "governance",
+          "Governance & change",
+          50,
+          48,
+          null
+        ]
+      ],
+      "owner": "Existing Enterprise Twin / Assessment-Overlay; LJ-1R Research-Audit",
+      "relationships": "External: only announced Google Cloud/Envoy link; internal: conceptual economic/operating mechanism, not actual organisation or system graph",
+      "gaps": "Nine original deficiencies preserved"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "landscape",
+      "nodes": [
+        [
+          "customers",
+          "Customer groups",
+          21,
+          76,
+          null
+        ],
+        [
+          "businesses",
+          "Peers & market context",
+          22,
+          28,
+          null
+        ],
+        [
+          "economics",
+          "Payments & oversight",
+          50,
+          52,
+          null
+        ],
+        [
+          "operations",
+          "Business customers",
+          80,
+          26,
+          null
+        ],
+        [
+          "technology",
+          "Suppliers & partners",
+          83,
+          78,
+          "Google Cloud \u2192 Envoy"
+        ]
+      ],
+      "owner": "Existing Enterprise Twin / Assessment-Overlay; LJ-1R Research-Audit",
+      "relationships": "External: only announced Google Cloud/Envoy link; internal: conceptual economic/operating mechanism, not actual organisation or system graph",
+      "gaps": "Nine original deficiencies preserved"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "landscape",
+      "nodes": [
+        [
+          "customers",
+          "Customer groups",
+          21,
+          76,
+          null
+        ],
+        [
+          "businesses",
+          "Peers & market context",
+          22,
+          28,
+          null
+        ],
+        [
+          "economics",
+          "Payments & oversight",
+          50,
+          52,
+          null
+        ],
+        [
+          "operations",
+          "Business customers",
+          80,
+          26,
+          null
+        ],
+        [
+          "technology",
+          "Suppliers & partners",
+          83,
+          78,
+          "Google Cloud \u2192 Envoy"
+        ]
+      ],
+      "owner": "Existing Enterprise Twin / Assessment-Overlay; LJ-1R Research-Audit",
+      "relationships": "External: only announced Google Cloud/Envoy link; internal: conceptual economic/operating mechanism, not actual organisation or system graph",
+      "gaps": "Nine original deficiencies preserved"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "landscape",
+      "nodes": [
+        [
+          "customers",
+          "Customer groups",
+          21,
+          76,
+          null
+        ],
+        [
+          "businesses",
+          "Peers & market context",
+          22,
+          28,
+          null
+        ],
+        [
+          "economics",
+          "Payments & oversight",
+          50,
+          52,
+          null
+        ],
+        [
+          "operations",
+          "Business customers",
+          80,
+          26,
+          null
+        ],
+        [
+          "technology",
+          "Suppliers & partners",
+          83,
+          78,
+          "Google Cloud \u2192 Envoy"
+        ]
+      ],
+      "owner": "Existing Enterprise Twin / Assessment-Overlay; LJ-1R Research-Audit",
+      "relationships": "External: only announced Google Cloud/Envoy link; internal: conceptual economic/operating mechanism, not actual organisation or system graph",
+      "gaps": "Nine original deficiencies preserved"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "forces",
+      "label": "Core modernisation",
+      "source": {
+        "id": "LBG-A2030-PLATFORMS",
+        "title": "Core modernisation",
+        "text": "Accelerate 2030 explicitly prioritises core-platform renewal.",
+        "date": "Strategy for 2027\u20132030",
+        "question": "Which migration decision is still open?",
+        "counter": "A stated priority does not reveal supplier scope or decision dates.",
+        "source_ids": [
+          "PR-LBG-A2030"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-A2030",
+            "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+            "title": "Lloyds Accelerate 2030 priorities",
+            "publication_date": null
+          }
+        ],
+        "status": "source_supported",
+        "kind": "management_commitment"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Core-platform renewal \u2192 technology operations and customer-service continuity. Current system dependencies and still-open decisions are unknown.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "forces",
+      "label": "Cost discipline",
+      "source": {
+        "id": "LBG-A2030-CIR",
+        "title": "Cost discipline",
+        "text": "The 2030 efficiency ambition is a cost-to-income ratio below 45%; achievement is not assumed.",
+        "date": "Strategy for 2027\u20132030",
+        "question": "What baseline and customer outcome constrain change?",
+        "counter": "Below 45% in 2030 is a target, not achieved performance or a budget.",
+        "source_ids": [
+          "PR-LBG-A2030"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-A2030",
+            "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+            "title": "Lloyds Accelerate 2030 priorities",
+            "publication_date": null
+          }
+        ],
+        "status": "source_supported",
+        "kind": "management_expectation"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Cost discipline \u2192 finance, service processes and operating efficiency. Current expense breakdown and achievable net outcomes are unverified.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "forces",
+      "label": "AI benefit & control",
+      "source": {
+        "id": "LBG-ENVOY-CONTROLS",
+        "title": "AI benefit & control",
+        "text": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+        "date": "Announced platform capability; not current effectiveness evidence",
+        "question": "Is a process-only alternative sufficient?",
+        "counter": "Internal teams, controls and existing partners may cover the need.",
+        "source_ids": [
+          "PR-LBG-ENVOY"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-ENVOY",
+            "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+            "title": "Lloyds Envoy announcement",
+            "publication_date": "2026-05-01"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "reported_fact"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "AI platforms and existing controls \u2192 data teams and frontline service workflows. Lloyds is an example, not proof of a sector-wide gap; effectiveness needs validation.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "forces",
+      "label": "Brand & service change",
+      "source": {
+        "id": "LBG-BRAND26-TIMING",
+        "title": "Brand & service change",
+        "text": "The announcement schedules branch-brand changes through 2027. Delivery progress and customer outcomes remain to be checked.",
+        "date": "Announced July 2026; branch changes planned through 2027",
+        "question": "Which customer outcomes still need validation?",
+        "counter": "A planned 2027 branch timetable does not prove open procurement.",
+        "source_ids": [
+          "PR-LBG-BRAND26"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-BRAND26",
+            "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/halifax-rebrand-to-lloyds.html",
+            "title": "Lloyds Halifax change announcement",
+            "publication_date": "2026-07-01"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "management_commitment"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Planned Halifax branch changes \u2192 assisted channels and customer servicing. Delivery progress and remaining decision windows are unknown.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "forces",
+      "label": "Core modernisation",
+      "source": {
+        "id": "LBG-A2030-PLATFORMS",
+        "title": "Core modernisation",
+        "text": "Accelerate 2030 explicitly prioritises core-platform renewal.",
+        "date": "Strategy for 2027\u20132030",
+        "question": "Which migration decision is still open?",
+        "counter": "A stated priority does not reveal supplier scope or decision dates.",
+        "source_ids": [
+          "PR-LBG-A2030"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-A2030",
+            "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+            "title": "Lloyds Accelerate 2030 priorities",
+            "publication_date": null
+          }
+        ],
+        "status": "source_supported",
+        "kind": "management_commitment"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Core-platform renewal \u2192 technology operations and customer-service continuity. Current system dependencies and still-open decisions are unknown.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "forces",
+      "label": "Cost discipline",
+      "source": {
+        "id": "LBG-A2030-CIR",
+        "title": "Cost discipline",
+        "text": "The 2030 efficiency ambition is a cost-to-income ratio below 45%; achievement is not assumed.",
+        "date": "Strategy for 2027\u20132030",
+        "question": "What baseline and customer outcome constrain change?",
+        "counter": "Below 45% in 2030 is a target, not achieved performance or a budget.",
+        "source_ids": [
+          "PR-LBG-A2030"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-A2030",
+            "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+            "title": "Lloyds Accelerate 2030 priorities",
+            "publication_date": null
+          }
+        ],
+        "status": "source_supported",
+        "kind": "management_expectation"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Cost discipline \u2192 finance, service processes and operating efficiency. Current expense breakdown and achievable net outcomes are unverified.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "forces",
+      "label": "AI benefit & control",
+      "source": {
+        "id": "LBG-ENVOY-CONTROLS",
+        "title": "AI benefit & control",
+        "text": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+        "date": "Announced platform capability; not current effectiveness evidence",
+        "question": "Is a process-only alternative sufficient?",
+        "counter": "Internal teams, controls and existing partners may cover the need.",
+        "source_ids": [
+          "PR-LBG-ENVOY"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-ENVOY",
+            "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+            "title": "Lloyds Envoy announcement",
+            "publication_date": "2026-05-01"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "reported_fact"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "AI platforms and existing controls \u2192 data teams and frontline service workflows. Lloyds is an example, not proof of a sector-wide gap; effectiveness needs validation.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "forces",
+      "label": "Brand & service change",
+      "source": {
+        "id": "LBG-BRAND26-TIMING",
+        "title": "Brand & service change",
+        "text": "The announcement schedules branch-brand changes through 2027. Delivery progress and customer outcomes remain to be checked.",
+        "date": "Announced July 2026; branch changes planned through 2027",
+        "question": "Which customer outcomes still need validation?",
+        "counter": "A planned 2027 branch timetable does not prove open procurement.",
+        "source_ids": [
+          "PR-LBG-BRAND26"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-BRAND26",
+            "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/halifax-rebrand-to-lloyds.html",
+            "title": "Lloyds Halifax change announcement",
+            "publication_date": "2026-07-01"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "management_commitment"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Planned Halifax branch changes \u2192 assisted channels and customer servicing. Delivery progress and remaining decision windows are unknown.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "forces",
+      "label": "Core modernisation",
+      "source": {
+        "id": "LBG-A2030-PLATFORMS",
+        "title": "Core modernisation",
+        "text": "Accelerate 2030 explicitly prioritises core-platform renewal.",
+        "date": "Strategy for 2027\u20132030",
+        "question": "Which migration decision is still open?",
+        "counter": "A stated priority does not reveal supplier scope or decision dates.",
+        "source_ids": [
+          "PR-LBG-A2030"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-A2030",
+            "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+            "title": "Lloyds Accelerate 2030 priorities",
+            "publication_date": null
+          }
+        ],
+        "status": "source_supported",
+        "kind": "management_commitment"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Core-platform renewal \u2192 technology operations and customer-service continuity. Current system dependencies and still-open decisions are unknown.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "forces",
+      "label": "Cost discipline",
+      "source": {
+        "id": "LBG-A2030-CIR",
+        "title": "Cost discipline",
+        "text": "The 2030 efficiency ambition is a cost-to-income ratio below 45%; achievement is not assumed.",
+        "date": "Strategy for 2027\u20132030",
+        "question": "What baseline and customer outcome constrain change?",
+        "counter": "Below 45% in 2030 is a target, not achieved performance or a budget.",
+        "source_ids": [
+          "PR-LBG-A2030"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-A2030",
+            "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+            "title": "Lloyds Accelerate 2030 priorities",
+            "publication_date": null
+          }
+        ],
+        "status": "source_supported",
+        "kind": "management_expectation"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Cost discipline \u2192 finance, service processes and operating efficiency. Current expense breakdown and achievable net outcomes are unverified.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "forces",
+      "label": "AI benefit & control",
+      "source": {
+        "id": "LBG-ENVOY-CONTROLS",
+        "title": "AI benefit & control",
+        "text": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+        "date": "Announced platform capability; not current effectiveness evidence",
+        "question": "Is a process-only alternative sufficient?",
+        "counter": "Internal teams, controls and existing partners may cover the need.",
+        "source_ids": [
+          "PR-LBG-ENVOY"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-ENVOY",
+            "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+            "title": "Lloyds Envoy announcement",
+            "publication_date": "2026-05-01"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "reported_fact"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "AI platforms and existing controls \u2192 data teams and frontline service workflows. Lloyds is an example, not proof of a sector-wide gap; effectiveness needs validation.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    },
+    {
+      "scope": "lloyds",
+      "stream": "forces",
+      "label": "Brand & service change",
+      "source": {
+        "id": "LBG-BRAND26-TIMING",
+        "title": "Brand & service change",
+        "text": "The announcement schedules branch-brand changes through 2027. Delivery progress and customer outcomes remain to be checked.",
+        "date": "Announced July 2026; branch changes planned through 2027",
+        "question": "Which customer outcomes still need validation?",
+        "counter": "A planned 2027 branch timetable does not prove open procurement.",
+        "source_ids": [
+          "PR-LBG-BRAND26"
+        ],
+        "sources": [
+          {
+            "id": "PR-LBG-BRAND26",
+            "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/halifax-rebrand-to-lloyds.html",
+            "title": "Lloyds Halifax change announcement",
+            "publication_date": "2026-07-01"
+          }
+        ],
+        "status": "source_supported",
+        "kind": "management_commitment"
+      },
+      "impact": "Interpretation/hypothesis, not qualified Material Pressure or buyer demand",
+      "pathway": "Planned Halifax branch changes \u2192 assisted channels and customer servicing. Delivery progress and remaining decision windows are unknown.",
+      "timing": "No early/late score computed; retain original dates, existing programmes and unknown decision window"
+    }
+  ],
+  "research_gaps": "Research-Gaps.md",
+  "future_streams": "News / Topic Cards / Tools are architecture slots only, no UI or runtime implementation",
+  "qualification": "ADR-026 gates and canonical Enterprise/source owners remain unchanged; no pressure qualified"
+}

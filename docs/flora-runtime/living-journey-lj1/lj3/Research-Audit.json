@@ -1,0 +1,551 @@
+{
+  "authority": "Design-only audit/index; existing research and canonical authority unchanged",
+  "audit_date": "2026-11-14",
+  "source_commit": "208015805e12772fb425cb014870db697f878f6d",
+  "owner": "Existing Assessment-Overlay / Understanding-Review / Enterprise Twin; no new model or relationship owner",
+  "research_path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+  "research_sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+  "claims": {
+    "LBG-Q326-DEPOSITS": {
+      "id": "LBG-Q326-DEPOSITS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Group customer deposits at September-end: GBP502.8bn; retain the FY2025 balance as a separate historical observation.",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "PDF page 2 / printed page 1, deposits paragraph",
+      "metric_value": 502.8,
+      "metric_unit": "GBP billion; balance at 30 September 2026",
+      "updates": "LBG-DEPOSITS",
+      "source_records": [
+        {
+          "id": "PR-LBG-Q326",
+          "title": "Lloyds Q3 2026 statement",
+          "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+          "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+          "publication_date": "2026-10-29",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-Q326.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. "
+        }
+      ]
+    },
+    "LBG-Q326-PROFIT": {
+      "id": "LBG-Q326-PROFIT",
+      "asset_id": "BK-ENT-001",
+      "statement": "Reported nine-month statutory pretax profit: GBP6.6bn. This is not an investment allocation.",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "PDF page 2 / printed page 1, results summary",
+      "metric_value": 6.6,
+      "metric_unit": "GBP billion; nine-month statutory pretax profit",
+      "source_records": [
+        {
+          "id": "PR-LBG-Q326",
+          "title": "Lloyds Q3 2026 statement",
+          "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+          "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+          "publication_date": "2026-10-29",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-Q326.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. "
+        }
+      ]
+    },
+    "LBG-Q326-INVESTMENT": {
+      "id": "LBG-Q326-INVESTMENT",
+      "asset_id": "BK-ENT-001",
+      "statement": "Quarterly commentary describes investment levelling as the current strategic cycle ends. Do not assume an unrestricted new supplier budget.",
+      "domain": "investment",
+      "kind": "reported_fact",
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "PDF page 2 / printed page 1, operating-cost commentary",
+      "source_records": [
+        {
+          "id": "PR-LBG-Q326",
+          "title": "Lloyds Q3 2026 statement",
+          "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+          "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+          "publication_date": "2026-10-29",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-Q326.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. "
+        }
+      ]
+    },
+    "LBG-A2030-SAVINGS": {
+      "id": "LBG-A2030-SAVINGS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Management projects about GBP2bn gross savings for the strategy; aggregation/run-rate definition needs validation. This is not supplier spend.",
+      "domain": "investment",
+      "kind": "management_expectation",
+      "reporting_period": "Strategy for 2027\u20132030",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "Strategy page, Simplify value",
+      "metric_value": 2,
+      "metric_unit": "GBP billion; projected gross cost savings, not procurement",
+      "source_records": [
+        {
+          "id": "PR-LBG-A2030",
+          "title": "Lloyds Accelerate 2030 priorities",
+          "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+          "reporting_period": "Strategy for 2027\u20132030",
+          "publication_date": null,
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-A2030.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. Undated maintained strategy page: observation date is known, original publication date remains Unknown. Targets are forward-looking, not achieved outcomes."
+        }
+      ]
+    },
+    "LBG-A2030-CIR": {
+      "id": "LBG-A2030-CIR",
+      "asset_id": "BK-ENT-001",
+      "statement": "The 2030 efficiency ambition is a cost-to-income ratio below 45%; achievement is not assumed.",
+      "domain": "financials",
+      "kind": "management_expectation",
+      "reporting_period": "Strategy for 2027\u20132030",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "Strategy page, 2027\u20132030 commitments",
+      "metric_value": 45,
+      "metric_unit": "percent; upper-bound management target for 2030",
+      "source_records": [
+        {
+          "id": "PR-LBG-A2030",
+          "title": "Lloyds Accelerate 2030 priorities",
+          "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+          "reporting_period": "Strategy for 2027\u20132030",
+          "publication_date": null,
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-A2030.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. Undated maintained strategy page: observation date is known, original publication date remains Unknown. Targets are forward-looking, not achieved outcomes."
+        }
+      ]
+    },
+    "LBG-A2030-INVESTMENT": {
+      "id": "LBG-A2030-INVESTMENT",
+      "asset_id": "BK-ENT-001",
+      "statement": "The presentation plans a 2027 investment increase followed by stability, subject to opportunity and return discipline; no candidate allocation is disclosed.",
+      "domain": "investment",
+      "kind": "management_expectation",
+      "reporting_period": "2027\u20132030 investment planning",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-INVEST30"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "PDF page 30 / presentation slide 50, execution principles",
+      "source_records": [
+        {
+          "id": "PR-LBG-INVEST30",
+          "title": "Lloyds strategy investment discipline",
+          "url": "https://www.lloydsbankinggroup.com/assets/pdfs/who-we-are/accelerate-2030/2026-lbg-hy-strategy-presentation.pdf",
+          "reporting_period": "2027\u20132030 investment planning",
+          "publication_date": "2026-07-30",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-INVEST30.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. "
+        }
+      ]
+    },
+    "LBG-ENVOY-GOOGLE": {
+      "id": "LBG-ENVOY-GOOGLE",
+      "asset_id": "BK-ENT-001",
+      "statement": "The bank identifies Google Cloud as an Envoy platform collaborator. Contract value, exclusivity and renewal are not disclosed.",
+      "domain": "supplier_relationships",
+      "kind": "reported_fact",
+      "reporting_period": "Announced platform capability; not current effectiveness evidence",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-ENVOY"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "Official HTML lines 609\u2013613, platform description",
+      "relationship": {
+        "subject": "BK-ENT-001",
+        "predicate": "reported_uses",
+        "object": "SUP-GOOGLE"
+      },
+      "source_records": [
+        {
+          "id": "PR-LBG-ENVOY",
+          "title": "Lloyds Envoy announcement",
+          "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+          "reporting_period": "Announced platform capability; not current effectiveness evidence",
+          "publication_date": "2026-05-01",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-ENVOY.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. HTML date is 1 May 2026; a linked PDF/search result carries 28 April. Retain the HTML date for this HTML source; do not collapse the versions."
+        }
+      ]
+    },
+    "LBG-ENVOY-CONTROLS": {
+      "id": "LBG-ENVOY-CONTROLS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+      "domain": "technology",
+      "kind": "reported_fact",
+      "reporting_period": "Announced platform capability; not current effectiveness evidence",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-ENVOY"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "Official HTML lines 606\u2013607, announcement highlights",
+      "source_records": [
+        {
+          "id": "PR-LBG-ENVOY",
+          "title": "Lloyds Envoy announcement",
+          "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+          "reporting_period": "Announced platform capability; not current effectiveness evidence",
+          "publication_date": "2026-05-01",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-ENVOY.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. HTML date is 1 May 2026; a linked PDF/search result carries 28 April. Retain the HTML date for this HTML source; do not collapse the versions."
+        }
+      ]
+    },
+    "LBG-BRAND26-TIMING": {
+      "id": "LBG-BRAND26-TIMING",
+      "asset_id": "BK-ENT-001",
+      "statement": "The announcement schedules branch-brand changes through 2027. Delivery progress and customer outcomes remain to be checked.",
+      "domain": "programmes",
+      "kind": "management_commitment",
+      "reporting_period": "Announced July 2026; branch changes planned through 2027",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-BRAND26"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "Official HTML line 619, branch timetable",
+      "corroborates": "LBG-BRAND",
+      "source_records": [
+        {
+          "id": "PR-LBG-BRAND26",
+          "title": "Lloyds Halifax change announcement",
+          "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/halifax-rebrand-to-lloyds.html",
+          "reporting_period": "Announced July 2026; branch changes planned through 2027",
+          "publication_date": "2026-07-01",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-BRAND26.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. "
+        }
+      ]
+    },
+    "LBG-BRAND26-NO-ROLES": {
+      "id": "LBG-BRAND26-NO-ROLES",
+      "asset_id": "BK-ENT-001",
+      "statement": "The announcement excludes related role reductions. It does not evidence an outsourcing mandate.",
+      "domain": "operating_capabilities",
+      "kind": "reported_fact",
+      "reporting_period": "Announced July 2026; branch changes planned through 2027",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-BRAND26"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "Official HTML line 619, workforce boundary",
+      "source_records": [
+        {
+          "id": "PR-LBG-BRAND26",
+          "title": "Lloyds Halifax change announcement",
+          "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/halifax-rebrand-to-lloyds.html",
+          "reporting_period": "Announced July 2026; branch changes planned through 2027",
+          "publication_date": "2026-07-01",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-BRAND26.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. "
+        }
+      ]
+    },
+    "LBG-AR25-DEPOSITS": {
+      "id": "LBG-AR25-DEPOSITS",
+      "asset_id": "BK-ENT-001",
+      "statement": "FY2025 deposit balance corroborated at GBP496.5bn; it is not the current-quarter balance.",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "reporting_period": "31 December 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AR25"
+      ],
+      "verification": "source_supported",
+      "quote_locator": "Report opening financial summary; printed page 1",
+      "metric_value": 496.5,
+      "metric_unit": "GBP billion; year-end balance",
+      "corroborates": "LBG-DEPOSITS",
+      "source_records": [
+        {
+          "id": "PR-LBG-AR25",
+          "title": "Lloyds FY2025 report",
+          "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2025/q4/2025-lbg-annual-report.pdf",
+          "reporting_period": "Year ended 31 December 2025; stated 2026 priorities",
+          "publication_date": "2026-02-13",
+          "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+          "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-AR25.txt",
+          "verification": "primary_retrieved",
+          "reviewed_by": "Codex source-content review; no independent human review",
+          "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. "
+        }
+      ]
+    },
+    "LBG-VERTEX": {
+      "id": "LBG-VERTEX",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports Lloyds use of Google Cloud Vertex AI.",
+      "source_ids": [
+        "SRC-LBG-GCP"
+      ],
+      "reporting_period": "2025 announcement context",
+      "domain": "supplier_relationships",
+      "kind": "reported_relationship",
+      "verification": "repository_reported",
+      "metric_value": null,
+      "metric_unit": null,
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_records": [
+        {
+          "id": "SRC-LBG-GCP",
+          "title": "Google Cloud AI announcement cited by the existing Twin",
+          "url": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html",
+          "reporting_period": "2025 announcement; current relationship status unverified",
+          "publication_date": null,
+          "retrieved_at": null,
+          "verification": "citation_only",
+          "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+        }
+      ]
+    },
+    "LBG-MODELS": {
+      "id": "LBG-MODELS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports 15 modelling systems migrated to Vertex AI.",
+      "source_ids": [
+        "SRC-LBG-GCP"
+      ],
+      "reporting_period": "2025 announcement context",
+      "domain": "technology",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": "15",
+      "metric_unit": "modelling systems",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_records": [
+        {
+          "id": "SRC-LBG-GCP",
+          "title": "Google Cloud AI announcement cited by the existing Twin",
+          "url": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html",
+          "reporting_period": "2025 announcement; current relationship status unverified",
+          "publication_date": null,
+          "retrieved_at": null,
+          "verification": "citation_only",
+          "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+        }
+      ]
+    },
+    "LBG-HEDGE": {
+      "id": "LBG-HEDGE",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports GBP1.6bn structural-hedge income for Q1 2026.",
+      "source_ids": [
+        "SRC-LBG-Q1"
+      ],
+      "reporting_period": "Q1 2026",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": "1.6",
+      "metric_unit": "GBP bn",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_records": [
+        {
+          "id": "SRC-LBG-Q1",
+          "title": "Lloyds Q1 2026 interim management statement",
+          "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q1/2026-lbg-q1-ims.pdf",
+          "reporting_period": "Q1 2026",
+          "publication_date": null,
+          "retrieved_at": null,
+          "verification": "citation_only",
+          "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+        }
+      ]
+    },
+    "LBG-TECH-COST": {
+      "id": "LBG-TECH-COST",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports c.30% gross reduction in technology run/change costs since 2021.",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "reporting_period": "2021\u20132025 comparison reported in existing Twin",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": "30",
+      "metric_unit": "percent, gross; not net programme benefit",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_records": [
+        {
+          "id": "SRC-LBG-AR",
+          "title": "Lloyds annual report landing page",
+          "url": "https://www.lloydsbankinggroup.com/investors/annual-report.html",
+          "reporting_period": "FY2025, as described by the existing Twin; current landing-page version unverified",
+          "publication_date": null,
+          "retrieved_at": null,
+          "verification": "citation_only",
+          "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+        }
+      ]
+    },
+    "LBG-CUSTOMERS": {
+      "id": "LBG-CUSTOMERS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports 23.6m digitally active customers.",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "reporting_period": "2025 year-end",
+      "domain": "operating_capabilities",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": "23.6",
+      "metric_unit": "million customers",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_records": [
+        {
+          "id": "SRC-LBG-AR",
+          "title": "Lloyds annual report landing page",
+          "url": "https://www.lloydsbankinggroup.com/investors/annual-report.html",
+          "reporting_period": "FY2025, as described by the existing Twin; current landing-page version unverified",
+          "publication_date": null,
+          "retrieved_at": null,
+          "verification": "citation_only",
+          "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+        }
+      ]
+    }
+  },
+  "display_decisions": {
+    "current_financials": "Only reviewed 30 Sep 2026 customer deposits and nine-month statutory pretax profit shown as current actuals. 2030 cost:income is visibly a target. No reconstructed current income, operating cost or revenue growth.",
+    "businesses": "Customer/business roles and historic business-area labels are distinguished from current segment/legal-entity facts; no org-chart assertion.",
+    "brands": "Lloyds/Halifax transition is supported by July 2026 announcement; delivery through 2027 not assumed complete. Bank of Scotland and Scottish Widows retained only as historic portfolio-brand references with current legal ownership unverified.",
+    "technology": "Envoy/Google collaboration source supported; Vertex and model migration are older repository-reported context, not a verified current inventory.",
+    "customers": "Household and business customer roles; no named corporate customer relationship.",
+    "regulators": "BoE, PRA and FCA retain distinct roles. PRA shown as BoE prudential function, not a separate bank/company. Sector policy does not prove applicability to a Lloyds legal entity.",
+    "suppliers": "Single named supported platform collaboration; no inferred exclusive contract, external scope or workshare.",
+    "visuals": "AI-generated original conceptual architectural scenes; not evidence, real offices, actual campus topology, tenant or relative financial scale."
+  },
+  "targeted_research_gaps": [
+    {
+      "id": "FIN-01",
+      "need": "Current consolidated income and operating costs",
+      "requested_evidence": "Latest official interim/annual income statement and reconciliation; net interest income, other income, total income, operating expenses, impairment, statutory vs underlying profit, GBP units and reporting periods.",
+      "impact": "Blocks quantified money-flow decomposition; old FY2024 fixture is not current evidence.",
+      "action": "Targeted enrichment request recorded only; not commissioned, fetched or promoted by this design sprint"
+    },
+    {
+      "id": "FIN-02",
+      "need": "Comparable growth and profitability",
+      "requested_evidence": "Company-disclosed matched-period income/cost/earnings growth, restatements, organic/FX boundary, margins and segment consistency.",
+      "impact": "No percentage growth or invented denominator shown.",
+      "action": "Targeted enrichment request recorded only; not commissioned, fetched or promoted by this design sprint"
+    },
+    {
+      "id": "ORG-01",
+      "need": "Current segments, brands and legal subsidiaries",
+      "requested_evidence": "Current official segment note, group organisation/subsidiary schedule, ownership percentages and entity IDs; distinguish brands, divisions, subsidiaries and regulated legal entities.",
+      "impact": "Historical three-division/four-brand profile does not prove current hierarchy.",
+      "action": "Targeted enrichment request recorded only; not commissioned, fetched or promoted by this design sprint"
+    },
+    {
+      "id": "OPS-01",
+      "need": "Operations and important technology systems",
+      "requested_evidence": "Official current operating-model disclosures, critical services, named systems/platform purpose, rollout status and dated dependencies.",
+      "impact": "Envoy/Vertex does not establish full core/payments estate or architecture.",
+      "action": "Targeted enrichment request recorded only; not commissioned, fetched or promoted by this design sprint"
+    },
+    {
+      "id": "REL-01",
+      "need": "Suppliers, partners and customers",
+      "requested_evidence": "Official specific relationship announcements/filings, parties/legal IDs, service, geography, date, status, rights and counter-evidence; current workshare/contract/renewal only if disclosed.",
+      "impact": "No supplier logos, unnamed customers or contracts invented.",
+      "action": "Targeted enrichment request recorded only; not commissioned, fetched or promoted by this design sprint"
+    },
+    {
+      "id": "REG-01",
+      "need": "Legal-entity regulatory applicability",
+      "requested_evidence": "Current official PRA/FCA register and entity/activity-level scope, BoE/PRA institutional structure source, permissions/firm numbers and dates.",
+      "impact": "Sector-policy actor links remain context, no firm-specific obligation graph.",
+      "action": "Targeted enrichment request recorded only; not commissioned, fetched or promoted by this design sprint"
+    },
+    {
+      "id": "ORG-02",
+      "need": "Current leadership and accountability",
+      "requested_evidence": "Official current governance/leadership page and report dates; role/entity scope and decision authority; no inferred buyer.",
+      "impact": "No named executive or buyer is drawn.",
+      "action": "Targeted enrichment request recorded only; not commissioned, fetched or promoted by this design sprint"
+    },
+    {
+      "id": "INF-01",
+      "need": "Infrastructure operating relationships",
+      "requested_evidence": "Official current CHAPS/RTGS and other payment-system operator/remit/participation sources and dates.",
+      "impact": "Infrastructure is depicted as sector function, not a particular bank contract.",
+      "action": "Targeted enrichment request recorded only; not commissioned, fetched or promoted by this design sprint"
+    },
+    {
+      "id": "COM-01",
+      "need": "Remaining influence and external need",
+      "requested_evidence": "Human-reviewed validation of unresolved outcomes, decision dates, current incumbent coverage, authorised access and external scope.",
+      "impact": "No early opportunity classification, budget, procurement or Pipeline write.",
+      "action": "Targeted enrichment request recorded only; not commissioned, fetched or promoted by this design sprint"
+    }
+  ]
+}

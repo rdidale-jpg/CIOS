@@ -1,0 +1,20 @@
+{
+  "HTML_states": 17,
+  "local_links_assets": 575,
+  "broken_links": 0,
+  "preserved_landscape_hashes": {
+    "uk-economy.webp": "ff4f70c21fcfe733affd0405021fa24386f5edaeb3497a10596550d9dbed0567",
+    "banking-combined.png": "2661db421634f422e571066152450cce92261ff714a4ed34c0bfe1e6a243d0af",
+    "lloyds-world.png": "98c0794e6cd78a9658eb00fce7327c9ffa998bcf83256301a513226e85ec0383"
+  },
+  "new_art": {
+    "lloyds-inside.png": "9bbb5b96f5fac6cdf72c9138973ac8f5ee429420ef3fe330ac7ece5072ec0584",
+    "uk-forces.png": "0a8dbc120ecababb297ea1a6eae7fb8a62277322e88bcee1148a3f06342f6a14",
+    "banking-forces.png": "2cc533ba6b6dfe4ec008192ffe7f71b8e4c978e8d391d128b9395809ae9f3a90",
+    "lloyds-forces.png": "47292147cf6c06dcb5b1d7807e75178d256c9dc8d43bb3fb01a0a85906ccc5db"
+  },
+  "nine_gaps_unchanged": true,
+  "model_or_qualification_engine": false,
+  "scope": "New design artifacts only; no canonical/app/IAM/Offers/Pipeline changes",
+  "art_provenance": "image_gen original purpose-composed UK/Banking/Lloyds currents/pressure/contour scenes and internal cutaway, 2026-11-14; original UK artistic language reference; not real premises, hierarchy, severity, geography or weather prediction. Unedited originals retained."
+}
