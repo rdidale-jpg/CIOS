@@ -46,8 +46,12 @@ with TemporaryDirectory() as storage, MonkeyPatch.context() as patch, sync_playw
             expect(summary).to_contain_text('38,411')
             expect(summary).to_contain_text('361 days')
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
-            summary.scroll_into_view_if_needed()
+            summary.evaluate("(node) => node.scrollIntoView({block:'start'})")
             page.screenshot(path=output / f'facts-{name}.jpg', quality=85)
+            if name == 'desktop':
+                summary.get_by_role('heading', name='Cash flow statement').evaluate(
+                    "(node) => node.scrollIntoView({block:'start'})")
+                page.screenshot(path=output / 'cash-flow-desktop.jpg', quality=85)
             link = page.get_by_role('link', name='FLORA Insight', exact=True)
             if name == 'desktop':
                 link.focus()
@@ -57,7 +61,7 @@ with TemporaryDirectory() as storage, MonkeyPatch.context() as patch, sync_playw
             page.wait_for_url(lambda url: 'reading=insight' in url)
             expect(summary).to_contain_text('+8,928')
             expect(summary).to_contain_text('each contributed cash')
-            summary.scroll_into_view_if_needed()
+            summary.evaluate("(node) => node.scrollIntoView({block:'start'})")
             page.screenshot(path=output / f'insight-{name}.jpg', quality=85)
             page.go_back()
             expect(summary).to_contain_text('3,904')

@@ -257,8 +257,15 @@ def annual_statement_view(lines, *, insight=False, comparison_keys=(), context='
             if len(periods) > 1:
                 return ''
     columns = {year: f'FY{year}' for year in years}
-    units = ', '.join(sorted({fact.unit for _, fact in rows}))
-    title = '<section class="reading-capability" aria-labelledby="eei-summary"><h2 id="eei-summary">Financial statements</h2>'
+    units = ' · '.join(sorted({fact.unit for _, fact in rows if fact.unit != '%'}))
+    if any(fact.unit == '%' for _, fact in rows):
+        units = (units + ' · ' if units else '') + 'Ratios shown as %'
+    title = ('<style>.eei-annual table{width:min(100%,46rem);margin:8px 0 24px;border-collapse:collapse}'
+             '.eei-annual td,.eei-annual thead th:not(:first-child){padding-inline-start:clamp(5px,2vw,24px);'
+             'text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}'
+             '.eei-annual th[scope=row]{text-align:left;padding-inline-end:8px}'
+             '</style><section class="reading-capability eei-annual" aria-labelledby="eei-summary">'
+             '<h2 id="eei-summary">Financial statements</h2>')
     source = rows[0][1].sources[0]
     body = (title + '<p class="reading-context">' + escape(rows[0][0].subject_name)
             + ' · annual report · ' + escape(units) + '</p>')
