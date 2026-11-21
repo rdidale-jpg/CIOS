@@ -82,7 +82,14 @@ LANDSCAPE_COMPONENTS = {
 
 def landscape(ctx, data, issues, *, headers=None):
     from .enterprise_economics import banking
-    return banking(ctx, data, issues, headers=headers)
+    if ctx.detail == 'flagship':
+        from .lloyds_flagship import render
+        return render(ctx, data, issues)
+    economics = banking(ctx, data, issues, headers=headers)
+    if ctx.detail:
+        return economics
+    target = escape(v.url(ctx, detail='flagship'), quote=True)
+    return f'<p class="reading-context"><a href="{target}#visual-content">Explore the Lloyds flagship</a></p>' + economics
 
 
 def inside(ctx, data):

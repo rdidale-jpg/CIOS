@@ -1,0 +1,84 @@
+{
+  "id": "RP-d1897810fb8a0d00e4dc9cff",
+  "task_id": "G-MARKET",
+  "target_claim_id": null,
+  "proposed_effect": "new",
+  "rationale": "Adds a dated payment mechanism to Lloyds wallet competition context. The policy document alone supports no launch status or enterprise exposure.",
+  "source_id": "RS-bf07cc542de69b7a487f",
+  "equivalent_existing_source_ids": [],
+  "source_metadata": {
+    "url": "https://www.gov.uk/government/publications/national-payments-vision/national-payments-vision",
+    "retrieval_url": "https://www.gov.uk/government/publications/national-payments-vision/national-payments-vision",
+    "title": "National Payments Vision",
+    "publisher": "HM Treasury",
+    "retrieved_at": "2026-11-21T13:41:06.789339+00:00",
+    "reporting_period": "Government policy as published 14 November 2024",
+    "publication_date": "2024-11-14",
+    "publication_date_evidence": "GOV.UK publication landing page",
+    "reviewed_by": "Lloyds flagship Source review",
+    "review_notes": "HM Treasury policy text carries OGL v3.0. The retained short sentence is first-party policy text. This is historical sector context with no enterprise-specific implementation evidence.",
+    "provenance_verified": true,
+    "expected_sha256": "254af37805456bdeec9e5dbf7ba2270700b301cb2bc912065fff3f7153715ae7",
+    "reviewed_quotes": [
+      {
+        "quote": "This pilot is focused on a limited number of lower-risk use cases such as paying bills.",
+        "locator": "Delivering seamless account-to-account payments through Open Banking"
+      }
+    ]
+  },
+  "raw_sha256": "254af37805456bdeec9e5dbf7ba2270700b301cb2bc912065fff3f7153715ae7",
+  "text_sha256": "d653b1ab4b62a5310e0c3df4f5706bf2e3827556203470c35d8d3444e7bb6425",
+  "original_bytes_archived": true,
+  "review_pack_retains_original_bytes": false,
+  "candidates": [
+    {
+      "candidate": {
+        "claim_id": "RC-8b42cac2a5d030053baa",
+        "claim_type": "research_excerpt",
+        "statement": "This pilot is focused on a limited number of lower-risk use cases such as paying bills.",
+        "source_asset_id": "RS-bf07cc542de69b7a487f",
+        "source_segment_id": "RS-bf07cc542de69b7a487f::c13874ad8476c93b",
+        "scope": "industry",
+        "subject": "BK-IND-002",
+        "predicate": "registered-gap",
+        "object": "This pilot is focused on a limited number of lower-risk use cases such as paying bills.",
+        "time_scope": "Government policy as published 14 November 2024",
+        "participant_scope": "UK Banking",
+        "enterprise_scope": "",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-bf07cc542de69b7a487f"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-bf07cc542de69b7a487f::c13874ad8476c93b",
+        "asset_id": "RS-bf07cc542de69b7a487f",
+        "section_heading": "Delivering seamless account-to-account payments through Open Banking",
+        "content": "This pilot is focused on a limited number of lower-risk use cases such as paying bills.",
+        "content_hash": "240c7531ee6b696edd2fdf6b79bd0914024e614d9f1a434036973750e9acb3fe",
+        "source_location": "https://www.gov.uk/government/publications/national-payments-vision/national-payments-vision [Delivering seamless account-to-account payments through Open Banking]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_supplied_file"
+      },
+      "observation_fingerprint": "obs-v1-8b42cac2a5d030053baacffcb499fac249f562a4238fe368af13d4b4bfe76f3f",
+      "accepted_observation": false
+    }
+  ],
+  "supersession": {
+    "predecessor_claim_id": null,
+    "state": "Proposed; predecessor retained",
+    "target_reporting_period": null,
+    "new_reporting_period": "Government policy as published 14 November 2024",
+    "period_match": false
+  },
+  "status": "Review required; no automatic finding change",
+  "remaining_checks": [
+    "Enterprise/scope/period entailment",
+    "Atomic observation and contrary evidence",
+    "Source authorship and independence",
+    "Governed Evidence acceptance before Observation persistence"
+  ]
+}

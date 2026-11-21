@@ -1,0 +1,23 @@
+{
+  "checkout": "1f8b3f98178f68703f19b18b41979b1ec4cbeb9d",
+  "observations": [
+    {
+      "viewport": "desktop",
+      "facts_insight": true,
+      "peer_evidence": true,
+      "operating_detail_and_back": true
+    },
+    {
+      "viewport": "ipad-landscape",
+      "facts_insight": true,
+      "peer_evidence": true,
+      "operating_detail_and_back": true
+    },
+    {
+      "viewport": "ipad-portrait",
+      "facts_insight": true,
+      "peer_evidence": true,
+      "operating_detail_and_back": true
+    }
+  ]
+}
