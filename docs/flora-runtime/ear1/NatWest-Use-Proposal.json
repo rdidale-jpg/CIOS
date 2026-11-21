@@ -1,0 +1,125 @@
+{
+  "schema": "ear1-review-proposal-v1",
+  "status": "unselected_owner_decision_proposal_not_import_package",
+  "baseline_sha": "e7c58feb84882b0e7a1ea38e7e1c72079402aa86",
+  "mission": {
+    "research_policy": "Decision and Assurance",
+    "capabilities": [
+      "public-source review",
+      "offline pure contract probes",
+      "isolated read-only fixtures",
+      "draft PR"
+    ],
+    "prohibited": [
+      "source permission changes",
+      "canonical writes",
+      "Evidence acceptance",
+      "production writes",
+      "paid calls",
+      "merge",
+      "deployment"
+    ]
+  },
+  "document": {
+    "research_source_ref": "BIE3-NW-Q3",
+    "url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf",
+    "retrieval_url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf",
+    "host": "investors.natwestgroup.com",
+    "path": "/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf",
+    "title": "NatWest Group Q3 2026 Interim Management Statement",
+    "issuer": "NatWest Group plc",
+    "reporting_scope": "NatWest Group plc and its subsidiaries",
+    "registration": "SC045551",
+    "source_type": "investor_results",
+    "page_count": 43,
+    "publication_date": "2026-10-30",
+    "publication_date_basis": "Original PDF management presentation date, PDF page36/printed35; official results-news publication heading corroborates",
+    "report_version": "Q3 2026, reviewed official URL; original-byte version identity UNVERIFIED",
+    "reporting_date": "2026-09-30",
+    "retrieved_on": "2026-11-15",
+    "original_bytes_sha256": null,
+    "original_bytes_retained": false,
+    "verification_extent": "Official PDF text and table headings reopened; no retained PDF archive, extracted bounding boxes or independently viewed screenshot payload claimed",
+    "review_reference": "approved web tool, original PDF turn285004view0 and turn842522view1; independent critique reopens original"
+  },
+  "assertion_refs": [
+    "BIE3-NW-DEPOSITS-TOTAL",
+    "BIE3-NW-DEPOSITS-EX-CENTRAL"
+  ],
+  "allowed_proposal_fields": [
+    "reported amount",
+    "GBP",
+    "billion",
+    "Group legal scope",
+    "as-at date",
+    "separate total/ex-central definition",
+    "original citation and attribution"
+  ],
+  "excluded_uses": [
+    "full PDF redistribution",
+    "source images/logos",
+    "full tables",
+    "narrative republication",
+    "derived third assertion",
+    "seller budget or demand inference",
+    "newspaper or SEC proxy",
+    "issuer-wide admission"
+  ],
+  "audiences": [
+    {
+      "audience": "internal_authorised_owner_review",
+      "proposed_purpose": "Evaluate the two atomised factual measurements with attribution and original link",
+      "recommendation": "Defer",
+      "owner_choice": null,
+      "recorded": false,
+      "executed": false,
+      "permission": "UNRESOLVED"
+    },
+    {
+      "audience": "seller_read_only_display",
+      "proposed_purpose": "Display only the two individually accepted measurements after all owning gates pass",
+      "recommendation": "Defer",
+      "owner_choice": null,
+      "recorded": false,
+      "executed": false,
+      "permission": "UNRESOLVED"
+    }
+  ],
+  "rights": {
+    "terms_url": "https://www.natwestgroup.com/hygiene/legal-information.html",
+    "locator": "Copyright, clause13; changes clause16; investor results-centre footer links to same terms",
+    "reviewed_on": "2026-11-15",
+    "interpretation": "General reproduction restriction with personal-use exception; no verified commercial factual-use grant. Business owner review is not presumed personal use. Scope of protected expression versus isolated facts requires exact-use decision; no categorical prohibition on facts is asserted. Citation is not permission. No separate incoming-link licence or prohibition was verified.",
+    "rights_receipt_id": null,
+    "owner_decision_id": null,
+    "licence_granted": false,
+    "revoked": false,
+    "proposed_review_until": "2026-12-15",
+    "decision_expires_at": null
+  },
+  "real_owner_state": {
+    "workspace_id": null,
+    "canonical_enterprise_id": null,
+    "canonical_evidence_ids": [],
+    "canonical_observation_ids": [],
+    "canonical_model_id": null,
+    "source_record_id": null,
+    "review_decision_ids": [],
+    "plan_id": null,
+    "approval_id": null,
+    "execution_receipt_id": null,
+    "existing_presence": "UNVERIFIED",
+    "authorised_read_service_available": false
+  },
+  "production_identity": {
+    "status": "UNVERIFIED",
+    "public_health_attempt": "URLError",
+    "public_deployment_attempt": "URLError",
+    "github_sha_is_not_deployment_proof": true
+  },
+  "preserved_reference_sha256": {
+    "docs/flora-runtime/bie3/Claim-Proposals.json": "c093574b917a628841b901aea13ea9f7f8bfa5844adcbc12468740dc5084dcf1",
+    "docs/flora-runtime/bie3/Source-Review.json": "be8774de8d4a1dd4d33889bb50fb40ae33e0f04a08d42d2eb683d1e4080aad0e",
+    "docs/flora-runtime/bie3/reviewed-cells/BIE3-NW-Q3.txt": "4ec8584008fab5e8202490bb1df5b977d6fa1e6aeb1c00dc2c00341176cd2038"
+  }
+}
