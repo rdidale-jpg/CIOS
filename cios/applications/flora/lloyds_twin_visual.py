@@ -5,7 +5,7 @@ from pathlib import Path
 
 from . import visual_streams as visual
 
-ART = 'vp2-lloyds-landscape-768-e58d32043d99'
+ART = 'vp2-lloyds-inside-768-13827db67c30'
 STYLE = '<style>' + Path(__file__).with_name('visual_stream_assets').joinpath('lloyds-twin.css').read_text() + '</style>'
 
 # Independently checked against the issuer-filed FY2025 Form 20-F, segment

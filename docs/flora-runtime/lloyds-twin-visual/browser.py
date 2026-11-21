@@ -56,7 +56,7 @@ with TemporaryDirectory() as directory, MonkeyPatch.context() as patch, sync_pla
                 expect(page.get_by_role('heading', name='Credit and customer service')).to_be_visible()
                 page.go_back()
                 expect(page.locator('#ltv-thread')).to_be_visible()
-                page.locator('#llf-benchmark summary').click()
+                page.locator('#llf-benchmark > summary').click()
                 expect(page.locator('#llf-benchmark')).to_contain_text('118,762')
             evidence.append({'viewport': device, 'phase': phase, 'no_page_overflow': True,
                              'inside_thread_mode_history_and_peer': phase == 'after'})
