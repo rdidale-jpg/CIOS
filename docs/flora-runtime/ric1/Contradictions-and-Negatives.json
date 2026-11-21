@@ -1,0 +1,363 @@
+[
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-TSB",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE1",
+        "record": {
+          "id": "NEG-TSB",
+          "preserved_history": "Sprint B tiers and versioned facts unchanged.",
+          "reason": "Acquisition complete30April; legal transfer conditional22March2027 and laterH22027 migration. Remaining sourcing/influence unknown.",
+          "rejected_inference": "Mature Santander/TSB integration announcement establishes early strategic shaping or open procurement.",
+          "source_refs": [
+            "TSB-NOV26"
+          ],
+          "status": "research only; no new sales classification"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-FR",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE1",
+        "record": {
+          "id": "NEG-FR",
+          "reason": "Exact legal entity, national law version/phase, thresholds/consolidation/exemptions unverified.",
+          "rejected_inference": "French reporting rule automatically establishes a Lloyds UK legal duty or procurement.",
+          "source_refs": [
+            "FR-CSRD26"
+          ],
+          "status": "blocked enterprise transmission"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-AI-VALUE",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE1",
+        "record": {
+          "id": "NEG-AI-VALUE",
+          "reason": "Benefit forecast is not outturn, buyer need, supplier spend or TCV.",
+          "rejected_inference": "Expected additional AI benefit is realised income or an external GBP100m opportunity.",
+          "source_refs": [
+            "LBG-AI26"
+          ],
+          "status": "rejected value/intent inference"
+        }
+      },
+      {
+        "package": "RIE2",
+        "record": {
+          "id": "NEG-AI-VALUE",
+          "inference": "Expected100m benefits are net realised2026 value, external spend or dealTCV",
+          "reason": "Expectation/benefit/unit economics/supplier budget/TCV are different.",
+          "source_refs": [
+            "R2-LBG-AI26"
+          ],
+          "status": "blocked"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-PROPERTY",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE1",
+        "record": {
+          "id": "NEG-PROPERTY",
+          "reason": "Full original unacquired; section includes imputed rent and far broader activity.",
+          "rejected_inference": "Official index excerpt proves complete current real-estate economics.",
+          "source_refs": [
+            "LAND-L26"
+          ],
+          "status": "inadmissible strong agenda support"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-HOUSEHOLD",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE1",
+        "record": {
+          "id": "NEG-HOUSEHOLD",
+          "reason": "No household profiling or justified enterprise sales agenda.",
+          "rejected_inference": "SIC T household employer can be an automatically generated enterprise prospect.",
+          "source_refs": [
+            "HOME-T"
+          ],
+          "status": "no agenda"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-PAYMENT",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE1",
+        "record": {
+          "id": "NEG-PAYMENT",
+          "reason": "System operator and named participant edges need different evidence.",
+          "rejected_inference": "BoE operates CHAPS therefore Lloyds is a proven current direct participant/customer.",
+          "source_refs": [
+            "BOE-SETTLE"
+          ],
+          "status": "blocked specific edge"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-FOS-PERIOD",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE2",
+        "record": {
+          "id": "NEG-FOS-PERIOD",
+          "inference": "FOS H1 title means January–June, so3764/118762 is an escalation rate",
+          "reason": "Different dates, stages and cohorts; actual source body says April–September.",
+          "source_refs": [
+            "R2-FOS-APRSEP26",
+            "R2-FCA-H126"
+          ],
+          "status": "blocked"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-CONSUMER-CREDIT",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE2",
+        "record": {
+          "id": "NEG-CONSUMER-CREDIT",
+          "inference": "FCA12308received is all Lloyds complaints or additional to118762",
+          "reason": "Separate Consumer Credit table, not the all-product Open table; duplicate/cross-scope addition prohibited.",
+          "source_refs": [
+            "R2-FCA-H126"
+          ],
+          "status": "blocked"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-IMPAIRMENT-ROUNDING",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE2",
+        "record": {
+          "id": "NEG-IMPAIRMENT-ROUNDING",
+          "inference": "616versus617m is unexplained rounding/incorrect source",
+          "reason": "Note3 explicitly shows1m insurance gross-up. Preserve statutory versus underlying.",
+          "source_refs": [
+            "R2-LBG-H126"
+          ],
+          "status": "explained_basis_difference"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-WHOLESALE-LOSS",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE2",
+        "record": {
+          "id": "NEG-WHOLESALE-LOSS",
+          "inference": "FY99.4bn versus represented95.6bn December funding proves financial deterioration",
+          "reason": "Wholesale funding definition revisedQ2; original and represented values kept, not compared as an economic movement.",
+          "source_refs": [
+            "R2-LBG-FY25",
+            "R2-LBG-Q326"
+          ],
+          "status": "explained_definition_change"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-PARENT-JOIN",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE2",
+        "record": {
+          "id": "NEG-PARENT-JOIN",
+          "inference": "An indirectly held principal subsidiary has a known immediate parent or currentNovemberownership",
+          "reason": "Principal schedule atDecember 2025 marks indirect interest, not every intermediate edge.",
+          "source_refs": [
+            "R2-LBG-20F25"
+          ],
+          "status": "blocked"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-AGENT-FAILURE",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE2",
+        "record": {
+          "id": "NEG-AGENT-FAILURE",
+          "inference": "Complaints prove Microsoft/Envoy ineffective or need a replacement platform",
+          "reason": "No eligible-case technology/causality join; existing capabilities and remedies are counter-evidence.",
+          "source_refs": [
+            "R2-FCA-H126",
+            "R2-LBG-MS26",
+            "R2-LBG-ENVOY-PDF"
+          ],
+          "status": "blocked"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-PEER-LEAGUE",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE2",
+        "record": {
+          "id": "NEG-PEER-LEAGUE",
+          "inference": "Lloyds Retail/NatWest Retail/Barclays UK profit levels establish efficiency winner",
+          "reason": "Same duration does not harmonise product geography, leasing, divisions, remediations, levies or accounting basis.",
+          "source_refs": [
+            "R2-LBG-H126",
+            "R2-NW-H126",
+            "R2-BAR-H126"
+          ],
+          "status": "blocked"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-INSURANCE",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE2",
+        "record": {
+          "id": "NEG-INSURANCE",
+          "inference": "CSM/deferred-profit stock, dividend or SolvencyII equals income, supplier spend or bankCET1",
+          "reason": "Different stock/flow/entity/metric bases. Keep risk adjustment included in Lloyds5.2bn deferredprofit.",
+          "source_refs": [
+            "R2-LBG-H126",
+            "R2-LG-H126"
+          ],
+          "status": "blocked"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-IPSOS-LABEL",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE2",
+        "record": {
+          "id": "NEG-IPSOS-LABEL",
+          "inference": "Assign unlabeled PDF percentages to banks by guessed chart order",
+          "reason": "Label alignment not inspected; no screenshot available. No numerical survey rank admitted.",
+          "source_refs": [
+            "R2-IPSOS-AUG26",
+            "R2-IPSOS-METHOD"
+          ],
+          "status": "not_admitted"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-CTP-CONTRACT",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE2",
+        "record": {
+          "id": "NEG-CTP-CONTRACT",
+          "inference": "A designated supplier legal entity must be Lloyds contract counterparty, or designation means bank control failure",
+          "reason": "Provider legal scope and bank service/contract/readiness require different evidence.",
+          "source_refs": [
+            "R2-HMT-CTP",
+            "R2-LBG-MS26",
+            "R2-LBG-ENVOY-PDF"
+          ],
+          "status": "blocked"
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "D",
+    "canonical_acceptance": false,
+    "id": "NEG-FR-TSB",
+    "scope": "Rejected inference only; supporting source facts are not rejected.",
+    "versions": [
+      {
+        "package": "RIE2",
+        "record": {
+          "id": "NEG-FR-TSB",
+          "inference": "French rule implies Lloyds duty, or a late Santander/TSB programme proves early open sourcing",
+          "reason": "RIE1 pinned negative register and source scope retained; no fresh legal opinion or tier change.",
+          "source_refs": [],
+          "status": "baseline_controls_retained"
+        }
+      }
+    ]
+  }
+]

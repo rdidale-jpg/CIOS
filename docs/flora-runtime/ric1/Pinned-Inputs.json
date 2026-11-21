@@ -1,0 +1,136 @@
+{
+  "inputs": [
+    {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "package": "RIE1",
+      "path": "docs/flora-runtime/rie1-617/Source-Ledger.json",
+      "repository_content_sha256": "353c636911c34efd02c9777766316fa29595aa97ab9400f8d2636c5980176882"
+    },
+    {
+      "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+      "package": "RIE2",
+      "path": "docs/flora-runtime/rie2-619/Source-Ledger.json",
+      "repository_content_sha256": "eece0d258c369f203bd63d9db2e14614f5ebaef31667c09328710c7308a8823d"
+    },
+    {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "package": "RIE1",
+      "path": "docs/flora-runtime/rie1-617/Facts.json",
+      "repository_content_sha256": "17175f89cca9746bf6175485f9146e7b496062c9a9d3c411b0448f3186e75f8e"
+    },
+    {
+      "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+      "package": "RIE2",
+      "path": "docs/flora-runtime/rie2-619/Claims.json",
+      "repository_content_sha256": "5ac7cdd4faeaf6dfd4b4b665821a3af61b6089d7e98086160a22b8479aa31544"
+    },
+    {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "package": "RIE1",
+      "path": "docs/flora-runtime/rie1-617/Gap-Disposition.json",
+      "repository_content_sha256": "42910c1bdb5e4d82107ccccf9ed7f4a59cde3acb6657aaca72302307004d9dff"
+    },
+    {
+      "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+      "package": "RIE2",
+      "path": "docs/flora-runtime/rie2-619/Gap-Dispositions.json",
+      "repository_content_sha256": "4316eb4f6951e99ca6c63b685104e7dd9a3cff05347dfeb6c3cd4f2c40cfe4a9"
+    },
+    {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "package": "RIE1",
+      "path": "docs/flora-runtime/rie1-617/Sector-Research.json",
+      "repository_content_sha256": "9d18c81e8721b13037d1fd0973c652dd887d6b97d7ca714fdae7bd0c74419455"
+    },
+    {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "package": "RIE1",
+      "path": "docs/flora-runtime/rie1-617/Lloyds-Financial-Reconciliation.json",
+      "repository_content_sha256": "eaf492ebc2e73237316448abf9d237caae7ff258ca2e1b3be9f0193b84c5c2aa"
+    },
+    {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "package": "RIE1",
+      "path": "docs/flora-runtime/rie1-617/Statistical-Extraction.json",
+      "repository_content_sha256": "9e0e6bf657c5f19fd427165b32a03800a1c9cd54cf219d27849bab0fb1fe0b19"
+    },
+    {
+      "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+      "package": "RIE2",
+      "path": "docs/flora-runtime/rie2-619/Financial-Reconciliation.json",
+      "repository_content_sha256": "ef69519b577833f83eb69531c585811d2f65551f3d34b4d8f08e4fa4accd57f6"
+    },
+    {
+      "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+      "package": "RIE2",
+      "path": "docs/flora-runtime/rie2-619/Customer-Outcomes.json",
+      "repository_content_sha256": "070fa8513e033eb665a73f8e9cce95f0165516b9a49cadce1e504e4340974ab5"
+    },
+    {
+      "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+      "package": "RIE2",
+      "path": "docs/flora-runtime/rie2-619/Operating-Model.json",
+      "repository_content_sha256": "1ea01921e332eb9d9ee12c2c60b09107650ba1de216be015198c80e3bcc2f862"
+    },
+    {
+      "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+      "package": "RIE2",
+      "path": "docs/flora-runtime/rie2-619/Banking-Comparability.json",
+      "repository_content_sha256": "376013bf14a3e32d499383f96fe093fffad7ce20c31cfc613300ca59913530bc"
+    },
+    {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "package": "RIE1",
+      "path": "docs/flora-runtime/rie1-617/Agenda-Candidates.json",
+      "repository_content_sha256": "49c34bbca9b8eea65a3b9a3ab40096ed091a13827da4941f245d0dd2a1dcafe0"
+    },
+    {
+      "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+      "package": "RIE2",
+      "path": "docs/flora-runtime/rie2-619/Leadership-Agenda.json",
+      "repository_content_sha256": "b04de801fab89153b9105dac161d3f9e030f1cb9ef78d6da0419e1accbbc0e63"
+    },
+    {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "package": "RIE1",
+      "path": "docs/flora-runtime/rie1-617/Relationships.json",
+      "repository_content_sha256": "1457bde2996be29cb9536aefbcfd94cc8b7e0eda1b674f5886a5f3314972900b"
+    },
+    {
+      "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+      "package": "RIE2",
+      "path": "docs/flora-runtime/rie2-619/Relationships.json",
+      "repository_content_sha256": "b91425c8d7e0ef3f4125cd110edc62e78f42df1cebf6aeaea4a997b67d2b507f"
+    },
+    {
+      "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "package": "RIE1",
+      "path": "docs/flora-runtime/rie1-617/Negative-Cases.json",
+      "repository_content_sha256": "7c7e5e2f96287e4ec3a29fe60903958c922cd2a401386c1598bfe319c3aa1e2a"
+    },
+    {
+      "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+      "package": "RIE2",
+      "path": "docs/flora-runtime/rie2-619/Rejected-and-Contradicted.json",
+      "repository_content_sha256": "33ab61a32a4547930e1e961a4ebdac251ca8bb866d8339810c60df78e294df15"
+    },
+    {
+      "commit": "85317167b4001dc027216c1c4e2faf058f0631a3",
+      "package": "SI1",
+      "path": "docs/flora-runtime/si1-615/Ownership-and-Contracts.md",
+      "repository_content_sha256": "81af475f9fd17744bf431e0277446fa247feb6cc5f8978b9aefb73e4cfab80b8"
+    },
+    {
+      "commit": "85317167b4001dc027216c1c4e2faf058f0631a3",
+      "package": "SI1",
+      "path": "docs/flora-runtime/si1-615/Analytical-Design.md",
+      "repository_content_sha256": "e7b9100acc92e240ca798e033f840bf6d6fc2dfcc54153dae424b843215e4e00"
+    }
+  ],
+  "packages": {
+    "RIE1": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+    "RIE2": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+    "SI1": "85317167b4001dc027216c1c4e2faf058f0631a3"
+  },
+  "validated_main": "fe66516c15726dc45de147ede2674c9172f8cac6"
+}

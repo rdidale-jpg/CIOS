@@ -1,0 +1,22 @@
+{
+  "canonical_target_ids": null,
+  "contracts": [
+    "cios/contracts/twin_object_profiles/researcher_v1.json",
+    "cios/applications/flora/blueprint_import/researcher_profile_adapter.py"
+  ],
+  "evidence_records": 8,
+  "missing_before_any_real_staging": [
+    "Owner evidence decision and specific source/rights use",
+    "Current authorised import/acceptance state",
+    "Country/industry/enterprise owning workspace and explicit canonical entity mappings",
+    "Reviewed original dates, stale/comparator handling and dedup dispositions",
+    "Governed Twin identity/release metadata then existing manifest files/checksums generated from actual candidate bytes"
+  ],
+  "no_automatic_promotion": true,
+  "observation_records": 8,
+  "production_manifest": null,
+  "records_path": "Proposed-Records.ndjson",
+  "records_sha256": "c8e295b34583502c7787b3b72bc10c98b175a6454d0f15f46a6575eb6c9ec920",
+  "source_records": 3,
+  "status": "owner-review proposal, not executable production package"
+}

@@ -1,0 +1,1904 @@
+{
+  "RIE2_enrichment": {
+    "authority": "NonbindingRIE2evidence proposals, no accepted closure",
+    "baseline_commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+    "overlay_thirteen": [
+      {
+        "id": "G-PRIMARY",
+        "original_record_sha256": "076db70b80344411a8a4c22906ca5086f7ec2b2bd3116463c37a4d2912b5d453",
+        "original_status": "partially_resolved",
+        "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+        "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+        "remaining": "Retrieve and quote-locate current Lloyds annual, interim and latest trading updates; capture publication dates, periods and content hashes.",
+        "rie2_evidence_delta": "Selected original tables/notes now inspected; full original-byte archive/hash and acceptance remain open.",
+        "source_refs": [
+          "R2-LBG-FY25",
+          "R2-LBG-H126",
+          "R2-LBG-Q326",
+          "R2-LBG-20F25"
+        ]
+      },
+      {
+        "id": "G-CUSTOMER-EVIDENCE",
+        "original_record_sha256": "b0591fd3e93da38f494d9ca9514c0afd6f1037e0342fd477032fa6a0d2852f3a",
+        "original_status": "open",
+        "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+        "proposed_disposition": "open; no resolving evidence",
+        "remaining": "Customer meeting/requirement reference; economic buyer, funding, criteria, process, relationship and mutual next action.",
+        "rie2_evidence_delta": "No customer-confirmed problem, funded decision process, buyer or mutual action; public complaints do not resolve this.",
+        "source_refs": []
+      },
+      {
+        "id": "G-REGULATORY",
+        "original_record_sha256": "a3df934a77be827496183c50a24787ab063e22762f00dcd32b26854de7108d34",
+        "original_status": "partially_resolved",
+        "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+        "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+        "remaining": "Retrieve FCA Consumer Duty/resilience publications, PRA/BoE rules and HM Treasury designations.",
+        "rie2_evidence_delta": "Dated provider-designation scope acquired, not an exact bank readiness/compliance determination.",
+        "source_refs": [
+          "R2-HMT-CTP",
+          "R2-LBG-RING"
+        ]
+      },
+      {
+        "id": "G-ALLOCATION",
+        "original_record_sha256": "115b6c4f0f00a1c7e18626f9318da98f487ba74b32a2b738e19ea54b11db63a9",
+        "original_status": "open",
+        "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+        "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+        "remaining": "Approved programme funding and sourcing scope, distinguishing gross savings, benefits and supplier spend.",
+        "rie2_evidence_delta": "Company explains cost/investment direction; no external programme allocation or supplier budget verified.",
+        "source_refs": [
+          "R2-LBG-Q326"
+        ]
+      },
+      {
+        "id": "G-OUTCOMES",
+        "original_record_sha256": "c3925e2db733585ccd7c8cd9418b28d7dcf4c378eaa6ecd2e01ae585d2690211",
+        "original_status": "open",
+        "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+        "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+        "remaining": "Current local access assessments, complaints, vulnerable-customer outcomes, retention and customer journey measures.",
+        "rie2_evidence_delta": "Firm service measures acquired on exact scopes/windows; causal journey harm, trend, unit economics and survey score-label alignment remain open.",
+        "source_refs": [
+          "R2-FCA-H126",
+          "R2-FOS-APRSEP26",
+          "R2-IPSOS-AUG26"
+        ]
+      },
+      {
+        "id": "G-PRIMACY",
+        "original_record_sha256": "4e3927fea898d0e2c6b77574c809573dc49148fe9c3518a9276bcde6a67fd404",
+        "original_status": "open",
+        "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+        "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+        "remaining": "Salary-flow/direct-debit concentration, retention, deposit segment and pricing behaviour.",
+        "rie2_evidence_delta": "Savings/pricing explanation and peer mix acquired; salary/DD concentration, elasticity and cohort primary-relationship status remain unknown.",
+        "source_refs": [
+          "R2-LBG-H126",
+          "R2-NW-H126"
+        ]
+      },
+      {
+        "id": "G-WORKLOADS",
+        "original_record_sha256": "754551e847537c95ad55955540c902da74db0529dbda8b13a54d7d20830c3cba",
+        "original_status": "open",
+        "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+        "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+        "remaining": "Approved roadmap, application dependencies, critical-service mapping, ownership and procurement evidence.",
+        "rie2_evidence_delta": "Disclosed capability boundaries refined; no workload dependency map, approved sourcing or delivery choice verified.",
+        "source_refs": [
+          "R2-LBG-MS26",
+          "R2-LBG-ENVOY-PDF"
+        ]
+      },
+      {
+        "id": "G-AI-BENEFITS",
+        "original_record_sha256": "c4e386c3bf272139794ac34d5fbc47c6cbe75e7dc4cfa28bdc84bece35b70abb",
+        "original_status": "open",
+        "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+        "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+        "remaining": "Benefit baselines, adoption measures, control costs and benefit ownership; distinguish targets from realised results.",
+        "rie2_evidence_delta": "Actual-claim versus expected and adoption clarified; net realised2026 customer/use-case benefit and control costs remain unknown.",
+        "source_refs": [
+          "R2-LBG-AI26",
+          "R2-LBG-MS26"
+        ]
+      },
+      {
+        "id": "G-SUPPLIER",
+        "original_record_sha256": "35dda7efa92bf318df86ad36f5fcb9c586d495702df31eeb44797e630ef69c72",
+        "original_status": "open",
+        "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+        "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+        "remaining": "Current customer or supplier primary disclosure, contract scope and terms where authorised.",
+        "rie2_evidence_delta": "Known disclosed agreements/capabilities only; workshare, obligations, terms/value/renewal/exit unverified.",
+        "source_refs": [
+          "R2-LBG-MS26",
+          "R2-LBG-ENVOY-PDF"
+        ]
+      },
+      {
+        "id": "G-CURVE",
+        "original_record_sha256": "a23619905d121d513f94c06e9ee14ef2339150372ab0c0e47496c380e8ce0ac7",
+        "original_status": "partially_resolved",
+        "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+        "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+        "remaining": "Completion announcement and customer-approved integration roadmap.",
+        "rie2_evidence_delta": "Completion remains established as in baseline; no integration roadmap, open architecture or procurement inferred.",
+        "source_refs": [
+          "R2-LBG-Q326"
+        ]
+      },
+      {
+        "id": "G-FRAUD",
+        "original_record_sha256": "bc853931d12868cba4825ff535bba0719502d011364baf54bb843e27cb3db78d",
+        "original_status": "open",
+        "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+        "proposed_disposition": "open; no resolving evidence",
+        "remaining": "Lloyds-specific losses, reimbursement, false positives, complaints and funded response.",
+        "rie2_evidence_delta": "No new Lloyds-specific fraud loss/false-positive/customer-outcome evidence; all original requirements remain open.",
+        "source_refs": []
+      },
+      {
+        "id": "G-CLIMATE",
+        "original_record_sha256": "5e8be38b7c299797cd336d9087883ed60298e752ffd109a44ef289c5c7680ff9",
+        "original_status": "open",
+        "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+        "proposed_disposition": "open; no resolving evidence",
+        "remaining": "Latest primary sustainability/transition report, financed-emissions scope and portfolio materiality.",
+        "rie2_evidence_delta": "No new portfolio financed-emission/transition materiality or customer needs; do not substitute a generic environmental mechanism.",
+        "source_refs": []
+      },
+      {
+        "id": "G-MARKET",
+        "original_record_sha256": "79e9bd26c75b8c2fd56f893561f43655fce0df7b78fde0ba67a33cc50f287db0",
+        "original_status": "open",
+        "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+        "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+        "remaining": "FCA/CMA and dated primary enterprise disclosures with consistent market/entity boundaries.",
+        "rie2_evidence_delta": "Comparable-within-issuer mechanism examples acquired; national matched market shares, profit pools and entrant economics remain open.",
+        "source_refs": [
+          "R2-NW-H126",
+          "R2-BAR-H126",
+          "R2-LG-H126"
+        ]
+      }
+    ],
+    "rco_nine": [
+      {
+        "id": "RCO-LBG-001",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "f32dee9b51356b6f47dbe325478ac919ef51088682c3a4b79127fee239ec68eb",
+        "original_research_tier": 1,
+        "proposal": "No tier or qualification change; no validated external need or supplier scope."
+      },
+      {
+        "id": "RCO-LBG-002",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "9bf448f2cafeacccebf1efe79665b2a6b56bcd9009ecbe7cc0d4ca5edc43b10e",
+        "original_research_tier": 1,
+        "proposal": "No tier or qualification change; no validated external need or supplier scope."
+      },
+      {
+        "id": "RCO-LBG-003",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "93ecccfe6e2815228ffa363a52851bee5965d73ad6ccdd328ee5ce0949266018",
+        "original_research_tier": 1,
+        "proposal": "No tier or qualification change; no validated external need or supplier scope."
+      },
+      {
+        "id": "RCO-LBG-004",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "8f0c346d6b1bfc7b6ba07b2234a405f3128ba52be5dc205c96e5a76a16945873",
+        "original_research_tier": 2,
+        "proposal": "No tier or qualification change; no validated external need or supplier scope."
+      },
+      {
+        "id": "RCO-LBG-005",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "6e6b76b45f3eff53d22e94a7016867b55267596697336b03d22fd47bc29596bf",
+        "original_research_tier": 1,
+        "proposal": "No tier or qualification change; no validated external need or supplier scope."
+      },
+      {
+        "id": "RCO-LBG-006",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "e8833a618a25476e35d5c20dd567512823ac1daa51a23764d87dafab20f22e56",
+        "original_research_tier": 2,
+        "proposal": "No tier or qualification change; no validated external need or supplier scope."
+      },
+      {
+        "id": "RCO-LBG-007",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "b965854f6fea67603f306301f276be857a550cac9c4a694efab63bcbbf5e7ef4",
+        "original_research_tier": 3,
+        "proposal": "No tier or qualification change; no validated external need or supplier scope."
+      },
+      {
+        "id": "RCO-LBG-008",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "eca5b26ee55b1a582bef2b7f3e868336c6e9c11ae3a3e056d6e7700c68a64850",
+        "original_research_tier": 3,
+        "proposal": "No tier or qualification change; no validated external need or supplier scope."
+      },
+      {
+        "id": "RCO-LBG-009",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "4b2cc7e7c9532a3924fed0ada6395e018d3554f63e36b684580c76bb8e4642ab",
+        "original_research_tier": 1,
+        "proposal": "No tier or qualification change; no validated external need or supplier scope."
+      }
+    ],
+    "visual_nine": [
+      {
+        "id": "FIN-01",
+        "new_source_refs": [
+          "R2-LBG-FY25",
+          "R2-LBG-H126",
+          "R2-LBG-Q326"
+        ],
+        "original_question": "Current income and operating-cost reconciliation",
+        "proposal": "partially enriched, owner review required",
+        "rie1_disposition": "partially enriched, remains open",
+        "rie1_remaining": "Current segment financials, investment/cash-flow detail and cost-to-serve remain open.",
+        "rie2_remaining": "Group/segment/APM/statutory bridges now acquired for named periods. Unit cost-to-serve, legal-company current accounts and fully reconciled investment allocation remain open."
+      },
+      {
+        "id": "FIN-02",
+        "new_source_refs": [
+          "R2-LBG-H126",
+          "R2-NW-H126",
+          "R2-BAR-H126"
+        ],
+        "original_question": "Comparable growth and profitability",
+        "proposal": "partially enriched, owner review required",
+        "rie1_disposition": "partially enriched, remains open",
+        "rie1_remaining": "No matched peer definitions or complete segment growth/returns; no ranking.",
+        "rie2_remaining": "Within-issuer segment growth/returns context improved; matched cross-bank capital/product scope and Q3segmentP&L remain unacquired; no performance ranking."
+      },
+      {
+        "id": "ORG-01",
+        "new_source_refs": [
+          "R2-LBG-20F25",
+          "R2-LBG-RING"
+        ],
+        "original_question": "Current businesses, brands and legal subsidiaries",
+        "proposal": "partially enriched, owner review required",
+        "rie1_disposition": "partially enriched, remains open",
+        "rie1_remaining": "Registry acquisition failed; full current legal hierarchy and dated subsidiaries unresolved.",
+        "rie2_remaining": "Dated principal direct/indirect holdings acquired at 31Dec2025; full current register and intermediate parents remain unverified."
+      },
+      {
+        "id": "OPS-01",
+        "new_source_refs": [
+          "R2-LBG-H126",
+          "R2-LBG-MS26",
+          "R2-LBG-ENVOY-PDF"
+        ],
+        "original_question": "Operations and important technology systems",
+        "proposal": "partially enriched, owner review required",
+        "rie1_disposition": "partially enriched, remains open",
+        "rie1_remaining": "Specific critical-service maps, system inventory and customer outcome/control effectiveness unacquired.",
+        "rie2_remaining": "Product/economic mechanisms and platform capabilities acquired; actual critical-service/process/system map, unit cost and measured control effectiveness remain open."
+      },
+      {
+        "id": "REL-01",
+        "new_source_refs": [
+          "R2-LBG-MS26",
+          "R2-LBG-ENVOY-PDF"
+        ],
+        "original_question": "Current suppliers, partners and customers",
+        "proposal": "partially enriched, owner review required",
+        "rie1_disposition": "partially enriched, remains open",
+        "rie1_remaining": "Contract value, terms, workshare, exit/renewal, customers and other suppliers unknown.",
+        "rie2_remaining": "Microsoft multi-year scope and Google/Envoy disclosure refreshed; all price/workshare/exclusivity/renewal/exit and other major supplier contracts remain unknown."
+      },
+      {
+        "id": "REG-01",
+        "new_source_refs": [
+          "R2-LBG-RING",
+          "R2-HMT-CTP"
+        ],
+        "original_question": "Legal-entity regulatory applicability",
+        "proposal": "partially enriched, owner review required",
+        "rie1_disposition": "partially enriched, remains open",
+        "rie1_remaining": "Exact applicable legal-entity rules, effective dates and readiness not established.",
+        "rie2_remaining": "CTP effective dates/provider legal entities acquired; exact Lloyds legal-entity/service applicability, readiness and breach evidence remain unknown."
+      },
+      {
+        "id": "ORG-02",
+        "new_source_refs": [
+          "R2-LBG-LEAD",
+          "R2-LBG-H126"
+        ],
+        "original_question": "Current leadership and accountability",
+        "proposal": "partially enriched, owner review required",
+        "rie1_disposition": "partially enriched, remains open",
+        "rie1_remaining": "Current public roles acquired, exact programme accountability and buying authority unknown.",
+        "rie2_remaining": "Public current professional roles and IFRS8CODM identified; exact service/procurement/budget accountability remains unknown."
+      },
+      {
+        "id": "INF-01",
+        "new_source_refs": [
+          "R2-HMT-CTP"
+        ],
+        "original_question": "Infrastructure operating relationships",
+        "proposal": "partially enriched, owner review required",
+        "rie1_disposition": "partially enriched, remains open",
+        "rie1_remaining": "BoE operator roles acquired, Lloyds-specific participant/operating edge unproved.",
+        "rie2_remaining": "Provider/system context is not a Lloyds payment-infrastructure membership/service-operating edge; original infrastructure gap remains open."
+      },
+      {
+        "id": "COM-01",
+        "new_source_refs": [],
+        "original_question": "Remaining influence and external need",
+        "proposal": "open; public evidence cannot establish private buyer need",
+        "rie1_disposition": "open",
+        "rie1_remaining": "Need, sourcing, funding, buyer, decision criteria, influence and mutual action remain unknown.",
+        "rie2_remaining": "Public evidence establishes no customer-confirmed need, economic buyer, unallocated funding/procurement, external scope or influence window."
+      }
+    ]
+  },
+  "acceptance_effect": "none; all original owner statuses/tier/qualification unchanged",
+  "all_twenty_sectors": [
+    {
+      "actors": "Defra is the statistics/public-policy actor; current named forestry/fishing enterprises and buyer concentration not acquired.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "2025 farming income rose; 21% loss incidence cannot be extended to every farm or all section A.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "unknown/not acquired; regulator/context actor is not an enterprise comparison",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Farm owner/finance and agricultural-processor operations roles",
+      "fact_refs": [
+        "SIC-A-WEIGHT24",
+        "SIC-A-YOY26",
+        "DEFRA-A25-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Processor/retailer concentration is a bargaining hypothesis pending segment data.",
+        "new_entrants": "Land, skills and capital constrain entry; current barriers unmeasured.",
+        "rivalry": "Commodity rivalry differs by crop/livestock and season.",
+        "substitutes": "Imports and diet choices are potential substitutes, not measured displacement.",
+        "supplier_power": "Energy/feed/fertiliser costs can alter farm returns; no named contracts."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Agriculture & fishing",
+      "next_research": "Acquire matched farm-type cash/output/input series and named processor/supplier contracts; separate GB FBI from UK and fishing/forestry.",
+      "panorama_id": "uk-sic07-a",
+      "pestle": {
+        "Economic": "Official section output -2.2% September yoy; 2024 GVA share 0.7%. DEFRA-A25 reports improved aggregate farming GVA but a non-positive FBI minority; scope excludes forestry/fishing.",
+        "Environmental": "DEFRA farm-income evidence does not identify climate causation. Test water/feed/yield exposure at a named farm segment.",
+        "Legal": "Not acquired for this sector: applicable land, labour and environmental duties by jurisdiction.",
+        "Political": "Not acquired for this sector: current subsidy scheme and claimant scope.",
+        "Social": "Interpretation: a farm-income distribution question is warranted; matched farm-type and household-income evidence is still absent.",
+        "Technological": "Not acquired for this sector: measured farm automation cost/yield outcomes."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which farm segment has a demonstrated cash or productivity constraint after subsidies, input costs and diversification?",
+        "strength_context": "2025 farming income rose; 21% loss incidence cannot be extended to every farm or all section A.",
+        "threat_to_test": "Energy/feed/fertiliser costs can alter farm returns; no named contracts. Processor/retailer concentration is a bargaining hypothesis pending segment data.",
+        "weakness": "No sector-wide internal weakness established; Acquire matched farm-type cash/output/input series and named processor/supplier contracts; separate GB FBI from UK and fishing/forestry."
+      },
+      "scope": "Farming, forestry and fishing; Defra evidence here is farming only.",
+      "sic": "A",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "DEFRA-A25"
+      ],
+      "strategic_questions": [
+        "Which farm segment has a demonstrated cash or productivity constraint after subsidies, input costs and diversification?"
+      ],
+      "value_chain": "Land, labour, inputs and water → crops/livestock → processors/retail. Commodity output, subsidies and diversification differ from farm profit."
+    },
+    {
+      "actors": "NSTA is the regulator, not an oil producer. Current named operators/quarries and asset economics remain gaps.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "Reported emissions fell; a future target gap is not evidence that every operator lacks a solution.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "unknown/not acquired; regulator/context actor is not an enterprise comparison",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Asset operations, subsurface, decommissioning and finance roles",
+      "fact_refs": [
+        "SIC-B-WEIGHT24",
+        "SIC-B-YOY26",
+        "NSTA-B26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Refinery/industrial off-taker options differ by product; bargaining unmeasured.",
+        "new_entrants": "Licences, reserves and capital condition entry.",
+        "rivalry": "Global commodity competition differs from local aggregates markets.",
+        "substitutes": "Electrification/recycled materials are conditional substitutes by use.",
+        "supplier_power": "Specialist offshore capacity may constrain delivery; no supplier spend measured."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Mining & quarrying",
+      "next_research": "Acquire asset/operator production, cost and decommissioning boundaries and agreed emissions plans; mineral/quarry coverage remains absent.",
+      "panorama_id": "uk-sic07-b",
+      "pestle": {
+        "Economic": "Official section output +1.2% September yoy; 2024 GVA share 0.7%. NSTA-B26 reports six successive years of offshore production-emissions reductions, not all mining output.",
+        "Environmental": "Observed offshore emissions fell 7% in 2025; reductions do not establish asset-level target sufficiency.",
+        "Legal": "Not acquired for this sector: licence, permit and decommissioning liabilities by asset.",
+        "Political": "Interpretation: test the interaction of asset life, licensing and decommissioning before assuming new investment.",
+        "Social": "Not acquired for this sector: current offshore/quarry workforce and safety outcomes.",
+        "Technological": "Not acquired for this sector: asset-specific abatement performance and residual choice."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Where does asset-level emissions reduction remain technically and economically undecided?",
+        "strength_context": "Reported emissions fell; a future target gap is not evidence that every operator lacks a solution.",
+        "threat_to_test": "Specialist offshore capacity may constrain delivery; no supplier spend measured. Refinery/industrial off-taker options differ by product; bargaining unmeasured.",
+        "weakness": "No sector-wide internal weakness established; Acquire asset/operator production, cost and decommissioning boundaries and agreed emissions plans; mineral/quarry coverage remains absent."
+      },
+      "scope": "Oil/gas extraction, mining support, minerals/quarries; NSTA covers upstream offshore only.",
+      "sic": "B",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "NSTA-B26"
+      ],
+      "strategic_questions": [
+        "Where does asset-level emissions reduction remain technically and economically undecided?"
+      ],
+      "value_chain": "Resource rights → extraction → transport/refining inputs; price, depletion, capex and decommissioning affect retained value."
+    },
+    {
+      "actors": "Rolls-Royce global Group reports Civil Aerospace, Defence and Power Systems; its results are not UK sector totals.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "Rolls-Royce reports substantial profit improvement and existing transformation, not a generic failing-manufacturer case.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "partial source-backed examples",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Manufacturing/service operations, engineering and finance roles",
+      "fact_refs": [
+        "SIC-C-WEIGHT24",
+        "SIC-C-YOY26",
+        "RR-C26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Large OEM/government buyers may negotiate strongly; specific arrangements need evidence.",
+        "new_entrants": "Certification, capital and know-how can constrain entry.",
+        "rivalry": "Segment-specific suppliers compete on cost, quality and certification.",
+        "substitutes": "Alternative propulsion/power architecture is a use-specific substitute.",
+        "supplier_power": "Critical components and specialist capacity may affect delivery; supplier leverage unmeasured."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Manufacturing",
+      "next_research": "Broaden to food/chemicals/equipment firms with UK segment costs, productivity, energy and service outcomes; separate Group underlying/statutory measures.",
+      "panorama_id": "uk-sic07-c",
+      "pestle": {
+        "Economic": "Official section output +4.4% September yoy; 2024 GVA share 8.7%. RR-C26 shows improved global underlying and statutory profitability on distinct bases; this is a counterexample to a universal manufacturing-distress claim.",
+        "Environmental": "Not acquired for this sector: actual energy/emissions exposure and remedies by UK plant.",
+        "Legal": "Not acquired for this sector: product/certification duties by segment and entity.",
+        "Political": "Not acquired for this sector: trade/industrial policy applying to the chosen manufacturing segment.",
+        "Social": "Not acquired for this sector: current skills, pay and safety outcomes.",
+        "Technological": "Company-reported Power Systems data-centre demand is a cross-sector exposure, not identified UK orders or open procurement."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which installed-base service or production decision can change reliability and margin after existing improvements?",
+        "strength_context": "Rolls-Royce reports substantial profit improvement and existing transformation, not a generic failing-manufacturer case.",
+        "threat_to_test": "Critical components and specialist capacity may affect delivery; supplier leverage unmeasured. Large OEM/government buyers may negotiate strongly; specific arrangements need evidence.",
+        "weakness": "No sector-wide internal weakness established; Broaden to food/chemicals/equipment firms with UK segment costs, productivity, energy and service outcomes; separate Group underlying/statutory measures."
+      },
+      "scope": "Food, chemicals, materials, machinery and transport equipment; one aerospace/power-systems example does not cover all manufacturing.",
+      "sic": "C",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "RR-C26"
+      ],
+      "strategic_questions": [
+        "Which installed-base service or production decision can change reliability and margin after existing improvements?"
+      ],
+      "value_chain": "Design/manufacture → equipment/service agreements → installed-base aftermarket. Recurring service economics differ from initial equipment sale."
+    },
+    {
+      "actors": "Ofgem is the GB regulator. Current named generator/network/supplier comparisons are not acquired in this tranche.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "A cap increase is not each household bill increase or proof of supplier loss; fixed tariffs and hedges can limit effects.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "unknown/not acquired; regulator/context actor is not an enterprise comparison",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Energy treasury, network asset, retail product and customer operations roles",
+      "fact_refs": [
+        "SIC-D-WEIGHT24",
+        "SIC-D-YOY26",
+        "OFGEM-D26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Household switching differs from industrial contracting power.",
+        "new_entrants": "Licences, network assets and funding shape entry.",
+        "rivalry": "Retail rivalry differs from regulated network monopolies.",
+        "substitutes": "Efficiency/self-generation alter purchased energy; effect depends on load/tariff.",
+        "supplier_power": "Wholesale fuel, network and meter dependencies matter; exposure needs contracts/hedges."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Energy supply",
+      "next_research": "Acquire named supplier/customer outcomes, hedge coverage and approved network-investment delivery choices; distinguish electricity policy from energy-price shock.",
+      "panorama_id": "uk-sic07-d",
+      "pestle": {
+        "Economic": "Official section output +5.0% September yoy; 2024 GVA share 1.9%. OFGEM-D26 announces a GB default domestic cap change; actual customer use, tariffs and supplier hedges vary.",
+        "Environmental": "Not acquired for this sector: generation mix, hedges and customer load before transition consequences.",
+        "Legal": "Cap applicability is GB default domestic tariffs; NI, fixed and non-domestic contracts are distinct.",
+        "Political": "The regulated cap transmits wholesale/network costs through a specific retail mechanism; it is not a sector profit guarantee.",
+        "Social": "Interpretation: affordability should be tested against usage, support and household income, not a notional typical bill.",
+        "Technological": "Not acquired for this sector: named generation/network/supply asset performance."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which customer or asset decision is exposed after actual hedging, tariff and network arrangements?",
+        "strength_context": "A cap increase is not each household bill increase or proof of supplier loss; fixed tariffs and hedges can limit effects.",
+        "threat_to_test": "Wholesale fuel, network and meter dependencies matter; exposure needs contracts/hedges. Household switching differs from industrial contracting power.",
+        "weakness": "No sector-wide internal weakness established; Acquire named supplier/customer outcomes, hedge coverage and approved network-investment delivery choices; distinguish electricity policy from energy-price shock."
+      },
+      "scope": "Electricity/gas generation, networks and supply; GB default-tariff retail evidence excludes NI and non-domestic pricing.",
+      "sic": "D",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "OFGEM-D26"
+      ],
+      "strategic_questions": [
+        "Which customer or asset decision is exposed after actual hedging, tariff and network arrangements?"
+      ],
+      "value_chain": "Generate/transport/retail energy → metered use and settlement; regulated allowances, hedging and customer charges are different value mechanisms."
+    },
+    {
+      "actors": "EA report identifies Thames Water, Severn Trent and other companies; data/reporting bases differ from Ofwat measures.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "Total outage improved materially; company variation and different reporting definitions defeat an all-water-firms failure thesis.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "partial source-backed examples",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Water resource, asset reliability and regulated finance roles",
+      "fact_refs": [
+        "SIC-E-WEIGHT24",
+        "SIC-E-YOY26",
+        "EA-E26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Household tariff regulation differs from business retail/municipal procurement.",
+        "new_entrants": "Network/permit/capital barriers differ between water and waste.",
+        "rivalry": "Regional regulated water supply differs from competitive waste contracts.",
+        "substitutes": "Reuse/demand reduction substitute for new supply only where feasible.",
+        "supplier_power": "Power, treatment inputs and contractor availability create dependencies; no contract inferred."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Water & waste",
+      "next_research": "Reconcile named asset/WRMP24 shortfall, current funded remedies and contractor scope; research waste/remediation separately.",
+      "panorama_id": "uk-sic07-e",
+      "pestle": {
+        "Economic": "Official section output -7.5% September yoy; 2024 GVA share 1.2%. EA-E26 records improved dry-year annual-average outage, excluding outages over six months; company variation and supply loss remain important.",
+        "Environmental": "Seven water companies exceed WRMP24 outage forecasts. A shorter outage measure can improve while available supply worsens.",
+        "Legal": "WRMP24 forecast comparison is a planning/performance context, not an automatically established statutory breach.",
+        "Political": "Not acquired for this sector: current approved water/waste programme and funding decisions.",
+        "Social": "Not acquired for this sector: service interruption/affordability at a named company.",
+        "Technological": "Not acquired for this sector: named asset reliability and existing treatment/monitoring remedies."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which asset/reliability intervention addresses a specific forecast or actual supply shortfall beyond current plans?",
+        "strength_context": "Total outage improved materially; company variation and different reporting definitions defeat an all-water-firms failure thesis.",
+        "threat_to_test": "Power, treatment inputs and contractor availability create dependencies; no contract inferred. Household tariff regulation differs from business retail/municipal procurement.",
+        "weakness": "No sector-wide internal weakness established; Reconcile named asset/WRMP24 shortfall, current funded remedies and contractor scope; research waste/remediation separately."
+      },
+      "scope": "Water, sewerage, waste and remediation; acquired EA evidence covers water resources in England, not all E.",
+      "sic": "E",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "EA-E26"
+      ],
+      "strategic_questions": [
+        "Which asset/reliability intervention addresses a specific forecast or actual supply shortfall beyond current plans?"
+      ],
+      "value_chain": "Collect/treat/distribute water and manage residuals → regulated service outcomes; asset reliability and resource losses affect available supply."
+    },
+    {
+      "actors": "Balfour Beatty describes energy, transportation and social-infrastructure capabilities; rounded order book is global.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "A strong contractor backlog coexists with falling UK construction volume; backlog is not unallocated technology demand.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "partial source-backed examples",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Project delivery, commercial, supply-chain and finance roles",
+      "fact_refs": [
+        "SIC-F-WEIGHT24",
+        "SIC-F-YOY26",
+        "BB-F26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Major public/developer clients differ in buying leverage and procurement terms.",
+        "new_entrants": "Safety, bonding, capacity and qualifications constrain entry.",
+        "rivalry": "Competitive tendering differs by housing/infrastructure/specialism.",
+        "substitutes": "Refurbishment, modular methods or demand deferral can replace some new build.",
+        "supplier_power": "Specialist labour/material availability can constrain delivery; pricing exposure is contract-specific."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Construction",
+      "next_research": "Acquire project-specific margin/cash and contractual risk allocation; test current controls/incumbents before proposing delivery assurance.",
+      "panorama_id": "uk-sic07-f",
+      "pestle": {
+        "Economic": "Official section output -1.5% September yoy; 2024 GVA share 5.7%. BB-F26 global backlog coexists with declining UK section output; backlog cannot establish UK project margin or new budget.",
+        "Environmental": "Not acquired for this sector: project embodied carbon/asset outcomes and approved response.",
+        "Legal": "Not acquired for this sector: risk allocation, procurement stage and enforceable project duties.",
+        "Political": "A contractor reports public infrastructure capabilities; Supply Estimates are not an award to that contractor.",
+        "Social": "Not acquired for this sector: named project workforce and safety outcomes.",
+        "Technological": "Interpretation: project information/handover choices require evidence of current contractual arrangements and control gaps."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which already-funded project has an unresolved delivery, data or handover decision that changes actual outcomes?",
+        "strength_context": "A strong contractor backlog coexists with falling UK construction volume; backlog is not unallocated technology demand.",
+        "threat_to_test": "Specialist labour/material availability can constrain delivery; pricing exposure is contract-specific. Major public/developer clients differ in buying leverage and procurement terms.",
+        "weakness": "No sector-wide internal weakness established; Acquire project-specific margin/cash and contractual risk allocation; test current controls/incumbents before proposing delivery assurance."
+      },
+      "scope": "Buildings, civil engineering and specialist construction; infrastructure case is not whole UK housing.",
+      "sic": "F",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "BB-F26"
+      ],
+      "strategic_questions": [
+        "Which already-funded project has an unresolved delivery, data or handover decision that changes actual outcomes?"
+      ],
+      "value_chain": "Plan/design/procure/build → handover/service → cash collection. Project risk, working capital and subcontractor performance shape value capture."
+    },
+    {
+      "actors": "Tesco original results are held by the FCA; company reports Barclays, Uber Eats and Deliveroo relationships, with no inferred workshare.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "Reported UK online growth and existing partnerships challenge a missing-channel/platform pitch.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "partial company-reported relationships",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "partial source-backed examples",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Retail operations, customer product, digital and commercial finance roles",
+      "fact_refs": [
+        "SIC-G-WEIGHT24",
+        "SIC-G-YOY26",
+        "TESCO-G26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Customer switching and promotion sensitivity require segment evidence.",
+        "new_entrants": "Scale, logistics, sites and working capital shape entry.",
+        "rivalry": "Food pricing rivalry differs from wholesale/motor retail.",
+        "substitutes": "Online/rapid delivery changes channel choice, not always total demand.",
+        "supplier_power": "Brand/commodity and platform suppliers have distinct leverage; no universal conclusion."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Retail & wholesale",
+      "next_research": "Acquire UK-only channel cost/service outcomes and supplier terms; treat self-reported market shares as specific bases, not whole-section comparisons.",
+      "panorama_id": "uk-sic07-g",
+      "pestle": {
+        "Economic": "Official section output +2.6% September yoy; 2024 GVA share 9.4%. TESCO-G26 reports UK online growth and existing delivery/banking relationships; no missing-channel diagnosis is justified.",
+        "Environmental": "Not acquired for this sector: supplier/product-specific resource and waste outcomes.",
+        "Legal": "Not acquired for this sector: precise consumer/food/data obligations and compliance outcomes.",
+        "Political": "Not acquired for this sector: current trade/food-policy exposure by retailer product mix.",
+        "Social": "Interpretation: test fulfilment value for actual customer segments; online sales growth alone does not prove customer benefit.",
+        "Technological": "Uber Eats/Deliveroo launches and an incumbent banking partnership constrain a generic platform-creation pitch."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which fulfilment or customer-value choice remains unresolved after current online/rapid-delivery investments?",
+        "strength_context": "Reported UK online growth and existing partnerships challenge a missing-channel/platform pitch.",
+        "threat_to_test": "Brand/commodity and platform suppliers have distinct leverage; no universal conclusion. Customer switching and promotion sensitivity require segment evidence.",
+        "weakness": "No sector-wide internal weakness established; Acquire UK-only channel cost/service outcomes and supplier terms; treat self-reported market shares as specific bases, not whole-section comparisons."
+      },
+      "scope": "Wholesale/retail and motor trade; Tesco food/online/Booker is one subset.",
+      "sic": "G",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "TESCO-G26"
+      ],
+      "strategic_questions": [
+        "Which fulfilment or customer-value choice remains unresolved after current online/rapid-delivery investments?"
+      ],
+      "value_chain": "Source/stock/distribute/sell → fulfilment and returns; margin, inventory cash and customer value interact with digital/media services."
+    },
+    {
+      "actors": "DfT is the statistical actor; existing Aviation/easyJet research is narrower and not revalidated by this traffic source.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "Traffic volumes rising do not prove logistics profit growth; private cars dominate the aggregate.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "unknown/not acquired; regulator/context actor is not an enterprise comparison",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Fleet/network operations, logistics customer and finance roles",
+      "fact_refs": [
+        "SIC-H-WEIGHT24",
+        "SIC-H-YOY26",
+        "DFT-H26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Large shippers and fragmented passenger demand have different leverage.",
+        "new_entrants": "Slots, networks, assets and safety approvals affect entry.",
+        "rivalry": "Competition differs by route, mode and warehouse catchment.",
+        "substitutes": "Modal substitution and remote activity depend on journey/customer need.",
+        "supplier_power": "Fuel, assets, labour and infrastructure create exposure; actual hedges/terms unknown."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Transport & logistics",
+      "next_research": "Acquire mode-specific tonne/passenger/service/cost series and named operator roles, including NI; do not turn vehicle miles into revenue.",
+      "panorama_id": "uk-sic07-h",
+      "pestle": {
+        "Economic": "Official section output +1.4% September yoy; 2024 GVA share 3.6%. DFT-H26 GB traffic is predominantly private cars; it cannot proxy freight revenue or aviation returns.",
+        "Environmental": "Interpretation: mode/load/fuel and actual substitution must precede an emissions or efficiency thesis.",
+        "Legal": "Not acquired for this sector: route, safety, operating licence and jurisdiction.",
+        "Political": "Not acquired for this sector: mode-specific investment and service decisions.",
+        "Social": "Vehicle miles measure movement, not access, passenger satisfaction or logistics service quality.",
+        "Technological": "Not acquired for this sector: named fleet/network utilisation and incumbent systems."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which freight or passenger service has an evidenced utilisation or reliability trade-off after current capacity plans?",
+        "strength_context": "Traffic volumes rising do not prove logistics profit growth; private cars dominate the aggregate.",
+        "threat_to_test": "Fuel, assets, labour and infrastructure create exposure; actual hedges/terms unknown. Large shippers and fragmented passenger demand have different leverage.",
+        "weakness": "No sector-wide internal weakness established; Acquire mode-specific tonne/passenger/service/cost series and named operator roles, including NI; do not turn vehicle miles into revenue."
+      },
+      "scope": "Road, rail, aviation, shipping, warehousing and postal services; GB traffic includes private cars and excludes NI.",
+      "sic": "H",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "DFT-H26"
+      ],
+      "strategic_questions": [
+        "Which freight or passenger service has an evidenced utilisation or reliability trade-off after current capacity plans?"
+      ],
+      "value_chain": "Infrastructure/capacity → movement/storage → delivery/service. Utilisation, fuel, reliability and regulation affect returns."
+    },
+    {
+      "actors": "Whitbread/Premier Inn results distinguish UK/Ireland and Germany; existing restaurant-to-hotel transformation is already underway.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "Accommodation sales grew despite lower reported profit; adjusting items/transition costs and current remedies matter.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "partial source-backed examples",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Hotel operations, estate/capital allocation, revenue management and finance roles",
+      "fact_refs": [
+        "SIC-I-WEIGHT24",
+        "SIC-I-YOY26",
+        "WTB-I26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Corporate contracts differ from individual rate-sensitive guests.",
+        "new_entrants": "Sites, funding and operating capacity shape entry.",
+        "rivalry": "Competition is local price/brand/distribution and customer segment specific.",
+        "substitutes": "Short lets, travel deferral and at-home eating substitute in different segments.",
+        "supplier_power": "Labour, energy, property and booking channels affect costs."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Hospitality & food",
+      "next_research": "Obtain UK-only margin/RevPAR/cost bridge and exact estate decisions; separate recurring costs, impairments and plans from buyer need.",
+      "panorama_id": "uk-sic07-i",
+      "pestle": {
+        "Economic": "Official section output -2.0% September yoy; 2024 GVA share 2.8%. WTB-I26 UK/Ireland accommodation sales grew while global statutory and adjusted profit diverged; restructuring is already in progress.",
+        "Environmental": "Not acquired for this sector: estate energy exposure and funded efficiency work.",
+        "Legal": "Not acquired for this sector: employment, lease and licensing scope by location.",
+        "Political": "Not acquired for this sector: tourism/local planning measures actually affecting the estate.",
+        "Social": "Interpretation: guest value and estate choices need occupancy/rate/service evidence; sales growth is not universal affordability.",
+        "Technological": "No missing booking/service platform is demonstrated; investigate the remaining choice within existing transformation."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which guest or estate decision can improve return after already-committed restructuring and efficiency work?",
+        "strength_context": "Accommodation sales grew despite lower reported profit; adjusting items/transition costs and current remedies matter.",
+        "threat_to_test": "Labour, energy, property and booking channels affect costs. Corporate contracts differ from individual rate-sensitive guests.",
+        "weakness": "No sector-wide internal weakness established; Obtain UK-only margin/RevPAR/cost bridge and exact estate decisions; separate recurring costs, impairments and plans from buyer need."
+      },
+      "scope": "Accommodation and food services; hotel Group results do not cover all restaurants/caterers.",
+      "sic": "I",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "WTB-I26"
+      ],
+      "strategic_questions": [
+        "Which guest or estate decision can improve return after already-committed restructuring and efficiency work?"
+      ],
+      "value_chain": "Property/capacity and labour → rooms/food/guest service → occupancy, rate and margin; leases and capex affect cash outcomes."
+    },
+    {
+      "actors": "BT reports Openreach/EE and UK Business; continuing operations exclude International. Named contracts do not establish unallocated supplier scope.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "BT reports improved take-up, existing savings and rising satisfaction; generic missing-transformation claims are contradicted.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "partial company-reported relationships",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "partial source-backed examples",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Network/product, enterprise-service, technology and finance roles",
+      "fact_refs": [
+        "SIC-J-WEIGHT24",
+        "SIC-J-YOY26",
+        "BT-J26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Large business accounts and retail households have different switching and negotiating positions.",
+        "new_entrants": "Network assets, spectrum, data/skills and distribution affect entry differently.",
+        "rivalry": "Telecom infrastructure rivalry differs from software/media markets.",
+        "substitutes": "Alternative connectivity/platforms and in-house delivery are use-specific substitutes.",
+        "supplier_power": "Cloud/network/energy dependencies may constrain choices; spend/lock-in needs evidence."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Information & communication",
+      "next_research": "Acquire current IT/media participants, contract/service boundaries and UK investment economics; do not revive old JV/ownership narratives as early scope.",
+      "panorama_id": "uk-sic07-j",
+      "pestle": {
+        "Economic": "Official section output +5.6% September yoy; 2024 GVA share 6.6%. BT-J26 continuing operations report improving Openreach adoption and transformation savings; International is discontinued.",
+        "Environmental": "Not acquired for this sector: network energy intensity, asset plan and actual remedies.",
+        "Legal": "Not acquired for this sector: specific telecom/data/security duties and findings.",
+        "Political": "Named Ministry/Cabinet/public-service contracts are reported commitments, not new unallocated procurement.",
+        "Social": "Not acquired for this sector: actual connectivity access/affordability and service outcomes.",
+        "Technological": "FTTP take-up and current Microsoft security collaboration show existing capabilities, not unserved demand."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which migration, take-up or business-service outcome is still unresolved after current build and transformation?",
+        "strength_context": "BT reports improved take-up, existing savings and rising satisfaction; generic missing-transformation claims are contradicted.",
+        "threat_to_test": "Cloud/network/energy dependencies may constrain choices; spend/lock-in needs evidence. Large business accounts and retail households have different switching and negotiating positions.",
+        "weakness": "No sector-wide internal weakness established; Acquire current IT/media participants, contract/service boundaries and UK investment economics; do not revive old JV/ownership narratives as early scope."
+      },
+      "scope": "Publishing/media, telecoms and IT services; Technology and Banking platforms are not synonyms for whole J.",
+      "sic": "J",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "BT-J26"
+      ],
+      "strategic_questions": [
+        "Which migration, take-up or business-service outcome is still unresolved after current build and transformation?"
+      ],
+      "value_chain": "Networks/content/software/data → connectivity and digital service → subscriptions/usage/service income, with high fixed-capacity and operating costs."
+    },
+    {
+      "actors": "BoE/FPC is an oversight actor; named peer-bank context is not comparable current accounts for insurers, managers or every bank.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "Official bank-system resilience is counter-evidence to blanket distress; K GVA cannot size Banking or private credit.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "unknown/not acquired; regulator/context actor is not an enterprise comparison",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Regulated product, treasury/risk, service operations and finance roles",
+      "fact_refs": [
+        "SIC-K-WEIGHT24",
+        "SIC-K-YOY26",
+        "UK-RESILIENCE-SEP"
+      ],
+      "five_forces": {
+        "buyer_power": "Retail customer, corporate treasury and institutional allocator leverage differ.",
+        "new_entrants": "Authorisation, capital and trust shape entry by regulated activity.",
+        "rivalry": "Retail banking, insurance underwriting and asset management have distinct rivalries.",
+        "substitutes": "Market finance/nonbanks can replace parts of lending/payment intermediation.",
+        "supplier_power": "Technology, funding and distribution dependence must be measured, not assumed."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Finance & insurance",
+      "next_research": "Deepen Banking separately, then acquire matched insurer/asset-manager/payment evidence and map financial-system flows without double counting.",
+      "panorama_id": "uk-sic07-k",
+      "pestle": {
+        "Economic": "Official section output +1.1% September yoy; 2024 GVA share 8.1%. BOE-FPC-SEP26 judges banks appropriately capitalised with high liquidity; systemic risk is not a universal bank funding crisis.",
+        "Environmental": "Not acquired for this sector: financed exposures and transition duties by financial activity.",
+        "Legal": "Capital/liquidity and conduct constraints differ across banks, insurers and asset managers; no common numerical threshold is assigned.",
+        "Political": "Not acquired for this sector: specific financial-services policy implementation and entity impact.",
+        "Social": "Not acquired for this sector: matched customer outcomes, exclusion and service access.",
+        "Technological": "FPC identifies AI/cyber interconnectedness; exact insurer, bank or manager exposure needs its own systems/vendor evidence."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which intermediation or customer-service decision changes a measured outcome under the correct regulated perimeter?",
+        "strength_context": "Official bank-system resilience is counter-evidence to blanket distress; K GVA cannot size Banking or private credit.",
+        "threat_to_test": "Technology, funding and distribution dependence must be measured, not assumed. Retail customer, corporate treasury and institutional allocator leverage differ.",
+        "weakness": "No sector-wide internal weakness established; Deepen Banking separately, then acquire matched insurer/asset-manager/payment evidence and map financial-system flows without double counting."
+      },
+      "scope": "Banking/credit, insurance/pensions and auxiliary finance; asset management/payments require activity/legal mapping. UK financial system is wider than K.",
+      "sic": "K",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "BOE-FPC-SEP26"
+      ],
+      "strategic_questions": [
+        "Which intermediation or customer-service decision changes a measured outcome under the correct regulated perimeter?"
+      ],
+      "value_chain": "Mobilise savings/capital, price/transfer risk, lend/invest/insure and settle → spreads/fees/premiums subject to funding, capital, claims and service costs."
+    },
+    {
+      "actors": "Landsec is an indexed commercial-property example; full current original not acquired, so its numeric excerpt is unverified.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "Large GVA share includes imputed rent; an inaccessible company excerpt cannot establish a verified market or deal thesis.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "unknown/not acquired; regulator/context actor is not an enterprise comparison",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Asset management, development, property operations and finance roles",
+      "fact_refs": [
+        "SIC-L-WEIGHT24",
+        "SIC-L-YOY26",
+        "LAND-L26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Large tenants, households and dispersed occupiers have different bargaining power.",
+        "new_entrants": "Land, planning, finance and asset control condition entry.",
+        "rivalry": "Competition is property type/catchment and tenant proposition specific.",
+        "substitutes": "Remote work, alternative locations and tenure changes can substitute by use.",
+        "supplier_power": "Construction, funding and property services create dependencies; no incumbent contract assumed."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Real estate",
+      "next_research": "Acquire original current Landsec/peer reports and tenant/occupancy/valuation bases; exclude imputed rent from addressable service-budget reasoning.",
+      "panorama_id": "uk-sic07-l",
+      "pestle": {
+        "Economic": "Official section output +0.8% September yoy; 2024 GVA share 14.2%. LAND-L26 is index-only and inadmissible for a verified property diagnosis; GVA includes imputed owner-occupied rent.",
+        "Environmental": "Not acquired for this sector: asset energy/flood exposure and approved capital remedies.",
+        "Legal": "Not acquired for this sector: lease, valuation and planning duties by asset.",
+        "Political": "Not acquired for this sector: planning/housing policy and asset-specific consequence.",
+        "Social": "Not acquired for this sector: current housing affordability/occupancy outcomes.",
+        "Technological": "Not acquired for this sector: named asset management and service capability."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which property or tenant-service choice remains economic after financing, occupancy and current asset plans?",
+        "strength_context": "Large GVA share includes imputed rent; an inaccessible company excerpt cannot establish a verified market or deal thesis.",
+        "threat_to_test": "Construction, funding and property services create dependencies; no incumbent contract assumed. Large tenants, households and dispersed occupiers have different bargaining power.",
+        "weakness": "No sector-wide internal weakness established; Acquire original current Landsec/peer reports and tenant/occupancy/valuation bases; exclude imputed rent from addressable service-budget reasoning."
+      },
+      "scope": "Property owning/letting, development services and imputed owner-occupied rent; not a single commercial-service market.",
+      "sic": "L",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "LAND-L26"
+      ],
+      "strategic_questions": [
+        "Which property or tenant-service choice remains economic after financing, occupancy and current asset plans?"
+      ],
+      "value_chain": "Finance/develop/lease/manage property → rental/service/valuation returns; imputed housing service is distinct from cash rent or capex."
+    },
+    {
+      "actors": "FRC provides audit-market evidence; current named client/supplier engagements and broader professional firms remain gaps.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "Non-Big-Four FTSE250 audit-count share increased; count share is not fee share or proof that all professional competition is weak.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "partial audit-count evidence",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "unknown/not acquired; regulator/context actor is not an enterprise comparison",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Practice/engagement, quality/risk, workforce and finance roles",
+      "fact_refs": [
+        "SIC-M-WEIGHT24",
+        "SIC-M-YOY26",
+        "FRC-M26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Large regulated clients may negotiate strongly subject to independence/provider choice constraints.",
+        "new_entrants": "Accreditation, independence, reputation and skill constrain entry.",
+        "rivalry": "Audit concentration differs from consulting/design competition.",
+        "substitutes": "Automation/in-house advice may substitute tasks, not all professional accountability.",
+        "supplier_power": "Skilled people, data and specialist tools influence delivery economics."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Professional services",
+      "next_research": "Acquire named firm economics and outcome/quality data, segment shares and actual client decisions; separate UK/ROI membership from UK industry output.",
+      "panorama_id": "uk-sic07-m",
+      "pestle": {
+        "Economic": "Official section output +7.4% September yoy; 2024 GVA share 8.7%. FRC-M26 shows rising non-Big-Four FTSE250 audit-count share; this is not professional-services fee share.",
+        "Environmental": "Not acquired for this sector: specific advisory/customer obligations; no blanket ESG demand.",
+        "Legal": "Audit registration and supervision are an evidenced activity boundary; no finding of noncompliance at any firm follows.",
+        "Political": "Not acquired for this sector: policy applicable beyond the acquired audit subset.",
+        "Social": "Interpretation: talent capacity may affect audit choice, but a current shortage is not measured here.",
+        "Technological": "Not acquired for this sector: actual professional-service productivity/tooling outcomes."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Where does changing audit choice or task automation improve outcomes without weakening accountable professional judgement?",
+        "strength_context": "Non-Big-Four FTSE250 audit-count share increased; count share is not fee share or proof that all professional competition is weak.",
+        "threat_to_test": "Skilled people, data and specialist tools influence delivery economics. Large regulated clients may negotiate strongly subject to independence/provider choice constraints.",
+        "weakness": "No sector-wide internal weakness established; Acquire named firm economics and outcome/quality data, segment shares and actual client decisions; separate UK/ROI membership from UK industry output."
+      },
+      "scope": "Legal/accounting, consulting, architecture/engineering, R&D and other professional work; audit is one evidenced segment.",
+      "sic": "M",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "FRC-M26"
+      ],
+      "strategic_questions": [
+        "Where does changing audit choice or task automation improve outcomes without weakening accountable professional judgement?"
+      ],
+      "value_chain": "Specialist knowledge/assurance/design → client decision/delivery → fees and recurring trusted relationships; utilisation and quality affect returns."
+    },
+    {
+      "actors": "Hays global Group reports net fees and productivity priorities; no specific client demand or current outsourcing contract inferred.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "An existing productivity strategy and global net fees do not establish any UK client’s unmet need.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "partial source-backed examples",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Recruitment/facilities operations, workforce, service quality and finance roles",
+      "fact_refs": [
+        "SIC-N-WEIGHT24",
+        "SIC-N-YOY26",
+        "HAYS-N26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Large employer/facility clients may bargain strongly; segment evidence needed.",
+        "new_entrants": "Networks, funding, labour compliance and service standards shape entry.",
+        "rivalry": "Staffing rivalry differs from equipment leasing/facilities markets.",
+        "substitutes": "In-house provision/automation can substitute tasks where service quality permits.",
+        "supplier_power": "Candidate skills, leased assets and platforms constrain supply differently."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Business support",
+      "next_research": "Acquire UK segment margin/candidate outcomes, leasing/facilities comparisons and matched client commitments; test labour-cost and employment-rule applicability.",
+      "panorama_id": "uk-sic07-n",
+      "pestle": {
+        "Economic": "Official section output +0.7% September yoy; 2024 GVA share 5.4%. HAYS-N26 reports global net fees and productivity strategy, not gross staffing sales or all administrative services.",
+        "Environmental": "Not acquired for this sector: facilities/rental/resource exposures outside the recruiting example.",
+        "Legal": "Not acquired for this sector: employment/agency/facilities duties in the chosen segment.",
+        "Political": "Not acquired for this sector: specific employment/service-market policy impacts.",
+        "Social": "Recruitment connects employers/candidates, but no named client vacancy or hiring plan is established.",
+        "Technological": "Company productivity strategy is an existing response; remaining process friction is unknown."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which resource or service model changes net productivity after existing cost and matching improvements?",
+        "strength_context": "An existing productivity strategy and global net fees do not establish any UK client’s unmet need.",
+        "threat_to_test": "Candidate skills, leased assets and platforms constrain supply differently. Large employer/facility clients may bargain strongly; segment evidence needed.",
+        "weakness": "No sector-wide internal weakness established; Acquire UK segment margin/candidate outcomes, leasing/facilities comparisons and matched client commitments; test labour-cost and employment-rule applicability."
+      },
+      "scope": "Staffing, leasing, travel agencies, security, facilities and office support; Hays is specialist recruitment only.",
+      "sic": "N",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "HAYS-N26"
+      ],
+      "strategic_questions": [
+        "Which resource or service model changes net productivity after existing cost and matching improvements?"
+      ],
+      "value_chain": "Labour/asset coordination → reliable flexible service → fees or rental/contract margin; gross pass-through and net fee value differ."
+    },
+    {
+      "actors": "HMT Supply Estimates are a parliamentary finance instrument, not a customer tender or an accepted award.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "Sought expenditure authority is not outturn or supplier scope; internal delivery and existing frameworks may already cover work.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "unknown/not acquired; regulator/context actor is not an enterprise comparison",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Departmental finance, service owner, accountable programme and procurement roles",
+      "fact_refs": [
+        "SIC-O-WEIGHT24",
+        "SIC-O-YOY26",
+        "HMT-O26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Parliament/departments/public accountability shape choices; citizens are not simply interchangeable commercial buyers.",
+        "new_entrants": "Statutory authority differs from supplier entry qualification.",
+        "rivalry": "Conventional firm rivalry is not directly applicable to core sovereign functions; supplier tender competition is separate.",
+        "substitutes": "Policy/process/digital alternatives require evidence about service outcomes.",
+        "supplier_power": "Workforce, technology and specialist suppliers create dependencies, not automatic procurement."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Public administration",
+      "next_research": "Acquire current departmental settlement-to-outturn bridges, named service metrics, existing awards and exact decision authority; no assumed procurement.",
+      "panorama_id": "uk-sic07-o",
+      "pestle": {
+        "Economic": "Official section output +0.9% September yoy; 2024 GVA share 5.1%. HMT-O26 estimates seek expenditure authority; approved limits, outturn and procurement awards remain separate.",
+        "Environmental": "Not acquired for this sector: department-specific estate/transition outturn and responsibilities.",
+        "Legal": "Authority sought in an estimate must not be represented as a completed award or released commercial budget.",
+        "Political": "Parliamentary supply is a public-finance control, not evidence of an open supplier opportunity.",
+        "Social": "Not acquired for this sector: named public-service demand and outcome changes.",
+        "Technological": "Not acquired for this sector: actual programme status, incumbents and unresolved choice."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which authorised service or administrative decision improves a measured public outcome without treating budget authority as an open contract?",
+        "strength_context": "Sought expenditure authority is not outturn or supplier scope; internal delivery and existing frameworks may already cover work.",
+        "threat_to_test": "Workforce, technology and specialist suppliers create dependencies, not automatic procurement. Parliament/departments/public accountability shape choices; citizens are not simply interchangeable commercial buyers.",
+        "weakness": "No sector-wide internal weakness established; Acquire current departmental settlement-to-outturn bridges, named service metrics, existing awards and exact decision authority; no assumed procurement."
+      },
+      "scope": "Public administration, defence and compulsory social security; public education/health remain P/Q, not extra O.",
+      "sic": "O",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "HMT-O26"
+      ],
+      "strategic_questions": [
+        "Which authorised service or administrative decision improves a measured public outcome without treating budget authority as an open contract?"
+      ],
+      "value_chain": "Tax/authorised resources and administrative capabilities → public/security/social-protection outcomes; nonmarket output is not supplier revenue."
+    },
+    {
+      "actors": "OfS is the English HE regulator. Named university/school finances and decision structures remain an evidence demand.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "2024–25 deficits were below prior expectations; forecast 42.7% is not an observed current result and institutions vary.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "unknown/not acquired; regulator/context actor is not an enterprise comparison",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "University CFO, provost/academic operations and governing body roles",
+      "fact_refs": [
+        "SIC-P-WEIGHT24",
+        "SIC-P-YOY26",
+        "OFS-P26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Students, funders and research commissioners have different value/choice constraints.",
+        "new_entrants": "Accreditation, staff, estates and degree powers condition entry.",
+        "rivalry": "Student/research competition differs from statutory/local school provision.",
+        "substitutes": "Alternative learning modes may substitute delivery, not all credentials/outcomes.",
+        "supplier_power": "Academic skills, estates and technology affect costs."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Education",
+      "next_research": "Acquire named current institution cash/restricted-fund and recruitment data; compare existing restructuring/internal options and student outcomes before an external proposition.",
+      "panorama_id": "uk-sic07-p",
+      "pestle": {
+        "Economic": "Official section output +0.1% September yoy; 2024 GVA share 5.9%. OFS-P26 distinguishes 35.8% deficit outturn from a 42.7% forecast; the England HE subset is not all education.",
+        "Environmental": "Not acquired for this sector: estate costs, condition and committed interventions.",
+        "Legal": "Not acquired for this sector: institution-specific duties and financial conditions.",
+        "Political": "Interpretation: funding constraints must be reconciled with restricted funds and current institutional plans.",
+        "Social": "Recruitment and student outcomes are material questions; an aggregate deficit does not prove a named institution is failing.",
+        "Technological": "Not acquired for this sector: measured learning/administration outcomes and existing systems."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which institution has a sustainable plan under prudent recruitment rather than optimistic future growth?",
+        "strength_context": "2024–25 deficits were below prior expectations; forecast 42.7% is not an observed current result and institutions vary.",
+        "threat_to_test": "Academic skills, estates and technology affect costs. Students, funders and research commissioners have different value/choice constraints.",
+        "weakness": "No sector-wide internal weakness established; Acquire named current institution cash/restricted-fund and recruitment data; compare existing restructuring/internal options and student outcomes before an external proposition."
+      },
+      "scope": "Schools, further/higher education and other teaching; OfS covers English higher education only.",
+      "sic": "P",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "OFS-P26"
+      ],
+      "strategic_questions": [
+        "Which institution has a sustainable plan under prudent recruitment rather than optimistic future growth?"
+      ],
+      "value_chain": "People/facilities/learning → student/research/public outcomes → tuition/grants/contracts; recruitment, restricted funds and cost base differ."
+    },
+    {
+      "actors": "CQC assesses providers and councils in England. No finding about a named unexamined hospital/care provider follows.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "Many assessed services are good/outstanding; aggregate council overspend is not every provider’s failure or an available supplier budget.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "unknown/not acquired; regulator/context actor is not an enterprise comparison",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Care operations, commissioning, clinical/care quality and finance roles",
+      "fact_refs": [
+        "SIC-Q-WEIGHT24",
+        "SIC-Q-YOY26",
+        "CQC-Q26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Public commissioners and self-payers have different bargaining/eligibility constraints.",
+        "new_entrants": "Registration, workforce and facilities constrain entry.",
+        "rivalry": "Provider choice/capacity differs by commissioned, insured and self-pay segment.",
+        "substitutes": "Community/prevention models can replace some hospital activity where appropriate, not all care.",
+        "supplier_power": "Specialist staff, medicines, estates and digital dependencies affect delivery."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Health & social care",
+      "next_research": "Acquire exact trust/council/provider, pathway outcomes, current funded response and remaining choice; retain assessed-sample and England scope.",
+      "panorama_id": "uk-sic07-q",
+      "pestle": {
+        "Economic": "Official section output +2.0% September yoy; 2024 GVA share 8.4%. CQC-Q26 English council overspend coexists with many good/outstanding assessed care homes; budget pressure is not a universal provider failure.",
+        "Environmental": "Not acquired for this sector: estate/energy exposure for a specific trust or care provider.",
+        "Legal": "CQC assessments apply to assessed providers in England; no finding is transferred to an unexamined UK enterprise.",
+        "Political": "Not acquired for this sector: commissioner funding and approved local response.",
+        "Social": "Access and care quality need pathway/provider evidence and assessed-sample scope.",
+        "Technological": "Not acquired for this sector: current pathway systems, clinical constraints and measured outcomes."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which care pathway has an evidenced capacity or budget consequence after current commissioning and workforce remedies?",
+        "strength_context": "Many assessed services are good/outstanding; aggregate council overspend is not every provider’s failure or an available supplier budget.",
+        "threat_to_test": "Specialist staff, medicines, estates and digital dependencies affect delivery. Public commissioners and self-payers have different bargaining/eligibility constraints.",
+        "weakness": "No sector-wide internal weakness established; Acquire exact trust/council/provider, pathway outcomes, current funded response and remaining choice; retain assessed-sample and England scope."
+      },
+      "scope": "Health, residential and non-residential social care; English adult social care evidence is narrower than UK Q.",
+      "sic": "Q",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "CQC-Q26"
+      ],
+      "strategic_questions": [
+        "Which care pathway has an evidenced capacity or budget consequence after current commissioning and workforce remedies?"
+      ],
+      "value_chain": "Workforce/capacity and clinical/care processes → safe access, treatment and support → outcomes under public/insurance/self-pay funding."
+    },
+    {
+      "actors": "DCMS survey context is England adults; named current venues/sports enterprises and their finances remain gaps.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "SIC R output decline alone is not named venue distress; changed surveys prevent casual old/new participation comparisons.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "unknown/not acquired; regulator/context actor is not an enterprise comparison",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Venue/sport operations, audience/commercial and finance roles",
+      "fact_refs": [
+        "SIC-R-WEIGHT24",
+        "SIC-R-YOY26",
+        "DCMS-R26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Audiences, rights buyers and public funders have different bargaining power.",
+        "new_entrants": "Rights, facilities, talent and funding condition entry.",
+        "rivalry": "Competition is experience/venue/sport and geographic segment specific.",
+        "substitutes": "Digital/home entertainment competes for time/spend but effects need evidence.",
+        "supplier_power": "Talent, rights, venues and platforms influence costs and access."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Arts & recreation",
+      "next_research": "Acquire current named venue/rights-holder finances, attendance and funding; reconcile survey population/time before trend claims.",
+      "panorama_id": "uk-sic07-r",
+      "pestle": {
+        "Economic": "Official section output -0.7% September yoy; 2024 GVA share 1.5%. DCMS-R26 survey replacement changes participation comparability; no current venue financial profile was acquired.",
+        "Environmental": "Not acquired for this sector: named venue/event resource exposures and current response.",
+        "Legal": "Not acquired for this sector: rights, safeguarding, venue and licensing scope.",
+        "Political": "Not acquired for this sector: actual venue/sport/grant policy and time basis.",
+        "Social": "CES England-adult coverage does not establish a UK audience trend across the survey break.",
+        "Technological": "Not acquired for this sector: rights/distribution/digital audience outcomes."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Which audience/access or venue-capacity choice changes evidenced economics after the survey-base change is reconciled?",
+        "strength_context": "SIC R output decline alone is not named venue distress; changed surveys prevent casual old/new participation comparisons.",
+        "threat_to_test": "Talent, rights, venues and platforms influence costs and access. Audiences, rights buyers and public funders have different bargaining power.",
+        "weakness": "No sector-wide internal weakness established; Acquire current named venue/rights-holder finances, attendance and funding; reconcile survey population/time before trend claims."
+      },
+      "scope": "Arts/entertainment, museums/heritage, sports and recreation; broader creative industries cross several SIC sections.",
+      "sic": "R",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "DCMS-R26"
+      ],
+      "strategic_questions": [
+        "Which audience/access or venue-capacity choice changes evidenced economics after the survey-base change is reconciled?"
+      ],
+      "value_chain": "Talent/content/venues → participation/experience → tickets, subscriptions, rights, sponsorship or grants; capacity and audience mix affect returns."
+    },
+    {
+      "actors": "Certification Officer names Unite as a missing return; no invented individual member or private data is collected.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "Reported membership decline mainly reflects a missing Unite return, not a comparable collapse or proof of poor service.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "partial source-backed examples",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "candidate question; open choice and buyer need unknown",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Member services, repair/service operations and finance roles",
+      "fact_refs": [
+        "SIC-S-WEIGHT24",
+        "SIC-S-YOY26",
+        "CERT-S26-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Individual customers and collective members have distinct voice/choice mechanisms.",
+        "new_entrants": "Skills, trust, location and rules condition entry by segment.",
+        "rivalry": "Local repair/beauty competition differs from member-representation organisations.",
+        "substitutes": "DIY/digital/self-service may substitute some activities; no general replacement inferred.",
+        "supplier_power": "Labour, premises and products affect costs; actual concentration unknown."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Other services",
+      "next_research": "Acquire comparable complete returns and representative repair/personal-service firms, actual service quality and costs; no generic digital-transformation demand.",
+      "panorama_id": "uk-sic07-s",
+      "pestle": {
+        "Economic": "Official section output +6.8% September yoy; 2024 GVA share 1.5%. CERT-S26 membership decline chiefly reflects missing Unite returns; it cannot establish sector decline.",
+        "Environmental": "Not acquired for this sector: repair/reuse or premises exposure at the correct activity.",
+        "Legal": "Union/employer-association returns describe a regulated subset, not repair/personal-service market rules.",
+        "Political": "Not acquired for this sector: actual representation/service policy implications.",
+        "Social": "A reporting-coverage break must be reconciled before member-retention or service demand claims.",
+        "Technological": "Not acquired for this sector: measured membership/repair/personal-service capability."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "Is an apparent membership or service trend real after reporting coverage and actual customer outcomes are reconciled?",
+        "strength_context": "Reported membership decline mainly reflects a missing Unite return, not a comparable collapse or proof of poor service.",
+        "threat_to_test": "Labour, premises and products affect costs; actual concentration unknown. Individual customers and collective members have distinct voice/choice mechanisms.",
+        "weakness": "No sector-wide internal weakness established; Acquire comparable complete returns and representative repair/personal-service firms, actual service quality and costs; no generic digital-transformation demand."
+      },
+      "scope": "Membership bodies, repair and personal services; union-return evidence is only a membership-body subset.",
+      "sic": "S",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "CERT-S26"
+      ],
+      "strategic_questions": [
+        "Is an apparent membership or service trend real after reporting coverage and actual customer outcomes are reconciled?"
+      ],
+      "value_chain": "Membership/skills/repair capacity → representation or personal service → dues/fees; professional and personal-service economics differ."
+    },
+    {
+      "actors": "Direct household employer roles are documented; no individual household is profiled or treated as an enterprise sales prospect.",
+      "canonical_acceptance": false,
+      "counter_evidence_and_limits": "The existence of SIC T supplies no enterprise opportunity, investment budget or justified sales shortlist.",
+      "coverage": {
+        "PESTLE": "partial; shared macro + sector context, exact applicability open",
+        "competitive_positioning": "unknown/not acquired on matched current bases",
+        "customer_supplier_relationships": "unknown/not acquired; functional mechanism only",
+        "economic_size_and_growth": "source-backed candidate",
+        "five_forces": "bounded interpretation; current segment concentration/returns incomplete",
+        "identity": "source-backed candidate",
+        "named_enterprise_roles": "unknown/not acquired; regulator/context actor is not an enterprise comparison",
+        "relational_SWOT": "bounded interpretation; no unsupported internal weakness",
+        "segments": "partial; taxonomy plus bounded interpretation",
+        "source_rights_dates": "partial; original bytes/independent acceptance open",
+        "strategic_decisions": "no enterprise agenda: scope inappropriate",
+        "value_chain": "bounded interpretation; no complete monetary value-flow proof"
+      },
+      "decision_role_hypotheses": "Household employer or authorised support service, not a corporate buyer",
+      "fact_refs": [
+        "SIC-T-WEIGHT24",
+        "SIC-T-YOY26",
+        "HOME-T-F1"
+      ],
+      "five_forces": {
+        "buyer_power": "Household affordability/worker rights cannot be reduced to a corporate bargaining score.",
+        "new_entrants": "Employer status and compliance differ from enterprise entry barriers.",
+        "rivalry": "Conventional corporate rivalry is not applicable; household choices differ from agency competition.",
+        "substitutes": "Agency/self-employed or unpaid family provision is a separate legal/economic choice.",
+        "supplier_power": "Domestic labour availability and eligibility matter without identifying private people."
+      },
+      "foundational_standard": "PARTIAL — not all substantive gates met",
+      "label": "Household employment",
+      "next_research": "Keep enterprise agenda empty; research aggregate household/service affordability and legal-scope boundaries only. No household personal data or Pipeline records.",
+      "panorama_id": "uk-sic07-t",
+      "pestle": {
+        "Economic": "Official section output -5.4% September yoy; 2024 GVA share 0.1%. HOME-T describes direct household employment, not enterprise capability, turnover or a corporate sales market.",
+        "Environmental": "Not acquired for this sector: aggregate resource effects only; no household targeting.",
+        "Legal": "Direct employer, agency and self-employed boundaries differ; exact eligibility/payroll jurisdiction matters.",
+        "Political": "Not acquired for this sector: aggregate policy effect without identifying households.",
+        "Social": "Private domestic employment is not permission to profile a household or generate a sales prospect.",
+        "Technological": "Not acquired for this sector: no enterprise technology need inferred."
+      },
+      "pipeline_handoff": false,
+      "relational_swot": {
+        "external_opportunity_hypothesis": "None admitted for enterprise sales.",
+        "strength_context": "The existence of SIC T supplies no enterprise opportunity, investment budget or justified sales shortlist.",
+        "threat_to_test": "Domestic labour availability and eligibility matter without identifying private people. Household affordability/worker rights cannot be reduced to a corporate bargaining score.",
+        "weakness": "No sector-wide internal weakness established; Keep enterprise agenda empty; research aggregate household/service affordability and legal-scope boundaries only. No household personal data or Pipeline records."
+      },
+      "scope": "Households as employers and undifferentiated own-use production; agency employers belong in different activities.",
+      "sic": "T",
+      "source_refs": [
+        "ONS-SIC07",
+        "ONS-GDP-SEP26",
+        "HOME-T"
+      ],
+      "strategic_questions": [],
+      "value_chain": "Household funds and paid domestic labour → care/household services; nonmarket/own-use scope is not a corporate profit pool."
+    }
+  ],
+  "original_RIE1": {
+    "authority": "Nonbinding RIE1 proposals; all originals/statuses unchanged; no accepted gap closure",
+    "overlay_thirteen": [
+      {
+        "id": "G-PRIMARY",
+        "original_status": "partially_resolved",
+        "original_title": "Current primary verification",
+        "proposed_disposition": "partially enriched; original owner acceptance pending",
+        "remaining": "Retrieve and quote-locate current Lloyds annual, interim and latest trading updates; capture publication dates, periods and content hashes.",
+        "source_refs": [
+          "LBG-Q326",
+          "LBG-AR25-WEB"
+        ]
+      },
+      {
+        "id": "G-CUSTOMER-EVIDENCE",
+        "original_status": "open",
+        "original_title": "Customer buying evidence",
+        "proposed_disposition": "open; no new resolving evidence",
+        "remaining": "Customer meeting/requirement reference; economic buyer, funding, criteria, process, relationship and mutual next action.",
+        "source_refs": []
+      },
+      {
+        "id": "G-REGULATORY",
+        "original_status": "partially_resolved",
+        "original_title": "Regulatory applicability",
+        "proposed_disposition": "partially enriched; original owner acceptance pending",
+        "remaining": "Retrieve FCA Consumer Duty/resilience publications, PRA/BoE rules and HM Treasury designations.",
+        "source_refs": [
+          "LBG-RING"
+        ]
+      },
+      {
+        "id": "G-ALLOCATION",
+        "original_status": "open",
+        "original_title": "Investment allocation",
+        "proposed_disposition": "open; no new resolving evidence",
+        "remaining": "Approved programme funding and sourcing scope, distinguishing gross savings, benefits and supplier spend.",
+        "source_refs": []
+      },
+      {
+        "id": "G-OUTCOMES",
+        "original_status": "open",
+        "original_title": "Channel/customer outcomes",
+        "proposed_disposition": "open; no new resolving evidence",
+        "remaining": "Current local access assessments, complaints, vulnerable-customer outcomes, retention and customer journey measures.",
+        "source_refs": []
+      },
+      {
+        "id": "G-PRIMACY",
+        "original_status": "open",
+        "original_title": "Deposit and relationship behaviour",
+        "proposed_disposition": "partially enriched; original owner acceptance pending",
+        "remaining": "Salary-flow/direct-debit concentration, retention, deposit segment and pricing behaviour.",
+        "source_refs": [
+          "LBG-Q326"
+        ]
+      },
+      {
+        "id": "G-WORKLOADS",
+        "original_status": "open",
+        "original_title": "Programme and workload scope",
+        "proposed_disposition": "open; no new resolving evidence",
+        "remaining": "Approved roadmap, application dependencies, critical-service mapping, ownership and procurement evidence.",
+        "source_refs": []
+      },
+      {
+        "id": "G-AI-BENEFITS",
+        "original_status": "open",
+        "original_title": "Net AI benefits",
+        "proposed_disposition": "partially enriched; original owner acceptance pending",
+        "remaining": "Benefit baselines, adoption measures, control costs and benefit ownership; distinguish targets from realised results.",
+        "source_refs": [
+          "LBG-AI26"
+        ]
+      },
+      {
+        "id": "G-SUPPLIER",
+        "original_status": "open",
+        "original_title": "Supplier contracts and roles",
+        "proposed_disposition": "partially enriched; original owner acceptance pending",
+        "remaining": "Current customer or supplier primary disclosure, contract scope and terms where authorised.",
+        "source_refs": [
+          "LBG-MS26",
+          "LBG-ENVOY26"
+        ]
+      },
+      {
+        "id": "G-CURVE",
+        "original_status": "partially_resolved",
+        "original_title": "Transaction and integration status",
+        "proposed_disposition": "partially enriched; original owner acceptance pending",
+        "remaining": "Completion announcement and customer-approved integration roadmap.",
+        "source_refs": [
+          "LBG-Q326"
+        ]
+      },
+      {
+        "id": "G-FRAUD",
+        "original_status": "open",
+        "original_title": "Lloyds-specific fraud evidence",
+        "proposed_disposition": "open; no new resolving evidence",
+        "remaining": "Lloyds-specific losses, reimbursement, false positives, complaints and funded response.",
+        "source_refs": []
+      },
+      {
+        "id": "G-CLIMATE",
+        "original_status": "open",
+        "original_title": "Climate/transition materiality",
+        "proposed_disposition": "open; no new resolving evidence",
+        "remaining": "Latest primary sustainability/transition report, financed-emissions scope and portfolio materiality.",
+        "source_refs": []
+      },
+      {
+        "id": "G-MARKET",
+        "original_status": "open",
+        "original_title": "Market structure",
+        "proposed_disposition": "partially enriched; original owner acceptance pending",
+        "remaining": "FCA/CMA and dated primary enterprise disclosures with consistent market/entity boundaries.",
+        "source_refs": [
+          "NW-Q326",
+          "BAR-Q326"
+        ]
+      }
+    ],
+    "owner_digests": {
+      "cios/applications/flora/visual_streams.py": "d7f3ccc2c62c2d5ba2853407eb4a89138f4cac329a5cc6968ad0f195b9e4ee3a",
+      "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2"
+    },
+    "rco_nine": [
+      {
+        "id": "RCO-LBG-001",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "f32dee9b51356b6f47dbe325478ac919ef51088682c3a4b79127fee239ec68eb",
+        "original_research_tier": 1,
+        "original_status": "not specified",
+        "original_title": "Legacy decommissioning and migration benefit assurance",
+        "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+        "source_refs": []
+      },
+      {
+        "id": "RCO-LBG-002",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "9bf448f2cafeacccebf1efe79665b2a6b56bcd9009ecbe7cc0d4ca5edc43b10e",
+        "original_research_tier": 1,
+        "original_status": "not specified",
+        "original_title": "AI value realisation and operating controls",
+        "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+        "source_refs": []
+      },
+      {
+        "id": "RCO-LBG-003",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "93ecccfe6e2815228ffa363a52851bee5965d73ad6ccdd328ee5ce0949266018",
+        "original_research_tier": 1,
+        "original_status": "not specified",
+        "original_title": "Brand/app migration customer-outcome assurance",
+        "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+        "source_refs": []
+      },
+      {
+        "id": "RCO-LBG-004",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "8f0c346d6b1bfc7b6ba07b2234a405f3128ba52be5dc205c96e5a76a16945873",
+        "original_research_tier": 2,
+        "original_status": "not specified",
+        "original_title": "AI model-platform governance and lineage",
+        "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+        "source_refs": []
+      },
+      {
+        "id": "RCO-LBG-005",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "6e6b76b45f3eff53d22e94a7016867b55267596697336b03d22fd47bc29596bf",
+        "original_research_tier": 1,
+        "original_status": "not specified",
+        "original_title": "Critical-service third-party dependency and exit assurance",
+        "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+        "source_refs": []
+      },
+      {
+        "id": "RCO-LBG-006",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "e8833a618a25476e35d5c20dd567512823ac1daa51a23764d87dafab20f22e56",
+        "original_research_tier": 2,
+        "original_status": "not specified",
+        "original_title": "Deposit/customer-value and balance-sheet analytics",
+        "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+        "source_refs": []
+      },
+      {
+        "id": "RCO-LBG-007",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "b965854f6fea67603f306301f276be857a550cac9c4a694efab63bcbbf5e7ef4",
+        "original_research_tier": 3,
+        "original_status": "not specified",
+        "original_title": "Assisted-access service and vulnerability outcomes",
+        "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+        "source_refs": []
+      },
+      {
+        "id": "RCO-LBG-008",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "eca5b26ee55b1a582bef2b7f3e868336c6e9c11ae3a3e056d6e7700c68a64850",
+        "original_research_tier": 3,
+        "original_status": "not specified",
+        "original_title": "Colleague AI adoption and productivity controls",
+        "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+        "source_refs": []
+      },
+      {
+        "id": "RCO-LBG-009",
+        "original_qualification": "Research candidate — not customer-verified demand",
+        "original_record_sha256": "4b2cc7e7c9532a3924fed0ada6395e018d3554f63e36b684580c76bb8e4642ab",
+        "original_research_tier": 1,
+        "original_status": "not specified",
+        "original_title": "Wallet and Curve integration outcome assurance",
+        "proposal": "No qualification change; public research cannot establish private buying evidence or external scope.",
+        "source_refs": []
+      }
+    ],
+    "visual_nine": [
+      {
+        "id": "FIN-01",
+        "original_question": "Current income and operating-cost reconciliation",
+        "original_status": "open visual research question",
+        "proposed_disposition": "partially enriched, remains open",
+        "remaining": "Current segment financials, investment/cash-flow detail and cost-to-serve remain open.",
+        "source_refs": [
+          "LBG-Q326"
+        ]
+      },
+      {
+        "id": "FIN-02",
+        "original_question": "Comparable growth and profitability",
+        "original_status": "open visual research question",
+        "proposed_disposition": "partially enriched, remains open",
+        "remaining": "No matched peer definitions or complete segment growth/returns; no ranking.",
+        "source_refs": [
+          "LBG-Q326",
+          "NW-Q326",
+          "BAR-Q326"
+        ]
+      },
+      {
+        "id": "ORG-01",
+        "original_question": "Current businesses, brands and legal subsidiaries",
+        "original_status": "open visual research question",
+        "proposed_disposition": "partially enriched, remains open",
+        "remaining": "Registry acquisition failed; full current legal hierarchy and dated subsidiaries unresolved.",
+        "source_refs": [
+          "LBG-RING",
+          "LBG-AR25-WEB"
+        ]
+      },
+      {
+        "id": "OPS-01",
+        "original_question": "Operations and important technology systems",
+        "original_status": "open visual research question",
+        "proposed_disposition": "partially enriched, remains open",
+        "remaining": "Specific critical-service maps, system inventory and customer outcome/control effectiveness unacquired.",
+        "source_refs": [
+          "LBG-ENVOY26",
+          "LBG-MS26",
+          "LBG-AR25-WEB"
+        ]
+      },
+      {
+        "id": "REL-01",
+        "original_question": "Current suppliers, partners and customers",
+        "original_status": "open visual research question",
+        "proposed_disposition": "partially enriched, remains open",
+        "remaining": "Contract value, terms, workshare, exit/renewal, customers and other suppliers unknown.",
+        "source_refs": [
+          "LBG-MS26",
+          "LBG-ENVOY26"
+        ]
+      },
+      {
+        "id": "REG-01",
+        "original_question": "Legal-entity regulatory applicability",
+        "original_status": "open visual research question",
+        "proposed_disposition": "partially enriched, remains open",
+        "remaining": "Exact applicable legal-entity rules, effective dates and readiness not established.",
+        "source_refs": [
+          "LBG-RING",
+          "FR-CSRD26"
+        ]
+      },
+      {
+        "id": "ORG-02",
+        "original_question": "Current leadership and accountability",
+        "original_status": "open visual research question",
+        "proposed_disposition": "partially enriched, remains open",
+        "remaining": "Current public roles acquired, exact programme accountability and buying authority unknown.",
+        "source_refs": [
+          "LBG-LEADERS"
+        ]
+      },
+      {
+        "id": "INF-01",
+        "original_question": "Infrastructure operating relationships",
+        "original_status": "open visual research question",
+        "proposed_disposition": "partially enriched, remains open",
+        "remaining": "BoE operator roles acquired, Lloyds-specific participant/operating edge unproved.",
+        "source_refs": [
+          "BOE-SETTLE"
+        ]
+      },
+      {
+        "id": "COM-01",
+        "original_question": "Remaining influence and external need",
+        "original_status": "open visual research question",
+        "proposed_disposition": "open",
+        "remaining": "Need, sourcing, funding, buyer, decision criteria, influence and mutual action remain unknown.",
+        "source_refs": []
+      }
+    ]
+  }
+}

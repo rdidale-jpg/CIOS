@@ -1,0 +1,652 @@
+[
+  {
+    "acceptance_class": "C",
+    "authority": "SI-1 Option A read-only synthesis design; not an accepted runtime owner",
+    "canonical_acceptance": false,
+    "current_version": "RIE1",
+    "id": "UK-A1",
+    "material_pressure_qualification": "not executed",
+    "pipeline_writes": 0,
+    "refresh_warning": "UK/Banking candidates retain RIE1 cutoff; no RIE2 refresh claimed",
+    "versions": [
+      {
+        "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+        "package": "RIE1",
+        "record": {
+          "alternatives": [
+            "Already-funded internal improvement",
+            "Existing suppliers",
+            "No additional intervention"
+          ],
+          "analysis_model": "SI-1 Option A design reference PR616 85317167b4001dc027216c1c4e2faf058f0631a3; not runtime authoritative",
+          "assertion_class": "FLORA-derived interpretation; investigation only",
+          "buyer_need": "unknown; no customer confirmation",
+          "canonical_acceptance": false,
+          "counter_evidence": "LFS productivity estimate is -0.2%, different method. Investment and output can rise without a missing supplier.",
+          "evidenced_consequence": "RTI output/hour +0.7% yoy in Q2; real business investment +0.4% qoq in Q3, different periods. No firm-level productivity loss measured.",
+          "external_supplier_scope": "unknown",
+          "fact_refs": [
+            "UK-PROD-RTI",
+            "UK-INV-Q3",
+            "UK-STRATEGY-PLAN"
+          ],
+          "id": "UK-A1",
+          "next_salesperson_learning_action": "Choose a named sector/enterprise; acquire actual process baseline, adoption, current capex/controls and residual choice.",
+          "open_decision_status": "UNKNOWN — Which funded asset/process/adoption choice can still change a measured outcome?",
+          "opportunity_value": null,
+          "pipeline_handoff": false,
+          "qualification": "not requested; ADR-026 not executed",
+          "role_categories": [
+            "Enterprise operations",
+            "Finance",
+            "Industrial-policy roles"
+          ],
+          "source_refs": [
+            "ONS-PROD-Q226",
+            "ONS-GDP-Q326",
+            "UK-STRATEGY26"
+          ],
+          "subject_scope": "UK economy",
+          "title": "Productivity investment with actual output and adoption outcomes",
+          "transmission": "Source observation → scoped mechanism → applicability test → decision question; no automatic enterprise pressure",
+          "why_now": "Latest growth and policy evidence allows more specific sector investigation."
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "C",
+    "authority": "SI-1 Option A read-only synthesis design; not an accepted runtime owner",
+    "canonical_acceptance": false,
+    "current_version": "RIE1",
+    "id": "UK-A2",
+    "material_pressure_qualification": "not executed",
+    "pipeline_writes": 0,
+    "refresh_warning": "UK/Banking candidates retain RIE1 cutoff; no RIE2 refresh claimed",
+    "versions": [
+      {
+        "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+        "package": "RIE1",
+        "record": {
+          "alternatives": [
+            "Repricing already planned",
+            "Customer support/internal underwriting",
+            "Wait for realised outcome data"
+          ],
+          "analysis_model": "SI-1 Option A design reference PR616 85317167b4001dc027216c1c4e2faf058f0631a3; not runtime authoritative",
+          "assertion_class": "FLORA-derived interpretation; investigation only",
+          "buyer_need": "unknown; no customer confirmation",
+          "canonical_acceptance": false,
+          "counter_evidence": "Household real income improved; low demand can explain lending weakness; hedges/current support may suffice.",
+          "evidenced_consequence": "Different new/stock mortgage and deposit rates and weaker SME survey supply/demand are observed. No named firm funding gap established.",
+          "external_supplier_scope": "unknown",
+          "fact_refs": [
+            "UK-RATE-NOV",
+            "UK-NEW-MORTGAGE-RATE",
+            "UK-CREDIT-Q3",
+            "UK-HH-INCOME"
+          ],
+          "id": "UK-A2",
+          "next_salesperson_learning_action": "Obtain current matched-period cohort rates, maturities, outcomes, hedges and existing support before suggesting a financing or service intervention.",
+          "open_decision_status": "UNKNOWN — Which actual cohort and financing/service remedy remain undecided?",
+          "opportunity_value": null,
+          "pipeline_handoff": false,
+          "qualification": "not requested; ADR-026 not executed",
+          "role_categories": [
+            "Bank treasury/product",
+            "Corporate finance",
+            "Customer operations"
+          ],
+          "source_refs": [
+            "BOE-MPC-NOV26",
+            "BOE-MC-SEP26",
+            "BOE-CCS-Q326",
+            "ONS-QSA-Q226"
+          ],
+          "subject_scope": "UK financial system",
+          "title": "Repricing and financing outcomes across unequal customer cohorts",
+          "transmission": "Source observation → scoped mechanism → applicability test → decision question; no automatic enterprise pressure",
+          "why_now": "November policy move is later than September rates and August survey window; obtain next releases before causal attribution."
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "C",
+    "authority": "SI-1 Option A read-only synthesis design; not an accepted runtime owner",
+    "canonical_acceptance": false,
+    "current_version": "RIE1",
+    "id": "BANK-A1",
+    "material_pressure_qualification": "not executed",
+    "pipeline_writes": 0,
+    "refresh_warning": "UK/Banking candidates retain RIE1 cutoff; no RIE2 refresh claimed",
+    "versions": [
+      {
+        "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+        "package": "RIE1",
+        "record": {
+          "alternatives": [
+            "Current hedges and product pricing",
+            "Existing customer retention/service",
+            "No new project"
+          ],
+          "analysis_model": "SI-1 Option A design reference PR616 85317167b4001dc027216c1c4e2faf058f0631a3; not runtime authoritative",
+          "assertion_class": "FLORA-derived interpretation; investigation only",
+          "buyer_need": "unknown; no customer confirmation",
+          "canonical_acceptance": false,
+          "counter_evidence": "Bank liquidity/capital remain strong; Lloyds Group deposits and NIM improved.",
+          "evidenced_consequence": "Funding/product rates and Lloyds mix movements are disclosed, not a sector-wide margin or funding loss.",
+          "external_supplier_scope": "unknown",
+          "fact_refs": [
+            "UK-DEPOSIT-RATE",
+            "UK-RESILIENCE-SEP",
+            "LBG-Q326-F1"
+          ],
+          "id": "BANK-A1",
+          "next_salesperson_learning_action": "Request an authorised product/cohort bridge separating intended pricing/mix, attrition, service and hedges.",
+          "open_decision_status": "UNKNOWN — What customer segment outcome or retention choice is still open after pricing/hedging?",
+          "opportunity_value": null,
+          "pipeline_handoff": false,
+          "qualification": "not requested; ADR-026 not executed",
+          "role_categories": [
+            "Treasury",
+            "Retail/commercial product",
+            "Customer operations"
+          ],
+          "source_refs": [
+            "BOE-MC-SEP26",
+            "BOE-FPC-SEP26",
+            "LBG-Q326"
+          ],
+          "subject_scope": "UK Banking",
+          "title": "Customer-value and funding mix after repricing",
+          "transmission": "Source observation → scoped mechanism → applicability test → decision question; no automatic enterprise pressure",
+          "why_now": "Current rates and nine-month reports expose a testable mix question."
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "C",
+    "authority": "SI-1 Option A read-only synthesis design; not an accepted runtime owner",
+    "canonical_acceptance": false,
+    "current_version": "RIE1",
+    "id": "BANK-A2",
+    "material_pressure_qualification": "not executed",
+    "pipeline_writes": 0,
+    "refresh_warning": "UK/Banking candidates retain RIE1 cutoff; no RIE2 refresh claimed",
+    "versions": [
+      {
+        "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+        "package": "RIE1",
+        "record": {
+          "alternatives": [
+            "Internal resilience testing",
+            "Incumbent remediation",
+            "No supplier change"
+          ],
+          "analysis_model": "SI-1 Option A design reference PR616 85317167b4001dc027216c1c4e2faf058f0631a3; not runtime authoritative",
+          "assertion_class": "FLORA-derived interpretation; investigation only",
+          "buyer_need": "unknown; no customer confirmation",
+          "canonical_acceptance": false,
+          "counter_evidence": "Designed controls and established suppliers may already address the issue. RTGS operation does not prove a bank membership.",
+          "evidenced_consequence": "FPC identifies systemic operational risk; no bank-specific control failure, outage cost or procurement established.",
+          "external_supplier_scope": "unknown",
+          "fact_refs": [
+            "UK-RESILIENCE-SEP",
+            "BOE-SETTLE-F1",
+            "LBG-MS26-F1",
+            "LBG-ENVOY26-F1"
+          ],
+          "id": "BANK-A2",
+          "next_salesperson_learning_action": "Acquire permitted service map, test outcomes and funded remedy; stop if current controls are adequate.",
+          "open_decision_status": "UNKNOWN — Which exact critical-service mapping/control/exit decision remains unresolved?",
+          "opportunity_value": null,
+          "pipeline_handoff": false,
+          "qualification": "not requested; ADR-026 not executed",
+          "role_categories": [
+            "Operations",
+            "Technology",
+            "Risk and resilience"
+          ],
+          "source_refs": [
+            "BOE-FPC-SEP26",
+            "BOE-SETTLE",
+            "LBG-MS26",
+            "LBG-ENVOY26"
+          ],
+          "subject_scope": "UK Banking",
+          "title": "Critical-service dependencies after existing resilience investment",
+          "transmission": "Source observation → scoped mechanism → applicability test → decision question; no automatic enterprise pressure",
+          "why_now": "Current interconnected-risk review and committed platforms make remaining-control decisions the relevant question."
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "C",
+    "authority": "SI-1 Option A read-only synthesis design; not an accepted runtime owner",
+    "canonical_acceptance": false,
+    "current_version": "RIE2",
+    "id": "LBG-A1",
+    "material_pressure_qualification": "not executed",
+    "pipeline_writes": 0,
+    "refresh_warning": "RIE2 refines the same issue identity; RIE1 history retained",
+    "versions": [
+      {
+        "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+        "package": "RIE1",
+        "record": {
+          "alternatives": [
+            "Internal platform modernisation",
+            "Current delivery partners",
+            "Process-only improvement",
+            "No change"
+          ],
+          "analysis_model": "SI-1 Option A design reference PR616 85317167b4001dc027216c1c4e2faf058f0631a3; not runtime authoritative",
+          "assertion_class": "FLORA-derived interpretation; investigation only",
+          "buyer_need": "unknown; no customer confirmation",
+          "canonical_acceptance": false,
+          "counter_evidence": "Income, profitability and existing digital productivity improved; current programmes may suffice.",
+          "evidenced_consequence": "Underlying net income 14819m vs13557m; operating costs7246m vs7176m; remediation61m vs912m. Total-cost improvement is not wholly recurring cost reduction.",
+          "external_supplier_scope": "unknown",
+          "fact_refs": [
+            "LBG-Q326-F1",
+            "LBG-STRATEGY-F1",
+            "LBG-AR25-WEB-F1"
+          ],
+          "id": "LBG-A1",
+          "next_salesperson_learning_action": "Ask for one named service unit-cost/outcome baseline, existing approved remedy and a still-changeable design/measurement decision.",
+          "open_decision_status": "UNKNOWN — Which service/platform choice, if any, remains addressable after committed programmes?",
+          "opportunity_value": null,
+          "pipeline_handoff": false,
+          "qualification": "not requested; ADR-026 not executed",
+          "role_categories": [
+            "Group COO",
+            "Group finance",
+            "Relevant service/platform owner"
+          ],
+          "source_refs": [
+            "LBG-Q326",
+            "LBG-STRATEGY",
+            "LBG-AR25-WEB"
+          ],
+          "subject_scope": "Lloyds Banking Group plc",
+          "title": "Operating leverage after delivered improvements",
+          "transmission": "Source observation → scoped mechanism → applicability test → decision question; no automatic enterprise pressure",
+          "why_now": "2027–30 ambition follows improving 2026 profitability; delivery and benefit measurement matter more than announcing transformation."
+        }
+      },
+      {
+        "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+        "package": "RIE2",
+        "record": {
+          "accountability_limit": "Published roles identify organisational responsibilities; authority for this exact choice/budget/procurement remains UNKNOWN",
+          "actual_evidenced_consequence": "H1 Retail other income+130m is almost offset by lease depreciation+129m; net effect+1m at that bridge level. Retail underlying operating costs fall50m while Group underlying operating costs rise2m; this is not a lease-product profit or unit-cost calculation.",
+          "alternatives": [
+            "Current internal teams and controls",
+            "Existing contracted supplier capabilities",
+            "Process/measurement-only remedy",
+            "No new intervention / monitor"
+          ],
+          "as_of": "2026-11-14",
+          "assertion_class": "FLORA-derived read-only interpretation, not leadership endorsement or qualified MaterialPressure",
+          "baseline_commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+          "baseline_issue_id": "LBG-A1",
+          "buyer_need": "unknown",
+          "canonical_acceptance": false,
+          "counter_evidence": "H1 Retail underlying profit improves282m; Q3 depreciation falls versusQ2 as extra used-car charge does not repeat.",
+          "decision_role_categories": [
+            "Group CFO",
+            "Group COO",
+            "Relevant Consumer/Connected Finance/service or asset-risk owner; exact allocation unverified"
+          ],
+          "decisions_already_taken_or_responses": [
+            "Existing lease risk mitigation",
+            "Reported cost savings/lower severance",
+            "Current core/operations programme and2027–30 targets"
+          ],
+          "executive_conversation_opener": "Which asset-risk or servicing decision could still improve return after lease depreciation, beyond existing risk mitigation, and how would you measure it without treating all cost movement as productivity?",
+          "external_supplier_scope": "unknown",
+          "external_value": null,
+          "id": "LBG-A1",
+          "influence_window": "unverified; programme announcement is insufficient",
+          "pain_status": "Financial/service metric observed; no independently established unmet customer need, process failure or required external intervention",
+          "pipeline_writes": 0,
+          "potential_remaining_decision": "UNKNOWN; test whether a specific remaining choice exists within current remedies",
+          "revision": "RIE2",
+          "rie2_delta": "RIE1 had a Group cost/remediation bridge; RIE2 identifies the Retail leasing economics and offsetting divisional cost movements.",
+          "source_refs": [
+            "R2-LBG-H126",
+            "R2-LBG-Q326",
+            "R2-LBG-STRATEGY"
+          ],
+          "specific_next_commercial_investigation": "Request an authorised product/asset return bridge separating vehicle prices, fleet mix, depreciation, servicing outcomes and existing controls; establish remaining choice before a solution.",
+          "subject_scope": "Group Retail reporting division; not a bank legal-company P&L",
+          "title": "Retail economics after lease depreciation, not a generic cost-cutting pitch",
+          "what_disproves_it": "Product-level after-depreciation returns are already satisfactory; the charge is adequately managed or existing plans settle the choice."
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "C",
+    "authority": "SI-1 Option A read-only synthesis design; not an accepted runtime owner",
+    "canonical_acceptance": false,
+    "current_version": "RIE2",
+    "id": "LBG-A2",
+    "material_pressure_qualification": "not executed",
+    "pipeline_writes": 0,
+    "refresh_warning": "RIE2 refines the same issue identity; RIE1 history retained",
+    "versions": [
+      {
+        "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+        "package": "RIE1",
+        "record": {
+          "alternatives": [
+            "Planned pricing/mix",
+            "Existing service/retention",
+            "No intervention"
+          ],
+          "analysis_model": "SI-1 Option A design reference PR616 85317167b4001dc027216c1c4e2faf058f0631a3; not runtime authoritative",
+          "assertion_class": "FLORA-derived interpretation; investigation only",
+          "buyer_need": "unknown; no customer confirmation",
+          "canonical_acceptance": false,
+          "counter_evidence": "Group funding and NIM improved; management reports Q1 savings movements and disciplined pricing, with Q3 Retail balances broadly stable.",
+          "evidenced_consequence": "Group deposits+6.3bn YTD; Commercial+9.6bn, Retail-3.7bn and Central Items+0.4bn (0.2bn to0.6bn). Management attributes Retail decline mainly to Q1 savings movements and disciplined pricing; Q3 balances broadly stable. A liability-stock change is not income loss or churn evidence.",
+          "external_supplier_scope": "unknown",
+          "fact_refs": [
+            "LBG-Q326-F1",
+            "UK-DEPOSIT-RATE"
+          ],
+          "id": "LBG-A2",
+          "next_salesperson_learning_action": "Does the disclosed Q1 savings/pricing explanation fit permitted cohort evidence, did any actual customer outcome worsen, and what decision remains beyond existing pricing/service actions?",
+          "open_decision_status": "UNKNOWN — Is there an unresolved retention/service/pricing decision for a particular customer cohort?",
+          "opportunity_value": null,
+          "pipeline_handoff": false,
+          "qualification": "not requested; ADR-026 not executed",
+          "role_categories": [
+            "Retail/customer product",
+            "Treasury",
+            "Finance"
+          ],
+          "source_refs": [
+            "LBG-Q326",
+            "BOE-MC-SEP26"
+          ],
+          "subject_scope": "Lloyds Banking Group plc",
+          "title": "Retail deposits and customer value without a funding-crisis narrative",
+          "transmission": "Source observation → scoped mechanism → applicability test → decision question; no automatic enterprise pressure",
+          "why_now": "Current Group and segment directions differ and deserve a cohort-specific explanation."
+        }
+      },
+      {
+        "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+        "package": "RIE2",
+        "record": {
+          "accountability_limit": "Published roles identify organisational responsibilities; authority for this exact choice/budget/procurement remains UNKNOWN",
+          "actual_evidenced_consequence": "H1 RetailUK savings reduction3.3bn is management-attributed to pricing; current accounts broadly stable. FCA all-product Lloyds Bank PLC complaints118762received and66.12%upheld measure different scope/time from FOS3764new Apr–Sep cases. No causal deposit/service link or harm value established.",
+          "alternatives": [
+            "Current internal teams and controls",
+            "Existing contracted supplier capabilities",
+            "Process/measurement-only remedy",
+            "No new intervention / monitor"
+          ],
+          "as_of": "2026-11-14",
+          "assertion_class": "FLORA-derived read-only interpretation, not leadership endorsement or qualified MaterialPressure",
+          "baseline_commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+          "baseline_issue_id": "LBG-A2",
+          "buyer_need": "unknown",
+          "canonical_acceptance": false,
+          "counter_evidence": "NatWest reports ISA/savings-mix effects and broadly stable deposits too. Group funding and NIM improved. Counts are scale-sensitive, not a dissatisfaction league table.",
+          "decision_role_categories": [
+            "Consumer/customer-product",
+            "Treasury",
+            "Customer operations/conduct",
+            "Relevant finance owner"
+          ],
+          "decisions_already_taken_or_responses": [
+            "Disciplined tax-year-end pricing",
+            "Existing servicing/digital channels",
+            "Q3 Retail balances broadly stable and Group deposits up"
+          ],
+          "executive_conversation_opener": "Which savings movements were intended pricing choices, which customer cohorts had worse outcomes if any, and would complaint root causes change a remaining retention or service decision?",
+          "external_supplier_scope": "unknown",
+          "external_value": null,
+          "id": "LBG-A2",
+          "influence_window": "unverified; programme announcement is insufficient",
+          "pain_status": "Financial/service metric observed; no independently established unmet customer need, process failure or required external intervention",
+          "pipeline_writes": 0,
+          "potential_remaining_decision": "UNKNOWN; test whether a specific remaining choice exists within current remedies",
+          "revision": "RIE2",
+          "rie2_delta": "RIE1 saw Retail balance decline; RIE2 narrows it to savings/pricing, adds independent-stage outcome evidence and a peer alternative explanation.",
+          "source_refs": [
+            "R2-LBG-H126",
+            "R2-LBG-Q326",
+            "R2-FCA-H126",
+            "R2-FOS-APRSEP26",
+            "R2-NW-H126"
+          ],
+          "specific_next_commercial_investigation": "Obtain permitted cohort/pricing/retention and product-specific complaint-root-cause evidence; never divide FOScases by FCAcomplaints or transfer legal-bank counts to all Retail/Group.",
+          "subject_scope": "Retail economic narrative plus separately scoped Lloyds Bank PLC service returns; no automatic join",
+          "title": "Test intended savings repricing and actual customer outcomes separately",
+          "what_disproves_it": "Balances moved as intended; cohort outcomes are satisfactory or current actions already fix the issue; complaints concern unrelated products."
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "C",
+    "authority": "SI-1 Option A read-only synthesis design; not an accepted runtime owner",
+    "canonical_acceptance": false,
+    "current_version": "RIE2",
+    "id": "LBG-A3",
+    "material_pressure_qualification": "not executed",
+    "pipeline_writes": 0,
+    "refresh_warning": "RIE2 refines the same issue identity; RIE1 history retained",
+    "versions": [
+      {
+        "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+        "package": "RIE1",
+        "record": {
+          "alternatives": [
+            "Existing Microsoft/Google capabilities",
+            "Internal benefits/control assurance",
+            "No extra supplier"
+          ],
+          "analysis_model": "SI-1 Option A design reference PR616 85317167b4001dc027216c1c4e2faf058f0631a3; not runtime authoritative",
+          "assertion_class": "FLORA-derived interpretation; investigation only",
+          "buyer_need": "unknown; no customer confirmation",
+          "canonical_acceptance": false,
+          "counter_evidence": "Reported realised historical value, established platforms and designed controls defeat a no-capability/no-benefit pitch.",
+          "evidenced_consequence": "Around50m GenAI value reported2025; >100m additional2026 expected, not confirmed outturn/net audited benefit/deal value.",
+          "external_supplier_scope": "unknown",
+          "fact_refs": [
+            "LBG-AI26-F1",
+            "LBG-MS26-F1",
+            "LBG-ENVOY26-F1",
+            "LBG-STRATEGY-F1"
+          ],
+          "id": "LBG-A3",
+          "next_salesperson_learning_action": "For one permitted use case, reconcile baseline, realised gross/net benefit, adoption/control costs, customer outcome and authority to change the approach.",
+          "open_decision_status": "UNKNOWN — Is any benefits/control measurement decision open beyond internal teams and contracted suppliers?",
+          "opportunity_value": null,
+          "pipeline_handoff": false,
+          "qualification": "not requested; ADR-026 not executed",
+          "role_categories": [
+            "Group COO",
+            "Finance benefits owner",
+            "Risk/control owner"
+          ],
+          "source_refs": [
+            "LBG-AI26",
+            "LBG-MS26",
+            "LBG-ENVOY26",
+            "LBG-STRATEGY"
+          ],
+          "subject_scope": "Lloyds Banking Group plc",
+          "title": "Net AI benefits within already committed platforms",
+          "transmission": "Source observation → scoped mechanism → applicability test → decision question; no automatic enterprise pressure",
+          "why_now": "2026 scaling and existing Microsoft/Envoy commitments narrow the inquiry to actual use-case outcomes and residual choices."
+        }
+      },
+      {
+        "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+        "package": "RIE2",
+        "record": {
+          "accountability_limit": "Published roles identify organisational responsibilities; authority for this exact choice/budget/procurement remains UNKNOWN",
+          "actual_evidenced_consequence": "40000licences/97% active and10,000+ engineers establish adoption claims, not cost per resolved customer case. Around50m reported2025 benefit and>100m expected2026 are not independently verified net realised current value.",
+          "alternatives": [
+            "Current internal teams and controls",
+            "Existing contracted supplier capabilities",
+            "Process/measurement-only remedy",
+            "No new intervention / monitor"
+          ],
+          "as_of": "2026-11-14",
+          "assertion_class": "FLORA-derived read-only interpretation, not leadership endorsement or qualified MaterialPressure",
+          "baseline_commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+          "baseline_issue_id": "LBG-A3",
+          "buyer_need": "unknown",
+          "canonical_acceptance": false,
+          "counter_evidence": "Adoption and reported historical value defeat a missing-platform/no-benefit thesis. CTP oversight is a system safeguard, not a Lloyds breach or an outsourcing requirement.",
+          "decision_role_categories": [
+            "Group COO",
+            "Finance benefits owner",
+            "Relevant customer/service owner",
+            "Risk/control and technology owner"
+          ],
+          "decisions_already_taken_or_responses": [
+            "Multi-year Microsoft365E7/Agent365 arrangement",
+            "Envoy built with Google Cloud and designed controls",
+            "Existing GenAI use cases/internal teams"
+          ],
+          "executive_conversation_opener": "For one material journey, how do the committed Microsoft and Envoy capabilities translate into net cost and customer outcomes after hand-offs and controls, and which measurement or workflow choice is still open?",
+          "external_supplier_scope": "unknown",
+          "external_value": null,
+          "id": "LBG-A3",
+          "influence_window": "unverified; programme announcement is insufficient",
+          "pain_status": "Financial/service metric observed; no independently established unmet customer need, process failure or required external intervention",
+          "pipeline_writes": 0,
+          "potential_remaining_decision": "UNKNOWN; test whether a specific remaining choice exists within current remedies",
+          "revision": "RIE2",
+          "rie2_delta": "RIE1 posed general benefit assurance; RIE2 tests licensed adoption versus an eligible journey outcome and benefits ownership across separately disclosed capabilities.",
+          "source_refs": [
+            "R2-LBG-MS26",
+            "R2-LBG-ENVOY-PDF",
+            "R2-LBG-AI26",
+            "R2-HMT-CTP",
+            "R2-FCA-H126"
+          ],
+          "specific_next_commercial_investigation": "Ask for an authorised baseline, eligible-case denominator, repeat/handoff/customer outcome, control costs and nonoverlapping benefit ownership for one use case. Do not infer a technical integration or supplier displacement.",
+          "subject_scope": "Group workplace/internal platforms; actual journey/service dependency remains unverified",
+          "title": "Measure net journey value within already committed AI platforms",
+          "what_disproves_it": "The measured net outcome is already achieved and controlled; current teams/incumbents own and resolve it; no material residual choice."
+        }
+      }
+    ]
+  },
+  {
+    "acceptance_class": "C",
+    "authority": "SI-1 Option A read-only synthesis design; not an accepted runtime owner",
+    "canonical_acceptance": false,
+    "current_version": "RIE2",
+    "id": "LBG-A4",
+    "material_pressure_qualification": "not executed",
+    "pipeline_writes": 0,
+    "refresh_warning": "RIE2 refines the same issue identity; RIE1 history retained",
+    "versions": [
+      {
+        "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+        "package": "RIE1",
+        "record": {
+          "alternatives": [
+            "Existing underwriting/support",
+            "Model/scenario update",
+            "Monitor rather than launch project"
+          ],
+          "analysis_model": "SI-1 Option A design reference PR616 85317167b4001dc027216c1c4e2faf058f0631a3; not runtime authoritative",
+          "assertion_class": "FLORA-derived interpretation; investigation only",
+          "buyer_need": "unknown; no customer confirmation",
+          "canonical_acceptance": false,
+          "counter_evidence": "Reported arrears low/stable; scenario/model changes and existing support can explain the movement.",
+          "evidenced_consequence": "Underlying impairment930m vs618m includes88m scenario-update charge; statutory impairment926m differs. No identified customer loss or process failure established.",
+          "external_supplier_scope": "unknown",
+          "fact_refs": [
+            "LBG-Q326-F1",
+            "UK-CREDIT-Q3"
+          ],
+          "id": "LBG-A4",
+          "next_salesperson_learning_action": "Request permitted cohort/scenario/actual-loss decomposition and current support effectiveness; retain research-only if no unmet outcome.",
+          "open_decision_status": "UNKNOWN — Does a specific cohort have an unresolved outcome/control decision after scenario and portfolio effects?",
+          "opportunity_value": null,
+          "pipeline_handoff": false,
+          "qualification": "not requested; ADR-026 not executed",
+          "role_categories": [
+            "Group credit/risk",
+            "Credit product",
+            "Customer support operations"
+          ],
+          "source_refs": [
+            "LBG-Q326",
+            "BOE-CCS-Q326"
+          ],
+          "subject_scope": "Lloyds Banking Group plc",
+          "title": "Credit scenario changes and actual customer outcomes",
+          "transmission": "Source observation → scoped mechanism → applicability test → decision question; no automatic enterprise pressure",
+          "why_now": "Current credit-cost increase warrants decomposition before a sales thesis."
+        }
+      },
+      {
+        "commit": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+        "package": "RIE2",
+        "record": {
+          "accountability_limit": "Published roles identify organisational responsibilities; authority for this exact choice/budget/procurement remains UNKNOWN",
+          "actual_evidenced_consequence": "H1 Retail impairment rises223m versus Group underlying rise175m. Commercial charge improves49m; insurance gross-up separates statutory616m and underlying617m. Nine-month88m scenario charge is a different later-period disclosure, not added to the H1delta.",
+          "alternatives": [
+            "Current internal teams and controls",
+            "Existing contracted supplier capabilities",
+            "Process/measurement-only remedy",
+            "No new intervention / monitor"
+          ],
+          "as_of": "2026-11-14",
+          "assertion_class": "FLORA-derived read-only interpretation, not leadership endorsement or qualified MaterialPressure",
+          "baseline_commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+          "baseline_issue_id": "LBG-A4",
+          "buyer_need": "unknown",
+          "canonical_acceptance": false,
+          "counter_evidence": "Prior-year house-price benefits, current model updates and stable credit are explicit Lloyds counter-evidence. NatWest also reports higher unsecured charge with growth/seasoning and stable arrears.",
+          "decision_role_categories": [
+            "Group CRO/credit risk",
+            "Relevant credit-product",
+            "Customer support/collections",
+            "Finance/model owner"
+          ],
+          "decisions_already_taken_or_responses": [
+            "Existing models/underwriting/risk mitigation",
+            "Current customer support",
+            "Management reports strong/stable portfolio performance"
+          ],
+          "executive_conversation_opener": "Of the Retail charge increase, what is model/comparator/growth effect versus new cohort deterioration, and which customer or risk decision could still change a measurable outcome after current controls?",
+          "external_supplier_scope": "unknown",
+          "external_value": null,
+          "id": "LBG-A4",
+          "influence_window": "unverified; programme announcement is insufficient",
+          "pain_status": "Financial/service metric observed; no independently established unmet customer need, process failure or required external intervention",
+          "pipeline_writes": 0,
+          "potential_remaining_decision": "UNKNOWN; test whether a specific remaining choice exists within current remedies",
+          "revision": "RIE2",
+          "rie2_delta": "RIE1 considered Group impairment/scenario expense; RIE2 isolates Retail versus Commercial, explains the insurance1m bridge and adds a peer mechanism that challenges bank-specific failure.",
+          "source_refs": [
+            "R2-LBG-H126",
+            "R2-LBG-Q326",
+            "R2-NW-H126"
+          ],
+          "specific_next_commercial_investigation": "Request permitted decomposition by scenario/model, balances, actual arrears/defaults and support outcomes; establish a remaining intervention choice before claiming failed credit systems.",
+          "subject_scope": "Reporting Retail/Commercial and Group; not borrower-level evidence or legal-company compliance finding",
+          "title": "Decompose Retail credit charges before proposing an intervention",
+          "what_disproves_it": "Model/comparator/growth effects explain the charge; arrears/customer outcomes stay sound and present controls suffice."
+        }
+      }
+    ]
+  }
+]
