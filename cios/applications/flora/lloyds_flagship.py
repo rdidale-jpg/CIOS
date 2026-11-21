@@ -165,7 +165,7 @@ def render(ctx, data, issues):
                 'sector pressure. They do not establish project-level savings, delivery accountability or a causal outcome.'
                 if insight and all(key in facts for _, key, _, _ in STAGES) else
                 'Explore Lloyds’ disclosures on efficiency, platform renewal, existing technology controls and regulatory timing.')
-    from .lloyds_twin_visual import opening, choices
+    from .lloyds_twin_visual import INTERACTIONS, opening, choices
 
     packets = []
 
@@ -208,4 +208,4 @@ def render(ctx, data, issues):
     if 'treasury-payments' in facts:
         body += '<p><small>Payments policy excerpt contains HM Treasury information licensed under the Open Government Licence v3.0.</small></p>'
     return (body + '<details id="llf-sources"><summary>Sources</summary>'
-            + ''.join(packets) + '</details></section>')
+            + ''.join(packets) + '</details>' + INTERACTIONS + '</section>')
