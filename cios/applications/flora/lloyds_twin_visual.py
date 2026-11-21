@@ -89,14 +89,21 @@ def opening(ctx, facts, stages, inspect, overview):
             '<h1>Lloyds <span>Banking Group</span></h1><p>Renew the bank while it runs</p></div>'
             f'<img src="{image}" alt="" width="768" height="512"></div>'
             '<nav class="ltv-jump" aria-label="Twin sections">'
-            '<a href="#ltv-landscape">Landscape</a><a href="#ltv-inside">Inside Lloyds</a>'
-            '<a href="#ltv-thread">Core renewal</a><a href="#ltv-perspectives">Perspectives</a></nav>'
+            '<a href="#ltv-landscape">Overview</a><a href="#ltv-inside">Explore</a>'
+            '<a href="#ltv-perspectives">Investigate</a></nav>'
             '<section id="ltv-landscape"><h2>Three businesses, different economics</h2>'
             + _division_cards(inspect)
+            + '<div class="ltv-grid ltv-signals">'
+            + ''.join('<article><h3>' + escape(label) + '</h3><p>' + escape(facts[key].text)
+                      + '</p><small>' + escape(facts[key].period) + '</small></article>'
+                      for label, key in (('Funding', 'LBG-Q326-DEPOSITS'),
+                                         ('Efficiency ambition', 'LBG-A2030-CIR'),
+                                         ('Reporting deadline', 'UK-PRA-REPORT27')) if key in facts)
+            + '</div>'
             + '<div class="ltv-band"><strong>Group funding and earnings</strong>'
             '<span>Deposits, lending income, operating costs and credit losses</span>'
             + _link(ctx, 'landscape', 'economics', 'Inspect Group economics') + '</div></section>'
-            '<section id="ltv-inside"><h2>Customer operations and their dependencies</h2>'
+            '<section id="ltv-inside"><div class="ltv-related"><a href="#ltv-thread">Explore core renewal</a></div><h2>Customer operations and their dependencies</h2>'
             '<div class="ltv-grid ltv-operations">' + _operations(ctx, facts, inspect) + '</div>'
             '<p class="ltv-note">Examples across the Group. Internal system hand-offs and accountable teams remain unverified.</p></section>'
             '<section id="ltv-thread"><h2>Core renewal and the cost of running the bank</h2>'

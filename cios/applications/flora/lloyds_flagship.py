@@ -30,6 +30,16 @@ VIEWS = (
         ('Threat · operating disruption', ('UK-PRA-REPORT27', 'LBG-A2030-PLATFORMS'),
          'Migration disruption could affect service delivery while incident reporting requirements change. Evidence of readiness, entity scope and actual exposure remains limited.'),
     )),
+    ('swot-more', 'SWOT themes', (
+        ('Strength · deposit base', ('LBG-Q326-DEPOSITS', 'LBG-AR25-DEPOSITS'),
+         'Group deposit balances provide a substantial funding base. The December 2025 and September 2026 stocks show scale at two dates. They do not identify organic flows, account mix or Retail funding costs.'),
+        ('Weakness · benefit measurement', ('LBG-AI26-REPORTED', 'LBG-AI26-EXPECTED'),
+         'A reported prior-year AI contribution and a higher management expectation put measurement discipline in focus. Validate net value and control performance before expanding. The figures do not allocate benefits to divisions.'),
+        ('Opportunity · data-enabled service', ('LBG-A2030-DATA', 'LBG-ENVOY-CONTROLS'),
+         'Existing controls and a stated data priority give the Group a basis to test improvements in customer service. Explore adoption and measurable service outcomes before scaling. The affected business units and realised gains remain unverified.'),
+        ('Threat · cost of parallel running', ('LBG-AR25-MIGRATION', 'LBG-A2030-CIR', 'UK-PRA-REPORT27'),
+         'Keeping old and new systems running may put pressure on the Group efficiency ambition. Service-led waves offer one response, with a trade-off between migration pace and continuity. No Lloyds-specific overrun or service disruption is established.'),
+    )),
     ('risk', 'Risks & pressures', (
         ('Time-bound pressure · incident reporting', ('UK-PRA-REPORT27', 'UK-FCA-REPORT27'),
          'Regulatory implementation gives this pressure a date. Lloyds-specific preparedness, service impact and remediation cost remain unverified.'),
@@ -155,11 +165,11 @@ def _benchmark(data, issues, inspect):
             '<dl class="llf-bars">' + bars + '</dl>' + inspect('Peer evidence', items))
 
 
-def render(ctx, data, issues):
+def render(ctx, data, issues, *, inspection=False):
     if data.get('enterprise_twin_id') != 'BK-ENT-001' or p.restricted_metadata(data):
         return ''
     facts = _facts(data)
-    insight = ctx.reading == 'insight'
+    insight = inspection or ctx.reading == 'insight'
     overview = ('Core renewal and application retirement matter to the cost base. Service continuity and control testing '
                 'shape the pace at which savings could be realised. These disclosures establish management direction and '
                 'sector pressure. They do not establish project-level savings, delivery accountability or a causal outcome.'
@@ -170,16 +180,22 @@ def render(ctx, data, issues):
     packets = []
 
     def inspect(title, items, *, content=None):
-        key = f'llf-source-{len(packets)}'
-        packets.append(f'<section id="{key}" tabindex="-1"><h3>{escape(title)}</h3>'
-                       + (content if content is not None else _source_rows(items)) + '</section>')
-        return f'<a class="llf-source-link" href="#{key}" data-llf-source>Sources</a>'
+        if inspection:
+            packets.append(f'<section><h2>{escape(title)}</h2>'
+                           + (content if content is not None else _source_rows(items)) + '</section>')
+        else:
+            p.note_editorial_sources(source for item in items for source in item.sources)
+        return ''
 
     body = ('<section class="llf" aria-label="Lloyds flagship overview">'
             + opening(ctx, facts, STAGES, inspect, overview)
             + '<section aria-labelledby="ltv-perspectives"><h2 id="ltv-perspectives">Perspectives</h2>')
     perspectives = []
     for key, title, rows in VIEWS:
+        if key == 'swot-more':
+            continue
+        if key == 'swot':
+            rows = (*rows, *next(rows for k, _, rows in VIEWS if k == 'swot-more'))
         cards = []
         for index, (label, dependencies, analysis) in enumerate(rows):
             if not all(ref in facts for ref in dependencies) or (key == 'options' and not insight):
@@ -190,7 +206,18 @@ def render(ctx, data, issues):
             if not insight and analysis and key != 'options':
                 detail += '<p class="ltv-note">FLORA Insight explains the implications and limits.</p>'
             cards.append((f'{key}-{index}', label, detail + inspect(label, items)))
-        content = choices('Findings', cards, key)
+        if key == 'swot':
+            quadrants = []
+            for quadrant in ('Strength', 'Weakness', 'Opportunity', 'Threat'):
+                themes = [(ident, text.split(' · ', 1)[1], detail) for ident, text, detail in cards
+                          if text.startswith(quadrant + ' · ')]
+                if themes:
+                    quadrants.append(('quadrant-' + quadrant.lower(), quadrant,
+                                      choices(quadrant + ' themes', themes, 'themes')))
+            content = ('<p class="ltv-note">Opportunities describe market or strategic choices for Lloyds.</p>'
+                       + choices('SWOT quadrants', quadrants, 'swot'))
+        else:
+            content = choices('Findings', cards, key)
         if not cards:
             content = ('<p>Switch to FLORA Insight to compare possible responses.</p>'
                        if key == 'options' and not insight else '<p>Eligible evidence is unavailable for this perspective.</p>')
@@ -205,7 +232,10 @@ def render(ctx, data, issues):
         perspectives.append((key, title, content))
     perspectives.append(('benchmark', 'Peer evidence · service operations', _benchmark(data, issues, inspect)))
     body += choices('Perspectives', perspectives, 'perspectives') + '</section>'
-    if 'treasury-payments' in facts:
-        body += '<p><small>Payments policy excerpt contains HM Treasury information licensed under the Open Government Licence v3.0.</small></p>'
-    return (body + '<details id="llf-sources"><summary>Sources</summary>'
-            + ''.join(packets) + '</details>' + INTERACTIONS + '</section>')
+    if inspection:
+        if 'treasury-payments' in facts:
+            packets.append('<p>Payments policy excerpt contains HM Treasury information licensed under the Open Government Licence v3.0.</p>')
+        href = escape(v.url(ctx), quote=True)
+        return ('<h1>Lloyds flagship research inspection</h1>'
+                f'<p><a href="{href}">Return to the executive view</a></p>' + ''.join(packets))
+    return body + INTERACTIONS + '</section>'

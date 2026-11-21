@@ -41,7 +41,7 @@ with TemporaryDirectory() as directory, MonkeyPatch.context() as patch, sync_pla
             page.screenshot(path=output / f'{phase}-{device}.jpg', quality=83)
             if phase == 'after':
                 expect(panel.get_by_role('heading', name='Lloyds Banking Group', exact=True)).to_be_visible()
-                assert count == 1 and panel.locator('details[open]').count() == 0
+                assert count == 0 and 'Research inspection' not in panel.inner_text()
                 segments = panel.get_by_role('navigation', name='Reporting segments')
                 segments.get_by_role('link', name='Commercial Banking').click()
                 expect(panel.locator('#llf-commercial')).to_be_visible()
@@ -52,14 +52,13 @@ with TemporaryDirectory() as directory, MonkeyPatch.context() as patch, sync_pla
                 thread = panel.get_by_role('navigation', name='Follow the strategic issue')
                 thread.get_by_role('link', name='Operations').click()
                 expect(panel.locator('#llf-stage-operations')).to_be_visible()
-                panel.locator('#llf-stage-operations').get_by_role('link', name='Sources').click()
-                expect(panel.locator('#llf-sources')).to_have_attribute('open', '')
-                expect(panel.locator('#llf-sources h3:visible')).to_have_text('Operations')
-                panel.locator('#llf-sources summary').click()
+                assert page.request.get('/enterprises/lloyds?stream=landscape&detail=flagship&lens=inspection').status == 403
                 perspectives = panel.get_by_role('navigation', name='Perspectives', exact=True)
                 perspectives.get_by_role('link', name='SWOT', exact=True).click()
-                expect(panel.locator('.llf-swot nav a')).to_have_count(4)
-                panel.locator('.llf-swot nav').get_by_role('link', name='Weakness · migration exposure').click()
+                expect(panel.locator('.llf-swot > nav a')).to_have_count(4)
+                panel.get_by_role('link', name='Weakness', exact=True).click()
+                expect(panel.get_by_role('navigation', name='Weakness themes').get_by_role('link')).to_have_count(2)
+                panel.get_by_role('link', name='migration exposure', exact=True).click()
                 expect(panel.locator('#llf-swot-1')).to_contain_text('remaining estate')
                 page.screenshot(path=output / f'swot-{device}.jpg', quality=83)
                 perspectives.get_by_role('link', name='Strategy timeline').click()

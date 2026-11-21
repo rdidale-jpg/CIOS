@@ -23,24 +23,5 @@ if (flagship) {
     window.addEventListener('hashchange', sync);
   }
 
-  const sources = flagship.querySelector('#llf-sources');
-  const packets = [...sources.querySelectorAll(':scope > section')];
-  const showSource = () => {
-    if (!packets.some(packet => '#' + packet.id === location.hash)) return;
-    sources.open = true;
-    for (const packet of packets) packet.hidden = '#' + packet.id !== location.hash;
-    packets.find(packet => !packet.hidden).focus();
-  };
-  sources.querySelector('summary').addEventListener('click', () => {
-    if (!sources.open) for (const packet of packets) packet.hidden = false;
-  });
-  for (const link of flagship.querySelectorAll('[data-llf-source]')) {
-    link.addEventListener('click', () => {
-      sources.open = true;
-      for (const packet of packets) packet.hidden = '#' + packet.id !== link.hash;
-    });
-  }
-  window.addEventListener('hashchange', showSource);
-  showSource();
 }
 })();
