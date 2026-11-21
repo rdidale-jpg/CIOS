@@ -1,0 +1,1843 @@
+{
+  "status": "Static discovery, not a claim these tests were run in SI-1",
+  "code": [
+    {
+      "path": "cios/applications/flora/banking_portfolio.py",
+      "top_level_symbols": [
+        "_pilot_assurance_html",
+        "_page",
+        "_scenario_sizing_html",
+        "_scenario_timing_text",
+        "_scenario_rollup_html",
+        "_scenario_catalogue_html",
+        "ValueEstimate",
+        "SupplierEntry",
+        "Opportunity",
+        "Bank",
+        "estimate_value",
+        "horizon_from_timing",
+        "earliest_entry",
+        "buying_window",
+        "programme_start",
+        "opp",
+        "horizon_from_timing",
+        "horizon_bucket",
+        "earliest_entry",
+        "buying_window",
+        "programme_start",
+        "bank_totals",
+        "bucket_totals",
+        "pipeline_value_note",
+        "audit_event",
+        "_lineage",
+        "_ul",
+        "label",
+        "money",
+        "pipeline",
+        "totals",
+        "portfolio_page",
+        "_opportunity_html",
+        "bank_page",
+        "compare_page",
+        "evidence_page",
+        "safe_unavailable_page",
+        "_supplier",
+        "_with_opp",
+        "_enrich",
+        "_supplier_table",
+        "_pipeline_rollup",
+        "_horizons",
+        "_opportunity_html",
+        "bank_page",
+        "compare_page",
+        "_supplier_cell",
+        "_financial_behaviour_section",
+        "_pressure_section",
+        "_barriers_section",
+        "_reinvention_opportunities_section",
+        "industry_outlook_html",
+        "pestle_view_html",
+        "industry_reinvention_map_html",
+        "opportunity_rollup_html",
+        "portfolio_page",
+        "bank_page",
+        "compare_page",
+        "_reference_model_html",
+        "_journey_html",
+        "_timeline_html",
+        "_positions_html",
+        "_plain_language_html",
+        "pestle_view_html",
+        "portfolio_page",
+        "_opportunity_provenance",
+        "_naming_validation",
+        "_gap_html",
+        "_opportunity_html",
+        "bank_page",
+        "compare_page",
+        "competitor_capability_html",
+        "_opportunity_competitor_mapping_html",
+        "competitors_page",
+        "breadcrumb",
+        "section_nav",
+        "executive_insight_card",
+        "_bank_horizon",
+        "banking_landing_page",
+        "industry_outlook_page",
+        "ai_native_page",
+        "ai_native_capability_model_page",
+        "timeline_page",
+        "portfolio_page",
+        "heatmap_page",
+        "compare_page",
+        "heatmap_detail_page",
+        "bank_page",
+        "opportunity_page",
+        "pipeline_page",
+        "compare_page",
+        "banking_landing_page",
+        "bank_page",
+        "opportunity_page",
+        "evidence_page",
+        "portfolio_page",
+        "bank_page",
+        "compare_page",
+        "bank_page",
+        "compare_page",
+        "_x",
+        "visual_legend",
+        "accessible_data_table_fallback",
+        "reinvention_maturity_rail",
+        "bank_journey_timeline",
+        "industry_force_timeline",
+        "_opp_years",
+        "opportunity_horizon_chart",
+        "pipeline_value_timeline",
+        "portfolio_priority_map",
+        "capability_gap_map",
+        "competitor_capability_html",
+        "_visual_css_marker",
+        "ai_native_page",
+        "timeline_page",
+        "pipeline_page",
+        "portfolio_page",
+        "bank_page",
+        "intelligence_inventory",
+        "intelligence_inventory_html",
+        "explore_all_intelligence_html",
+        "featured_selection_contract_html",
+        "context_legend",
+        "visual_legend",
+        "accessible_data_table_fallback",
+        "short_title",
+        "bank_journey_timeline",
+        "opportunity_horizon_chart",
+        "commercial_pipeline_table",
+        "pipeline_page",
+        "reinvention_maturity_rail",
+        "ai_native_page",
+        "timeline_page",
+        "heatmap_page",
+        "_assessment_score",
+        "competitor_capability_html",
+        "industry_signal_explorer_page",
+        "banking_landing_page",
+        "accessible_data_table_fallback",
+        "reinvention_maturity_rail",
+        "ai_native_page",
+        "heatmap_page",
+        "visual_intro",
+        "global_industry_portfolio_page",
+        "pestle_view_html",
+        "industry_outlook_page",
+        "banking_landing_page",
+        "industry_signal_explorer_page",
+        "ai_native_page",
+        "timeline_page",
+        "heatmap_page",
+        "compare_page",
+        "capability_gap_map",
+        "competitor_capability_html",
+        "pipeline_value_timeline",
+        "pipeline_page",
+        "banking_landing_page",
+        "heatmap_page",
+        "compare_page",
+        "competitor_capability_html",
+        "industry_signal_explorer_page",
+        "opportunity_horizon_chart",
+        "pipeline_value_timeline",
+        "opportunity_horizon_chart",
+        "competitor_capability_html",
+        "banking_landing_page",
+        "industry_outlook_page",
+        "ai_native_page",
+        "heatmap_page",
+        "compare_page",
+        "competitor_capability_html",
+        "pipeline_value_timeline",
+        "banking_landing_page",
+        "heatmap_page",
+        "compare_page",
+        "pipeline_value_timeline",
+        "banking_landing_page",
+        "pipeline_page",
+        "banking_landing_page",
+        "pressure_battery",
+        "_bank_link",
+        "global_industry_portfolio_page",
+        "validate_pestle_distinctiveness",
+        "pestle_view_html",
+        "industry_outlook_page",
+        "validate_signal_semantics",
+        "industry_signal_explorer_page",
+        "ai_native_page",
+        "ai_native_capability_model_page",
+        "timeline_page",
+        "enterprise_tabs",
+        "bank_page",
+        "financial_history_page",
+        "market_reaction_page",
+        "analyst_history_page",
+        "enterprise_event_timeline_page",
+        "research_backlog_page",
+        "global_industry_portfolio_page",
+        "industry_outlook_page",
+        "industry_signal_explorer_page",
+        "ai_native_page",
+        "timeline_page",
+        "bank_page",
+        "industry_outlook_page",
+        "industry_signal_explorer_page",
+        "ai_native_page",
+        "timeline_page",
+        "ai_native_capability_model_page",
+        "bank_page",
+        "timeline_page",
+        "bank_page",
+        "bank_page",
+        "banking_subnav",
+        "_bank_card",
+        "banks_page",
+        "banking_landing_page",
+        "causal_graph_html",
+        "industry_outlook_page",
+        "ai_native_page",
+        "ai_native_capability_model_page",
+        "validate_reinvention_timeline",
+        "timeline_page",
+        "industry_signal_explorer_page",
+        "compare_page",
+        "pipeline_page",
+        "banking_landing_page",
+        "validate_reinvention_timeline",
+        "causal_graph_html",
+        "ai_native_page",
+        "validate_reinvention_timeline",
+        "timeline_page",
+        "timeline_page",
+        "banking_landing_page",
+        "industry_outlook_page",
+        "ai_native_page",
+        "timeline_page",
+        "compare_page",
+        "banking_landing_page",
+        "compare_page",
+        "ai_native_page",
+        "timeline_page",
+        "banking_landing_page",
+        "ai_native_page",
+        "timeline_page",
+        "compare_page",
+        "banking_landing_page",
+        "ai_native_page",
+        "compare_page",
+        "validate_ai_native_comparison",
+        "banking_landing_page",
+        "causal_graph_html",
+        "industry_outlook_page",
+        "ai_native_page",
+        "validate_reinvention_timeline",
+        "timeline_page",
+        "_enterprise_tab_links",
+        "enterprise_tabs",
+        "bank_page",
+        "financial_history_page",
+        "market_reaction_page",
+        "analyst_history_page",
+        "compare_page",
+        "opportunity_page",
+        "banking_landing_page",
+        "industry_outlook_page",
+        "ai_native_page",
+        "timeline_page",
+        "bank_page",
+        "compare_page",
+        "competitors_page",
+        "banking_landing_page",
+        "bank_page",
+        "compare_page",
+        "ai_native_page",
+        "timeline_page"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/visual_v2.py",
+      "top_level_symbols": [
+        "basis",
+        "asset",
+        "url",
+        "selection",
+        "insight",
+        "_sources",
+        "_home",
+        "_pestle",
+        "render"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/registry.py",
+      "top_level_symbols": [
+        "assessment_path",
+        "snapshot_boundary",
+        "enterprise_domain",
+        "EnterpriseReference",
+        "enterprise_reference",
+        "landscape_url"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/memory/models.py",
+      "top_level_symbols": [
+        "now_iso",
+        "normalise",
+        "_effective_date",
+        "stable_observation_fingerprint",
+        "stable_observation_id",
+        "_validate_schema",
+        "Observation",
+        "EnterpriseModelAttribute",
+        "EnterpriseUnknown",
+        "MaterialPressure",
+        "EnterpriseModel",
+        "ModelUpdateResult"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/memory/service.py",
+      "top_level_symbols": [
+        "_domain_for",
+        "_effective_period",
+        "_assertions_conflict",
+        "_evidence_id",
+        "_names",
+        "_metric_key",
+        "FactualClaim",
+        "_financial_model_value",
+        "validate_factual_claim",
+        "decompose_factual_claims",
+        "EvidenceProcessingReport",
+        "ObservationMemoryService"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/blueprint_import/observation_runtime.py",
+      "top_level_symbols": [
+        "StatementSourceSelector",
+        "CandidateObservation",
+        "observation_family",
+        "build_candidate_observation",
+        "_statement_and_fields",
+        "_substantive_value",
+        "_render_value",
+        "_observation_id",
+        "_observation_type"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/model.py",
+      "top_level_symbols": [
+        "_sha",
+        "_index",
+        "load_assessment",
+        "_asset",
+        "claim_segment",
+        "primary_text",
+        "primary_claim_supported",
+        "validate",
+        "freshness",
+        "candidate_claim",
+        "evidence_item",
+        "ranked_candidates",
+        "candidate",
+        "commercial_dimensions",
+        "commercial_candidates",
+        "commercial_capture",
+        "compare_revision"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/macro_intelligence.py",
+      "top_level_symbols": [
+        "Specification",
+        "GeographicArea",
+        "Jurisdiction",
+        "LegalEntityScope",
+        "MarketContext",
+        "ContextEdge",
+        "Selection",
+        "selection",
+        "load_context",
+        "validate_context",
+        "semantic_projection",
+        "exact_entity_identity",
+        "context_spec",
+        "GlobalContextContracts",
+        "context_schema"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/macro_trace.py",
+      "top_level_symbols": [
+        "Alternative",
+        "EntityTrace",
+        "load_traces",
+        "trace_projection",
+        "MacroContextReference",
+        "capture_reference",
+        "validate_reference"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/visual_specs.py",
+      "top_level_symbols": [
+        "local_link",
+        "claim_state",
+        "build_visual_specs",
+        "validate_visual_spec",
+        "build_intelligence_specs"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/unified_views.py",
+      "top_level_symbols": [
+        "routes_for",
+        "specs",
+        "page",
+        "breadcrumb",
+        "home_body",
+        "catalogue",
+        "provenance_notice",
+        "claim_cards",
+        "research_fold",
+        "opportunity_cards",
+        "enterprise_cards",
+        "industry_page",
+        "enterprise_page",
+        "opportunities_body"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/living_map_specs.py",
+      "top_level_symbols": [
+        "load_mapping",
+        "build_living_map",
+        "validate_living_map"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/visual_intelligence_specs.py",
+      "top_level_symbols": [
+        "load_profile",
+        "_derive",
+        "build_intelligence_specs",
+        "validate_intelligence_specs"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/understanding.py",
+      "top_level_symbols": [
+        "load_review",
+        "document_key",
+        "publisher_group",
+        "source_quality",
+        "_claims",
+        "claim_quality",
+        "graph_projection",
+        "relationship_quality",
+        "assess",
+        "before_after",
+        "replay_research",
+        "report_markdown"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/understanding_views.py",
+      "top_level_symbols": [
+        "relationship_visual",
+        "render",
+        "understanding_page"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/intelligence_depth.py",
+      "top_level_symbols": [
+        "available",
+        "assessment",
+        "source_cards",
+        "hypothesis_depth",
+        "executive",
+        "operating_depth",
+        "framework_depth",
+        "coverage_inventory",
+        "decision_register",
+        "coverage_body",
+        "framework_question"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/research_intelligence/buying_evidence.py",
+      "top_level_symbols": [
+        "fingerprint",
+        "load",
+        "_identity",
+        "_projection",
+        "accounts",
+        "available_facts"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/buying_entry_plays.py",
+      "top_level_symbols": [
+        "resolve"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/financial_intelligence/schema.py",
+      "top_level_symbols": [
+        "openai_strict_json_schema",
+        "assert_openai_structured_outputs_schema",
+        "_require_all_object_properties",
+        "ClaimType",
+        "FactState",
+        "NumericFactValue",
+        "TextFactValue",
+        "DateFactValue",
+        "BooleanFactValue",
+        "PageRange",
+        "ExperimentDocument",
+        "FoundationFact",
+        "ProviderFoundationFact",
+        "ProviderFoundationFactSet",
+        "FoundationFactSet",
+        "ExtractionRun",
+        "DocumentUnderstandingProvider",
+        "now_iso"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/financial_intelligence/normalisation.py",
+      "top_level_symbols": [
+        "MetricCatalogueEntry",
+        "_clean_metric_text",
+        "resolve_metric",
+        "canonical_metric",
+        "CanonicalFinancialMetricFact",
+        "CanonicalReportingPeriod",
+        "normalise_reporting_period",
+        "accounting_basis",
+        "measurement_state",
+        "normalise_scale",
+        "_scale_from_evidence",
+        "normalise_amount",
+        "rounding_interval",
+        "rounding_compatible",
+        "display_amount",
+        "_precision",
+        "_is_non_numeric_narrative",
+        "canonicalise_financial_claim"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/financial_intelligence/rapid.py",
+      "top_level_symbols": [
+        "OfficialSource",
+        "CandidateFact",
+        "VerificationException",
+        "RapidEnterpriseProfile",
+        "_empty_profile",
+        "_candidate_to_fact",
+        "_result",
+        "run_rapid_financial_intelligence",
+        "render_financial_pressure_outlook"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/financial_intelligence/candidate_validation.py",
+      "top_level_symbols": [
+        "populated_value_fields",
+        "_safe_candidate",
+        "validation_exception",
+        "_provider_candidate_with_runtime_context",
+        "parse_foundation_fact_candidates"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/financial_intelligence/provider_guard.py",
+      "top_level_symbols": [
+        "ProviderCallViolation",
+        "ProviderCallGuard",
+        "provider_call_guard",
+        "enforce_provider_call_allowed"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/enterprise_canvas/service.py",
+      "top_level_symbols": [
+        "EnterpriseCanvasAccessError",
+        "EnterpriseCanvasNotFoundError",
+        "can_view_enterprise_canvas",
+        "EnterpriseCanvasService"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/enterprise_canvas/access.py",
+      "top_level_symbols": [
+        "EnterpriseCanvasAccessRecord",
+        "EnterpriseCanvasAccessRepository",
+        "_read_records",
+        "repair_blueprint_canvas_access",
+        "repair_enterprise_canvas_access",
+        "can_access_canvas_record"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/enterprise_canvas/models.py",
+      "top_level_symbols": [
+        "CanvasLineageReference",
+        "CanvasAnalyticalProjection",
+        "CanvasLineageInspection",
+        "EnterpriseCanvasHeader",
+        "EnterpriseCanvasTile",
+        "EnterpriseCanvas"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/twin_inspection/enterprise.py",
+      "top_level_symbols": [
+        "_known",
+        "enterprise_inspection_adapter",
+        "_conclusion",
+        "_lineage"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/blueprint_import/material_pressure.py",
+      "top_level_symbols": [
+        "PressureCandidate",
+        "PressureAssessment",
+        "MaterialPressureQualification",
+        "_canonical",
+        "_get",
+        "_descriptor",
+        "_refs",
+        "_date_ok",
+        "_active",
+        "_supported",
+        "candidate_from_source",
+        "semantic_identity",
+        "qualify_candidates",
+        "material_pressure_qualification",
+        "model_pressure_assessments"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/enterprise_intelligence/runtime.py",
+      "top_level_symbols": [
+        "output_schema",
+        "_theme",
+        "deterministic_brief",
+        "EnterpriseIntelligenceRuntime",
+        "safe_fallback",
+        "is_valid_result",
+        "latest_result"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/enterprise_intelligence/retrieval.py",
+      "top_level_symbols": [
+        "_date_ok",
+        "_active",
+        "score_item",
+        "BoundedTwinRetrievalService"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/enterprise_intelligence/validator.py",
+      "top_level_symbols": [
+        "_normalise",
+        "_commercial_assertions",
+        "ClaimValidator"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/offers.py",
+      "top_level_symbols": [
+        "_path",
+        "_load",
+        "_text",
+        "_key",
+        "_actor",
+        "_employer",
+        "_selected",
+        "_persist",
+        "declare_employer",
+        "bind_employer",
+        "revoke_employer",
+        "select_employer",
+        "configure_library",
+        "adopt_library",
+        "_visible",
+        "_record",
+        "_eligible",
+        "snapshot",
+        "save_offer",
+        "transition",
+        "studio_toggle",
+        "compose",
+        "accounts",
+        "assess_fit",
+        "discover",
+        "shortlist_snapshot",
+        "save_shortlist"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/seller_development.py",
+      "top_level_symbols": [
+        "_actor",
+        "_private",
+        "_scope",
+        "_versions",
+        "dependencies",
+        "_current",
+        "_view",
+        "qualification",
+        "records",
+        "_append",
+        "create",
+        "save",
+        "reassess",
+        "handoff"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/sales_pipeline.py",
+      "top_level_symbols": [
+        "SalesValidationError",
+        "now",
+        "_text",
+        "hypothesis",
+        "_path",
+        "_load",
+        "_supported",
+        "qualification",
+        "maturity",
+        "evidence_maturity",
+        "_scope",
+        "_persist",
+        "create_opportunity",
+        "get_opportunity",
+        "list_opportunities",
+        "_amount",
+        "totals",
+        "update_opportunity"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/visual_streams.py",
+      "top_level_symbols": [
+        "Context",
+        "artwork",
+        "geometry",
+        "asset_files",
+        "asset",
+        "resolve",
+        "url",
+        "current_data",
+        "claim_rows",
+        "claim_html",
+        "force_row",
+        "_metric",
+        "_detail",
+        "_proof",
+        "render"
+      ]
+    },
+    {
+      "path": "cios/applications/flora/design_system.py",
+      "top_level_symbols": [
+        "view_scope",
+        "active",
+        "source_note",
+        "context_link",
+        "asset",
+        "head",
+        "section_scale",
+        "header"
+      ]
+    }
+  ],
+  "available_test_modules": [
+    {
+      "path": "tests/test_blueprint_manifest_contract.py",
+      "tests_or_suites": [
+        "test_known_valid_fixture_uses_model_and_real_flora_path",
+        "test_unsupported_version_and_unexpected_fields_fail_at_receipt",
+        "test_generated_schema_prohibits_additional_fields"
+      ]
+    },
+    {
+      "path": "tests/test_dual_speed_financial_intelligence_orchestration.py",
+      "tests_or_suites": [
+        "test_dual_speed_mode_persists_combined_standard_run_and_preserves_rapid_result",
+        "test_dual_speed_progress_and_result_render_from_standard_run_only",
+        "test_dual_speed_fixture_is_not_default",
+        "test_unsupported_mode_still_rejected",
+        "test_slice_2c_success_persists_source_candidates_and_renders",
+        "test_slice_2c_acquisition_failure_does_not_extract",
+        "test_slice_2c_partial_and_zero_extraction_are_honest",
+        "test_default_structured_mode_does_not_invoke_rapid_acquisition",
+        "test_official_source_zero_candidate_result_uses_honest_wording"
+      ]
+    },
+    {
+      "path": "tests/test_enterprise_intelligence_reasoning.py",
+      "tests_or_suites": [
+        "test_retrieval_guards_truth_labels_and_materiality",
+        "test_validation_rejects_invalid_ids_and_requires_recommendation_lineage",
+        "test_runtime_fallback_no_canonical_mutation_and_telemetry",
+        "test_schema_profile_persistence_and_render_quality",
+        "test_canvas_diagnostics_missing_provider_and_no_secret",
+        "RecordingProvider",
+        "test_successful_reasoning_provider_validation_and_transient_store",
+        "test_canvas_diagnostics_configured_provider_ready_without_secret"
+      ]
+    },
+    {
+      "path": "tests/test_financial_intelligence_candidate_validation.py",
+      "tests_or_suites": [
+        "test_candidate_with_two_value_fields_is_rejected_individually",
+        "test_candidate_with_no_value_is_rejected_individually",
+        "test_valid_candidates_same_packet_still_proceed_and_invalid_quarantined",
+        "test_provider_numeric_text_date_and_boolean_map_to_canonical_values",
+        "test_provider_multiple_value_fields_quarantines_only_that_candidate",
+        "test_validation_diagnostics_include_exact_provider_field_locations",
+        "test_stored_packet_one_regression_revalidates_with_runtime_provenance_and_single_provider_validation",
+        "test_entirely_invalid_response_returns_provider_response_invalid_without_unhandled_exception",
+        "test_provider_schema_replaces_canonical_union_for_openai",
+        "test_discriminated_value_representation_accepts_exactly_one_type"
+      ]
+    },
+    {
+      "path": "tests/test_financial_intelligence_grounding_progress.py",
+      "tests_or_suites": [
+        "test_packet_page_one_maps_to_original_pdf_page_three_and_persists_both_refs",
+        "test_packet_local_page_valid_not_rejected_and_out_of_range_quarantined_individually"
+      ]
+    },
+    {
+      "path": "tests/test_financial_intelligence_low_cost_mode.py",
+      "tests_or_suites": [
+        "test_low_cost_defaults_and_overrides",
+        "test_token_count_precedes_model_invocation_and_bounds_request",
+        "test_cost_ceiling_blocks_model_invocation",
+        "test_successful_same_document_can_be_reused_without_provider_call",
+        "test_schema_still_valid_and_no_hard_coded_fallback",
+        "test_production_openai_constraint_requires_2_5_or_later",
+        "test_responses_input_tokens_count_is_used_and_mirrors_extraction",
+        "test_technical_count_failure_allows_one_bounded_nano_request",
+        "test_auth_quota_and_invalid_count_errors_do_not_bypass_controls",
+        "test_actual_usage_and_cost_breakdown_recorded",
+        "test_incomplete_response_records_usage_without_json_parse"
+      ]
+    },
+    {
+      "path": "tests/test_financial_intelligence_normalisation.py",
+      "tests_or_suites": [
+        "test_bn_and_millions_normalise_to_base_units",
+        "test_scale_is_retained_and_missing_scale_blocks_acceptance",
+        "test_packet_one_bn_candidates_are_accepted_and_packet_two_missing_scale_stays_quarantined",
+        "test_duplicate_financial_metrics_are_reconciled_and_counts_balance",
+        "test_accounting_bases_remain_distinct",
+        "test_completed_with_exceptions_language_and_reprocess_without_openai",
+        "test_route_level_golden_financial_twin_without_openai"
+      ]
+    },
+    {
+      "path": "tests/test_financial_intelligence_pdf_navigation.py",
+      "tests_or_suites": [
+        "test_corrupt_embedded_text_fails_quality_gate",
+        "test_stronger_parser_selected_when_it_produces_better_text",
+        "test_corrupt_text_cannot_enter_keyword_selection",
+        "test_visual_navigation_invoked_and_preserves_page_numbers",
+        "test_bt_golden_fixture_produces_non_empty_financial_plan_and_domains",
+        "test_page_packets_remain_bounded",
+        "test_terminal_failed_progress_never_displays_working",
+        "test_missing_historic_progress_run_never_crashes",
+        "test_zero_packets_cannot_complete_status",
+        "test_missing_progress_status_returns_terminal_safe_404_payload",
+        "test_missing_progress_page_terminal_browser_script_does_not_redirect_none"
+      ]
+    },
+    {
+      "path": "tests/test_financial_intelligence_provider_logging.py",
+      "tests_or_suites": [
+        "test_handled_provider_failures_log_same_support_reference_and_distinct_types",
+        "test_unexpected_provider_exception_logs_traceback",
+        "test_production_logging_configures_console_handler"
+      ]
+    },
+    {
+      "path": "tests/test_financial_intelligence_real_pdf_packets.py",
+      "tests_or_suites": [
+        "test_pymupdf_is_declared_as_production_dependency",
+        "test_placeholder_extraction_messages_never_become_candidate_facts",
+        "test_selected_pages_are_copied_to_non_empty_packet_with_original_mapping",
+        "test_provider_input_contains_pdf_file_data_not_page_number_only",
+        "test_zero_byte_or_zero_page_packets_fail_locally"
+      ]
+    },
+    {
+      "path": "tests/test_financial_intelligence_section_packets.py",
+      "tests_or_suites": [
+        "test_token_count_payload_excludes_max_output_but_generation_keeps_allowance",
+        "test_relevant_pages_selected_with_original_page_numbers",
+        "test_full_pdf_is_never_submitted_as_one_extraction_request_and_every_packet_preflighted",
+        "test_packets_above_ceiling_are_split",
+        "test_packet_results_are_merged_and_deduplicated",
+        "test_generic_cover_pages_are_not_selected_without_financial_evidence",
+        "test_empty_final_selection_fails_closed_without_openai",
+        "test_empty_primary_selection_invokes_bounded_fallback",
+        "test_page_numbers_preserved_through_packet_lineage",
+        "test_bt_golden_manifest_covers_at_least_three_financial_domains"
+      ]
+    },
+    {
+      "path": "tests/test_financial_intelligence_support_diagnostics.py",
+      "tests_or_suites": [
+        "test_deployed_revision_and_unknown",
+        "test_early_retrieval_failure_diagnostic_sanitises_url",
+        "test_parsing_and_extraction_diagnostics_retain_prior_state",
+        "test_support_diagnostic_view_requires_authorisation",
+        "test_persisted_queued_progress_cached_duplicate_success_failure_have_diagnostics",
+        "test_filesystem_paths_redacted_recursively_and_business_slashes_preserved",
+        "test_support_html_and_download_redact_paths_and_do_not_reacquire_or_change_canonical",
+        "test_product_result_pages_show_safe_support_report_for_failed_and_partial",
+        "test_safe_support_report_product_download_authz_persisted_no_reacquire_no_ai",
+        "test_missing_persisted_support_report_has_friendly_message",
+        "test_safe_support_report_support_token_and_malformed_run_id",
+        "test_rendered_product_support_report_link_is_safe_get_and_read_only",
+        "test_result_and_support_report_share_session_access_and_missing_diagnostic"
+      ]
+    },
+    {
+      "path": "tests/test_flora_ai_financial_report_review.py",
+      "tests_or_suites": [
+        "test_production_openai_adapter_imports_with_sdk_available",
+        "test_missing_openai_sdk_is_deployment_defect",
+        "test_provider_diagnostic_sanitises_secret_before_logging",
+        "test_ai_financial_report_review_applies_accepted_claim",
+        "test_review_page_exposes_accept_amend_reject",
+        "test_financial_intelligence_records_source_retrieval_failure",
+        "test_financial_intelligence_records_provider_not_configured",
+        "test_outcome_summary_uses_plain_language_and_retry_for_zero_changes",
+        "test_financial_intelligence_refresh_creates_missing_nested_directories",
+        "test_financial_intelligence_persistence_failure_is_not_provider_failure",
+        "test_provider_request_failures_remain_classified",
+        "test_missing_financial_intelligence_run_returns_usable_page",
+        "test_old_financial_intelligence_url_does_not_raise",
+        "test_financial_intelligence_navigation_uses_start_page_not_missing_historic_run",
+        "test_newly_written_financial_intelligence_run_can_be_loaded",
+        "test_financial_intelligence_reads_and_writes_use_same_resolved_root",
+        "test_flora_data_dir_defaults_to_render_persistent_pilot_storage",
+        "test_provider_timeout_is_distinct_and_records_safe_diagnostic",
+        "test_openai_governed_pdf_url_uses_file_url_without_files_api",
+        "test_openai_inaccessible_file_url_uses_base64_fallback",
+        "test_invalid_and_oversized_pdfs_fail_before_provider_request",
+        "test_financial_intelligence_page_requires_no_manual_bt_upload",
+        "test_section_packet_diagnostics_page_reasons_and_partial_success",
+        "test_duplicate_needs_attention_and_failed_headline_are_safe",
+        "test_progress_run_deduplicates_refresh_clicks"
+      ]
+    },
+    {
+      "path": "tests/test_flora_banking_enterprise_intelligence.py",
+      "tests_or_suites": [
+        "test_complete_banking_run_succeeds_and_outputs",
+        "test_authority_and_source_assets_unchanged",
+        "test_hallucinated_asset_id_rejected",
+        "test_missing_enterprise_specificity_and_named_executive_are_downgraded",
+        "test_unknowns_and_contradictions_propagate_to_brief",
+        "test_recommendation_gate_prevents_proposal_level_action",
+        "test_lineage_resolves_from_recommendation_to_observations",
+        "test_failure_safety_and_invalid_structured_output",
+        "test_fitness_controls"
+      ]
+    },
+    {
+      "path": "tests/test_flora_banking_increment45_visual_intelligence.py",
+      "tests_or_suites": [
+        "test_ai_native_maturity_journey_renders_as_visual_progression",
+        "test_all_five_banks_appear_on_shared_time_axis_with_ranges",
+        "test_opportunity_start_duration_values_and_supplier_markers_render",
+        "test_pipeline_values_reconcile_and_value_states_not_conflated",
+        "test_supplier_and_event_markers_do_not_invent_dates_or_contract_ownership",
+        "test_visuals_have_accessible_text_keyboard_and_print_fallbacks",
+        "test_portfolio_capability_and_competitor_visual_artifacts_render",
+        "test_visual_elements_link_to_drill_down_and_are_deterministic"
+      ]
+    },
+    {
+      "path": "tests/test_flora_blueprint_import_executive_review.py",
+      "tests_or_suites": [
+        "test_review_is_executive_first_and_technical_content_is_collapsed",
+        "test_review_preserves_trust_and_business_domain_paths",
+        "test_business_record_table_leads_with_owner_supplied_meaning",
+        "test_disclosures_use_native_keyboard_accessible_details"
+      ]
+    },
+    {
+      "path": "tests/test_flora_blueprint_import_interface.py",
+      "tests_or_suites": [
+        "test_authorised_upload_validation_history_and_no_git_write",
+        "test_upload_security_rejections_and_accessible_entry",
+        "test_validation_review_decline_approval_completion_and_canvas_link",
+        "test_owner_can_upload_review_and_import_without_explicit_blueprint_roles",
+        "test_denied_uploads_have_role_aware_message_audit_and_no_state",
+        "test_denied_upload_screen_shows_live_diagnostics_for_non_owner",
+        "test_owner_denial_gets_owner_recovery_not_admin",
+        "test_owner_enterprise_boundary_still_blocks_cross_workspace",
+        "test_owner_cookie_upload_audit_captures_authorisation_decision",
+        "test_denied_entry_page_renders_when_audit_persistence_fails",
+        "test_inspection_failure_exposes_safe_staging_persistence_diagnostic",
+        "test_unavailable_var_data_style_path_no_longer_crashes_denied_page",
+        "test_writable_configured_directory_records_authorisation_audit",
+        "test_owner_and_non_owner_authorisation_outcomes_unchanged_by_audit_fix",
+        "test_anonymous_blueprint_diagnostics_stop_after_account_failure",
+        "test_blueprint_get_and_post_share_cookie_session_identity",
+        "test_failed_validation_disables_review_and_promotion",
+        "test_blueprint_execution_trace_visible_on_validation_review_and_no_secrets",
+        "test_failed_blueprint_execution_trace_disables_promotion_and_shows_nearest",
+        "test_large_review_is_non_blocking_paginated_reusable_and_safe",
+        "test_review_plan_failure_renders_normal_page",
+        "test_inspection_only_user_can_validate_but_cannot_review_or_promote",
+        "test_account_failure_summary_and_stage_table_use_same_canonical_stage",
+        "test_upload_page_shows_current_deployed_change_acceptance_panel",
+        "test_upload_page_flags_deployment_problem_for_wrong_branch",
+        "test_deployment_status_merge_commit_scenario",
+        "test_deployment_status_squash_merge_scenario",
+        "test_deployment_status_later_main_commit_scenario",
+        "test_deployment_status_pending_scenario",
+        "test_deployment_status_wrong_branch_service_scenario",
+        "test_deployment_status_missing_metadata_scenario",
+        "test_deployment_status_ui_only_change_does_not_reimport",
+        "test_deployment_status_material_semantic_change_requires_reimport",
+        "test_functional_acceptance_failure_blocks_test_with_exact_reason",
+        "test_functional_pass_with_incomplete_metadata_is_ready_for_human_test",
+        "test_read_only_canonical_projection_change_never_requires_reimport"
+      ]
+    },
+    {
+      "path": "tests/test_flora_blueprint_import_promotion.py",
+      "tests_or_suites": [
+        "test_authorised_plan_approval_and_unauthorised_rejection",
+        "test_plan_change_invalidation_after_approval",
+        "test_successful_evidence_create_update_mapping_unchanged_duplicate_and_skips",
+        "test_conflict_blocks_approval_and_unresolved_blocks_execution",
+        "test_repeat_execution_idempotency_and_no_duplicate_records",
+        "test_atomic_failure_rolls_back_partial_canonical_state",
+        "test_no_enterprise_canvas_or_new_projection_canonical_types",
+        "test_accepted_contradiction_creates_preserves_payload_and_is_idempotent",
+        "test_reconciliation_mismatch_blocks_approval_controls",
+        "test_observation_promotion_completes_canonical_contract_and_preserves_lineage",
+        "test_observation_date_fallback_order_and_no_import_timestamp",
+        "test_observation_missing_required_data_blocks_whole_promotion_and_retry_succeeds",
+        "test_authenticated_workspace_owner_context_survives_observation_approval_flow",
+        "test_compound_observation_detected_before_promotion_and_excluded_from_totals",
+        "test_constructor_validation_blocks_approval_before_any_promotion",
+        "test_atomic_observation_promotes_and_retry_succeeds_without_duplicates",
+        "test_deterministic_split_helpers_preserve_stable_child_ids_and_lineage_values",
+        "test_ambiguous_compound_observation_is_quarantined_not_rewritten",
+        "test_real_mod_workbook_atomicity_scan_reports_every_failing_observation",
+        "test_blueprint_persistence_contract_accounts_all_mod_classes",
+        "test_review_candidate_reconciliation_distinct_from_mutation_count"
+      ]
+    },
+    {
+      "path": "tests/test_flora_blueprint_import_registry.py",
+      "tests_or_suites": [
+        "test_successful_package_receipt_checksum_inventory_import_run_and_audit",
+        "test_duplicate_receipt_returns_existing_record_and_logs_duplicate",
+        "test_original_archive_is_preserved_immutably",
+        "test_invalid_input_rejected_and_no_acceptance_record",
+        "test_unsafe_zip_member_rolls_back_acceptance_records",
+        "test_receipt_does_not_mutate_canonical_memory",
+        "test_access_control_for_blueprint_package_receipt",
+        "test_cios_owner_inherits_blueprint_import_permissions",
+        "test_canonical_owner_alias_requires_verified_context_and_encoded_cookie_is_rejected"
+      ]
+    },
+    {
+      "path": "tests/test_flora_blueprint_import_relevance.py",
+      "tests_or_suites": [
+        "test_owner_backed_core_and_sub_sector_items_are_primary_eligible",
+        "test_adjacent_out_of_scope_and_unresolved_are_never_primary",
+        "test_labels_and_keywords_do_not_infer_relevance_or_twin_link",
+        "test_explicit_status_without_relationship_remains_ineligible",
+        "test_unknown_status_is_preserved_as_presentation_unresolved",
+        "test_mixed_industry_render_groups_and_explains_every_statement",
+        "test_quarantined_contradiction_is_not_rendered_as_primary",
+        "test_promotion_impact_is_broken_down_by_relevance_without_changing_mutations"
+      ]
+    },
+    {
+      "path": "tests/test_flora_blueprint_import_restage.py",
+      "tests_or_suites": [
+        "test_restage_action_visible_to_owner_and_hidden_for_unauthorised",
+        "test_restage_reuses_archive_versions_invalidates_review_and_generates_new_review",
+        "test_restage_idempotency_and_failure_preserves_prior_active",
+        "test_progress_page_renders_large_package",
+        "test_regenerate_current_validation_quarantines_non_atomic_and_blocks_stale_approval"
+      ]
+    },
+    {
+      "path": "tests/test_flora_blueprint_import_review_planning.py",
+      "tests_or_suites": [
+        "test_authorised_and_unauthorised_review_decision_creation",
+        "test_mapping_to_existing_proposed_create_update_unchanged_duplicate_conflict_contradiction_unresolved",
+        "test_rejected_deferred_quarantine_unsupported_and_projection_blocked",
+        "test_idempotent_repeated_dry_runs_deterministic_identities_and_no_canonical_mutation"
+      ]
+    },
+    {
+      "path": "tests/test_flora_blueprint_import_validation.py",
+      "tests_or_suites": [
+        "test_valid_package_validation_and_supported_record_staging",
+        "test_staging_summary_failure_is_safe_diagnosable_and_retryable",
+        "test_validation_page_shows_safe_deployed_commit",
+        "test_manifest_to_registry_mismatch_is_rejected_inspectably",
+        "test_checksum_mismatch_stops_processing",
+        "test_missing_required_file_duplicate_and_unsafe_archive_paths",
+        "test_unsupported_projection_unresolved_partial_and_idempotent",
+        "test_authorised_unauthorised_failed_cleanup_and_no_canonical_mutation",
+        "test_manifest_missing_nested_duplicate_invalid_json_and_schema_messages",
+        "test_xlsx_relationship_targets_resolve_without_xl_duplication",
+        "test_xlsx_multiple_sheets_ids_staging_and_macro_warning",
+        "test_xlsx_missing_malformed_and_traversal_targets_fail_safely",
+        "test_xlsx_relative_parent_target_uses_source_part_semantics",
+        "test_mod_blueprint_equivalent_workbook_proceeds_beyond_inspection",
+        "test_workbook_execution_trace_records_selection_relationship_lookup_and_hash",
+        "test_workbook_execution_trace_survives_missing_part_keyerror_and_malformed_xml",
+        "test_empty_cached_summary_is_revalidated_to_populate_canonical_trace_store"
+      ]
+    },
+    {
+      "path": "tests/test_flora_buying_triggers_591.py",
+      "tests_or_suites": [
+        "test_source_registry_and_existing_evidence_observation_contracts",
+        "test_five_by_ten_real_assessments_never_invent_qualification",
+        "test_offer_specific_positive_counter_and_unknown_contrasts",
+        "test_publication_effective_and_verification_dates_are_distinct",
+        "test_decay_contradiction_supersession_and_policy_sensitivity_without_mutation",
+        "test_private_approval_scope_and_exclusions_are_not_overridden",
+        "test_both_modes_use_one_engine_and_permissions_filter_extended_accounts",
+        "test_reviewed_shortlist_private_cas_snapshot_audit_and_no_pipeline",
+        "test_shortlist_stale_forged_and_unreviewed_writes_leave_bytes_unchanged",
+        "test_shortlist_rollback_on_persist_failure_and_enterprise_permission_revocation",
+        "test_http_discovery_scoping_csrf_escaping_and_read_only_get",
+        "test_source_integrity_rejects_unreviewed_input",
+        "test_candidate_rights_publisher_dates_and_acceptance_fail_closed",
+        "test_matcher_and_source_adapter_have_no_network_or_canonical_write",
+        "test_enterprise_entry_plays_require_their_retained_positive_basis",
+        "test_diagnostics_are_substantively_distinct_and_do_not_upgrade_research_only",
+        "test_changed_entry_play_revision_invalidates_saved_review_without_pipeline_write"
+      ]
+    },
+    {
+      "path": "tests/test_flora_deterministic_financial_refresh.py",
+      "tests_or_suites": [
+        "test_standard_refresh_fails_closed_without_ai_fallback",
+        "test_provider_guard_blocks_call_before_transmission",
+        "test_route_level_golden_persists_evidence_and_idempotent",
+        "test_structured_standard_refresh_uses_structured_adapter_and_no_fallback",
+        "test_structured_missing_source_preserves_existing_trusted_state",
+        "test_structured_missing_source_marks_fresh_ephemeral_absence",
+        "test_malformed_legacy_pdf_candidates_cannot_leak_into_structured_result"
+      ]
+    },
+    {
+      "path": "tests/test_flora_enterprise_canvas.py",
+      "tests_or_suites": [
+        "test_enterprise_canvas_read_model_foundation",
+        "test_canvas_handles_missing_data_and_blocks_unauthorised_access",
+        "test_enterprise_canvas_organisation_experience_renders_human_usable_page",
+        "test_enterprise_canvas_tile_detail_plain_language_and_lineage",
+        "test_enterprise_canvas_ui_blocks_unauthorised_and_handles_empty",
+        "test_missing_canvas_does_not_fall_back_to_synthetic_enterprise",
+        "test_home_page_does_not_expose_synthetic_canvas_route",
+        "test_enterprise_canvas_lineage_inspection_read_only_accessible_and_complete",
+        "test_enterprise_canvas_lineage_blocks_unauthorised_and_distinguishes_missing_from_error",
+        "test_blueprint_owner_canvas_access_repair_preserves_workspace_enterprise_acl_and_link",
+        "test_existing_blueprint_canvas_is_repaired_not_duplicated_and_no_reimport_required",
+        "test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+        "test_twin_detail_route_is_reserved_for_shell_while_audit_redirect_is_preserved",
+        "test_unauthorised_and_empty_governed_twin_registry",
+        "test_mod_executive_commercial_canvas_read_model"
+      ]
+    },
+    {
+      "path": "tests/test_flora_enterprise_canvas_feedback.py",
+      "tests_or_suites": [
+        "test_authorised_feedback_submission_and_tile_link",
+        "test_unauthorised_submission_rejected",
+        "test_plain_feedback_actions",
+        "test_human_supplied_knowledge_requires_and_preserves_label",
+        "test_unknown_contradiction_and_evidence_request_candidates",
+        "test_confidentiality_handling_and_status_display",
+        "test_review_state_change_and_unauthorised_review_rejection",
+        "test_append_only_audit_and_supersession_not_silent_edit",
+        "test_no_canonical_mutation_from_feedback_submission"
+      ]
+    },
+    {
+      "path": "tests/test_flora_enterprise_memory.py",
+      "tests_or_suites": [
+        "test_observation_requires_evidence_or_human_provenance",
+        "test_speculation_recommendation_and_non_atomic_language_are_rejected",
+        "test_evidence_to_observation_is_durable_idempotent_and_corroborates",
+        "test_unrelated_evidence_creates_distinct_observation",
+        "test_model_update_retains_lineage_confidence_dates_and_prior_state",
+        "test_unknowns_and_contradictions_are_preserved",
+        "test_model_backed_output_reads_memory_and_exposes_lineage",
+        "test_versioned_fingerprint_uses_effective_date_not_collection_timestamp",
+        "test_schema_versions_and_jsonl_corruption_are_detected",
+        "test_enterprise_paths_are_safe_stable_and_collision_resistant",
+        "test_memory_survives_reconstruction_and_report_deletion",
+        "test_duplicate_memory_implementation_is_not_active",
+        "test_compound_financial_sentence_decomposes_to_atomic_claims",
+        "test_organisation_strategy_and_leadership_decompose_separately",
+        "test_invalid_claim_isolated_and_successes_persist",
+        "test_evidence_primary_dispositions_reconcile_without_secondary_inflation"
+      ]
+    },
+    {
+      "path": "tests/test_flora_enterprise_understanding.py",
+      "tests_or_suites": [
+        "test_assessments_are_reproducible_scoped_and_read_only",
+        "test_all_evidence_classes_and_secondary_never_relabelled_primary",
+        "test_independent_publisher_repeating_management_is_not_independent_outcome_verification",
+        "test_genuinely_reviewed_independent_origins_can_be_reported_without_acceptance",
+        "test_fabricated_corroboration_cannot_inflate_evidence",
+        "test_query_variants_and_publisher_names_cannot_create_independence",
+        "test_support_review_cannot_be_reused_for_other_scope_or_assertion",
+        "test_industry_material_cannot_become_enterprise_proof",
+        "test_wrong_locator_and_tampered_passage_are_not_direct_support",
+        "test_factual_supplier_edge_is_explicit_historical_and_not_causal",
+        "test_shared_context_and_two_evidenced_endpoints_do_not_prove_causation",
+        "test_inference_needs_real_passages_not_context_flags",
+        "test_contradiction_and_supersession_keep_predecessor_and_counterevidence",
+        "test_missing_and_foreign_endpoints_are_unknown_not_fabricated_nodes",
+        "test_arbitrary_factual_conclusion_cannot_borrow_true_support",
+        "test_before_after_distinguishes_understanding_from_record_counts",
+        "test_cycle_revisit_preserves_history_and_requires_bound_reason",
+        "test_finite_public_understanding_route_and_navigation",
+        "test_html_safety_and_conclusion_lineage_are_enforced",
+        "test_cross_enterprise_source_and_baseline_replacement_are_rejected",
+        "test_source_supersession_retains_history_without_current_corroboration",
+        "test_unverified_counterevidence_cannot_mark_relationship_contradicted",
+        "test_future_and_index_only_passages_never_establish_exact_support",
+        "test_checkpoint_replay_and_cli_export_are_reproducible",
+        "test_contradictory_passage_is_retained_without_automatic_invalidation"
+      ]
+    },
+    {
+      "path": "tests/test_flora_financial_canonicalisation.py",
+      "tests_or_suites": [
+        "test_metric_aliases_resolve_and_unknown_metrics_do_not_slugify",
+        "test_period_texts_resolve_to_one_identity_and_original_text_is_retained",
+        "test_decimal_arithmetic_exact_values_and_no_float_artifacts",
+        "test_rounding_compatibility_examples_and_incompatible_values",
+        "test_accounting_basis_not_invented_and_narrative_guidance_excluded"
+      ]
+    },
+    {
+      "path": "tests/test_flora_financial_fact_capture_v2.py",
+      "tests_or_suites": [
+        "test_route_level_golden_deterministic_refresh_second_refresh_zero_openai"
+      ]
+    },
+    {
+      "path": "tests/test_flora_financial_table_adapter.py",
+      "tests_or_suites": [
+        "test_pdf_financial_table_adapter_extracts_visible_row_column_period_and_table_scale",
+        "test_table_level_millions_context_propagates_and_scale_is_not_inferred_from_magnitude",
+        "test_page_wide_keyword_proximity_does_not_create_candidate_without_table_structure",
+        "test_strict_table_rejects_unit_only_year_percentage_and_blank_cells",
+        "test_guidance_and_future_narrative_do_not_become_actual_candidates",
+        "test_accepted_candidate_preserves_complete_table_evidence_bundle"
+      ]
+    },
+    {
+      "path": "tests/test_flora_financial_twin_hardening.py",
+      "tests_or_suites": [
+        "test_provider_labels_do_not_slugify_and_aliases_resolve",
+        "test_canonical_path_numeric_value_and_display_are_separate",
+        "test_narrative_and_ambiguous_basis_block_acceptance",
+        "test_multiple_packet_facts_are_not_truncated_or_overwritten"
+      ]
+    },
+    {
+      "path": "tests/test_flora_global_macro.py",
+      "tests_or_suites": [
+        "test_seven_primary_excerpts_reuse_unaccepted_semantic_and_evidence_contracts",
+        "test_gb_and_fr_reuse_one_industry_model_without_copying_or_mutating_research",
+        "test_global_cyber_is_one_force_with_separately_scoped_country_edges",
+        "test_navigation_region_is_not_legal_jurisdiction",
+        "test_uk_instruments_do_not_propagate_to_french_procurement_or_enterprises",
+        "test_fr_sustainability_retains_eu_enactment_vs_national_transposition_unknown",
+        "test_parent_identity_never_proves_child_identity_or_inherits_an_obligation",
+        "test_verified_entity_identity_requires_explicit_evidence",
+        "test_proposed_bill_cannot_be_upgraded_to_enacted_duty",
+        "test_source_passage_identity_and_digest_cannot_drift",
+        "test_ambiguous_or_unregistered_contexts_fail_closed",
+        "test_public_macro_catalogue_never_accepts_private_selectors_or_prefixes",
+        "test_all_three_macro_routes_are_explicitly_public_and_bound_to_repo_data",
+        "test_seller_fit_is_ephemeral_not_customer_demand_or_territorial_permission",
+        "test_unsupported_category_is_an_explicit_research_gap_not_zero_risk",
+        "test_existing_hypotheses_are_only_thematic_associations_with_evidence_and_no_new_ids",
+        "test_generated_contract_schema_matches_the_reusable_models",
+        "test_public_journeys_do_not_enumerate_or_modify_private_pipeline",
+        "test_invalid_public_context_is_a_controlled_error_not_server_failure",
+        "test_selected_page_has_one_inspector_and_keeps_deep_research_on_demand",
+        "test_fr_category_defaults_to_local_evidence_without_transferring_uk_policy",
+        "test_french_reference_switched_to_uk_retains_unknown_scope_and_correct_explanation"
+      ]
+    },
+    {
+      "path": "tests/test_flora_macro_enterprise_v2.py",
+      "tests_or_suites": [
+        "test_new_cut_retains_source_truth_and_reuses_semantic_owner",
+        "test_separate_edge_decisions_do_not_collapse_identity_into_demand",
+        "test_unreviewed_context_does_not_inherit_entity_or_trace",
+        "test_france_has_national_text_but_no_entity_or_transplanted_candidate",
+        "test_uk_investigates_ongoing_resilience_not_new_deadline_or_bank_deficiency",
+        "test_trace_and_source_tampering_fails_closed",
+        "test_reference_is_deterministic_server_derived_and_not_a_persistence_payload",
+        "test_caller_modified_reference_rejected",
+        "test_reference_does_not_create_unreviewed_hypothesis_links",
+        "test_public_trace_cannot_read_private_records_or_rewrite_capture",
+        "test_one_concise_panel_and_deliberate_full_dossier",
+        "test_original_opportunity_identities_and_scope_stay_intact"
+      ]
+    },
+    {
+      "path": "tests/test_flora_material_pressure_lifecycle.py",
+      "tests_or_suites": [
+        "test_verified_pressure_qualifies_and_survives_repository_reconstruction",
+        "test_missing_evidence_fails_even_when_candidate_flags_are_true",
+        "test_ineligible_evidence_is_not_current_support",
+        "test_ineligible_canonical_source_cannot_qualify",
+        "test_paraphrases_reconcile_via_governed_semantic_basis_not_words",
+        "test_distinct_supported_conditions_are_not_merged",
+        "test_uncertain_equivalence_is_unresolved_not_silently_split_or_merged",
+        "test_corroboration_and_identical_replay_do_not_duplicate_pressure_history",
+        "test_core_same_period_contradiction_is_unresolved_and_keeps_facts",
+        "test_non_core_contradiction_is_linked_without_invalidating_core",
+        "test_lower_confidence_evidence_weakens_existing_pressure",
+        "test_resolution_retains_original_condition_history_and_lineage",
+        "test_industry_or_other_enterprise_evidence_cannot_be_borrowed",
+        "test_plain_observation_does_not_automatically_become_pressure",
+        "test_pressure_creation_never_creates_commercial_domain_objects",
+        "test_approved_import_uses_same_owner_and_bounded_retrieval",
+        "test_existing_model_json_without_pressures_remains_readable",
+        "test_caller_cannot_assert_semantics_or_consequence_without_source_support",
+        "test_missing_semantic_basis_remains_unresolved",
+        "test_rejected_assessment_is_diagnostic_not_a_new_durable_pressure",
+        "test_governed_negative_gate_cannot_be_overridden_by_caller",
+        "test_unknowns_are_resolved_scoped_and_preserved",
+        "test_unresolvable_counter_evidence_fails_lineage",
+        "test_numeric_metric_alone_is_not_material_consequence",
+        "test_canonical_fact_input_uses_same_enterprise_model_owner",
+        "test_explicit_supersession_keeps_history_and_cannot_be_replayed_current",
+        "test_resolved_pressure_cannot_be_revived_by_unrelated_replay",
+        "test_older_source_replay_cannot_restore_weakened_confidence",
+        "test_superseded_observation_relation_excludes_predecessor",
+        "test_read_models_revalidate_current_evidence_without_writing",
+        "test_unresolved_pressure_is_retrieved_as_conflict_not_qualified_truth",
+        "test_strengthening_retains_prior_confidence_and_evidence",
+        "test_different_period_change_does_not_create_false_pressure_conflict",
+        "test_historical_retrieval_excludes_future_pressure_diagnostics",
+        "test_failed_pressure_persistence_uses_existing_import_compensation",
+        "test_governed_requalification_requires_all_gates_and_preserves_resolution",
+        "test_existing_enterprise_memory_view_exposes_assurance_diagnostics",
+        "test_source_identity_mutation_requires_explicit_reconciliation",
+        "test_caller_cannot_omit_canonical_core_unknown_references",
+        "test_caller_cannot_omit_canonical_core_contradictions",
+        "test_future_effective_source_provenance_cannot_support_historical_pressure"
+      ]
+    },
+    {
+      "path": "tests/test_flora_offers_v1.py",
+      "tests_or_suites": [
+        "test_private_version_persistence_and_audit",
+        "test_private_offers_are_not_visible_to_other_users_even_owner",
+        "test_employer_name_and_owner_role_do_not_confer_binding",
+        "test_binding_rejects_nonmembers_and_requires_reference",
+        "test_approval_separate_from_authorship_and_revision",
+        "test_reviewer_cannot_approve_their_own_offer",
+        "test_parent_protected_fields_cannot_change",
+        "test_variation_lineage_and_stale_parent",
+        "test_review_outcomes_are_scoped_and_versioned",
+        "test_retired_offer_not_reused",
+        "test_optimistic_concurrency_and_no_extra_version",
+        "test_symmetric_discovery_has_identical_assessment_and_deduplication",
+        "test_cutoff_filters_observations_and_counters_and_changes_identity",
+        "test_pure_matcher_is_repeatable_and_rejects_policy_override",
+        "test_mission_exclusion_and_version_are_inputs",
+        "test_account_permission_boundary_filters_private_assessment",
+        "test_studio_default_off_explicit_scope_and_grounded_private_composition",
+        "test_studio_rejects_unapproved_unreferenced_or_duplicate_components",
+        "test_composite_cannot_publish_with_stale_components",
+        "test_no_pipeline_or_canonical_mutations_from_offer_workflows",
+        "test_binding_revocation_invalidates_selected_context",
+        "test_membership_revocation_denies_service",
+        "test_write_and_audit_failure_roll_back",
+        "test_real_http_authentication_csrf_origin_and_form_validation",
+        "test_http_rejects_unrecognised_routes_and_selectors",
+        "test_forged_headers_confer_no_offer_access",
+        "test_offer_text_is_escaped_in_browser",
+        "test_source_adapter_preserves_existing_status_and_no_invented_observations",
+        "test_offer_relevance_is_context_sensitive_without_opaque_score",
+        "test_expired_recent_auth_cannot_approve_or_change_employer",
+        "test_approval_does_not_override_component_or_account_access",
+        "test_composition_requires_explicit_account_and_keeps_candidate_lineage",
+        "test_match_and_studio_make_no_network_or_paid_calls",
+        "test_selected_employer_isolated_when_same_user_changes_workspace",
+        "test_concurrent_edit_cannot_overwrite_a_newer_version",
+        "test_composite_edit_preserves_target_and_component_lineage",
+        "test_approved_components_without_proof_references_cannot_compose",
+        "test_seller_cannot_modify_or_withdraw_employer_approved_master",
+        "test_delegated_reviewer_can_draft_master_revision_but_not_self_approve",
+        "test_grandparent_withdrawal_invalidates_nested_variations",
+        "test_changed_upstream_source_snapshot_requires_policy_reconciliation",
+        "test_fresh_owner_can_declare_company_in_browser_without_imported_twin",
+        "test_declare_employer_preserves_existing_profile_and_does_not_grant_authority"
+      ]
+    },
+    {
+      "path": "tests/test_flora_pilot_blueprint_review.py",
+      "tests_or_suites": [
+        "test_pilot_upload_review_and_dispositions_do_not_grant_promotion",
+        "test_non_pilot_workspace_and_capability_checks_are_unchanged"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_01d_final_acceptance.py",
+      "tests_or_suites": [
+        "test_native_sqlite_contention_precedes_rollback_and_feedback_commit",
+        "test_concurrent_feedback_appends_have_no_lost_records_or_audits",
+        "test_concurrent_actor_profiles_preserve_both_keys_in_shared_file",
+        "test_previously_accepted_feedback_survives_unrelated_failed_profile_commit",
+        "test_http_cleanup_denials_preserve_every_protected_file",
+        "test_http_recent_scoped_cleanup_commits_history_deletion_and_audit"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_01d_pr_review.py",
+      "tests_or_suites": [
+        "test_candidate_delete_intersects_persisted_scope_and_existing_acl",
+        "test_direct_candidate_deletion_cannot_continue_after_committed_revocation",
+        "test_candidate_deletion_audit_failure_preserves_protected_data",
+        "test_valid_json_manifest_omission_cannot_silently_delete_snapshot_data",
+        "test_completed_promotion_cannot_be_deleted_using_stale_candidate_preview",
+        "test_financial_apply_validates_actual_canonical_enterprise_target"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_01e_bounded_remediation.py",
+      "tests_or_suites": [
+        "test_authorised_candidate_deletion_commits_resource_audit",
+        "test_candidate_deletion_failure_is_unchanged",
+        "test_adjacent_cancel_uses_same_authority_boundary",
+        "test_downstream_reviewed_ingestion_checks_actual_destination",
+        "test_authorised_financial_apply_still_writes",
+        "test_corrupt_snapshot_denies_without_touching_data_and_retains_evidence",
+        "test_interrupted_restore_retries_from_retained_valid_snapshot",
+        "test_failed_deletion_releases_lock_before_waiting_promotion_commits",
+        "test_revocation_serializes_after_inflight_deletion_and_denies_next_call",
+        "test_deletion_rechecks_persisted_scope_and_acl_at_effect_boundary"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_admin_policy.py",
+      "tests_or_suites": [
+        "test_real_administrator_policy_and_service_allow_scoped_promotion",
+        "test_administrator_cannot_bypass_membership_scope_or_acl",
+        "test_admin_enterprise_grant_does_not_bypass_canonical_target_acl",
+        "test_existing_canonical_target_requires_authoritative_matching_scope"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_adversarial_remediation.py",
+      "tests_or_suites": [
+        "test_financial_reads_intersect_scope_capability_membership_and_acl",
+        "test_financial_authorised_read_does_not_require_write_capability",
+        "test_financial_read_services_require_verified_authority",
+        "test_protected_review_failure_restores_full_store",
+        "test_actual_canonical_promotion_late_commit_is_undone",
+        "test_http_does_not_acknowledge_before_authority_commit",
+        "test_failed_recovery_denies_authority_until_undo_completes",
+        "test_process_interruption_recovers_before_next_authority_read",
+        "test_concurrent_writer_waits_and_is_not_erased_by_undo",
+        "test_visible_logout_clears_cookies_and_old_session_is_rejected_over_http",
+        "test_session_activity_policy_with_deterministic_clock",
+        "test_http_dispatcher_error_does_not_touch_or_commit",
+        "test_audit_failure_after_partial_effects_is_undone",
+        "test_corrupt_recovery_backup_cannot_grant_authority",
+        "test_symlink_in_protected_tree_denies_without_changing_target"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_independent_readiness.py",
+      "tests_or_suites": [
+        "test_feedback_read_enforces_current_resource_scope_and_acl",
+        "test_direct_feedback_mutation_cannot_write_after_revocation",
+        "test_undo_cannot_erase_concurrently_accepted_direct_feedback",
+        "test_recovery_preserves_existing_names_matching_temporary_pattern",
+        "test_direct_storage_cleanup_requires_recent_authentication",
+        "test_commercial_profile_write_requires_effective_edit_capability"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_integrity_repair.py",
+      "tests_or_suites": [
+        "test_feedback_rejects_current_denied_authority_without_changes",
+        "test_feedback_reads_fail_closed_on_persisted_or_authority_conflict",
+        "test_feedback_rechecks_revocation_immediately_before_append",
+        "test_feedback_positive_scope_capability_and_resource_audit",
+        "test_feedback_external_revocation_serializes_after_current_commit",
+        "test_feedback_failure_cannot_leave_data_without_authority_audit",
+        "test_profile_edit_intersects_current_membership_capability_and_scope",
+        "test_profile_authorised_edit_is_scoped_and_audited",
+        "test_paired_profile_failure_restores_both_profiles_and_audits",
+        "test_direct_cleanup_requires_current_resource_authority",
+        "test_authorised_cleanup_removes_only_scoped_disposable_history_with_audit",
+        "test_cleanup_failure_undo_is_durable_and_lossless",
+        "test_caught_nested_service_failure_poison_outer_transaction",
+        "test_recovery_retains_evidence_until_exact_restoration_is_verified",
+        "test_reservation_failure_prevents_effects_and_preserves_store",
+        "test_recovery_primitives_require_the_current_writer_lock",
+        "test_profile_payload_and_storage_override_cannot_select_other_scope",
+        "test_edit_only_profile_versions_advance_without_implicit_view_permission",
+        "test_profile_revalidates_authority_and_persisted_scope_after_write",
+        "test_feedback_revalidates_after_append_before_commit",
+        "test_cleanup_internal_destructive_helper_cannot_skip_write_envelope",
+        "test_cleanup_acl_revocation_before_commit_rolls_back_deletion",
+        "test_repeated_rollback_preserves_collision_names_and_directory_permissions",
+        "test_profile_reads_do_not_disclose_uncommitted_values_before_rollback",
+        "test_silent_profile_content_corruption_is_not_acknowledged",
+        "test_previously_valid_request_is_rechecked_after_waiting_for_write",
+        "test_feedback_visibility_preserves_existing_capability_policy",
+        "test_second_authority_database_cannot_recover_the_shared_root"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_legacy_obligations.py",
+      "tests_or_suites": [
+        "test_individual_session_restart_and_cookie_lifetime",
+        "test_legacy_flags_do_not_replace_verified_identity_or_membership",
+        "test_query_credentials_never_issue_authority",
+        "test_login_audit_failure_rolls_back_session_without_disclosure",
+        "test_least_privilege_reviewer_dispositions_do_not_grant_promotion",
+        "test_authenticated_archive_and_form_validation_precede_import_mutation",
+        "test_settings_and_diagnostics_show_only_authorised_scope",
+        "test_verified_reviewer_cannot_review_unscoped_or_other_workspace_package"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_owner_journey.py",
+      "tests_or_suites": [
+        "Browser",
+        "test_complete_isolated_owner_http_journey",
+        "test_authenticated_cross_origin_and_csrf_deny_without_writes"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_release_review.py",
+      "tests_or_suites": [
+        "test_financial_get_rejects_acl_denial_and_scope_conflict",
+        "Forms",
+        "test_visible_home_sign_out_revokes_the_actual_session",
+        "test_authority_commit_failure_does_not_leave_protected_write",
+        "test_successful_private_reads_refresh_idle_activity"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_repair_01a.py",
+      "tests_or_suites": [
+        "test_unverified_claims_never_resolve_authority",
+        "test_mutating_http_routes_closed_before_dispatch",
+        "test_protected_gets_deny_without_disclosure",
+        "test_public_import_entry_does_not_read_or_disclose_registry",
+        "test_shared_pilot_cannot_record_human_review",
+        "test_promotion_service_rejects_forged_owner_before_loading_plan",
+        "test_service_mutations_fail_closed",
+        "test_public_discovery_exposes_only_curated_context",
+        "test_public_source_views_survive",
+        "test_public_preference_post_rejects_cross_origin",
+        "test_public_preference_is_not_an_authority_grant",
+        "test_legacy_listener_cannot_mutate",
+        "test_review_coordinator_rejects_before_job_creation",
+        "test_wrong_workspace_history_does_not_disclose",
+        "test_legacy_signed_sessions_have_no_authority",
+        "test_legacy_flags_cannot_enable_authority_or_break_public_reads"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_repair_01b.py",
+      "tests_or_suites": [
+        "test_offline_bootstrap_receipt_idempotency_no_snapshot_changes",
+        "test_conflicting_and_stale_bootstrap_rejected",
+        "test_enrollment_single_use_and_hashes_only",
+        "test_owner_sign_in_workspace_rotation_logout",
+        "test_unverified_claims_never_resolve",
+        "test_invalidated_sessions_fail_closed",
+        "test_wrong_workspace_and_csrf_rejected",
+        "test_security_store_failure_and_permissions_deny",
+        "test_recovery_revokes_sessions_and_rotates_token",
+        "test_persistent_throttle_survives_restart",
+        "test_recent_authentication_required",
+        "test_membership_revocation_serializes_with_mutation",
+        "test_missing_resource_acl_denied_without_get_grant",
+        "test_financial_mutation_rejects_wrong_workspace"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_review_closure.py",
+      "tests_or_suites": [
+        "test_unregistered_or_ambiguous_public_paths_deny_before_dispatch",
+        "test_ambiguous_or_resource_selecting_query_denied",
+        "test_every_public_route_uses_declared_handler_without_private_reads",
+        "test_public_source_queries_cannot_select_canonical_records",
+        "test_public_fingerprint_excludes_environment_configuration",
+        "test_head_classification_matches_get",
+        "test_verified_context_protocol_is_explicit_but_not_authority",
+        "test_arbitrary_objects_and_claims_cannot_supply_context"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_service_contracts.py",
+      "tests_or_suites": [
+        "test_review_get_does_not_prepare_or_write",
+        "test_review_get_without_job_preserves_existing_records",
+        "test_verified_fixture_wildcard_cannot_cross_resource_workspace",
+        "test_membership_is_not_inferred_from_enterprise_wildcard",
+        "test_effective_capability_snapshot_bounds_existing_policy"
+      ]
+    },
+    {
+      "path": "tests/test_flora_security_workspace_boundary.py",
+      "tests_or_suites": [
+        "test_financial_mutations_intersect_persisted_workspace_and_acl",
+        "test_financial_same_enterprise_correct_workspace_and_acl_permitted",
+        "test_canvas_acl_cannot_be_rebound_by_selected_workspace_argument",
+        "test_canvas_feedback_uses_recorded_scope",
+        "test_executive_brief_uses_recorded_scope_before_retrieval",
+        "test_blueprint_promotion_uses_package_workspace",
+        "test_route_and_direct_service_both_deny_wrong_workspace"
+      ]
+    },
+    {
+      "path": "tests/test_flora_seller_development_598.py",
+      "tests_or_suites": [
+        "test_versioned_private_candidate_snapshot_and_idempotent_creation",
+        "test_private_candidate_all_reads_and_writes_deny_other_principals",
+        "test_five_pilots_retain_distinct_hypotheses_and_never_auto_qualify",
+        "test_internal_progress_does_not_establish_customer_validation",
+        "test_public_and_unsupported_evidence_cannot_be_customer_confirmation",
+        "test_deliberate_stages_pause_retire_resume_and_customer_attestation_reset",
+        "test_explicit_qualified_handoff_uses_pipeline_contract_and_is_idempotent",
+        "test_atomic_handoff_rolls_back_both_files_and_audit_on_failure",
+        "test_source_cancellation_drift_preserves_notes_and_never_mutates_pipeline",
+        "test_offer_and_entry_play_revision_and_acl_revocation",
+        "test_scope_and_pipeline_fields_cannot_be_injected",
+        "test_real_http_acl_csrf_origin_escaping_and_gets_preserve_store",
+        "test_unknown_commercial_inputs_do_not_qualify",
+        "test_private_offer_is_developable_but_cannot_qualify",
+        "test_offer_change_preserves_candidate_and_blocks_promotion",
+        "test_wrong_origin_on_real_development_write_is_denied"
+      ]
+    },
+    {
+      "path": "tests/test_flora_strategic_offers_588.py",
+      "tests_or_suites": [
+        "test_original_84_ids_content_and_source_references_remain_exactly_current",
+        "test_five_priority_programmes_are_distinct_complete_and_discoverable",
+        "test_customer_category_and_delivery_specialism_overlap_without_new_authority",
+        "test_invalid_delivery_specialisms_fail_closed",
+        "test_five_priority_drafts_share_matching_and_require_independent_proof_review",
+        "test_old_approved_library_offer_remains_eligible_when_new_catalogue_is_added",
+        "test_native_specialism_onboarding_and_economic_playbook_are_accessible_and_private"
+      ]
+    },
+    {
+      "path": "tests/test_flora_visual_intelligence.py",
+      "tests_or_suites": [
+        "Elements",
+        "test_pinned_specs_are_reproducible_and_inputs_are_read_only",
+        "test_all_flagship_pages_and_ai_lens_keep_canonical_navigation",
+        "test_every_family_reaches_actual_evidence_and_resolvable_fragment",
+        "test_original_six_spec_api_and_explicit_lenses_are_preserved",
+        "test_metrics_do_not_mix_enterprise_and_industry_or_forecast_and_actual",
+        "test_numeric_data_without_matching_passage_is_not_rendered",
+        "test_index_only_or_unreviewed_evidence_cannot_supply_a_metric",
+        "test_seven_lanes_preserve_unknown_dates_and_scenario_uncertainty",
+        "test_timeline_does_not_turn_publication_dates_or_plans_into_go_live",
+        "test_missing_date_support_does_not_keep_a_profile_authored_date",
+        "test_supplier_activity_associations_do_not_claim_incumbency_or_causality",
+        "test_documented_historical_supplier_keeps_period_and_unknown_current_scope",
+        "test_contradictions_are_visible_not_erased",
+        "test_new_supplier_renders_without_drawing_changes_and_without_verified_relationship",
+        "test_research_review_change_alters_visual_status_without_renderer_edits",
+        "test_principal_data_states_remain_inspectable",
+        "test_spec_validator_rejects_tampered_dates",
+        "test_spec_validator_rejects_tampered_metric_and_unsupported_flow",
+        "test_ai_lens_never_asserts_entrant_names_displacement_or_predicted_dates",
+        "test_accessible_text_navigation_escaping_and_no_write_script",
+        "test_invalid_profile_or_future_snapshot_is_rejected"
+      ]
+    },
+    {
+      "path": "tests/test_flora_visual_streams_612.py",
+      "tests_or_suites": [
+        "DOM",
+        "test_scope_identity_exact_native_streams_and_single_title",
+        "test_exact_accepted_seven_sources_and_only_responsive_current_scene_loaded",
+        "test_twenty_original_labels_available_industries_and_two_selection_journey",
+        "test_route_country_entity_duplicate_and_stream_abuse_fails_closed",
+        "test_every_interactive_detail_is_server_addressable_without_js",
+        "test_current_source_facts_targets_periods_and_truthful_unknowns",
+        "test_only_source_supported_announced_supplier_link_is_visible",
+        "test_projection_uses_current_owner_not_frozen_design_facts",
+        "test_no_private_owner_reads_no_matching_models_or_writes",
+        "test_verified_account_context_revokes_and_never_caches_html",
+        "test_unregistered_public_selectors_never_grant_access",
+        "test_real_http_all_seven_states_and_permission_negatives",
+        "test_immutable_public_art_cache_is_separate_from_private_html",
+        "test_asset_traversal_and_symlinks_fail_closed",
+        "test_withdrawn_relationship_is_not_reinstated_from_retained_claim",
+        "test_frozen_captions_disappear_if_public_source_pins_change"
+      ]
+    },
+    {
+      "path": "tests/test_material_pressure_qualification.py",
+      "tests_or_suites": [
+        "test_all_six_mandatory_gates_are_required_and_rejections_are_explainable",
+        "test_keyword_generic_metric_programme_opportunity_and_procurement_inputs_do_not_qualify",
+        "test_identity_singularity_is_semantic_and_duplicate_evidence_does_not_create_pressure",
+        "test_non_core_unknown_and_contradiction_are_preserved_but_core_conflict_is_unresolved",
+        "test_true_empty_state_and_no_domain_object_creation",
+        "test_candidate_discovery_states_distinguish_false_empty_and_failure"
+      ]
+    },
+    {
+      "path": "tests/test_memory_models.py",
+      "tests_or_suites": [
+        "test_memory_records_instantiate_correctly",
+        "test_memory_records_serialize_to_json_compatible_dicts",
+        "test_memory_does_not_import_forbidden_modules",
+        "test_decision_outputs_can_be_referenced_without_importing_decision_engine"
+      ]
+    },
+    {
+      "path": "tests/test_memory_repository.py",
+      "tests_or_suites": [
+        "test_in_memory_repository_saves_and_retrieves_records",
+        "test_in_memory_repository_lists_records",
+        "test_in_memory_repository_filters_by_record_type",
+        "test_in_memory_repository_unknown_ids_return_none",
+        "test_memory_repository_does_not_import_forbidden_modules"
+      ]
+    },
+    {
+      "path": "tests/test_rapid_financial_candidate_extraction.py",
+      "tests_or_suites": [
+        "test_rejected_source_receipt_produces_zero_candidates",
+        "test_extracts_three_core_statutory_group_candidates_with_lineage",
+        "test_prior_period_not_selected_and_display_text_retained",
+        "test_candidate_ids_are_deterministic_and_no_duplicates",
+        "test_table_scale_marker_variants_are_controlled_and_propagated",
+        "test_missing_scale_creates_partial_with_exception",
+        "test_contradictory_table_scale_creates_exception",
+        "test_ambiguous_period_creates_exception",
+        "test_duplicate_revenue_rows_create_exception_and_partial",
+        "test_negative_fixtures_fail_safely",
+        "test_source_receipt_sha_mismatch_fails_precondition",
+        "test_structural_bt_layout_fixture_reproduces_old_matcher_failure_and_new_extractor_reconstructs_rows",
+        "test_split_operating_profit_label_is_reconstructed_across_spans"
+      ]
+    },
+    {
+      "path": "tests/test_rapid_financial_intelligence.py",
+      "tests_or_suites": [
+        "test_production_rapid_requires_accepted_source_receipt",
+        "test_seeded_bt_fixture_remains_explicitly_test_only",
+        "test_rapid_outlook_persists_missing_source_shape",
+        "test_portability_enterprises_do_not_generate_from_id_and_period"
+      ]
+    },
+    {
+      "path": "tests/test_rapid_financial_source_acquisition.py",
+      "tests_or_suites": [
+        "test_production_bt_fy26_rapid_manifest_is_discoverable_through_runtime_loader",
+        "test_valid_selected_manifest_loads",
+        "test_missing_manifest_fails_before_request",
+        "test_invalid_configuration_fails_before_request",
+        "test_valid_pdf_bytes_create_accepted_receipt_and_cleanup",
+        "test_octet_stream_with_valid_pdf_magic_is_accepted",
+        "test_invalid_payloads_rejected_and_cleanup",
+        "test_oversized_response_is_rejected_safely",
+        "test_redirect_to_unapproved_host_is_rejected",
+        "test_identity_and_period_mismatch_are_validation_failures",
+        "test_http_error_receipt_and_no_ai_or_canonical_calls",
+        "test_live_bt_rapid_source_smoke"
+      ]
+    },
+    {
+      "path": "tests/test_tel001_blueprint_import_regression.py",
+      "tests_or_suites": [
+        "test_tel001_evidence_inventory_manifest_counts_checksums_and_shapes",
+        "test_unchanged_tel001_package_reaches_semantic_staging_without_promotion",
+        "test_tel001_candidates_are_shared_by_governance_twin_map_and_research_gaps",
+        "test_exact_tel001_pilot_import_reaches_candidate_governance_review",
+        "test_duplicate_tel001_upload_restages_persisted_candidates_for_deployed_ui",
+        "test_tel001_researcher_fields_reach_canonical_owner_shapes_losslessly",
+        "test_tel001_full_ui_service_path_projects_substantive_canonical_fields",
+        "test_tel001_deployed_aspect_and_dossier_routes_render_pending_candidate_fields",
+        "test_tel001_imported_twin_observation_builder_generalises_supported_families",
+        "test_tel001_canonical_factual_projection_exposes_shared_contract_metadata",
+        "test_tel001_enterprise_association_correction_is_visible_on_import_screen",
+        "test_tel001_relationship_truth_report_reconciles_governed_source_records"
+      ]
+    },
+    {
+      "path": "tests/test_tel001_executive_enterprise_intelligence.py",
+      "tests_or_suites": [
+        "test_tel001_staged_enterprise_conditions_do_not_self_qualify_under_adr026",
+        "test_executive_intelligence_is_governed_rendered_derivative",
+        "test_six_enterprise_executive_quality_and_raw_label_contract"
+      ]
+    }
+  ]
+}

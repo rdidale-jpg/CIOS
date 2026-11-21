@@ -1,0 +1,798 @@
+[
+  {
+    "status": "design proposal; no persisted agenda",
+    "scope": "uk",
+    "subject_reference": "public:GB",
+    "as_of": "2026-11-14",
+    "policy_version": "si1-design-editorial-v1.0",
+    "dependency_owner_hashes": {
+      "enterprise-knowledge/macro/research-model/Macro-Context-v1.json": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9",
+      "cios/applications/flora/visual_v2_assets/economy.json": "78b4bb90c02b9af8132d7f8eca3c1832b6a1047feb382f9473d463d44e1f31cd"
+    },
+    "issues": [
+      {
+        "view_ref": "design:uk-continuity",
+        "scope": "uk",
+        "title": "Protect continuity in a connected service economy",
+        "why_it_matters": "A reviewed UK cyber-risk context and service-led growth make operational continuity a useful national question; they do not prove a company incident or a sector loss.",
+        "assertion_class": "interpretation",
+        "source_refs": [
+          "UK-TECHNOLOGICAL",
+          "UK-ECONOMIC",
+          "UK-GVA-2024"
+        ],
+        "as_of": "2026-11-14",
+        "horizon": "Use original reporting/effective periods; remaining decision dates unknown",
+        "materiality_argument": "A reviewed UK cyber-risk context and service-led growth make operational continuity a useful national question; they do not prove a company incident or a sector loss.",
+        "financial_operational_consequence": {
+          "statement": "Possible interruption of service delivery; no loss, customer pain or external spend is quantified.",
+          "class": "interpretation",
+          "quantified_external_value": null
+        },
+        "leadership": {
+          "status": "FLORA_derived_issue",
+          "attribution_basis": null,
+          "named_leader": null,
+          "role_hypotheses": [
+            "Public-policy and industry resilience roles \u2014 not a named buyer"
+          ],
+          "role_ownership_confirmed": false
+        },
+        "decision": {
+          "question": "Which service and supplier dependencies deserve closer sector-level investigation?",
+          "already_committed": "Only the source-specific rule or event is established; enterprise implementation is unknown.",
+          "remaining_choices": "Unknown until the accountable party confirms the decision and alternatives.",
+          "influence": "Not established",
+          "decision_date": null
+        },
+        "biggest_uncertainty": "Sector-specific incidence, loss and control effectiveness are not established.",
+        "counter_evidence": [
+          "Aggregate threat evidence cannot identify a deficient bank.",
+          "Existing resilience capability may already address the exposure.",
+          "Quarterly real GDP growth is not cyber loss or enterprise growth."
+        ],
+        "pain": {
+          "classification": "no_pain_claim",
+          "adverse_outcome_evidence_refs": [],
+          "customer_confirmed": false
+        },
+        "commercial": {
+          "next_investigation": "Choose a material service chain and obtain current sector-specific disruption and dependency evidence before selecting an enterprise hypothesis.",
+          "disposition": "Investigate; no qualified opportunity",
+          "offer_library_reference": null,
+          "private_employer_offer_fit": "Not assessed; requires existing authorised Offer approval and matcher",
+          "budget": null,
+          "contract_value": null,
+          "external_need": "Unknown",
+          "pipeline_handoff": false
+        },
+        "analysis": {
+          "pestle": [
+            "Technological",
+            "Economic"
+          ],
+          "five_forces": [
+            "Supplier power/dependency is a conditional sector mechanism, not a national Porter score."
+          ],
+          "value_chain": [
+            "Service creation \u2192 technology/supplier enablement \u2192 customer continuity; actual dependencies need evidence."
+          ],
+          "swot": {
+            "strengths": [],
+            "context": [
+              "Observed service contribution to quarterly growth; not proof of operational resilience."
+            ],
+            "weaknesses": [],
+            "opportunities": [
+              "Hypothesis: improve dependency visibility where a specific gap is evidenced."
+            ],
+            "threats": [
+              "UK aggregate cyber-risk context; enterprise effects remain conditional."
+            ]
+          }
+        },
+        "qualification": {
+          "owner": "ADR-026 / existing MaterialPressureQualification; not executed in SI-1",
+          "qualified_pressure_refs": [],
+          "new_canonical_objects": false
+        },
+        "challenges": [
+          {
+            "statement": "Aggregate threat evidence cannot identify a deficient bank.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "Existing resilience capability may already address the exposure.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "Quarterly real GDP growth is not cyber loss or enterprise growth.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          }
+        ]
+      },
+      {
+        "view_ref": "design:uk-reporting",
+        "scope": "uk",
+        "title": "Make reporting preparation fit the actual issuer scope",
+        "why_it_matters": "The reviewed FCA reporting rules have specified issuer scope and future accounting periods. Preparation choices matter only for entities actually covered.",
+        "assertion_class": "interpretation",
+        "source_refs": [
+          "UK-ENVIRONMENTAL",
+          "UK-LEGAL"
+        ],
+        "as_of": "2026-11-14",
+        "horizon": "Use original reporting/effective periods; remaining decision dates unknown",
+        "materiality_argument": "The reviewed FCA reporting rules have specified issuer scope and future accounting periods. Preparation choices matter only for entities actually covered.",
+        "financial_operational_consequence": {
+          "statement": "Potential reporting-data/control preparation; no measured compliance failure or cost is asserted.",
+          "class": "interpretation",
+          "quantified_external_value": null
+        },
+        "leadership": {
+          "status": "FLORA_derived_issue",
+          "attribution_basis": null,
+          "named_leader": null,
+          "role_hypotheses": [
+            "Issuer finance, reporting and policy roles \u2014 ownership to confirm"
+          ],
+          "role_ownership_confirmed": false
+        },
+        "decision": {
+          "question": "Which issuers and reporting periods are covered, and what preparation is already owned?",
+          "already_committed": "Only the source-specific rule or event is established; enterprise implementation is unknown.",
+          "remaining_choices": "Unknown until the accountable party confirms the decision and alternatives.",
+          "influence": "Not established",
+          "decision_date": null
+        },
+        "biggest_uncertainty": "No company-specific readiness deficit or unresolved external requirement is demonstrated.",
+        "counter_evidence": [
+          "First reporting follows the specified accounting periods; it is not a universal immediate deadline.",
+          "Existing teams or advisers may already cover preparation.",
+          "Cyber reform is a separate proposal, not evidence that these reporting rules apply to every enterprise."
+        ],
+        "pain": {
+          "classification": "no_pain_claim",
+          "adverse_outcome_evidence_refs": [],
+          "customer_confirmed": false
+        },
+        "commercial": {
+          "next_investigation": "Verify the exact listed legal entity, commencement/reliefs and current preparation before discussing data/control work.",
+          "disposition": "Investigate; no qualified opportunity",
+          "offer_library_reference": null,
+          "private_employer_offer_fit": "Not assessed; requires existing authorised Offer approval and matcher",
+          "budget": null,
+          "contract_value": null,
+          "external_need": "Unknown",
+          "pipeline_handoff": false
+        },
+        "analysis": {
+          "pestle": [
+            "Legal",
+            "Environmental"
+          ],
+          "five_forces": [
+            "No automatic rivalry or competitive advantage inferred from common rules."
+          ],
+          "value_chain": [
+            "Issuer reporting \u2192 finance/data/control dependencies; legal scope is a prerequisite."
+          ],
+          "swot": {
+            "strengths": [],
+            "weaknesses": [],
+            "opportunities": [
+              "Hypothesis: targeted reporting-process improvement for covered issuers."
+            ],
+            "threats": [
+              "Potential transition burden where the rule applies; readiness unknown."
+            ]
+          }
+        },
+        "qualification": {
+          "owner": "ADR-026 / existing MaterialPressureQualification; not executed in SI-1",
+          "qualified_pressure_refs": [],
+          "new_canonical_objects": false
+        },
+        "challenges": [
+          {
+            "statement": "First reporting follows the specified accounting periods; it is not a universal immediate deadline.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "Existing teams or advisers may already cover preparation.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "Cyber reform is a separate proposal, not evidence that these reporting rules apply to every enterprise.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          }
+        ]
+      }
+    ],
+    "ordering_basis": "Qualitative editorial order: source-grounded decision relevance and distinct consequences; no numeric score or implied opportunity rank.",
+    "research_completeness": "Incomplete; no full national/industry/enterprise diagnosis claimed",
+    "qualified_opportunities_created": 0
+  },
+  {
+    "status": "design proposal; no persisted agenda",
+    "scope": "banking",
+    "subject_reference": "public:BK-IND-002",
+    "as_of": "2026-11-14",
+    "policy_version": "si1-design-editorial-v1.0",
+    "dependency_owner_hashes": {
+      "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "cios/applications/flora/visual_v2_assets/economy.json": "78b4bb90c02b9af8132d7f8eca3c1832b6a1047feb382f9473d463d44e1f31cd"
+    },
+    "issues": [
+      {
+        "view_ref": "design:banking-funding",
+        "scope": "banking",
+        "title": "Balance customer value with returns as funding conditions change",
+        "why_it_matters": "The November Bank Rate decision is current context for deposit and lending economics. Its effect on any bank depends on repricing, funding mix and customer behaviour.",
+        "assertion_class": "interpretation",
+        "source_refs": [
+          "UK-RATE-NOV26",
+          "UK-VALUE",
+          "UK-CAPITAL",
+          "UK-GVA-2024"
+        ],
+        "as_of": "2026-11-14",
+        "horizon": "Use original reporting/effective periods; remaining decision dates unknown",
+        "materiality_argument": "The November Bank Rate decision is current context for deposit and lending economics. Its effect on any bank depends on repricing, funding mix and customer behaviour.",
+        "financial_operational_consequence": {
+          "statement": "Possible funding and customer-value trade-off; no adverse bank consequence is demonstrated.",
+          "class": "interpretation",
+          "quantified_external_value": null
+        },
+        "leadership": {
+          "status": "FLORA_derived_issue",
+          "attribution_basis": null,
+          "named_leader": null,
+          "role_hypotheses": [
+            "Bank treasury, finance and product roles \u2014 hypotheses"
+          ],
+          "role_ownership_confirmed": false
+        },
+        "decision": {
+          "question": "Which pricing and service choices would materially change the bank\u2019s funding economics?",
+          "already_committed": "Only the source-specific rule or event is established; enterprise implementation is unknown.",
+          "remaining_choices": "Unknown until the accountable party confirms the decision and alternatives.",
+          "influence": "Not established",
+          "decision_date": null
+        },
+        "biggest_uncertainty": "Deposit sensitivity, matched-period margin movement and customer switching are unmeasured.",
+        "counter_evidence": [
+          "Rate direction alone does not establish lost margin.",
+          "The value-system/capital anchors are historical interpretations, not current thresholds or market shares.",
+          "Finance & insurance GVA is not Banking revenue or a bank profit pool."
+        ],
+        "pain": {
+          "classification": "no_pain_claim",
+          "adverse_outcome_evidence_refs": [],
+          "customer_confirmed": false
+        },
+        "commercial": {
+          "next_investigation": "Obtain a matched-period bank-level funding/margin bridge and test customer/pricing alternatives before proposing transformation.",
+          "disposition": "Investigate; no qualified opportunity",
+          "offer_library_reference": null,
+          "private_employer_offer_fit": "Not assessed; requires existing authorised Offer approval and matcher",
+          "budget": null,
+          "contract_value": null,
+          "external_need": "Unknown",
+          "pipeline_handoff": false
+        },
+        "analysis": {
+          "pestle": [
+            "Economic",
+            "Social"
+          ],
+          "five_forces": [
+            "Buyer bargaining power and rivalry are conditional interpretations; entrant/capital constraints are historical context."
+          ],
+          "value_chain": [
+            "Customer acquisition \u2192 deposits/funding \u2192 lending \u2192 service outcomes."
+          ],
+          "swot": {
+            "strengths": [],
+            "context": [
+              "Historical hypothesis: primary-account relationships may support funding stability; current magnitude unknown."
+            ],
+            "weaknesses": [],
+            "opportunities": [
+              "Hypothesis: service/pricing choices that preserve value if a bank-specific trade-off is demonstrated."
+            ],
+            "threats": [
+              "Conditional repricing/switching exposure; no measured current loss."
+            ]
+          }
+        },
+        "qualification": {
+          "owner": "ADR-026 / existing MaterialPressureQualification; not executed in SI-1",
+          "qualified_pressure_refs": [],
+          "new_canonical_objects": false
+        },
+        "challenges": [
+          {
+            "statement": "Rate direction alone does not establish lost margin.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "The value-system/capital anchors are historical interpretations, not current thresholds or market shares.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "Finance & insurance GVA is not Banking revenue or a bank profit pool.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          }
+        ]
+      },
+      {
+        "view_ref": "design:banking-reporting",
+        "scope": "banking",
+        "title": "Prepare incident reporting at the right legal-entity boundary",
+        "why_it_matters": "Reviewed PRA/FCA reporting changes identify a dated industry requirement. Applicability and existing readiness must be checked for each regulated entity.",
+        "assertion_class": "interpretation",
+        "source_refs": [
+          "UK-PRA-REPORT27",
+          "UK-FCA-REPORT27",
+          "UK-CTP"
+        ],
+        "as_of": "2026-11-14",
+        "horizon": "Use original reporting/effective periods; remaining decision dates unknown",
+        "materiality_argument": "Reviewed PRA/FCA reporting changes identify a dated industry requirement. Applicability and existing readiness must be checked for each regulated entity.",
+        "financial_operational_consequence": {
+          "statement": "Possible incident-data/control preparation; no bank-specific adverse consequence or supplier requirement is established.",
+          "class": "interpretation",
+          "quantified_external_value": null
+        },
+        "leadership": {
+          "status": "FLORA_derived_issue",
+          "attribution_basis": null,
+          "named_leader": null,
+          "role_hypotheses": [
+            "Operational resilience, risk and compliance roles \u2014 hypotheses"
+          ],
+          "role_ownership_confirmed": false
+        },
+        "decision": {
+          "question": "Which reporting/control decisions remain unresolved after current internal and incumbent preparation?",
+          "already_committed": "Only the source-specific rule or event is established; enterprise implementation is unknown.",
+          "remaining_choices": "Unknown until the accountable party confirms the decision and alternatives.",
+          "influence": "Not established",
+          "decision_date": null
+        },
+        "biggest_uncertainty": "Entity applicability, readiness gaps, existing coverage and external scope remain unknown.",
+        "counter_evidence": [
+          "A known implementation date is not an open procurement or proof of non-compliance.",
+          "Older critical-third-party context is not current designation evidence.",
+          "An internal or incumbent-led solution may already be sufficient."
+        ],
+        "pain": {
+          "classification": "no_pain_claim",
+          "adverse_outcome_evidence_refs": [],
+          "customer_confirmed": false
+        },
+        "commercial": {
+          "next_investigation": "Validate the regulated legal entity and readiness owner; compare the current incident/third-party reporting process with the final applicable requirements.",
+          "disposition": "Investigate; no qualified opportunity",
+          "offer_library_reference": null,
+          "private_employer_offer_fit": "Not assessed; requires existing authorised Offer approval and matcher",
+          "budget": null,
+          "contract_value": null,
+          "external_need": "Unknown",
+          "pipeline_handoff": false
+        },
+        "analysis": {
+          "pestle": [
+            "Legal",
+            "Technological"
+          ],
+          "five_forces": [
+            "Supplier dependencies may shape resilience choices; bargaining power is unmeasured."
+          ],
+          "value_chain": [
+            "Third-party/platform enablement \u2192 risk and incident detection \u2192 regulatory reporting."
+          ],
+          "swot": {
+            "strengths": [],
+            "context": [
+              "Lloyds reports existing Envoy controls; a single-company counterexample cannot establish a sector-wide strength."
+            ],
+            "weaknesses": [],
+            "opportunities": [
+              "Hypothesis: narrowly evidenced reporting/control improvement after scope and gap confirmation."
+            ],
+            "threats": [
+              "Potential implementation exposure for covered entities; not established failure."
+            ]
+          }
+        },
+        "qualification": {
+          "owner": "ADR-026 / existing MaterialPressureQualification; not executed in SI-1",
+          "qualified_pressure_refs": [],
+          "new_canonical_objects": false
+        },
+        "challenges": [
+          {
+            "statement": "A known implementation date is not an open procurement or proof of non-compliance.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "Older critical-third-party context is not current designation evidence.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "An internal or incumbent-led solution may already be sufficient.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          }
+        ]
+      }
+    ],
+    "ordering_basis": "Qualitative editorial order: source-grounded decision relevance and distinct consequences; no numeric score or implied opportunity rank.",
+    "research_completeness": "Incomplete; no full national/industry/enterprise diagnosis claimed",
+    "qualified_opportunities_created": 0
+  },
+  {
+    "status": "design proposal; no persisted agenda",
+    "scope": "lloyds",
+    "subject_reference": "public:BK-ENT-001",
+    "as_of": "2026-11-14",
+    "policy_version": "si1-design-editorial-v1.0",
+    "dependency_owner_hashes": {
+      "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "enterprise-knowledge/macro/research-model/Macro-Context-v1.json": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9"
+    },
+    "issues": [
+      {
+        "view_ref": "design:lloyds-core",
+        "scope": "lloyds",
+        "title": "Renew core platforms without disrupting customer service",
+        "why_it_matters": "Core renewal is a company-stated strategy priority. Service continuity is a plausible decision constraint, but the selected evidence does not establish the current system map or an outage problem.",
+        "assertion_class": "interpretation",
+        "source_refs": [
+          "LBG-A2030-PLATFORMS",
+          "LBG-A2030-INVESTMENT",
+          "LBG-Q326-DEPOSITS",
+          "UK-RATE-NOV26",
+          "UK-CAPITAL"
+        ],
+        "as_of": "2026-11-14",
+        "horizon": "Use original reporting/effective periods; remaining decision dates unknown",
+        "materiality_argument": "Core renewal is a company-stated strategy priority. Service continuity is a plausible decision constraint, but the selected evidence does not establish the current system map or an outage problem.",
+        "financial_operational_consequence": {
+          "statement": "Potential service-continuity and delivery trade-offs; deposits are contextual stock, not contract value.",
+          "class": "interpretation",
+          "quantified_external_value": null
+        },
+        "leadership": {
+          "status": "authorised_corporate_priority",
+          "attribution_basis": "The authorised corporate strategy prioritises core-platform renewal for 2027\u20132030; no named executive attribution is made.",
+          "named_leader": null,
+          "role_hypotheses": [
+            "Technology and operations leadership \u2014 ownership not confirmed"
+          ],
+          "role_ownership_confirmed": false
+        },
+        "decision": {
+          "question": "Which core-renewal choices and customer journeys are still open to influence?",
+          "already_committed": "The authorised corporate strategy prioritises core-platform renewal for 2027\u20132030; no named executive attribution is made.",
+          "remaining_choices": "Unknown until the accountable party confirms the decision and alternatives.",
+          "influence": "Not established",
+          "decision_date": null
+        },
+        "biggest_uncertainty": "The affected estate, current programme ownership, decision gates and external delivery scope are unknown.",
+        "counter_evidence": [
+          "A stated renewal priority may already have approved delivery arrangements.",
+          "Planned group investment is not a supplier budget.",
+          "Deposit balances do not quantify migration scope or value.",
+          "A national rate change does not establish a Lloyds migration pressure."
+        ],
+        "pain": {
+          "classification": "no_pain_claim",
+          "adverse_outcome_evidence_refs": [],
+          "customer_confirmed": false
+        },
+        "commercial": {
+          "next_investigation": "Ask the accountable platform/service owner for the unresolved options and service-dependency evidence; test incumbent/internal coverage before any delivery proposition.",
+          "disposition": "Investigate; no qualified opportunity",
+          "offer_library_reference": "tech-strategic-complex-legacy-modernisation",
+          "private_employer_offer_fit": "Not assessed; requires existing authorised Offer approval and matcher",
+          "budget": null,
+          "contract_value": null,
+          "external_need": "Unknown",
+          "pipeline_handoff": false
+        },
+        "analysis": {
+          "pestle": [
+            "Technological",
+            "Economic"
+          ],
+          "five_forces": [
+            "Supplier power/entry/capital mechanisms may constrain options, but enterprise-specific bargaining and funding sensitivity are unknown."
+          ],
+          "value_chain": [
+            "Core platforms/data \u2192 lending, payments and servicing; actual dependencies require OPS-01."
+          ],
+          "swot": {
+            "strengths": [],
+            "strategic_responses": [
+              "Published core-renewal commitment; successful execution not established."
+            ],
+            "weaknesses": [],
+            "opportunities": [
+              "Hypothesis: shape an unresolved service/architecture choice if the owner confirms it remains open."
+            ],
+            "threats": [
+              "Conditional transition/continuity risk; no actual service failure claimed."
+            ]
+          }
+        },
+        "qualification": {
+          "owner": "ADR-026 / existing MaterialPressureQualification; not executed in SI-1",
+          "qualified_pressure_refs": [],
+          "new_canonical_objects": false
+        },
+        "challenges": [
+          {
+            "statement": "A stated renewal priority may already have approved delivery arrangements.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "Planned group investment is not a supplier budget.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "Deposit balances do not quantify migration scope or value.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "A national rate change does not establish a Lloyds migration pressure.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          }
+        ]
+      },
+      {
+        "view_ref": "design:lloyds-efficiency",
+        "scope": "lloyds",
+        "title": "Turn the efficiency ambition into evidenced operating choices",
+        "why_it_matters": "The 2030 cost:income ambition is below 45%. That target establishes strategic intent, not current excessive cost, realised savings or available external spend.",
+        "assertion_class": "interpretation",
+        "source_refs": [
+          "LBG-A2030-CIR",
+          "LBG-Q326-DEPOSITS",
+          "LBG-Q326-PROFIT",
+          "UK-RATE-NOV26"
+        ],
+        "as_of": "2026-11-14",
+        "horizon": "Use original reporting/effective periods; remaining decision dates unknown",
+        "materiality_argument": "The 2030 cost:income ambition is below 45%. That target establishes strategic intent, not current excessive cost, realised savings or available external spend.",
+        "financial_operational_consequence": {
+          "statement": "Potential efficiency/customer-outcome trade-off; current cost pain and quantified external value are not established.",
+          "class": "interpretation",
+          "quantified_external_value": null
+        },
+        "leadership": {
+          "status": "authorised_corporate_priority",
+          "attribution_basis": "The authorised strategy states a 2030 efficiency ambition; it does not establish a named leader\u2019s private belief.",
+          "named_leader": null,
+          "role_hypotheses": [
+            "Finance and operations leadership \u2014 ownership not confirmed"
+          ],
+          "role_ownership_confirmed": false
+        },
+        "decision": {
+          "question": "What matched-period cost and customer-outcome evidence would justify the next operating-model choice?",
+          "already_committed": "The authorised strategy states a 2030 efficiency ambition; it does not establish a named leader\u2019s private belief.",
+          "remaining_choices": "Unknown until the accountable party confirms the decision and alternatives.",
+          "influence": "Not established",
+          "decision_date": null
+        },
+        "biggest_uncertainty": "Current income/cost decomposition, comparable growth and remaining funded decisions are unresolved.",
+        "counter_evidence": [
+          "A target is not an observed adverse outcome.",
+          "Nine-month profit cannot be annualised or treated as investable budget.",
+          "Deposit stock is not revenue.",
+          "Internal teams and existing programmes may already cover the target."
+        ],
+        "pain": {
+          "classification": "no_pain_claim",
+          "adverse_outcome_evidence_refs": [],
+          "customer_confirmed": false
+        },
+        "commercial": {
+          "next_investigation": "Request a reconciled income/cost baseline and already-funded change scope; identify one customer process whose net outcome could be tested without assuming a technology purchase.",
+          "disposition": "Investigate; no qualified opportunity",
+          "offer_library_reference": "tech-strategic-digital-transformation",
+          "private_employer_offer_fit": "Not assessed; requires existing authorised Offer approval and matcher",
+          "budget": null,
+          "contract_value": null,
+          "external_need": "Unknown",
+          "pipeline_handoff": false
+        },
+        "analysis": {
+          "pestle": [
+            "Economic",
+            "Technological"
+          ],
+          "five_forces": [
+            "Bank pricing/rivalry mechanisms are context only; current Lloyds margin erosion is not proven."
+          ],
+          "value_chain": [
+            "Funding/income \u2192 operating activity \u2192 customer outcomes; no invented cost allocation."
+          ],
+          "swot": {
+            "strengths": [],
+            "context": [
+              "Reported nine-month Group profit; neither excess cash nor operational superiority established."
+            ],
+            "weaknesses": [],
+            "opportunities": [
+              "Hypothesis: a specific operating-process improvement, conditional on a reconciled baseline and unmet need."
+            ],
+            "threats": [
+              "Conditional failure to realise future ambition; no current target miss claimed."
+            ]
+          }
+        },
+        "qualification": {
+          "owner": "ADR-026 / existing MaterialPressureQualification; not executed in SI-1",
+          "qualified_pressure_refs": [],
+          "new_canonical_objects": false
+        },
+        "challenges": [
+          {
+            "statement": "A target is not an observed adverse outcome.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "Nine-month profit cannot be annualised or treated as investable budget.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "Deposit stock is not revenue.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "Internal teams and existing programmes may already cover the target.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          }
+        ]
+      },
+      {
+        "view_ref": "design:lloyds-ai",
+        "scope": "lloyds",
+        "title": "Prove benefit on the AI capability already being built",
+        "why_it_matters": "Lloyds describes Envoy, Google Cloud collaboration and built-in controls. A useful discussion tests realised service outcomes, rather than presuming a missing AI platform or absent controls.",
+        "assertion_class": "interpretation",
+        "source_refs": [
+          "LBG-ENVOY-CONTROLS",
+          "LBG-ENVOY-GOOGLE",
+          "LBG-A2030-DATA",
+          "UK-TECHNOLOGICAL"
+        ],
+        "as_of": "2026-11-14",
+        "horizon": "Use original reporting/effective periods; remaining decision dates unknown",
+        "materiality_argument": "Lloyds describes Envoy, Google Cloud collaboration and built-in controls. A useful discussion tests realised service outcomes, rather than presuming a missing AI platform or absent controls.",
+        "financial_operational_consequence": {
+          "statement": "Potential service-benefit/control trade-off; no measured adverse outcome, budget or deal value.",
+          "class": "interpretation",
+          "quantified_external_value": null
+        },
+        "leadership": {
+          "status": "authorised_corporate_priority",
+          "attribution_basis": "The bank\u2019s announcement and strategy describe capability and data priorities; no CEO belief or buyer name is inferred.",
+          "named_leader": null,
+          "role_hypotheses": [
+            "Service/business and technology/data leadership \u2014 ownership not confirmed"
+          ],
+          "role_ownership_confirmed": false
+        },
+        "decision": {
+          "question": "Which service outcome remains unproven after existing platform and control work?",
+          "already_committed": "The bank\u2019s announcement and strategy describe capability and data priorities; no CEO belief or buyer name is inferred.",
+          "remaining_choices": "Unknown until the accountable party confirms the decision and alternatives.",
+          "influence": "Not established",
+          "decision_date": null
+        },
+        "biggest_uncertainty": "Net benefits, control effectiveness, workflow adoption and residual external need remain unknown.",
+        "counter_evidence": [
+          "The announced platform and existing controls defeat a generic greenfield AI or missing-control pitch.",
+          "An announcement proves neither effective controls nor realised net benefit.",
+          "The named collaboration establishes no exclusivity, renewal or unallocated scope.",
+          "UK cyber context is not a Lloyds incident."
+        ],
+        "pain": {
+          "classification": "no_pain_claim",
+          "adverse_outcome_evidence_refs": [],
+          "customer_confirmed": false
+        },
+        "commercial": {
+          "next_investigation": "Select one service workflow and ask its owner for outcome/control evidence and a process-only alternative; test whether the incumbent platform already meets the need.",
+          "disposition": "Investigate; no qualified opportunity",
+          "offer_library_reference": "tech-strategic-ai-first-transformation",
+          "private_employer_offer_fit": "Not assessed; requires existing authorised Offer approval and matcher",
+          "budget": null,
+          "contract_value": null,
+          "external_need": "Unknown",
+          "pipeline_handoff": false
+        },
+        "analysis": {
+          "pestle": [
+            "Technological"
+          ],
+          "five_forces": [
+            "One supported platform collaboration does not measure supplier bargaining power or lock-in."
+          ],
+          "value_chain": [
+            "Data/platform capability \u2192 frontline/service workflow \u2192 customer outcome; actual dependency and outcome validation required."
+          ],
+          "swot": {
+            "strengths": [
+              "Source-reported Envoy capability and controls, with effectiveness unverified."
+            ],
+            "weaknesses": [],
+            "opportunities": [
+              "Hypothesis: a residual workflow or assurance need, if current delivery does not already resolve it."
+            ],
+            "threats": [
+              "Conditional control/adoption risk; not an observed deficiency."
+            ]
+          }
+        },
+        "qualification": {
+          "owner": "ADR-026 / existing MaterialPressureQualification; not executed in SI-1",
+          "qualified_pressure_refs": [],
+          "new_canonical_objects": false
+        },
+        "challenges": [
+          {
+            "statement": "The announced platform and existing controls defeat a generic greenfield AI or missing-control pitch.",
+            "class": "source_backed_counter_evidence",
+            "source_refs": [
+              "LBG-ENVOY-CONTROLS",
+              "LBG-ENVOY-GOOGLE"
+            ]
+          },
+          {
+            "statement": "An announcement proves neither effective controls nor realised net benefit.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "The named collaboration establishes no exclusivity, renewal or unallocated scope.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          },
+          {
+            "statement": "UK cyber context is not a Lloyds incident.",
+            "class": "alternative_or_methodological_limit",
+            "source_refs": []
+          }
+        ]
+      }
+    ],
+    "ordering_basis": "Qualitative editorial order: source-grounded decision relevance and distinct consequences; no numeric score or implied opportunity rank.",
+    "research_completeness": "Incomplete; no full national/industry/enterprise diagnosis claimed",
+    "qualified_opportunities_created": 0
+  }
+]
