@@ -1,0 +1,1108 @@
+{
+  "id": "EEI3-EQUINIX-10K-2024",
+  "authority": "analytical_working_research",
+  "canonical_mutation": false,
+  "title": "Equinix, Inc. Form 10-K FY2024",
+  "publisher": "Equinix, Inc.",
+  "url": "https://www.sec.gov/Archives/edgar/data/1101239/000162828025005126/eqix-20241231.htm",
+  "retrieval_url": "https://www.sec.gov/Archives/edgar/data/1101239/000162828025005126/eqix-20241231.htm",
+  "publication_date": "2025-02-12",
+  "publication_date_evidence": "SEC EDGAR accession 0001628280-25-005126, filing date in official submissions index.",
+  "retrieved_at": "2026-11-21T09:28:00+00:00",
+  "retrieval_method": "approved_web_research_tool",
+  "retrieval_reference": "SEC EDGAR original inline XBRL filing 0001628280-25-005126; filer CIK 1101239 and reporting context checked in SEC submissions data and displayed statements.",
+  "verification": "primary_retrieved",
+  "content_kind": "minimal_verified_numerical_facts",
+  "primary_content_sha256": null,
+  "reporting_period": "Fiscal year ended 31 December 2024 and selected prior-year presented comparatives",
+  "reviewed_by": "EEI-3 repository Source verification",
+  "review_notes": "Minimal independently verified numerical facts, USD millions. Group figures and separately scoped Americas note; no UK figures inferred.",
+  "source_category": "issuer_results",
+  "third_party_material": false,
+  "retained_form": "minimal_facts_and_provenance",
+  "purpose": "attributed_analytical_working_views",
+  "audience": "flora_research_views",
+  "retention": "minimal_facts_and_provenance",
+  "rights": {
+    "basis": "ordinary_public_factual_analysis",
+    "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+    "expression_reuse": false,
+    "contract_restriction_found": false,
+    "method_review": "SEC EDGAR provides open access to authentic statutory filings; checked EDGAR access and fair-use-of-service conditions at https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data. Bounded fact transcription from the statutory filing, with no investor-host copying, protected form redistribution or bulk access.",
+    "operations": [
+      "read_public",
+      "independent_facts",
+      "minimal_numerical_retention",
+      "public_read_only"
+    ],
+    "material_exceptions": [],
+    "attribution_url": "https://www.sec.gov/",
+    "homepage_conditions_met": true
+  },
+  "document_identity": {
+    "url": "https://www.sec.gov/Archives/edgar/data/1101239/000162828025005126/eqix-20241231.htm",
+    "publisher": "Equinix, Inc.",
+    "title": "Equinix, Inc. Form 10-K FY2024",
+    "published": "2025-02-12",
+    "version": "sha256:8506fb3e7cb9e19afc4c1db24f3dac43ded9bb87b003bb59f5c466e97d6fd72a"
+  },
+  "facts_sha256": "d8ae1cbd2d649a3eef2e6d0fce43c7731c6af04e00af7f85d1b6db2ce63c03e0",
+  "fact_bindings": [
+    {
+      "key": "eqix-2024-revenue-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Operations · 2024 column · Revenues · c-1",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "revenue",
+        "definition": "Revenues",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "8748",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "8,748",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2024,
+        "reported_label": "Revenues",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-revenue-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Operations · 2023 column · Revenues · c-15",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "revenue",
+        "definition": "Revenues",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2023-01-01",
+          "end": "2023-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "8188",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "8,188",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2023,
+        "reported_label": "Revenues",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-operating_costs-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Operations · 2024 column · Total costs and operating expenses · c-1",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "operating_costs",
+        "definition": "Total costs and operating expenses",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "7420",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "7,420",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2024,
+        "reported_label": "Total costs and operating expenses",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-operating_costs-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Operations · 2023 column · Total costs and operating expenses · c-15",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "operating_costs",
+        "definition": "Total costs and operating expenses",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2023-01-01",
+          "end": "2023-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "6745",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "6,745",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2023,
+        "reported_label": "Total costs and operating expenses",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-operating_income-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Operations · 2024 column · Income from operations · c-1",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "operating_income",
+        "definition": "Income from operations",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "1328",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "1,328",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2024,
+        "reported_label": "Income from operations",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-operating_income-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Operations · 2023 column · Income from operations · c-15",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "operating_income",
+        "definition": "Income from operations",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2023-01-01",
+          "end": "2023-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "1443",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "1,443",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2023,
+        "reported_label": "Income from operations",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-net_income-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Operations · 2024 column · Net income · c-1",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "net_income",
+        "definition": "Net income",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "814",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "814",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2024,
+        "reported_label": "Net income",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-net_income-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Operations · 2023 column · Net income · c-15",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "net_income",
+        "definition": "Net income",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2023-01-01",
+          "end": "2023-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "969",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "969",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2023,
+        "reported_label": "Net income",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-cash-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Balance Sheets · 2024 column · Cash and cash equivalents · c-13",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "cash",
+        "definition": "Cash and cash equivalents",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "instant",
+          "as_at": "2024-12-31"
+        },
+        "value": {
+          "amount": "3081",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "3,081",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2024,
+        "reported_label": "Cash and cash equivalents",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-cash-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Balance Sheets · 2023 column · Cash and cash equivalents · c-14",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "cash",
+        "definition": "Cash and cash equivalents",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "instant",
+          "as_at": "2023-12-31"
+        },
+        "value": {
+          "amount": "2096",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "2,096",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2023,
+        "reported_label": "Cash and cash equivalents",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-current_assets-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Balance Sheets · 2024 column · Total current assets · c-13",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "current_assets",
+        "definition": "Total current assets",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "instant",
+          "as_at": "2024-12-31"
+        },
+        "value": {
+          "amount": "5447",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "5,447",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2024,
+        "reported_label": "Total current assets",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-current_assets-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Balance Sheets · 2023 column · Total current assets · c-14",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "current_assets",
+        "definition": "Total current assets",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "instant",
+          "as_at": "2023-12-31"
+        },
+        "value": {
+          "amount": "3568",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "3,568",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2023,
+        "reported_label": "Total current assets",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-assets-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Balance Sheets · 2024 column · Total assets · c-13",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "assets",
+        "definition": "Total assets",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "instant",
+          "as_at": "2024-12-31"
+        },
+        "value": {
+          "amount": "35085",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "35,085",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2024,
+        "reported_label": "Total assets",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-assets-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Balance Sheets · 2023 column · Total assets · c-14",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "assets",
+        "definition": "Total assets",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "instant",
+          "as_at": "2023-12-31"
+        },
+        "value": {
+          "amount": "32651",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "32,651",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2023,
+        "reported_label": "Total assets",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-current_liabilities-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Balance Sheets · 2024 column · Total current liabilities · c-13",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "current_liabilities",
+        "definition": "Total current liabilities",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "instant",
+          "as_at": "2024-12-31"
+        },
+        "value": {
+          "amount": "3349",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "3,349",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2024,
+        "reported_label": "Total current liabilities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-current_liabilities-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Balance Sheets · 2023 column · Total current liabilities · c-14",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "current_liabilities",
+        "definition": "Total current liabilities",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "instant",
+          "as_at": "2023-12-31"
+        },
+        "value": {
+          "amount": "3162",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "3,162",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2023,
+        "reported_label": "Total current liabilities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-liabilities-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Balance Sheets · 2024 column · Total liabilities · c-13",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "liabilities",
+        "definition": "Total liabilities",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "instant",
+          "as_at": "2024-12-31"
+        },
+        "value": {
+          "amount": "21533",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "21,533",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2024,
+        "reported_label": "Total liabilities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-liabilities-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Balance Sheets · 2023 column · Total liabilities · c-14",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "liabilities",
+        "definition": "Total liabilities",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "instant",
+          "as_at": "2023-12-31"
+        },
+        "value": {
+          "amount": "20137",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "20,137",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2023,
+        "reported_label": "Total liabilities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-equity-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Balance Sheets · 2024 column · Total stockholders’ equity · c-13",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "equity",
+        "definition": "Total stockholders’ equity",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "instant",
+          "as_at": "2024-12-31"
+        },
+        "value": {
+          "amount": "13527",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "13,527",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2024,
+        "reported_label": "Total stockholders’ equity",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-equity-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Balance Sheets · 2023 column · Total stockholders’ equity · c-14",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "equity",
+        "definition": "Total stockholders’ equity",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "instant",
+          "as_at": "2023-12-31"
+        },
+        "value": {
+          "amount": "12489",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "12,489",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2023,
+        "reported_label": "Total stockholders’ equity",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-operating_cash-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Cash Flows · 2024 column · Net cash from operating activities · c-1",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "operating_cash",
+        "definition": "Net cash from operating activities",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "3249",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "3,249",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2024,
+        "reported_label": "Net cash from operating activities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-operating_cash-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Cash Flows · 2023 column · Net cash from operating activities · c-15",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "operating_cash",
+        "definition": "Net cash from operating activities",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2023-01-01",
+          "end": "2023-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "3217",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "3,217",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2023,
+        "reported_label": "Net cash from operating activities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-investing_cash-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Cash Flows · 2024 column · Net cash used in investing activities · c-1",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "investing_cash",
+        "definition": "Net cash used in investing activities",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-3937",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "(3,937)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2024,
+        "reported_label": "Net cash used in investing activities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-investing_cash-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Cash Flows · 2023 column · Net cash used in investing activities · c-15",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "investing_cash",
+        "definition": "Net cash used in investing activities",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2023-01-01",
+          "end": "2023-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-3224",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "(3,224)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2023,
+        "reported_label": "Net cash used in investing activities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-financing_cash-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Cash Flows · 2024 column · Net cash from financing activities · c-1",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "financing_cash",
+        "definition": "Net cash from financing activities",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "1723",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "1,723",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2024,
+        "reported_label": "Net cash from financing activities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-financing_cash-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Cash Flows · 2023 column · Net cash from financing activities · c-15",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "financing_cash",
+        "definition": "Net cash from financing activities",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2023-01-01",
+          "end": "2023-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "211",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "211",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2023,
+        "reported_label": "Net cash from financing activities",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-other_property_purchases-2024",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Cash Flows · 2024 column · Purchases of other property, plant and equipment · c-1",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "other_property_purchases",
+        "definition": "Purchases of other property, plant and equipment",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-3066",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "(3,066)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2024,
+        "reported_label": "Purchases of other property, plant and equipment",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-other_property_purchases-2023",
+      "kind": "financial_measurement",
+      "locator": "Consolidated Statements of Cash Flows · 2023 column · Purchases of other property, plant and equipment · c-15",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Equinix consolidated Group",
+        "metric": "other_property_purchases",
+        "definition": "Purchases of other property, plant and equipment",
+        "accounting_basis": "audited consolidated",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2023-01-01",
+          "end": "2023-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-2781",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "(2,781)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "cash_flow",
+        "fiscal_year": 2023,
+        "reported_label": "Purchases of other property, plant and equipment",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-americas_capex-2024",
+      "kind": "financial_measurement",
+      "locator": "Segment Information · Americas capital expenditures · 2024 column · Americas capital expenditure · c-217",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Americas reportable segment",
+        "metric": "americas_capex",
+        "definition": "Americas capital expenditure",
+        "accounting_basis": "audited segment note",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "1838",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "1,838",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2024,
+        "reported_label": "Americas capital expenditure",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "eqix-2024-americas_capex-2023",
+      "kind": "financial_measurement",
+      "locator": "Segment Information · Americas capital expenditures · 2023 column · Americas capital expenditure · c-214",
+      "facts": {
+        "subject_id": "research-subject:equinix-inc-group",
+        "subject_name": "Equinix, Inc.",
+        "perimeter": "Americas reportable segment",
+        "metric": "americas_capex",
+        "definition": "Americas capital expenditure",
+        "accounting_basis": "audited segment note",
+        "accounting_standard": "US GAAP",
+        "period": {
+          "kind": "duration",
+          "start": "2023-01-01",
+          "end": "2023-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "1627",
+          "unit": "currency",
+          "currency": "USD",
+          "scale": "millions"
+        },
+        "original_display": "1,627",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2023,
+        "reported_label": "Americas capital expenditure",
+        "sign_convention": "Negative figures are shown in parentheses.",
+        "caveats": []
+      }
+    }
+  ]
+}

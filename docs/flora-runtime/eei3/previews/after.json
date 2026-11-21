@@ -1,0 +1,20 @@
+{
+  "checkout": "d8dba10f3e96891da917a5e20c85d08b1936b82f",
+  "observations": [
+    {
+      "viewport": "desktop",
+      "before_after": "after",
+      "reading_history_withdrawal": true
+    },
+    {
+      "viewport": "ipad-landscape",
+      "before_after": "after",
+      "reading_history_withdrawal": true
+    },
+    {
+      "viewport": "ipad-portrait",
+      "before_after": "after",
+      "reading_history_withdrawal": true
+    }
+  ]
+}
