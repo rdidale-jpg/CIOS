@@ -191,3 +191,30 @@ def profile(key, district=''):
         body += ds.source_note('<details class="commercial-source"><summary>Company research</summary>' + ''.join('<p>' + x.link(research.BASE + '/evidence#block-' + key, 'Retained company passage') + '</p>' for key in row['foundation_blocks']) + '</details>')
     ds.context_link(x.url('/district', district=district), 'District participants')
     return body
+
+
+def reading_insight(suffix, query):
+    """Reuse existing scoped interpretations without copying reported figures."""
+    data = c.load()
+    district = query.get('district') or query.get('selected')
+    title = x.DISTRICTS[district][0] if district else 'UK Technology'
+    body = ''
+    if suffix == '/enterprise':
+        key = query.get('enterprise') or 'equinix'
+        title = next(r['label'] for r in research.load()[0]['providers'] if r['key'] == key)
+        if key == 'nvidia':
+            body = observations('Commercial pressures', data['profiles'][key]['pressures'], data, 'pressures')
+        else:
+            signal = data['participants'].get(key, {}).get('signal')
+            if signal and signal['kind'] == 'hypothesis':
+                body = '<p><strong>Hypothesis</strong></p>' + observations('Commercial context', [signal], data, 'commercial-context')
+    elif suffix == '/operating-model':
+        title = 'Inside Equinix'
+        return '<div data-semantic-type="insight">' + x.operating_model(query.get('area') or 'facilities', query.get('macro', '')) + '</div>'
+    elif query.get('macro'):
+        label, interpretation, question = x.MACRO_CONTEXT[query['macro']]
+        body = ('<h2>' + e(label) + '</h2><p>' + e(interpretation) + '</p><p>' + e(question)
+                + '</p><p>Industry interpretation. Enterprise applicability remains unconfirmed.</p>')
+    if not body:
+        body = '<p>No supported FLORA Insight for this selection.</p>'
+    return '<div data-semantic-type="insight"><h1>' + e(title) + '</h1>' + body + '</div>'

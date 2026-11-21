@@ -54,7 +54,7 @@ with TemporaryDirectory() as temporary, MonkeyPatch.context() as patch, sync_pla
                 summary.evaluate("(node) => node.parentElement.scrollIntoView({block:'start'})")
             page.screenshot(path=output / f'{phase}-{name}.jpg', quality=82)
             if phase == 'after':
-                nav = page.get_by_role('link', name='FLORA Insight', exact=True)
+                nav = page.get_by_role('navigation', name='Financial reading mode').get_by_role('link', name='FLORA Insight', exact=True)
                 if name == 'desktop':
                     nav.focus()
                     nav.press('Enter')

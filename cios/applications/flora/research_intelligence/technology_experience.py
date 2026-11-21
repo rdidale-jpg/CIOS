@@ -93,7 +93,7 @@ def asset(name):
 
 
 def validate(query):
-    if set(query) - {'selected', 'district', 'scope', 'record', 'detail', 'area', 'macro', 'enterprise', 'sort', 'direction', 'search'}:
+    if set(query) - {'selected', 'district', 'scope', 'record', 'detail', 'area', 'macro', 'enterprise', 'sort', 'direction', 'search', 'reading'}:
         raise ValueError('Unknown experience selector')
     for key in ('selected', 'district'):
         if query.get(key, '') not in ('', *DISTRICTS):
@@ -156,7 +156,7 @@ def support():
             + '</nav></details>')
 
 
-def scene(selected=''):
+def scene(selected='', *, heading=True):
     hotspots = []
     for n, (key, (label, (x, y, w, h))) in enumerate(DISTRICTS.items(), 1):
         current = ' aria-current="true"' if selected == key else ''
@@ -174,7 +174,8 @@ def scene(selected=''):
     ds.context_link(url('/participants'), 'All Technology participants')
     pipeline_link()
     scale = ds.section_scale('J')
-    return ('<div class="exp-heading exp-scene-heading"><h1>UK Technology</h1></div>' + scale
+    title = '<div class="exp-heading exp-scene-heading"><h1>UK Technology</h1></div>' if heading else ''
+    return (title + scale
             + f'<section class="exp-scene" id="scene" aria-label="UK Technology industry scene"><div class="exp-artwork">'
             f'<img src="{ASSET_BASE}artwork" width="1536" height="1024" alt="Conceptual UK technology landscape with software offices, '
             'data centres, research laboratories, a connectivity mast and distribution facilities against a London skyline.">'
@@ -346,7 +347,7 @@ def statement_detail(key, query):
         return ''
     active = query.get('detail')
     selections = {name: value for name, value in query.items() if name != 'detail'}
-    navigation = '<nav aria-label="Reading mode">' + ' · '.join(
+    navigation = '<nav aria-label="Financial reading mode">' + ' · '.join(
         link(url('/enterprise', **selections, detail=mode)+'#eei-summary', label,
              **({'aria_current': 'page'} if mode == active else {}))
         for mode, label in (('financials', 'Facts'), ('financial-insight', 'FLORA Insight'))) + '</nav>'
@@ -361,14 +362,19 @@ def render(path, query, headers=None):
     if path not in PATHS:
         raise ValueError('Unknown Technology experience view')
     validate(query)
+    from . import technology_alignment as alignment
     suffix = path[len(BASE):]
     if query.get('detail') == 'financial-insight' and suffix != '/enterprise':
         raise ValueError('Financial reading requires an enterprise view')
+    reading = query.get('reading', 'facts')
+    if reading not in ('facts', 'insight') or ('reading' in query and suffix not in alignment.ALIGNED):
+        raise ValueError('Unknown Technology reading mode')
     context_scope = ((query.get('enterprise') or 'equinix') if suffix in ('/enterprise', '/operating-model') else
                      (query.get('district') or 'cloud') if suffix == '/district' else 'industry')
     scope = query.get('scope') or context_scope
     from . import technology_commercial_views as commercial
-    if suffix == '': body = scene(query.get('selected', ''))
+    if reading == 'insight': body = commercial.reading_insight(suffix, query)
+    elif suffix == '': body = '<h1>UK Technology</h1><p>Explore the eight districts from the landscape.</p>'
     elif suffix in ('/district', '/participants'):
         selected_district = (query.get('district') or 'cloud') if suffix == '/district' else query.get('district', '')
         body = commercial.comparison(selected_district, query.get('sort') or 'name', query.get('direction') or 'asc', query.get('search', ''), query.get('macro', ''))
@@ -377,11 +383,13 @@ def render(path, query, headers=None):
         detail = query.get('detail', '')
         financial = detail in {'financials', 'financial-insight'}
         body = enterprise('financials' if financial else detail) if key == 'equinix' else commercial.profile(key, query.get('district', ''))
-        if financial:
-            body += statement_detail(key, query)
     elif suffix == '/operating-model': body = operating_model(query.get('area') or 'facilities', query.get('macro', ''))
     elif suffix == '/pipeline': body = pipeline(scope)
     else: body = opportunity(query.get('record') or 'cooling', scope)
+    if suffix == '/enterprise' and query.get('detail') in {'financials', 'financial-insight'}:
+        body += statement_detail(query.get('enterprise') or 'equinix', query)
+    if suffix in alignment.ALIGNED:
+        body = alignment.frame(path, suffix, query, body)
     import json
     config = json.dumps({'base': BASE, 'scope': scope, 'record': query.get('record') or 'cooling',
                          'view': suffix, 'participants': {r['key']: r['label'] for r in research.load()[0]['providers']}, 'stages': STAGES, 'districts': {k: v[0] for k, v in DISTRICTS.items()}}, separators=(',', ':')).replace('<', '\\u003c').replace('&', '\\u0026')

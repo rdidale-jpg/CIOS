@@ -1,0 +1,29 @@
+{
+  "checkout": "df6173c186e6469783c732247f4c13aaa961aec4",
+  "results": [
+    {
+      "viewport": "desktop",
+      "artwork_districts": 8,
+      "layout_pass": true,
+      "reading_history_directory_and_identity": false
+    },
+    {
+      "viewport": "ipad-landscape",
+      "artwork_districts": 8,
+      "layout_pass": true,
+      "reading_history_directory_and_identity": false
+    },
+    {
+      "viewport": "ipad-portrait",
+      "artwork_districts": 8,
+      "layout_pass": true,
+      "reading_history_directory_and_identity": false
+    },
+    {
+      "viewport": "mobile",
+      "artwork_districts": 8,
+      "layout_pass": true,
+      "reading_history_directory_and_identity": false
+    }
+  ]
+}
