@@ -1,0 +1,60 @@
+{
+  "reports": [
+    {
+      "id": "EEI2B-NATIONWIDE-AR26",
+      "file": "EEI2B-Nationwide-AR26.json",
+      "origin": {
+        "origin": "https://www.nationwide.co.uk",
+        "document_prefix": "/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/",
+        "identity_evidence": "https://www.nationwide.co.uk/about-us/governance-reports-and-results/results-and-accounts"
+      },
+      "url": "https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/annual-report-and-accounts-2026.pdf",
+      "publisher": "Nationwide Building Society",
+      "version": "sha256:8d4e0d7807d4a68164bc8d136702686dbd323cdff78bbc0fa3ec0988770b6587",
+      "subject": [
+        "research-subject:nationwide-building-society-group",
+        "Nationwide Building Society Group"
+      ],
+      "legacy_snapshot_domain": "banking",
+      "presentation": "banking:nationwide"
+    },
+    {
+      "id": "EEI3-EQUINIX-10K-2025",
+      "file": "EEI3-EQUINIX-10K-2025.json",
+      "origin": {
+        "origin": "https://www.sec.gov",
+        "document_prefix": "/Archives/edgar/data/1101239/",
+        "cik": "1101239",
+        "identity_evidence": "https://data.sec.gov/submissions/CIK0001101239.json"
+      },
+      "url": "https://www.sec.gov/Archives/edgar/data/1101239/000110123926000032/eqix-20251231.htm",
+      "publisher": "Equinix, Inc.",
+      "version": "sha256:5e5053a34cbfcd70f1ab56801aab8d77d3f8934cb1e7bb560990955ba6ca6910",
+      "subject": [
+        "research-subject:equinix-inc-group",
+        "Equinix, Inc."
+      ],
+      "accession": "000110123926000032",
+      "presentation": "technology:equinix"
+    },
+    {
+      "id": "EEI3-EQUINIX-10K-2024",
+      "file": "EEI3-EQUINIX-10K-2024.json",
+      "origin": {
+        "origin": "https://www.sec.gov",
+        "document_prefix": "/Archives/edgar/data/1101239/",
+        "cik": "1101239",
+        "identity_evidence": "https://data.sec.gov/submissions/CIK0001101239.json"
+      },
+      "url": "https://www.sec.gov/Archives/edgar/data/1101239/000162828025005126/eqix-20241231.htm",
+      "publisher": "Equinix, Inc.",
+      "version": "sha256:8506fb3e7cb9e19afc4c1db24f3dac43ded9bb87b003bb59f5c466e97d6fd72a",
+      "subject": [
+        "research-subject:equinix-inc-group",
+        "Equinix, Inc."
+      ],
+      "accession": "000162828025005126",
+      "presentation": "technology:equinix"
+    }
+  ]
+}

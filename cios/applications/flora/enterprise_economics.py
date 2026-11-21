@@ -242,69 +242,77 @@ def source_statement_summary(record, *, subject, insight=False, fixture=False):
     return statement_summary(project(record, subject=subject), insight=insight, fixture=fixture)
 
 
-def annual_statement_view(lines, *, insight=False, comparison_keys=(), context=''):
+def annual_statement_view(lines, *, insight=False, comparison_keys=(), growth_keys=(), context='', inspection=False):
     """Shared Economics composition for paired reported years and stock movements."""
     from decimal import Decimal
-    from .financial_intelligence.public_statements import balance_changes, statements
+    from .financial_intelligence.public_statements import annual_growth, balance_changes, statements
 
     rows = tuple(statements(lines))
     if not rows:
         return ''
-    years = sorted({line.fiscal_year for line, _ in rows}, reverse=True)
-    for kind in ('income', 'balance', 'cash_flow'):
-        for year in years:
-            periods = {line.period.label for line, _ in rows if line.statement == kind and line.fiscal_year == year}
-            if len(periods) > 1:
-                return ''
-    columns = {year: f'FY{year}' for year in years}
     units = ' · '.join(sorted({fact.unit for _, fact in rows if fact.unit != '%'}))
     if any(fact.unit == '%' for _, fact in rows):
         units = (units + ' · ' if units else '') + 'Ratios shown as %'
-    title = ('<style>.eei-annual table{width:min(100%,46rem);margin:8px 0 24px;border-collapse:collapse}'
+    title = ('<style>.eei-table-scroll{overflow-x:auto}.eei-annual table{width:min(100%,46rem);margin:8px 0 24px;border-collapse:collapse}'
              '.eei-annual td,.eei-annual thead th:not(:first-child){padding-inline-start:clamp(5px,2vw,24px);'
              'text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}'
              '.eei-annual th[scope=row]{text-align:left;padding-inline-end:8px}'
              '</style><section class="reading-capability eei-annual" aria-labelledby="eei-summary">'
              '<h2 id="eei-summary">Financial statements</h2>')
-    source = rows[0][1].sources[0]
     body = (title + '<p class="reading-context">' + escape(rows[0][0].subject_name)
-            + ' · annual report · ' + escape(units) + '</p>')
+            + ' · reported figures · ' + escape(units) + '</p>')
     if context:
         body += '<p>' + escape(context) + '</p>'
     if insight:
-        body += '<h3>Changes in the year-end balance sheet</h3><ul>'
-        for label, result in balance_changes(lines, comparison_keys):
-            change = Decimal(result['value'])
-            body += ('<li data-semantic-type="calculated"><strong>' + escape(label)
-                     + ':</strong> ' + f'{change:+,f}' + ' ' + escape(result['unit'])
-                     + ' · closing minus opening</li>')
-        body += '</ul>'
+        changes = (
+            ('Changes in the year-end balance sheet', balance_changes(lines, comparison_keys)),
+            ('Annual change in earnings and income', tuple(annual_growth(lines, growth_keys))),
+        )
+        for heading, results in changes:
+            if not results:
+                continue
+            body += '<h3>' + heading + '</h3><ul>'
+            for label, result in results:
+                change = Decimal(result['value'])
+                display = f'{change:+,.2f}' if result['unit'] == '%' else f'{change:+,f}'
+                body += ('<li data-semantic-type="calculated"><strong>' + escape(label)
+                         + ':</strong> ' + display + ' ' + escape(result['unit'])
+                         + ' · ' + escape(result['method']) + '</li>')
+            body += '</ul>'
         context_insight = _cash_flow_insight(rows)
         body += ''.join(p.render(fact, compact=True) for fact in context_insight)
         if context_insight:
             body += '<p>Which cash movements recur, and how much depends on changes in assets or funding?</p>'
     else:
-        for kind, label in (('income', 'Income statement'), ('balance', 'Balance sheet'), ('cash_flow', 'Cash flow statement')):
+        for kind, label in (('income', 'Income statement'), ('balance', 'Balance sheet'), ('cash_flow', 'Cash flow statement'),
+                            ('segment', 'Segment reporting')):
             selected = [line for line, _ in rows if line.statement == kind]
             if not selected:
                 continue
+            def period_key(line):
+                return line.fiscal_year, line.period.label
+
+            periods_shown = sorted({period_key(line) for line in selected}, reverse=True)
+            years = [year for year, _ in periods_shown]
             groups = {}
             for line in selected:
                 key = (line.metric, line.reported_label, line.accounting_basis, line.definition,
                        line.accounting_standard, line.value.unit, line.value.currency, line.value.scale,
-                       line.perimeter if kind == 'balance' else '')
+                       line.perimeter if kind in {'balance', 'segment'} else '', line.sign_convention)
                 group = groups.setdefault(key, {})
-                if line.fiscal_year in group:
+                if period_key(line) in group:
                     return ''
-                group[line.fiscal_year] = line
-            body += ('<h3>' + label + '</h3><table><caption class="sr-only">' + label
+                group[period_key(line)] = line
+            body += ('<h3>' + label + '</h3><div class="eei-table-scroll" tabindex="0" role="region" aria-label="' + label + '"><table><caption class="sr-only">' + label
                      + ' · reported values</caption><thead><tr><th scope="col">Measure</th>'
-                     + ''.join('<th scope="col">' + columns[year] + '</th>' for year in years)
+                     + ''.join('<th scope="col" title="' + escape(period, quote=True) + '">'
+                               + (f'FY{year}' if years.count(year) == 1 else escape(period)) + '</th>'
+                               for year, period in periods_shown)
                      + '</tr></thead><tbody>')
             for (_, label, basis, *_), periods in groups.items():
                 spans = []
-                for year in years:
-                    line = periods.get(year)
+                for key in periods_shown:
+                    line = periods.get(key)
                     if line:
                         tag = ' · Restated' if line.revision_state == 'restated' else ''
                         spans.append('<td><span title="' + escape(line.period.label + ' · ' + line.perimeter + ' · ' + basis + ' · ' + line.source.locator, quote=True)
@@ -312,8 +320,11 @@ def annual_statement_view(lines, *, insight=False, comparison_keys=(), context='
                     else:
                         spans.append('<td>—</td>')
                 body += '<tr><th scope="row">' + escape(label) + '</th>' + ''.join(spans) + '</tr>'
-            body += '</tbody></table>'
-    return body + '<p class="reading-context">Source: ' + escape(source.title) + '.</p></section>'
+            body += '</tbody></table></div>'
+    if inspection:
+        body += _basis(fact for _, fact in rows)
+    titles = dict.fromkeys(fact.sources[0].title for _, fact in rows)
+    return body + '<p class="reading-context">Sources: ' + escape(' · '.join(titles)) + '.</p></section>'
 
 
 def _cash_flow_insight(rows):
@@ -329,13 +340,32 @@ def _cash_flow_insight(rows):
     first = chosen[0][1]
     if any((fact.scope, fact.period, fact.unit, fact.basis, fact.sources[0].url) !=
            (first.scope, first.period, first.unit, first.basis, first.sources[0].url)
-           or fact.value <= 0 for _, fact in chosen):
+           for _, fact in chosen):
+        return ()
+    by_metric = {line.metric: fact.value for line, fact in chosen}
+    amounts = tuple(by_metric[metric] for metric in metrics)
+    if all(value > 0 for value in amounts):
+        text = 'Operating, investing and financing activities each contributed cash in the latest annual period shown.'
+    elif amounts[0] > 0 and amounts[1] < 0 and amounts[2] > 0:
+        text = 'Operations and financing brought in cash while investing used cash in the latest annual period shown.'
+    else:
         return ()
     return (p.Statement(
-        'Operating, investing and financing activities each contributed cash in the latest annual period shown.',
-        'insight', first.scope, first.period, tuple(fact.sources[0] for _, fact in chosen),
+        text, 'insight', first.scope, first.period, tuple(fact.sources[0] for _, fact in chosen),
         'repository_interpretation', 'analytical_working_research',
-        reasoning='The three signed cash-flow subtotals are positive for the same reporting period and scope.',
+        reasoning='The signed operating, investing and financing subtotals come from the same reporting period and scope.',
         dependencies=tuple(fact.text for _, fact in chosen), dependency_types=('reported',) * 3,
         counter_evidence=('Timing, investment maturities and funding activity can change year-to-year cash movement.',),
     ),)
+
+
+def presented_statement_series(presentation_id):
+    """Read an existing presentation's currently eligible statement series."""
+    from .financial_intelligence.public_statements import statement_series
+    from .research_intelligence.statement_sources import presentation_subject
+
+    try:
+        subject = presentation_subject(presentation_id)
+        return statement_series(subject) if subject else ()
+    except (OSError, ValueError, KeyError, TypeError):
+        return ()

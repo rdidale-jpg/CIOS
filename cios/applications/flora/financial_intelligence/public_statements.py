@@ -9,7 +9,7 @@ from .candidate_analytics import Measurement, calculate, stable_hash
 from .. import intelligence_presentation as isp
 from ..research_intelligence import source_import as source
 
-StatementKind = Literal['income', 'balance', 'cash_flow']
+StatementKind = Literal['income', 'balance', 'cash_flow', 'segment']
 
 
 class Line(Measurement):
@@ -75,7 +75,7 @@ def _check_history(lines):
     return tuple(line for line in lines if line.revision_state != 'superseded')
 
 
-def project(record, *, subject):
+def project(record, *, subject, url_validator=source.official_url, check_history=True):
     """Accept only trusted Source records selected by the caller, never URLs or runs.
 
     Source remains the owner of eligibility. Lloyds retains its existing dedicated
@@ -89,7 +89,7 @@ def project(record, *, subject):
                 or 'lloyds' in (record['publisher'] + record['url'] + record['retrieval_url']).casefold()
                 or any('lloyds' in str(item).casefold() for item in subject)):
             return ()
-        if source.routine_factual_use(record) != 'minimal_factual_analysis':
+        if source.routine_factual_use(record, url_validator=url_validator) != 'minimal_factual_analysis':
             return ()
         bindings = source.minimal_factual_integrity(record, statement_periods=True)
         lines = []
@@ -111,7 +111,8 @@ def project(record, *, subject):
                            'retrieved_at': record['retrieved_at'], 'use_reference': rights['basis']},
             })
             lines.append(line)
-        _check_history(lines)
+        if check_history:
+            _check_history(lines)
         return tuple(lines)
     except (OSError, ValueError, KeyError, TypeError, PermissionError, ArithmeticError, AttributeError):
         return ()
@@ -171,6 +172,70 @@ def annual_details(selection):
         return ()
 
 
+def statement_history(subject, *, catalogue=None):
+    """Return all eligible revisions, including repeated published comparatives."""
+    from ..research_intelligence.statement_sources import records
+
+    try:
+        return tuple(line for record, validate in records(subject, catalogue=catalogue)
+                     for line in project(record, subject=subject, url_validator=validate,
+                                         check_history=False))
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        return ()
+
+
+def statement_series(subject, *, catalogue=None):
+    """Select current views while preserving earlier publications in history."""
+    history = statement_history(subject, catalogue=catalogue)
+    referenced = {line.supersedes for line in history if line.supersedes}
+    # If a source is withdrawn, suppress an orphaned successor or predecessor.
+    revisions = {line.source.revision for line in history}
+    groups = {}
+    for line in history:
+        if line.revision_state == 'superseded' and line.source.revision not in referenced:
+            continue
+        if line.supersedes and line.supersedes not in revisions:
+            continue
+        groups.setdefault((_identity(line), _period_key(line)), []).append(line)
+    selected = []
+    for group in groups.values():
+        if any(line.revision_state != 'original' for line in group):
+            try:
+                _check_history(group)
+            except ValueError:
+                continue
+            selected.extend(group)
+        elif len({(line.value.amount, line.precision_dp, line.rounding) for line in group}) == 1:
+            selected.append(max(group, key=lambda line: (line.source.published, line.source.source_id)))
+        # Divergent original reports require an explicit correction chain.
+    try:
+        _check_history(selected)
+    except ValueError:
+        return ()
+    return tuple(selected)
+
+
+def annual_growth(lines, metrics):
+    """Calculate adjacent, originally paired fiscal years through F1."""
+    from .candidate_analytics import Derivation, InputReference
+
+    current = _check_history(lines)
+    for metric in metrics:
+        group = sorted((line for line in current if line.metric == metric and line.statement == 'income'
+                        and line.value.unit == 'currency'), key=lambda line: line.period.end)
+        if len(group) < 2:
+            continue
+        pair = group[-2:]
+        spec = Derivation(derivation_id=metric + '-annual-growth', formula='percent_change',
+                          comparison='duration_dates', inputs=tuple(
+                              InputReference(measurement_id=line.measurement_id, revision=line.revision)
+                              for line in pair))
+        try:
+            yield pair[1].reported_label, compare(lines, spec)
+        except ValueError:
+            continue
+
+
 def balance_changes(lines, keys):
     """Project scoped, revision-bound changes between eligible stock dates."""
     from .candidate_analytics import Derivation, InputReference
@@ -181,8 +246,9 @@ def balance_changes(lines, keys):
         pair = sorted((line for line in current if line.metric == key
                        and line.statement == 'balance' and line.value.unit == 'currency'),
                       key=lambda line: line.period.as_at)
-        if len(pair) != 2:
+        if len(pair) < 2:
             continue
+        pair = pair[-2:]
         spec = Derivation(derivation_id=key + '-balance-change', formula='difference', comparison='stock_dates',
                           inputs=tuple(InputReference(measurement_id=line.measurement_id, revision=line.revision)
                                        for line in pair))

@@ -10,11 +10,20 @@ CUTS = {
     'tools/research/history_integrity.py': ('d147e4f49cb9e4ad6d367659e4a6e0057884886c6e79c3840e5d2e4430691560', ('verify_history',)),
 }
 
+EEI3_BASE = 'e6d49f3391f5cd1527ace9010db8ab56f459b87b'
+EEI3_CUTS = {'cios/applications/flora/research_intelligence/source_import.py': ('a7d1744b6b9b8d02470100d29cae8954ac67ec20affe8e1bf536c7413c3b5fe8', ('routine_factual_use',)), 'cios/applications/flora/visual_panels.py': ('61d11d985ba0f00e5a8adbd439556e77b6803a30daf4f3aefb2fad69c998f732', ('render',))}
+
+
 def predecessor(root, path, current):
-    cut = CUTS.get(path)
+    current = checked_cut(root, path, current, EEI3_BASE, EEI3_CUTS)
+    return checked_cut(root, path, current, BASE, CUTS)
+
+
+def checked_cut(root, path, current, base, cuts):
+    cut = cuts.get(path)
     if cut is None or sha256(current).hexdigest() != cut[0]:
         return current
-    old = subprocess.check_output(['git', 'show', BASE + ':' + path], cwd=root)
+    old = subprocess.check_output(['git', 'show', base + ':' + path], cwd=root)
 
     def protected(raw):
         tree = ast.parse(raw)
@@ -22,5 +31,5 @@ def predecessor(root, path, current):
                      if not isinstance(node, ast.FunctionDef) or node.name not in cut[1]]
         return ast.dump(tree, include_attributes=False)
 
-    assert protected(old) == protected(current), 'Unexpected change outside EEI-2B boundary'
+    assert protected(old) == protected(current), 'Unexpected change outside statement integration boundary'
     return old

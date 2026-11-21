@@ -132,15 +132,14 @@ def secondary_excerpt(source, repo):
     return text
 
 
-def routine_factual_use(source):
+def routine_factual_use(source, *, url_validator=official_url):
     """Existing Source owner: use eligibility is separate from canonical status.
 
     Trusted retained Source metadata, never request parameters. This establishes
     only a bounded analytical use, not a licence to redistribute expression.
     Actual source-level restrictions/lifecycle changes isolate that source.
     """
-    official_url(source['url'])
-    provenance(source)
+    provenance(source, url_validator)
     from ..intelligence_presentation import restricted_metadata
     if (working_restricted(source) or source.get('restrictions')
             or source.get('third_party_material') is not False

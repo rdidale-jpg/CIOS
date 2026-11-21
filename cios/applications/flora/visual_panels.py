@@ -432,8 +432,8 @@ def render(ctx,headers=None,*,financial_run_id=''):
                 body=(reading.nationwide_insight(public) if ctx.reading=='insight' else
                       analyst.compose_editorial(public)+reading.nationwide_facts_bridge(public)+_nationwide_service(data))
                 from .enterprise_economics import annual_statement_view, statement_summary
-                from .financial_intelligence.public_statements import annual_details, nationwide_lines
-                lines = annual_details('nationwide-annual')
+                from .financial_intelligence.public_statements import statement_series, nationwide_lines
+                lines = statement_series(('research-subject:nationwide-building-society-group', 'Nationwide Building Society Group'))
                 if lines:
                     context = ('FY2025 covers 361 days and includes six months of Virgin Money. '
                                'FY2026 includes a full year. This limits direct comparisons of income and cash flows. '
