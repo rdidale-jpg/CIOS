@@ -22,7 +22,7 @@ def test_existing_journey_and_connected_issue():
     assert 'Core renewal and application retirement matter' in insight
     assert 'Core renewal and application retirement matter' not in facts
     assert 'Scale AI only after benefit' in insight and 'Scale AI only after benefit' not in facts
-    for value in ('118,762', '92,548', '79,323', 'HM Treasury', 'Evidence &amp; scope'):
+    for value in ('118,762', '92,548', '79,323', 'HM Treasury', 'id="llf-sources"'):
         assert value in facts
     root = visual.render(PATH, {})
     assert 'Explore the Lloyds flagship' in root and '118,762' not in root

@@ -57,21 +57,6 @@ VIEWS = (
          'Validate net value and control performance before expanding deployment. Additional gates can slow learning where risk is already low.'),
     )),
 )
-STYLE = """<style>
-.llf {margin-block: 1.5rem 2.5rem; color:#12362e}
-.llf-header {background:#133a32;color:#f7f3e8;border-radius:1rem;padding:clamp(1rem,3vw,2rem)}
-.llf-header h1 {color:inherit;margin:.25rem 0 .65rem}
-.llf-header .eyebrow {color:#d2e1d0}
-.llf-path {display:flex;gap:.65rem;flex-wrap:wrap;margin:1rem 0}
-.llf-path a {padding:.45rem .65rem;border:1px solid #9fb9a7;border-radius:.45rem}
-.llf-path a {flex:1 1 7rem;color:#14382d;background:#e8efe2}
-.llf details {border:1px solid #b6c8ba;border-radius:.6rem;margin:.6rem 0;padding:.65rem .8rem}
-.llf details summary {cursor:pointer;font-weight:650}
-.llf dl {display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:.6rem}
-.llf h3 {margin-bottom:.35rem}
-</style>"""
-
-
 def _payments():
     """The one reviewed OGL historical policy extract, subject to live Source checks."""
     path = model.REPO / 'docs/flora-runtime/lloyds-flagship/Payments-Source.json'
@@ -121,7 +106,7 @@ def _facts(data):
     return facts
 
 
-def _basis(items):
+def _source_rows(items):
     items = tuple(items)
     p.note_editorial_sources(s for item in items for s in item.sources)
     rows = []
@@ -137,10 +122,10 @@ def _basis(items):
         rows.append('<li><strong>' + escape(state) + '</strong> · ' + escape(item.text)
                     + ' <small>' + escape(item.period + ' · ' + item.scope) + '</small> · '
                     + ', '.join(citations) + '</li>')
-    return '<details class="llf-basis"><summary>Evidence &amp; scope</summary><ul>' + ''.join(rows) + '</ul></details>'
+    return '<ul>' + ''.join(rows) + '</ul>'
 
 
-def _benchmark(data, issues):
+def _benchmark(data, issues, inspect):
     service = next((issue for issue in issues if issue.key == 'service-recovery'), None)
     peers = [leadership_agenda.bank_service_issue(key, data) for key in ('natwest', 'hsbc-uk')]
     units = {'complaints received; all-product total', 'complaints received; FCA Open table total'}
@@ -151,11 +136,15 @@ def _benchmark(data, issues):
     items = [item for item in items if item is not None and item.period == '1 January–30 June 2026']
     if len(items) < 2 or not service or items[0] not in service.facts:
         return '<p>Eligible matched-period Lloyds and peer activity figures are unavailable.</p>'
-    return ('<p>FCA complaints received, all products, January–June 2026. Each figure covers one reporting legal entity. '
-            'Customer and product denominators differ, so these volumes cannot rank service quality or benchmark Group economics.</p>'
-            '<dl>' + ''.join('<div><dt>' + escape(item.scope.split(';')[0]) + '</dt><dd>'
-                             + format(item.value, ',') + '</dd></div>' for item in items)
-            + '</dl>' + _basis(items))
+    largest = max(item.value for item in items)
+    bars = ''.join('<div><dt>' + escape(item.scope.split(';')[0]) + '</dt><dd>'
+                   + format(item.value, ',') + '<meter min="0" max="' + str(largest or 1)
+                   + '" value="' + str(item.value) + '" aria-label="Complaints received"></meter></dd></div>'
+                   for item in items)
+    return ('<p>Complaints received · January–June 2026 · all products</p>'
+            '<p class="ltv-note">Counts cover distinct legal entities. Customer and product denominators differ, '
+            'so the bars show activity volume only and cannot rank service quality.</p>'
+            '<dl class="llf-bars">' + bars + '</dl>' + inspect('Peer evidence', items))
 
 
 def render(ctx, data, issues):
@@ -168,31 +157,42 @@ def render(ctx, data, issues):
                 'sector pressure. They do not establish project-level savings, delivery accountability or a causal outcome.'
                 if insight and all(key in facts for _, key, _, _ in STAGES) else
                 'Explore Lloyds’ disclosures on efficiency, platform renewal, existing technology controls and regulatory timing.')
-    from .lloyds_twin_visual import opening
+    from .lloyds_twin_visual import opening, choices
 
-    body = (STYLE + '<section class="llf" aria-label="Lloyds flagship overview">'
-            + opening(ctx, facts, STAGES, _basis, overview)
-            + '<h2 id="ltv-perspectives">Perspectives</h2><div class="ltv-perspectives">')
+    packets = []
+
+    def inspect(title, items, *, content=None):
+        key = f'llf-source-{len(packets)}'
+        packets.append(f'<section id="{key}" tabindex="-1"><h3>{escape(title)}</h3>'
+                       + (content if content is not None else _source_rows(items)) + '</section>')
+        return f'<a class="llf-source-link" href="#{key}" data-llf-source>Sources</a>'
+
+    body = ('<section class="llf" aria-label="Lloyds flagship overview">'
+            + opening(ctx, facts, STAGES, inspect, overview)
+            + '<section aria-labelledby="ltv-perspectives"><h2 id="ltv-perspectives">Perspectives</h2>')
+    perspectives = []
     for key, title, rows in VIEWS:
-        body += f'<details id="llf-{key}"' + (' open' if key == 'swot' and insight else '') + '><summary>' + escape(title) + '</summary>'
-        count = 0
-        for label, dependencies, analysis in rows:
+        cards = []
+        for index, (label, dependencies, analysis) in enumerate(rows):
             if not all(ref in facts for ref in dependencies) or (key == 'options' and not insight):
                 continue
-            count += 1
-            body += '<section><h3>' + escape(label) + '</h3>'
-            if insight and analysis:
-                body += '<p><strong>FLORA Insight</strong> · ' + escape(analysis) + '</p>'
-            else:
-                body += ''.join(p.render(facts[ref], compact=True) for ref in dependencies)
-            body += _basis(facts[ref] for ref in dependencies) + '</section>'
-        if not count:
-            body += ('<p>Switch to FLORA Insight to compare possible responses.</p>'
-                     if key == 'options' and not insight else '<p>Eligible evidence is unavailable for this perspective.</p>')
-        body += '</details>'
-    body += ('<details id="llf-benchmark"><summary>Peer evidence · service operations</summary>'
-             + _benchmark(data, issues) + '</details>')
-    body += '</div>'
+            items = tuple(facts[ref] for ref in dependencies)
+            detail = (('<p><strong>FLORA Insight</strong> · ' + escape(analysis) + '</p>')
+                      if insight and analysis else ''.join(p.render(item, compact=True) for item in items))
+            if not insight and analysis and key != 'options':
+                detail += '<p class="ltv-note">FLORA Insight explains the implications and limits.</p>'
+            cards.append((f'{key}-{index}', label, detail + inspect(label, items)))
+        content = choices('Findings', cards, key)
+        if not cards:
+            content = ('<p>Switch to FLORA Insight to compare possible responses.</p>'
+                       if key == 'options' and not insight else '<p>Eligible evidence is unavailable for this perspective.</p>')
+        if key == 'competition':
+            content += ('<p class="ltv-note">The policy pilot and a future payment assistant have different evidence. '
+                        'A named AI-native entrant launch is unverified.</p>')
+        perspectives.append((key, title, content))
+    perspectives.append(('benchmark', 'Peer evidence · service operations', _benchmark(data, issues, inspect)))
+    body += choices('Perspectives', perspectives, 'perspectives') + '</section>'
     if 'treasury-payments' in facts:
         body += '<p><small>Payments policy excerpt contains HM Treasury information licensed under the Open Government Licence v3.0.</small></p>'
-    return body + '</section>'
+    return (body + '<details id="llf-sources"><summary>Sources</summary>'
+            + ''.join(packets) + '</details></section>')
