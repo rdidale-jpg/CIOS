@@ -1,0 +1,314 @@
+[
+  {
+    "id": "NR-income",
+    "terms": [
+      {
+        "measurement_id": "NR-grant",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "NR-access",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "NR-other",
+        "coefficient": "1"
+      }
+    ],
+    "expected": "12343",
+    "tolerance": "0",
+    "context": {
+      "entity_id": "NR",
+      "period": "2025-04-01/2026-03-31",
+      "basis": "GB regulatory financial statements; 2025/26 prices",
+      "currency": "GBP",
+      "unit": "million",
+      "measurement_state": "actual",
+      "stock_flow": "flow",
+      "semantic_type": "reported"
+    },
+    "meaning": "Funding receipts reconcile; not a supplier market.",
+    "output_type": "calculated",
+    "canonical_promotion": false
+  },
+  {
+    "id": "NR-capex",
+    "terms": [
+      {
+        "measurement_id": "NR-renew",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "NR-enhance",
+        "coefficient": "1"
+      }
+    ],
+    "expected": "5550",
+    "tolerance": "0",
+    "context": {
+      "entity_id": "NR",
+      "period": "2025-04-01/2026-03-31",
+      "basis": "GB regulatory financial statements; 2025/26 prices",
+      "currency": "GBP",
+      "unit": "million",
+      "measurement_state": "actual",
+      "stock_flow": "flow",
+      "semantic_type": "reported"
+    },
+    "meaning": "Renewals plus enhancements; not an addressable technology contract.",
+    "output_type": "calculated",
+    "canonical_promotion": false
+  },
+  {
+    "id": "NR-total",
+    "terms": [
+      {
+        "measurement_id": "NR-opex",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "NR-capex",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "NR-finance",
+        "coefficient": "1"
+      }
+    ],
+    "expected": "15028",
+    "tolerance": "0",
+    "context": {
+      "entity_id": "NR",
+      "period": "2025-04-01/2026-03-31",
+      "basis": "GB regulatory financial statements; 2025/26 prices",
+      "currency": "GBP",
+      "unit": "million",
+      "measurement_state": "actual",
+      "stock_flow": "flow",
+      "semantic_type": "reported"
+    },
+    "meaning": "Regulatory expenditure bridge, not IFRS cost of sales.",
+    "output_type": "calculated",
+    "canonical_promotion": false
+  },
+  {
+    "id": "ABP-gross",
+    "terms": [
+      {
+        "measurement_id": "AP-rev",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "AP-cost",
+        "coefficient": "-1"
+      }
+    ],
+    "expected": "480.2",
+    "tolerance": "0",
+    "context": {
+      "entity_id": "ABP",
+      "period": "2025-01-01/2025-12-31",
+      "basis": "statutory company income statement",
+      "currency": "GBP",
+      "unit": "million",
+      "measurement_state": "actual",
+      "stock_flow": "flow",
+      "semantic_type": "reported"
+    },
+    "meaning": "Company gross profit, not Holdings group EBITDA.",
+    "output_type": "calculated",
+    "canonical_promotion": false
+  },
+  {
+    "id": "ABP-op",
+    "terms": [
+      {
+        "measurement_id": "AP-gross",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "AP-admin",
+        "coefficient": "-1"
+      },
+      {
+        "measurement_id": "AP-other",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "AP-fair",
+        "coefficient": "1"
+      }
+    ],
+    "expected": "582.5",
+    "tolerance": "0",
+    "context": {
+      "entity_id": "ABP",
+      "period": "2025-01-01/2025-12-31",
+      "basis": "statutory company income statement",
+      "currency": "GBP",
+      "unit": "million",
+      "measurement_state": "actual",
+      "stock_flow": "flow",
+      "semantic_type": "reported"
+    },
+    "meaning": "Property valuation included; not a cash operating margin.",
+    "output_type": "calculated",
+    "canonical_promotion": false
+  },
+  {
+    "id": "TFL-income",
+    "terms": [
+      {
+        "measurement_id": "TF-pass",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "TF-other",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "TF-rates",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "TF-grants",
+        "coefficient": "1"
+      }
+    ],
+    "expected": "9622",
+    "tolerance": "0",
+    "context": {
+      "entity_id": "TFL",
+      "period": "2025-04-01/2026-03-31",
+      "basis": "unaudited management reporting; excludes Places contribution",
+      "currency": "GBP",
+      "unit": "million",
+      "measurement_state": "actual",
+      "stock_flow": "flow",
+      "semantic_type": "reported"
+    },
+    "meaning": "Rates and grants included, not pure fares.",
+    "output_type": "calculated",
+    "canonical_promotion": false
+  },
+  {
+    "id": "TFL-pre",
+    "terms": [
+      {
+        "measurement_id": "TF-rev",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "TF-opex",
+        "coefficient": "-1"
+      }
+    ],
+    "expected": "1192",
+    "tolerance": "0",
+    "context": {
+      "entity_id": "TFL",
+      "period": "2025-04-01/2026-03-31",
+      "basis": "unaudited management reporting; excludes Places contribution",
+      "currency": "GBP",
+      "unit": "million",
+      "measurement_state": "actual",
+      "stock_flow": "flow",
+      "semantic_type": "reported"
+    },
+    "meaning": "Before interest and capital renewals, not statutory operating profit.",
+    "output_type": "calculated",
+    "canonical_promotion": false
+  },
+  {
+    "id": "TFL-rounded",
+    "terms": [
+      {
+        "measurement_id": "TF-pre",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "TF-renew",
+        "coefficient": "-1"
+      },
+      {
+        "measurement_id": "TF-interest",
+        "coefficient": "-1"
+      }
+    ],
+    "expected": "6",
+    "tolerance": "1",
+    "context": {
+      "entity_id": "TFL",
+      "period": "2025-04-01/2026-03-31",
+      "basis": "unaudited management reporting; excludes Places contribution",
+      "currency": "GBP",
+      "unit": "million",
+      "measurement_state": "actual",
+      "stock_flow": "flow",
+      "semantic_type": "reported"
+    },
+    "meaning": "Rounded printed components produce7 versus reported6; £1m rounding residual retained.",
+    "output_type": "calculated",
+    "canonical_promotion": false
+  },
+  {
+    "id": "HA-rev",
+    "terms": [
+      {
+        "measurement_id": "HA-aero",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "HA-retail",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "HA-other",
+        "coefficient": "1"
+      }
+    ],
+    "expected": "2684",
+    "tolerance": "0",
+    "context": {
+      "entity_id": "HEATHROW",
+      "period": "2026-01-01/2026-09-30",
+      "basis": "public HTML Group results; adjusted EBITDA/opex definitions",
+      "currency": "GBP",
+      "unit": "million",
+      "measurement_state": "actual",
+      "stock_flow": "flow",
+      "semantic_type": "reported"
+    },
+    "meaning": "Public statement income mix; legal-operator standalone join withheld.",
+    "output_type": "calculated",
+    "canonical_promotion": false
+  },
+  {
+    "id": "HA-ebitda",
+    "terms": [
+      {
+        "measurement_id": "HA-rev",
+        "coefficient": "1"
+      },
+      {
+        "measurement_id": "HA-opex",
+        "coefficient": "-1"
+      }
+    ],
+    "expected": "1441",
+    "tolerance": "0",
+    "context": {
+      "entity_id": "HEATHROW",
+      "period": "2026-01-01/2026-09-30",
+      "basis": "public HTML Group results; adjusted EBITDA/opex definitions",
+      "currency": "GBP",
+      "unit": "million",
+      "measurement_state": "actual",
+      "stock_flow": "flow",
+      "semantic_type": "reported"
+    },
+    "meaning": "Adjusted EBITDA excludes depreciation etc; not statutory profit.",
+    "output_type": "calculated",
+    "canonical_promotion": false
+  }
+]

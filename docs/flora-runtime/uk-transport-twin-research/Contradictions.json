@@ -1,0 +1,44 @@
+[
+  {
+    "id": "C-ABP",
+    "issue": "Search lead foregrounded756.6 as if current; original accounts distinguish2025=792.5 from2024=756.6.",
+    "resolution": "Original table controls; old-year figure retained only as comparator.",
+    "status": "resolved_transcription"
+  },
+  {
+    "id": "C-FIRST",
+    "issue": "Statutory and adjusted revenue differ because no-revenue-risk DfT flows are excluded from APM.",
+    "resolution": "Not a contradiction; retain both definitions, prohibit mixed-basis ratio.",
+    "status": "explained_difference"
+  },
+  {
+    "id": "C-ROUND-TFL",
+    "issue": "Printed1192-716-469=7, source reports6.",
+    "resolution": "Do not edit source or invent expense; bounded£1m rounding residual retained, exact unrounded proof pending.",
+    "status": "rounding_explained_unrounded_reconciliation_open"
+  },
+  {
+    "id": "C-HEATHROW",
+    "issue": "Public results PDF simultaneously carries restrictive/confidential wording.",
+    "resolution": "Retain rights exception, no archive/import; separate public HTML numerical source does not settle PDF rights.",
+    "status": "open_source_use"
+  },
+  {
+    "id": "C-GBR",
+    "issue": "Future integrated railway wording can be mistaken for current operational/legal consolidation.",
+    "resolution": "Consultation/future licence is not current company/active licence or completed merger.",
+    "status": "prevented_temporal_join"
+  },
+  {
+    "id": "C-TFL-STAGE2",
+    "issue": "Historical unauthorised signalling-stage statement could be presented as current.",
+    "resolution": "Bind to2July2025 only; current update remains open.",
+    "status": "bounded_historical_fact"
+  },
+  {
+    "id": "C-ARCH",
+    "issue": "ADR014/024 Draft header conflicts with Accepted registry and body.",
+    "resolution": "Registry consulted: Accepted; no architecture changes; request separate metadata correction.",
+    "status": "authority_registry_resolved_metadata_gap_retained"
+  }
+]

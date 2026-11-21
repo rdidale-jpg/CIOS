@@ -1,0 +1,27 @@
+{
+  "mission": "UK Transport Industry Twin Research Foundation",
+  "commission": "owner uploaded Transport sprint brief, 18 November 2026",
+  "base_sha": "2757e459f90fc4e1156180acf5f7ed9a40c292d9",
+  "branch": "codex/uk-transport-twin-research",
+  "cut": "2026-11-18",
+  "overall_outcome": "CONTINUE",
+  "bounded_increment": "foundation prepared for owner review; not a high-fidelity completed Twin",
+  "readiness": "Research-ready with conditions",
+  "canonical_writes": false,
+  "runtime_changes": false,
+  "source_permissions_changed": false,
+  "production_inspected": false,
+  "import_package": "not produced: canonical Industry root and owner-approved membership/crosswalk unavailable; review proposals only",
+  "existing_aviation_identity": {
+    "industry": "AV-IND-001",
+    "enterprise": "AV-ENT-001",
+    "authority": "candidate_intelligence; research IDs only"
+  },
+  "source_count": 35,
+  "entity_reference_count": 37,
+  "claim_count": 45,
+  "measurement_count": 44,
+  "calculation_count": 10,
+  "relationship_count": 22,
+  "resume": "Read README, Coverage-and-Next-Sprint, then Research-Queue; do not infer completed source exhaustion."
+}
