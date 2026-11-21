@@ -1,6 +1,6 @@
 # UK Technology experience alignment
 
-Baseline `df6173c186e6469783c732247f4c13aaa961aec4` includes #701 and #704. T1 follows the owner-agreed product direction in the [Experience Contract](../../product/flora-experience/FLORA-Experience-Contract-v1.0.md), the role-led Technology concept in [#702](https://github.com/rdidale-jpg/CIOS/pull/702) and the dependency map in [#703](https://github.com/rdidale-jpg/CIOS/pull/703).
+Reconciled baseline `c9792a5cff75489d8ba857b33687a85f33d86931` includes EEI‑3 (#709). The original T1 review used `df6173c186e6469783c732247f4c13aaa961aec4`. T1 follows the owner-agreed product direction in the [Experience Contract](../../product/flora-experience/FLORA-Experience-Contract-v1.0.md), the role-led Technology concept in [#702](https://github.com/rdidale-jpg/CIOS/pull/702) and the dependency map in [#703](https://github.com/rdidale-jpg/CIOS/pull/703).
 
 | Entry or capability | T1 treatment |
 | --- | --- |
@@ -22,6 +22,12 @@ The current Facts composition retains history and labelled research disclosures 
 
 Both modes rely on existing hash-pinned research and comparison reads. Mutation of a pinned package fails closed. These static fixtures do not provide granular current publisher withdrawal for an individual retained claim. Equinix legacy figures still have their existing fixed presentation scope and publication date. T1 adds no derived financial figures or rights, identity or scope extensions. Contract actuality, exact deployment geography, UK entity attribution, and original-source reuse rights remain unresolved where the existing records say so.
 
+## EEI‑3 reconciliation
+
+The conflict was in `technology_experience.render`. Technology reading (`reading`) and enterprise financial detail (`detail`) retain their existing finite selectors and route guards. The financial statements are composed after Technology chooses its surrounding editorial content, so a selected financial detail survives either Technology reading mode. The financial controls preserve the Technology mode, enterprise and district. The separately named navigation regions make the scope of each control available to assistive technology. This preserves historic finance links at the cost of two controls when financial detail is open.
+
+The render path still delegates to the existing statement series. Equinix uses the verified SEC FY2024 and FY2025 filings. Source attribution, historical values, withdrawal and F1 calculations continue through EEI‑3. The eight-district art, original comparison data, provider directory, private Financial and Pipeline boundaries are outside the reconciliation. The existing Nationwide presentation retains its finance integration. Lloyds §2 stays inactive, §5 direct links stay deferred, and ADR‑027 remains Proposed. [EEI‑3 Source and history notes](../eei3/README.md)
+
 ## Review and verification
 
 | View | Desktop | iPad landscape | iPad portrait | Mobile |
@@ -32,4 +38,4 @@ Both modes rely on existing hash-pinned research and comparison reads. Mutation 
 | After NVIDIA Facts | [Desktop](previews/after-nvidia-desktop.jpg) | [Landscape](previews/after-nvidia-ipad-landscape.jpg) | [Portrait](previews/after-nvidia-ipad-portrait.jpg) | [Mobile](previews/after-nvidia-mobile.jpg) |
 | After NVIDIA Insight | [Desktop](previews/after-insight-desktop.jpg) | [Landscape](previews/after-insight-ipad-landscape.jpg) | [Portrait](previews/after-insight-ipad-portrait.jpg) | [Mobile](previews/after-insight-mobile.jpg) |
 
-The [browser harness](browser.py) runs against a loopback app with isolated storage. Device dimensions and touch use emulation. Physical iPad, Safari and assistive-technology acceptance remain pending. The final PR records full validation and exact reverse-tree rollback. There is no migration or data rollback.
+The table contains original T1 review captures. The [updated browser harness](browser.py) runs against a loopback app with isolated storage and checks that both reading controls preserve the selected financial context. The [EEI‑3 harness](../eei3/browser.py) exercises report withdrawal while an earlier filing remains visible. Device dimensions and touch use emulation. Physical iPad, Safari and assistive-technology acceptance remain pending. The final PR records full validation and exact reverse-tree rollback. There is no migration or data rollback.
