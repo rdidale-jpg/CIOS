@@ -99,7 +99,7 @@ def test_existing_equinix_route_uses_public_only(monkeypatch):
         monkeypatch.setattr(f, name, forbidden)
     url = tech.BASE + '/enterprise'
     facts = tech.render(url, {'detail': 'financials'})
-    insight = tech.render(url, {'detail': 'financials', 'reading': 'insight'})
+    insight = tech.render(url, {'detail': 'financial-insight'})
     assert all(label in facts for label in ('Financial statements', 'Cash flow statement', '40,141', 'Segment reporting'))
     assert '+5.36' in insight and 'investing used cash' in insight
     assert 'Source &amp; basis' in facts

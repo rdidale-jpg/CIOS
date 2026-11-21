@@ -93,7 +93,7 @@ def asset(name):
 
 
 def validate(query):
-    if set(query) - {'selected', 'district', 'scope', 'record', 'detail', 'area', 'macro', 'enterprise', 'sort', 'direction', 'search', 'reading'}:
+    if set(query) - {'selected', 'district', 'scope', 'record', 'detail', 'area', 'macro', 'enterprise', 'sort', 'direction', 'search'}:
         raise ValueError('Unknown experience selector')
     for key in ('selected', 'district'):
         if query.get(key, '') not in ('', *DISTRICTS):
@@ -117,9 +117,7 @@ def validate(query):
     import re
     if record and not re.fullmatch(r'(cooling|migration|resilience|connectivity|demo-[a-f0-9-]{1,40})', record):
         raise ValueError('Unknown demo opportunity')
-    if query.get('reading', '') not in ('', 'facts', 'insight'):
-        raise ValueError('Unknown reading mode')
-    if query.get('detail', '') not in ('', 'financials', 'strategy'):
+    if query.get('detail', '') not in ('', 'financials', 'financial-insight', 'strategy'):
         raise ValueError('Unknown enterprise detail')
 
 
@@ -346,14 +344,14 @@ def statement_detail(key, query):
     lines = presented_statement_series('technology:' + key)
     if not lines:
         return ''
-    active = query.get('reading') or 'facts'
-    selections = {name: value for name, value in query.items() if name != 'reading'}
+    active = query.get('detail')
+    selections = {name: value for name, value in query.items() if name != 'detail'}
     navigation = '<nav aria-label="Reading mode">' + ' · '.join(
-        link(url('/enterprise', **selections, reading=mode)+'#eei-summary', label,
+        link(url('/enterprise', **selections, detail=mode)+'#eei-summary', label,
              **({'aria_current': 'page'} if mode == active else {}))
-        for mode, label in (('facts', 'Facts'), ('insight', 'FLORA Insight'))) + '</nav>'
+        for mode, label in (('financials', 'Facts'), ('financial-insight', 'FLORA Insight'))) + '</nav>'
     return navigation + annual_statement_view(
-        lines, insight=active == 'insight',
+        lines, insight=active == 'financial-insight',
         comparison_keys=('assets', 'cash', 'liabilities'),
         growth_keys=('revenue', 'operating_income', 'net_income'), inspection=True)
 
@@ -364,6 +362,8 @@ def render(path, query, headers=None):
         raise ValueError('Unknown Technology experience view')
     validate(query)
     suffix = path[len(BASE):]
+    if query.get('detail') == 'financial-insight' and suffix != '/enterprise':
+        raise ValueError('Financial reading requires an enterprise view')
     context_scope = ((query.get('enterprise') or 'equinix') if suffix in ('/enterprise', '/operating-model') else
                      (query.get('district') or 'cloud') if suffix == '/district' else 'industry')
     scope = query.get('scope') or context_scope
@@ -374,8 +374,10 @@ def render(path, query, headers=None):
         body = commercial.comparison(selected_district, query.get('sort') or 'name', query.get('direction') or 'asc', query.get('search', ''), query.get('macro', ''))
     elif suffix == '/enterprise':
         key = query.get('enterprise') or 'equinix'
-        body = enterprise(query.get('detail', '')) if key == 'equinix' else commercial.profile(key, query.get('district', ''))
-        if query.get('detail') == 'financials':
+        detail = query.get('detail', '')
+        financial = detail in {'financials', 'financial-insight'}
+        body = enterprise('financials' if financial else detail) if key == 'equinix' else commercial.profile(key, query.get('district', ''))
+        if financial:
             body += statement_detail(key, query)
     elif suffix == '/operating-model': body = operating_model(query.get('area') or 'facilities', query.get('macro', ''))
     elif suffix == '/pipeline': body = pipeline(scope)

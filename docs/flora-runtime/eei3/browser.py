@@ -29,6 +29,7 @@ with TemporaryDirectory() as temporary, MonkeyPatch.context() as patch, sync_pla
     if phase == 'after':
         from cios.applications.flora.research_intelligence.statement_sources import PACKAGE
         shutil.copytree(model.REPO / PACKAGE, root / PACKAGE)
+        shutil.copytree(model.REPO / "enterprise-knowledge", root / "enterprise-knowledge")
         patch.setattr(model, 'REPO', root)
         record = root / PACKAGE / 'EEI3-EQUINIX-10K-2025.json'
         original = record.read_text()
@@ -59,7 +60,7 @@ with TemporaryDirectory() as temporary, MonkeyPatch.context() as patch, sync_pla
                     nav.press('Enter')
                 else:
                     nav.tap()
-                page.wait_for_url(lambda url: 'reading=insight' in url)
+                page.wait_for_url(lambda url: 'detail=financial-insight' in url)
                 expect(page.locator('.eei-annual')).to_contain_text('+5.36')
                 page.screenshot(path=output / f'insight-{name}.jpg', quality=82)
                 page.go_back()
