@@ -58,6 +58,8 @@ def predecessor(root, path):
     current = (Path(root) / path).read_bytes()
     if path == AVIATION_JOURNEY_APP and sha256(current).hexdigest() == AVIATION_JOURNEY_SHA256:
         current = subprocess.check_output(["git", "show", f"{AVIATION_JOURNEY_BASE}:{path}"], cwd=root)
+    if path == "cios/applications/flora/public_routes.py" and sha256(current).hexdigest() == "0dc12bc420aa94b669253579ff312798d84c5c06a7af775cdc4ef6b194ee5442":
+        current = subprocess.check_output(["git", "show", "df6173c186e6469783c732247f4c13aaa961aec4:" + path], cwd=root)
     from tools.research.enterprise_economics_compatibility import predecessor as economics_predecessor
     current = economics_predecessor(root, path, current)
     from tools.research.public_financial_compatibility import predecessor as public_predecessor
