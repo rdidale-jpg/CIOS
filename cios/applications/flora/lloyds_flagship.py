@@ -116,12 +116,20 @@ def _source_rows(items):
             url = source.url
             if (urlsplit(url).hostname or '').endswith(('lloydsbankinggroup.com', 'lloydsbank.com')):
                 url = 'https://www.lloydsbankinggroup.com/'
-            citations.append(f'<a href="{escape(url, quote=True)}" rel="noreferrer">{escape(source.title)}</a>')
+            citations.append(f'<a href="{escape(url, quote=True)}" rel="noreferrer">{escape(source.title)}</a>'
+                             + (' · ' + escape(source.publisher) if source.publisher else '')
+                             + (' · Published ' + escape(source.published) if source.published else '')
+                             + (' · ' + escape(source.locator) if source.locator else ''))
         state = {'commitment': 'Stated priority or plan', 'target': 'Management target',
                  'expectation': 'Management expectation'}.get(item.measurement_state, 'Attributed disclosure')
         rows.append('<li><strong>' + escape(state) + '</strong> · ' + escape(item.text)
                     + ' <small>' + escape(item.period + ' · ' + item.scope) + '</small> · '
-                    + ', '.join(citations) + '</li>')
+                    + '; '.join(citations)
+                    + '<p class="ltv-note">' + escape(item.verification.replace('_', ' ').capitalize())
+                    + ' · ' + escape(item.canonical_status.replace('_', ' ')) + '</p>'
+                    + ''.join('<p>' + escape(text) + '</p>' for text in (*item.caveats, *item.material_caveats,
+                                                                         *item.counter_evidence))
+                    + '</li>')
     return '<ul>' + ''.join(rows) + '</ul>'
 
 
@@ -187,8 +195,13 @@ def render(ctx, data, issues):
             content = ('<p>Switch to FLORA Insight to compare possible responses.</p>'
                        if key == 'options' and not insight else '<p>Eligible evidence is unavailable for this perspective.</p>')
         if key == 'competition':
-            content += ('<p class="ltv-note">The policy pilot and a future payment assistant have different evidence. '
-                        'A named AI-native entrant launch is unverified.</p>')
+            controls = facts.get('LBG-ENVOY-CONTROLS')
+            known = ('<div class="ltv-band"><strong>Company-disclosed development</strong>'
+                     + p.render(controls, compact=True) + inspect('Envoy controls', (controls,)) + '</div>'
+                     if controls else '')
+            content = (known + content
+                       + '<p class="ltv-note">The policy pilot and a future payment assistant have different evidence. '
+                         'A named AI-native entrant launch is unverified.</p>')
         perspectives.append((key, title, content))
     perspectives.append(('benchmark', 'Peer evidence · service operations', _benchmark(data, issues, inspect)))
     body += choices('Perspectives', perspectives, 'perspectives') + '</section>'
