@@ -290,13 +290,18 @@ def annual_statement_view(lines, *, insight=False, comparison_keys=(), context='
                 continue
             groups = {}
             for line in selected:
-                key = (line.metric, line.reported_label, line.accounting_basis, line.perimeter if kind == 'balance' else '')
-                groups.setdefault(key, {})[line.fiscal_year] = line
+                key = (line.metric, line.reported_label, line.accounting_basis, line.definition,
+                       line.accounting_standard, line.value.unit, line.value.currency, line.value.scale,
+                       line.perimeter if kind == 'balance' else '')
+                group = groups.setdefault(key, {})
+                if line.fiscal_year in group:
+                    return ''
+                group[line.fiscal_year] = line
             body += ('<h3>' + label + '</h3><table><caption class="sr-only">' + label
                      + ' · reported values</caption><thead><tr><th scope="col">Measure</th>'
                      + ''.join('<th scope="col">' + columns[year] + '</th>' for year in years)
                      + '</tr></thead><tbody>')
-            for (_, label, basis, _), periods in groups.items():
+            for (_, label, basis, *_), periods in groups.items():
                 spans = []
                 for year in years:
                     line = periods.get(year)
