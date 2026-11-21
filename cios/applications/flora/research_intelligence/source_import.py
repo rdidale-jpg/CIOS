@@ -22,7 +22,8 @@ def sha(content):
 
 def official_url(value):
     target = urlsplit(value)
-    if (target.scheme != 'https' or not (target.hostname in PUBLISHERS or (target.hostname == 'www.nationwide.co.uk' and re.fullmatch(r'/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/[0-9-]+/[0-9]{4}-preliminary-results\.pdf', target.path) and not target.query))
+    if (target.scheme != 'https' or not (target.hostname in PUBLISHERS or (target.hostname == 'www.nationwide.co.uk' and (re.fullmatch(r'/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/[0-9-]+/[0-9]{4}-preliminary-results\.pdf', target.path)
+                 or target.path == '/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/annual-report-and-accounts-2026.pdf') and not target.query))
             or target.username or target.password or target.port not in (None, 443)
             or target.fragment):
         raise ValueError('Expected an approved official-publisher HTTPS document URL')
@@ -304,6 +305,33 @@ def public_factual_record():
     routine_factual_use(source)
     minimal_factual_integrity(source)
     return source
+
+
+
+def public_statement_record(selection):
+    """Finite Source selections for statement reads, independent of Financial runs."""
+    import json
+    from . import model
+    from .registry import snapshot_boundary
+
+    entries = {
+        'nationwide-annual': ('banking', 'EEI2B-Nationwide-AR26.json', 'EEI2B-NATIONWIDE-AR26',
+            'https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/annual-report-and-accounts-2026.pdf',
+            ('research-subject:nationwide-building-society-group', 'Nationwide Building Society Group')),
+    }
+    if selection not in entries:
+        raise ValueError('Unavailable financial statement selection')
+    domain, filename, record_id, official, subject = entries[selection]
+    path = snapshot_boundary(domain, model.REPO) / filename
+    relative = path.relative_to(model.REPO)
+    if (any((model.REPO / Path(*relative.parts[:i])).is_symlink() for i in range(1, len(relative.parts)+1))
+            or not path.is_file() or path.stat().st_size > LIMIT):
+        raise ValueError('Financial statement source unavailable')
+    record = json.loads(path.read_text())
+    if (not isinstance(record, dict) or record.get('id') != record_id
+            or record.get('url') != official or record.get('retrieval_url') != official):
+        raise ValueError('Financial statement document mismatch')
+    return record, subject
 
 
 def working_facts():

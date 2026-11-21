@@ -431,9 +431,19 @@ def render(ctx,headers=None,*,financial_run_id=''):
                 data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
                 body=(reading.nationwide_insight(public) if ctx.reading=='insight' else
                       analyst.compose_editorial(public)+reading.nationwide_facts_bridge(public)+_nationwide_service(data))
-                from .enterprise_economics import statement_summary
-                from .financial_intelligence.public_statements import nationwide_lines
-                body += statement_summary(nationwide_lines(public), insight=ctx.reading=='insight', inspection=False)
+                from .enterprise_economics import annual_statement_view, statement_summary
+                from .financial_intelligence.public_statements import annual_details, nationwide_lines
+                lines = annual_details('nationwide-annual')
+                if lines:
+                    context = ('FY2025 covers 361 days and includes six months of Virgin Money. '
+                               'FY2026 includes a full year. This limits direct comparisons of income and cash flows. '
+                               'Balance sheet dates are 31 March 2026 and 31 March 2025.')
+                    body += annual_statement_view(
+                        lines, insight=ctx.reading=='insight', context=context,
+                        comparison_keys=('assets','cash_central','loans','debt_securities'),
+                    )
+                else:
+                    body += statement_summary(nationwide_lines(public), insight=ctx.reading=='insight', inspection=False)
                 action=analyst.prepare_action(ctx,headers=headers) if ctx.reading=='facts' else ''
                 if action:body+='<section class="workspace-setup"><h2>Workspace analysis</h2>'+action+'</section>'
                 return _frame(ctx,headers,data,issues,v.destinations(ctx,data),cohort.landscape(ctx,body,data,issues)+_bank_picker(ctx,data,issues))
