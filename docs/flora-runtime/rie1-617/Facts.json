@@ -1,0 +1,1800 @@
+[
+  {
+    "id": "UK-GVA24",
+    "source_refs": [
+      "ONS-BB26"
+    ],
+    "subject_scope": "UK domestic economy",
+    "reporting_period": "2024",
+    "statement": "UK GVA was GBP2,623bn at current basic prices. This is not nominal GDP at market prices or a sales market.",
+    "locator": "Industrial analysis section 1",
+    "value": 2623,
+    "unit": "GBP billion nominal GVA",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-GDP-Q3",
+    "source_refs": [
+      "ONS-GDP-Q326"
+    ],
+    "subject_scope": "UK economy",
+    "reporting_period": "Q3 2026",
+    "statement": "Real GDP grew 0.7% from Q2; year-on-year growth was 1.9%. Early estimate subject to revision.",
+    "locator": "Main points / Table 1",
+    "value": 0.7,
+    "unit": "percent real GDP qoq",
+    "comparison": "Q2 2026",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-INV-Q3",
+    "source_refs": [
+      "ONS-GDP-Q326"
+    ],
+    "subject_scope": "UK business investment",
+    "reporting_period": "Q3 2026",
+    "statement": "Business investment increased 0.4% quarter-on-quarter and 3.0% year-on-year; whole-economy GFCF grew 1.7% qoq.",
+    "locator": "Gross capital formation",
+    "value": 0.4,
+    "unit": "percent real business investment qoq",
+    "comparison": "Q2 2026",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-CPI-SEP",
+    "source_refs": [
+      "ONS-CPI-SEP26"
+    ],
+    "subject_scope": "UK consumer prices",
+    "reporting_period": "September 2026",
+    "statement": "CPI annual inflation was 3.5%, versus 3.1% in August; CPIH was 3.6%. Transport fuel was the largest upward contribution.",
+    "locator": "Main points",
+    "value": 3.5,
+    "unit": "percent CPI yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-RATE-NOV",
+    "source_refs": [
+      "BOE-MPC-NOV26"
+    ],
+    "subject_scope": "UK monetary policy",
+    "reporting_period": "Meeting ending 4 November 2026",
+    "statement": "MPC raised Bank Rate by 0.25 percentage points to 4.0%, on an 8\u20131 vote.",
+    "locator": "Monetary Policy Summary",
+    "value": 4.0,
+    "unit": "percent policy rate",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-LAB-UNEMP",
+    "source_refs": [
+      "ONS-LAB-OCT26"
+    ],
+    "subject_scope": "UK residents aged 16+",
+    "reporting_period": "June\u2013August 2026",
+    "statement": "LFS unemployment was 4.7%; payroll data show a different employment direction and remain a separate measure.",
+    "locator": "LFS headline rates",
+    "value": 4.7,
+    "unit": "percent unemployment rate",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-LAB-WAGE",
+    "source_refs": [
+      "ONS-LAB-OCT26"
+    ],
+    "subject_scope": "Employees; Great Britain earnings series within UK overview",
+    "reporting_period": "June\u2013August 2026",
+    "statement": "Regular nominal earnings grew 3.7% yoy; public-sector 6.3% and private-sector 3.0%, affected by pay-award timing.",
+    "locator": "Average weekly earnings",
+    "value": 3.7,
+    "unit": "percent nominal earnings yoy",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-PROD-RTI",
+    "source_refs": [
+      "ONS-PROD-Q226"
+    ],
+    "subject_scope": "UK productivity, administrative RTI-based method",
+    "reporting_period": "Q2 2026",
+    "statement": "Preferred RTI-based flash output per hour was 0.7% above Q2 2025; the LFS-based estimate was -0.2%, so methods must not be spliced.",
+    "locator": "Main points / Tables 1\u20132",
+    "value": 0.7,
+    "unit": "percent output per hour yoy",
+    "comparison": "Q2 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-POP25",
+    "source_refs": [
+      "ONS-POP25"
+    ],
+    "subject_scope": "UK population",
+    "reporting_period": "Mid-2025",
+    "statement": "Population was about 69.5m, increasing 0.3% year-on-year. Revisions and constituent-country differences matter.",
+    "locator": "Overview",
+    "value": 69.5,
+    "unit": "million people rounded",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-TRADE-Q3",
+    "source_refs": [
+      "ONS-TRADE-SEP26"
+    ],
+    "subject_scope": "UK goods and services excluding precious metals",
+    "reporting_period": "Q3 2026",
+    "statement": "The current-price trade deficit was GBP10.4bn, GBP6.2bn wider than Q2; goods deficit GBP61.5bn and services surplus GBP51.1bn.",
+    "locator": "Main points",
+    "value": -10.4,
+    "unit": "GBP billion trade balance",
+    "comparison": "Q2 2026",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-FISCAL-BORROW",
+    "source_refs": [
+      "ONS-FISCAL-SEP26"
+    ],
+    "subject_scope": "UK public sector excluding public-sector banks",
+    "reporting_period": "September 2026",
+    "statement": "Net borrowing was GBP24.5bn and central-government debt interest GBP10.9bn. Monthly borrowing is not debt stock or a departmental spending budget.",
+    "locator": "Overview / Public sector net borrowing",
+    "value": 24.5,
+    "unit": "GBP billion monthly borrowing",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-FISCAL-DEBT",
+    "source_refs": [
+      "ONS-FISCAL-SEP26"
+    ],
+    "subject_scope": "UK public sector net debt excluding public-sector banks",
+    "reporting_period": "End September 2026",
+    "statement": "Provisional net debt was GBP3,005.0bn, equivalent to 94.0% of GDP.",
+    "locator": "Public sector balance sheet",
+    "value": 3005.0,
+    "unit": "GBP billion debt stock",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-HH-INCOME",
+    "source_refs": [
+      "ONS-QSA-Q226"
+    ],
+    "subject_scope": "UK households",
+    "reporting_period": "Q2 2026",
+    "statement": "Real disposable income per head rose 1.0% qoq; the saving ratio was 8.8%. Aggregate improvement does not establish every household is better off.",
+    "locator": "Main points",
+    "value": 1.0,
+    "unit": "percent real income per head qoq",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-SECTOR-FLOWS",
+    "source_refs": [
+      "ONS-QSA-Q226"
+    ],
+    "subject_scope": "UK institutional sectors, national accounts",
+    "reporting_period": "Q2 2026",
+    "statement": "PNFCs recorded GBP4.3bn net lending; households net lending was 2.4% of GDP and government net borrowing 5.2%. These are distinct sector flow accounts, not loan applications.",
+    "locator": "Main points",
+    "value": 4.3,
+    "unit": "GBP billion PNFC net lending",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-MORTGAGE-DSR",
+    "source_refs": [
+      "BOE-FSR-JUL26"
+    ],
+    "subject_scope": "UK aggregate households under Bank definition",
+    "reporting_period": "End 2025",
+    "statement": "Mortgage interest plus principal repayments were 7.5% of aggregate adjusted nominal post-tax household income, not a typical mortgagor burden. The denominator adjusts pension entitlements, excludes gross operating surplus/FISIM and adds interest paid. Later scenario projections are not observed debt-service outturns.",
+    "locator": "Chart 5.3 and notes",
+    "value": 7.5,
+    "unit": "percent mortgage debt-service ratio",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-CAPITAL-Q1",
+    "source_refs": [
+      "BOE-FSR-JUL26"
+    ],
+    "subject_scope": "Major UK banks: Barclays, HSBC, Lloyds, Nationwide, NatWest, Santander UK and Standard Chartered",
+    "reporting_period": "Q1 2026",
+    "statement": "Major-bank CET1 was 14.2%, compared with 14.4% in Q3 2025. This is a peer aggregate, not an individual bank requirement.",
+    "locator": "Table 6.A",
+    "value": 14.2,
+    "unit": "percent CET1 ratio",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-RESILIENCE-SEP",
+    "source_refs": [
+      "BOE-FPC-SEP26"
+    ],
+    "subject_scope": "UK banking system and financial markets",
+    "reporting_period": "September 2026 review",
+    "statement": "FPC judged banks appropriately capitalised with high liquidity while highlighting interconnected sovereign, risky-asset, credit and AI/cyber risks.",
+    "locator": "Headline judgements",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_regulatory_assessment",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-CREDIT-Q3",
+    "source_refs": [
+      "BOE-CCS-Q326"
+    ],
+    "subject_scope": "Surveyed UK bank/building-society lenders",
+    "reporting_period": "Three months to end-August 2026",
+    "statement": "Lenders reported reduced small/medium-business credit availability and demand; large-business availability/demand were unchanged. These are survey balances, not measured rejection rates.",
+    "locator": "Supply / Demand",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_survey",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-MORTGAGE-SEP",
+    "source_refs": [
+      "BOE-MC-SEP26"
+    ],
+    "subject_scope": "UK individuals; bank/building-society lending",
+    "reporting_period": "September 2026",
+    "statement": "House-purchase mortgage approvals fell to 53,400; remortgage approvals with a different lender rose to 42,600.",
+    "locator": "Mortgage lending and chart 2",
+    "value": 53400,
+    "unit": "net approvals seasonally adjusted",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-NEW-MORTGAGE-RATE",
+    "source_refs": [
+      "BOE-MC-SEP26"
+    ],
+    "subject_scope": "UK newly drawn mortgages",
+    "reporting_period": "September 2026",
+    "statement": "The effective interest rate on newly drawn mortgages was 4.63%; the outstanding-stock rate was 4.03%.",
+    "locator": "Mortgage lending",
+    "value": 4.63,
+    "unit": "percent effective interest rate",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-DEPOSIT-RATE",
+    "source_refs": [
+      "BOE-MC-SEP26"
+    ],
+    "subject_scope": "UK individuals new time deposits",
+    "reporting_period": "September 2026",
+    "statement": "New time-deposit effective rate was 4.42%; outstanding time and sight rates were 3.44% and 1.66%. Do not infer bank-specific deposit beta.",
+    "locator": "Household deposits",
+    "value": 4.42,
+    "unit": "percent effective rate",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-A-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section A",
+    "reporting_period": "2024",
+    "statement": "Section A: official rounded GVA weight 7 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column A",
+    "value": 7,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-A-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section A",
+    "reporting_period": "September 2026",
+    "statement": "Section A: real GVA volume change -2.2% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column A",
+    "value": -2.2,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-B-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section B",
+    "reporting_period": "2024",
+    "statement": "Section B: official rounded GVA weight 7 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column B",
+    "value": 7,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-B-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section B",
+    "reporting_period": "September 2026",
+    "statement": "Section B: real GVA volume change 1.2% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column B",
+    "value": 1.2,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-C-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section C",
+    "reporting_period": "2024",
+    "statement": "Section C: official rounded GVA weight 87 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column C",
+    "value": 87,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-C-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section C",
+    "reporting_period": "September 2026",
+    "statement": "Section C: real GVA volume change 4.4% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column C",
+    "value": 4.4,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-D-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section D",
+    "reporting_period": "2024",
+    "statement": "Section D: official rounded GVA weight 19 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column D",
+    "value": 19,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-D-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section D",
+    "reporting_period": "September 2026",
+    "statement": "Section D: real GVA volume change 5.0% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column D",
+    "value": 5.0,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-E-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section E",
+    "reporting_period": "2024",
+    "statement": "Section E: official rounded GVA weight 12 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column E",
+    "value": 12,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-E-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section E",
+    "reporting_period": "September 2026",
+    "statement": "Section E: real GVA volume change -7.5% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column E",
+    "value": -7.5,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-F-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section F",
+    "reporting_period": "2024",
+    "statement": "Section F: official rounded GVA weight 57 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column F",
+    "value": 57,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-F-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section F",
+    "reporting_period": "September 2026",
+    "statement": "Section F: real GVA volume change -1.5% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column F",
+    "value": -1.5,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-G-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section G",
+    "reporting_period": "2024",
+    "statement": "Section G: official rounded GVA weight 94 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column G",
+    "value": 94,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-G-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section G",
+    "reporting_period": "September 2026",
+    "statement": "Section G: real GVA volume change 2.6% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column G",
+    "value": 2.6,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-H-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section H",
+    "reporting_period": "2024",
+    "statement": "Section H: official rounded GVA weight 36 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column H",
+    "value": 36,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-H-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section H",
+    "reporting_period": "September 2026",
+    "statement": "Section H: real GVA volume change 1.4% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column H",
+    "value": 1.4,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-I-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section I",
+    "reporting_period": "2024",
+    "statement": "Section I: official rounded GVA weight 28 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column I",
+    "value": 28,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-I-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section I",
+    "reporting_period": "September 2026",
+    "statement": "Section I: real GVA volume change -2.0% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column I",
+    "value": -2.0,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-J-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section J",
+    "reporting_period": "2024",
+    "statement": "Section J: official rounded GVA weight 66 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column J",
+    "value": 66,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-J-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section J",
+    "reporting_period": "September 2026",
+    "statement": "Section J: real GVA volume change 5.6% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column J",
+    "value": 5.6,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-K-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section K",
+    "reporting_period": "2024",
+    "statement": "Section K: official rounded GVA weight 81 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column K",
+    "value": 81,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-K-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section K",
+    "reporting_period": "September 2026",
+    "statement": "Section K: real GVA volume change 1.1% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column K",
+    "value": 1.1,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-L-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section L",
+    "reporting_period": "2024",
+    "statement": "Section L: official rounded GVA weight 142 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column L",
+    "value": 142,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-L-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section L",
+    "reporting_period": "September 2026",
+    "statement": "Section L: real GVA volume change 0.8% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column L",
+    "value": 0.8,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-M-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section M",
+    "reporting_period": "2024",
+    "statement": "Section M: official rounded GVA weight 87 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column M",
+    "value": 87,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-M-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section M",
+    "reporting_period": "September 2026",
+    "statement": "Section M: real GVA volume change 7.4% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column M",
+    "value": 7.4,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-N-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section N",
+    "reporting_period": "2024",
+    "statement": "Section N: official rounded GVA weight 54 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column N",
+    "value": 54,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-N-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section N",
+    "reporting_period": "September 2026",
+    "statement": "Section N: real GVA volume change 0.7% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column N",
+    "value": 0.7,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-O-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section O",
+    "reporting_period": "2024",
+    "statement": "Section O: official rounded GVA weight 51 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column O",
+    "value": 51,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-O-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section O",
+    "reporting_period": "September 2026",
+    "statement": "Section O: real GVA volume change 0.9% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column O",
+    "value": 0.9,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-P-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section P",
+    "reporting_period": "2024",
+    "statement": "Section P: official rounded GVA weight 59 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column P",
+    "value": 59,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-P-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section P",
+    "reporting_period": "September 2026",
+    "statement": "Section P: real GVA volume change 0.1% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column P",
+    "value": 0.1,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-Q-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section Q",
+    "reporting_period": "2024",
+    "statement": "Section Q: official rounded GVA weight 84 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column Q",
+    "value": 84,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-Q-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section Q",
+    "reporting_period": "September 2026",
+    "statement": "Section Q: real GVA volume change 2.0% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column Q",
+    "value": 2.0,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-R-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section R",
+    "reporting_period": "2024",
+    "statement": "Section R: official rounded GVA weight 15 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column R",
+    "value": 15,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-R-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section R",
+    "reporting_period": "September 2026",
+    "statement": "Section R: real GVA volume change -0.7% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column R",
+    "value": -0.7,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-S-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section S",
+    "reporting_period": "2024",
+    "statement": "Section S: official rounded GVA weight 15 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column S",
+    "value": 15,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-S-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section S",
+    "reporting_period": "September 2026",
+    "statement": "Section S: real GVA volume change 6.8% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column S",
+    "value": 6.8,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-T-WEIGHT24",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section T",
+    "reporting_period": "2024",
+    "statement": "Section T: official rounded GVA weight 1 per thousand of the UK total. Not turnover or addressable market.",
+    "locator": "Appendix GVA3, PDF page index 29, 2024 weights / section column T",
+    "value": 1,
+    "unit": "GVA weight per thousand",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "SIC-T-YOY26",
+    "source_refs": [
+      "ONS-GDP-SEP26"
+    ],
+    "subject_scope": "UK SIC 2007 section T",
+    "reporting_period": "September 2026",
+    "statement": "Section T: real GVA volume change -5.4% compared with September 2025; monthly year-on-year, not quarterly growth.",
+    "locator": "Appendix GVA3, PDF page index 29, September 2026 row / section column T",
+    "value": -5.4,
+    "unit": "percent real GVA yoy",
+    "comparison": "September 2025",
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-STRATEGY-PLAN",
+    "source_refs": [
+      "UK-STRATEGY26"
+    ],
+    "subject_scope": "UK industrial policy",
+    "reporting_period": "March 2026 publication; ten-year plan",
+    "statement": "Government describes eight growth-driving policy sectors; these are not the twenty SIC sections or proof that investment has been spent.",
+    "locator": "Details",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_policy_plan",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-EMPLOYMENT-PHASES",
+    "source_refs": [
+      "UK-EMPLOYMENT26"
+    ],
+    "subject_scope": "Employers within each applicable measure/jurisdiction",
+    "reporting_period": "Status updated 5 November 2026",
+    "statement": "Employment reforms are phased; some measures are effective, others planned through 2027. Future timings remain subject to parliamentary process.",
+    "locator": "Background / timetable and caveat",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_policy_timetable",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "UK-CLIMATE-PROGRESS",
+    "source_refs": [
+      "CCC-PROGRESS26"
+    ],
+    "subject_scope": "UK emissions / national transition assessment",
+    "reporting_period": "2025 emissions; June 2026 assessment",
+    "statement": "CCC reports emissions fell 1.8% in 2025 and progress toward fourth/fifth budgets, while slow electrification creates later-budget risk. This is not evidence of a named firm failing a duty.",
+    "locator": "Annual assessment and priority recommendations",
+    "value": -1.8,
+    "unit": "percent total emissions yoy",
+    "comparison": null,
+    "assertion_class": "reported_assessment",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "uncertainty": "Source report only; exact definition, revision and scope limits apply. No automatic enterprise or buyer-need inheritance."
+  },
+  {
+    "id": "DEFRA-A25-F1",
+    "source_refs": [
+      "DEFRA-A25"
+    ],
+    "subject_scope": "UK farming; GB FBI where NI unavailable",
+    "reporting_period": "Updated 3 September 2026; 2025 accounts, 2024/25 FBI separately",
+    "statement": "Farming GVA was GBP15.9bn in 2025; 21% of GB farms had no positive Farm Business Income in 2024/25. The prior comparator covers a different UK geography.",
+    "locator": "Accounts / Farming income",
+    "value": 15.9,
+    "unit": "GBP billion nominal farming GVA",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "NSTA-B26-F1",
+    "source_refs": [
+      "NSTA-B26"
+    ],
+    "subject_scope": "UK offshore oil and gas, not all mining/quarrying",
+    "reporting_period": "2025 emissions, 2026 monitoring report",
+    "statement": "Estimated production emissions fell 7% in 2025 and 37% since 2018; regulator identifies progress and remaining long-term target uncertainty.",
+    "locator": "Emissions assessment",
+    "value": -7,
+    "unit": "percent production emissions change",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "RR-C26-F1",
+    "source_refs": [
+      "RR-C26"
+    ],
+    "subject_scope": "Global Group; Civil Aerospace, Defence and Power Systems",
+    "reporting_period": "Six months to 30 June 2026",
+    "statement": "Underlying operating profit was GBP2,534m; statutory GBP2,418m. Power Systems reports data-centre power demand; neither measure is UK manufacturing profit.",
+    "locator": "Group statutory/underlying reconciliation and Power Systems",
+    "value": 2534,
+    "unit": "GBP million underlying operating profit",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "OFGEM-D26-F1",
+    "source_refs": [
+      "OFGEM-D26"
+    ],
+    "subject_scope": "Great Britain default domestic tariffs; fixed/non-domestic scope differs",
+    "reporting_period": "Effective October\u2013December 2026",
+    "statement": "Ofgem announces a 4% typical-household cap increase for Q4. This limits unit/standing charges, not each actual annual bill or every energy business.",
+    "locator": "Price-cap rates",
+    "value": 4,
+    "unit": "percent announced typical-household change",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "EA-E26-F1",
+    "source_refs": [
+      "EA-E26"
+    ],
+    "subject_scope": "Reported water-company England water resources; not UK waste industry",
+    "reporting_period": "Financial year 2025\u201326; source updated 29 October 2026",
+    "statement": "Reported dry-year annual-average outage, excluding outages exceeding six months, fell to 378 Ml/day from 518; seven companies remained above their WRMP24 forecasts. Thames Water and Severn Trent are named in the performance table; outcomes differ substantially. Lower recorded outage can coexist with less available supply.",
+    "locator": "Section 2.4 Outage / section 2.3 losses",
+    "value": 378,
+    "unit": "million litres per day reported outage",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "BB-F26-F1",
+    "source_refs": [
+      "BB-F26"
+    ],
+    "subject_scope": "Global Group construction/infrastructure, not whole UK section F",
+    "reporting_period": "Half-year 2026; Group order book",
+    "statement": "Company describes a rounded GBP23bn order book and energy, transportation and social infrastructure capabilities. This is committed backlog, not an unallocated technology budget.",
+    "locator": "Chief executive statement / sectors",
+    "value": 23,
+    "unit": "GBP billion rounded order book",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "TESCO-G26-F1",
+    "source_refs": [
+      "TESCO-G26"
+    ],
+    "subject_scope": "Group and specifically labelled UK/ROI businesses",
+    "reporting_period": "26 weeks to 29 August 2026",
+    "statement": "Tesco reports UK online sales growth of 8.4%; it describes Barclays banking partnership and launches on Uber Eats/Deliveroo. UK/ROI adjusted profit is a separate combined perimeter, not UK retail sector profit.",
+    "locator": "PDF pages 1\u20133 strategic progress",
+    "value": 8.4,
+    "unit": "percent reported UK online sales growth",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "DFT-H26-F1",
+    "source_refs": [
+      "DFT-H26"
+    ],
+    "subject_scope": "Great Britain road traffic; private cars included, not whole transport output",
+    "reporting_period": "Twelve months ending June 2026",
+    "statement": "343.5bn vehicle miles, up 1.5% year-on-year; cars represented 76% and vans 17%. Traffic volume is not logistics revenue or UK-wide H GVA.",
+    "locator": "Headline figures / vehicle type",
+    "value": 343.5,
+    "unit": "billion vehicle miles provisional",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "WTB-I26-F1",
+    "source_refs": [
+      "WTB-I26"
+    ],
+    "subject_scope": "Global Group, UK/Ireland and Germany separately",
+    "reporting_period": "26 weeks to 27 August 2026",
+    "statement": "Adjusted PBT GBP287m versus statutory GBP109m after GBP178m adjusting items. UK/Ireland accommodation sales grew 3%; an existing transformation and savings programme is underway.",
+    "locator": "PDF pages 1\u20132",
+    "value": 287,
+    "unit": "GBP million adjusted profit before tax",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "BT-J26-F1",
+    "source_refs": [
+      "BT-J26"
+    ],
+    "subject_scope": "Continuing Group; Openreach/UK specified; International discontinued",
+    "reporting_period": "Half-year to 30 September 2026; October events labelled separately",
+    "statement": "Openreach had 9.9m FTTP connections at September end and passed 10m in October; take-up 41%. BT reports GBP312m annualised transformation savings and named Business contracts with MoJ, Cabinet Office, Scottish Water and Royal Mail.",
+    "locator": "PDF page 1",
+    "value": 41,
+    "unit": "percent reported Openreach FTTP take-up",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "LAND-L26-F1",
+    "source_refs": [
+      "LAND-L26"
+    ],
+    "subject_scope": "Commercial property Group; not whole real estate/imputed rent",
+    "reporting_period": "Six months to 30 September 2026",
+    "statement": "Official index excerpt reports EPRA earnings GBP192m and 6.2% like-for-like income growth; full original could not be opened. Do not promote this to a verified current property diagnosis.",
+    "locator": "Official search index excerpt",
+    "value": 192,
+    "unit": "GBP million EPRA earnings",
+    "comparison": null,
+    "assertion_class": "index_only_unverified_candidate",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": false,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "FRC-M26-F1",
+    "source_refs": [
+      "FRC-M26"
+    ],
+    "subject_scope": "UK audit/accountancy, membership UK and ROI; not all professional services",
+    "reporting_period": "2025 data versus 2024",
+    "statement": "Five largest non-Big-Four firms held nearly 18% of FTSE250 audits in 2025, versus around 13% in 2024; registered audit firms fell 9% to 3,421. Audit-count share is not fee share.",
+    "locator": "Key findings",
+    "value": 18,
+    "unit": "percent approximate FTSE250 audit-count share",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "HAYS-N26-F1",
+    "source_refs": [
+      "HAYS-N26"
+    ],
+    "subject_scope": "Global specialist recruitment Group, subset of business support",
+    "reporting_period": "Year ended June 2026; web summary",
+    "statement": "Hays reports net fee income GBP905.5m and emphasises consultant productivity, client/candidate networks and structural cost discipline. Net fees differ from gross staffing turnover; no named customer purchase inferred.",
+    "locator": "Performance this year / strategy",
+    "value": 905.5,
+    "unit": "GBP million net fee income",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "HMT-O26-F1",
+    "source_refs": [
+      "HMT-O26"
+    ],
+    "subject_scope": "UK central-government departmental estimates",
+    "reporting_period": "Financial year 2026\u201327 sought authority, not expenditure outturn",
+    "statement": "Supply Estimates seek parliamentary authority for departmental expenditure. They are not awards, external supplier scope or demonstrated procurement demand.",
+    "locator": "Main publication / details",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "OFS-P26-F1",
+    "source_refs": [
+      "OFS-P26"
+    ],
+    "subject_scope": "Higher education in England, not schools or all UK section P",
+    "reporting_period": "2024\u201325 outturn; 2025\u201326 forecasts distinct",
+    "statement": "35.8% of institutions reported 2024\u201325 deficits; 42.7% for 2025\u201326 was a forecast. Outcomes vary, and restructuring costs were GBP218.2m.",
+    "locator": "Financial findings",
+    "value": 35.8,
+    "unit": "percent institutions reporting deficit",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "CQC-Q26-F1",
+    "source_refs": [
+      "CQC-Q26"
+    ],
+    "subject_scope": "Adult social care in England; assessed-provider sample, not UK section Q",
+    "reporting_period": "2025/26 assessment; specific underlying periods retained",
+    "statement": "CQC reports councils overspending annual adult-social-care budgets by GBP715m, while seven in ten assessed care homes are good/outstanding. Neither is a finding about an unexamined named provider.",
+    "locator": "Adult social care key points",
+    "value": 715,
+    "unit": "GBP million reported budget overspend",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "DCMS-R26-F1",
+    "source_refs": [
+      "DCMS-R26"
+    ],
+    "subject_scope": "England adults 16+, survey method; not UK industry turnover",
+    "reporting_period": "October 2025\u2013March 2026, with some engagement data from April\u2013September 2025",
+    "statement": "CES replaced the Participation and Community Life surveys in October 2025. Changed survey coverage/bases prevent an unqualified old/new participation comparison; audience outcomes need detailed tables.",
+    "locator": "Release description and methodology",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "CERT-S26-F1",
+    "source_refs": [
+      "CERT-S26"
+    ],
+    "subject_scope": "Great Britain trade unions and employer associations, subset of S",
+    "reporting_period": "2025\u201326 operations; 2024\u201325 union returns",
+    "statement": "Reported membership fell from 6.7m to 5.4m, mainly because Unite supplied no 2024\u201325 return. This is not evidence of a comparable 19.4% membership collapse.",
+    "locator": "Membership and finances",
+    "value": 5.4,
+    "unit": "million reported memberships, incomplete coverage",
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "HOME-T-F1",
+    "source_refs": [
+      "HOME-T"
+    ],
+    "subject_scope": "Households directly employing domestic staff; exact jurisdiction/eligibility matters",
+    "reporting_period": "Current undated guidance reviewed 14 November 2026",
+    "statement": "Direct household employers have employment/payroll responsibilities. Agency/self-employment scope differs; domestic households are not enterprise prospects merely because SIC T exists.",
+    "locator": "Overview / tax and employing people",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "ONS-SIC07-F1",
+    "source_refs": [
+      "ONS-SIC07"
+    ],
+    "subject_scope": "UK economic-activity classification",
+    "reporting_period": "SIC2007 retained to match official national-account measures",
+    "statement": "Activity classification defines comparable scope, not a customer relationship, ownership, company capability or contract. SIC2026 must not be silently substituted for SIC2007 measures.",
+    "locator": "Classification page",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Narrower than the whole SIC section; no automatic named-enterprise demand or UK-wide inheritance."
+  },
+  {
+    "id": "NW-Q326-F1",
+    "source_refs": [
+      "NW-Q326"
+    ],
+    "subject_scope": "Global NatWest Group; not UK banking sector",
+    "reporting_period": "Nine months ended 30 September 2026, not Q3 alone",
+    "statement": "Group income GBP13,502m, operating expenses GBP6,259m, impairment GBP700m and PBT GBP6,543m. CIR 45.7% excludes litigation/conduct; NIM 2.49% uses its disclosed basis. CET1 13.5% at September end.",
+    "locator": "PDF performance summary, page index 3",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  },
+  {
+    "id": "BAR-Q326-F1",
+    "source_refs": [
+      "BAR-Q326"
+    ],
+    "subject_scope": "Global Group, UK segment separate; unaudited",
+    "reporting_period": "Nine months ended 30 September 2026; amended presentation for SEC Reg G",
+    "statement": "Group income GBP23,866m, operating expenses GBP13,625m, other net income GBP44m, impairment GBP1,897m and PBT GBP8,388m. Barclays UK segment income GBP6,866m. Global Group income is not UK banking revenue; CIR basis differs from NatWest.",
+    "locator": "Performance highlights / nine-month consolidated results",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  },
+  {
+    "id": "BOE-SETTLE-F1",
+    "source_refs": [
+      "BOE-SETTLE"
+    ],
+    "subject_scope": "UK sterling central-bank settlement functions",
+    "reporting_period": "Current public institutional description reviewed 14 November 2026",
+    "statement": "Bank of England operates RTGS and CHAPS. System operation does not establish a named bank current participant status, account or supplier contract.",
+    "locator": "RTGS and CHAPS overview",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  },
+  {
+    "id": "HMT-FSG26-F1",
+    "source_refs": [
+      "HMT-FSG26"
+    ],
+    "subject_scope": "UK financial-services policy",
+    "reporting_period": "Policy implementation summary; detailed report not acquired",
+    "statement": "Official summary reviews the 2025 financial-services growth and competitiveness strategy. A government strategy is not evidence of delivered enterprise benefits or an open procurement.",
+    "locator": "Publication metadata / details",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_policy_plan",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  },
+  {
+    "id": "LBG-Q326-F1",
+    "source_refs": [
+      "LBG-Q326"
+    ],
+    "subject_scope": "Group, underlying and statutory bases separate",
+    "reporting_period": "Nine months ended 30 September 2026 versus 2025; stocks at September end",
+    "statement": "Group underlying net income GBP14,819m, costs GBP7,307m, impairment GBP930m; statutory PBT GBP6,625m. Statutory total income GBP16,084m, operating expenses GBP8,533m, impairment GBP926m. Deposits GBP502.8bn and CET1 13.3% are September-end stocks/ratios. Curve acquisition completed; integration scope unknown.",
+    "locator": "PDF underlying summary page index 2, statutory page index 5, key messages",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  },
+  {
+    "id": "LBG-STRATEGY-F1",
+    "source_refs": [
+      "LBG-STRATEGY"
+    ],
+    "subject_scope": "Group; no supplier funding allocation",
+    "reporting_period": "2027\u201330 strategy ambitions; targets not outturn",
+    "statement": "Modernising core platforms, data/AI, servicing/operations and capital-efficient growth are stated priorities. Around GBP2bn gross cost savings and cost:income below 45% in 2030 are targets, not realised benefit or external spend.",
+    "locator": "Grow / innovate / simplify strategy pillars",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "leadership_stated_target",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  },
+  {
+    "id": "LBG-LEADERS-F1",
+    "source_refs": [
+      "LBG-LEADERS"
+    ],
+    "subject_scope": "Group and named management roles, not inferred legal-company directors",
+    "reporting_period": "Current public roles read 14 November 2026; not all appointment dates verified",
+    "statement": "Current professional role list includes Charlie Nunn (CEO), William Chalmers (CFO), Ron van Kemenade (Group COO), Amanda Murphy (Business and Commercial Banking), John Langley (Corporate and Institutional Banking), Chirantan Barua (Scottish Widows / Wealth and Insurance), and Javier Rodr\u00edguez de Colmenares (CRO). No named buyer or private intent asserted.",
+    "locator": "Executive role headings",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  },
+  {
+    "id": "LBG-MS26-F1",
+    "source_refs": [
+      "LBG-MS26"
+    ],
+    "subject_scope": "Group workplace/engineering, not every technology workload",
+    "reporting_period": "June 2026 announcement; multi-year term not quantified",
+    "statement": "Company announces a multi-year Microsoft 365 E7 Frontier Suite agreement and expanded Copilot use. Contract value, expiry, exclusivity and unallocated external scope are not disclosed.",
+    "locator": "Announcement body",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  },
+  {
+    "id": "LBG-ENVOY26-F1",
+    "source_refs": [
+      "LBG-ENVOY26"
+    ],
+    "subject_scope": "Internal platform built with Google Cloud",
+    "reporting_period": "HTML publication 1 May 2026; linked PDF dated 28 April, unresolved publication difference",
+    "statement": "Company describes Envoy built on Google Cloud and designed controls, human oversight and audit. Claimed capability is not independently demonstrated effectiveness or proof of a missing AI platform.",
+    "locator": "Announcement and control design description",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  },
+  {
+    "id": "LBG-AI26-F1",
+    "source_refs": [
+      "LBG-AI26"
+    ],
+    "subject_scope": "Group GenAI benefits, not deal TCV or supplier spend",
+    "reporting_period": "2025 reported benefits versus 2026 expected incremental benefits",
+    "statement": "Company reports around GBP50m GenAI value in 2025 and expects over GBP100m additional value in 2026. The latter is expected, not independently confirmed realised outturn; no external opportunity value follows. Athena, engineering support and HR tools illustrate existing operational use.",
+    "locator": "Benefits summary / colleague use cases",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  },
+  {
+    "id": "LBG-AR25-WEB-F1",
+    "source_refs": [
+      "LBG-AR25-WEB"
+    ],
+    "subject_scope": "Group web summary; full statutory report unavailable to tool",
+    "reporting_period": "2025 performance and 2026 plans explicitly distinct; dynamic landing page",
+    "statement": "Retail, Commercial Banking and Insurance/Pensions/Investments are described alongside equity investments. Current management labels do not prove segment/legal hierarchy. App redesign and digital BCB servicing are reported existing responses; 2026 priorities and outcomes are targets. Historical Curve intention is superseded in status by Q3 completion, not erased.",
+    "locator": "Strategy FAQ / strategic priority cards",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  },
+  {
+    "id": "LBG-RING-F1",
+    "source_refs": [
+      "LBG-RING"
+    ],
+    "subject_scope": "Group subgroup description, not a complete legal ownership register",
+    "reporting_period": "Current undated corporate description read 14 November 2026",
+    "statement": "Company distinguishes ring-fenced Lloyds Bank/Bank of Scotland/Halifax activities, non-ring-fenced Lloyds Bank Corporate Markets, Scottish Widows insurance subgroup, and equity investments. A brand is not necessarily a separate legal subsidiary.",
+    "locator": "Our approach to ring-fencing",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  },
+  {
+    "id": "TSB-NOV26-F1",
+    "source_refs": [
+      "TSB-NOV26"
+    ],
+    "subject_scope": "Santander UK and TSB, not Lloyds",
+    "reporting_period": "Acquisition 30 April 2026; proposed transfer 22 March 2027 conditional on court; migration H2 2027",
+    "statement": "Proposed Part VII transfer and later systems migration describe a mature integration programme. No immediate customer banking change; legal transfer remains conditional. This does not establish an early strategic shaping window, open procurement or unallocated supplier scope.",
+    "locator": "Announcement / next steps / separate legal entities",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "reported_observation",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  },
+  {
+    "id": "FR-CSRD26-F1",
+    "source_refs": [
+      "FR-CSRD26"
+    ],
+    "subject_scope": "France-scoped entity, threshold, consolidation and exemption conditions",
+    "reporting_period": "Official-text check 2 September 2026; future transposition and reporting phases distinct",
+    "statement": "French guidance distinguishes future EU amendment transposition from existing national thresholds, phase-in and conditional exemptions. No exact French Lloyds entity or applicable duty is established. Reject an automatic Lloyds reporting-pressure or mandatory-procurement inference.",
+    "locator": "Opening regulatory notice / scope / exemptions",
+    "value": null,
+    "unit": null,
+    "comparison": null,
+    "assertion_class": "negative_applicability_control",
+    "canonical_acceptance": false,
+    "pressure_qualification": "not requested",
+    "pipeline_handoff": false,
+    "usable_for_agenda": true,
+    "uncertainty": "Company statements are reported claims, not independently verified effectiveness, open sourcing or buyer need."
+  }
+]
