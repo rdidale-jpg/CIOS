@@ -26,6 +26,9 @@ PATTERNS = {
 }
 BASE = '/flora/offers'
 READ_PATHS = frozenset(BASE + s for s in ('', '/company', '/edit', '/review', '/discover', '/studio', '/start', '/triggers', '/trigger-detail', '/shortlists', '/development'))
+# Command Centre shares the existing private-read admission boundary; its
+# renderer and every read service additionally require verified owner authority.
+READ_PATHS = READ_PATHS | frozenset({'/flora/command-centre', '/flora/command-centre/opportunity-assurance'})
 WRITE_PATHS = frozenset(BASE + s for s in ('/profile', '/bind', '/select', '/save', '/transition', '/studio-toggle', '/compose', '/revoke', '/onboard-company', '/onboard-preferences', '/onboard-adopt', '/shortlist-save', '/development-create', '/development-save', '/development-reassess', '/development-handoff'))
 FIELDS = ('name', 'outcome', 'icp', 'buyers', 'trigger', 'entry_play', 'next_test',
           'capabilities', 'partners', 'constraints', 'evidence', 'exclusions', 'trigger_pattern')
@@ -600,9 +603,16 @@ def assess_fit(seller, offer, enterprise, evidence_cutoff, policy=POLICY):
                  if dimension in f['dimensions'] or not f['dimensions']]
         closed = {f['programme_id'] for f in facts if f['kind'] == 'closed'
                   or (f['kind'] == 'counter' and f.get('counter_scope') == 'programme' and f['dated_current'])}
-        positive = [f for f in facts if f['kind'] in {'structural', 'catalyst', 'programme'}
-                    and f['programme_id'] not in closed and (f['dated_current'] or f['kind'] == 'structural')
-                    and f['review_age_days'] <= bundle['policy']['catalyst_review_days']]
+        fact_checks = []
+        def admitted(f):
+            checks = {'positive_kind': f['kind'] in {'structural', 'catalyst', 'programme'},
+                'programme_not_closed': f['programme_id'] not in closed,
+                'dated_or_structural': f['dated_current'] or f['kind'] == 'structural',
+                'review_current': f['review_age_days'] <= bundle['policy']['catalyst_review_days']}
+            allowed = all(checks.values())
+            fact_checks.append({'fact_id': f['id'], 'checks': checks, 'admitted': allowed})
+            return allowed
+        positive = [f for f in facts if admitted(f)]
         programmes = [f for f in positive if f['kind'] == 'programme' and f['dated_current']]
         catalysts = [f for f in positive if f['kind'] == 'catalyst' and f['dated_current']]
         linked = [f for f in programmes if f['scope_confirmed'] and any(c['programme_id'] == f['programme_id'] for c in catalysts)]
@@ -647,6 +657,15 @@ def assess_fit(seller, offer, enterprise, evidence_cutoff, policy=POLICY):
             'period':f['effective_period'],'segment_id':f['source_segment']['segment_id'], 'content_sha256':f['source_segment']['content_hash'],
             'source_refs':[{'id':f['source_id'],'title':f['source_title'],'url':f['source_url'],'verification':f['candidate_claim']['status'],'limitation':f['interpretation_limit']}]} for f in facts]
         result['buying_trigger'] = {'policy': TRIGGER_POLICY, 'tier': tier, 'stage': stage,
+            'evaluation_trace': {'policy': TRIGGER_POLICY, 'review_window_days': bundle['policy']['catalyst_review_days'],
+                'mission_not_excluded': not excluded, 'sector_fit': sector_fit, 'employer_approved': approved,
+                'identity_allows_priority': bundle['identity']['identity_allows_priority'],
+                'positive_fact_ids': [f['id'] for f in positive], 'programme_ids': [f['id'] for f in programmes],
+                'catalyst_ids': [f['id'] for f in catalysts], 'linked_programme_ids': [f['id'] for f in linked],
+                'closed_programmes': sorted(closed, key=lambda v: str(v)), 'fact_checks': fact_checks,
+                'available_relevant_fact_ids': [f['id'] for f in facts],
+                'not_available_or_not_relevant': sorted({f['id'] for f in bundle['facts']} - {f['id'] for f in facts}),
+                'tailored_entry_play': tailored is not None},
             'entry_play_detail': tailored, 'entry_play_revision': buying_entry_plays.REVISION,
             'dimension': dimension, 'interpretation': 'Source-supported candidate assessment; not accepted APPA or customer buying intent',
             'structural_pressures': [f['id'] for f in positive if f['kind']=='structural'],
