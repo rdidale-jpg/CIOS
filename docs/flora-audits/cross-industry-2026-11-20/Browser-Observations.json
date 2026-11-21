@@ -1,0 +1,1480 @@
+{
+  "auditedMain": "03719d7573f087c65d9622719273aa4b89caf7d3",
+  "method": "Isolated localhost Guest GETs; no production, canonical acceptance, authentication provisioning or changes. Representative templates, not every enterprise/browser.",
+  "observations": [
+    {
+      "device": "desktop",
+      "label": "uk",
+      "path": "/",
+      "status": 200,
+      "headline": [
+        "The shape of the UK economy"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 149
+    },
+    {
+      "device": "desktop",
+      "label": "catalogue",
+      "path": "/industries",
+      "status": 200,
+      "headline": [
+        "See the forces.\nFollow the implications."
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 2,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 95
+    },
+    {
+      "device": "desktop",
+      "label": "banking",
+      "path": "/industries/banking",
+      "status": 200,
+      "headline": [
+        "Where money meets the economy"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 214
+    },
+    {
+      "device": "desktop",
+      "label": "nationwide",
+      "path": "/industries/banking?selected=nationwide",
+      "status": 200,
+      "headline": [
+        "Nationwide"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 258
+    },
+    {
+      "device": "desktop",
+      "label": "natwest",
+      "path": "/industries/banking?selected=natwest",
+      "status": 200,
+      "headline": [
+        "National Westminster Bank PLC"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 139
+    },
+    {
+      "device": "desktop",
+      "label": "lloyds",
+      "path": "/enterprises/lloyds",
+      "status": 200,
+      "headline": [
+        "How does Lloyds make money?"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 175
+    },
+    {
+      "device": "desktop",
+      "label": "lloyds-inside",
+      "path": "/enterprises/lloyds?stream=inside",
+      "status": 200,
+      "headline": [
+        "Credit and customer service"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 112
+    },
+    {
+      "device": "desktop",
+      "label": "aviation-industry",
+      "path": "/industries/aviation",
+      "status": 200,
+      "headline": [
+        "Aviation"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 40,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 272
+    },
+    {
+      "device": "desktop",
+      "label": "easyjet-legacy",
+      "path": "/enterprises/easyjet",
+      "status": 200,
+      "headline": [
+        "easyJet."
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 22,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 479
+    },
+    {
+      "device": "desktop",
+      "label": "easyjet-visual",
+      "path": "/enterprises/easyjet/preview",
+      "status": 200,
+      "headline": [
+        "easyJet’s business and network"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 2,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 71
+    },
+    {
+      "device": "desktop",
+      "label": "easyjet-fleet",
+      "path": "/enterprises/easyjet/preview?stream=inside&detail=fleet-operations",
+      "status": 200,
+      "headline": [
+        "Fleet Operations"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 2,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 87
+    },
+    {
+      "device": "desktop",
+      "label": "technology",
+      "path": "/industries/technology/experience",
+      "status": 200,
+      "headline": [
+        "UK Technology"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 1,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 34
+    },
+    {
+      "device": "desktop",
+      "label": "technology-comparison",
+      "path": "/industries/technology/experience/participants",
+      "status": 200,
+      "headline": [
+        "Technology participants"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 1,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 500
+    },
+    {
+      "device": "desktop",
+      "label": "nvidia",
+      "path": "/industries/technology/experience/enterprise?enterprise=nvidia",
+      "status": 200,
+      "headline": [
+        "NVIDIA"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 3,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 411
+    },
+    {
+      "device": "desktop",
+      "label": "equinix",
+      "path": "/industries/technology/experience/enterprise?enterprise=equinix",
+      "status": 200,
+      "headline": [
+        "Equinix"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 26
+    },
+    {
+      "device": "desktop",
+      "label": "digital-twins",
+      "path": "/digital-twins",
+      "status": 200,
+      "headline": [
+        "Digital Twins"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 167
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "uk",
+      "path": "/",
+      "status": 200,
+      "headline": [
+        "The shape of the UK economy"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 149
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "catalogue",
+      "path": "/industries",
+      "status": 200,
+      "headline": [
+        "See the forces.\nFollow the implications."
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 2,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 95
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "banking",
+      "path": "/industries/banking",
+      "status": 200,
+      "headline": [
+        "Where money meets the economy"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 214
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "nationwide",
+      "path": "/industries/banking?selected=nationwide",
+      "status": 200,
+      "headline": [
+        "Nationwide"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 258
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "natwest",
+      "path": "/industries/banking?selected=natwest",
+      "status": 200,
+      "headline": [
+        "National Westminster Bank PLC"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 139
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "lloyds",
+      "path": "/enterprises/lloyds",
+      "status": 200,
+      "headline": [
+        "How does Lloyds make money?"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 175
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "lloyds-inside",
+      "path": "/enterprises/lloyds?stream=inside",
+      "status": 200,
+      "headline": [
+        "Credit and customer service"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 112
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "aviation-industry",
+      "path": "/industries/aviation",
+      "status": 200,
+      "headline": [
+        "Aviation"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 40,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 396
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "easyjet-legacy",
+      "path": "/enterprises/easyjet",
+      "status": 200,
+      "headline": [
+        "easyJet."
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 22,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 479
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "easyjet-visual",
+      "path": "/enterprises/easyjet/preview",
+      "status": 200,
+      "headline": [
+        "easyJet’s business and network"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 2,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 71
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "easyjet-fleet",
+      "path": "/enterprises/easyjet/preview?stream=inside&detail=fleet-operations",
+      "status": 200,
+      "headline": [
+        "Fleet Operations"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 2,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": true,
+      "wordCount": 87
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "technology",
+      "path": "/industries/technology/experience",
+      "status": 200,
+      "headline": [
+        "UK Technology"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 1,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 34
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "technology-comparison",
+      "path": "/industries/technology/experience/participants",
+      "status": 200,
+      "headline": [
+        "Technology participants"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 1,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 500
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "nvidia",
+      "path": "/industries/technology/experience/enterprise?enterprise=nvidia",
+      "status": 200,
+      "headline": [
+        "NVIDIA"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 3,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 411
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "equinix",
+      "path": "/industries/technology/experience/enterprise?enterprise=equinix",
+      "status": 200,
+      "headline": [
+        "Equinix"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 26
+    },
+    {
+      "device": "ipad-landscape",
+      "label": "digital-twins",
+      "path": "/digital-twins",
+      "status": 200,
+      "headline": [
+        "Digital Twins"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 167
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "uk",
+      "path": "/",
+      "status": 200,
+      "headline": [
+        "The shape of the UK economy"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 149
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "catalogue",
+      "path": "/industries",
+      "status": 200,
+      "headline": [
+        "See the forces.\nFollow the implications."
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 2,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 95
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "banking",
+      "path": "/industries/banking",
+      "status": 200,
+      "headline": [
+        "Where money meets the economy"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 214
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "nationwide",
+      "path": "/industries/banking?selected=nationwide",
+      "status": 200,
+      "headline": [
+        "Nationwide"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 258
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "natwest",
+      "path": "/industries/banking?selected=natwest",
+      "status": 200,
+      "headline": [
+        "National Westminster Bank PLC"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 139
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "lloyds",
+      "path": "/enterprises/lloyds",
+      "status": 200,
+      "headline": [
+        "How does Lloyds make money?"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 175
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "lloyds-inside",
+      "path": "/enterprises/lloyds?stream=inside",
+      "status": 200,
+      "headline": [
+        "Credit and customer service"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 112
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "aviation-industry",
+      "path": "/industries/aviation",
+      "status": 200,
+      "headline": [
+        "Aviation"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 40,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 396
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "easyjet-legacy",
+      "path": "/enterprises/easyjet",
+      "status": 200,
+      "headline": [
+        "easyJet."
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 22,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 479
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "easyjet-visual",
+      "path": "/enterprises/easyjet/preview",
+      "status": 200,
+      "headline": [
+        "easyJet’s business and network"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 2,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 71
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "easyjet-fleet",
+      "path": "/enterprises/easyjet/preview?stream=inside&detail=fleet-operations",
+      "status": 200,
+      "headline": [
+        "Fleet Operations"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 2,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 87
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "technology",
+      "path": "/industries/technology/experience",
+      "status": 200,
+      "headline": [
+        "UK Technology"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 1,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 34
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "technology-comparison",
+      "path": "/industries/technology/experience/participants",
+      "status": 200,
+      "headline": [
+        "Technology participants"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 1,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 500
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "nvidia",
+      "path": "/industries/technology/experience/enterprise?enterprise=nvidia",
+      "status": 200,
+      "headline": [
+        "NVIDIA"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 3,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 411
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "equinix",
+      "path": "/industries/technology/experience/enterprise?enterprise=equinix",
+      "status": 200,
+      "headline": [
+        "Equinix"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 26
+    },
+    {
+      "device": "ipad-portrait",
+      "label": "digital-twins",
+      "path": "/digital-twins",
+      "status": 200,
+      "headline": [
+        "Digital Twins"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 167
+    },
+    {
+      "device": "mobile",
+      "label": "uk",
+      "path": "/",
+      "status": 200,
+      "headline": [
+        "The shape of the UK economy"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 149
+    },
+    {
+      "device": "mobile",
+      "label": "catalogue",
+      "path": "/industries",
+      "status": 200,
+      "headline": [
+        "See the forces.\nFollow the implications."
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 2,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 95
+    },
+    {
+      "device": "mobile",
+      "label": "banking",
+      "path": "/industries/banking",
+      "status": 200,
+      "headline": [
+        "Where money meets the economy"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 214
+    },
+    {
+      "device": "mobile",
+      "label": "nationwide",
+      "path": "/industries/banking?selected=nationwide",
+      "status": 200,
+      "headline": [
+        "Nationwide"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 258
+    },
+    {
+      "device": "mobile",
+      "label": "natwest",
+      "path": "/industries/banking?selected=natwest",
+      "status": 200,
+      "headline": [
+        "National Westminster Bank PLC"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 1,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 139
+    },
+    {
+      "device": "mobile",
+      "label": "lloyds",
+      "path": "/enterprises/lloyds",
+      "status": 200,
+      "headline": [
+        "How does Lloyds make money?"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 175
+    },
+    {
+      "device": "mobile",
+      "label": "lloyds-inside",
+      "path": "/enterprises/lloyds?stream=inside",
+      "status": 200,
+      "headline": [
+        "Credit and customer service"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 3,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 112
+    },
+    {
+      "device": "mobile",
+      "label": "aviation-industry",
+      "path": "/industries/aviation",
+      "status": 200,
+      "headline": [
+        "Aviation"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 40,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 285
+    },
+    {
+      "device": "mobile",
+      "label": "easyjet-legacy",
+      "path": "/enterprises/easyjet",
+      "status": 200,
+      "headline": [
+        "easyJet."
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 22,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 427
+    },
+    {
+      "device": "mobile",
+      "label": "easyjet-visual",
+      "path": "/enterprises/easyjet/preview",
+      "status": 200,
+      "headline": [
+        "easyJet’s business and network"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 2,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 71
+    },
+    {
+      "device": "mobile",
+      "label": "easyjet-fleet",
+      "path": "/enterprises/easyjet/preview?stream=inside&detail=fleet-operations",
+      "status": 200,
+      "headline": [
+        "Fleet Operations"
+      ],
+      "regions": 3,
+      "readingModes": [
+        "Facts",
+        "FLORA Insight"
+      ],
+      "primaryStreams": [
+        "Landscape",
+        "Inside",
+        "Forces"
+      ],
+      "overflow": false,
+      "imageCount": 2,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": true,
+      "wideSceneVisible": false,
+      "wordCount": 87
+    },
+    {
+      "device": "mobile",
+      "label": "technology",
+      "path": "/industries/technology/experience",
+      "status": 200,
+      "headline": [
+        "UK Technology"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 1,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 34
+    },
+    {
+      "device": "mobile",
+      "label": "technology-comparison",
+      "path": "/industries/technology/experience/participants",
+      "status": 200,
+      "headline": [
+        "Technology participants"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 1,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 500
+    },
+    {
+      "device": "mobile",
+      "label": "nvidia",
+      "path": "/industries/technology/experience/enterprise?enterprise=nvidia",
+      "status": 200,
+      "headline": [
+        "NVIDIA"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 3,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 414
+    },
+    {
+      "device": "mobile",
+      "label": "equinix",
+      "path": "/industries/technology/experience/enterprise?enterprise=equinix",
+      "status": 200,
+      "headline": [
+        "Equinix"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 26
+    },
+    {
+      "device": "mobile",
+      "label": "digital-twins",
+      "path": "/digital-twins",
+      "status": 200,
+      "headline": [
+        "Digital Twins"
+      ],
+      "regions": 0,
+      "readingModes": [],
+      "primaryStreams": [],
+      "overflow": false,
+      "imageCount": 0,
+      "disclosures": 0,
+      "visibleSourceLinks": 0,
+      "compactSceneClosed": false,
+      "wideSceneVisible": false,
+      "wordCount": 167
+    }
+  ],
+  "unsupportedOrProtectedProbes": [
+    {
+      "path": "/industries/telecommunications",
+      "status": 403
+    },
+    {
+      "path": "/industries/utilities",
+      "status": 403
+    },
+    {
+      "path": "/industries/energy",
+      "status": 403
+    },
+    {
+      "path": "/industries/insurance",
+      "status": 403
+    },
+    {
+      "path": "/industries/media",
+      "status": 403
+    },
+    {
+      "path": "/industries/sport",
+      "status": 403
+    },
+    {
+      "path": "/industries/banking?stream=changing",
+      "status": 404
+    },
+    {
+      "path": "/financial-intelligence",
+      "status": 403
+    },
+    {
+      "path": "/digital-twins/bt-group-plc",
+      "status": 403
+    },
+    {
+      "path": "/flora/offers",
+      "status": 403
+    }
+  ]
+}
