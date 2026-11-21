@@ -1,0 +1,53 @@
+{
+  "banking_credit_cards_received": 115687,
+  "canonical_acceptance": false,
+  "closed_after_3_days_within_8_weeks_pct": 31.49,
+  "closed_within_3_days_pct": 55.25,
+  "complaints_closed": 118861,
+  "complaints_received": 118762,
+  "complaints_upheld_by_firm_pct": 66.12,
+  "consumer_credit_separate_table": {
+    "closed": 12222,
+    "received": 12308,
+    "upheld_pct": 21.5,
+    "warning": "Different activity/product table; never substitute for or add to all-product total."
+  },
+  "counter_evidence": "Company reports existing digital/customer capability; closures and positive survey methodology do not establish all customers dissatisfied. No matched prior-period trend acquired.",
+  "denominator_notes": "Closure/uphold measures refer to complaints closed, not the incoming cohort, accounts or unique customers. No trend/harm/customer need or per-complaint cost established.",
+  "entity": "Lloyds Bank PLC",
+  "fos": {
+    "banking_credit": 3612,
+    "entity": "Lloyds Bank PLC",
+    "general_insurance": 14,
+    "investments": 10,
+    "mortgages_home_finance": 117,
+    "new_cases": 3764,
+    "pensions": 11,
+    "period_end": "2026-09-30",
+    "period_start": "2026-04-01",
+    "publication_date": null,
+    "source_ref": "R2-FOS-APRSEP26",
+    "warning": "Not FCA calendarH1, not resolved/upheld cohort, not an escalation/conversion rate."
+  },
+  "material_consequence": "Observed complaint-handling workload and firm-upheld complaints; monetary cost and direct customer harm not established from these aggregates.",
+  "period_end": "2026-06-30",
+  "period_start": "2026-01-01",
+  "pipeline_writes": 0,
+  "remaining": [
+    "Permitted complaint root causes/repeats/affected journeys and outcome by cohort",
+    "Cost-to-serve and remediation effectiveness, without private personal case records",
+    "Matched historical windows and correctly labelled survey values before trend/rank inference"
+  ],
+  "scope": "All product groups in Open/Closed/Upheld tables, not consumer-credit-only table, brand or Group",
+  "source_ref": "R2-FCA-H126",
+  "survey": {
+    "blocking_reason": "PDF text loses provider labels; screenshot capability unavailable. No percentage mapped to a brand from ordered unlabelled values.",
+    "metric": "Very/extremely likely to recommend; service-specific eligible users, excludes dont-know",
+    "scope": "GB personal current accounts, July 2025–June 2026",
+    "scores_admitted": [],
+    "source_refs": [
+      "R2-IPSOS-AUG26",
+      "R2-IPSOS-METHOD"
+    ]
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "adapter_checks": [
+    {
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+      "id": "RIE2-OBS-RETAIL-NET",
+      "owner_class": "observation",
+      "source_payload_retained": true,
+      "statement_retained": true
+    },
+    {
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+      "id": "RIE2-OBS-RETAIL-COST",
+      "owner_class": "observation",
+      "source_payload_retained": true,
+      "statement_retained": true
+    },
+    {
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+      "id": "RIE2-OBS-RETAIL-LEASE",
+      "owner_class": "observation",
+      "source_payload_retained": true,
+      "statement_retained": true
+    },
+    {
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+      "id": "RIE2-OBS-COMM-CREDIT",
+      "owner_class": "observation",
+      "source_payload_retained": true,
+      "statement_retained": true
+    },
+    {
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+      "id": "RIE2-OBS-IP-PROFIT",
+      "owner_class": "observation",
+      "source_payload_retained": true,
+      "statement_retained": true
+    },
+    {
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+      "id": "RIE2-OBS-FCA-RECEIVED",
+      "owner_class": "observation",
+      "source_payload_retained": true,
+      "statement_retained": true
+    },
+    {
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+      "id": "RIE2-OBS-FCA-CLOSED",
+      "owner_class": "observation",
+      "source_payload_retained": true,
+      "statement_retained": true
+    },
+    {
+      "contract_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+      "id": "RIE2-OBS-FOS-NEW",
+      "owner_class": "observation",
+      "source_payload_retained": true,
+      "statement_retained": true
+    }
+  ],
+  "approvals_created": 0,
+  "atomic_observation_proposals": 8,
+  "canonical_mutations": 0,
+  "cross_workspace_inspection_denied": true,
+  "cross_workspace_planning_denied": true,
+  "effects_by_original_id": {
+    "NEG-COMPOUND": "quarantine",
+    "PROJECTION-ONLY": "projection",
+    "R2-FCA-H126": "mapped",
+    "R2-FOS-APRSEP26": "mapped",
+    "R2-LBG-H126": "mapped",
+    "RIE2-EVD-COMM-CREDIT": "unresolved",
+    "RIE2-EVD-FCA-CLOSED": "unresolved",
+    "RIE2-EVD-FCA-RECEIVED": "unresolved",
+    "RIE2-EVD-FOS-NEW": "unresolved",
+    "RIE2-EVD-IP-PROFIT": "unresolved",
+    "RIE2-EVD-RETAIL-COST": "unresolved",
+    "RIE2-EVD-RETAIL-LEASE": "unresolved",
+    "RIE2-EVD-RETAIL-NET": "unresolved",
+    "RIE2-OBS-COMM-CREDIT": "unresolved",
+    "RIE2-OBS-FCA-CLOSED": "unresolved",
+    "RIE2-OBS-FCA-RECEIVED": "unresolved",
+    "RIE2-OBS-FOS-NEW": "unresolved",
+    "RIE2-OBS-IP-PROFIT": "unresolved",
+    "RIE2-OBS-RETAIL-COST": "unresolved",
+    "RIE2-OBS-RETAIL-LEASE": "unresolved",
+    "RIE2-OBS-RETAIL-NET": "unresolved"
+  },
+  "evidence_proposals": 8,
+  "fact_bundle_limit": "Claims.json contains financial metric candidates and compound research notes. Only these eight scalar statements are rehearsed as Observation proposals; no full-ledger acceptance or atomicity claim.",
+  "input_sha256": "7272dc52b298f41c40635ffa7f1f0619bcb48d37c851bf75cfa5427695925c68",
+  "limitations": [
+    "Staging accepted means structurally accepted candidate only.",
+    "Source scope retained as proposal metadata in disposable workspace; no public-to-private entity mapping performed.",
+    "No human evidence acceptance or promotion execution.",
+    "Original byte acquisition/rights acceptance and any real import mappings require owner review.",
+    "No temporary archive or private fixture state published."
+  ],
+  "pipeline_writes": 0,
+  "plan_effect_counts": {
+    "mapped": 3,
+    "projection": 1,
+    "quarantine": 1,
+    "unresolved": 16
+  },
+  "production_receipt_status": "not inspected; unverified",
+  "repeated_plan_idempotent": true,
+  "reviews_created": 0,
+  "scope": "Disposable existing receipt/staging/planning contracts; explicit service-test authority, not real login/HTTP/production receipt evidence",
+  "source_profile_checksum": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+  "source_records": 3,
+  "staging_status_counts": {
+    "accepted": 19,
+    "quarantined": 2
+  }
+}

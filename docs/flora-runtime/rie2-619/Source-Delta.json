@@ -1,0 +1,142 @@
+{
+  "new_document_urls": 13,
+  "reinspected_document_urls": 6,
+  "research_scope": "Prior20-sector/UK baseline and other4agenda candidates remain pinned, not refreshed or promoted.",
+  "rie1_commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+  "sources": [
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2025/q4/2025-lbg-fy-results.pdf",
+      "relation": "new document to this research ledger, still candidate",
+      "rie1_id": null,
+      "rie2_id": "R2-LBG-FY25"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "relation": "new document to this research ledger, still candidate",
+      "rie1_id": null,
+      "rie2_id": "R2-LBG-H126"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000010/lyg-20251231_d2.htm",
+      "relation": "new document to this research ledger, still candidate",
+      "rie1_id": null,
+      "rie2_id": "R2-LBG-20F25"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+      "relation": "fresh reinspection of same original; not independent corroboration",
+      "rie1_id": "LBG-Q326",
+      "rie2_id": "R2-LBG-Q326"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/31072026/nwg-h1-2026-results.pdf",
+      "relation": "new document to this research ledger, still candidate",
+      "rie1_id": null,
+      "rie2_id": "R2-NW-H126"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.sec.gov/Archives/edgar/data/312069/000031206926000201/R29.htm",
+      "relation": "new document to this research ledger, still candidate",
+      "rie1_id": null,
+      "rie2_id": "R2-BAR-H126"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+      "relation": "new document to this research ledger, still candidate",
+      "rie1_id": null,
+      "rie2_id": "R2-FCA-H126"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.fca.org.uk/data/complaints-data-2026-h1",
+      "relation": "new document to this research ledger, still candidate",
+      "rie1_id": null,
+      "rie2_id": "R2-FCA-METHOD"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.financial-ombudsman.org.uk/businesses/resolving-complaint/our-insight/half-yearly-complaints-data-h1-2026",
+      "relation": "new document to this research ledger, still candidate",
+      "rie1_id": null,
+      "rie2_id": "R2-FOS-APRSEP26"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.ipsos.com/en-uk/personal-banking-service-quality-great-britain-august-2026",
+      "relation": "new document to this research ledger, still candidate",
+      "rie1_id": null,
+      "rie2_id": "R2-IPSOS-AUG26"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.ipsos.com/sites/default/files/PCA%20Detailed%20Methodology%20Aug2026.pdf",
+      "relation": "new document to this research ledger, still candidate",
+      "rie1_id": null,
+      "rie2_id": "R2-IPSOS-METHOD"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/microsoft-365-frontier-suite.html",
+      "relation": "fresh reinspection of same original; not independent corroboration",
+      "rie1_id": "LBG-MS26",
+      "rie2_id": "R2-LBG-MS26"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.lloydsbankinggroup.com/assets/pdfs/media/press-releases/2026-press-releases/lloyds-banking-group/260428-lbg-unveils-envoy.pdf",
+      "relation": "new document to this research ledger, still candidate",
+      "rie1_id": null,
+      "rie2_id": "R2-LBG-ENVOY-PDF"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/ai-driven-benefits-2026.html",
+      "relation": "fresh reinspection of same original; not independent corroboration",
+      "rie1_id": "LBG-AI26",
+      "rie2_id": "R2-LBG-AI26"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/group-executive-committee.html",
+      "relation": "fresh reinspection of same original; not independent corroboration",
+      "rie1_id": "LBG-LEADERS",
+      "rie2_id": "R2-LBG-LEAD"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+      "relation": "fresh reinspection of same original; not independent corroboration",
+      "rie1_id": "LBG-STRATEGY",
+      "rie2_id": "R2-LBG-STRATEGY"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/ring-fencing.html",
+      "relation": "fresh reinspection of same original; not independent corroboration",
+      "rie1_id": "LBG-RING",
+      "rie2_id": "R2-LBG-RING"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+      "relation": "new document to this research ledger, still candidate",
+      "rie1_id": null,
+      "rie2_id": "R2-HMT-CTP"
+    },
+    {
+      "canonical_action": "none; acceptance/dedup mapping unapproved",
+      "original_url": "https://group.legalandgeneral.com/asset/4a1fe0/globalassets/group/reporting-hub/results/2026/half-year-results-2026/lg-2026-half-year-results-press-release-and-analyst-pack.pdf/",
+      "relation": "new document to this research ledger, still candidate",
+      "rie1_id": null,
+      "rie2_id": "R2-LG-H126"
+    }
+  ],
+  "special_case": "Envoy datedPDF is a new inspected document surface for the same disclosed platform event, not independent corroboration of the HTML."
+}

@@ -1,0 +1,30 @@
+{
+  "current_production_receipts": "Unverified; no private runtime ledger accessed",
+  "cutoff": "2026-11-14",
+  "direct_bytes": {
+    "attempts": 2,
+    "result": "URLError; no bytes or hashes obtained",
+    "sources": [
+      "R2-LBG-H126",
+      "R2-LBG-FY25"
+    ]
+  },
+  "official_source_blockers": [
+    {
+      "source": "Full original2025 annual-report incorporated rendering",
+      "status": "research tool size limit; compact official Form20F_d2 original and FYresults used within their actual extent",
+      "url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000010/lyg-20251231.htm"
+    },
+    {
+      "source": "Ipsos provider-to-score chart alignment",
+      "status": "PDFtext labels missing; screenshot unavailable. No score assignment or visual table check claimed.",
+      "url": "https://www.ipsos.com/sites/default/files/PCAGB_3rd_Party_Aug2026_v1.pdf_0.pdf"
+    },
+    {
+      "source": "IBM/middleware recruitment page",
+      "status": "400; no technology-inventory/contract conclusion adopted. A job deadline is not a publication date.",
+      "url": "https://www.lloydsbankinggroup.com/careers/job-search/workday-job.159303.html"
+    }
+  ],
+  "source_rights": "Public factual values and bounded paraphrases only; full source redistribution/ingestion permissions not assumed"
+}

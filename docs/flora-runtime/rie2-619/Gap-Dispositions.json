@@ -1,0 +1,342 @@
+{
+  "authority": "NonbindingRIE2evidence proposals, no accepted closure",
+  "baseline_commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+  "overlay_thirteen": [
+    {
+      "id": "G-PRIMARY",
+      "original_record_sha256": "076db70b80344411a8a4c22906ca5086f7ec2b2bd3116463c37a4d2912b5d453",
+      "original_status": "partially_resolved",
+      "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+      "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+      "remaining": "Retrieve and quote-locate current Lloyds annual, interim and latest trading updates; capture publication dates, periods and content hashes.",
+      "rie2_evidence_delta": "Selected original tables/notes now inspected; full original-byte archive/hash and acceptance remain open.",
+      "source_refs": [
+        "R2-LBG-FY25",
+        "R2-LBG-H126",
+        "R2-LBG-Q326",
+        "R2-LBG-20F25"
+      ]
+    },
+    {
+      "id": "G-CUSTOMER-EVIDENCE",
+      "original_record_sha256": "b0591fd3e93da38f494d9ca9514c0afd6f1037e0342fd477032fa6a0d2852f3a",
+      "original_status": "open",
+      "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+      "proposed_disposition": "open; no resolving evidence",
+      "remaining": "Customer meeting/requirement reference; economic buyer, funding, criteria, process, relationship and mutual next action.",
+      "rie2_evidence_delta": "No customer-confirmed problem, funded decision process, buyer or mutual action; public complaints do not resolve this.",
+      "source_refs": []
+    },
+    {
+      "id": "G-REGULATORY",
+      "original_record_sha256": "a3df934a77be827496183c50a24787ab063e22762f00dcd32b26854de7108d34",
+      "original_status": "partially_resolved",
+      "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+      "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+      "remaining": "Retrieve FCA Consumer Duty/resilience publications, PRA/BoE rules and HM Treasury designations.",
+      "rie2_evidence_delta": "Dated provider-designation scope acquired, not an exact bank readiness/compliance determination.",
+      "source_refs": [
+        "R2-HMT-CTP",
+        "R2-LBG-RING"
+      ]
+    },
+    {
+      "id": "G-ALLOCATION",
+      "original_record_sha256": "115b6c4f0f00a1c7e18626f9318da98f487ba74b32a2b738e19ea54b11db63a9",
+      "original_status": "open",
+      "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+      "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+      "remaining": "Approved programme funding and sourcing scope, distinguishing gross savings, benefits and supplier spend.",
+      "rie2_evidence_delta": "Company explains cost/investment direction; no external programme allocation or supplier budget verified.",
+      "source_refs": [
+        "R2-LBG-Q326"
+      ]
+    },
+    {
+      "id": "G-OUTCOMES",
+      "original_record_sha256": "c3925e2db733585ccd7c8cd9418b28d7dcf4c378eaa6ecd2e01ae585d2690211",
+      "original_status": "open",
+      "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+      "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+      "remaining": "Current local access assessments, complaints, vulnerable-customer outcomes, retention and customer journey measures.",
+      "rie2_evidence_delta": "Firm service measures acquired on exact scopes/windows; causal journey harm, trend, unit economics and survey score-label alignment remain open.",
+      "source_refs": [
+        "R2-FCA-H126",
+        "R2-FOS-APRSEP26",
+        "R2-IPSOS-AUG26"
+      ]
+    },
+    {
+      "id": "G-PRIMACY",
+      "original_record_sha256": "4e3927fea898d0e2c6b77574c809573dc49148fe9c3518a9276bcde6a67fd404",
+      "original_status": "open",
+      "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+      "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+      "remaining": "Salary-flow/direct-debit concentration, retention, deposit segment and pricing behaviour.",
+      "rie2_evidence_delta": "Savings/pricing explanation and peer mix acquired; salary/DD concentration, elasticity and cohort primary-relationship status remain unknown.",
+      "source_refs": [
+        "R2-LBG-H126",
+        "R2-NW-H126"
+      ]
+    },
+    {
+      "id": "G-WORKLOADS",
+      "original_record_sha256": "754551e847537c95ad55955540c902da74db0529dbda8b13a54d7d20830c3cba",
+      "original_status": "open",
+      "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+      "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+      "remaining": "Approved roadmap, application dependencies, critical-service mapping, ownership and procurement evidence.",
+      "rie2_evidence_delta": "Disclosed capability boundaries refined; no workload dependency map, approved sourcing or delivery choice verified.",
+      "source_refs": [
+        "R2-LBG-MS26",
+        "R2-LBG-ENVOY-PDF"
+      ]
+    },
+    {
+      "id": "G-AI-BENEFITS",
+      "original_record_sha256": "c4e386c3bf272139794ac34d5fbc47c6cbe75e7dc4cfa28bdc84bece35b70abb",
+      "original_status": "open",
+      "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+      "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+      "remaining": "Benefit baselines, adoption measures, control costs and benefit ownership; distinguish targets from realised results.",
+      "rie2_evidence_delta": "Actual-claim versus expected and adoption clarified; net realised2026 customer/use-case benefit and control costs remain unknown.",
+      "source_refs": [
+        "R2-LBG-AI26",
+        "R2-LBG-MS26"
+      ]
+    },
+    {
+      "id": "G-SUPPLIER",
+      "original_record_sha256": "35dda7efa92bf318df86ad36f5fcb9c586d495702df31eeb44797e630ef69c72",
+      "original_status": "open",
+      "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+      "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+      "remaining": "Current customer or supplier primary disclosure, contract scope and terms where authorised.",
+      "rie2_evidence_delta": "Known disclosed agreements/capabilities only; workshare, obligations, terms/value/renewal/exit unverified.",
+      "source_refs": [
+        "R2-LBG-MS26",
+        "R2-LBG-ENVOY-PDF"
+      ]
+    },
+    {
+      "id": "G-CURVE",
+      "original_record_sha256": "a23619905d121d513f94c06e9ee14ef2339150372ab0c0e47496c380e8ce0ac7",
+      "original_status": "partially_resolved",
+      "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+      "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+      "remaining": "Completion announcement and customer-approved integration roadmap.",
+      "rie2_evidence_delta": "Completion remains established as in baseline; no integration roadmap, open architecture or procurement inferred.",
+      "source_refs": [
+        "R2-LBG-Q326"
+      ]
+    },
+    {
+      "id": "G-FRAUD",
+      "original_record_sha256": "bc853931d12868cba4825ff535bba0719502d011364baf54bb843e27cb3db78d",
+      "original_status": "open",
+      "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+      "proposed_disposition": "open; no resolving evidence",
+      "remaining": "Lloyds-specific losses, reimbursement, false positives, complaints and funded response.",
+      "rie2_evidence_delta": "No new Lloyds-specific fraud loss/false-positive/customer-outcome evidence; all original requirements remain open.",
+      "source_refs": []
+    },
+    {
+      "id": "G-CLIMATE",
+      "original_record_sha256": "5e8be38b7c299797cd336d9087883ed60298e752ffd109a44ef289c5c7680ff9",
+      "original_status": "open",
+      "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+      "proposed_disposition": "open; no resolving evidence",
+      "remaining": "Latest primary sustainability/transition report, financed-emissions scope and portfolio materiality.",
+      "rie2_evidence_delta": "No new portfolio financed-emission/transition materiality or customer needs; do not substitute a generic environmental mechanism.",
+      "source_refs": []
+    },
+    {
+      "id": "G-MARKET",
+      "original_record_sha256": "79e9bd26c75b8c2fd56f893561f43655fce0df7b78fde0ba67a33cc50f287db0",
+      "original_status": "open",
+      "proposal": "No owner-status change. Inspect relevant financial/operating/outcome dossier; residual evidence requirement preserved.",
+      "proposed_disposition": "partial evidence enrichment; original owner status unchanged",
+      "remaining": "FCA/CMA and dated primary enterprise disclosures with consistent market/entity boundaries.",
+      "rie2_evidence_delta": "Comparable-within-issuer mechanism examples acquired; national matched market shares, profit pools and entrant economics remain open.",
+      "source_refs": [
+        "R2-NW-H126",
+        "R2-BAR-H126",
+        "R2-LG-H126"
+      ]
+    }
+  ],
+  "rco_nine": [
+    {
+      "id": "RCO-LBG-001",
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "f32dee9b51356b6f47dbe325478ac919ef51088682c3a4b79127fee239ec68eb",
+      "original_research_tier": 1,
+      "proposal": "No tier or qualification change; no validated external need or supplier scope."
+    },
+    {
+      "id": "RCO-LBG-002",
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "9bf448f2cafeacccebf1efe79665b2a6b56bcd9009ecbe7cc0d4ca5edc43b10e",
+      "original_research_tier": 1,
+      "proposal": "No tier or qualification change; no validated external need or supplier scope."
+    },
+    {
+      "id": "RCO-LBG-003",
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "93ecccfe6e2815228ffa363a52851bee5965d73ad6ccdd328ee5ce0949266018",
+      "original_research_tier": 1,
+      "proposal": "No tier or qualification change; no validated external need or supplier scope."
+    },
+    {
+      "id": "RCO-LBG-004",
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "8f0c346d6b1bfc7b6ba07b2234a405f3128ba52be5dc205c96e5a76a16945873",
+      "original_research_tier": 2,
+      "proposal": "No tier or qualification change; no validated external need or supplier scope."
+    },
+    {
+      "id": "RCO-LBG-005",
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "6e6b76b45f3eff53d22e94a7016867b55267596697336b03d22fd47bc29596bf",
+      "original_research_tier": 1,
+      "proposal": "No tier or qualification change; no validated external need or supplier scope."
+    },
+    {
+      "id": "RCO-LBG-006",
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "e8833a618a25476e35d5c20dd567512823ac1daa51a23764d87dafab20f22e56",
+      "original_research_tier": 2,
+      "proposal": "No tier or qualification change; no validated external need or supplier scope."
+    },
+    {
+      "id": "RCO-LBG-007",
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "b965854f6fea67603f306301f276be857a550cac9c4a694efab63bcbbf5e7ef4",
+      "original_research_tier": 3,
+      "proposal": "No tier or qualification change; no validated external need or supplier scope."
+    },
+    {
+      "id": "RCO-LBG-008",
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "eca5b26ee55b1a582bef2b7f3e868336c6e9c11ae3a3e056d6e7700c68a64850",
+      "original_research_tier": 3,
+      "proposal": "No tier or qualification change; no validated external need or supplier scope."
+    },
+    {
+      "id": "RCO-LBG-009",
+      "original_qualification": "Research candidate — not customer-verified demand",
+      "original_record_sha256": "4b2cc7e7c9532a3924fed0ada6395e018d3554f63e36b684580c76bb8e4642ab",
+      "original_research_tier": 1,
+      "proposal": "No tier or qualification change; no validated external need or supplier scope."
+    }
+  ],
+  "visual_nine": [
+    {
+      "id": "FIN-01",
+      "new_source_refs": [
+        "R2-LBG-FY25",
+        "R2-LBG-H126",
+        "R2-LBG-Q326"
+      ],
+      "original_question": "Current income and operating-cost reconciliation",
+      "proposal": "partially enriched, owner review required",
+      "rie1_disposition": "partially enriched, remains open",
+      "rie1_remaining": "Current segment financials, investment/cash-flow detail and cost-to-serve remain open.",
+      "rie2_remaining": "Group/segment/APM/statutory bridges now acquired for named periods. Unit cost-to-serve, legal-company current accounts and fully reconciled investment allocation remain open."
+    },
+    {
+      "id": "FIN-02",
+      "new_source_refs": [
+        "R2-LBG-H126",
+        "R2-NW-H126",
+        "R2-BAR-H126"
+      ],
+      "original_question": "Comparable growth and profitability",
+      "proposal": "partially enriched, owner review required",
+      "rie1_disposition": "partially enriched, remains open",
+      "rie1_remaining": "No matched peer definitions or complete segment growth/returns; no ranking.",
+      "rie2_remaining": "Within-issuer segment growth/returns context improved; matched cross-bank capital/product scope and Q3segmentP&L remain unacquired; no performance ranking."
+    },
+    {
+      "id": "ORG-01",
+      "new_source_refs": [
+        "R2-LBG-20F25",
+        "R2-LBG-RING"
+      ],
+      "original_question": "Current businesses, brands and legal subsidiaries",
+      "proposal": "partially enriched, owner review required",
+      "rie1_disposition": "partially enriched, remains open",
+      "rie1_remaining": "Registry acquisition failed; full current legal hierarchy and dated subsidiaries unresolved.",
+      "rie2_remaining": "Dated principal direct/indirect holdings acquired at 31Dec2025; full current register and intermediate parents remain unverified."
+    },
+    {
+      "id": "OPS-01",
+      "new_source_refs": [
+        "R2-LBG-H126",
+        "R2-LBG-MS26",
+        "R2-LBG-ENVOY-PDF"
+      ],
+      "original_question": "Operations and important technology systems",
+      "proposal": "partially enriched, owner review required",
+      "rie1_disposition": "partially enriched, remains open",
+      "rie1_remaining": "Specific critical-service maps, system inventory and customer outcome/control effectiveness unacquired.",
+      "rie2_remaining": "Product/economic mechanisms and platform capabilities acquired; actual critical-service/process/system map, unit cost and measured control effectiveness remain open."
+    },
+    {
+      "id": "REL-01",
+      "new_source_refs": [
+        "R2-LBG-MS26",
+        "R2-LBG-ENVOY-PDF"
+      ],
+      "original_question": "Current suppliers, partners and customers",
+      "proposal": "partially enriched, owner review required",
+      "rie1_disposition": "partially enriched, remains open",
+      "rie1_remaining": "Contract value, terms, workshare, exit/renewal, customers and other suppliers unknown.",
+      "rie2_remaining": "Microsoft multi-year scope and Google/Envoy disclosure refreshed; all price/workshare/exclusivity/renewal/exit and other major supplier contracts remain unknown."
+    },
+    {
+      "id": "REG-01",
+      "new_source_refs": [
+        "R2-LBG-RING",
+        "R2-HMT-CTP"
+      ],
+      "original_question": "Legal-entity regulatory applicability",
+      "proposal": "partially enriched, owner review required",
+      "rie1_disposition": "partially enriched, remains open",
+      "rie1_remaining": "Exact applicable legal-entity rules, effective dates and readiness not established.",
+      "rie2_remaining": "CTP effective dates/provider legal entities acquired; exact Lloyds legal-entity/service applicability, readiness and breach evidence remain unknown."
+    },
+    {
+      "id": "ORG-02",
+      "new_source_refs": [
+        "R2-LBG-LEAD",
+        "R2-LBG-H126"
+      ],
+      "original_question": "Current leadership and accountability",
+      "proposal": "partially enriched, owner review required",
+      "rie1_disposition": "partially enriched, remains open",
+      "rie1_remaining": "Current public roles acquired, exact programme accountability and buying authority unknown.",
+      "rie2_remaining": "Public current professional roles and IFRS8CODM identified; exact service/procurement/budget accountability remains unknown."
+    },
+    {
+      "id": "INF-01",
+      "new_source_refs": [
+        "R2-HMT-CTP"
+      ],
+      "original_question": "Infrastructure operating relationships",
+      "proposal": "partially enriched, owner review required",
+      "rie1_disposition": "partially enriched, remains open",
+      "rie1_remaining": "BoE operator roles acquired, Lloyds-specific participant/operating edge unproved.",
+      "rie2_remaining": "Provider/system context is not a Lloyds payment-infrastructure membership/service-operating edge; original infrastructure gap remains open."
+    },
+    {
+      "id": "COM-01",
+      "new_source_refs": [],
+      "original_question": "Remaining influence and external need",
+      "proposal": "open; public evidence cannot establish private buyer need",
+      "rie1_disposition": "open",
+      "rie1_remaining": "Need, sourcing, funding, buyer, decision criteria, influence and mutual action remain unknown.",
+      "rie2_remaining": "Public evidence establishes no customer-confirmed need, economic buyer, unallocated funding/procurement, external scope or influence window."
+    }
+  ]
+}

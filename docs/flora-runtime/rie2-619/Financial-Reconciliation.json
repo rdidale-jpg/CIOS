@@ -1,0 +1,772 @@
+{
+  "annual_bridge_source": "R2-LBG-FY25 PDF index15",
+  "annual_bridges": {
+    "FY2024": {
+      "pat": 4477,
+      "restructuring": -40,
+      "statutory_pbt": 5971,
+      "tax": -1494,
+      "underlying_profit": 6343,
+      "volatility_other": -332
+    },
+    "FY2025": {
+      "pat": 4757,
+      "restructuring": -46,
+      "statutory_pbt": 6661,
+      "tax": -1904,
+      "underlying_profit": 6777,
+      "volatility_other": -70
+    }
+  },
+  "authority": "Candidate research, not EI001 projection or accepted financial facts",
+  "current_capital_liquidity": {
+    "cet1_pct": 13.3,
+    "date": "2026-09-30",
+    "lcr_pct_12_month_average": 143,
+    "nsfr_pct_4_quarter_average": 123,
+    "rwa_GBP_bn": 247.4,
+    "source_ref": "R2-LBG-Q326",
+    "warning": "Wholesale funding definition changed in Q2; December comparative represented95.6bn versus originalFY99.4bn. Not a financial loss or supplier budget.",
+    "wholesale_funding_GBP_bn": 109.9
+  },
+  "guidance_2026": {
+    "capital_generation_bps": "greater than200, excluding distributions",
+    "cet1_pct": "circa13",
+    "cost_income_pct": "less than50",
+    "measurement_state": "guidance",
+    "operating_cost_GBP_bn": "less than9.9",
+    "rote_pct": "greater than16",
+    "source_ref": "R2-LBG-Q326"
+  },
+  "periods": [
+    {
+      "accounting_basis": "alternative_performance_measure",
+      "columns": [
+        "Retail",
+        "Commercial Banking",
+        "Insurance Pensions and Investments",
+        "Equity Investments and Central Items",
+        "Group total"
+      ],
+      "duration_months": 12,
+      "financial_measurement_state": "prior_period_comparator",
+      "id": "FY2024",
+      "period_end": "2024-12-31",
+      "period_start": "2024-01-01",
+      "presentation_warning": "Operating division is not legal entity; inter-segment income allocation matters. FY2024 variable-pay costs/other-income and capital transfer pricing represented in FY25; do not mix old unrepresented values.",
+      "source_locator": "PDF index19",
+      "source_ref": "R2-LBG-FY25",
+      "unit": "GBP million",
+      "values": {
+        "impairment": [
+          -457,
+          14,
+          7,
+          3,
+          -433
+        ],
+        "lease_depreciation": [
+          -1319,
+          -6,
+          0,
+          0,
+          -1325
+        ],
+        "net_income": [
+          9965,
+          5243,
+          1156,
+          753,
+          17117
+        ],
+        "net_interest_income": [
+          8930,
+          3434,
+          -136,
+          617,
+          12845
+        ],
+        "operating_costs": [
+          -5566,
+          -2752,
+          -924,
+          -200,
+          -9442
+        ],
+        "other_income": [
+          2354,
+          1815,
+          1292,
+          136,
+          5597
+        ],
+        "profit_before_impairment": [
+          3649,
+          2387,
+          213,
+          527,
+          6776
+        ],
+        "remediation": [
+          -750,
+          -104,
+          -19,
+          -26,
+          -899
+        ],
+        "total_costs": [
+          -6316,
+          -2856,
+          -943,
+          -226,
+          -10341
+        ],
+        "underlying_profit": [
+          3192,
+          2401,
+          220,
+          530,
+          6343
+        ]
+      }
+    },
+    {
+      "accounting_basis": "alternative_performance_measure",
+      "columns": [
+        "Retail",
+        "Commercial Banking",
+        "Insurance Pensions and Investments",
+        "Equity Investments and Central Items",
+        "Group total"
+      ],
+      "duration_months": 12,
+      "financial_measurement_state": "actual",
+      "id": "FY2025",
+      "period_end": "2025-12-31",
+      "period_start": "2025-01-01",
+      "presentation_warning": "Operating division is not legal entity; inter-segment income allocation matters. FY2024 variable-pay costs/other-income and capital transfer pricing represented in FY25; do not mix old unrepresented values.",
+      "source_locator": "PDF index19",
+      "source_ref": "R2-LBG-FY25",
+      "unit": "GBP million",
+      "values": {
+        "impairment": [
+          -734,
+          -60,
+          -2,
+          1,
+          -795
+        ],
+        "lease_depreciation": [
+          -1445,
+          -9,
+          0,
+          0,
+          -1454
+        ],
+        "net_income": [
+          10828,
+          5486,
+          1280,
+          707,
+          18301
+        ],
+        "net_interest_income": [
+          9637,
+          3670,
+          -151,
+          479,
+          13635
+        ],
+        "operating_costs": [
+          -5807,
+          -2853,
+          -933,
+          -168,
+          -9761
+        ],
+        "other_income": [
+          2636,
+          1825,
+          1431,
+          228,
+          6120
+        ],
+        "profit_before_impairment": [
+          4090,
+          2606,
+          332,
+          544,
+          7572
+        ],
+        "remediation": [
+          -931,
+          -27,
+          -15,
+          5,
+          -968
+        ],
+        "total_costs": [
+          -6738,
+          -2880,
+          -948,
+          -163,
+          -10729
+        ],
+        "underlying_profit": [
+          3356,
+          2546,
+          330,
+          545,
+          6777
+        ]
+      }
+    },
+    {
+      "accounting_basis": "alternative_performance_measure",
+      "columns": [
+        "Retail",
+        "Commercial Banking",
+        "Insurance Pensions and Investments",
+        "Other",
+        "Group total"
+      ],
+      "duration_months": 6,
+      "financial_measurement_state": "prior_period_comparator",
+      "id": "H12025",
+      "period_end": "2025-06-30",
+      "period_start": "2025-01-01",
+      "presentation_warning": "Operating division is not legal entity; inter-segment income allocation matters. FY2024 variable-pay costs/other-income and capital transfer pricing represented in FY25; do not mix old unrepresented values.",
+      "source_locator": "Note3 printed42–43",
+      "source_ref": "R2-LBG-H126",
+      "unit": "GBP million",
+      "values": {
+        "impairment": [
+          -342,
+          -100,
+          1,
+          -1,
+          -442
+        ],
+        "lease_depreciation": [
+          -706,
+          -4,
+          0,
+          0,
+          -710
+        ],
+        "net_income": [
+          5279,
+          2688,
+          611,
+          336,
+          8914
+        ],
+        "net_interest_income": [
+          4709,
+          1766,
+          -78,
+          258,
+          6655
+        ],
+        "operating_costs": [
+          -2922,
+          -1394,
+          -466,
+          -92,
+          -4874
+        ],
+        "other_income": [
+          1276,
+          926,
+          689,
+          78,
+          2969
+        ],
+        "profit_before_impairment": [
+          2316,
+          1294,
+          143,
+          250,
+          4003
+        ],
+        "remediation": [
+          -41,
+          0,
+          -2,
+          6,
+          -37
+        ],
+        "total_costs": [
+          -2963,
+          -1394,
+          -468,
+          -86,
+          -4911
+        ],
+        "underlying_profit": [
+          1974,
+          1194,
+          144,
+          249,
+          3561
+        ]
+      }
+    },
+    {
+      "accounting_basis": "alternative_performance_measure",
+      "columns": [
+        "Retail",
+        "Commercial Banking",
+        "Insurance Pensions and Investments",
+        "Other",
+        "Group total"
+      ],
+      "duration_months": 6,
+      "financial_measurement_state": "prior_period_comparator",
+      "id": "H22025",
+      "period_end": "2025-12-31",
+      "period_start": "2025-07-01",
+      "presentation_warning": "Operating division is not legal entity; inter-segment income allocation matters. FY2024 variable-pay costs/other-income and capital transfer pricing represented in FY25; do not mix old unrepresented values.",
+      "source_locator": "Note3 printed42–43",
+      "source_ref": "R2-LBG-H126",
+      "unit": "GBP million",
+      "values": {
+        "impairment": [
+          -392,
+          40,
+          -3,
+          2,
+          -353
+        ],
+        "lease_depreciation": [
+          -739,
+          -5,
+          0,
+          0,
+          -744
+        ],
+        "net_income": [
+          5549,
+          2798,
+          669,
+          371,
+          9387
+        ],
+        "net_interest_income": [
+          4928,
+          1904,
+          -73,
+          221,
+          6980
+        ],
+        "operating_costs": [
+          -2885,
+          -1459,
+          -467,
+          -76,
+          -4887
+        ],
+        "other_income": [
+          1360,
+          899,
+          742,
+          150,
+          3151
+        ],
+        "profit_before_impairment": [
+          1774,
+          1312,
+          189,
+          294,
+          3569
+        ],
+        "remediation": [
+          -890,
+          -27,
+          -13,
+          -1,
+          -931
+        ],
+        "total_costs": [
+          -3775,
+          -1486,
+          -480,
+          -77,
+          -5818
+        ],
+        "underlying_profit": [
+          1382,
+          1352,
+          186,
+          296,
+          3216
+        ]
+      }
+    },
+    {
+      "accounting_basis": "alternative_performance_measure",
+      "columns": [
+        "Retail",
+        "Commercial Banking",
+        "Insurance Pensions and Investments",
+        "Other",
+        "Group total"
+      ],
+      "duration_months": 6,
+      "financial_measurement_state": "actual",
+      "id": "H12026",
+      "period_end": "2026-06-30",
+      "period_start": "2026-01-01",
+      "presentation_warning": "Operating division is not legal entity; inter-segment income allocation matters. FY2024 variable-pay costs/other-income and capital transfer pricing represented in FY25; do not mix old unrepresented values.",
+      "source_locator": "Note3 printed42–43",
+      "source_ref": "R2-LBG-H126",
+      "unit": "GBP million",
+      "values": {
+        "impairment": [
+          -565,
+          -51,
+          -1,
+          0,
+          -617
+        ],
+        "lease_depreciation": [
+          -835,
+          -6,
+          0,
+          0,
+          -841
+        ],
+        "net_income": [
+          5710,
+          2897,
+          747,
+          393,
+          9747
+        ],
+        "net_interest_income": [
+          5139,
+          2014,
+          -71,
+          196,
+          7278
+        ],
+        "operating_costs": [
+          -2872,
+          -1409,
+          -494,
+          -101,
+          -4876
+        ],
+        "other_income": [
+          1406,
+          889,
+          818,
+          197,
+          3310
+        ],
+        "profit_before_impairment": [
+          2821,
+          1476,
+          246,
+          289,
+          4832
+        ],
+        "remediation": [
+          -17,
+          -12,
+          -7,
+          -3,
+          -39
+        ],
+        "total_costs": [
+          -2889,
+          -1421,
+          -501,
+          -104,
+          -4915
+        ],
+        "underlying_profit": [
+          2256,
+          1425,
+          245,
+          289,
+          4215
+        ]
+      }
+    }
+  ],
+  "q3_nine_months_pinned_input": {
+    "commit": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+    "source_ref": "R2-LBG-Q326",
+    "values": {
+      "canonical_acceptance": false,
+      "columns": [
+        "2026",
+        "2025"
+      ],
+      "deposit_changes_YTD_GBP_bn": {
+        "central_items": 0.4,
+        "commercial": 9.6,
+        "group": 6.3,
+        "retail": -3.7
+      },
+      "period": "Nine months ended 30 September",
+      "ratios_reported": {
+        "asset_quality_bps": [
+          25,
+          18
+        ],
+        "banking_nim_pct": [
+          3.21,
+          3.04
+        ],
+        "cost_income_pct": [
+          49.3,
+          59.7
+        ],
+        "rote_pct": [
+          17.9,
+          11.9
+        ]
+      },
+      "restrictions": [
+        "Underlying net income is not statutory total income. Underlying and statutory impairment differ.",
+        "Nine-month flows must not be compared to stocks or annualised here.",
+        "Ratios use issuer definitions; cross-bank ranking is not supported.",
+        "Group deposit increase is not a funding crisis; retail decline does not prove attrition or its cause.",
+        "Central Items deposits rose from GBP0.2bn in December2025 to GBP0.6bn in September2026, completing the Group bridge."
+      ],
+      "source_id": "LBG-Q326",
+      "statutory": {
+        "impairment": [
+          -926,
+          -619
+        ],
+        "net_interest_income": [
+          10827,
+          9808
+        ],
+        "operating_expenses": [
+          -8533,
+          -8955
+        ],
+        "other_income": [
+          5257,
+          4444
+        ],
+        "pat": [
+          4835,
+          3322
+        ],
+        "pbt": [
+          6625,
+          4678
+        ],
+        "tax": [
+          -1790,
+          -1356
+        ],
+        "total_income": [
+          16084,
+          14252
+        ]
+      },
+      "stocks_30sep2026": {
+        "cet1_pct": 13.3,
+        "customer_deposits_GBP_bn": 502.8,
+        "risk_weighted_assets_GBP_bn": 247.4,
+        "underlying_loans_GBP_bn": 495.5
+      },
+      "subject": "Lloyds Banking Group plc",
+      "underlying": {
+        "impairment": [
+          -930,
+          -618
+        ],
+        "net_income": [
+          14819,
+          13557
+        ],
+        "net_interest_income": [
+          11084,
+          10106
+        ],
+        "operating_costs": [
+          -7246,
+          -7176
+        ],
+        "operating_lease_depreciation": [
+          -1261,
+          -1075
+        ],
+        "other_income": [
+          4996,
+          4526
+        ],
+        "profit_before_impairment": [
+          7512,
+          5469
+        ],
+        "remediation": [
+          -61,
+          -912
+        ],
+        "restructuring": [
+          -51,
+          -16
+        ],
+        "statutory_pat": [
+          4835,
+          3322
+        ],
+        "statutory_pbt": [
+          6625,
+          4678
+        ],
+        "tax": [
+          -1790,
+          -1356
+        ],
+        "total_costs": [
+          -7307,
+          -8088
+        ],
+        "underlying_profit": [
+          6582,
+          4851
+        ],
+        "volatility_other": [
+          94,
+          -157
+        ]
+      },
+      "unit": "GBP million unless stated"
+    }
+  },
+  "statutory_bridges": {
+    "H12025": {
+      "locator": "Note3 printed44",
+      "source_ref": "R2-LBG-H126",
+      "statutory": {
+        "impairment": -442,
+        "net_interest_income": 6478,
+        "operating_expenses": -5440,
+        "other_income": 2908,
+        "pbt": 3504,
+        "total_income": 9386
+      },
+      "statutory_to_underlying": {
+        "impairment": [
+          0,
+          0,
+          0
+        ],
+        "net_interest_income": [
+          0,
+          177,
+          0
+        ],
+        "operating_expenses": [
+          9,
+          649,
+          -129
+        ],
+        "other_income": [
+          0,
+          -68,
+          129
+        ],
+        "pbt": [
+          9,
+          48,
+          0
+        ],
+        "total_income": [
+          0,
+          -601,
+          129
+        ]
+      },
+      "underlying": {
+        "impairment": -442,
+        "lease_depreciation": -710,
+        "net_income": 8914,
+        "net_interest_income": 6655,
+        "other_income": 2969,
+        "pbt": 3561,
+        "total_costs": -4911
+      }
+    },
+    "H12026": {
+      "locator": "Note3 printed44",
+      "source_ref": "R2-LBG-H126",
+      "statutory": {
+        "impairment": -616,
+        "net_interest_income": 7105,
+        "operating_expenses": -5717,
+        "other_income": 3521,
+        "pbt": 4293,
+        "total_income": 10626
+      },
+      "statutory_to_underlying": {
+        "impairment": [
+          0,
+          0,
+          -1
+        ],
+        "net_interest_income": [
+          0,
+          172,
+          1
+        ],
+        "operating_expenses": [
+          34,
+          891,
+          -123
+        ],
+        "other_income": [
+          0,
+          -334,
+          123
+        ],
+        "pbt": [
+          34,
+          -112,
+          0
+        ],
+        "total_income": [
+          0,
+          -1003,
+          124
+        ]
+      },
+      "underlying": {
+        "impairment": -617,
+        "lease_depreciation": -841,
+        "net_income": 9747,
+        "net_interest_income": 7278,
+        "other_income": 3310,
+        "pbt": 4215,
+        "total_costs": -4915
+      }
+    }
+  },
+  "statutory_to_underlying_column_order": [
+    "restructuring_removed",
+    "volatility_other_removed",
+    "insurance_gross_up"
+  ],
+  "targets_2030": {
+    "capital_generation_bps": "greater than225",
+    "cost_income_pct": "less than45",
+    "gross_cost_savings_GBP_bn": "circa2",
+    "measurement_state": "target",
+    "rote_pct": "circa20",
+    "source_ref": "R2-LBG-STRATEGY"
+  },
+  "unknowns": [
+    "No Q3 segment P&L inferred from H1 or Group nine-month values.",
+    "Segment-specific economic capital/returns, unit cost-to-serve and fully reconciled investment allocation remain unacquired.",
+    "Underlying segment profits are not independently published statutory legal-company PBT."
+  ]
+}
