@@ -431,6 +431,9 @@ def render(ctx,headers=None,*,financial_run_id=''):
                 data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
                 body=(reading.nationwide_insight(public) if ctx.reading=='insight' else
                       analyst.compose_editorial(public)+reading.nationwide_facts_bridge(public)+_nationwide_service(data))
+                from .enterprise_economics import statement_summary
+                from .financial_intelligence.public_statements import nationwide_lines
+                body += statement_summary(nationwide_lines(public), insight=ctx.reading=='insight', inspection=False)
                 action=analyst.prepare_action(ctx,headers=headers) if ctx.reading=='facts' else ''
                 if action:body+='<section class="workspace-setup"><h2>Workspace analysis</h2>'+action+'</section>'
                 return _frame(ctx,headers,data,issues,v.destinations(ctx,data),cohort.landscape(ctx,body,data,issues)+_bank_picker(ctx,data,issues))

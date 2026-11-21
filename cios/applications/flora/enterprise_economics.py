@@ -202,3 +202,41 @@ def aviation(ctx, data):
         related += '<a href="' + escape(v.url(ctx, stream='inside', detail=detail, reading=ctx.reading), quote=True) + '#visual-content">' + label + '</a>'
     related += '<a href="/enterprises/easyjet/understanding">Research and evidence</a></nav>'
     return _composition(ctx, AIRLINE, selected, figures, (fleet, network), caveat, related)
+
+
+def statement_summary(lines, *, insight=False, fixture=False, inspection=True):
+    """One editorial composition for eligible statement lines from any issuer."""
+    from .financial_intelligence.public_statements import statements
+
+    eligible = tuple(statements(lines))
+    if not eligible:
+        return ''
+    disclaimer = '<p><strong>Synthetic review fixture</strong></p>' if fixture else ''
+    body = '<section class="reading-capability" aria-labelledby="eei-summary"><h2 id="eei-summary">Financial statements</h2>' + disclaimer
+    for kind, label, context in (
+        ('income', 'Income statement', 'Income and costs explain earnings during the reporting period.'),
+        ('balance', 'Balance sheet', 'Assets and obligations describe the position on the reported date.'),
+        ('cash_flow', 'Cash flow statement', 'Cash movements show how operations, investment and funding changed cash during the period.'),
+    ):
+        body += '<h3>' + label + '</h3>'
+        rows = tuple((line, fact) for line, fact in eligible if line.statement == kind)
+        if not rows:
+            body += '<p>No eligible figures in this view.</p>'
+        elif insight:
+            body += '<p>' + context + ' Use matching scope and basis when comparing figures.</p>'
+        else:
+            for line, fact in rows:
+                details = f'{fact.scope} · FY{line.fiscal_year} · {fact.period} · {fact.unit}'
+                restated = ' · Restated' if line.revision_state == 'restated' else ''
+                body += ('<p><strong>' + escape(line.reported_label) + ' · ' + escape(line.original_display)
+                         + '</strong><br><small>' + escape(details + restated) + '</small></p>')
+    if inspection:
+        body += _basis(fact for _, fact in eligible)
+    return body + '</section>'
+
+
+def source_statement_summary(record, *, subject, insight=False, fixture=False):
+    """Resolve fresh trusted Source input before rendering; no cached view payload."""
+    from .financial_intelligence.public_statements import project
+
+    return statement_summary(project(record, subject=subject), insight=insight, fixture=fixture)
