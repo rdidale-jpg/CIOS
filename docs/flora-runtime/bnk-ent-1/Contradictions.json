@@ -1,0 +1,63 @@
+{
+  "authority": "review_register_not_canonical_conflict_updates",
+  "items": [
+    {
+      "id": "X-IDENTITY",
+      "kind": "owner_namespace_collision",
+      "evidence": [
+        "enterprise-knowledge/banking/flora/Banking-Knowledge-Manifest.json",
+        "cios/applications/flora/banking_portfolio.py"
+      ],
+      "conflict": "BK-ENT-003 Nationwide legacy vs NatWest current",
+      "resolution": "open; preserve both exact owner paths; no alias merge"
+    },
+    {
+      "id": "X-ENVOY-DATE",
+      "kind": "version_date_discrepancy",
+      "source_ids": [
+        "PR-LBG-ENVOY"
+      ],
+      "conflict": "HTML1May2026 versus linked variant28April2026",
+      "resolution": "open; retain version-specific dates, no programme commencement inference"
+    },
+    {
+      "id": "X-PAY-USE",
+      "kind": "document_restriction_conflict",
+      "source_ids": [
+        "BE-S-PAY-FPS-GUIDE"
+      ],
+      "conflict": "Public classification with confidentiality/use-approval language",
+      "resolution": "exclude guide business content; clarify exact document/use if needed"
+    },
+    {
+      "id": "X-NBS-USE",
+      "kind": "same_document_different_use_versions_not_factual_corrob",
+      "evidence": [
+        "docs/flora-runtime/bie2/Source-Ledger.json",
+        "enterprise-knowledge/banking/research-model/source-snapshots/RUD1-Public-Facts.json"
+      ],
+      "conflict": "Earlier NBS-FY research-only; later finite working factual reuse",
+      "resolution": "retain each extent/use decision; same PDF is not independent corroboration or whole-report admission"
+    },
+    {
+      "id": "X-PAY-COUNT",
+      "kind": "unresolved_rendered_counter_units",
+      "source_ids": [
+        "BE-S-PAY-SYSTEMS"
+      ],
+      "conflict": "Homepage search/render output lacks a safely established unit/denominator for a transaction counter",
+      "resolution": "omit quantitative claim; acquire proper statistical definition if needed"
+    },
+    {
+      "id": "X-PERIOD",
+      "kind": "incompatible_comparison_not_source_error",
+      "source_ids": [
+        "RUD1-NATIONWIDE-FY26",
+        "BE-S-LBG-FY25",
+        "BE-S-GC-Q326"
+      ],
+      "conflict": "Different legal/reporting objects, periods and accounting bases",
+      "resolution": "compare mechanisms; prohibit direct PBT/segment ranking or geographic allocation"
+    }
+  ]
+}

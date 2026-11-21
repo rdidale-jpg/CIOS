@@ -1,0 +1,1264 @@
+{
+  "authority": "research_claim_proposals_only",
+  "claims": [
+    {
+      "id": "BE-LBG-IDENTITY",
+      "subject_ref": "lbg",
+      "text": "Scottish registered public holding company SC095000.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-LBG-ID"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Holding company / consolidated reporting Group",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "bounded_identity_fact_owner_mapping_required",
+      "caveat": "Companies House publishes filed information without checking its accuracy.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-LBG-CONTROL",
+      "subject_ref": "lbg",
+      "text": "Companies House lists Group as active PSC of Lloyds Bank plc, with at least 75% share/voting control and director appointment rights.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-LB-PSC"
+      ],
+      "period": "Active register view18Nov2026; notification6Apr2016",
+      "entity_perimeter": "Holding company / consolidated reporting Group",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "PSC threshold is not a precise 100% ownership assertion or direct-contract proof.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Active register view18Nov2026; notification6Apr2016",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-LBG-ROLES",
+      "subject_ref": "lbg",
+      "text": "Published roles include Charlie Nunn (Group CEO), William Chalmers (CFO), Ron van Kemenade (Group COO) and Javier Rodríguez de Colmenares (CRO).",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-LBG-LEAD"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Holding company / consolidated reporting Group",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Role titles are not an Envoy-specific RACI, budget or procurement authority.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-LBG-CURRENT-BUSINESS",
+      "subject_ref": "lbg",
+      "text": "The maintained executive structure distinguishes Consumer, Business & Commercial, Corporate & Institutional, Wealth & Insurance and Connected Finance roles.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-LBG-LEAD"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Holding company / consolidated reporting Group",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Current management roles are not automatically FY2025 reportable segments or legal subsidiaries.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-LBG-PBT9M",
+      "subject_ref": "lbg",
+      "text": "Statutory pretax profit £6.6bn for nine months ended30September2026.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "period": "2026-01-01/2026-09-30",
+      "entity_perimeter": "Holding company / consolidated reporting Group",
+      "existing_claim_refs": [
+        "LBG-Q326-PROFIT"
+      ],
+      "status": "candidate_not_canonical",
+      "public_disposition": "existing_bounded_public_disclosure",
+      "caveat": "Neither a quarterly profit nor a supplier investment allocation.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "2026-01-01/2026-09-30",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-LBG-DEPOSITS",
+      "subject_ref": "lbg",
+      "text": "Customer deposits £502.8bn at30September2026.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "period": "Stock at2026-09-30",
+      "entity_perimeter": "Holding company / consolidated reporting Group",
+      "existing_claim_refs": [
+        "LBG-Q326-DEPOSITS"
+      ],
+      "status": "candidate_not_canonical",
+      "public_disposition": "existing_bounded_public_disclosure",
+      "caveat": "Deposit stock is not revenue, organic inflow or discretionary transformation spend.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Stock at2026-09-30",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-LBG-ENVOY",
+      "subject_ref": "lbg",
+      "text": "Group reports building Envoy with Google Cloud and describes built-in controls.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "PR-LBG-ENVOY"
+      ],
+      "period": "HTML publication2026-05-01; linked variant2026-04-28 unresolved",
+      "entity_perimeter": "Holding company / consolidated reporting Group",
+      "existing_claim_refs": [
+        "LBG-ENVOY-GOOGLE",
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "status": "candidate_not_canonical",
+      "public_disposition": "existing_bounded_public_disclosure",
+      "caveat": "Google Cloud is the brand endpoint; bank entity, EMEA contractor, workload criticality and contract terms remain unverified.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "historical_or_scope_limited"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": "2026-05-01",
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "HTML publication2026-05-01; linked variant2026-04-28 unresolved",
+        "null_semantics": "unestablished; never inferred from retrieval",
+        "alternative_variant_date": "2026-04-28",
+        "conflict": "unresolved"
+      }
+    },
+    {
+      "id": "BE-LBG-AI-VALUE",
+      "subject_ref": "lbg",
+      "text": "Approximately £50m FY2025 AI value is reported; more than £100m for2026 is an expectation.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "PR-LBG-AI26"
+      ],
+      "period": "FY2025 actual claim / FY2026 expectation",
+      "entity_perimeter": "Holding company / consolidated reporting Group",
+      "existing_claim_refs": [
+        "LBG-AI26-REPORTED",
+        "LBG-AI26-EXPECTED"
+      ],
+      "status": "candidate_not_canonical",
+      "public_disposition": "existing_bounded_public_disclosure",
+      "caveat": "Not two achieved net-benefit figures; no Envoy attribution or inferred buyer need.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "historical_or_scope_limited"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "FY2025 actual claim / FY2026 expectation",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-LBG-STRATEGY",
+      "subject_ref": "lbg",
+      "text": "Accelerate2030 states a cost:income ambition below45% in2030.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "period": "2027–2030 management ambition",
+      "entity_perimeter": "Holding company / consolidated reporting Group",
+      "existing_claim_refs": [
+        "LBG-A2030-CIR"
+      ],
+      "status": "candidate_not_canonical",
+      "public_disposition": "existing_bounded_public_disclosure",
+      "caveat": "Target is not achieved performance, programme budget or external supplier allocation.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "2027–2030 management ambition",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-LBG-AI-THESIS",
+      "subject_ref": "lbg",
+      "text": "The commercial issue is incremental AI benefit realisation within existing platform controls, rather than assumed greenfield adoption.",
+      "semantic_type": "hypothesis",
+      "source_ids": [
+        "PR-LBG-ENVOY",
+        "PR-LBG-AI26"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Holding company / consolidated reporting Group",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Existing internal capability or fully delivered net benefits could remove external relevance.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [
+        "Existing internal capabilities, committed responses and alternative economic/period explanations may fully account for the observation."
+      ],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "analytical_candidate_not_measured_outcome"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "reasoning": "Mechanism interpretation over the stated source-scoped facts; no customer demand or causal outcome is inferred.",
+      "falsifier": "A satisfactory existing response and no validated remaining decision/operating gap remove commercial relevance.",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-NBS-MUTUAL",
+      "subject_ref": "nationwide",
+      "text": "Nationwide describes member ownership and distinguishes members from every account holder.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-NBS-TRANSFER"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Mutual society / regulated deposit taker",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Do not assume every Virgin Money customer qualifies as a Society member.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-NBS-TRANSFER",
+      "subject_ref": "nationwide",
+      "text": "Issuer states Virgin Money business legally transferred on2April2026; brand and service interfaces initially continue.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-NBS-TRANSFER"
+      ],
+      "period": "Effective2026-04-02; view2026-11-18",
+      "entity_perimeter": "Mutual society / regulated deposit taker",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Legal transfer does not demonstrate complete systems migration, realised synergies or failed integration.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": "2026-04-02",
+        "effective": "2026-04-02",
+        "observed_on": "2026-11-18",
+        "reporting_period": "Effective2026-04-02; view2026-11-18",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-NBS-CEO",
+      "subject_ref": "nationwide",
+      "text": "Dame Debbie Crosbie is identified as Chief Executive.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-NBS-LEAD"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Mutual society / regulated deposit taker",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "No specific mortgage-platform or procurement sign-off is attested.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-NBS-FINANCIAL-BASIS",
+      "subject_ref": "nationwide-group",
+      "text": "FY2026 consolidated Group has a full year of Virgin Money; earlier comparator includes only six months.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "RUD1-NATIONWIDE-FY26"
+      ],
+      "period": "2025-04-01/2026-03-31",
+      "entity_perimeter": "FY2026 reporting perimeter, not another legal person",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "existing_finite_working_facts_only",
+      "caveat": "Fiscal year, consolidation and statutory/underlying bases prevent a simple Lloyds profit ranking.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "2025-04-01/2026-03-31",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-NBS-INTEGRATION",
+      "subject_ref": "nationwide-group",
+      "text": "£127m integration expenditure is already included in underlying operating costs.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "RUD1-NATIONWIDE-FY26"
+      ],
+      "period": "2025-04-01/2026-03-31",
+      "entity_perimeter": "FY2026 reporting perimeter, not another legal person",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "existing_finite_working_facts_only",
+      "caveat": "Do not subtract again or treat as available supplier budget.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "2025-04-01/2026-03-31",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-NBS-MEMBER-THESIS",
+      "subject_ref": "nationwide-group",
+      "text": "Member value and retained financial strength must be assessed together, rather than by maximising bank-style pretax profit.",
+      "semantic_type": "insight",
+      "source_ids": [
+        "RUD1-NATIONWIDE-FY26",
+        "BE-S-NBS-TRANSFER"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "FY2026 reporting perimeter, not another legal person",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "No assertion that rewards impair resilience, that members are dissatisfied, or that a new supplier is required.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [
+        "Existing internal capabilities, committed responses and alternative economic/period explanations may fully account for the observation."
+      ],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "analytical_candidate_not_measured_outcome"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "reasoning": "Mechanism interpretation over the stated source-scoped facts; no customer demand or causal outcome is inferred.",
+      "falsifier": "A satisfactory existing response and no validated remaining decision/operating gap remove commercial relevance.",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-GC-ENTITY",
+      "subject_ref": "google-emea",
+      "text": "Google identifies an Irish entity, registration660412, separately from Google Ireland Ltd.368047.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-GC-PROCESSORS"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Named CTP legal provider; issuer-reported Irish company registration",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Issuer list is not independently inspected Irish filing or ownership-chain proof.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-GC-CONTRACTING",
+      "subject_ref": "google-emea",
+      "text": "Standard entity terms identify Google Cloud EMEA Limited for covered EMEA GCP agreements outside stated country exceptions.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-GC-ENTITY"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Named CTP legal provider; issuer-reported Irish company registration",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Actual signed, reseller, service-specific or negotiated agreements can differ; no Lloyds contractor inferred.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-GC-DESIGNATION",
+      "subject_ref": "google-emea",
+      "text": "HMT names Google Cloud EMEA Limited as a critical third party.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "EAI-HMT-CTP26"
+      ],
+      "period": "Published2026-07-10; effective2026-07-13",
+      "entity_perimeter": "Named CTP legal provider; issuer-reported Irish company registration",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "existing_ogl_provider_context_only",
+      "caveat": "Designation does not establish service use, critical workload, failure or procurement at Lloyds Bank plc.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": "2026-07-10",
+        "event": null,
+        "effective": "2026-07-13",
+        "observed_on": "2026-11-18",
+        "reporting_period": "Published2026-07-10; effective2026-07-13",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-GC-FINANCIAL-SCOPE",
+      "subject_ref": "google-segment",
+      "text": "Q32026 global Cloud revenue$30.7bn and operating income$11.1bn are segment measures.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-GC-Q326"
+      ],
+      "period": "2026-07-01/2026-09-30; USD",
+      "entity_perimeter": "Alphabet global reporting segment, not EMEA entity revenue",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Not UK/EMEA legal-entity accounts; segment operating income is not Group statutory PBT or free cash flow.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": "2026-10-28",
+        "event": "2026-10-28",
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "2026-07-01/2026-09-30; USD",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-GC-CEO",
+      "subject_ref": "google-brand",
+      "text": "Thomas Kurian is identified as SVP and CEO of Google Cloud.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-GC-Q326"
+      ],
+      "period": "2026-10-28 earnings call",
+      "entity_perimeter": "Commercial brand; not an exact contracting party",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "No personal signing authority over EMEA customer contracts or a specific workload inferred.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": "2026-10-28",
+        "event": "2026-10-28",
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "2026-10-28 earnings call",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-GC-MIX",
+      "subject_ref": "google-segment",
+      "text": "Management describes GCP growth and TPU system sales; short-term third-party capacity can affect margins.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-GC-Q326"
+      ],
+      "period": "2026-10-28 retrospective/forward-looking statements",
+      "entity_perimeter": "Alphabet global reporting segment, not EMEA entity revenue",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Not a pure seat-subscription business or disclosed UK cost allocation; forward-looking margin effects remain expectations.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": "2026-10-28",
+        "event": "2026-10-28",
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "2026-10-28 retrospective/forward-looking statements",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-GC-TECH",
+      "subject_ref": "google-brand",
+      "text": "Google documents layered infrastructure security spanning facilities, hardware, service deployment, storage, communication and operations.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-GC-INFRA"
+      ],
+      "period": "Technical description June2024",
+      "entity_perimeter": "Commercial brand; not an exact contracting party",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Not proof of a customer’s present configuration or effectiveness; content CC BY4 attribution must remain.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "historical_or_scope_limited"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Technical description June2024",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-GC-AFFILIATES",
+      "subject_ref": "google-emea",
+      "text": "Provider disclosure lists EMEA service-maintenance/support separately from Google Ireland; third parties have limited processing roles.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-GC-PROCESSORS"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Named CTP legal provider; issuer-reported Irish company registration",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "A subprocessor list is not an Envoy architecture, customer-specific access log, invoice or vendor workshare.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-GC-VALUE-MODEL",
+      "subject_ref": "google-brand",
+      "text": "On-demand resource services support consumption economics; capacity, utilisation and service mix shape the provider mechanism.",
+      "semantic_type": "insight",
+      "source_ids": [
+        "BE-S-GC-MODEL",
+        "BE-S-GC-Q326"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Commercial brand; not an exact contracting party",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "No specific customer demand or cloud savings; actual billing/discounts and contractual allocation remain unknown.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [
+        "Existing internal capabilities, committed responses and alternative economic/period explanations may fully account for the observation."
+      ],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "analytical_candidate_not_measured_outcome"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "reasoning": "Mechanism interpretation over the stated source-scoped facts; no customer demand or causal outcome is inferred.",
+      "falsifier": "A satisfactory existing response and no validated remaining decision/operating gap remove commercial relevance.",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-PAY-IDENTITY",
+      "subject_ref": "payuk",
+      "text": "Pay.UK Limited is a company limited by guarantee, England, company10872449.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-PAY-ID"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Company limited by guarantee / payment system operator",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Not the Faster Payment System, Bacs, ICS or CASS; legal form alone does not prove any profit policy.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-PAY-GOV",
+      "subject_ref": "payuk",
+      "text": "Guarantors hold the board to account; Lloyds Bank plc and Nationwide are named on the published guarantor list.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-PAY-GOV",
+        "BE-S-PAY-GUARANTORS"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Company limited by guarantee / payment system operator",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Membership is not shareholding, voting dominance, procurement, vendor exposure or service volume.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-PAY-ROLES",
+      "subject_ref": "payuk",
+      "text": "Published leaders: David Pitt CEO, Michael Ellis CFO, David Morris COO, David Crawford Strategy/Transformation; Lone Le Roux CRO.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-PAY-LEAD"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Company limited by guarantee / payment system operator",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Published professional roles, not inferred deal authority or programme RACI.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-PAY-SYSTEMS",
+      "subject_ref": "payuk",
+      "text": "The Bank identifies Pay.UK as the Bacs/FPS operator it supervises; CHAPS is operated by the Bank.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-BOE-FMI"
+      ],
+      "period": "Published2026-06-25; annual supervisory report",
+      "entity_perimeter": "Company limited by guarantee / payment system operator",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Do not extrapolate every system to the same statutory recognition or regulator remit.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Published2026-06-25; annual supervisory report",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-PAY-SERVICES",
+      "subject_ref": "payuk",
+      "text": "Operator separates Bacs, FPS, ICS and account-switching/overlay service functions.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-PAY-SYSTEMS"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Company limited by guarantee / payment system operator",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "A switching service is not a payment rail; an operator is not the settlement bank.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-PAY-ICS",
+      "subject_ref": "payuk",
+      "text": "Public ICS framework describes admission and terms governing participant access.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-PAY-ICS"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Company limited by guarantee / payment system operator",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "No signed named-participant contract or nonpublic settlement document inspected.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-PAY-ECONOMICS",
+      "subject_ref": "payuk",
+      "text": "RCMS FAQ describes cost recovery, including2025–26 billing through FPS direct participants and expected direct billing by2027.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-PAY-RCMS"
+      ],
+      "period": "Dated years within an undated maintained FAQ",
+      "entity_perimeter": "Company limited by guarantee / payment system operator",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "RCMS-specific; expected2027 is not completed delivery or universal current fee schedule. No fee amount copied.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Dated years within an undated maintained FAQ",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-PAY-THESIS",
+      "subject_ref": "payuk",
+      "text": "The key economic problem is funding reliable common services while allocating benefits and costs across participants with different interests.",
+      "semantic_type": "hypothesis",
+      "source_ids": [
+        "BE-S-PAY-RCMS",
+        "BE-S-PAY-GOV"
+      ],
+      "period": "Source-scoped; see ledger",
+      "entity_perimeter": "Company limited by guarantee / payment system operator",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Not a demonstrated funding shortfall, failed control, procurement or approved transformation budget.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [
+        "Existing internal capabilities, committed responses and alternative economic/period explanations may fully account for the observation."
+      ],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "analytical_candidate_not_measured_outcome"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "reasoning": "Mechanism interpretation over the stated source-scoped facts; no customer demand or causal outcome is inferred.",
+      "falsifier": "A satisfactory existing response and no validated remaining decision/operating gap remove commercial relevance.",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Source-scoped; see ledger",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    },
+    {
+      "id": "BE-PAY-SUPPLIER",
+      "subject_ref": "payuk",
+      "text": "Supplier-side announcement reports three central-infrastructure contract extensions across FPS, Bacs and ICS with continuity into early2030s.",
+      "semantic_type": "reported",
+      "source_ids": [
+        "BE-S-VOCALINK"
+      ],
+      "period": "Undated announcement as viewed18Nov2026; exact execution/effective dates unverified",
+      "entity_perimeter": "Named Pay.UK operator / Vocalink supplier context; executed legal contracting endpoints unverified",
+      "existing_claim_refs": [],
+      "status": "candidate_not_canonical",
+      "public_disposition": "owner_research_candidate",
+      "caveat": "Not evidence of full contract text, fees, exclusivity, current workshare or available future procurement.",
+      "qualified_material_pressure": false,
+      "pipeline_eligible": false,
+      "counter_evidence": [],
+      "confidence": {
+        "meaning": "confidence in stated bounded claim, not buying probability",
+        "assessment": "primary_or_retained_source_support"
+      },
+      "freshness": {
+        "reviewed_on": "2026-11-18",
+        "meaning": "source dates retained; review is not event freshness",
+        "status": "as_stated_in_source"
+      },
+      "observation_mapping": "decompose multi-field review summaries before any separately authorised Observation proposal; no import now",
+      "dates": {
+        "published": null,
+        "event": null,
+        "effective": null,
+        "observed_on": "2026-11-18",
+        "reporting_period": "Undated announcement as viewed18Nov2026; exact execution/effective dates unverified",
+        "null_semantics": "unestablished; never inferred from retrieval"
+      }
+    }
+  ]
+}
