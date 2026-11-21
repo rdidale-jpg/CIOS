@@ -212,7 +212,7 @@ def _ordinary_factual_method(source):
     return 'minimal_factual_analysis'
 
 
-def minimal_factual_integrity(source):
+def minimal_factual_integrity(source, *, statement_periods=False):
     """Bind actual minimal numerical data to its inspected document/version.
 
     This hash covers retained facts, never purported original PDF bytes. Legacy
@@ -239,6 +239,14 @@ def minimal_factual_integrity(source):
     encoded = json.dumps(payload, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode()
     if sha(encoded) != source.get('facts_sha256'):
         raise ValueError('Retained factual integrity mismatch')
+    def valid_period(period):
+        retrieval = date.fromisoformat(source['retrieved_at'][:10])
+        if statement_periods and period.get('kind') == 'instant':
+            return (set(period) == {'kind', 'as_at'}
+                    and date.fromisoformat(period['as_at']) <= retrieval)
+        return (period.get('kind') == 'duration' and period.get('fiscal_year_end')
+                and date.fromisoformat(period['start']) <= date.fromisoformat(period['end']) <= retrieval)
+
     keys = set()
     for binding in bindings:
         if not isinstance(binding, dict) or not isinstance(binding.get('facts'), dict):
@@ -253,9 +261,7 @@ def minimal_factual_integrity(source):
                 or facts.get('semantic_type') != 'reported' or facts.get('state') != 'actual'
                 or not Decimal(value['amount']).is_finite()
                 or value.get('unit') not in {'currency', 'percentage'}
-                or period.get('kind') != 'duration' or not period.get('fiscal_year_end')
-                or not date.fromisoformat(period['start']) <= date.fromisoformat(period['end'])
-                <= date.fromisoformat(source['retrieved_at'][:10])):
+                or not valid_period(period)):
             raise ValueError('Invalid numerical fact meaning')
         keys.add(binding['key'])
     return bindings

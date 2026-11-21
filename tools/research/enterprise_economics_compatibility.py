@@ -20,6 +20,8 @@ ALLOWED = {
 
 
 def predecessor(root, path, current):
+    from tools.research.eei2a_compatibility import predecessor as statements_predecessor
+    current = statements_predecessor(root, path, current)
     record_path = Path(root) / 'docs/flora-runtime/enterprise-economics-a1/Renderer-Evolution.json'
     if path not in ALLOWED or not record_path.is_file():
         return current
@@ -44,7 +46,8 @@ def validate(root):
     records = json.loads((root / 'docs/flora-runtime/enterprise-economics-a1/Renderer-Evolution.json').read_text())
     assert set(records) == set(ALLOWED)
     for path, row in records.items():
-        raw = (root / path).read_bytes()
+        from tools.research.eei2a_compatibility import predecessor as statements_predecessor
+        raw = statements_predecessor(root, path, (root / path).read_bytes())
         assert sha256(raw).hexdigest() == row['after_sha256'], 'Unknown Economics cut: ' + path
         assert predecessor(root, path, raw) != raw
     return {'base': BASE, 'renderer_functions': {k: sorted(v) for k, v in ALLOWED.items()}, 'comparator_changed': False}
