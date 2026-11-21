@@ -1,0 +1,23 @@
+{
+  "checkout": "f56fe3a3f5053f3c6442b4ae323a8eb40cb336fd",
+  "results": [
+    {
+      "viewport": "desktop",
+      "eligible_nationwide": true,
+      "labelled_synthetic": true,
+      "history_and_withdrawal": true
+    },
+    {
+      "viewport": "ipad-landscape",
+      "eligible_nationwide": true,
+      "labelled_synthetic": true,
+      "history_and_withdrawal": true
+    },
+    {
+      "viewport": "ipad-portrait",
+      "eligible_nationwide": true,
+      "labelled_synthetic": true,
+      "history_and_withdrawal": true
+    }
+  ]
+}
