@@ -63,7 +63,7 @@ def calibration_inspection_panel(enterprise_id: str, models: EnterpriseModelRepo
 from cios.applications.flora.memory.factual_twin import coverage_for_model, maturity_for_model
 
 
-def factual_digital_twin_workspace(enterprise_id: str, models: EnterpriseModelRepository | None = None, observations: ObservationRepository | None = None, evidence_items: list[dict] | None = None, *, title: str = "BT Digital Twin") -> str:
+def factual_digital_twin_workspace(enterprise_id: str, models: EnterpriseModelRepository | None = None, observations: ObservationRepository | None = None, evidence_items: list[dict] | None = None, *, title: str = "BT Digital Twin", isolated_workspace: str = "") -> str:
     """Render model-first factual Digital Twin workspace with drill-down lineage."""
     enterprise_id = canonical_enterprise_id(enterprise_id) or enterprise_id
     model = (models or EnterpriseModelRepository()).get(enterprise_id)
@@ -113,9 +113,13 @@ def factual_digital_twin_workspace(enterprise_id: str, models: EnterpriseModelRe
         return f"<section class='card'><h2>{escape(title)}</h2>{'<table><tbody>'+''.join(rows)+'</tbody></table>' if rows else '<p>Not yet established</p>'}</section>"
     ev_rows=''.join(f"<tr id='evidence-{escape(str(e.get('evidence_id')))}'><th><a href='#evidence-{escape(str(e.get('evidence_id')))}'>{escape(str(e.get('evidence_id')))}</a></th><td>{escape(str(e.get('metric_identity') or e.get('metric_label') or e.get('commercial_condition')))}</td><td>{escape(str(e.get('display_value') or e.get('value')))}</td><td>{escape(str(e.get('normalised_amount')))}</td><td>{escape(str(e.get('period')))} / {escape(str(e.get('state')))} / {escape(str(e.get('enterprise_scope')))} / {escape(str(e.get('accounting_basis')))}</td><td><a href='{escape(str(e.get('source_url') or '#'))}'>source</a> page {escape(str(e.get('page_number') or e.get('page_range')))}</td><td>{escape(str((e.get('financial_table_evidence_bundle') or {}).get('table_title') or ''))} · {escape(str((e.get('financial_table_evidence_bundle') or {}).get('row_label') or ''))} / {escape(str((e.get('financial_table_evidence_bundle') or {}).get('column_heading') or ''))}</td><td>{escape(str(e.get('source_excerpt') or e.get('extracted_text') or e.get('snippet'))[:360])}</td><td>{escape(str(e.get('extractor_name') or e.get('extraction_method')))} · {escape(str(e.get('extraction_timestamp')))}</td><td>{escape(str(e.get('observation_id')))} · {escape(str(e.get('enterprise_model_path') or e.get('affected_attribute')))}</td></tr>" for e in evidence_items if str(e.get('evidence_id')) in evidence_ids)
     domains_html = domain_panel("Financials", "financial_performance.") + domain_panel("Structure", "structure.") + domain_panel("Strategy", "strategy.") + domain_panel("Leadership", "leadership.") + domain_panel("Identity", "identity.")
+    sections = ""
+    if isolated_workspace:
+        from .commercial_views import replay_sections
+        sections = replay_sections(enterprise_id, isolated_workspace)
     return (
         "<style>@media (max-width: 900px) { .factual-workspace table { display: block; overflow-x: auto; max-width: 100%; } }</style>"
-        + "<div class='factual-workspace'>" + overview + tabs + domains_html
+        + "<div class='factual-workspace'>" + overview + sections + tabs + domains_html
         + f"<section class='card'><h2>Domain coverage</h2><table><thead><tr><th>Domain</th><th>Coverage</th><th>Expected</th><th>Populated</th><th>Unsupported</th><th>Contradicted</th><th>Sources</th></tr></thead><tbody>{cov_rows}</tbody></table></section>" + f"<section class='card'><h2>Attribute Detail</h2><table><tbody>{''.join(attr_rows) or '<tr><td>No factual attributes yet.</td></tr>'}</tbody></table></section>" + f"<section class='card'><h2>Evidence Detail</h2><table><thead><tr><th>Evidence</th><th>Metric</th><th>Reported</th><th>Normalised</th><th>Period / state / scope / basis</th><th>Source page</th><th>Table context</th><th>Excerpt</th><th>Extraction</th><th>Lineage</th></tr></thead><tbody>{ev_rows or '<tr><td>No evidence detail loaded.</td></tr>'}</tbody></table></section></div>"
     )
 

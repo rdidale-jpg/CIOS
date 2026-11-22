@@ -95,3 +95,71 @@ def test_withdrawn_version_cannot_be_reintroduced_as_independent_copy(tmp_path):
     assert len(report['records']) == 6
     assert report['relationship_candidates'] == []
     assert report['held']['unavailable, restricted or mismatched acquisition'] == 2
+
+
+@pytest.mark.parametrize('bundle', CASES, ids=[r['commission']['industry'] for r in CASES])
+def test_commercial_replay_updates_existing_memory(bundle, tmp_path, monkeypatch, verified_flora_test_authority):
+    from cios.applications.flora.memory.commercial_views import replay_sections
+    from cios.applications.flora.memory.repository import EvidenceRepository
+    from cios.applications.flora.research_intelligence.commercial_factory import prepare_commercial
+
+    commission = bundle['commission']
+    enterprise = commission['enterprise_id']
+    title = commission['legal_name'] + ' · isolated commercial evidence'
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path / 'store'))
+    monkeypatch.setenv('FLORA_PILOT_DIR', str(tmp_path / 'store'))
+    register = prepare(commission, read_replay(bundle, tmp_path), families())
+    sources = json.loads(REPLAY.with_name('commercial-replay.json').read_text())[enterprise]
+    result = prepare_commercial(register, commission, sources)
+    assert len(result['records']) >= 16
+    assert sum(v == 'Partial' for v in result['coverage'].values()) >= 6
+    before = replay_sections(enterprise, enterprise)
+    actor = 'isolated-commercial-reviewer'
+    headers = {'X-Flora-User': actor, 'X-Flora-Enterprises': enterprise,
+               'X-Flora-Roles': 'package.review,candidate.promote'}
+    archive = blueprint_archive(result)
+    package = BlueprintPackageRegistry().receive(archive, 'commercial.zip', actor, enterprise)
+    validator = BlueprintPackageValidator()
+    assert validator.validate_and_stage(package.package_ref, actor, headers).records_accepted_into_staging == len(result['records'])
+    for row in validator.staging_summary(package.import_run_id)['candidates']:
+        CandidateReviewService().record_decision(
+            row['candidate_record_id'], 'approve', actor, 'Scoped fixture replay', headers)
+    plan = DryRunPlanningService().create_plan(package.import_run_id, actor, headers)
+    promotion = CanonicalPromotionService()
+    approval = promotion.approve_plan(package.import_run_id, plan.plan_id, actor, 'Scoped fixture replay', headers)
+    assert promotion.execute_approved_plan(package.import_run_id, approval.approval_id, actor, headers).actual_mutation_count == len(result['records'])
+    assert promotion.execute_approved_plan(package.import_run_id, approval.approval_id, actor, headers).final_execution_status == 'repeat_no_change'
+    after = replay_sections(enterprise, enterprise)
+    assert after in factual_digital_twin_workspace(enterprise, isolated_workspace=enterprise)
+    assert after not in factual_digital_twin_workspace(enterprise)
+    if commission['industry'] == 'Technology':
+        assert '53.6%' in after
+    for perspective in ('landscape', 'inside', 'forces'):
+        assert '<article' in after.split(f'id="factory-{perspective}"')[1].split('</section>')[0]
+    assert 'No current scoped evidence' in before
+    assert '<article' not in replay_sections(enterprise, 'foreign-workspace')
+    if output := os.getenv('CIOS_FACTORY_EXAMPLE_OUTPUT'):
+        for state, body in [('before', before), ('after', after)]:
+            (Path(output) / f'{enterprise}-{state}.html').write_text(_page(title, '<h1>'+title+'</h1>'+body))
+    repository = EvidenceRepository()
+    ev = next(e for e in repository.list() if e.get('use_scope') == 'isolated_commercial_replay')
+    assert ev['statement'] in after
+    repository.save(dict(ev, status='withdrawn'))
+    assert ev['statement'] not in replay_sections(enterprise, enterprise)
+
+
+def test_commercial_digest_rejects_tampering_and_withdrawal_isolates_repeats(tmp_path):
+    from cios.applications.flora.research_intelligence.commercial_factory import prepare_commercial
+
+    bundle = CASES[0]
+    commission = bundle['commission']
+    base = prepare(commission, read_replay(bundle, tmp_path), families())
+    sources = json.loads(REPLAY.with_name('commercial-replay.json').read_text())[commission['enterprise_id']]
+    tampered = deepcopy(sources[1])
+    tampered['claims'][0]['statement'] = 'An unreviewed assertion.'
+    withdrawn = dict(sources[0], withdrawn=True)
+    result = prepare_commercial(base, commission, [*sources, withdrawn, tampered])
+    statements = [row['payload'].get('statement', '') for row in result['records']]
+    assert not any('Envoy' in text or 'unreviewed' in text for text in statements)
+    assert any('Natasha Condon' in text for text in statements)
+    assert result['held']['commercial disclosure held or provenance invalid'] >= 7

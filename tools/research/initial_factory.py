@@ -17,6 +17,7 @@ from cios.applications.flora.research_intelligence.initial_factory import (
     IDENTIFIER, REGISTER, RegisterFields, blueprint_archive, prepare,
 )
 from cios.applications.flora.research_intelligence.source_import import LIMIT
+from cios.applications.flora.research_intelligence.commercial_factory import prepare_commercial
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -100,9 +101,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('commission', type=Path, help='Commission object, or an array of recorded replay bundles')
     parser.add_argument('--acquire-register', action='store_true', help='Use approved public register read for a single commission')
+    parser.add_argument('--commercial-replay', type=Path, help='Reviewed commercial Source bindings for isolated replay')
     parser.add_argument('output', type=Path, help='New local output directory')
     args = parser.parse_args()
     inputs = json.loads(args.commission.read_text())
+    commercial = json.loads(args.commercial_replay.read_text()) if args.commercial_replay else {}
     args.output.mkdir(parents=True, exist_ok=False)
     results = []
     with TemporaryDirectory() as temp:
@@ -115,6 +118,8 @@ def main():
             else:
                 sources, failed = read_replay(bundle, path), []
             result = prepare(commission, sources, families())
+            if commission['enterprise_id'] in commercial:
+                result = prepare_commercial(result, commission, commercial[commission['enterprise_id']])
             for model in model_inventory():
                 result['models'].setdefault(model, 'Blocked')
             result['acquisition'] = 'original public register' if args.acquire_register else 'recorded register replay'

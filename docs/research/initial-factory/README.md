@@ -47,3 +47,25 @@ Continuous monitoring remains deferred until baseline sufficiency, useful analys
 Original Companies House pages were inspected for all four registered subjects and the listed controlled registrations. The independent live-acquisition invocation was also exercised for BT, Arm and easyJet and returned eight candidates per subject. Lloyds replay used the captured source fields and the #714 perimeter reference. The four-subject recorded preparation run took 0.413 seconds before final reporting changes, excluding fixture writes and browser capture.
 
 The narrow iPad viewport check exposed horizontal page overflow in the existing factual detail tables. The renderer now confines table overflow on narrow screens. Chromium measured a 768-pixel document at a 768-pixel viewport after the change. No shared navigation or Facts/Insight change.
+
+## Commercial completeness correction
+
+The statutory lane remains the foundation. The same commissioned tool now accepts a reviewed commercial replay alongside it:
+
+```sh
+python tools/research/initial_factory.py docs/research/initial-factory/register-replay.json \
+  --commercial-replay docs/research/initial-factory/commercial-replay.json NEW_OUTPUT_DIR
+```
+
+Commercial replay binds each atomic claim to its publisher, locator, disclosure version, exact reporting scope and date. Original publisher pages and documents were sampled for the retained assertions. The checksum covers this reviewed factual transcription. It makes no claim that the archived file is the original release. The tool processes corporate, financial, regulator and supplier disclosures using the same Evidence/Observation output. It recognises procurement notices, but the BT notice checked in this wave returned HTTP 403 on the official HTML route and supplies no accepted procurement observation. Lloyds Q3 financial expansion remains held under §2. Lloyds links retain homepage attribution. Other eligible records continue independently.
+
+| Enterprise | Commercial additions | Partial families of 31 | Local Blueprint effects including register foundation | Before and after |
+| --- | --- | ---: | ---: | --- |
+| Lloyds | CIB remit, Condon appointment, Envoy, Google Cloud collaboration and FCA cohort selection. No new restricted financial output. | 6 | 18 | [Landscape, Inside and Forces](previews/lloyds-banking-group-plc-commercial.png) |
+| BT | Openreach connections, take-up and repairs, Nokia selection, fibre build and gross transformation targets. Procurement remained held. | 8 | 20 | [Landscape, Inside and Forces](previews/bt-group-plc-commercial.png) |
+| Arm | Separate Q2 licensing and royalties, mobile CSS for AI and the AGI CPU delivery outlook. The same-scope reported amounts imply a 53.6% licensing share of their sum, with no margin or outlook inference. | 6 | 16 | [Landscape, Inside and Forces](previews/arm-holdings-plc-commercial.png) |
+| easyJet | Historical fleet, reported quarterly passenger load factor, capital allocation, upgauging, A319 retirement target and Airbus order. No new financial measure admitted. | 8 | 20 | [Landscape, Inside and Forces](previews/easyjet-plc-commercial.png) |
+
+The existing factual workspace can compose these three sections in an explicit **isolated** rendering call. The renderer rechecks current Evidence, its supporting accepted Observation, the current model attribute and exact workspace scope. Withdrawal suppresses the affected statement and its dependent calculation in that projection. The fixture tests check the views before and after the isolated authenticated Blueprint execution and verify repeat execution produces no change. The screenshots render these same sections at desktop width, plus a [portrait Arm capture](previews/arm-commercial-ipad.png). They are scoped renderer demonstrations. The public enterprise routes and shared reading controls have no replay-data path.
+
+The wider recipe catalogue remains gated by actual inputs. No operating model, procurement opportunity, commercial conclusion or ADR‑026 Pressure is accepted by default. Live canonical graph links, financial admissions, public executive routing and unattended acquisition of arbitrary documents remain outstanding. Enabling any production execution still requires an approved standing Source/use policy, authorised execution identity and verified workspace/target binding. No additional approval framework or background activity is introduced.
