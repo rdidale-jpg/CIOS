@@ -1,0 +1,15 @@
+# Candidate acceptance register
+
+All records remain outside canonical storage. Use the existing object-profile adapter and manual review process. Scope binding, Source review, record-level review, mapping and any later controlled approval and execution are separate decisions under ADR‑012. Keep private Financial, security, Pipeline and ADR‑026 qualification separate.
+
+| Candidate class | Review disposition | Existing owner and condition |
+| --- | --- | --- |
+| F01–F04, F14–F16, F19–F21, F23–F24 | Eligible for provenance and exact subject review on the ordinary public-source path. Entity statements and market context have separate scopes. | Existing Source reviewer checks applicable operation and lifecycle. Enterprise reviewer verifies legal entity or records external context only. |
+| F05–F13, F22, F25–F27 | Professional or operating facts from openly published announcements, restricted to factual review. Keep provisional where the disclosed relationship is a trial, reported plan or party claim. | Source owner checks scope and any applicable restriction before broader retention, reuse or display. No new Lloyds §2 restricted use or §5 PDF links. |
+| F17–F18 | Public buyer record and bounded independent comparison for factual review. | Source owner validates actual operation and reuse scope. Enterprise/Industry reviewer checks historical award status, comparable product and survey perimeter. |
+| R and N records | Evidence-linked endpoints and relationships for review only. Commercial propositions, licence terms and causal claims remain outside these edges. | Enterprise identity and Model owners reconcile stable identities, predicates and temporal scope. No new predicate or ID contract. |
+| U and C records | Preserve unresolved questions and why dates/perimeters were reconciled. | Research reviewer records gaps and follow-up. Source owner resolves affected-operation holds. |
+| Additional divisional or period financial measures | Withheld from candidate financial output where the Lloyds §2 question affects the proposed use. Comparability remains incomplete. | Existing Source owner resolves actual operation with legal input where applicable. Financial owner validates basis and scope if cleared. |
+| Any canonical effect | Unapproved. Confirm the already-authorised Blueprint approver and executor under scoped `candidate.promote`, including exact Lloyds workspace and target, before any later write. | Existing canonical approval and execution route under ADR‑012. No authority inferred from validation or a repository decision. |
+
+A withdrawn, unresolved, materially corrected or ineligible source flags every referencing fact for hold and subsequent reassessment. Dependent relationships inherit the hold through their supporting fact ID. An independently supportable fact can be restored only after a reviewer checks the remaining records on the same scope, version and asserted meaning. Retain the history, including conflicting or superseded evidence. No live withdrawal workflow or runtime change is proposed.

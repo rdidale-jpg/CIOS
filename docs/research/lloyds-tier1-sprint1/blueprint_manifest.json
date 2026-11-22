@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "package_id": "lloyds-tier1-sprint1",
+  "package_version": "1.0.0",
+  "enterprise_id": "BK-ENT-001",
+  "profile_version": "1.0",
+  "files": [
+    {
+      "path": "entity.ndjson",
+      "required": true,
+      "sha256": "cc310375a602dd27189ceccaceb9c5c8ec9689c5deeba271a21ad0d15def0d69"
+    },
+    {
+      "path": "sources.json",
+      "required": true,
+      "sha256": "c725f0fa05fde86969b58001a246ef0915c5bfa2832db4be65af27a1c75b1327"
+    }
+  ],
+  "record_sets": [
+    {
+      "record_class": "evidence_register",
+      "path": "evidence.ndjson",
+      "count": 27,
+      "required": true
+    },
+    {
+      "record_class": "relationship_register",
+      "path": "relationship.ndjson",
+      "count": 15,
+      "required": true
+    },
+    {
+      "record_class": "unknown_register",
+      "path": "unknown.ndjson",
+      "count": 31,
+      "required": true
+    },
+    {
+      "record_class": "contradiction_register",
+      "path": "contradiction.ndjson",
+      "count": 2,
+      "required": true
+    }
+  ]
+}
