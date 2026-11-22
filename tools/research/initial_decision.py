@@ -35,6 +35,7 @@ def read_review(folder):
     if (folder / owner.MANIFEST).is_symlink():
         raise ValueError('Expected a local Blueprint manifest')
     manifest = json.loads((folder / owner.MANIFEST).read_text())
+    schema = json.loads((PRODUCER.parent / "blueprint_manifest.schema.json").read_text())
     root = folder.resolve()
     for section in ('files', 'record_sets'):
         for entry in manifest.get(section, []):
