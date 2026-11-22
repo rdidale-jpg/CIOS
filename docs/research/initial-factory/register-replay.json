@@ -1,0 +1,114 @@
+[
+  {
+    "commission": {
+      "enterprise_id": "lloyds-banking-group-plc",
+      "legal_name": "Lloyds Banking Group plc",
+      "registration_number": "SC095000",
+      "controlled_registrations": [
+        "00002065"
+      ],
+      "as_of": "2026-11-22",
+      "industry": "Banking"
+    },
+    "captures": [
+      {
+        "url": "https://find-and-update.company-information.service.gov.uk/company/SC095000",
+        "reviewed_field_anchors": "<h1>LLOYDS BANKING GROUP PLC</h1><div id=\"company-number\">Company number SC095000</div><div id=\"company-status\">Active</div><div id=\"company-type-value\">Public limited Company</div><div id=\"sic0\">64205 - Activities of financial services holding companies</div>",
+        "captured_original_sha256": "f5e379d0041527be352bc0c7046ba52cdb493b52d82978c5ca80758369cc2d50",
+        "controlled_registration": null,
+        "reviewed_quote": "Company number SC095000"
+      },
+      {
+        "url": "https://find-and-update.company-information.service.gov.uk/company/00002065/persons-with-significant-control",
+        "reviewed_field_anchors": "<h1>LLOYDS BANK PLC</h1><div id=\"company-number\">Company number 00002065</div><div id=\"psc-notified-on-1\">6 April 2016</div><div id=\"psc-registration-number-1\">Sc095000</div><div id=\"psc-status-tag-1\">Active</div>",
+        "captured_original_sha256": "bb42e3b06db11fa4e1c5403ad9b3ceb0debdb413fbd82040f9749b8d47ee296c",
+        "controlled_registration": "00002065",
+        "reviewed_quote": "Company number 00002065"
+      }
+    ]
+  },
+  {
+    "commission": {
+      "enterprise_id": "bt-group-plc",
+      "legal_name": "BT Group plc",
+      "registration_number": "04190816",
+      "controlled_registrations": [
+        "04278695"
+      ],
+      "as_of": "2026-11-22",
+      "industry": "Telecommunications"
+    },
+    "captures": [
+      {
+        "url": "https://find-and-update.company-information.service.gov.uk/company/04190816",
+        "reviewed_field_anchors": "<h1>BT GROUP PLC</h1><div id=\"company-number\">Company number 04190816</div><div id=\"company-status\">Active</div><div id=\"company-type-value\">Public limited Company</div><div id=\"sic0\">61900 - Other telecommunications activities</div>",
+        "captured_original_sha256": "932f6c0eb392a5929291fd34d0ef3117dfa8a7fe70d04ca65a01715c2dac6935",
+        "controlled_registration": null,
+        "reviewed_quote": "Company number 04190816"
+      },
+      {
+        "url": "https://find-and-update.company-information.service.gov.uk/company/04278695/persons-with-significant-control",
+        "reviewed_field_anchors": "<h1>BT GROUP INVESTMENTS LIMITED</h1><div id=\"company-number\">Company number 04278695</div><div id=\"psc-notified-on-1\">6 April 2016</div><div id=\"psc-registration-number-1\">04190816</div><div id=\"psc-status-tag-1\">Active</div>",
+        "captured_original_sha256": "c9ce8f0b26ac5be778110bb941e4f56aeaa656203d27ce15bdcd65b42a8359c1",
+        "controlled_registration": "04278695",
+        "reviewed_quote": "Company number 04278695"
+      }
+    ]
+  },
+  {
+    "commission": {
+      "enterprise_id": "arm-holdings-plc",
+      "legal_name": "Arm Holdings plc",
+      "registration_number": "11299879",
+      "controlled_registrations": [
+        "02557590"
+      ],
+      "as_of": "2026-11-22",
+      "industry": "Technology"
+    },
+    "captures": [
+      {
+        "url": "https://find-and-update.company-information.service.gov.uk/company/11299879",
+        "reviewed_field_anchors": "<h1>ARM HOLDINGS PLC</h1><div id=\"company-number\">Company number 11299879</div><div id=\"company-status\">Active</div><div id=\"company-type-value\">Public limited Company</div><div id=\"sic0\">64209 - Activities of other holding companies not elsewhere classified</div>",
+        "captured_original_sha256": "89aa5da1de21ed072e42a9eaa968fa351f476398044fc7c31afbf3a721331e32",
+        "controlled_registration": null,
+        "reviewed_quote": "Company number 11299879"
+      },
+      {
+        "url": "https://find-and-update.company-information.service.gov.uk/company/02557590/persons-with-significant-control",
+        "reviewed_field_anchors": "<h1>ARM LIMITED</h1><div id=\"company-number\">Company number 02557590</div><div id=\"psc-notified-on-1\">21 August 2023</div><div id=\"psc-registration-number-1\">11299879</div><div id=\"psc-status-tag-1\">Active</div>",
+        "captured_original_sha256": "4e5746751d6e42f9034e23e9607ff783b61868f828bc549855e1b94ac1bbd5b4",
+        "controlled_registration": "02557590",
+        "reviewed_quote": "Company number 02557590"
+      }
+    ]
+  },
+  {
+    "commission": {
+      "enterprise_id": "easyjet-plc",
+      "legal_name": "easyJet plc",
+      "registration_number": "03959649",
+      "controlled_registrations": [
+        "10886978"
+      ],
+      "as_of": "2026-11-22",
+      "industry": "Aviation"
+    },
+    "captures": [
+      {
+        "url": "https://find-and-update.company-information.service.gov.uk/company/03959649",
+        "reviewed_field_anchors": "<h1>EASYJET PLC</h1><div id=\"company-number\">Company number 03959649</div><div id=\"company-status\">Active</div><div id=\"company-type-value\">Public limited Company</div><div id=\"sic0\">70100 - Activities of head offices</div>",
+        "captured_original_sha256": "04194d60d3bb100ee962649745f117efed5160866868f85e3b9ab712c410ab3c",
+        "controlled_registration": null,
+        "reviewed_quote": "Company number 03959649"
+      },
+      {
+        "url": "https://find-and-update.company-information.service.gov.uk/company/10886978/persons-with-significant-control",
+        "reviewed_field_anchors": "<h1>EASYJET UK LIMITED</h1><div id=\"company-number\">Company number 10886978</div><div id=\"psc-notified-on-1\">27 July 2017</div><div id=\"psc-registration-number-1\">03959649</div><div id=\"psc-status-tag-1\">Active</div>",
+        "captured_original_sha256": "52047a529a7b389c85cc0c9e3261137888fdf834a4396facc2c7cef96a54bfb4",
+        "controlled_registration": "10886978",
+        "reviewed_quote": "Company number 10886978"
+      }
+    ]
+  }
+]
