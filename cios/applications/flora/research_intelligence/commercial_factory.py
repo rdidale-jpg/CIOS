@@ -103,7 +103,8 @@ def prepare_commercial(result, commission, sources):
                 'reporting_scope': scope, 'publication_date': source['published'],
                 'period': period, 'statement': statement, 'affected_attribute': attribute,
                 'perspective': claim['perspective'], 'caveat': claim['caveat'],
-                'family': claim['family'], 'metric': claim.get('metric'), 'status': 'current', 'recorded_replay': True,
+                'family': claim['family'], 'metric': claim.get('metric'), 'status': 'current', 'recorded_replay': not bool(source.get('live_content_sha256')),
+                'live_content_sha256': source.get('live_content_sha256'),
                 'use_scope': 'isolated_commercial_replay',
             }),
             record(observation, 'observation', {

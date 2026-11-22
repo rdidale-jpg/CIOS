@@ -1,0 +1,297 @@
+[
+  {
+    "enterprise_id": "lloyds-banking-group-plc",
+    "as_of": "2026-11-22",
+    "verified_disclosures": [
+      {
+        "evidence_candidate_id": "EV-a3d07560960e9268722a3b5c",
+        "source_url": "https://www.fca.org.uk/news/press-releases/fca-announces-second-cohort-ai-live-testing",
+        "source_locator": "Second cohort participant list",
+        "reporting_scope": "Lloyds Banking Group (Scottish Widows)",
+        "publication_date": "2026-04-21",
+        "period": "2026-04-21",
+        "statement": "The FCA named Lloyds Banking Group (Scottish Widows) in AI Live Testing cohort two.",
+        "perspective": "forces",
+        "caveat": "Published participant label only; startup, results and exact entity unresolved.",
+        "family": "Technology and regulation",
+        "live_content_sha256": "1f84d97f67ddc2aeed0166bded7341c5838de065f6683eddf820f4dcef036dfd"
+      },
+      {
+        "evidence_candidate_id": "EV-56fcf1961a0f727cf5c35bd9",
+        "source_url": "https://www.lloydsbankinggroup.com/",
+        "source_locator": "Media / 28 April 2026 / built with Google Cloud",
+        "reporting_scope": "Lloyds Banking Group plc",
+        "publication_date": "2026-04-28",
+        "period": "2026-04-28",
+        "statement": "Lloyds disclosed Google Cloud as an Envoy build partner.",
+        "perspective": "inside",
+        "caveat": "Collaboration only; no contract scope or spend.",
+        "family": "Suppliers and outsourcing",
+        "live_content_sha256": "1052775504c7db76516d908bc0967e2838474516297b40a1ffad442b38539c7b"
+      },
+      {
+        "evidence_candidate_id": "EV-28c8d339dd6ed4d939798686",
+        "source_url": "https://www.lloydsbankinggroup.com/",
+        "source_locator": "Media / 18 November 2026 / appointment",
+        "reporting_scope": "Lloyds Banking Group plc",
+        "publication_date": "2026-11-18",
+        "period": "2026-11-18",
+        "statement": "Lloyds announced Natasha Condon as Global Head of Transaction Banking.",
+        "perspective": "inside",
+        "caveat": "Appointment disclosure; effective date and delegated powers unverified.",
+        "family": "Leadership and accountability",
+        "live_content_sha256": "ae32f17f54be494772e06a446f170391c76e438fe03d795ae1a8249f66904f34"
+      },
+      {
+        "evidence_candidate_id": "EV-2ab08f5cb5bbdbe280a569ac",
+        "source_url": "https://www.lloydsbankinggroup.com/",
+        "source_locator": "Media / 18 November 2026 / Natasha Condon appointment",
+        "reporting_scope": "Lloyds Banking Group plc",
+        "publication_date": "2026-11-18",
+        "period": "2026-11-18",
+        "statement": "Lloyds places Transaction Banking within its CIB business unit.",
+        "perspective": "landscape",
+        "caveat": "Organisational unit; no statutory segment bridge.",
+        "family": "Subsidiaries, divisions and perimeter",
+        "live_content_sha256": "ae32f17f54be494772e06a446f170391c76e438fe03d795ae1a8249f66904f34"
+      }
+    ],
+    "commercial_replay_records": 0,
+    "holds": {
+      "commercial disclosure held or provenance invalid": 1
+    },
+    "partial_families": [
+      "Identity and ownership",
+      "Subsidiaries, divisions and perimeter",
+      "Suppliers and outsourcing",
+      "Leadership and accountability",
+      "Technology and regulation"
+    ],
+    "local_blueprint_effects": 16
+  },
+  {
+    "enterprise_id": "bt-group-plc",
+    "as_of": "2026-11-22",
+    "verified_disclosures": [
+      {
+        "evidence_candidate_id": "EV-bfe616c2b615e23ef32ba2e3",
+        "source_url": "https://www.nokia.com/newsroom/openreach-chooses-nokia-to-build-open-access-fiber-network-to-connect-millions-to-faster-broadband/",
+        "source_locator": "Openreach chooses Nokia / Altiplano and NSP",
+        "reporting_scope": "Openreach, BT Group reporting perimeter",
+        "publication_date": "2025-01-09",
+        "period": "2025-01-09",
+        "statement": "Nokia announced Openreach had selected its network controllers for the open-access fibre network.",
+        "perspective": "inside",
+        "caveat": "Supplier disclosure; no pricing, renewal or verified entire footprint.",
+        "family": "Suppliers and outsourcing",
+        "live_content_sha256": "f92e2114ba73aac4d0657c40805af650e66cbd660c4ead679b2ef7c90bf2279a"
+      },
+      {
+        "evidence_candidate_id": "EV-d47cf481c255b31bbde609c1",
+        "source_url": "https://www.bt.com/about/investors/financial-reporting-and-news/results-events-and-financial-calendar/fy27",
+        "source_locator": "FY27 H1 results / operating efficiency",
+        "reporting_scope": "BT Group plc / Openreach reporting",
+        "publication_date": "2026-11-05",
+        "period": "2026-09-30",
+        "statement": "BT reported a 16% year-on-year reduction in Openreach repair volumes.",
+        "perspective": "forces",
+        "caveat": "No causal attribution or service quality ranking.",
+        "family": "Productivity, performance and risk",
+        "live_content_sha256": "e83fdd265b73c8008c6d0655241ffbfeb26a7b154202f1c737d6a759a91a8f68"
+      },
+      {
+        "evidence_candidate_id": "EV-78f161037c419d9c8626e19c",
+        "source_url": "https://www.bt.com/about/investors/financial-reporting-and-news/results-events-and-financial-calendar/fy27",
+        "source_locator": "FY27 H1 results / full fibre target",
+        "reporting_scope": "BT Group plc / Openreach reporting",
+        "publication_date": "2026-11-05",
+        "period": "2026-11-05",
+        "statement": "BT targeted 25 million premises in its full-fibre build by the end of December 2026.",
+        "perspective": "landscape",
+        "caveat": "Build target; no realised investment or coverage inferred.",
+        "family": "Strategy and investments",
+        "live_content_sha256": "e83fdd265b73c8008c6d0655241ffbfeb26a7b154202f1c737d6a759a91a8f68"
+      },
+      {
+        "evidence_candidate_id": "EV-9d8e3026aae4313bc4615121",
+        "source_url": "https://www.bt.com/about/investors/financial-reporting-and-news/results-events-and-financial-calendar/fy27",
+        "source_locator": "H1 FY27 / transformation programme",
+        "reporting_scope": "BT Group plc / Openreach reporting",
+        "publication_date": "2026-11-05",
+        "period": "2026-11-05",
+        "statement": "BT targeted GBP 3.5 billion gross annualised transformation savings by FY30.",
+        "perspective": "forces",
+        "caveat": "Continuing operations target; no net returns or realised savings inferred.",
+        "family": "Programmes and milestones",
+        "live_content_sha256": "e83fdd265b73c8008c6d0655241ffbfeb26a7b154202f1c737d6a759a91a8f68"
+      }
+    ],
+    "commercial_replay_records": 0,
+    "holds": {
+      "commercial disclosure held or provenance invalid": 1
+    },
+    "partial_families": [
+      "Identity and ownership",
+      "Subsidiaries, divisions and perimeter",
+      "Strategy and investments",
+      "Suppliers and outsourcing",
+      "Programmes and milestones",
+      "Productivity, performance and risk"
+    ],
+    "local_blueprint_effects": 16
+  },
+  {
+    "enterprise_id": "arm-holdings-plc",
+    "as_of": "2026-11-22",
+    "verified_disclosures": [
+      {
+        "evidence_candidate_id": "EV-d0a62d451e5ec84568df6d66",
+        "source_url": "https://newsroom.arm.com/news/arm-q2-fye27-results",
+        "source_locator": "Q2 FYE27 results / smartphone ecosystem",
+        "reporting_scope": "Arm Holdings plc consolidated",
+        "publication_date": "2026-11-04",
+        "period": "2026-11-04",
+        "statement": "Arm identifies CSS for Mobile 2 as supporting agentic AI workloads.",
+        "perspective": "inside",
+        "caveat": "Issuer description; no independent performance assurance.",
+        "family": "Technology and regulation",
+        "live_content_sha256": "ec8edd3d146e9e96e8c43b6da7d35c4201bfddb4461dd085d198d17ef40e76a4"
+      },
+      {
+        "evidence_candidate_id": "EV-ccb757f059bc0d16314188f2",
+        "source_url": "https://newsroom.arm.com/news/arm-q2-fye27-results",
+        "source_locator": "Q2 FYE27 financial results / licensing and other revenue",
+        "reporting_scope": "Arm Holdings plc consolidated",
+        "publication_date": "2026-11-04",
+        "period": "2026-09-30",
+        "statement": "Arm reported USD 773 million in its licensing/other revenue category for Q2 FYE27.",
+        "perspective": "landscape",
+        "caveat": "Quarterly issuer figure, isolated replay only.",
+        "family": "Revenue pools, margins and cost drivers",
+        "live_content_sha256": "ec8edd3d146e9e96e8c43b6da7d35c4201bfddb4461dd085d198d17ef40e76a4"
+      },
+      {
+        "evidence_candidate_id": "EV-2b79dff87994ae662e518569",
+        "source_url": "https://newsroom.arm.com/news/arm-q2-fye27-results",
+        "source_locator": "Q2 FYE27 financial results / royalty revenue",
+        "reporting_scope": "Arm Holdings plc consolidated",
+        "publication_date": "2026-11-04",
+        "period": "2026-09-30",
+        "statement": "Arm reported USD 670 million in royalty revenue for Q2 FYE27.",
+        "perspective": "landscape",
+        "caveat": "Quarterly issuer figure, isolated replay only.",
+        "family": "Statements and multi-period economics",
+        "live_content_sha256": "ec8edd3d146e9e96e8c43b6da7d35c4201bfddb4461dd085d198d17ef40e76a4"
+      },
+      {
+        "evidence_candidate_id": "EV-4fee59f337d010f38fdf2a96",
+        "source_url": "https://newsroom.arm.com/news/arm-q2-fye27-results",
+        "source_locator": "Q2 FYE27 results / AGI CPU deliveries",
+        "reporting_scope": "Arm Holdings plc consolidated",
+        "publication_date": "2026-11-04",
+        "period": "2026-11-04",
+        "statement": "Arm expected first commercial AGI CPU deliveries in Q4 FYE27.",
+        "perspective": "forces",
+        "caveat": "Issuer expectation, not recognised silicon revenue.",
+        "family": "Programmes and milestones",
+        "live_content_sha256": "ec8edd3d146e9e96e8c43b6da7d35c4201bfddb4461dd085d198d17ef40e76a4"
+      }
+    ],
+    "commercial_replay_records": 0,
+    "holds": {},
+    "partial_families": [
+      "Identity and ownership",
+      "Subsidiaries, divisions and perimeter",
+      "Revenue pools, margins and cost drivers",
+      "Statements and multi-period economics",
+      "Programmes and milestones",
+      "Technology and regulation"
+    ],
+    "local_blueprint_effects": 16
+  },
+  {
+    "enterprise_id": "easyjet-plc",
+    "as_of": "2026-11-22",
+    "verified_disclosures": [
+      {
+        "evidence_candidate_id": "EV-b4d9cf5b6cf0a82aa7a4e69c",
+        "source_url": "https://corporate.easyjet.com/about/what-we-do/default.aspx?pubDate=20250319",
+        "source_locator": "What we do / as at 31 March 2025",
+        "reporting_scope": "easyJet plc Group",
+        "publication_date": "2025-03-31",
+        "period": "2025-03-31",
+        "statement": "easyJet reported a fleet of 355 aircraft as at 31 March 2025.",
+        "perspective": "inside",
+        "caveat": "Historical fleet count, not current or legal operator-specific.",
+        "family": "Capabilities and processes",
+        "live_content_sha256": "378ea6a09fdda6cfd96e9e2ba0dcb4236e0082fb2c44b5ea26f2799e9d0cec57"
+      },
+      {
+        "evidence_candidate_id": "EV-eb29b7ced40511d11c2e6df6",
+        "source_url": "https://www.airbus.com/en/newsroom/press-releases/2023-12-easyjet-orders-a-further-157-a320neo-family-aircraft",
+        "source_locator": "Airbus / 19 December release / firm order",
+        "reporting_scope": "easyJet, Airbus customer disclosure",
+        "publication_date": "2023-12-19",
+        "period": "2023-12-19",
+        "statement": "Airbus announced an easyJet firm order for 157 additional A320neo family aircraft.",
+        "perspective": "landscape",
+        "caveat": "Order, not delivery; price and airline legal allocation outside scope.",
+        "family": "Suppliers and outsourcing",
+        "live_content_sha256": "ce78da470516d8cc33ec4fcd2b9caa66181dc2f96fda065a492c5199142239fc"
+      },
+      {
+        "evidence_candidate_id": "EV-81690c13527cad47a9020f41",
+        "source_url": "https://s203.q4cdn.com/522538739/files/doc_financials/2026/q2/1-HY26-Combined-RNS-FINAL.pdf",
+        "source_locator": "Results for six months ending 31 March 2026 / upgauging",
+        "reporting_scope": "easyJet plc Group",
+        "publication_date": "2026-05-21",
+        "period": "2026-05-21",
+        "statement": "easyJet reported accelerating its fleet upgauging programme.",
+        "perspective": "inside",
+        "caveat": "Larger aircraft changes the seat base; route profitability unverified.",
+        "family": "Operating model",
+        "live_content_sha256": "dfb0e779f299c031c2b69d543083ada43f1861a324e714c572e266c9e1975dc4"
+      },
+      {
+        "evidence_candidate_id": "EV-b2fe03991ae2b81267fb78be",
+        "source_url": "https://s203.q4cdn.com/522538739/files/doc_financials/2026/q2/1-HY26-Combined-RNS-FINAL.pdf",
+        "source_locator": "Results for six months ending 31 March 2026 / upgauging",
+        "reporting_scope": "easyJet plc Group",
+        "publication_date": "2026-05-21",
+        "period": "2026-05-21",
+        "statement": "easyJet targets retirement of all A319 aircraft by FY29.",
+        "perspective": "forces",
+        "caveat": "Future plan; no realised cost efficiency.",
+        "family": "Programmes and milestones",
+        "live_content_sha256": "dfb0e779f299c031c2b69d543083ada43f1861a324e714c572e266c9e1975dc4"
+      },
+      {
+        "evidence_candidate_id": "EV-e1486439f5c4501cc253e1ea",
+        "source_url": "https://s203.q4cdn.com/522538739/files/doc_financials/2026/q2/1-HY26-Combined-RNS-FINAL.pdf",
+        "source_locator": "H1 FY26 / capital allocation target",
+        "reporting_scope": "easyJet plc Group",
+        "publication_date": "2026-05-21",
+        "period": "2026-05-21",
+        "statement": "easyJet described allocating incremental FY26 aircraft to existing bases exceeding its FY25 profitability target.",
+        "perspective": "landscape",
+        "caveat": "Issuer-reported allocation approach; funding amount or route profitability unverified.",
+        "family": "Revenue pools, margins and cost drivers",
+        "live_content_sha256": "dfb0e779f299c031c2b69d543083ada43f1861a324e714c572e266c9e1975dc4"
+      }
+    ],
+    "commercial_replay_records": 0,
+    "holds": {
+      "commercial disclosure held or provenance invalid": 1
+    },
+    "partial_families": [
+      "Identity and ownership",
+      "Subsidiaries, divisions and perimeter",
+      "Revenue pools, margins and cost drivers",
+      "Operating model",
+      "Capabilities and processes",
+      "Suppliers and outsourcing",
+      "Programmes and milestones"
+    ],
+    "local_blueprint_effects": 18
+  }
+]

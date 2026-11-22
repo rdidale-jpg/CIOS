@@ -18,6 +18,7 @@ from cios.applications.flora.research_intelligence.initial_factory import (
 )
 from cios.applications.flora.research_intelligence.source_import import LIMIT
 from cios.applications.flora.research_intelligence.commercial_factory import prepare_commercial
+from cios.applications.flora.research_intelligence.disclosure_acquisition import acquire_disclosures
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -97,11 +98,23 @@ def read_replay(bundle, directory):
                         original_digest=row['captured_original_sha256']) for row in bundle['captures']]
 
 
+def fetch_disclosure(url):
+    with build_opener(NoRedirect).open(Request(url, headers={
+        'Accept': 'text/html, application/pdf', 'User-Agent': 'CIOS commissioned factual research'
+    }), timeout=12) as response:
+        kind = response.headers.get_content_type()
+        if kind not in {'text/html', 'application/pdf'}:
+            raise ValueError('Unexpected disclosure media type')
+        raw = response.read(LIMIT + 1)
+        return raw, '.pdf' if kind == 'application/pdf' else '.html'
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('commission', type=Path, help='Commission object, or an array of recorded replay bundles')
     parser.add_argument('--acquire-register', action='store_true', help='Use approved public register read for a single commission')
     parser.add_argument('--commercial-replay', type=Path, help='Reviewed commercial Source bindings for isolated replay')
+    parser.add_argument('--acquire-commercial', action='store_true', help='Check the reviewed disclosure bindings against originals')
     parser.add_argument('output', type=Path, help='New local output directory')
     args = parser.parse_args()
     inputs = json.loads(args.commission.read_text())
@@ -119,7 +132,15 @@ def main():
                 sources, failed = read_replay(bundle, path), []
             result = prepare(commission, sources, families())
             if commission['enterprise_id'] in commercial:
-                result = prepare_commercial(result, commission, commercial[commission['enterprise_id']])
+                disclosures = commercial[commission['enterprise_id']]
+                if args.acquire_commercial:
+                    disclosures = acquire_disclosures(disclosures, fetch_disclosure)
+                result = prepare_commercial(result, commission, disclosures)
+                result['commercial_live_records'] = sum(
+                    bool(row['payload'].get('live_content_sha256')) for row in result['records'])
+                result['commercial_replay_records'] = sum(
+                    row['payload'].get('use_scope') == 'isolated_commercial_replay'
+                    and row['payload'].get('recorded_replay') is True for row in result['records'])
             for model in model_inventory():
                 result['models'].setdefault(model, 'Blocked')
             result['acquisition'] = 'original public register' if args.acquire_register else 'recorded register replay'

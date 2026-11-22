@@ -16,7 +16,11 @@
           "statement": "Lloyds disclosed Envoy as its internal agentic AI platform.",
           "locator": "Media / 28 April 2026 / Lloyds Banking Group unveils Envoy",
           "caveat": "Issuer disclosure; no deployment outcome.",
-          "scope": "Lloyds Banking Group plc"
+          "scope": "Lloyds Banking Group plc",
+          "anchors": [
+            "agentic ai platform",
+            "Envoy"
+          ]
         },
         {
           "key": "envoy_google",
@@ -27,11 +31,16 @@
           "statement": "Lloyds disclosed Google Cloud as an Envoy build partner.",
           "locator": "Media / 28 April 2026 / built with Google Cloud",
           "caveat": "Collaboration only; no contract scope or spend.",
-          "scope": "Lloyds Banking Group plc"
+          "scope": "Lloyds Banking Group plc",
+          "anchors": [
+            "built with Google Cloud",
+            "platform"
+          ]
         }
       ],
-      "sha256": "40fef836a6a41da7cfa1368b4eafc32fd472f8bef0b24afee985c13ae0782d2d",
-      "enterprise_id": "lloyds-banking-group-plc"
+      "sha256": "8c81f060049bcacc3aaf4a3cec1b4a269a147db977cea09feecb7d8be9c905c9",
+      "enterprise_id": "lloyds-banking-group-plc",
+      "acquisition_url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html"
     },
     {
       "publisher": "Lloyds Banking Group",
@@ -49,7 +58,11 @@
           "statement": "Lloyds places Transaction Banking within its CIB business unit.",
           "locator": "Media / 18 November 2026 / Natasha Condon appointment",
           "caveat": "Organisational unit; no statutory segment bridge.",
-          "scope": "Lloyds Banking Group plc"
+          "scope": "Lloyds Banking Group plc",
+          "anchors": [
+            "Corporate",
+            "Transaction Banking"
+          ]
         },
         {
           "key": "condon",
@@ -60,11 +73,16 @@
           "statement": "Lloyds announced Natasha Condon as Global Head of Transaction Banking.",
           "locator": "Media / 18 November 2026 / appointment",
           "caveat": "Appointment disclosure; effective date and delegated powers unverified.",
-          "scope": "Lloyds Banking Group plc"
+          "scope": "Lloyds Banking Group plc",
+          "anchors": [
+            "Natasha Condon",
+            "Global Head of Transaction Banking"
+          ]
         }
       ],
-      "sha256": "35bd3e3ade4dc54d354dc34a061e7c0926139a4ecf5232c0c864ea9d956410c2",
-      "enterprise_id": "lloyds-banking-group-plc"
+      "sha256": "3695bce4bbb4f926cfe7973c740607141cfe47bb4befd4774d11e60070eae48f",
+      "enterprise_id": "lloyds-banking-group-plc",
+      "acquisition_url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds/lloyds-appoints-natasha-condon-global-head-transaction-banking.html"
     },
     {
       "publisher": "Lloyds Banking Group",
@@ -82,10 +100,11 @@
           "statement": "Lloyds reported structural hedge income as a contributor to net interest income.",
           "locator": "Investors / Q3 2026 IMS / underlying net interest income",
           "caveat": "Section 2 use unresolved. Keep this financial disclosure held.",
-          "scope": "Lloyds Banking Group plc"
+          "scope": "Lloyds Banking Group plc",
+          "anchors": []
         }
       ],
-      "sha256": "408a1ce2f5364f5b3a19f3b548dabc53ec20ca7512aa0a63fa1d40efdc31b92a",
+      "sha256": "05dd8aea816e9387f68d9462646f065b99e2db524354b29125896cd31a293c12",
       "hold": "Lloyds §2 unresolved",
       "enterprise_id": "lloyds-banking-group-plc"
     },
@@ -105,10 +124,14 @@
           "statement": "The FCA named Lloyds Banking Group (Scottish Widows) in AI Live Testing cohort two.",
           "locator": "Second cohort participant list",
           "caveat": "Published participant label only; startup, results and exact entity unresolved.",
-          "scope": "Lloyds Banking Group (Scottish Widows)"
+          "scope": "Lloyds Banking Group (Scottish Widows)",
+          "anchors": [
+            "second group",
+            "Scottish Widows"
+          ]
         }
       ],
-      "sha256": "2d8cc3cbfbf3a553968caf44180002f38b7f998ed7d0edd3142f3d942d891db7",
+      "sha256": "071e0177e77ea26c2214defffae6f75cb002cfbe46bbcbecd7f3757c4f5f9076",
       "enterprise_id": "lloyds-banking-group-plc"
     }
   ],
@@ -129,7 +152,11 @@
           "statement": "BT reported Openreach FTTP take-up of 41% at the half-year reporting date.",
           "locator": "FY27 H1 results / Openreach FTTP",
           "caveat": "Issuer-reported take-up; not an industry-wide denominator.",
-          "scope": "BT Group plc / Openreach reporting"
+          "scope": "BT Group plc / Openreach reporting",
+          "anchors": [
+            "9.9m",
+            "41%"
+          ]
         },
         {
           "key": "premises",
@@ -140,7 +167,11 @@
           "statement": "BT reported 9.9 million premises connected on Openreach FTTP at the half-year reporting date.",
           "locator": "FY27 H1 results / Openreach total premises connected",
           "caveat": "Connections differ from premises passed.",
-          "scope": "BT Group plc / Openreach reporting"
+          "scope": "BT Group plc / Openreach reporting",
+          "anchors": [
+            "premises connected",
+            "9.9m"
+          ]
         },
         {
           "key": "fibre_build",
@@ -151,7 +182,11 @@
           "statement": "BT targeted 25 million premises in its full-fibre build by the end of December 2026.",
           "locator": "FY27 H1 results / full fibre target",
           "caveat": "Build target; no realised investment or coverage inferred.",
-          "scope": "BT Group plc / Openreach reporting"
+          "scope": "BT Group plc / Openreach reporting",
+          "anchors": [
+            "25 million premises",
+            "end of December"
+          ]
         },
         {
           "key": "repair",
@@ -162,7 +197,11 @@
           "statement": "BT reported a 16% year-on-year reduction in Openreach repair volumes.",
           "locator": "FY27 H1 results / operating efficiency",
           "caveat": "No causal attribution or service quality ranking.",
-          "scope": "BT Group plc / Openreach reporting"
+          "scope": "BT Group plc / Openreach reporting",
+          "anchors": [
+            "repair volumes down",
+            "16%"
+          ]
         },
         {
           "key": "transformation_target",
@@ -173,10 +212,15 @@
           "statement": "BT targeted GBP 3.5 billion gross annualised transformation savings by FY30.",
           "locator": "H1 FY27 / transformation programme",
           "caveat": "Continuing operations target; no net returns or realised savings inferred.",
-          "scope": "BT Group plc / Openreach reporting"
+          "scope": "BT Group plc / Openreach reporting",
+          "anchors": [
+            "Transformation programme",
+            "3.5bn",
+            "FY30"
+          ]
         }
       ],
-      "sha256": "61c4689aaff8a84665807d92edb21dbef516e5fa256c33c808e609625378d645",
+      "sha256": "2ba69b9c71dc4840872e221c5e4488b1cbc1593a794a16d0fdea4a61e99ad5a2",
       "enterprise_id": "bt-group-plc"
     },
     {
@@ -195,10 +239,15 @@
           "statement": "Nokia announced Openreach had selected its network controllers for the open-access fibre network.",
           "locator": "Openreach chooses Nokia / Altiplano and NSP",
           "caveat": "Supplier disclosure; no pricing, renewal or verified entire footprint.",
-          "scope": "Openreach, BT Group reporting perimeter"
+          "scope": "Openreach, BT Group reporting perimeter",
+          "anchors": [
+            "Altiplano",
+            "Openreach",
+            "NSP"
+          ]
         }
       ],
-      "sha256": "a7b9edd1484ec7fc24de362f26f73a3401467bba913f58822ca01e9b82197400",
+      "sha256": "c1079347af76d769988d22bf5a7fa1fc47aaf35add256e33ff39c379e36ffeec",
       "enterprise_id": "bt-group-plc"
     },
     {
@@ -222,13 +271,13 @@
       "published": "2026-11-04",
       "claims": [
         {
-          "key": "licensing",
+          "key": "licensing_other",
           "type": "financial_metric_reported",
           "family": "Revenue pools, margins and cost drivers",
           "perspective": "landscape",
           "period": "2026-09-30",
-          "statement": "Arm reported USD 773 million in licensing revenue for Q2 FYE27.",
-          "locator": "Q2 FYE27 financial results / licensing revenue",
+          "statement": "Arm reported USD 773 million in its licensing/other revenue category for Q2 FYE27.",
+          "locator": "Q2 FYE27 financial results / licensing and other revenue",
           "caveat": "Quarterly issuer figure, isolated replay only.",
           "scope": "Arm Holdings plc consolidated",
           "metric": {
@@ -236,7 +285,11 @@
             "axis": "licensing",
             "unit": "USD million",
             "amount": 773
-          }
+          },
+          "anchors": [
+            "licensing and other revenue",
+            "773 million"
+          ]
         },
         {
           "key": "royalties",
@@ -253,7 +306,11 @@
             "axis": "royalties",
             "unit": "USD million",
             "amount": 670
-          }
+          },
+          "anchors": [
+            "royalty revenue",
+            "670 million"
+          ]
         },
         {
           "key": "cpu_delivery",
@@ -264,7 +321,11 @@
           "statement": "Arm expected first commercial AGI CPU deliveries in Q4 FYE27.",
           "locator": "Q2 FYE27 results / AGI CPU deliveries",
           "caveat": "Issuer expectation, not recognised silicon revenue.",
-          "scope": "Arm Holdings plc consolidated"
+          "scope": "Arm Holdings plc consolidated",
+          "anchors": [
+            "first commercial deliveries",
+            "Q4 FYE27"
+          ]
         },
         {
           "key": "mobile_css",
@@ -275,17 +336,21 @@
           "statement": "Arm identifies CSS for Mobile 2 as supporting agentic AI workloads.",
           "locator": "Q2 FYE27 results / smartphone ecosystem",
           "caveat": "Issuer description; no independent performance assurance.",
-          "scope": "Arm Holdings plc consolidated"
+          "scope": "Arm Holdings plc consolidated",
+          "anchors": [
+            "CSS for Mobile 2",
+            "agentic AI workloads"
+          ]
         }
       ],
-      "sha256": "9601b39f2d9e4948106dbdeedd2d6b8100bbe52f47d70f15d88751f04c209781",
+      "sha256": "daff406eadbdcd96b64bff2dd84bd5b92c6bddfd90ca92a9464fa7f5cbf49a0c",
       "enterprise_id": "arm-holdings-plc"
     }
   ],
   "easyjet-plc": [
     {
       "publisher": "easyJet",
-      "url": "https://corporate.easyjet.com/investors/reports-and-presentations/default.aspx",
+      "url": "https://s203.q4cdn.com/522538739/files/doc_financials/2026/q2/1-HY26-Combined-RNS-FINAL.pdf",
       "category": "financial_publication",
       "scope": "easyJet plc Group",
       "published": "2026-05-21",
@@ -299,7 +364,12 @@
           "statement": "easyJet targets retirement of all A319 aircraft by FY29.",
           "locator": "Results for six months ending 31 March 2026 / upgauging",
           "caveat": "Future plan; no realised cost efficiency.",
-          "scope": "easyJet plc Group"
+          "scope": "easyJet plc Group",
+          "anchors": [
+            "Accelerating upgauging",
+            "A319 aircraft",
+            "FY29"
+          ]
         },
         {
           "key": "upgauging",
@@ -310,7 +380,11 @@
           "statement": "easyJet reported accelerating its fleet upgauging programme.",
           "locator": "Results for six months ending 31 March 2026 / upgauging",
           "caveat": "Larger aircraft changes the seat base; route profitability unverified.",
-          "scope": "easyJet plc Group"
+          "scope": "easyJet plc Group",
+          "anchors": [
+            "Accelerating upgauging",
+            "A319"
+          ]
         },
         {
           "key": "capacity_economics",
@@ -321,10 +395,15 @@
           "statement": "easyJet described allocating incremental FY26 aircraft to existing bases exceeding its FY25 profitability target.",
           "locator": "H1 FY26 / capital allocation target",
           "caveat": "Issuer-reported allocation approach; funding amount or route profitability unverified.",
-          "scope": "easyJet plc Group"
+          "scope": "easyJet plc Group",
+          "anchors": [
+            "incremental FY26 aircraft",
+            "existing bases",
+            "FY25"
+          ]
         }
       ],
-      "sha256": "517ae9416d8a83481d6a53f53e6786ebdb1ce67857da925647bf74a9c4b64179",
+      "sha256": "e5d14405898c9b58a791b0c1786755a0a8dd962720e24453101dab584e86209a",
       "enterprise_id": "easyjet-plc"
     },
     {
@@ -343,10 +422,14 @@
           "statement": "easyJet reported a fleet of 355 aircraft as at 31 March 2025.",
           "locator": "What we do / as at 31 March 2025",
           "caveat": "Historical fleet count, not current or legal operator-specific.",
-          "scope": "easyJet plc Group"
+          "scope": "easyJet plc Group",
+          "anchors": [
+            "355 aircraft",
+            "31 March 2025"
+          ]
         }
       ],
-      "sha256": "d67626e9f4485d5e65d2d08e75fac8e97f453db924d827da3d1c05441e6de03c",
+      "sha256": "beef2f4e3dffb7139259f0f09b04f66d058836fbd05f0de80819c30ab0175632",
       "enterprise_id": "easyjet-plc"
     },
     {
@@ -365,10 +448,15 @@
           "statement": "Airbus announced an easyJet firm order for 157 additional A320neo family aircraft.",
           "locator": "Airbus / 19 December release / firm order",
           "caveat": "Order, not delivery; price and airline legal allocation outside scope.",
-          "scope": "easyJet, Airbus customer disclosure"
+          "scope": "easyJet, Airbus customer disclosure",
+          "anchors": [
+            "confirmed a firm order",
+            "157 additional",
+            "A320neo"
+          ]
         }
       ],
-      "sha256": "a551094e224430e542fdd26d451ea2293a4bad0286eed0b70f75469b63f1d16b",
+      "sha256": "972f6eec80cbd825ff01502045401cf05d1563cfdb3f33a8c5f7d79c79df9d22",
       "enterprise_id": "easyjet-plc"
     },
     {
@@ -388,10 +476,15 @@
           "scope": "easyJet plc Group",
           "statement": "easyJet reported an 88.9% passenger load factor for Q3 FY26.",
           "locator": "Q3 FY26 trading update / passenger load factor",
-          "caveat": "Operating ratio for the reporting quarter; no financial measure admitted."
+          "caveat": "Operating ratio for the reporting quarter; no financial measure admitted.",
+          "anchors": [
+            "Passengers",
+            "25.8m",
+            "88.9%"
+          ]
         }
       ],
-      "sha256": "b3997ecde799da3d585c3ac49615fa1cbdd40a2c165c8358da53ec143409ed6a"
+      "sha256": "98d4e87c68c4a5d3fcd98a317a45eee40da96d6a10caac6f79c242c9b33bf5fa"
     }
   ]
 }
