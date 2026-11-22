@@ -1,0 +1,77 @@
+{
+  "superseded_evidence_candidates": {
+    "F03": [
+      "F03A",
+      "F03B"
+    ],
+    "F05": [
+      "F05A",
+      "F05B"
+    ],
+    "F06": [
+      "F06A",
+      "F06B"
+    ],
+    "F08": [
+      "F08A",
+      "F08B",
+      "F08C"
+    ],
+    "F10": [
+      "F10A",
+      "F10B"
+    ],
+    "F11": [
+      "F11A",
+      "F11B"
+    ],
+    "F14": [
+      "F14A",
+      "F14B"
+    ],
+    "F21": [
+      "F21A",
+      "F21B"
+    ],
+    "F23": [
+      "F23A",
+      "F23B"
+    ],
+    "F26": [
+      "F26A",
+      "F26B",
+      "F26C",
+      "F26D"
+    ]
+  },
+  "withheld_relationships": [
+    {
+      "id": "R03",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N04",
+      "target": "N05",
+      "relationship_type": "appears in authorised list",
+      "evidence": [
+        "F04"
+      ],
+      "period": "2026-11-22",
+      "status": "regulator-observed",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Scottish Widows Master Trust",
+      "object_label": "The Pensions Regulator authorised list",
+      "review_disposition": "withheld from graph; evidence F04 retained",
+      "uncertainty": "Observed authorisation listing as of 22 November 2026. 6 May 2026 is the guidance inclusion date only. No scheme asset, volume or conversion measure."
+    }
+  ],
+  "owner_binding": {
+    "research_subject": "BK-ENT-001",
+    "runtime_normalisation": "bk-ent-001",
+    "proposed_legal_subject": "Lloyds Banking Group plc",
+    "group_name_normalisation": "lloyds-banking-group-plc",
+    "canonical_enterprise_id": null,
+    "workspace_id": null,
+    "status": "unresolved; explicit scoped owner confirmation required before receipt or plan"
+  }
+}

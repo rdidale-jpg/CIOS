@@ -86,7 +86,7 @@
     "version": "updated 2026-10-26",
     "source_role": "Regulator",
     "observed_on": "2026-11-22",
-    "use_status": "referenced for candidate review only",
+    "use_status": "historical locator only; direct retrieval returned HTTP 404 in independent review",
     "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
   },
   "fca-aaa": {
@@ -123,7 +123,7 @@
     "publisher": "Lloyds Banking Group",
     "url": "https://www.lloydsbankinggroup.com/",
     "original_locator": "/media/press-releases/2026/lloyds/fiamma-morton-appointment.html",
-    "version": "2026 announcement, observed 2026-11-22",
+    "version": "2026-08-12 HTML publication",
     "source_role": "Issuer disclosure",
     "observed_on": "2026-11-22",
     "use_status": "referenced for candidate review only",
@@ -173,7 +173,7 @@
     "publisher": "Lloyds Banking Group",
     "url": "https://www.lloydsbankinggroup.com/",
     "original_locator": "/media/press-releases/2026/lloyds-banking-group/1000-new-ai-roles.html",
-    "version": "2026 announcement, observed 2026-11-22",
+    "version": "2026-06-22 HTML publication",
     "source_role": "Issuer disclosure",
     "observed_on": "2026-11-22",
     "use_status": "referenced for candidate review only",
@@ -277,6 +277,16 @@
     "source_role": "Issuer supplier guidance",
     "observed_on": "2026-11-22",
     "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "fca-motor-firms": {
+    "publisher": "FCA",
+    "url": "https://www.fca.org.uk/firms/information-firms-motor-finance-complaints",
+    "original_locator": "https://www.fca.org.uk/firms/information-firms-motor-finance-complaints",
+    "version": "26 October 2026 update within firms guidance",
+    "source_role": "Regulator",
+    "observed_on": "2026-11-22",
+    "use_status": "external regulatory context for candidate review",
     "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
   }
 }
