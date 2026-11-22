@@ -6,6 +6,7 @@
 | --- | --- |
 | Authority, Source-use proposal and ownership decisions | [Authority and factual use](authority-and-factual-use.md) |
 | Tier 1 research obligations, exact family requirements and projections | [Enterprise factual contract](factual-contract.md) |
+| Estate, contracts, leadership, relationships and pressure qualification | [Technology and commercial intelligence](technology-commercial-intelligence.md) |
 | Descriptive, external, strategic and disruption models | [Analytical model catalogue](analytical-models.md) |
 | UK Banking and illustrative BT, Arm and easyJet specialisations | [Industry schedules](industry-schedules.md) |
 | Experience, acceptance gates and release decisions | [Presentation and quality](presentation-and-quality.md) |

@@ -151,3 +151,7 @@ Each model entry specifies **A** question, **B** required inputs, **C** optional
 - **E** Evidence for the specific asserted edges; causal language requires supporting time/alternatives evidence. **F** A map of related topics is a navigation aid.
 - **G** Trace supported edges, flag hypotheses and test alternative mechanisms. **H** Facts, explanatory associations and causal conclusions stay distinct. **I** Show conflicting timing, confounders and missing links. **J** Inspectable chain with qualified gaps. **K** Core-renewal issue map.
 - **L** Suppress dependent explanations after any input withdrawal or contradiction. **M** Enterprise owner under ADR‑002 and ADR‑005. **N** Linked exploration implemented; general causal recipe proposed.
+
+## Estate, commercial and leadership input traceability
+
+Apply the [model input traceability matrix](technology-commercial-intelligence.md#analytical-input-traceability-and-visual-destinations) when the selected scope involves estate, contracts, people or buying activity. It qualifies each relationship and assigns the governing family. Carry the actual observation/contract version, effective period, scope and counterevidence into the recipe review. Hold an affected conclusion when a decisive join is Unknown, disputed or withdrawn.

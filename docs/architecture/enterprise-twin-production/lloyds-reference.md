@@ -27,12 +27,15 @@ The retained working projection carries its own authority and provenance. Preser
 | Capabilities and processes | Partial. Reported AI and platform capability can be described. Adoption and effect need evidence. |
 | Journeys and service operations | Partial. Complaints supply activity counts. Journey outcomes, volumes served and boundaries are open. |
 | Workforce and organisation | Partial. Reported licences can be shown. Coverage, workforce responsibilities and effects need corroboration. |
-| Technology and applications | Partial. Retirements and renewal can be described. Workload lineage and cutover dependencies are missing. |
-| Cloud, data, AI and cybersecurity | Partial. Public commitments and controls frame A. Verified operating outcomes remain open. |
-| Suppliers and outsourcing | Partial. Google collaboration is reportable at its evidenced scope. Contracting entity, concentration and substitution are unknown. |
+| Application Estate and Lifecycle | Partial. Retirements and renewal can be described. Named installation, version, dependencies, support coverage and actual cutover remain open. |
+| Hosting and infrastructure | Partial. Announced collaboration does not establish a workload deployment or host dependency. |
+| Data and AI capabilities | Partial. Disclosures supply reported adoption indicators. Qualify usage, effect and control scope independently. |
+| Cybersecurity and resilience | Partial. Public controls and obligations frame the investigation. Workload-level evidence and residual exposure remain open. |
+| Suppliers and outsourcing | Partial. Google collaboration is reportable at its evidenced scope. Actual workload operation, concentration and alternatives are Unknown. |
+| Supplier Contracts and Commercial Lifecycle | Blocked for renewal or exit analysis. No verified commercial term/notice, legal scope or transition dependency in the reviewed case. |
 | Programmes and milestones | Ready for reported and planned dates with distinct labels and historical states. Integration progress remains open. |
 | Productivity, performance and risk | Partial. Targets and risk signals exist. Baselines, realised effect and contingency evidence are incomplete. |
-| Leadership and accountability | Partial. Public executive sponsorship can be described where cited. Programme decision rights and escalation remain unknown. |
+| Leadership and accountability | Partial. Public sponsorship or responsibility can be described where cited. Actual programme, procurement and escalation decision rights remain Unknown. |
 | Political, economic, social, environmental | Partial. Relevant public context can be framed. Transmission and Entity exposure remain open. |
 | Technology and regulation | Partial. The PRA milestone can be shown. Entity applicability and implementation status need review. |
 | Rivalry and industry structure | Partial. Selected comparison entities are identifiable. A matched competitive perimeter remains open. |
@@ -41,6 +44,7 @@ The retained working projection carries its own authority and provenance. Preser
 | AI-native competition | Blocked for entrant assessment. Active offering and competitive overlap lack qualifying evidence. |
 | Ecosystem and convergence | Partial. Collaboration and completed acquisition can be represented with typed edges. Value transfer and integration effects remain open. |
 | Events and milestones | Ready for cited event date and status. Link future events only to reported plans. |
+| Procurement and Commercial Events | Blocked for commercial access claims. No scoped notice or active buying route established in this review. Do not use inferred expiry as procurement. |
 
 ## Analytical readiness by decision
 
@@ -80,5 +84,14 @@ These obligations are proposed commissioning units for a subsequent sprint. The 
 | L5 · Payments and competitive effects (G-CURVE, G-MARKET) | Industry research owner | Check dated authorised regulator and counterparty materials for deal status, live product, adoption and alternatives. Return a bitemporal edge history and evaluate whether a threat meets the relevant gate. |
 | L6 · Date and applicability (G-REGULATORY, G-FRAUD, G-CLIMATE) | Pressure owner | Trace current primary regulator instruments and public Entity evidence. Return obligation, perimeter, effective date, actual evidence of exposure and counterevidence. Keep unresolved exposure out of qualified pressure outputs. |
 | L7 · Independent release review | Architecture and commercial reviewers | Test one withdrawn input, one superseded disclosure and one identity mismatch desk-side. Verify every shipped claim points to eligible evidence and each decision has a named remaining gap. Preserve §5 deferral, private isolation and separate approval for durable records. |
+
+### Technology and commercial extension to the next Lloyds mission
+
+| Obligation | Owner and completion evidence |
+| --- | --- |
+| L8 · Estate and support horizon | Enterprise research owner extends L3. Seek attributable disclosures of core/payments installations, versions where lawful, business services and hosting/control scope. Match exact support notices and local coverage, deployment, transition and retirement evidence. Deliver dated verified edges and explicit Unknowns. Exclude inferred vendor footprint. |
+| L9 · Supplier terms and buying activity | Supplier relationship reviewer and Source owner extend L3/L5. Seek lawful official notices, scoped issuer/counterparty disclosures, award and variation records. Separate supplier roles, contracting entity, notice/extension/exit, service scope and actual procurement. Return verified dates or held terms and officially published routes only. |
+| L10 · Role and mandate | Enterprise research owner extends L3/L7. Use Group, bank and programme governance/appointment materials to separate effective title, mandate, function, succession and explicit decision rights for technology, transformation and procurement. Return role-level traces and distinct influence hypotheses. |
+| L11 · Qualification review | Pressure and Financial reviewers extend L1/L4/L6. Join estate, contract, workforce, leadership, cost and programme facts only over their evidenced scope. Record ADR‑026 results per candidate, residual exposure, and demonstrated delay consequence and fallback before any urgency claim. Retain failed/unresolved gates and verify withdrawal. |
 
 The immediate release candidate is the narrow transformation chronology and scoped activity description. Deeper economics, service comparisons and strategy choices depend on the corresponding obligations. Missing dimensions can be shown as Unknown with the reason and review trigger. A restriction travels with its affected operation and audience. The existing withdrawal path should suppress affected outputs and recompute qualified dependent views after any future release.

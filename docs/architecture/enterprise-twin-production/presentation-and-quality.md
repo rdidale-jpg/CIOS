@@ -37,3 +37,10 @@ Keep audit metadata, permission codes and research workflow controls outside the
 - **Not Applicable** means the scope or decision provides a supported exclusion. Record the evidence and reconsideration trigger. Lack of evidence is never sufficient to declare it.
 
 Readiness does not replace existing approval. Release owners record exact revision, provisional/accepted status, scope, reviewer, held operations and rollback. No record count, aggregate score or checklist completion substitutes for judgement. Preserve unresolved contradictions and unavoidable evidence exhaustion in the release decision.
+
+### Estate and commercial quality checks
+
+- Factual coverage and relationship integrity require a verified installation and entity, scoped supplier role, verified term versus option, and exact role mandate. Keep Unknowns and conflicted terms visible.
+- History and evidence require traceable version, amendment, succession and notice records. Test a withdrawn source and an extension that supersedes an earlier date. Retain prior valid history and suppress affected current conclusions.
+- Analytical validity and commercial usefulness require all ADR‑026 gates for Pressure, plus separate timing evidence for any urgency label. A projected date cannot populate an observed procurement event.
+- Executive usability and security require optional contract/leadership drill-through and commercial events within existing depth and access. Test that private material, personal details and research controls stay outside ordinary presentation, including after a mode change.

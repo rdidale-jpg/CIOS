@@ -39,3 +39,7 @@ The current [Source import](../../../cios/applications/flora/research_intelligen
 ### Specific holds carried forward
 
 Lloyds §2 remains unresolved where it could reach independent facts or minimal retention. Keep affected output inactive pending a Source/legal disposition. §5 direct PDF links remain deferred, with approved homepage attribution where applicable. Do not treat an alternative host as a way around a genuine restriction. BT issuer origin and terms, and easyJet issuer terms, remain operation-specific open questions from EEI‑3. Current explicit admissions and withdrawal rules stay in place. [EEI‑3 restrictions](../../flora-runtime/eei3/README.md)
+
+## Estate, contracts and leadership ownership
+
+The [technology and commercial schedule](technology-commercial-intelligence.md) is a review extension over accepted ADR‑002 and ADR‑026. It reuses EI‑002 vocabulary where compatible while preserving that document's Draft status. Financial measures, procurement, source lifecycle and publication retain their existing owners. Contract and leadership evidence require an explicitly lawful audience and sufficient scoped provenance, including redactions and limitations. Do not retain personal contact data, private biographies or non-public organisational detail. Official procurement channels may be referenced at their published scope and dates. Titles or roles alone confer no commercial access.

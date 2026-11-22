@@ -32,3 +32,14 @@ The known case and evidence needs are in the [Lloyds reference](lloyds-reference
 - Record aircraft operator, ownership/lease basis, commercial fleet scope, network/airport season and route availability. Distinguish passengers, seats, load factor, yield, ancillary income and holidays with periods, units and definitions.
 - Connect route/network economics to seat capacity, fleet utilisation, fuel/FX, resilience and disruption, distribution and customer service where evidenced. Fuel or reliability mechanisms expose levers without asserting causation or route profitability.
 - Compare airlines only on compatible operating and currency/period bases. Separate company operating scope, regulatory obligations and competitive alternatives by route/season. Use fleet/network states, runway timeline and operational Inside maps. Source terms and financial admission stay separately owned.
+
+## Estate and commercial emphasis by industry
+
+These are questions and evidence boundaries for future authorised work. The [shared input and relationship map](technology-commercial-intelligence.md) governs each schedule.
+
+| Schedule | Application, commercial and accountability evidence |
+| --- | --- |
+| Lloyds | Bind core banking, payments and other material systems to the operating bank/Group perimeter, business process, service tolerance and migration scope. Distinguish disclosed partnership, implementation and contracted operation. Track operative renewal/notice or public procurement only if evidenced. Check separate CIO/technology, service, procurement and programme mandates and test PRA applicability at the relevant entity. |
+| BT | Distinguish BT Group, Openreach and the operating units for network/service applications, platform and transition dependencies. Separate regulated wholesale access, equipment/support contracts and actual customer migration. Verify supplier transition and executive responsibilities against the actual regulated and operating perimeter. |
+| Arm | Distinguish intellectual property/product generations and external licensees from the Enterprise's own design, data and delivery applications. Separate licensed scope, commercial terms, reported adoption and disclosed contract events. Verify which role actually owns design, ecosystem or operational decisions. |
+| easyJet | Scope flight operations, maintenance, distribution and resilience applications to the operating entity and seasonal service. Separate aircraft, airport, ground-handling and technology support terms. Verify any actual procurement, flight-service cutover and programme accountability. |
