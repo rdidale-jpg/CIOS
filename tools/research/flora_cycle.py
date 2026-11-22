@@ -7,14 +7,16 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-from cios.applications.flora.research_intelligence.cycle import research_plan, run_cycle, acquire
+from cios.applications.flora.research_intelligence.cycle import research_plan, run_cycle
 from cios.applications.flora.research_intelligence.model import load_assessment
 from cios.applications.flora.research_intelligence.registry import enterprise_domain
 from cios.applications.flora.research_intelligence.mission_adapter import manifest, mission_owner
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        epilog='For a routine brief from existing reviewed candidates, use tools/research/initial_decision.py.')
     parser.add_argument('--enterprise', choices=('lloyds', 'easyjet'), required=True)
     parser.add_argument('--as-of', required=True)
     parser.add_argument('--limit', type=int, default=3)
@@ -29,10 +31,9 @@ def main(argv=None):
     plan = research_plan(data, args.as_of, args.limit)
     if not isinstance(submissions, list) or len(submissions) > args.limit:
         raise ValueError('Submissions must be an array within the task budget')
-    originals = [acquire(s, data) for s in submissions]
-    checkpoint = run_cycle(data, args.as_of, submissions, args.limit, previous, args.revisit_task)
-    if [(p['raw_sha256'], p['text_sha256']) for p in checkpoint['waves'][-1]['proposals']] != [(s['primary_content_sha256'], s['text_sha256']) for s in originals]:
-        raise ValueError('Source changed during acquisition')
+    originals = []
+    checkpoint = run_cycle(data, args.as_of, submissions, args.limit, previous, args.revisit_task,
+                           on_acquired=originals.append)
     commission = manifest(data, args.as_of, args.limit)
     # Export resume-selected tasks instead of silently commissioning the first wave again.
     selected = checkpoint['waves'][-1]['selected_task_ids']

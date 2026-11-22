@@ -217,7 +217,7 @@ def acquire(submission, data):
             'text_sha256': source['text_sha256']}
 
 
-def run_cycle(data, as_of, submissions=(), limit=3, previous=None, revisit_task_ids=()):
+def run_cycle(data, as_of, submissions=(), limit=3, previous=None, revisit_task_ids=(), *, on_acquired=None):
     """Acquire supplied permitted source files, extract exact passages, propose review.
 
     Reviewer effects are proposed judgements, NOT automatic semantic entailment,
@@ -296,6 +296,8 @@ def run_cycle(data, as_of, submissions=(), limit=3, previous=None, revisit_task_
             'status': 'Review required; no automatic finding change',
             'remaining_checks': ['Enterprise/scope/period entailment', 'Atomic observation and contrary evidence',
                 'Source authorship and independence', 'Governed Evidence acceptance before Observation persistence']})
+        if on_acquired is not None:
+            on_acquired(imported)
     wave = {'as_of': as_of, 'selected_task_ids': selected, 'proposals': proposals,
             'revisit_task_ids': revisits,
             'acquisition_status': 'Supplied file(s) or retained web excerpts reviewed' if proposals else 'Awaiting permitted source imports; no new evidence acquired',
