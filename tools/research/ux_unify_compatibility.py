@@ -54,8 +54,16 @@ AVIATION_JOURNEY_APP = "cios/applications/flora/web/app.py"
 AVIATION_JOURNEY_SHA256 = "547a14898b829af23e711ff4d97a332dc7f10bfbb5bd9f88b7dd3560f40ca446"
 
 
+# Exact draft Factory presentation hook. Security dispatch and the earlier
+# owner files are still checked against their independently pinned versions.
+FACTORY_PREVIEW_BASE = "3e5aa2fc5dc1531ffb305374c91fad831b998fad"
+FACTORY_PREVIEW_APP = "2c2d58493e6ff23ed8864cd6c0c71aa9377400a7aa3b7994efcbf4bb61c59385"
+
+
 def predecessor(root, path):
     current = (Path(root) / path).read_bytes()
+    if path == AVIATION_JOURNEY_APP and sha256(current).hexdigest() == FACTORY_PREVIEW_APP:
+        current = subprocess.check_output(["git", "show", f"{FACTORY_PREVIEW_BASE}:{path}"], cwd=root)
     if path == AVIATION_JOURNEY_APP and sha256(current).hexdigest() == AVIATION_JOURNEY_SHA256:
         current = subprocess.check_output(["git", "show", f"{AVIATION_JOURNEY_BASE}:{path}"], cwd=root)
     if path == "cios/applications/flora/public_routes.py" and sha256(current).hexdigest() == "0dc12bc420aa94b669253579ff312798d84c5c06a7af775cdc4ef6b194ee5442":
