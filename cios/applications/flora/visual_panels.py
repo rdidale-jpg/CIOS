@@ -397,7 +397,8 @@ def _frame(ctx,headers,data,issues,entries,body):
     """Ordinary three-panel frame emits no research disclosures or source URLs."""
     scene=replace(ctx,stream='landscape') if ctx.scope=='banking' and ctx.stream=='inside' else ctx
     if __import__('cios.applications.flora.access',fromlist=['is_cios_owner']).is_cios_owner(headers):
-        ds.context_link(v.url(scene)+'&lens=inspection' if ctx.scope in {'banking','lloyds'} else '/research','Research inspection')
+        inspect_scene=replace(scene,reading='facts') if scene.scope=='lloyds' and scene.detail=='flagship' else scene
+        ds.context_link(v.url(inspect_scene)+'&lens=inspection' if ctx.scope in {'banking','lloyds'} else '/research','Research inspection')
     binding=v.PRESENTATIONS[ctx.scope]
     identity=binding.get('identity')or data[binding['identity_key']]
     title=binding['title'] if ctx.scope in {'uk','easyjet'} else data['industry_name'if ctx.scope=='banking'else'enterprise_name']
@@ -509,6 +510,11 @@ def research_inspection(path,query,headers=None):
         issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
         return _research_frame(ctx,headers,data,issues,v.destinations(ctx,data),analyst.STYLE+'<section class="financial-analyst">'+analyst.compose(projection)+'</section>')
     ctx=v.resolve(path,query)
+    if ctx.scope=='lloyds' and ctx.detail=='flagship':
+        from .lloyds_flagship import render as render_flagship
+        data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
+        return _research_frame(ctx,headers,data,issues,v.destinations(ctx,data),
+                               render_flagship(ctx,data,issues,inspection=True))
     if ctx.scope=='banking' and ctx.stream=='inside':ctx=replace(ctx,stream='landscape')
     if ctx.scope=='banking' and ctx.detail in ecosystem.STAGES:ctx=replace(ctx,detail='')
     return _research_render(ctx,headers)

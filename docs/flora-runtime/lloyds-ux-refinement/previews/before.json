@@ -1,0 +1,26 @@
+{
+  "checkout": "5eab9fd47f56f3fd67757b0b3ca80f1097de8cee",
+  "observations": [
+    {
+      "viewport": "desktop",
+      "phase": "before",
+      "no_page_overflow": true,
+      "disclosure_count": 1,
+      "choices_sources_and_history": false
+    },
+    {
+      "viewport": "ipad-landscape",
+      "phase": "before",
+      "no_page_overflow": true,
+      "disclosure_count": 1,
+      "choices_sources_and_history": false
+    },
+    {
+      "viewport": "ipad-portrait",
+      "phase": "before",
+      "no_page_overflow": true,
+      "disclosure_count": 1,
+      "choices_sources_and_history": false
+    }
+  ]
+}

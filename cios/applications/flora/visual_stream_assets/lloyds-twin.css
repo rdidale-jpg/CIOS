@@ -1,25 +1,39 @@
 .llf{--pine:#103b30;--paper:#fcfaf1;--line:#b5c8b9;--ink:#163a30;color:var(--ink)}
-.ltv-hero{height:clamp(13rem,22vw,18rem);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);background:var(--pine);color:#fffbed;border-radius:1rem;overflow:hidden}
+.ltv-hero{height:clamp(11rem,16vw,14rem);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);background:var(--pine);color:#fffbed;border-radius:1rem;overflow:hidden}
 .ltv-title{align-self:center;padding:clamp(1rem,3vw,2.5rem);position:relative}
 .ltv-title h1{font-size:clamp(2rem,4vw,3.35rem);line-height:1.05;color:inherit;margin:.45rem 0 .8rem}
 .ltv-hero img{width:100%;height:100%;min-height:0;object-fit:cover;object-position:center}
 .ltv-kicker{text-transform:uppercase;font-size:.72rem;letter-spacing:.09em;font-weight:700;margin:0 0 .4rem}
-.ltv-jump,.ltv-thread{display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0;padding:0}
-.ltv-jump a,.ltv-thread a{padding:.48rem .7rem;border:1px solid var(--line);border-radius:.4rem;display:block}
-.ltv a:focus-visible,.llf summary:focus-visible{outline:3px solid #27735d;outline-offset:3px}
+.ltv-jump{display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0;padding:0}
+.ltv-jump a{padding:.48rem .7rem;border:1px solid var(--line);border-radius:.4rem;display:block}
+.ltv a:focus-visible{outline:3px solid #27735d;outline-offset:3px}
 .ltv>section{scroll-margin-top:1rem;margin:1.7rem 0}
 .ltv h2{margin:.2rem 0 .8rem}
 .ltv-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
 .ltv-grid article{min-width:0;background:var(--paper);border:1px solid var(--line);border-top:4px solid #49866d;border-radius:.65rem;padding:.85rem}
 .ltv-grid h3{margin:.35rem 0 .5rem;font-size:1.05rem;line-height:1.25}
 .ltv-grid p{margin:.25rem 0;font-size:.88rem}
-.ltv-commercial{border-top-color:#968246!important}.ltv-retirement{border-top-color:#637a8c!important}
 .ltv-band{background:#e6efe3;border-radius:.6rem;padding:.65rem;margin:.6rem 0;display:flex;flex-wrap:wrap;gap:.45rem 1rem;align-items:center}
 .ltv-note{font-size:.85rem;color:#38574c}
-.ltv-thread{list-style:none}
-.ltv-thread li{flex:1 1 6.5rem}
-.ltv-thread a{background:#deebdf;min-height:2.5rem}
-.ltv-perspectives{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;align-items:start}
-.ltv-perspectives>details{margin:0;background:var(--paper)}
-.ltv-perspectives>details[open]{grid-column:1/-1}
-@media(max-width:640px){.ltv-grid{grid-template-columns:1fr}.ltv-hero{grid-template-columns:1fr;height:auto}.ltv-hero img{height:9rem;min-height:0}.ltv-perspectives{grid-template-columns:1fr}}
+@media(max-width:640px){.ltv-grid{grid-template-columns:1fr}.ltv-hero{grid-template-columns:1fr;height:auto}.ltv-hero img{height:9rem;min-height:0}}
+.ltv-title h1{font-size:clamp(1.75rem,3vw,2.85rem)}
+.ltv-title h1 span{display:block;white-space:nowrap}
+.llf-choices{margin:.55rem 0 1rem}
+.llf-choices>nav{display:flex;gap:.45rem;flex-wrap:wrap;margin:.25rem 0 .6rem}
+.llf-choices>nav a,.ltv-related>a{display:inline-flex;align-items:center;min-height:44px;padding:.35rem .7rem;border:1px solid #9bb4a5;border-radius:.45rem}
+.llf-choices>nav a{background:#edf3e9;text-decoration:none}
+.llf-choices>nav a[aria-current]{background:#143c30;color:white}
+.llf-choices>[data-llf-panel]{background:var(--paper);border:1px solid var(--line);border-radius:.65rem;padding:.75rem 1rem;margin:.5rem 0}
+.llf-choices>[data-llf-panel] h3{margin:.15rem 0 .5rem}
+.llf-division>nav,.llf-swot>nav,.llf-risk>nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.llf-swot>nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+.llf-swot>nav a:nth-child(2n):not([aria-current]){background:#f3ede0}
+.llf-risk>nav a:nth-child(1):not([aria-current]){border-color:#916a34;background:#f7edda}
+.llf-timeline>nav,.llf-thread>nav{flex-wrap:nowrap;overflow-x:auto;padding:.2rem .2rem .6rem}
+.llf-timeline>nav a,.llf-thread>nav a{flex:1 0 auto}
+.llf-thread>nav a{border-top:3px solid #50846d}
+.llf-bars{display:grid;gap:.4rem;padding:0}
+.llf-bars dd{margin:0;display:grid;grid-template-columns:5.5rem 1fr;align-items:center}
+.llf-bars meter{width:100%;height:1.15rem}
+.llf [hidden]{display:none!important}
+@media(max-width:750px){.llf-division>nav,.llf-risk>nav{grid-template-columns:1fr}}

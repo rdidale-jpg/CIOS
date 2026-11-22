@@ -19,6 +19,9 @@ FLAGSHIP_CUTS = {'tools/research/history_integrity.py': ('6bbbcbfc3f22f3a0c4f627
 
 
 def predecessor(root, path, current):
+    current = checked_cut(root, path, current, '63df0cbf8e1de98d8a782cd0a448c7ec7bab4147', {
+        'cios/applications/flora/visual_panels.py': ('ad4ef6a1377b7a2cbc76e9d49b610e0a479cd7e7dcb7e1eac9c63bbe729cf838', ('_frame', 'research_inspection')),
+    })
     current = checked_cut(root, path, current, FLAGSHIP_BASE, FLAGSHIP_CUTS)
     current = checked_cut(root, path, current, EEI3_BASE, EEI3_CUTS)
     return checked_cut(root, path, current, BASE, CUTS)
