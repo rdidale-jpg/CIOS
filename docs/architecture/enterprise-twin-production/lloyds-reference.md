@@ -71,6 +71,10 @@ The retained working projection carries its own authority and provenance. Preser
 | Enterprise Transformation Timeline | Ready, A, for sourced announced and reported milestones with explicit states. Benefits remain outside this release. |
 | Enterprise Mechanism and Dependency Analysis | Partial, A. Present scoped public links and the unanswered dependency question. Hold causal or quantitative conclusions. |
 
+## Subsequent Lloyds mission scope
+
+Assess all 31 Tier 1 families for applicability and research every applicable family. Use the readiness table as the starting inventory. For each family record material questions, legal entity and timeframe, evidence routes and restrictions, accountable reviewer, coverage verdict and review trigger. Record Unknown, contradiction or an evidenced inapplicability with the rationale. Core renewal and payments are first-priority end-to-end demonstrators. The family inventory governs the full mission scope, including gaps outside the listed obligations.
+
 ## Follow-up obligations
 
 These obligations are proposed commissioning units for a subsequent sprint. The research owner records search perimeter, conflicting material and exhaustion. The Source owner checks each actual operation and audience. Reviewers close or explicitly hold each obligation.
@@ -94,4 +98,4 @@ These obligations are proposed commissioning units for a subsequent sprint. The 
 | L10 · Role and mandate | Enterprise research owner extends L3/L7. Use Group, bank and programme governance/appointment materials to separate effective title, mandate, function, succession and explicit decision rights for technology, transformation and procurement. Return role-level traces and distinct influence hypotheses. |
 | L11 · Qualification review | Pressure and Financial reviewers extend L1/L4/L6. Join estate, contract, workforce, leadership, cost and programme facts only over their evidenced scope. Record ADR‑026 results per candidate, residual exposure, and demonstrated delay consequence and fallback before any urgency claim. Retain failed/unresolved gates and verify withdrawal. |
 
-The immediate release candidate is the narrow transformation chronology and scoped activity description. Deeper economics, service comparisons and strategy choices depend on the corresponding obligations. Missing dimensions can be shown as Unknown with the reason and review trigger. A restriction travels with its affected operation and audience. The existing withdrawal path should suppress affected outputs and recompute qualified dependent views after any future release.
+The immediate release candidate is the narrow transformation chronology and scoped activity description. Release readiness applies to those outputs, while research scope covers all applicable families. Deeper economics, service comparisons and strategy choices depend on the corresponding obligations. Missing dimensions can be shown as Unknown with the reason and review trigger. A restriction travels with its affected operation and audience. The existing withdrawal path should suppress affected outputs and recompute qualified dependent views after any future release.
