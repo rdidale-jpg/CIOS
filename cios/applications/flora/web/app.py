@@ -1029,6 +1029,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 
     def _html(self, html: str, status: int = 200, set_cookie: str = "") -> None:
         from cios.applications.flora.security_web import decorate_forms
+        if status == 200:
+            from cios.applications.flora.memory.commercial_views import route_replay
+            target = urlparse(self.path)
+            html = route_replay(html, target.path, parse_qs(target.query), self.headers)
         html = decorate_forms(html, self.headers)
         auto_status = pilot_auto_sign_in_status()
         if auto_status.active and resolve_pilot_session(self.headers) and "</body" in html.lower():
