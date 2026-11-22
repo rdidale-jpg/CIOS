@@ -1,0 +1,292 @@
+{
+  "ch-bank": {
+    "publisher": "Companies House",
+    "url": "https://find-and-update.company-information.service.gov.uk/company/00002065",
+    "original_locator": "https://find-and-update.company-information.service.gov.uk/company/00002065",
+    "version": "register observed 2026-11-22",
+    "source_role": "Public register",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "ch-psc": {
+    "publisher": "Companies House",
+    "url": "https://find-and-update.company-information.service.gov.uk/company/00002065/persons-with-significant-control",
+    "original_locator": "https://find-and-update.company-information.service.gov.uk/company/00002065/persons-with-significant-control",
+    "version": "register observed 2026-11-22",
+    "source_role": "Public register",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "ch-widows": {
+    "publisher": "Companies House",
+    "url": "https://find-and-update.company-information.service.gov.uk/company/03196171",
+    "original_locator": "https://find-and-update.company-information.service.gov.uk/company/03196171",
+    "version": "register observed 2026-11-22",
+    "source_role": "Public register",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "ch-hbos": {
+    "publisher": "Companies House",
+    "url": "https://find-and-update.company-information.service.gov.uk/company/SC218813/persons-with-significant-control",
+    "original_locator": "https://find-and-update.company-information.service.gov.uk/company/SC218813/persons-with-significant-control",
+    "version": "register observed 2026-11-22",
+    "source_role": "Public register",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "tpr": {
+    "publisher": "The Pensions Regulator",
+    "url": "https://www.thepensionsregulator.gov.uk/en/master-trust-pension-schemes/list-of-authorised-master-trusts",
+    "original_locator": "https://www.thepensionsregulator.gov.uk/en/master-trust-pension-schemes/list-of-authorised-master-trusts",
+    "version": "list observed 2026-11-22",
+    "source_role": "Regulator",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "tpr-transfer": {
+    "publisher": "The Pensions Regulator",
+    "url": "https://www.thepensionsregulator.gov.uk/en/document-library/scheme-management-detailed-guidance/winding-up-or-transferring-a-scheme-detailed-guidance/transferring-to-a-master-trust-smaller-defined-contribution-schemes",
+    "original_locator": "https://www.thepensionsregulator.gov.uk/en/document-library/scheme-management-detailed-guidance/winding-up-or-transferring-a-scheme-detailed-guidance/transferring-to-a-master-trust-smaller-defined-contribution-schemes",
+    "version": "guidance updated 2026-07-06; inclusion entry 2026-05-06",
+    "source_role": "Regulator",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "fca-ai": {
+    "publisher": "FCA",
+    "url": "https://www.fca.org.uk/news/press-releases/fca-announces-second-cohort-ai-live-testing",
+    "original_locator": "https://www.fca.org.uk/news/press-releases/fca-announces-second-cohort-ai-live-testing",
+    "version": "2026-04-21",
+    "source_role": "Regulator",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "fca-sandbox": {
+    "publisher": "FCA",
+    "url": "https://www.fca.org.uk/news/press-releases/anthropic-supercharged-sandbox",
+    "original_locator": "https://www.fca.org.uk/news/press-releases/anthropic-supercharged-sandbox",
+    "version": "2026-07-22",
+    "source_role": "Regulator",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "fca-motor": {
+    "publisher": "FCA",
+    "url": "https://www.fca.org.uk/news/statements/motor-finance-legal-challenge-heard-february-2027",
+    "original_locator": "https://www.fca.org.uk/news/statements/motor-finance-legal-challenge-heard-february-2027",
+    "version": "updated 2026-10-26",
+    "source_role": "Regulator",
+    "observed_on": "2026-11-22",
+    "use_status": "historical locator only; direct retrieval returned HTTP 404 in independent review",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "fca-aaa": {
+    "publisher": "FCA",
+    "url": "https://www.fca.org.uk/publications/good-poor-practice/ai-financial-services",
+    "original_locator": "https://www.fca.org.uk/publications/good-poor-practice/ai-financial-services",
+    "version": "updated 2026-10-20",
+    "source_role": "Regulator",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "lbg-exco": {
+    "publisher": "Lloyds Banking Group",
+    "url": "https://www.lloydsbankinggroup.com/",
+    "original_locator": "/who-we-are/group-overview/group-executive-committee.html",
+    "version": "observed 2026-11-22",
+    "source_role": "Issuer disclosure",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "lbg-condon": {
+    "publisher": "Lloyds Banking Group",
+    "url": "https://www.lloydsbankinggroup.com/",
+    "original_locator": "/media/press-releases/2026/lloyds/lloyds-appoints-natasha-condon-global-head-transaction-banking.html",
+    "version": "2026-11-18",
+    "source_role": "Issuer disclosure",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "lbg-morton": {
+    "publisher": "Lloyds Banking Group",
+    "url": "https://www.lloydsbankinggroup.com/",
+    "original_locator": "/media/press-releases/2026/lloyds/fiamma-morton-appointment.html",
+    "version": "2026-08-12 HTML publication",
+    "source_role": "Issuer disclosure",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "lbg-fit": {
+    "publisher": "Lloyds Banking Group",
+    "url": "https://www.lloydsbankinggroup.com/",
+    "original_locator": "/media/press-releases/2025/lloyds-banking-group-2025/peter-fitzgerald-appointed.html",
+    "version": "2025-12-10 announcement",
+    "source_role": "Issuer disclosure",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "lbg-sprout": {
+    "publisher": "Lloyds Banking Group",
+    "url": "https://www.lloydsbankinggroup.com/",
+    "original_locator": "/media/press-releases/2025/scottish-widows-2025/scottish-widows-turns-to-ai-to-speed-up-protection-insurance-cla.html",
+    "version": "2025-06-05 HTML publication",
+    "source_role": "Issuer disclosure",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "lbg-ms": {
+    "publisher": "Lloyds Banking Group",
+    "url": "https://www.lloydsbankinggroup.com/",
+    "original_locator": "/media/press-releases/2026/lloyds-banking-group/microsoft-365-frontier-suite.html",
+    "version": "2026-06-04",
+    "source_role": "Issuer disclosure",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "ms-e7": {
+    "publisher": "Microsoft",
+    "url": "https://ukstories.microsoft.com/features/lloyds-banking-group-rolls-out-microsoft-365-frontier-suite-to-power-its-agentic-future/",
+    "original_locator": "https://ukstories.microsoft.com/features/lloyds-banking-group-rolls-out-microsoft-365-frontier-suite-to-power-its-agentic-future/",
+    "version": "2026-06 announcement",
+    "source_role": "Interested supplier corroboration",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "lbg-skills": {
+    "publisher": "Lloyds Banking Group",
+    "url": "https://www.lloydsbankinggroup.com/",
+    "original_locator": "/media/press-releases/2026/lloyds-banking-group/1000-new-ai-roles.html",
+    "version": "2026-06-22 HTML publication",
+    "source_role": "Issuer disclosure",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "lbg-ariba": {
+    "publisher": "Lloyds Banking Group",
+    "url": "https://www.lloydsbankinggroup.com/",
+    "original_locator": "/who-we-are/working-with-suppliers/faqs.html",
+    "version": "observed 2026-11-22",
+    "source_role": "Issuer supplier guidance",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "gca": {
+    "publisher": "Government Commercial Agency",
+    "url": "https://redirect-b.webprod.crowncommercial.gov.uk/suppliers/1183/lloyds-bank-plc",
+    "original_locator": "https://redirect-b.webprod.crowncommercial.gov.uk/suppliers/1183/lloyds-bank-plc",
+    "version": "supplier listing observed 2026-11-22",
+    "source_role": "Official buyer channel",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "glos": {
+    "publisher": "Gloucestershire County Council",
+    "url": "https://glostext.gloucestershire.gov.uk/ieDecisionDetails.aspx?ID=1741",
+    "original_locator": "https://glostext.gloucestershire.gov.uk/ieDecisionDetails.aspx?ID=1741",
+    "version": "2021 award decision",
+    "source_role": "Public buyer decision",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "ipsos": {
+    "publisher": "Ipsos",
+    "url": "https://www.ipsos.com/en-uk/business-banking-service-quality-great-britain",
+    "original_locator": "https://www.ipsos.com/en-uk/business-banking-service-quality-great-britain",
+    "version": "August 2026; fieldwork July 2025 to June 2026",
+    "source_role": "Original independent survey release",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "starling": {
+    "publisher": "Starling Bank",
+    "url": "https://www.starlingbank.com/business-account/business-service-quality-survey-results/",
+    "original_locator": "https://www.starlingbank.com/business-account/business-service-quality-survey-results/",
+    "version": "August 2026",
+    "source_role": "Participating provider reproduces Ipsos",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "boe-sep": {
+    "publisher": "Bank of England",
+    "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/september-2026",
+    "original_locator": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/september-2026",
+    "version": "2026-09-17 meeting",
+    "source_role": "Central bank",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "boe-nov": {
+    "publisher": "Bank of England",
+    "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+    "original_locator": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+    "version": "2026-11-04 meeting",
+    "source_role": "Central bank",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "pra-climate": {
+    "publisher": "PRA",
+    "url": "https://www.bankofengland.co.uk/prudential-regulation/publication/2025/december/enhancing-banks-and-insurers-approaches-to-managing-climate-related-risks-ss",
+    "original_locator": "https://www.bankofengland.co.uk/prudential-regulation/publication/2025/december/enhancing-banks-and-insurers-approaches-to-managing-climate-related-risks-ss",
+    "version": "December 2025 SS5/25",
+    "source_role": "Regulator",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "lbg-invest": {
+    "publisher": "Lloyds Banking Group",
+    "url": "https://www.lloydsbankinggroup.com/",
+    "original_locator": "/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-to-invest-100-million-in-future-skills.html",
+    "version": "2026-08-20",
+    "source_role": "Issuer disclosure",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "lbg-sourcing": {
+    "publisher": "Lloyds Banking Group",
+    "url": "https://www.lloydsbankinggroup.com/",
+    "original_locator": "/who-we-are/working-with-suppliers/responsible-sourcing-supplier-management.html",
+    "version": "observed 2026-11-22",
+    "source_role": "Issuer supplier guidance",
+    "observed_on": "2026-11-22",
+    "use_status": "referenced for candidate review only",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  },
+  "fca-motor-firms": {
+    "publisher": "FCA",
+    "url": "https://www.fca.org.uk/firms/information-firms-motor-finance-complaints",
+    "original_locator": "https://www.fca.org.uk/firms/information-firms-motor-finance-complaints",
+    "version": "26 October 2026 update within firms guidance",
+    "source_role": "Regulator",
+    "observed_on": "2026-11-22",
+    "use_status": "external regulatory context for candidate review",
+    "withdrawal": "hold dependent records until locator, scope and eligibility are reverified"
+  }
+}
