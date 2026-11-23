@@ -116,10 +116,13 @@ def test_726_navigation_arrival_and_industry_specific_economics_survive():
 
 
 def test_compatibility_cut_is_exact_and_does_not_accept_unreviewed_functions():
-    from tools.research.eei2b_compatibility import checked_cut, UX_RECOVERY_BASE, UX_RECOVERY_CUTS
+    from tools.research.eei2b_compatibility import checked_cut, UX_RECOVERY_BASE, UX_RECOVERY_CUTS, PREVIEW_BASE, PREVIEW_CUTS
     root=Path(__file__).resolve().parents[1]
     for path,(_,functions) in UX_RECOVERY_CUTS.items():
         current=(root/path).read_bytes()
+        # Retain the original recovery proof after the separately exact-checked
+        # optional-preview frame extension; all historical cut bytes stay pinned.
+        current=checked_cut(root,path,current,PREVIEW_BASE,PREVIEW_CUTS)
         previous=checked_cut(root,path,current,UX_RECOVERY_BASE,UX_RECOVERY_CUTS)
         assert previous!=current
         changed=current+b'\n# Unreviewed mutation\n'

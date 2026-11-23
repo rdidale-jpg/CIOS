@@ -89,6 +89,10 @@ def public_route_catalog(include_owner_inspection=False):
     from .banking_portfolio import BANKS as public_banks
     add(tuple('/enterprises/'+slug for slug in (*public_banks,'easyjet') if slug!='lloyds'), 'unified_enterprise', 'Finite public bank references; not Enterprise Model lookup', ('lens',))
     add(('/enterprises/lloyds',), 'visual_enterprise', 'Existing public Lloyds research reference, never a private Enterprise Model lookup', ('lens','stream','market','layer','selected','detail','agenda','reading'))
+    add(('/enterprises/lloyds/preview',), 'living_enterprise_preview',
+        'Experimental read-only view of the same eligible public Lloyds research; no private model or financial-run lookup', ('stream','focus','subject'))
+    add(('/enterprises/lloyds/preview/assets/styles','/enterprises/lloyds/preview/assets/interactions'),
+        'living_enterprise_preview_asset', 'Exact local presentation assets; no intelligence snapshot or authority')
     from .research_intelligence.model import load_assessment
     research=load_assessment()
     add(('/flora/banking/research',), 'research_industry_page', 'Existing public repository research with explicit primary-verification gaps', ('lens',))

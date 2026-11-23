@@ -1,0 +1,110 @@
+{
+  "phase": "after",
+  "sha": "97d316c640c96d99c2301819f8aac00b3b9c1398",
+  "devices": [
+    {
+      "device": "desktop",
+      "default_main_matches_baseline": true,
+      "public_industry_enterprise_journeys": true,
+      "twelve_preview_regions": true,
+      "eight_swot_themes": true,
+      "history_reload_context_return": true,
+      "keyboard_or_touch": true,
+      "page_errors": []
+    },
+    {
+      "device": "ipad-landscape",
+      "default_main_matches_baseline": true,
+      "public_industry_enterprise_journeys": true,
+      "twelve_preview_regions": true,
+      "eight_swot_themes": true,
+      "history_reload_context_return": true,
+      "keyboard_or_touch": true,
+      "page_errors": []
+    },
+    {
+      "device": "ipad-portrait",
+      "default_main_matches_baseline": true,
+      "public_industry_enterprise_journeys": true,
+      "twelve_preview_regions": true,
+      "eight_swot_themes": true,
+      "history_reload_context_return": true,
+      "keyboard_or_touch": true,
+      "page_errors": []
+    },
+    {
+      "device": "mobile",
+      "default_main_matches_baseline": true,
+      "public_industry_enterprise_journeys": true,
+      "twelve_preview_regions": true,
+      "eight_swot_themes": true,
+      "history_reload_context_return": true,
+      "keyboard_or_touch": true,
+      "page_errors": []
+    }
+  ],
+  "baseline_content": {
+    "desktop:landscape": "Lloyds Banking Group How the Group earns, runs its services and renews its platforms. Economics Operating model What\u2019s changed Leadership agenda Technology & suppliers Commercial hypotheses WHAT\u2019S CHANGED Curve acquisition reported complete Published 2026-10-29 \u00b7 Nine months ended / balance sheet at 30 September 2026 Integration scope and external procurement remain unproven. Explore the timeline Explore Lloyds LLOYDS BANKING GROUP PLC \u00b7 CONSOLIDATED GROUP From funding to earnings Illustrative banking model \u00b7 not to scale Funding REPORTED \u00a3502.8bn Customer deposits \u00b7 30 Sep 2026 Lending & income Interest + fees Profit & costs REPORTED \u00a36.6bn Statutory pretax profit \u00b7 9m to 30 Sep 2026 A foundation for lending Deposits help fund lending and other earning assets. Some accounts earn interest for customers. The balance alone does not show funding cost. Customer mix and the rates paid determine how much deposits cost the bank. Calculated \u00b7 \u00a36.3bn difference in deposits 31 December 2025 \u2192 30 September 2026 \u00b7 two balance-sheet dates A difference between reported balances, not an organic inflow or an income measure. Financial analysis Funding perspective Customer outcomes \u00b7 Lloyds Bank plc Enterprises Customers & Suppliers Regulators",
+    "desktop:inside": "LLOYDS BANKING GROUP PLC \u00b7 CONCEPTUAL MAP Credit and customer service Durable capabilities Credit origination and servicing Customer support and service Risk assessment Assess affordability Triage financial difficulty Servicing Book and service credit Correct an account Customer operations Explain the offer Resolve a service request Technology and controls Record the credit decision Protect access to case data Risk assessment Affordability and vulnerability information shapes the next decision. Lloyds\u2019 thresholds and accountable roles are unverified. Conceptual operating mechanism Assess affordability Risk assessment Triage financial difficulty Earlier checks can limit losses and rework. Overly restrictive thresholds can also exclude sound applicants. Separate Group technology example Reported: Lloyds describes built-in Envoy controls and monitoring. Announced platform capability; not current effectiveness evidence Explore Technology & data Workflow use and supplier contract remain unverified. Enterprises Customers & Suppliers Regulators",
+    "desktop:forces": "LLOYDS BANKING GROUP PLC \u00b7 RATES AND EARNINGS What can put pressure on earnings? Observed condition UK monetary policy \u00b7 industry context Reported: The November policy decision raises Bank Rate to 4%. Meeting ending 4 November 2026 Transmission Funding costs reprice first If funding costs rise faster than asset yields, spread can narrow. Lending reprices first If asset yields rise faster, spread can widen. Disclosed response No eligible evidence links a Lloyds response to this rate decision. Separate Group efficiency ambition Reported: Management target The 2030 efficiency ambition is a cost-to-income ratio below 45%. Strategy for 2027\u20132030 Conditional consequence Conditional \u00b7 A weaker spread can reduce income. The cost-to-income ratio can rise even when operating costs are steady. Earnings sensitivity depends on the timing and size of repricing. To assess Lloyds\u2019 exposure, compare deposit and asset repricing, income and costs over matching periods. Reported Group performance context \u00a36.6bn statutory pretax profit Nine months to 30 September 2026 \u00b7 earnings flow Enterprises Customers & Suppliers Regulators",
+    "ipad-landscape:landscape": "Lloyds Banking Group How the Group earns, runs its services and renews its platforms. Economics Operating model What\u2019s changed Leadership agenda Technology & suppliers Commercial hypotheses WHAT\u2019S CHANGED Curve acquisition reported complete Published 2026-10-29 \u00b7 Nine months ended / balance sheet at 30 September 2026 Integration scope and external procurement remain unproven. Explore the timeline Explore Lloyds LLOYDS BANKING GROUP PLC \u00b7 CONSOLIDATED GROUP From funding to earnings Illustrative banking model \u00b7 not to scale Funding REPORTED \u00a3502.8bn Customer deposits \u00b7 30 Sep 2026 Lending & income Interest + fees Profit & costs REPORTED \u00a36.6bn Statutory pretax profit \u00b7 9m to 30 Sep 2026 A foundation for lending Deposits help fund lending and other earning assets. Some accounts earn interest for customers. The balance alone does not show funding cost. Customer mix and the rates paid determine how much deposits cost the bank. Calculated \u00b7 \u00a36.3bn difference in deposits 31 December 2025 \u2192 30 September 2026 \u00b7 two balance-sheet dates A difference between reported balances, not an organic inflow or an income measure. Financial analysis Funding perspective Customer outcomes \u00b7 Lloyds Bank plc Enterprises Customers & Suppliers Regulators",
+    "ipad-landscape:inside": "LLOYDS BANKING GROUP PLC \u00b7 CONCEPTUAL MAP Credit and customer service Durable capabilities Credit origination and servicing Customer support and service Risk assessment Assess affordability Triage financial difficulty Servicing Book and service credit Correct an account Customer operations Explain the offer Resolve a service request Technology and controls Record the credit decision Protect access to case data Risk assessment Affordability and vulnerability information shapes the next decision. Lloyds\u2019 thresholds and accountable roles are unverified. Conceptual operating mechanism Assess affordability Risk assessment Triage financial difficulty Earlier checks can limit losses and rework. Overly restrictive thresholds can also exclude sound applicants. Separate Group technology example Reported: Lloyds describes built-in Envoy controls and monitoring. Announced platform capability; not current effectiveness evidence Explore Technology & data Workflow use and supplier contract remain unverified. Enterprises Customers & Suppliers Regulators",
+    "ipad-landscape:forces": "LLOYDS BANKING GROUP PLC \u00b7 RATES AND EARNINGS What can put pressure on earnings? Observed condition UK monetary policy \u00b7 industry context Reported: The November policy decision raises Bank Rate to 4%. Meeting ending 4 November 2026 Transmission Funding costs reprice first If funding costs rise faster than asset yields, spread can narrow. Lending reprices first If asset yields rise faster, spread can widen. Disclosed response No eligible evidence links a Lloyds response to this rate decision. Separate Group efficiency ambition Reported: Management target The 2030 efficiency ambition is a cost-to-income ratio below 45%. Strategy for 2027\u20132030 Conditional consequence Conditional \u00b7 A weaker spread can reduce income. The cost-to-income ratio can rise even when operating costs are steady. Earnings sensitivity depends on the timing and size of repricing. To assess Lloyds\u2019 exposure, compare deposit and asset repricing, income and costs over matching periods. Reported Group performance context \u00a36.6bn statutory pretax profit Nine months to 30 September 2026 \u00b7 earnings flow Enterprises Customers & Suppliers Regulators",
+    "ipad-portrait:landscape": "Lloyds Banking Group How the Group earns, runs its services and renews its platforms. Economics Operating model What\u2019s changed Leadership agenda Technology & suppliers Commercial hypotheses WHAT\u2019S CHANGED Curve acquisition reported complete Published 2026-10-29 \u00b7 Nine months ended / balance sheet at 30 September 2026 Integration scope and external procurement remain unproven. Explore the timeline Explore Lloyds LLOYDS BANKING GROUP PLC \u00b7 CONSOLIDATED GROUP From funding to earnings Illustrative banking model \u00b7 not to scale Funding REPORTED \u00a3502.8bn Customer deposits \u00b7 30 Sep 2026 Lending & income Interest + fees Profit & costs REPORTED \u00a36.6bn Statutory pretax profit \u00b7 9m to 30 Sep 2026 A foundation for lending Deposits help fund lending and other earning assets. Some accounts earn interest for customers. The balance alone does not show funding cost. Customer mix and the rates paid determine how much deposits cost the bank. Calculated \u00b7 \u00a36.3bn difference in deposits 31 December 2025 \u2192 30 September 2026 \u00b7 two balance-sheet dates A difference between reported balances, not an organic inflow or an income measure. Financial analysis Funding perspective Customer outcomes \u00b7 Lloyds Bank plc Enterprises Customers & Suppliers Regulators",
+    "ipad-portrait:inside": "LLOYDS BANKING GROUP PLC \u00b7 CONCEPTUAL MAP Credit and customer service Durable capabilities Credit origination and servicing Customer support and service Risk assessment Assess affordability Triage financial difficulty Servicing Book and service credit Correct an account Customer operations Explain the offer Resolve a service request Technology and controls Record the credit decision Protect access to case data Risk assessment Affordability and vulnerability information shapes the next decision. Lloyds\u2019 thresholds and accountable roles are unverified. Conceptual operating mechanism Assess affordability Risk assessment Triage financial difficulty Earlier checks can limit losses and rework. Overly restrictive thresholds can also exclude sound applicants. Separate Group technology example Reported: Lloyds describes built-in Envoy controls and monitoring. Announced platform capability; not current effectiveness evidence Explore Technology & data Workflow use and supplier contract remain unverified. Enterprises Customers & Suppliers Regulators",
+    "ipad-portrait:forces": "LLOYDS BANKING GROUP PLC \u00b7 RATES AND EARNINGS What can put pressure on earnings? Observed condition UK monetary policy \u00b7 industry context Reported: The November policy decision raises Bank Rate to 4%. Meeting ending 4 November 2026 Transmission Funding costs reprice first If funding costs rise faster than asset yields, spread can narrow. Lending reprices first If asset yields rise faster, spread can widen. Disclosed response No eligible evidence links a Lloyds response to this rate decision. Separate Group efficiency ambition Reported: Management target The 2030 efficiency ambition is a cost-to-income ratio below 45%. Strategy for 2027\u20132030 Conditional consequence Conditional \u00b7 A weaker spread can reduce income. The cost-to-income ratio can rise even when operating costs are steady. Earnings sensitivity depends on the timing and size of repricing. To assess Lloyds\u2019 exposure, compare deposit and asset repricing, income and costs over matching periods. Reported Group performance context \u00a36.6bn statutory pretax profit Nine months to 30 September 2026 \u00b7 earnings flow Enterprises Customers & Suppliers Regulators",
+    "mobile:landscape": "Lloyds Banking Group How the Group earns, runs its services and renews its platforms. Economics Operating model What\u2019s changed Leadership agenda Technology & suppliers Commercial hypotheses WHAT\u2019S CHANGED Curve acquisition reported complete Published 2026-10-29 \u00b7 Nine months ended / balance sheet at 30 September 2026 Integration scope and external procurement remain unproven. Explore the timeline Explore Lloyds LLOYDS BANKING GROUP PLC \u00b7 CONSOLIDATED GROUP From funding to earnings Illustrative banking model \u00b7 not to scale Funding REPORTED\u00a3502.8bn Customer deposits \u00b7 30 Sep 2026 Lending & income Interest + fees Profit & costs REPORTED\u00a36.6bn Statutory pretax profit \u00b7 9m to 30 Sep 2026 A foundation for lending Deposits help fund lending and other earning assets. Some accounts earn interest for customers. The balance alone does not show funding cost. Customer mix and the rates paid determine how much deposits cost the bank. Calculated \u00b7 \u00a36.3bn difference in deposits 31 December 2025 \u2192 30 September 2026 \u00b7 two balance-sheet dates A difference between reported balances, not an organic inflow or an income measure. Financial analysis Funding perspective Customer outcomes \u00b7 Lloyds Bank plc Enterprises Customers & Suppliers Regulators",
+    "mobile:inside": "LLOYDS BANKING GROUP PLC \u00b7 CONCEPTUAL MAP Credit and customer service Durable capabilities Credit origination and servicing Customer support and service Risk assessment Assess affordability Triage financial difficulty Servicing Book and service credit Correct an account Customer operations Explain the offer Resolve a service request Technology and controls Record the credit decision Protect access to case data Risk assessment Affordability and vulnerability information shapes the next decision. Lloyds\u2019 thresholds and accountable roles are unverified. Conceptual operating mechanism Assess affordability Risk assessment Triage financial difficulty Earlier checks can limit losses and rework. Overly restrictive thresholds can also exclude sound applicants. Separate Group technology example Reported: Lloyds describes built-in Envoy controls and monitoring. Announced platform capability; not current effectiveness evidence Explore Technology & data Workflow use and supplier contract remain unverified. Enterprises Customers & Suppliers Regulators",
+    "mobile:forces": "LLOYDS BANKING GROUP PLC \u00b7 RATES AND EARNINGS What can put pressure on earnings? Observed condition UK monetary policy \u00b7 industry context Reported: The November policy decision raises Bank Rate to 4%. Meeting ending 4 November 2026 Transmission Funding costs reprice first If funding costs rise faster than asset yields, spread can narrow. Lending reprices first If asset yields rise faster, spread can widen. Disclosed response No eligible evidence links a Lloyds response to this rate decision. Separate Group efficiency ambition Reported: Management target The 2030 efficiency ambition is a cost-to-income ratio below 45%. Strategy for 2027\u20132030 Conditional consequence Conditional \u00b7 A weaker spread can reduce income. The cost-to-income ratio can rise even when operating costs are steady. Earnings sensitivity depends on the timing and size of repricing. To assess Lloyds\u2019 exposure, compare deposit and asset repricing, income and costs over matching periods. Reported Group performance context \u00a36.6bn statutory pretax profit Nine months to 30 September 2026 \u00b7 earnings flow Enterprises Customers & Suppliers Regulators"
+  },
+  "baseline_html_sha256": {
+    "landscape": "a6f7f221ff0320f12f6ce5d34e9857d31b369b64e3dccaffa60054438265d2ef",
+    "inside": "23e0e2523af23b224731152b98f093ed8ff63f537d079167db6b62d06756e2de",
+    "forces": "de8e4a62e032039d9a3852236a9e079872f9123fdcab47f63751cb0538d44b05"
+  },
+  "screenshots": {
+    "after-desktop-current-lloyds.jpg": "37a9f483a54b63013972685fce6ba65df437876375eacfea118320696aa2576e",
+    "after-desktop-preview-landscape.jpg": "5f5a83f92fc50959711971a3d54f8c43575a2e0b23d9820478b5c89dfd9aa158",
+    "after-desktop-preview-inside.jpg": "37d11ed4caff099c5b313bcc42a5115c425a5622069705220a1f2895ec6eeece",
+    "after-desktop-preview-forces.jpg": "447a5acfe083c3645388c426f5c6b70bc93204ca5007621d2c5303ac15b56088",
+    "after-desktop-preview-swot.jpg": "7a30772dac44b7994082db1029996909fcfbcfa7915aae3eb9844b64619bcab3",
+    "after-desktop-easyjet-inside.jpg": "492378e2fc9780e8a726cabb8f7418dd209092621c9496f416d9422685b25f2f",
+    "after-ipad-landscape-current-lloyds.jpg": "8228e8dc0b3ce324483b0e78303600a583c831771d9407acf86c60998f3e2fc9",
+    "after-ipad-landscape-preview-landscape.jpg": "b40904fccccd36b73013af56a6dd507c7300fdd9c993afc4eb71bdf75a886d72",
+    "after-ipad-landscape-preview-inside.jpg": "607569fc76d329a096f6aee6818b15a25d7203ba663345ed9872ed59c83fec94",
+    "after-ipad-landscape-preview-forces.jpg": "a72cedff756fdfb20bc4b75e8f4b3772fc6c5030cd7247d49ef96bd8232cc3be",
+    "after-ipad-landscape-preview-swot.jpg": "54373baca86d48ccdb6e5eddd993d18a6568977d2f969adfe85dc298b90b9bbe",
+    "after-ipad-landscape-easyjet-inside.jpg": "ef9b007c028d99651f1788fecd2a45597adce9c487b1d25bdf65e6632a3f24c2",
+    "after-ipad-portrait-current-lloyds.jpg": "66b020c72c9d300d8d1347fadd06780b93f83e2bd0aaa4b6a6323e5ddcb07ece",
+    "after-ipad-portrait-preview-landscape-compact.jpg": "82570b123bc83c065e60bacc257db9c5d6e5da9428a8c4512d061b2d121a74b4",
+    "after-ipad-portrait-preview-landscape.jpg": "397d58786d3a836174f5266580c99973c5e76e78e86f81a2f2620f990e4332d5",
+    "after-ipad-portrait-preview-inside-compact.jpg": "03cfe52b480d2badc6bf19e3b68240fbd1a1d6dd10765e70abfa5a07d6bbf59c",
+    "after-ipad-portrait-preview-inside.jpg": "4c3c151c9462f457f18afa81da86bc4285bb4b4a58fe860baf13438f270a158c",
+    "after-ipad-portrait-preview-forces-compact.jpg": "f2381f4d4d4a4b1f106bad09bf47cc3dbdddced66a31927eeaba7d1dc850ec09",
+    "after-ipad-portrait-preview-forces.jpg": "9e3e8622479c7ad2940047da81c0e66f12e05518472bb5c89cfc84bff3973082",
+    "after-ipad-portrait-preview-swot.jpg": "34f5d8b8e0689b2cf3474744095c2c85855935afa1d59fd0a0358f47cda51e67",
+    "after-ipad-portrait-easyjet-inside.jpg": "22f3144865ea04f971123ce76efa06bd134faab0d59c22ab9a9f442884ee7ade",
+    "after-mobile-current-lloyds.jpg": "b6aac4276a40dd9484ca4e88968e5cc22493255b3cbc97413d915416de436fd2",
+    "after-mobile-preview-landscape-compact.jpg": "fcdd87e104172fd595aea287b8323a95b81367d763e5393dfa71cab4ea2416f8",
+    "after-mobile-preview-landscape.jpg": "9a5ebac213a4cee8244708c62b6dcea4d96f16b6ca4acd45c9f2b76c77a36b23",
+    "after-mobile-preview-inside-compact.jpg": "9c9305e23aa27db774ecc4448a98ab627bb1637348f19488035c3205915639e8",
+    "after-mobile-preview-inside.jpg": "8eb28f42067ecc578bc3f8567f6a4494ecd5c6809b2506dc26f5ea3936d89444",
+    "after-mobile-preview-forces-compact.jpg": "d8ec0e662f314197a648b08be77b778dd542d573e97b254d3dbb4eb4d0bfc372",
+    "after-mobile-preview-forces.jpg": "25ef801055a7ab93d0e376c9936d34c91fe0fe529702167f098273b97da3ea4f",
+    "after-mobile-preview-swot.jpg": "5dd74717f8d07b982f679df55a0b05f525b7ba538ac90adf9952b11fe61c11a3",
+    "after-mobile-easyjet-inside.jpg": "60cbd24e2eca190904708dc48ebf3da081fa5b75c7c9779bd8cd77260d03cea7"
+  },
+  "source_withdrawal_history_reload_print_accessible_marker": true,
+  "no_javascript_fallback": true,
+  "browser": "Chromium; emulated iPad/touch, not physical iPad or live Render",
+  "worktree_dirty": true,
+  "runtime_source_sha256": {
+    "living_enterprise_preview.py": "816a1ff2c2a6d673a09fb827acdee2d3bec2d09ee09bcbd65b70e7b99ef7432f",
+    "lloyds_flagship.py": "b6bb3e532d518b5fc2e39f579286915cedd1d381f25e26712e65642f029e37d5",
+    "visual_panels.py": "592ecfbbc2b0d70baf1019c839981d62ddce23b137afbeacc2c2dc5fdf75400d",
+    "public_routes.py": "17a39084779442cdea73a0bd9922be6722c815ac0ee3dfa2b164810472575916",
+    "web/app.py": "232d7d9fbf736adc1d1c9735038a53cb0508af5e8c18b29ee46582fc0d47ec69",
+    "visual_stream_assets/living-enterprise-preview.css": "4b6f68f9cc7347bcac483ed0d98918d1bc8e0a27ff188d073e606f493b8acc7c",
+    "visual_stream_assets/living-enterprise-preview.js": "9bc244c91eddb913ca9013a5813c28878140addb5ddd85f544770cf67342f028"
+  }
+}
