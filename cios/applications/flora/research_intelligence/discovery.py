@@ -175,10 +175,13 @@ def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=(), include_bod
             'publication_eligible': False,
         }
         if include_body:
+            from .assurance import screen_extracted
             from .body_claims import extract_claims
             candidate['body_claims'] = extract_claims(
                 raw, enterprise=enterprise, url=url, digest=digest,
                 published=published.isoformat(), publisher=publisher)
+            for claim in candidate['body_claims']:
+                claim['assurance'] = screen_extracted(claim, raw, as_of=cutoff)
         candidates.append(candidate)
 
     unique = {}

@@ -17,8 +17,9 @@ from cios.applications.flora.memory.repository import EvidenceRepository, Enterp
 from cios.applications.flora.research_intelligence.initial_factory import blueprint_archive
 from cios.applications.flora.web.app import FloraWebHandler
 from cios.applications.flora.research_intelligence.source_lifecycle import lifecycle_path
-from cios.applications.flora.storage import atomic_write_json
+from cios.applications.flora.storage import atomic_write_json, data_path
 from tools.research.verified_factory_proof import capture
+from tests.flora_assurance_fixture import ARM, assess_existing_proof, fixture_handoff
 
 FIXTURE = Path('docs/research/initial-factory/verified/isolated-records.json')
 ROUTES = {
@@ -67,14 +68,24 @@ def test_verified_change_route(result, tmp_path, monkeypatch, verified_flora_tes
 
     before = render(headers)
     assert 'data-commercial-change' not in before
+    decision = assess_existing_proof(result, {(row['url'], row['sha256']) for row in source_revisions})
+    handoff = fixture_handoff(decision, enterprise)
+    assert handoff['eligible_for_isolated_handoff'] is (enterprise == ARM)
+    assert decision['factual_state'] == ('verified' if enterprise == ARM else 'attributed_only')
+    # The three existing issuer-only cards below reproduce the manually
+    # reviewed comparison baseline. Only the Arm notice exercises automatic
+    # eligibility under the explicitly scoped, test-only handoff.
     blueprint = BlueprintPackageRegistry().receive(blueprint_archive(result), 'scoped.zip', actor, enterprise)
     validator = BlueprintPackageValidator()
     assert validator.validate_and_stage(blueprint.package_ref, actor, headers).records_accepted_into_staging == 2
     for candidate in validator.staging_summary(blueprint.import_run_id)['candidates']:
         CandidateReviewService().record_decision(candidate['candidate_record_id'], 'approve',
-                                                actor, 'Isolated reviewed factual assertion', headers)
+                                                actor, (decision['decision_id'] if handoff['eligible_for_isolated_handoff']
+                                                        else 'Isolated reviewed factual assertion'), headers)
     plan = DryRunPlanningService().create_plan(blueprint.import_run_id, actor, headers)
     service = CanonicalPromotionService()
+    with pytest.raises(PermissionError):
+        service.approve_plan(blueprint.import_run_id, plan.plan_id, actor, 'No authority', {})
     approved = service.approve_plan(blueprint.import_run_id, plan.plan_id, actor, 'Isolated proof', headers)
     execute = lambda: service.execute_approved_plan(blueprint.import_run_id, approved.approval_id, actor, headers)
     assert execute().actual_mutation_count == 2
@@ -98,6 +109,9 @@ def test_verified_change_route(result, tmp_path, monkeypatch, verified_flora_tes
     stored_bytes = repository.path.read_bytes()
     source_revisions[-1]['lifecycle'] = 'withdrawn'
     set_source_revisions()
+    degraded = assess_existing_proof(result, {(row['url'], row['sha256']) for row in source_revisions
+                                               if row['lifecycle'] == 'current'})
+    assert not fixture_handoff(degraded, enterprise)['eligible_for_isolated_handoff']
     assert repository.get(row['evidence_id'])['status'] == 'withdrawn'
     assert 'data-commercial-change' not in render(headers)
     assert repository.path.read_bytes() == stored_bytes
@@ -114,6 +128,7 @@ def test_verified_change_route(result, tmp_path, monkeypatch, verified_flora_tes
     assert 'data-commercial-change' in render(headers)
     repository.save(dict(row, status='withdrawn'))
     assert 'data-commercial-change' not in render(headers)
+    assert not data_path('sales_pipeline', 'opportunities.json').exists()
 
 
 def test_head_only_or_conflicting_passage_cannot_be_used_as_evidence():
