@@ -49,6 +49,13 @@ def test_verified_change_route(result, tmp_path, monkeypatch, verified_flora_tes
         assert original['url'] == prior['url']
         prior['sha256'] = original['digest']
         payload['commercial_change']['corroboration']['sha256'] = original['digest']
+        payload['commercial_change'].update(
+            headline='Microsoft announces Azure Cobalt 200 availability',
+            confidence='Microsoft announcement',
+            meaning='Microsoft announced an Arm-based option for evaluating cloud workloads on Azure.',
+        )
+        payload['caveat'] = ('Microsoft’s notice describes availability. Regional coverage, customer adoption '
+                             'and measured savings remain unverified.')
     evidence, _ = result['records']
     headline = evidence['payload']['commercial_change']['headline']
     alias, route = ROUTES[enterprise]
