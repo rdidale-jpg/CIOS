@@ -1,0 +1,459 @@
+[
+  {
+    "id": "UK-RAIL",
+    "name": "UK rail system",
+    "kind": "statistical_perimeter",
+    "scope": "UK rail 2024/25",
+    "source_ids": [
+      "RAIL-FIN"
+    ],
+    "identity_basis": "statistical boundary, not a legal company",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "NR",
+    "name": "Network Rail regulatory GB perimeter",
+    "kind": "reporting_perimeter",
+    "scope": "Great Britain infrastructure, regulatory FY2025/26",
+    "source_ids": [
+      "NR-REG"
+    ],
+    "identity_basis": "not an alias for a single legal company",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "NRIL",
+    "name": "Network Rail Infrastructure Limited",
+    "kind": "legal_company",
+    "scope": "GB infrastructure legal-company identity only",
+    "source_ids": [
+      "ID-NR"
+    ],
+    "identity_basis": "Companies House 02904587",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "NR-BRAND",
+    "name": "Network Rail",
+    "kind": "organisation_brand",
+    "scope": "Project Reach public announcement party",
+    "source_ids": [
+      "REACH"
+    ],
+    "identity_basis": "brand-level announcement; exact legal buyer not assigned",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "GBR",
+    "name": "Great British Railways (proposed)",
+    "kind": "proposed_public_body",
+    "scope": "GB proposed integrated railway",
+    "source_ids": [
+      "GBR"
+    ],
+    "identity_basis": "licence consultation; no assigned company, active licence or operating successor asserted",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "DFTO",
+    "name": "DfT Operator Limited",
+    "kind": "legal_company",
+    "scope": "government rail holding/delivery role",
+    "source_ids": [
+      "ID-DFTO",
+      "DFTO"
+    ],
+    "identity_basis": "Companies House 07141122; not GBR",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "FIRST",
+    "name": "FirstGroup plc",
+    "kind": "reporting_group",
+    "scope": "26 weeks ended 26 September 2026; UK public transport",
+    "source_ids": [
+      "FIRST"
+    ],
+    "identity_basis": "issuer name and LEI 549300DEJZCPWA4HKM93",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "NH",
+    "name": "National Highways Limited",
+    "kind": "legal_company",
+    "scope": "England strategic road network",
+    "source_ids": [
+      "ID-NH",
+      "NH-ORR"
+    ],
+    "identity_basis": "Companies House 09346363",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "TFL",
+    "name": "Transport for London",
+    "kind": "public_authority",
+    "scope": "London multi-modal authority and group",
+    "source_ids": [
+      "TFL",
+      "TFL-PLU"
+    ],
+    "identity_basis": "issuer/authority name; not all UK transport",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "LU",
+    "name": "London Underground upgrade programme",
+    "kind": "programme_context",
+    "scope": "Piccadilly Stage 1; TfL programme",
+    "source_ids": [
+      "TFL-PLU"
+    ],
+    "identity_basis": "not a separately assigned legal buyer",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "HSP",
+    "name": "Heathrow (SP) Limited",
+    "kind": "legal_holding_company",
+    "scope": "airport holding/reporting group",
+    "source_ids": [
+      "ID-HSP"
+    ],
+    "identity_basis": "Companies House 06458621; not airport operator legal-entity alias",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "HEATHROW",
+    "name": "Heathrow public results perimeter",
+    "kind": "reporting_perimeter",
+    "scope": "nine months ended 30 September 2026; debt scopes explicitly labelled",
+    "source_ids": [
+      "HEATHROW"
+    ],
+    "identity_basis": "public issuer statement; no automatic legal/operator identity join",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "EASYJET",
+    "name": "easyJet existing research subject",
+    "kind": "existing_research_identity",
+    "scope": "airline, holidays and Group boundaries retained",
+    "source_ids": [
+      "EJ-W3"
+    ],
+    "identity_basis": "enterprise-knowledge aviation candidate identity, not accepted canonical identity",
+    "canonical_identity": {
+      "owner": "enterprise-knowledge/aviation/MANIFEST.yaml",
+      "research_enterprise_id": "AV-ENT-001",
+      "accepted_model_id": null
+    },
+    "status": "research_reference_only"
+  },
+  {
+    "id": "IAG",
+    "name": "International Consolidated Airlines Group S.A.",
+    "kind": "reporting_group",
+    "scope": "global airlines; EUR; not British Airways UK company",
+    "source_ids": [
+      "IAG"
+    ],
+    "identity_basis": "original issuer name; registry/NIF reconciliation outstanding",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "ABP",
+    "name": "Associated British Ports",
+    "kind": "statutory_company",
+    "scope": "21 UK ports and related property; company accounts",
+    "source_ids": [
+      "ABP"
+    ],
+    "identity_basis": "statutory company ZC000195; not ABP Holdings group",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "DPW-UK",
+    "name": "DP World UK terminals",
+    "kind": "operating_brand_perimeter",
+    "scope": "London Gateway and Southampton terminals",
+    "source_ids": [
+      "DPW"
+    ],
+    "identity_basis": "not a single incorporated UK entity; UK accounts not supplied by global brand",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "LGP",
+    "name": "London Gateway Port Limited",
+    "kind": "legal_company",
+    "scope": "registered company, underlying financial accounts not reviewed",
+    "source_ids": [
+      "ID-LGP"
+    ],
+    "identity_basis": "Companies House 04341592; no automatic DPW metric attachment",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "IDS",
+    "name": "International Distribution Services Limited",
+    "kind": "legal_holding_company",
+    "scope": "current private holding-company identity",
+    "source_ids": [
+      "ID-IDS"
+    ],
+    "identity_basis": "Companies House 08680755; PLC ended 18 September 2025",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "RM",
+    "name": "Royal Mail Group Limited",
+    "kind": "legal_company",
+    "scope": "UK postal universal-service operator reference",
+    "source_ids": [
+      "ID-RM",
+      "RM-QOS"
+    ],
+    "identity_basis": "Companies House 04138203; distinct from IDS",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "DHL-UK",
+    "name": "DHL Supply Chain Limited",
+    "kind": "legal_company",
+    "scope": "UK freight/contract logistics legal company",
+    "source_ids": [
+      "ID-DHL"
+    ],
+    "identity_basis": "Companies House 00528867; not DHL Express or global division",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "DHL-GLOBAL",
+    "name": "DHL Group Supply Chain division",
+    "kind": "reporting_division",
+    "scope": "global reporting division, Q3 2026",
+    "source_ids": [
+      "DHL"
+    ],
+    "identity_basis": "no UK revenue attribution",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "NEOS",
+    "name": "Neos Networks Limited",
+    "kind": "named_legal_counterparty",
+    "scope": "Project Reach fibre role",
+    "source_ids": [
+      "REACH-LEGAL",
+      "REACH"
+    ],
+    "identity_basis": "ORR correspondence; current registry crosswalk not completed",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "FRESHWAVE",
+    "name": "Freshwave Facilities Limited",
+    "kind": "named_legal_counterparty",
+    "scope": "Project Reach mobile/tunnel role",
+    "source_ids": [
+      "REACH-LEGAL",
+      "REACH"
+    ],
+    "identity_basis": "ORR correspondence; brand-to-contract scope limited to this proposal",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "SIEMENS",
+    "name": "Siemens Mobility Limited",
+    "kind": "named_legal_counterparty",
+    "scope": "Piccadilly trains and Fleet Services Agreement",
+    "source_ids": [
+      "TFL-PLU"
+    ],
+    "identity_basis": "TfL public committee paper; current company-number crosswalk outstanding",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "OPENAIR",
+    "name": "OpenAirlines",
+    "kind": "supplier_brand",
+    "scope": "IAG SkyBreathe selection",
+    "source_ids": [
+      "IAG-SKY"
+    ],
+    "identity_basis": "contracting legal company not disclosed; no signed contract/value asserted",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "DFT",
+    "name": "Department for Transport",
+    "kind": "government",
+    "scope": "UK department with programme-specific geographies",
+    "source_ids": [
+      "DFT",
+      "GBR",
+      "REACH"
+    ],
+    "identity_basis": "official departmental source",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "ORR",
+    "name": "Office of Rail and Road",
+    "kind": "regulator",
+    "scope": "GB rail / England strategic-road monitoring",
+    "source_ids": [
+      "NR-REG",
+      "NH-ORR"
+    ],
+    "identity_basis": "official regulatory assessment",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "OFCOM",
+    "name": "Ofcom",
+    "kind": "regulator",
+    "scope": "UK postal regulation",
+    "source_ids": [
+      "RM-QOS"
+    ],
+    "identity_basis": "official regulator investigation",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "SCOT-GOV",
+    "name": "Scottish Government",
+    "kind": "government",
+    "scope": "Scotland rail sponsorship",
+    "source_ids": [
+      "SCOT"
+    ],
+    "identity_basis": "official Transport Scotland governance",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "SRH",
+    "name": "Scottish Rail Holdings Limited",
+    "kind": "named_legal_company",
+    "scope": "Scotland passenger rail ownership",
+    "source_ids": [
+      "SCOT"
+    ],
+    "identity_basis": "official sponsor; registry-number reconciliation pending",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "SCOTRAIL",
+    "name": "ScotRail Trains Limited",
+    "kind": "named_legal_company",
+    "scope": "Scotland passenger operations",
+    "source_ids": [
+      "SCOT"
+    ],
+    "identity_basis": "official sponsor governance",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "SLEEPER",
+    "name": "Caledonian Sleeper Limited",
+    "kind": "named_legal_company",
+    "scope": "sleeper passenger services",
+    "source_ids": [
+      "SCOT"
+    ],
+    "identity_basis": "official sponsor governance",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "NITHC",
+    "name": "Northern Ireland Transport Holding Company",
+    "kind": "public_holding_body",
+    "scope": "Northern Ireland Translink portfolio",
+    "source_ids": [
+      "NI"
+    ],
+    "identity_basis": "official corporate index; subsidiary and accounts verification pending",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "ROAD-UK",
+    "name": "GB-registered domestic HGV activity",
+    "kind": "statistical_perimeter",
+    "scope": "UK activity of GB registered vehicles",
+    "source_ids": [
+      "ROAD"
+    ],
+    "identity_basis": "separate NI survey not silently aggregated",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "PORT-UK",
+    "name": "UK major-port cargo",
+    "kind": "statistical_perimeter",
+    "scope": "51 UK major ports in source",
+    "source_ids": [
+      "PORTS"
+    ],
+    "identity_basis": "not all minor ports or shipping lines",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "SZC-WORK",
+    "name": "Sizewell C worker transport programme",
+    "kind": "programme_reference",
+    "scope": "worker transport award mentioned in FirstGroup report; not verified contracting company",
+    "source_ids": [
+      "FIRST"
+    ],
+    "identity_basis": "issuer programme description; legal counterparty unresolved",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  },
+  {
+    "id": "GB-RAIL-FREIGHT",
+    "name": "Great Britain rail freight activity",
+    "kind": "statistical_perimeter",
+    "scope": "April-June2026; volumes, distance and cancellations",
+    "source_ids": [
+      "RAIL-FREIGHT"
+    ],
+    "identity_basis": "ORR statistical scope, not a legal operator or all-UK company perimeter",
+    "canonical_identity": null,
+    "status": "research_reference_only"
+  }
+]

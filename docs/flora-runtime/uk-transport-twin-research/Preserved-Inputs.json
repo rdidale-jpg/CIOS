@@ -1,0 +1,397 @@
+[
+  {
+    "path": "architecture/reference-architecture/Architecture-Authority-Registry.md",
+    "sha256": "88de0e0df9a8a78ab0a8263c562ff1c3cd02fb8492afa3cf7c99a32a462ec5d7",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "cios/contracts/twin_object_profiles/researcher_v1.json",
+    "sha256": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Banking-Ecosystem-Map.md",
+    "sha256": "244341fd05ffce32ff78007b31d157d9ce2a3136bb385c25500031c8b7a5d625",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Banking-Portfolio-Crosswalk.json",
+    "sha256": "998ed280376b3ae9ae5eb924d28271b5fabea722354af6963f1bc1e490d104a9",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Claims.json",
+    "sha256": "aacee1130d958d0960f4bb24814c42070c53e84bf364a6d1ffa24804285c3476",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Commercial-Quality.md",
+    "sha256": "3ec9d138deb656c422f12d32defeb29c5e8b9b67ff29ca69ddf18e51aba223a4",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Continuing-Waves.json",
+    "sha256": "5e0248053ff071b4bdc612e0c8f63230a14834ebee037e29fe29b69f94930c7d",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Contradictions-and-Gaps.json",
+    "sha256": "ca2e33d1f23675de7beaf440ec94ec7883a436af331cd66e3f785a8a0b52cb55",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Dossier-Index.md",
+    "sha256": "adbdc1abfbc6154a7bf54f5c52beba1ba171ba1ab91ed1a94deac9785587d641",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Enterprise-Dossiers.json",
+    "sha256": "e0289d960f39106f0824a8339f686d60b553994dc5c086fbe789ed0f40df7d87",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Existing-Cohort-Reconciliation.json",
+    "sha256": "bd804277fb0d3d28da70f4f1dc56fbb5e2fb374d99377249afc4fbd35d9d320c",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Experience-Readiness-Handoff.json",
+    "sha256": "c3d638564857abb96f8ef04a4924575fc92f9fc96346d4839af142e1de593dde",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Financial-Measurements.json",
+    "sha256": "e20101b4909df44949d4d8bb06d96932cdcda175688b1238f0402af4eb8561de",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Financial-Reconciliations.json",
+    "sha256": "fdf4e6dcdc3d484e9bab89d8a4b2265074af402ef6061675b5fe1798a9dda060",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Information-Requirements-and-Readiness.json",
+    "sha256": "bc6724459c0575ef2454a6c898b8df71c89a845a6bb4c7af5b193263d387df1e",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Inherited-Relationship-Review.json",
+    "sha256": "f3d244ff4c5803cfe4090571dd9d4580c79ce9414da7c20c0f377c9a43f1c804",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Owner-Acceptance-and-Rollback.md",
+    "sha256": "779b0195136cb75d9a7879004ab7b94c3fea783019b8fcbf85e7b3880b55499f",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Ownership-and-Method.md",
+    "sha256": "c0723c1b464ee0c03108499b134c53ed72dcd959bf9f1cb5bac58e322ff68613",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Preserved-Inputs.json",
+    "sha256": "171e9dc62b9ea32206bd0be182421a347c95db67fcc56354a52f12e11ac81887",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/README.md",
+    "sha256": "aa6e1d64bf43d1b799f24c307f86d599d89a596d016994b2195fb2fade59da70",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Research-Baseline.json",
+    "sha256": "d71e5b9740b992b95f4a1a02a761acc37980053cb7d0d14cf9ab5bdb934bea98",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Source-Exceptions-and-Decisions.json",
+    "sha256": "a4b8bb63631af769024f9953c332eadebfe48b54efc30f6225af1e62cfcacc4e",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Sources.json",
+    "sha256": "cdd602873b6129fb58b0f54803de816bdb3f62c461bb43cb6d439314b2dffd3f",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Typed-Relationships.json",
+    "sha256": "1646ec3768a6c2b167c13cf137b4791916eacc8911a785dcbac1114a2329d293",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/Validation-and-Review.md",
+    "sha256": "1969e0f2b395f2b4743099b4df408920c23913b1bb2a2a6b56c484d1e36b0c1d",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/arm.md",
+    "sha256": "5759ef7f297e78d698eac2dc2f69b1b9b46852992cbc26ca2209f2750848fd80",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/aws.md",
+    "sha256": "13f8f1d174c684f59f26059339f9c7956c06ed11723f21d011ce00d6d39b1c77",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/barclays.md",
+    "sha256": "1c90b59cc8105aca9eb1d68f07a008b9ae9660149dedb3dd8ccd0924f810464c",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/boe.md",
+    "sha256": "ff93542a09e8e56e48dc044e62109d4bf193ad8cc2c2fcff7c95d2b33489f044",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/clearbank.md",
+    "sha256": "05225191af875e2797a8b60cd11f1900e6a7ea0fad7f18650c78013256a7e677",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/computacenter.md",
+    "sha256": "299060965003aa4991b252226b12b0a14d471f26dfc2d4fd7a43b45d7b818590",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/coventry.md",
+    "sha256": "177152e5b78c62fdad3f350bced70897f7ad5c093041e9468a5752e400f8db58",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/easyjet-holidays.md",
+    "sha256": "4cd263b2ab42712592646118291f3be4a020d4f74bec956dcc4b86d97225ae04",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/easyjet.md",
+    "sha256": "7b48196dc5014cb041bcf3adb47d4d5501716b001f55c00c0841f6ebe10919c6",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/equinix.md",
+    "sha256": "2b35482c8d6b8a85d298089b720c892646840e2d10b338e78a1b5045352a3fa9",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/fca.md",
+    "sha256": "f3c17ae3f98de89d3a7cfeba8aa3cb3c484d12d0457e6e4b9ebdceec56bbf818",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/google.md",
+    "sha256": "b266ddf4563784e91276db4e750e914bfbbd5113ae3fd6304ce1364a8b2f0e22",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/hsbc.md",
+    "sha256": "cdcd12c99581b164d0a1e7f97c527df9789d12d42f5d8dfda68d1ab27f24b1c6",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/lloyds.md",
+    "sha256": "4683f719e35236d12c23fa1267de0d3ca93b81ee3d59445e78d79a2679a8e52d",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/microsoft.md",
+    "sha256": "13d6a640d2b24b574fa03f3339af683c9a39e9da51a89f1d8292571211ea4f0c",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/monzo.md",
+    "sha256": "3da058b3eb673dac48b433c31b5c1925785ca0b4991797202d41bad7ad92ef9d",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/nationwide.md",
+    "sha256": "6a4425173426204f9bfc9c2d1e396109bef3619b8a254d9a905a334cea6c94e8",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/natwest.md",
+    "sha256": "0b6a05b4f304b84db6614b221d2acb547bd28e5a9533cad55844508944adcf6d",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/nvidia.md",
+    "sha256": "40236fd3d9fc97b3a5642b90065f9368a2dda9be411caf2fd6b54127adfef42f",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/oaknorth.md",
+    "sha256": "2f4f8e38d0f4c39ba30b9c007ff20f1be8148d210578ee4067b7a30f2b80416e",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/payuk.md",
+    "sha256": "b7a9985ba53d1266049fd1fa4b0a525c2a77c4fb6f347936976dabb8456a49a9",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/pra.md",
+    "sha256": "98b80233a93ed7a3b63c0c4166f9060af27424bb39c4c33ab7e8330af311aac3",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/psr.md",
+    "sha256": "5448d7498b472e3ef0c175e6243499152b2435524e335467403709d283d60504",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/santander.md",
+    "sha256": "294fd12307048b48dab5e32d1358f683804035ff30e82448fdf15f15143ade87",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/starling.md",
+    "sha256": "2b884cdd282249d9b3193b9b51a84a7425f9008eac9f43f9463eb25865ae47a9",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "docs/flora-runtime/research-enrich-all-w3-689/validate.py",
+    "sha256": "803cc72223b0203429359167e6661ed1a0d3450e77f6b5c15d3fba4bae43bd68",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/Industry-Twin.md",
+    "sha256": "32365fcbc0838af8db42665a12a4c9a48028bd752f4f349e9391b4ed3fa5c573",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/MANIFEST.yaml",
+    "sha256": "fa9f22be5274dc74cdeb6d4b70a31cfa15a571ea5b664c5c2d2fb74393bb4196",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/easyJet-Enterprise-Twin.md",
+    "sha256": "2ba66bedefa3875536d288d5aa3515ceec534192cf56b16479994c3c8f76c8b3",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/Assessment-Overlay.json",
+    "sha256": "b3f395e1deb0b2b545ad4fa02396f6baffbc6d548b19c891315eb6bc8505c3aa",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/Living-Map.json",
+    "sha256": "492ccc88db77e771ef7f64dfdfbaa26271be0f3a632772c2b8e9f683bd564278",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/Research-Cycle-v2-Source.json",
+    "sha256": "c90e92eafb4cce93b99601492a68e57c85deea930c5e2ec7ae7e5d7b84ded000",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/Understanding-Review.json",
+    "sha256": "8ce5ca5ab17464794476dd715d1d72c963aa73a3a39a3e53ef471e7f3a290985",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/Visual-Profile.json",
+    "sha256": "6c97fff91aac950795e90cdbe4aa09c7cd1b19b3d68b35747e1ac4f68c4f1982",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-AI-SAFETY.txt",
+    "sha256": "11d0e4986d69ec1178bb9c877ddd7c57d01a56f784e12dacc2727a89c8974d63",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-AR25.txt",
+    "sha256": "5fefb3d6bc234287136892d079f5e1c1e179c8ebb2523e4ccf346fda6e2912fa",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-CAA25.txt",
+    "sha256": "dfcb43818521fe339585ad024be1d5d09d079d9538fe7c776caf4dadb24ba2a0",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-CHAT26.txt",
+    "sha256": "18407c0d3ee1302b5f870ede4663dd7a062bad8b3a3c0324ebe208ebc33880e9",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-HOL26.txt",
+    "sha256": "86ab9003a3b50a2a2b6fbc3aff09baad3bfc445ef02b6247c3dcd481ac27e990",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-IATA26.txt",
+    "sha256": "9565fdbba06476c505ebd426e3b37ab9b21fdf353ba37556448d3296362bcfbd",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-ICC.txt",
+    "sha256": "6cdd0d89cfadde4bd145d86f249757dae30bcf4046a87a74148a68003f674337",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-OFFER26.txt",
+    "sha256": "5d10b1172b46c175df6917ad52e8080be177af1edfe38a1d7843c3c7ee4cbb98",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-Q326.txt",
+    "sha256": "550c6aca2a48e2802f879e9e94ded544b5ae8a7c7445dfc96fb566457a26780c",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-RIGHTS.txt",
+    "sha256": "b7a98b13d7e1f5bc55115ad8d49bb38a7f87cb2bb796b51ea195bba92cddff97",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-SAF.txt",
+    "sha256": "9e9122983fa92f83a5b5d6ce38a6c69366dbbd7187860dabbbb529a8c45b5313",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-SFP.txt",
+    "sha256": "43ac035af08c414507d0acb0f8dfae25eb0270e44937db7fec1bd21ae583cdd8",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-WIFI26.txt",
+    "sha256": "a09b3ce3feca236690d9615e39dbaa9ea6ae84de70d0f92f673cb072f2aa2f06",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-V2-EJ-MODEL-20261110.txt",
+    "sha256": "fa783d06489a132cba8d2035ea5e81f63dd0a8a3bb7e8f42c8f8a857b3f082cd",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-EJ-H126.txt",
+    "sha256": "1c80ba9954539238ffb71e05dd64e1801c991befbfb39541a1e3fef28fe8a155",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-EJ-ICC.txt",
+    "sha256": "c34f5999916619ffaf597ea1ce75ccbb66bdc92b00925fbe2c58f5084c087247",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-EJ-MRO.txt",
+    "sha256": "10b3113e95e047fb272ff0377a7f6bd05328c64e4c22d810d0e504826bdc6ff8",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-EJ-OUTCOMES.txt",
+    "sha256": "457af8d1d8e18b571cebeaa5651352a1f0aa8539636c88420b4f2de04bd25200",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-UK-SAF.txt",
+    "sha256": "1d3162246e4e1acb6de0f8b30f594ee390e604d73e97f6a4758c4e6d0d322933",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  },
+  {
+    "path": "knowledge-packs/researcher/contracts/researcher_v1.json",
+    "sha256": "7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb",
+    "disposition": "reuse immutable lineage; no new authority or edits"
+  }
+]

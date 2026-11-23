@@ -1,0 +1,190 @@
+[
+  {
+    "id": "PR-REACH",
+    "entity_id": "NR-BRAND",
+    "status": "signed_existing",
+    "source_ids": [
+      "REACH",
+      "REACH-LEGAL"
+    ],
+    "event_date": "2025-06-26",
+    "temporal_scope": "2026 mobile start /2028 full rollout expected at signing",
+    "programme": "Fibre, tunnel coverage and station mobile connectivity",
+    "blocker": "No verified current completion, contract value, expiry, option or open procurement",
+    "commercial_reading": "Asset/connectivity service outcomes; existing awarded remedy",
+    "qualified_material_pressure": false,
+    "opportunity": false,
+    "renewal_date": null,
+    "procurement_value": null
+  },
+  {
+    "id": "PR-GBR",
+    "entity_id": "GBR",
+    "status": "consultation_proposed",
+    "source_ids": [
+      "GBR"
+    ],
+    "event_date": "2026-11-12",
+    "temporal_scope": "subsequent licence process expected2027",
+    "programme": "Future rail licence/obligations",
+    "blocker": "No active licence, merger effective date or successor identity",
+    "commercial_reading": "Policy/institutional transition; not demand",
+    "qualified_material_pressure": false,
+    "opportunity": false,
+    "renewal_date": null,
+    "procurement_value": null
+  },
+  {
+    "id": "PR-NH",
+    "entity_id": "NH",
+    "status": "regulator_reported_delivery_and_forward_target",
+    "source_ids": [
+      "NH-ORR"
+    ],
+    "event_date": "FY2025/26 assessment",
+    "temporal_scope": "RP3 April2026-March2031",
+    "programme": "Renewals reporting, BICP and efficiency improvements",
+    "blocker": "No current award/renewal or addressable scope; target not spend",
+    "commercial_reading": "Delayed renewals/output visibility; actual efficiency counter-evidence preserved",
+    "qualified_material_pressure": false,
+    "opportunity": false,
+    "renewal_date": null,
+    "procurement_value": null
+  },
+  {
+    "id": "PR-TFL",
+    "entity_id": "LU",
+    "status": "historical_existing_award",
+    "source_ids": [
+      "TFL-PLU"
+    ],
+    "event_date": "November2018 award; paper2025-07-02",
+    "temporal_scope": "Historical forecast not restated as current",
+    "programme": "94 trains plus whole-life maintenance support",
+    "blocker": "Stage2 unauthorised at paper date only; current stage/expiry/options need refresh",
+    "commercial_reading": "Existing major supplier response; no greenfield assumption",
+    "qualified_material_pressure": false,
+    "opportunity": false,
+    "renewal_date": null,
+    "procurement_value": null
+  },
+  {
+    "id": "PR-FIRST",
+    "entity_id": "FIRST",
+    "status": "reported_operating_transition",
+    "source_ids": [
+      "FIRST"
+    ],
+    "event_date": "May2026 start; reported2026-11-17",
+    "temporal_scope": "Current subsidiary/term needs original concession instruments",
+    "programme": "London Overground mobilisation and driver recruitment/training",
+    "blocker": "No final legal contract schedule or buyer scope",
+    "commercial_reading": "Performance mobilisation; existing management response",
+    "qualified_material_pressure": false,
+    "opportunity": false,
+    "renewal_date": null,
+    "procurement_value": null
+  },
+  {
+    "id": "PR-DPW",
+    "entity_id": "DPW-UK",
+    "status": "announced_construction_and_investment",
+    "source_ids": [
+      "DPW"
+    ],
+    "event_date": "2026-01-19",
+    "temporal_scope": "two-year BOXBAY investment plan as announced",
+    "programme": "Additional berths, rail terminal, container automation",
+    "blocker": "Envelopes not contract awards or IT budgets; no actual-spend assurance",
+    "commercial_reading": "Intermodal capacity/throughput; new assets may already mitigate",
+    "qualified_material_pressure": false,
+    "opportunity": false,
+    "renewal_date": null,
+    "procurement_value": null
+  },
+  {
+    "id": "PR-IAG",
+    "entity_id": "IAG",
+    "status": "supplier_selected_rollout",
+    "source_ids": [
+      "IAG-SKY"
+    ],
+    "event_date": "publicationdateunresolved",
+    "temporal_scope": "BA expected in coming months at undated statement",
+    "programme": "Common flight-efficiency data/reporting",
+    "blocker": "No current rollout verification, term, price or realised IAG savings",
+    "commercial_reading": "Existing platform selection narrows any future sales hypothesis",
+    "qualified_material_pressure": false,
+    "opportunity": false,
+    "renewal_date": null,
+    "procurement_value": null
+  },
+  {
+    "id": "PR-ABP",
+    "entity_id": "ABP",
+    "status": "reported_transition",
+    "source_ids": [
+      "ABP"
+    ],
+    "event_date": "2025 report",
+    "temporal_scope": "2026 further dashboard work planned",
+    "programme": "Spot-It! safety reporting",
+    "blocker": "No named supplier or proof of proposed work completed",
+    "commercial_reading": "Safety capability; not an independently evidenced pain point",
+    "qualified_material_pressure": false,
+    "opportunity": false,
+    "renewal_date": null,
+    "procurement_value": null
+  },
+  {
+    "id": "PR-RM",
+    "entity_id": "RM",
+    "status": "investigation_opened_historical",
+    "source_ids": [
+      "RM-QOS"
+    ],
+    "event_date": "2026-06-01",
+    "temporal_scope": "FY2025/26 performance; later outcome not verified",
+    "programme": "Service performance investigation",
+    "blocker": "Not a current fine, final finding, procurement or technology cause",
+    "commercial_reading": "Customer service outcome established; remedy/causes open",
+    "qualified_material_pressure": false,
+    "opportunity": false,
+    "renewal_date": null,
+    "procurement_value": null
+  },
+  {
+    "id": "PR-BUS",
+    "entity_id": "DFT",
+    "status": "funding_allocation",
+    "source_ids": [
+      "BUS"
+    ],
+    "event_date": "2026-07-22 uplift",
+    "temporal_scope": "revenue2026/27-2028/29; capitalto2029/30",
+    "programme": "Local authority bus grants outside London",
+    "blocker": "Allocation not awarded supplier scope, farebox or UK total",
+    "commercial_reading": "Funding availability at authority level; spending decisions not inferred",
+    "qualified_material_pressure": false,
+    "opportunity": false,
+    "renewal_date": null,
+    "procurement_value": null
+  },
+  {
+    "id": "PR-EJ",
+    "entity_id": "EASYJET",
+    "status": "existing_research_reference",
+    "source_ids": [
+      "EJ-W3"
+    ],
+    "event_date": "sixmonthsended2026-03-31",
+    "temporal_scope": "latest full-year and Q3 refresh open",
+    "programme": "Retained operational/holidays programmes in Aviation owner",
+    "blocker": "No duplicate lifecycle or unverified latest supplier commitment",
+    "commercial_reading": "Airline versus holiday economics and realised outcomes remain distinct",
+    "qualified_material_pressure": false,
+    "opportunity": false,
+    "renewal_date": null,
+    "procurement_value": null
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "id": "Q1",
+    "gap_id": "G-IDENTITY",
+    "task": "Existing Model/Factory owner selects scope and reconciles exact IDs through authorised read-only service; no invented root.",
+    "priority": "owner_review",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q2",
+    "gap_id": "G-METADATA",
+    "task": "Chief Architect/registry owner reconciles metadata in separate work. IT001 remains Review; no promotion.",
+    "priority": "next_tranche",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q3",
+    "gap_id": "G-RAIL-CUT",
+    "task": "Refresh after actual release, preserve periods/geographies and avoid transfer double-counting.",
+    "priority": "next_tranche",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q4",
+    "gap_id": "G-TFL-SIZE",
+    "task": "Obtain accessible statutory report from original publisher; reconcile exact differences, no substitute snippet.",
+    "priority": "next_tranche",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q5",
+    "gap_id": "G-FTS",
+    "task": "Use authorised access/original notice in later tranche; retain unverified lead only.",
+    "priority": "next_tranche",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q6",
+    "gap_id": "G-HA-RIGHTS",
+    "task": "Existing source owner assesses exact permitted use/identity without universal per-metric approvals or expanding rights.",
+    "priority": "owner_review",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q7",
+    "gap_id": "G-UNDATED",
+    "task": "Obtain publisher metadata/dated official release; keep selection as undated reported relationship.",
+    "priority": "next_tranche",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q8",
+    "gap_id": "G-GEO",
+    "task": "Prioritise Transport for Wales, DfI/NITHC, Transport Scotland roads/ferries, one shipping and rail freight operator.",
+    "priority": "next_tranche",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q9",
+    "gap_id": "G-LEGAL",
+    "task": "Inspect original accounts and executed public legal instruments; add owner-reviewed crosswalk only.",
+    "priority": "owner_review",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q10",
+    "gap_id": "G-RENEWALS",
+    "task": "Check award notices, options, original schedules and current supplier selection; don’t infer dates from asset age.",
+    "priority": "next_tranche",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q11",
+    "gap_id": "G-SYSTEMS",
+    "task": "Validate against actual operating manuals, issuer disclosures and separately verified contracts; no architecture invented.",
+    "priority": "next_tranche",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q12",
+    "gap_id": "G-UK-FIN",
+    "task": "Obtain original entity accounts, exact reporting periods and accounting definitions; keep unavailable values blank.",
+    "priority": "next_tranche",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q13",
+    "gap_id": "G-CROSS",
+    "task": "Research original financing facilities, traction supply/energy agreements and contracting entities.",
+    "priority": "next_tranche",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q14",
+    "gap_id": "G-LEADERS",
+    "task": "Reverify current official leadership and responsibility statements; no private contact data.",
+    "priority": "next_tranche",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  },
+  {
+    "id": "Q15",
+    "gap_id": "G-BENEFIT",
+    "task": "Find outcome baselines, implementation costs, competing explanations and existing remedies before any seller action.",
+    "priority": "next_tranche",
+    "owner_role": "existing Researcher/source/Model owner as applicable; no automatic assignment",
+    "state": "open",
+    "evidence_exhausted": false
+  }
+]

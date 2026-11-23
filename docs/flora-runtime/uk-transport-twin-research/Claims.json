@@ -1,0 +1,643 @@
+[
+  {
+    "id": "RF-1",
+    "entity_id": "UK-RAIL",
+    "source_ids": [
+      "RAIL-FIN"
+    ],
+    "semantic_type": "reported",
+    "statement": "UK rail FY2024/25 income £25.9bn: £11.9bn government, £12.2bn operators and £1.8bn other.",
+    "period": "2024-04-01/2025-03-31",
+    "input_claim_ids": [],
+    "caveat": "Research candidate; source-use and model ownership unchanged.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "RF-2",
+    "entity_id": "UK-RAIL",
+    "source_ids": [
+      "RAIL-FIN"
+    ],
+    "semantic_type": "reported",
+    "statement": "Operator income includes £11.5bn fares and £0.7bn other; expenditure £26.0bn. Next whole-industry release scheduled 26 November 2026.",
+    "period": "2024-04-01/2025-03-31",
+    "input_claim_ids": [],
+    "caveat": "Research candidate; source-use and model ownership unchanged.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "NR-1",
+    "entity_id": "NR",
+    "source_ids": [
+      "NR-REG"
+    ],
+    "semantic_type": "reported",
+    "statement": "GB regulatory income £12,343m; maintenance £2,657m against £2,439m plan; capex £5,550m and total expenditure £15,028m.",
+    "period": "2025-04-01/2026-03-31",
+    "input_claim_ids": [],
+    "caveat": "Research candidate; source-use and model ownership unchanged.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "NR-2",
+    "entity_id": "NR",
+    "source_ids": [
+      "NR-REG"
+    ],
+    "semantic_type": "reported",
+    "statement": "Regulatory RAB £92,691m and net debt £61,080m at FY2025/26 end are stocks, not annual technology spending.",
+    "period": "2026-03-31",
+    "input_claim_ids": [],
+    "caveat": "Research candidate; source-use and model ownership unchanged.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "NR-3",
+    "entity_id": "NR-BRAND",
+    "source_ids": [
+      "REACH"
+    ],
+    "semantic_type": "reported",
+    "statement": "Project Reach was signed 26 June 2025: Neos fibre deployment, Freshwave tunnel coverage, with full rollout expected by 2028.",
+    "period": "2025-06-26 announcement; 2028 target",
+    "input_claim_ids": [],
+    "caveat": "Targets not verified delivery; value, expiry and open procurement unknown.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "GBR-1",
+    "entity_id": "GBR",
+    "source_ids": [
+      "GBR"
+    ],
+    "semantic_type": "reported",
+    "statement": "12 November 2026 licence consultation proposes obligations for future GBR; subsequent notification expected in 2027.",
+    "period": "2026-11-12",
+    "input_claim_ids": [],
+    "caveat": "Not an active licence, implemented merger or canonical legal identity.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "NH-1",
+    "entity_id": "NH",
+    "source_ids": [
+      "NH-ORR"
+    ],
+    "semantic_type": "reported",
+    "statement": "ORR found renewals underspend partly reflected delayed/undelivered technology and other programmes; asset-level efficiency evidence remained limited.",
+    "period": "2025-04-01/2026-03-31",
+    "input_claim_ids": [],
+    "caveat": "Research candidate; source-use and model ownership unchanged.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "NH-2",
+    "entity_id": "NH",
+    "source_ids": [
+      "NH-ORR"
+    ],
+    "semantic_type": "reported",
+    "statement": "ORR reported a £32m inflation headwind in the interim year; the £1.4bn RIS3 efficiency target is forward-looking.",
+    "period": "2025/26 actual; RP3 April2026-March2031 target",
+    "input_claim_ids": [],
+    "caveat": "Research candidate; source-use and model ownership unchanged.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "FST-1",
+    "entity_id": "FIRST",
+    "source_ids": [
+      "FIRST"
+    ],
+    "semantic_type": "reported",
+    "statement": "H1 FY2027 adjusted revenue £1,010.7m versus statutory £2,366.8m; adjusted operating profit £110.5m versus statutory £154.0m.",
+    "period": "26weeks ended2026-09-26",
+    "input_claim_ids": [],
+    "caveat": "26-week issuer period; adjusted revenue excludes substantially no-revenue-risk DfT TOC flows but retains fees; do not mix bases.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "FST-2",
+    "entity_id": "FIRST",
+    "source_ids": [
+      "FIRST"
+    ],
+    "semantic_type": "reported",
+    "statement": "London Overground operation began May 2026; SWR had transferred to DfTO in May 2025; Mistral Data sale to Tracsis completed August 2026.",
+    "period": "2025-05/2026-09",
+    "input_claim_ids": [],
+    "caveat": "Operating concessions and sold assets must not be represented as unchanged ownership.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "FST-3",
+    "entity_id": "FIRST",
+    "source_ids": [
+      "FIRST"
+    ],
+    "semantic_type": "reported",
+    "statement": "FirstGroup reports open-access launch/ramp costs, price competition and new bus/franchise contracts; Graham Sutherland is the reporting CEO.",
+    "period": "2026-11-17",
+    "input_claim_ids": [],
+    "caveat": "Contract award does not imply unallocated follow-on scope; exact subsidiary contracting identity not reviewed.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "TF-1",
+    "entity_id": "TFL",
+    "source_ids": [
+      "TFL"
+    ],
+    "semantic_type": "reported",
+    "statement": "Unaudited FY2025/26 management revenue £9,622m includes passenger income £5,467m; reported operating surplus £6m, excluding Places for London contribution.",
+    "period": "2025-04-01/2026-03-31",
+    "input_claim_ids": [],
+    "caveat": "Management measure includes rates/grants, distinct from farebox and statutory profit; rounded table bridge has £1m residual.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "TF-2",
+    "entity_id": "TFL",
+    "source_ids": [
+      "TFL"
+    ],
+    "semantic_type": "reported",
+    "statement": "TfL reports passenger income £142m below budget; stronger other income helped offset the shortfall, with related bad-debt provisions.",
+    "period": "2025-04-01/2026-03-31",
+    "input_claim_ids": [],
+    "caveat": "Research candidate; source-use and model ownership unchanged.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "TF-3",
+    "entity_id": "LU",
+    "source_ids": [
+      "TFL-PLU"
+    ],
+    "semantic_type": "reported",
+    "statement": "2018 award to Siemens Mobility Limited covers 94 Piccadilly trains and a whole-life Fleet Services Agreement; July 2025 paper says Stage 2 signalling was not authorised.",
+    "period": "2018 award; 2025-07-02 paper",
+    "input_claim_ids": [],
+    "caveat": "Historical authority status, not a current Stage2 procurement claim; exempt Part2 not accessed.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "HA-1",
+    "entity_id": "HEATHROW",
+    "source_ids": [
+      "HEATHROW"
+    ],
+    "semantic_type": "reported",
+    "statement": "Nine-month 2026 revenue £2,684m and adjusted EBITDA £1,441m; 62.9m passengers.",
+    "period": "2026-01-01/2026-09-30",
+    "input_claim_ids": [],
+    "caveat": "Public HTML results; not airport operating-company standalone accounts or a source-use grant.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "HA-2",
+    "entity_id": "HEATHROW",
+    "source_ids": [
+      "HEATHROW"
+    ],
+    "semantic_type": "reported",
+    "statement": "Heathrow attributes lower EBITDA to reduced airport charges and higher operating costs; Thomas Woldbye CEO and Sally Ding CFO are named.",
+    "period": "2026-10-21",
+    "input_claim_ids": [],
+    "caveat": "Issuer account of drivers, not quantified attribution or open external technology scope.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "AP-1",
+    "entity_id": "ABP",
+    "source_ids": [
+      "ABP"
+    ],
+    "semantic_type": "reported",
+    "statement": "Company FY2025 revenue £792.5m versus £756.6m; gross profit £480.2m; operating profit £582.5m includes £239.8m investment-property fair-value uplift.",
+    "period": "2025-01-01/2025-12-31",
+    "input_claim_ids": [],
+    "caveat": "Research candidate; source-use and model ownership unchanged.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "AP-2",
+    "entity_id": "ABP",
+    "source_ids": [
+      "ABP"
+    ],
+    "semantic_type": "reported",
+    "statement": "ABP describes 21 UK ports, cargo handling/property income and transition to Spot-It! safety reporting in 2025.",
+    "period": "2025",
+    "input_claim_ids": [],
+    "caveat": "No named technology supplier, current tender or Group-wide system ownership inferred.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "DP-1",
+    "entity_id": "DPW-UK",
+    "source_ids": [
+      "DPW"
+    ],
+    "semantic_type": "reported",
+    "statement": "London Gateway exceeded 3m TEU in 2025; Southampton exceeded 2m. Gateway rail terminal began operations in 2025.",
+    "period": "2025",
+    "input_claim_ids": [],
+    "caveat": "Participant-reported throughput, not legal-company revenue or additive UK market value.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "DP-2",
+    "entity_id": "DPW-UK",
+    "source_ids": [
+      "DPW"
+    ],
+    "semantic_type": "reported",
+    "statement": "January 2026 release reports construction on two berths within £1bn investment and proposed £170m BOXBAY investment over two years.",
+    "period": "2026-01-19",
+    "input_claim_ids": [],
+    "caveat": "Programme envelopes and plans; not technology-services contract value or proven spending.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "IA-1",
+    "entity_id": "IAG",
+    "source_ids": [
+      "IAG"
+    ],
+    "semantic_type": "reported",
+    "statement": "Q3 2026 Group revenue €9,744m and operating profit before exceptional items €1,726m; fuel cost increased 30.4%.",
+    "period": "2026-07-01/2026-09-30",
+    "input_claim_ids": [],
+    "caveat": "Global consolidated scope, EUR, quarterly not nine-month or UK-only results.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "IA-2",
+    "entity_id": "IAG",
+    "source_ids": [
+      "IAG-SKY"
+    ],
+    "semantic_type": "reported",
+    "statement": "IAG selected OpenAirlines SkyBreathe; four airlines already using it, BA rollout expected in coming months; common fuel reporting is the stated purpose.",
+    "period": "publication date unresolved; retrieved 2026-11-18",
+    "input_claim_ids": [],
+    "caveat": "Supplier already selected; no contract price, achieved savings or publication-date certainty.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "DH-1",
+    "entity_id": "DHL-GLOBAL",
+    "source_ids": [
+      "DHL"
+    ],
+    "semantic_type": "reported",
+    "statement": "Global Supply Chain Q3 2026 revenue €4,941m; reported 12% growth differs from 6.1% excluding UK/Iberia changes and FX.",
+    "period": "2026-07-01/2026-09-30",
+    "input_claim_ids": [],
+    "caveat": "No allocation to DHL Supply Chain Limited UK or to named UK customers.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "RM-1",
+    "entity_id": "RM",
+    "source_ids": [
+      "RM-QOS"
+    ],
+    "semantic_type": "reported",
+    "statement": "Ofcom opened a FY2025/26 investigation on 1 June 2026: 75.7% First Class next day against then-target 93%; 90.2% Second Class in three days against then-target 98.5%.",
+    "period": "year ended March2026",
+    "input_claim_ids": [],
+    "caveat": "Historical then-applicable targets; investigation opening is not a final finding or current target schedule.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "IDS-1",
+    "entity_id": "IDS",
+    "source_ids": [
+      "ID-IDS"
+    ],
+    "semantic_type": "reported",
+    "statement": "IDS is International Distribution Services Limited, private company 08680755; former PLC name ended 18 September 2025.",
+    "period": "retrieved 2026-11-18",
+    "input_claim_ids": [],
+    "caveat": "Research candidate; source-use and model ownership unchanged.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "RD-1",
+    "entity_id": "ROAD-UK",
+    "source_ids": [
+      "ROAD"
+    ],
+    "semantic_type": "reported",
+    "statement": "GB-registered HGVs lifted 1.53bn tonnes and moved 162bn tonne-km within the UK in 2025.",
+    "period": "2025",
+    "input_claim_ids": [],
+    "caveat": "GB vehicle registration and UK activity, not all UK HGVs or freight operator revenue.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "PO-1",
+    "entity_id": "PORT-UK",
+    "source_ids": [
+      "PORTS"
+    ],
+    "semantic_type": "reported",
+    "statement": "UK major-port 2025 cargo: liquid bulk160.0, Ro-Ro97.0, dry bulk78.7, containers66.9, other16.9 million tonnes.",
+    "period": "2025",
+    "input_claim_ids": [],
+    "caveat": "Tonnes not TEU or shipping-company turnover; domestic legs can be counted at more than one port.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "BU-1",
+    "entity_id": "DFT",
+    "source_ids": [
+      "BUS"
+    ],
+    "semantic_type": "reported",
+    "statement": "LABG allocates £481m annual revenue and around £200m annual capital funding to England local authorities; £30m one-off revenue uplift in 2026/27.",
+    "period": "revenue to2028/29; capital to2029/30",
+    "input_claim_ids": [],
+    "caveat": "England outside London; grants not additive supplier contracts or UK-wide revenue.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "SC-1",
+    "entity_id": "SRH",
+    "source_ids": [
+      "SCOT"
+    ],
+    "semantic_type": "reported",
+    "statement": "Scottish Government owns SRH, which owns/oversees ScotRail Trains and Caledonian Sleeper; transfer dates 1 April 2022 and 25 June 2023.",
+    "period": "2022/2023 transfers; current sponsor description",
+    "input_claim_ids": [],
+    "caveat": "Research candidate; source-use and model ownership unchanged.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "NI-1",
+    "entity_id": "NITHC",
+    "source_ids": [
+      "NI"
+    ],
+    "semantic_type": "reported",
+    "statement": "Translink publishes NITHC accounts and a 2030 strategy; passenger charter covers Northern Ireland buses and trains.",
+    "period": "index retrieved2026-11-18",
+    "input_claim_ids": [],
+    "caveat": "Index establishes source route and regional portfolio, not current financial totals or subsidiary ownership.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "IN-NR",
+    "entity_id": "NR",
+    "source_ids": [],
+    "semantic_type": "insight",
+    "statement": "Maintenance delivery and connectivity rollout require different value tests: asset reliability versus passenger/data connectivity.",
+    "period": "analysis at2026-11-18",
+    "input_claim_ids": [
+      "NR-1",
+      "NR-3"
+    ],
+    "caveat": "Signed Reach programme is an existing remedy; aggregate maintenance overspend does not prove IT-system failure.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "IN-NH",
+    "entity_id": "NH",
+    "source_ids": [],
+    "semantic_type": "insight",
+    "statement": "Underspend cannot alone establish efficiency when delayed renewals reduce delivered output.",
+    "period": "analysis at2026-11-18",
+    "input_claim_ids": [
+      "NH-1",
+      "NH-2"
+    ],
+    "caveat": "ORR also recognises reasonable efficiency evidence and seven of eight asset-class output targets met.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "IN-FIRST",
+    "entity_id": "FIRST",
+    "source_ids": [],
+    "semantic_type": "insight",
+    "statement": "A changing concession portfolio alters revenue-risk exposure; gross turnover is a poor proxy for retained transport economics.",
+    "period": "analysis at2026-11-18",
+    "input_claim_ids": [
+      "FST-1",
+      "FST-2",
+      "FST-3"
+    ],
+    "caveat": "Adjusted fees and operating profit already reflect a functioning mixed model; transfer is not service cessation.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "IN-TFL",
+    "entity_id": "TFL",
+    "source_ids": [],
+    "semantic_type": "insight",
+    "statement": "Farebox weakness and enforcement-income provisions complicate interpretation of a small management surplus.",
+    "period": "analysis at2026-11-18",
+    "input_claim_ids": [
+      "TF-1",
+      "TF-2"
+    ],
+    "caveat": "Surplus remains positive and new capital funding provides planning certainty; no insolvency or unbudgeted need inferred.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "IN-ABP",
+    "entity_id": "ABP",
+    "source_ids": [],
+    "semantic_type": "insight",
+    "statement": "ABP earnings combine port operations and property valuation; operating profit is not a pure cash-handling margin.",
+    "period": "analysis at2026-11-18",
+    "input_claim_ids": [
+      "AP-1",
+      "AP-2"
+    ],
+    "caveat": "Rental and cargo operations are established business lines; no assertion that valuation gains are improper.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "IN-DPW",
+    "entity_id": "DPW-UK",
+    "source_ids": [],
+    "semantic_type": "insight",
+    "statement": "Container growth and rail capacity create an intermodal operating interface, distinct from bulk-port economics.",
+    "period": "analysis at2026-11-18",
+    "input_claim_ids": [
+      "DP-1",
+      "DP-2"
+    ],
+    "caveat": "Existing terminal and planned automation investments may already address bottlenecks; no proven unmet need.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "IN-IAG",
+    "entity_id": "IAG",
+    "source_ids": [],
+    "semantic_type": "insight",
+    "statement": "Fuel volatility increases the relevance of consistent flight-efficiency measurement, but the named platform is already selected.",
+    "period": "analysis at2026-11-18",
+    "input_claim_ids": [
+      "IA-1",
+      "IA-2"
+    ],
+    "caveat": "Savings remain to be evidenced; no replacement opportunity or unallocated supplier scope follows.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "IN-RM",
+    "entity_id": "RM",
+    "source_ids": [],
+    "semantic_type": "insight",
+    "statement": "Quality-of-service delivery is a concrete operating issue; holding-company identity changes do not quantify its cause or remedy.",
+    "period": "analysis at2026-11-18",
+    "input_claim_ids": [
+      "RM-1",
+      "IDS-1"
+    ],
+    "caveat": "An investigation opening is not a final breach decision; subsequent performance/reforms may alter the position.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "IN-HA",
+    "entity_id": "HEATHROW",
+    "source_ids": [],
+    "semantic_type": "insight",
+    "statement": "Airport capacity and regulated charges affect different economic levers; traffic scale cannot establish expansion returns.",
+    "period": "analysis at2026-11-18",
+    "input_claim_ids": [
+      "HA-1",
+      "HA-2"
+    ],
+    "caveat": "Management reports resilient performance and dividends; projected wider economic gains are not realised issuer revenue.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "HY-NR",
+    "entity_id": "NR",
+    "source_ids": [],
+    "semantic_type": "hypothesis",
+    "statement": "Conditionally, integrated work planning could help prioritise asset interventions if inconsistent data or access-window decisions are demonstrated.",
+    "period": "conditional investigation only",
+    "input_claim_ids": [
+      "IN-NR"
+    ],
+    "caveat": "No observed workflow defect, authorised data access, marginal benefit or open supplier scope yet.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "HY-TFL",
+    "entity_id": "TFL",
+    "source_ids": [],
+    "semantic_type": "hypothesis",
+    "statement": "Conditionally, fleet fault triage could support resilience if current maintenance tools leave a measured decision delay.",
+    "period": "conditional investigation only",
+    "input_claim_ids": [
+      "IN-TFL",
+      "TF-3"
+    ],
+    "caveat": "Siemens whole-life support already exists; cannot assume unallocated analytics work or autonomous safety decisions.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "HY-NH",
+    "entity_id": "NH",
+    "source_ids": [],
+    "semantic_type": "hypothesis",
+    "statement": "Conditionally, better intervention-level cost attribution could improve renewal decisions if the identified reporting limits persist.",
+    "period": "conditional investigation only",
+    "input_claim_ids": [
+      "IN-NH"
+    ],
+    "caveat": "Could be solved by existing reporting changes rather than AI or external procurement.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "HY-DPW",
+    "entity_id": "DPW-UK",
+    "source_ids": [],
+    "semantic_type": "hypothesis",
+    "statement": "Conditionally, coordinated berth-yard-rail planning may improve throughput if measured handoff variability persists after current investments.",
+    "period": "conditional investigation only",
+    "input_claim_ids": [
+      "IN-DPW"
+    ],
+    "caveat": "No local bottleneck baseline, authorised data, buyer authority or uncommitted scope established.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "HY-RM",
+    "entity_id": "RM",
+    "source_ids": [],
+    "semantic_type": "hypothesis",
+    "statement": "Conditionally, service-exception triage may help targeted recovery if operational root causes and current remedies leave an addressable gap.",
+    "period": "conditional investigation only",
+    "input_claim_ids": [
+      "IN-RM"
+    ],
+    "caveat": "No verified root-cause model, system supplier, customer demand or funding exists in this pack.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  },
+  {
+    "id": "FR-1",
+    "entity_id": "GB-RAIL-FREIGHT",
+    "source_ids": [
+      "RAIL-FREIGHT"
+    ],
+    "semantic_type": "reported",
+    "statement": "GB rail freight April-June2026: 4,135m net tonne-km moved, 17.6m tonnes lifted, 7.5m train-km and1.1% cancellations.",
+    "period": "2026-04-01/2026-06-30",
+    "input_claim_ids": [],
+    "caveat": "Financial-year Q1, GB not UK, physical activity not revenue; no annualisation, operator margins or rail-to-road mode-shift causation inferred.",
+    "status": "research_candidate",
+    "canonical_promotion": false
+  }
+]
