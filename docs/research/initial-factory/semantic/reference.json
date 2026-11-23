@@ -1,0 +1,173 @@
+{
+  "development": [
+    {
+      "url": "https://www.airbus.com/en/newsroom/press-releases/2026-11-skywise-expands-its-portfolio-with-the-launch-of-enhanced-digital-flight-training-solutions",
+      "sha256": "99b4b89eb19225fe9773a06f1e16f6a133a090fe9b3dbde8cf348c1e730b58aa",
+      "paragraph": 5,
+      "claims": [
+        {
+          "actor": "Skywise",
+          "kind": "portfolio expansion",
+          "status": "announced",
+          "target": "portfolio",
+          "dates": [
+            "november 2, 2026"
+          ],
+          "value": null,
+          "counterparty": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.nokia.com/newsroom/nokia-strengthens-partnership-with-aalto-university-with-15-million-donation-and-expanded-rd-collaboration-for-future-technology-research-and-talent/",
+      "sha256": "35afb4de7645de179b85210b76c57c19c957909bb7818a457208c3151a96eb62",
+      "paragraph": 14,
+      "claims": [
+        {
+          "actor": "Nokia",
+          "kind": "donation",
+          "status": "planned",
+          "target": "Aalto University",
+          "dates": [],
+          "value": "€1.5 million",
+          "counterparty": "Aalto University"
+        },
+        {
+          "actor": "Nokia",
+          "kind": "research collaboration",
+          "status": "committed",
+          "target": "Aalto University",
+          "dates": [],
+          "value": "approximately €1.3 million annually",
+          "counterparty": "Aalto University"
+        }
+      ]
+    },
+    {
+      "url": "https://news.sap.com/2026/11/sap-completes-acquisition-of-techwolf/",
+      "sha256": "d1c24b4013a3343d6d095f3a0628e3fc1f10d1f429707cfa3519387768330924",
+      "paragraph": 1,
+      "claims": [
+        {
+          "actor": "SAP SE",
+          "kind": "acquisition",
+          "status": "completed",
+          "target": "TechWolf",
+          "dates": [],
+          "value": null,
+          "counterparty": "TechWolf"
+        }
+      ]
+    }
+  ],
+  "held_out": [
+    {
+      "url": "https://www.t-mobile.com/news/un-carrier/advancing-cybersecurity-at-t-mobile",
+      "sha256": "215c2344cf2d86b1316d5ed66a6af16ea6fd9b34b24ef2a057e3796a1c4a1db0",
+      "paragraph": 2,
+      "claims": [
+        {
+          "actor": "T‑Mobile",
+          "kind": "announcement",
+          "status": "announced",
+          "target": "Advancing Cybersecurity at T‑Mobile",
+          "dates": [
+            "nov. 2, 2026"
+          ],
+          "value": null,
+          "counterparty": null
+        }
+      ]
+    },
+    {
+      "url": "https://news.sap.com/2026/11/sap-expands-collaboration-astrazeneca-rise-with-sap-business-ai/",
+      "sha256": "b3a3bdc10296f39557a466cfc43722b14d6f2f8e9ecf76b5429fd9ed142143fe",
+      "paragraph": 1,
+      "claims": [
+        {
+          "actor": "AstraZeneca",
+          "kind": "migration",
+          "status": "in progress",
+          "target": "SAP Cloud ERP Private",
+          "dates": [],
+          "value": null,
+          "counterparty": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/news/expanding-partnership-gsa",
+      "sha256": "305853a83d1191aa1dc83c91d87160167cce02ea54112ee4badcb9037149a1e3",
+      "paragraph": 3,
+      "claims": [
+        {
+          "actor": "Anthropic",
+          "kind": "partnership",
+          "status": "in progress",
+          "target": "General Services Administration",
+          "dates": [],
+          "value": null,
+          "counterparty": "General Services Administration"
+        }
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/news/cyber-verification-program",
+      "sha256": "2ed8695b42f9728a5d64463e734464c2d6838c9b984474d38ed7ee44a5a6a4f5",
+      "paragraph": 4,
+      "claims": []
+    },
+    {
+      "url": "https://news.sap.com/2026/11/how-sap-store-certification-turns-into-customer-trust-for-vertex/",
+      "sha256": "8de35898c5eb08f084b4c1d8c0df3f9f6eb341d5697b5f6a0cb4ad5b4a9cf4d3",
+      "paragraph": 1,
+      "claims": []
+    },
+    {
+      "url": "https://www.t-mobile.com/news/network/t-mobile-powers-new-ways-to-experience-the-formula-1-heineken-las-vegas-grand-prix-on-and-off-the-track",
+      "sha256": "db92f97cc05c78fc443b43f2000177d1e5dac3f47edaeb6f42b36f5ab713d8ef",
+      "paragraph": 2,
+      "claims": [
+        {
+          "actor": "T‑Mobile",
+          "kind": "partnership",
+          "status": "in progress",
+          "target": "Formula 1",
+          "dates": [
+            "nov. 12, 2026"
+          ],
+          "value": null,
+          "counterparty": "Formula 1"
+        }
+      ]
+    },
+    {
+      "url": "https://news.sap.com/2026/11/takeda-turns-to-sap-erp-digital-transformation/",
+      "sha256": "8faf6b5c4381606b719a829dcf0ab46756069e446ad3d9a15d3070f71e39e17c",
+      "paragraph": 1,
+      "claims": [
+        {
+          "actor": "Takeda Pharmaceuticals",
+          "kind": "migration",
+          "status": "in progress",
+          "target": "SAP Cloud ERP",
+          "dates": [],
+          "value": null,
+          "counterparty": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions",
+      "sha256": "885c54675ed3c968cc2ac44f379033404f5368742f45bba64b038b444f9cebdb",
+      "paragraph": 5,
+      "claims": []
+    },
+    {
+      "url": "https://www.t-mobile.com/news/network/5g-advanced-in-action-better-experiences-t-mobile-puts-ai-to-work-for-customers",
+      "sha256": "4da82f165b70c489700f7eb7d0a131bc7c5f726c23bc2d7094df42fe768e8842",
+      "paragraph": 7,
+      "claims": []
+    }
+  ]
+}
