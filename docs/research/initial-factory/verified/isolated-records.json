@@ -3,14 +3,14 @@
     "enterprise_id": "lloyds-banking-group-plc",
     "records": [
       {
-        "external_id": "EV-16cf5c53f68c3ac6dacbfc96",
+        "external_id": "EV-4d827896786ae5f7c15da932",
         "record_class": "evidence",
         "truth_class": "evidence_record",
         "payload": {
           "enterprise_id": "lloyds-banking-group-plc",
           "source_url": "https://www.lloydsbankinggroup.com/",
           "source_locator": "Publisher article body",
-          "source_content_sha256": "1c24965e162550679ba2fb22fb1b4080bb762df41658eae3d883edeaaab35599",
+          "source_content_sha256": "c5ee17d0d028ef6ca9984b8674f607bd165dbde01131e0783111c7520efbe4cc",
           "publisher": "Lloyds Banking Group",
           "source_category": "corporate_announcement",
           "reporting_scope": "Lloyds Banking Group",
@@ -24,7 +24,7 @@
           "metric": null,
           "status": "current",
           "recorded_replay": false,
-          "live_content_sha256": "1cdc338242ed82290f968bd3aa246d5cbab6cb49588f0c90e714262314819a9b",
+          "live_content_sha256": "f35d3f598c394770da6384a03253bb8842a5e6f2d20418227b5c6238c5ec8756",
           "use_scope": "isolated_commercial_replay",
           "commercial_change": {
             "headline": "How Lloyds reviews complex AI decisions",
@@ -33,7 +33,13 @@
             "relationship": "Lloyds Banking Group",
             "confidence": "Issuer account",
             "corroboration": null
-          }
+          },
+          "document_revisions": [
+            {
+              "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/responsible-ai-guide.html",
+              "sha256": "f35d3f598c394770da6384a03253bb8842a5e6f2d20418227b5c6238c5ec8756"
+            }
+          ]
         }
       },
       {
@@ -50,7 +56,7 @@
           "evidence_date": "2026-11-18",
           "scope": "Lloyds Banking Group",
           "supporting_evidence_ids": [
-            "EV-16cf5c53f68c3ac6dacbfc96"
+            "EV-4d827896786ae5f7c15da932"
           ],
           "freshness": "current",
           "contradiction_state": "none"
@@ -101,14 +107,14 @@
     "enterprise_id": "bt-group-plc",
     "records": [
       {
-        "external_id": "EV-3735bdf256af9a3a6d690440",
+        "external_id": "EV-628374797b64a8f15b1fa316",
         "record_class": "evidence",
         "truth_class": "evidence_record",
         "payload": {
           "enterprise_id": "bt-group-plc",
           "source_url": "https://newsroom.bt.com/bt-transforms-scotlands-public-sector-connectivity--upgrading-the-nations-digital-infrastructure/",
           "source_locator": "Publisher article body",
-          "source_content_sha256": "b30683ae8f9958bbc50c5b7a52131ad4b9d4f2d6de9e3f842144bc5a37b0881d",
+          "source_content_sha256": "5b280bd068c4da25a8e59bf107d4c59ba41f4761bc70c896bc12773a2adcc4ca",
           "publisher": "BT Group",
           "source_category": "corporate_announcement",
           "reporting_scope": "BT Group",
@@ -122,7 +128,7 @@
           "metric": null,
           "status": "current",
           "recorded_replay": false,
-          "live_content_sha256": "1a63495b18ab218269daab283c35d264a5bbef7f1fdac2a1e7fe33312c730e75",
+          "live_content_sha256": "a4c6ceec896b3ef97c44db7033d3b97e3dbfe4ca6ac3178d592d2ad053fab691",
           "use_scope": "isolated_commercial_replay",
           "commercial_change": {
             "headline": "BT reports Scotland network upgrade complete",
@@ -131,7 +137,13 @@
             "relationship": "BT Group \u00b7 Scottish public-sector organisations",
             "confidence": "Supplier account",
             "corroboration": null
-          }
+          },
+          "document_revisions": [
+            {
+              "url": "https://newsroom.bt.com/bt-transforms-scotlands-public-sector-connectivity--upgrading-the-nations-digital-infrastructure/",
+              "sha256": "a4c6ceec896b3ef97c44db7033d3b97e3dbfe4ca6ac3178d592d2ad053fab691"
+            }
+          ]
         }
       },
       {
@@ -148,7 +160,7 @@
           "evidence_date": "2026-11-02",
           "scope": "BT Group",
           "supporting_evidence_ids": [
-            "EV-3735bdf256af9a3a6d690440"
+            "EV-628374797b64a8f15b1fa316"
           ],
           "freshness": "current",
           "contradiction_state": "none"
@@ -199,14 +211,14 @@
     "enterprise_id": "arm-holdings-plc",
     "records": [
       {
-        "external_id": "EV-2ab097959aeacb800a5c4821",
+        "external_id": "EV-1f330df259ee71013859b013",
         "record_class": "evidence",
         "truth_class": "evidence_record",
         "payload": {
           "enterprise_id": "arm-holdings-plc",
           "source_url": "https://newsroom.arm.com/news/arm-microsoft-azure-cobalt-200",
           "source_locator": "Publisher article body",
-          "source_content_sha256": "465dfacec92dcc74215b8d1e317edd7623641cf628d205e26dcd460881004cc4",
+          "source_content_sha256": "30c61334309521701e81cd969694a2eb566c53ed113325b4b835fd9a59d53aad",
           "publisher": "Arm",
           "source_category": "corporate_announcement",
           "reporting_scope": "Arm",
@@ -220,7 +232,7 @@
           "metric": null,
           "status": "current",
           "recorded_replay": false,
-          "live_content_sha256": "1f7db4941bd759f77cdb31780cc81ef20a66808870843cbf96579dde2cdaa89a",
+          "live_content_sha256": "3e5331ef34bdcd97d6cd9fabd1828600fce8077426d988bf0223d4604c7d2218",
           "use_scope": "isolated_commercial_replay",
           "commercial_change": {
             "headline": "Azure makes Cobalt 200 generally available",
@@ -230,10 +242,20 @@
             "confidence": "Confirmed by Microsoft",
             "corroboration": {
               "url": "https://azure.microsoft.com/en-us/blog/azure-cobalt-200-vms-now-available-proven-on-real-workloads-and-built-for-the-agentic-era/",
-              "sha256": "97db931106004556782a2085d1feddafc3831a13ec77be4de320202c5972fab2",
+              "sha256": "8482dd65d9c3f17b72bc230b83749dad7ce6e0c0618c752378eb708b4215dde3",
               "relationship": "Microsoft confirms its own announcement"
             }
-          }
+          },
+          "document_revisions": [
+            {
+              "url": "https://newsroom.arm.com/news/arm-microsoft-azure-cobalt-200",
+              "sha256": "3e5331ef34bdcd97d6cd9fabd1828600fce8077426d988bf0223d4604c7d2218"
+            },
+            {
+              "url": "https://azure.microsoft.com/en-us/blog/azure-cobalt-200-vms-now-available-proven-on-real-workloads-and-built-for-the-agentic-era/",
+              "sha256": "8482dd65d9c3f17b72bc230b83749dad7ce6e0c0618c752378eb708b4215dde3"
+            }
+          ]
         }
       },
       {
@@ -250,7 +272,7 @@
           "evidence_date": "2026-11-17",
           "scope": "Arm",
           "supporting_evidence_ids": [
-            "EV-2ab097959aeacb800a5c4821"
+            "EV-1f330df259ee71013859b013"
           ],
           "freshness": "current",
           "contradiction_state": "none"
@@ -301,14 +323,14 @@
     "enterprise_id": "easyjet-plc",
     "records": [
       {
-        "external_id": "EV-b09ed83c7ed98e105e6b81b5",
+        "external_id": "EV-f3509baa18f79e2776641a19",
         "record_class": "evidence",
         "truth_class": "evidence_record",
         "payload": {
           "enterprise_id": "easyjet-plc",
           "source_url": "https://www.easyjet.com/en/news/airline/story/easyjet-to-offer-connectivity-onboard-for-the-first-time-with-starlink-the-fastest-wi-fi-in-the-sky-with-rapid-roll-out-coming-from-2027",
           "source_locator": "Publisher article body",
-          "source_content_sha256": "5f1a31aae2757a0de7842e8e606ece4ec53f8e84f8d7a77730fb6a3dad9969ef",
+          "source_content_sha256": "a8e7bc2d960d102914f54240dc34c83f6215039975ee4667e791ff7f432b8235",
           "publisher": "easyJet",
           "source_category": "corporate_announcement",
           "reporting_scope": "easyJet",
@@ -322,7 +344,7 @@
           "metric": null,
           "status": "current",
           "recorded_replay": false,
-          "live_content_sha256": "de407c8064fcca82c022ad70c0558915d94b634e64b82dc2ca404fd8e1c2d5b1",
+          "live_content_sha256": "7f6f5fabeadf86f5244c6fa29632a40a42a1460ef5033daca20a0a079a9e5db7",
           "use_scope": "isolated_commercial_replay",
           "commercial_change": {
             "headline": "easyJet plans onboard Starlink from 2027",
@@ -331,7 +353,13 @@
             "relationship": "easyJet \u00b7 Starlink",
             "confidence": "Issuer plan",
             "corroboration": null
-          }
+          },
+          "document_revisions": [
+            {
+              "url": "https://www.easyjet.com/en/news/airline/story/easyjet-to-offer-connectivity-onboard-for-the-first-time-with-starlink-the-fastest-wi-fi-in-the-sky-with-rapid-roll-out-coming-from-2027",
+              "sha256": "7f6f5fabeadf86f5244c6fa29632a40a42a1460ef5033daca20a0a079a9e5db7"
+            }
+          ]
         }
       },
       {
@@ -348,7 +376,7 @@
           "evidence_date": "2026-10-26",
           "scope": "easyJet",
           "supporting_evidence_ids": [
-            "EV-b09ed83c7ed98e105e6b81b5"
+            "EV-f3509baa18f79e2776641a19"
           ],
           "freshness": "current",
           "contradiction_state": "none"

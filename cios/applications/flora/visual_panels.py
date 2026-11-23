@@ -393,7 +393,7 @@ def _legal_notice(ctx,data):
     return '<footer class="legal-notice" aria-label="Legal attribution">'+text+'</footer>'
 
 
-def _frame(ctx,headers,data,issues,entries,body):
+def _frame(ctx,headers,data,issues,entries,body,*,show_commercial=False):
     """Ordinary three-panel frame emits no research disclosures or source URLs."""
     scene=replace(ctx,stream='landscape') if ctx.scope=='banking' and ctx.stream=='inside' else ctx
     if __import__('cios.applications.flora.access',fromlist=['is_cios_owner']).is_cios_owner(headers):
@@ -410,13 +410,17 @@ def _frame(ctx,headers,data,issues,entries,body):
     if ctx.scope=='easyjet':head+=easyjet.STYLE
     if ctx.scope=='banking':head+=ecosystem.STYLE+cohort.STYLE
     if ctx.scope=='lloyds':head+=recovery.STYLE
-    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(scene,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+watermark+'<article class="workspace editorial-workspace">'+reading.selector(ctx)+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
+    change = ''
+    if show_commercial and ctx.scope in {'lloyds', 'easyjet'} and not (ctx.detail or ctx.agenda or ctx.selected):
+        from .memory.commercial_views import commercial_change
+        change = commercial_change(ctx.scope, ctx.stream, headers)
+    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(scene,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+watermark+'<article class="workspace editorial-workspace">'+reading.selector(ctx)+change+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
 
 
 def render(ctx,headers=None,*,financial_run_id=''):
     from .supabase_identity import public_read
     with p.editorial_view(ctx.reading), public_read():
-        if ctx.scope=='easyjet':return _frame(ctx,headers,None,(),(),easyjet.main(ctx))
+        if ctx.scope=='easyjet':return _frame(ctx,headers,None,(),(),easyjet.main(ctx),show_commercial=True)
         if financial_run_id:
             from .financial_intelligence import analyst
             return analyst.render_selected(ctx,financial_run_id,headers=headers)
@@ -493,7 +497,7 @@ def render(ctx,headers=None,*,financial_run_id=''):
                 if not body:body='<h1>Technology &amp; data</h1><p>No eligible disclosures for this selection.</p>'
                 body+=reading.lloyds_capability(data,insight=False)
         else:body=_overview(ctx,data,issues)
-        return _frame(ctx,headers,data,issues,entries,body)
+        return _frame(ctx,headers,data,issues,entries,body,show_commercial=True)
 
 
 @verified_service_read('package.inspect')

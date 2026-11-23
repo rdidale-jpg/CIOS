@@ -1,0 +1,39 @@
+name: FLORA verified Factory
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'cios/applications/flora/**'
+      - 'docs/research/initial-factory/verified/**'
+      - 'tests/test_flora_verified_factory.py'
+      - 'tools/research/verified_factory_proof.py'
+      - '.github/workflows/flora-verified-factory.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verified-factory:
+    name: FLORA verified Factory Source, Blueprint and browser proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install browser proof dependencies
+        run: |
+          python -m pip install -r requirements-browser.txt 'Pillow>=10,<13'
+          python -m playwright install --with-deps chromium
+      - name: Check Source withdrawal and scoped Blueprint execution
+        env:
+          CIOS_VERIFIED_ROUTE_OUTPUT: ${{ runner.temp }}/flora-verified-routes
+        run: python -m pytest -q -o usefixtures=verified_flora_test_authority tests/test_flora_verified_factory.py tests/test_flora_initial_factory.py tests/test_flora_blueprint_import_validation.py tests/test_flora_blueprint_import_promotion.py
+      - name: Verify desktop and both iPad orientations
+        run: PYTHONPATH=. python docs/research/initial-factory/verified/browser.py "$RUNNER_TEMP/flora-verified-routes" --output "$RUNNER_TEMP/flora-verified-captures"

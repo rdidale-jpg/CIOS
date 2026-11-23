@@ -97,12 +97,41 @@ def replay_sections(enterprise, workspace, *, perspective=None, insight=False, n
         for p in PERSPECTIVES)
 
 
+def _isolated_binding(binding, headers):
+    import os
+    from ..access import active_workspace_membership
+    from ..enterprise_canvas.access import EnterpriseCanvasAccessRepository, can_access_canvas_record
+
+    if (os.getenv('FLORA_ENVIRONMENT') != 'development'
+            or os.getenv('FLORA_FACTORY_ROUTE_REPLAY') != '1'):
+        return None
+    membership = active_workspace_membership(headers)
+    if not membership:
+        return None
+    matches = [record for record in EnterpriseCanvasAccessRepository().list()
+               if binding in {record.enterprise_id, record.canvas_id}
+               and record.workspace_id == membership.workspace_id]
+    if len(matches) != 1:
+        return None
+    record = matches[0]
+    if not can_access_canvas_record(headers, record.enterprise_id, record.workspace_id):
+        return None
+    return record
+
+
+def commercial_change(binding, perspective, headers):
+    """Native renderer slot. Production publication remains disabled."""
+    record = _isolated_binding(binding, headers)
+    if record is None:
+        return ''
+    return replay_sections(record.enterprise_id, record.workspace_id,
+                           perspective=perspective, native=True)
+
+
 def route_replay(html, path, query, headers):
     """Opt-in non-production proof on existing routes with existing Canvas access."""
     import os
     import re
-    from ..access import active_workspace_membership
-    from ..enterprise_canvas.access import EnterpriseCanvasAccessRepository, can_access_canvas_record
 
     if (os.getenv('FLORA_ENVIRONMENT') != 'development'
             or os.getenv('FLORA_FACTORY_ROUTE_REPLAY') != '1'):
@@ -119,16 +148,8 @@ def route_replay(html, path, query, headers):
         binding = 'arm'
     if not binding or 'lens' in query or 'analysis' in query:
         return html
-    membership = active_workspace_membership(headers)
-    if not membership:
-        return html
-    matches = [record for record in EnterpriseCanvasAccessRepository().list()
-               if binding in {record.enterprise_id, record.canvas_id}
-               and record.workspace_id == membership.workspace_id]
-    if len(matches) != 1:
-        return html
-    record = matches[0]
-    if not can_access_canvas_record(headers, record.enterprise_id, record.workspace_id):
+    record = _isolated_binding(binding, headers)
+    if record is None:
         return html
     selected = query.get('stream', ['landscape'])
     if len(selected) != 1 or selected[0] not in PERSPECTIVES:
@@ -136,22 +157,6 @@ def route_replay(html, path, query, headers):
     reading = query.get('reading', ['facts'])
     if reading not in (['facts'], ['insight']):
         return html
-    # Insert the small change into the existing main reading surface. Keep the
-    # legacy isolated projection for records without reviewed commercial copy.
-    has_specialist_selection = any(key in query for key in ('detail', 'agenda', 'selected'))
-    if not has_specialist_selection:
-        current = replay_sections(record.enterprise_id, record.workspace_id,
-                                  perspective=selected[0], native=True)
-        if current:
-            # Place the change alongside each destination's existing context,
-            # after its controls or heading rather than below the page.
-            if technology:
-                anchor = r'<p class="commercial-perspective">[^<]*</p>'
-            elif binding == 'bt-group-plc':
-                anchor = r'</h1>'
-            else:
-                anchor = r'<nav class="reading-mode"[^>]*>.*?</nav>'
-            html = re.sub(anchor, lambda match: match[0] + current, html, count=1, flags=re.S)
     sections = replay_sections(record.enterprise_id, record.workspace_id,
                                perspective=selected[0], insight=reading == ['insight'])
     if technology and reading == ['facts']:

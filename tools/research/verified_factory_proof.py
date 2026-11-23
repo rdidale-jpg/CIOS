@@ -100,6 +100,9 @@ def prepare_finding(review, discovery, fetch=fetch_disclosure):
     evidence = result['records'][0]['payload']
     evidence['commercial_change'] = {key: review[key] for key in VISUAL_FIELDS}
     evidence['commercial_change']['corroboration'] = corroboration
+    evidence['document_revisions'] = [{'url': review['url'], 'sha256': digest}]
+    if corroboration:
+        evidence['document_revisions'].append({key: corroboration[key] for key in ('url', 'sha256')})
     return result
 
 

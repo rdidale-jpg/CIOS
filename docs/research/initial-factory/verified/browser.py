@@ -1,5 +1,6 @@
 """Render before/after Flora handler responses captured by the isolated proof."""
 import argparse
+import shutil
 from pathlib import Path
 from io import BytesIO
 from urllib.parse import urlsplit
@@ -53,7 +54,7 @@ def capture(browser, stem, state, viewport, tablet=False):
     return overview,evidence
 
 with sync_playwright() as p:
-    browser=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
+    browser=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox'])
     responses = sorted(src.glob('*-route-after.html'))
     assert len(responses) == 4, 'Expected all four enterprise route captures'
     for file in responses:

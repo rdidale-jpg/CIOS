@@ -54,8 +54,12 @@ def _executive_canvas(canvas, headers, include_reasoning: bool = True, force_ove
     if canvas.enterprise_id.upper() == 'MOD' and not _has_successful_reasoning(canvas) and not force_overview:
         return _reasoning_panel(canvas) + f"""<section class='card model-explorer' id='model-explorer'><h2>Model Explorer</h2><p class='muted'>Legacy diagnostic view only; not the Executive Intelligence Brief.</p><div class='card-grid'>{explorer}</div></section><section class='card' id='evidence-and-lineage'><h2>Evidence &amp; Lineage</h2><p>Executive statements can be inspected for Evidence, Observations, Unknowns, Contradictions, confidence, freshness and source lineage. Select any Model Explorer area to inspect detailed lineage.</p></section>"""
     reasoning = _reasoning_panel(canvas) if include_reasoning else ""
+    change = ''
+    if canvas.enterprise_id == 'bt-group-plc':
+        from cios.applications.flora.memory.commercial_views import commercial_change
+        change = commercial_change(canvas.enterprise_id, 'inside', headers)
     return reasoning + f"""
-    <section class='hero' id='overview'><p><a href='/digital-twins'>Digital Twins</a></p><p class='pill'>Executive Commercial Canvas · governed read model · Overview default</p><h1>{escape(h.enterprise_name)} executive situation briefing</h1><p>{escape(_summary(h, canvas))}</p><dl><div><dt>Twin version</dt><dd>{escape(h.twin_version)}</dd></div><div><dt>Source cut-off</dt><dd>{escape(h.source_cut_off)}</dd></div><div><dt>Progressive Assurance status</dt><dd>{escape(h.maturity_or_acceptance_state)}</dd></div></dl><div class='brief-grid'>
+    <section class='hero' id='overview'><p><a href='/digital-twins'>Digital Twins</a></p><p class='pill'>Executive Commercial Canvas · governed read model · Overview default</p><h1>{escape(h.enterprise_name)} executive situation briefing</h1>{change}<p>{escape(_summary(h, canvas))}</p><dl><div><dt>Twin version</dt><dd>{escape(h.twin_version)}</dd></div><div><dt>Source cut-off</dt><dd>{escape(h.source_cut_off)}</dd></div><div><dt>Progressive Assurance status</dt><dd>{escape(h.maturity_or_acceptance_state)}</dd></div></dl><div class='brief-grid'>
     {_brief('Enterprise summary', h.enterprise_purpose if h.enterprise_purpose != 'Unknown' else 'Evidence incomplete')}
     {_brief('Current strategic context', h.governing_thesis if h.governing_thesis != 'Unknown' else ('MOD strategic context is unavailable until supported by accepted intelligence.' if canvas.enterprise_id.upper()=='MOD' else 'Strategic context unavailable — no governed executive interpretation is supplied.'))}
     {_brief('Major transformation agenda', _join_pressures(h.current_material_pressures) or 'Evidence incomplete')}

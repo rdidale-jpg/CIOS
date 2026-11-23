@@ -16,6 +16,8 @@ from cios.applications.flora.enterprise_canvas.access import (
 from cios.applications.flora.memory.repository import EvidenceRepository, EnterpriseModelRepository
 from cios.applications.flora.research_intelligence.initial_factory import blueprint_archive
 from cios.applications.flora.web.app import FloraWebHandler
+from cios.applications.flora.research_intelligence.source_lifecycle import lifecycle_path
+from cios.applications.flora.storage import atomic_write_json
 from tools.research.verified_factory_proof import capture
 
 FIXTURE = Path('docs/research/initial-factory/verified/isolated-records.json')
@@ -37,6 +39,13 @@ def test_verified_change_route(result, tmp_path, monkeypatch, verified_flora_tes
         monkeypatch.setenv(key, str(tmp_path / 'isolated'))
     monkeypatch.setenv('FLORA_ENVIRONMENT', 'development')
     monkeypatch.setenv('FLORA_FACTORY_ROUTE_REPLAY', '1')
+    source_revisions = [dict(row, lifecycle='current')
+                        for row in evidence['payload']['document_revisions']]
+
+    def set_source_revisions():
+        atomic_write_json(lifecycle_path(), {'schema_version': '1.0', 'revisions': source_revisions})
+
+    set_source_revisions()
     actor = 'isolated-proof-approver'
     headers = {'X-Flora-User': actor, 'X-Flora-Enterprises': enterprise,
                'X-Flora-Roles': 'package.review,candidate.promote'}
@@ -86,6 +95,23 @@ def test_verified_change_route(result, tmp_path, monkeypatch, verified_flora_tes
             (Path(output) / f'{enterprise}-route-{state}.html').write_text(markup)
     repository = EvidenceRepository()
     row, = repository.list()
+    stored_bytes = repository.path.read_bytes()
+    source_revisions[-1]['lifecycle'] = 'withdrawn'
+    set_source_revisions()
+    assert repository.get(row['evidence_id'])['status'] == 'withdrawn'
+    assert 'data-commercial-change' not in render(headers)
+    assert repository.path.read_bytes() == stored_bytes
+    assert EnterpriseModelRepository().get(enterprise) == model
+    lifecycle_path().unlink()
+    assert 'data-commercial-change' not in render(headers)
+    source_revisions[-1]['lifecycle'] = 'current'
+    original = source_revisions[-1]['sha256']
+    source_revisions[-1]['sha256'] = '0' * 64
+    set_source_revisions()
+    assert 'data-commercial-change' not in render(headers)
+    source_revisions[-1]['sha256'] = original
+    set_source_revisions()
+    assert 'data-commercial-change' in render(headers)
     repository.save(dict(row, status='withdrawn'))
     assert 'data-commercial-change' not in render(headers)
 
