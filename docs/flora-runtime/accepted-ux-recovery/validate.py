@@ -62,6 +62,13 @@ with TemporaryDirectory() as scratch:
     subprocess.run(['git','apply','--cached','--reverse','--binary'],input=patch,cwd=ROOT,env=env,check=True)
     tree = git('write-tree', env=env).decode().strip()
 assert tree == git('rev-parse', BASE + '^{tree}').decode().strip()
+for manifest in ('Before-Proof.json', 'Browser-Proof.json'):
+    proof = json.loads((Path(__file__).parent / manifest).read_text())
+    for name, expected in proof['captures_sha256'].items():
+        assert sha256((Path(__file__).parent / 'previews' / name).read_bytes()).hexdigest() == expected, name
+    for path, expected in proof['runtime_sha256'].items():
+        raw = original(BASE, path) if manifest == 'Before-Proof.json' else (ROOT / path).read_bytes()
+        assert sha256(raw).hexdigest() == expected, (manifest, path)
 links = []
 for doc in Path(__file__).parent.glob('*.md'):
     for target in re.findall(r'\]\(([^)]+)\)', doc.read_text()):
@@ -73,4 +80,4 @@ print(json.dumps({'head':head,'base':BASE,'recovered_from':RECOVERY,'changed_fil
                   'protected_paths_unchanged':True,'original_runtime_images_unchanged':len(assets),
                   'exact_712_reuse':reused,'726_navigation_functions_unchanged':True,
                   'reverse_tree':tree,'rollback_matches_baseline':True,'local_links_checked':len(links),
-                  'production_or_canonical_writes':0,'paid_calls':0},indent=2))
+                  'capture_and_runtime_hashes_verified':True,'production_or_canonical_writes':0,'paid_calls':0},indent=2))

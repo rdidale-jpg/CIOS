@@ -1,5 +1,5 @@
 {
-  "checkout": "8aff113c8833cb67db301bd2866338bbb16359ce",
+  "checkout": "64daeb433962089f1d333a03292467ac5c014e7e",
   "runtime_sha256": {
     "cios/applications/flora/__init__.py": "20f7c2692c6fcbd4125350d1e8b8b2242c380374203aac504e844feadf598a7e",
     "cios/applications/flora/access.py": "da0abc2923c2c02d93e65c3ba986df879c6a71946b2e6b567dfca08c0c8ceb51",
@@ -242,7 +242,7 @@
     "cios/applications/flora/twin_inspection/views.py": "f0cb30610fdde23d968d98a33318411eb2a4864e2918ca1b6456751268284802",
     "cios/applications/flora/url_utils.py": "300d6f436df8ad928b4ea9cf833d6269a599ecc74ceeea6a18494484d024b861",
     "cios/applications/flora/verified_context_contract.py": "464f425f43a92578154161e89fc8a436a34c9a6df6504ec21670b2b90f6bb180",
-    "cios/applications/flora/visual_panels.py": "44172917889dc5ee06dc127c070280fd3f77da1841321e53ea265e368bb8f787",
+    "cios/applications/flora/visual_panels.py": "983c6016b28b72f274e59674169cf2a3e5d2d59d4c7da080eefb0db573cba0ae",
     "cios/applications/flora/visual_stream_assets/economics.css": "a9401b6d7ef49495ee1709240e2fe5794ee95c8d2e99fa0d40e70d9a9dead15e",
     "cios/applications/flora/visual_stream_assets/lloyds-twin.css": "f4b2e96dfe70d124837ac32f554437f3e34cb45ee6455b80882d813b445672df",
     "cios/applications/flora/visual_stream_assets/lloyds-twin.js": "ab64bab9ff41ba813f8c350e8ecaf33381efaa73c672274984e0f5a370895720",
@@ -269,7 +269,7 @@
     "after-desktop-easyjet.jpg": "c761ab7b0446c3507cd3a70b4fbc9c6b14b9eb6ab57202f49b7d0c10332d9d83",
     "after-desktop-lloyds-arrival.jpg": "bfcc0ac0e0d7e8bf2e3b306b4931ff5bae1be94e257bead09c91a30358b2c231",
     "after-desktop-lloyds-forces.jpg": "f2c03ae351424335156233801866cbf1d1ebdbe0c9666b06ecc2dde13920b73d",
-    "after-desktop-lloyds-inside.jpg": "ac597ff7b831e3c802580bf9bccd2a15f4e7d35541034117806d399bdb88af74",
+    "after-desktop-lloyds-inside.jpg": "b14f4b3fe2787659292c026b6c6ac4eb523047174ec3290b1bf101bf9e80d953",
     "after-desktop-lloyds-overview.jpg": "29468a7ff252fad2cd9551d0f389630320ede9141bd8c2d1cd5b25eb1cf95b80",
     "after-desktop-swot.jpg": "224adc407d2b7c14ce8fc4450e1550dd40af710729d7c1337226b408d671e7fa",
     "after-ipad-landscape-banking.jpg": "d570b406008aaf27839e6e27726398c515cf8dc7d4d7833ca5e594aa6c7d1a11",
@@ -333,6 +333,6 @@
       "failed_requests": []
     }
   ],
-  "capture_requirement": "Fonts ready; every currently visible image complete with positive natural width. Collapsed lazy images are excluded.",
-  "note": "Actual local browser render. No claim of live production comparison or owner acceptance."
+  "capture_requirement": "Fonts ready; visible images complete with positive natural width. Collapsed lazy images excluded.",
+  "note": "Captured checkout plus explicitly hashed working-tree runtime before final corrective commit. validate.py matches these runtime bytes and image hashes to the final committed head; hosted browser proof reruns on that head. Not a live Render capture."
 }

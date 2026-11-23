@@ -47,7 +47,7 @@ UX_RECOVERY_CUTS = {'cios/applications/flora/easyjet_capabilities.py': ('2ac52cf
                                                         'uk_forces')),
  'cios/applications/flora/lloyds_recovery.py': ('d65a2f2d884fac43eb082b8d0176b34a27231f718dc40fa81634bf4299d2b9f8',
                                                 ('forces', 'inside', 'landscape')),
- 'cios/applications/flora/visual_panels.py': ('44172917889dc5ee06dc127c070280fd3f77da1841321e53ea265e368bb8f787',
+ 'cios/applications/flora/visual_panels.py': ('983c6016b28b72f274e59674169cf2a3e5d2d59d4c7da080eefb0db573cba0ae',
                                               ('_frame', 'render', 'research_inspection'))}
 
 

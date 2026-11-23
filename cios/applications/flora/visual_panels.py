@@ -543,8 +543,10 @@ def render(ctx,headers=None,*,financial_run_id=''):
             elif ctx.stream=='forces':
                 item=v.force_view(ctx,ctx.detail,data)
                 if item and p.eligible(item):
-                    text,caveat,_=v.FORCE_POLICY[ctx.detail]
-                    body+=reading.interpretation('What this means',(item,),text,caveat,heading='h2')
+                    _,caveat,_=v.FORCE_POLICY[ctx.detail]
+                    if ctx.scope=='banking' and ctx.detail.startswith('LBG-'):
+                        caveat+=' This is a Lloyds example; it does not establish effects across all banks.'
+                    body+='<p class="material">'+e(caveat)+'</p>'
         else:
             body=_overview(ctx,data,issues)
             if ctx.scope=='uk' and ctx.stream=='landscape':

@@ -27,6 +27,7 @@ The historical comparator, approved failures/skips and original security tests r
 | `test_flora_lloyds_flagship.py` | Analysis absent in Facts; four old SWOT title prefixes; evidence accordion; old root link label | Unified typed content, eight theme anchors, no executive accordion and Explore Lloyds label. Source, relationship and withdrawal negatives retained. |
 | `test_flora_ux_unify_670.py` | Reading-mode links, fact/analysis separation, source-unavailable reading placeholder | Same public composition on legacy URLs; reported numbers and scoped interpretation coexist. Source rights, private-run, provenance and request-boundary negatives retained. |
 | `test_flora_enterprise_economics_a1.py` | Public Source & basis accordion and separate assumed/insight stage | Both existing types in one stage; zero public basis accordion. No new measures or permissions; invalid units/entities/periods and source withdrawal retained. |
+| `test_flora_visual_streams_612.py` | Forces detail required no interpretation on the default URL | Both existing typed layers in one public composition; legacy URL identical. Server addressability, close controls and all source/access negatives remain. A new assertion prevents duplicate interpretation and requires the material scope caveat. |
 | `test_flora_experience_684.py` | Separate reading selector, only one branch visible | Existing per-stream facts, conceptual mechanisms and eligible conditional implications together; exact subject/stream and source negatives retained. |
 | `test_flora_et_integrate_672.py` | Insight exists only on insight URL; unsupported-source placeholder | Existing eligible interpretation in both legacy URLs. Withdrawal denies the specific fact and dependent analysis while keeping independent conceptual operating activities. |
 | `test_flora_banking_cohort_691.py` | Reading-mode selector; complaint fact hidden from insight; Nationwide Society count absent from Group view | Unified display with **explicit separate legal entity and period**, not a new aggregation. Restore existing cohort conditional mechanisms; complaint cohorts remain non-comparable. Withdrawal still removes facts and interpretation. |
@@ -42,6 +43,14 @@ Strength: reuse, rather than replacement. The premium images, header, Top / Left
 Limitations: the recovered flagship is still a long editorial composition with several perspective choices, not a newly designed compact application. It inherits #712's prototype wording and illustrative operating maps. Combining previously separate content increases some pages' length; scoped caveats are intentionally retained. Do not call the result executive-ready solely because tests pass: the owner must judge commercial usefulness and visual density in the walkthrough. No unrequested visual design programme is started to address these judgments.
 
 Public factual access does not imply private-run access or owner inspection. Detailed provenance remains restricted where it already was restricted. Legal attribution still uses the existing eligible-source collector. Canonical acceptance and Pipeline qualification remain separate. No new architecture/registry is necessary.
+
+## Issues found during validation
+
+Hosted FIG-1 and semantic checks exposed three parametrised legacy assertions in `test_flora_visual_streams_612.py` requiring Forces to hide interpretation in Facts. They now test identical unified legacy-URL output while retaining detail/close/addressability and negative controls. Review also caught a duplicate Forces interpretation: the existing detail renderer already emitted its typed inference when the facts-only filter was removed. The redundant appended inference was removed; its material scope caveat remains visible and a dedicated non-duplication test was added.
+
+A screenshot initially captured before its Left illustration decoded. The harness now waits for fonts and visible-image completion, and the full before/after set was regenerated. Collapsed lazy-loaded scenes are excluded from the wait; they remain covered when opened in the existing responsive suite.
+
+Intermediate local CI runs started before later commits are not final-head evidence. One observed a changed deployment-endpoint signature because the checkout HEAD changed while it was running. Its result was invalidated; the final run freezes the committed head and retains the unchanged comparator. No baseline or approved failure is refreshed.
 
 ## Evidence limits and remaining decisions
 

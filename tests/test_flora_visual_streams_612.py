@@ -111,9 +111,9 @@ def test_every_interactive_detail_is_server_addressable_without_js(scope,stream)
   assert 'id="insight" tabindex="-1" aria-labelledby="insight-title"'in html
   assert 'id="insight-title"'in html and 'aria-label="Close 'in html
   if stream=='forces':
-   assert 'data-semantic-type="insight"'not in html
+   assert 'data-semantic-type="insight"'in html
    insight=v.render(path,{'stream':[stream],'detail':[spot['id']],'reading':['insight']})
-   assert 'data-semantic-type="insight"'in insight and 'A useful next question'not in insight
+   assert html == insight and 'A useful next question'not in insight
 
 
 def test_current_source_facts_targets_periods_and_truthful_unknowns():

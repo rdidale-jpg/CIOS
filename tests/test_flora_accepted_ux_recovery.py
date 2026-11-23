@@ -124,3 +124,10 @@ def test_compatibility_cut_is_exact_and_does_not_accept_unreviewed_functions():
         assert previous!=current
         changed=current+b'\n# Unreviewed mutation\n'
         assert checked_cut(root,path,changed,UX_RECOVERY_BASE,UX_RECOVERY_CUTS)==changed
+
+
+def test_selected_force_has_one_interpretation_and_material_scope():
+    body=main(v.render('/industries/banking',{'stream':['forces'],'detail':['UK-RATE-NOV26']}))
+    assert body.count('Funding conditions affect the context for deposit pricing and lending.')==1
+    assert 'Rate direction alone proves neither lost margin nor customer demand.' in body
+    assert 'data-semantic-type="reported"' in body and 'data-semantic-type="insight"' in body
