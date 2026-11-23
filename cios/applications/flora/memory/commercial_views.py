@@ -8,7 +8,22 @@ from ..research_intelligence.commercial_factory import PERSPECTIVES
 from .repository import EnterpriseModelRepository, EvidenceRepository, ObservationRepository
 
 
-def replay_sections(enterprise, workspace, *, perspective=None, insight=False):
+def _change_card(row, observation):
+    change = row['commercial_change']
+    return (
+        '<aside class="card" aria-label="Recent enterprise change" data-commercial-change>'
+        f'<p><small>{escape(row["period"])} · {escape(change["confidence"])}</small></p>'
+        f'<h2>{escape(change["headline"])}</h2>'
+        f'<p>{escape(change["meaning"])}</p>'
+        f'<p><strong>Investigate</strong> · {escape(change["next_question"])}</p>'
+        '<details><summary>What supports this?</summary>'
+        f'<p>{escape(observation.atomic_statement)}</p>'
+        f'<p>{escape(change["relationship"])} · {escape(row["publisher"])}</p>'
+        f'<p>{escape(row["caveat"])}</p></details></aside>'
+    )
+
+
+def replay_sections(enterprise, workspace, *, perspective=None, insight=False, native=False):
     """Render accepted memory for an explicitly scoped isolated preview."""
     model = EnterpriseModelRepository().get(enterprise)
     observations = {o.observation_id: o for o in ObservationRepository().list()
@@ -36,6 +51,13 @@ def replay_sections(enterprise, workspace, *, perspective=None, insight=False):
                         or row.get('affected_attribute') != observation.affected_attribute
                         or row.get('perspective') not in cards):
                     continue
+                change = row.get('commercial_change')
+                if native or change:
+                    required = ('headline', 'meaning', 'next_question', 'relationship', 'confidence')
+                    if (native and isinstance(change, dict)
+                            and all(isinstance(change.get(key), str) and change[key] for key in required)):
+                        cards[row['perspective']].append(_change_card(row, observation))
+                    continue
                 metric = row.get('metric')
                 if metric and metric.get('group') == 'revenue_mix' and metric.get('unit') == 'USD million':
                     metrics[row['reporting_scope'], row['period'], row['source_content_sha256']].append(metric)
@@ -58,6 +80,8 @@ def replay_sections(enterprise, workspace, *, perspective=None, insight=False):
             f"<p>Licensing and other revenue was {share:.1f}% of the sum of these reported licensing-and-other and royalty amounts.</p>"
             f"<p>{escape(scope)} · {escape(period)}. Same USD-million reporting basis. "
             "This mix does not establish margin or future revenue.</p></article>")
+    if native:
+        return ''.join(cards[perspective])
     if perspective is not None:
         items = analyses if insight and perspective == 'landscape' else (
             [] if insight else cards[perspective])
@@ -73,12 +97,41 @@ def replay_sections(enterprise, workspace, *, perspective=None, insight=False):
         for p in PERSPECTIVES)
 
 
+def _isolated_binding(binding, headers):
+    import os
+    from ..access import active_workspace_membership
+    from ..enterprise_canvas.access import EnterpriseCanvasAccessRepository, can_access_canvas_record
+
+    if (os.getenv('FLORA_ENVIRONMENT') != 'development'
+            or os.getenv('FLORA_FACTORY_ROUTE_REPLAY') != '1'):
+        return None
+    membership = active_workspace_membership(headers)
+    if not membership:
+        return None
+    matches = [record for record in EnterpriseCanvasAccessRepository().list()
+               if binding in {record.enterprise_id, record.canvas_id}
+               and record.workspace_id == membership.workspace_id]
+    if len(matches) != 1:
+        return None
+    record = matches[0]
+    if not can_access_canvas_record(headers, record.enterprise_id, record.workspace_id):
+        return None
+    return record
+
+
+def commercial_change(binding, perspective, headers):
+    """Native renderer slot. Production publication remains disabled."""
+    record = _isolated_binding(binding, headers)
+    if record is None:
+        return ''
+    return replay_sections(record.enterprise_id, record.workspace_id,
+                           perspective=perspective, native=True)
+
+
 def route_replay(html, path, query, headers):
     """Opt-in non-production proof on existing routes with existing Canvas access."""
     import os
     import re
-    from ..access import active_workspace_membership
-    from ..enterprise_canvas.access import EnterpriseCanvasAccessRepository, can_access_canvas_record
 
     if (os.getenv('FLORA_ENVIRONMENT') != 'development'
             or os.getenv('FLORA_FACTORY_ROUTE_REPLAY') != '1'):
@@ -95,16 +148,8 @@ def route_replay(html, path, query, headers):
         binding = 'arm'
     if not binding or 'lens' in query or 'analysis' in query:
         return html
-    membership = active_workspace_membership(headers)
-    if not membership:
-        return html
-    matches = [record for record in EnterpriseCanvasAccessRepository().list()
-               if binding in {record.enterprise_id, record.canvas_id}
-               and record.workspace_id == membership.workspace_id]
-    if len(matches) != 1:
-        return html
-    record = matches[0]
-    if not can_access_canvas_record(headers, record.enterprise_id, record.workspace_id):
+    record = _isolated_binding(binding, headers)
+    if record is None:
         return html
     selected = query.get('stream', ['landscape'])
     if len(selected) != 1 or selected[0] not in PERSPECTIVES:

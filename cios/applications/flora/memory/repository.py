@@ -157,6 +157,10 @@ class EvidenceRepository:
         self.path = path or data_path("memory", "evidence.jsonl")
 
     def list(self) -> list[dict]:
+        from ..research_intelligence.source_lifecycle import apply_source_lifecycle
+        return apply_source_lifecycle(self._stored_records())
+
+    def _stored_records(self) -> list[dict]:
         if not self.path.exists():
             return []
         rows = []
@@ -178,7 +182,7 @@ class EvidenceRepository:
     def save(self, evidence: dict) -> dict:
         if not evidence.get("evidence_id"):
             raise ValueError("Evidence requires evidence_id")
-        rows = self.list()
+        rows = self._stored_records()
         for i, row in enumerate(rows):
             if str(row.get("evidence_id")) == str(evidence.get("evidence_id")):
                 merged = {**row, **{k: v for k, v in evidence.items() if v not in (None, "", [])}}

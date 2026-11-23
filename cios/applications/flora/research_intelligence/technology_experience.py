@@ -388,6 +388,9 @@ def render(path, query, headers=None):
     else: body = opportunity(query.get('record') or 'cooling', scope)
     if suffix == '/enterprise' and query.get('detail') in {'financials', 'financial-insight'}:
         body += statement_detail(query.get('enterprise') or 'equinix', query)
+    if suffix == '/enterprise' and query.get('enterprise') == 'arm' and not query.get('detail'):
+        from ..memory.commercial_views import commercial_change
+        body += commercial_change('arm', 'landscape', headers)
     if suffix in alignment.ALIGNED:
         body = alignment.frame(path, suffix, query, body)
     import json
