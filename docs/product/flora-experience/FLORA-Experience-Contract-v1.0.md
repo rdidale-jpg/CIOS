@@ -1,5 +1,8 @@
 # FLORA Experience Contract v1.0 — Three Levels, Facts First, Insight by Choice
 
+> **Current reconciliation, 23 November 2026:** PR #728 has superseded this document's separate Facts / FLORA Insight reading-mode instructions with unified eligible facts and interpretation. The six semantic types and all existing authority/source boundaries remain distinct. [Presentation Contract v2.0](Presentation-Contract-v2.0.md) is the current **Phase A proposal** for Landscape / Inside / Forces / Left responsibilities; it requires owner visual acceptance before implementation. The v1 text below remains historical decision evidence.
+
+
 **Status:** Owner-agreed **product experience direction**, 18 November 2026. **Proposed repository design contract for owner confirmation and downstream implementation; not an accepted architecture ADR, not a runtime change.** This records the owner's express acceptance of the three-level presentation matrix and the *two-option* **Facts | FLORA Insight** selector at the top of Main. It does not reclassify IT-001 (Review), EIF-001 (Review), EI-001 (Draft), EGM-001 (Founder Review), or the INT-MAP-1 draft as accepted canonical architecture.
 
 **Mission:** One comprehensible intelligence experience across **UK → Industry → Enterprise**, with **Facts as the default in Main at every level and every primary perspective**. FLORA Insight is a deliberate alternative rendering of **the same selected subject**, not a route to obscuring or modifying factual knowledge.
