@@ -8,7 +8,22 @@ from ..research_intelligence.commercial_factory import PERSPECTIVES
 from .repository import EnterpriseModelRepository, EvidenceRepository, ObservationRepository
 
 
-def replay_sections(enterprise, workspace, *, perspective=None, insight=False):
+def _change_card(row, observation):
+    change = row['commercial_change']
+    return (
+        '<aside class="card" aria-label="Recent enterprise change" data-commercial-change>'
+        f'<p><small>{escape(row["period"])} · {escape(change["confidence"])}</small></p>'
+        f'<h2>{escape(change["headline"])}</h2>'
+        f'<p>{escape(change["meaning"])}</p>'
+        f'<p><strong>Investigate</strong> · {escape(change["next_question"])}</p>'
+        '<details><summary>What supports this?</summary>'
+        f'<p>{escape(observation.atomic_statement)}</p>'
+        f'<p>{escape(change["relationship"])} · {escape(row["publisher"])}</p>'
+        f'<p>{escape(row["caveat"])}</p></details></aside>'
+    )
+
+
+def replay_sections(enterprise, workspace, *, perspective=None, insight=False, native=False):
     """Render accepted memory for an explicitly scoped isolated preview."""
     model = EnterpriseModelRepository().get(enterprise)
     observations = {o.observation_id: o for o in ObservationRepository().list()
@@ -36,6 +51,13 @@ def replay_sections(enterprise, workspace, *, perspective=None, insight=False):
                         or row.get('affected_attribute') != observation.affected_attribute
                         or row.get('perspective') not in cards):
                     continue
+                change = row.get('commercial_change')
+                if native or change:
+                    required = ('headline', 'meaning', 'next_question', 'relationship', 'confidence')
+                    if (native and isinstance(change, dict)
+                            and all(isinstance(change.get(key), str) and change[key] for key in required)):
+                        cards[row['perspective']].append(_change_card(row, observation))
+                    continue
                 metric = row.get('metric')
                 if metric and metric.get('group') == 'revenue_mix' and metric.get('unit') == 'USD million':
                     metrics[row['reporting_scope'], row['period'], row['source_content_sha256']].append(metric)
@@ -58,6 +80,8 @@ def replay_sections(enterprise, workspace, *, perspective=None, insight=False):
             f"<p>Licensing and other revenue was {share:.1f}% of the sum of these reported licensing-and-other and royalty amounts.</p>"
             f"<p>{escape(scope)} · {escape(period)}. Same USD-million reporting basis. "
             "This mix does not establish margin or future revenue.</p></article>")
+    if native:
+        return ''.join(cards[perspective])
     if perspective is not None:
         items = analyses if insight and perspective == 'landscape' else (
             [] if insight else cards[perspective])
@@ -112,6 +136,22 @@ def route_replay(html, path, query, headers):
     reading = query.get('reading', ['facts'])
     if reading not in (['facts'], ['insight']):
         return html
+    # Insert the small change into the existing main reading surface. Keep the
+    # legacy isolated projection for records without reviewed commercial copy.
+    has_specialist_selection = any(key in query for key in ('detail', 'agenda', 'selected'))
+    if not has_specialist_selection:
+        current = replay_sections(record.enterprise_id, record.workspace_id,
+                                  perspective=selected[0], native=True)
+        if current:
+            # Place the change alongside each destination's existing context,
+            # after its controls or heading rather than below the page.
+            if technology:
+                anchor = r'<p class="commercial-perspective">[^<]*</p>'
+            elif binding == 'bt-group-plc':
+                anchor = r'</h1>'
+            else:
+                anchor = r'<nav class="reading-mode"[^>]*>.*?</nav>'
+            html = re.sub(anchor, lambda match: match[0] + current, html, count=1, flags=re.S)
     sections = replay_sections(record.enterprise_id, record.workspace_id,
                                perspective=selected[0], insight=reading == ['insight'])
     if technology and reading == ['facts']:

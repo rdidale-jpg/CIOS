@@ -1,0 +1,398 @@
+[
+  {
+    "enterprise_id": "lloyds-banking-group-plc",
+    "records": [
+      {
+        "external_id": "EV-16cf5c53f68c3ac6dacbfc96",
+        "record_class": "evidence",
+        "truth_class": "evidence_record",
+        "payload": {
+          "enterprise_id": "lloyds-banking-group-plc",
+          "source_url": "https://www.lloydsbankinggroup.com/",
+          "source_locator": "Publisher article body",
+          "source_content_sha256": "1c24965e162550679ba2fb22fb1b4080bb762df41658eae3d883edeaaab35599",
+          "publisher": "Lloyds Banking Group",
+          "source_category": "corporate_announcement",
+          "reporting_scope": "Lloyds Banking Group",
+          "publication_date": "2026-11-18",
+          "period": "2026-11-18",
+          "statement": "Lloyds says its Data & AI Ethics Committee reviews complex AI cases.",
+          "affected_attribute": "events.responsible_ai_ethics",
+          "perspective": "forces",
+          "caveat": "The guide describes internal practice. It gives no basis to assume adoption across all teams or purchase intent.",
+          "family": "Technology and regulation",
+          "metric": null,
+          "status": "current",
+          "recorded_replay": false,
+          "live_content_sha256": "1cdc338242ed82290f968bd3aa246d5cbab6cb49588f0c90e714262314819a9b",
+          "use_scope": "isolated_commercial_replay",
+          "commercial_change": {
+            "headline": "How Lloyds reviews complex AI decisions",
+            "meaning": "The committee is a disclosed point of oversight for complex AI cases.",
+            "next_question": "Which teams supply testing evidence to the committee, and where is the work still manual?",
+            "relationship": "Lloyds Banking Group",
+            "confidence": "Issuer account",
+            "corroboration": null
+          }
+        }
+      },
+      {
+        "external_id": "OBS-9c313ecf4e49a2a7a73f3cf4",
+        "record_class": "observation",
+        "truth_class": "observed",
+        "payload": {
+          "enterprise_id": "lloyds-banking-group-plc",
+          "observation_id": "OBS-9c313ecf4e49a2a7a73f3cf4",
+          "atomic_statement": "Lloyds says its Data & AI Ethics Committee reviews complex AI cases.",
+          "type": "enterprise_event_announced",
+          "affected_entity_relationship": "events.responsible_ai_ethics",
+          "event_date": "2026-11-18",
+          "evidence_date": "2026-11-18",
+          "scope": "Lloyds Banking Group",
+          "supporting_evidence_ids": [
+            "EV-16cf5c53f68c3ac6dacbfc96"
+          ],
+          "freshness": "current",
+          "contradiction_state": "none"
+        }
+      }
+    ],
+    "coverage": {
+      "Identity and ownership": "Unknown",
+      "Subsidiaries, divisions and perimeter": "Unknown",
+      "Geography and markets": "Unknown",
+      "Products, services and customers": "Unknown",
+      "Revenue pools, margins and cost drivers": "Unknown",
+      "Statements and multi-period economics": "Unknown",
+      "Position and advantage": "Unknown",
+      "Value chain and partnerships": "Unknown",
+      "Strategy and investments": "Unknown",
+      "Operating model": "Unknown",
+      "Capabilities and processes": "Unknown",
+      "Journeys and service operations": "Unknown",
+      "Workforce and organisation": "Unknown",
+      "Application Estate and Lifecycle": "Unknown",
+      "Hosting and infrastructure": "Unknown",
+      "Data and AI capabilities": "Unknown",
+      "Cybersecurity and resilience": "Unknown",
+      "Suppliers and outsourcing": "Unknown",
+      "Supplier Contracts and Commercial Lifecycle": "Unknown",
+      "Programmes and milestones": "Unknown",
+      "Productivity, performance and risk": "Unknown",
+      "Leadership and accountability": "Unknown",
+      "Political, economic, social, environmental": "Unknown",
+      "Technology and regulation": "Partial",
+      "Rivalry and industry structure": "Unknown",
+      "Supplier and buyer power": "Unknown",
+      "Substitution and entrants": "Unknown",
+      "AI-native competition": "Unknown",
+      "Ecosystem and convergence": "Unknown",
+      "Events and milestones": "Unknown",
+      "Procurement and Commercial Events": "Unknown"
+    },
+    "models": {
+      "PESTLE": "Partial",
+      "limitation": "Partial models expose attributable inputs and bounded comparisons. Commercial intent, causal outcomes and delivery remain unverified."
+    },
+    "held": {},
+    "conflicts": []
+  },
+  {
+    "enterprise_id": "bt-group-plc",
+    "records": [
+      {
+        "external_id": "EV-3735bdf256af9a3a6d690440",
+        "record_class": "evidence",
+        "truth_class": "evidence_record",
+        "payload": {
+          "enterprise_id": "bt-group-plc",
+          "source_url": "https://newsroom.bt.com/bt-transforms-scotlands-public-sector-connectivity--upgrading-the-nations-digital-infrastructure/",
+          "source_locator": "Publisher article body",
+          "source_content_sha256": "b30683ae8f9958bbc50c5b7a52131ad4b9d4f2d6de9e3f842144bc5a37b0881d",
+          "publisher": "BT Group",
+          "source_category": "corporate_announcement",
+          "reporting_scope": "BT Group",
+          "publication_date": "2026-11-02",
+          "period": "2026-11-02",
+          "statement": "BT reported completing its upgrade to the Scottish Wide Area Network.",
+          "affected_attribute": "events.programmes.swan_upgrade",
+          "perspective": "inside",
+          "caveat": "BT reports completion. Customer acceptance and any open procurement remain unverified.",
+          "family": "Programmes and milestones",
+          "metric": null,
+          "status": "current",
+          "recorded_replay": false,
+          "live_content_sha256": "1a63495b18ab218269daab283c35d264a5bbef7f1fdac2a1e7fe33312c730e75",
+          "use_scope": "isolated_commercial_replay",
+          "commercial_change": {
+            "headline": "BT reports Scotland network upgrade complete",
+            "meaning": "The announced milestone moves attention from rollout to ongoing service performance.",
+            "next_question": "Which service and resilience measures will public-sector customers track after migration?",
+            "relationship": "BT Group \u00b7 Scottish public-sector organisations",
+            "confidence": "Supplier account",
+            "corroboration": null
+          }
+        }
+      },
+      {
+        "external_id": "OBS-8ef3d1abbaa228be3636321f",
+        "record_class": "observation",
+        "truth_class": "observed",
+        "payload": {
+          "enterprise_id": "bt-group-plc",
+          "observation_id": "OBS-8ef3d1abbaa228be3636321f",
+          "atomic_statement": "BT reported completing its upgrade to the Scottish Wide Area Network.",
+          "type": "programme_announced",
+          "affected_entity_relationship": "events.programmes.swan_upgrade",
+          "event_date": "2026-11-02",
+          "evidence_date": "2026-11-02",
+          "scope": "BT Group",
+          "supporting_evidence_ids": [
+            "EV-3735bdf256af9a3a6d690440"
+          ],
+          "freshness": "current",
+          "contradiction_state": "none"
+        }
+      }
+    ],
+    "coverage": {
+      "Identity and ownership": "Unknown",
+      "Subsidiaries, divisions and perimeter": "Unknown",
+      "Geography and markets": "Unknown",
+      "Products, services and customers": "Unknown",
+      "Revenue pools, margins and cost drivers": "Unknown",
+      "Statements and multi-period economics": "Unknown",
+      "Position and advantage": "Unknown",
+      "Value chain and partnerships": "Unknown",
+      "Strategy and investments": "Unknown",
+      "Operating model": "Unknown",
+      "Capabilities and processes": "Unknown",
+      "Journeys and service operations": "Unknown",
+      "Workforce and organisation": "Unknown",
+      "Application Estate and Lifecycle": "Unknown",
+      "Hosting and infrastructure": "Unknown",
+      "Data and AI capabilities": "Unknown",
+      "Cybersecurity and resilience": "Unknown",
+      "Suppliers and outsourcing": "Unknown",
+      "Supplier Contracts and Commercial Lifecycle": "Unknown",
+      "Programmes and milestones": "Partial",
+      "Productivity, performance and risk": "Unknown",
+      "Leadership and accountability": "Unknown",
+      "Political, economic, social, environmental": "Unknown",
+      "Technology and regulation": "Unknown",
+      "Rivalry and industry structure": "Unknown",
+      "Supplier and buyer power": "Unknown",
+      "Substitution and entrants": "Unknown",
+      "AI-native competition": "Unknown",
+      "Ecosystem and convergence": "Unknown",
+      "Events and milestones": "Unknown",
+      "Procurement and Commercial Events": "Unknown"
+    },
+    "models": {
+      "Enterprise Transformation Timeline": "Partial",
+      "limitation": "Partial models expose attributable inputs and bounded comparisons. Commercial intent, causal outcomes and delivery remain unverified."
+    },
+    "held": {},
+    "conflicts": []
+  },
+  {
+    "enterprise_id": "arm-holdings-plc",
+    "records": [
+      {
+        "external_id": "EV-2ab097959aeacb800a5c4821",
+        "record_class": "evidence",
+        "truth_class": "evidence_record",
+        "payload": {
+          "enterprise_id": "arm-holdings-plc",
+          "source_url": "https://newsroom.arm.com/news/arm-microsoft-azure-cobalt-200",
+          "source_locator": "Publisher article body",
+          "source_content_sha256": "465dfacec92dcc74215b8d1e317edd7623641cf628d205e26dcd460881004cc4",
+          "publisher": "Arm",
+          "source_category": "corporate_announcement",
+          "reporting_scope": "Arm",
+          "publication_date": "2026-11-17",
+          "period": "2026-11-17",
+          "statement": "Microsoft announced general availability of Azure Cobalt 200 virtual machines.",
+          "affected_attribute": "events.azure_cobalt_200",
+          "perspective": "landscape",
+          "caveat": "Microsoft confirms availability. The announcements do not establish regional coverage, customer adoption or measured savings.",
+          "family": "Technology and regulation",
+          "metric": null,
+          "status": "current",
+          "recorded_replay": false,
+          "live_content_sha256": "1f7db4941bd759f77cdb31780cc81ef20a66808870843cbf96579dde2cdaa89a",
+          "use_scope": "isolated_commercial_replay",
+          "commercial_change": {
+            "headline": "Azure makes Cobalt 200 generally available",
+            "meaning": "Microsoft now offers another Arm-based option for evaluating cloud workloads.",
+            "next_question": "Which regions and workloads are supported, and what would a portability test need to prove?",
+            "relationship": "Arm \u00b7 Microsoft Azure",
+            "confidence": "Confirmed by Microsoft",
+            "corroboration": {
+              "url": "https://azure.microsoft.com/en-us/blog/azure-cobalt-200-vms-now-available-proven-on-real-workloads-and-built-for-the-agentic-era/",
+              "sha256": "97db931106004556782a2085d1feddafc3831a13ec77be4de320202c5972fab2",
+              "relationship": "Microsoft confirms its own announcement"
+            }
+          }
+        }
+      },
+      {
+        "external_id": "OBS-f8329cd6749b4ab8c5bc3b31",
+        "record_class": "observation",
+        "truth_class": "observed",
+        "payload": {
+          "enterprise_id": "arm-holdings-plc",
+          "observation_id": "OBS-f8329cd6749b4ab8c5bc3b31",
+          "atomic_statement": "Microsoft announced general availability of Azure Cobalt 200 virtual machines.",
+          "type": "enterprise_event_announced",
+          "affected_entity_relationship": "events.azure_cobalt_200",
+          "event_date": "2026-11-17",
+          "evidence_date": "2026-11-17",
+          "scope": "Arm",
+          "supporting_evidence_ids": [
+            "EV-2ab097959aeacb800a5c4821"
+          ],
+          "freshness": "current",
+          "contradiction_state": "none"
+        }
+      }
+    ],
+    "coverage": {
+      "Identity and ownership": "Unknown",
+      "Subsidiaries, divisions and perimeter": "Unknown",
+      "Geography and markets": "Unknown",
+      "Products, services and customers": "Unknown",
+      "Revenue pools, margins and cost drivers": "Unknown",
+      "Statements and multi-period economics": "Unknown",
+      "Position and advantage": "Unknown",
+      "Value chain and partnerships": "Unknown",
+      "Strategy and investments": "Unknown",
+      "Operating model": "Unknown",
+      "Capabilities and processes": "Unknown",
+      "Journeys and service operations": "Unknown",
+      "Workforce and organisation": "Unknown",
+      "Application Estate and Lifecycle": "Unknown",
+      "Hosting and infrastructure": "Unknown",
+      "Data and AI capabilities": "Unknown",
+      "Cybersecurity and resilience": "Unknown",
+      "Suppliers and outsourcing": "Unknown",
+      "Supplier Contracts and Commercial Lifecycle": "Unknown",
+      "Programmes and milestones": "Unknown",
+      "Productivity, performance and risk": "Unknown",
+      "Leadership and accountability": "Unknown",
+      "Political, economic, social, environmental": "Unknown",
+      "Technology and regulation": "Partial",
+      "Rivalry and industry structure": "Unknown",
+      "Supplier and buyer power": "Unknown",
+      "Substitution and entrants": "Unknown",
+      "AI-native competition": "Unknown",
+      "Ecosystem and convergence": "Unknown",
+      "Events and milestones": "Unknown",
+      "Procurement and Commercial Events": "Unknown"
+    },
+    "models": {
+      "PESTLE": "Partial",
+      "limitation": "Partial models expose attributable inputs and bounded comparisons. Commercial intent, causal outcomes and delivery remain unverified."
+    },
+    "held": {},
+    "conflicts": []
+  },
+  {
+    "enterprise_id": "easyjet-plc",
+    "records": [
+      {
+        "external_id": "EV-b09ed83c7ed98e105e6b81b5",
+        "record_class": "evidence",
+        "truth_class": "evidence_record",
+        "payload": {
+          "enterprise_id": "easyjet-plc",
+          "source_url": "https://www.easyjet.com/en/news/airline/story/easyjet-to-offer-connectivity-onboard-for-the-first-time-with-starlink-the-fastest-wi-fi-in-the-sky-with-rapid-roll-out-coming-from-2027",
+          "source_locator": "Publisher article body",
+          "source_content_sha256": "5f1a31aae2757a0de7842e8e606ece4ec53f8e84f8d7a77730fb6a3dad9969ef",
+          "publisher": "easyJet",
+          "source_category": "corporate_announcement",
+          "reporting_scope": "easyJet",
+          "publication_date": "2026-10-26",
+          "period": "2026-10-26",
+          "statement": "easyJet announced plans to start deploying Starlink in the first half of 2027.",
+          "affected_attribute": "events.partnerships.starlink_rollout",
+          "perspective": "inside",
+          "caveat": "Reuters attributed the plan to easyJet. Installation, service coverage and completion remain unverified.",
+          "family": "Suppliers and outsourcing",
+          "metric": null,
+          "status": "current",
+          "recorded_replay": false,
+          "live_content_sha256": "de407c8064fcca82c022ad70c0558915d94b634e64b82dc2ca404fd8e1c2d5b1",
+          "use_scope": "isolated_commercial_replay",
+          "commercial_change": {
+            "headline": "easyJet plans onboard Starlink from 2027",
+            "meaning": "The announced rollout introduces an onboard connectivity service with Starlink.",
+            "next_question": "Who owns aircraft installation and ongoing support, and what is the confirmed fleet schedule?",
+            "relationship": "easyJet \u00b7 Starlink",
+            "confidence": "Issuer plan",
+            "corroboration": null
+          }
+        }
+      },
+      {
+        "external_id": "OBS-173137728071b2f21c9ab5bf",
+        "record_class": "observation",
+        "truth_class": "observed",
+        "payload": {
+          "enterprise_id": "easyjet-plc",
+          "observation_id": "OBS-173137728071b2f21c9ab5bf",
+          "atomic_statement": "easyJet announced plans to start deploying Starlink in the first half of 2027.",
+          "type": "partnership_announced",
+          "affected_entity_relationship": "events.partnerships.starlink_rollout",
+          "event_date": "2026-10-26",
+          "evidence_date": "2026-10-26",
+          "scope": "easyJet",
+          "supporting_evidence_ids": [
+            "EV-b09ed83c7ed98e105e6b81b5"
+          ],
+          "freshness": "current",
+          "contradiction_state": "none"
+        }
+      }
+    ],
+    "coverage": {
+      "Identity and ownership": "Unknown",
+      "Subsidiaries, divisions and perimeter": "Unknown",
+      "Geography and markets": "Unknown",
+      "Products, services and customers": "Unknown",
+      "Revenue pools, margins and cost drivers": "Unknown",
+      "Statements and multi-period economics": "Unknown",
+      "Position and advantage": "Unknown",
+      "Value chain and partnerships": "Unknown",
+      "Strategy and investments": "Unknown",
+      "Operating model": "Unknown",
+      "Capabilities and processes": "Unknown",
+      "Journeys and service operations": "Unknown",
+      "Workforce and organisation": "Unknown",
+      "Application Estate and Lifecycle": "Unknown",
+      "Hosting and infrastructure": "Unknown",
+      "Data and AI capabilities": "Unknown",
+      "Cybersecurity and resilience": "Unknown",
+      "Suppliers and outsourcing": "Partial",
+      "Supplier Contracts and Commercial Lifecycle": "Unknown",
+      "Programmes and milestones": "Unknown",
+      "Productivity, performance and risk": "Unknown",
+      "Leadership and accountability": "Unknown",
+      "Political, economic, social, environmental": "Unknown",
+      "Technology and regulation": "Unknown",
+      "Rivalry and industry structure": "Unknown",
+      "Supplier and buyer power": "Unknown",
+      "Substitution and entrants": "Unknown",
+      "AI-native competition": "Unknown",
+      "Ecosystem and convergence": "Unknown",
+      "Events and milestones": "Unknown",
+      "Procurement and Commercial Events": "Unknown"
+    },
+    "models": {
+      "Technology and Supplier Ecosystem Model": "Partial",
+      "limitation": "Partial models expose attributable inputs and bounded comparisons. Commercial intent, causal outcomes and delivery remain unverified."
+    },
+    "held": {},
+    "conflicts": []
+  }
+]

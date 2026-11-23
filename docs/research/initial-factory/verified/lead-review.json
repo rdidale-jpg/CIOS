@@ -1,0 +1,101 @@
+[
+  {
+    "enterprise_id": "lloyds-banking-group-plc",
+    "discovery_id": "82c3d3d34a7341285a1df238ac9a8837520e440c9539a7955f048d8291b50db4",
+    "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/responsible-ai-guide.html",
+    "published": "2026-11-18",
+    "publisher": "Lloyds Banking Group",
+    "perspective": "forces",
+    "family": "Technology and regulation",
+    "type": "enterprise_event_announced",
+    "key": "responsible_ai_ethics",
+    "statement": "Lloyds says its Data & AI Ethics Committee reviews complex AI cases.",
+    "caveat": "The guide describes internal practice. It gives no basis to assume adoption across all teams or purchase intent.",
+    "anchors": [
+      "Elsewhere, the guide shows how Lloyds Banking Group reviews AI systems",
+      "Data & AI Ethics Committee",
+      "to review complex cases"
+    ],
+    "headline": "How Lloyds reviews complex AI decisions",
+    "meaning": "The committee is a disclosed point of oversight for complex AI cases.",
+    "next_question": "Which teams supply testing evidence to the committee, and where is the work still manual?",
+    "relationship": "Lloyds Banking Group",
+    "confidence": "Issuer account"
+  },
+  {
+    "enterprise_id": "bt-group-plc",
+    "discovery_id": "a5bd58ab33c037adbcc7ad05d8bada6b4f0b15343b56da06f7ea536aa1a9c5cc",
+    "url": "https://newsroom.bt.com/bt-transforms-scotlands-public-sector-connectivity--upgrading-the-nations-digital-infrastructure/",
+    "published": "2026-11-02",
+    "publisher": "BT Group",
+    "perspective": "inside",
+    "family": "Programmes and milestones",
+    "type": "programme_announced",
+    "key": "swan_upgrade",
+    "statement": "BT reported completing its upgrade to the Scottish Wide Area Network.",
+    "caveat": "BT reports completion. Customer acceptance and any open procurement remain unverified.",
+    "anchors": [
+      "BT announces the completion of its upgrade",
+      "Scottish Wide Area Network",
+      "public sector connectivity across Scotland"
+    ],
+    "headline": "BT reports Scotland network upgrade complete",
+    "meaning": "The announced milestone moves attention from rollout to ongoing service performance.",
+    "next_question": "Which service and resilience measures will public-sector customers track after migration?",
+    "relationship": "BT Group · Scottish public-sector organisations",
+    "confidence": "Supplier account"
+  },
+  {
+    "enterprise_id": "arm-holdings-plc",
+    "discovery_id": "ab7bb8afec31c6a457a70d35b044c29820742e56334470114c6dbffc7b2372a8",
+    "url": "https://newsroom.arm.com/news/arm-microsoft-azure-cobalt-200",
+    "published": "2026-11-17",
+    "publisher": "Arm",
+    "perspective": "landscape",
+    "family": "Technology and regulation",
+    "type": "enterprise_event_announced",
+    "key": "azure_cobalt_200",
+    "statement": "Microsoft announced general availability of Azure Cobalt 200 virtual machines.",
+    "caveat": "Microsoft confirms availability. The announcements do not establish regional coverage, customer adoption or measured savings.",
+    "anchors": [
+      "At Microsoft Ignite 2026",
+      "announced the general availability of Azure Cobalt 200 virtual machines",
+      "latest Arm-based custom CPU"
+    ],
+    "headline": "Azure makes Cobalt 200 generally available",
+    "meaning": "Microsoft now offers another Arm-based option for evaluating cloud workloads.",
+    "next_question": "Which regions and workloads are supported, and what would a portability test need to prove?",
+    "relationship": "Arm · Microsoft Azure",
+    "confidence": "Confirmed by Microsoft",
+    "confirmation": {
+      "url": "https://azure.microsoft.com/en-us/blog/azure-cobalt-200-vms-now-available-proven-on-real-workloads-and-built-for-the-agentic-era/",
+      "anchors": [
+        "Today at Microsoft Ignite 2026",
+        "general availability of Azure Cobalt 200-based virtual machines"
+      ]
+    }
+  },
+  {
+    "enterprise_id": "easyjet-plc",
+    "discovery_id": "fd22c01c1c0c63d168ad37fbb50298f9aadfd768980288bbd50f8c9f0fbf61f5",
+    "url": "https://www.easyjet.com/en/news/airline/story/easyjet-to-offer-connectivity-onboard-for-the-first-time-with-starlink-the-fastest-wi-fi-in-the-sky-with-rapid-roll-out-coming-from-2027",
+    "published": "2026-10-26",
+    "publisher": "easyJet",
+    "perspective": "inside",
+    "family": "Suppliers and outsourcing",
+    "type": "partnership_announced",
+    "key": "starlink_rollout",
+    "statement": "easyJet announced plans to start deploying Starlink in the first half of 2027.",
+    "caveat": "Reuters attributed the plan to easyJet. Installation, service coverage and completion remain unverified.",
+    "anchors": [
+      "Starlink will be deployed from the first half of 2027",
+      "A320neo",
+      "roll out expected to be completed by early 2028"
+    ],
+    "headline": "easyJet plans onboard Starlink from 2027",
+    "meaning": "The announced rollout introduces an onboard connectivity service with Starlink.",
+    "next_question": "Who owns aircraft installation and ongoing support, and what is the confirmed fleet schedule?",
+    "relationship": "easyJet · Starlink",
+    "confidence": "Issuer plan"
+  }
+]
