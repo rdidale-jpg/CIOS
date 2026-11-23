@@ -1,4 +1,5 @@
 """Exercise reviewed source facts through the existing isolated authority and web routes."""
+from copy import deepcopy
 import json
 import os
 from pathlib import Path
@@ -22,6 +23,7 @@ from tools.research.verified_factory_proof import capture
 from tests.flora_assurance_fixture import ARM, assess_existing_proof, fixture_handoff
 
 FIXTURE = Path('docs/research/initial-factory/verified/isolated-records.json')
+INVESTIGATION = FIXTURE.parent.parent / 'resolution/live-proof.json'
 ROUTES = {
     'lloyds-banking-group-plc': ('lloyds', '/enterprises/lloyds?stream=forces'),
     'bt-group-plc': ('bt-group-plc', '/digital-twins/bt-group-plc/canvas?stream=inside'),
@@ -33,6 +35,20 @@ ROUTES = {
 @pytest.mark.parametrize('result', json.loads(FIXTURE.read_text()), ids=ROUTES)
 def test_verified_change_route(result, tmp_path, monkeypatch, verified_flora_test_authority):
     enterprise = result['enterprise_id']
+    if enterprise == ARM:
+        # Use the newly recovered publisher revision in the existing isolated
+        # test scope. The committed report itself grants no publication right.
+        report = next(row for row in json.loads(INVESTIGATION.read_text())
+                      if row['enterprise_id'] == ARM)
+        assert report['factual_state'] == 'verified' and report['publication_eligible'] is False
+        result = deepcopy(result)
+        payload = result['records'][0]['payload']
+        assert report['assurance']['assertion']['statement'] == payload['statement']
+        original = next(row for row in report['observations'] if row['kind'] == 'notice')['reference']
+        prior = payload['document_revisions'][-1]
+        assert original['url'] == prior['url']
+        prior['sha256'] = original['digest']
+        payload['commercial_change']['corroboration']['sha256'] = original['digest']
     evidence, _ = result['records']
     headline = evidence['payload']['commercial_change']['headline']
     alias, route = ROUTES[enterprise]

@@ -1,0 +1,167 @@
+[
+  {
+    "candidate_id": "82c3d3d34a7341285a1df238ac9a8837520e440c9539a7955f048d8291b50db4",
+    "enterprise_id": "lloyds-banking-group-plc",
+    "starting_state": "attributed_only",
+    "factual_state": "attributed_only",
+    "attempts": 2,
+    "maximum_attempts": 3,
+    "maximum_bytes_per_response": 2097152,
+    "paid_searches": 0,
+    "audit": [
+      {
+        "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/artificial-intelligence.html",
+        "state": "searched index",
+        "sha256": "434bcfe70ec6ac5b7b2df20d18cdc492c4bbe7d65e775263335af447af2518dd"
+      },
+      {
+        "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/artificial-intelligence/responsible-ai-a-practical-guide-for-organisations.html",
+        "sha256": "c89c5cde194cc189462e484d6c558ee39e333207ab43a15a37a56d72658aeb9b",
+        "publisher": "Lloyds Banking Group",
+        "state": "related material; no exact scoped support"
+      }
+    ],
+    "publication_eligible": false,
+    "source_relationship": "No qualifying source relationship established",
+    "commercial_reading": {
+      "confirmed_development": null,
+      "buyer_questions": []
+    }
+  },
+  {
+    "candidate_id": "a5bd58ab33c037adbcc7ad05d8bada6b4f0b15343b56da06f7ea536aa1a9c5cc",
+    "enterprise_id": "bt-group-plc",
+    "starting_state": "attributed_only",
+    "factual_state": "attributed_only",
+    "attempts": 1,
+    "maximum_attempts": 3,
+    "maximum_bytes_per_response": 2097152,
+    "paid_searches": 0,
+    "audit": [
+      {
+        "url": "https://www.nss.nhs.scot/news/",
+        "state": "searched index",
+        "sha256": "9dda86c6566339a6909fec94c4ec24f3ceea787574f146473763092f5eb09993"
+      }
+    ],
+    "publication_eligible": false,
+    "source_relationship": "No qualifying source relationship established",
+    "commercial_reading": {
+      "confirmed_development": null,
+      "buyer_questions": []
+    }
+  },
+  {
+    "candidate_id": "ab7bb8afec31c6a457a70d35b044c29820742e56334470114c6dbffc7b2372a8",
+    "enterprise_id": "arm-holdings-plc",
+    "starting_state": "withheld",
+    "factual_state": "verified",
+    "attempts": 3,
+    "maximum_attempts": 3,
+    "maximum_bytes_per_response": 2097152,
+    "paid_searches": 0,
+    "audit": [
+      {
+        "url": "https://azure.microsoft.com/en-us/blog/",
+        "state": "searched index",
+        "sha256": "5e30d194dd246c75b091531f02665607613148d43dfdfd837f07dec075b2b453"
+      },
+      {
+        "url": "https://azure.microsoft.com/en-us/blog/azure-cobalt-200-vms-now-available-proven-on-real-workloads-and-built-for-the-agentic-era/",
+        "sha256": "00fbdfe7d321f0d466bb323471fed174aaf2deb9de124e32a6f666827c59b470",
+        "publisher": "Microsoft Azure",
+        "state": "examined original publisher body"
+      },
+      {
+        "url": "https://azure.microsoft.com/en-us/blog/designing-azure-silicon-on-azure-silicon-eda-workloads-on-cobalt-200/",
+        "sha256": "f6e88e9815c57cdda60f05e893652397a7d19d53a4aa8bdc3a7138e6efd02f15",
+        "publisher": "Microsoft Azure",
+        "state": "publication date differs from the scoped notice"
+      }
+    ],
+    "publication_eligible": false,
+    "source_relationship": "Microsoft confirms publication of its own notice",
+    "commercial_reading": {
+      "confirmed_development": "Microsoft announced general availability of Azure Cobalt 200 virtual machines.",
+      "buyer_questions": [
+        "What is in scope, and which date or eligibility criteria would the buyer confirm?"
+      ]
+    },
+    "observations": [
+      {
+        "kind": "notice",
+        "reference": {
+          "url": "https://azure.microsoft.com/en-us/blog/azure-cobalt-200-vms-now-available-proven-on-real-workloads-and-built-for-the-agentic-era/",
+          "digest": "00fbdfe7d321f0d466bb323471fed174aaf2deb9de124e32a6f666827c59b470",
+          "locator": "body p1"
+        },
+        "observed_on": "2026-11-17"
+      }
+    ],
+    "assurance": {
+      "decision_id": "9ce3af55ef0ff56df41fd5a90739f807fa485ae8fdfcde5806a06162525d4a78",
+      "assertion": {
+        "scope": {
+          "enterprise": "arm-holdings-plc",
+          "entity": "microsoft",
+          "event": "azure-cobalt-200",
+          "field": "publisher_notice",
+          "definition": "Microsoft announcement of Azure Cobalt 200 availability",
+          "period": "2026-11-17"
+        },
+        "value": "announced",
+        "unit": "status",
+        "statement": "Microsoft announced general availability of Azure Cobalt 200 virtual machines."
+      },
+      "as_of": "2026-11-23",
+      "factual_state": "verified",
+      "support": [
+        {
+          "source": {
+            "url": "https://azure.microsoft.com/en-us/blog/azure-cobalt-200-vms-now-available-proven-on-real-workloads-and-built-for-the-agentic-era/",
+            "digest": "00fbdfe7d321f0d466bb323471fed174aaf2deb9de124e32a6f666827c59b470",
+            "locator": "body p1"
+          },
+          "state": "current",
+          "origin": "Microsoft announcement",
+          "publisher": "Microsoft Azure",
+          "observed_on": "2026-11-17",
+          "quality": "official",
+          "value": "announced",
+          "unit": "status",
+          "statement": "Microsoft announced general availability of Azure Cobalt 200 virtual machines.",
+          "replaces": null
+        }
+      ],
+      "publication_eligible": false
+    },
+    "material_updates": []
+  },
+  {
+    "candidate_id": "fd22c01c1c0c63d168ad37fbb50298f9aadfd768980288bbd50f8c9f0fbf61f5",
+    "enterprise_id": "easyjet-plc",
+    "starting_state": "attributed_only",
+    "factual_state": "attributed_only",
+    "attempts": 1,
+    "maximum_attempts": 3,
+    "maximum_bytes_per_response": 2097152,
+    "paid_searches": 0,
+    "audit": [
+      {
+        "url": "https://www.easyjet.com/en/news/airline",
+        "state": "searched index",
+        "sha256": "a8079dfbfb12d68413d48537b9e2fc83be31ae569a3378fcccc8a4150dbe93d9"
+      },
+      {
+        "url": "https://www.easyjet.com/en/news/airline/story/easyjet-to-offer-connectivity-onboard-for-the-first-time-with-starlink-the-fastest-wi-fi-in-the-sky-with-rapid-roll-out-coming-from-2027",
+        "state": "same document as discovery"
+      }
+    ],
+    "publication_eligible": false,
+    "source_relationship": "No qualifying source relationship established",
+    "commercial_reading": {
+      "confirmed_development": null,
+      "buyer_questions": []
+    }
+  }
+]
