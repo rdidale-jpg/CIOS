@@ -36,17 +36,6 @@ def main(html):return html.split('<main ',1)[1].split('</main>',1)[0]
     ('/enterprises/lloyds',{'detail':['economics']}),('/industries/banking',{'detail':['boe']})])
 def test_customer_markup_has_no_research_controls_even_hidden_or_printable(path,query):
     html=v.render(path,query);body=main(html)
-    if path=='/enterprises/lloyds' and query.get('stream',['landscape'])==['landscape'] and not query.get('detail'):
-        # A1 expressly authorises one optional public evidence inspection in
-        # Economics. This changes no other screen's no-research-controls rule.
-        assert body.count('<details')==1
-        prefix,inspection=body.split('<details class="econ-basis">',1)
-        inspection,suffix=inspection.split('</details>',1)
-        assert '<details'not in inspection and '.pdf'not in inspection
-        assert 'Source &amp; basis'in inspection
-        assert 'href="https://www.lloydsbankinggroup.com/"'in inspection
-        assert 'primary_content_sha256'not in inspection and 'canonical acceptance'not in inspection
-        body=prefix+suffix
     assert '<details'not in body
     for text in ('Sources &amp; reasoning','Sources &amp; basis','Sources & detail','primary_content_sha256','reviewed excerpt','retrieval','canonical acceptance'):
         assert text not in body

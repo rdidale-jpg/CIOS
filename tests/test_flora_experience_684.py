@@ -13,15 +13,16 @@ def test_enterprise_roots_observe_three_different_questions(path):
         query = {"stream": [stream]}
         facts = main(v.render(path, query))
         insight = main(v.render(path, {**query, "reading": ["insight"]}))
-        assert 'aria-current=page>Facts' in facts
-        assert 'data-semantic-type="insight"' not in facts
+        assert 'aria-label="Reading mode"' not in facts
+        assert facts == insight
         if path == "/enterprises/lloyds":
             expected = {"inside": "Conceptual operating mechanism",
                         "landscape": "The balance alone does not show funding cost",
                         "forces": "If funding costs rise faster than asset yields"}
             assert expected[stream] in insight
-            assert expected[stream] not in facts
-            assert ('data-semantic-type="insight"' in insight) == (stream == "landscape")
+            assert expected[stream] in facts
+            if stream == 'landscape':
+                assert 'data-semantic-type="insight"' in insight
         else:
             assert 'data-semantic-type="insight"' in insight
         assert "What's changing?" not in facts
@@ -52,7 +53,8 @@ def test_force_lenses_retain_subject_and_reject_outside_scope(scope, keys):
         query = {"stream": ["forces"], "detail": [key]}
         facts = main(v.render(path, query))
         insight = main(v.render(path, {**query, "reading": ["insight"]}))
-        assert f'detail={key}&amp;reading=insight' in facts
+        assert f'detail={key}' in facts
+        assert 'reading=insight' not in facts
         assert 'class="experience-path"' in insight
         with pytest.raises(ValueError):
             v.resolve(path, {"stream": ["landscape"], "detail": [key]})
@@ -76,7 +78,7 @@ def test_competitive_comparisons_have_no_proxy_provenance(key):
     facts = main(v.render(path, query))
     insight = main(v.render(path, {**query, "reading": ["insight"]}))
     assert "Conceptual competitive mechanism" in insight
-    assert "Conceptual competitive mechanism" not in facts
+    assert "Conceptual competitive mechanism" in facts and facts == insight
     for html in (facts, insight):
         assert 'data-semantic-type="insight"' not in html
         assert "4 November 2026" not in html
@@ -142,10 +144,8 @@ def test_lloyds_capability_preserves_mode_and_selection(mode):
     assert "<h2>Servicing</h2>" in html
     assert "Credit origination and servicing" in html
     assert "Customer support and service" in html
-    assert 'detail=servicing&amp;reading=insight#visual-content' in html
-    expected = 'detail=risk-assessment&amp;reading=insight#lv-selection' if mode == "insight" else (
-        'detail=risk-assessment#lv-selection'
-    )
+    assert 'detail=servicing' in html and 'aria-label="Reading mode"' not in html
+    expected = 'detail=risk-assessment#lv-selection'
     assert expected in html
     assert "Lloyds’ thresholds" not in html
     with pytest.raises(ValueError):
@@ -178,12 +178,12 @@ def test_lloyds_economic_selection_is_preserved_in_both_readings(key, heading):
     insight = main(v.render(path, {**query, "reading": ["insight"]}))
     for html in (facts, insight):
         assert f'data-stage="{key}"' in html
-        assert f'detail={key}&amp;reading=insight#visual-content' in html
+        assert f'detail={key}#visual-content' in html
         assert heading in html
         assert "What to investigate" not in html
         assert 'data-identity="BK-ENT-001"' in html
         assert 'detail=economics' in html  # Existing financial presentation remains reachable.
-    assert facts != insight
+    assert facts == insight
     with pytest.raises(ValueError):
         v.resolve(path, {**query, "stream": ["inside"]})
     with pytest.raises(ValueError):

@@ -76,33 +76,31 @@ def payments(ctx, data):
         '<p class="eyebrow">Banking · Landscape</p><h1 id="insight-title">Payments &amp; settlement</h1>'
     )
     body += '<p class="reading-context">Conceptual · UK payment roles</p>'
-    if ctx.reading == "facts":
-        body += sequence((
-            ("Initiate", "A household or business authorises a payment and its provider checks and routes the instruction."),
-            ("Clear", "Participants exchange and validate instructions, establishing obligations that may be netted."),
-            ("Settle", "Transfer of settlement funds discharges the obligations. The recipient’s provider makes funds available under the applicable arrangement."),
-        ))
-        body += (
-            '<p class="reading-context">Arrows show the order of activities. Actual access and settlement arrangements vary by system.</p>'
-            '<dl class="reading-roles"><div><dt>Scheme</dt><dd>Sets the rules for participation and processing.</dd></div>'
-            '<div><dt>Operator</dt><dd>Provides and runs the system service.</dd></div>'
-            '<div><dt>Network</dt><dd>Carries messages between participants.</dd></div></dl>'
-        )
-    else:
-        model = v.force_view(ctx, "UK-VALUE", data)
-        if not model or not p.eligible(model):
-            return body + '<p>No supported FLORA Insight for this selection.</p></section>'
-        p.note_editorial_sources(model.sources)
-        body += (
-            '<section class="reading-economy"><h2>One payment, two economic flows</h2>'
-            '<dl class="reading-payment-flows"><div><dt>Customer principal</dt><dd>Money moves to the recipient. '
-            'Settlement discharges obligations between participants, which can represent many payments.</dd></div>'
-            '<div><dt>Service income</dt><dd>Participants or customers may pay service charges under the applicable arrangements. Operators incur costs to run and maintain the service.</dd></div></dl></section>'
-            '<h2>What changes the economics?</h2><dl class="reading-drivers">'
-            '<div><dt>Service mix</dt><dd>The same volume can produce different income under different pricing and access arrangements.</dd></div>'
-            '<div><dt>Continuity</dt><dd>Capacity, monitoring and recovery can incur costs even when traffic is steady.</dd></div></dl>'
-            '<p>Payment volume and principal alone cannot establish operator revenue, actual fees or bank-level dependencies.</p>'
-        )
+    body += sequence((
+        ("Initiate", "A household or business authorises a payment and its provider checks and routes the instruction."),
+        ("Clear", "Participants exchange and validate instructions, establishing obligations that may be netted."),
+        ("Settle", "Transfer of settlement funds discharges the obligations. The recipient’s provider makes funds available under the applicable arrangement."),
+    ))
+    body += (
+        '<p class="reading-context">Arrows show the order of activities. Actual access and settlement arrangements vary by system.</p>'
+        '<dl class="reading-roles"><div><dt>Scheme</dt><dd>Sets the rules for participation and processing.</dd></div>'
+        '<div><dt>Operator</dt><dd>Provides and runs the system service.</dd></div>'
+        '<div><dt>Network</dt><dd>Carries messages between participants.</dd></div></dl>'
+    )
+    model = v.force_view(ctx, "UK-VALUE", data)
+    if not model or not p.eligible(model):
+        return body + banking_links(include_payments=False) + '</section>'
+    p.note_editorial_sources(model.sources)
+    body += (
+        '<section class="reading-economy"><h2>One payment, two economic flows</h2>'
+        '<dl class="reading-payment-flows"><div><dt>Customer principal</dt><dd>Money moves to the recipient. '
+        'Settlement discharges obligations between participants, which can represent many payments.</dd></div>'
+        '<div><dt>Service income</dt><dd>Participants or customers may pay service charges under the applicable arrangements. Operators incur costs to run and maintain the service.</dd></div></dl></section>'
+        '<h2>What changes the economics?</h2><dl class="reading-drivers">'
+        '<div><dt>Service mix</dt><dd>The same volume can produce different income under different pricing and access arrangements.</dd></div>'
+        '<div><dt>Continuity</dt><dd>Capacity, monitoring and recovery can incur costs even when traffic is steady.</dd></div></dl>'
+        '<p>Payment volume and principal alone cannot establish operator revenue, actual fees or bank-level dependencies.</p>'
+    )
     return body + banking_links(include_payments=False) + '</section>'
 
 
@@ -207,7 +205,7 @@ def nationwide_facts_bridge(projection):
     ) if equation else ""
 
 
-def nationwide_insight(projection):
+def nationwide_insight(projection, *, narrative_only=False):
     if not projection:
         return unavailable("Nationwide Group earnings")
     underlying = nationwide_bridge(projection, "underlying")
@@ -216,8 +214,8 @@ def nationwide_insight(projection):
         return unavailable("Nationwide Group earnings")
     p.note_editorial_sources(p.Source(s["title"], s["url"], "Nationwide Building Society") for s in projection["sources"])
     return (
-        '<h1>Nationwide Group earnings</h1><p class="reading-context">Consolidated Group · FY ended 31 March 2026 · GBP millions</p>'
-        + flow((("Underlying", underlying), ("Statutory", statutory)))
+        ('' if narrative_only else '<h1>Nationwide Group earnings</h1><p class="reading-context">Consolidated Group · FY ended 31 March 2026 · GBP millions</p>'
+         + flow((("Underlying", underlying), ("Statutory", statutory))))
         + '<p>The underlying result isolates the trading basis. The statutory bridge brings member rewards and acquisition-related '
         'adjustments back into the result. Integration spending of £127m is already included in underlying operating costs.</p>'
         '<p>Virgin Money contributes a full year. The previous period included six months, which limits comparisons of organic performance.</p>'

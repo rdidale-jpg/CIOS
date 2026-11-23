@@ -12,13 +12,13 @@ BANKING = "/industries/banking"
 LLOYDS = "/enterprises/lloyds"
 
 
-def test_same_payment_subject_two_distinct_readings():
+def test_same_payment_subject_has_one_composition_for_both_legacy_urls():
     query = {"stream": ["landscape"], "detail": ["payments"]}
     facts = main(v.render(BANKING, query))
     insight = main(v.render(BANKING, {**query, "reading": ["insight"]}))
-    assert "Conceptual" in facts and "Initiate" in facts and "Service income" not in facts
-    assert "Conceptual" in insight and "Service income" in insight and "Initiate" not in insight
-    assert 'aria-current=page>Facts' in facts and 'aria-current=page>FLORA Insight' in insight
+    assert "Conceptual" in facts and "Initiate" in facts and "Service income" in facts
+    assert facts == insight
+    assert 'aria-label="Reading mode"' not in facts + insight
     assert "Pay.UK" not in facts + insight
     ctx = v.resolve(BANKING, {**query, "reading": ["insight"]})
     assert parse_qs(urlsplit(v.url(ctx, reading="insight")).query) == {**query, "reading": ["insight"]}
@@ -49,7 +49,7 @@ def test_provider_evidence_gates_both_modes(mutation, tmp_path, monkeypatch):
     assert "services used" in main(v.render(BANKING, {**query, "reading": ["insight"]}))
     changed_release("provider", mutation, tmp_path, monkeypatch)
     assert "Google Cloud EMEA Limited" not in main(v.render(BANKING, query))
-    assert "No supported FLORA Insight" in main(v.render(BANKING, {**query, "reading": ["insight"]}))
+    assert "services used" not in main(v.render(BANKING, {**query, "reading": ["insight"]}))
 
 
 def test_nationwide_keeps_both_bases_and_withdrawal_gates_analysis(retained):
@@ -57,14 +57,14 @@ def test_nationwide_keeps_both_bases_and_withdrawal_gates_analysis(retained):
     facts = main(v.render(BANKING, query))
     insight = main(v.render(BANKING, {**query, "reading": ["insight"]}))
     assert "6,378 − 4,021 − 331 = 2,026" in facts + insight
-    assert "2,026 + 1 − 138 − 399 = 1,490" in insight
+    assert "£2,026m + £1m − £138m − £399m = £1,490m" in insight
     assert "Customer complaints · Society" in facts
-    assert "100,886" not in insight
+    assert "100,886" in insight and facts == insight
     package = json.loads(retained.read_text())
     package["sources"][1]["withdrawn"] = True
     retained.write_text(json.dumps(package))
     assert "6,378" not in main(v.render(BANKING, query))
-    assert "No supported FLORA Insight" in main(v.render(BANKING, {**query, "reading": ["insight"]}))
+    assert "6,378" not in main(v.render(BANKING, {**query, "reading": ["insight"]}))
 
 
 def test_lloyds_operating_disclosure_and_implication_use_same_capability():
@@ -72,7 +72,7 @@ def test_lloyds_operating_disclosure_and_implication_use_same_capability():
     facts = main(v.render(LLOYDS, query))
     insight = main(v.render(LLOYDS, {**query, "reading": ["insight"]}))
     assert "Conceptual · Group capability" in facts
-    assert "data-semantic-type=\"insight\"" not in facts
+    assert "data-semantic-type=\"insight\"" in facts and facts == insight
     assert "monitoring part of the operating process" in insight
     assert "legal contracting entity remain unverified" in insight
 
@@ -92,7 +92,7 @@ def test_payment_insight_suppressed_when_its_model_is_restricted(monkeypatch, fl
     assert "Initiate" in main(v.render(BANKING, query))
     html = v.render(BANKING, {**query, "reading": ["insight"]},
                     {"X-Flora-User": "owner", "X-Flora-Roles": "cios_owner"})
-    assert "No supported FLORA Insight" in main(html)
+    assert "Initiate" in main(html)
     assert "Service income" not in main(html)
     assert "Guest" in html
 
@@ -102,14 +102,12 @@ def test_payment_insight_suppressed_when_its_model_is_restricted(monkeypatch, fl
     for scope, spec in v.SCOPES.items()
     for stream in spec["streams"]
 ])
-def test_default_scene_has_no_authorial_insight(scope, stream):
+def test_default_scene_is_unified_and_legacy_modes_have_same_content(scope, stream):
     path = v.SCOPES[scope]["route"]
     facts = main(v.render(path, {"stream": [stream]}))
-    assert 'aria-current=page>Facts' in facts
-    assert 'data-semantic-type="insight"' not in facts
-    assert "FLORA INSIGHT" not in facts
+    assert 'aria-label="Reading mode"' not in facts
     analysis = main(v.render(path, {"stream": [stream], "reading": ["insight"]}))
-    assert 'aria-current=page>FLORA Insight' in analysis
+    assert facts == analysis
 
 
 def test_lloyds_capability_map_respects_disclosure_lifecycle(monkeypatch):

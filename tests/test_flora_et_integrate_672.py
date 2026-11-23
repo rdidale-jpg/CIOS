@@ -18,7 +18,8 @@ def test_easyjet_scene_keeps_exact_selection(capability, stream, mode):
     assert ("reading=insight" in v.stream_url(ctx, "forces")) == (mode == "insight")
     assert "reading=" not in v.url(ctx, detail="network-planning")
     assert "What's changing?" not in html and "AV-FLEET" not in html
-    assert ('data-semantic-type="insight"' in html) == (mode == "insight")
+    assert 'data-semantic-type="insight"' in html
+    assert 'aria-label="Reading mode"' not in html
 
 
 @pytest.mark.parametrize("query", [
@@ -41,7 +42,8 @@ def test_source_lifecycle_suppresses_both_modes(monkeypatch, flag):
     analysis = v.render(v.EASYJET_ROUTE, {**query, "reading": ["insight"]})
     assert "1,202 routes" not in facts + analysis
     assert "Conceptual · operating activities" in facts
-    assert "No supported FLORA Insight" in analysis
+    assert 'data-semantic-type="insight"' not in analysis
+    assert "Allocating scarce aircraft time" not in analysis
     assert et.fact(data, "AV-MRO") is not None
 
 

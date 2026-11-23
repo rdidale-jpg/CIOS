@@ -72,7 +72,7 @@ def navigation(ctx, data, issues):
 
 def _model(ctx):
     _, _, heading, facts, insight = SUBJECTS[ctx.selected]
-    text = facts if ctx.reading == "facts" else insight
+    text = facts + " " + insight
     return (
         f'<section class="cohort-mechanism"><p class="reading-context">Conceptual business model</p>'
         f'<h2>{escape(heading)}</h2><p>{escape(text)}</p></section>'
@@ -99,26 +99,23 @@ def _service(ctx, facts):
         return '<p>Scoped evidence for this selection is unavailable.</p>'
     if ctx.stream == "forces":
         condition = facts[:1]
-        if ctx.reading == "insight":
-            return p.render(condition[0], compact=True) + reading.interpretation(
-                "What complaint intake signals", condition,
-                "Intake measures service workload. A change in volume could reflect scale, product mix or customer experience.",
-                "Compare rates on a matched customer base and period before judging commercial pressure.",
-                heading="h2",
-            )
-        return p.render(condition[0]) + '<p>Comparable customer rates are needed to judge pressure.</p>'
+        return p.render(condition[0], compact=True) + reading.interpretation(
+            "What complaint intake signals", condition,
+            "Intake measures service workload. A change in volume could reflect scale, product mix or customer experience.",
+            "Compare rates on a matched customer base and period before judging commercial pressure.",
+            heading="h2",
+        )
 
     heading = "Customer service evidence" if ctx.stream == "landscape" else "Reported service activity"
     body = f'<h2>{heading}</h2>'
-    if ctx.reading == "insight" and ctx.stream == "inside":
-        return body + reading.interpretation(
+    interpretation = ''
+    if ctx.stream == "inside":
+        interpretation = reading.interpretation(
             "What the cohorts show", facts,
             "Intake, case closure and firm decisions measure different parts of service operations.",
             "Received and closed complaints are different cohorts. Firm-upheld is the bank’s own decision.",
             heading="h3",
         )
-    if ctx.reading == "insight":
-        return body + '<p>The legal-bank complaint figures in Facts cover service activity.</p>'
     lines = (
         f"{facts[0].value:,} complaints received",
         f"{facts[1].value:,} complaints closed",
@@ -127,28 +124,26 @@ def _service(ctx, facts):
     return (
         body + f'<p class="reading-context">{escape(facts[0].period)} · legal entity · FCA</p>'
         + "".join(p.render(replace(fact, text=line), compact=True) for fact, line in zip(facts, lines))
-        + '<p>Received and closed complaints are different cohorts. Firm-upheld is the bank’s own decision.</p>'
+        + '<p>Received and closed complaints are different cohorts. Firm-upheld is the bank’s own decision.</p>' + interpretation
     )
 
 
 def _institution(ctx, issues):
     if ctx.stream == "inside":
         body = _inside(ctx)
-        if ctx.reading == "insight":
-            body += '<h2>Conceptual operating mechanism</h2><p>Settlement reduces outstanding obligations and depends on liquidity and resilient operations.</p>'
+        body += '<h2>Conceptual operating mechanism</h2><p>Settlement reduces outstanding obligations and depends on liquidity and resilient operations.</p>'
         return body
     facts = next((row.facts[:1] for row in issues if row.key == "funding-economics"), ())
     if ctx.stream == "landscape":
         return _model(ctx) + '<h2>Monetary policy context</h2>' + (
             p.render(facts[0]) if facts else '<p>Scoped policy evidence is unavailable.</p>'
         )
-    if ctx.reading == "insight":
-        return reading.interpretation(
+    return ('<h2>Monetary policy decision</h2>' + (p.render(facts[0]) if facts else '')
+        + reading.interpretation(
             "How policy affects funding", facts,
             "The policy rate can affect borrowing and funding costs. The effect depends on each institution’s exposure.",
             "The decision does not establish bank-specific effects or settlement outcomes.", heading="h2",
-        )
-    return '<h2>Monetary policy decision</h2>' + (p.render(facts[0]) if facts else '<p>Scoped policy evidence is unavailable.</p>')
+        ))
 
 
 def render(ctx, data, issues):

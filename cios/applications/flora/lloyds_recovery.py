@@ -89,7 +89,7 @@ def landscape(ctx, data, issues, *, headers=None):
     if ctx.detail:
         return economics
     target = escape(v.url(ctx, detail='flagship'), quote=True)
-    return f'<p class="reading-context"><a href="{target}#visual-content">Explore the Lloyds flagship</a></p>' + economics
+    return f'<p class="reading-context"><a href="{target}#visual-content">Explore Lloyds</a></p>' + economics
 
 
 def inside(ctx, data):
@@ -108,12 +108,11 @@ def inside(ctx, data):
                     + p.render(envoy)
                     + f'<a href="{escape(v.url(ctx, detail="technology", reading=ctx.reading), quote=True)}#visual-content">Explore Technology &amp; data</a>'
                     '<p>Workflow use and supplier contract remain unverified.</p></aside>')
-    insight = ctx.reading == "insight"
     selection = (
+        f'<p>{basis}</p>'
         '<h3>Conceptual operating mechanism</h3>'
         f'<div class="lv-shared"><span>{tasks[0]}</span><strong>{name}</strong><span>{tasks[1]}</span></div>'
         f'<p>{mechanism}</p>'
-        if insight else f'<p>{basis}</p>'
     )
     return (
         '<section class="lv lv-inside"><p class="eyebrow">Lloyds Banking Group plc · conceptual map</p>'
@@ -139,11 +138,9 @@ def forces(ctx, data):
         '<dl class="lv-rate-branches"><div><dt>Funding costs reprice first</dt>'
         '<dd>If funding costs rise faster than asset yields, spread can narrow.</dd></div>'
         '<div><dt>Lending reprices first</dt><dd>If asset yields rise faster, spread can widen.</dd></div></dl>'
-        if ctx.reading == "insight" else
-        '<p>Conceptual · Changes in rates can reach bank earnings through funding costs and loan yields.</p>'
     )
-    consequence = ("A weaker spread can reduce income. The cost-to-income ratio can rise even when operating costs are steady."
-                   if ctx.reading == "insight" else "Conditional · Earnings sensitivity depends on the timing and size of repricing.")
+    consequence = ("Conditional · A weaker spread can reduce income. The cost-to-income ratio can rise even when operating costs are steady. "
+                   "Earnings sensitivity depends on the timing and size of repricing.")
     return (
         '<section class="lv lv-forces"><p class="eyebrow">Lloyds Banking Group plc · rates and earnings</p>'
         '<h1>What can put pressure on earnings?</h1><ol class="lv-pressure">'

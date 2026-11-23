@@ -58,11 +58,9 @@ def _facts(items):
 
 
 def _interpret(title, items, text, gap, ctx):
-    if ctx.reading == "facts":
-        return _facts(items) or f'<p>{escape(gap)}</p>'
     if items:
         return reading.interpretation(title, items, text, gap, heading="h2")
-    return f'<p>No eligible premise for this interpretation. {escape(gap)}</p>'
+    return ''
 
 
 def _navigation(ctx, items, label, active):
@@ -95,7 +93,7 @@ def uk_forces(ctx, data):
         + '</li><li><strong>Industry context</strong> · Follow the relevant economic channel in '
           '<a href="/industries/banking?stream=forces">Banking</a> or <a href="/industries/aviation?lens=pestle">Aviation</a>. '
           'These links give sector context.</li><li><strong>Enterprise applicability</strong> · Needs evidence about the exact entity and activity.</li></ol>'
-        + (_interpret("Sector mechanism", items, mechanism, gap, ctx) if ctx.reading == "insight" else '')
+        + _interpret("Sector mechanism", items, mechanism, gap, ctx)
     )
     if partial:
         if items:
@@ -116,9 +114,8 @@ def banking_forces(ctx):
         + f'<h3 id="insight" tabindex="-1">{title}</h3><ol class="experience-path"><li><strong>Industry stage</strong> · <a href="{href}">{stage}</a></li>'
         + f'<li><strong>Contextual PESTLE</strong> · {escape(_BANKING_CONTEXT[key])} '
           '<a href="/?stream=forces">See national conditions</a>.</li>'
-        + f'<li><strong>Evidence needed</strong> · {escape(gap)}</li></ol>'
-        + (f'<h2>Conceptual competitive mechanism</h2><p>{escape(mechanism)}</p>' if ctx.reading == "insight"
-           else '<p>Conceptual framework. Direct evidence for this force is not shown.</p>')
+        + f'<li><strong>Scope</strong> · {escape(gap)}</li></ol>'
+        + f'<h2>Conceptual competitive mechanism</h2><p>{escape(mechanism)}</p>'
     )
     return body
 
@@ -138,10 +135,10 @@ def _capability_root(ctx, title, outcome, activities, abilities, facts, mechanis
         + "".join(f'<div id="{targets[label]}" tabindex="-1"><dt>{escape(label)}</dt><dd>{escape(detail)}</dd></div>'
                   for label, detail in abilities)
         + '</dl><h2>Roles, enablers and measures</h2>'
+        + _facts(facts)
         + (f'<h2>Conceptual operating mechanism</h2><p>{escape(mechanism)}</p>'
-           if conceptual and ctx.reading == "insight" else
-           '' if conceptual else _interpret("Operating mechanism", facts, mechanism, gap, ctx))
-        + (f'<p>{escape(gap)}</p>' if conceptual or (facts and ctx.reading == "facts") else '')
+           if conceptual else _interpret("Operating mechanism", facts, mechanism, gap, ctx))
+        + (f'<p>{escape(gap)}</p>' if conceptual else '')
     )
 
 
@@ -150,9 +147,9 @@ def enterprise_forces(ctx, title, observed, response, mechanism, gap, *, depende
         f'<h1>{escape(title)}</h1><ol class="experience-path">'
         '<li><strong>Observed condition</strong>' + (_facts(observed) or '<p>Scoped observation unavailable.</p>') + '</li>'
         '<li><strong>Disclosed response</strong>' + (_facts(response) or '<p>No linked response is verified for this condition.</p>') + '</li>'
-        f'<li><strong>Evidence needed</strong><p>{escape(gap)}</p></li></ol>'
-        + (_interpret("Conditional consequence", (*observed, *response) if dependencies is None else dependencies,
-                      mechanism, gap, ctx) if ctx.reading == "insight" else '')
+        f'<li><strong>Scope</strong><p>{escape(gap)}</p></li></ol>'
+        + _interpret("Conditional consequence", (*observed, *response) if dependencies is None else dependencies,
+                     mechanism, gap, ctx)
     )
 
 
