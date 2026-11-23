@@ -322,5 +322,71 @@
       "paragraph": 10,
       "claims": []
     }
+  ],
+  "confirmation": [
+    {
+      "url": "https://news.microsoft.com/source/2003/01/21/microsoft-announces-its-intention-to-acquire-placeware/",
+      "sha256": "617132329d1e664e7597cabd5776ff4716ad4ee154f180c152c506d9831bbeea",
+      "paragraph": 1,
+      "enterprise": "microsoft",
+      "publisher": "Microsoft",
+      "claims": [
+        {
+          "actor": "Microsoft Corp.",
+          "kind": "acquisition",
+          "status": "planned",
+          "target": "PlaceWare Inc.",
+          "dates": [
+            "jan. 21, 2003"
+          ],
+          "value": null,
+          "counterparty": "PlaceWare Inc."
+        }
+      ]
+    },
+    {
+      "url": "https://news.microsoft.com/source/2008/02/11/microsoft-agrees-to-acquire-danger-inc-strengthens-mobile-consumer-vision/",
+      "sha256": "70226c0202713928928598efdfd1df084943b198367878f300c55047a26ecadb",
+      "paragraph": 1,
+      "enterprise": "microsoft",
+      "publisher": "Microsoft",
+      "claims": [
+        {
+          "actor": "Microsoft Corp.",
+          "kind": "acquisition",
+          "status": "planned",
+          "target": "Danger Inc.",
+          "dates": [
+            "feb. 11, 2008"
+          ],
+          "value": null,
+          "counterparty": "Danger Inc."
+        }
+      ]
+    },
+    {
+      "url": "https://www.nttdata.com/en-ae/news/2025/servicenow-and-ntt-data-expand-strategic-partnership",
+      "sha256": "65365ae79d637e863a2dfd3c83d3bc3038593f424cfde1a1d95bfa0982c78285",
+      "paragraph": 6,
+      "enterprise": "ntt-data",
+      "publisher": "NTT DATA",
+      "claims": []
+    },
+    {
+      "url": "https://newsroom.servicenow.com/press-releases/details/2025/ServiceNow-and-NTT-DATA-Expand-Strategic-Partnership-to-Accelerate-AI-led-Transformation-for-Global-Enterprises/default.aspx",
+      "sha256": "e5d806a68042f3ddf816b7e3883c2180c73a067dcdaad430ec4d926637ed589f",
+      "paragraph": 9,
+      "enterprise": "servicenow",
+      "publisher": "ServiceNow",
+      "claims": []
+    },
+    {
+      "url": "https://newsroom.mgmresorts.com/2025-02-28-Problem-Gambling-Awareness-Month",
+      "sha256": "bf91b02653cd23cf989042c52917cf7543ee613aebf8283ab142a74e2b7b9376",
+      "paragraph": 14,
+      "enterprise": "mgm-resorts",
+      "publisher": "MGM Resorts",
+      "claims": []
+    }
   ]
 }
