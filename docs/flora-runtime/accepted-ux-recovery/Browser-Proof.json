@@ -1,5 +1,5 @@
 {
-  "checkout": "92f0b03687e6450d6e9a9c88f68e692547fc5309",
+  "checkout": "8aff113c8833cb67db301bd2866338bbb16359ce",
   "runtime_sha256": {
     "cios/applications/flora/__init__.py": "20f7c2692c6fcbd4125350d1e8b8b2242c380374203aac504e844feadf598a7e",
     "cios/applications/flora/access.py": "da0abc2923c2c02d93e65c3ba986df879c6a71946b2e6b567dfca08c0c8ceb51",
@@ -276,7 +276,7 @@
     "after-ipad-landscape-easyjet.jpg": "e7667d655fc0ac6e8ff861f7acd54e8b2f685112c5206dd34eb672534a1bd179",
     "after-ipad-landscape-lloyds-arrival.jpg": "eac9eb967ab90f52f56d7bc9fb3e88503c87710f7fa72b0b2d8bf81212af5711",
     "after-ipad-landscape-lloyds-forces.jpg": "859dff8f2c103edd5725e3f0d3e851ef2218146e5a6ca2f286e57c02c98b696b",
-    "after-ipad-landscape-lloyds-inside.jpg": "8bbcef3253071ad5bafa2ec6f442e4afbfe526e84a464f07ac4d33924a30c02e",
+    "after-ipad-landscape-lloyds-inside.jpg": "a525ce1f788c4f8ceb462bbee12a267ff771a8a986a1d3429988519ef9a58c03",
     "after-ipad-landscape-lloyds-overview.jpg": "e6fc1446663fc201ad4a8c4abc1f697b8685bc364b104a0b61359d420f0d17fc",
     "after-ipad-landscape-swot.jpg": "deb582baf9e4a31027e792ed25c22a56fbf46a90352db964b403d583b37079a4",
     "after-ipad-portrait-banking.jpg": "e800c5d7da98e4b995f938120a67cee79fac538096bf8ad26fb1c31eedbdea93",
@@ -333,5 +333,6 @@
       "failed_requests": []
     }
   ],
-  "note": "Captured implementation commit; subsequent evidence-only commit leaves these runtime bytes unchanged."
+  "capture_requirement": "Fonts ready; every currently visible image complete with positive natural width. Collapsed lazy images are excluded.",
+  "note": "Actual local browser render. No claim of live production comparison or owner acceptance."
 }

@@ -39,6 +39,8 @@ with TemporaryDirectory() as directory, sync_playwright() as playwright:
             page.set_default_timeout(10000)
 
             def capture(name):
+                page.evaluate('document.fonts.ready')
+                page.wait_for_function("[...document.images].filter(image => image.checkVisibility()).every(image => image.complete && image.naturalWidth > 0)")
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), name
                 page.screenshot(path=output / f'{phase}-{device}-{name}.jpg', quality=80)
 

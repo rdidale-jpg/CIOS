@@ -1,5 +1,5 @@
 {
-  "head": "92f0b03687e6450d6e9a9c88f68e692547fc5309",
+  "head": "8aff113c8833cb67db301bd2866338bbb16359ce",
   "base": "9822c883f90bd1bff1e1eb4d6bc284c003e92b25",
   "recovered_from": "e9daf762131c1e70cf83bebca5c811c56f4138d9",
   "changed_files": [
@@ -15,6 +15,8 @@
     "cios/applications/flora/visual_panels.py",
     "cios/applications/flora/visual_stream_assets/lloyds-twin.css",
     "cios/applications/flora/visual_stream_assets/lloyds-twin.js",
+    "docs/flora-runtime/accepted-ux-recovery/Browser-Proof.json",
+    "docs/flora-runtime/accepted-ux-recovery/Integrity-Proof.json",
     "docs/flora-runtime/accepted-ux-recovery/README.md",
     "docs/flora-runtime/accepted-ux-recovery/Reconciliation.md",
     "docs/flora-runtime/accepted-ux-recovery/Validation.md",
@@ -82,5 +84,6 @@
   "rollback_matches_baseline": true,
   "local_links_checked": 16,
   "production_or_canonical_writes": 0,
-  "paid_calls": 0
+  "paid_calls": 0,
+  "note": "Temporary-index proof at the stated predecessor. Final-head validation repeats in the PR; no checkout or production writes."
 }

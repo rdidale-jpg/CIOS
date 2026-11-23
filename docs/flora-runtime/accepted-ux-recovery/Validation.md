@@ -18,6 +18,8 @@ The existing Enterprise Economics hosted workflow also runs the recovery tests a
 
 The historical comparator, approved failures/skips and original security tests remain unchanged. The compatibility adapter accepts **only exact reviewed file bytes and named presentation-function changes** against the verified predecessor. It retains prior AST checks and rejects any unreviewed mutation; this grants no runtime authority.
 
+[Baseline capture manifest](Before-Proof.json) · [Recovery capture manifest](Browser-Proof.json) · [Protected files and rollback proof](Integrity-Proof.json). These record their actual checkout identities; the final PR head repeats integrity validation.
+
 ## Individual stale assertion reconciliation
 
 | Test family | Old assertion | Justified correction / retained boundary |
