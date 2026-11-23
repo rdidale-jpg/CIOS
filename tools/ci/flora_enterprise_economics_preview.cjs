@@ -45,25 +45,22 @@ const airline = '/enterprises/easyjet/preview?stream=landscape';
         await page.waitForURL(url=>url.searchParams.get('detail')===stage);
         check(new URL(page.url()).searchParams.get('detail')===stage,'stage deep link');
         check(await page.locator('.econ-stages [aria-current]').getAttribute('data-stage')===stage,'selection follows URL');
-        await page.getByRole('link',{name:'FLORA Insight',exact:true}).click();
+        check(await page.getByRole('navigation',{name:'Reading mode',exact:true}).count()===0,'one unified presentation');
+        const unified = await page.locator('main').innerText();
+        await page.goto(page.url().split('#')[0]+'&reading=insight');
         await page.waitForURL(url=>url.searchParams.get('reading')==='insight');
-        check(new URL(page.url()).searchParams.get('detail')===stage,'mode preserves stage');
+        check(new URL(page.url()).searchParams.get('detail')===stage,'legacy link preserves stage');
+        check(await page.locator('main').innerText()===unified,'legacy reading URL has identical intelligence');
         check(await page.locator('.econ-focus [data-semantic-type=insight]').count()===1,'insight semantic label');
         await page.screenshot({path:`${cfg.output}/after-${company}-insight-${label}.jpg`,quality:78});
         await page.goBack(); await page.goForward(); await page.reload();
         check(new URL(page.url()).searchParams.get('reading')==='insight','back forward reload');
         const disclosure=page.locator('.econ-basis > summary');
-        if(await disclosure.count()) {
-          await disclosure.click();
-          check(await page.locator('.econ-basis[open]').count()===1,'evidence is inspectable');
-          if(company==='lloyds')check(await page.locator('.econ-basis a[href*=".pdf"]').count()===0,'Lloyds PDF deep links deferred');
-          await page.screenshot({path:`${cfg.output}/evidence-${company}-${label}.jpg`,quality:78});
-          await disclosure.click();
-        }
+        check(await disclosure.count()===0,'executive canvas has no evidence accordion');
         check(!(await page.locator('main').innerText()).match(/£11\.084bn|£477\.5bn|3\.21%|£10,106|£665m/),'no restricted or research-only financial outputs');
         await page.getByRole('link',{name:'Close economic detail',exact:true}).click();
         await page.waitForURL(url=>!url.searchParams.has('detail'));
-        check(new URL(page.url()).searchParams.get('reading')==='insight','close preserves subject and reading');
+        check(new URL(page.url()).pathname===(company==='lloyds'?'/enterprises/lloyds':'/enterprises/easyjet/preview'),'close preserves enterprise');
         for(const forbidden of ['workspace=private','run_id=fi-private','export=csv']) {
           check([403,404].includes((await page.request.get(cfg.base+route+'&'+forbidden)).status()),'unsupported/private query denied');
         }

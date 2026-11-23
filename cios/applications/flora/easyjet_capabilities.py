@@ -219,22 +219,6 @@ def main(ctx):
     name = CAPABILITIES[ctx.detail]
     mechanism, caveat, drivers = MECHANISMS[ctx.detail]
     scope = f'<p class="eyebrow">easyJet · {ctx.stream.title()}</p>'
-    if ctx.reading == "insight":
-        body = reading.interpretation(name, facts, PERSPECTIVE.get(ctx.stream, {}).get(ctx.detail, mechanism), caveat)
-        if facts and ctx.stream == "inside":
-            if ctx.detail == "network-planning":
-                capacity, *tradeoffs = drivers
-                body += ('<section class="reading-economy"><h2>Scheduling trade-off</h2><p><strong>'
-                         + escape(capacity[0]) + '</strong> · ' + escape(capacity[1]) + '</p>'
-                         '<dl class="reading-drivers">' + ''.join(
-                             '<div><dt>' + escape(title) + '</dt><dd>' + escape(detail) + '</dd></div>'
-                             for title, detail in tradeoffs
-                         ) + '</dl></section>')
-            elif ctx.detail == "fleet-operations":
-                body += reading.sequence(drivers)
-            else:
-                body += reading.flow(drivers)
-        return scope + body
     body = scope + f'<h1>{name}</h1>'
     if ctx.stream == "inside":
         body += (
@@ -250,4 +234,19 @@ def main(ctx):
         body += '<div class="et-facts">' + "".join(p.render(item) for item in facts) + '</div>'
     else:
         body += '<p>No eligible disclosures for this selection.</p>'
+    if facts:
+        body += reading.interpretation("Operating implications", facts, PERSPECTIVE.get(ctx.stream, {}).get(ctx.detail, mechanism), caveat, heading="h2")
+        if facts and ctx.stream == "inside":
+            if ctx.detail == "network-planning":
+                capacity, *tradeoffs = drivers
+                body += ('<section class="reading-economy"><h2>Scheduling trade-off</h2><p><strong>'
+                         + escape(capacity[0]) + '</strong> · ' + escape(capacity[1]) + '</p>'
+                         '<dl class="reading-drivers">' + ''.join(
+                             '<div><dt>' + escape(title) + '</dt><dd>' + escape(detail) + '</dd></div>'
+                             for title, detail in tradeoffs
+                         ) + '</dl></section>')
+            elif ctx.detail == "fleet-operations":
+                body += reading.sequence(drivers)
+            else:
+                body += reading.flow(drivers)
     return body

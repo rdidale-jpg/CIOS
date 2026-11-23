@@ -37,12 +37,13 @@ def test_three_connected_stages_share_modes_scope_and_native_urls(path, stages, 
         assert title in html and html.count('data-stage=') == 3
         assert f'data-stage="{stage}"' in html
         assert html.count('aria-current="page"') >= 1
-        assert ('econ-explanation" data-semantic-type="insight"' in html) == (reading == 'insight')
+        assert 'econ-explanation" data-semantic-type="insight"' in html
+        assert 'econ-explanation" data-semantic-type="assumed"' in html
         assert 'Illustrative' in html and 'not to scale' in html
         assert all(word not in html for word in ('What to investigate', 'No eligible reported measure', 'Research gap'))
-        assert 'Source &amp; basis' in html
-        assert html.count('<details') == 1  # One inspection, no nested click tree.
-        assert ('reading=insight' in html) == (reading == 'insight' or 'FLORA Insight' in html)
+        assert 'Source &amp; basis' not in html
+        assert html.count('<details') == 0  # Existing Owner inspection retains provenance.
+        assert 'reading=insight' not in html
 
 
 def test_banking_stocks_flows_actuals_and_derived_comparison_keep_definitions():

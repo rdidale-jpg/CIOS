@@ -32,7 +32,27 @@ EXECUTIVE_CUTS = {
 }
 
 
+# Accepted UX recovery: exact current bytes and only the reviewed presentation functions.
+# This preserves every historical check; it grants no runtime or Source authority.
+UX_RECOVERY_BASE = '9822c883f90bd1bff1e1eb4d6bc284c003e92b25'
+UX_RECOVERY_CUTS = {'cios/applications/flora/easyjet_capabilities.py': ('2ac52cf9d83f9a1270404dbf204f65e1c56afb24afae45105c2945ce507f1150',
+                                                     ('main',)),
+ 'cios/applications/flora/enterprise_economics.py': ('c8ee62d9f225a976d91aeabdf51ff280cbad21663606d2f02af3f0cb0db0f6d7',
+                                                     ('_composition', 'annual_statement_view', 'banking')),
+ 'cios/applications/flora/experience_composition.py': ('1b570fec56978be09ed1fcc3c4c7234e2203682a8858723ff155a13cc92bc8fe',
+                                                       ('_capability_root',
+                                                        '_interpret',
+                                                        'banking_forces',
+                                                        'enterprise_forces',
+                                                        'uk_forces')),
+ 'cios/applications/flora/lloyds_recovery.py': ('d65a2f2d884fac43eb082b8d0176b34a27231f718dc40fa81634bf4299d2b9f8',
+                                                ('forces', 'inside', 'landscape')),
+ 'cios/applications/flora/visual_panels.py': ('44172917889dc5ee06dc127c070280fd3f77da1841321e53ea265e368bb8f787',
+                                              ('_frame', 'render', 'research_inspection'))}
+
+
 def predecessor(root, path, current):
+    current = checked_cut(root, path, current, UX_RECOVERY_BASE, UX_RECOVERY_CUTS)
     current = checked_cut(root, path, current, EXECUTIVE_BASE, EXECUTIVE_CUTS)
     current = checked_cut(root, path, current, FACTORY_BASE, FACTORY_CUTS)
     current = checked_cut(root, path, current, FLAGSHIP_BASE, FLAGSHIP_CUTS)

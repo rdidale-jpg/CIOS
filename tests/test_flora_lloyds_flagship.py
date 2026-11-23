@@ -20,12 +20,13 @@ def test_existing_journey_and_connected_issue():
     facts, insight = render(), render('insight')
     assert 'Renew the bank while it runs' in facts
     assert 'Core renewal and application retirement matter' in insight
-    assert 'Core renewal and application retirement matter' not in facts
-    assert 'Scale AI only after benefit' in insight and 'Scale AI only after benefit' not in facts
-    for value in ('118,762', '92,548', '79,323', 'HM Treasury', 'Evidence &amp; scope'):
+    assert 'Core renewal and application retirement matter' in facts
+    assert facts == insight
+    assert 'Scale AI only after benefit' in facts and 'Scale AI only after benefit' in insight
+    for value in ('118,762', '92,548', '79,323', 'HM Treasury', 'Efficiency ambition'):
         assert value in facts
     root = visual.render(PATH, {})
-    assert 'Explore the Lloyds flagship' in root and '118,762' not in root
+    assert 'Explore Lloyds' in root and '118,762' not in root
     ctx = visual.resolve(PATH, {})
     for _, _, stream, detail in flagship.STAGES:
         route = urlsplit(visual.url(ctx, stream=stream, detail=detail))
@@ -37,7 +38,7 @@ def test_existing_journey_and_connected_issue():
 
 @pytest.mark.parametrize('source_id, text', [
     ('PR-LBG-A2030', 'Core renewal and application retirement matter'),
-    ('PR-LBG-ENVOY', 'Strength · existing AI capability'),
+    ('PR-LBG-ENVOY', 'existing AI capability'),
 ])
 def test_source_withdrawal_removes_coupled_insight(monkeypatch, source_id, text):
     assert text in render('insight')
@@ -59,7 +60,7 @@ def test_new_policy_excerpt_provenance_and_lifecycle(monkeypatch):
     monkeypatch.setattr(flagship.json, 'loads', withdraw)
     assert flagship._payments() is None
     assert 'HM Treasury' not in render('insight')
-    assert 'Opportunity · payments' not in render('insight')
+    assert 'id="llf-swot-2"' not in render('insight')
 
 def test_flagship_preserves_supplier_relationship_gate(monkeypatch):
     data = deepcopy(visual.current_data(visual.resolve(PATH, {})))

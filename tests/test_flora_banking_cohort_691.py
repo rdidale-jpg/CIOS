@@ -14,9 +14,9 @@ def test_cohort_perspectives_and_exact_context(subject):
         query = {"selected": [subject], "stream": [stream]}
         facts = v.render(path, query)
         insight = v.render(path, {**query, "reading": ["insight"]})
-        assert "aria-current=page>Facts" in facts
-        assert "aria-current=page>FLORA Insight" in insight
-        assert f"stream={stream}&amp;selected={subject}&amp;reading=insight" in facts
+        assert 'aria-label="Reading mode"' not in facts
+        assert main(facts) == main(insight)
+        assert f"stream={stream}&amp;selected={subject}" in facts
         assert cohort.SUBJECTS[subject][0] in facts + insight
         assert "What's changing?" not in facts + insight
     assert v.BANKING_ART in v.render(path, {"selected": [subject]})
@@ -85,7 +85,8 @@ def test_starling_platform_is_separate_from_scoped_bank_evidence():
     html = main(v.render("/industries/banking", query))
     assert "Group and Engine platform economics remain separate research" in html
     assert "data-semantic-type=\"insight\"" not in html
-    assert "15,223" not in html
+    assert "15,223" in html
+    assert "Starling Bank Limited" in html and "1 October 2025–31 March 2026" in html
 
 
 def test_nationwide_group_and_society_views_remain_separate():
@@ -94,6 +95,9 @@ def test_nationwide_group_and_society_views_remain_separate():
     landscape = main(v.render(path, {**query, "reading": ["insight"]}))
     inside = main(v.render(path, {**query, "stream": ["inside"]}))
     assert "6,378 − 4,021 − 331 = 2,026" in landscape
-    assert "2,026 + 1 − 138 − 399 = 1,490" in landscape
-    assert "100,886" not in landscape and "100,886" in inside
+    assert "£2,026m + £1m − £138m − £399m = £1,490m" in landscape
+    assert landscape.count("6,378 − 4,021 − 331 = 2,026") == 1
+    assert "100,886" in landscape and "100,886" in inside
+    assert "Customer complaints · Society" in landscape
+    assert "Consolidated Group" in landscape and "31 March 2026" in landscape
     assert "1 October 2025–31 March 2026" in inside and "6,378" not in inside

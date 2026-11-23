@@ -431,7 +431,8 @@ def _frame(ctx,headers,data,issues,entries,body,*,show_commercial=False):
     """Ordinary three-panel frame emits no research disclosures or source URLs."""
     scene=replace(ctx,stream='landscape') if ctx.scope=='banking' and ctx.stream=='inside' else ctx
     if __import__('cios.applications.flora.access',fromlist=['is_cios_owner']).is_cios_owner(headers):
-        ds.context_link(v.url(scene)+'&lens=inspection' if ctx.scope in {'banking','lloyds'} else '/research','Research inspection')
+        inspect_scene=replace(scene,reading='facts') if scene.scope=='lloyds' and scene.detail=='flagship' else scene
+        ds.context_link(v.url(inspect_scene)+'&lens=inspection' if ctx.scope in {'banking','lloyds'} else '/research','Research inspection')
     binding=v.PRESENTATIONS[ctx.scope]
     identity=binding.get('identity')or data[binding['identity_key']]
     title=binding['title'] if ctx.scope in {'uk','easyjet'} else data['industry_name'if ctx.scope=='banking'else'enterprise_name']
@@ -450,12 +451,16 @@ def _frame(ctx,headers,data,issues,entries,body,*,show_commercial=False):
         change = commercial_change(ctx.scope, ctx.stream, headers)
         if ctx.stream == 'landscape':
             change = _enterprise_arrival(ctx, data, change)
-    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(scene,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+watermark+'<article class="workspace editorial-workspace">'+reading.selector(ctx)+change+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
+    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(scene,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+watermark+'<article class="workspace editorial-workspace">'+change+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
 
 
 def render(ctx,headers=None,*,financial_run_id=''):
     from .supabase_identity import public_read
-    with p.editorial_view(ctx.reading), public_read():
+    # The retired reading URLs remain valid, but ordinary exploration has one
+    # composition. Statement types and all source/resource guards stay distinct.
+    if not financial_run_id:
+        ctx=replace(ctx,reading='facts')
+    with p.editorial_view(), public_read():
         if ctx.scope=='easyjet':return _frame(ctx,headers,None,(),(),easyjet.main(ctx),show_commercial=True)
         if financial_run_id:
             from .financial_intelligence import analyst
@@ -469,8 +474,9 @@ def render(ctx,headers=None,*,financial_run_id=''):
             public = financial.public_nationwide_projection()
             if public:
                 data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
-                body=(reading.nationwide_insight(public) if ctx.reading=='insight' else
-                      analyst.compose_editorial(public)+reading.nationwide_facts_bridge(public)+_nationwide_service(data))
+                body=(analyst.compose_editorial(public)+reading.nationwide_facts_bridge(public)
+                      +reading.nationwide_insight(public,narrative_only=True)
+                      +_nationwide_service(data))
                 from .enterprise_economics import annual_statement_view, statement_summary
                 from .financial_intelligence.public_statements import statement_series, nationwide_lines
                 lines = statement_series(('research-subject:nationwide-building-society-group', 'Nationwide Building Society Group'))
@@ -479,11 +485,11 @@ def render(ctx,headers=None,*,financial_run_id=''):
                                'FY2026 includes a full year. This limits direct comparisons of income and cash flows. '
                                'Balance sheet dates are 31 March 2026 and 31 March 2025.')
                     body += annual_statement_view(
-                        lines, insight=ctx.reading=='insight', context=context,
+                        lines, unified=True, context=context,
                         comparison_keys=('assets','cash_central','loans','debt_securities'),
                     )
                 else:
-                    body += statement_summary(nationwide_lines(public), insight=ctx.reading=='insight', inspection=False)
+                    body += statement_summary(nationwide_lines(public), inspection=False)
                 action=analyst.prepare_action(ctx,headers=headers) if ctx.reading=='facts' else ''
                 if action:body+='<section class="workspace-setup"><h2>Workspace analysis</h2>'+action+'</section>'
                 return _frame(ctx,headers,data,issues,v.destinations(ctx,data),cohort.landscape(ctx,body,data,issues)+_bank_picker(ctx,data,issues))
@@ -511,10 +517,9 @@ def render(ctx,headers=None,*,financial_run_id=''):
             body=(_editorial_banking(ctx,data,issues,headers) if ctx.reading=='facts' and not ctx.detail
                   else '<h1>The forces reshaping banking</h1>')
             body+=experience.banking_forces(ctx)
-            if ctx.reading=='insight' and not ctx.detail:
+            if not ctx.detail:
                 context=ecosystem.forces(ctx,data,issues)
                 if context:body+='<section aria-label="Separate funding and oversight context"><h2>Funding and oversight context</h2>'+context+'</section>'
-        elif ctx.reading=='insight':body=reading.insight(ctx,data,issues)
         elif ctx.scope=='banking' and ctx.detail=='payments' and ctx.stream=='landscape':
             body=reading.payments(ctx,data)
         elif ctx.scope=='banking' and not ctx.detail and not ctx.agenda:
@@ -522,7 +527,9 @@ def render(ctx,headers=None,*,financial_run_id=''):
             if ctx.stream=='landscape' and not ctx.selected:body+=cohort.navigation(ctx,data,issues)
         elif ctx.agenda:
             row=next((r for r in issues if r.key==ctx.agenda),None)
-            body=('<section class="focus agenda-focus" id="agenda-insight" tabindex="-1" aria-label="Leadership insight"><a class="close close-insight" aria-label="Close Leadership Agenda" href="'+e(v.url(ctx,agenda=''),quote=True)+'">×</a><h1>'+e(row.title)+'</h1>'+reading.agenda_facts(row)+'</section>') if row else _overview(ctx,data,issues)
+            body=('<section class="focus agenda-focus" id="agenda-insight" tabindex="-1" aria-label="Leadership insight"><a class="close close-insight" aria-label="Close Leadership Agenda" href="'+e(v.url(ctx,agenda=''),quote=True)+'">×</a><h1>'+e(row.title)+'</h1>'+reading.agenda_facts(row)+p.render(row.conclusion)+'</section>') if row else _overview(ctx,data,issues)
+            if row and ctx.scope=='banking' and ctx.stream=='forces' and row.key=='provider-oversight':
+                body+=reading.insight(replace(ctx,reading='insight'),data,issues).replace('<h1>','<h2>',1).replace('</h1>','</h2>',1)
             if ctx.scope=='banking':
                 if ctx.agenda=='provider-oversight':body+=reading.provider_pulse(issues)
                 body+=_bank_picker(ctx,data,issues)
@@ -532,7 +539,16 @@ def render(ctx,headers=None,*,financial_run_id=''):
             if ctx.scope=='lloyds' and ctx.stream=='inside' and ctx.detail=='technology':
                 if not body:body='<h1>Technology &amp; data</h1><p>No eligible disclosures for this selection.</p>'
                 body+=reading.lloyds_capability(data,insight=False)
-        else:body=_overview(ctx,data,issues)
+                body+=reading.lloyds_capability(data,insight=True).replace('<h1>','<h2>',1).replace('</h1>','</h2>',1)
+            elif ctx.stream=='forces':
+                item=v.force_view(ctx,ctx.detail,data)
+                if item and p.eligible(item):
+                    text,caveat,_=v.FORCE_POLICY[ctx.detail]
+                    body+=reading.interpretation('What this means',(item,),text,caveat,heading='h2')
+        else:
+            body=_overview(ctx,data,issues)
+            if ctx.scope=='uk' and ctx.stream=='landscape':
+                body+=reading.insight(replace(ctx,reading='insight'),data,issues).replace('<h1>','<h2>',1).replace('</h1>','</h2>',1)
         return _frame(ctx,headers,data,issues,entries,body,show_commercial=True)
 
 
@@ -549,6 +565,11 @@ def research_inspection(path,query,headers=None):
         issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
         return _research_frame(ctx,headers,data,issues,v.destinations(ctx,data),analyst.STYLE+'<section class="financial-analyst">'+analyst.compose(projection)+'</section>')
     ctx=v.resolve(path,query)
+    if ctx.scope=='lloyds' and ctx.detail=='flagship':
+        from .lloyds_flagship import render as render_flagship
+        data=v.current_data(ctx);issues=agenda.agenda(ctx.scope,data,selected=ctx.selected)
+        return _research_frame(ctx,headers,data,issues,v.destinations(ctx,data),
+                               render_flagship(ctx,data,issues,inspection=True))
     if ctx.scope=='banking' and ctx.stream=='inside':ctx=replace(ctx,stream='landscape')
     if ctx.scope=='banking' and ctx.detail in ecosystem.STAGES:ctx=replace(ctx,detail='')
     return _research_render(ctx,headers)

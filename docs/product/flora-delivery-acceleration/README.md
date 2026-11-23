@@ -1,6 +1,6 @@
 # FLORA Product Delivery Doctrine
 
-**Status:** Proposed operating guidance for owner acceptance, 23 November 2026. **Budget:** £0 incremental expenditure beyond existing ChatGPT Pro. This applies the accepted [ADR-009](../../../architecture/decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md); it creates no architecture, data owner, approval layer or release authority.
+**Status:** Accepted operating guidance in PR #727; bounded recovery amendment for owner review, 23 November 2026. **Budget:** £0 incremental expenditure beyond existing ChatGPT Pro. This applies the accepted [ADR-009](../../../architecture/decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md); it creates no architecture, data owner, approval layer or release authority.
 
 ## Operating rules
 
@@ -25,6 +25,10 @@
 
 This is five activities, not five new approval gates. It replaces repeated intake/review/publication loops for the same unchanged decision. No elapsed-time or productivity improvement is claimed until measured in use.
 
+Before building, reconcile existing work and open PRs against each accepted owner requirement in the existing PR/report: decision → exact implementation → draft/merged/deployed/owner-accepted state → remaining gap → smallest action. Verify previously accepted UX behaviour and compare the owner’s current failure captures; record unavailable evidence explicitly. Do not equate design acceptance with implementation or deployment.
+
+Completion requires the working accepted journey and its browser evidence, not passing CI alone. Keep this traceability in the same PR; create no separate registry, approval layer or standing review ceremony.
+
 ## Mandatory controls and optional conventions
 
 | Preserve as mandatory when applicable | Do not require universally |
@@ -38,7 +42,7 @@ This is five activities, not five new approval gates. It replaces repeated intak
 | Independent review explicitly required by the commission or owning contract | Repeated independent review of unchanged scope when no applicable requirement demands it |
 | Real browser visual review for visual changes and separately authorised release | Screenshots or PR counts as substitutes for a working, accepted journey |
 
-The [Experience Contract](../flora-experience/FLORA-Experience-Contract-v1.0.md) governs presentation: retain Top / Left / Main, Facts / FLORA Insight, accepted artwork and commercially understandable language. Internal gaps, source administration and suggested investigations do not become new ordinary-screen panels. Mandatory attribution and material factual limitations remain.
+The [Experience Contract](../flora-experience/FLORA-Experience-Contract-v1.0.md) governs presentation: retain Top / Left / Main, distinct factual and interpretive semantics, accepted artwork and commercially understandable language. The current owner recovery commission supersedes the separate Facts / FLORA Insight selector with one unified executive composition. Internal gaps, source administration and suggested investigations do not become new ordinary-screen panels. Mandatory attribution and material factual limitations remain.
 
 [Source factual-use guidance](../../flora-runtime/public-facts-policy/README.md) and current Source records remain authoritative for their use scope. This doctrine grants no new source permissions. Preserve any current Lloyds §2 hold, deferred §5 links and all other operation-specific restrictions; ADR-027 remains Proposed.
 

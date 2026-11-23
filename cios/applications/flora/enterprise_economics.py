@@ -77,6 +77,9 @@ def _icon(index, airline):
 
 
 def _composition(ctx, stages, selected, figures, facts, extra='', related=''):
+    for fact in facts:
+        if fact:
+            p.note_editorial_sources(fact.sources)
     airline = ctx.scope == 'easyjet'
     title = 'From seats to earnings' if airline else 'From funding to earnings'
     company = 'easyJet Group' if airline else 'Lloyds Banking Group plc · consolidated Group'
@@ -90,7 +93,6 @@ def _composition(ctx, stages, selected, figures, facts, extra='', related=''):
                      + '#visual-content"' + (' aria-current="page"' if key == selected else '') + '>'
                      + _icon(i, airline) + '<span class="econ-stage-name">' + escape(name) + '</span>' + amount + '</a></li>')
     active = next(row for row in stages if row[0] == selected)
-    analysis = ctx.reading == 'insight'
     heading_id = 'insight-title' if ctx.detail else 'economics-title'
     focus = ' id="insight" tabindex="-1"' if ctx.detail else ''
     close = ('<a class="close close-insight" aria-label="Close economic detail" href="'
@@ -100,9 +102,10 @@ def _composition(ctx, stages, selected, figures, facts, extra='', related=''):
             '<figure class="econ-story"><figcaption>Illustrative ' + ('airline' if airline else 'banking') + ' model · not to scale</figcaption>'
             '<nav aria-label="Economic stages"><ol class="econ-stages">' + ''.join(links) + '</ol></nav></figure>'
             '<section class="econ-focus" aria-labelledby="economic-detail"><h2 id="economic-detail">' + escape(active[3]) + '</h2>'
-            '<p class="econ-explanation" data-semantic-type="' + ('insight' if analysis else 'assumed') + '">'
-            + escape(active[5] if analysis else active[4]) + '</p>' + extra + '</section>'
-            + related + _basis(facts) + '</section>')
+            '<p class="econ-explanation" data-semantic-type="assumed">'
+            + escape(active[4]) + '</p><p class="econ-explanation" data-semantic-type="insight">'
+            + escape(active[5]) + '</p>' + extra + '</section>'
+            + related + ('' if p.is_editorial() else _basis(facts)) + '</section>')
 
 
 def _qualified_pressure_link(headers, company):
@@ -174,7 +177,7 @@ def banking(ctx, data, issues, *, headers=None):
         # Shipping §2 is unresolved, so this returns nothing. No permission,
         # identity, legal exception or persistence is changed here.
         from .financial_intelligence.candidate_analytics import public_factual_html
-        extra = public_factual_html(insight=ctx.reading == 'insight')
+        extra = public_factual_html(insight=True)
     related = '<nav class="econ-related" aria-label="Related enterprise views">'
     related += '<a href="' + escape(v.url(ctx, stream='inside', detail='economics', reading=ctx.reading), quote=True) + '#visual-content">Financial analysis</a>'
     if change and any(issue.key == 'funding-base' for issue in issues):
@@ -242,7 +245,7 @@ def source_statement_summary(record, *, subject, insight=False, fixture=False):
     return statement_summary(project(record, subject=subject), insight=insight, fixture=fixture)
 
 
-def annual_statement_view(lines, *, insight=False, comparison_keys=(), growth_keys=(), context='', inspection=False):
+def annual_statement_view(lines, *, insight=False, comparison_keys=(), growth_keys=(), context='', inspection=False, unified=False):
     """Shared Economics composition for paired reported years and stock movements."""
     from decimal import Decimal
     from .financial_intelligence.public_statements import annual_growth, balance_changes, statements
@@ -263,7 +266,7 @@ def annual_statement_view(lines, *, insight=False, comparison_keys=(), growth_ke
             + ' · reported figures · ' + escape(units) + '</p>')
     if context:
         body += '<p>' + escape(context) + '</p>'
-    if insight:
+    if insight or unified:
         changes = (
             ('Changes in the year-end balance sheet', balance_changes(lines, comparison_keys)),
             ('Annual change in earnings and income', tuple(annual_growth(lines, growth_keys))),
@@ -281,9 +284,7 @@ def annual_statement_view(lines, *, insight=False, comparison_keys=(), growth_ke
             body += '</ul>'
         context_insight = _cash_flow_insight(rows)
         body += ''.join(p.render(fact, compact=True) for fact in context_insight)
-        if context_insight:
-            body += '<p>Which cash movements recur, and how much depends on changes in assets or funding?</p>'
-    else:
+    if not insight or unified:
         for kind, label in (('income', 'Income statement'), ('balance', 'Balance sheet'), ('cash_flow', 'Cash flow statement'),
                             ('segment', 'Segment reporting')):
             selected = [line for line, _ in rows if line.statement == kind]
