@@ -1,0 +1,54 @@
+name: FLORA Enterprise Economics design assurance
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/flora-design/enterprise-economics-s1/**'
+      - '.github/workflows/flora-enterprise-economics-design.yml'
+permissions:
+  contents: read
+jobs:
+  design-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install existing validation dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Design-only scope, original assets, source holds and existing Financial recipes
+        run: python docs/flora-design/enterprise-economics-s1/validate.py > "$RUNNER_TEMP/economics-design-validation.json"
+      - name: Unchanged strict security boundary
+        run: python -m pytest tests/test_flora_security*.py -q
+      - name: Install isolated browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/economics-node" playwright@1.62.1
+          "$RUNNER_TEMP/economics-node/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Static prototype browser and responsive proof
+        env:
+          NODE_PATH: ${{ runner.temp }}/economics-node/node_modules
+        run: python docs/flora-design/enterprise-economics-s1/preview.py --output "$RUNNER_TEMP/economics-proof"
+      - name: Package review-only prototype and fresh evidence
+        run: |
+          mkdir -p "$RUNNER_TEMP/economics-review"
+          cp -R docs/flora-design/enterprise-economics-s1/prototype "$RUNNER_TEMP/economics-review/prototype"
+          cp -R "$RUNNER_TEMP/economics-proof" "$RUNNER_TEMP/economics-review/previews"
+          cp docs/flora-design/enterprise-economics-s1/*.md "$RUNNER_TEMP/economics-review/"
+          cp docs/flora-design/enterprise-economics-s1/Artwork-Provenance.json "$RUNNER_TEMP/economics-review/"
+          cp "$RUNNER_TEMP/economics-design-validation.json" "$RUNNER_TEMP/economics-review/Validation.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: flora-enterprise-economics-design-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/economics-review/
+          if-no-files-found: warn
+          retention-days: 14
