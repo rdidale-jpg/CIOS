@@ -1,0 +1,424 @@
+{
+  "D01": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "UPS",
+        "kind": "acquisition",
+        "status": "planned",
+        "target": "Smartways Logistics",
+        "counterparty": "Smartways Logistics",
+        "dates": [
+          "nov. 17, 2026"
+        ],
+        "value": null
+      }
+    ]
+  },
+  "D02": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "SAP SE",
+        "kind": "acquisition",
+        "status": "completed",
+        "target": "TechWolf",
+        "counterparty": "TechWolf",
+        "dates": [],
+        "value": null
+      }
+    ]
+  },
+  "D03": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Microsoft Corp.",
+        "kind": "acquisition",
+        "status": "planned",
+        "target": "PlaceWare Inc.",
+        "counterparty": "PlaceWare Inc.",
+        "dates": [
+          "jan. 21, 2003"
+        ],
+        "value": null
+      }
+    ]
+  },
+  "D04": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Microsoft Corp.",
+        "kind": "acquisition",
+        "status": "planned",
+        "target": "Danger Inc.",
+        "counterparty": "Danger Inc.",
+        "dates": [
+          "feb. 11, 2008"
+        ],
+        "value": null
+      }
+    ]
+  },
+  "D05": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Microsoft Corp.",
+        "kind": "acquisition",
+        "status": "planned",
+        "target": "GitHub",
+        "counterparty": "GitHub",
+        "dates": [
+          "june 4, 2018"
+        ],
+        "value": null
+      }
+    ]
+  },
+  "D06": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "HSBC",
+        "kind": "partnership",
+        "status": "announced",
+        "target": "Google Cloud",
+        "counterparty": "Google Cloud",
+        "dates": [
+          "17 june 2026"
+        ],
+        "value": null
+      }
+    ]
+  },
+  "D07": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Anthropic",
+        "kind": "partnership",
+        "status": "in progress",
+        "target": "General Services Administration",
+        "counterparty": "General Services Administration",
+        "dates": [],
+        "value": null
+      }
+    ]
+  },
+  "D08": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Standard Chartered",
+        "kind": "supply",
+        "status": "planned",
+        "target": "secure digital asset custody services",
+        "counterparty": "LMAX Group",
+        "dates": [],
+        "value": null
+      }
+    ]
+  },
+  "D09": {
+    "commercial_relevance": 1,
+    "claims": [
+      {
+        "actor": "T‑Mobile",
+        "kind": "partnership",
+        "status": "in progress",
+        "target": "Formula 1",
+        "counterparty": "Formula 1",
+        "dates": [
+          "nov. 12, 2026"
+        ],
+        "value": null
+      }
+    ]
+  },
+  "D10": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "ServiceNow",
+        "kind": "partnership",
+        "status": "announced",
+        "target": "NTT DATA",
+        "counterparty": "NTT DATA",
+        "dates": [
+          "nov. 5, 2025"
+        ],
+        "value": null
+      }
+    ]
+  },
+  "D11": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "European Space Agency",
+        "kind": "procurement",
+        "status": "awarded",
+        "target": "two additional second-generation Galileo satellites",
+        "counterparty": "Airbus",
+        "dates": [
+          "27 october 2026"
+        ],
+        "value": null
+      }
+    ]
+  },
+  "D12": {
+    "commercial_relevance": 0,
+    "claims": []
+  },
+  "D13": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Ethiopian Airlines",
+        "kind": "order",
+        "status": "placed",
+        "target": "eight 777-8 Freighters and two 777 Freighters",
+        "counterparty": "Boeing",
+        "dates": [],
+        "value": null
+      }
+    ]
+  },
+  "D14": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Biman Bangladesh Airlines",
+        "kind": "order",
+        "status": "placed",
+        "target": "11 787 Dreamliner and 737 MAX airplanes",
+        "counterparty": "Boeing",
+        "dates": [],
+        "value": null
+      }
+    ]
+  },
+  "D15": {
+    "commercial_relevance": 0,
+    "claims": []
+  },
+  "D16": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Nokia",
+        "kind": "donation",
+        "status": "planned",
+        "target": "Aalto University",
+        "counterparty": "Aalto University",
+        "dates": [],
+        "value": "€1.5 million"
+      },
+      {
+        "actor": "Nokia",
+        "kind": "research collaboration",
+        "status": "committed",
+        "target": "Aalto University",
+        "counterparty": "Aalto University",
+        "dates": [],
+        "value": "approximately €1.3 million annually"
+      }
+    ]
+  },
+  "D17": {
+    "commercial_relevance": 0,
+    "claims": []
+  },
+  "D18": {
+    "commercial_relevance": 1,
+    "claims": [
+      {
+        "actor": "Airbus",
+        "kind": "investment",
+        "status": "planned",
+        "target": "share buyback programme",
+        "counterparty": null,
+        "dates": [
+          "31 july 2029"
+        ],
+        "value": "up to € 5 billion"
+      }
+    ]
+  },
+  "D19": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "NVIDIA",
+        "kind": "capacity expansion",
+        "status": "in progress",
+        "target": "manufacturing capacity",
+        "counterparty": null,
+        "dates": [],
+        "value": null
+      }
+    ]
+  },
+  "D20": {
+    "commercial_relevance": 0,
+    "claims": []
+  },
+  "D21": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Takeda Pharmaceuticals",
+        "kind": "migration",
+        "status": "in progress",
+        "target": "SAP Cloud ERP applications",
+        "counterparty": null,
+        "dates": [],
+        "value": null
+      }
+    ]
+  },
+  "D22": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "AstraZeneca",
+        "kind": "migration",
+        "status": "in progress",
+        "target": "SAP Cloud ERP Private",
+        "counterparty": null,
+        "dates": [],
+        "value": null
+      }
+    ]
+  },
+  "D23": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Colt Technology Services",
+        "kind": "migration",
+        "status": "completed",
+        "target": "cloud ERP",
+        "counterparty": null,
+        "dates": [
+          "april 15 2026"
+        ],
+        "value": null
+      }
+    ]
+  },
+  "D24": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Brose",
+        "kind": "migration",
+        "status": "completed",
+        "target": "cloud",
+        "counterparty": null,
+        "dates": [],
+        "value": null
+      }
+    ]
+  },
+  "D25": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Volumetric Building Companies",
+        "kind": "migration",
+        "status": "completed",
+        "target": "SAP Cloud ERP",
+        "counterparty": "IBM",
+        "dates": [],
+        "value": null
+      },
+      {
+        "actor": "Second Nature Brands",
+        "kind": "migration",
+        "status": "completed",
+        "target": "SAP Cloud ERP",
+        "counterparty": "IBM",
+        "dates": [],
+        "value": null
+      }
+    ]
+  },
+  "D26": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "IBM",
+        "kind": "announcement",
+        "status": "announced",
+        "target": "Imagine Enterprise",
+        "counterparty": "Microsoft",
+        "dates": [
+          "november 10, 2026"
+        ],
+        "value": null
+      }
+    ]
+  },
+  "D27": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Skywise",
+        "kind": "portfolio expansion",
+        "status": "announced",
+        "target": "portfolio",
+        "counterparty": null,
+        "dates": [
+          "november 2, 2026"
+        ],
+        "value": null
+      }
+    ]
+  },
+  "D28": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "AWS Forward Deployed Engineering",
+        "kind": "rollout",
+        "status": "planned",
+        "target": "customer-embedded engineering",
+        "counterparty": null,
+        "dates": [],
+        "value": null
+      }
+    ]
+  },
+  "D29": {
+    "commercial_relevance": 2,
+    "claims": [
+      {
+        "actor": "Nokia",
+        "kind": "facility opening",
+        "status": "announced",
+        "target": "R&D and manufacturing campus",
+        "counterparty": null,
+        "dates": [],
+        "value": null
+      }
+    ]
+  },
+  "D30": {
+    "commercial_relevance": 1,
+    "claims": [
+      {
+        "actor": "Board of Directors",
+        "kind": "governance",
+        "status": "completed",
+        "target": "National Security and Export Control Oversight Committee",
+        "counterparty": null,
+        "dates": [],
+        "value": null
+      }
+    ]
+  }
+}
