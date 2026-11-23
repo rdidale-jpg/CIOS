@@ -109,7 +109,7 @@ def article_urls(index, path_pattern, links):
     return list(urls)[:MAX_ARTICLES]
 
 
-def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=()):
+def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=(), include_body=False):
     """Read one original index and a bounded set of linked original HTML articles."""
     industry, publisher, index, pattern = NEWSROOMS[enterprise]
     cutoff = date.fromisoformat(as_of)
@@ -127,7 +127,7 @@ def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=()):
             raw, suffix = fetch(url)
             if suffix != '.html':
                 raise ValueError('Not HTML')
-            return NewsPage(raw), sha256(raw).hexdigest()
+            return NewsPage(raw), sha256(raw).hexdigest(), raw
         except HTTPError as exc:
             failures.append({'url': url, 'reason': 'publisher HTTP response', 'http_status': exc.code})
             return None
@@ -141,7 +141,7 @@ def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=()):
         article = read(url)
         if not article:
             continue
-        page, digest = article
+        page, digest, raw = article
         title = ' '.join(page.properties.get('og:title', '').split())
         dates = [page.properties.get(key, '') for key in
                  ('article:published_time', 'datePublished', 'publish-date')]
@@ -163,7 +163,7 @@ def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=()):
         state = 'new'
         if prior:
             state = 'unchanged' if prior['candidate_id'] == identity else 'conflicting metadata'
-        candidates.append({
+        candidate = {
             'candidate_id': identity, 'enterprise_id': enterprise, 'publisher': publisher,
             'industry': industry, 'url': url, 'published': published.isoformat(), 'title': title,
             'document_sha256': digest, 'locator': 'og:title with publication metadata',
@@ -173,7 +173,13 @@ def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=()):
             'themes': topics,
             'verification_questions': [TOPICS[name][1] for name in topics],
             'publication_eligible': False,
-        })
+        }
+        if include_body:
+            from .body_claims import extract_claims
+            candidate['body_claims'] = extract_claims(
+                raw, enterprise=enterprise, url=url, digest=digest,
+                published=published.isoformat(), publisher=publisher)
+        candidates.append(candidate)
 
     unique = {}
     for candidate in candidates:

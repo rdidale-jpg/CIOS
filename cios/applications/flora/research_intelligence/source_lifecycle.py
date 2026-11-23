@@ -10,28 +10,35 @@ def lifecycle_path():
     return data_path('research_intelligence', 'document-lifecycle.json')
 
 
+def parse_revisions(document):
+    """Validate the owner lifecycle envelope."""
+    if not isinstance(document, dict) or document.get('schema_version') != '1.0':
+        raise ValueError('Invalid or ambiguous Source lifecycle state')
+    rows = document.get('revisions')
+    if not isinstance(rows, list):
+        raise ValueError('Invalid or ambiguous Source lifecycle state')
+    states = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            raise ValueError('Invalid or ambiguous Source lifecycle state')
+        locator, digest = row.get('url'), row.get('sha256')
+        if not isinstance(locator, str) or not isinstance(digest, str) or len(digest) != 64:
+            raise ValueError('Invalid or ambiguous Source lifecycle state')
+        key = locator, digest
+        if key in states:
+            raise ValueError('Invalid or ambiguous Source lifecycle state')
+        states[key] = row.get('lifecycle')
+    return states
+
+
+
 def current_revisions():
     """Read current states afresh. Missing or invalid owner data fails closed."""
     try:
         document = json.loads(lifecycle_path().read_text(encoding='utf-8'))
+        states = parse_revisions(document)
     except (OSError, ValueError):
         return set()
-    if not isinstance(document, dict) or document.get('schema_version') != '1.0':
-        return set()
-    rows = document.get('revisions')
-    if not isinstance(rows, list):
-        return set()
-    states = {}
-    for row in rows:
-        if not isinstance(row, dict):
-            return set()
-        locator, digest = row.get('url'), row.get('sha256')
-        if not isinstance(locator, str) or not isinstance(digest, str) or len(digest) != 64:
-            return set()
-        key = locator, digest
-        if key in states:
-            return set()
-        states[key] = row.get('lifecycle')
     return {key for key, state in states.items() if state == 'current'}
 
 

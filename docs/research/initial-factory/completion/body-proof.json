@@ -1,0 +1,584 @@
+[
+  {
+    "enterprise_id": "lloyds-banking-group-plc",
+    "as_of": "2026-11-23",
+    "index": "https://www.lloydsbankinggroup.com/media/press-releases.html",
+    "article_count": 6,
+    "candidates": [
+      {
+        "candidate_id": "82c3d3d34a7341285a1df238ac9a8837520e440c9539a7955f048d8291b50db4",
+        "enterprise_id": "lloyds-banking-group-plc",
+        "publisher": "Lloyds Banking Group",
+        "industry": "Banking",
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/responsible-ai-guide.html",
+        "published": "2026-11-18",
+        "document_sha256": "b6545f867c8dcad7ffb131c6bebc9247d95aee564ae46fd282ec7428bc425e2c",
+        "locator": "og:title with publication metadata",
+        "status": "new",
+        "document_bytes_changed": null,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false,
+        "body_claims": [
+          {
+            "claim_id": "2549e3adbcb46dd2fa65740e557d63009ce1ac051df47082f226034577742b16",
+            "event_hint": "4e3fc81bb1dcb1ba6d9abb8a654149b017fcf74f4918b7850246916076d68538",
+            "enterprise_id": "lloyds-banking-group-plc",
+            "source": {
+              "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/responsible-ai-guide.html",
+              "sha256": "b6545f867c8dcad7ffb131c6bebc9247d95aee564ae46fd282ec7428bc425e2c",
+              "publisher": "Lloyds Banking Group",
+              "published": "2026-11-18",
+              "locator": "body p156, sentence 1"
+            },
+            "actor_text": "Lloyds Banking Group",
+            "relationship_candidates": [],
+            "kind": "announcement",
+            "reported_status": "announced",
+            "date_mentions": [],
+            "classification": "issuer claim candidate",
+            "publication_eligible": false
+          }
+        ]
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-recognised-as-euromoneys-uk-best-bank-for-2026.html",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-recognised-as-top-10-employer-for-graduates-and-apprenticeships.html",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds/lloyds-appoints-natasha-condon-global-head-transaction-banking.html",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/university-of-leeds-partnership.html",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds/uk-businesses-push-into-new-markets-despite-global-challenges.html",
+        "reason": "headline or publication date unresolved"
+      }
+    ],
+    "body_assessment": [
+      {
+        "enterprise_id": "lloyds-banking-group-plc",
+        "event_hint": "4e3fc81bb1dcb1ba6d9abb8a654149b017fcf74f4918b7850246916076d68538",
+        "claim_ids": [
+          "2549e3adbcb46dd2fa65740e557d63009ce1ac051df47082f226034577742b16"
+        ],
+        "differences": [],
+        "disposition": "single report",
+        "source_diversity": "one publisher",
+        "publication_eligible": false
+      }
+    ]
+  },
+  {
+    "enterprise_id": "bt-group-plc",
+    "as_of": "2026-11-23",
+    "index": "https://newsroom.bt.com/",
+    "article_count": 3,
+    "candidates": [
+      {
+        "candidate_id": "a5bd58ab33c037adbcc7ad05d8bada6b4f0b15343b56da06f7ea536aa1a9c5cc",
+        "enterprise_id": "bt-group-plc",
+        "publisher": "BT Group",
+        "industry": "Telecommunications",
+        "url": "https://newsroom.bt.com/bt-transforms-scotlands-public-sector-connectivity--upgrading-the-nations-digital-infrastructure/",
+        "published": "2026-11-02",
+        "document_sha256": "31d58f854a73d8a4f14bb954427234623cc8b88c73ba74f6764237bd91fa0a9b",
+        "locator": "og:title with publication metadata",
+        "status": "new",
+        "document_bytes_changed": null,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false,
+        "body_claims": [
+          {
+            "claim_id": "eb0e6a3f35012148161a19b36e66c9c2befa4ddc9a734bdfda540ac59b9331fd",
+            "event_hint": "804c301db5204f9576acee470332751d58a72e31208653812adfde2bea6e04e4",
+            "enterprise_id": "bt-group-plc",
+            "source": {
+              "url": "https://newsroom.bt.com/bt-transforms-scotlands-public-sector-connectivity--upgrading-the-nations-digital-infrastructure/",
+              "sha256": "31d58f854a73d8a4f14bb954427234623cc8b88c73ba74f6764237bd91fa0a9b",
+              "publisher": "BT Group",
+              "published": "2026-11-02",
+              "locator": "body p2, sentence 1"
+            },
+            "actor_text": "BT",
+            "relationship_candidates": [],
+            "kind": "rollout",
+            "reported_status": "completed",
+            "date_mentions": [],
+            "classification": "issuer claim candidate",
+            "publication_eligible": false
+          },
+          {
+            "claim_id": "646dde59934f94a64a918bf1d752049df316d5ee3440e143b5cdeeec9317232a",
+            "event_hint": "81d19f0fb24eff9b0bda43e2ff739c66385ab8c011f60b9f5995f246a41ff42d",
+            "enterprise_id": "bt-group-plc",
+            "source": {
+              "url": "https://newsroom.bt.com/bt-transforms-scotlands-public-sector-connectivity--upgrading-the-nations-digital-infrastructure/",
+              "sha256": "31d58f854a73d8a4f14bb954427234623cc8b88c73ba74f6764237bd91fa0a9b",
+              "publisher": "BT Group",
+              "published": "2026-11-02",
+              "locator": "body p3, sentence 1"
+            },
+            "actor_text": "BT was",
+            "relationship_candidates": [],
+            "kind": "supplier selection",
+            "reported_status": "announced",
+            "date_mentions": [
+              "2023"
+            ],
+            "classification": "issuer claim candidate",
+            "publication_eligible": false
+          },
+          {
+            "claim_id": "a840aa1b2b4d135cbb8b4d36ee3e866fd975bb1f3fabf8d1e67129f3d9ced34f",
+            "event_hint": "ab95c294d768bf14db81715b2bf1903dda49dae06a380624a2beaa93e5261ca5",
+            "enterprise_id": "bt-group-plc",
+            "source": {
+              "url": "https://newsroom.bt.com/bt-transforms-scotlands-public-sector-connectivity--upgrading-the-nations-digital-infrastructure/",
+              "sha256": "31d58f854a73d8a4f14bb954427234623cc8b88c73ba74f6764237bd91fa0a9b",
+              "publisher": "BT Group",
+              "published": "2026-11-02",
+              "locator": "body p19, sentence 2"
+            },
+            "actor_text": "BT",
+            "relationship_candidates": [],
+            "kind": "announcement",
+            "reported_status": "announced",
+            "date_mentions": [
+              "second half of 2027"
+            ],
+            "classification": "issuer claim candidate",
+            "publication_eligible": false
+          }
+        ]
+      },
+      {
+        "candidate_id": "fa9c9f57297e13131d1bf3205ba0df142005197dcaff81a8614e4e922f581ab8",
+        "enterprise_id": "bt-group-plc",
+        "publisher": "BT Group",
+        "industry": "Telecommunications",
+        "url": "https://newsroom.bt.com/bt-urges-customers-not-to-ignore-the-switch-to-digital-landlines/",
+        "published": "2026-09-16",
+        "document_sha256": "c0cce91b88cc2504578a5bad64c3074a1f443c4c39a064f7643a40e6ce61a1a5",
+        "locator": "og:title with publication metadata",
+        "status": "new",
+        "document_bytes_changed": null,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false,
+        "body_claims": []
+      }
+    ],
+    "failures": [],
+    "body_assessment": [
+      {
+        "enterprise_id": "bt-group-plc",
+        "event_hint": "804c301db5204f9576acee470332751d58a72e31208653812adfde2bea6e04e4",
+        "claim_ids": [
+          "eb0e6a3f35012148161a19b36e66c9c2befa4ddc9a734bdfda540ac59b9331fd"
+        ],
+        "differences": [],
+        "disposition": "single report",
+        "source_diversity": "one publisher",
+        "publication_eligible": false
+      },
+      {
+        "enterprise_id": "bt-group-plc",
+        "event_hint": "81d19f0fb24eff9b0bda43e2ff739c66385ab8c011f60b9f5995f246a41ff42d",
+        "claim_ids": [
+          "646dde59934f94a64a918bf1d752049df316d5ee3440e143b5cdeeec9317232a"
+        ],
+        "differences": [],
+        "disposition": "single report",
+        "source_diversity": "one publisher",
+        "publication_eligible": false
+      },
+      {
+        "enterprise_id": "bt-group-plc",
+        "event_hint": "ab95c294d768bf14db81715b2bf1903dda49dae06a380624a2beaa93e5261ca5",
+        "claim_ids": [
+          "a840aa1b2b4d135cbb8b4d36ee3e866fd975bb1f3fabf8d1e67129f3d9ced34f"
+        ],
+        "differences": [],
+        "disposition": "single report",
+        "source_diversity": "one publisher",
+        "publication_eligible": false
+      }
+    ]
+  },
+  {
+    "enterprise_id": "arm-holdings-plc",
+    "as_of": "2026-11-23",
+    "index": "https://newsroom.arm.com/",
+    "article_count": 8,
+    "candidates": [
+      {
+        "candidate_id": "ab7bb8afec31c6a457a70d35b044c29820742e56334470114c6dbffc7b2372a8",
+        "enterprise_id": "arm-holdings-plc",
+        "publisher": "Arm",
+        "industry": "Technology",
+        "url": "https://newsroom.arm.com/news/arm-microsoft-azure-cobalt-200",
+        "published": "2026-11-17",
+        "document_sha256": "ea8f2b89445e335a7f99d83b52c80355d1c301f625ec639df1f7e8af7aa10d57",
+        "locator": "og:title with publication metadata",
+        "status": "new",
+        "document_bytes_changed": null,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false,
+        "body_claims": [
+          {
+            "claim_id": "bfb9a6ab2cc107d345a932cb779da9076362d075a2b218ae6c9f5a0cf15ed1dc",
+            "event_hint": "606c6439d4a3f3f9a5c85542d756cba9736622881d8d5cf6bcf4412af97e4cf8",
+            "enterprise_id": "arm-holdings-plc",
+            "source": {
+              "url": "https://newsroom.arm.com/news/arm-microsoft-azure-cobalt-200",
+              "sha256": "ea8f2b89445e335a7f99d83b52c80355d1c301f625ec639df1f7e8af7aa10d57",
+              "publisher": "Arm",
+              "published": "2026-11-17",
+              "locator": "body p2, sentence 1"
+            },
+            "actor_text": "Microsoft",
+            "relationship_candidates": [],
+            "kind": "availability",
+            "reported_status": "available",
+            "date_mentions": [
+              "2026"
+            ],
+            "classification": "issuer claim candidate",
+            "publication_eligible": false
+          }
+        ]
+      },
+      {
+        "candidate_id": "13f132bd54f20d8551eab1550244a559427159b9b2331cb1bfadb846e4de49d3",
+        "enterprise_id": "arm-holdings-plc",
+        "publisher": "Arm",
+        "industry": "Technology",
+        "url": "https://newsroom.arm.com/blog/arm-neoverse-based-microsoft-cobal-200-vms-cloud-agentic-ai-performance",
+        "published": "2026-11-17",
+        "document_sha256": "f5af88dab61951b6f3cd4af8c36cbc5d341b709a6e08b6e791f79ece4d10b3a2",
+        "locator": "og:title with publication metadata",
+        "status": "new",
+        "document_bytes_changed": null,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false,
+        "body_claims": [
+          {
+            "claim_id": "2690f38a9f3e9007d8f73fa91310088d8013bcde084729c67bb04181d38417a0",
+            "event_hint": "bc63934c5383ce6d322ca615f4d2b385dc05fd42866284640b8d9940a63a2d1c",
+            "enterprise_id": "arm-holdings-plc",
+            "source": {
+              "url": "https://newsroom.arm.com/blog/arm-neoverse-based-microsoft-cobal-200-vms-cloud-agentic-ai-performance",
+              "sha256": "f5af88dab61951b6f3cd4af8c36cbc5d341b709a6e08b6e791f79ece4d10b3a2",
+              "publisher": "Arm",
+              "published": "2026-11-17",
+              "locator": "body p16, sentence 2"
+            },
+            "actor_text": "Recent engineering work",
+            "relationship_candidates": [],
+            "kind": "announcement",
+            "reported_status": "announced",
+            "date_mentions": [],
+            "classification": "issuer claim candidate",
+            "publication_eligible": false
+          }
+        ]
+      },
+      {
+        "candidate_id": "9af12d1eda39854fc611051d572940f75de67618f955276950c43ec88ca40694",
+        "enterprise_id": "arm-holdings-plc",
+        "publisher": "Arm",
+        "industry": "Technology",
+        "url": "https://newsroom.arm.com/blog/arm-css-for-mobile-2-smartphones-mobile-gaming",
+        "published": "2026-11-13",
+        "document_sha256": "819b05b36a7fb7fe3599b4eab0988192e45d1e53b5a33cacadc3aec8e233e9c6",
+        "locator": "og:title with publication metadata",
+        "status": "new",
+        "document_bytes_changed": null,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false,
+        "body_claims": []
+      },
+      {
+        "candidate_id": "8f016ce329bc618e4a9614ae0c42d332e4c7df7df7db637de5a6bf52d31b22cd",
+        "enterprise_id": "arm-holdings-plc",
+        "publisher": "Arm",
+        "industry": "Technology",
+        "url": "https://newsroom.arm.com/news/arm-cortex-m42-accelerate-edge-ai-innovation",
+        "published": "2026-11-10",
+        "document_sha256": "ae964f907cce66474a7d9c81f691f4c842953ac47c5ab509fbaca5136262b4c0",
+        "locator": "og:title with publication metadata",
+        "status": "new",
+        "document_bytes_changed": null,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change",
+          "Expansion"
+        ],
+        "publication_eligible": false,
+        "body_claims": []
+      },
+      {
+        "candidate_id": "e6040ac66555564a614bd4f9ae7f643626c35222ffb42291a2e42be309eff2ae",
+        "enterprise_id": "arm-holdings-plc",
+        "publisher": "Arm",
+        "industry": "Technology",
+        "url": "https://newsroom.arm.com/news/arm-agi-cpu-oracle-cloud-infrastructure",
+        "published": "2026-10-28",
+        "document_sha256": "3a5fe1d5ce3628286e676c3b8286e802a91a4b279bb17fe49c04dedba2786a49",
+        "locator": "og:title with publication metadata",
+        "status": "new",
+        "document_bytes_changed": null,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false,
+        "body_claims": []
+      },
+      {
+        "candidate_id": "4aa9bb48c2fa4da4f345e75d6c67c18f9508e30f3e1c56fe765fd11b1cc6d924",
+        "enterprise_id": "arm-holdings-plc",
+        "publisher": "Arm",
+        "industry": "Technology",
+        "url": "https://newsroom.arm.com/news/arm-agi-cpu-agentic-benchmarks",
+        "published": "2026-10-13",
+        "document_sha256": "3dc97357f9dbeac7744548bf35ba5855496a7dc396273655c9d8e0c7f275d50c",
+        "locator": "og:title with publication metadata",
+        "status": "new",
+        "document_bytes_changed": null,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false,
+        "body_claims": []
+      }
+    ],
+    "failures": [],
+    "body_assessment": [
+      {
+        "enterprise_id": "arm-holdings-plc",
+        "event_hint": "606c6439d4a3f3f9a5c85542d756cba9736622881d8d5cf6bcf4412af97e4cf8",
+        "claim_ids": [
+          "bfb9a6ab2cc107d345a932cb779da9076362d075a2b218ae6c9f5a0cf15ed1dc"
+        ],
+        "differences": [],
+        "disposition": "single report",
+        "source_diversity": "one publisher",
+        "publication_eligible": false
+      },
+      {
+        "enterprise_id": "arm-holdings-plc",
+        "event_hint": "bc63934c5383ce6d322ca615f4d2b385dc05fd42866284640b8d9940a63a2d1c",
+        "claim_ids": [
+          "2690f38a9f3e9007d8f73fa91310088d8013bcde084729c67bb04181d38417a0"
+        ],
+        "differences": [],
+        "disposition": "single report",
+        "source_diversity": "one publisher",
+        "publication_eligible": false
+      }
+    ]
+  },
+  {
+    "enterprise_id": "easyjet-plc",
+    "as_of": "2026-11-23",
+    "index": "https://www.easyjet.com/en/news/",
+    "article_count": 3,
+    "candidates": [
+      {
+        "candidate_id": "fd22c01c1c0c63d168ad37fbb50298f9aadfd768980288bbd50f8c9f0fbf61f5",
+        "enterprise_id": "easyjet-plc",
+        "publisher": "easyJet",
+        "industry": "Aviation",
+        "url": "https://www.easyjet.com/en/news/airline/story/easyjet-to-offer-connectivity-onboard-for-the-first-time-with-starlink-the-fastest-wi-fi-in-the-sky-with-rapid-roll-out-coming-from-2027",
+        "published": "2026-10-26",
+        "document_sha256": "4175a9058b6ac8556b86b27436af4e28431635a56665013ec034fa3c732033cc",
+        "locator": "og:title with publication metadata",
+        "status": "new",
+        "document_bytes_changed": null,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false,
+        "body_claims": [
+          {
+            "claim_id": "5de01b2afd0dc341f238e9c8a4c91b74fa691a9e17e4919ed98ed2f27ec2c923",
+            "event_hint": "c1f2a4c622cd06a15c3ccd01c272b0c05f65d03ab3072611f92f722b567b94ca",
+            "enterprise_id": "easyjet-plc",
+            "source": {
+              "url": "https://www.easyjet.com/en/news/airline/story/easyjet-to-offer-connectivity-onboard-for-the-first-time-with-starlink-the-fastest-wi-fi-in-the-sky-with-rapid-roll-out-coming-from-2027",
+              "sha256": "4175a9058b6ac8556b86b27436af4e28431635a56665013ec034fa3c732033cc",
+              "publisher": "easyJet",
+              "published": "2026-10-26",
+              "locator": "body p130, sentence 1"
+            },
+            "actor_text": "easyJet",
+            "relationship_candidates": [],
+            "kind": "announcement",
+            "reported_status": "announced",
+            "date_mentions": [],
+            "classification": "issuer claim candidate",
+            "publication_eligible": false
+          },
+          {
+            "claim_id": "678ab1fb77c98c67cca35d9ba0dfe5c60347a6851a3bb37dbb2b7c9a61d23675",
+            "event_hint": "cfb9608f575e93291c8bdc775cece57e38730d939c5590e753eb85ac6e9c96b5",
+            "enterprise_id": "easyjet-plc",
+            "source": {
+              "url": "https://www.easyjet.com/en/news/airline/story/easyjet-to-offer-connectivity-onboard-for-the-first-time-with-starlink-the-fastest-wi-fi-in-the-sky-with-rapid-roll-out-coming-from-2027",
+              "sha256": "4175a9058b6ac8556b86b27436af4e28431635a56665013ec034fa3c732033cc",
+              "publisher": "easyJet",
+              "published": "2026-10-26",
+              "locator": "body p131, sentence 1"
+            },
+            "actor_text": "Starlink",
+            "relationship_candidates": [],
+            "kind": "rollout",
+            "reported_status": "planned",
+            "date_mentions": [
+              "first half of 2027",
+              "early 2028"
+            ],
+            "classification": "issuer claim candidate",
+            "publication_eligible": false
+          }
+        ]
+      },
+      {
+        "candidate_id": "091c74ae57409273f37e845765e83e621c966bb94f967d4201e91830df12dc0b",
+        "enterprise_id": "easyjet-plc",
+        "publisher": "easyJet",
+        "industry": "Aviation",
+        "url": "https://www.easyjet.com/en/news/airline/story/easyjet-announces-additional-new-routes-for-summer-2027",
+        "published": "2026-10-15",
+        "document_sha256": "f5b21f3023928ac0132961b44a646af5d043e0f76d3539aa6b58ef4aa3c19155",
+        "locator": "og:title with publication metadata",
+        "status": "new",
+        "document_bytes_changed": null,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Expansion"
+        ],
+        "publication_eligible": false,
+        "body_claims": [
+          {
+            "claim_id": "74abac5d5fcb2a40879dcf47ae68571c9288dcaeed53924eb3319dbea9f9f703",
+            "event_hint": "d6091343aacfd50281c5f23d7a2620c5023ca2ae9d34e06c1b0ca72c56bc83b4",
+            "enterprise_id": "easyjet-plc",
+            "source": {
+              "url": "https://www.easyjet.com/en/news/airline/story/easyjet-announces-additional-new-routes-for-summer-2027",
+              "sha256": "f5b21f3023928ac0132961b44a646af5d043e0f76d3539aa6b58ef4aa3c19155",
+              "publisher": "easyJet",
+              "published": "2026-10-15",
+              "locator": "body p131, sentence 1"
+            },
+            "actor_text": "easyJet has today",
+            "relationship_candidates": [],
+            "kind": "announcement",
+            "reported_status": "announced",
+            "date_mentions": [],
+            "classification": "issuer claim candidate",
+            "publication_eligible": false
+          },
+          {
+            "claim_id": "1b0e78efd958d3f22e49cae1683ad9b20a34925edfa2635b08edc93a8fb5e898",
+            "event_hint": "5751be14c3c72dbebfe09b76b61e115175e76682dabb92eb994360f5aca244f9",
+            "enterprise_id": "easyjet-plc",
+            "source": {
+              "url": "https://www.easyjet.com/en/news/airline/story/easyjet-announces-additional-new-routes-for-summer-2027",
+              "sha256": "f5b21f3023928ac0132961b44a646af5d043e0f76d3539aa6b58ef4aa3c19155",
+              "publisher": "easyJet",
+              "published": "2026-10-15",
+              "locator": "body p174, sentence 1"
+            },
+            "actor_text": "easyJet",
+            "relationship_candidates": [],
+            "kind": "announcement",
+            "reported_status": "announced",
+            "date_mentions": [
+              "2022",
+              "2050"
+            ],
+            "classification": "issuer claim candidate",
+            "publication_eligible": false
+          }
+        ]
+      }
+    ],
+    "failures": [],
+    "body_assessment": [
+      {
+        "enterprise_id": "easyjet-plc",
+        "event_hint": "5751be14c3c72dbebfe09b76b61e115175e76682dabb92eb994360f5aca244f9",
+        "claim_ids": [
+          "1b0e78efd958d3f22e49cae1683ad9b20a34925edfa2635b08edc93a8fb5e898"
+        ],
+        "differences": [],
+        "disposition": "single report",
+        "source_diversity": "one publisher",
+        "publication_eligible": false
+      },
+      {
+        "enterprise_id": "easyjet-plc",
+        "event_hint": "c1f2a4c622cd06a15c3ccd01c272b0c05f65d03ab3072611f92f722b567b94ca",
+        "claim_ids": [
+          "5de01b2afd0dc341f238e9c8a4c91b74fa691a9e17e4919ed98ed2f27ec2c923"
+        ],
+        "differences": [],
+        "disposition": "single report",
+        "source_diversity": "one publisher",
+        "publication_eligible": false
+      },
+      {
+        "enterprise_id": "easyjet-plc",
+        "event_hint": "cfb9608f575e93291c8bdc775cece57e38730d939c5590e753eb85ac6e9c96b5",
+        "claim_ids": [
+          "678ab1fb77c98c67cca35d9ba0dfe5c60347a6851a3bb37dbb2b7c9a61d23675"
+        ],
+        "differences": [],
+        "disposition": "single report",
+        "source_diversity": "one publisher",
+        "publication_eligible": false
+      },
+      {
+        "enterprise_id": "easyjet-plc",
+        "event_hint": "d6091343aacfd50281c5f23d7a2620c5023ca2ae9d34e06c1b0ca72c56bc83b4",
+        "claim_ids": [
+          "74abac5d5fcb2a40879dcf47ae68571c9288dcaeed53924eb3319dbea9f9f703"
+        ],
+        "differences": [],
+        "disposition": "single report",
+        "source_diversity": "one publisher",
+        "publication_eligible": false
+      }
+    ]
+  }
+]

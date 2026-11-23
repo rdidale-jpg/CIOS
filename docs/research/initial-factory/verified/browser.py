@@ -13,6 +13,7 @@ from cios.applications.flora.research_intelligence import technology_experience
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('responses', type=Path)
 parser.add_argument('--output', type=Path, default=Path(__file__).parent / 'previews')
+parser.add_argument('--baseline-responses', type=Path, help='Compare with approved changes rendered at the prior head')
 args = parser.parse_args()
 src, out = args.responses, args.output
 out.mkdir(parents=True, exist_ok=True)
@@ -24,7 +25,11 @@ def capture(browser, stem, state, viewport, tablet=False):
     def serve(request):
         path=urlsplit(request.request.url).path
         if path=='/preview':
-            request.fulfill(body=(src/f'{stem}-route-{state}.html').read_bytes(),content_type='text/html; charset=utf-8')
+            if state == 'before' and args.baseline_responses:
+                response = args.baseline_responses / f'{stem}-route-after.html'
+            else:
+                response = src / f'{stem}-route-{state}.html'
+            request.fulfill(body=response.read_bytes(), content_type='text/html; charset=utf-8')
             return
         for prefix, asset in assets.items():
             if path.startswith(prefix):
@@ -41,13 +46,18 @@ def capture(browser, stem, state, viewport, tablet=False):
     evidence=None
     if state=='after':
         assert section.is_visible()
-        source=section.get_by_text('What supports this?').first
-        if tablet:
-            source.tap()
-        else:
-            source.focus()
-            page.keyboard.press('Enter')
-        assert source.locator('..').get_attribute('open') is not None
+        assert section.get_attribute('open') is None
+
+        def expand(summary):
+            if tablet:
+                summary.tap()
+            else:
+                summary.focus()
+                page.keyboard.press('Enter')
+            assert summary.locator('..').get_attribute('open') is not None
+
+        expand(section.locator(':scope > summary'))
+        expand(section.get_by_text('What supports this?', exact=True))
         evidence=Image.open(BytesIO(section.screenshot())).convert('RGB')
         if evidence.height>640: evidence=evidence.crop((0,0,evidence.width,640))
     page.close()
@@ -65,8 +75,9 @@ with sync_playwright() as p:
             right=max(width,evidence.width)
             panel=Image.new('RGB',(width+right,height+evidence.height+72),'#f4f2ed')
             draw=ImageDraw.Draw(panel)
-            draw.text((16,13),'Before | existing Flora route',fill='#17211b')
-            draw.text((width+16,13),'After | same route with governed evidence in isolated storage',fill='#17211b')
+            draw.text((16, 13), ('Before | approved card on main' if args.baseline_responses else
+                                'Before | existing Flora route'), fill='#17211b')
+            draw.text((width+16, 13), 'After | same route with compact change', fill='#17211b')
             panel.paste(before,(0,35))
             panel.paste(after,(width,35))
             draw.text((width+16,height+49),'After | change and supporting evidence',fill='#17211b')
