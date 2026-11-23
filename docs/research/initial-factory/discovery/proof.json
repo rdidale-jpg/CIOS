@@ -1,0 +1,247 @@
+[
+  {
+    "enterprise_id": "lloyds-banking-group-plc",
+    "as_of": "2026-11-23",
+    "index": "https://www.lloydsbankinggroup.com/media/press-releases.html",
+    "article_count": 6,
+    "candidates": [
+      {
+        "candidate_id": "82c3d3d34a7341285a1df238ac9a8837520e440c9539a7955f048d8291b50db4",
+        "enterprise_id": "lloyds-banking-group-plc",
+        "publisher": "Lloyds Banking Group",
+        "industry": "Banking",
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/responsible-ai-guide.html",
+        "published": "2026-11-18",
+        "document_sha256": "bf7a12c1fbe35f1ce10ba797eb2974ed28789997d0d5b4d0d227a1d8f387ce33",
+        "locator": "og:title with publication metadata",
+        "status": "unchanged",
+        "document_bytes_changed": true,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-recognised-as-euromoneys-uk-best-bank-for-2026.html",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-recognised-as-top-10-employer-for-graduates-and-apprenticeships.html",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds/lloyds-appoints-natasha-condon-global-head-transaction-banking.html",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/university-of-leeds-partnership.html",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds/uk-businesses-push-into-new-markets-despite-global-challenges.html",
+        "reason": "headline or publication date unresolved"
+      }
+    ]
+  },
+  {
+    "enterprise_id": "bt-group-plc",
+    "as_of": "2026-11-23",
+    "index": "https://newsroom.bt.com/",
+    "article_count": 3,
+    "candidates": [
+      {
+        "candidate_id": "a5bd58ab33c037adbcc7ad05d8bada6b4f0b15343b56da06f7ea536aa1a9c5cc",
+        "enterprise_id": "bt-group-plc",
+        "publisher": "BT Group",
+        "industry": "Telecommunications",
+        "url": "https://newsroom.bt.com/bt-transforms-scotlands-public-sector-connectivity--upgrading-the-nations-digital-infrastructure/",
+        "published": "2026-11-02",
+        "document_sha256": "36abaaf67d470f64ac1ab7ec2646023f067095617350b70afdf65e9d6cdd1562",
+        "locator": "og:title with publication metadata",
+        "status": "unchanged",
+        "document_bytes_changed": true,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "candidate_id": "fa9c9f57297e13131d1bf3205ba0df142005197dcaff81a8614e4e922f581ab8",
+        "enterprise_id": "bt-group-plc",
+        "publisher": "BT Group",
+        "industry": "Telecommunications",
+        "url": "https://newsroom.bt.com/bt-urges-customers-not-to-ignore-the-switch-to-digital-landlines/",
+        "published": "2026-09-16",
+        "document_sha256": "cf697302810fab3e1c5e920acfdccc16e16778513fae54429b83fd4143e032f8",
+        "locator": "og:title with publication metadata",
+        "status": "unchanged",
+        "document_bytes_changed": true,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false
+      }
+    ],
+    "failures": []
+  },
+  {
+    "enterprise_id": "arm-holdings-plc",
+    "as_of": "2026-11-23",
+    "index": "https://newsroom.arm.com/",
+    "article_count": 8,
+    "candidates": [
+      {
+        "candidate_id": "ab7bb8afec31c6a457a70d35b044c29820742e56334470114c6dbffc7b2372a8",
+        "enterprise_id": "arm-holdings-plc",
+        "publisher": "Arm",
+        "industry": "Technology",
+        "url": "https://newsroom.arm.com/news/arm-microsoft-azure-cobalt-200",
+        "published": "2026-11-17",
+        "document_sha256": "0b5ea353ab076aaf7482433cc6438cf02de7a6d255c140009db8cfcdf2d7b2f0",
+        "locator": "og:title with publication metadata",
+        "status": "unchanged",
+        "document_bytes_changed": true,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "candidate_id": "13f132bd54f20d8551eab1550244a559427159b9b2331cb1bfadb846e4de49d3",
+        "enterprise_id": "arm-holdings-plc",
+        "publisher": "Arm",
+        "industry": "Technology",
+        "url": "https://newsroom.arm.com/blog/arm-neoverse-based-microsoft-cobal-200-vms-cloud-agentic-ai-performance",
+        "published": "2026-11-17",
+        "document_sha256": "81f919819443f0faaa8dc6427f7df2fd651218728d9092d43e0969b27eb5c3d9",
+        "locator": "og:title with publication metadata",
+        "status": "unchanged",
+        "document_bytes_changed": true,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "candidate_id": "9af12d1eda39854fc611051d572940f75de67618f955276950c43ec88ca40694",
+        "enterprise_id": "arm-holdings-plc",
+        "publisher": "Arm",
+        "industry": "Technology",
+        "url": "https://newsroom.arm.com/blog/arm-css-for-mobile-2-smartphones-mobile-gaming",
+        "published": "2026-11-13",
+        "document_sha256": "447816cdecbc513067bbc7e26deb66665f16dcdb67c83967c28482dff1a85d95",
+        "locator": "og:title with publication metadata",
+        "status": "unchanged",
+        "document_bytes_changed": true,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "candidate_id": "8f016ce329bc618e4a9614ae0c42d332e4c7df7df7db637de5a6bf52d31b22cd",
+        "enterprise_id": "arm-holdings-plc",
+        "publisher": "Arm",
+        "industry": "Technology",
+        "url": "https://newsroom.arm.com/news/arm-cortex-m42-accelerate-edge-ai-innovation",
+        "published": "2026-11-10",
+        "document_sha256": "765358ff28718d1850abaa05231331c78e2af73e12ec255be3fab1732270912b",
+        "locator": "og:title with publication metadata",
+        "status": "unchanged",
+        "document_bytes_changed": true,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change",
+          "Expansion"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "candidate_id": "e6040ac66555564a614bd4f9ae7f643626c35222ffb42291a2e42be309eff2ae",
+        "enterprise_id": "arm-holdings-plc",
+        "publisher": "Arm",
+        "industry": "Technology",
+        "url": "https://newsroom.arm.com/news/arm-agi-cpu-oracle-cloud-infrastructure",
+        "published": "2026-10-28",
+        "document_sha256": "0e8013f261f2d392c304042791b1b6f342114a57faa2b4a9274eec84334d8eaf",
+        "locator": "og:title with publication metadata",
+        "status": "unchanged",
+        "document_bytes_changed": true,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "candidate_id": "4aa9bb48c2fa4da4f345e75d6c67c18f9508e30f3e1c56fe765fd11b1cc6d924",
+        "enterprise_id": "arm-holdings-plc",
+        "publisher": "Arm",
+        "industry": "Technology",
+        "url": "https://newsroom.arm.com/news/arm-agi-cpu-agentic-benchmarks",
+        "published": "2026-10-13",
+        "document_sha256": "7bf18f0240ea08e4817dcd98d77a26d8506e508e99cf658324a7a79999b84c0e",
+        "locator": "og:title with publication metadata",
+        "status": "unchanged",
+        "document_bytes_changed": true,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false
+      }
+    ],
+    "failures": []
+  },
+  {
+    "enterprise_id": "easyjet-plc",
+    "as_of": "2026-11-23",
+    "index": "https://www.easyjet.com/en/news/",
+    "article_count": 3,
+    "candidates": [
+      {
+        "candidate_id": "fd22c01c1c0c63d168ad37fbb50298f9aadfd768980288bbd50f8c9f0fbf61f5",
+        "enterprise_id": "easyjet-plc",
+        "publisher": "easyJet",
+        "industry": "Aviation",
+        "url": "https://www.easyjet.com/en/news/airline/story/easyjet-to-offer-connectivity-onboard-for-the-first-time-with-starlink-the-fastest-wi-fi-in-the-sky-with-rapid-roll-out-coming-from-2027",
+        "published": "2026-10-26",
+        "document_sha256": "b0d90cfb7872e914637e4f050a71b3d31676bcdff29734f06137720480626af6",
+        "locator": "og:title with publication metadata",
+        "status": "unchanged",
+        "document_bytes_changed": true,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Technology change"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "candidate_id": "091c74ae57409273f37e845765e83e621c966bb94f967d4201e91830df12dc0b",
+        "enterprise_id": "easyjet-plc",
+        "publisher": "easyJet",
+        "industry": "Aviation",
+        "url": "https://www.easyjet.com/en/news/airline/story/easyjet-announces-additional-new-routes-for-summer-2027",
+        "published": "2026-10-15",
+        "document_sha256": "64cbc1c5b981fb6b52f83f1ae89a82ac6ab627836f42581dd0f2ae000abe9903",
+        "locator": "og:title with publication metadata",
+        "status": "unchanged",
+        "document_bytes_changed": true,
+        "evidence_class": "publisher headline candidate",
+        "themes": [
+          "Expansion"
+        ],
+        "publication_eligible": false
+      }
+    ],
+    "failures": []
+  }
+]

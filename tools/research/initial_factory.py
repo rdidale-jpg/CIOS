@@ -18,6 +18,7 @@ from cios.applications.flora.research_intelligence.initial_factory import (
 )
 from cios.applications.flora.research_intelligence.source_import import LIMIT
 from cios.applications.flora.research_intelligence.commercial_factory import prepare_commercial
+from cios.applications.flora.research_intelligence.discovery import NEWSROOMS, discover
 from cios.applications.flora.research_intelligence.disclosure_acquisition import acquire_disclosures
 
 
@@ -115,9 +116,32 @@ def main():
     parser.add_argument('--acquire-register', action='store_true', help='Use approved public register read for a single commission')
     parser.add_argument('--commercial-replay', type=Path, help='Reviewed commercial Source bindings for isolated replay')
     parser.add_argument('--acquire-commercial', action='store_true', help='Check the reviewed disclosure bindings against originals')
+    parser.add_argument('--discover', action='store_true', help='Read bounded official newsroom indices into a review report')
+    parser.add_argument('--withdrawn-discovery', type=Path, help='JSON list of explicit Source exclusions for this commission')
+    parser.add_argument('--previous-discovery', type=Path, help='An earlier report for revision comparison')
     parser.add_argument('output', type=Path, help='New local output directory')
     args = parser.parse_args()
     inputs = json.loads(args.commission.read_text())
+    if args.discover:
+        if args.acquire_register or args.acquire_commercial or args.commercial_replay:
+            parser.error('Discovery is a separate candidate-only run')
+        if (not isinstance(inputs, list) or not 1 <= len(inputs) <= 4
+                or not all(isinstance(key, str) and key in NEWSROOMS for key in inputs)
+                or len(set(inputs)) != len(inputs)):
+            parser.error('Commission one to four distinct newsroom enterprise identifiers')
+        previous = json.loads(args.previous_discovery.read_text()) if args.previous_discovery else []
+        withdrawn = json.loads(args.withdrawn_discovery.read_text()) if args.withdrawn_discovery else []
+        if not isinstance(withdrawn, list) or not all(isinstance(url, str) for url in withdrawn):
+            parser.error('Expected a JSON array of withdrawn Source URLs')
+        records = [row for result in previous for row in result['candidates']]
+        results = [
+            discover(enterprise, fetch_disclosure, as_of=date.today().isoformat(),
+                     previous=records, withdrawn=withdrawn)
+            for enterprise in inputs
+        ]
+        args.output.mkdir(parents=True, exist_ok=False)
+        (args.output / 'discovery.json').write_text(json.dumps(results, indent=2) + '\n')
+        return
     commercial = json.loads(args.commercial_replay.read_text()) if args.commercial_replay else {}
     args.output.mkdir(parents=True, exist_ok=False)
     results = []
