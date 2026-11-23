@@ -15,3 +15,7 @@
 /* Keep the existing Pipeline action readable under the shared anchor reset. */
 .ds-page .sales-compact a.ex-button{color:#fff}
 @media(forced-colors:active){.ds-page .sales-compact a.ex-button{color:LinkText}}
+
+/* Keep product destinations visible when account and specialist controls wrap. */
+.ds-page .product-header nav{flex-wrap:wrap;row-gap:4px}
+.ds-page .product-header nav>a[data-product-link]{white-space:nowrap}

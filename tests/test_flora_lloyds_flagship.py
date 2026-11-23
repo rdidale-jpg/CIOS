@@ -68,3 +68,21 @@ def test_flagship_preserves_supplier_relationship_gate(monkeypatch):
             row['verified'] = False
     monkeypatch.setattr(visual, 'current_data', lambda context: data)
     assert 'Google Cloud' not in render('insight')
+
+
+def test_executive_arrival_preserves_source_withdrawal_and_replay_boundaries(monkeypatch):
+    arrival = visual.render(PATH, {})
+    assert 'Curve acquisition reported complete' in arrival
+    assert 'Integration scope and external procurement remain unproven.' in arrival
+    assert 'What’s changed' in arrival and 'data-commercial-change' not in arrival
+
+    data = deepcopy(visual.current_data(visual.resolve(PATH, {})))
+    next(source for source in data['sources'] if source['id'] == 'PR-LBG-Q326')['withdrawn'] = True
+    monkeypatch.setattr(visual, 'current_data', lambda context: data)
+    withheld = visual.render(PATH, {})
+    assert 'No recent change is available' in withheld
+    assert 'Curve acquisition reported complete' not in withheld
+
+    airline = visual.render('/enterprises/easyjet', {})
+    assert 'No recent change is available' in airline
+    assert 'Curve acquisition' not in airline and 'data-commercial-change' not in airline

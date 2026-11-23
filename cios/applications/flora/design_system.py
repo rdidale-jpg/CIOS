@@ -90,11 +90,18 @@ def header(active='home', account_html='', headers=None, compact=False, embedded
         from .web.app import _account_context_html
         account_html = _account_context_html(blueprint_upload_authorisation(headers or {}))
     state = _view.get() or {'sources': [], 'context': []}
-    label = 'Explore'
-    menu = ''; seen = {'/', '/pestle?market=GB'}
-    for href, text in PRODUCT:
+    primary_keys = {'home', 'industries', 'enterprises', 'opportunities', 'pipeline'}
+    primary = ''.join(
+        '<a data-product-link="true" href="' + e(href, quote=True) + '"'
+        + (' aria-current="page"' if active == key else '') + '>' + e(label) + '</a>'
+        for key, href, label in PRIMARY if key in primary_keys
+    )
+    seen = {href for key, href, _ in PRIMARY if key in primary_keys}
+    menu = ''
+    for href, label in PRODUCT:
         if href not in seen:
-            menu += '<a data-product-link="true" href="' + e(href, quote=True) + '">' + e(text) + '</a>'; seen.add(href)
+            menu += '<a href="' + e(href, quote=True) + '">' + e(label) + '</a>'
+            seen.add(href)
     context = ''
     for href, text in state['context']:
         if href not in seen:
@@ -103,20 +110,15 @@ def header(active='home', account_html='', headers=None, compact=False, embedded
         menu += '<section class="view-links"><h2>In this view</h2>' + context + '</section>'
     menu += (('<details class="specialist-menu"><summary>Research & specialist tools</summary><div>'
         '<a href="/research">Research</a><a href="/blueprint-import/history">Import History</a><a href="/intelligence">Advanced intelligence</a><a href="/digital-twins">Canvas & Twins</a><a href="/financial-intelligence">Financial Intelligence</a><a href="/governance">Governance</a><a href="/settings">Settings</a></div></details>' if research_tools else '') + account_html)
+    more = ('<details class="product-menu" name="flora-header"><summary>More</summary><div class="menu-sheet">'
+            + ('<p class="market-label">Selected market · United Kingdom</p>' if active in ('home','pestle') else '')
+            + menu + '</div></details>')
     if compact:
-        # The image journey has its own contextual stream switcher. Keep all
-        # implemented global destinations and verified account controls in one
-        # existing menu; sources belong to the selected content, not this menu.
         tag = 'div' if embedded else 'header'
         return ('<' + tag + ' class="product-header vex-global"><a class="wordmark" href="/">FLORA</a>'
-            '<nav aria-label="Primary product navigation"><details class="product-menu" name="flora-header">'
-            '<summary>Explore</summary><div class="menu-sheet"><a data-product-link="true" href="/">Home</a>'
-            '<a data-product-link="true" href="/pestle?market=GB">PESTLE</a>' + menu + '</div></details></nav></' + tag + '>')
+                '<nav aria-label="Primary product navigation">' + primary + more + '</nav></' + tag + '>')
     sources = ''.join(state['sources']) or '<p>Source periods, interpretation and material limitations remain with the existing view and its source owner.</p><a href="/research">Source research</a>'
     return ('<header class="product-header"><span class="wordmark">FLORA</span><nav aria-label="Primary product navigation">'
-        '<a data-product-link="true" href="/"' + (' aria-current="page"' if active == 'home' else '') + '>Home</a>'
-        '<a data-product-link="true" href="/pestle?market=GB"' + (' aria-current="page"' if active == 'pestle' else '') + '>PESTLE</a>'
-        '<details class="product-menu" name="flora-header"><summary>' + label + '</summary><div class="menu-sheet">'
-        + ('<p class="market-label">Selected market · United Kingdom</p>' if active in ('home','pestle') else '') + menu + '</div></details>'
-        '<details class="sources-menu" name="flora-header"><summary>Sources & method</summary><section class="menu-sheet source-sheet" aria-label="Sources and methodology">'
-        + sources + '</section></details></nav></header>')
+            + primary + more
+            + '<details class="sources-menu" name="flora-header"><summary>Sources & method</summary><section class="menu-sheet source-sheet" aria-label="Sources and methodology">'
+            + sources + '</section></details></nav></header>')

@@ -37,7 +37,7 @@ class Navigation(HTMLParser):
 def test_primary_navigation_is_consistent_and_specialist_tools_are_contextual(web,inspection_web):
     for path in ['/','/industries','/enterprises','/opportunities','/industries/banking','/enterprises/lloyds','/flora/banking','/flora/banking/research/sources']:
         status,html=(inspection_web(path)if owner_inspection_request_target(path)else web(path));assert status==200,path
-        assert Navigation(html).labels==['Home','PESTLE','Industries','Enterprises','Offers','Opportunities','Pipeline']
+        assert Navigation(html).labels==['Home','Industries','Enterprises','Opportunities','Pipeline']
         assert html.count('aria-label="Primary product navigation"')==1
         assert '/flora/sales/pipeline' in Navigation(html).urls
         if path in {'/','/industries/banking','/enterprises/lloyds'}:

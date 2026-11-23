@@ -140,6 +140,21 @@ def _basis(items):
     return '<details class="llf-basis"><summary>Evidence &amp; scope</summary><ul>' + ''.join(rows) + '</ul></details>'
 
 
+def reviewed_change(data):
+    """Reuse the existing public flagship timeline disclosure and its Source checks."""
+    if data.get('enterprise_twin_id') != 'BK-ENT-001' or p.restricted_metadata(data):
+        return ''
+    item = _facts(data).get('LBG-Q326-CURVE')
+    if item is None or not p.eligible(item):
+        return ''
+    publication = next((source.published for source in item.sources if source.published), '')
+    return ('<p><strong>Curve acquisition reported complete</strong></p>'
+            + ('<p class="change-period">Published ' + escape(publication) + ' · ' + escape(item.period) + '</p>'
+               if publication else '<p class="change-period">' + escape(item.period) + '</p>')
+            + '<p>Integration scope and external procurement remain unproven.</p>'
+            + _basis((item,)))
+
+
 def _benchmark(data, issues):
     service = next((issue for issue in issues if issue.key == 'service-recovery'), None)
     peers = [leadership_agenda.bank_service_issue(key, data) for key in ('natwest', 'hsbc-uk')]
