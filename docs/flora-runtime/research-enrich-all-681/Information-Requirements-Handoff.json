@@ -1,0 +1,97 @@
+{
+  "authority": "neutral_documentary_requirements_only_not_an_import_or_truth_schema",
+  "issue": 680,
+  "parent": 679,
+  "contract": "docs/product/flora-experience/FLORA-Experience-Contract-v1.0.md",
+  "baseline": "df475865cc367a28f355c38bc4c23054abe88502",
+  "elements": {
+    "identity": "Exact legal entity/brand/reporting boundary",
+    "economics": "Revenue,cost,cash,capital,units,period,basis",
+    "leadership_strategy": "Dated role accountability and actual/target strategy",
+    "customers_products": "Customer groups,products and business purpose",
+    "value_streams": "Customer value activities, distinct from capabilities",
+    "capabilities": "Enduring abilities and operational outcomes",
+    "people_process_information": "Roles/processes/workforce/data enabling layer",
+    "technology": "Dated named systems and actual applicability",
+    "suppliers_contracts": "Exactparty/service/role and operativecontract status",
+    "programmes_outcomes": "Decisions,announcements,delivery and realised benefits",
+    "competition_regulation": "Competitive cohort and exact regulatory applicability",
+    "dated_change": "Publication,event,effective/supersession/period distinctions"
+  },
+  "scopes": {
+    "national": [
+      "landscape",
+      "forces",
+      "conditional_change"
+    ],
+    "industry": [
+      "landscape",
+      "forces",
+      "conditional_change"
+    ],
+    "enterprise": [
+      "landscape",
+      "inside",
+      "forces",
+      "conditional_change"
+    ]
+  },
+  "reading_modes": [
+    "facts",
+    "insight"
+  ],
+  "default": "facts",
+  "required_fields": [
+    "owner_qualified_subject",
+    "perspective",
+    "reading_mode",
+    "information_element",
+    "source_claim_refs",
+    "entity_period_unit_basis",
+    "public_use_status",
+    "canonical_state",
+    "observed_visibility",
+    "gap_status",
+    "next_source",
+    "owner_action"
+  ],
+  "delivery_rules": [
+    "sourceeligibility not routeavailability",
+    "canonicalacceptance not required universally for factualresearch",
+    "no generic missing source equals internetsearch",
+    "exact applicability before crosslevel causal link",
+    "Source withdrawal suppresses dependent facts and Insight; preserve history",
+    "changes conditional on actual eligible temporal supply"
+  ],
+  "existing_owners": {
+    "sources": "live/source_registry.py; research_intelligence/source_import.py; source_use_review.py",
+    "observations_models": "memory/repository.py,service.py; blueprint_import acceptance boundary",
+    "financials": "financial_intelligence/candidate_analytics.py,analyst.py",
+    "presentation": "visual_streams.py,visual_panels.py,reading_views.py and industry-specific adapters",
+    "permissions": "security,enterprise_canvas/access; never documentary IDs"
+  },
+  "coordination": "TrackAconsumes pinned documentary rows; no shared runtime edits. Owner review reconciles before any implementation.",
+  "design_reconciliation": {
+    "pr": 682,
+    "head": "0c64c414361692162cb50650cd8ecfd65dc0eb84",
+    "mapping": "Design-Reconciliation.json",
+    "keys": [
+      "UK-STRUCT",
+      "UK-PESTLE",
+      "IND-VALUE",
+      "IND-FORCES",
+      "BNK-CUST",
+      "BNK-FUND",
+      "BNK-PAY",
+      "BNK-TECH",
+      "AIR-ROTATE",
+      "TECH-SUPPLY",
+      "ENT-ECON",
+      "ENT-CAP",
+      "ENT-EXPOSURE",
+      "PROVIDER-TIER",
+      "CHANGE-LEASE",
+      "FACTORY-RECEIPT"
+    ]
+  }
+}

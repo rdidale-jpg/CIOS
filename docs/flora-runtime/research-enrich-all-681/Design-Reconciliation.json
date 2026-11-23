@@ -1,0 +1,381 @@
+{
+  "design_pr": 682,
+  "head": "0c64c414361692162cb50650cd8ecfd65dc0eb84",
+  "base": "df475865cc367a28f355c38bc4c23054abe88502",
+  "source_path": "docs/product/flora-experience/experience-align-all/requirements.csv",
+  "source_sha256": "7b50880fef675ebb3c6ee8e76964cfa3e036643ee2eeaf426616100c83f60ce7",
+  "requirements": [
+    {
+      "design_requirement": "UK-STRUCT",
+      "requirement_question": "Where is value generated",
+      "coverage_selector": {
+        "family_any": [
+          "national"
+        ],
+        "information_element_any": [
+          "economics",
+          "value_system"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [
+        "C-GDP",
+        "C-GDP-READING"
+      ],
+      "negative_or_unresolved": "Finance and insurance is broader than Banking",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "UK-PESTLE",
+      "requirement_question": "What changes conditions across each PESTLE dimension",
+      "coverage_selector": {
+        "family_any": [
+          "national"
+        ],
+        "information_element_any": [
+          "PESTLE",
+          "dated_change"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [
+        "C-RATE"
+      ],
+      "negative_or_unresolved": "No direct applicability to an enterprise from a national rule",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "IND-VALUE",
+      "requirement_question": "Who performs and captures value at each stage",
+      "coverage_selector": {
+        "family_any": [
+          "banking",
+          "aviation",
+          "technology"
+        ],
+        "information_element_any": [
+          "value_system",
+          "economics",
+          "participants"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [
+        "C-AV-TRAFFIC",
+        "C-OFCOM"
+      ],
+      "negative_or_unresolved": "Separate actual commercial relationships from illustrated adjacency",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "IND-FORCES",
+      "requirement_question": "What drives rivalry and bargaining",
+      "coverage_selector": {
+        "family_any": [
+          "banking",
+          "aviation",
+          "technology"
+        ],
+        "information_element_any": [
+          "PESTLE",
+          "Porter",
+          "competition_regulation"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [
+        "C-MORTGAGE",
+        "C-BANK-MECH"
+      ],
+      "negative_or_unresolved": "No unsupported market shares or ranked scores",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "BNK-CUST",
+      "requirement_question": "What shapes customer choice",
+      "coverage_selector": {
+        "family_any": [
+          "banking"
+        ],
+        "information_element_any": [
+          "customers_products",
+          "participants"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [],
+      "negative_or_unresolved": "FCA counts are ancillary legal entity cohorts",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "BNK-FUND",
+      "requirement_question": "How funding and credit affect earnings",
+      "coverage_selector": {
+        "family_any": [
+          "banking"
+        ],
+        "information_element_any": [
+          "economics"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [
+        "C-RATE",
+        "C-BANK-MECH"
+      ],
+      "negative_or_unresolved": "Individual Group is not sector profit pool",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "BNK-PAY",
+      "requirement_question": "Who moves principal and who earns service income",
+      "coverage_selector": {
+        "family_any": [
+          "banking"
+        ],
+        "information_element_any": [
+          "value_system",
+          "suppliers_contracts"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [],
+      "negative_or_unresolved": "No draft Pay.UK participation fees or unverified account economics",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "BNK-TECH",
+      "requirement_question": "Where service dependencies matter",
+      "coverage_selector": {
+        "family_any": [
+          "banking",
+          "technology"
+        ],
+        "information_element_any": [
+          "technology",
+          "suppliers_contracts"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [],
+      "negative_or_unresolved": "No Lloyds Bank plc Envoy contract inferred",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "AIR-ROTATE",
+      "requirement_question": "How network and capacity economics differ",
+      "coverage_selector": {
+        "family_any": [
+          "aviation"
+        ],
+        "information_element_any": [
+          "economics",
+          "value_system",
+          "capabilities"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [
+        "C-AV-TRAFFIC",
+        "C-EJ-SFP",
+        "C-EJ-ICC",
+        "C-EJ-MECH"
+      ],
+      "negative_or_unresolved": "No attribution of group results to a route or capability",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "TECH-SUPPLY",
+      "requirement_question": "Where capacity and service interdependencies sit",
+      "coverage_selector": {
+        "family_any": [
+          "technology"
+        ],
+        "information_element_any": [
+          "technology",
+          "suppliers_contracts",
+          "economics"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [
+        "C-NV3",
+        "C-NV-MECH"
+      ],
+      "negative_or_unresolved": "Directory membership is not provider-customer evidence",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "ENT-ECON",
+      "requirement_question": "How this business earns and deploys capital",
+      "coverage_selector": {
+        "family_any": [
+          "banking",
+          "aviation",
+          "technology",
+          "telecoms",
+          "energy",
+          "media",
+          "sport",
+          "government"
+        ],
+        "information_element_any": [
+          "economics",
+          "identity",
+          "leadership_strategy"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [
+        "C-NV3",
+        "C-NV-LEAD",
+        "C-BT-FIN",
+        "C-NG-CAP"
+      ],
+      "negative_or_unresolved": "Do not substitute Society complaints for Group results",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "ENT-CAP",
+      "requirement_question": "How the chosen capability supports a value stream",
+      "coverage_selector": {
+        "family_any": [
+          "banking",
+          "aviation",
+          "technology",
+          "telecoms",
+          "energy",
+          "media",
+          "sport",
+          "government"
+        ],
+        "information_element_any": [
+          "capabilities",
+          "value_streams",
+          "people_process_information",
+          "technology"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [
+        "C-EJ-SFP",
+        "C-EJ-ICC",
+        "C-BT-OPS"
+      ],
+      "negative_or_unresolved": "Label reference or conceptual capability and withhold unknown evidence",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "ENT-EXPOSURE",
+      "requirement_question": "What conditions affect this company and why",
+      "coverage_selector": {
+        "family_any": [
+          "banking",
+          "aviation",
+          "technology",
+          "telecoms",
+          "energy",
+          "media",
+          "sport",
+          "government"
+        ],
+        "information_element_any": [
+          "competition_regulation",
+          "programmes_outcomes"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [
+        "C-NG-MECH",
+        "C-IFR"
+      ],
+      "negative_or_unresolved": "No procurement claim or automatic pressure qualification",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "PROVIDER-TIER",
+      "requirement_question": "How much of this provider is evidenced",
+      "coverage_selector": {
+        "family_any": [
+          "technology"
+        ],
+        "information_element_any": [
+          "identity",
+          "economics",
+          "capabilities"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [
+        "C-NV2",
+        "C-NV3"
+      ],
+      "negative_or_unresolved": "No automatic promotion of 80 partial profiles",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "CHANGE-LEASE",
+      "requirement_question": "What changed when and for whom",
+      "coverage_selector": {
+        "family_any": [
+          "national",
+          "banking",
+          "aviation",
+          "technology",
+          "telecoms",
+          "energy",
+          "media",
+          "sport",
+          "government"
+        ],
+        "information_element_any": [
+          "dated_change",
+          "programmes_outcomes"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [
+        "C-BT-CHANGE",
+        "C-IFR",
+        "C-MOD"
+      ],
+      "negative_or_unresolved": "No automatic News from historical reports",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    },
+    {
+      "design_requirement": "FACTORY-RECEIPT",
+      "requirement_question": "What is actually loaded and accepted",
+      "coverage_selector": {
+        "family_any": [
+          "telecoms",
+          "banking",
+          "energy"
+        ],
+        "information_element_any": [
+          "identity"
+        ]
+      },
+      "coverage_file": "Coverage-and-Gaps.json",
+      "wave_claim_refs": [],
+      "negative_or_unresolved": "No route or acceptance inferred from package or historical screenshot",
+      "status": "research_side_reconciled_owner_joint_acceptance_pending",
+      "not_a_claim": "Selector coverage or a candidate fact does not establish entire requirement complete or eligible."
+    }
+  ],
+  "integration_exception": "A receipt is necessary to assert imported/accepted package state; absence of canonical receipt alone is not a universal barrier to lawful separately sourced analytical research. No route or policy is implemented here."
+}
