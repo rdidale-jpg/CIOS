@@ -11,15 +11,17 @@ from .repository import EnterpriseModelRepository, EvidenceRepository, Observati
 def _change_card(row, observation):
     change = row['commercial_change']
     return (
-        '<aside class="card" aria-label="Recent enterprise change" data-commercial-change>'
-        f'<p><small>{escape(row["period"])} · {escape(change["confidence"])}</small></p>'
-        f'<h2>{escape(change["headline"])}</h2>'
+        '<details class="card" aria-label="Recent enterprise change" data-commercial-change>'
+        '<summary><span class="eyebrow">What’s changed</span> '
+        f'<strong>{escape(change["headline"])}</strong> '
+        f'<small>· {escape(change["confidence"])}</small></summary>'
+        f'<p><time datetime="{escape(row["period"])}">{escape(row["period"])}</time></p>'
         f'<p>{escape(change["meaning"])}</p>'
         f'<p><strong>Investigate</strong> · {escape(change["next_question"])}</p>'
         '<details><summary>What supports this?</summary>'
         f'<p>{escape(observation.atomic_statement)}</p>'
         f'<p>{escape(change["relationship"])} · {escape(row["publisher"])}</p>'
-        f'<p>{escape(row["caveat"])}</p></details></aside>'
+        f'<p>{escape(row["caveat"])}</p></details></details>'
     )
 
 

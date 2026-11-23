@@ -117,11 +117,14 @@ def main():
     parser.add_argument('--commercial-replay', type=Path, help='Reviewed commercial Source bindings for isolated replay')
     parser.add_argument('--acquire-commercial', action='store_true', help='Check the reviewed disclosure bindings against originals')
     parser.add_argument('--discover', action='store_true', help='Read bounded official newsroom indices into a review report')
+    parser.add_argument('--extract-body', action='store_true', help='Include candidate body events and conflict signals in discovery')
     parser.add_argument('--withdrawn-discovery', type=Path, help='JSON list of explicit Source exclusions for this commission')
     parser.add_argument('--previous-discovery', type=Path, help='An earlier report for revision comparison')
     parser.add_argument('output', type=Path, help='New local output directory')
     args = parser.parse_args()
     inputs = json.loads(args.commission.read_text())
+    if args.extract_body and not args.discover:
+        parser.error('--extract-body requires --discover')
     if args.discover:
         if args.acquire_register or args.acquire_commercial or args.commercial_replay:
             parser.error('Discovery is a separate candidate-only run')
@@ -136,9 +139,17 @@ def main():
         records = [row for result in previous for row in result['candidates']]
         results = [
             discover(enterprise, fetch_disclosure, as_of=date.today().isoformat(),
-                     previous=records, withdrawn=withdrawn)
+                     previous=records, withdrawn=withdrawn, include_body=args.extract_body)
             for enterprise in inputs
         ]
+        if args.extract_body:
+            from cios.applications.flora.research_intelligence.body_claims import assess_claims
+            for result in results:
+                historical = [row for row in records if row['enterprise_id'] == result['enterprise_id']
+                              and row['url'] not in withdrawn]
+                result['body_assessment'] = assess_claims(
+                    claim for row in [*historical, *result['candidates']]
+                    for claim in row.get('body_claims', ()))
         args.output.mkdir(parents=True, exist_ok=False)
         (args.output / 'discovery.json').write_text(json.dumps(results, indent=2) + '\n')
         return
