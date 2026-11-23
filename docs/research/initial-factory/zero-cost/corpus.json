@@ -1,0 +1,272 @@
+[
+  {
+    "id": "D01",
+    "category": "acquisition",
+    "split": "development",
+    "url": "https://about.ups.com/us/en/newsroom/press-releases/our-strategy/ups-announces-agreement-to-acquire-smartways-logistics.html",
+    "publisher": "UPS",
+    "sha256": "53c59d7f1b2b545bd4ac5b7c5999c7b1f9d5386e93a9332783d5cc404bba1ed4",
+    "paragraph": 6
+  },
+  {
+    "id": "D02",
+    "category": "acquisition",
+    "split": "development",
+    "url": "https://news.sap.com/2026/11/sap-completes-acquisition-of-techwolf/",
+    "publisher": "SAP",
+    "sha256": "d1c24b4013a3343d6d095f3a0628e3fc1f10d1f429707cfa3519387768330924",
+    "paragraph": 1
+  },
+  {
+    "id": "D03",
+    "category": "acquisition",
+    "split": "evaluation",
+    "url": "https://news.microsoft.com/source/2003/01/21/microsoft-announces-its-intention-to-acquire-placeware/",
+    "publisher": "Microsoft",
+    "sha256": "617132329d1e664e7597cabd5776ff4716ad4ee154f180c152c506d9831bbeea",
+    "paragraph": 1
+  },
+  {
+    "id": "D04",
+    "category": "acquisition",
+    "split": "evaluation",
+    "url": "https://news.microsoft.com/source/2008/02/11/microsoft-agrees-to-acquire-danger-inc-strengthens-mobile-consumer-vision/",
+    "publisher": "Microsoft",
+    "sha256": "70226c0202713928928598efdfd1df084943b198367878f300c55047a26ecadb",
+    "paragraph": 1
+  },
+  {
+    "id": "D05",
+    "category": "acquisition",
+    "split": "evaluation",
+    "url": "https://news.microsoft.com/source/2018/06/04/microsoft-to-acquire-github-for-7-5-billion/",
+    "publisher": "Microsoft",
+    "sha256": "7aa27db155365caaf1f5096e0ab29b010f7b47c80b94f7de7cbe8c20e2ece42e",
+    "paragraph": 2
+  },
+  {
+    "id": "D06",
+    "category": "partnership",
+    "split": "development",
+    "url": "https://www.hsbc.com/news-and-views/news/media-releases/2026/hsbc-and-google-cloud-announce-transformative-ai-banking-partnership",
+    "publisher": "HSBC",
+    "sha256": "126b55330e6ae1cf45cc219cfc442a3eaaaa239c3a25f75a60d2034b0adff789",
+    "paragraph": 9
+  },
+  {
+    "id": "D07",
+    "category": "partnership",
+    "split": "development",
+    "url": "https://www.anthropic.com/news/expanding-partnership-gsa",
+    "publisher": "Anthropic",
+    "sha256": "305853a83d1191aa1dc83c91d87160167cce02ea54112ee4badcb9037149a1e3",
+    "paragraph": 3
+  },
+  {
+    "id": "D08",
+    "category": "partnership",
+    "split": "evaluation",
+    "url": "https://www.sc.com/en/press-release/standard-chartered-and-lmax-group-expand-partnership-to-include-digital-asset-custody-in-luxembourg-and-difc/",
+    "publisher": "Standard Chartered",
+    "sha256": "530f302d1bdb54803849b148b80c2bca2d7d4d79bc318cae2902ee43c0afd4db",
+    "paragraph": 63
+  },
+  {
+    "id": "D09",
+    "category": "partnership",
+    "split": "evaluation",
+    "url": "https://www.t-mobile.com/news/network/t-mobile-powers-new-ways-to-experience-the-formula-1-heineken-las-vegas-grand-prix-on-and-off-the-track",
+    "publisher": "T-Mobile",
+    "sha256": "db92f97cc05c78fc443b43f2000177d1e5dac3f47edaeb6f42b36f5ab713d8ef",
+    "paragraph": 2
+  },
+  {
+    "id": "D10",
+    "category": "partnership",
+    "split": "evaluation",
+    "url": "https://www.nttdata.com/en-ae/news/2025/servicenow-and-ntt-data-expand-strategic-partnership",
+    "publisher": "NTT DATA",
+    "sha256": "65365ae79d637e863a2dfd3c83d3bc3038593f424cfde1a1d95bfa0982c78285",
+    "paragraph": 1
+  },
+  {
+    "id": "D11",
+    "category": "procurement",
+    "split": "development",
+    "url": "https://www.airbus.com/en/newsroom/press-releases/2026-10-airbus-awarded-contract-for-two-additional-galileo-satellites",
+    "publisher": "Airbus",
+    "sha256": "1252a93d60528872ad6e4d73342dbb0d5bec3366d2490aa2465085f2ba28a648",
+    "paragraph": 5
+  },
+  {
+    "id": "D12",
+    "category": "procurement",
+    "split": "development",
+    "url": "https://www.airbus.com/en/newsroom/press-releases/2026-11-airbus-to-deliver-iris-frances-next-generation-military-earth-observation-satellites",
+    "publisher": "Airbus",
+    "sha256": "66e57b7e75f90eed50386768e1dd130756d11f91822b6a2f24fc2ee48e2ab7a2",
+    "paragraph": 7
+  },
+  {
+    "id": "D13",
+    "category": "procurement",
+    "split": "evaluation",
+    "url": "https://boeing.mediaroom.com/2026-09-30-Ethiopian-Airlines-Orders-Boeing-777-and-777-8-Freighters-to-Expand-Cargo-Fleet",
+    "publisher": "Boeing",
+    "sha256": "5df64e2c1ad6d026310129249be41ff6d17a800c81e47ebd7b404ce201c7358b",
+    "paragraph": 1
+  },
+  {
+    "id": "D14",
+    "category": "procurement",
+    "split": "evaluation",
+    "url": "https://boeing.mediaroom.com/2026-09-23-Biman-Bangladesh-Airlines-Orders-11-More-Boeing-Jets-to-Expand-Fleet",
+    "publisher": "Boeing",
+    "sha256": "582768f946cd2bf58429458c3fede9a6ee6a6f8a63b88ccf09f4c07441fcf4e4",
+    "paragraph": 1
+  },
+  {
+    "id": "D15",
+    "category": "procurement",
+    "split": "evaluation",
+    "url": "https://boeing.mediaroom.com/2026-11-02-Boeing-and-Icelease-Sign-Agreement-for-up-to-Three-767-300-Boeing-Converted-Freighters",
+    "publisher": "Boeing",
+    "sha256": "e7952a3616c287e1f36d4606eff66f902fae597fea276fcbac15ae0bddb7b306",
+    "paragraph": 7
+  },
+  {
+    "id": "D16",
+    "category": "investment",
+    "split": "development",
+    "url": "https://www.nokia.com/newsroom/nokia-strengthens-partnership-with-aalto-university-with-15-million-donation-and-expanded-rd-collaboration-for-future-technology-research-and-talent/",
+    "publisher": "Nokia",
+    "sha256": "35afb4de7645de179b85210b76c57c19c957909bb7818a457208c3151a96eb62",
+    "paragraph": 14
+  },
+  {
+    "id": "D17",
+    "category": "investment",
+    "split": "development",
+    "url": "https://www.hsbc.com/news-and-views/news/media-releases/2026/the-trust-threshold-ai-makes-investors-bolder-but-they-want-human-judgement-to-make-decisions",
+    "publisher": "HSBC",
+    "sha256": "a5bb1390118e96b021faff2cbc2e0d6237374d6c33dfe101a05f0c85875c5d5e",
+    "paragraph": 11
+  },
+  {
+    "id": "D18",
+    "category": "investment",
+    "split": "evaluation",
+    "url": "https://www.airbus.com/en/newsroom/press-releases/2026-11-airbus-reports-share-buyback-transactions-9-13-november-2026",
+    "publisher": "Airbus",
+    "sha256": "6c49689d61b27f5aa58b43afa5ee16fe7a13a3d44b25d571d37b41241277b5a5",
+    "paragraph": 88
+  },
+  {
+    "id": "D19",
+    "category": "investment",
+    "split": "evaluation",
+    "url": "https://nvidianews.nvidia.com/news/nvidia-expands-commitments-with-supply-chain-partners-to-support-ai-infrastructure-buildout",
+    "publisher": "NVIDIA",
+    "sha256": "3bc57bbfd596b511163e7d7a160feb0933facfcaf4d703b4eefd1324db94eb65",
+    "paragraph": 3
+  },
+  {
+    "id": "D20",
+    "category": "investment",
+    "split": "evaluation",
+    "url": "https://newsroom.ibm.com/2026-11-17-ibm-study-chief-ai-officers-see-where-ai-creates-value,-but-few-control-investment-decisions",
+    "publisher": "IBM",
+    "sha256": "605a5819ccbd6f670fa07f7f0f8b1c752d49547857d8d050beccef478664416b",
+    "paragraph": 2
+  },
+  {
+    "id": "D21",
+    "category": "migration",
+    "split": "development",
+    "url": "https://news.sap.com/2026/11/takeda-turns-to-sap-erp-digital-transformation/",
+    "publisher": "SAP",
+    "sha256": "8faf6b5c4381606b719a829dcf0ab46756069e446ad3d9a15d3070f71e39e17c",
+    "paragraph": 1
+  },
+  {
+    "id": "D22",
+    "category": "migration",
+    "split": "development",
+    "url": "https://news.sap.com/2026/11/sap-expands-collaboration-astrazeneca-rise-with-sap-business-ai/",
+    "publisher": "SAP",
+    "sha256": "b3a3bdc10296f39557a466cfc43722b14d6f2f8e9ecf76b5429fd9ed142143fe",
+    "paragraph": 1
+  },
+  {
+    "id": "D23",
+    "category": "migration",
+    "split": "evaluation",
+    "url": "https://news.sap.com/uk/2026/04/colt-technology-services-shapes-next-gen-telco-offerings-with-sap/",
+    "publisher": "SAP",
+    "sha256": "f108328e04c6f70d5fcd89a44c330a9ca2d1bf4a79ce0ff0d85c7dece3405d08",
+    "paragraph": 2
+  },
+  {
+    "id": "D24",
+    "category": "migration",
+    "split": "evaluation",
+    "url": "https://news.sap.com/2025/11/brose-accelerates-digital-transformation-sap-cloud-erp-private/",
+    "publisher": "SAP",
+    "sha256": "6c669b49e5a59eb656ef7f108effb85e3cd9dd702a27ea4885ac2f8618322218",
+    "paragraph": 2
+  },
+  {
+    "id": "D25",
+    "category": "migration",
+    "split": "evaluation",
+    "url": "https://newsroom.ibm.com/2026-10-07-ibm-teams-up-with-sap-to-help-businesses-modernize-operations-and-advance-ai-readiness",
+    "publisher": "IBM",
+    "sha256": "a90d611d9b5a0aeb3abbca09c4144f34ec0e100cbfbe94eaa751db46e8a58b59",
+    "paragraph": 2
+  },
+  {
+    "id": "D26",
+    "category": "transformation",
+    "split": "development",
+    "url": "https://newsroom.ibm.com/2026-11-10-ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation",
+    "publisher": "IBM",
+    "sha256": "8e191a3913768ec2d42226aec62de0d80cd3049b50b6f65db4d1ad1bb449e54d",
+    "paragraph": 1
+  },
+  {
+    "id": "D27",
+    "category": "transformation",
+    "split": "development",
+    "url": "https://www.airbus.com/en/newsroom/press-releases/2026-11-skywise-expands-its-portfolio-with-the-launch-of-enhanced-digital-flight-training-solutions",
+    "publisher": "Airbus",
+    "sha256": "99b4b89eb19225fe9773a06f1e16f6a133a090fe9b3dbde8cf348c1e730b58aa",
+    "paragraph": 5
+  },
+  {
+    "id": "D28",
+    "category": "transformation",
+    "split": "evaluation",
+    "url": "https://www.aboutamazon.com/news/aws/aws-1-billion-forward-deployed-ai-engineers",
+    "publisher": "Amazon",
+    "sha256": "d75317b066322821f3cd3d29ccb6c4995f61aad3fb12ce009a38ff5746e22d55",
+    "paragraph": 1
+  },
+  {
+    "id": "D29",
+    "category": "transformation",
+    "split": "evaluation",
+    "url": "https://www.nokia.com/newsroom/nokia-home-of-radio-in-oulu/",
+    "publisher": "Nokia",
+    "sha256": "d3a541983d971bd3d452c3034f939c7e5b7e37342c6405f36c475c5fbc27dc36",
+    "paragraph": 14
+  },
+  {
+    "id": "D30",
+    "category": "transformation",
+    "split": "evaluation",
+    "url": "https://nvidianews.nvidia.com/news/nvidia-board-of-directors-establishes-national-security-and-export-control-oversight-committee",
+    "publisher": "NVIDIA",
+    "sha256": "4f0a37b46fdf17071371174995580275c7e0327d5390875958e7a914a7371761",
+    "paragraph": 2
+  }
+]

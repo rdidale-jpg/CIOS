@@ -1,0 +1,474 @@
+{
+  "documents": [
+    {
+      "id": "D01",
+      "split": "development",
+      "category": "acquisition",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 1,
+        "correct": 1,
+        "commercial_relevance_points": 2,
+        "event_matches": 1,
+        "status_correct": 1,
+        "bound_attribution": 1,
+        "missed": 0
+      },
+      "baseline_kinds": [
+        "acquisition"
+      ]
+    },
+    {
+      "id": "D02",
+      "split": "development",
+      "category": "acquisition",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 1,
+        "correct": 1,
+        "commercial_relevance_points": 2,
+        "event_matches": 1,
+        "status_correct": 1,
+        "bound_attribution": 1,
+        "missed": 0
+      },
+      "baseline_kinds": [
+        "acquisition"
+      ]
+    },
+    {
+      "id": "D03",
+      "split": "evaluation",
+      "category": "acquisition",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 2,
+        "correct": 1,
+        "commercial_relevance_points": 2,
+        "event_matches": 1,
+        "status_correct": 1,
+        "bound_attribution": 2,
+        "false_positive": 1,
+        "missed": 0
+      },
+      "baseline_kinds": [
+        "acquisition",
+        "partnership"
+      ]
+    },
+    {
+      "id": "D04",
+      "split": "evaluation",
+      "category": "acquisition",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 1,
+        "correct": 1,
+        "commercial_relevance_points": 2,
+        "event_matches": 1,
+        "status_correct": 1,
+        "bound_attribution": 1,
+        "missed": 0
+      },
+      "baseline_kinds": [
+        "acquisition"
+      ]
+    },
+    {
+      "id": "D05",
+      "split": "evaluation",
+      "category": "acquisition",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 0,
+        "missed": 1
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D06",
+      "split": "development",
+      "category": "partnership",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 0,
+        "missed": 1
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D07",
+      "split": "development",
+      "category": "partnership",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 1,
+        "correct": 1,
+        "commercial_relevance_points": 2,
+        "event_matches": 1,
+        "status_correct": 1,
+        "bound_attribution": 1,
+        "missed": 0
+      },
+      "baseline_kinds": [
+        "partnership"
+      ]
+    },
+    {
+      "id": "D08",
+      "split": "evaluation",
+      "category": "partnership",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 0,
+        "missed": 1
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D09",
+      "split": "evaluation",
+      "category": "partnership",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 1,
+        "correct": 1,
+        "commercial_relevance_points": 1,
+        "event_matches": 1,
+        "status_correct": 1,
+        "bound_attribution": 1,
+        "missed": 0
+      },
+      "baseline_kinds": [
+        "partnership"
+      ]
+    },
+    {
+      "id": "D10",
+      "split": "evaluation",
+      "category": "partnership",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 0,
+        "missed": 1
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D11",
+      "split": "development",
+      "category": "procurement",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 0,
+        "missed": 1
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D12",
+      "split": "development",
+      "category": "procurement",
+      "deterministic": {
+        "expected": 0,
+        "predicted": 0,
+        "missed": 0
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D13",
+      "split": "evaluation",
+      "category": "procurement",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 1,
+        "false_positive": 1,
+        "bound_attribution": 1,
+        "missed": 1
+      },
+      "baseline_kinds": [
+        "announcement"
+      ]
+    },
+    {
+      "id": "D14",
+      "split": "evaluation",
+      "category": "procurement",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 1,
+        "false_positive": 1,
+        "bound_attribution": 1,
+        "missed": 1
+      },
+      "baseline_kinds": [
+        "announcement"
+      ]
+    },
+    {
+      "id": "D15",
+      "split": "evaluation",
+      "category": "procurement",
+      "deterministic": {
+        "expected": 0,
+        "predicted": 0,
+        "missed": 0
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D16",
+      "split": "development",
+      "category": "investment",
+      "deterministic": {
+        "expected": 2,
+        "predicted": 2,
+        "correct": 2,
+        "commercial_relevance_points": 4,
+        "event_matches": 2,
+        "status_correct": 2,
+        "bound_attribution": 2,
+        "missed": 0
+      },
+      "baseline_kinds": [
+        "donation",
+        "research collaboration"
+      ]
+    },
+    {
+      "id": "D17",
+      "split": "development",
+      "category": "investment",
+      "deterministic": {
+        "expected": 0,
+        "predicted": 0,
+        "missed": 0
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D18",
+      "split": "evaluation",
+      "category": "investment",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 0,
+        "missed": 1
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D19",
+      "split": "evaluation",
+      "category": "investment",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 0,
+        "missed": 1
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D20",
+      "split": "evaluation",
+      "category": "investment",
+      "deterministic": {
+        "expected": 0,
+        "predicted": 0,
+        "missed": 0
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D21",
+      "split": "development",
+      "category": "migration",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 1,
+        "correct": 1,
+        "commercial_relevance_points": 2,
+        "event_matches": 1,
+        "status_correct": 1,
+        "bound_attribution": 1,
+        "missed": 0
+      },
+      "baseline_kinds": [
+        "migration"
+      ]
+    },
+    {
+      "id": "D22",
+      "split": "development",
+      "category": "migration",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 1,
+        "correct": 1,
+        "commercial_relevance_points": 2,
+        "event_matches": 1,
+        "status_correct": 1,
+        "bound_attribution": 1,
+        "missed": 0
+      },
+      "baseline_kinds": [
+        "migration"
+      ]
+    },
+    {
+      "id": "D23",
+      "split": "evaluation",
+      "category": "migration",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 0,
+        "missed": 1
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D24",
+      "split": "evaluation",
+      "category": "migration",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 0,
+        "missed": 1
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D25",
+      "split": "evaluation",
+      "category": "migration",
+      "deterministic": {
+        "expected": 2,
+        "predicted": 0,
+        "missed": 2
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D26",
+      "split": "development",
+      "category": "transformation",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 0,
+        "missed": 1
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D27",
+      "split": "development",
+      "category": "transformation",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 1,
+        "correct": 1,
+        "commercial_relevance_points": 2,
+        "event_matches": 1,
+        "status_correct": 1,
+        "bound_attribution": 1,
+        "missed": 0
+      },
+      "baseline_kinds": [
+        "portfolio expansion"
+      ]
+    },
+    {
+      "id": "D28",
+      "split": "evaluation",
+      "category": "transformation",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 0,
+        "missed": 1
+      },
+      "baseline_kinds": []
+    },
+    {
+      "id": "D29",
+      "split": "evaluation",
+      "category": "transformation",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 1,
+        "false_positive": 1,
+        "bound_attribution": 1,
+        "missed": 1
+      },
+      "baseline_kinds": [
+        "announcement"
+      ]
+    },
+    {
+      "id": "D30",
+      "split": "evaluation",
+      "category": "transformation",
+      "deterministic": {
+        "expected": 1,
+        "predicted": 0,
+        "missed": 1
+      },
+      "baseline_kinds": []
+    }
+  ],
+  "arms": {
+    "deterministic": {
+      "development": {
+        "evaluated_documents": 12,
+        "expected": 11,
+        "predicted": 8,
+        "correct": 8,
+        "commercial_relevance_points": 16,
+        "event_matches": 8,
+        "status_correct": 8,
+        "bound_attribution": 8,
+        "missed": 3,
+        "precision": 1.0,
+        "recall": 0.7272727272727273
+      },
+      "evaluation": {
+        "evaluated_documents": 18,
+        "expected": 17,
+        "predicted": 7,
+        "correct": 3,
+        "commercial_relevance_points": 5,
+        "event_matches": 3,
+        "status_correct": 3,
+        "bound_attribution": 7,
+        "false_positive": 4,
+        "missed": 14,
+        "precision": 0.42857142857142855,
+        "recall": 0.17647058823529413
+      }
+    },
+    "semantic": {
+      "development": {
+        "evaluated_documents": 0,
+        "precision": null,
+        "recall": null
+      },
+      "evaluation": {
+        "evaluated_documents": 0,
+        "precision": null,
+        "recall": null
+      }
+    },
+    "hybrid": {
+      "development": {
+        "evaluated_documents": 0,
+        "precision": null,
+        "recall": null
+      },
+      "evaluation": {
+        "evaluated_documents": 0,
+        "precision": null,
+        "recall": null
+      }
+    }
+  }
+}
