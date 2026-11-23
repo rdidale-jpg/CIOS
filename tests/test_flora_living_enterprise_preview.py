@@ -214,3 +214,24 @@ def test_preview_compatibility_cut_is_exact_and_preserves_every_historical_cut()
             name=node.targets[0].id
             if name.endswith(('_BASE','_CUTS')) or name in {'BASE','CUTS'}:
                 assert getattr(compatibility,name)==ast.literal_eval(node.value),name
+
+
+def test_route_evolution_pins_are_exact_and_reject_unreviewed_bytes(monkeypatch):
+    import ast
+    import subprocess
+    from tools.research import ux_unify_compatibility as compatibility
+    root=Path(__file__).resolve().parents[1]
+    read_bytes=Path.read_bytes
+    for path,expected in compatibility.PREVIEW_ROUTE_PINS.items():
+        target=root/path;current=target.read_bytes()
+        assert sha256(current).hexdigest()==expected
+        assert compatibility.predecessor(root,path)!=current
+        mutation=current+b'\n# Unreviewed route mutation\n'
+        with monkeypatch.context() as patch:
+            patch.setattr(Path,'read_bytes',lambda self:mutation if self==target else read_bytes(self))
+            assert compatibility.predecessor(root,path)==mutation
+    old=ast.parse(subprocess.check_output(['git','show',compatibility.PREVIEW_ROUTE_BASE+':tools/research/ux_unify_compatibility.py'],cwd=root))
+    for node in old.body:
+        if isinstance(node,ast.Assign) and len(node.targets)==1 and isinstance(node.targets[0],ast.Name):
+            name=node.targets[0].id
+            if name.isupper():assert getattr(compatibility,name)==ast.literal_eval(node.value),name

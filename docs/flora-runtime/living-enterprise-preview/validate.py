@@ -21,7 +21,8 @@ ALLOWED={'.github/workflows/flora-enterprise-economics-a1.yml',
  'cios/applications/flora/visual_stream_assets/living-enterprise-preview.js',
  'cios/applications/flora/visual_panels.py','cios/applications/flora/public_routes.py',
  'cios/applications/flora/web/app.py','tests/test_flora_living_enterprise_preview.py',
- 'tests/test_flora_accepted_ux_recovery.py','tools/research/eei2b_compatibility.py'}
+ 'tests/test_flora_accepted_ux_recovery.py','tools/research/eei2b_compatibility.py',
+ 'tools/research/ux_unify_compatibility.py'}
 
 def git(*args,env=None,input=None):
     return subprocess.check_output(['git',*args],cwd=ROOT,env=env,input=input)

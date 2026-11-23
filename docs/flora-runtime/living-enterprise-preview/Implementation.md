@@ -10,7 +10,7 @@
 | [public_routes.py](../../../cios/applications/flora/public_routes.py) | Exact preview URL plus two exact local CSS/JS URLs | Existing original-target validation stays intact. Only stream/focus/subject are legal preview selectors; private, foreign and malformed state fails closed. |
 | [web/app.py](../../../cios/applications/flora/web/app.py) | Dispatch those exact public routes, validate preview HEAD state and retain `no-store` | Existing authentication, workspace/resource guards, mutation handling and response bodies unchanged outside those branches. |
 | New CSS/JS in `visual_stream_assets` | Reuse #729 overlay styling; add experimental/return notice, compact selection and restored-page reload | Original images and other assets are byte-identical. No new global product control or intelligence cache. |
-| Existing compatibility helper/test | Add one exact-current-bytes `_frame` predecessor cut; retain the prior recovery proof through it | Every old cut, approved failure/skip and security comparator remains unchanged. Unreviewed mutation still fails closed. Current-head runtime tests remain mandatory. |
+| Existing compatibility helpers/tests | Add an exact-current-bytes `_frame` predecessor cut and exact-file dispatch/catalogue pins; retain the prior recovery proof through them | Every old cut, approved failure/skip and security comparator remains unchanged. Unreviewed mutation still fails closed. Current-head runtime tests remain mandatory. |
 | Existing Economics/browser workflow | Add new preview tests and actual before/after browser journeys/artifacts | No new CI governance service or production deployment workflow. No removed checks. |
 
 Source design: [#729 at da1a6c7](https://github.com/rdidale-jpg/CIOS/tree/da1a6c7b5e4b95e85ef2de3697bc8c506368192c/docs/product/flora-experience/living-enterprise-v2). Its documentation, snapshot and design branch are not merged or modified. Reused original image: `vp2-lloyds-inside-768-13827db67c30.webp`, SHA-256 `13827db67c3077e5a390965499c38ec2a93d3003cde580895d86eac82140d80f`. All 51 existing application image files are unchanged, including the approved originals and variants.
@@ -29,6 +29,8 @@ Source design: [#729 at da1a6c7](https://github.com/rdidale-jpg/CIOS/tree/da1a6c
 | Eight SWOT themes | Exact existing `VIEWS.swot`, `VIEWS.swot-more`, `lloyds_twin_visual.choices` | Same source-dependent evidence, interpretations and counter-evidence; no qualification change |
 
 All source lifecycle checks occur before composing claims and their dependent diagrams, change marker/accessibility label, themes and timeline. Withdrawn or restricted material is omitted without replacing it with an unknown/research-administration panel. Generic conceptual navigation and explicitly illustrative mechanisms do not become verified enterprise relationships.
+
+The first hosted pass also identified two historical owner checks rejecting the newly authorised finite dispatcher/catalogue changes. Those changes now have exact-file predecessor pins, with unknown-byte negative tests; every historical pin and the regression comparator remains unchanged.
 
 The prototype test uncovered that the old typed-measure accessor alone did not apply every restriction flag used by the governed flagship adapter. The preview now obtains these measures through that existing full adapter before applying financial type guards; it does not introduce an alternative policy. The existing default experience was not silently rewritten in this sprint.
 
