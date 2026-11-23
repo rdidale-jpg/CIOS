@@ -1,0 +1,17 @@
+{
+  "issue": 629,
+  "baseline_main": "8a53777d1dec359f56b66e533d512c0a86881939",
+  "main_postmerge_ci": {
+    "id": 43709888042,
+    "event": "push",
+    "conclusion": "success"
+  },
+  "branch": "codex/flora-vp1-629",
+  "approved_art_design_reference": "c6bf2280594922db6951c5c36205984c85ca4aea",
+  "pending_EAI_PR": 630,
+  "pending_EAI_incorporated": false,
+  "other_draft_prs_merged_or_changed": false,
+  "canonical_or_production_access": false,
+  "runtime_changes": false,
+  "render_operations": false
+}

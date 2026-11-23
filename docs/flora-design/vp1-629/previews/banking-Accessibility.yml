@@ -1,0 +1,53 @@
+- banner:
+  - link "Skip to intelligence":
+    - /url: "#main-title"
+  - link "FLORA UK home":
+    - /url: uk-landscape.html
+    - text: FLORA
+  - navigation "Global FLORA":
+    - link "Explore":
+      - /url: uk-landscape.html
+    - text: Offers Pipeline
+  - text: Owner · Design preview
+  - navigation "Current scope":
+    - link "UK":
+      - /url: uk-landscape.html
+    - text: Banking
+  - navigation "Insight streams":
+    - link "Landscape":
+      - /url: banking-landscape.html#stream-landscape
+    - link "Forces":
+      - /url: banking-forces.html#stream-forces
+- complementary "Visual exploration":
+  - figure "Purpose-composed banking landscape illustration. Conceptual environments, not actual premises or a quantitative map.":
+    - text: Purpose-composed banking landscape illustration. Conceptual environments, not actual premises or a quantitative map.
+    - link "Lloyds":
+      - /url: lloyds-inside.html#main-title
+    - link "Regulation":
+      - /url: banking-landscape-regulation.html#main-title
+    - link "Leadership Agenda":
+      - /url: banking-landscape-agenda.html#main-title
+- main "The UK Banking ecosystem":
+  - article:
+    - paragraph: Industry landscape
+    - heading "The UK Banking ecosystem" [level=1]
+    - paragraph: Banks connect deposits, credit and payments with the wider economy.
+    - text: Reported · Bank Rate
+    - strong: 4%
+    - text: Decision ending 4 November 2026 Reported · incident-reporting policy
+    - strong: March 2027
+    - text: Sector policy · entity scope remains specific Deposits Credit & payments Households & businesses
+    - paragraph: FLORA Insight · sector functions, not bilateral contracts or quantified value flows.
+    - heading "Funding economics" [level=3]
+    - paragraph: FLORA Insight The November 2026 Bank Rate decision changes the policy-rate backdrop; deposit pricing and lending repricing determine how each bank transmits it.
+    - paragraph: No individual bank margin loss or customer demand follows from a rate decision alone.
+    - heading "Supervision and reporting" [level=3]
+    - term: Bank of England
+    - definition: Central-bank and monetary-policy context.
+    - term: PRA
+    - definition: Prudential supervision; part of the Bank of England.
+    - term: FCA
+    - definition: Conduct-supervision context, distinct from prudential supervision.
+    - paragraph: Policy does not establish a particular entity’s readiness, supplier shortfall or open procurement.
+    - group: Industry economics and boundaries
+    - group: Sources & basis

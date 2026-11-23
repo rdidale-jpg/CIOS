@@ -1,0 +1,285 @@
+{
+  "status": "Unaccepted VP-1 design concepts; not source evidence, premises, quantitative maps or relationships",
+  "generation": "image_gen reference-guided portrait recomposition, 15 November 2026; no content edits after generation",
+  "delivery": "Pillow proportional WebP encoding only; original generated PNG masters retained",
+  "artworks": [
+    {
+      "key": "uk-landscape",
+      "prompt": "Create ONE premium FLORA editorial architectural illustration, portrait format 1024x1536, using the supplied accepted UK panorama as the artistic reference. This is a NEW purpose-composed portrait, not a crop, squeeze, screenshot, collage of panels, simplified SVG or UI. Preserve fine hand-painted architectural craftsmanship, believable depth, warm ivory, sage green, subtle gold sunlight, spring flowers, lively but tiny unidentifiable people, watercolour/engraved richness. Recompose the full breadth of the UK economy vertically around one elegant winding river, from rural agriculture, quarry, renewables and reservoirs at the distant top, through factories, construction, life sciences, airport/logistics and communications at mid-depth, down through education, health, culture, financial services/Bank of England-like classic building, hospitality, shops and homes in foreground. Distinct heritage/contemporary/frontier architecture. A conceptual composite, not a geographic or quantitative map, no implied real relationships. Integrate all areas naturally into ONE continuous richly detailed landscape. No written words, no logos, no data labels, no numeric figures, no UI, no border. Keep principal recognisable banking/classical and technology districts clearly separated in the central safe area so HTML labels can later be placed. Warm cream feathered outer edges. Output the image, not a design explanation.",
+      "master": "artwork-masters/uk-landscape.png",
+      "master_sha256": "434ab898e0ddd188713cb3ba6ebf7b75b2d14bda496267700e6d3f0a6649ca4e",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "variants": [
+        {
+          "file": "assets/uk-landscape-384.webp",
+          "width": 384,
+          "height": 576,
+          "bytes": 108258,
+          "sha256": "84a37760e3e89556727e60003a23f38c3f3f0255050ad1fcc6be62b09c12a25f"
+        },
+        {
+          "file": "assets/uk-landscape-768.webp",
+          "width": 768,
+          "height": 1152,
+          "bytes": 415040,
+          "sha256": "73f0ba099fbcbd5f9201360870c917c9e53f3966127d0caf3024b522f2930fb4"
+        }
+      ],
+      "original": {
+        "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/uk-economy.webp",
+        "original_sha256": "ff4f70c21fcfe733affd0405021fa24386f5edaeb3497a10596550d9dbed0567",
+        "original_bytes": 723036,
+        "commit": "c6bf2280594922db6951c5c36205984c85ca4aea"
+      },
+      "crop_comparison": {
+        "method": "Subject-focused CSS object-fit:cover, original delivery bytes untouched",
+        "object_position": "48% 50%"
+      }
+    },
+    {
+      "key": "uk-forces",
+      "prompt": "Create ONE new purpose-composed PORTRAIT illustration 1024x1536 for premium FLORA. Use the supplied accepted image as the artistic reference, but recompose spatially for portrait; do not crop, squeeze, add UI, or miniaturise the landscape image. Same extraordinarily fine hand-painted architectural/landscape craftsmanship, warm ivory, sage, forest green, subtle gold light, layered perspective, spring flowers, tiny unidentifiable people. Rich sophisticated architectural illustration, not flat blocks, vector/SVG, diagram, generic buildings, photographic collage or panels. Continuous immersive scene with cream feathered edges, no text, logos, numbers, arrows, UI or invented factual relationships. Every building is a conceptual environment, not a claim about real premises, ownership, supplier relationships, economic size or geography. Recompose a majestic UK national forces landscape vertically: distant rugged highlands, open sea on one side, valley farmland, a graceful single river winding in layered depth toward an intimate foreground of heather and ancient trees. Expansive atmospheric sky with extremely subtle translucent current-like ribbons of golden light crossing overhead, not literal chart lines. Soft blue highlands, varied clouds, broad national scale. Distinct from a bank's braided channels or an enterprise's converging pathways. Retain the original ethereal beauty and recognisable national landscape.",
+      "master": "artwork-masters/uk-forces.png",
+      "master_sha256": "8799a56c99600cd4575024238da64f208c9a712de753a7424638e16cb51e0970",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "variants": [
+        {
+          "file": "assets/uk-forces-384.webp",
+          "width": 384,
+          "height": 576,
+          "bytes": 88324,
+          "sha256": "fa241b77924d085ced99b2027f1ab94a813dcd78977751c2aff2d989df3c770a"
+        },
+        {
+          "file": "assets/uk-forces-768.webp",
+          "width": 768,
+          "height": 1152,
+          "bytes": 321434,
+          "sha256": "a67e2ac95b527af0967211487b407162c3258d63fa78f7650c53030d10bef9a0"
+        }
+      ],
+      "original": {
+        "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/uk-forces.png",
+        "original_sha256": "0a8dbc120ecababb297ea1a6eae7fb8a62277322e88bcee1148a3f06342f6a14",
+        "original_bytes": 3841329,
+        "commit": "c6bf2280594922db6951c5c36205984c85ca4aea"
+      },
+      "crop_comparison": {
+        "method": "Subject-focused CSS object-fit:cover, original delivery bytes untouched",
+        "object_position": "57% 50%"
+      }
+    },
+    {
+      "key": "banking-landscape",
+      "prompt": "Create ONE new purpose-composed PORTRAIT illustration 1024x1536 for premium FLORA. Use the supplied accepted image as the artistic reference, but recompose spatially for portrait; do not crop, squeeze, add UI, or miniaturise the landscape image. Same extraordinarily fine hand-painted architectural/landscape craftsmanship, warm ivory, sage, forest green, subtle gold light, layered perspective, spring flowers, tiny unidentifiable people. Rich sophisticated architectural illustration, not flat blocks, vector/SVG, diagram, generic buildings, photographic collage or panels. Continuous immersive scene with cream feathered edges, no text, logos, numbers, arrows, UI or invented factual relationships. Every building is a conceptual environment, not a claim about real premises, ownership, supplier relationships, economic size or geography. Recompose UK Banking as a vertically flowing rich urban ecosystem along one winding river with stone bridges. An unmistakable Bank-of-England-inspired classical colonnaded civic building near upper third, smaller dignified regulator buildings nearby but no crests. Five clearly distinct major banking enterprise environments in middle/foreground, blending heritage brick, classical limestone, contemporary glass and frontier technology. Each is equally considered, no featured corporate logo and no premature Lloyds dominance. Payments/communications infrastructure represented by a small discreet technical pavilion, with shops, households and businesses near water foreground. Warm premium architectural richness; distinct navigable districts with breathing room for later HTML labels. Not a factual location/relationship map.",
+      "master": "artwork-masters/banking-landscape.png",
+      "master_sha256": "b5ddc5bd88ea79702f8fe91506f07b3b814839f8b73a46207c98d0ac125a92d1",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "variants": [
+        {
+          "file": "assets/banking-landscape-384.webp",
+          "width": 384,
+          "height": 576,
+          "bytes": 125396,
+          "sha256": "18fe29a66bb682225badfa13a5563d9a94a9e54086b1cc2514f27a8068fdcedb"
+        },
+        {
+          "file": "assets/banking-landscape-768.webp",
+          "width": 768,
+          "height": 1152,
+          "bytes": 440682,
+          "sha256": "b59e48e78a00bbe22a42450883f72d855e767be772fa136d4b0c037069288167"
+        }
+      ],
+      "original": {
+        "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/banking-combined.png",
+        "original_sha256": "2661db421634f422e571066152450cce92261ff714a4ed34c0bfe1e6a243d0af",
+        "original_bytes": 3935311,
+        "commit": "c6bf2280594922db6951c5c36205984c85ca4aea"
+      },
+      "crop_comparison": {
+        "method": "Subject-focused CSS object-fit:cover, original delivery bytes untouched",
+        "object_position": "25% 50%"
+      }
+    },
+    {
+      "key": "banking-forces",
+      "prompt": "Create ONE new purpose-composed PORTRAIT illustration 1024x1536 for premium FLORA. Use the supplied accepted image as the artistic reference, but recompose spatially for portrait; do not crop, squeeze, add UI, or miniaturise the landscape image. Same extraordinarily fine hand-painted architectural/landscape craftsmanship, warm ivory, sage, forest green, subtle gold light, layered perspective, spring flowers, tiny unidentifiable people. Rich sophisticated architectural illustration, not flat blocks, vector/SVG, diagram, generic buildings, photographic collage or panels. Continuous immersive scene with cream feathered edges, no text, logos, numbers, arrows, UI or invented factual relationships. Every building is a conceptual environment, not a claim about real premises, ownership, supplier relationships, economic size or geography. A portrait UK banking forces landscape made of many beautiful braided streams meeting across meticulously terraced green riverbanks. Gentle circular ridgelines and limestone terraces, flowing water reflecting pale gold, mature trees and flowering banks. Contemporary-financial-system metaphor through rich natural scene, no buildings required, no icons. Broad currents meet at different depths; stronger gold reflection in lower middle. A mature oak canopy frames top left. More structured terraces and multiple parallel channels than the UK national forces image; not an identical valley.",
+      "master": "artwork-masters/banking-forces.png",
+      "master_sha256": "2ebcd13d3b1eae484af1859712b8445f86d5bb284558a5ef0903ab33c7a66d28",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "variants": [
+        {
+          "file": "assets/banking-forces-384.webp",
+          "width": 384,
+          "height": 576,
+          "bytes": 115572,
+          "sha256": "12cea0c2400a53ece89bcb8b97fe946bc6fcbdad1c8fd142454175d6c3c58b42"
+        },
+        {
+          "file": "assets/banking-forces-768.webp",
+          "width": 768,
+          "height": 1152,
+          "bytes": 437242,
+          "sha256": "772726f361a3f38f514e51b65d955620c44f2bef7378964f5b1d839e6ed6322e"
+        }
+      ],
+      "original": {
+        "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/banking-forces.png",
+        "original_sha256": "2cc533ba6b6dfe4ec008192ffe7f71b8e4c978e8d391d128b9395809ae9f3a90",
+        "original_bytes": 4218446,
+        "commit": "c6bf2280594922db6951c5c36205984c85ca4aea"
+      },
+      "crop_comparison": {
+        "method": "Subject-focused CSS object-fit:cover, original delivery bytes untouched",
+        "object_position": "56% 50%"
+      }
+    },
+    {
+      "key": "lloyds-inside",
+      "prompt": "Create ONE new purpose-composed PORTRAIT illustration 1024x1536 for premium FLORA. Use the supplied accepted image as the artistic reference, but recompose spatially for portrait; do not crop, squeeze, add UI, or miniaturise the landscape image. Same extraordinarily fine hand-painted architectural/landscape craftsmanship, warm ivory, sage, forest green, subtle gold light, layered perspective, spring flowers, tiny unidentifiable people. Rich sophisticated architectural illustration, not flat blocks, vector/SVG, diagram, generic buildings, photographic collage or panels. Continuous immersive scene with cream feathered edges, no text, logos, numbers, arrows, UI or invented factual relationships. Every building is a conceptual environment, not a claim about real premises, ownership, supplier relationships, economic size or geography. A breathtaking portrait cutaway interior of a conceptual Lloyds enterprise environment. Tall elegant conservatory/atrium blending heritage limestone arches and contemporary glass roof, warm oak fittings, sage seating, lush trees and flowers. Multiple clearly readable floors connected by an elegant staircase winding vertically. Foreground customer/service spaces, mid-level collaborative operations and business rooms, a discreet server/AI/data environment on upper right, senior decision rooms high in the architecture. Tiny people integrated naturally. Explain internal organisational/operational richness visually without claiming an actual floor plan, reporting lines, divisions, supplier systems or private offices. Same luminous architectural detail as original; make the vertical atrium feel spectacular rather than a stack of simplified blocks.",
+      "master": "artwork-masters/lloyds-inside.png",
+      "master_sha256": "6bdbc15088aebbbe9aa9be00c65f84d65781b1b1ccbd770c7d083248164525f8",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "variants": [
+        {
+          "file": "assets/lloyds-inside-384.webp",
+          "width": 384,
+          "height": 576,
+          "bytes": 110268,
+          "sha256": "12d9a56acd25c1fc7ef673130c20ca30cf86083485e866ba9360282f175d47dc"
+        },
+        {
+          "file": "assets/lloyds-inside-768.webp",
+          "width": 768,
+          "height": 1152,
+          "bytes": 389678,
+          "sha256": "13827db67c3077e5a390965499c38ec2a93d3003cde580895d86eac82140d80f"
+        }
+      ],
+      "original": {
+        "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/lloyds-inside.png",
+        "original_sha256": "9bbb5b96f5fac6cdf72c9138973ac8f5ee429420ef3fe330ac7ece5072ec0584",
+        "original_bytes": 4081179,
+        "commit": "c6bf2280594922db6951c5c36205984c85ca4aea"
+      },
+      "crop_comparison": {
+        "method": "Subject-focused CSS object-fit:cover, original delivery bytes untouched",
+        "object_position": "52% 50%"
+      }
+    },
+    {
+      "key": "lloyds-landscape",
+      "prompt": "Create ONE new purpose-composed PORTRAIT illustration 1024x1536 for premium FLORA. Use the supplied accepted image as the artistic reference, but recompose spatially for portrait; do not crop, squeeze, add UI, or miniaturise the landscape image. Same extraordinarily fine hand-painted architectural/landscape craftsmanship, warm ivory, sage, forest green, subtle gold light, layered perspective, spring flowers, tiny unidentifiable people. Rich sophisticated architectural illustration, not flat blocks, vector/SVG, diagram, generic buildings, photographic collage or panels. Continuous immersive scene with cream feathered edges, no text, logos, numbers, arrows, UI or invented factual relationships. Every building is a conceptual environment, not a claim about real premises, ownership, supplier relationships, economic size or geography. A portrait external ecosystem surrounding a conceptual Lloyds enterprise. One beautiful central classical limestone enterprise building in middle depth, distinctive from an entire banking-industry district. A curving canal and pedestrian bridges connect contextual neighbourhoods: households and shops foreground/left, business activity and discreet logistics near mid-right, contemporary technology pavilion on right, civic/regulatory architecture distant upper-left, London-like distant horizon. Natural planting, cream/sage/pink flowers and warm glass. No lines/arrows or logos, no claims of real contracts, ownership, customer names, actual buildings or supplier scope. Give the central enterprise and external surroundings their own visual hierarchy, preserving original softness and vivid depth.",
+      "master": "artwork-masters/lloyds-landscape.png",
+      "master_sha256": "b243cabc0dc3b156c7202725ec978f5b9ce51953fa6563b6c970500c70f9dfe0",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "variants": [
+        {
+          "file": "assets/lloyds-landscape-384.webp",
+          "width": 384,
+          "height": 576,
+          "bytes": 114154,
+          "sha256": "358069bf4f4c424ae2cbe8a1f06ffbf75364731f527c208bda8ba703e56e76b3"
+        },
+        {
+          "file": "assets/lloyds-landscape-768.webp",
+          "width": 768,
+          "height": 1152,
+          "bytes": 409040,
+          "sha256": "e58d32043d99ebfe411a10b0ca01fddeb1b8e0464afa0447feb65d824a39deb7"
+        }
+      ],
+      "original": {
+        "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/lloyds-world.png",
+        "original_sha256": "98c0794e6cd78a9658eb00fce7327c9ffa998bcf83256301a513226e85ec0383",
+        "original_bytes": 4243024,
+        "commit": "c6bf2280594922db6951c5c36205984c85ca4aea"
+      },
+      "crop_comparison": {
+        "method": "Subject-focused CSS object-fit:cover, original delivery bytes untouched",
+        "object_position": "47% 50%"
+      }
+    },
+    {
+      "key": "lloyds-forces",
+      "prompt": "Create ONE new purpose-composed PORTRAIT illustration 1024x1536 for premium FLORA. Use the supplied accepted image as the artistic reference, but recompose spatially for portrait; do not crop, squeeze, add UI, or miniaturise the landscape image. Same extraordinarily fine hand-painted architectural/landscape craftsmanship, warm ivory, sage, forest green, subtle gold light, layered perspective, spring flowers, tiny unidentifiable people. Rich sophisticated architectural illustration, not flat blocks, vector/SVG, diagram, generic buildings, photographic collage or panels. Continuous immersive scene with cream feathered edges, no text, logos, numbers, arrows, UI or invented factual relationships. Every building is a conceptual environment, not a claim about real premises, ownership, supplier relationships, economic size or geography. A portrait enterprise-level forces landscape: an intimate rounded valley with one luminous lake and mature tree near centre, winding paths and small streams converge around it from surrounding wooded hills. Elegant light ribbons and atmospheric currents show multiple environmental pressures, entirely metaphorical, no icons or text. Soft pale gold morning light, intricate foreground wildflowers, limestone outcrops. More focused and intimate than UK forces; fewer braided channels than Banking forces. Clear central calm amid converging routes, no claim about actual demand, company losses or opportunities.",
+      "master": "artwork-masters/lloyds-forces.png",
+      "master_sha256": "20f228eb28ec59468b46564d5b7b8d9a7fe9fb9c933f91ac63fa48653173e167",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "variants": [
+        {
+          "file": "assets/lloyds-forces-384.webp",
+          "width": 384,
+          "height": 576,
+          "bytes": 97652,
+          "sha256": "2ffca0158cd78943d3b20b176bd4bc50bc7d6d944ec11d13cd2ce15f3478367d"
+        },
+        {
+          "file": "assets/lloyds-forces-768.webp",
+          "width": 768,
+          "height": 1152,
+          "bytes": 355572,
+          "sha256": "8fca8b08527af1da381e97145e383c2461144f7a00f334867b7310ee4fec6ce7"
+        }
+      ],
+      "original": {
+        "original_path": "docs/flora-runtime/living-journey-lj1/lj3/assets/lloyds-forces.png",
+        "original_sha256": "47292147cf6c06dcb5b1d7807e75178d256c9dc8d43bb3fb01a0a85906ccc5db",
+        "original_bytes": 4094604,
+        "commit": "c6bf2280594922db6951c5c36205984c85ca4aea"
+      },
+      "crop_comparison": {
+        "method": "Subject-focused CSS object-fit:cover, original delivery bytes untouched",
+        "object_position": "50% 50%"
+      }
+    },
+    {
+      "key": "uk-skyline",
+      "prompt": "Create ONE premium FLORA country skyline illustration, extra-wide horizontal composition. An elegant conceptual UK skyline combining recognisable London silhouettes (Westminster and clock tower, St Paul's dome, Bank of England-like colonnade, Shard and Canary Wharf), plus subtle distant UK civic/industrial architecture. Rich fine hand-painted engraving/watercolour craftsmanship matching FLORA's sage, ivory, pale gold, forest green atmosphere. All principal landmarks arranged in a narrow horizontal strip at the vertical middle, with generous warm ivory empty sky above and softly feathered ivory foreground below, so this can be placed as a slim 140px-high country banner. Keep buildings around the central/right portion; the leftmost quarter is pale ivory breathing room for the FLORA name. Soft morning light, architectural detail, restrained saturation. No text, labels, numbers, logos, buttons, borders or UI. Conceptual composite identity, not a geographic map or claim that UK is only London. Image itself should be an ultrawide panoramic artwork, not a screenshot.",
+      "master": "artwork-masters/uk-skyline.png",
+      "master_sha256": "5c3f50707d52e66b6417607e7e4c79b15115baa22a3ccbb159e28c2cfc2d1a81",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "variants": [
+        {
+          "file": "assets/uk-skyline-1280.webp",
+          "width": 1280,
+          "height": 427,
+          "bytes": 55486,
+          "sha256": "21e9c5d3fc39c340d39d77324c5444a33784c788eb262751383972d36c47d507"
+        },
+        {
+          "file": "assets/uk-skyline-2172.webp",
+          "width": 2172,
+          "height": 724,
+          "bytes": 142184,
+          "sha256": "219747b1c362cec411920a80967633c4048c603205c5a5e2f9d9aa8305218ae0"
+        }
+      ]
+    }
+  ]
+}
