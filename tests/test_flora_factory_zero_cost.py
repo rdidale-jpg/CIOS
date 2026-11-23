@@ -44,3 +44,17 @@ def test_withdrawal_does_not_read_capture_or_turn_into_a_model_result():
     assert result['documents'][0]['disposition'] == 'withdrawn'
     assert result['arms']['hybrid']['evaluation'] == {
         'evaluated_documents': 0, 'precision': None, 'recall': None}
+
+
+@pytest.mark.parametrize('passage', [
+    'Company A has not completed the acquisition of North Labs.',
+    'Company A expects the acquisition of North Labs to be completed.',
+])
+def test_hybrid_withholds_negated_or_future_completion(passage):
+    raw = f'<body><p>{passage}</p></body>'.encode()
+    row = {'id': 'D01', 'sha256': sha256(raw).hexdigest(), 'paragraph': 1,
+           'url': 'https://example.org/news', 'publisher': 'Company A'}
+    response = {'actor': 'Company A', 'kind': 'acquisition', 'target': 'North Labs',
+                'status': 'completed', 'quote': passage}
+    claim, = candidates(row, passage, [response], '2026-11-23')
+    assert hybrid_gate(claim, raw, '2026-11-23') == 'status_uncertain_or_negated'

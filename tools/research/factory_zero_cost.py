@@ -10,7 +10,7 @@ import re
 
 from cios.applications.flora.research_intelligence.assurance import screen_extracted
 from cios.applications.flora.research_intelligence.body_claims import (
-    SENTENCE_BREAK, body_paragraphs, extract_claims,
+    SENTENCE_BREAK, UNCERTAIN, body_paragraphs, extract_claims,
 )
 from cios.applications.flora.research_intelligence.discovery import NewsPage, parse_date
 from tools.research.factory_scale import MAX_BYTES
@@ -32,6 +32,8 @@ STATUS = {
 CRITICAL = {'acquisition', 'procurement', 'order', 'investment'}
 MAX_MANUAL_BYTES = 256 * 1024
 MAX_CLAIMS = 6
+NON_ACTUAL = re.compile(
+    r"\b(?:once|if|unless|subject to)\b|\b(?:will|expect\w*|plan\w*|aim\w*)\b", re.I)
 
 
 def documents(corpus, captures):
@@ -109,6 +111,10 @@ def hybrid_gate(claim, raw, published):
         return 'unbound_quote'
     if not published:
         return 'publication_date_unresolved'
+    status = claim['reported_status']
+    if UNCERTAIN.search(quote) or (status in {'completed', 'awarded', 'placed'}
+                                  and NON_ACTUAL.search(quote)):
+        return 'status_uncertain_or_negated'
     decision = screen_extracted(claim, raw, as_of=date.fromisoformat(published))
     if decision['factual_state'] != 'attributed_only':
         return 'assurance_withheld'
@@ -116,7 +122,7 @@ def hybrid_gate(claim, raw, published):
               *claim['value_mentions'], *(p['name'] for p in claim['relationship_candidates'])]
     anchored = all(re.search(r'(?<!\w)' + re.escape(v.casefold()) + r'(?!\w)', quote.casefold())
                    for v in values)
-    if not anchored or not re.search(STATUS[claim['reported_status']], quote, re.I):
+    if not anchored or not re.search(STATUS[status], quote, re.I):
         return 'field_support_unresolved'
     return None
 
