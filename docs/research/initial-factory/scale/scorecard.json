@@ -1,0 +1,312 @@
+{
+  "as_of": "2026-11-23",
+  "baseline": "8bf5f8e26ef0c80c362a459fce41247c27bafd6c",
+  "overall": {
+    "coverage": {
+      "enterprises": 30,
+      "indexes_parsed": 19,
+      "with_dated_candidate": 5,
+      "with_body_candidate": 0,
+      "dated_candidates": 12,
+      "article_reads_attempted": 60,
+      "scoped_links": 224,
+      "duplicate_links": 237,
+      "duplicate_headlines": 0,
+      "stale": 7,
+      "no_topic": 2,
+      "event_groups_with_differences": 0,
+      "requests": 90,
+      "returned_bytes": 13403506
+    },
+    "read_status": {
+      "html_read": 79,
+      "http_error": 11
+    },
+    "claim_states": {},
+    "theme_hits": {
+      "Strategy and transformation": 8,
+      "Technology and AI": 7,
+      "Contracts, partnerships and investment": 3,
+      "Customers and suppliers": 2
+    },
+    "source_failures": {
+      "headline or publication date unresolved": 37,
+      "conflicting publication dates": 2,
+      "301": 7,
+      "403": 1,
+      "308": 1,
+      "302": 1,
+      "405": 1
+    },
+    "paid_search_calls": 0
+  },
+  "by_sector": {
+    "Banking and financial services": {
+      "coverage": {
+        "enterprises": 5,
+        "indexes_parsed": 3,
+        "with_dated_candidate": 0,
+        "with_body_candidate": 0,
+        "dated_candidates": 0,
+        "article_reads_attempted": 8,
+        "scoped_links": 41,
+        "duplicate_links": 0,
+        "duplicate_headlines": 0,
+        "stale": 4,
+        "no_topic": 0,
+        "event_groups_with_differences": 0,
+        "requests": 13,
+        "returned_bytes": 1794719
+      },
+      "read_status": {
+        "html_read": 11,
+        "http_error": 2
+      },
+      "claim_states": {},
+      "theme_hits": {},
+      "source_failures": {
+        "403": 1,
+        "headline or publication date unresolved": 4,
+        "308": 1
+      },
+      "paid_search_calls": 0
+    },
+    "Telecommunications": {
+      "coverage": {
+        "enterprises": 5,
+        "indexes_parsed": 3,
+        "with_dated_candidate": 2,
+        "with_body_candidate": 0,
+        "dated_candidates": 4,
+        "article_reads_attempted": 12,
+        "scoped_links": 60,
+        "duplicate_links": 37,
+        "duplicate_headlines": 0,
+        "stale": 1,
+        "no_topic": 0,
+        "event_groups_with_differences": 0,
+        "requests": 17,
+        "returned_bytes": 3401349
+      },
+      "read_status": {
+        "html_read": 15,
+        "http_error": 2
+      },
+      "claim_states": {},
+      "theme_hits": {
+        "Strategy and transformation": 2,
+        "Technology and AI": 3,
+        "Contracts, partnerships and investment": 1,
+        "Customers and suppliers": 1
+      },
+      "source_failures": {
+        "headline or publication date unresolved": 7,
+        "301": 2
+      },
+      "paid_search_calls": 0
+    },
+    "Technology": {
+      "coverage": {
+        "enterprises": 5,
+        "indexes_parsed": 4,
+        "with_dated_candidate": 2,
+        "with_body_candidate": 0,
+        "dated_candidates": 7,
+        "article_reads_attempted": 16,
+        "scoped_links": 50,
+        "duplicate_links": 129,
+        "duplicate_headlines": 0,
+        "stale": 0,
+        "no_topic": 1,
+        "event_groups_with_differences": 0,
+        "requests": 21,
+        "returned_bytes": 2431590
+      },
+      "read_status": {
+        "html_read": 20,
+        "http_error": 1
+      },
+      "claim_states": {},
+      "theme_hits": {
+        "Customers and suppliers": 1,
+        "Strategy and transformation": 5,
+        "Technology and AI": 3,
+        "Contracts, partnerships and investment": 2
+      },
+      "source_failures": {
+        "headline or publication date unresolved": 8,
+        "302": 1
+      },
+      "paid_search_calls": 0
+    },
+    "Aviation and transport": {
+      "coverage": {
+        "enterprises": 5,
+        "indexes_parsed": 3,
+        "with_dated_candidate": 1,
+        "with_body_candidate": 0,
+        "dated_candidates": 1,
+        "article_reads_attempted": 12,
+        "scoped_links": 47,
+        "duplicate_links": 32,
+        "duplicate_headlines": 0,
+        "stale": 0,
+        "no_topic": 1,
+        "event_groups_with_differences": 0,
+        "requests": 17,
+        "returned_bytes": 2549967
+      },
+      "read_status": {
+        "html_read": 15,
+        "http_error": 2
+      },
+      "claim_states": {},
+      "theme_hits": {
+        "Strategy and transformation": 1,
+        "Technology and AI": 1
+      },
+      "source_failures": {
+        "conflicting publication dates": 2,
+        "headline or publication date unresolved": 8,
+        "301": 1,
+        "405": 1
+      },
+      "paid_search_calls": 0
+    },
+    "Energy and utilities": {
+      "coverage": {
+        "enterprises": 5,
+        "indexes_parsed": 4,
+        "with_dated_candidate": 0,
+        "with_body_candidate": 0,
+        "dated_candidates": 0,
+        "article_reads_attempted": 4,
+        "scoped_links": 8,
+        "duplicate_links": 8,
+        "duplicate_headlines": 0,
+        "stale": 0,
+        "no_topic": 0,
+        "event_groups_with_differences": 0,
+        "requests": 9,
+        "returned_bytes": 687848
+      },
+      "read_status": {
+        "html_read": 8,
+        "http_error": 1
+      },
+      "claim_states": {},
+      "theme_hits": {},
+      "source_failures": {
+        "301": 1,
+        "headline or publication date unresolved": 4
+      },
+      "paid_search_calls": 0
+    },
+    "Retail and consumer": {
+      "coverage": {
+        "enterprises": 5,
+        "indexes_parsed": 2,
+        "with_dated_candidate": 0,
+        "with_body_candidate": 0,
+        "dated_candidates": 0,
+        "article_reads_attempted": 8,
+        "scoped_links": 18,
+        "duplicate_links": 31,
+        "duplicate_headlines": 0,
+        "stale": 2,
+        "no_topic": 0,
+        "event_groups_with_differences": 0,
+        "requests": 13,
+        "returned_bytes": 2538033
+      },
+      "read_status": {
+        "http_error": 3,
+        "html_read": 10
+      },
+      "claim_states": {},
+      "theme_hits": {},
+      "source_failures": {
+        "301": 3,
+        "headline or publication date unresolved": 6
+      },
+      "paid_search_calls": 0
+    }
+  },
+  "by_cohort": {
+    "development": {
+      "coverage": {
+        "enterprises": 6,
+        "indexes_parsed": 5,
+        "with_dated_candidate": 1,
+        "with_body_candidate": 0,
+        "dated_candidates": 1,
+        "article_reads_attempted": 16,
+        "scoped_links": 61,
+        "duplicate_links": 35,
+        "duplicate_headlines": 0,
+        "stale": 4,
+        "no_topic": 1,
+        "event_groups_with_differences": 0,
+        "requests": 22,
+        "returned_bytes": 3465196
+      },
+      "read_status": {
+        "html_read": 21,
+        "http_error": 1
+      },
+      "claim_states": {},
+      "theme_hits": {
+        "Strategy and transformation": 1,
+        "Technology and AI": 1
+      },
+      "source_failures": {
+        "headline or publication date unresolved": 8,
+        "conflicting publication dates": 2,
+        "301": 1
+      },
+      "paid_search_calls": 0
+    },
+    "held_out": {
+      "coverage": {
+        "enterprises": 24,
+        "indexes_parsed": 14,
+        "with_dated_candidate": 4,
+        "with_body_candidate": 0,
+        "dated_candidates": 11,
+        "article_reads_attempted": 44,
+        "scoped_links": 163,
+        "duplicate_links": 202,
+        "duplicate_headlines": 0,
+        "stale": 3,
+        "no_topic": 1,
+        "event_groups_with_differences": 0,
+        "requests": 68,
+        "returned_bytes": 9938310
+      },
+      "read_status": {
+        "http_error": 10,
+        "html_read": 58
+      },
+      "claim_states": {},
+      "theme_hits": {
+        "Strategy and transformation": 7,
+        "Technology and AI": 6,
+        "Contracts, partnerships and investment": 3,
+        "Customers and suppliers": 2
+      },
+      "source_failures": {
+        "403": 1,
+        "headline or publication date unresolved": 29,
+        "308": 1,
+        "301": 6,
+        "302": 1,
+        "405": 1
+      },
+      "paid_search_calls": 0
+    }
+  },
+  "wall_seconds_by_cohort": {
+    "development": 8.191,
+    "held_out": 8.269
+  }
+}

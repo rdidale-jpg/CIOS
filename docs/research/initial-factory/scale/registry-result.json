@@ -1,0 +1,214 @@
+[
+  {
+    "industry": "Banking and financial services",
+    "expected": {
+      "company_number": "SC045551",
+      "legal_name": "NATWEST GROUP PLC",
+      "status": "Active"
+    },
+    "observed": {
+      "company_number": "SC045551",
+      "legal_name": "NATWEST GROUP PLC",
+      "status": "Active"
+    },
+    "matches": 3,
+    "reported_fields": 3,
+    "reference_fields": 3,
+    "judgement": {
+      "decision_id": "b1c3e052bb14c2f58ae60d005f56c666abd3927cf6fa8e6e76ee7a9f4321e89b",
+      "assertion": {
+        "scope": {
+          "enterprise": "SC045551",
+          "entity": "SC045551",
+          "event": "register",
+          "field": "registry_status",
+          "definition": "Companies House registered status",
+          "period": "2026-11-23"
+        },
+        "value": "Active",
+        "unit": "status",
+        "statement": "Companies House lists NATWEST GROUP PLC as Active."
+      },
+      "as_of": "2026-11-23",
+      "factual_state": "verified",
+      "support": [
+        {
+          "source": {
+            "url": "https://find-and-update.company-information.service.gov.uk/company/SC045551",
+            "digest": "62943752b76024bbce1a4137012af99111c0a7c671703484b113764ea231519e",
+            "locator": "company-status"
+          },
+          "state": "current",
+          "origin": "Companies House register",
+          "publisher": "Companies House",
+          "observed_on": "2026-11-23",
+          "quality": "official",
+          "value": "Active",
+          "unit": "status",
+          "statement": "Companies House lists NATWEST GROUP PLC as Active.",
+          "replaces": null
+        }
+      ],
+      "publication_eligible": false
+    }
+  },
+  {
+    "industry": "Telecommunications",
+    "expected": {
+      "company_number": "01833679",
+      "legal_name": "VODAFONE GROUP PUBLIC LIMITED COMPANY",
+      "status": "Active"
+    },
+    "observed": {
+      "company_number": "01833679",
+      "legal_name": "VODAFONE GROUP PUBLIC LIMITED COMPANY",
+      "status": "Active"
+    },
+    "matches": 3,
+    "reported_fields": 3,
+    "reference_fields": 3,
+    "judgement": {
+      "decision_id": "47166d855a5fb1b52de3f12ca0b3ad4da8a3887e496280523ddca004c28dcb10",
+      "assertion": {
+        "scope": {
+          "enterprise": "01833679",
+          "entity": "01833679",
+          "event": "register",
+          "field": "registry_status",
+          "definition": "Companies House registered status",
+          "period": "2026-11-23"
+        },
+        "value": "Active",
+        "unit": "status",
+        "statement": "Companies House lists VODAFONE GROUP PUBLIC LIMITED COMPANY as Active."
+      },
+      "as_of": "2026-11-23",
+      "factual_state": "verified",
+      "support": [
+        {
+          "source": {
+            "url": "https://find-and-update.company-information.service.gov.uk/company/01833679",
+            "digest": "4f6355f13415905fdcf7152e150dfb5babae89608c37ee05aaa91363681732a0",
+            "locator": "company-status"
+          },
+          "state": "current",
+          "origin": "Companies House register",
+          "publisher": "Companies House",
+          "observed_on": "2026-11-23",
+          "quality": "official",
+          "value": "Active",
+          "unit": "status",
+          "statement": "Companies House lists VODAFONE GROUP PUBLIC LIMITED COMPANY as Active.",
+          "replaces": null
+        }
+      ],
+      "publication_eligible": false
+    }
+  },
+  {
+    "industry": "Energy and utilities",
+    "expected": {
+      "company_number": "SC117119",
+      "legal_name": "SSE PLC",
+      "status": "Active"
+    },
+    "observed": {
+      "company_number": "SC117119",
+      "legal_name": "SSE PLC",
+      "status": "Active"
+    },
+    "matches": 3,
+    "reported_fields": 3,
+    "reference_fields": 3,
+    "judgement": {
+      "decision_id": "352b2a9acb3f0db99209546ff7ea0d8461462c1e79ace6aaef1200fa4c426687",
+      "assertion": {
+        "scope": {
+          "enterprise": "SC117119",
+          "entity": "SC117119",
+          "event": "register",
+          "field": "registry_status",
+          "definition": "Companies House registered status",
+          "period": "2026-11-23"
+        },
+        "value": "Active",
+        "unit": "status",
+        "statement": "Companies House lists SSE PLC as Active."
+      },
+      "as_of": "2026-11-23",
+      "factual_state": "verified",
+      "support": [
+        {
+          "source": {
+            "url": "https://find-and-update.company-information.service.gov.uk/company/SC117119",
+            "digest": "a704fd7eb2de081d748cdd1888575ebab29220b83d7bd5ad4ca66b0db11262e0",
+            "locator": "company-status"
+          },
+          "state": "current",
+          "origin": "Companies House register",
+          "publisher": "Companies House",
+          "observed_on": "2026-11-23",
+          "quality": "official",
+          "value": "Active",
+          "unit": "status",
+          "statement": "Companies House lists SSE PLC as Active.",
+          "replaces": null
+        }
+      ],
+      "publication_eligible": false
+    }
+  },
+  {
+    "industry": "Retail and consumer",
+    "expected": {
+      "company_number": "00185647",
+      "legal_name": "J SAINSBURY PLC",
+      "status": "Active"
+    },
+    "observed": {
+      "company_number": "00185647",
+      "legal_name": "J SAINSBURY PLC",
+      "status": "Active"
+    },
+    "matches": 3,
+    "reported_fields": 3,
+    "reference_fields": 3,
+    "judgement": {
+      "decision_id": "21ac0a288979f0da6fa73efbb88f8eda3815c200fd85898d2ed4bf2e9e0bec52",
+      "assertion": {
+        "scope": {
+          "enterprise": "00185647",
+          "entity": "00185647",
+          "event": "register",
+          "field": "registry_status",
+          "definition": "Companies House registered status",
+          "period": "2026-11-23"
+        },
+        "value": "Active",
+        "unit": "status",
+        "statement": "Companies House lists J SAINSBURY PLC as Active."
+      },
+      "as_of": "2026-11-23",
+      "factual_state": "verified",
+      "support": [
+        {
+          "source": {
+            "url": "https://find-and-update.company-information.service.gov.uk/company/00185647",
+            "digest": "f6ff72fe1038027f836c8bf77b190a955cc77965db4bb3ea6a5537fc38c0ecf9",
+            "locator": "company-status"
+          },
+          "state": "current",
+          "origin": "Companies House register",
+          "publisher": "Companies House",
+          "observed_on": "2026-11-23",
+          "quality": "official",
+          "value": "Active",
+          "unit": "status",
+          "statement": "Companies House lists J SAINSBURY PLC as Active.",
+          "replaces": null
+        }
+      ],
+      "publication_eligible": false
+    }
+  }
+]
