@@ -48,6 +48,8 @@ Public factual access does not imply private-run access or owner inspection. Det
 
 Hosted FIG-1 and semantic checks exposed three parametrised legacy assertions in `test_flora_visual_streams_612.py` requiring Forces to hide interpretation in Facts. They now test identical unified legacy-URL output while retaining detail/close/addressability and negative controls. Review also caught a duplicate Forces interpretation: the existing detail renderer already emitted its typed inference when the facts-only filter was removed. The redundant appended inference was removed; its material scope caveat remains visible and a dedicated non-duplication test was added.
 
+The expanded hosted browser setup initially requested a Python Playwright patch version that exists only in npm. CI now pins the published Python 1.62.0 release and explicitly installs its Chromium in addition to the existing npm browser. Application tests and strict security had already passed before that setup failure. No application dependency or permission changes.
+
 A screenshot initially captured before its Left illustration decoded. The harness now waits for fonts and visible-image completion, and the full before/after set was regenerated. Collapsed lazy-loaded scenes are excluded from the wait; they remain covered when opened in the existing responsive suite.
 
 Intermediate local CI runs started before later commits are not final-head evidence. One observed a changed deployment-endpoint signature because the checkout HEAD changed while it was running. Its result was invalidated; the final run freezes the committed head and retains the unchanged comparator. No baseline or approved failure is refreshed.

@@ -45,9 +45,10 @@ jobs:
           python tools/research/enterprise_economics_quality.py > "$RUNNER_TEMP/economics-quality.json"
       - name: Install isolated Chromium
         run: |
-          python -m pip install playwright==1.62.1
+          python -m pip install playwright==1.62.0
           npm install --prefix "$RUNNER_TEMP/economics-node" playwright@1.62.1
           "$RUNNER_TEMP/economics-node/node_modules/.bin/playwright" install --with-deps chromium
+          python -m playwright install chromium
       - name: Desktop, iPads, mobile, keyboard, touch, print and history withdrawal
         env:
           NODE_PATH: ${{ runner.temp }}/economics-node/node_modules
