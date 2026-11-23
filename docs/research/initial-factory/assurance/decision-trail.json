@@ -1,0 +1,929 @@
+{
+  "controlled_cases": [
+    {
+      "control": "no evidence",
+      "expected": "withheld",
+      "decision": {
+        "decision_id": "e5cde58533d21bb7b33555f31b2b7de32991eca3daca851a32e24bf27aa679b4",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "withheld",
+        "support": [],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "issuer only",
+      "expected": "attributed_only",
+      "decision": {
+        "decision_id": "1e022969fec823adcd3ba1c70adb6dccad24cd4b12016e8879c573096e742653",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "attributed_only",
+        "support": [
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-23",
+            "quality": "issuer",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "syndication",
+      "expected": "attributed_only",
+      "decision": {
+        "decision_id": "2528f3100805e3848c89b387fcf11855140d2f27d5f8c49e0806c95cf985af6b",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "attributed_only",
+        "support": [
+          {
+            "source": {
+              "url": "https://two.example.org/doc",
+              "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin One",
+            "publisher": "Publisher Two",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          },
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "same publisher",
+      "expected": "attributed_only",
+      "decision": {
+        "decision_id": "a13c9d940cd07fb19664133f1fb615050da4ac5733693d91bdc84f0e17838e0d",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "attributed_only",
+        "support": [
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          },
+          {
+            "source": {
+              "url": "https://two.example.org/doc",
+              "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin Two",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "independent",
+      "expected": "verified",
+      "decision": {
+        "decision_id": "d85c7283ff742d740bc0d74ebe10c2968b5d30aca8f1bf728f226bf92a758043",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "verified",
+        "support": [
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          },
+          {
+            "source": {
+              "url": "https://two.example.org/doc",
+              "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin Two",
+            "publisher": "Publisher Two",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "duplicate",
+      "expected": "attributed_only",
+      "decision": {
+        "decision_id": "0bfb1b59493d1fd2046a4adddc2720925344025df9a2e9401fb5bf8776d2db4e",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "attributed_only",
+        "support": [
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "withdrawal",
+      "expected": "attributed_only",
+      "decision": {
+        "decision_id": "52987fcabc46596e034812a467cb4c2c5c2e8fcc0727770768d84d58aaf1cc8b",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "attributed_only",
+        "support": [
+          {
+            "source": {
+              "url": "https://two.example.org/doc",
+              "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "locator": "body p1"
+            },
+            "state": "excluded",
+            "origin": "Origin Two",
+            "publisher": "Publisher Two",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          },
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "changed bytes",
+      "expected": "withheld",
+      "decision": {
+        "decision_id": "7f73085dab9c55b5eaf1ef6d5606a03a7c4a4e66ba58a31e4c6942b58146e10e",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "withheld",
+        "support": [
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "excluded",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "future",
+      "expected": "withheld",
+      "decision": {
+        "decision_id": "91c8e564a7fc0aaee3b9e42c0d72ed1508c0406ddba72b824a9f58cb519ae067",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "withheld",
+        "support": [
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "excluded",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-24",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "stale",
+      "expected": "withheld",
+      "decision": {
+        "decision_id": "980440643ef8cea41a94268e7a3443dcf60aca6191b9018229dd1a3df97fc53f",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "withheld",
+        "support": [
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "excluded",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-08-24",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "subsidiary",
+      "expected": "withheld",
+      "decision": {
+        "decision_id": "e5cde58533d21bb7b33555f31b2b7de32991eca3daca851a32e24bf27aa679b4",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "withheld",
+        "support": [],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "different definition",
+      "expected": "verified",
+      "decision": {
+        "decision_id": "d85c7283ff742d740bc0d74ebe10c2968b5d30aca8f1bf728f226bf92a758043",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "verified",
+        "support": [
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          },
+          {
+            "source": {
+              "url": "https://two.example.org/doc",
+              "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin Two",
+            "publisher": "Publisher Two",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "different period",
+      "expected": "verified",
+      "decision": {
+        "decision_id": "d85c7283ff742d740bc0d74ebe10c2968b5d30aca8f1bf728f226bf92a758043",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "verified",
+        "support": [
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          },
+          {
+            "source": {
+              "url": "https://two.example.org/doc",
+              "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin Two",
+            "publisher": "Publisher Two",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "contradiction",
+      "expected": "conflict",
+      "decision": {
+        "decision_id": "b4ff43fcec907230ac7cd825df875ec0135848412fa284445322fec6885ee160",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "conflict",
+        "support": [
+          {
+            "source": {
+              "url": "https://two.example.org/doc",
+              "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin Two",
+            "publisher": "Publisher Two",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "cancelled",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          },
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "current",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      }
+    },
+    {
+      "control": "same revision disputed",
+      "expected": "conflict",
+      "decision": {
+        "decision_id": "4919cc7cc28762df90220c9d8792af61dc8e8119cb9d1cc9e1d74fe8dba7c687",
+        "assertion": {
+          "scope": {
+            "enterprise": "enterprise-a",
+            "entity": "enterprise-a",
+            "event": "service-a",
+            "field": "status",
+            "definition": "deployment status",
+            "period": "2026-11-23"
+          },
+          "value": "completed",
+          "unit": "status",
+          "statement": "Company A completed the service rollout."
+        },
+        "as_of": "2026-11-23",
+        "factual_state": "conflict",
+        "support": [
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "ambiguous",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "completed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          },
+          {
+            "source": {
+              "url": "https://one.example.org/doc",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "locator": "body p1"
+            },
+            "state": "ambiguous",
+            "origin": "Origin One",
+            "publisher": "Publisher One",
+            "observed_on": "2026-11-23",
+            "quality": "direct",
+            "value": "proposed",
+            "unit": "status",
+            "statement": "Company A completed the service rollout.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      }
+    }
+  ],
+  "existing_proof": [
+    {
+      "enterprise": "lloyds-banking-group-plc",
+      "decision": {
+        "decision_id": "10b069dd4645290b471238842a98d188922811b41dbed4e59550d3f92f767c40",
+        "assertion": {
+          "scope": {
+            "enterprise": "lloyds-banking-group-plc",
+            "entity": "lloyds-banking-group-plc",
+            "event": "events.responsible_ai_ethics",
+            "field": "status",
+            "definition": "Attribution in the previously reviewed isolated sample",
+            "period": "2026-11-18"
+          },
+          "value": "announced",
+          "unit": "status",
+          "statement": "Lloyds says its Data & AI Ethics Committee reviews complex AI cases."
+        },
+        "as_of": "2026-11-18",
+        "factual_state": "attributed_only",
+        "support": [
+          {
+            "source": {
+              "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/responsible-ai-guide.html",
+              "digest": "f35d3f598c394770da6384a03253bb8842a5e6f2d20418227b5c6238c5ec8756",
+              "locator": "publisher body \u00b7 reviewed binding"
+            },
+            "state": "current",
+            "origin": "Lloyds Banking Group",
+            "publisher": "Lloyds Banking Group",
+            "observed_on": "2026-11-18",
+            "quality": "issuer",
+            "value": "announced",
+            "unit": "status",
+            "statement": "Lloyds says its Data & AI Ethics Committee reviews complex AI cases.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      },
+      "fixture_handoff": {
+        "eligible_for_isolated_handoff": false,
+        "can_publish_live": false,
+        "can_mutate_pipeline": false
+      },
+      "interpretation": {
+        "confirmed_development": null,
+        "buyer_questions": []
+      }
+    },
+    {
+      "enterprise": "bt-group-plc",
+      "decision": {
+        "decision_id": "80cc9ba6505f043f0a201bd1f56c0f621c946059520b554d0f85a59ec0feb8c9",
+        "assertion": {
+          "scope": {
+            "enterprise": "bt-group-plc",
+            "entity": "bt-group-plc",
+            "event": "events.programmes.swan_upgrade",
+            "field": "status",
+            "definition": "Attribution in the previously reviewed isolated sample",
+            "period": "2026-11-02"
+          },
+          "value": "announced",
+          "unit": "status",
+          "statement": "BT reported completing its upgrade to the Scottish Wide Area Network."
+        },
+        "as_of": "2026-11-02",
+        "factual_state": "attributed_only",
+        "support": [
+          {
+            "source": {
+              "url": "https://newsroom.bt.com/bt-transforms-scotlands-public-sector-connectivity--upgrading-the-nations-digital-infrastructure/",
+              "digest": "a4c6ceec896b3ef97c44db7033d3b97e3dbfe4ca6ac3178d592d2ad053fab691",
+              "locator": "publisher body \u00b7 reviewed binding"
+            },
+            "state": "current",
+            "origin": "BT Group",
+            "publisher": "BT Group",
+            "observed_on": "2026-11-02",
+            "quality": "issuer",
+            "value": "announced",
+            "unit": "status",
+            "statement": "BT reported completing its upgrade to the Scottish Wide Area Network.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      },
+      "fixture_handoff": {
+        "eligible_for_isolated_handoff": false,
+        "can_publish_live": false,
+        "can_mutate_pipeline": false
+      },
+      "interpretation": {
+        "confirmed_development": null,
+        "buyer_questions": []
+      }
+    },
+    {
+      "enterprise": "arm-holdings-plc",
+      "decision": {
+        "decision_id": "345dc9f11387b8ef4a1c1e1cb78da53dc62b5c7a02e928c3978a976f52d1d7b9",
+        "assertion": {
+          "scope": {
+            "enterprise": "arm-holdings-plc",
+            "entity": "microsoft",
+            "event": "azure-cobalt-200",
+            "field": "publisher_notice",
+            "definition": "Microsoft announcement of Azure Cobalt 200 availability",
+            "period": "2026-11-17"
+          },
+          "value": "announced",
+          "unit": "status",
+          "statement": "Microsoft announced general availability of Azure Cobalt 200 virtual machines."
+        },
+        "as_of": "2026-11-17",
+        "factual_state": "verified",
+        "support": [
+          {
+            "source": {
+              "url": "https://newsroom.arm.com/news/arm-microsoft-azure-cobalt-200",
+              "digest": "3e5331ef34bdcd97d6cd9fabd1828600fce8077426d988bf0223d4604c7d2218",
+              "locator": "publisher body \u00b7 reviewed binding"
+            },
+            "state": "current",
+            "origin": "Microsoft announcement",
+            "publisher": "Arm",
+            "observed_on": "2026-11-17",
+            "quality": "issuer",
+            "value": "announced",
+            "unit": "status",
+            "statement": "Microsoft announced general availability of Azure Cobalt 200 virtual machines.",
+            "replaces": null
+          },
+          {
+            "source": {
+              "url": "https://azure.microsoft.com/en-us/blog/azure-cobalt-200-vms-now-available-proven-on-real-workloads-and-built-for-the-agentic-era/",
+              "digest": "8482dd65d9c3f17b72bc230b83749dad7ce6e0c0618c752378eb708b4215dde3",
+              "locator": "publisher body \u00b7 reviewed binding"
+            },
+            "state": "current",
+            "origin": "Microsoft announcement",
+            "publisher": "Microsoft",
+            "observed_on": "2026-11-17",
+            "quality": "official",
+            "value": "announced",
+            "unit": "status",
+            "statement": "Microsoft announced general availability of Azure Cobalt 200 virtual machines.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      },
+      "fixture_handoff": {
+        "eligible_for_isolated_handoff": true,
+        "can_publish_live": false,
+        "can_mutate_pipeline": false
+      },
+      "interpretation": {
+        "confirmed_development": "Microsoft announced general availability of Azure Cobalt 200 virtual machines.",
+        "buyer_questions": [
+          "What is in scope, and which date or eligibility criteria would the buyer confirm?"
+        ]
+      }
+    },
+    {
+      "enterprise": "easyjet-plc",
+      "decision": {
+        "decision_id": "e8043cf05cd4fb35987f064118cfdb9f62250dca642c522f20bbc34a9b6857f7",
+        "assertion": {
+          "scope": {
+            "enterprise": "easyjet-plc",
+            "entity": "easyjet-plc",
+            "event": "events.partnerships.starlink_rollout",
+            "field": "status",
+            "definition": "Attribution in the previously reviewed isolated sample",
+            "period": "2026-10-26"
+          },
+          "value": "announced",
+          "unit": "status",
+          "statement": "easyJet announced plans to start deploying Starlink in the first half of 2027."
+        },
+        "as_of": "2026-10-26",
+        "factual_state": "attributed_only",
+        "support": [
+          {
+            "source": {
+              "url": "https://www.easyjet.com/en/news/airline/story/easyjet-to-offer-connectivity-onboard-for-the-first-time-with-starlink-the-fastest-wi-fi-in-the-sky-with-rapid-roll-out-coming-from-2027",
+              "digest": "7f6f5fabeadf86f5244c6fa29632a40a42a1460ef5033daca20a0a079a9e5db7",
+              "locator": "publisher body \u00b7 reviewed binding"
+            },
+            "state": "current",
+            "origin": "easyJet",
+            "publisher": "easyJet",
+            "observed_on": "2026-10-26",
+            "quality": "issuer",
+            "value": "announced",
+            "unit": "status",
+            "statement": "easyJet announced plans to start deploying Starlink in the first half of 2027.",
+            "replaces": null
+          }
+        ],
+        "publication_eligible": false
+      },
+      "fixture_handoff": {
+        "eligible_for_isolated_handoff": false,
+        "can_publish_live": false,
+        "can_mutate_pipeline": false
+      },
+      "interpretation": {
+        "confirmed_development": null,
+        "buyer_questions": []
+      }
+    }
+  ]
+}

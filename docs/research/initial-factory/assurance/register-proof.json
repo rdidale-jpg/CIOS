@@ -1,0 +1,108 @@
+[
+  {
+    "industry": "Retail",
+    "expected": {
+      "company_number": "00445790",
+      "legal_name": "TESCO PLC",
+      "status": "Active"
+    },
+    "observed": {
+      "company_number": "00445790",
+      "legal_name": "TESCO PLC",
+      "status": "Active"
+    },
+    "matches": 3,
+    "reported_fields": 3,
+    "reference_fields": 3,
+    "judgement": {
+      "decision_id": "8f0280125617effa3aa74644df67fd53f0a641569a8ccda529f029886f2a85e8",
+      "assertion": {
+        "scope": {
+          "enterprise": "00445790",
+          "entity": "00445790",
+          "event": "register",
+          "field": "registry_status",
+          "definition": "Companies House registered status",
+          "period": "2026-11-23"
+        },
+        "value": "Active",
+        "unit": "status",
+        "statement": "Companies House lists TESCO PLC as Active."
+      },
+      "as_of": "2026-11-23",
+      "factual_state": "verified",
+      "support": [
+        {
+          "source": {
+            "url": "https://find-and-update.company-information.service.gov.uk/company/00445790",
+            "digest": "330216df62e17f2fef150915f3ee899b250d5858a0266fd6b212110faf19dece",
+            "locator": "company-status"
+          },
+          "state": "current",
+          "origin": "Companies House register",
+          "publisher": "Companies House",
+          "observed_on": "2026-11-23",
+          "quality": "official",
+          "value": "Active",
+          "unit": "status",
+          "statement": "Companies House lists TESCO PLC as Active.",
+          "replaces": null
+        }
+      ],
+      "publication_eligible": false
+    }
+  },
+  {
+    "industry": "Utilities",
+    "expected": {
+      "company_number": "04031152",
+      "legal_name": "NATIONAL GRID PLC",
+      "status": "Active"
+    },
+    "observed": {
+      "company_number": "04031152",
+      "legal_name": "NATIONAL GRID PLC",
+      "status": "Active"
+    },
+    "matches": 3,
+    "reported_fields": 3,
+    "reference_fields": 3,
+    "judgement": {
+      "decision_id": "18117e1112f0dafb767d9c60e9363a95ad1c114e64209c6a723ad6a049c51a31",
+      "assertion": {
+        "scope": {
+          "enterprise": "04031152",
+          "entity": "04031152",
+          "event": "register",
+          "field": "registry_status",
+          "definition": "Companies House registered status",
+          "period": "2026-11-23"
+        },
+        "value": "Active",
+        "unit": "status",
+        "statement": "Companies House lists NATIONAL GRID PLC as Active."
+      },
+      "as_of": "2026-11-23",
+      "factual_state": "verified",
+      "support": [
+        {
+          "source": {
+            "url": "https://find-and-update.company-information.service.gov.uk/company/04031152",
+            "digest": "fb57ca547de1f411f7ea383438236e8acb9ad0396df850d5b1d1f60f1273a0c6",
+            "locator": "company-status"
+          },
+          "state": "current",
+          "origin": "Companies House register",
+          "publisher": "Companies House",
+          "observed_on": "2026-11-23",
+          "quality": "official",
+          "value": "Active",
+          "unit": "status",
+          "statement": "Companies House lists NATIONAL GRID PLC as Active.",
+          "replaces": null
+        }
+      ],
+      "publication_eligible": false
+    }
+  }
+]
