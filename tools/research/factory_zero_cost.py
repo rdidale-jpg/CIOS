@@ -166,9 +166,14 @@ def score(corpus, captures, reference, manual, withdrawn):
                 ('article:published_time', 'datePublished', 'publish-date')]
         dates = {d for v in meta + page.structured_dates if (d := parse_date(v))}
         published = next(iter(dates)).isoformat() if len(dates) == 1 else None
+        context = {}
+        if (issuer_agrees := getattr(page, 'issuer_agrees', None)):
+            # Follow the discovery route's scoped publisher check on v2.
+            if issuer_agrees(row['publisher'], row['url']):
+                context['issuer'] = row['publisher']
         baseline = extract_claims(raw, enterprise=row['id'], url=row['url'],
                                   digest=row['sha256'], published=published or '',
-                                  publisher=row['publisher'])
+                                  publisher=row['publisher'], **context)
         baseline = [claim for claim in baseline if int(LOCATOR.fullmatch(
             claim['source']['locator'])[1]) == row['paragraph']]
         label = reference[row['id']]
