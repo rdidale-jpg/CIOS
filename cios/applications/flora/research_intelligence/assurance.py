@@ -186,6 +186,11 @@ def screen_extracted(candidate, raw, *, as_of):
     issues = []
     if not bound_revision(raw, ref):
         issues.append('document_revision_mismatch')
+    elif 'value_mentions' in candidate or ', chars ' in ref.locator:
+        from .body_claims import excerpt_at_span
+
+        if excerpt_at_span(raw, ref.locator) != candidate['excerpt']:
+            issues.append('source_span_mismatch')
     if published > as_of or published < as_of - timedelta(days=90):
         issues.append('outside_review_window')
     if not validate_atomic_statement(candidate['excerpt']).atomic:

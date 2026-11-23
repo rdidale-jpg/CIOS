@@ -27,6 +27,84 @@ DATE = re.compile(
 UNCERTAIN = re.compile(r"\b(?:not|never|may|might|could|if|whether|reportedly|considering)\b|n['’]t\b", re.I)
 NAME = re.compile(r'[A-Z][\w&-]*(?:\s+(?:[A-Z][\w&-]*|of|for|the|and))*')
 
+# Local semantic recovery for bounded announcement and event clauses.
+MONTH = r'(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sept?(?:ember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?'
+DATELINE_DATE = rf'{MONTH} \d{{1,2}}, 20\d{{2}}'
+DATELINE = re.compile(
+    rf'^(?:[A-Z][\w .’\'-]{{1,32}})(?:, [A-Z][\w .’\'-]{{1,25}})?'
+    rf'\s+[-–—]\s+(?:(?P<date>{DATELINE_DATE})\s+(?:[-–—]\s+)?|(?=[A-Z]))'
+)
+ENTITY = r"[A-Z][\w&'’.‑-]*(?: (?:[A-Z][\w&'’.‑-]*|of|for|and|the))*?"
+SUBJECT = (
+    rf'(?P<actor>{ENTITY})(?: \([A-Z][A-Z0-9 ]{{1,11}}: [A-Z0-9. -]{{1,15}}\))?'
+    rf'(?:, (?:an?|the) [^,.;:!?]{{3,85}},)?'
+)
+ANNOUNCE = r'(?:today )?(?:announces?|announced)'
+NESTED = re.compile(rf'^{SUBJECT} {ANNOUNCE} (?:that )?(?P<clause>.+)$')
+VALUE = r'(?:approximately |about |up to |at least )?(?:[€£$]\d+(?:[.,]\d+)*|\d+(?:[.,]\d+)* (?:EUR|GBP|USD))(?: (?:thousand|million|billion))?(?: (?:annually|per year))?'
+EVENT_CLAUSES = (
+    ('acquisition', 'completed', 'acquired entity',
+     r'(?:has )?completed (?:its |the )?acquisition of', rf'(?P<target>{ENTITY})(?=,|[.!?]?$)'),
+    ('donation', 'planned', 'recipient',
+     rf'(?:{ANNOUNCE} )?plans? to donate',
+     rf"(?P<value>{VALUE}) to (?:{ENTITY}’s )?(?P<target>{ENTITY})(?=,|[.!?]?$)"),
+    ('research collaboration', 'committed', 'collaborator',
+     r'(?:has )?committed to (?:continue and increase|expand|continue) (?:its )?(?:R&D|research) collaboration with',
+     rf'(?P<target>{ENTITY})(?:, focusing on projects worth (?P<value>{VALUE})'
+     r'(?= across\b|,|$)|(?=,|$))'),
+    ('portfolio expansion', 'announced', None,
+     rf'{ANNOUNCE} (?:a )?(?:major )?expansion of',
+     r'(?:its |the )?(?P<target>portfolio)(?=,|[.!?]?$)'),
+    ('migration', 'in progress', None,
+     r'is migrating to', r'(?P<target>[^,;.!?]{3,140})(?=,|[.!?]?$)'),
+    ('announcement', 'announced', None,
+     r'(?:today )?published', r'(?P<target>[^,;.!?]{4,140})(?=,|[.!?]?$)'),
+)
+SENTENCE_BREAK = re.compile(r'(?<=[.!?])\s+(?=[A-Z])')
+SPAN_LOCATOR = re.compile(r'body p(\d+), sentence (\d+), chars (\d+)–(\d+)')
+
+SEMANTIC_RULES = tuple((kind, status, role, re.compile(rf'^{SUBJECT} {verb} {target}'))
+                       for kind, status, role, verb, target in EVENT_CLAUSES)
+
+
+def semantic_clause(sentence):
+    """Extract one narrow event assertion, anchored to its exact displayed text."""
+    dateline = DATELINE.match(sentence)
+    if dateline and not (dateline['date'] or dateline[0].isupper()):
+        dateline = None
+    offset = dateline.end() if dateline else 0
+    prefix = re.match(r'In parallel, ', sentence[offset:])
+    if prefix:
+        offset += prefix.end()
+    text = sentence[offset:].rstrip('.!?')
+    # A nested issuer statement can name a different actor. Resolve only an
+    # explicit entity or the grammatical subject pronoun within this wrapper.
+    nested = NESTED.fullmatch(text)
+    interpretations = [(text, offset, None)]
+    if nested:
+        clause = nested['clause']
+        start = offset + nested.start('clause')
+        if clause.startswith('it '):
+            start += 3
+            interpretations.append((nested['actor'] + ' ' + clause[3:], start, nested['actor']))
+        elif clause[0].isupper():
+            interpretations.append((clause, start, None))
+    for interpretation, start, substituted in interpretations:
+        for kind, status, role, rule in SEMANTIC_RULES:
+            match = rule.match(interpretation)
+            if match is None or (kind == 'announcement' and dateline is None):
+                continue
+            stop = start + match.end() - (len(substituted) + 1 if substituted else 0)
+            excerpt = sentence[offset:stop]
+            target = match['target']
+            value = match.groupdict().get('value')
+            dates = [found.group().casefold().removeprefix('the ') for found in DATE.finditer(excerpt)]
+            if dateline and dateline['date']:
+                dates.insert(0, dateline['date'].casefold())
+            return (kind, status, match['actor'], target, dates, [value] if value else [],
+                    [{'name': target, 'role': role}] if role else [], offset, stop)
+    return None
+
 
 class BodyParagraphs(HTMLParser):
     """Count HTML body paragraphs, including skipped paragraphs for stable locators."""
@@ -62,15 +140,64 @@ class BodyParagraphs(HTMLParser):
             self.paragraph = None
 
 
-def extract_claims(raw, *, enterprise, url, digest, published, publisher):
-    """Return attributed candidate excerpts only. No authority or eligibility."""
+def body_paragraphs(raw):
     parser = BodyParagraphs()
     parser.feed(raw.decode('utf-8-sig'))
     parser.close()
+    return parser.paragraphs
+
+
+def excerpt_at_span(raw, locator):
+    """Return display text at a zero-based, end-exclusive sentence span."""
+    match = SPAN_LOCATOR.fullmatch(locator)
+    if match is None:
+        return None
+    paragraph, number, start, stop = map(int, match.groups())
+    for index, text in body_paragraphs(raw):
+        if index == paragraph:
+            sentences = SENTENCE_BREAK.split(text)
+            if 1 <= number <= len(sentences) and 0 <= start < stop <= len(sentences[number - 1]):
+                return sentences[number - 1][start:stop]
+            break
+    return None
+
+
+def semantic_spans(sentence):
+    # A named subject must be explicit on each side of a semicolon.
+    for part in re.finditer(r'[^;]+', sentence):
+        statement = part[0].strip()
+        if not 25 <= len(statement) <= 640 or UNCERTAIN.search(statement):
+            continue
+        if (clause := semantic_clause(statement)) is not None:
+            *fields, start, stop = clause
+            offset = part.start() + len(part[0]) - len(part[0].lstrip())
+            yield *fields, offset + start, offset + stop
+
+
+def extract_claims(raw, *, enterprise, url, digest, published, publisher):
+    """Return attributed candidate excerpts only. No authority or eligibility."""
     facts = {}
-    for paragraph, text in parser.paragraphs:
-        for number, sentence in enumerate(re.split(r'(?<=[.!?])\s+(?=[A-Z])', text), 1):
-            if not 25 <= len(sentence) <= 320 or UNCERTAIN.search(sentence):
+    for paragraph, text in body_paragraphs(raw):
+        for number, sentence in enumerate(SENTENCE_BREAK.split(text), 1):
+            semantic = tuple(semantic_spans(sentence)) if len(sentence) <= 640 else ()
+            for kind, status, actor, target, dates, values, parties, start, stop in semantic:
+                key = kind, status, actor.casefold(), target.casefold(), tuple(dates), tuple(values)
+                facts.setdefault(key, {
+                    'claim_id': fingerprint((url, digest, paragraph, number, start, stop)),
+                    'event_hint': fingerprint((enterprise, kind, actor.casefold(), target.casefold())),
+                    'enterprise_id': enterprise,
+                    'source': {'url': url, 'sha256': digest, 'publisher': publisher,
+                               'published': published,
+                               'locator': f'body p{paragraph}, sentence {number}, chars {start}–{stop}'},
+                    'excerpt': sentence[start:stop],
+                    'actor_text': actor, 'target_text': target, 'date_mentions': dates,
+                    'value_mentions': values, 'relationship_candidates': parties,
+                    'kind': kind, 'reported_status': status,
+                    'classification': 'issuer claim candidate', 'publication_eligible': False,
+                })
+                if len(facts) >= 6:
+                    return list(facts.values())
+            if semantic or not 25 <= len(sentence) <= 320 or UNCERTAIN.search(sentence):
                 continue
             statement = re.sub(r'^(?:At|In|On) [^,]{3,70},\s*', '', sentence)
             for kind, status, rule in RULES:
@@ -128,10 +255,12 @@ def assess_claims(claims, *, reviewed_events=None, reviewed_origins=None):
         claims_in_group = list(rows.values())
         statuses = {row['reported_status'] for row in claims_in_group}
         dated = {tuple(row['date_mentions']) for row in claims_in_group if row['date_mentions']}
+        values = {tuple(row['value_mentions']) for row in claims_in_group if row.get('value_mentions')}
         roles = {tuple(sorted((pair['name'], pair['role']) for pair in row['relationship_candidates']))
                  for row in claims_in_group if row['relationship_candidates']}
         differences = [label for label, values in (
             ('status', statuses), ('date mentions', dated), ('relationship descriptions', roles),
+            ('reported values', values),
         ) if len(values) > 1]
         publishers = {row['source']['publisher'] for row in claims_in_group}
         origins = {reviewed_origins[key] for key in rows if reviewed_origins.get(key)}
