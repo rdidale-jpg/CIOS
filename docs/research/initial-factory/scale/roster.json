@@ -1,0 +1,242 @@
+[
+  {
+    "industry": "Banking and financial services",
+    "enterprise_id": "hsbc",
+    "publisher": "HSBC",
+    "index": "https://www.hsbc.com/news-and-views/news/media-releases",
+    "article_path": "/news-and-views/news/media-releases/[^?#]+",
+    "cohort": "development"
+  },
+  {
+    "industry": "Banking and financial services",
+    "enterprise_id": "barclays",
+    "publisher": "Barclays",
+    "index": "https://home.barclays/news/press-releases/",
+    "article_path": "/news/press-releases/20\\d\\d/[^?#]+",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Banking and financial services",
+    "enterprise_id": "natwest",
+    "publisher": "NatWest Group",
+    "index": "https://www.natwestgroup.com/news-and-insights/news-room/press-releases.html",
+    "article_path": "/news-and-insights/news-room/press-releases/[^?#]+\\.html",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Banking and financial services",
+    "enterprise_id": "standard-chartered",
+    "publisher": "Standard Chartered",
+    "index": "https://www.sc.com/en/press-release/",
+    "article_path": "/en/press-release/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Banking and financial services",
+    "enterprise_id": "monzo",
+    "publisher": "Monzo",
+    "index": "https://monzo.com/blog/",
+    "article_path": "/blog/(?:\\d{4}/\\d{2}/\\d{2}/)?[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Telecommunications",
+    "enterprise_id": "vodafone",
+    "publisher": "Vodafone",
+    "index": "https://www.vodafone.com/news",
+    "article_path": "/news/(?:[a-z0-9-]+/)?[a-z0-9-]+/?",
+    "cohort": "development"
+  },
+  {
+    "industry": "Telecommunications",
+    "enterprise_id": "orange",
+    "publisher": "Orange",
+    "index": "https://newsroom.orange.com/",
+    "article_path": "/(?:press-releases|communiques)/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Telecommunications",
+    "enterprise_id": "nokia",
+    "publisher": "Nokia",
+    "index": "https://www.nokia.com/newsroom/",
+    "article_path": "/newsroom/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Telecommunications",
+    "enterprise_id": "ericsson",
+    "publisher": "Ericsson",
+    "index": "https://www.ericsson.com/en/press-releases",
+    "article_path": "/en/(?:press-releases|news)/20\\d\\d/[^?#]+",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Telecommunications",
+    "enterprise_id": "t-mobile",
+    "publisher": "T-Mobile",
+    "index": "https://www.t-mobile.com/news",
+    "article_path": "/news/[a-z0-9-]+/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Technology",
+    "enterprise_id": "ibm",
+    "publisher": "IBM",
+    "index": "https://newsroom.ibm.com/",
+    "article_path": "/20\\d\\d-\\d\\d-\\d\\d-[^/]+",
+    "cohort": "development"
+  },
+  {
+    "industry": "Technology",
+    "enterprise_id": "nvidia",
+    "publisher": "NVIDIA",
+    "index": "https://nvidianews.nvidia.com/",
+    "article_path": "/news/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Technology",
+    "enterprise_id": "cloudflare",
+    "publisher": "Cloudflare",
+    "index": "https://www.cloudflare.com/press-releases/",
+    "article_path": "/(?:press/)?press-releases/(?:20\\d\\d/)?[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Technology",
+    "enterprise_id": "sap",
+    "publisher": "SAP",
+    "index": "https://news.sap.com/",
+    "article_path": "/20\\d\\d/\\d\\d/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Technology",
+    "enterprise_id": "anthropic",
+    "publisher": "Anthropic",
+    "index": "https://www.anthropic.com/news",
+    "article_path": "/news/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Aviation and transport",
+    "enterprise_id": "airbus",
+    "publisher": "Airbus",
+    "index": "https://www.airbus.com/en/newsroom/press-releases",
+    "article_path": "/en/newsroom/(?:press-releases|news)/20\\d\\d-\\d\\d-[a-z0-9-]+",
+    "cohort": "development"
+  },
+  {
+    "industry": "Aviation and transport",
+    "enterprise_id": "boeing",
+    "publisher": "Boeing",
+    "index": "https://boeing.mediaroom.com/news-releases-statements",
+    "article_path": "/20\\d\\d-\\d\\d-\\d\\d-[^/]+",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Aviation and transport",
+    "enterprise_id": "ryanair",
+    "publisher": "Ryanair",
+    "index": "https://corporate.ryanair.com/news/",
+    "article_path": "/news/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Aviation and transport",
+    "enterprise_id": "wizz-air",
+    "publisher": "Wizz Air",
+    "index": "https://www.wizzair.com/en-gb/information-and-services/about-us/news",
+    "article_path": "/en-gb/information-and-services/about-us/news/[^?#]+",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Aviation and transport",
+    "enterprise_id": "ups",
+    "publisher": "UPS",
+    "index": "https://about.ups.com/us/en/newsroom.html",
+    "article_path": "/us/en/newsroom/[^?#]+\\.html",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Energy and utilities",
+    "enterprise_id": "shell",
+    "publisher": "Shell",
+    "index": "https://www.shell.com/news-and-insights/newsroom.html",
+    "article_path": "/news-and-insights/newsroom/[^?#]+\\.html",
+    "cohort": "development"
+  },
+  {
+    "industry": "Energy and utilities",
+    "enterprise_id": "bp",
+    "publisher": "BP",
+    "index": "https://www.bp.com/en/global/corporate/news-and-insights/press-releases.html",
+    "article_path": "/en/global/corporate/news-and-insights/press-releases/[^?#]+\\.html",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Energy and utilities",
+    "enterprise_id": "siemens-energy",
+    "publisher": "Siemens Energy",
+    "index": "https://www.siemens-energy.com/global/en/home/press-releases.html",
+    "article_path": "/global/en/home/press-releases/[^?#]+\\.html",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Energy and utilities",
+    "enterprise_id": "sse",
+    "publisher": "SSE",
+    "index": "https://www.sse.com/news-and-views/",
+    "article_path": "/news-and-views/20\\d\\d/\\d\\d/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Energy and utilities",
+    "enterprise_id": "octopus-energy",
+    "publisher": "Octopus Energy",
+    "index": "https://octopus.energy/press/",
+    "article_path": "/press/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Retail and consumer",
+    "enterprise_id": "sainsburys",
+    "publisher": "Sainsbury’s",
+    "index": "https://www.about.sainsburys.co.uk/news/latest-news",
+    "article_path": "/news/(?:latest-news/)?20\\d\\d/[^?#]+",
+    "cohort": "development"
+  },
+  {
+    "industry": "Retail and consumer",
+    "enterprise_id": "marks-and-spencer",
+    "publisher": "Marks & Spencer",
+    "index": "https://corporate.marksandspencer.com/media/press-releases",
+    "article_path": "/media/press-releases/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Retail and consumer",
+    "enterprise_id": "amazon",
+    "publisher": "Amazon",
+    "index": "https://www.aboutamazon.com/news",
+    "article_path": "/news/[a-z0-9-]+/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Retail and consumer",
+    "enterprise_id": "ocado-group",
+    "publisher": "Ocado Group",
+    "index": "https://www.ocadogroup.com/newsroom",
+    "article_path": "/(?:newsroom|news)/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  },
+  {
+    "industry": "Retail and consumer",
+    "enterprise_id": "asos",
+    "publisher": "ASOS",
+    "index": "https://www.asosplc.com/news/",
+    "article_path": "/news/[a-z0-9-]+/?",
+    "cohort": "held_out"
+  }
+]
