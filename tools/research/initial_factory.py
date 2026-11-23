@@ -99,14 +99,14 @@ def read_replay(bundle, directory):
                         original_digest=row['captured_original_sha256']) for row in bundle['captures']]
 
 
-def fetch_disclosure(url):
+def fetch_disclosure(url, max_bytes=LIMIT):
     with build_opener(NoRedirect).open(Request(url, headers={
         'Accept': 'text/html, application/pdf', 'User-Agent': 'CIOS commissioned factual research'
     }), timeout=12) as response:
         kind = response.headers.get_content_type()
         if kind not in {'text/html', 'application/pdf'}:
             raise ValueError('Unexpected disclosure media type')
-        raw = response.read(LIMIT + 1)
+        raw = response.read(max_bytes + 1)
         return raw, '.pdf' if kind == 'application/pdf' else '.html'
 
 
