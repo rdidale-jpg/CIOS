@@ -23,7 +23,17 @@ FACTORY_BASE = 'f9b939c31dfc4993fe3a59d1e9d05dbe24683226'
 FACTORY_CUTS = {'cios/applications/flora/visual_panels.py': ('84503654abe987c913a85953cd1de977233edf3c5899e84255d3bf4ed2066ea8', ('_frame', 'render'))}
 
 
+# Draft executive restoration changes only public header and arrival presentation.
+# Preserve exact predecessor checks alongside current-head security and browser runs.
+EXECUTIVE_BASE = 'c04b242b1c09b584156d838c8634b504e1c988bf'
+EXECUTIVE_CUTS = {
+    'cios/applications/flora/design_system.py': ('b33220e71eaf4c7489086efffee19b16cd2c2c6ca79aadce38d019e3028ba7a8', ('header',)),
+    'cios/applications/flora/visual_panels.py': ('91bef548be804a88deebab13fd0d09cdd6b1bad5838cdbd42ab2f11d9efd9624', ('_trail', '_top', '_enterprise_arrival', '_frame')),
+}
+
+
 def predecessor(root, path, current):
+    current = checked_cut(root, path, current, EXECUTIVE_BASE, EXECUTIVE_CUTS)
     current = checked_cut(root, path, current, FACTORY_BASE, FACTORY_CUTS)
     current = checked_cut(root, path, current, FLAGSHIP_BASE, FLAGSHIP_CUTS)
     current = checked_cut(root, path, current, EEI3_BASE, EEI3_CUTS)

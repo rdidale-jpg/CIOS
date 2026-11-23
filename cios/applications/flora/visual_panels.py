@@ -64,13 +64,12 @@ def _trail(ctx):
         if ctx.selected in cohort.SUBJECTS:
             return text+'<a href="/industries/banking">Banking</a><span aria-hidden="true">/</span><span>'+e(cohort.SUBJECTS[ctx.selected][0])+'</span>'
         return text+'<span>Banking</span>'
-    bank=v.url(v.Context('banking','landscape',ctx.layer,'lloyds'))
-    return text+'<a href="'+e(bank,quote=True)+'">Banking</a><span aria-hidden="true">/</span><span>Lloyds Banking Group</span>'
+    return text+'<a href="/industries/banking">Banking</a><span aria-hidden="true">/</span><span>Lloyds Banking Group</span>'
 
 
 def _top(ctx,headers):
     body='<header id="top" data-region="top"><a class="skip" href="#visual-content">Skip to main content</a><div class="global">'
-    body+=ds.header(headers=headers,compact=True,embedded=True,research_tools=__import__('cios.applications.flora.access',fromlist=['is_cios_owner']).is_cios_owner(headers))+'<span class="identity" aria-label="Current account role">'+_role(headers)+'</span>'+('<a class="account-entry" href="/auth/sign-in">Sign in</a>' if _role(headers)=='Guest' else '')+'</div>'
+    body+=ds.header(active={'uk':'home','banking':'industries'}.get(ctx.scope,'enterprises'),headers=headers,compact=True,embedded=True,research_tools=__import__('cios.applications.flora.access',fromlist=['is_cios_owner']).is_cios_owner(headers))+'<span class="identity" aria-label="Current account role">'+_role(headers)+'</span>'+('<a class="account-entry" href="/auth/sign-in">Sign in</a>' if _role(headers)=='Guest' else '')+'</div>'
     body+='<div class="context"><nav aria-label="Current scope">'+_trail(ctx)+'</nav><nav class="stream-switcher" aria-label="Insight streams">'
     streams=cohort.STREAMS if ctx.scope=='banking' and ctx.selected in cohort.SUBJECTS and not (ctx.detail or ctx.agenda) else v.PRESENTATIONS[ctx.scope]['streams']
     for stream in streams:
@@ -393,6 +392,41 @@ def _legal_notice(ctx,data):
     return '<footer class="legal-notice" aria-label="Legal attribution">'+text+'</footer>'
 
 
+def _enterprise_arrival(ctx, data, replay):
+    """Editorial links to existing views and individually eligible disclosures."""
+    if ctx.scope == 'lloyds':
+        from .lloyds_flagship import reviewed_change
+        name = data['enterprise_name']
+        lead = 'How the Group earns, runs its services and renews its platforms.'
+        links = (
+            ('Economics', v.url(ctx, detail='economics', reading=ctx.reading) + '#visual-content'),
+            ('Operating model', v.stream_url(ctx, 'inside') + '#visual-content'),
+            ('Leadership agenda', v.url(ctx, agenda='funding-base', reading=ctx.reading) + '#agenda-insight'),
+            ('Technology & suppliers', v.url(ctx, stream='inside', detail='technology', reading=ctx.reading) + '#visual-content'),
+            ('Commercial hypotheses', '/opportunities#opportunities-banking'),
+        )
+        change = reviewed_change(ctx, data)
+    else:
+        name = 'easyJet'
+        lead = 'How the airline turns its network, aircraft and schedule into earnings.'
+        links = (
+            ('Economics', v.url(ctx, detail='airline-revenue', reading=ctx.reading) + '#visual-content'),
+            ('Operating model', v.stream_url(ctx, 'inside') + '#visual-content'),
+            ('Industry pressures', v.stream_url(ctx, 'forces') + '#visual-content'),
+            ('Research & evidence', '/enterprises/easyjet/understanding'),
+            ('Commercial hypotheses', '/opportunities#opportunities-aviation'),
+        )
+        change = ''
+    links = (*links[:2], ('What’s changed', '#enterprise-change'), *links[2:])
+    navigation = ''.join('<a href="' + e(url, quote=True) + '">' + e(label) + '</a>' for label, url in links)
+    change = replay or change or '<p>No recent change is available for this view under the current evidence rules.</p>'
+    return ('<section class="enterprise-arrival" aria-label="' + e(name, quote=True) + ' overview">'
+            '<p class="enterprise-name">' + e(name) + '</p><p>' + e(lead) + '</p>'
+            '<nav aria-label="Explore this enterprise">' + navigation + '</nav></section>'
+            '<section class="enterprise-change" id="enterprise-change" aria-labelledby="enterprise-change-title">'
+            '<h2 id="enterprise-change-title">What’s changed</h2>' + change + '</section>')
+
+
 def _frame(ctx,headers,data,issues,entries,body,*,show_commercial=False):
     """Ordinary three-panel frame emits no research disclosures or source URLs."""
     scene=replace(ctx,stream='landscape') if ctx.scope=='banking' and ctx.stream=='inside' else ctx
@@ -414,6 +448,8 @@ def _frame(ctx,headers,data,issues,entries,body,*,show_commercial=False):
     if show_commercial and ctx.scope in {'lloyds', 'easyjet'} and not (ctx.detail or ctx.agenda or ctx.selected):
         from .memory.commercial_views import commercial_change
         change = commercial_change(ctx.scope, ctx.stream, headers)
+        if ctx.stream == 'landscape':
+            change = _enterprise_arrival(ctx, data, change)
     return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(scene,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+watermark+'<article class="workspace editorial-workspace">'+reading.selector(ctx)+change+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
 
 

@@ -15,3 +15,18 @@
 /* Keep the existing Pipeline action readable under the shared anchor reset. */
 .ds-page .sales-compact a.ex-button{color:#fff}
 @media(forced-colors:active){.ds-page .sales-compact a.ex-button{color:LinkText}}
+
+/* Keep product destinations visible when account and specialist controls wrap. */
+.ds-page .product-header nav{flex-wrap:wrap;row-gap:4px}
+.ds-page .product-header nav>a[data-product-link]{white-space:nowrap}
+
+.vp-page .enterprise-arrival{padding:0 0 14px;margin:0 0 18px;border-bottom:1px solid var(--line)}
+.vp-page .enterprise-arrival p{margin:0 0 8px;max-width:54ch}
+.vp-page .enterprise-arrival .enterprise-name{font:400 clamp(32px,4vw,53px)/1.06 Georgia,serif;letter-spacing:-.035em;color:var(--forest)}
+.vp-page .enterprise-arrival nav{display:flex;flex-wrap:wrap;gap:0 17px}
+.vp-page .enterprise-arrival nav a{min-height:44px;display:inline-flex;align-items:center;font-size:.87em;text-underline-offset:.2em}
+.vp-page .enterprise-change{margin:0 0 26px;padding:13px 17px;border-left:3px solid #6a8872;background:#e9efe690;scroll-margin-top:20px}
+.vp-page .enterprise-change h2{font:600 .82em/1.35 Arial,sans-serif;letter-spacing:.065em;text-transform:uppercase;margin:0 0 7px}
+.vp-page .enterprise-change p{margin:4px 0;max-width:65ch}
+.vp-page .enterprise-change .change-period{font-size:.82em;color:var(--muted)}
+.vp-page .enterprise-change>a{display:inline-flex;align-items:center;min-height:40px;font-size:.87em;text-underline-offset:.2em}

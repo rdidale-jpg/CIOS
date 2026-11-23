@@ -31,7 +31,7 @@ def test_primary_navigation_uses_five_executive_destinations():
     page = _flora_home_page({"X-Flora-User": "owner", "X-Flora-Roles": "owner", "X-Flora-Active-Workspace": "CIOS", "X-Flora-Enterprises": "CIOS"})
 
     from tests.test_flora_unified_experience import Navigation
-    assert Navigation(page).labels == ['Home','PESTLE','Industries','Enterprises','Offers','Opportunities','Pipeline']
+    assert Navigation(page).labels == ['Home','Industries','Enterprises','Opportunities','Pipeline']
     assert page.count('aria-label="Primary product navigation"')==1
     assert '<details class="specialist-menu"><summary>Research & specialist tools</summary>' in page
     assert "/research" in page and "/governance" in page
