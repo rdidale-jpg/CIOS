@@ -1,0 +1,392 @@
+{
+  "development": [
+    {
+      "url": "https://www.sc.com/en/press-release/standard-chartered-steps-up-formula-1-partnership-as-bank-becomes-global-partner/",
+      "sha256": "49593276307beb24c7592c6a1cd41498c2634260b97638d30757b214c7c8a31a",
+      "enterprise": "standard-chartered",
+      "publisher": "Standard Chartered",
+      "paragraph": 60,
+      "claims": [
+        {
+          "actor": "Formula 1",
+          "kind": "partnership",
+          "status": "announced",
+          "target": "Standard Chartered",
+          "dates": [],
+          "value": null,
+          "counterparty": "Standard Chartered"
+        }
+      ]
+    },
+    {
+      "url": "https://newsroom.ibm.com/2026-11-17-ibm-study-chief-ai-officers-see-where-ai-creates-value,-but-few-control-investment-decisions",
+      "sha256": "605a5819ccbd6f670fa07f7f0f8b1c752d49547857d8d050beccef478664416b",
+      "enterprise": "ibm",
+      "publisher": "IBM",
+      "paragraph": 2,
+      "claims": []
+    },
+    {
+      "url": "https://www.anthropic.com/news/genesis-mission-commitment",
+      "sha256": "3883be953951a3a3a76141329fc1e24ec290fcc49635a4ab61639326906cceac",
+      "enterprise": "anthropic",
+      "publisher": "Anthropic",
+      "paragraph": 4,
+      "claims": [
+        {
+          "actor": "Anthropic",
+          "kind": "partnership",
+          "status": "announced",
+          "target": "US Department of Energy",
+          "dates": [],
+          "value": null,
+          "counterparty": "US Department of Energy"
+        }
+      ]
+    },
+    {
+      "url": "https://www.nokia.com/newsroom/polish-eu-presidency-must-grasp-opportunity-to-drive-digital-competitiveness/",
+      "sha256": "dc793c2dedf1f6d5accdfd13b02d054147095c3d22cd8a8cd3b2975dc8e20c91",
+      "enterprise": "nokia",
+      "publisher": "Nokia",
+      "paragraph": 18,
+      "claims": []
+    }
+  ],
+  "validation": [
+    {
+      "url": "https://www.sc.com/en/press-release/301703/",
+      "sha256": "a83e2e0e0e303220a1c5fcaed985bfb12b772dab4e7e88fb60568b4be92161f5",
+      "enterprise": "standard-chartered",
+      "publisher": "Standard Chartered",
+      "paragraph": 61,
+      "claims": [
+        {
+          "actor": "Standard Chartered",
+          "kind": "portfolio expansion",
+          "status": "announced",
+          "target": "Tokenised Deposits solution",
+          "dates": [],
+          "value": null,
+          "counterparty": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.sc.com/en/press-release/standard-chartered-pilots-redemption-liquidity-facility-for-ant-internationals-investment-in-tokenised-money-market-funds/",
+      "sha256": "0ef0727ac12bdd841b6ff43ac6152f77b0fb2e878f039e1f8552428cdbab054d",
+      "enterprise": "standard-chartered",
+      "publisher": "Standard Chartered",
+      "paragraph": 61,
+      "claims": [
+        {
+          "actor": "Standard Chartered Bank (Hong Kong) Limited",
+          "kind": "pilot",
+          "status": "completed",
+          "target": "Ant International",
+          "dates": [],
+          "value": null,
+          "counterparty": "Ant International"
+        }
+      ]
+    },
+    {
+      "url": "https://www.nokia.com/newsroom/nokia-home-of-radio-in-oulu/",
+      "sha256": "d3a541983d971bd3d452c3034f939c7e5b7e37342c6405f36c475c5fbc27dc36",
+      "enterprise": "nokia",
+      "publisher": "Nokia",
+      "paragraph": 14,
+      "claims": [
+        {
+          "actor": "Nokia",
+          "kind": "facility opening",
+          "status": "announced",
+          "target": "R&D and manufacturing campus",
+          "dates": [],
+          "value": null,
+          "counterparty": null
+        }
+      ]
+    },
+    {
+      "url": "https://nvidianews.nvidia.com/news/nvidia-board-of-directors-establishes-national-security-and-export-control-oversight-committee",
+      "sha256": "4f0a37b46fdf17071371174995580275c7e0327d5390875958e7a914a7371761",
+      "enterprise": "nvidia",
+      "publisher": "NVIDIA",
+      "paragraph": 2,
+      "claims": [
+        {
+          "actor": "Board of Directors",
+          "kind": "governance",
+          "status": "completed",
+          "target": "National Security and Export Control Oversight Committee",
+          "dates": [],
+          "value": null,
+          "counterparty": null
+        }
+      ]
+    },
+    {
+      "url": "https://newsroom.ibm.com/2026-11-10-ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation",
+      "sha256": "8e191a3913768ec2d42226aec62de0d80cd3049b50b6f65db4d1ad1bb449e54d",
+      "enterprise": "ibm",
+      "publisher": "IBM",
+      "paragraph": 2,
+      "claims": []
+    }
+  ],
+  "held_out": [
+    {
+      "url": "https://about.ups.com/us/en/newsroom/press-releases/our-strategy/ups-announces-agreement-to-acquire-smartways-logistics.html",
+      "sha256": "53c59d7f1b2b545bd4ac5b7c5999c7b1f9d5386e93a9332783d5cc404bba1ed4",
+      "enterprise": "ups",
+      "publisher": "UPS",
+      "paragraph": 6,
+      "claims": [
+        {
+          "actor": "UPS",
+          "kind": "acquisition",
+          "status": "planned",
+          "target": "Smartways Logistics",
+          "dates": [
+            "nov. 17, 2026"
+          ],
+          "value": null,
+          "counterparty": "Smartways Logistics"
+        }
+      ]
+    },
+    {
+      "url": "https://www.sc.com/en/press-release/standard-chartered-and-lmax-group-expand-partnership-to-include-digital-asset-custody-in-luxembourg-and-difc/",
+      "sha256": "530f302d1bdb54803849b148b80c2bca2d7d4d79bc318cae2902ee43c0afd4db",
+      "enterprise": "standard-chartered",
+      "publisher": "Standard Chartered",
+      "paragraph": 63,
+      "claims": [
+        {
+          "actor": "Standard Chartered",
+          "kind": "supply",
+          "status": "planned",
+          "target": "secure digital asset custody services",
+          "dates": [],
+          "value": null,
+          "counterparty": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.hsbc.com/news-and-views/news/media-releases/2026/hsbc-and-google-cloud-announce-transformative-ai-banking-partnership",
+      "sha256": "126b55330e6ae1cf45cc219cfc442a3eaaaa239c3a25f75a60d2034b0adff789",
+      "enterprise": "hsbc",
+      "publisher": "HSBC",
+      "paragraph": 9,
+      "claims": [
+        {
+          "actor": "HSBC",
+          "kind": "partnership",
+          "status": "announced",
+          "target": "Google Cloud",
+          "dates": [
+            "17 june 2026"
+          ],
+          "value": null,
+          "counterparty": "Google Cloud"
+        }
+      ]
+    },
+    {
+      "url": "https://www.hsbc.com/news-and-views/news/media-releases/2026/hsbc-becomes-presenting-partner-of-the-china-open",
+      "sha256": "9a9bb631b1d125420d7bf355ec7c7eb774737aae2725c08bfce1d6bceca26bcf",
+      "enterprise": "hsbc",
+      "publisher": "HSBC",
+      "paragraph": 9,
+      "claims": [
+        {
+          "actor": "HSBC Group",
+          "kind": "partnership",
+          "status": "planned",
+          "target": "China Open",
+          "dates": [
+            "2026"
+          ],
+          "value": null,
+          "counterparty": "China Open"
+        }
+      ]
+    },
+    {
+      "url": "https://newsroom.ibm.com/2026-11-16-ibm,-fermilab,-and-nvidia-announce-plans-for-new-co-design-platform-to-accelerate-the-development-of-next-generation,-modular-quantum-computers",
+      "sha256": "ce9c29b0f67e037ead0a45433c9d118a64fb64cb51d2eee8b975c41973449cf9",
+      "enterprise": "ibm",
+      "publisher": "IBM",
+      "paragraph": 1,
+      "claims": [
+        {
+          "actor": "IBM",
+          "kind": "research collaboration",
+          "status": "planned",
+          "target": "NVIDIA and Fermi National Accelerator Laboratory",
+          "dates": [
+            "nov. 16, 2026"
+          ],
+          "value": null,
+          "counterparty": null
+        }
+      ]
+    },
+    {
+      "url": "https://nvidianews.nvidia.com/news/nvidia-expands-commitments-with-supply-chain-partners-to-support-ai-infrastructure-buildout",
+      "sha256": "3bc57bbfd596b511163e7d7a160feb0933facfcaf4d703b4eefd1324db94eb65",
+      "enterprise": "nvidia",
+      "publisher": "NVIDIA",
+      "paragraph": 3,
+      "claims": [
+        {
+          "actor": "NVIDIA",
+          "kind": "capacity expansion",
+          "status": "in progress",
+          "target": "manufacturing capacity",
+          "dates": [],
+          "value": null,
+          "counterparty": null
+        }
+      ]
+    },
+    {
+      "url": "https://boeing.mediaroom.com/2026-09-30-Ethiopian-Airlines-Orders-Boeing-777-and-777-8-Freighters-to-Expand-Cargo-Fleet",
+      "sha256": "5df64e2c1ad6d026310129249be41ff6d17a800c81e47ebd7b404ce201c7358b",
+      "enterprise": "boeing",
+      "publisher": "Boeing",
+      "paragraph": 1,
+      "claims": [
+        {
+          "actor": "Ethiopian Airlines",
+          "kind": "order",
+          "status": "completed",
+          "target": "eight 777-8 Freighters and two 777 Freighters",
+          "dates": [],
+          "value": null,
+          "counterparty": "Boeing"
+        }
+      ]
+    },
+    {
+      "url": "https://boeing.mediaroom.com/2026-09-23-Biman-Bangladesh-Airlines-Orders-11-More-Boeing-Jets-to-Expand-Fleet",
+      "sha256": "582768f946cd2bf58429458c3fede9a6ee6a6f8a63b88ccf09f4c07441fcf4e4",
+      "enterprise": "boeing",
+      "publisher": "Boeing",
+      "paragraph": 1,
+      "claims": [
+        {
+          "actor": "Biman Bangladesh Airlines",
+          "kind": "order",
+          "status": "completed",
+          "target": "11 787 Dreamliner and 737 MAX airplanes",
+          "dates": [],
+          "value": null,
+          "counterparty": "Boeing"
+        }
+      ]
+    },
+    {
+      "url": "https://www.aboutamazon.com/news/aws/aws-1-billion-forward-deployed-ai-engineers",
+      "sha256": "d75317b066322821f3cd3d29ccb6c4995f61aad3fb12ce009a38ff5746e22d55",
+      "enterprise": "amazon",
+      "publisher": "Amazon",
+      "paragraph": 1,
+      "claims": [
+        {
+          "actor": "AWS Forward Deployed Engineering",
+          "kind": "rollout",
+          "status": "planned",
+          "target": "customer-embedded engineering",
+          "dates": [],
+          "value": null,
+          "counterparty": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.hsbc.com/news-and-views/news/media-releases/2026/the-trust-threshold-ai-makes-investors-bolder-but-they-want-human-judgement-to-make-decisions",
+      "sha256": "a5bb1390118e96b021faff2cbc2e0d6237374d6c33dfe101a05f0c85875c5d5e",
+      "enterprise": "hsbc",
+      "publisher": "HSBC",
+      "paragraph": 12,
+      "claims": []
+    },
+    {
+      "url": "https://boeing.mediaroom.com/2026-11-02-Boeing-and-Icelease-Sign-Agreement-for-up-to-Three-767-300-Boeing-Converted-Freighters",
+      "sha256": "e7952a3616c287e1f36d4606eff66f902fae597fea276fcbac15ae0bddb7b306",
+      "enterprise": "boeing",
+      "publisher": "Boeing",
+      "paragraph": 10,
+      "claims": []
+    }
+  ],
+  "confirmation": [
+    {
+      "url": "https://news.microsoft.com/source/2003/01/21/microsoft-announces-its-intention-to-acquire-placeware/",
+      "sha256": "617132329d1e664e7597cabd5776ff4716ad4ee154f180c152c506d9831bbeea",
+      "paragraph": 1,
+      "enterprise": "microsoft",
+      "publisher": "Microsoft",
+      "claims": [
+        {
+          "actor": "Microsoft Corp.",
+          "kind": "acquisition",
+          "status": "planned",
+          "target": "PlaceWare Inc.",
+          "dates": [
+            "jan. 21, 2003"
+          ],
+          "value": null,
+          "counterparty": "PlaceWare Inc."
+        }
+      ]
+    },
+    {
+      "url": "https://news.microsoft.com/source/2008/02/11/microsoft-agrees-to-acquire-danger-inc-strengthens-mobile-consumer-vision/",
+      "sha256": "70226c0202713928928598efdfd1df084943b198367878f300c55047a26ecadb",
+      "paragraph": 1,
+      "enterprise": "microsoft",
+      "publisher": "Microsoft",
+      "claims": [
+        {
+          "actor": "Microsoft Corp.",
+          "kind": "acquisition",
+          "status": "planned",
+          "target": "Danger Inc.",
+          "dates": [
+            "feb. 11, 2008"
+          ],
+          "value": null,
+          "counterparty": "Danger Inc."
+        }
+      ]
+    },
+    {
+      "url": "https://www.nttdata.com/en-ae/news/2025/servicenow-and-ntt-data-expand-strategic-partnership",
+      "sha256": "65365ae79d637e863a2dfd3c83d3bc3038593f424cfde1a1d95bfa0982c78285",
+      "paragraph": 6,
+      "enterprise": "ntt-data",
+      "publisher": "NTT DATA",
+      "claims": []
+    },
+    {
+      "url": "https://newsroom.servicenow.com/press-releases/details/2025/ServiceNow-and-NTT-DATA-Expand-Strategic-Partnership-to-Accelerate-AI-led-Transformation-for-Global-Enterprises/default.aspx",
+      "sha256": "e5d806a68042f3ddf816b7e3883c2180c73a067dcdaad430ec4d926637ed589f",
+      "paragraph": 9,
+      "enterprise": "servicenow",
+      "publisher": "ServiceNow",
+      "claims": []
+    },
+    {
+      "url": "https://newsroom.mgmresorts.com/2025-02-28-Problem-Gambling-Awareness-Month",
+      "sha256": "bf91b02653cd23cf989042c52917cf7543ee613aebf8283ab142a74e2b7b9376",
+      "paragraph": 14,
+      "enterprise": "mgm-resorts",
+      "publisher": "MGM Resorts",
+      "claims": []
+    }
+  ]
+}

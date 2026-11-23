@@ -114,3 +114,59 @@ def test_scale_route_repeats_candidate_then_excludes_withdrawn_source():
     assert visited == [index]
     assert withdrawn['candidates'] == []
     assert withdrawn['failures'] == [{'url': url, 'reason': 'withdrawn'}]
+
+
+def test_first_person_needs_matching_publisher_and_unquoted_prose():
+    from cios.applications.flora.research_intelligence.discovery import NewsPage
+
+    url = 'https://example.org/news/one'
+    body = 'We are expanding our partnership with the North University (NU) through a new agreement.'
+    metadata = ('<script type="application/ld+json">{"@type":"NewsArticle",'
+                '"publisher":{"@type":"Organization","name":"Example issuer",'
+                '"url":"https://example.org"}}</script>')
+
+    def run(paragraph, structured=metadata):
+        raw = (structured + '<body>' + paragraph + '</body>').encode()
+        page = NewsPage(raw)
+        publisher = 'Example issuer'
+        return extract_claims(raw, enterprise='issuer', url=url, digest=sha256(raw).hexdigest(),
+                              published='2026-11-02', publisher=publisher,
+                              issuer=publisher if page.issuer_agrees(publisher, url) else None)
+
+    claim, = run(f'<p>{body}</p>')
+    assert (claim['actor_text'], claim['target_text'], claim['reported_status']) == (
+        'Example issuer', 'North University', 'in progress')
+    assert claim['excerpt'].startswith('We are')
+    assert not claim['publication_eligible']
+    assert run(f'<blockquote><p>{body}</p></blockquote>') == []
+    assert run(f'<p>Our spokesperson said “Update; {body}”</p>') == []
+    assert run(f'<p>{body}</p>', metadata.replace('example.org', 'different.example')) == []
+    assert run(f'<p>{body}</p>', metadata.replace('Example issuer', 'Different publisher')) == []
+    assert run(f'<p>{body}</p>', metadata + metadata.replace('Example issuer', 'Other publisher')) == []
+
+
+def test_migration_antecedent_has_its_own_revision_bound_span():
+    text = ('Horizon SE is in the midst of a major technology change. '
+            'The logistics company’s move from on-premise tools to Network Cloud through the '
+            'upgrade programme is part of a larger operating change.')
+    raw, (row,) = extract(text)
+    assert row['actor_text'] == 'Horizon SE'
+    assert row['target_text'] == 'Network Cloud'
+    assert row['source']['actor_locator'] == 'body p1, sentence 1, chars 0–10'
+    assert 'actor_span_mismatch' in screen_extracted(
+        dict(row, actor_text='Unknown issuer'), raw, as_of=date(2026, 11, 23))['issues']
+    assert not extract(text.split('. ', 1)[1])[1]
+    assert not extract(text.replace('technology change', 'technology change at North Labs'))[1]
+
+
+def test_new_and_existing_partnership_milestones_are_distinct_from_an_acquisition_plan():
+    _, claims = extract(
+        'PORT CITY, Nov. 2, 2026 — Horizon SE is bringing its North Labs regional partnership to life. '
+        'Horizon SE today announced it has entered into an agreement to acquire East Systems, '
+        'a software company.')
+    delivery, acquisition = claims
+    assert (delivery['kind'], delivery['reported_status'], delivery['target_text']) == (
+        'partnership', 'in progress', 'North Labs')
+    assert delivery['date_mentions'] == ['nov. 2, 2026']
+    assert (acquisition['kind'], acquisition['reported_status'], acquisition['target_text']) == (
+        'acquisition', 'planned', 'East Systems')

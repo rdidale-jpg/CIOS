@@ -68,9 +68,15 @@ class NewsPage(HTMLParser):
         self.open_link = None
         self.properties = {}
         self.structured_dates = []
+        self.structured_publishers = set()
         self.is_structured = False
         self.feed(raw.decode('utf-8-sig'))
         self.close()
+
+    def issuer_agrees(self, scoped_publisher, url):
+        # Metadata can corroborate the scoped publisher for pronoun binding.
+        # Metadata alone cannot establish the scope or confer Source authority.
+        return self.structured_publishers == {(scoped_publisher.casefold(), urlsplit(url).hostname)}
 
     def handle_starttag(self, tag, attributes):
         attrs = dict(attributes)
@@ -116,6 +122,18 @@ class NewsPage(HTMLParser):
                     published = entry.get('datePublished')
                     if isinstance(published, str):
                         self.structured_dates.append(published)
+                    publisher = entry.get('publisher')
+                    if isinstance(publisher, dict) and publisher.get('@type') == 'Organization':
+                        name, address = publisher.get('name'), publisher.get('url')
+                        if isinstance(name, str) and isinstance(address, str):
+                            try:
+                                origin = urlsplit(address)
+                            except ValueError:
+                                continue
+                            if (origin.scheme == 'https' and origin.hostname
+                                    and origin.netloc == origin.hostname):
+                                self.structured_publishers.add((' '.join(name.split()).casefold(),
+                                                               origin.hostname))
 
 
 def parse_date(value):
@@ -265,7 +283,8 @@ def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=(), include_bod
             from .body_claims import extract_claims
             candidate['body_claims'] = extract_claims(
                 raw, enterprise=enterprise, url=url, digest=digest,
-                published=published.isoformat(), publisher=publisher)
+                published=published.isoformat(), publisher=publisher,
+                issuer=publisher if page.issuer_agrees(publisher, url) else None)
             for claim in candidate['body_claims']:
                 claim['assurance'] = screen_extracted(claim, raw, as_of=cutoff)
         candidates.append(candidate)
