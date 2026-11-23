@@ -140,7 +140,7 @@ def _basis(items):
     return '<details class="llf-basis"><summary>Evidence &amp; scope</summary><ul>' + ''.join(rows) + '</ul></details>'
 
 
-def reviewed_change(data):
+def reviewed_change(ctx, data):
     """Reuse the existing public flagship timeline disclosure and its Source checks."""
     if data.get('enterprise_twin_id') != 'BK-ENT-001' or p.restricted_metadata(data):
         return ''
@@ -152,7 +152,8 @@ def reviewed_change(data):
             + ('<p class="change-period">Published ' + escape(publication) + ' · ' + escape(item.period) + '</p>'
                if publication else '<p class="change-period">' + escape(item.period) + '</p>')
             + '<p>Integration scope and external procurement remain unproven.</p>'
-            + _basis((item,)))
+            + '<a href="' + escape(v.url(ctx, detail='flagship', reading=ctx.reading), quote=True)
+            + '#llf-timeline">Evidence &amp; timeline</a>')
 
 
 def _benchmark(data, issues):

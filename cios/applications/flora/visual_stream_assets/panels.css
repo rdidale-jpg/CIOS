@@ -82,14 +82,3 @@ h1,h2,h3,.identity,.metric-label,.metric-period,.bar-row>span{overflow-wrap:anyw
 .vp-page .portrait .subject.layer-focus{border-width:3px;border-color:#89733c;box-shadow:0 0 0 2px #faf7efcc;font-weight:700}
 .vp-page .exploration-link.layer-focus{border-left:3px solid #89733c;padding-left:10px;font-weight:700}
 @media(forced-colors:active){.vp-page .portrait .subject.layer-focus,.vp-page .exploration-link.layer-focus{border-color:CanvasText;border-style:double}}
-
-.vp-page .enterprise-arrival{padding:0 0 14px;margin:0 0 18px;border-bottom:1px solid var(--line)}
-.vp-page .enterprise-arrival p{margin:0 0 8px;max-width:54ch}
-.vp-page .enterprise-arrival .enterprise-name{font:400 clamp(32px,4vw,53px)/1.06 Georgia,serif;letter-spacing:-.035em;color:var(--forest)}
-.vp-page .enterprise-arrival nav{display:flex;flex-wrap:wrap;gap:0 17px}
-.vp-page .enterprise-arrival nav a{min-height:44px;display:inline-flex;align-items:center;font-size:.87em;text-underline-offset:.2em}
-.vp-page .enterprise-change{margin:0 0 26px;padding:13px 17px;border-left:3px solid #6a8872;background:#e9efe690;scroll-margin-top:20px}
-.vp-page .enterprise-change h2{font:600 .82em/1.35 Arial,sans-serif;letter-spacing:.065em;text-transform:uppercase;margin:0 0 7px}
-.vp-page .enterprise-change p{margin:4px 0;max-width:65ch}
-.vp-page .enterprise-change .change-period{font-size:.82em;color:var(--muted)}
-.vp-page .enterprise-change summary{cursor:pointer;font-weight:600;min-height:36px;display:list-item;padding-top:7px}

@@ -405,7 +405,7 @@ def _enterprise_arrival(ctx, data, replay):
             ('Technology & suppliers', v.url(ctx, stream='inside', detail='technology', reading=ctx.reading) + '#visual-content'),
             ('Commercial hypotheses', '/opportunities#opportunities-banking'),
         )
-        change = reviewed_change(data)
+        change = reviewed_change(ctx, data)
     else:
         name = 'easyJet'
         lead = 'How the airline turns its network, aircraft and schedule into earnings.'
