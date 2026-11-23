@@ -29,20 +29,44 @@ NAME = re.compile(r'[A-Z][\w&-]*(?:\s+(?:[A-Z][\w&-]*|of|for|the|and))*')
 
 # Local semantic recovery for bounded announcement and event clauses.
 MONTH = r'(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sept?(?:ember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?'
-DATELINE_DATE = rf'{MONTH} \d{{1,2}}, 20\d{{2}}'
+DATELINE_DATE = rf'(?:{MONTH} \d{{1,2}}, 20\d{{2}}|\d{{1,2}} {MONTH} 20\d{{2}})'
+CITY = r"[A-Z][\w .’'-]{1,32}(?:, [A-Z][\w .’'-]{1,25})?"
 DATELINE = re.compile(
-    rf'^(?:[A-Z][\w .’\'-]{{1,32}})(?:, [A-Z][\w .’\'-]{{1,25}})?'
-    rf'\s+[-–—]\s+(?:(?P<date>{DATELINE_DATE})\s+(?:[-–—]\s+)?|(?=[A-Z]))'
+    rf'^{CITY}\s+[-–—]\s+(?:(?P<date>{DATELINE_DATE})\s+(?:[-–—]\s+)?|(?=[A-Z]))'
+    rf'|^{CITY}, (?P<comma_date>{DATELINE_DATE})\s+[-–—]\s+'
 )
-ENTITY = r"[A-Z][\w&'’.‑-]*(?: (?:[A-Z][\w&'’.‑-]*|of|for|and|the))*?"
+ENTITY = r"[A-Z][\w&'’.‑-]*(?: (?:[A-Z][\w&'’.‑-]*|[0-9]+|of|for|and|the))*?"
 SUBJECT = (
-    rf'(?P<actor>{ENTITY})(?: \([A-Z][A-Z0-9 ]{{1,11}}: [A-Z0-9. -]{{1,15}}\))?'
+    rf'(?P<actor>{ENTITY})[®™]?(?: \([A-Z][A-Z0-9 ]{{1,11}}: [A-Z0-9. -]{{1,15}}\))?'
     rf'(?:, (?:an?|the) [^,.;:!?]{{3,85}},)?'
 )
 ANNOUNCE = r'(?:today )?(?:announces?|announced)'
 NESTED = re.compile(rf'^{SUBJECT} {ANNOUNCE} (?:that )?(?P<clause>.+)$')
 VALUE = r'(?:approximately |about |up to |at least )?(?:[€£$]\d+(?:[.,]\d+)*|\d+(?:[.,]\d+)* (?:EUR|GBP|USD))(?: (?:thousand|million|billion))?(?: (?:annually|per year))?'
+PARTNER_TARGET = rf'(?P<target>{ENTITY})[®™]?(?: \([A-Z][A-Z0-9]{{1,10}}\))?'
+PARTNER_END = r'(?= through\b| with the\b|,|$)'
+NOMINAL_ANTECEDENT = re.compile(rf'^(?P<actor>{ENTITY}) (?:is|are) in the midst of\b')
+NOMINAL_MOVE = re.compile(
+    r"^The (?:[a-z-]+ )?compan(?:y['’]s|ies['’]) (?:move|migration) from "
+    r"[^,;.!?]{3,140}? to (?P<target>[^,;.!?]{3,140}?)(?= through | (?:is|forms) part of )"
+    r"(?: through [^,;.!?]{3,140}?)? (?:is|forms) part of\b")
+
 EVENT_CLAUSES = (
+    ('partnership', 'in progress', 'partner',
+     r'(?:is|are) bringing (?:its|their|our)',
+     rf'(?P<target>{ENTITY})[®™]? (?:regional |global |local )?partnership to life\b'),
+    ('partnership', 'in progress', 'partner',
+     r'(?:is|are) expanding (?:our|its|their|the) partnership with',
+     r'(?:the )?' + PARTNER_TARGET + PARTNER_END),
+    ('partnership', 'announced', 'partner',
+     r'(?:has )?(?:today )?announced (?:an? )?(?:[a-z-]+ )?expansion of (?:its|their|our|the) partnership with',
+     r'(?:the )?' + PARTNER_TARGET + PARTNER_END),
+    ('acquisition', 'planned', 'acquired entity',
+     r'(?:has )?entered into an agreement to acquire',
+     PARTNER_TARGET + r'(?: \([A-Z][\w -]{1,24}\))?(?=,|$)'),
+    ('supply', 'planned', None,
+     r'will provide', r'(?P<target>[^,;.!?]{3,120} (?:services|equipment|software|capacity))'
+     r'(?= to support\b|,|$)'),
     ('acquisition', 'completed', 'acquired entity',
      r'(?:has )?completed (?:its |the )?acquisition of', rf'(?P<target>{ENTITY})(?=,|[.!?]?$)'),
     ('donation', 'planned', 'recipient',
@@ -67,10 +91,11 @@ SEMANTIC_RULES = tuple((kind, status, role, re.compile(rf'^{SUBJECT} {verb} {tar
                        for kind, status, role, verb, target in EVENT_CLAUSES)
 
 
-def semantic_clause(sentence):
+def semantic_clause(sentence, issuer, previous):
     """Extract one narrow event assertion, anchored to its exact displayed text."""
     dateline = DATELINE.match(sentence)
-    if dateline and not (dateline['date'] or dateline[0].isupper()):
+    explicit_date = (dateline['date'] or dateline['comma_date']) if dateline else None
+    if dateline and not (explicit_date or dateline[0].isupper()):
         dateline = None
     offset = dateline.end() if dateline else 0
     prefix = re.match(r'In parallel, ', sentence[offset:])
@@ -79,6 +104,12 @@ def semantic_clause(sentence):
     text = sentence[offset:].rstrip('.!?')
     # A nested issuer statement can name a different actor. Resolve only an
     # explicit entity or the grammatical subject pronoun within this wrapper.
+    prior = NOMINAL_ANTECEDENT.match(previous) if previous else None
+    move = NOMINAL_MOVE.match(text) if prior else None
+    if move and not NAME.search(previous[prior.end():]):
+        return ('migration', 'in progress', prior['actor'], move['target'], [], [], [],
+                offset, offset + move.end(), prior.span('actor'))
+
     nested = NESTED.fullmatch(text)
     interpretations = [(text, offset, None)]
     if nested:
@@ -90,6 +121,8 @@ def semantic_clause(sentence):
         elif clause[0].isupper():
             interpretations.append((clause, start, None))
     for interpretation, start, substituted in interpretations:
+        if interpretation.startswith(('We ', 'we ')) and issuer is None:
+            continue
         for kind, status, role, rule in SEMANTIC_RULES:
             match = rule.match(interpretation)
             if match is None or (kind == 'announcement' and dateline is None):
@@ -98,11 +131,13 @@ def semantic_clause(sentence):
             excerpt = sentence[offset:stop]
             target = match['target']
             value = match.groupdict().get('value')
-            dates = [found.group().casefold().removeprefix('the ') for found in DATE.finditer(excerpt)]
-            if dateline and dateline['date']:
-                dates.insert(0, dateline['date'].casefold())
-            return (kind, status, match['actor'], target, dates, [value] if value else [],
-                    [{'name': target, 'role': role}] if role else [], offset, stop)
+            dates = [found.group().casefold().removeprefix('the ')
+                     for found in DATE.finditer(excerpt.replace(value, '', 1) if value else excerpt)]
+            if explicit_date:
+                dates.insert(0, explicit_date.casefold())
+            actor = issuer if match['actor'] == 'We' else match['actor']
+            return (kind, status, actor, target, dates, [value] if value else [],
+                    [{'name': target, 'role': role}] if role else [], offset, stop, None)
     return None
 
 
@@ -115,21 +150,31 @@ class BodyParagraphs(HTMLParser):
         self.paragraph = None
         self.paragraphs = []
         self.ordinal = 0
+        self.quote_depth = 0
+        self.quoted_paragraphs = set()
 
     def handle_starttag(self, tag, attrs):
         if tag == 'body':
             self.body = True
         if tag in {'script', 'style', 'nav', 'footer', 'header', 'aside', 'template', 'noscript'}:
             self.ignored.append(tag)
+        if tag in {'blockquote', 'q'}:
+            self.quote_depth += 1
+            if self.paragraph is not None:
+                self.quoted_paragraphs.add(self.ordinal)
         if tag == 'p' and self.body:
             self.ordinal += 1
             self.paragraph = None if self.ignored else []
+            if self.quote_depth:
+                self.quoted_paragraphs.add(self.ordinal)
 
     def handle_data(self, data):
         if self.paragraph is not None and not self.ignored:
             self.paragraph.append(data)
 
     def handle_endtag(self, tag):
+        if tag in {'blockquote', 'q'} and self.quote_depth:
+            self.quote_depth -= 1
         if tag == 'body':
             self.body = False
             self.paragraph = None
@@ -140,11 +185,15 @@ class BodyParagraphs(HTMLParser):
             self.paragraph = None
 
 
-def body_paragraphs(raw):
+def parse_body(raw):
     parser = BodyParagraphs()
     parser.feed(raw.decode('utf-8-sig'))
     parser.close()
-    return parser.paragraphs
+    return parser
+
+
+def body_paragraphs(raw):
+    return parse_body(raw).paragraphs
 
 
 def excerpt_at_span(raw, locator):
@@ -162,33 +211,42 @@ def excerpt_at_span(raw, locator):
     return None
 
 
-def semantic_spans(sentence):
+def semantic_spans(sentence, issuer, previous):
     # A named subject must be explicit on each side of a semicolon.
     for part in re.finditer(r'[^;]+', sentence):
         statement = part[0].strip()
         if not 25 <= len(statement) <= 640 or UNCERTAIN.search(statement):
             continue
-        if (clause := semantic_clause(statement)) is not None:
-            *fields, start, stop = clause
+        if (clause := semantic_clause(statement, issuer, previous if part.start() == 0 else None)) is not None:
+            *fields, start, stop, antecedent = clause
             offset = part.start() + len(part[0]) - len(part[0].lstrip())
-            yield *fields, offset + start, offset + stop
+            yield *fields, offset + start, offset + stop, antecedent
 
 
-def extract_claims(raw, *, enterprise, url, digest, published, publisher):
+def extract_claims(raw, *, enterprise, url, digest, published, publisher, issuer=None):
     """Return attributed candidate excerpts only. No authority or eligibility."""
     facts = {}
-    for paragraph, text in body_paragraphs(raw):
-        for number, sentence in enumerate(SENTENCE_BREAK.split(text), 1):
-            semantic = tuple(semantic_spans(sentence)) if len(sentence) <= 640 else ()
-            for kind, status, actor, target, dates, values, parties, start, stop in semantic:
+    body = parse_body(raw)
+    for paragraph, text in body.paragraphs:
+        sentences = SENTENCE_BREAK.split(text)
+        quoted = paragraph in body.quoted_paragraphs or any(mark in text for mark in ('“', '”', '"'))
+        context_issuer = None if quoted else issuer
+        for number, sentence in enumerate(sentences, 1):
+            previous = sentences[number - 2] if number >= 2 and not quoted else None
+            semantic = tuple(semantic_spans(sentence, context_issuer, previous)) if len(sentence) <= 640 else ()
+            for kind, status, actor, target, dates, values, parties, start, stop, antecedent in semantic:
                 key = kind, status, actor.casefold(), target.casefold(), tuple(dates), tuple(values)
+                source = {'url': url, 'sha256': digest, 'publisher': publisher,
+                          'published': published,
+                          'locator': f'body p{paragraph}, sentence {number}, chars {start}–{stop}'}
+                if antecedent:
+                    left, right = antecedent
+                    source['actor_locator'] = f'body p{paragraph}, sentence {number - 1}, chars {left}–{right}'
                 facts.setdefault(key, {
                     'claim_id': fingerprint((url, digest, paragraph, number, start, stop)),
                     'event_hint': fingerprint((enterprise, kind, actor.casefold(), target.casefold())),
                     'enterprise_id': enterprise,
-                    'source': {'url': url, 'sha256': digest, 'publisher': publisher,
-                               'published': published,
-                               'locator': f'body p{paragraph}, sentence {number}, chars {start}–{stop}'},
+                    'source': source,
                     'excerpt': sentence[start:stop],
                     'actor_text': actor, 'target_text': target, 'date_mentions': dates,
                     'value_mentions': values, 'relationship_candidates': parties,
@@ -205,7 +263,8 @@ def extract_claims(raw, *, enterprise, url, digest, published, publisher):
                 if not match:
                     continue
                 actor = match['actor']
-                if not re.fullmatch(r"[\w&'’() -]+", actor) or not NAME.search(actor):
+                if (not re.fullmatch(r"[\w&'’() -]+", actor) or not NAME.search(actor)
+                        or actor.casefold().split()[0] in {'we', 'our', 'us'}):
                     break
                 obj = match['object'] or ''
                 dates = [found.group().casefold().removeprefix('the ') for found in DATE.finditer(sentence)]

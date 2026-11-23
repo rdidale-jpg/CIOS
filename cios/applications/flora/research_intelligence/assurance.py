@@ -191,6 +191,8 @@ def screen_extracted(candidate, raw, *, as_of):
 
         if excerpt_at_span(raw, ref.locator) != candidate['excerpt']:
             issues.append('source_span_mismatch')
+        if (actor_locator := source.get('actor_locator')) and excerpt_at_span(raw, actor_locator) != candidate['actor_text']:
+            issues.append('actor_span_mismatch')
     if published > as_of or published < as_of - timedelta(days=90):
         issues.append('outside_review_window')
     if not validate_atomic_statement(candidate['excerpt']).atomic:
