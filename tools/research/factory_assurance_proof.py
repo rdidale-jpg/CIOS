@@ -16,12 +16,12 @@ REFERENCE = (
 )
 
 
-def live_register_check():
+def live_register_check(reference=REFERENCE):
     """Original public registry fields; eligibility stays local to the proof."""
     now = date.today()
     outcomes = []
     with TemporaryDirectory() as directory:
-        for number, name, industry in REFERENCE:
+        for number, name, industry in reference:
             commission = {'registration_number': number, 'as_of': now.isoformat()}
             captures, failed = acquire_online(commission, Path(directory))
             if failed or len(captures) != 1:

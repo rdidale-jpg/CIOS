@@ -1,4 +1,5 @@
 """Bounded newsroom discovery. Results are unverified research candidates."""
+from dataclasses import dataclass
 from datetime import date, timedelta
 from hashlib import sha256
 from html.parser import HTMLParser
@@ -36,12 +37,35 @@ TOPICS = {
 }
 
 
+@dataclass(frozen=True)
+class DiscoveryScope:
+    industry: str
+    publisher: str
+    index: str
+    article_path: str
+
+
+SCALE_THEMES = {
+    'Strategy and transformation': r'\b(strateg\w*|transform\w*|moderni[sz]\w*|expand\w*|initiative\w*)\b',
+    'Technology and AI': r'\b(technology|digital|cloud|ai|network\w*|data centres?|software)\b',
+    'Customers and suppliers': r'\b(customer\w*|supplier\w*|procure\w*|sourcing|supply chain)\b',
+    'Contracts, partnerships and investment': r'\b(contract\w*|partner\w*|acqui\w*|invest\w*|agreement\w*)\b',
+    'Competition and risks': r'\b(competit\w*|risk\w*|regulat\w*|resilien\w*|security|disrupt\w*)\b',
+}
+
+
+def scale_themes(text):
+    return [name for name, pattern in SCALE_THEMES.items() if re.search(pattern, text, re.I)]
+
+
 class NewsPage(HTMLParser):
     def __init__(self, raw):
         super().__init__()
         if not raw or len(raw) > LIMIT:
             raise ValueError('Invalid document size')
         self.links = []
+        self.link_labels = {}
+        self.open_link = None
         self.properties = {}
         self.structured_dates = []
         self.is_structured = False
@@ -52,6 +76,7 @@ class NewsPage(HTMLParser):
         attrs = dict(attributes)
         if tag == 'a' and attrs.get('href'):
             self.links.append(attrs['href'])
+            self.open_link = (attrs['href'], [])
         if tag == 'meta' and attrs.get('content'):
             key = attrs.get('property') or attrs.get('name') or attrs.get('itemprop')
             self.properties.setdefault(key, attrs['content'])
@@ -61,10 +86,16 @@ class NewsPage(HTMLParser):
             self.is_structured = attrs.get('type') == 'application/ld+json'
 
     def handle_endtag(self, tag):
+        if tag == 'a' and self.open_link:
+            href, parts = self.open_link
+            self.link_labels[href] = ' '.join(''.join(parts).split())
+            self.open_link = None
         if tag == 'script':
             self.is_structured = False
 
     def handle_data(self, content):
+        if self.open_link and not self.is_structured:
+            self.open_link[1].append(content)
         if not self.is_structured:
             return
         try:
@@ -109,9 +140,54 @@ def article_urls(index, path_pattern, links):
     return list(urls)[:MAX_ARTICLES]
 
 
-def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=(), include_body=False):
+def scoped_article_urls(scope, page, limit):
+    """Rank original article links using URL and anchor text within a frozen perimeter."""
+    origin = urlsplit(scope.index)
+    pattern = re.compile(scope.article_path)
+    urls = {}
+    duplicates = 0
+    for link in page.links:
+        try:
+            target = urlsplit(urljoin(scope.index, link))
+        except ValueError:
+            continue
+        path = target.path
+        if (target.scheme != 'https' or target.netloc != origin.netloc or path == origin.path
+                or any(char in path for char in ('%', chr(92)))
+                or any(part in {'.', '..'} for part in path.split('/'))
+                or not pattern.fullmatch(path)):
+            continue
+        clean = target._replace(query='', fragment='').geturl()
+        themes = scale_themes(path.replace('-', ' ') + ' ' + page.link_labels.get(link, ''))
+        if clean in urls:
+            duplicates += 1
+        if clean not in urls or len(themes) > len(urls[clean]):
+            urls[clean] = themes
+    # Prefer anchors covering a theme not already selected, then additional
+    # signals and original publisher order. Thin indexes still get a sample.
+    pending = list(urls)
+    selected = []
+    covered = set()
+    while pending and len(selected) < limit:
+        best = max(pending, key=lambda url: (len(set(urls[url]) - covered), len(urls[url])))
+        pending.remove(best)
+        selected.append(best)
+        covered.update(urls[best])
+    return selected, len(urls), duplicates
+
+
+def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=(), include_body=False,
+             scope=None, max_articles=MAX_ARTICLES):
     """Read one original index and a bounded set of linked original HTML articles."""
-    industry, publisher, index, pattern = NEWSROOMS[enterprise]
+    if scope is None:
+        industry, publisher, index, pattern = NEWSROOMS[enterprise]
+    else:
+        industry, publisher, index = scope.industry, scope.publisher, scope.index
+        origin = urlsplit(index)
+        if (origin.scheme != 'https' or origin.netloc != origin.hostname
+                or not origin.hostname or origin.query or origin.fragment
+                or not 1 <= max_articles <= MAX_ARTICLES):
+            raise ValueError('Expected an exact bounded HTTPS publisher scope')
     cutoff = date.fromisoformat(as_of)
     if cutoff > date.today():
         raise ValueError('Discovery cut-off cannot be in the future')
@@ -136,7 +212,13 @@ def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=(), include_bod
             return None
 
     directory = read(index)
-    urls = article_urls(index, pattern, directory[0].links) if directory else []
+    discovered = duplicates = stale = no_topic = 0
+    urls = []
+    if directory:
+        if scope is None:
+            urls = article_urls(index, pattern, directory[0].links)
+        else:
+            urls, discovered, duplicates = scoped_article_urls(scope, directory[0], max_articles)
     for url in urls:
         article = read(url)
         if not article:
@@ -154,9 +236,13 @@ def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=(), include_bod
             failures.append({'url': url, 'reason': 'headline or publication date unresolved'})
             continue
         if published < cutoff - timedelta(days=90):
+            stale += 1
             continue
         topics = [name for name, (pattern, _) in TOPICS.items() if re.search(pattern, title, re.I)]
+        if scope is not None:
+            topics = scale_themes(title + ' ' + urlsplit(url).path.replace('-', ' '))
         if not topics:
+            no_topic += 1
             continue
         identity = fingerprint((enterprise, published.isoformat(), title.casefold()))
         prior = previous_by_url.get(url)
@@ -171,7 +257,7 @@ def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=(), include_bod
             'document_bytes_changed': prior['document_sha256'] != digest if prior else None,
             'evidence_class': 'publisher headline candidate',
             'themes': topics,
-            'verification_questions': [TOPICS[name][1] for name in topics],
+            'verification_questions': [TOPICS[name][1] for name in topics] if scope is None else [],
             'publication_eligible': False,
         }
         if include_body:
@@ -189,7 +275,12 @@ def discover(enterprise, fetch, *, as_of, previous=(), withdrawn=(), include_bod
         key = candidate['candidate_id']
         if key not in unique or candidate['status'] == 'conflicting metadata':
             unique[key] = candidate
-    return {'enterprise_id': enterprise, 'as_of': as_of, 'index': index,
-            'article_count': len(urls),
+    result = {'enterprise_id': enterprise, 'as_of': as_of, 'index': index,
+              'article_count': len(urls),
             'candidates': sorted(unique.values(), key=lambda row: row['published'], reverse=True),
             'failures': failures}
+    if scope is not None:
+        result['coverage'] = {'index_read': bool(directory), 'scoped_links': discovered,
+                              'duplicate_links': duplicates, 'stale': stale, 'no_topic': no_topic,
+                              'duplicate_headlines': len(candidates) - len(unique)}
+    return result

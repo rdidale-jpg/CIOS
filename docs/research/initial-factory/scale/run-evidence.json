@@ -1,0 +1,1437 @@
+[
+  {
+    "enterprise_id": "hsbc",
+    "publisher": "HSBC",
+    "industry": "Banking and financial services",
+    "cohort": "development",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 20,
+      "duplicate_links": 0,
+      "stale": 4,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.hsbc.com/news-and-views/news/media-releases",
+        "bytes": 171239,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.hsbc.com/news-and-views/news/media-releases/2026/hsbc-and-google-cloud-announce-transformative-ai-banking-partnership",
+        "bytes": 161128,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.hsbc.com/news-and-views/news/media-releases/2026/the-trust-threshold-ai-makes-investors-bolder-but-they-want-human-judgement-to-make-decisions",
+        "bytes": 165442,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.hsbc.com/news-and-views/news/media-releases/2026/hsbc-becomes-presenting-partner-of-the-china-open",
+        "bytes": 159035,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.hsbc.com/news-and-views/news/media-releases/2026/david-rice-announced-as-chief-ai-officer",
+        "bytes": 158540,
+        "status": "html_read"
+      }
+    ],
+    "failures": [],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 8.188,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "vodafone",
+    "publisher": "Vodafone",
+    "industry": "Telecommunications",
+    "cohort": "development",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 14,
+      "duplicate_links": 35,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.vodafone.com/news",
+        "bytes": 200628,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.vodafone.com/news/newsroom",
+        "bytes": 308845,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.vodafone.com/news/newsroom/digital-society",
+        "bytes": 185383,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.vodafone.com/news/newsroom/technology",
+        "bytes": 185338,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.vodafone.com/news/newsroom/corporate-and-financial",
+        "bytes": 185463,
+        "status": "html_read"
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.vodafone.com/news/newsroom",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.vodafone.com/news/newsroom/digital-society",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.vodafone.com/news/newsroom/technology",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.vodafone.com/news/newsroom/corporate-and-financial",
+        "reason": "headline or publication date unresolved"
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 4.812,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "ibm",
+    "publisher": "IBM",
+    "industry": "Technology",
+    "cohort": "development",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 7,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://newsroom.ibm.com/",
+        "bytes": 43840,
+        "status": "html_read"
+      },
+      {
+        "url": "https://newsroom.ibm.com/2026-11-17-ibm-study-chief-ai-officers-see-where-ai-creates-value,-but-few-control-investment-decisions",
+        "bytes": 48934,
+        "status": "html_read"
+      },
+      {
+        "url": "https://newsroom.ibm.com/2026-11-10-ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation",
+        "bytes": 50962,
+        "status": "html_read"
+      },
+      {
+        "url": "https://newsroom.ibm.com/2026-11-11-ibm-digital-sovereignty-index-in-the-ai-era,-control-is-no-longer-enough-enterprises-must-prove-it",
+        "bytes": 50755,
+        "status": "html_read"
+      },
+      {
+        "url": "https://newsroom.ibm.com/2026-11-16-ibm,-fermilab,-and-nvidia-announce-plans-for-new-co-design-platform-to-accelerate-the-development-of-next-generation,-modular-quantum-computers",
+        "bytes": 53268,
+        "status": "html_read"
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://newsroom.ibm.com/2026-11-17-ibm-study-chief-ai-officers-see-where-ai-creates-value,-but-few-control-investment-decisions",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://newsroom.ibm.com/2026-11-10-ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://newsroom.ibm.com/2026-11-11-ibm-digital-sovereignty-index-in-the-ai-era,-control-is-no-longer-enough-enterprises-must-prove-it",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://newsroom.ibm.com/2026-11-16-ibm,-fermilab,-and-nvidia-announce-plans-for-new-co-design-platform-to-accelerate-the-development-of-next-generation,-modular-quantum-computers",
+        "reason": "headline or publication date unresolved"
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 1.261,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "airbus",
+    "publisher": "Airbus",
+    "industry": "Aviation and transport",
+    "cohort": "development",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 20,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 1,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.airbus.com/en/newsroom/press-releases",
+        "bytes": 298917,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.airbus.com/en/newsroom/press-releases/2026-11-airbus-to-deliver-iris-frances-next-generation-military-earth-observation-satellites",
+        "bytes": 256959,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.airbus.com/en/newsroom/press-releases/2026-11-skywise-expands-its-portfolio-with-the-launch-of-enhanced-digital-flight-training-solutions",
+        "bytes": 253876,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.airbus.com/en/newsroom/press-releases/2026-11-airbus-reports-share-buyback-transactions-9-13-november-2026",
+        "bytes": 249177,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.airbus.com/en/newsroom/press-releases/2026-10-airbus-awarded-contract-for-two-additional-galileo-satellites",
+        "bytes": 272304,
+        "status": "html_read"
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.airbus.com/en/newsroom/press-releases/2026-11-airbus-to-deliver-iris-frances-next-generation-military-earth-observation-satellites",
+        "reason": "conflicting publication dates"
+      },
+      {
+        "url": "https://www.airbus.com/en/newsroom/press-releases/2026-10-airbus-awarded-contract-for-two-additional-galileo-satellites",
+        "reason": "conflicting publication dates"
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 3.343,
+    "candidates": [
+      {
+        "url": "https://www.airbus.com/en/newsroom/press-releases/2026-11-skywise-expands-its-portfolio-with-the-launch-of-enhanced-digital-flight-training-solutions",
+        "published": "2026-11-02",
+        "document_sha256": "3277e33c3e2784852b039bf08cf8287ad71208f03d5cef3c9f6b6a94ef7722d8",
+        "themes": [
+          "Strategy and transformation",
+          "Technology and AI"
+        ],
+        "publication_eligible": false
+      }
+    ]
+  },
+  {
+    "enterprise_id": "shell",
+    "publisher": "Shell",
+    "industry": "Energy and utilities",
+    "cohort": "development",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.shell.com/news-and-insights/newsroom.html",
+        "bytes": 5163,
+        "status": "html_read"
+      }
+    ],
+    "failures": [],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 1.057,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "sainsburys",
+    "publisher": "Sainsbury’s",
+    "industry": "Retail and consumer",
+    "cohort": "development",
+    "coverage": {
+      "index_read": false,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.about.sainsburys.co.uk/news/latest-news",
+        "status": "http_error",
+        "http_status": 301
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.about.sainsburys.co.uk/news/latest-news",
+        "reason": "publisher HTTP response",
+        "http_status": 301
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 0.917,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "barclays",
+    "publisher": "Barclays",
+    "industry": "Banking and financial services",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": false,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://home.barclays/news/press-releases/",
+        "status": "http_error",
+        "http_status": 403
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://home.barclays/news/press-releases/",
+        "reason": "publisher HTTP response",
+        "http_status": 403
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 0.867,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "natwest",
+    "publisher": "NatWest Group",
+    "industry": "Banking and financial services",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.natwestgroup.com/news-and-insights/news-room/press-releases.html",
+        "bytes": 210159,
+        "status": "html_read"
+      }
+    ],
+    "failures": [],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 1.178,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "standard-chartered",
+    "publisher": "Standard Chartered",
+    "industry": "Banking and financial services",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 21,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.sc.com/en/press-release/",
+        "bytes": 242009,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.sc.com/en/press-release/standard-chartered-and-lmax-group-expand-partnership-to-include-digital-asset-custody-in-luxembourg-and-difc/",
+        "bytes": 134035,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.sc.com/en/press-release/301703/",
+        "bytes": 130081,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.sc.com/en/press-release/standard-chartered-steps-up-formula-1-partnership-as-bank-becomes-global-partner/",
+        "bytes": 132329,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.sc.com/en/press-release/standard-chartered-pilots-redemption-liquidity-facility-for-ant-internationals-investment-in-tokenised-money-market-funds/",
+        "bytes": 130722,
+        "status": "html_read"
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.sc.com/en/press-release/standard-chartered-and-lmax-group-expand-partnership-to-include-digital-asset-custody-in-luxembourg-and-difc/",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.sc.com/en/press-release/301703/",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.sc.com/en/press-release/standard-chartered-steps-up-formula-1-partnership-as-bank-becomes-global-partner/",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.sc.com/en/press-release/standard-chartered-pilots-redemption-liquidity-facility-for-ant-internationals-investment-in-tokenised-money-market-funds/",
+        "reason": "headline or publication date unresolved"
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 6.745,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "monzo",
+    "publisher": "Monzo",
+    "industry": "Banking and financial services",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": false,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://monzo.com/blog/",
+        "status": "http_error",
+        "http_status": 308
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://monzo.com/blog/",
+        "reason": "publisher HTTP response",
+        "http_status": 308
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 0.424,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "orange",
+    "publisher": "Orange",
+    "industry": "Telecommunications",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": false,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://newsroom.orange.com/",
+        "status": "http_error",
+        "http_status": 301
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://newsroom.orange.com/",
+        "reason": "publisher HTTP response",
+        "http_status": 301
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 0.88,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "nokia",
+    "publisher": "Nokia",
+    "industry": "Telecommunications",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 25,
+      "duplicate_links": 2,
+      "stale": 1,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.nokia.com/newsroom/",
+        "bytes": 224554,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.nokia.com/newsroom/nokia-strengthens-partnership-with-aalto-university-with-15-million-donation-and-expanded-rd-collaboration-for-future-technology-research-and-talent/",
+        "bytes": 164581,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.nokia.com/newsroom/polish-eu-presidency-must-grasp-opportunity-to-drive-digital-competitiveness/",
+        "bytes": 143580,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.nokia.com/newsroom/nokia-home-of-radio-in-oulu/",
+        "bytes": 209002,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.nokia.com/newsroom/nokia-partners-with-nvidia/",
+        "bytes": 164814,
+        "status": "html_read"
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.nokia.com/newsroom/nokia-home-of-radio-in-oulu/",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.nokia.com/newsroom/nokia-partners-with-nvidia/",
+        "reason": "headline or publication date unresolved"
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 5.077,
+    "candidates": [
+      {
+        "url": "https://www.nokia.com/newsroom/nokia-strengthens-partnership-with-aalto-university-with-15-million-donation-and-expanded-rd-collaboration-for-future-technology-research-and-talent/",
+        "published": "2026-11-12",
+        "document_sha256": "df180a7e25fa9bc23f02ee2a047f26ca188fe3461ee86d81f347acafb50b1b79",
+        "themes": [
+          "Strategy and transformation",
+          "Technology and AI",
+          "Contracts, partnerships and investment"
+        ],
+        "publication_eligible": false
+      }
+    ]
+  },
+  {
+    "enterprise_id": "ericsson",
+    "publisher": "Ericsson",
+    "industry": "Telecommunications",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": false,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.ericsson.com/en/press-releases",
+        "status": "http_error",
+        "http_status": 301
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.ericsson.com/en/press-releases",
+        "reason": "publisher HTTP response",
+        "http_status": 301
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 0.471,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "t-mobile",
+    "publisher": "T-Mobile",
+    "industry": "Telecommunications",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 21,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.t-mobile.com/news",
+        "bytes": 299475,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.t-mobile.com/news/network/5g-advanced-in-action-better-experiences-t-mobile-puts-ai-to-work-for-customers",
+        "bytes": 196289,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.t-mobile.com/news/un-carrier/advancing-cybersecurity-at-t-mobile",
+        "bytes": 256442,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.t-mobile.com/news/category/network",
+        "bytes": 464861,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.t-mobile.com/news/network/t-mobile-powers-new-ways-to-experience-the-formula-1-heineken-las-vegas-grand-prix-on-and-off-the-track",
+        "bytes": 212094,
+        "status": "html_read"
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.t-mobile.com/news/category/network",
+        "reason": "headline or publication date unresolved"
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 4.692,
+    "candidates": [
+      {
+        "url": "https://www.t-mobile.com/news/network/t-mobile-powers-new-ways-to-experience-the-formula-1-heineken-las-vegas-grand-prix-on-and-off-the-track",
+        "published": "2026-11-12",
+        "document_sha256": "83a40c2833e8c64f9aa756e32fd9bbc25cee2e1e42e5b95afcc45ae96e0753a1",
+        "themes": [
+          "Technology and AI"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "url": "https://www.t-mobile.com/news/un-carrier/advancing-cybersecurity-at-t-mobile",
+        "published": "2026-11-02",
+        "document_sha256": "13999341ca5050f3814d9770a750337631854c4be8471e437e0a670b9998c7e4",
+        "themes": [
+          "Strategy and transformation"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "url": "https://www.t-mobile.com/news/network/5g-advanced-in-action-better-experiences-t-mobile-puts-ai-to-work-for-customers",
+        "published": "2026-10-20",
+        "document_sha256": "b48474c6fa4fae736c60155eb2db77fd3a8938b8ae194c3c8f43923571244924",
+        "themes": [
+          "Technology and AI",
+          "Customers and suppliers"
+        ],
+        "publication_eligible": false
+      }
+    ]
+  },
+  {
+    "enterprise_id": "nvidia",
+    "publisher": "NVIDIA",
+    "industry": "Technology",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 4,
+      "duplicate_links": 13,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://nvidianews.nvidia.com/",
+        "bytes": 89380,
+        "status": "html_read"
+      },
+      {
+        "url": "https://nvidianews.nvidia.com/news/nvidia-expands-commitments-with-supply-chain-partners-to-support-ai-infrastructure-buildout",
+        "bytes": 79062,
+        "status": "html_read"
+      },
+      {
+        "url": "https://nvidianews.nvidia.com/news/nvidia-board-of-directors-establishes-national-security-and-export-control-oversight-committee",
+        "bytes": 61982,
+        "status": "html_read"
+      },
+      {
+        "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2027",
+        "bytes": 397944,
+        "status": "html_read"
+      },
+      {
+        "url": "https://nvidianews.nvidia.com/news/nvidia-announces-upcoming-event-for-financial-community-6929322",
+        "bytes": 60009,
+        "status": "html_read"
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://nvidianews.nvidia.com/news/nvidia-expands-commitments-with-supply-chain-partners-to-support-ai-infrastructure-buildout",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://nvidianews.nvidia.com/news/nvidia-board-of-directors-establishes-national-security-and-export-control-oversight-committee",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2027",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://nvidianews.nvidia.com/news/nvidia-announces-upcoming-event-for-financial-community-6929322",
+        "reason": "headline or publication date unresolved"
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 1.502,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "cloudflare",
+    "publisher": "Cloudflare",
+    "industry": "Technology",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": false,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.cloudflare.com/press-releases/",
+        "status": "http_error",
+        "http_status": 302
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.cloudflare.com/press-releases/",
+        "reason": "publisher HTTP response",
+        "http_status": 302
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 0.155,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "sap",
+    "publisher": "SAP",
+    "industry": "Technology",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 12,
+      "duplicate_links": 4,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://news.sap.com/",
+        "bytes": 107086,
+        "status": "html_read"
+      },
+      {
+        "url": "https://news.sap.com/2026/11/takeda-turns-to-sap-erp-digital-transformation/",
+        "bytes": 106206,
+        "status": "html_read"
+      },
+      {
+        "url": "https://news.sap.com/2026/11/how-sap-store-certification-turns-into-customer-trust-for-vertex/",
+        "bytes": 114473,
+        "status": "html_read"
+      },
+      {
+        "url": "https://news.sap.com/2026/11/sap-completes-acquisition-of-techwolf/",
+        "bytes": 100132,
+        "status": "html_read"
+      },
+      {
+        "url": "https://news.sap.com/2026/11/sap-expands-collaboration-astrazeneca-rise-with-sap-business-ai/",
+        "bytes": 102396,
+        "status": "html_read"
+      }
+    ],
+    "failures": [],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 4.885,
+    "candidates": [
+      {
+        "url": "https://news.sap.com/2026/11/how-sap-store-certification-turns-into-customer-trust-for-vertex/",
+        "published": "2026-11-23",
+        "document_sha256": "8de35898c5eb08f084b4c1d8c0df3f9f6eb341d5697b5f6a0cb4ad5b4a9cf4d3",
+        "themes": [
+          "Customers and suppliers"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "url": "https://news.sap.com/2026/11/takeda-turns-to-sap-erp-digital-transformation/",
+        "published": "2026-11-20",
+        "document_sha256": "8faf6b5c4381606b719a829dcf0ab46756069e446ad3d9a15d3070f71e39e17c",
+        "themes": [
+          "Strategy and transformation",
+          "Technology and AI"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "url": "https://news.sap.com/2026/11/sap-completes-acquisition-of-techwolf/",
+        "published": "2026-11-16",
+        "document_sha256": "d1c24b4013a3343d6d095f3a0628e3fc1f10d1f429707cfa3519387768330924",
+        "themes": [
+          "Contracts, partnerships and investment"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "url": "https://news.sap.com/2026/11/sap-expands-collaboration-astrazeneca-rise-with-sap-business-ai/",
+        "published": "2026-11-10",
+        "document_sha256": "b3a3bdc10296f39557a466cfc43722b14d6f2f8e9ecf76b5429fd9ed142143fe",
+        "themes": [
+          "Strategy and transformation",
+          "Technology and AI"
+        ],
+        "publication_eligible": false
+      }
+    ]
+  },
+  {
+    "enterprise_id": "anthropic",
+    "publisher": "Anthropic",
+    "industry": "Technology",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 27,
+      "duplicate_links": 112,
+      "stale": 0,
+      "no_topic": 1,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.anthropic.com/news",
+        "bytes": 344013,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions",
+        "bytes": 160856,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.anthropic.com/news/cyber-verification-program",
+        "bytes": 173773,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.anthropic.com/news/expanding-partnership-gsa",
+        "bytes": 145895,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.anthropic.com/news/genesis-mission-commitment",
+        "bytes": 140624,
+        "status": "html_read"
+      }
+    ],
+    "failures": [],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 1.194,
+    "candidates": [
+      {
+        "url": "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions",
+        "published": "2026-10-28",
+        "document_sha256": "885c54675ed3c968cc2ac44f379033404f5368742f45bba64b038b444f9cebdb",
+        "themes": [
+          "Strategy and transformation",
+          "Technology and AI"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "url": "https://www.anthropic.com/news/expanding-partnership-gsa",
+        "published": "2026-10-27",
+        "document_sha256": "11cdf935007275990e1aaa1b45602c3fd6fb7a49eed8187914df66bc5933e90e",
+        "themes": [
+          "Strategy and transformation",
+          "Contracts, partnerships and investment"
+        ],
+        "publication_eligible": false
+      },
+      {
+        "url": "https://www.anthropic.com/news/cyber-verification-program",
+        "published": "2026-10-06",
+        "document_sha256": "914d9d3f714c39119087c43d7f5c6031337f6af32e2a77c8f4789bdb51875553",
+        "themes": [
+          "Strategy and transformation"
+        ],
+        "publication_eligible": false
+      }
+    ]
+  },
+  {
+    "enterprise_id": "boeing",
+    "publisher": "Boeing",
+    "industry": "Aviation and transport",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 21,
+      "duplicate_links": 32,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://boeing.mediaroom.com/news-releases-statements",
+        "bytes": 206300,
+        "status": "html_read"
+      },
+      {
+        "url": "https://boeing.mediaroom.com/2026-11-02-Boeing-and-Icelease-Sign-Agreement-for-up-to-Three-767-300-Boeing-Converted-Freighters",
+        "bytes": 166084,
+        "status": "html_read"
+      },
+      {
+        "url": "https://boeing.mediaroom.com/2026-09-30-Ethiopian-Airlines-Orders-Boeing-777-and-777-8-Freighters-to-Expand-Cargo-Fleet",
+        "bytes": 168411,
+        "status": "html_read"
+      },
+      {
+        "url": "https://boeing.mediaroom.com/2026-10-05-Boeing-receives-seven-year-contract-to-accelerate-PAC-3-MSE-seeker-output",
+        "bytes": 164344,
+        "status": "html_read"
+      },
+      {
+        "url": "https://boeing.mediaroom.com/2026-09-23-Biman-Bangladesh-Airlines-Orders-11-More-Boeing-Jets-to-Expand-Fleet",
+        "bytes": 171286,
+        "status": "html_read"
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://boeing.mediaroom.com/2026-11-02-Boeing-and-Icelease-Sign-Agreement-for-up-to-Three-767-300-Boeing-Converted-Freighters",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://boeing.mediaroom.com/2026-09-30-Ethiopian-Airlines-Orders-Boeing-777-and-777-8-Freighters-to-Expand-Cargo-Fleet",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://boeing.mediaroom.com/2026-10-05-Boeing-receives-seven-year-contract-to-accelerate-PAC-3-MSE-seeker-output",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://boeing.mediaroom.com/2026-09-23-Biman-Bangladesh-Airlines-Orders-11-More-Boeing-Jets-to-Expand-Fleet",
+        "reason": "headline or publication date unresolved"
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 1.633,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "ryanair",
+    "publisher": "Ryanair",
+    "industry": "Aviation and transport",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": false,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://corporate.ryanair.com/news/",
+        "status": "http_error",
+        "http_status": 301
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://corporate.ryanair.com/news/",
+        "reason": "publisher HTTP response",
+        "http_status": 301
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 0.354,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "wizz-air",
+    "publisher": "Wizz Air",
+    "industry": "Aviation and transport",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": false,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.wizzair.com/en-gb/information-and-services/about-us/news",
+        "status": "http_error",
+        "http_status": 405
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.wizzair.com/en-gb/information-and-services/about-us/news",
+        "reason": "publisher HTTP response",
+        "http_status": 405
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 0.306,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "ups",
+    "publisher": "UPS",
+    "industry": "Aviation and transport",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 6,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://about.ups.com/us/en/newsroom.html",
+        "bytes": 70419,
+        "status": "html_read"
+      },
+      {
+        "url": "https://about.ups.com/us/en/newsroom/press-releases/our-strategy/ups-announces-agreement-to-acquire-smartways-logistics.html",
+        "bytes": 77877,
+        "status": "html_read"
+      },
+      {
+        "url": "https://about.ups.com/us/en/newsroom/press-releases/people-led.html",
+        "bytes": 64680,
+        "status": "html_read"
+      },
+      {
+        "url": "https://about.ups.com/us/en/newsroom/press-releases.html",
+        "bytes": 64776,
+        "status": "html_read"
+      },
+      {
+        "url": "https://about.ups.com/us/en/newsroom/statements.html",
+        "bytes": 64557,
+        "status": "html_read"
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://about.ups.com/us/en/newsroom/press-releases/our-strategy/ups-announces-agreement-to-acquire-smartways-logistics.html",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://about.ups.com/us/en/newsroom/press-releases/people-led.html",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://about.ups.com/us/en/newsroom/press-releases.html",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://about.ups.com/us/en/newsroom/statements.html",
+        "reason": "headline or publication date unresolved"
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 3.241,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "bp",
+    "publisher": "BP",
+    "industry": "Energy and utilities",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": false,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.bp.com/en/global/corporate/news-and-insights/press-releases.html",
+        "status": "http_error",
+        "http_status": 301
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.bp.com/en/global/corporate/news-and-insights/press-releases.html",
+        "reason": "publisher HTTP response",
+        "http_status": 301
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 0.489,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "siemens-energy",
+    "publisher": "Siemens Energy",
+    "industry": "Energy and utilities",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.siemens-energy.com/global/en/home/press-releases.html",
+        "bytes": 106874,
+        "status": "html_read"
+      }
+    ],
+    "failures": [],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 1.347,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "sse",
+    "publisher": "SSE",
+    "industry": "Energy and utilities",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 8,
+      "duplicate_links": 8,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.sse.com/news-and-views/",
+        "bytes": 50683,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.sse.com/news-and-views/2026/11/ssen-distribution-unveils-8-7-billion-pounds-network-plan/",
+        "bytes": 42678,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.sse.com/news-and-views/2026/11/sse-invests-record-26bn-as-33bn-electricity-infrastructure-plan-gathers-pace/",
+        "bytes": 42980,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.sse.com/news-and-views/2026/11/sse-welcomes-approval-of-carnaig-and-hurlie-substations/",
+        "bytes": 41044,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.sse.com/news-and-views/2026/11/building-skills-for-the-future-as-sse-commits-900-000-to-workforce-development/",
+        "bytes": 42200,
+        "status": "html_read"
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.sse.com/news-and-views/2026/11/ssen-distribution-unveils-8-7-billion-pounds-network-plan/",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.sse.com/news-and-views/2026/11/sse-invests-record-26bn-as-33bn-electricity-infrastructure-plan-gathers-pace/",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.sse.com/news-and-views/2026/11/sse-welcomes-approval-of-carnaig-and-hurlie-substations/",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.sse.com/news-and-views/2026/11/building-skills-for-the-future-as-sse-commits-900-000-to-workforce-development/",
+        "reason": "headline or publication date unresolved"
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 2.892,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "octopus-energy",
+    "publisher": "Octopus Energy",
+    "industry": "Energy and utilities",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://octopus.energy/press/",
+        "bytes": 356226,
+        "status": "html_read"
+      }
+    ],
+    "failures": [],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 1.3,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "marks-and-spencer",
+    "publisher": "Marks & Spencer",
+    "industry": "Retail and consumer",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": false,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://corporate.marksandspencer.com/media/press-releases",
+        "status": "http_error",
+        "http_status": 301
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://corporate.marksandspencer.com/media/press-releases",
+        "reason": "publisher HTTP response",
+        "http_status": 301
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 1.08,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "amazon",
+    "publisher": "Amazon",
+    "industry": "Retail and consumer",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 14,
+      "duplicate_links": 12,
+      "stale": 2,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.aboutamazon.com/news",
+        "bytes": 311286,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.aboutamazon.com/news/aws/aws-1-billion-forward-deployed-ai-engineers",
+        "bytes": 218453,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.aboutamazon.com/news/transportation/amazon-drone-deliver-package",
+        "bytes": 256179,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.aboutamazon.com/news/tag/holiday",
+        "bytes": 307719,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.aboutamazon.com/news/tag/amazon-leo",
+        "bytes": 312663,
+        "status": "html_read"
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.aboutamazon.com/news/tag/holiday",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.aboutamazon.com/news/tag/amazon-leo",
+        "reason": "headline or publication date unresolved"
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 2.329,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "ocado-group",
+    "publisher": "Ocado Group",
+    "industry": "Retail and consumer",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": true,
+      "scoped_links": 4,
+      "duplicate_links": 19,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.ocadogroup.com/newsroom",
+        "bytes": 354426,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.ocadogroup.com/newsroom/news",
+        "bytes": 198242,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.ocadogroup.com/newsroom/stories",
+        "bytes": 267345,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.ocadogroup.com/newsroom/media-kit",
+        "bytes": 169570,
+        "status": "html_read"
+      },
+      {
+        "url": "https://www.ocadogroup.com/newsroom/social-channels",
+        "bytes": 142150,
+        "status": "html_read"
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.ocadogroup.com/newsroom/news",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.ocadogroup.com/newsroom/stories",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.ocadogroup.com/newsroom/media-kit",
+        "reason": "headline or publication date unresolved"
+      },
+      {
+        "url": "https://www.ocadogroup.com/newsroom/social-channels",
+        "reason": "headline or publication date unresolved"
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 1.202,
+    "candidates": []
+  },
+  {
+    "enterprise_id": "asos",
+    "publisher": "ASOS",
+    "industry": "Retail and consumer",
+    "cohort": "held_out",
+    "coverage": {
+      "index_read": false,
+      "scoped_links": 0,
+      "duplicate_links": 0,
+      "stale": 0,
+      "no_topic": 0,
+      "duplicate_headlines": 0
+    },
+    "reads": [
+      {
+        "url": "https://www.asosplc.com/news/",
+        "status": "http_error",
+        "http_status": 301
+      }
+    ],
+    "failures": [
+      {
+        "url": "https://www.asosplc.com/news/",
+        "reason": "publisher HTTP response",
+        "http_status": 301
+      }
+    ],
+    "claim_states": {},
+    "event_assessment": [],
+    "seconds": 0.846,
+    "candidates": []
+  }
+]

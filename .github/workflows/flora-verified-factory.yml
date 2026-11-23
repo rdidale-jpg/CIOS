@@ -34,6 +34,8 @@ jobs:
       - name: Check Source withdrawal and scoped Blueprint execution
         env:
           CIOS_VERIFIED_ROUTE_OUTPUT: ${{ runner.temp }}/flora-verified-routes
-        run: python -m pytest -q -o usefixtures=verified_flora_test_authority tests/test_flora_investigation.py tests/test_flora_assurance.py tests/test_flora_factory_completion.py tests/test_flora_factory_discovery.py tests/test_flora_verified_factory.py tests/test_flora_initial_factory.py tests/test_flora_blueprint_import_validation.py tests/test_flora_blueprint_import_promotion.py
+        run: python -m pytest -q -o usefixtures=verified_flora_test_authority tests/test_flora_factory_scale.py tests/test_flora_investigation.py tests/test_flora_assurance.py tests/test_flora_factory_completion.py tests/test_flora_factory_discovery.py tests/test_flora_verified_factory.py tests/test_flora_initial_factory.py tests/test_flora_blueprint_import_validation.py tests/test_flora_blueprint_import_promotion.py
       - name: Verify desktop and both iPad orientations
         run: PYTHONPATH=. python docs/research/initial-factory/verified/browser.py "$RUNNER_TEMP/flora-verified-routes" --output "$RUNNER_TEMP/flora-verified-captures"
+      - name: Check catalogue isolation and responsive layout
+        run: PYTHONPATH=. python docs/research/initial-factory/scale/capture_catalogue.py
