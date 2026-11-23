@@ -1,0 +1,159 @@
+{
+  "base_sha": "c04b242b1c09b584156d838c8634b504e1c988bf",
+  "classification": "documentation and operating instructions only; proposed owner acceptance",
+  "changed_files": [
+    "CIOS-AI.md",
+    "CONTRIBUTING.md",
+    "ROADMAP.md",
+    "docs/product/flora-delivery-acceleration/README.md",
+    "docs/product/flora-delivery-acceleration/Assessment-and-Validation.md",
+    "docs/product/flora-delivery-acceleration/Validation.json"
+  ],
+  "checks": {
+    "introduced_relative_links_and_anchors": {
+      "passed": true,
+      "checked": 19
+    },
+    "adr_status_and_identity": {
+      "passed": true,
+      "checked": 12
+    },
+    "exact_scope": {
+      "passed": true,
+      "files": 6
+    },
+    "runtime_security_data_source_adr_and_pack_inputs_unchanged": true,
+    "concurrent_file_intersections": {
+      "726": [],
+      "715": []
+    },
+    "whitespace_diff_check": true,
+    "reverse_patch_restores_base_tree": true,
+    "existing_role_pack_tests": {
+      "passed": 5,
+      "seconds": 0.09
+    }
+  },
+  "authority_references": [
+    {
+      "path": "architecture/decisions/ADR-001-Observations-as-Atomic-Intelligence-Unit.md",
+      "index_status": "Accepted",
+      "header_status": "Accepted",
+      "metadata_exception": null,
+      "sha256": "5b60de84f6465d7fb1c8cdde18e4f130f6fb48fe6958626a24bfe6195c9e4fe9"
+    },
+    {
+      "path": "architecture/decisions/ADR-002-Enterprise-Model-as-Durable-Memory.md",
+      "index_status": "Accepted",
+      "header_status": "Accepted",
+      "metadata_exception": null,
+      "sha256": "4b1ec0881d57bffce703c0faeb717d075c851fb5fc66cc0c9dc9f0e98e270803"
+    },
+    {
+      "path": "architecture/decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md",
+      "index_status": "Accepted",
+      "header_status": "Accepted",
+      "metadata_exception": null,
+      "sha256": "903e176189094c7fa9f41e16d71198e5f1217599fb0adae0070473403a6612d1"
+    },
+    {
+      "path": "architecture/decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md",
+      "index_status": "Accepted",
+      "header_status": "Accepted",
+      "metadata_exception": null,
+      "sha256": "489cf1e76a6524ab0c575061545d049ab4d0d3d2c44ea1cbf5f7bea9e1df18fa"
+    },
+    {
+      "path": "architecture/decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md",
+      "index_status": "Accepted",
+      "header_status": "Accepted",
+      "metadata_exception": null,
+      "sha256": "789083dd769ec6f50747909c96107f4ec432cb0c5f6dfd5eeccdd3184d35fe44"
+    },
+    {
+      "path": "architecture/decisions/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md",
+      "index_status": "Accepted",
+      "header_status": "Accepted",
+      "metadata_exception": null,
+      "sha256": "e99366be281c6fbb5dc65ed6ecd65111dc58ef3cd9a164b4347a9e841c02fb42"
+    },
+    {
+      "path": "architecture/decisions/ADR-014-Evidence-Governed-Enterprise-Intelligence-Reasoning-Runtime.md",
+      "index_status": "Accepted",
+      "header_status": "Draft",
+      "metadata_exception": "Body/index Accepted; legacy header Draft",
+      "sha256": "77b60acd612127cb7321ca204db585ec6fc3753984aa9742ef9de6ea3ebb2162"
+    },
+    {
+      "path": "architecture/decisions/ADR-015-Runtime-Mission-Context.md",
+      "index_status": "Accepted",
+      "header_status": "Accepted",
+      "metadata_exception": null,
+      "sha256": "beeac96ca186a630335675195595ed81ba330d7fb21a3f37f7e4da5c7f5cf0cf"
+    },
+    {
+      "path": "architecture/decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md",
+      "index_status": "Accepted",
+      "header_status": "Accepted",
+      "metadata_exception": null,
+      "sha256": "d40d4062d3ea62e8a8031e9e1e20296b0686caa9995435c742be1816dce68f5b"
+    },
+    {
+      "path": "architecture/decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md",
+      "index_status": "Accepted",
+      "header_status": "Draft",
+      "metadata_exception": "Body/index Accepted; legacy header Draft",
+      "sha256": "eeb7823d290985cc69c60a528bb6936dc2a5ad2c1c88cfec3a16d67973826a09"
+    },
+    {
+      "path": "architecture/decisions/ADR-026-Material-Pressure-Qualification-and-Ownership.md",
+      "index_status": "Accepted",
+      "header_status": "Accepted",
+      "metadata_exception": null,
+      "sha256": "3cc8fd7922eb52f315f4d222acb03315da7919174bc892e3719fa249803ffbd1"
+    },
+    {
+      "path": "architecture/decisions/ADR-027-Document-Scoped-Publisher-Admission-Proposal.md",
+      "index_status": "Proposed",
+      "header_status": "Proposed",
+      "metadata_exception": null,
+      "sha256": "a6d597c0b9e6b998d23850e10d88469d4c4a6d04949f970ed392b697fdf57f14"
+    }
+  ],
+  "concurrent_snapshots": {
+    "715": {
+      "head_sha": "5b4b67e6f3fc7d0e60c7d1fcfc7470f2dfb61c2c",
+      "files": [
+        "cios/applications/flora/research_intelligence/cycle.py",
+        "docs/research/initial-decision-twin.md",
+        "tests/test_flora_initial_decision.py",
+        "tools/research/flora_cycle.py",
+        "tools/research/initial_decision.py"
+      ]
+    },
+    "726": {
+      "head_sha": "9ff17e6f2437c867fa7750484f1e63dba0e75d67",
+      "files": [
+        "cios/applications/flora/design_assets/design.css",
+        "cios/applications/flora/design_system.py",
+        "cios/applications/flora/lloyds_flagship.py",
+        "cios/applications/flora/visual_panels.py",
+        "tests/test_flora_lloyds_flagship.py",
+        "tests/test_flora_unified_experience.py",
+        "tools/research/eei2b_compatibility.py"
+      ]
+    }
+  },
+  "base_hosted_ci": "https://github.com/rdidale-jpg/CIOS/actions/runs/45211537434",
+  "new_runtime_security_browser_suites": "not rerun: no runtime, test, configuration or protected input changes",
+  "hosted_dispatch": "none; report only automatically triggered checks, if any",
+  "incremental_paid_calls": 0,
+  "merges": 0,
+  "deployments": 0,
+  "production_changes": 0,
+  "limits": [
+    "No measured delivery-time improvement yet.",
+    "External GPT configurations and versioned role-pack inputs are unchanged.",
+    "Parallel branches may evolve; recheck intersection before integration."
+  ]
+}

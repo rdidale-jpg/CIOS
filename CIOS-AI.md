@@ -2,7 +2,7 @@
 
 **Status:** Living document
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-21
+**Last updated:** 2026-11-23
 
 ## Purpose
 
@@ -70,6 +70,8 @@ Optimise for one autonomous run and one completion response. Ask Rob only for in
 
 
 ## Mandatory reading order
+
+Establish this context once for the bounded mission. Reuse the recorded baseline and accepted decisions; reread affected owners when their content, the scope or a material assumption changes. This is not a requirement to restart architecture review for every commit.
 
 Before major work, read in this order:
 
@@ -140,7 +142,7 @@ Research GPTs must use the canonical Markdown [Commercial Digital Twin Research 
 
 For Knowledge Pack publishing, Research GPT outputs must be compatible with `manifest.json`, `metadata.json`, `validation.json`, `lineage.json`, `checksums.sha256`, `payload/twin/`, `payload/presentation-model/` and `attachments/` where appropriate. Do not require a GPT to create a ZIP unless an existing text-based publishing workflow explicitly gives it that job.
 
-Research GPTs must produce governed Twin candidate data, atomic Observations, Twin Presentation Models, enterprise topology, executive themes, stakeholder landscape, commercial relevance, Unknowns, Contradictions, Recommendations, lineage manifests, validation reports, release manifests and completion reports. They must use enterprise-specific language, stable IDs, explicit truth status, source cut-off, confidence and freshness. Facts must remain separate from interpretation; projections and human-supplied knowledge must be labelled; Recommendations must link to Hypotheses and Evidence; Unknowns and Contradictions must be preserved.
+For Initial Decision Twin work, use ADR-009's minimum output set: governed Twin state, an executive decision view, and a source, uncertainty and lineage ledger. Material Observations, topology, stakeholder context, commercial relevance, Unknowns, Contradictions and any justified Recommendations belong in those existing outputs, not automatically in separate documents. Twin Presentation Models, manifests, validation/release/completion reports and packaged formats are required only where the commissioned exchange, High-Fidelity profile, Assured Release or existing owning contract requires them. They must use enterprise-specific language, stable IDs, explicit truth status, source cut-off, confidence and freshness. Facts must remain separate from interpretation; projections and human-supplied knowledge must be labelled; Recommendations must link to Hypotheses and Evidence; Unknowns and Contradictions must be preserved.
 
 Executive-facing output for `strategic_sales_director_v1` must answer: Who? Why now? Why them? What evidence? What remains unknown? What contradicts the current view? What next? What not to claim? It must not expose raw worksheet or database labels and must not assert profit-centre or cost-centre classifications without support.
 
@@ -187,6 +189,16 @@ Codex-ready prompts should be inspectable and bounded. Always include:
 - completion report.
 
 Specify whether the task is documentation-only or runtime-changing. Put Codex prompts in fenced code blocks.
+
+## FLORA product delivery
+
+Apply the [Product Delivery Doctrine](docs/product/flora-delivery-acceleration/README.md) within the current commission and existing architecture. It is working guidance, not a new architecture or approval authority.
+
+- Deliver the smallest complete user journey using existing owners and components. Judge success by owner-tested commercial usefulness, not PR or document counts.
+- Reuse valid reviews and test evidence for the unchanged scope. Reassess only affected behaviour, changed assumptions or new evidence; keep required CI and security gates intact.
+- Proceed through already authorised reversible work without repeated confirmation. Escalate material architecture, legal or security conflicts; record unrelated issues for later work.
+- For visual work, provide actual browser walkthroughs at the applicable desktop/tablet sizes. Owner visual acceptance, merge authority and deployment authority remain distinct.
+- Follow the [near-term FLORA priorities](ROADMAP.md#current-flora-product-priorities). Defer semantic extraction experiments unless a named priority milestone requires them. Use existing included/local tools with zero incremental expenditure; do not make paid API calls or purchase services.
 
 ## Response style
 
