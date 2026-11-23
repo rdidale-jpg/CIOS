@@ -1,0 +1,84 @@
+{
+  "base": "97d316c640c96d99c2301819f8aac00b3b9c1398",
+  "checkout": "97d316c640c96d99c2301819f8aac00b3b9c1398",
+  "tested_prototype_sha256": {
+    "browser.py": "07b402319d1906e544e4a9e19270b1ed783aba481a5382df0fa3acfe790c4dac",
+    "preview.html": "1ac4971d5674804913d78c27f8f57933e70591acc1548596524e101b4e0b60e2",
+    "validate.py": "1fb6d4b1d94c7b1505b74fd86985de91fb33550b796993b177bcb9265d56ecbb",
+    "prototype.py": "3f256797dfceac5ec01e39452737adfacb07247051df025acec8a1d0073a973b",
+    "living.js": "4c6772a99458097d70a75025999bcdc42773403de0b9fb0ca826671c0280e69c",
+    "living.css": "33e3de128bf90f00dbcbc6255a54d75936d0e99b2330e612009d9e447664ee18",
+    "checks.py": "16effe6204ff003faf16d32a72c39104e4e5eb6c6c1e533c2c85fd254f170180",
+    "export.py": "93f47d0cae4578637bbce5e90fad9237b704c1bf3746582cc84d227f0f51084d"
+  },
+  "checks": [
+    {
+      "device": "desktop",
+      "four_regions_per_layer": true,
+      "three_perspectives": true,
+      "eight_swot_themes": true,
+      "keyboard_or_touch": true,
+      "history_reload_subject_continuity": true,
+      "errors": []
+    },
+    {
+      "device": "ipad-landscape",
+      "four_regions_per_layer": true,
+      "three_perspectives": true,
+      "eight_swot_themes": true,
+      "keyboard_or_touch": true,
+      "history_reload_subject_continuity": true,
+      "errors": []
+    },
+    {
+      "device": "ipad-portrait",
+      "four_regions_per_layer": true,
+      "three_perspectives": true,
+      "eight_swot_themes": true,
+      "keyboard_or_touch": true,
+      "history_reload_subject_continuity": true,
+      "errors": []
+    },
+    {
+      "device": "mobile",
+      "four_regions_per_layer": true,
+      "three_perspectives": true,
+      "eight_swot_themes": true,
+      "keyboard_or_touch": true,
+      "history_reload_subject_continuity": true,
+      "errors": []
+    }
+  ],
+  "self_contained_preview_no_subrequests": true,
+  "file_url_check": "Blocked by managed browser administrator policy; not overridden",
+  "no_javascript_fallback": true,
+  "screenshots": {
+    "mobile-industry-comparison.jpg": "c9bf54a703765cf3c23cb41c64b66835fb4f6ab2c797ffaae243292e1322dbf8",
+    "mobile-forces.jpg": "79b04564659433266931cf8380bc936deddda7ac9a53c705f2cace00e796f2ad",
+    "mobile-forces-compact.jpg": "3eeb029f93d778bdda79a39b06fbeb1ea5ac38f1893d0562b4c1c4c99dbc9a51",
+    "mobile-inside.jpg": "cf1e0aa949c60a13a53fb34fd6de6cbbe534f122881b9448e6273b352ab5461b",
+    "mobile-inside-compact.jpg": "eaed9e28540f1e349db7fcfb8a9ad23a8feac3df35734dad49bcc177801bdf65",
+    "mobile-landscape.jpg": "3e39e2118a0f07ac45a75dbfaa30bd50b5244ef4fea1976f4f774e58c7368d4a",
+    "mobile-landscape-compact.jpg": "73f01e3129380bda4c0f5b3c4b4d414e4e531207494cc6d5df5ede6e808636e1",
+    "ipad-portrait-industry-comparison.jpg": "8452248681c8f0cfbde523b0e2890f0bd042f63abad3283995b7322bb333d47e",
+    "ipad-portrait-forces.jpg": "035deb71eb9fd587321df78f92759195ac2ccc1fdc821fdff81d351e14bfbd9f",
+    "ipad-portrait-forces-compact.jpg": "7e9c8b80356e6b9a00691d67f972ce83ab58b80b1e562c80b47ecd0e782cd643",
+    "ipad-portrait-inside.jpg": "67d1d27015db299ad0af4d84fc262a712eaf4e053511912634c32a01c18a3927",
+    "ipad-portrait-inside-compact.jpg": "30f35a2dc601fb85b96a4503a988371feca20ebb7fedbe3585e9f2738d5477b4",
+    "ipad-portrait-landscape.jpg": "aef2181b1985a582034c48e3e8f6b11cfe49c653c4cd161199e5ba3b8ba9bb3a",
+    "ipad-portrait-landscape-compact.jpg": "dd938accadc67411f8653c20031a10d9e3f266da6385f52204204248137f4ff3",
+    "ipad-portrait-current-landscape.jpg": "aa1a0e9ebc574e014d9ed625a150e9faf608550265412dad559ebe8c54c4e6e8",
+    "ipad-landscape-industry-comparison.jpg": "6373b61490535cd7af7cd2e19ad588d02d21c6eff0f2a787b9ee1005052c672c",
+    "ipad-landscape-forces.jpg": "dd1cd4dc079fabf24e40e5f5fc1bfafa1dc2db328fd21342eabbc3d83f52927d",
+    "ipad-landscape-inside.jpg": "9b33485a7ee430ea6f26f9deb060a8c77d05c08ab20593ad6c786910b9ce615f",
+    "ipad-landscape-landscape.jpg": "d488fecddb2216b7d3331cca736d3693d174aa8d35697edce8157d46b5e9258a",
+    "ipad-landscape-current-landscape.jpg": "c20f97de9407a7cfe07c42a0c386b0b4d522f811b3ccfaf79ef72cb1953c33d7",
+    "desktop-industry-comparison.jpg": "06330eba45b0fafd9ee61bb881ff93f613e30b9363511d8245327d2001fb17fb",
+    "desktop-swot.jpg": "c3ff70c6a40fb65365631731984cfab051e76afcf6df1459746be31ad58ac095",
+    "desktop-forces.jpg": "aa7a2a2190a5e68628533eafb2e0aa614d21df89bf3891e23215c626ac330a53",
+    "desktop-inside.jpg": "305e404c7f1511a08c9ded1c4b99886ea1ab2c8e05519a683e7cdee58b3a41c1",
+    "desktop-landscape.jpg": "406e4066f88bba09f43a3001b3182db6413da72d018f96fc0c44f12ed454aa2c",
+    "desktop-current-landscape.jpg": "f2b8c97698fccc47734c2a312deff07153f31a3c1449db08f9e5c299b34bc19c"
+  },
+  "actual_browser": "system Chromium, emulated touch/tablets; not physical iPad or live Render"
+}
