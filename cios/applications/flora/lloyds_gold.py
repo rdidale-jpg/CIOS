@@ -50,17 +50,17 @@ APPS = {
 DETAILS = {
  'group': ('economics','sources'), 'retail': ('model','sources'), 'commercial': ('model','sources'),
  'retirement': ('model','sources'), 'economics': ('comparison','central','sources'),
- 'operations': ('credit','service','sources'), 'capabilities': ('risk','technology','data','sources'),
+ 'operations': ('credit','service','people','sources'), 'capabilities': ('risk','technology','data','sources'),
  'applications': ('envoy','copilot','sources'), 'partners': ('google','microsoft','sources'),
  'programmes': ('legacy','ai','brand','colleague','curve','sources'),
  'markets': ('mechanism','sources'), 'resilience': ('applicability','sources'),
- 'competition': ('payments','ai','sources'), 'strategy': ('timeline','options','sources'),
+ 'competition': ('payments','ai','sources'), 'strategy': ('timeline','options','goals','sources'),
  'analysis': tuple('theme-'+str(i) for i in range(8))+('sources',),
 }
 FOCUS_FACTS = {
  'group':('LBG-Q326-PROFIT','LBG-Q326-DEPOSITS','LBG-AR25-MIGRATION','LBG-A2030-CIR'), 'economics':tuple(recovery.MEASURES)+('LBG-A2030-CIR','LBG-A2030-SAVINGS','LBG-Q326-INVESTMENT','LBG-A2030-INVESTMENT'),
  'retail':('LBG-BRAND26-TIMING','LBG-BRAND26-NO-ROLES'), 'commercial':(), 'retirement':(),
- 'operations':('LBG-BRAND26-TIMING','LBG-BRAND26-NO-ROLES'),
+ 'operations':('LBG-BRAND26-TIMING','LBG-BRAND26-NO-ROLES','LBG-AR25-COPILOT'),
  'capabilities':('LBG-AR25-MIGRATION','LBG-A2030-DATA','LBG-ENVOY-CONTROLS'),
  'applications':tuple(dict.fromkeys(k for row in APPS.values() for k in row[2]))+('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'),
  'partners':('LBG-ENVOY-GOOGLE','LBG-AR25-COPILOT'),
@@ -70,7 +70,7 @@ FOCUS_FACTS = {
  'resilience':('UK-PRA-REPORT27','UK-FCA-REPORT27','LBG-A2030-PLATFORMS'),
  'competition':('LBG-A2030-WALLET','treasury-payments','LBG-A2030-DATA','LBG-ENVOY-CONTROLS'),
  'strategy':('LBG-AR25-MIGRATION','LBG-Q326-CURVE','LBG-Q326-INVESTMENT','UK-PRA-REPORT27',
-             'LBG-A2030-PLATFORMS','LBG-A2030-INVESTMENT','LBG-A2030-CIR','LBG-A2030-SAVINGS'),
+             'LBG-A2030-PLATFORMS','LBG-A2030-INVESTMENT','LBG-A2030-CIR','LBG-A2030-SAVINGS','LBG-A2030-WALLET'),
  'analysis':tuple(dict.fromkeys(k for _,keys,_ in SWOT for k in keys)),
 }
 
@@ -190,10 +190,28 @@ def economics(state,facts,issues=()):
             (link(state,'Central / Equity',focus='economics',detail='central'),'Central items and consolidation','Underlying segments must reconcile to the statutory Group'),
         ],'Different businesses, different economics')
     if state.detail=='comparison':
+        body+=economic_decisions()
         body+=reported(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS','LBG-Q326-INVESTMENT','LBG-A2030-INVESTMENT'))
         body+=interpretation(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS'),'Gross savings and a future cost ratio are management ambitions, not current net profit or money available to suppliers. Revenue, implementation costs and parallel running can change the result.')
-    elif not state.detail:body+='<p class="gold-related">'+link(state,'Efficiency & investment',focus='economics',detail='comparison')+'</p>'
+    elif not state.detail:body+='<p class="gold-related">'+link(state,'Earnings, efficiency & capital decisions',focus='economics',detail='comparison')+'</p>'
     return body
+
+
+def economic_decisions():
+    return table(
+        ('Decision', 'What changes the answer', 'Evidence needed'),
+        [
+            ('Protect funding economics', 'Deposit mix and pricing can offset growth in total balances.',
+             'Deposit mix, effective rates and loan repricing on comparable dates.'),
+            ('Separate efficiency from a favourable comparison',
+             'Remediation and credit charges can move independently of ordinary operating costs.',
+             'Comparable income, operating expense, remediation and impairment on the same basis.'),
+            ('Balance growth and capital',
+             'New lending and distributions compete for capacity once regulatory and management buffers are considered.',
+             'Risk-weighted assets, capital generation, distributions and the capital bridge.'),
+        ],
+        'How to read Group earnings and capital · analytical framework',
+    )
 
 
 def division(state,facts):
@@ -206,21 +224,57 @@ def division(state,facts):
     body+=table(('Value stream','Activities','Durable capabilities'),[(e(a),e(b),e(c)) for a,b,c in rows[state.focus]],'Operating interpretation · not a verified workflow or organisation chart')
     body+=reported(facts,FOCUS_FACTS[state.focus])
     body+='<p class="gold-related">'+link(state,'Group economic context',focus='economics')+' · '+link(state,'Related operating capabilities',stream='inside',focus='capabilities')+'</p>'
+    if state.focus in {'retail', 'commercial'}:
+        body += '<p class="gold-related">' + link(
+            state, 'Explore the credit journey', stream='inside', focus='operations', detail='credit'
+        ) + '</p>'
     if not state.detail:body+='<p class="gold-related">'+link(state,'Division & legal entity',detail='model')+'</p>'
     if state.detail=='model':body+='<h2>Division versus legal entity</h2><p>A reporting business is not a single regulated legal entity. No capability-level profit, legal-bank allocation or application ownership is inferred from these navigation labels.</p>'
     return body
 
 
+def people(state, facts):
+    body = '<p class="le-deck">Who serves customers, who runs shared capabilities and what the workforce disclosures establish.</p>'
+    body += table(
+        ('Organisation lens', 'Executive question'),
+        [
+            ('Group leadership', 'Who sets the Group objective and which role owns the measured outcome?'),
+            ('Reporting businesses', 'Which customer business owns the service or economic result?'),
+            ('Shared functions', 'Which function operates the capability and which function tests its controls?'),
+            ('External collaborators', 'What delivery obligation, if any, does each legal counterparty hold?'),
+        ],
+        'How to trace accountability · conceptual, with no inferred reporting lines',
+    )
+    body += reported(facts, ('LBG-AR25-COPILOT', 'LBG-BRAND26-NO-ROLES'))
+    body += '<p class="le-limit">Licences do not establish headcount, adoption, productivity or the split between internal and external delivery. An announcement about roles does not provide a current workforce total or cost trend.</p>'
+    body += '<p class="gold-related">' + link(state, 'Disclosed technology and collaborators', focus='partners') + '</p>'
+    return body
+
+
 def operating(state,data,facts,issues=()):
+    if state.detail == 'people':
+        return people(state, facts)
     body='<p class="le-deck">Customer journeys cross durable capabilities. Shared capabilities are not reporting divisions.</p>'
     body+=table(('Value stream','Activities','Supporting capabilities'),[
         ('Credit origination & servicing','Assess affordability → record a decision → service an account','Lending; risk assessment; finance; technology controls'),
         ('Customer support & service','Receive a request → resolve or escalate → correct the record','Customer operations; servicing; data; access controls'),
     ],'Conceptual operating map · workflow ownership and system topology unverified')
+    body+='<p class="gold-related">'+link(state,'Organisation, accountability & workforce',detail='people')+'</p>'
     if state.detail in {'credit','service'}:
         row=recovery.CAPABILITIES[0 if state.detail=='credit' else 2]
         body+='<h2>'+e(row[1])+'</h2><p>'+e(row[4])+'</p><p>'+e(row[3])+'</p>'
         body+=table(('People & accountability','Process','Information & technology'),[('Decision role hypothesis; named mandate Unknown',e(' / '.join(row[2])),'Account and case information; actual application mapping Unknown')],'Operating detail · conceptual, not a verified role or system assignment')
+        targets = (
+            ('Risk capability', 'capabilities', 'risk'),
+            ('Core platform renewal', 'programmes', 'legacy'),
+        ) if state.detail == 'credit' else (
+            ('Data capability', 'capabilities', 'data'),
+            ('Colleague technology', 'applications', 'copilot'),
+        )
+        body += '<p class="le-limit">Explore related topics. The links do not establish actual system dependencies.</p>'
+        body += '<p class="gold-related">' + ' · '.join(
+            link(state, label, focus=focus, detail=detail) for label, focus, detail in targets
+        ) + '</p>'
         body+='<h3>Commercial investigation</h3><p>Which hand-off causes avoidable repeat work, and what measured customer outcome would demonstrate an improvement? This is an investigation question, not established customer pain or demand.</p>'
     else:body+='<p class="gold-related">'+link(state,'Credit journey detail',detail='credit')+' · '+link(state,'Customer service detail',detail='service')+'</p>'
     body+=reported(facts,FOCUS_FACTS['operations'])
@@ -335,15 +389,57 @@ def analysis(state,facts):
     return body
 
 
+GOALS = (
+    ('Current performance context', 'Investment at the end of the strategic cycle', 'LBG-Q326-INVESTMENT',
+     'Compare delivered milestones, spend and service continuity on the same reporting basis.'),
+    ('Medium-term transformation', 'Reduce legacy platforms', 'LBG-A2030-PLATFORMS',
+     'Which services can retire old platforms, and what evidence supports a safe cutover?'),
+    ('Medium-term transformation', 'Invest in change', 'LBG-A2030-INVESTMENT',
+     'Which investments are committed, and which depend on delivery or future decisions?'),
+    ('Longer-term ambition', 'Improve cost efficiency', 'LBG-A2030-CIR',
+     'Use a comparable period and cost basis before judging progress.'),
+    ('Longer-term ambition', 'Deliver gross savings', 'LBG-A2030-SAVINGS',
+     'Which recurring costs are removed after implementation and parallel running?'),
+    ('Medium-term transformation', 'Develop wallet and payment propositions', 'LBG-A2030-WALLET',
+     'Which customer outcome is measured, and what would distinguish adoption from delivery?'),
+)
+
+
+def strategy_goals(facts):
+    body = '<p class="le-deck">Read each management commitment alongside the evidence needed to judge delivery.</p>'
+    groups = {}
+    for row in GOALS:
+        if row[2] in facts:
+            groups.setdefault(row[0], []).append(row)
+    if not groups:
+        return body + '<p>No eligible strategy disclosures are available for this view.</p>'
+    anchors = {horizon: horizon.lower().replace(' ', '-') for horizon in groups}
+    body += '<nav class="gold-related" aria-label="Strategy horizons">' + ' · '.join(
+        f'<a href="#strategy-{anchors[horizon]}">{e(horizon)}</a>' for horizon in groups
+    ) + '</nav>'
+    for horizon, rows in groups.items():
+        body += f'<section class="gold-dossier" id="strategy-{anchors[horizon]}"><h2>{e(horizon)}</h2>'
+        for _, title, key, question in rows:
+            body += '<h3>' + e(title) + '</h3>' + reported(facts, (key,))
+            if key == 'LBG-A2030-PLATFORMS' and 'LBG-AR25-MIGRATION' in facts:
+                body += '<p><strong>Earlier disclosed progress</strong> · A separate historical milestone on a different reporting horizon.</p>'
+                body += reported(facts, ('LBG-AR25-MIGRATION',))
+            body += '<p><strong>Test progress</strong> · ' + e(question) + '</p>'
+        body += '</section>'
+    return body + '<p class="le-limit">Comparable actuals and named delivery owners are shown only when established. A Group objective does not establish work-package ownership or supplier demand.</p>'
+
+
 def forces(state,facts):
     if state.focus=='analysis':return analysis(state,facts)
     if state.focus=='strategy':
+        if state.detail == 'goals':
+            return strategy_goals(facts)
         body='<p class="le-deck">Management direction and the sequence of change.</p>'+preview.timeline(facts)
         body+=reported(facts,('LBG-A2030-SAVINGS','LBG-Q326-INVESTMENT','LBG-A2030-INVESTMENT'))
         if state.detail=='options':
             for title,keys,text in next(rows for key,_,rows in flagship.VIEWS if key=='options'):
                 if all(k in facts for k in keys):body+='<h2>'+e(title)+'</h2>'+interpretation(facts,keys,text)
-        else:body+='<p class="gold-related">'+link(state,'Strategic alternatives & trade-offs',detail='options')+'</p>'
+        else:body+='<p class="gold-related">'+link(state,'Goals & tests of progress',detail='goals')+' · '+link(state,'Strategic alternatives & trade-offs',detail='options')+'</p>'
         return body
     keys=FOCUS_FACTS[state.focus]
     deck={'markets':'Funding and asset repricing can move at different speeds.',
@@ -388,7 +484,7 @@ def main(state,data,facts,issues=()):
             body+='<div class="gold-divisions">'+''.join('<article>'+link(state,title,focus=key,subject=key)+'<p>'+e(customer)+'</p></article>' for title,customer,_,_,key in twin.DIVISIONS)+'</div>'
             body+='<div class="le-measures">'+preview.measures(facts)+'</div>'
             body+=interpretation(facts,('LBG-AR25-MIGRATION','LBG-A2030-CIR'),'The efficiency ambition and platform-renewal priority put the sequencing of change alongside service continuity. They establish strategic direction, not a project-level saving or open buying programme.')
-            body+='<p class="gold-related">'+link(state,'Funding, income & earnings',focus='economics')+'</p>'
+            body+='<p class="gold-related">'+link(state,'Funding, income & earnings',focus='economics')+' · '+link(state,'Organisation & workforce',stream='inside',focus='operations',detail='people')+' · '+link(state,'Management goals',stream='forces',focus='strategy',detail='goals')+'</p>'
         elif state.focus in {'group','economics'}:body+=economics(state,facts,issues)
         else:body+=division(state,facts)
     elif state.stream=='inside':
