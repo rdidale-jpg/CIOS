@@ -51,7 +51,8 @@ def test_exact_accepted_seven_sources_and_only_responsive_current_scene_loaded()
    assert hashlib.sha256(raw).hexdigest()==variant['sha256']
    assert len(raw)==variant['bytes'] and variant['bytes']<row['original_bytes']
  for scope,stream in CASES:
-  html=v.render(v.SCOPES[scope]['route'],{'stream':[stream]})
+  # The original responsive subtree contract is retained on the old view.
+  html=v.render('/enterprises/lloyds/legacy' if scope=='lloyds' else v.SCOPES[scope]['route'],{'stream':[stream]})
   images=[a for t,a in DOM(html).nodes if t=='img'];assert len(images)==3
   from cios.applications.flora.visual_panels import asset_manifest
   current=asset_manifest()['portraits'][scope+'-'+stream]

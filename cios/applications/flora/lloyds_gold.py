@@ -114,7 +114,7 @@ def canonical_query(query):
     # Legacy contextual overlays retain their existing finite resolver/renderer.
     # Mixed new selectors are not routed around canonical validation.
     if not {'focus','subject'} & set(query) and query.get('layer') in (['regulators'],['suppliers']):return None
-    if 'detail' in query and 'focus' not in query and query.get('detail')!=['']:return None
+    if 'detail' in query and 'focus' not in query:return None
     allowed={'stream','focus','subject','detail','market','layer','selected','reading'}
     if set(query)-allowed or any(not isinstance(a,list) or len(a)!=1 or not isinstance(a[0],str) for a in query.values()):
         raise ValueError('Unsupported enterprise state')
@@ -529,6 +529,16 @@ def main(state,data,facts,issues=()):
             if 'CEO1-ROLE-NUNN-20260322' in facts:
                 p.note_editorial_sources(facts['CEO1-ROLE-NUNN-20260322'].sources)
                 body+='<p class="ceo-lead-context">'+link(state,'Leadership evidence',stream='inside',focus='people',detail='leadership')+' · Charlie Nunn was identified as Group Chief Executive in March 2026; current mandate verification is unavailable.</p><p class="ceo-attribution">Contains public sector information licensed under the Open Government Licence v3.0.</p>'
+            # Keep the existing EAI agenda destinations discoverable, with their
+            # current eligibility owner deciding whether each link may appear.
+            related=[]
+            funding=next((row for row in issues if row.key=='funding-base'),None)
+            if funding and funding.facts[-1].semantic_type=='calculated' and p.eligible(funding.facts[-1]):
+                body+='<div data-intelligence="funding-base">'+p.render(funding.facts[-1])+'</div>'
+                related.append('<a href="/enterprises/lloyds?agenda=funding-base#agenda-insight">Funding comparison</a>')
+            if any(row.key=='service-recovery' for row in issues):
+                related.append('<a href="/enterprises/lloyds?agenda=service-recovery#agenda-insight">Customer outcomes</a>')
+            if related:body+='<p class="gold-related">'+' · '.join(related)+'</p>'
             body+='<p class="gold-related">'+link(state,'Funding, income & earnings',focus='economics')+' · '+link(state,'Organisation & workforce',stream='inside',focus='people',detail='leadership')+' · '+link(state,'Management goals',stream='forces',focus='strategy',detail='goals')+'</p>'
         elif state.focus in {'group','economics'}:body+=_ceo_financial(state,facts,issues)
         else:body+=division(state,facts)
@@ -562,7 +572,13 @@ def render(query,headers=None,*,canonical=False):
         for stream in REGIONS:
             old=e(v.stream_url(ctx,stream)+'#stream-'+stream,quote=True)
             top=top.replace('href="'+old+'"','href="'+e(href(state,stream=stream),quote=True)+'"')
-        markup=panels._frame(ctx,headers,data,issues,(),notice+main(state,data,facts,issues),top=top,left=scene(state,facts),show_layers=False)
+        # Preserve the existing opt-in, authorised non-production Canvas replay
+        # slot. The existing service owns environment/ACL/lifecycle checks.
+        change=''
+        if canonical and not state.detail and state.focus==REGIONS[state.stream][0][0]:
+            from .memory.commercial_views import commercial_change
+            change=commercial_change('lloyds',state.stream,headers)
+        markup=panels._frame(ctx,headers,data,issues,(),change+notice+main(state,data,facts,issues),top=top,left=scene(state,facts),show_layers=False)
         assets=('<link rel="stylesheet" href="'+preview.PATH+'/assets/styles"><link rel="stylesheet" href="'+PATH+'/assets/styles">'
                 '<script defer src="'+preview.PATH+'/assets/interactions"></script>')
         markup=markup.replace('</head>',assets+'</head>')

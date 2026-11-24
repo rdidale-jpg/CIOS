@@ -83,6 +83,9 @@ tests/test_flora_lloyds_ceo.py
 tests/test_flora_lloyds_flagship.py
 tests/test_flora_lloyds_gold.py
 tests/test_flora_visual_panels_632.py
+tests/test_flora_visual_streams_612.py
+tools/ci/flora_enterprise_economics_preview.cjs
+tools/ci/flora_vp2_preview.cjs
 tools/research/eei2b_compatibility.py
 tools/research/history_integrity.py
 tools/research/ux_unify_compatibility.py

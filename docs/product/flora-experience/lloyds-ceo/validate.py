@@ -12,7 +12,7 @@ APPROVED={
  'docs/flora-runtime/accepted-ux-recovery/browser.py','docs/flora-runtime/living-enterprise-preview/browser.py','docs/flora-runtime/lloyds-gold-standard/browser.py',
  'tests/test_flora_lloyds_ceo.py','tests/test_flora_lloyds_gold.py','tests/test_flora_living_enterprise_preview.py','tests/test_flora_accepted_ux_recovery.py',
  'tests/test_flora_lloyds_flagship.py','tests/test_flora_enterprise_economics_a1.py','tests/test_flora_experience_684.py','tests/test_flora_visual_panels_632.py',
- 'tools/research/eei2b_compatibility.py','tools/research/ux_unify_compatibility.py','tools/research/history_integrity.py',
+ 'tests/test_flora_visual_streams_612.py','tools/ci/flora_vp2_preview.cjs','tools/ci/flora_enterprise_economics_preview.cjs','tools/research/eei2b_compatibility.py','tools/research/ux_unify_compatibility.py','tools/research/history_integrity.py',
  'enterprise-knowledge/banking/research-model/source-snapshots/CEO1-GOV-ROLE.json',
  'enterprise-knowledge/banking/research-model/source-snapshots/CEO1-GOV-ROLE.txt',
 }

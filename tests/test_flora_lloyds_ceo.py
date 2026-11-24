@@ -204,3 +204,21 @@ def test_history_keeps_new_role_bytes_exact_and_rejects_unreviewed_additions(tmp
     file=root/'enterprise-knowledge/banking/research-model/source-snapshots'/('unknown.txt'if change=='unknown'else'CEO1-GOV-ROLE.'+change)
     file.write_text(file.read_text()+'\nchanged'if file.exists()else'unknown')
     with pytest.raises(AssertionError):history.verify_history(root)
+
+
+def test_existing_eai_outcomes_and_funding_still_have_one_source_guarded_entry():
+    html=main(v.render(g.CANONICAL,{}))
+    assert html.count('data-intelligence="funding-base"')==1
+    assert html.count('agenda=service-recovery#agenda-insight')==1
+    assert 'Funding comparison'in html and 'Customer outcomes'in html
+
+
+def test_existing_isolated_replay_owner_is_preserved_without_guest_or_production_authority(monkeypatch):
+    from cios.applications.flora.memory import commercial_views
+    calls=[]
+    def guarded(binding,stream,headers):
+        calls.append((binding,stream,headers));return ''
+    monkeypatch.setattr(commercial_views,'commercial_change',guarded)
+    v.render(g.CANONICAL,{'stream':['forces']})
+    assert calls==[('lloyds','forces',None)]
+    assert 'data-commercial-change'not in v.render(g.CANONICAL,{'stream':['forces']})

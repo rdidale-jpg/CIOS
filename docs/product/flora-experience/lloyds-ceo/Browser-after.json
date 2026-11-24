@@ -1,6 +1,6 @@
 {
   "phase": "after",
-  "sha": "7a96e94839340bea1c2d4fe9970f454d34e0f10b",
+  "sha": "d6a3da360f4267722ac95b9ac004528dcae58d2b",
   "environment": "isolated loopback Chromium; simulated iPads; not Render",
   "devices": [
     {
@@ -45,7 +45,7 @@
     }
   ],
   "screenshots": {
-    "after-desktop-group.jpg": "54f78641e23f1b81103fa998beac3966edd6845207e8886fa808e02549d5e3bb",
+    "after-desktop-group.jpg": "1daed6c7b0aed3a88aecd3b707c735b4c89eeb0daa58def7cf4079235c5b7ecd",
     "after-desktop-economics.jpg": "7d6ab80e61758923fa420debec0380dfd549a262accb0d2927f9a784c697e7b2",
     "after-desktop-retail.jpg": "cb3399f6fb8bbff40185e6d181d7c7de1d92c06f7116e3da9ca32d3043b92f3a",
     "after-desktop-organisation.jpg": "15117c47eadcbdfdd3946523da513e81798ebbba1c2851efb0790513c7a72b25",
@@ -55,8 +55,8 @@
     "after-desktop-strategy.jpg": "ead5598495f1c4909dc874c14142285e00db373d6f662a8bbe594f5ca5f1b2c8",
     "after-desktop-goal-ai.jpg": "0435828f282ba34432673bb5bec25068f84da24e6ca953328d6c81950a94dddb",
     "after-desktop-analysis.jpg": "e7e8c35d00f74e78464806a0143ccf081974b2fa1f50d617241d7f78870ae156",
-    "after-desktop-zoom-200.jpg": "20cf4e2eeb6894305451bec5ebd25589d736d561836c7f16571268ab1308376c",
-    "after-ipad-landscape-group.jpg": "d0f5ac8d44c9bd3f1d0d0808bccb5494771be123b672cacaa3eab8d148bf5e9b",
+    "after-desktop-zoom-200.jpg": "c97ac26270e457e721d772d5c03189ae4c1ea16431075026857baee2bcd3cd86",
+    "after-ipad-landscape-group.jpg": "9ff635815ec911d2c1d29d4eb701ca7261945593d5cf6a27128bb3c7de97f5d0",
     "after-ipad-landscape-economics.jpg": "f4d822a1853fbba667735ad19a876431b1ac37bed009962e74f9484874300ac9",
     "after-ipad-landscape-retail.jpg": "41461a0b5c88df4531fd467887d5c583f5a7103612e66d07f1c0bb5a3f56470a",
     "after-ipad-landscape-organisation.jpg": "1d7551dca02fe79a97164a866407e4cdf1fec7788ea51120e6f7367a1ee8d8a3",
@@ -66,7 +66,7 @@
     "after-ipad-landscape-strategy.jpg": "8a54521ba62ff6ffcef168a789010f725f783a4fe8033bfbcc258b565c48c679",
     "after-ipad-landscape-goal-ai.jpg": "b9e8bb29519a23bc65c6c5adafbeca802f96b86da7849980e6a23499a104d486",
     "after-ipad-landscape-analysis.jpg": "fc8144d0144f8bc60ce012af4d1d66f686ac3698610fb3d9f9b664fc7cbd70a5",
-    "after-ipad-portrait-group.jpg": "7fad5fa3bd176c677a0f1f6732b5560249ef95333c3755e4e9d76e3d5221790d",
+    "after-ipad-portrait-group.jpg": "25f3a62a937d073dac0bae5283d28b61dd8b7e5ee164c3dd52daaf8cce99d406",
     "after-ipad-portrait-economics.jpg": "c78db97678456f3330f06bd94506c1181e5d93bfc49acb3457fcae88a4c4b969",
     "after-ipad-portrait-retail.jpg": "3222ff0547c8c8733e3785623319f612677362b95d57842736cd6aebddbe1af3",
     "after-ipad-portrait-organisation.jpg": "8cb7fe7f61b1653d7ec1bc49c1e6c678a22f7dddc1b0953e8d0949e7ce7a149c",
@@ -77,7 +77,7 @@
     "after-ipad-portrait-goal-ai.jpg": "1b420711e23cb27750c8f30698dcb2738f38cb442a61ccec7cd619f1d9be15df",
     "after-ipad-portrait-analysis.jpg": "17c74d6290dd783aa0e123d9e8e3e2d8a41d9099254bf11fb3f440102ad094ef",
     "after-ipad-portrait-illustration-open.jpg": "0735e00139df6a28796ad8c7e7c27b8b44e2079574fed65168d9fc45f5295bdd",
-    "after-mobile-group.jpg": "05e5271482e34ff241726e6c892444158f609614d750bdd106bcf93ddc724d8a",
+    "after-mobile-group.jpg": "7b3687de0349c79275322959c73bcb30764f55d5ee07bfc3da5a5a471e4333aa",
     "after-mobile-economics.jpg": "1ad5b2029a35a97572903affbfd14703a04a2379fe0b8157ad93239b682f2172",
     "after-mobile-retail.jpg": "7cb18d9e50b4a0029aadd99bdc0eb0c9744a9b82e0bbe7c4a99d1c0b70d444a4",
     "after-mobile-organisation.jpg": "6af5cea13a53e7e4cae1cdcab6a4bc6f1a7a9e003a1999d2131920ab535c3432",
@@ -130,7 +130,7 @@
     "cios/applications/flora/banking_cohort.py": "bd0c6b82a2f5fd80fe6f38f3b2da6e014f1b8b6a1a6fda039bc734f36390daf2",
     "cios/applications/flora/banking_portfolio.py": "b7f7ef1bfaea78bfa93761d276b3c16f167642b23037d2dcd8ca3277fa27882a",
     "cios/applications/flora/access.py": "da0abc2923c2c02d93e65c3ba986df879c6a71946b2e6b567dfca08c0c8ceb51",
-    "cios/applications/flora/lloyds_gold.py": "97c88eec9d1b44f3fe33aa16a71d11f6ed01797b5159f9bdb679f909d17a0dec",
+    "cios/applications/flora/lloyds_gold.py": "db7e75758fcdea902e1d054ae79e4ecfda2dc2062144bf2ad56fbc7718425bbe",
     "cios/applications/flora/experience_composition.py": "1b570fec56978be09ed1fcc3c4c7234e2203682a8858723ff155a13cc92bc8fe",
     "cios/applications/flora/provider_context.py": "3422d0c9938525467554bfca69b2f811f5555a1f3b02293bd232b9789c36ffe1",
     "cios/applications/flora/seed_data.py": "77f84f69398d219c2f245541ecb3dd8701c8e464f33e6ebeadc8bb1559874b0a",
