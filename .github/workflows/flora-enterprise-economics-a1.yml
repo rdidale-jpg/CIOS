@@ -10,6 +10,7 @@ on:
       - 'docs/flora-runtime/enterprise-economics-a1/**'
       - 'docs/flora-runtime/accepted-ux-recovery/**'
       - 'docs/flora-runtime/living-enterprise-preview/**'
+      - 'docs/flora-runtime/lloyds-gold-standard/**'
       - '.github/workflows/flora-enterprise-economics-a1.yml'
 permissions:
   contents: read
@@ -35,7 +36,9 @@ jobs:
       - name: All strict security tests
         run: python -m pytest tests/test_flora_security*.py -q
       - name: Optional Living Enterprise preview and fail-closed public source boundaries
-        run: python -m pytest tests/test_flora_living_enterprise_preview.py -q
+        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py -q
+      - name: Lloyds intelligence utilisation and immutable image verification
+        run: python docs/flora-runtime/lloyds-gold-standard/audit.py --check
       - name: Verify the A1 historical cut and its reverse-tree rollback
         run: |
           # The A1 exact-cut audit includes source paths that later PRs may
@@ -65,6 +68,15 @@ jobs:
           python "$GITHUB_WORKSPACE/docs/flora-runtime/living-enterprise-preview/browser.py" "$RUNNER_TEMP/living-preview-browser" before
           cd "$GITHUB_WORKSPACE"
           python docs/flora-runtime/living-enterprise-preview/browser.py "$RUNNER_TEMP/living-preview-browser" after
+      - name: Gold Standard actual runtime, preserved previews, touch, history and withdrawal
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/gold-baseline" eaca26f2b31c3c9227bb797d60f7d3492a8313d1
+          cd "$RUNNER_TEMP/gold-baseline"
+          python "$GITHUB_WORKSPACE/docs/flora-runtime/lloyds-gold-standard/browser.py" "$RUNNER_TEMP/gold-browser" before
+          cd "$GITHUB_WORKSPACE"
+          python docs/flora-runtime/lloyds-gold-standard/browser.py "$RUNNER_TEMP/gold-browser" after
+      - name: Gold scope, source inventory, capture hashes and reverse-tree rollback
+        run: python docs/flora-runtime/lloyds-gold-standard/validate.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -75,4 +87,6 @@ jobs:
             ${{ runner.temp }}/economics-browser/*.jpg
             ${{ runner.temp }}/living-preview-browser/*.json
             ${{ runner.temp }}/living-preview-browser/*.jpg
+            ${{ runner.temp }}/gold-browser/*.json
+            ${{ runner.temp }}/gold-browser/*.jpg
           retention-days: 14

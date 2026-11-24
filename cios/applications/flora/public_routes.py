@@ -93,6 +93,10 @@ def public_route_catalog(include_owner_inspection=False):
         'Experimental read-only view of the same eligible public Lloyds research; no private model or financial-run lookup', ('stream','focus','subject'))
     add(('/enterprises/lloyds/preview/assets/styles','/enterprises/lloyds/preview/assets/interactions'),
         'living_enterprise_preview_asset', 'Exact local presentation assets; no intelligence snapshot or authority')
+    add(('/enterprises/lloyds/preview/gold',), 'lloyds_gold',
+        'Optional public Lloyds composition over existing live Source guards; no private lookup', ('stream','focus','subject','detail'))
+    add(('/enterprises/lloyds/preview/gold/assets/styles',), 'lloyds_gold_asset',
+        'Exact local stylesheet; no intelligence data or export')
     from .research_intelligence.model import load_assessment
     research=load_assessment()
     add(('/flora/banking/research',), 'research_industry_page', 'Existing public repository research with explicit primary-verification gaps', ('lens',))

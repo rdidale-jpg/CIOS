@@ -239,7 +239,7 @@ def render(query, headers=None):
             if item: facts[key] = item
         issues = agenda.agenda(ctx.scope, data)
         notice = ('<section class="le-preview-notice" aria-label="Experimental design">'
-                  '<strong>Experimental design</strong><a href="'
+                  '<strong>Experimental design</strong><a href="/enterprises/lloyds/preview/gold">Gold Standard evaluation</a><a href="'
                   + e(v.url(ctx) + '#visual-content', quote=True)
                   + '">Return to current experience</a></section>')
         body = notice + main(state, data, facts)

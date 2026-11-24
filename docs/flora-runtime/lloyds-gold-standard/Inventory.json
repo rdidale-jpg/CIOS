@@ -1,0 +1,3205 @@
+{
+  "baseline": "eaca26f2b31c3c9227bb797d60f7d3492a8313d1",
+  "method": "Unique original claim IDs; older unverified duplicates remain held, not silently merged. B/C are all supported underutilised Lloyds items. No full-estate completeness claim.",
+  "collections": {
+    "sources": 24,
+    "claims": 45,
+    "capabilities": 10,
+    "programmes": 5,
+    "suppliers": 4,
+    "relationships": 123,
+    "gaps": 13,
+    "frameworks": 19,
+    "candidates": 9
+  },
+  "lloyds_claim_counts": {
+    "C": 14,
+    "B": 5,
+    "D": 20
+  },
+  "eligible_lloyds_denominator": 19,
+  "eligible_lloyds_surfaced": 19,
+  "baseline_reachable_eligible": 14,
+  "external_context_ids": [
+    "UK-FCA-REPORT27",
+    "UK-PRA-REPORT27",
+    "UK-RATE-NOV26",
+    "treasury-payments"
+  ],
+  "source_records": [
+    {
+      "id": "SRC-LBG-AR",
+      "title": "Lloyds annual report landing page",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": null,
+      "reporting_period": "FY2025, as described by the existing Twin; current landing-page version unverified",
+      "verification": "citation_only",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "SRC-LBG-Q1",
+      "title": "Lloyds Q1 2026 interim management statement",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": null,
+      "reporting_period": "Q1 2026",
+      "verification": "citation_only",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "SRC-LBG-AI",
+      "title": "AI benefits announcement cited by the existing Twin",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": null,
+      "reporting_period": "2025 reported benefits / 2026 management expectation",
+      "verification": "citation_only",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "SRC-LBG-GCP",
+      "title": "Google Cloud AI announcement cited by the existing Twin",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": null,
+      "reporting_period": "2025 announcement; current relationship status unverified",
+      "verification": "citation_only",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "SRC-LBG-BRAND",
+      "title": "Halifax brand announcement cited by the existing Twin",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": null,
+      "reporting_period": "2026 announcement; implementation status unverified",
+      "verification": "citation_only",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "SRC-LBG-ACCESS",
+      "title": "Branch closures and local access assessments",
+      "publisher": "Lloyds Bank",
+      "publication_date": null,
+      "reporting_period": "Rolling local assessments; individual dates not yet captured",
+      "verification": "citation_only",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "SRC-LBG-CURVE",
+      "title": "Proposed Curve acquisition announcement cited by the existing Twin",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": null,
+      "reporting_period": "Proposed transaction; announcement date inferred from URL is not treated as verified publication date",
+      "verification": "citation_only",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "SRC-HMT-CTP",
+      "title": "Critical third-party safeguards announcement cited by existing research",
+      "publisher": "HM Treasury",
+      "publication_date": null,
+      "reporting_period": "Designation/effective dates require primary verification",
+      "verification": "citation_only",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "SRC-FCA-DUTY",
+      "title": "Consumer Duty focus areas",
+      "publisher": "Financial Conduct Authority",
+      "publication_date": null,
+      "reporting_period": "Current applicable version and dates require verification",
+      "verification": "citation_only",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "SRC-FCA-MODELS",
+      "title": "Strategic review of retail banking business models",
+      "publisher": "Financial Conduct Authority",
+      "publication_date": null,
+      "reporting_period": "Historical industry context; not current market-share evidence",
+      "verification": "citation_only",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "SRC-BOE-FSR",
+      "title": "July 2026 Financial Stability Report cited by existing research",
+      "publisher": "Bank of England",
+      "publication_date": null,
+      "reporting_period": "July 2026; latest available version not checked",
+      "verification": "citation_only",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "SRC-CMA-OB",
+      "title": "Retail Banking Market Investigation Order 2017",
+      "publisher": "Competition and Markets Authority",
+      "publication_date": null,
+      "reporting_period": "2017 instrument; current amendments/applicability need verification",
+      "verification": "citation_only",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "PR-LBG-Q326",
+      "title": "Lloyds Q3 2026 statement",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": "2026-10-29",
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "verification": "primary_retrieved",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [
+        "LBG-Q326-CURVE",
+        "LBG-Q326-DEPOSITS",
+        "LBG-Q326-INVESTMENT",
+        "LBG-Q326-PROFIT"
+      ],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "PR-LBG-AR25",
+      "title": "Lloyds FY2025 report",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": "2026-02-13",
+      "reporting_period": "Year ended 31 December 2025; stated 2026 priorities",
+      "verification": "primary_retrieved",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [
+        "LBG-AR25-COPILOT",
+        "LBG-AR25-DEPOSITS",
+        "LBG-AR25-MIGRATION"
+      ],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "PR-LBG-A2030",
+      "title": "Lloyds Accelerate 2030 priorities",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": null,
+      "reporting_period": "Strategy for 2027–2030",
+      "verification": "primary_retrieved",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [
+        "LBG-A2030-CIR",
+        "LBG-A2030-DATA",
+        "LBG-A2030-PLATFORMS",
+        "LBG-A2030-SAVINGS",
+        "LBG-A2030-WALLET"
+      ],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "PR-LBG-INVEST30",
+      "title": "Lloyds strategy investment discipline",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": "2026-07-30",
+      "reporting_period": "2027–2030 investment planning",
+      "verification": "primary_retrieved",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [
+        "LBG-A2030-INVESTMENT"
+      ],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "PR-LBG-ENVOY",
+      "title": "Lloyds Envoy announcement",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": "2026-05-01",
+      "reporting_period": "Announced platform capability; not current effectiveness evidence",
+      "verification": "primary_retrieved",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [
+        "LBG-ENVOY-CONTROLS",
+        "LBG-ENVOY-GOOGLE"
+      ],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "PR-LBG-BRAND26",
+      "title": "Lloyds Halifax change announcement",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": "2026-07-01",
+      "reporting_period": "Announced July 2026; branch changes planned through 2027",
+      "verification": "primary_retrieved",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [
+        "LBG-BRAND26-NO-ROLES",
+        "LBG-BRAND26-TIMING"
+      ],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "PR-LBG-AI26",
+      "title": "Lloyds AI performance and plans",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": null,
+      "reporting_period": "Reported FY2025 value / expected 2026 value",
+      "verification": "primary_retrieved",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [
+        "LBG-AI26-EXPECTED",
+        "LBG-AI26-REPORTED"
+      ],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "PR-BOE-NOV26",
+      "title": "Bank of England November rate decision",
+      "publisher": "Bank of England",
+      "publication_date": "2026-11-05",
+      "reporting_period": "Meeting ending 4 November 2026",
+      "verification": "primary_retrieved",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "PR-PRA-PS726",
+      "title": "PRA incident and third-party policy",
+      "publisher": "PRA / Bank of England",
+      "publication_date": "2026-03-18",
+      "reporting_period": "Final policy; implementation 18 March 2027",
+      "verification": "primary_retrieved",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "PR-FCA-RES26",
+      "title": "FCA resilience and reporting update",
+      "publisher": "FCA",
+      "publication_date": "2017-05-13",
+      "reporting_period": "Page last updated 15 September 2026; March 2027 reporting commencement",
+      "verification": "primary_retrieved",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "PR-LBG-FSQS",
+      "title": "Lloyds supplier qualification process",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": null,
+      "reporting_period": "Maintained supplier process observed 9 November 2026",
+      "verification": "primary_retrieved",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    },
+    {
+      "id": "PR-LBG-SOURCING",
+      "title": "Lloyds supplier sourcing FAQ",
+      "publisher": "Lloyds Banking Group",
+      "publication_date": null,
+      "reporting_period": "Maintained supplier process observed 9 November 2026",
+      "verification": "primary_retrieved",
+      "rights": null,
+      "eligible_lloyds_claim_ids": [],
+      "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
+    }
+  ],
+  "claims": [
+    {
+      "id": "LBG-A2030-CIR",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "group",
+        "economics",
+        "markets",
+        "strategy",
+        "analysis"
+      ],
+      "domain": "financials",
+      "period": "Strategy for 2027–2030",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "claim_kind": "management_expectation",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-A2030-DATA",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "capabilities",
+        "competition",
+        "analysis"
+      ],
+      "domain": "strategy",
+      "period": "Strategy for 2027–2030",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "claim_kind": "management_commitment",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-A2030-INVESTMENT",
+      "classification": "B",
+      "eligible_now": true,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [
+        "economics",
+        "strategy"
+      ],
+      "domain": "investment",
+      "period": "2027–2030 investment planning",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-INVEST30"
+      ],
+      "claim_kind": "management_expectation",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-A2030-PLATFORMS",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "programmes",
+        "resilience",
+        "strategy",
+        "analysis"
+      ],
+      "domain": "strategy",
+      "period": "Strategy for 2027–2030",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "claim_kind": "management_commitment",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-A2030-SAVINGS",
+      "classification": "B",
+      "eligible_now": true,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [
+        "economics",
+        "strategy"
+      ],
+      "domain": "investment",
+      "period": "Strategy for 2027–2030",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "claim_kind": "management_expectation",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-A2030-WALLET",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "programmes",
+        "competition",
+        "analysis"
+      ],
+      "domain": "programmes",
+      "period": "Strategy for 2027–2030",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "claim_kind": "management_commitment",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-ACCESS",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "operating_capabilities",
+      "period": "Local assessment periods unknown",
+      "entity": "Lloyds Bank retail network; not all Group entities",
+      "source_ids": [
+        "SRC-LBG-ACCESS"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-AI-TARGET",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "investment",
+      "period": "2026 management expectation",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-AI"
+      ],
+      "claim_kind": "management_expectation",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-AI-USE",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "technology",
+      "period": "2025",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-AI"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-AI-VALUE",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "investment",
+      "period": "2025",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-AI"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-AI26-EXPECTED",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "applications",
+        "analysis"
+      ],
+      "domain": "investment",
+      "period": "2026 expectation",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AI26"
+      ],
+      "claim_kind": "management_expectation",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-AI26-REPORTED",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "applications",
+        "analysis"
+      ],
+      "domain": "investment",
+      "period": "FY2025",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AI26"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-AR25-COPILOT",
+      "classification": "B",
+      "eligible_now": true,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [
+        "applications",
+        "partners",
+        "programmes"
+      ],
+      "domain": "technology",
+      "period": "FY2025",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AR25"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-AR25-DEPOSITS",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "economics",
+        "analysis"
+      ],
+      "domain": "financials",
+      "period": "31 December 2025",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AR25"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-AR25-MIGRATION",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "group",
+        "capabilities",
+        "programmes",
+        "strategy",
+        "analysis"
+      ],
+      "domain": "programmes",
+      "period": "2026 management priorities",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AR25"
+      ],
+      "claim_kind": "management_commitment",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-BPO-GAP",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "supplier_relationships",
+      "period": "Existing research gap, July 2026",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-Q1"
+      ],
+      "claim_kind": "unknown",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-BRAND",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "programmes",
+      "period": "2026 announcement context",
+      "entity": "Lloyds/Halifax brands; legal entity impacts unverified",
+      "source_ids": [
+        "SRC-LBG-BRAND"
+      ],
+      "claim_kind": "reported_programme",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-BRAND26-NO-ROLES",
+      "classification": "B",
+      "eligible_now": true,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [
+        "retail",
+        "operations",
+        "programmes"
+      ],
+      "domain": "operating_capabilities",
+      "period": "Announced July 2026; branch changes planned through 2027",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-BRAND26"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-BRAND26-TIMING",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "retail",
+        "operations",
+        "programmes"
+      ],
+      "domain": "programmes",
+      "period": "Announced July 2026; branch changes planned through 2027",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-BRAND26"
+      ],
+      "claim_kind": "management_commitment",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-COPILOT",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "technology",
+      "period": "Existing Twin FY2025/2026 context; precise effective date unknown",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-CURVE",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "programmes",
+      "period": "Proposed transaction; status needs refresh",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-CURVE"
+      ],
+      "claim_kind": "proposed_transaction",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-CUSTOMERS",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "operating_capabilities",
+      "period": "2025 year-end",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-DEPOSITS",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "financials",
+      "period": "2025 year-end",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-ENVOY-CONTROLS",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "capabilities",
+        "applications",
+        "programmes",
+        "competition",
+        "analysis"
+      ],
+      "domain": "technology",
+      "period": "Announced platform capability; not current effectiveness evidence",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-ENVOY"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-ENVOY-GOOGLE",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "applications",
+        "partners",
+        "programmes",
+        "analysis"
+      ],
+      "domain": "supplier_relationships",
+      "period": "Announced platform capability; not current effectiveness evidence",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-ENVOY"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-FRAUD-GAP",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "operating_capabilities",
+      "period": "Existing research gap, July 2026",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-Q1"
+      ],
+      "claim_kind": "unknown",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-FSQS-ACCESS",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "commercial_access",
+      "period": "Published process observed 9 November 2026",
+      "entity": "Lloyds Banking Group supplier process; no candidate-specific invitation",
+      "source_ids": [
+        "PR-LBG-FSQS"
+      ],
+      "claim_kind": "procurement_process",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-HEDGE",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "financials",
+      "period": "Q1 2026",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-Q1"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-MIGRATION",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "programmes",
+      "period": "2026 management priority",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "claim_kind": "management_priority",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-MODELS",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "technology",
+      "period": "2025 announcement context",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-GCP"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-PRIMACY-GAP",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "strategy",
+      "period": "Existing research assessment, July 2026",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "claim_kind": "interpretation",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-Q326-CURVE",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "programmes",
+        "strategy",
+        "analysis"
+      ],
+      "domain": "programmes",
+      "period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-Q326-DEPOSITS",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "group",
+        "economics",
+        "markets",
+        "analysis"
+      ],
+      "domain": "financials",
+      "period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-Q326-INVESTMENT",
+      "classification": "B",
+      "eligible_now": true,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [
+        "economics",
+        "strategy"
+      ],
+      "domain": "investment",
+      "period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-Q326-PROFIT",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "group",
+        "economics"
+      ],
+      "domain": "financials",
+      "period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-SOURCING-ACCESS",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "commercial_access",
+      "period": "Published process observed 9 November 2026",
+      "entity": "Lloyds Banking Group supplier process; no candidate-specific invitation",
+      "source_ids": [
+        "PR-LBG-SOURCING"
+      ],
+      "claim_kind": "procurement_process",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-SUPPLIER-RISK",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "supplier_relationships",
+      "period": "Q1 2026 risk-factor context",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-Q1"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-TECH-COST",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "financials",
+      "period": "2021–2025 comparison reported in existing Twin",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Retain research history; no new public authority inferred"
+    },
+    {
+      "id": "LBG-VERTEX",
+      "classification": "D",
+      "eligible_now": false,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [],
+      "domain": "supplier_relationships",
+      "period": "2025 announcement context",
+      "entity": "Lloyds Banking Group; subsidiary/workload coverage unverified",
+      "source_ids": [
+        "SRC-LBG-GCP"
+      ],
+      "claim_kind": "reported_relationship",
+      "disposition": "Retain research history; no new public authority inferred"
+    }
+  ],
+  "underutilised_supported_items": [
+    {
+      "id": "LBG-A2030-CIR",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "group",
+        "economics",
+        "markets",
+        "strategy",
+        "analysis"
+      ],
+      "domain": "financials",
+      "period": "Strategy for 2027–2030",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "claim_kind": "management_expectation",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-A2030-DATA",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "capabilities",
+        "competition",
+        "analysis"
+      ],
+      "domain": "strategy",
+      "period": "Strategy for 2027–2030",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "claim_kind": "management_commitment",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-A2030-INVESTMENT",
+      "classification": "B",
+      "eligible_now": true,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [
+        "economics",
+        "strategy"
+      ],
+      "domain": "investment",
+      "period": "2027–2030 investment planning",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-INVEST30"
+      ],
+      "claim_kind": "management_expectation",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-A2030-PLATFORMS",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "programmes",
+        "resilience",
+        "strategy",
+        "analysis"
+      ],
+      "domain": "strategy",
+      "period": "Strategy for 2027–2030",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "claim_kind": "management_commitment",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-A2030-SAVINGS",
+      "classification": "B",
+      "eligible_now": true,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [
+        "economics",
+        "strategy"
+      ],
+      "domain": "investment",
+      "period": "Strategy for 2027–2030",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "claim_kind": "management_expectation",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-A2030-WALLET",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "programmes",
+        "competition",
+        "analysis"
+      ],
+      "domain": "programmes",
+      "period": "Strategy for 2027–2030",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "claim_kind": "management_commitment",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-AI26-EXPECTED",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "applications",
+        "analysis"
+      ],
+      "domain": "investment",
+      "period": "2026 expectation",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AI26"
+      ],
+      "claim_kind": "management_expectation",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-AI26-REPORTED",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "applications",
+        "analysis"
+      ],
+      "domain": "investment",
+      "period": "FY2025",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AI26"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-AR25-COPILOT",
+      "classification": "B",
+      "eligible_now": true,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [
+        "applications",
+        "partners",
+        "programmes"
+      ],
+      "domain": "technology",
+      "period": "FY2025",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AR25"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-AR25-DEPOSITS",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "economics",
+        "analysis"
+      ],
+      "domain": "financials",
+      "period": "31 December 2025",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AR25"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-AR25-MIGRATION",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "group",
+        "capabilities",
+        "programmes",
+        "strategy",
+        "analysis"
+      ],
+      "domain": "programmes",
+      "period": "2026 management priorities",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AR25"
+      ],
+      "claim_kind": "management_commitment",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-BRAND26-NO-ROLES",
+      "classification": "B",
+      "eligible_now": true,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [
+        "retail",
+        "operations",
+        "programmes"
+      ],
+      "domain": "operating_capabilities",
+      "period": "Announced July 2026; branch changes planned through 2027",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-BRAND26"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-BRAND26-TIMING",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "retail",
+        "operations",
+        "programmes"
+      ],
+      "domain": "programmes",
+      "period": "Announced July 2026; branch changes planned through 2027",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-BRAND26"
+      ],
+      "claim_kind": "management_commitment",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-ENVOY-CONTROLS",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "capabilities",
+        "applications",
+        "programmes",
+        "competition",
+        "analysis"
+      ],
+      "domain": "technology",
+      "period": "Announced platform capability; not current effectiveness evidence",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-ENVOY"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-ENVOY-GOOGLE",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "applications",
+        "partners",
+        "programmes",
+        "analysis"
+      ],
+      "domain": "supplier_relationships",
+      "period": "Announced platform capability; not current effectiveness evidence",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-ENVOY"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-Q326-CURVE",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "programmes",
+        "strategy",
+        "analysis"
+      ],
+      "domain": "programmes",
+      "period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-Q326-DEPOSITS",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "group",
+        "economics",
+        "markets",
+        "analysis"
+      ],
+      "domain": "financials",
+      "period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-Q326-INVESTMENT",
+      "classification": "B",
+      "eligible_now": true,
+      "baseline_730_reachable": false,
+      "gold_main_destinations": [
+        "economics",
+        "strategy"
+      ],
+      "domain": "investment",
+      "period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    },
+    {
+      "id": "LBG-Q326-PROFIT",
+      "classification": "C",
+      "eligible_now": true,
+      "baseline_730_reachable": true,
+      "gold_main_destinations": [
+        "group",
+        "economics"
+      ],
+      "domain": "financials",
+      "period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "claim_kind": "reported_fact",
+      "disposition": "Existing eligible public statement; deepen without new admission"
+    }
+  ],
+  "model_records": [
+    {
+      "collection": "capabilities",
+      "id": "CAP-STRATEGY",
+      "classification": "C",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "collection": "capabilities",
+      "id": "CAP-CHANNEL",
+      "classification": "C",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "collection": "capabilities",
+      "id": "CAP-SERVICE",
+      "classification": "C",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "collection": "capabilities",
+      "id": "CAP-DEPOSITS",
+      "classification": "C",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "collection": "capabilities",
+      "id": "CAP-FINANCE",
+      "classification": "C",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "collection": "capabilities",
+      "id": "CAP-LENDING",
+      "classification": "C",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "collection": "capabilities",
+      "id": "CAP-PAYMENTS",
+      "classification": "C",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "collection": "capabilities",
+      "id": "CAP-RISK",
+      "classification": "C",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "collection": "capabilities",
+      "id": "CAP-TECH",
+      "classification": "C",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "collection": "capabilities",
+      "id": "CAP-DATA",
+      "classification": "C",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "collection": "programmes",
+      "id": "PROG-LBG-LEGACY",
+      "classification": "C",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-TECH-COST",
+        "LBG-AR25-MIGRATION",
+        "LBG-A2030-PLATFORMS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "programmes",
+      "id": "PROG-LBG-AI",
+      "classification": "C",
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-VERTEX",
+        "LBG-MODELS",
+        "LBG-ENVOY-GOOGLE",
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "programmes",
+      "id": "PROG-LBG-BRAND",
+      "classification": "C",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-BRAND26-TIMING",
+        "LBG-BRAND26-NO-ROLES"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "programmes",
+      "id": "PROG-LBG-COLLEAGUE",
+      "classification": "C",
+      "claim_ids": [
+        "LBG-COPILOT",
+        "LBG-AR25-COPILOT"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "programmes",
+      "id": "PROG-LBG-CURVE",
+      "classification": "C",
+      "claim_ids": [
+        "LBG-CURVE",
+        "LBG-Q326-CURVE",
+        "LBG-A2030-WALLET"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "suppliers",
+      "id": "SUP-GOOGLE",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "suppliers",
+      "id": "SUP-MICROSOFT",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "suppliers",
+      "id": "SUP-AWS",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "suppliers",
+      "id": "SUP-ORACLE",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PESTLE-P-CAP-RISK",
+      "classification": "D",
+      "claim_ids": [
+        "UK-CAPITAL",
+        "LBG-ACCESS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PESTLE-P-CAP-SERVICE",
+      "classification": "D",
+      "claim_ids": [
+        "UK-CAPITAL",
+        "LBG-ACCESS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PESTLE-E-CAP-DEPOSITS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-TECH-COST"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PESTLE-E-CAP-FINANCE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-TECH-COST"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PESTLE-S-CAP-SERVICE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-CUSTOMERS",
+        "LBG-ACCESS",
+        "LBG-PRIMACY-GAP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PESTLE-S-CAP-CHANNEL",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-CUSTOMERS",
+        "LBG-ACCESS",
+        "LBG-PRIMACY-GAP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PESTLE-T-CAP-TECH",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-VERTEX",
+        "LBG-AI-USE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PESTLE-T-CAP-DATA",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-VERTEX",
+        "LBG-AI-USE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PESTLE-L-CAP-RISK",
+      "classification": "D",
+      "claim_ids": [
+        "UK-CTP",
+        "LBG-SUPPLIER-RISK"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PESTLE-ENV-CAP-RISK",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PESTLE-ENV-CAP-LENDING",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PORTER-RIVALRY-CAP-DEPOSITS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-PRIMACY-GAP",
+        "LBG-DEPOSITS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PORTER-RIVALRY-CAP-CHANNEL",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-PRIMACY-GAP",
+        "LBG-DEPOSITS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PORTER-ENTRY-CAP-RISK",
+      "classification": "D",
+      "claim_ids": [
+        "UK-CAPITAL"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PORTER-ENTRY-CAP-FINANCE",
+      "classification": "D",
+      "claim_ids": [
+        "UK-CAPITAL"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PORTER-BUYER-CAP-DEPOSITS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-PRIMACY-GAP",
+        "LBG-DEPOSITS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PORTER-BUYER-CAP-SERVICE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-PRIMACY-GAP",
+        "LBG-DEPOSITS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PORTER-SUPPLIER-CAP-TECH",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-SUPPLIER-RISK"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PORTER-SUPPLIER-CAP-RISK",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-SUPPLIER-RISK"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PORTER-SUBSTITUTE-CAP-PAYMENTS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-CURVE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "PORTER-SUBSTITUTE-CAP-CHANNEL",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-CURVE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "VC-PRODUCT-CAP-STRATEGY",
+      "classification": "D",
+      "claim_ids": [
+        "UK-VALUE",
+        "LBG-PRIMACY-GAP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "VC-ACQUIRE-CAP-CHANNEL",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-CUSTOMERS",
+        "LBG-ACCESS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "VC-ACQUIRE-CAP-SERVICE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-CUSTOMERS",
+        "LBG-ACCESS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "VC-DEPOSITS-CAP-DEPOSITS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "VC-DEPOSITS-CAP-FINANCE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "VC-LENDING-CAP-LENDING",
+      "classification": "D",
+      "claim_ids": [
+        "UK-CAPITAL"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "VC-LENDING-CAP-RISK",
+      "classification": "D",
+      "claim_ids": [
+        "UK-CAPITAL"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "VC-PAYMENTS-CAP-PAYMENTS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-CURVE",
+        "LBG-FRAUD-GAP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "VC-SERVICE-CAP-SERVICE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "VC-CONTROL-CAP-RISK",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "UK-CTP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "VC-ENABLE-CAP-TECH",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MIGRATION",
+        "LBG-COPILOT"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "VC-ENABLE-CAP-DATA",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MIGRATION",
+        "LBG-COPILOT"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-001-PESTLE-T",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-TECH-COST"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-001-PESTLE-E",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-TECH-COST"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-001-CAP-TECH",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-TECH-COST"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-001-CAP-FINANCE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-TECH-COST"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-002-PESTLE-T",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-AI-VALUE",
+        "LBG-AI-TARGET"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-002-PESTLE-E",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-AI-VALUE",
+        "LBG-AI-TARGET"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-002-CAP-DATA",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-AI-VALUE",
+        "LBG-AI-TARGET"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-002-CAP-SERVICE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-AI-VALUE",
+        "LBG-AI-TARGET"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-003-PESTLE-S",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-PRIMACY-GAP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-003-VC-ACQUIRE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-PRIMACY-GAP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-003-CAP-CHANNEL",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-PRIMACY-GAP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-003-CAP-SERVICE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-PRIMACY-GAP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-004-PESTLE-T",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-004-PORTER-SUPPLIER",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-004-CAP-DATA",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-004-CAP-RISK",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-005-PESTLE-L",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "LBG-VERTEX",
+        "UK-CTP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-005-PORTER-SUPPLIER",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "LBG-VERTEX",
+        "UK-CTP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-005-CAP-RISK",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "LBG-VERTEX",
+        "UK-CTP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-005-CAP-TECH",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "LBG-VERTEX",
+        "UK-CTP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-006-PESTLE-E",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-PRIMACY-GAP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-006-PORTER-BUYER",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-PRIMACY-GAP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-006-CAP-DEPOSITS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-PRIMACY-GAP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-006-CAP-FINANCE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-PRIMACY-GAP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-007-PESTLE-S",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-007-VC-SERVICE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-007-CAP-SERVICE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-007-CAP-CHANNEL",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-008-PESTLE-T",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-COPILOT",
+        "LBG-AI-VALUE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-008-VC-ENABLE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-COPILOT",
+        "LBG-AI-VALUE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-008-CAP-DATA",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-COPILOT",
+        "LBG-AI-VALUE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-008-CAP-SERVICE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-COPILOT",
+        "LBG-AI-VALUE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REL-LBG-GCP",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REL-LBG-MS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-COPILOT"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REL-LBG-AWS",
+      "classification": "D",
+      "claim_ids": [
+        "UK-CTP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REL-LBG-ORACLE",
+      "classification": "D",
+      "claim_ids": [
+        "UK-CTP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-001-PROG-LBG-LEGACY",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-TECH-COST"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-002-PROG-LBG-AI",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-AI-VALUE",
+        "LBG-AI-TARGET"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-003-PROG-LBG-BRAND",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-PRIMACY-GAP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-004-PROG-LBG-AI",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-005-PROG-LBG-LEGACY",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "LBG-VERTEX",
+        "UK-CTP"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-007-PROG-LBG-BRAND",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "RCO-LBG-008-PROG-LBG-COLLEAGUE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-COPILOT",
+        "LBG-AI-VALUE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "LBG-CAP-STRATEGY",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "LBG-CAP-CHANNEL",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "LBG-CAP-SERVICE",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "LBG-CAP-DEPOSITS",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "LBG-CAP-FINANCE",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "LBG-CAP-LENDING",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "LBG-CAP-PAYMENTS",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "LBG-CAP-RISK",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "LBG-CAP-TECH",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "LBG-CAP-DATA",
+      "classification": "D",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-001-LBG-AR25-MIGRATION",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-AR25-MIGRATION"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-001-LBG-A2030-PLATFORMS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-A2030-PLATFORMS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-001-LBG-A2030-SAVINGS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-A2030-SAVINGS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-001-LBG-A2030-INVESTMENT",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-A2030-INVESTMENT"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-001-LBG-Q326-INVESTMENT",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-Q326-INVESTMENT"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-002-LBG-AI26-REPORTED",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-AI26-REPORTED"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-002-LBG-AI26-EXPECTED",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-AI26-EXPECTED"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-002-LBG-A2030-DATA",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-A2030-DATA"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-002-LBG-ENVOY-CONTROLS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-003-LBG-BRAND26-TIMING",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-BRAND26-TIMING"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-003-LBG-BRAND26-NO-ROLES",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-BRAND26-NO-ROLES"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-004-LBG-ENVOY-CONTROLS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-004-LBG-ENVOY-GOOGLE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ENVOY-GOOGLE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-004-LBG-A2030-DATA",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-A2030-DATA"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-005-UK-PRA-REPORT27",
+      "classification": "D",
+      "claim_ids": [
+        "UK-PRA-REPORT27"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-005-UK-FCA-REPORT27",
+      "classification": "D",
+      "claim_ids": [
+        "UK-FCA-REPORT27"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-005-LBG-ENVOY-GOOGLE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ENVOY-GOOGLE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-006-LBG-Q326-DEPOSITS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-Q326-DEPOSITS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-006-LBG-AR25-DEPOSITS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-AR25-DEPOSITS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-006-UK-RATE-NOV26",
+      "classification": "D",
+      "claim_ids": [
+        "UK-RATE-NOV26"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-007-LBG-BRAND26-TIMING",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-BRAND26-TIMING"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-008-LBG-AR25-COPILOT",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-AR25-COPILOT"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-008-LBG-AI26-REPORTED",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-AI26-REPORTED"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-009-LBG-Q326-CURVE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-Q326-CURVE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-RCO-LBG-009-LBG-A2030-WALLET",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-A2030-WALLET"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-ENVOY-GOOGLE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ENVOY-GOOGLE"
+      ],
+      "verified": true,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-PESTLE-E-UK-RATE-NOV26",
+      "classification": "D",
+      "claim_ids": [
+        "UK-RATE-NOV26"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-PESTLE-T-LBG-ENVOY-CONTROLS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-PESTLE-L-UK-PRA-REPORT27",
+      "classification": "D",
+      "claim_ids": [
+        "UK-PRA-REPORT27"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-PESTLE-L-UK-FCA-REPORT27",
+      "classification": "D",
+      "claim_ids": [
+        "UK-FCA-REPORT27"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-PORTER-SUPPLIER-LBG-ENVOY-GOOGLE",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ENVOY-GOOGLE"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-VC-CONTROL-UK-PRA-REPORT27",
+      "classification": "D",
+      "claim_ids": [
+        "UK-PRA-REPORT27"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-VC-CONTROL-UK-FCA-REPORT27",
+      "classification": "D",
+      "claim_ids": [
+        "UK-FCA-REPORT27"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-VC-ENABLE-LBG-A2030-DATA",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-A2030-DATA"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "REV-VC-ENABLE-LBG-ENVOY-CONTROLS",
+      "classification": "D",
+      "claim_ids": [
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "relationships",
+      "id": "COMM-IND-UK-PRA-REPORT27",
+      "classification": "D",
+      "claim_ids": [
+        "UK-PRA-REPORT27"
+      ],
+      "verified": false,
+      "scope": "In-scope UK regulated firms; entity applicability and customer readiness unverified"
+    },
+    {
+      "collection": "relationships",
+      "id": "COMM-IND-UK-FCA-REPORT27",
+      "classification": "D",
+      "claim_ids": [
+        "UK-FCA-REPORT27"
+      ],
+      "verified": false,
+      "scope": "In-scope UK regulated firms; entity applicability and customer readiness unverified"
+    },
+    {
+      "collection": "gaps",
+      "id": "G-PRIMARY",
+      "classification": "E",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "gaps",
+      "id": "G-CUSTOMER-EVIDENCE",
+      "classification": "E",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "gaps",
+      "id": "G-REGULATORY",
+      "classification": "E",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "gaps",
+      "id": "G-ALLOCATION",
+      "classification": "E",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "gaps",
+      "id": "G-OUTCOMES",
+      "classification": "E",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "gaps",
+      "id": "G-PRIMACY",
+      "classification": "E",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "gaps",
+      "id": "G-WORKLOADS",
+      "classification": "E",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "gaps",
+      "id": "G-AI-BENEFITS",
+      "classification": "E",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "gaps",
+      "id": "G-SUPPLIER",
+      "classification": "E",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "gaps",
+      "id": "G-CURVE",
+      "classification": "E",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "gaps",
+      "id": "G-FRAUD",
+      "classification": "E",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "gaps",
+      "id": "G-CLIMATE",
+      "classification": "E",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    },
+    {
+      "collection": "gaps",
+      "id": "G-MARKET",
+      "classification": "E",
+      "claim_ids": [],
+      "verified": false,
+      "scope": "Candidate model record; no canonical acceptance inferred"
+    }
+  ],
+  "documents": [
+    {
+      "path": "docs/architecture/enterprise-twin-production/README.md",
+      "sha256": "6c1aeeca9b625c21f748f744ed8e869f5a899327301814804b97252536ca56f0",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/architecture/enterprise-twin-production/analytical-models.md",
+      "sha256": "9a4da9f259413c12829ffed22f6b3b2af6d9febae2117839c9281a43a74d9668",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/architecture/enterprise-twin-production/authority-and-factual-use.md",
+      "sha256": "606688ba81122c1f3c6a51e09a64220a3a4085fab8bbd2fef2cd6b9360a26a3a",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/architecture/enterprise-twin-production/factual-contract.md",
+      "sha256": "2af6f48760c63fe12fa841036ade4b2f90a06e8d469fa79796310f8d2af50048",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/architecture/enterprise-twin-production/industry-schedules.md",
+      "sha256": "5432ac7cd45bc232edaa97a681a7a2d4dfceebc715580be2d1f7044052a6de23",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/architecture/enterprise-twin-production/lloyds-reference.md",
+      "sha256": "a4a906415a973bec1689c9ff89c0d9193a8b929f07fe5ea50128d550ba167f6e",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/architecture/enterprise-twin-production/presentation-and-quality.md",
+      "sha256": "90d1b4e9664c42f3dcc6c7abffbf3594383a03cab1ef91f0690c3aec5cf2113d",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/architecture/enterprise-twin-production/technology-commercial-intelligence.md",
+      "sha256": "6d18c553f534f50ab64ae2425a80b3539623250bf356d0d0fae7ed2fb9154bbc",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lei-1/README.md",
+      "sha256": "fb758768b06586d6bce1542298074360225a6f6b8031a66224944e22e0932255",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lei-1/reconciliations.json",
+      "sha256": "9b4d81a4a866115c9806e6c4b6a38eae2938dc413dc4e7e16028e593a6edbcb5",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lei-1/sources.md",
+      "sha256": "5302105290b3880bba3187f243ba85e9474fc1b0a129b80ead435994f51197d7",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lei-1/validate.py",
+      "sha256": "897e7bb58356715defe0fb12aa15fe9fe49c8eaaceeec16649ddfe82cec3013e",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lei-1/validation.md",
+      "sha256": "03e862e12d3b7d35047eb4c1e9a3220f66a3a776a54df85b709f69c082c5bc20",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/public-facts-policy/README.md",
+      "sha256": "833224028abe74b59a24950e80e9034e528e82df6eea153cc7d00f496b2c1ae8",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/public-facts-policy/lloyds-q3-disposition.md",
+      "sha256": "662a07f744b0ae3c25ab6e6e7f4cf9a656fb3f8c6bbf4737ad88dbcfb85bd30d",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/public-facts-policy/validation.md",
+      "sha256": "6233600075d70ab6392643215886ad27b4f7e1192f16b9a8f2c0c6074d2a5e77",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/lloyds.md",
+      "sha256": "4683f719e35236d12c23fa1267de0d3ca93b81ee3d59445e78d79a2679a8e52d",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/lloyds/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+      "sha256": "cb7b14702a8f1c2cb2d311abfe334977998a4a8091a1f8b2946cd9b35c062cdd",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/lloyds/README.md",
+      "sha256": "ee8f3ba49083bcfb2744431d657a08e3612da58ffacc25fb762ee8efb0477a0c",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      "sha256": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Living-Map.json",
+      "sha256": "f58eacc73345e6a28be6cef51b6ba0c53845ebdcacf75a9036b6d459ea992256",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Research-Cycle-v2-Source.json",
+      "sha256": "e8e17016dba9a3c9e8cc38be9fa670631a62570b3bff493d431055fa30cbab6a",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Understanding-Review.json",
+      "sha256": "66209037db188db27b216574076b71a818cf0f290245791fbe2945f0162e7fcd",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/Visual-Profile.json",
+      "sha256": "af2d96c39a0d35e07fd800e2e64a31084ab63139ae7ff704f771e60416717424",
+      "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    }
+  ],
+  "original_images": [
+    {
+      "path": "cios/applications/flora/visual_stream_assets/banking-forces-1152-46402578a8ed.webp",
+      "sha256": "46402578a8edf0ae2beb70ed2ad2cce67229f3ac2c2754065ced1991a7ce2a30"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/banking-forces-1536-2a58ebb939f7.webp",
+      "sha256": "2a58ebb939f7857a7dd094e46bb888a4736cb3bc8d2928b96ee0d71936cd9c89"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/banking-forces-768-1df482a9583f.webp",
+      "sha256": "1df482a9583fc7fb13430d3cb6de37b4b654c3ca2d50fedbf6304ca089ea0fc0"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/banking-landscape-1152-f4f9b56d78a9.webp",
+      "sha256": "f4f9b56d78a918687bf6e3a4170bffed458e66718160a41df87c2c8860a8d193"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/banking-landscape-1536-1de7b3640185.webp",
+      "sha256": "1de7b3640185039f27d2101ad4823888b401122d19c1c324f2184e624608fdc9"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/banking-landscape-768-09a6ae4c5b73.webp",
+      "sha256": "09a6ae4c5b7318bac08a1fac563a5e3eec0ff145533e7ad08404c98ef89249e2"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-forces-1152-d7029da317c3.webp",
+      "sha256": "d7029da317c32c87aba442e85ef94d1c4a20f7b83c0a0ca4bddf6348daad714e"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-forces-1536-c629f014985a.webp",
+      "sha256": "c629f014985a1e65e586b09cd396d088879b0e75fef172f1fd68e40466b0d8a2"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-forces-768-048af0418b8e.webp",
+      "sha256": "048af0418b8efe8f9e2ad7f541f1eb130d24b88e6d1dfa51a91e4c6d8599c447"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-inside-1152-a3938046ba72.webp",
+      "sha256": "a3938046ba72ccf8774747afd3e0e949590a0f0e01714e1040255997b2e243b2"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-inside-1536-3d6a3c0bd592.webp",
+      "sha256": "3d6a3c0bd5927fab299a9cab334341b77b2d752b6ee3d3f5e2a0cffef9189f3c"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-inside-768-8d00816a9ad7.webp",
+      "sha256": "8d00816a9ad7c2c4662aa573591e155838e71e9b89769dd2ed249d89943c55a0"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-landscape-1152-17ed441fa74d.webp",
+      "sha256": "17ed441fa74d5855149107fc21e9950dad71f738041ba832dbf8978b9e693387"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-landscape-1536-e2710006a387.webp",
+      "sha256": "e2710006a387ef3c4251aa6fd2e4574e576129e209a191d0e9053f6b9d8010b7"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/lloyds-landscape-768-fa44563b2e93.webp",
+      "sha256": "fa44563b2e93f9fe1bdd9505e870d80ca635b59812ba0781c2426c069efb7675"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/uk-forces-1152-b51364843c5d.webp",
+      "sha256": "b51364843c5dff665f40f47b6fb7b199fd6a36c1ac8c15ee502cb4b7335be014"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/uk-forces-1536-847d312743bd.webp",
+      "sha256": "847d312743bd3b91f7182eede499c75a1c99f26b57cd39a36797dbb64e975d13"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/uk-forces-768-0241193578d1.webp",
+      "sha256": "0241193578d1f8abb230566cab5a6031ea2e19d81d14a4a1c390568109b653af"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/uk-landscape-1152-685df28a3075.webp",
+      "sha256": "685df28a3075ca4e50223ecfbb9258727044bc4c3aa54c3d664c6ab0cb0d3dfa"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/uk-landscape-1536-8351b4eb8ddc.webp",
+      "sha256": "8351b4eb8ddcc75edd780e556f52fb169cfd6ebe790403b9c378fa5a37135910"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/uk-landscape-768-507689f8afd8.webp",
+      "sha256": "507689f8afd86d84bf3d08def11e920e07c511bc9479a68849906708e69abd64"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-banking-forces-384-12cea0c2400a.webp",
+      "sha256": "12cea0c2400a53ece89bcb8b97fe946bc6fcbdad1c8fd142454175d6c3c58b42"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-banking-forces-768-772726f361a3.webp",
+      "sha256": "772726f361a3f38f514e51b65d955620c44f2bef7378964f5b1d839e6ed6322e"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-banking-landscape-384-18fe29a66bb6.webp",
+      "sha256": "18fe29a66bb682225badfa13a5563d9a94a9e54086b1cc2514f27a8068fdcedb"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-banking-landscape-768-b59e48e78a00.webp",
+      "sha256": "b59e48e78a00bbe22a42450883f72d855e767be772fa136d4b0c037069288167"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-lloyds-forces-384-2ffca0158cd7.webp",
+      "sha256": "2ffca0158cd78943d3b20b176bd4bc50bc7d6d944ec11d13cd2ce15f3478367d"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-lloyds-forces-768-8fca8b08527a.webp",
+      "sha256": "8fca8b08527af1da381e97145e383c2461144f7a00f334867b7310ee4fec6ce7"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-lloyds-inside-384-12d9a56acd25.webp",
+      "sha256": "12d9a56acd25c1fc7ef673130c20ca30cf86083485e866ba9360282f175d47dc"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-lloyds-inside-768-13827db67c30.webp",
+      "sha256": "13827db67c3077e5a390965499c38ec2a93d3003cde580895d86eac82140d80f"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-lloyds-landscape-384-358069bf4f4c.webp",
+      "sha256": "358069bf4f4c424ae2cbe8a1f06ffbf75364731f527c208bda8ba703e56e76b3"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-lloyds-landscape-768-e58d32043d99.webp",
+      "sha256": "e58d32043d99ebfe411a10b0ca01fddeb1b8e0464afa0447feb65d824a39deb7"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-uk-forces-384-fa241b77924d.webp",
+      "sha256": "fa241b77924d085ced99b2027f1ab94a813dcd78977751c2aff2d989df3c770a"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-uk-forces-768-a67e2ac95b52.webp",
+      "sha256": "a67e2ac95b527af0967211487b407162c3258d63fa78f7650c53030d10bef9a0"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-uk-landscape-384-84a37760e3e8.webp",
+      "sha256": "84a37760e3e89556727e60003a23f38c3f3f0255050ad1fcc6be62b09c12a25f"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-uk-landscape-768-73f0ba099fbc.webp",
+      "sha256": "73f0ba099fbcbd5f9201360870c917c9e53f3966127d0caf3024b522f2930fb4"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-uk-skyline-1280-21e9c5d3fc39.webp",
+      "sha256": "21e9c5d3fc39c340d39d77324c5444a33784c788eb262751383972d36c47d507"
+    },
+    {
+      "path": "cios/applications/flora/visual_stream_assets/vp2-uk-skyline-2172-219747b1c362.webp",
+      "sha256": "219747b1c362cec411920a80967633c4048c603205c5a5e2f9d9aa8305218ae0"
+    }
+  ],
+  "canonical_record_status": "UNKNOWN: no authorised live canonical-store inspection in this task; no import or promotion claimed",
+  "source_authority_delta": "None; existing request-time Source owners only"
+}
