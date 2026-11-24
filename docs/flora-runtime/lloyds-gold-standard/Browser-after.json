@@ -1,0 +1,107 @@
+{
+  "phase": "after",
+  "sha": "75eacc1b7043a65a6db79930acf0cc74116179ec",
+  "devices": [
+    {
+      "device": "desktop",
+      "fifteen_native_image_selections": true,
+      "eight_swot_theme_drills": true,
+      "application_evidence_unknowns": true,
+      "context_reload_history": true,
+      "original_and_default_preserved": true,
+      "no_overflow": true,
+      "keyboard_or_touch": true,
+      "errors": []
+    },
+    {
+      "device": "ipad-landscape",
+      "fifteen_native_image_selections": true,
+      "eight_swot_theme_drills": true,
+      "application_evidence_unknowns": true,
+      "context_reload_history": true,
+      "original_and_default_preserved": true,
+      "no_overflow": true,
+      "keyboard_or_touch": true,
+      "errors": []
+    },
+    {
+      "device": "ipad-portrait",
+      "fifteen_native_image_selections": true,
+      "eight_swot_theme_drills": true,
+      "application_evidence_unknowns": true,
+      "context_reload_history": true,
+      "original_and_default_preserved": true,
+      "no_overflow": true,
+      "keyboard_or_touch": true,
+      "errors": []
+    },
+    {
+      "device": "mobile",
+      "fifteen_native_image_selections": true,
+      "eight_swot_theme_drills": true,
+      "application_evidence_unknowns": true,
+      "context_reload_history": true,
+      "original_and_default_preserved": true,
+      "no_overflow": true,
+      "keyboard_or_touch": true,
+      "errors": []
+    }
+  ],
+  "baseline": {
+    "desktop:default": "Lloyds Banking Group How the Group earns, runs its services and renews its platforms. Economics Operating model What\u2019s changed Leadership agenda Technology & suppliers Commercial hypotheses WHAT\u2019S CHANGED Curve acquisition reported complete Published 2026-10-29 \u00b7 Nine months ended / balance sheet at 30 September 2026 Integration scope and external procurement remain unproven. Explore the timeline Preview New Experience Explore Lloyds LLOYDS BANKING GROUP PLC \u00b7 CONSOLIDATED GROUP From funding to earnings Illustrative banking model \u00b7 not to scale Funding REPORTED \u00a3502.8bn Customer deposits \u00b7 30 Sep 2026 Lending & income Interest + fees Profit & costs REPORTED \u00a36.6bn Statutory pretax profit \u00b7 9m to 30 Sep 2026 A foundation for lending Deposits help fund lending and other earning assets. Some accounts earn interest for customers. The balance alone does not show funding cost. Customer mix and the rates paid determine how much deposits cost the bank. Calculated \u00b7 \u00a36.3bn difference in deposits 31 December 2025 \u2192 30 September 2026 \u00b7 two balance-sheet dates A difference between reported balances, not an organic inflow or an income measure. Financial analysis Funding perspective Customer outcomes \u00b7 Lloyds Bank plc Enterprises Customers & Suppliers Regulators",
+    "desktop:original-preview": "Experimental design Return to current experience OVERVIEW \u00b7 LLOYDS GROUP Retail Banking Households. Current accounts, savings and mortgages. Illustrative value path \u00b7 not to scale 01 Households Customers 02 Current accounts, savings and mortgages Products & services 03 Economic value Interest paid on deposits and earned on loans Business-model orientation, not measured divisional flows or financial allocation. Group scale, in context \u00a3502.8bn Group customer deposits \u00b7 reported stock 30 September 2026 \u00a36.6bn Group statutory pretax profit \u00b7 reported flow Nine months to 30 September 2026 Explore how the business operates \u2192",
+    "desktop:original-forces": "Experimental design Return to current experience INVESTIGATE \u00b7 LLOYDS GROUP Renewal & change Core renewal links the efficiency ambition with the work of keeping the bank running. Analytical connection of Group disclosures \u00b7 no project-level savings or causal outcome is established 01 Direction Efficiency ambition 02 Execution Retirement and core renewal 03 Constraint Service continuity and control testing Reported: Management target The 2030 efficiency ambition is a cost-to-income ratio below 45%. Reported: Stated priority The annual report names faster application retirement and cloud migration among 2026 priorities. Curve \u00b7 reported complete Reported: The Q3 statement treats the Curve acquisition as completed. Integration progress, external procurement and customer adoption are not established. Strategic change over time 2025 reporting \u00b7 2026 priorities Reported: Stated priority The annual report names faster application retirement and cloud migration among 2026 priorities. Q3 2026 \u00b7 transaction and investment context Reported: The Q3 statement treats the Curve acquisition as completed. March 2027 \u00b7 reporting policy Reported: PRA incident/third-party reporting changes take effect in March 2027. 2027\u20132030 \u00b7 management plans Reported: Stated priority Accelerate 2030 explicitly prioritises core-platform renewal. Investigate \u00b7 SWOT Strategic choices for Lloyds; not qualified sales opportunities. Strength Weakness Opportunity Threat Strength existing AI capability deposit base existing AI capability Reported: Lloyds describes built-in Envoy controls and monitoring. Reported: The bank identifies Google Cloud as an Envoy platform collaborator. FLORA INSIGHT An existing governed platform makes adoption and measured benefits the relevant questions. Built-in controls do not establish effectiveness.",
+    "ipad-landscape:default": "Lloyds Banking Group How the Group earns, runs its services and renews its platforms. Economics Operating model What\u2019s changed Leadership agenda Technology & suppliers Commercial hypotheses WHAT\u2019S CHANGED Curve acquisition reported complete Published 2026-10-29 \u00b7 Nine months ended / balance sheet at 30 September 2026 Integration scope and external procurement remain unproven. Explore the timeline Preview New Experience Explore Lloyds LLOYDS BANKING GROUP PLC \u00b7 CONSOLIDATED GROUP From funding to earnings Illustrative banking model \u00b7 not to scale Funding REPORTED \u00a3502.8bn Customer deposits \u00b7 30 Sep 2026 Lending & income Interest + fees Profit & costs REPORTED \u00a36.6bn Statutory pretax profit \u00b7 9m to 30 Sep 2026 A foundation for lending Deposits help fund lending and other earning assets. Some accounts earn interest for customers. The balance alone does not show funding cost. Customer mix and the rates paid determine how much deposits cost the bank. Calculated \u00b7 \u00a36.3bn difference in deposits 31 December 2025 \u2192 30 September 2026 \u00b7 two balance-sheet dates A difference between reported balances, not an organic inflow or an income measure. Financial analysis Funding perspective Customer outcomes \u00b7 Lloyds Bank plc Enterprises Customers & Suppliers Regulators",
+    "ipad-landscape:original-preview": "Experimental design Return to current experience OVERVIEW \u00b7 LLOYDS GROUP Retail Banking Households. Current accounts, savings and mortgages. Illustrative value path \u00b7 not to scale 01 Households Customers 02 Current accounts, savings and mortgages Products & services 03 Economic value Interest paid on deposits and earned on loans Business-model orientation, not measured divisional flows or financial allocation. Group scale, in context \u00a3502.8bn Group customer deposits \u00b7 reported stock 30 September 2026 \u00a36.6bn Group statutory pretax profit \u00b7 reported flow Nine months to 30 September 2026 Explore how the business operates \u2192",
+    "ipad-landscape:original-forces": "Experimental design Return to current experience INVESTIGATE \u00b7 LLOYDS GROUP Renewal & change Core renewal links the efficiency ambition with the work of keeping the bank running. Analytical connection of Group disclosures \u00b7 no project-level savings or causal outcome is established 01 Direction Efficiency ambition 02 Execution Retirement and core renewal 03 Constraint Service continuity and control testing Reported: Management target The 2030 efficiency ambition is a cost-to-income ratio below 45%. Reported: Stated priority The annual report names faster application retirement and cloud migration among 2026 priorities. Curve \u00b7 reported complete Reported: The Q3 statement treats the Curve acquisition as completed. Integration progress, external procurement and customer adoption are not established. Strategic change over time 2025 reporting \u00b7 2026 priorities Reported: Stated priority The annual report names faster application retirement and cloud migration among 2026 priorities. Q3 2026 \u00b7 transaction and investment context Reported: The Q3 statement treats the Curve acquisition as completed. March 2027 \u00b7 reporting policy Reported: PRA incident/third-party reporting changes take effect in March 2027. 2027\u20132030 \u00b7 management plans Reported: Stated priority Accelerate 2030 explicitly prioritises core-platform renewal. Investigate \u00b7 SWOT Strategic choices for Lloyds; not qualified sales opportunities. Strength Weakness Opportunity Threat Strength existing AI capability deposit base existing AI capability Reported: Lloyds describes built-in Envoy controls and monitoring. Reported: The bank identifies Google Cloud as an Envoy platform collaborator. FLORA INSIGHT An existing governed platform makes adoption and measured benefits the relevant questions. Built-in controls do not establish effectiveness.",
+    "ipad-portrait:default": "Lloyds Banking Group How the Group earns, runs its services and renews its platforms. Economics Operating model What\u2019s changed Leadership agenda Technology & suppliers Commercial hypotheses WHAT\u2019S CHANGED Curve acquisition reported complete Published 2026-10-29 \u00b7 Nine months ended / balance sheet at 30 September 2026 Integration scope and external procurement remain unproven. Explore the timeline Preview New Experience Explore Lloyds LLOYDS BANKING GROUP PLC \u00b7 CONSOLIDATED GROUP From funding to earnings Illustrative banking model \u00b7 not to scale Funding REPORTED \u00a3502.8bn Customer deposits \u00b7 30 Sep 2026 Lending & income Interest + fees Profit & costs REPORTED \u00a36.6bn Statutory pretax profit \u00b7 9m to 30 Sep 2026 A foundation for lending Deposits help fund lending and other earning assets. Some accounts earn interest for customers. The balance alone does not show funding cost. Customer mix and the rates paid determine how much deposits cost the bank. Calculated \u00b7 \u00a36.3bn difference in deposits 31 December 2025 \u2192 30 September 2026 \u00b7 two balance-sheet dates A difference between reported balances, not an organic inflow or an income measure. Financial analysis Funding perspective Customer outcomes \u00b7 Lloyds Bank plc Enterprises Customers & Suppliers Regulators",
+    "ipad-portrait:original-preview": "Experimental design Return to current experience OVERVIEW \u00b7 LLOYDS GROUP Retail Banking Households. Current accounts, savings and mortgages. Illustrative value path \u00b7 not to scale 01 Households Customers 02 Current accounts, savings and mortgages Products & services 03 Economic value Interest paid on deposits and earned on loans Business-model orientation, not measured divisional flows or financial allocation. Group scale, in context \u00a3502.8bn Group customer deposits \u00b7 reported stock 30 September 2026 \u00a36.6bn Group statutory pretax profit \u00b7 reported flow Nine months to 30 September 2026 Explore how the business operates \u2192",
+    "ipad-portrait:original-forces": "Experimental design Return to current experience INVESTIGATE \u00b7 LLOYDS GROUP Renewal & change Core renewal links the efficiency ambition with the work of keeping the bank running. Analytical connection of Group disclosures \u00b7 no project-level savings or causal outcome is established 01 Direction Efficiency ambition 02 Execution Retirement and core renewal 03 Constraint Service continuity and control testing Reported: Management target The 2030 efficiency ambition is a cost-to-income ratio below 45%. Reported: Stated priority The annual report names faster application retirement and cloud migration among 2026 priorities. Curve \u00b7 reported complete Reported: The Q3 statement treats the Curve acquisition as completed. Integration progress, external procurement and customer adoption are not established. Strategic change over time 2025 reporting \u00b7 2026 priorities Reported: Stated priority The annual report names faster application retirement and cloud migration among 2026 priorities. Q3 2026 \u00b7 transaction and investment context Reported: The Q3 statement treats the Curve acquisition as completed. March 2027 \u00b7 reporting policy Reported: PRA incident/third-party reporting changes take effect in March 2027. 2027\u20132030 \u00b7 management plans Reported: Stated priority Accelerate 2030 explicitly prioritises core-platform renewal. Investigate \u00b7 SWOT Strategic choices for Lloyds; not qualified sales opportunities. Strength Weakness Opportunity Threat Strength existing AI capability deposit base existing AI capability Reported: Lloyds describes built-in Envoy controls and monitoring. Reported: The bank identifies Google Cloud as an Envoy platform collaborator. FLORA INSIGHT An existing governed platform makes adoption and measured benefits the relevant questions. Built-in controls do not establish effectiveness.",
+    "mobile:default": "Lloyds Banking Group How the Group earns, runs its services and renews its platforms. Economics Operating model What\u2019s changed Leadership agenda Technology & suppliers Commercial hypotheses WHAT\u2019S CHANGED Curve acquisition reported complete Published 2026-10-29 \u00b7 Nine months ended / balance sheet at 30 September 2026 Integration scope and external procurement remain unproven. Explore the timeline Preview New Experience Explore Lloyds LLOYDS BANKING GROUP PLC \u00b7 CONSOLIDATED GROUP From funding to earnings Illustrative banking model \u00b7 not to scale Funding REPORTED\u00a3502.8bn Customer deposits \u00b7 30 Sep 2026 Lending & income Interest + fees Profit & costs REPORTED\u00a36.6bn Statutory pretax profit \u00b7 9m to 30 Sep 2026 A foundation for lending Deposits help fund lending and other earning assets. Some accounts earn interest for customers. The balance alone does not show funding cost. Customer mix and the rates paid determine how much deposits cost the bank. Calculated \u00b7 \u00a36.3bn difference in deposits 31 December 2025 \u2192 30 September 2026 \u00b7 two balance-sheet dates A difference between reported balances, not an organic inflow or an income measure. Financial analysis Funding perspective Customer outcomes \u00b7 Lloyds Bank plc Enterprises Customers & Suppliers Regulators",
+    "mobile:original-preview": "Experimental design Return to current experience OVERVIEW \u00b7 LLOYDS GROUP Retail Banking Households. Current accounts, savings and mortgages. Illustrative value path \u00b7 not to scale 01 Households Customers 02 Current accounts, savings and mortgages Products & services 03 Economic value Interest paid on deposits and earned on loans Business-model orientation, not measured divisional flows or financial allocation. Group scale, in context \u00a3502.8bn Group customer deposits \u00b7 reported stock 30 September 2026 \u00a36.6bn Group statutory pretax profit \u00b7 reported flow Nine months to 30 September 2026 Explore how the business operates \u2192",
+    "mobile:original-forces": "Experimental design Return to current experience INVESTIGATE \u00b7 LLOYDS GROUP Renewal & change Core renewal links the efficiency ambition with the work of keeping the bank running. Analytical connection of Group disclosures \u00b7 no project-level savings or causal outcome is established 01 Direction Efficiency ambition 02 Execution Retirement and core renewal 03 Constraint Service continuity and control testing Reported: Management target The 2030 efficiency ambition is a cost-to-income ratio below 45%. Reported: Stated priority The annual report names faster application retirement and cloud migration among 2026 priorities. Curve \u00b7 reported complete Reported: The Q3 statement treats the Curve acquisition as completed. Integration progress, external procurement and customer adoption are not established. Strategic change over time 2025 reporting \u00b7 2026 priorities Reported: Stated priority The annual report names faster application retirement and cloud migration among 2026 priorities. Q3 2026 \u00b7 transaction and investment context Reported: The Q3 statement treats the Curve acquisition as completed. March 2027 \u00b7 reporting policy Reported: PRA incident/third-party reporting changes take effect in March 2027. 2027\u20132030 \u00b7 management plans Reported: Stated priority Accelerate 2030 explicitly prioritises core-platform renewal. Investigate \u00b7 SWOT Strategic choices for Lloyds; not qualified sales opportunities. Strength Weakness Opportunity Threat Strength existing AI capability deposit base existing AI capability Reported: Lloyds describes built-in Envoy controls and monitoring. Reported: The bank identifies Google Cloud as an Envoy platform collaborator. FLORA INSIGHT An existing governed platform makes adoption and measured benefits the relevant questions. Built-in controls do not establish effectiveness."
+  },
+  "screenshots": {
+    "after-desktop-group.jpg": "6f926da5bf0903d66e49863efdde30cd587588fe8e55a7e6572c424a2837887c",
+    "after-desktop-economics.jpg": "c719293ecc95a6d3f0e652c28fa8ce76f4e770de9a276f6591d58d436d9c3058",
+    "after-desktop-operating-model.jpg": "b07b1bd20ff0421f67e2a4089afd6d67b286c3ec0a1525262c71ba91ca890e29",
+    "after-desktop-applications.jpg": "738a11bcd3d352bcd28f726d44585013d2b6dc480be6c8d5e8a86de23136ea02",
+    "after-desktop-transformation.jpg": "0c10c52a44795d3d248d4f89099ba7434909dc1198c517b512eca86c5fdfd6b2",
+    "after-desktop-analysis.jpg": "37aa25c5f350dbda9261afdd7c31c76bb9d267b73a1a77492167931380f2d8ac",
+    "after-desktop-service-outcomes.jpg": "aec9ad6c008d4a222e6c29993a86aa549820b0a523037f11bab70ac9bc146a3d",
+    "after-desktop-zoom-200.jpg": "5513d7e8cb532e6be29625ffc96bbccd4dbcf78d4fe8acb20a760c08a8466334",
+    "after-ipad-landscape-group.jpg": "0505dd8bc74818b4e4468df34a79496529ce6aebb06ea17536297746011beb35",
+    "after-ipad-landscape-economics.jpg": "87f89a06ced2a748cf6b0f57fd583be97e142b428eb87124cd709099ef9cfb34",
+    "after-ipad-landscape-operating-model.jpg": "6902338bad3bd66284268ab33ac1536ebcd5d68f6aaa43e764823bad9f874476",
+    "after-ipad-landscape-applications.jpg": "a6aa97d58d1dbe47d4c00f47a546596e13e627866942d926a83fcf2d2be6c32a",
+    "after-ipad-landscape-transformation.jpg": "e25aefa0ecfb39d680d4a27a8717c6b34b55f581a2ec302f0ca33eed244e8d17",
+    "after-ipad-landscape-analysis.jpg": "79513830d2c0af0a390e139ddab635e15cf08e7a33288c927a7454f59034db01",
+    "after-ipad-landscape-service-outcomes.jpg": "6b5381d201b6194aea96565476622c17ccb541db821beab26a493f56e10a07d1",
+    "after-ipad-portrait-group.jpg": "0023b428f7b7b55df71e35c489cce0d5e26bcb7e5bb20cccdef1a2176f477ce5",
+    "after-ipad-portrait-economics.jpg": "2a5d093d85246521a50442d9544afbe127700aff5d243965b13176b766e06629",
+    "after-ipad-portrait-operating-model.jpg": "2c5325f27f84549257cabeca0687bb7a1b46242970096b201e5fd97fdda3d4a4",
+    "after-ipad-portrait-applications.jpg": "2d99503233350a6231c240c5a597b946f48af5eb94548e453b04df97663caf66",
+    "after-ipad-portrait-transformation.jpg": "66d95b17181facd818c31ce78f6bc3292dcaa694a8cc9f1acc4c94c48b0717aa",
+    "after-ipad-portrait-analysis.jpg": "2720fde96ff5eb302ce04ac8456680f6a732aaa7307709fd587be9f24e007776",
+    "after-ipad-portrait-service-outcomes.jpg": "bfabc9c44a1964d934f6061805f260c8b628f17ceb1ad05b783ebbd7ac0a3456",
+    "after-ipad-portrait-illustration-expanded.jpg": "bf428095def3ecb5c16cb6d7a70612f80f3eb52da3644e2191bd9891f245810f",
+    "after-mobile-group.jpg": "e763aee9228c4c11f407e9e117340079138572d072cbd03f03887a13dc2bedbb",
+    "after-mobile-economics.jpg": "f93e271f88fe2f86afcab930b2e1bb5e651a91555a0f90daf2c9a0eea1f672d2",
+    "after-mobile-operating-model.jpg": "ce65751cc0d19adcdf018904091d42f5d60af1c609b2e65137003cc4ad7d52f9",
+    "after-mobile-applications.jpg": "f3a51c3a4be758084fad07fb5ec2089ada37a47b0d1a7924d0d15260fa14251d",
+    "after-mobile-transformation.jpg": "a49660fd50e917e82af3e5ee29818ee621fba6289acbd4a5531112b1e852faab",
+    "after-mobile-analysis.jpg": "52bd86f344cabadc253e8a5623c963be38667a8b1e53745d3704d5ff8e21f752",
+    "after-mobile-service-outcomes.jpg": "0694d00c45295de0298ac605bd5f0c1b1b3ea4c261318815f4e5319c50c94428",
+    "after-withdrawal-ipad.jpg": "05c3c29dc34a6eff5ca88fe1f409ff3b5d4b4f446d4a7e9e2b6cceb23bf57a86"
+  },
+  "runtime_hashes": {
+    "cios/applications/flora/lloyds_gold.py": "41db965d562e79ba84c0f113e88ae27efa1ffa8d257d243d44ca5ea925211f2e",
+    "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "3c6ca4c9e5162433e57db271e2b7c633b4b10631a8e352452514b808b92dc3d3",
+    "cios/applications/flora/web/app.py": "4cd79245a09eb776effa62e1276b33abaada8980c4cd87b485f1bc6de1e45990",
+    "cios/applications/flora/public_routes.py": "ec4fc4eabb697ce7d1eec8f69e9dc361179faed37dbc145d517c233ac35a94e9"
+  },
+  "withdrawal": {
+    "browser_history_reload_print_accessible_values": true
+  },
+  "no_javascript": true
+}

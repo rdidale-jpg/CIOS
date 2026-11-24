@@ -66,8 +66,20 @@ PREVIEW_ROUTE_BASE = '97d316c640c96d99c2301819f8aac00b3b9c1398'
 PREVIEW_ROUTE_PINS = {'cios/applications/flora/web/app.py': '232d7d9fbf736adc1d1c9735038a53cb0508af5e8c18b29ee46582fc0d47ec69', 'cios/applications/flora/public_routes.py': '17a39084779442cdea73a0bd9922be6722c815ac0ee3dfa2b164810472575916'}
 
 
+# Gold Standard: one optional finite route and stylesheet. Historical pins stay
+# immutable; only the entire reviewed bytes may resolve to #730's predecessor.
+GOLD_ROUTE_BASE = 'eaca26f2b31c3c9227bb797d60f7d3492a8313d1'
+GOLD_ROUTE_PINS = {'cios/applications/flora/web/app.py': '4cd79245a09eb776effa62e1276b33abaada8980c4cd87b485f1bc6de1e45990', 'cios/applications/flora/public_routes.py': 'ec4fc4eabb697ce7d1eec8f69e9dc361179faed37dbc145d517c233ac35a94e9'}
+
+def gold_route_predecessor(root, path, current):
+    if path in GOLD_ROUTE_PINS and sha256(current).hexdigest() == GOLD_ROUTE_PINS[path]:
+        return subprocess.check_output(['git', 'show', f'{GOLD_ROUTE_BASE}:{path}'], cwd=root)
+    return current
+
+
 def predecessor(root, path):
     current = (Path(root) / path).read_bytes()
+    current = gold_route_predecessor(root, path, current)
     if path in PREVIEW_ROUTE_PINS and sha256(current).hexdigest() == PREVIEW_ROUTE_PINS[path]:
         current = subprocess.check_output(["git", "show", f"{PREVIEW_ROUTE_BASE}:{path}"], cwd=root)
     if path == AVIATION_JOURNEY_APP and sha256(current).hexdigest() == FACTORY_PREVIEW_APP:

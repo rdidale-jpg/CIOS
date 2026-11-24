@@ -223,10 +223,11 @@ def test_route_evolution_pins_are_exact_and_reject_unreviewed_bytes(monkeypatch)
     root=Path(__file__).resolve().parents[1]
     read_bytes=Path.read_bytes
     for path,expected in compatibility.PREVIEW_ROUTE_PINS.items():
-        target=root/path;current=target.read_bytes()
+        target=root/path;actual=target.read_bytes()
+        current=compatibility.gold_route_predecessor(root,path,actual)
         assert sha256(current).hexdigest()==expected
         assert compatibility.predecessor(root,path)!=current
-        mutation=current+b'\n# Unreviewed route mutation\n'
+        mutation=actual+b'\n# Unreviewed route mutation\n'
         with monkeypatch.context() as patch:
             patch.setattr(Path,'read_bytes',lambda self:mutation if self==target else read_bytes(self))
             assert compatibility.predecessor(root,path)==mutation

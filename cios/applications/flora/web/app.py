@@ -139,13 +139,16 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             if parsed.path == '/enterprises/lloyds/preview':
                 from cios.applications.flora.living_enterprise_preview import resolve
                 resolve(parse_qs(parsed.query, keep_blank_values=True))
+            if parsed.path == '/enterprises/lloyds/preview/gold':
+                from cios.applications.flora.lloyds_gold import resolve
+                resolve(parse_qs(parsed.query, keep_blank_values=True))
             content_type = _content_type_for_path(parsed.path)
             if content_type is None:
                 self.send_error(404, "Flora web route not found")
                 return
             self.send_response(200)
             self.send_header("Content-Type", content_type)
-            if parsed.path in {'/enterprises/lloyds/preview', '/enterprises/lloyds/preview/assets/styles', '/enterprises/lloyds/preview/assets/interactions'}:
+            if parsed.path in {'/enterprises/lloyds/preview/gold', '/enterprises/lloyds/preview/gold/assets/styles', '/enterprises/lloyds/preview', '/enterprises/lloyds/preview/assets/styles', '/enterprises/lloyds/preview/assets/interactions'}:
                 self.send_header("Cache-Control", "no-store")
             self.end_headers()
         except ValueError as exc:
@@ -222,6 +225,13 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(visual_streams.render(
                     visual_streams.EASYJET_ROUTE, parse_qs(parsed.query, keep_blank_values=True), self.headers,
                 ))
+            elif parsed.path == '/enterprises/lloyds/preview/gold':
+                from cios.applications.flora.lloyds_gold import render
+                self._html(render(parse_qs(parsed.query, keep_blank_values=True), self.headers))
+            elif parsed.path == '/enterprises/lloyds/preview/gold/assets/styles':
+                from cios.applications.flora.lloyds_gold import stylesheet
+                body, mime = stylesheet()
+                self._body(body, mime, 200)
             elif parsed.path == '/enterprises/lloyds/preview':
                 from cios.applications.flora.living_enterprise_preview import render
                 self._html(render(parse_qs(parsed.query, keep_blank_values=True), self.headers))
@@ -1708,6 +1718,8 @@ app = FloraWebHandler
 def _content_type_for_path(path: str) -> str | None:
     from cios.applications.flora.research_intelligence import technology_experience
     from cios.applications.flora import visual_streams
+    if path == '/enterprises/lloyds/preview/gold': return 'text/html; charset=utf-8'
+    if path == '/enterprises/lloyds/preview/gold/assets/styles': return 'text/css; charset=utf-8'
     if path == '/enterprises/lloyds/preview': return 'text/html; charset=utf-8'
     if path in {'/enterprises/lloyds/preview/assets/styles', '/enterprises/lloyds/preview/assets/interactions'}:
         from cios.applications.flora.living_enterprise_preview import FILES
