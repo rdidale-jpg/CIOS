@@ -1,12 +1,12 @@
 # Research reuse, source boundaries and remaining demand
 
-The [reproducible inventory](Inventory.json) is an assessment artefact, not a new runtime registry. Claim IDs are the denominator, with each original ID counted once. All 39 Lloyds rows carry source IDs, periods, scope, type and A–E disposition. Older repository-only duplicates remain D, never silently counted again as eligible facts. A means eligible and satisfactorily displayed; B eligible/undisplayed; C eligible/displayed but shallow; D held/research-only; E insufficient evidence. Baseline has B=5, C=14, D=20; no item is called A simply because a document or previous completion claim exists. The B/C entries are the complete nineteen supported underutilised items, ranked implicitly by their actual Group/economics/operating/strategy destinations rather than invented commercial scores.
+The [reproducible inventory](Inventory.json) is an assessment artefact, not a new runtime registry. Claim IDs are the denominator, with each original ID counted once. All 39 Lloyds rows carry source IDs, periods, scope, type and A–E disposition. Older repository-only duplicates remain D, never silently counted again as eligible facts. A means eligible and satisfactorily displayed; B eligible/undisplayed; C eligible/displayed but shallow; D held/research-only; E insufficient evidence. Baseline has B=5, C=14, D=20; no item is called A simply because a document or previous completion claim exists. The B/C entries are the nineteen overlay items; four additional existing-owner items are separately recorded in `other_owner_items`. All twenty-three are listed with actual destinations, without invented commercial scores.
 
 ## Estate and gaps
 
 | Area | Existing repository evidence / ownership | Public integration / remaining boundary |
 | --- | --- | --- |
-| Sources and claims | Banking research assessment: 24 Source records / 45 total claims; 39 Lloyds + other policy context | 19 eligible Lloyds IDs used; four external context facts kept separate. Primary excerpts are reviewed text, not invented downloaded original-byte archives |
+| Sources and claims | Banking research assessment: 24 Source records / 45 total claims; 39 Lloyds + other policy context | 19 eligible overlay IDs used, plus three eligible Lloyds Bank PLC FCA measurements and an existing calculated Group stock difference; four external context facts kept separate. Primary excerpts are reviewed text, not invented downloaded original-byte archives |
 | Evidence / Observations | Existing Evidence/Observation owners and repository research packages | No authorised production store inspection or canonical import status asserted. Research success is not canonical acceptance |
 | Enterprise Model | `enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md`; overlay BK-ENT-001 | Preserve identity; model prose labelled Validated is not itself public Source permission. No legal-bank/Group joins |
 | Financials / segments | LEI-1 README, sources and reconciliations; W3 Lloyds dossier/ledger | Only existing rounded nine-month Group PBT and two dated deposit stocks used. All new H1 segment measures, net income, margins, costs, credit losses, underlying profits, central/statutory bridge, capital/RWA and technology-cost allocations held |
@@ -38,3 +38,9 @@ Existing eligible reviewed factual disclosures may be restated and analytically 
 6. Resolve scoped service/customer outcomes and actual pressure applicability under existing owners; do not manufacture urgency or sales demand.
 
 No new research acquisition, canonical acceptance, Source admission or production mutation is performed.
+
+## Other-owner reconciliation
+
+The Leadership Agenda owns three already permitted FCA received/closed/upheld measurements and the existing Group stock-date calculation. AI and opening/closing deposit inputs overlap the nineteen overlay identities and are deduplicated, not counted again. The FCA legal bank is not the consolidated Group or Retail segment. Different complaint cohorts establish no backlog change, harm rate, cost or supplier need; OGL attribution is retained. The £6.3bn arithmetic difference is calculated, not a reported organic inflow, and disappears if either eligible source/input is withdrawn. These existing-owner items are available in the current default Agenda but absent from #730; they are C for preview utilisation, with default reachability recorded independently. No new source data, recipe or registry.
+
+The document census now scans all retained Markdown/JSON/text references to Lloyds or BK-ENT-001 under enterprise knowledge and Flora runtime documentation, recording exact paths/hashes. Such references are not additional unique facts or proof of canonical acceptance.

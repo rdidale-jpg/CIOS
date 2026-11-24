@@ -53,6 +53,7 @@ with TemporaryDirectory(prefix='flora-gold-browser-') as runtime,sync_playwright
      if focus=='applications':
       page.get_by_role('link',name='Envoy',exact=True).click();expect(page.locator('main')).to_contain_text('Contract end / renewal');expect(page.locator('main')).to_contain_text('Unknown')
       page.get_by_role('link',name='Evidence & dates',exact=True).click();expect(page.locator('main h2')).to_have_text('Evidence, dates & boundaries');assert not page.locator('main a[href*=".pdf"]').count()
+    page.goto(g.href(g.State('inside','operations','operations','service')));expect(page.locator('[data-owner-item]')).to_have_count(3);expect(page.locator('main')).to_contain_text('not consolidated Group or Retail');capture('service-outcomes')
     page.goto(g.href(g.State('landscape','commercial','commercial')));page.get_by_role('navigation',name='Insight streams').get_by_role('link',name='Inside',exact=True).click();expect(page.locator('main')).to_contain_text('From Commercial Banking')
     url=page.url;page.reload();assert page.url==url;page.go_back();expect(page.locator('main h1')).to_have_text('Commercial Banking');page.go_forward();expect(page.locator('main')).to_contain_text('From Commercial Banking')
     page.get_by_role('navigation',name='Insight streams').get_by_role('link',name='Landscape',exact=True).click();expect(page.locator('main h1')).to_have_text('Commercial Banking')
@@ -71,7 +72,7 @@ with TemporaryDirectory(prefix='flora-gold-browser-') as runtime,sync_playwright
    page.goto(g.href(g.State('landscape','economics','economics')));expect(page.locator('main')).to_contain_text('£502.8bn');page.goto(g.href(g.State('forces','analysis','analysis')))
    next(s for s in d['sources'] if s['id']=='PR-LBG-Q326')['withdrawn']=True;v.current_data=lambda ctx:d
    try:
-    page.go_back();expect(page.locator('main')).not_to_contain_text('£502.8bn');assert not page.locator('meter[value="502.8"]').count()
+    page.go_back();expect(page.locator('main')).not_to_contain_text('£502.8bn');assert not page.locator('meter[value="502.8"]').count();expect(page.locator('main')).not_to_contain_text('£6.3bn')
     page.reload();page.emulate_media(media='print');expect(page.locator('main')).not_to_contain_text('£6.6bn');page.screenshot(path=out/'after-withdrawal-ipad.jpg');proof['screenshots']['after-withdrawal-ipad.jpg']=sha256((out/'after-withdrawal-ipad.jpg').read_bytes()).hexdigest()
     page.goto(g.href(g.State('forces','analysis','analysis')));assert not page.locator('main a[href*="detail=theme-4"]').count();proof['withdrawal']={'browser_history_reload_print_accessible_values':True}
    finally:v.current_data=source

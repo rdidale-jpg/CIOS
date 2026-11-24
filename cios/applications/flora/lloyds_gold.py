@@ -95,15 +95,17 @@ def resolve(query):
     return State(stream,focus,subject,detail)
 
 
-def href(state, *, stream=None, focus=None, detail='', subject=None):
+def href(state, *, stream=None, focus=None, detail=None, subject=None):
     target=stream or state.stream
     if focus is None:
         # Preserve the originating subject, so switching back restores division.
         focus=state.subject if state.subject in dict(REGIONS[target]) else state.focus if state.focus in dict(REGIONS[target]) else REGIONS[target][0][0]
+    if detail is None:detail=state.detail if target==state.stream and focus==state.focus else ''
     return PATH+'?'+urlencode({'stream':target,'focus':focus,'subject':subject or state.subject,'detail':detail})+'#visual-content'
 
 
 def link(state,label,**kw):
+    kw.setdefault('detail','')
     return '<a href="'+e(href(state,**kw),quote=True)+'">'+e(label)+'</a>'
 
 
@@ -146,7 +148,7 @@ def scene(state,facts):
         if key=='retirement':words=['Insurance, Pensions','& Investments']
         if key=='competition':words=['Competition','& technology']
         text=''.join(f'<tspan x="{x}" dy="{0 if i==0 else 27}">{e(word)}</tspan>' for i,word in enumerate(words))
-        areas.append(f'<a data-region-key="{key}" aria-label="{e(label,quote=True)}" href="{e(href(state,focus=key,subject=key),quote=True)}"'
+        areas.append(f'<a data-region-key="{key}" aria-label="{e(label,quote=True)}" href="{e(href(state,focus=key,subject=key,detail=''),quote=True)}"'
                      +(' aria-current="true"' if key==state.focus else '')+f'><polygon class="area" points="{points}"/>'
                      f'<g class="region-label"><rect x="{x-124}" y="{y-27}" width="248" height="{78 if len(words)>1 else 54}" rx="9"/>'
                      f'<text x="{x}" y="{y+6}">{text}</text></g></a>')
@@ -158,7 +160,7 @@ def scene(state,facts):
             '<figcaption>Illustrative enterprise · areas do not encode financial scale</figcaption></figure></div></aside>')
 
 
-def economics(state,facts):
+def economics(state,facts,issues=()):
     body='<p class="le-deck">Deposits fund lending. Service income adds to interest income. Costs, credit losses and capital shape the return.</p>'
     body+='<div class="gold-economic-map" aria-label="Conceptual Group economic mechanism"><span>Funding<small>Deposits & other sources</small></span><span>Lending & services<small>Interest & fees</small></span><span>Earnings<small>After costs & credit losses</small></span><span>Capital<small>Absorbs risk; constrains growth</small></span></div>'
     body+='<p class="le-limit">Conceptual model · not a measured allocation or accounting reconciliation.</p>'
@@ -173,6 +175,11 @@ def economics(state,facts):
             item=facts[key];p.note_editorial_sources(item.sources)
             body+='<div data-claim-id="'+key+'"><span>'+label+'</span><meter min="0" max="'+str(maximum)+'" value="'+str(item.value)+'" aria-label="Deposits at '+label+'">'+str(item.value)+'</meter><strong>£'+str(item.value)+'bn</strong></div>'
         body+='<p class="le-limit">Reported stocks at two dates. Zero-based bars; a stock difference is not an adjusted deposit flow. Profit above covers nine months and uses a different unit of time.</p></figure>'
+    funding=next((row for row in issues if row.key=='funding-base'),None)
+    if funding and all(key in facts for key in ('LBG-AR25-DEPOSITS','LBG-Q326-DEPOSITS')):
+        body+=''.join('<div data-owner-item="funding-stock-change">'+p.render(item,compact=True)+'</div>'
+                      for item in funding.facts if item.semantic_type=='calculated' and p.eligible(item))
+        body+='<p class="le-limit">Arithmetic comparison of published stocks; not adjusted for consolidation, transfers or other balance-sheet effects. Not an organic inflow or earnings measure.</p>'
     if state.detail=='central':
         body+='<h2>Central / Equity and the Group tie-out</h2><p>Segment underlying profit and Group statutory profit have different accounting bases. Central items and the statutory bridge must remain separate; no residual is allocated to a business.</p><p>New segment and reconciliation figures are not published in this view.</p>'
     else:
@@ -204,7 +211,7 @@ def division(state,facts):
     return body
 
 
-def operating(state,data,facts):
+def operating(state,data,facts,issues=()):
     body='<p class="le-deck">Customer journeys cross durable capabilities. Shared capabilities are not reporting divisions.</p>'
     body+=table(('Value stream','Activities','Supporting capabilities'),[
         ('Credit origination & servicing','Assess affordability → record a decision → service an account','Lending; risk assessment; finance; technology controls'),
@@ -217,6 +224,14 @@ def operating(state,data,facts):
         body+='<h3>Commercial investigation</h3><p>Which hand-off causes avoidable repeat work, and what measured customer outcome would demonstrate an improvement? This is an investigation question, not established customer pain or demand.</p>'
     else:body+='<p class="gold-related">'+link(state,'Credit journey detail',detail='credit')+' · '+link(state,'Customer service detail',detail='service')+'</p>'
     body+=reported(facts,FOCUS_FACTS['operations'])
+    if state.detail=='service':
+        service=next((row for row in issues if row.key=='service-recovery'),None)
+        if service:
+            outcome='<section class="gold-dossier"><h2>Service outcomes · Lloyds Bank PLC</h2><p>January–June 2026 · this legal bank only, not consolidated Group or Retail reporting segment.</p>'
+            outcome+=''.join('<div data-owner-item="'+key+'">'+p.render(item,compact=True)+'</div>'
+                          for key,item in zip(('LBG-FCA-H126-RECEIVED','EAI-LBG-CLOSED','EAI-LBG-UPHELD'),service.facts) if p.eligible(item))
+            outcome+='<p class="le-limit">Received and closed complaints are different cohorts. Firm-upheld is not independent adjudication. These figures establish no backlog clearance, harm rate, service-quality ranking, avoidable cost or external supplier need.</p></section>'
+            body=outcome+body
     return body
 
 
@@ -350,7 +365,7 @@ def forces(state,facts):
     return body
 
 
-def main(state,data,facts):
+def main(state,data,facts,issues=()):
     title=SUBJECTS[state.focus]
     body='<section class="gold-content" data-level="'+('3' if state.detail=='sources' else '2' if state.detail else '0' if state.focus=='group' else '1')+'">'
     body+='<p class="eyebrow">Lloyds Banking Group plc'+(' · From '+e(SUBJECTS[state.subject]) if state.subject!=state.focus else '')+'</p>'
@@ -358,7 +373,13 @@ def main(state,data,facts):
     body+='<h1>'+e(title)+'</h1>'
     if state.detail=='sources':
         items=[facts[k] for k in FOCUS_FACTS[state.focus] if k in facts]
-        body+='<h2>Evidence, dates & boundaries</h2>'+flagship._source_rows(items)
+        if state.focus in {'operations','economics'}:
+            concern='service-recovery' if state.focus=='operations' else 'funding-base'
+            row=next((row for row in issues if row.key==concern),None)
+            if row:items.extend(item for item in row.facts if p.eligible(item))
+        body+='<h2>Evidence, dates & boundaries</h2>'+flagship._source_rows(item for item in items if item.semantic_type!='calculated')
+        for item in items:
+            if item.semantic_type=='calculated':body+='<h3>Calculated · method</h3>'+p.render(item,compact=True)+'<p>'+e(item.method)+'</p>'
         body+='<p class="le-limit">Lloyds attribution links to the issuer homepage. Direct PDF links remain deferred. These statements remain analytical public research, not canonical acceptance.</p>'
         return body+'</section>'
     if state.stream=='landscape':
@@ -368,10 +389,10 @@ def main(state,data,facts):
             body+='<div class="le-measures">'+preview.measures(facts)+'</div>'
             body+=interpretation(facts,('LBG-AR25-MIGRATION','LBG-A2030-CIR'),'The efficiency ambition and platform-renewal priority put the sequencing of change alongside service continuity. They establish strategic direction, not a project-level saving or open buying programme.')
             body+='<p class="gold-related">'+link(state,'Funding, income & earnings',focus='economics')+'</p>'
-        elif state.focus in {'group','economics'}:body+=economics(state,facts)
+        elif state.focus in {'group','economics'}:body+=economics(state,facts,issues)
         else:body+=division(state,facts)
     elif state.stream=='inside':
-        if state.focus=='operations':body+=operating(state,data,facts)
+        if state.focus=='operations':body+=operating(state,data,facts,issues)
         elif state.focus=='capabilities':body+=capabilities(state,data,facts)
         elif state.focus=='applications':body+=applications(state,facts)
         elif state.focus=='partners':body+=partners(state,facts)
@@ -396,7 +417,7 @@ def render(query,headers=None):
         for stream in REGIONS:
             old=e(v.stream_url(ctx,stream)+'#stream-'+stream,quote=True)
             top=top.replace('href="'+old+'"','href="'+e(href(state,stream=stream),quote=True)+'"')
-        markup=panels._frame(ctx,headers,data,issues,(),notice+main(state,data,facts),top=top,left=scene(state,facts),show_layers=False)
+        markup=panels._frame(ctx,headers,data,issues,(),notice+main(state,data,facts,issues),top=top,left=scene(state,facts),show_layers=False)
         assets=('<link rel="stylesheet" href="'+preview.PATH+'/assets/styles"><link rel="stylesheet" href="'+PATH+'/assets/styles">'
                 '<script defer src="'+preview.PATH+'/assets/interactions"></script>')
         return markup.replace('</head>',assets+'</head>').replace('<title>','<title>Gold Standard evaluation · ',1).replace('class="ds-page vp-page"','class="ds-page vp-page le-page gold-page" data-preview="gold-standard" data-focus="'+state.focus+'" data-subject="'+state.subject+'"')

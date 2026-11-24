@@ -7,7 +7,7 @@ from pathlib import Path
 import subprocess
 import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[3]))
-from cios.applications.flora import lloyds_gold as gold,visual_streams as v
+from cios.applications.flora import lloyds_gold as gold,visual_streams as v,leadership_agenda as agenda
 
 ROOT=Path(__file__).resolve().parents[3]
 BASE='eaca26f2b31c3c9227bb797d60f7d3492a8313d1'
@@ -38,6 +38,32 @@ def report():
     for path in sorted({p for pattern in patterns for p in ROOT.glob(pattern) if p.is_file()}):
         documents.append({'path':str(path.relative_to(ROOT)),'sha256':sha256(path.read_bytes()).hexdigest(),
           'authority':'Existing package; document presence does not prove canonical or public acceptance'})
+    # Census additional existing owners, not only the original overlay.
+    extra=[]
+    for issue in agenda.agenda('lloyds',data):
+        if issue.key=='service-recovery':
+            for ident,item in zip(('LBG-FCA-H126-RECEIVED','EAI-LBG-CLOSED','EAI-LBG-UPHELD'),issue.facts):
+                extra.append({'id':ident,'owner':'Leadership Agenda / existing Source release','classification':'C',
+                  'baseline_730_reachable':False,'existing_default_agenda_reachable':True,'gold_main_destination':'inside/operations/service',
+                  'scope':item.scope,'period':item.period,'type':item.semantic_type,'unit':item.unit,
+                  'source_publishers':[ref.publisher for ref in item.sources]})
+        if issue.key=='funding-base':
+            for item in issue.facts:
+                if item.semantic_type=='calculated':extra.append({'id':'funding-base/deposit-change',
+                  'owner':'Existing Leadership Agenda stock-date calculation','classification':'C','baseline_730_reachable':False,
+                  'existing_default_agenda_reachable':True,'gold_main_destination':'landscape/economics',
+                  'scope':item.scope,'period':item.period,'type':item.semantic_type,'unit':item.unit,'method':item.method})
+    # Include every matching retained text artefact, not just the selected packs.
+    for folder in ('enterprise-knowledge','docs/flora-runtime'):
+        for path in (ROOT/folder).rglob('*'):
+            if not path.is_file() or path.suffix not in {'.md','.json','.txt'} or path.is_relative_to(Path(__file__).parent):continue
+            content=path.read_text(errors='replace')
+            if 'lloyds' in content.casefold() or 'BK-ENT-001' in content:
+                if not any(row['path']==str(path.relative_to(ROOT)) for row in documents):
+                    documents.append({'path':str(path.relative_to(ROOT)),'sha256':sha256(path.read_bytes()).hexdigest(),
+                      'authority':'Retained Lloyds reference; not a unique fact, source grant or canonical acceptance'})
+    documents.sort(key=lambda row:row['path'])
+    assert len(extra)==4
     collections={k:len(data[k]) for k in ('sources','claims','capabilities','programmes','suppliers','relationships','gaps','frameworks','candidates')}
     model=[]
     for collection in ('capabilities','programmes','suppliers','relationships','gaps'):
@@ -56,7 +82,7 @@ def report():
     eligible=[row for row in rows if row['eligible_now']]
     surfaced=[row for row in eligible if row['gold_main_destinations']]
     assert len(surfaced)==len(eligible)==19
-    return {'baseline':BASE,'method':'Unique original claim IDs; older unverified duplicates remain held, not silently merged. B/C are all supported underutilised Lloyds items. No full-estate completeness claim.',
+    return {'baseline':BASE,'method':'Unique original claim IDs; overlay and additional Source/Agenda measurements counted separately with exact Group/legal-bank boundaries. Classifications describe preview depth; existing-default reachability is recorded independently. Older unverified duplicates remain held, not silently merged. B/C are all supported underutilised Lloyds items. No full-estate completeness claim.',
       'collections':collections,'lloyds_claim_counts':dict(Counter(r['classification'] for r in rows)),
       'eligible_lloyds_denominator':len(eligible),'eligible_lloyds_surfaced':len(surfaced),
       'baseline_reachable_eligible':sum(r['baseline_730_reachable'] for r in rows),
@@ -65,6 +91,7 @@ def report():
         'reporting_period':r.get('reporting_period'),'verification':r.get('verification'),'rights':r.get('rights'),
         'eligible_lloyds_claim_ids':[c['id'] for c in eligible if r['id'] in c['source_ids']],
         'existing_record_location':'enterprise-knowledge/banking/research-model (original identity retained)'} for r in data['sources']],
+      'other_owner_items':extra,'other_owner_eligible_denominator':4,'other_owner_surfaced':4,
       'claims':rows,'underutilised_supported_items':eligible,'model_records':model,'documents':documents,'original_images':images,
       'canonical_record_status':'UNKNOWN: no authorised live canonical-store inspection in this task; no import or promotion claimed',
       'source_authority_delta':'None; existing request-time Source owners only'}
@@ -73,7 +100,7 @@ if __name__=='__main__':
     value=report();target=Path(__file__).with_name('Inventory.json')
     if '--check' in sys.argv:
         assert json.loads(target.read_text())==value,'Inventory differs from current owner projections'
-        print('Inventory, 19/19 eligible public Lloyds claim identities, and original image hashes verified')
+        print('Inventory: 19/19 overlay claims plus 4/4 other-owner items, retained references and original images verified')
     else:
         target.write_text(json.dumps(value,indent=2,ensure_ascii=False)+'\n')
         print(json.dumps({k:value[k] for k in ('collections','lloyds_claim_counts','eligible_lloyds_denominator','eligible_lloyds_surfaced','baseline_reachable_eligible')}))

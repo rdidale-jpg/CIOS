@@ -1,6 +1,6 @@
 {
   "baseline": "eaca26f2b31c3c9227bb797d60f7d3492a8313d1",
-  "method": "Unique original claim IDs; older unverified duplicates remain held, not silently merged. B/C are all supported underutilised Lloyds items. No full-estate completeness claim.",
+  "method": "Unique original claim IDs; overlay and additional Source/Agenda measurements counted separately with exact Group/legal-bank boundaries. Classifications describe preview depth; existing-default reachability is recorded independently. Older unverified duplicates remain held, not silently merged. B/C are all supported underutilised Lloyds items. No full-estate completeness claim.",
   "collections": {
     "sources": 24,
     "claims": 45,
@@ -318,6 +318,68 @@
       "existing_record_location": "enterprise-knowledge/banking/research-model (original identity retained)"
     }
   ],
+  "other_owner_items": [
+    {
+      "id": "LBG-FCA-H126-RECEIVED",
+      "owner": "Leadership Agenda / existing Source release",
+      "classification": "C",
+      "baseline_730_reachable": false,
+      "existing_default_agenda_reachable": true,
+      "gold_main_destination": "inside/operations/service",
+      "scope": "Lloyds Bank PLC only; not consolidated Lloyds Banking Group or its Retail reporting division",
+      "period": "1 January–30 June 2026",
+      "type": "reported",
+      "unit": "complaints received; FCA Open table total",
+      "source_publishers": [
+        "Financial Conduct Authority"
+      ]
+    },
+    {
+      "id": "EAI-LBG-CLOSED",
+      "owner": "Leadership Agenda / existing Source release",
+      "classification": "C",
+      "baseline_730_reachable": false,
+      "existing_default_agenda_reachable": true,
+      "gold_main_destination": "inside/operations/service",
+      "scope": "Lloyds Bank PLC only; not Lloyds Banking Group or Retail reporting segment",
+      "period": "1 January–30 June 2026",
+      "type": "reported",
+      "unit": "complaints closed; all-product total",
+      "source_publishers": [
+        "Financial Conduct Authority"
+      ]
+    },
+    {
+      "id": "EAI-LBG-UPHELD",
+      "owner": "Leadership Agenda / existing Source release",
+      "classification": "C",
+      "baseline_730_reachable": false,
+      "existing_default_agenda_reachable": true,
+      "gold_main_destination": "inside/operations/service",
+      "scope": "Lloyds Bank PLC only; not Lloyds Banking Group or Retail reporting segment",
+      "period": "1 January–30 June 2026",
+      "type": "reported",
+      "unit": "percent of closed complaints upheld by firm; FCA table total",
+      "source_publishers": [
+        "Financial Conduct Authority"
+      ]
+    },
+    {
+      "id": "funding-base/deposit-change",
+      "owner": "Existing Leadership Agenda stock-date calculation",
+      "classification": "C",
+      "baseline_730_reachable": false,
+      "existing_default_agenda_reachable": true,
+      "gold_main_destination": "landscape/economics",
+      "scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "period": "31 December 2025 to 30 September 2026; two balance-sheet dates",
+      "type": "calculated",
+      "unit": "GBP billion",
+      "method": "502.8 − 496.5 = 6.3 GBP billion; arithmetic comparison of the published stocks."
+    }
+  ],
+  "other_owner_eligible_denominator": 4,
+  "other_owner_surfaced": 4,
   "claims": [
     {
       "id": "LBG-A2030-CIR",
@@ -2965,6 +3027,571 @@
       "authority": "Existing package; document presence does not prove canonical or public acceptance"
     },
     {
+      "path": "docs/flora-runtime/Increment-1-Implementation-Report.md",
+      "sha256": "9f52fdf3ffa8dc92df8b3dbf6892388937e49d950fb4873911708f9622fb0410",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/accepted-ux-recovery/Before-Proof.json",
+      "sha256": "297febc11eca032e1d29896cb83c2438d83c2f2e129132f2ca8a7cafe04c12a7",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/accepted-ux-recovery/Browser-Proof.json",
+      "sha256": "3b2721f64da773e8781c9f28a83f350dde420cc319a48cc04e3fb939794df4b5",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/accepted-ux-recovery/Integrity-Proof.json",
+      "sha256": "e97b1e31464a987d856f8f7baaa4a687a21c87f09bed3fbb11cec2cfff33a860",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/accepted-ux-recovery/README.md",
+      "sha256": "1326bb47d8e3f4112c8e319b0520a5966c3320fb2b2681a43c06f542427ca762",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/accepted-ux-recovery/Reconciliation.md",
+      "sha256": "75f4b8b08bf01272b6eefe57c0dd34b9ec7d2fdc32a56558c5ed6261f7553927",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/accepted-ux-recovery/Validation.md",
+      "sha256": "3827d6b296488b0cf14255f978f5874726f7971e9770f3cabcc24679740b3ff0",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/auth2-655/Public-and-Private.md",
+      "sha256": "44f33c40b3f0cb5a4b74d89abcb1ac2073adcea08a9fa92634cf550dde411716",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/aviation-journey/README.md",
+      "sha256": "9dead8b3212430bb52ae468ea4758b3155b4762b439f8cb53dc1d2ce3d50fee6",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/banking-explorer/Implementation.md",
+      "sha256": "a2a0223073c11726d1b2668f248da429e10e741c688513360d38138eb6feaf77",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bie2/Acceptance-Walkthrough.md",
+      "sha256": "0d9c61fecbc0be84cfdcefdf0ebd3a90e71b847caecc195997e5d989fae8e8b5",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bie2/Actor-Register.json",
+      "sha256": "94c9bd1cd0e508de428a76634925f01f402f6c1b7a77b4d954b2ef11d8189354",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bie2/Architecture.md",
+      "sha256": "1a197b41f0f5059c0836fc7af3bb51aa0da691770a9b69f29df8f1551c88b005",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bie2/Coverage-Assessment.json",
+      "sha256": "b89ffdde4e393c88b4ae5443fc6dbd06a8e1c4097a048618118048f60b7c1340",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bie2/News-Candidates.json",
+      "sha256": "154e22ce6e476c8f2c761e4a33eae9e226b084c714454bb8ffa4aa9523b2b0ea",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bie2/README.md",
+      "sha256": "b41d35246030cbf26b15f7decaf429617d369cafb21e6bb6d811b2a29ca45619",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bie2/Validation-and-Rollback.md",
+      "sha256": "d9aed12f90d786132e6053ed1ac559975a90be1b2263e998772641b4ee58540d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bie2/previews/Browser-Checks.json",
+      "sha256": "3dd73feeedca286ad2cfd28e4d7c811416939fa625054162d8f000d63dc9eb79",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bie3/Acceptance-Walkthrough.md",
+      "sha256": "68ea4fd20fc1b1bbe085fca78ffe6f102c3927406d74302bb465ec6cc3e9a4f0",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bie3/Architecture-and-Integration.md",
+      "sha256": "64119bfad6694d9adc0f8308fdaa685853fe79e165f854a4d585453dcf8d96fc",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bie3/Independent-Critique.md",
+      "sha256": "285f2e346de94cc56c9ef656b46caec5b39128a1ed296991dd0f13d5d1bcad94",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bie3/Validation-and-Rollback.md",
+      "sha256": "2106437b8b7092a85407409adb0c5cfa1a3d06f0b865674ee54c582da2dad1c2",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bie3/previews/Browser-Checks.json",
+      "sha256": "07fb891336b0a09c7a84eae03e321571f8e3e9e0a762b044b63dc23a3546f929",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bnk-cohort-691/README.md",
+      "sha256": "f10bf9d5795f6ddcaef96b798e267d4b90be7cb19c40fde407536a641e334e94",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bnk-cohort-691/source-gate.md",
+      "sha256": "8f035bcfcacc5ba76437982cd363c71861665f9ece792e1981ab4cf5ee5f98a8",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bnk-depth-676/README.md",
+      "sha256": "efe938f2a40c92dda0f8ce07646017d36291c3395e3672d6b29ab0f7d7aa8fc8",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bnk-vis-674/Lineage.md",
+      "sha256": "4ae3a7c1f0fecb2ce7443ffea3d45988d4eeea98c52744bc765993319e12072d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/bnk-vis-674/README.md",
+      "sha256": "defc33843d2c6dbefe0ecc991061752450a1ae0d55212f72b7a802367c40fda2",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/buying-trigger-591/Commercial-Before.json",
+      "sha256": "3de4a4a2d57b49b2b25cd6f585be22ec7d70edbd3b430942a54d303fb25c63ec",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/buying-trigger-591/Commercial-Quality-Review.md",
+      "sha256": "8c685bccbe1fe8cb23a61fb9de84016bdf795404c167bf1fd65cd6fd0bac0ad5",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/buying-trigger-591/README.md",
+      "sha256": "f851b4ff9d8cb7505ca610bd8399451df05c92ea789851ad6c8830643fbd0d0e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/buying-trigger-591/Source-Register.md",
+      "sha256": "edb41ecb406871cbb9daacb2c4e1fca01a8858ff641aa2cd8863936538c57d58",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/buying-trigger-591/previews/Assessment-Matrix.json",
+      "sha256": "bd39c632bc3963d9423609b4a301ff4265639614774f6c0a5dcfad3ec5575c31",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/buying-trigger-591/previews/Browser-Checks.json",
+      "sha256": "275298d03ededbd9ac4f04dcae707e8554884f0ee1e06794f8267a7ad36b4c01",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/design-system-585/Protected-Owners.json",
+      "sha256": "a55fc11e2c92af228f1e4a0a778dc07bfaf097408f1f66a0618bf5eb3a681434",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/design-system-585/README.md",
+      "sha256": "eca829b300acf5b1529e8407928a70cdb42aa79d595e82e61d3843073828a0b7",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/design-system-585/Reconciliation-586.json",
+      "sha256": "83cb783ddd15e9c8dcaed57cd50501a0848cb073345ce6f3716ded44c55c57e1",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/design-system-585/Reconciliation-586.md",
+      "sha256": "1b065e5c75a88a97cf580d2ef07b92b2a82358bff78a74ada797dd506f5c41d9",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/design-system-585/Route-Matrix.md",
+      "sha256": "57a07c1cabd399035241922936ff551a514d96e1a234306efe92cf71ef3f0046",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Banking-News-Handoff.json",
+      "sha256": "d3552749e8fefe55c0c73bada24b0f1d6cd392628b7f0ec3918d5a2df9e51d27",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Eight-Evidence-Review-Proposals.json",
+      "sha256": "80afbcc76a3a163ca2658c98ec4c07d37ce7e401a114add55f937e210e3f16b2",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Eight-Evidence-Reviews.md",
+      "sha256": "1abf66fc5f2df5b19f92522a167cbe5b67eeb608e1d5867ec2803792189e5f2f",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Financial-Reconciliation.json",
+      "sha256": "e8f7758240de58958669c1b1e1311fae556c127e44d9d43246c01f3fd57bd609",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Source-Admission-Review.md",
+      "sha256": "1b7d1c6f0d8361e67d0f0c9416f7b4f123a7ea7737854a46e45a9fd29a36b6b6",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eai1-628/Source-Ledger.json",
+      "sha256": "65704a7eaeed2637e0bcf271435f769ada117d1535fb9df03ee00d889a847979",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eai2/Acceptance-Walkthrough.md",
+      "sha256": "2f358d5febadfdedd03603d776f4bdd3726174d81e5620ddf1f81e22e80c824f",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eai2/Architecture-and-Reconciliation.md",
+      "sha256": "bfd8534f08a14519c84cd2d901f9ffa8230a948046fdd2f6e8eb09f298b5f898",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eai2/Evidence-and-Exclusions.md",
+      "sha256": "1a38805d2950fba5b1bee1d099e2dd6574965d263b6811044762721cbe2aa8f3",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eai2/README.md",
+      "sha256": "35c35f3c9947b225e7493e5a75bee2d958557163170abe411295bd88066008d9",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eai2/Reconciliation.json",
+      "sha256": "5f2abaccd0af74bf17081f21a1ae2af629abd688c5f41e1cb5373b5da5f378f6",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eai2/Rights-Decision-Register.json",
+      "sha256": "b6b4c99dbe2d4b5baf92f4689c6c8ad4aa527375f95b1b58d6c4a4c00113814e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eai2/previews/Browser-Checks.json",
+      "sha256": "c74619a417375a8409b83b1b0befdc21330236fe624a29494c903ae0087fa012",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eei2a-foundation/README.md",
+      "sha256": "dc07f272ef5209a4f4f396f57a965bf408f339adce246f8cdfa74a682c0251a4",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eei2b-real-statements/README.md",
+      "sha256": "11f9da4fae3e7c82a37f93755b86916b983777bc95c2a01b466c7e2430322ade",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/eei3/README.md",
+      "sha256": "a51f2298be4e6bb107ad409bd6884feac20daa12163c642cf53e7edfdfdafd77",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/enterprise-economics-a1/Architecture-and-Sources.md",
+      "sha256": "c7daa75e8d2466f3ffae5d6c496f03a7cf4a193d63d8ab45ae06e68046f5c350",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/enterprise-economics-a1/Changed-Files.txt",
+      "sha256": "1fe0cde3812a0ff0e94fa17e0d9db5294ed1f8cd3b9ac0af56a49fe7d80b8c40",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/enterprise-economics-a1/Previews.md",
+      "sha256": "dda8d9a5bf6d76f98082059bbefcfa9a9e75c0c044a0e859644cd2eaa7a67149",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/enterprise-economics-a1/README.md",
+      "sha256": "c5e3d8833ac7101b250befd29fcc71a83e4a4e2aaa6106b6989a2abac4c10f7c",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/enterprise-economics-a1/Renderer-Evolution.json",
+      "sha256": "03eff1929f025aea389e975ce0ebf551bb2a785306a80c1771ed873358678c57",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/enterprise-economics-a1/Validation-and-Rollback.md",
+      "sha256": "3c3ac329fe39f6e71271b683f8eea08b199cd69398686e5ebda15c502f51ef1d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/enterprise-economics-a1/previews/Before-Proof.json",
+      "sha256": "1d0bf39d41e00b74e6d007dccb04784e9e40ebe267dce2b94184deafc0ad4967",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/enterprise-economics-a1/previews/Browser-Proof.json",
+      "sha256": "daeb6032504308681eb71d448301dddf0145689c64aa443dd8740f669d553873",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/enterprise-opportunity-v1/README.md",
+      "sha256": "95641ca81c6fbed4df30764d4821b12616a6e35fc813d18cc20051d911f77f7f",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/experience-684/README.md",
+      "sha256": "59e477019ef29aa17d03edd3b413fe8f793426bd020905806ebe1952d656a6ad",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/experience-684/banking-portfolio-handoff.md",
+      "sha256": "aa380234d71ae7094010522752384283a7fa877ac060afff4b19bea7fd88288d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/experience-repair-01/Regression-Comparison.json",
+      "sha256": "6e54387be971f8566d457a358a3bd2a463f4af885776e3b8a239a4ac9d1c9b45",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/experience-repair-02/Regression-Comparison.json",
+      "sha256": "4fe48e98879ae1970266128dd0af18f0818b0430612a43cc37e85d0597669d6d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f1-642/Architecture-and-Contract.md",
+      "sha256": "f53b22624f11ca3a899c7ccde7980109c5041e41853bb1fd79180d3f1050670c",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f1-642/Browser-Checks.json",
+      "sha256": "df80a544b649044dc7d056085bfd0846d9c13ea1fba87bc788d226532e06aa22",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f1-642/Independent-Critique.md",
+      "sha256": "59e4aa6cbdcf8a9d1ccd55e914f83169366e7ccce37f20539d0be7e7b8b11e00",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f1-642/Owner-Acceptance-and-Rollback.md",
+      "sha256": "75fa91a17256cc35314035b7fe2f09865c28f3acef33533789aea88a95b2f67c",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f1-642/README.md",
+      "sha256": "86cb2828faf0e1c69f3ad61c5b8bfa1b1b5bcb6810f676a060125fdae508ff09",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f1-642/Source-Admission.md",
+      "sha256": "055a060fbd8128a9095dedd3a12ee7ab441512e97054bd5214369b164ed241be",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f1-642/Visual-Browser-Checks.json",
+      "sha256": "93b140dfd2bf92104ab38e84e538bf8c67a1807763c04fa26a0b55d7f3d312ff",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f2-644/Preservation.json",
+      "sha256": "d91b0b6c287e36632b97297716ec8fbe6a19ac937c07a1821f25eab4ca8a2669",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f2-644/README.md",
+      "sha256": "8436322c38ae1f274676325ad0300563d6209c52a1eb01a84eb070aef198eaa6",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f2-644/acceptance.md",
+      "sha256": "72f84c1610b3f798c9d3c7921d6d209132d96e0c4e8a03b11f86b517e360820e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f2-644/architecture.md",
+      "sha256": "06f34a8ccc7e4ad9669e58d2c46bd32df7adb9f12d1f9c4afad838306b270e6b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f2-644/source-use.md",
+      "sha256": "ccc3d65d6c4293155d1697f1297b628b9ffff9479a3914e1a3a4cda54e71a58b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f2-644/validation.md",
+      "sha256": "7e6257bf6620728abb652c42f9e36de310431f3aba02e33540632454d91d1b22",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f3-646/F1-Compatibility.json",
+      "sha256": "c72df8008af706a13cfb81475019b4adb4089609e7dda9591d27c398546dadd8",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/f3-646/Preservation.json",
+      "sha256": "7940dc21617edfefe46b62fbde4908da7aa8140eb97f242bd4347f4097ac1ff9",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/factory-repair-02/Retained-Package-Evidence.json",
+      "sha256": "3e67ea1ddab3d940e9b11098a8a5a376690e524f0884d07f21e377eeba80040b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/factory-repair-03/Regression-Comparison.json",
+      "sha256": "6c2f2167fa64ccd67d28d277c95b464f9185e9819ee03a8f0a66ae7d17f6e217",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/fig1/Roadmap-and-Acceptance.md",
+      "sha256": "bf1119225edb66ee6ef52c2856afab1e66d44b0123061746a3bc67bd1c6bbf0a",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/global-macro-v1/Architecture-Reuse.md",
+      "sha256": "174185e8b98af3d425edd4347b4e38ca8eb3b4825d8779c9cb5edb6fb6bb99d2",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/global-macro-v1/Gallery.md",
+      "sha256": "f8e9f004317e00123fa84d506df96588a6dcab77fb473b6fe1240b23249e36e0",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/global-macro-v1/README.md",
+      "sha256": "73e1f83f24972eb8313f9f633e9cf7fca2aee6a6a0f8f644c24388d7c2726bb2",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/global-macro-v1/Source-Audit.md",
+      "sha256": "71cdef9febd6d836247bedfeac5ba1e4ebf55fc61c65d8b9b0f74b59fd992810",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/global-macro-v1/previews/browser-results.json",
+      "sha256": "7f3d540e40b7aec31de0bb8939a45c30075e2d238ba8dab98e7d71cf1d9d1dec",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/increment-1-validation/Increment-1-Architecture-Acceptance.md",
+      "sha256": "8b199d87dc64939c9fa3466576367f1b34198a4ad863f58f308685b471542f34",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/increment-1-validation/lloyds-validation-report.md",
+      "sha256": "93a25605cf60ab423c9b757c41019fc7d59b2a946b9f87edf5176a2405b30761",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/increment-2/Full-Suite-Failure-Analysis.md",
+      "sha256": "459f290cedea4e0d70db6fce874d2ef29e5163a4aaf8e9257156d3b3629437dc",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/increment-2/Increment-2-Full-Mission-Checklist.md",
+      "sha256": "3063a6e964664fbabdee3bcabeb17fca0c47cfad20e5de698f086567ec59a2ee",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/increment-2/Increment-2-Merged-PR-Gap-Analysis.md",
+      "sha256": "fcd36288d333d27d097d88668c00b753363956f2214bdf059fa21c3c5a7890ad",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/increment-2/Increment-2-Reconciliation-Report.md",
+      "sha256": "44812266729a5b6c1d6088ab7259736d371b420716fc79b1675215238752509e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/increment-2/closure/Commercial-Reviewer-Closure-Scorecard.md",
+      "sha256": "6c083615d26e506debece5ae0e64343617f8ba884933d918bddceb30530bcbfa",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/increment-2/closure/Increment-2-Acceptance-Condition-Closure-Report.md",
+      "sha256": "f08591595aa7568277bdb5d5b2fd415a3abd0cfe538d9e2567d41c4d900c6efe",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/increment-2/closure/Semantic-Replay-Artifact-v0.2.json",
+      "sha256": "643cbd6ea76929dfeee12756d3841b3c3e537d1aad817f2db5889f45fe74b1fe",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/int1-625/Acceptance-Walkthrough.md",
+      "sha256": "ce9d5990196c466204ae1c5c3879768679501ade5f88eed1eb29b02cac04f20a",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/int1-625/Architecture-and-Semantics.md",
+      "sha256": "ef63c077761bb0d4dd9e172b5baeb2db05700a4580c23792428c0228a1b0b628",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/int1-625/Commercial-Review.md",
+      "sha256": "4ab23d1d11820adc33a8a14c6c77aaac448984bff81dc67e554b53735b716a60",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/int1-625/Source-Admission.md",
+      "sha256": "4770d06a427392c4a827409165447a102174b6e2949f824ddc12e30f8ed9b645",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/int1-625/Validation-and-Rollback.md",
+      "sha256": "ba6e4b1475cf90b6efd1601561fc7349cb182ab372fd624007578362e4237bd1",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/int1-625/previews/Browser-Checks.json",
+      "sha256": "f40f3a59f0a73632e76a6d84d144641636a740ea6c18ee0d6c33f370d1831f16",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/int1-625/previews/Performance.json",
+      "sha256": "2cce4908adddb208cab4e677b9690336b5d60643610e19e938c71feb98de958b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/integration-578/Technology-Browser-Checks.json",
+      "sha256": "1bd10d431a4256d8fcf0d8b899ef3ec044f27a86e69bbb8e24ed38ea797c8861",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/intelligence-depth-v1/Coverage-and-Provenance.json",
+      "sha256": "3305f4baa48492017d904a5b13330dd4a5aceb1f5a977fb12bec5563c11835f9",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/intelligence-depth-v1/README.md",
+      "sha256": "c2f3bce8aacd105375260ebccbfb05b47112733823e50afe675c5b9f20d1e69c",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/intelligence-depth-v1/Validation-and-Reuse.md",
+      "sha256": "8bb6a0bcb3077fc3f928b1510cbe56091947df95149701ace07f9b341ea67621",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/isp1-623/Inspection-Fixture-Reconciliation.md",
+      "sha256": "7c25be1c544559005225a7766324b2d5212a2dbe62d6bddde6e20cc8a7c19950",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/isp1-623/Preserved-Owners-and-Artwork.json",
+      "sha256": "3368bc8b94a2e14d5a5c96793098175447c8290493418e02bb97bee90c7f5c56",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
       "path": "docs/flora-runtime/lei-1/README.md",
       "sha256": "fb758768b06586d6bce1542298074360225a6f6b8031a66224944e22e0932255",
       "authority": "Existing package; document presence does not prove canonical or public acceptance"
@@ -2990,6 +3617,166 @@
       "authority": "Existing package; document presence does not prove canonical or public acceptance"
     },
     {
+      "path": "docs/flora-runtime/living-enterprise-preview/Deployment.md",
+      "sha256": "a0f44b0e67be4ed0930c0361583461e5a83c12a1d33c1517f54ecc8cdbf3edb4",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/living-enterprise-preview/Implementation.md",
+      "sha256": "ed2a9e92836eeb7974c709226b944d437349c4b00c9a1978f878cc5b243536f4",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/living-enterprise-preview/Integrity-Proof.json",
+      "sha256": "820e49febabd46970a3d7d5b1b2db1e59cb1e99640d4e41bcc1c0b59e7f38703",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/living-enterprise-preview/README.md",
+      "sha256": "b088395aa15d7e852a85bfc8c7f957f3d33abbe8b0c1af9ef9206bcc6b0a135b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/living-enterprise-preview/Validation.md",
+      "sha256": "7d1b1a5a60a3e9721242444dae69c65b3a89862fe33b615acbdddd8673accdb5",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/living-enterprise-preview/previews/Browser-after.json",
+      "sha256": "afa7f449f3105335d71552acc61712d86e726abda8cf6a6c1c70b2c1ef35cae3",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/living-enterprise-preview/previews/Browser-before.json",
+      "sha256": "fdc768113f6c78683f40a1563bba7f7ce7ac9595d2ec3ab7e96d7b35f0bc26d0",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lloyds-flagship/Payments-Research-Proposal.json",
+      "sha256": "f00846430e42cd9ca71d237de5179192ca4473a0a2787d299cbcc6d9fecd2ffd",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lloyds-flagship/Payments-Source.json",
+      "sha256": "9e7ba94e3f3b0750e6716da7e64cecad42ac4bb59692041d44e0a574e8f34af2",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lloyds-flagship/README.md",
+      "sha256": "5357d9df676f01a5397b46a1e524bd8cb4d02cbf9251ee5d7c2a8b8625c943f7",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lloyds-twin-visual/README.md",
+      "sha256": "84b59f9fe6f89a7c10a12e05d7936cc58c0d15c60dedf1beb029f5a36195fa11",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lvir-1/README.md",
+      "sha256": "d64a189cc974d34ac227da74d415a1e208e8e5adcca9e0c4cf35284a422e9e92",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lvir-1/lvir-2/README.md",
+      "sha256": "0f168918640bfbe1f29e43e4b0dcac36f60a92e2a147d339bd208d46e4dbfedf",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lvir-1/lvir-2/browser-results.json",
+      "sha256": "9562928ec7fd018742173d55c21fb2fea61337d4f9b80a7b95a4e0914514bf62",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lvir-1/owner-review/README.md",
+      "sha256": "73f06907f85d75d0fe6c5e15f2004b3fae14eb18b880ec2e4fb5da382dc3ace9",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/lvir-1/owner-review/browser-results.json",
+      "sha256": "28a5ffebfb4e9e130193c8e628a1b1f817c56570af242288795ed127dcfa8a81",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/macro-enterprise-v2/Capture-Adapter-Proposal.json",
+      "sha256": "c3cf9901487a00f328d9aa981511e42fbd789c3d122801c18320304a1dab69e9",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/macro-enterprise-v2/Decision-and-Edge-Manifest.json",
+      "sha256": "18fdefb5500e66b4dc1561ec8489446a36a2e06db269ccda5801c92f135ddfb2",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/macro-enterprise-v2/Gallery.md",
+      "sha256": "a839ea1b6667d80492f1f509ff4964727c2357abb31477dc2be025cbc0abff8a",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/macro-enterprise-v2/README.md",
+      "sha256": "43ea3f3b467f2fa179d9f3d4be5d0ab5f8a1d23ae19e3cf19f891d90ff14c54d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/macro-enterprise-v2/Source-Audit.md",
+      "sha256": "38ef2705a99735db121793098e572693d1a3e70ac2165206c382a515939c7789",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/macro-enterprise-v2/previews/existing-browser-results.json",
+      "sha256": "7f3d540e40b7aec31de0bb8939a45c30075e2d238ba8dab98e7d71cf1d9d1dec",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/multi-industry-integration/README.md",
+      "sha256": "ad2cb0a40a187e68c5f020e14a6ad40f0488f49ab7d771ad6f97673da51846be",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/offer-library-587/Architecture.md",
+      "sha256": "48f8746dcb585c3d3c67204b65bf8fb2f3dd9881fec90fd127bdc3b8e6cfd816",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/offer-library-587/Coverage.md",
+      "sha256": "6b2cb71236468681d6cd66b93896783a309483b006a8948d6b7ad5d2a9a99b9b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/offer-library-587/README.md",
+      "sha256": "7ddf8feb53ad1a75e13d9b2676292abb85a598cf2f846c0b08b3d155a51d684c",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/offer-library-587/strategic-priorities/README.md",
+      "sha256": "0c97051df9c78c308d56486ca83ea5423f3e76c0dc7bb7dfefc1db3218c07543",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/offer-library-587/strategic-priorities/previews/Sample-Matches.json",
+      "sha256": "8bd7c51565c9b969b504f0cbc082c9ffecf69fe8b4d676779c2d59bb54f45fc9",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/offers-v1-576/Acceptance-Walkthrough.md",
+      "sha256": "ad304e910b3a61d434d3654a08ab5d18490c26b207a4202a96c363140ca5e136",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/offers-v1-576/Validation.md",
+      "sha256": "274b2c9d4878a2e1f4e5a1b448da2f3c60273e10fa65e8e58193fdf2f9c7e5e4",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/offers-v1-576/previews/Browser-Checks.json",
+      "sha256": "301ad7212394de3c64d2078950dfc6ec9773b774dce32cda68e46d8b387aae35",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/opportunity-pipeline/Implementation.md",
+      "sha256": "0783c660896346bae90466b1a7315885d9405aae923dfb7d25f274a0c27bfcd6",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
       "path": "docs/flora-runtime/public-facts-policy/README.md",
       "sha256": "833224028abe74b59a24950e80e9034e528e82df6eea153cc7d00f496b2c1ae8",
       "authority": "Existing package; document presence does not prove canonical or public acceptance"
@@ -3005,9 +3792,529 @@
       "authority": "Existing package; document presence does not prove canonical or public acceptance"
     },
     {
+      "path": "docs/flora-runtime/public-financial-intelligence/Owner-Evolution.json",
+      "sha256": "f027ce2e7e0e62ed2069719ebedc80f46f7202cf4caef0d2f9c41b420c1a7d88",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/public-financial-intelligence/README.md",
+      "sha256": "eb995ec301e60705a47bd66019d2fe31b14baf4a8e7d137166fde9f36fb2d98d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/public-financial-intelligence/Source-Addition.json",
+      "sha256": "f61706f774182dfae3ed368a7f3f23ce2465ffcf3df83ec5282b9ed32f18cabf",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w2-685/Continuing-Waves.json",
+      "sha256": "308ccd915a58fd9438535b121e0d201b0a7443dbab33df40d01b1a7b2a1a8dbd",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w2-685/Experience-Readiness-Handoff.json",
+      "sha256": "0f7cfcc34a2811e3647ce022f249be10b8fa40040512e8ee73fdfb77d51f6daa",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w2-685/Ownership-and-Readiness.md",
+      "sha256": "dc20541a7f2fa381e707b54a6bee85cbe5e640bd24ada381e4da0d63e849a06d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w2-685/Wave-4-Provider-Worklist.json",
+      "sha256": "cbfac21973c725efb6f2e33680035cb0eb84154c7b6f83ee739406c1950b98ea",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/Banking-Ecosystem-Map.md",
+      "sha256": "244341fd05ffce32ff78007b31d157d9ce2a3136bb385c25500031c8b7a5d625",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/Banking-Portfolio-Crosswalk.json",
+      "sha256": "998ed280376b3ae9ae5eb924d28271b5fabea722354af6963f1bc1e490d104a9",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/Claims.json",
+      "sha256": "aacee1130d958d0960f4bb24814c42070c53e84bf364a6d1ffa24804285c3476",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/Commercial-Quality.md",
+      "sha256": "3ec9d138deb656c422f12d32defeb29c5e8b9b67ff29ca69ddf18e51aba223a4",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/Continuing-Waves.json",
+      "sha256": "5e0248053ff071b4bdc612e0c8f63230a14834ebee037e29fe29b69f94930c7d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/Contradictions-and-Gaps.json",
+      "sha256": "ca2e33d1f23675de7beaf440ec94ec7883a436af331cd66e3f785a8a0b52cb55",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/Dossier-Index.md",
+      "sha256": "adbdc1abfbc6154a7bf54f5c52beba1ba171ba1ab91ed1a94deac9785587d641",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/Enterprise-Dossiers.json",
+      "sha256": "e0289d960f39106f0824a8339f686d60b553994dc5c086fbe789ed0f40df7d87",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/Existing-Cohort-Reconciliation.json",
+      "sha256": "bd804277fb0d3d28da70f4f1dc56fbb5e2fb374d99377249afc4fbd35d9d320c",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/Experience-Readiness-Handoff.json",
+      "sha256": "c3d638564857abb96f8ef04a4924575fc92f9fc96346d4839af142e1de593dde",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/Information-Requirements-and-Readiness.json",
+      "sha256": "bc6724459c0575ef2454a6c898b8df71c89a845a6bb4c7af5b193263d387df1e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/README.md",
+      "sha256": "aa6e1d64bf43d1b799f24c307f86d599d89a596d016994b2195fb2fade59da70",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/Sources.json",
+      "sha256": "cdd602873b6129fb58b0f54803de816bdb3f62c461bb43cb6d439314b2dffd3f",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/Typed-Relationships.json",
+      "sha256": "1646ec3768a6c2b167c13cf137b4791916eacc8911a785dcbac1114a2329d293",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/google.md",
+      "sha256": "b266ddf4563784e91276db4e750e914bfbbd5113ae3fd6304ce1364a8b2f0e22",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
       "path": "docs/flora-runtime/research-enrich-all-w3-689/dossiers/lloyds.md",
       "sha256": "4683f719e35236d12c23fa1267de0d3ca93b81ee3d59445e78d79a2679a8e52d",
       "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-intelligence-v2/README.md",
+      "sha256": "2874936bb1546799d7ad65e007c3d19431930eaa15347e69c65ccaa6283d63a9",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-intelligence-v2/lloyds-assessment.json",
+      "sha256": "d691391ef11146f8aa78ecb90149b18c9da759b9d1b0082f12356915504f6b4e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-intelligence-v2/lloyds-commission.md",
+      "sha256": "06cdd47e8afe3792975c1f5190f758ba2f23582389d55d7a931f3df02279c6c8",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-intelligence-v2/lloyds-mission.json",
+      "sha256": "601044c9216396812e8db14329765da87eb78ac5047f24a0c1e2ce9bfd78dbd6",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-intelligence-v3/README.md",
+      "sha256": "5b82c3112bd4fe9bae87479d40a36925203a62a13ffe28fdf38659691460be2b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-intelligence-v3/lloyds-before-after.md",
+      "sha256": "199ed2e3bb2dbc6562e2b8a489875d3bf62d52d0f245cfdd737718f7f480d5d3",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-intelligence/Lloyds-Commercial-Shortlist.md",
+      "sha256": "4d0fa83c188c4e7a1db455437ccc7fd258428180c4d425f7c6169e88c193cf5d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-intelligence/Primary-Enrichment.md",
+      "sha256": "da18989d9773d478806ae1371890ba39ab47d2cd97895147368ba9a8f0c42f36",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-intelligence/Research-Method.md",
+      "sha256": "74de5143d51d2d3f0a87193724d49daf71f070b70cdc9b4e868f86e688bcf6b0",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/research-intelligence/Source-Import-Metadata.example.json",
+      "sha256": "54903b13b792e7d5811720ea2a27aa5fc25e2d497f393395a026e6fec3f58243",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/rud1-648/README.md",
+      "sha256": "3cd85ac61ce8f25d9e7e1d9367037ec03cbfd586dda05b876f068994fb9f393c",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/security-repair-01a/Public-Route-Classification-Matrix.md",
+      "sha256": "c4321bdd6d2d209357d075b4172ecb54bc8688923a18f8804f719f9b8a0efd2d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/security-repair-01a/Regression-Comparison.json",
+      "sha256": "0b7ebe8f6ef82b254dd01a2c8fd6d55e9b97359ad6bcf82257e23496a14eb827",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/security-repair-01a/Review-Closure-Regression-Comparison.json",
+      "sha256": "c62266a0db9586dac9cda993013e4f6c2e9cec4ba9a1492e0c901f56d75a2e5d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/security-repair-01b/01D-Final-Acceptance-Evidence.json",
+      "sha256": "f32b5e0cd96302534b2e3ae966e9caf96b2b197ac5e62eec84e781e5c57ba6a9",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/security-repair-01b/01E-Bounded-Remediation-Evidence.json",
+      "sha256": "f463b3559d620885da6661106647690663ebb817c8ffa893b10a630fe4cdad8e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/seller-development-598/README.md",
+      "sha256": "93e8efdfe25e5fd1d9caf5ccbfa9917cbdd3b5ea431bd574548b5860c8b24537",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/seller-development-598/previews/Assessment-Matrix.json",
+      "sha256": "bd39c632bc3963d9423609b4a301ff4265639614774f6c0a5dcfad3ec5575c31",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/seller-development-598/previews/Development-Pilots.json",
+      "sha256": "3fd2de66614c1938570b0dc62c52da654798e27bbc1cf33c1398d54f37f08730",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/technology-alignment-t1/README.md",
+      "sha256": "8f1f87e8945dd4af7c0f1a830e2b54b1222ef6f342ad501758921c12cdf43a6f",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/technology-owner-journey/Existing-View-Comparison.json",
+      "sha256": "6e0b55a51d5de464f413bec7f393a565f657ff2e5b3a864e9d6f6449853852a4",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/Candidate-Handoff.json",
+      "sha256": "61c4012b5b60fc8219ad7dd8910d455faa11c604e163e83f3117d17d97f2945a",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/Coverage-and-Reconciliation.json",
+      "sha256": "b0ef6fcc9f8a33f773d8da11be8e222a0b45b1d8e3fb876187b65f9ded0c2b2e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/Foundation.json",
+      "sha256": "1f332a13026e83d677d3897fcec9bd29c259546b070b9cea23b6b8dcd83c05b5",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/README.md",
+      "sha256": "8bf2208cae55a6ec33543a3d9ab1bda01b85935464fe1eb36380a23025066df8",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/Research-Page.json",
+      "sha256": "e7f0bad8a7451cbb10f65a84b786c8ba4c1b5d634540fd02b660d46c57285b11",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/Validation.md",
+      "sha256": "df994004d5ba6cfe0165dd1acb22fab7b2e4a7d2fafd4bcf43836bd1007a7f3e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-foundation/previews/Browser-Results.json",
+      "sha256": "9cd65bc1ff99b49633eb912db4dd39bf2c385c995758f4dcb2c7558acf204f84",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-world-v1/Existing-View-Comparison.json",
+      "sha256": "2041cf2eb3e43264d862a781c65d022a84f29b147290f1e606027604be8f80c7",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-world-v1/README.md",
+      "sha256": "57850f3de78c95091b35253153654a2f47b34703591844e7093192766eb0180e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-world-v1/Validation.md",
+      "sha256": "f4f3c25a840018021e8ef8a5e49934711b14687706f8691ac57d9a155ee2996e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/technology-visual-world-v1/previews/Browser-Results.json",
+      "sha256": "c06bcbe0dba60637ce1aac7589fa64568b5714fdaebc90a0d11d69ca214cac5a",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/unified-experience/README.md",
+      "sha256": "67118cabd276da0deb2813a94644ec3725990e061f6496347bff1d5eb0935fa5",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/unified-integration-v1/Approved-Research-Inventory.json",
+      "sha256": "65b396e2c80421ef78ad88d96c01edc5d8538c097809d86ad4054972f329b347",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/unified-integration-v1/Architecture-and-Reuse.md",
+      "sha256": "8d9b2e9052216cb2b25dd0d328010e792fe2f4e5905becdaec0d59abcd425ce9",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/unified-integration-v1/Gallery.md",
+      "sha256": "9a0656e14a6e3ebcf8363986d9928e1fc26babb089fbb6fa606f75de26d9730e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/unified-integration-v1/README.md",
+      "sha256": "a5338baebbe0d7130c632e2834694f5c25a3509b8b96642bdc4eab39df6ecca4",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/unified-integration-v1/Test-Identity-Reconciliation.json",
+      "sha256": "f5568ad5816955e5e91bfdb2cee7b24b67006e8d9c504c313a2062a1fd39c7f8",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/ux-refinement-573/Parity-Audit.md",
+      "sha256": "9942f7503fd84a4d697062bd878d7b171f48cf870812c7bd92031621e0b95441",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/ux-refinement-573/README.md",
+      "sha256": "a88b33e206656c293c9ffe27b2726cea5dec1c2360a5fd0cdebee79ad7ef52c5",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/ux-refinement-573/previews/Browser-Results.json",
+      "sha256": "1bd10d431a4256d8fcf0d8b899ef3ec044f27a86e69bbb8e24ed38ea797c8861",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/ux-unify-670/Lineage.md",
+      "sha256": "632b5c1f1fcabb2984542ee718d7c21b452eb7f06fb7c3dcda904c59fee54616",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/ux-unify-670/README.md",
+      "sha256": "496464591cabe99e241bbb002ef94a7ee8c60fec3d444ba2250dc6c3fd72d54b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/ux-unify-670/Review-Refinement.md",
+      "sha256": "9c116493a2c332e4dd3c1e434a7d88aa6860d05652fa5794007238bf19150d1c",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/uxr1-650/Acceptance-and-Critique.md",
+      "sha256": "0e2187c109328311023ac37c9488c876300d064d2657e3f53ffd6fe38d05acf5",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/uxr1-650/README.md",
+      "sha256": "5f88ea15f2b36408959d8e700d92984f3dc00eab39c2753c805c949dd77519ab",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/uxr1-650/Source-and-Boundaries.md",
+      "sha256": "376351bc52dea1eaa095e901f448255071fee657b1172886d80f31d822125eaa",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vex1-612/Accepted-Artwork.json",
+      "sha256": "2e31938a3d8cbd472bbca0ca8a3498ef6d205dc410c7b6bb00f6d2306ff1462d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vex1-612/Architecture-and-Provenance.md",
+      "sha256": "8c1ca5df80b09391b76924d0d2939c953139b83037fd395e85e5dc41af896a36",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vex1-612/Boundary-Checks.json",
+      "sha256": "2370d27a90b029a57aae2f7843ed1d174c72aaeb06d1bf5f91ba852aa066bb56",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vex1-612/README.md",
+      "sha256": "210df5ceef031056612665d497d62e4908e39e7912d3fa8ee7d567be58eecce4",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vex1-612/previews/Browser-Checks.json",
+      "sha256": "3e455e05445a2d9a2cab2286c129dc64d0e5a968b6c262118b98f19e71139702",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vex1-612/previews/Performance.json",
+      "sha256": "03b90c578370438b0eef31b5e60bb0aa384a159a2ff76f0aa90496ef09c1d6fc",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/visual-intelligence-v1/Browser-Checks.json",
+      "sha256": "7f7f17592f0d1e0de9d988512ecfff180faf9ebf21b2ce1c721f8718fe2f1d03",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/visual-intelligence-v1/Comprehension-Evaluation.md",
+      "sha256": "1abec0746e397007877b438cf3509a8248e29146eb032c56f38d61f8ddb85578",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/visual-intelligence-v1/Design-and-Reuse.md",
+      "sha256": "7ff080ec0c7e5e433c8649aa077fb31b7c91b0b0726573a5bbe44b21488cb8e0",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/visual-intelligence-v1/README.md",
+      "sha256": "438f35cbaf5a2cac6c5e47b451efa3296a59e8a1cfa31251bef4e86747be9746",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/visual-intelligence-v2/README.md",
+      "sha256": "d172ebd219507cc89535bd35fb4c938b9060e16b1222d81ff5e10fefdd9f0a18",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/visual-intelligence-v3-1/README.md",
+      "sha256": "b8416dbc5d19ba7d8fe442c59bceb171452eaf80cb91e852d718cd5d138e70d4",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/visual-intelligence-v3-1/Validation.md",
+      "sha256": "f0eb30709ff37011660432d16f29762a62395bab93677be5639e4629c902f833",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/visual-intelligence-v3/Architecture-and-Reuse.md",
+      "sha256": "e2396489cd50b2c9c3e8f743926f897971a6960ed83af5485930e62fdf5035f1",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/visual-intelligence-v3/Browser-Checks.json",
+      "sha256": "6b830a4ef0a457780bb21913065b1ae60be060d334b58ebac449e5b29a0bc1f0",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/visual-intelligence-v3/Comprehension-Evaluation.md",
+      "sha256": "b4e05a7a87c5349ddeecbf0ce0d02cbc5cbfe4a50ad230181dfee8a489582ca3",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/visual-intelligence-v3/Print-Checks.json",
+      "sha256": "d40826d55dac26b760b67dba3234dcf87ae8c4ec6a8718e3527b7ba9c01ec87d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/visual-intelligence-v3/README.md",
+      "sha256": "7430e49f959a00a7ace0de7ae918a805873450cf3cfb98afa13c61990d9cb7d8",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/visual-v2-583/Protected-Owners.json",
+      "sha256": "be6c8f597f1c26188914b236f374bfc31304ba0a7676fd3218535ef141dcdb99",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vp2-632/Acceptance-Walkthrough.md",
+      "sha256": "7f876726455eaf6e3081aadbf3adbe1e45221e11b5947d72bbd974cc7a361bbf",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vp2-632/Accepted-Asset-Import.json",
+      "sha256": "ea0a2670260ad0739d47b09f39f9fc49b6c5efe616366254b080e5ff184c325b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vp2-632/Architecture-and-Preflight.md",
+      "sha256": "efbd8b72fa9f977a53eeb8efa5c43032f653b6f2e2fbc9566c40b8e379ef6961",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vp2-632/Independent-Critique.md",
+      "sha256": "b4fa3b4c063c70b1f26e6d1ec327ece6b0a1ab06e6f822ec7ac21f3e3396ea4e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vp2-632/README.md",
+      "sha256": "a63a0843645eee96141becd80e105208121e5d58ea27ef84cc908bf456629985",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vp2-632/Retained-Destinations.json",
+      "sha256": "7c781a39bc50edeb66ccb8b6da8665716cc70a9f6021b99ec3430e57a05eccaa",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vp2-632/Validation-and-Rollback.md",
+      "sha256": "5bb883cbeff76803507cd8b32ea96b4bb2cb2cbe7c2ed457581842e5e67813c1",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vp2-632/previews/Browser-Checks.json",
+      "sha256": "878376d014c954f5f649006cc6148ac3f8b8316d3f27f499037f81e2125ddc35",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/vp2-632/previews/Performance.json",
+      "sha256": "bc3b2bf1dc7815f27acb6b596a98f61c45f04bf4687a486655193d952feaa818",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "docs/flora-runtime/wp-011/Flora-Runtime-Capability-Baseline.md",
+      "sha256": "80ab1083095b4a629213751b0f0a6a6d58e676336c31b386d96843b919e709e2",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/REGISTER.md",
+      "sha256": "810ef6c9187a905aafd5511e72ffcb6c23e25ef21239ba666f0c95a229411535",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+      "sha256": "4b11b4458ca1689aae680336bb55bdb623ae9e1cb2b06dfc7044b9cb77064221",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/comparisons/Banking-Mechanism-Differential-Matrix.md",
+      "sha256": "4e0c99a56ffc01d0ed3c612e7b2fe8bd84db925d8e9c77ca2e4fb2a8704242db",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md",
+      "sha256": "02e885bff2ff6a24a028dd6db1899bddceb6a81887041b20a513fb92aa2e0946",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/README.md",
+      "sha256": "087b9599f7619bba836bd4da4b5c704e605b160422351c484ee5657ea005edf6",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/barclays/Barclays-Enterprise-Twin.md",
+      "sha256": "a991d67ee4409a314f0eb34ce6dc6411882c9ae8440bc253562a31876615c50e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
     },
     {
       "path": "enterprise-knowledge/banking/enterprises/lloyds/.gitkeep",
@@ -3023,6 +4330,151 @@
       "path": "enterprise-knowledge/banking/enterprises/lloyds/README.md",
       "sha256": "ee8f3ba49083bcfb2744431d657a08e3612da58ffacc25fb762ee8efb0477a0c",
       "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/monzo/Monzo-Enterprise-Twin.md",
+      "sha256": "16b780788634b8b9a95ff686fd0259832dc9b72785a2c89683ff27b9f2c6bce9",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md",
+      "sha256": "f6cb57afd526a13a761842eb774fc4b7dd551a3cc2b1d7a66f7ee8bd74067a66",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/enterprises/natwest/NatWest-Enterprise-Twin.md",
+      "sha256": "59c02cd59be8431159d574e277eb32322b3f9b3b99aa6ab4cccf449e2aa4c2e0",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/Banking-Knowledge-Manifest.json",
+      "sha256": "39e245b4c9311af53ac9e1ca5dc22a08a933bd78566a557cfaa65dcd29d7b3e7",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/Banking-Strategic-Sales-Navigation-Specification.md",
+      "sha256": "f75dd8977afcff07760463d870c51193a5822239c099db1be08503c3f4dd44a7",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Content-Understanding-Evaluation.md",
+      "sha256": "6f423ae4fbe4d9ec634243c0ce87422cec27bf87c5b3f10a5e5768a9245a6d9e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Failure-Analysis.md",
+      "sha256": "726eb99b0d7ee0e1be36df1e822e0bd67f60f21d9fb27997010663d7ce794459",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Increment-2-Readiness-Decision.md",
+      "sha256": "5a183ed231a18446884766595f6acf06441234e3587ad545b0a9ebc56936117c",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Lloyds-Semantic-Evaluation-Dataset.json",
+      "sha256": "ae8d39ef54588ec5540f465625916e40582bda25ec533a0b6c49a07949d50e53",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-A-Outputs.md",
+      "sha256": "ecc8931c302f483647929c8648ca8e4de4672c19c76e65f11d3b6d784a2e3edf",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-B-Outputs.md",
+      "sha256": "22012ca540c37cd4fd2c356baf016b388fad047cb5f2a42ac669c8bdd22b2361",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-C-Outputs.md",
+      "sha256": "a6e8f9b5f94917c9a682675d239348b453d8d8cf7124e625d1cf05d7c8432d0e",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Mode-Comparison.md",
+      "sha256": "aca908feb6569cdf5859047409254c63adfbfc25b3eac8d7f05c9ece35670a0f",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/README.md",
+      "sha256": "f03f03e3fa04d5ed328783a5114ee6bfd243feb1e7617f8796a15e0e77b282e3",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Reviewer-1-Scorecard.md",
+      "sha256": "5038617e39915f4b15961ec45bbb09f83e4bf3b61841c6358c4cc7c98cbc6527",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/flora/semantic-evaluation/Reviewer-2-Scorecard.md",
+      "sha256": "f45fbecc63b824eaaa57ba57433a92913da714e6e38bbb4c3e15e0431f79954b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/governance-reports/Banking-Strategic-Sales-Navigation-Validation-Report.md",
+      "sha256": "4de9ce06014fd1c62836641a9d1cd3af14cd0e4801e758cd63e733589c30fc84",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/governance-reports/File-Conversion-Report.md",
+      "sha256": "83118ccff1016a50d6da3b0f57efcb8c57fc97316d3e64fff5b6c76da1ddbf7a",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+      "sha256": "52f7020634b87f444a561758588892ebfaa8e9784948f3b8df7aa888bbf2aae4",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/industry/Banking-Industry-Twin.md",
+      "sha256": "e8ecc5ca0fc9fecdc46a34a20aac6f16bfba3dbe31b2cbf1fc0594b0755573cf",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+      "sha256": "105c9193d80001f846d93bc2df3ddc7f0a5e3b5e6dbb0371534f059e56c3dc8c",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/provider-offer-twin/banking-provider-offer-twin.json",
+      "sha256": "697ccc9e99d4405a6adabd7cfdcb390ccaaa469b4d00d1f1e372f2d044afe8ab",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/provider-offer-twin/commercial-accessibility-seed.json",
+      "sha256": "98b90bd151b0bd065353e8affb3d2cc56c1fc6ee524c5989c0895c68b80bf784",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/provider-offer-twin/commercial-conviction-seed.json",
+      "sha256": "58bd7099d8ada4358678df13b10b218907cfbf2e80094677130c61088afe704d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/provider-offer-twin/provider-fit-assessment-seed.json",
+      "sha256": "8f8a0871eb94c25d15b542b792d90eecd6f741f50cb651c95aebdb836db10210",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md",
+      "sha256": "cba9c89746267d05b5192f0c0567f5a2e8ad9cc5e5d89e775487f9986f80043b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/reinvention/Completion-Report.md",
+      "sha256": "173f1a16f3d0d28d2b20d7b5bad8049ff23eddeb2a0c7e6de2131d7e8b5dce20",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-migration/cross-release-analysis.json",
+      "sha256": "9fb4f8ac578ee3ac97b4f9193607214ac6668e7ddec1c2318494f4475370c2a7",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-migration/migration-review-items.json",
+      "sha256": "70919a7194117b46a5bddc13e7ec2dd375dc4dc26d382fdd34099d8f1d3a7242",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
     },
     {
       "path": "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
@@ -3048,6 +4500,76 @@
       "path": "enterprise-knowledge/banking/research-model/Visual-Profile.json",
       "sha256": "af2d96c39a0d35e07fd800e2e64a31084ab63139ae7ff704f771e60416717424",
       "authority": "Existing package; document presence does not prove canonical or public acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json",
+      "sha256": "5a2a0ed623d7d3fbde1e57f10c76abbf7761d8905692ccaec4d5cd8448a90e0a",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-WALLET.txt",
+      "sha256": "445b237cbdc111bb790301632d4eb388d960d052f7b9ac367e08e787f7f1f9a7",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-FCA-Service-Candidate.json",
+      "sha256": "953d7e15fae078295ca21bf6fd4d874ad142f3b813656ba474be789ee670ef9b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/EAI1-FCA-Service.txt",
+      "sha256": "015a657f4f7cc232037879c652a8cbb3da91865ede073dfb6186de54f278773d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/INT1-FCA-Candidate.json",
+      "sha256": "511b5f5225fa6fc005ebdc5484aad75539c1f9e64df8201591a5c628aedec63b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PFI-Lloyds-Q326.json",
+      "sha256": "d5d6c29d840502101991c166428af18e7a4b77b19b016f9bfe9707130a809775",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-FCA-COMPLAINTS-H126.txt",
+      "sha256": "b1ca214f97c51e0375d054a879d2e01f71c34697bdf26f040953c7a91d98905b",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-BRAND26.txt",
+      "sha256": "d2a4fff2a18bf79db215f85c79c9644a91b1bc7e1f5775f40b8ad2ecdf6a4158",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-SOURCING.txt",
+      "sha256": "2fd01db38ebc4d68e5a71b2c3181a01455a652435d0eb6dd4cdfa4fb23ef1daa",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/Entity-Traces-v2.json",
+      "sha256": "4aa9d1f7f790234d6e6460b3121f3bf2601d6a3b5e5bc2ebd19f945e7ed3908d",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/Macro-Context-v1.json",
+      "sha256": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/MT-UK-BANK.txt",
+      "sha256": "ee3c98c12a2720a105f40024f286c8682da281124e1be83d3f701e8099f8d2bf",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/macro/research-model/source-snapshots/MT-UK-REGISTER.txt",
+      "sha256": "142d2af85272450cce076f3f0017c04c273f1a6c4296b06bd376e5fb53c1848a",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
+    },
+    {
+      "path": "enterprise-knowledge/technology/research-model/Buying-Trigger-Pilot.json",
+      "sha256": "2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927",
+      "authority": "Retained Lloyds reference; not a unique fact, source grant or canonical acceptance"
     }
   ],
   "original_images": [

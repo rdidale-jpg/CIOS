@@ -233,3 +233,55 @@ def test_every_counted_eligible_claim_has_substantive_non_source_main_output():
                 found.update(re.findall('data-claim-id="([^"]+)"',body))
     # Scale figures use the existing amount component; they are checked above.
     assert set(gold.LLOYDS_IDS)-set(gold.recovery.MEASURES)<=found
+
+
+def test_other_existing_owners_supply_scoped_service_outcomes_and_stock_recipe():
+    from cios.applications.flora import leadership_agenda
+    service=main(gold.render({'stream':['inside'],'focus':['operations'],'detail':['service']}))
+    assert service.count('data-owner-item=')==3
+    assert 'Lloyds Bank PLC' in service and 'not consolidated Group or Retail' in service
+    assert all(value in service for value in ('118,762','118,861','66.12'))
+    assert 'Open Government Licence' in service and 'different cohorts' in service
+    economics=main(gold.render({'focus':['economics']}))
+    assert 'data-owner-item="funding-stock-change"' in economics
+    assert '£6.3bn' in economics and 'data-semantic-type="calculated"' in economics
+    assert 'not adjusted for consolidation' in economics
+    issue=next(row for row in leadership_agenda.agenda('lloyds',data()) if row.key=='funding-base')
+    assert issue.facts[-1].method=='502.8 − 496.5 = 6.3 GBP billion; arithmetic comparison of the published stocks.'
+
+
+@pytest.mark.parametrize('release',['base','service'])
+def test_fca_source_withdrawal_removes_dependent_service_outputs_only(monkeypatch,release):
+    import json
+    from cios.applications.flora import leadership_agenda as a
+    target=a.CANDIDATE if release=='base' else a.model.REPO/'enterprise-knowledge/banking/research-model/source-snapshots/EAI1-FCA-Service-Candidate.json'
+    read=Path.read_text
+    def withdraw(path,*args,**kw):
+        text=read(path,*args,**kw)
+        if path==target:
+            package=json.loads(text);package['source']['withdrawn']=True
+            return json.dumps(package)
+        return text
+    monkeypatch.setattr(Path,'read_text',withdraw)
+    html=main(gold.render({'stream':['inside'],'focus':['operations'],'detail':['service']}))
+    if release=='base':
+        assert '118,762' not in html and 'data-owner-item=' not in html
+    else:
+        assert '118,762' in html and '118,861' not in html and '66.12' not in html
+    assert '£502.8bn' in gold.render({})
+
+
+def test_stock_withdrawal_removes_existing_calculated_result(monkeypatch):
+    d=data();next(s for s in d['sources'] if s['id']=='PR-LBG-AR25')['withdrawn']=True
+    monkeypatch.setattr(v,'current_data',lambda ctx:d)
+    html=gold.render({'focus':['economics']})
+    assert '£6.3bn' not in html and 'funding-stock-change' not in html
+    assert '£502.8bn' in html
+
+
+def test_deep_link_serialisation_and_parent_navigation_do_not_lose_or_trap_detail():
+    from urllib.parse import urlsplit,parse_qs
+    state=gold.State('inside','operations','operations','service')
+    assert gold.resolve(parse_qs(urlsplit(gold.href(state)).query,keep_blank_values=True))==state
+    assert 'detail=&amp;' not in gold.link(state,'Back')
+    assert 'detail=#visual-content' in gold.link(state,'Back')
