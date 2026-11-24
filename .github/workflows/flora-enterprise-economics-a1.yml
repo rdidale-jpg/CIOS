@@ -9,6 +9,7 @@ on:
       - 'tools/ci/flora_enterprise_economics_preview.cjs'
       - 'docs/flora-runtime/enterprise-economics-a1/**'
       - 'docs/flora-runtime/accepted-ux-recovery/**'
+      - 'docs/flora-runtime/living-enterprise-preview/**'
       - '.github/workflows/flora-enterprise-economics-a1.yml'
 permissions:
   contents: read
@@ -33,6 +34,8 @@ jobs:
         run: python -m pytest tests/test_flora_accepted_ux_recovery.py tests/test_flora_ux_unify_670.py tests/test_flora_banking_cohort_691.py tests/test_flora_uxr1_650.py tests/test_flora_lloyds_flagship.py tests/test_flora_technology_alignment.py tests/test_flora_eei3.py tests/test_flora_eei2b.py tests/test_flora_eei2a.py tests/test_flora_enterprise_economics_a1.py tests/test_flora_experience_684.py tests/test_flora_public_financial.py tests/test_flora_et_integrate_672.py tests/test_flora_f1_642.py tests/test_flora_f2_644.py tests/test_flora_f3_646.py tests/test_flora_rud1_648.py tests/test_flora_auth2_655.py tests/test_flora_visual_panels_632.py -q
       - name: All strict security tests
         run: python -m pytest tests/test_flora_security*.py -q
+      - name: Optional Living Enterprise preview and fail-closed public source boundaries
+        run: python -m pytest tests/test_flora_living_enterprise_preview.py -q
       - name: Verify the A1 historical cut and its reverse-tree rollback
         run: |
           # The A1 exact-cut audit includes source paths that later PRs may
@@ -55,6 +58,13 @@ jobs:
         run: |
           python tools/research/enterprise_economics_preview.py --output "$RUNNER_TEMP/economics-browser"
           python docs/flora-runtime/accepted-ux-recovery/browser.py "$RUNNER_TEMP/economics-browser" after
+      - name: Optional preview, unchanged default and withdrawal through actual browser history
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/living-preview-baseline" 97d316c640c96d99c2301819f8aac00b3b9c1398
+          cd "$RUNNER_TEMP/living-preview-baseline"
+          python "$GITHUB_WORKSPACE/docs/flora-runtime/living-enterprise-preview/browser.py" "$RUNNER_TEMP/living-preview-browser" before
+          cd "$GITHUB_WORKSPACE"
+          python docs/flora-runtime/living-enterprise-preview/browser.py "$RUNNER_TEMP/living-preview-browser" after
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -63,4 +73,6 @@ jobs:
             ${{ runner.temp }}/economics-quality.json
             ${{ runner.temp }}/economics-browser/*.json
             ${{ runner.temp }}/economics-browser/*.jpg
+            ${{ runner.temp }}/living-preview-browser/*.json
+            ${{ runner.temp }}/living-preview-browser/*.jpg
           retention-days: 14

@@ -88,9 +88,10 @@ def _payments():
         return None
 
 
-def _facts(data):
+def _facts(data, *, extra_ids=()):
     ids = {key for _, key, _, _ in STAGES}
     ids.update(key for _, _, rows in VIEWS for _, keys, _ in rows for key in keys)
+    ids.update(extra_ids)
     facts = {}
     source_by_id = {row['id']: row for row in data['sources']}
     supplier_spot = {'id': 'technology'}

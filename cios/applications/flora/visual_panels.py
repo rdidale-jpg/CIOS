@@ -427,7 +427,7 @@ def _enterprise_arrival(ctx, data, replay):
             '<h2 id="enterprise-change-title">What’s changed</h2>' + change + '</section>')
 
 
-def _frame(ctx,headers,data,issues,entries,body,*,show_commercial=False):
+def _frame(ctx,headers,data,issues,entries,body,*,show_commercial=False,top=None,left=None,show_layers=True):
     """Ordinary three-panel frame emits no research disclosures or source URLs."""
     scene=replace(ctx,stream='landscape') if ctx.scope=='banking' and ctx.stream=='inside' else ctx
     if __import__('cios.applications.flora.access',fromlist=['is_cios_owner']).is_cios_owner(headers):
@@ -440,7 +440,7 @@ def _frame(ctx,headers,data,issues,entries,body,*,show_commercial=False):
     if ctx.scope!='easyjet':
         asset=asset_manifest()['watermarks'][ctx.scope+'-'+scene.stream]
         watermark='<img class="watermark" src="'+_asset(asset)+'" alt="" aria-hidden="true">'
-    layers='' if ctx.scope in {'uk','easyjet'} else '<nav class="context-nav" aria-label="Context layers">'+''.join('<a href="'+e(v.url(ctx,layer=k),quote=True)+'"'+(' aria-current="page"'if ctx.layer==k else'')+'>'+e(label)+'</a>' for k,label in v.LAYERS.items())+'</nav>'
+    layers='' if not show_layers or ctx.scope in {'uk','easyjet'} else '<nav class="context-nav" aria-label="Context layers">'+''.join('<a href="'+e(v.url(ctx,layer=k),quote=True)+'"'+(' aria-current="page"'if ctx.layer==k else'')+'>'+e(label)+'</a>' for k,label in v.LAYERS.items())+'</nav>'
     head=ds.head()+'<link rel="stylesheet" href="'+v.ASSET_BASE+'panel-styles"><script defer src="'+v.ASSET_BASE+'interactions"></script>'+EDITORIAL_STYLE+reading.STYLE+experience.STYLE
     if ctx.scope=='easyjet':head+=easyjet.STYLE
     if ctx.scope=='banking':head+=ecosystem.STYLE+cohort.STYLE
@@ -451,7 +451,9 @@ def _frame(ctx,headers,data,issues,entries,body,*,show_commercial=False):
         change = commercial_change(ctx.scope, ctx.stream, headers)
         if ctx.stream == 'landscape':
             change = _enterprise_arrival(ctx, data, change)
-    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+head+'</head><body class="ds-page vp-page">'+_top(ctx,headers)+_left(scene,data,entries,issues)+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+watermark+'<article class="workspace editorial-workspace">'+change+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
+    if ctx.scope=='lloyds' and left is None:
+        body='<p class="reading-context" data-preview-entry><a href="/enterprises/lloyds/preview">Preview New Experience</a></p>'+body
+    return ('<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+e(title)+' · '+ctx.stream.title()+' · FLORA</title>'+"<link rel='canonical' href='"+binding['route']+"'>"+head+'</head><body class="ds-page vp-page">'+(top if top is not None else _top(ctx,headers))+(left if left is not None else _left(scene,data,entries,issues))+'<main id="visual-content" tabindex="-1" data-region="main" data-market="GB" data-scope="'+ctx.scope+'" data-identity="'+e(identity,quote=True)+'" data-stream="'+ctx.stream+'" data-layer="'+ctx.layer+'">'+watermark+'<article class="workspace editorial-workspace">'+change+body+layers+_legal_notice(ctx,data)+'</article></main></body></html>')
 
 
 def render(ctx,headers=None,*,financial_run_id=''):

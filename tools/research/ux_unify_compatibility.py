@@ -60,8 +60,16 @@ FACTORY_PREVIEW_BASE = "3e5aa2fc5dc1531ffb305374c91fad831b998fad"
 FACTORY_PREVIEW_APP = "2c2d58493e6ff23ed8864cd6c0c71aa9377400a7aa3b7994efcbf4bb61c59385"
 
 
+# Finite optional Lloyds preview routes. Match entire files before exposing
+# their exact predecessor to historical checks; no unknown evolution is accepted.
+PREVIEW_ROUTE_BASE = '97d316c640c96d99c2301819f8aac00b3b9c1398'
+PREVIEW_ROUTE_PINS = {'cios/applications/flora/web/app.py': '232d7d9fbf736adc1d1c9735038a53cb0508af5e8c18b29ee46582fc0d47ec69', 'cios/applications/flora/public_routes.py': '17a39084779442cdea73a0bd9922be6722c815ac0ee3dfa2b164810472575916'}
+
+
 def predecessor(root, path):
     current = (Path(root) / path).read_bytes()
+    if path in PREVIEW_ROUTE_PINS and sha256(current).hexdigest() == PREVIEW_ROUTE_PINS[path]:
+        current = subprocess.check_output(["git", "show", f"{PREVIEW_ROUTE_BASE}:{path}"], cwd=root)
     if path == AVIATION_JOURNEY_APP and sha256(current).hexdigest() == FACTORY_PREVIEW_APP:
         current = subprocess.check_output(["git", "show", f"{FACTORY_PREVIEW_BASE}:{path}"], cwd=root)
     if path == AVIATION_JOURNEY_APP and sha256(current).hexdigest() == AVIATION_JOURNEY_SHA256:

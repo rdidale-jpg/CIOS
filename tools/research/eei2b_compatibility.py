@@ -51,7 +51,14 @@ UX_RECOVERY_CUTS = {'cios/applications/flora/easyjet_capabilities.py': ('2ac52cf
                                               ('_frame', 'render', 'research_inspection'))}
 
 
+# Optional Living Enterprise frame slots; exact bytes, one presentation function.
+# Existing historical cuts and security/failure baselines remain unchanged.
+PREVIEW_BASE = '97d316c640c96d99c2301819f8aac00b3b9c1398'
+PREVIEW_CUTS = {'cios/applications/flora/visual_panels.py': ('592ecfbbc2b0d70baf1019c839981d62ddce23b137afbeacc2c2dc5fdf75400d', ('_frame',))}
+
+
 def predecessor(root, path, current):
+    current = checked_cut(root, path, current, PREVIEW_BASE, PREVIEW_CUTS)
     current = checked_cut(root, path, current, UX_RECOVERY_BASE, UX_RECOVERY_CUTS)
     current = checked_cut(root, path, current, EXECUTIVE_BASE, EXECUTIVE_CUTS)
     current = checked_cut(root, path, current, FACTORY_BASE, FACTORY_CUTS)
