@@ -51,6 +51,11 @@ with TemporaryDirectory() as directory, sync_playwright() as playwright:
             capture('banking')
             page.locator('a[href="/enterprises/lloyds"]:visible').first.click()
             capture('lloyds-arrival')
+            # The canonical arrival is now the CEO twin. Exercise the retained
+            # accepted predecessor explicitly, without treating it as the default.
+            if hasattr(__import__('cios.applications.flora.lloyds_gold', fromlist=['CANONICAL']), 'CANONICAL'):
+                expect(page.locator('[data-experience="lloyds-ceo"]')).to_have_count(1)
+                page.goto('/enterprises/lloyds/legacy')
             expect(page.get_by_role('navigation', name='Explore this enterprise')).to_contain_text('Economics')
             page.get_by_role('link', name='Explore Lloyds' if phase == 'after' else 'Explore the Lloyds flagship', exact=True).click()
             capture('lloyds-overview')

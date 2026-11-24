@@ -1,4 +1,4 @@
-"""Optional Lloyds Gold composition, not a new intelligence or financial owner.
+"""Lloyds CEO composition and compatible Gold route, using existing owners.
 
 Finite navigation over the existing live public research projection. No imports,
 run lookup, persistence, canonical promotion or cache. Source withdrawal applies
@@ -17,6 +17,8 @@ from .supabase_identity import public_read
 from .research_intelligence import source_import
 
 PATH = '/enterprises/lloyds/preview/gold'
+CANONICAL = '/enterprises/lloyds'
+LEGACY = '/enterprises/lloyds/legacy'
 # Presentation geometry only. Areas do not imply divisional size or premises.
 REGIONS = {
  'landscape': (('group','Group overview'),('retail','Retail Banking'),('commercial','Commercial Banking'),
@@ -30,6 +32,7 @@ GEOMETRY = (('278,125 512,125 510,250 278,250',395,185),
  ('30,675 330,660 350,1070 25,1105',174,890),('55,260 360,260 370,417 55,420',210,330),
  ('480,255 750,245 755,420 490,435',620,330),('350,685 735,675 742,1050 365,1065',548,940))
 SUBJECTS = dict(row for rows in REGIONS.values() for row in rows)
+SUBJECTS['people']='Organisation & workforce'
 # These are finite existing public claim identities, never query-supplied sources.
 LLOYDS_IDS = (
  'LBG-Q326-PROFIT','LBG-Q326-DEPOSITS','LBG-Q326-CURVE','LBG-Q326-INVESTMENT',
@@ -57,9 +60,14 @@ DETAILS = {
  'competition': ('payments','ai','sources'), 'strategy': ('timeline','options','goals','sources'),
  'analysis': tuple('theme-'+str(i) for i in range(8))+('sources',),
 }
+DETAILS['people']=('leadership','structure','workforce','sources')
+DETAILS['operations']+=tuple('journey-'+key for key in ('credit','payments','service','insurance','risk','data','platforms','finance','support'))
+DETAILS['strategy']+=tuple('objective-'+key for key in ('renewal','ai','access','reporting','investment','efficiency','payments'))
+DETAILS['economics']+=('funding','income','costs','capital','divisions')
 FOCUS_FACTS = {
- 'group':('LBG-Q326-PROFIT','LBG-Q326-DEPOSITS','LBG-AR25-MIGRATION','LBG-A2030-CIR'), 'economics':tuple(recovery.MEASURES)+('LBG-A2030-CIR','LBG-A2030-SAVINGS','LBG-Q326-INVESTMENT','LBG-A2030-INVESTMENT'),
+ 'group':('CEO1-ROLE-NUNN-20260322','LBG-Q326-PROFIT','LBG-Q326-DEPOSITS','LBG-AR25-MIGRATION','LBG-A2030-CIR'), 'economics':tuple(recovery.MEASURES)+('LBG-A2030-CIR','LBG-A2030-SAVINGS','LBG-Q326-INVESTMENT','LBG-A2030-INVESTMENT'),
  'retail':('LBG-BRAND26-TIMING','LBG-BRAND26-NO-ROLES'), 'commercial':(), 'retirement':(),
+ 'people':('LBG-AR25-COPILOT','LBG-BRAND26-NO-ROLES','CEO1-ROLE-NUNN-20260322'),
  'operations':('LBG-BRAND26-TIMING','LBG-BRAND26-NO-ROLES','LBG-AR25-COPILOT'),
  'capabilities':('LBG-AR25-MIGRATION','LBG-A2030-DATA','LBG-ENVOY-CONTROLS'),
  'applications':tuple(dict.fromkeys(k for row in APPS.values() for k in row[2]))+('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'),
@@ -80,6 +88,7 @@ class State:
     focus: str = 'group'
     subject: str = 'group'
     detail: str = ''
+    route: str = PATH
 
 
 def resolve(query):
@@ -90,18 +99,40 @@ def resolve(query):
     if stream not in REGIONS:raise ValueError('Unsupported perspective')
     focus=query.get('focus',[REGIONS[stream][0][0]])[0]
     subject=query.get('subject',[focus])[0]; detail=query.get('detail',[''])[0]
-    if (focus not in dict(REGIONS[stream]) or subject not in SUBJECTS
+    if (focus not in (set(dict(REGIONS[stream]))|({'people'} if stream=='inside' else set())) or subject not in SUBJECTS
             or (detail and detail not in DETAILS[focus])):raise ValueError('Unsupported selection')
     return State(stream,focus,subject,detail)
+
+
+def canonical_query(query):
+    """Bridge ordinary legacy context without admitting private selectors.
+
+    Historical detail, agenda, specialist and Financial paths keep their owners.
+    New focus/subject state is finite and never a canonical model identifier.
+    """
+    if any(k in query for k in ('analysis','agenda','lens')):return None
+    # Legacy contextual overlays retain their existing finite resolver/renderer.
+    # Mixed new selectors are not routed around canonical validation.
+    if not {'focus','subject'} & set(query) and query.get('layer') in (['regulators'],['suppliers']):return None
+    if 'detail' in query and 'focus' not in query and query.get('detail')!=['']:return None
+    allowed={'stream','focus','subject','detail','market','layer','selected','reading'}
+    if set(query)-allowed or any(not isinstance(a,list) or len(a)!=1 or not isinstance(a[0],str) for a in query.values()):
+        raise ValueError('Unsupported enterprise state')
+    for key,values in {'market':{'GB'},'layer':{'enterprises'},'selected':{'','lloyds'},'reading':{'facts','insight'}}.items():
+        if key in query and query[key][0] not in values:raise ValueError('Enterprise context mismatch')
+    result={k:a for k,a in query.items() if k in {'stream','focus','subject','detail'}}
+    resolve(result)
+    return result
 
 
 def href(state, *, stream=None, focus=None, detail=None, subject=None):
     target=stream or state.stream
     if focus is None:
         # Preserve the originating subject, so switching back restores division.
-        focus=state.subject if state.subject in dict(REGIONS[target]) else state.focus if state.focus in dict(REGIONS[target]) else REGIONS[target][0][0]
+        choices=set(dict(REGIONS[target]))|({'people'} if target=='inside' else set())
+        focus=state.subject if state.subject in choices else state.focus if state.focus in choices else REGIONS[target][0][0]
     if detail is None:detail=state.detail if target==state.stream and focus==state.focus else ''
-    return PATH+'?'+urlencode({'stream':target,'focus':focus,'subject':subject or state.subject,'detail':detail})+'#visual-content'
+    return state.route+'?'+urlencode({'stream':target,'focus':focus,'subject':subject or state.subject,'detail':detail})+'#visual-content'
 
 
 def link(state,label,**kw):
@@ -122,6 +153,11 @@ def facts_for(data):
     # Identity remains bound to the existing public assessment, never a private
     # model lookup or a same-name bank. Statement scope alone is insufficient.
     claims={c['id']:c for c in data['claims']}
+    role=source_import.public_enterprise_role()
+    if role:
+        src,row=role
+        ref=p.Source(src['title'],src['url'],src['publisher'],src['publication_date'],src['reporting_period'],locator=src['excerpts'][0]['locator'])
+        facts[row['id']]=p.Statement(row['statement'],'reported',recovery.GROUP,row['period'],(ref,),'reviewed_excerpt','candidate_intelligence',caveats=('Dated role attribution only; current mandate and procurement authority are not established.','Contains public sector information licensed under the Open Government Licence v3.0.'))
     return {k:s for k,s in facts.items() if not k.startswith('LBG-') or (s.scope==recovery.GROUP
             and claims[k].get('asset_id')=='BK-ENT-001'
             and all(source.publisher=='Lloyds Banking Group' for source in s.sources))}
@@ -143,13 +179,16 @@ def table(headings,rows,caption):
 
 def scene(state,facts):
     areas=[]
-    for (key,label),(points,x,y) in zip(REGIONS[state.stream],GEOMETRY):
+    regions=REGIONS[state.stream]
+    if state.stream=='inside' and (state.route==CANONICAL or state.focus=='people'):
+        regions=tuple(('people','Organisation & people') if key=='partners' else (key,label) for key,label in regions)
+    for (key,label),(points,x,y) in zip(regions,GEOMETRY):
         words=label.split(' & ') if len(label)>22 else [label]
         if key=='retirement':words=['Insurance, Pensions','& Investments']
         if key=='competition':words=['Competition','& technology']
         text=''.join(f'<tspan x="{x}" dy="{0 if i==0 else 27}">{e(word)}</tspan>' for i,word in enumerate(words))
         areas.append(f'<a data-region-key="{key}" aria-label="{e(label,quote=True)}" href="{e(href(state,focus=key,subject=key,detail=''),quote=True)}"'
-                     +(' aria-current="true"' if key==state.focus else '')+f'><polygon class="area" points="{points}"/>'
+                     +(' aria-current="true"' if key==({'partners':'applications'}.get(state.focus,state.focus) if state.route==CANONICAL else state.focus) else '')+f'><polygon class="area" points="{points}"/>'
                      f'<g class="region-label"><rect x="{x-124}" y="{y-27}" width="248" height="{78 if len(words)>1 else 54}" rx="9"/>'
                      f'<text x="{x}" y="{y+6}">{text}</text></g></a>')
     return ('<aside id="left" data-region="left" aria-label="Lloyds illustrated enterprise"><div class="le-sticky">'
@@ -162,7 +201,7 @@ def scene(state,facts):
 
 def economics(state,facts,issues=()):
     body='<p class="le-deck">Deposits fund lending. Service income adds to interest income. Costs, credit losses and capital shape the return.</p>'
-    body+='<div class="gold-economic-map" aria-label="Conceptual Group economic mechanism"><span>Funding<small>Deposits & other sources</small></span><span>Lending & services<small>Interest & fees</small></span><span>Earnings<small>After costs & credit losses</small></span><span>Capital<small>Absorbs risk; constrains growth</small></span></div>'
+    body+='<div class="gold-economic-map" aria-label="Conceptual Group economic mechanism">'+''.join('<span>'+link(state,title,focus='economics',detail=key)+'<small>'+desc+'</small></span>' for key,title,desc in (('funding','Funding','Deposits & other sources'),('income','Lending & income','Interest & fees'),('costs','Costs & impairment','Running the bank and credit risk'),('capital','Capital & returns','Risk capacity and returns')))+'</div>'
     body+='<p class="le-limit">Conceptual model · not a measured allocation or accounting reconciliation.</p>'
     body+='<div class="le-measures">'+preview.measures(facts)+'</div>'
     stocks=[(key,label) for key,label in [('LBG-AR25-DEPOSITS','31 December 2025'),('LBG-Q326-DEPOSITS','30 September 2026')] if key in facts]
@@ -222,6 +261,7 @@ def division(state,facts):
           'commercial':(('Finance businesses','Evaluate and service business credit','Lending, risk and finance · conceptual'),('Move money','Provide payment and cash-management services','Payments, technology and operations · conceptual')),
           'retirement':(('Build long-term savings','Pensions and investment products','Product, servicing and risk · conceptual'),('Meet obligations','Administer policies and customer outcomes','Operations, finance and data · conceptual'))}
     body+=table(('Value stream','Activities','Durable capabilities'),[(e(a),e(b),e(c)) for a,b,c in rows[state.focus]],'Operating interpretation · not a verified workflow or organisation chart')
+    body+='<p class="ceo-unavailable">Reported segment contribution and matched comparisons are unavailable.</p>'
     body+=reported(facts,FOCUS_FACTS[state.focus])
     body+='<p class="gold-related">'+link(state,'Group economic context',focus='economics')+' · '+link(state,'Related operating capabilities',stream='inside',focus='capabilities')+'</p>'
     if state.focus in {'retail', 'commercial'}:
@@ -484,15 +524,23 @@ def main(state,data,facts,issues=()):
             body+='<div class="gold-divisions">'+''.join('<article>'+link(state,title,focus=key,subject=key)+'<p>'+e(customer)+'</p></article>' for title,customer,_,_,key in twin.DIVISIONS)+'</div>'
             body+='<div class="le-measures">'+preview.measures(facts)+'</div>'
             body+=interpretation(facts,('LBG-AR25-MIGRATION','LBG-A2030-CIR'),'The efficiency ambition and platform-renewal priority put the sequencing of change alongside service continuity. They establish strategic direction, not a project-level saving or open buying programme.')
-            body+='<p class="gold-related">'+link(state,'Funding, income & earnings',focus='economics')+' · '+link(state,'Organisation & workforce',stream='inside',focus='operations',detail='people')+' · '+link(state,'Management goals',stream='forces',focus='strategy',detail='goals')+'</p>'
-        elif state.focus in {'group','economics'}:body+=economics(state,facts,issues)
+            if 'LBG-Q326-CURVE' in facts:
+                body+='<section class="ceo-change"><span class="eyebrow">Reported change</span><h2>Curve acquisition reported complete</h2>'+reported(facts,('LBG-Q326-CURVE',))+'<p class="le-limit">Completion is not integration progress or open supplier scope.</p></section>'
+            if 'CEO1-ROLE-NUNN-20260322' in facts:
+                p.note_editorial_sources(facts['CEO1-ROLE-NUNN-20260322'].sources)
+                body+='<p class="ceo-lead-context">'+link(state,'Leadership evidence',stream='inside',focus='people',detail='leadership')+' · Charlie Nunn was identified as Group Chief Executive in March 2026; current mandate verification is unavailable.</p><p class="ceo-attribution">Contains public sector information licensed under the Open Government Licence v3.0.</p>'
+            body+='<p class="gold-related">'+link(state,'Funding, income & earnings',focus='economics')+' · '+link(state,'Organisation & workforce',stream='inside',focus='people',detail='leadership')+' · '+link(state,'Management goals',stream='forces',focus='strategy',detail='goals')+'</p>'
+        elif state.focus in {'group','economics'}:body+=_ceo_financial(state,facts,issues)
         else:body+=division(state,facts)
     elif state.stream=='inside':
-        if state.focus=='operations':body+=operating(state,data,facts,issues)
+        if state.focus=='people' or state.focus=='operations' and state.detail=='people':body+=_ceo_people(state,facts)
+        elif state.focus=='operations' and state.detail!='service':body+=_ceo_journey(state,data,facts)
+        elif state.focus=='operations':body+=operating(state,data,facts,issues)
         elif state.focus=='capabilities':body+=capabilities(state,data,facts)
         elif state.focus=='applications':body+=applications(state,facts)
         elif state.focus=='partners':body+=partners(state,facts)
         else:body+=programmes(state,data,facts)
+    elif state.focus=='strategy' and (state.detail=='goals' or state.detail.startswith('objective-')):body+=_ceo_goals(state,facts)
     else:body+=forces(state,facts)
     if state.focus not in {'group','analysis'} or state.detail:
         body+='<footer class="gold-inspect">'+link(state,'Evidence & boundaries',detail='sources')+'</footer>'
@@ -500,8 +548,8 @@ def main(state,data,facts,issues=()):
 
 
 @ds.view_scope
-def render(query,headers=None):
-    state=resolve(query);ctx=v.Context('lloyds',state.stream)
+def render(query,headers=None,*,canonical=False):
+    state=replace(resolve(query),route=CANONICAL if canonical else PATH);ctx=v.Context('lloyds',state.stream)
     with p.editorial_view(),public_read():
         data=v.current_data(ctx)
         if data.get('enterprise_twin_id')!='BK-ENT-001' or source_import.working_restricted(data):
@@ -509,6 +557,7 @@ def render(query,headers=None):
         facts=facts_for(data);issues=agenda.agenda(ctx.scope,data)
         notice=('<section class="le-preview-notice" aria-label="Gold Standard evaluation"><strong>Gold Standard · owner evaluation</strong>'
                 '<span><a href="'+preview.PATH+'">Original preview</a> · <a href="'+e(v.url(ctx),quote=True)+'">Current experience</a></span></section>')
+        if canonical:notice=''
         top=panels._top(ctx,headers)
         for stream in REGIONS:
             old=e(v.stream_url(ctx,stream)+'#stream-'+stream,quote=True)
@@ -516,10 +565,181 @@ def render(query,headers=None):
         markup=panels._frame(ctx,headers,data,issues,(),notice+main(state,data,facts,issues),top=top,left=scene(state,facts),show_layers=False)
         assets=('<link rel="stylesheet" href="'+preview.PATH+'/assets/styles"><link rel="stylesheet" href="'+PATH+'/assets/styles">'
                 '<script defer src="'+preview.PATH+'/assets/interactions"></script>')
-        return markup.replace('</head>',assets+'</head>').replace('<title>','<title>Gold Standard evaluation · ',1).replace('class="ds-page vp-page"','class="ds-page vp-page le-page gold-page" data-preview="gold-standard" data-focus="'+state.focus+'" data-subject="'+state.subject+'"')
+        markup=markup.replace('</head>',assets+'</head>')
+        if not canonical:markup=markup.replace('<title>','<title>Gold Standard evaluation · ',1)
+        mode='data-experience="lloyds-ceo"' if canonical else 'data-preview="gold-standard"'
+        return markup.replace('class="ds-page vp-page"','class="ds-page vp-page le-page gold-page" '+mode+' data-focus="'+state.focus+'" data-subject="'+state.subject+'"')
 
 
 def stylesheet():
     assets=Path(__file__).with_name('visual_stream_assets');path=assets/'lloyds-gold.css'
     if path.is_symlink() or not path.resolve().is_relative_to(assets.resolve()):raise ValueError('Unavailable asset')
     return path.read_bytes(),'text/css; charset=utf-8'
+
+
+# Presentation configuration over current owners, not enterprise-model records.
+# A role to verify is not a mandate; a conceptual connection is not an estate edge.
+JOURNEYS = {
+ 'credit': ('Lending & credit','Retail / Commercial Banking','Originate → assess affordability and risk → book → service → recover',
+            ('CAP-LENDING','CAP-RISK','CAP-FINANCE','CAP-TECH'),('LBG-AR25-MIGRATION',),
+            'Loan and funding economics depend on credit quality, repricing and capital. No portfolio-level yield, loss or allocation is established here.',
+            'Which credit-service hand-off has a measured customer or control outcome, and which operating entity owns it?'),
+ 'payments': ('Payments','Retail / Commercial Banking','Initiate payment → authorise → clear and settle → service exceptions',
+              ('CAP-PAYMENTS','CAP-RISK','CAP-TECH','CAP-DATA'),('LBG-A2030-WALLET','LBG-Q326-CURVE'),
+              'A completed acquisition and a payments priority are decisions already taken. They do not establish integration, adoption or open supplier scope.',
+              'What adoption or integration result follows the completed Curve transaction, and which decision remains open?'),
+ 'service': ('Customer operations','Customer-facing businesses','Receive request → identify need → resolve or escalate → close and learn',
+             ('CAP-SERVICE','CAP-CHANNEL','CAP-DATA','CAP-RISK'),('LBG-BRAND26-TIMING','LBG-BRAND26-NO-ROLES'),
+             'Access changes can alter the service route. The announcement is not evidence of reduced staffing or a realised service outcome.',
+             'Which customer outcome and service channel would distinguish a successful change from displaced demand?'),
+ 'insurance': ('Insurance, pensions & wealth','Insurance, Pensions & Investments','Design proposition → distribute → administer policies and assets → meet obligations',
+               ('CAP-STRATEGY','CAP-SERVICE','CAP-FINANCE','CAP-RISK'),(),
+               'Policyholder obligations and long-term asset administration have different economics from banking margin. Allocation and system ownership are unavailable.',
+               'Which policy or servicing outcome has a matched financial and operational baseline?'),
+ 'risk': ('Risk & control','Group / relevant regulated entity','Set risk appetite → assess exposure → apply controls → monitor → remediate',
+          ('CAP-RISK','CAP-DATA','CAP-TECH'),('LBG-ENVOY-CONTROLS',),
+          'Disclosed controls are an existing management capability. Effectiveness and coverage require evidence; a policy date does not establish a failure.',
+          'Which critical service and legal entity is in scope, and what independent control or recovery evidence exists?'),
+ 'data': ('Data & AI','Group disclosures; divisional ownership unavailable','Prepare data → develop → deploy with controls → monitor outcomes',
+          ('CAP-DATA','CAP-TECH','CAP-RISK'),('LBG-A2030-DATA','LBG-ENVOY-CONTROLS','LBG-AI26-REPORTED','LBG-AI26-EXPECTED'),
+          'Existing platforms and reported contributions are counter-evidence to an assumed capability gap. Net value, adoption and divisional attribution are unavailable.',
+          'Which full-cost baseline and attribution method reconciles AI contribution to net realised customer or operating benefit?'),
+ 'platforms': ('Platforms & modernisation','Group disclosures; workload ownership unavailable','Identify dependency → sequence retirement → migrate → test recovery → decommission',
+               ('CAP-TECH','CAP-DATA','CAP-RISK'),('LBG-AR25-MIGRATION','LBG-A2030-PLATFORMS'),
+               'Renewal is already a published management response. No system inventory, cutover commitment, contract workshare or overrun is established.',
+               'Which retirement milestone limits dual running, and what continuity evidence constrains its pace?'),
+ 'finance': ('Finance & treasury','Group and distinct reporting businesses','Manage funding → price risk and capital → report → reconcile → allocate under governance',
+             ('CAP-FINANCE','CAP-DEPOSITS','CAP-RISK'),('LBG-Q326-DEPOSITS','LBG-Q326-PROFIT'),
+             'Funding stocks, period profit and capital are different measures. Group results cannot be allocated to a product, capability or legal bank.',
+             'Which matched-period income, cost, credit and capital inputs would explain the change in economic return?'),
+ 'support': ('People, organisation & suppliers','Group; accountable functions unavailable','Define role and skills → provide shared services → assure delivery → review outcomes',
+             ('CAP-STRATEGY','CAP-SERVICE','CAP-TECH'),('LBG-AR25-COPILOT','LBG-ENVOY-GOOGLE'),
+             'Licences and collaboration are not employee counts, an outsourced-function map, contract scope or renewal timing.',
+             'Which function owns the service outcome, and what evidence establishes the internal/external delivery boundary?'),
+}
+OBJECTIVES = (
+ ('renewal','2026 priority','Retire applications while maintaining service',('LBG-AR25-MIGRATION','LBG-A2030-PLATFORMS'),'Technology / service owner to verify','legacy','platforms'),
+ ('ai','FY2025 reported / 2026 expectation','Turn AI capability into measured benefit',('LBG-AI26-REPORTED','LBG-AI26-EXPECTED','LBG-ENVOY-CONTROLS'),'Business benefit and control owners to verify','ai','data'),
+ ('access','Changes planned through 2027','Keep the customer route to service clear',('LBG-BRAND26-TIMING','LBG-BRAND26-NO-ROLES'),'Customer service / channel owner to verify','brand','service'),
+ ('reporting','18 March 2027 regulatory timetable','Prepare incident and third-party reporting',('UK-PRA-REPORT27','UK-FCA-REPORT27'),'Applicable regulated entity / risk owner to verify',None,'risk'),
+ ('investment','2027 investment plan','Sequence investment against delivery and returns',('LBG-Q326-INVESTMENT','LBG-A2030-INVESTMENT'),'Finance and programme sponsor to verify','legacy','finance'),
+ ('efficiency','2030 management ambition','Improve efficiency without confusing gross and net',('LBG-A2030-CIR','LBG-A2030-SAVINGS'),'Executive objective; delegated owner unavailable','legacy','platforms'),
+ ('payments','2027–2030 strategic priority','Develop payments and customer interaction',('LBG-A2030-WALLET','LBG-Q326-CURVE'),'Payments / proposition owner to verify','curve','payments'),
+)
+
+
+GOAL_DECISIONS = {
+ 'renewal': ('Existing migration and platform plans are management responses, not evidence of an unawarded modernisation programme.', 'Which remaining retirement decision controls dual-running cost, and which recovery test limits its timing?'),
+ 'ai': ('Reported contribution and deployed controls demonstrate existing capability; gross contribution does not establish full-cost net benefit.', 'Which realised benefit survives model, infrastructure, change and control costs, and who signs off the attribution?'),
+ 'access': ('Planned brand changes do not establish job cuts, customer attrition or a procurement event.', 'How will service continuity and customer comprehension be measured through the announced brand transition?'),
+ 'reporting': ('A regulatory timetable establishes a requirement only for its applicable perimeter; it does not establish a Lloyds control failure.', 'Which regulated entity must report which incident, and what evidence shows its existing provider inventory and reporting process meet the deadline?'),
+ 'investment': ('An announced investment plan is a management commitment; external scope and unallocated supplier spend are not established.', 'Which sequencing choice is still open between committed programmes, and what return or service evidence would change that choice?'),
+ 'efficiency': ('A cost/income ambition and gross savings target do not establish realised net savings or a service-quality improvement.', 'Which expense, income and remediation movements explain efficiency on a consistent basis, after the cost of change?'),
+ 'payments': ('The completed Curve acquisition is an existing management response; integration scope, vendor selection and unallocated external work are unproven.', 'Which customer interaction or payments outcome would establish value from the existing strategy, without assuming a new buying programme?'),
+}
+
+
+def _ceo_people(state,facts):
+    body='<p class="le-deck">Leadership, reporting businesses and shared capabilities are different organisational views.</p>'
+    role=facts.get('CEO1-ROLE-NUNN-20260322')
+    if state.detail in {'','leadership','people'}:
+        if role:
+            body+='<section class="ceo-leader"><span class="eyebrow">Dated leadership evidence</span><h2>Charlie Nunn</h2>'+reported(facts,('CEO1-ROLE-NUNN-20260322',))+'<p class="le-limit">This source establishes the role attribution in March 2026, not a verified current mandate or purchasing authority.</p><p class="ceo-attribution">Contains public sector information licensed under the Open Government Licence v3.0.</p></section>'
+        body+=table(('Dimension','Available view'),[
+          ('Group executive leadership','Current roster / delegated mandates: Unavailable'),
+          ('Board and governance','Current public role projection: Unavailable'),
+          ('Reporting businesses','Retail; Commercial Banking; Insurance, Pensions & Investments'),
+          ('Legal entities','Not interchangeable with reporting segments; legal ownership map unavailable'),
+        ],'Organisation · no inferred reporting lines')
+    if state.detail=='structure':
+        body+='<div class="ceo-hierarchy"><strong>Lloyds Banking Group plc</strong><span>Reporting businesses · not legal subsidiaries</span><div>'+''.join('<article>'+link(state,title,stream='landscape',focus=key,subject=key)+'<p>'+e(customer)+'</p></article>' for title,customer,_,_,key in twin.DIVISIONS)+'</div></div>'
+        body+=table(('Function view','Durable capability','Accountability'),[
+         ('Finance / treasury','Finance and funding','Named owner / mandate unavailable'),('Customer operations','Servicing and channels','Named owner / mandate unavailable'),
+         ('Risk and control','Risk assessment and controls','Named owner / mandate unavailable'),('Technology / data','Platforms, data and AI','Named owner / mandate unavailable'),
+        ],'Conceptual function lenses · not a verified organisation chart')
+    if state.detail=='workforce':
+        body+='<h2>Workforce measures</h2><p class="ceo-unavailable">Comparable workforce totals and distribution are unavailable in this view.</p>'
+        body+=table(('Measure','Current eligible result'),[(x,'Unavailable') for x in ('Employee headcount / FTE','Prior-period movement','Business / function / geography split','Technology and AI workforce','Workforce cost / productivity','Internal / supplier-delivered split')],'Workforce · no proxy values or invented trend')
+        if 'LBG-AR25-COPILOT' in facts:body+='<h2>Separate tool footprint</h2>'+reported(facts,('LBG-AR25-COPILOT',))+'<p class="le-limit">Licences are not people, active adoption or productivity. No headcount or workforce chart is derived from them.</p>'
+        body+=reported(facts,('LBG-BRAND26-NO-ROLES',))
+    body+='<p class="gold-related">'+link(state,'Leadership',focus='people',detail='leadership')+' · '+link(state,'Businesses & functions',focus='people',detail='structure')+' · '+link(state,'Workforce',focus='people',detail='workforce')+'</p>'
+    return body
+
+
+def _ceo_journey(state,data,facts):
+    selected=state.detail.removeprefix('journey-') if state.detail.startswith('journey-') else None
+    if selected not in JOURNEYS:
+        return ('<p class="le-deck">Explore the work that delivers customer and economic outcomes.</p>'
+                +table(('Value stream / function','Business perimeter','Supported operating context'),[(link(state,row[0],detail='journey-'+key),e(row[1]),'Dated Group disclosures available' if row[4] else 'Conceptual orientation; measured operating evidence unavailable') for key,row in JOURNEYS.items()],
+                       'Operating architecture · conceptual until the specific dependency is evidenced'))
+    title,division,activities,caps,keys,meaning,question=JOURNEYS[selected]
+    names={row['id']:row['title'] for row in data.get('capabilities',()) if not source_import.working_restricted(row)}
+    body='<p class="eyebrow">'+e(division)+'</p><h2>'+e(title)+'</h2><p class="le-deck">'+e(activities)+'</p><p class="le-limit">Conceptual activity sequence; no verified application, role or supplier dependency is inferred.</p>'
+    body+=table(('Layer','Established boundary'),[
+      ('Business / value stream',e(division)+' · '+e(title)),('Activities',e(activities)),
+      ('Durable capabilities',e(' · '.join(names[k] for k in caps if k in names))),('Organisation / accountable role','Unavailable; function association is conceptual'),
+      ('Applications / data','Only the separately disclosed examples below; stream assignment unavailable'),('Technology / infrastructure','Installed topology and workload criticality unavailable'),
+      ('Suppliers / contracts','Only disclosed collaboration / product context; contracted service and dates unavailable'),
+    ],'From business to delivery · factual edges are not implied by navigation')
+    body+=reported(facts,keys)+interpretation(facts,keys,meaning) if keys else '<p class="le-limit">'+e(meaning)+'</p>'
+    body+='<section class="gold-dossier"><h3>Commercial significance</h3><p>'+e(meaning)+'</p><h3>Account investigation</h3><p>'+e(question)+'</p><p class="le-limit">Potential intervention must add to existing capabilities. No buyer need, budget, procurement event or supplier demand is established.</p></section>'
+    body+='<p class="gold-related">'+link(state,'Applications & disclosed suppliers',focus='applications')+' · '+link(state,'Transformation disclosures',focus='programmes')+' · '+link(state,'Related strategy',stream='forces',focus='strategy',detail='goals')+'</p>'
+    return body
+
+
+def _ceo_goals(state,facts):
+    selected=state.detail.removeprefix('objective-') if state.detail.startswith('objective-') else None
+    available=[row for row in OBJECTIVES if all(key in facts for key in row[3])]
+    if selected:
+        row=next((row for row in available if row[0]==selected),None)
+        if row is None:return '<p class="ceo-unavailable">This objective is unavailable.</p>'
+        key,horizon,title,keys,owner,programme,journey=row
+        body='<p class="eyebrow">'+e(horizon)+'</p><h2>'+e(title)+'</h2>'+reported(facts,keys)
+        body+=table(('Decision dimension','Evidence boundary'),[
+          ('Accountability',e(owner)+' · role hypothesis, not verified buying authority'),
+          ('Starting position / latest progress','Only the dated statements above; matched baseline and current progress unavailable'),
+          ('Target / horizon',e(horizon)+' · distinguish actuals, commitments and expectations'),
+          ('Investment / programme','Published priorities only; work package, spend and delivery obligations unavailable'),
+          ('Capability connection',e(JOURNEYS[journey][0])+' · conceptual association'),
+          ('Counter-evidence',e(GOAL_DECISIONS[key][0])),
+        ],'Goal scorecard · no inferred progress percentage or causal benefit')
+        body+='<h3>Commercial investigation</h3><p>'+e(GOAL_DECISIONS[key][1])+'</p><p class="le-limit">External intervention is a hypothesis only; procurement, budget and sponsor mandate are unproven.</p>'
+        body+='<p class="gold-related">'+link(state,'Operating context',stream='inside',focus='operations',detail='journey-'+journey)
+        if programme:body+=' · '+link(state,'Existing programme disclosure',stream='inside',focus='programmes',detail=programme)
+        return body+'</p>'
+    body='<p class="le-deck">Management objectives, on their own reporting horizons.</p><div class="ceo-goals">'
+    for key,horizon,title,keys,owner,programme,journey in available:
+        body+='<article><span class="eyebrow">'+e(horizon)+'</span><h2>'+link(state,title,detail='objective-'+key)+'</h2>'+reported(facts,keys[:1])+'</article>'
+    if 'LBG-Q326-INVESTMENT' in facts and not all(key in facts for key in ('LBG-Q326-INVESTMENT','LBG-A2030-INVESTMENT')):
+        body+='<section><h2>Separate investment context</h2>'+reported(facts,('LBG-Q326-INVESTMENT',))+'</section>'
+    body+='</div><p class="le-limit">No measured progress-to-target chart is shown without a matched baseline and actual. A prior-year contribution and a later expectation are different states, not a percentage achieved.</p>'
+    return body
+
+
+def _ceo_financial(state,facts,issues):
+    if state.detail not in {'funding','income','costs','capital','divisions'}:return economics(state,facts,issues)
+    title={'funding':'Funding & interest economics','income':'Income & profit','costs':'Costs, impairment & remediation','capital':'Capital, liquidity & returns','divisions':'Reporting businesses & contribution'}[state.detail]
+    body='<h2>'+title+'</h2>'
+    if state.detail=='funding':
+        body+=economics(replace(state,detail='funding'),facts,issues)
+    elif state.detail=='income':
+        body+='<div class="le-measures">'+preview.measures({k:s for k,s in facts.items() if k=='LBG-Q326-PROFIT'})+'</div>'
+        body+=table(('Financial measure','Period / basis','Eligible result'),[
+          ('Net interest income','Group; statutory and underlying are distinct','Unavailable'),('Fees / other income','Matched Group reporting period','Unavailable'),
+          ('Underlying profit / statutory bridge','Same period and consolidation perimeter','Unavailable'),
+        ],'Income · no lending yield, residual or allocation inferred')
+    elif state.detail=='costs':
+        body+=table(('Component','Treatment','Eligible actual'),[
+          ('Operating costs','Separate ordinary costs from remediation','Unavailable'),('Credit impairment','A charge over a period; not an arrears stock','Unavailable'),
+          ('Remediation','Separate current charge and prior-period comparison','Unavailable'),('Efficiency ambition','Management target is not current cost or net saving','See attributed ambition below'),
+        ],'Cost and risk · no manufactured financial bridge')
+        body+=reported(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS'))
+    elif state.detail=='capital':
+        body+=table(('Measure','Financial meaning','Eligible result'),[
+          ('CET1 / risk-weighted assets','Actual and pro-forma bases must not be mixed','Unavailable'),('Liquidity','Dated stocks / ratios, not investment budget','Unavailable'),
+          ('Return on tangible equity','Profit and capital on a matched basis','Unavailable'),('Capital generation / distributions','Separate generation from announced return plans','Unavailable'),
+        ],'Capital and returns · no proxy for deployable supplier budget')
+    else:
+        body+=table(('Reporting business','Current eligible contribution'),[(e(row[0]),'Reported segment measures unavailable') for row in twin.DIVISIONS]+[('Equity / Central','Reconciliation unavailable')],
+                    'Division economics · no Group-to-segment allocation')
+    return body

@@ -58,6 +58,8 @@ PREVIEW_CUTS = {'cios/applications/flora/visual_panels.py': ('592ecfbbc2b0d70baf
 
 
 def predecessor(root, path, current):
+    from .ux_unify_compatibility import ceo_predecessor
+    current = ceo_predecessor(root,path,current)
     current = checked_cut(root, path, current, PREVIEW_BASE, PREVIEW_CUTS)
     current = checked_cut(root, path, current, UX_RECOVERY_BASE, UX_RECOVERY_CUTS)
     current = checked_cut(root, path, current, EXECUTIVE_BASE, EXECUTIVE_CUTS)

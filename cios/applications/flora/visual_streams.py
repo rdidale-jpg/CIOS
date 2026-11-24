@@ -37,7 +37,7 @@ EASYJET_ART='easyjet-operations-a3ebfbfaca50'
 EASYJET_ART_SHA256='a3ebfbfaca5030fbe35ba49b295714e703a21b2217a0065ac2cb761dfc88c984'
 PRESENTATIONS={**SCOPES,'easyjet':{'route':EASYJET_ROUTE,'streams':('landscape','inside','forces'),
              'title':'easyJet','identity':'AV-ENT-001'}}
-ROUTES={r['route']:key for key,r in SCOPES.items()} | {'/flora':'uk','/flora/':'uk'}
+ROUTES={r['route']:key for key,r in SCOPES.items()} | {'/flora':'uk','/flora/':'uk','/enterprises/lloyds/legacy':'lloyds'}
 LAYERS={'enterprises':'Enterprises','suppliers':'Customers & Suppliers','regulators':'Regulators'}
 BANKS=('barclays','hsbc-uk','lloyds','natwest','santander-uk')
 CAPTION_SOURCES=frozenset({'enterprise-knowledge/banking/research-model/Assessment-Overlay.json',
@@ -416,4 +416,8 @@ def render(path,query,headers=None):
   from .financial_intelligence.analyst import selection
   ctx,run_id=selection(path,query)
   return panels(ctx,headers,financial_run_id=run_id)
+ if path=='/enterprises/lloyds':
+  from . import lloyds_gold
+  current=lloyds_gold.canonical_query(query)
+  if current is not None:return lloyds_gold.render(current,headers,canonical=True)
  return panels(resolve(path,query),headers)

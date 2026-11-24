@@ -485,7 +485,6 @@
       "gold_main_destinations": [
         "programmes",
         "competition",
-        "strategy",
         "analysis"
       ],
       "domain": "programmes",
@@ -599,7 +598,6 @@
       "eligible_now": true,
       "baseline_730_reachable": false,
       "gold_main_destinations": [
-        "operations",
         "applications",
         "partners",
         "programmes"
@@ -1152,7 +1150,6 @@
       "gold_main_destinations": [
         "programmes",
         "competition",
-        "strategy",
         "analysis"
       ],
       "domain": "programmes",
@@ -1206,7 +1203,6 @@
       "eligible_now": true,
       "baseline_730_reachable": false,
       "gold_main_destinations": [
-        "operations",
         "applications",
         "partners",
         "programmes"

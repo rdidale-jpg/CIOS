@@ -408,3 +408,41 @@ def working_restricted(record):
     from ..intelligence_presentation import restricted_metadata
     return restricted_metadata(record) or any(record.get(key) is True for key in
         ('revoked', 'denied', 'contradictory', 'stale', 'superseded'))
+
+
+def public_enterprise_role():
+    """Finite government-attributed role fact through the current Source owner.
+
+    Existing open-government factual use only; no issuer permission, registry,
+    canonical identity creation, private lookup, or Financial-run authority.
+    """
+    import json
+    from . import model
+    from .registry import snapshot_boundary
+    root=snapshot_boundary('banking',model.REPO)
+    path=root/'CEO1-GOV-ROLE.json'
+    relative=path.relative_to(model.REPO)
+    if (any((model.REPO/Path(*relative.parts[:i])).is_symlink() for i in range(1,len(relative.parts)+1))
+            or not path.resolve().is_relative_to(root.resolve())):return ()
+    try:
+        package=json.loads(path.read_text());source=package['source'];facts=package['facts']
+        expected='https://www.gov.uk/government/news/seven-new-towns-proposed-to-kickstart-housebuilding-push'
+        if (working_restricted(package) or package.get('authority')!='analytical_working_research'
+                or package.get('canonical_mutation') is not False or working_restricted(source)
+                or source.get('id')!='CEO1-GOV-ROLE' or source.get('url')!=expected or source.get('retrieval_url')!=expected
+                or source.get('publication_date')!='2026-03-22' or source.get('restrictions')
+                or source.get('rights',{}).get('material_exceptions') or working_restricted(source.get('rights',{}))
+                or source.get('rights',{}).get('status')!='permitted_ogl_factual_extract'
+                or source['rights'].get('terms_url')!='https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/'
+                or len(facts)!=1):return ()
+        provenance(source);content=model.primary_text(source)
+        fact=facts[0]
+        if (working_restricted(fact) or fact.get('id')!='CEO1-ROLE-NUNN-20260322'
+                or fact.get('subject_id')!='BK-ENT-001' or fact.get('legal_name')!='Lloyds Banking Group plc'
+                or fact.get('name')!='Charlie Nunn' or fact.get('role')!='Group Chief Executive'
+                or fact.get('semantic_type')!='reported' or fact.get('period')!='22 March 2026'
+                or fact.get('current_mandate_verified') is not False or fact.get('source_id')!=source['id']
+                or fact.get('statement')!='The government identified Charlie Nunn as Lloyds Banking Group Chief Executive on 22 March 2026.'
+                or 'Charlie Nunn, Group Chief Executive at Lloyds Banking Group, said:' not in content):return ()
+        return source,fact
+    except (OSError,ValueError,KeyError,TypeError):return ()

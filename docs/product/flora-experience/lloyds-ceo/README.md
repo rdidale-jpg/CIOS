@@ -1,36 +1,63 @@
-# Lloyds CEO intelligence
+# Lloyds CEO Digital Twin v1.0
 
-This increment deepens the optional Gold Standard experience integrated in #731. It keeps the illustrated Left, Landscape / Inside / Forces, existing default Lloyds and the original preview. Main at the start was `1c13e6962516dbb071b2133f2c1a3de87647e2ac`, with [successful hosted validation](https://github.com/rdidale-jpg/CIOS/actions/runs/45372064086). #729 remains a design proposal. #712 is a separate open refinement.
+The accepted Gold Standard becomes the Group-first default at `/enterprises/lloyds`. The existing illustrated Top / Left / Main presentation now connects economics, organisation, operating work and strategy. This continues #732 instead of opening another overlapping PR. Baseline: `1c13e6962516dbb071b2133f2c1a3de87647e2ac` (#731), with [successful full main validation](https://github.com/rdidale-jpg/CIOS/actions/runs/45372064086).
 
-## CEO questions and coverage
+**The experience is implemented; the CEO knowledge is partial.** Matched segment P&Ls, current executive mandates, workforce trends and verified end-to-end systems/contract dependencies are not available for this public use. They are not replaced with allocations, proxy headcounts or manufactured progress charts. See [domain coverage and source decisions](Research-and-coverage.md).
 
-| Question | Support | In the preview | Evidence needed for a stronger answer |
-| --- | --- | --- | --- |
-| How does Lloyds create value, and how do the businesses differ? | Supported for the business mechanisms. Partial for contribution. | Landscape → Group economics. Retail, Commercial and Insurance, Pensions & Investments retain distinct economics. Group deposits are dated stocks. Statutory profit has a nine-month period. The efficiency detail explains how to read costs, risk and capital alongside those results. | LEI-1 has income, fees, impairment, capital and H1 segment and statutory bridges. Exact figures and allocations are held for this use. No segment share or full earnings bridge is implied. |
-| Who makes decisions, and how is work organised? | Partial for business and workforce context. Current named mandates, workforce trends and reporting lines are unsupported in this preview. | Inside → Operating model → Organisation, accountability & workforce. Explains the functions to trace and presents existing licence and role-announcement disclosures with their limits. | The Tier 1 F05/F06 leadership records remain subject to a Source decision. LEI-1 names are research context. Obtain comparable workforce totals, perimeter, costs and internal/external delivery before assessing productivity. |
-| What is leadership trying to achieve? | Supported for the selected published priorities. Partial for progress. | Forces → Strategy & change → Goals & tests of progress. Separates current-period context, transformation and longer-term efficiency. The earlier disclosed migration milestone has a separate period. | Comparable baseline, progress and realised net outcomes, with accountable delivery roles. Targets and management plans have their own dates and are not treated as delivered. |
-| How does work reach applications and suppliers? | Partial. Navigation supports exploration. Actual end-to-end dependencies and delivery obligations remain unresolved. | From Retail or Commercial, follow the credit journey into risk capability and platform renewal. From the customer service journey, follow data capability and colleague technology. Existing Envoy and supplier views retain scope and limitations. | Verified service and application inventory with ownership, deployment and dependency evidence. Relationship candidates and disclosed collaboration cannot establish current contracts. |
-| What could prevent success, and what should sales investigate? | Supported as qualified analytical questions. Firm-specific impacts, urgency, buying mandate and procurement are unsupported. | Compare funding repricing, remediation versus efficiency and risk-weighted capacity. Use the existing Forces choices and SWOT for counterevidence, commercial questions and dependencies. | Matched financial comparators and measurable customer/service outcomes, tested against management responses and counterexamples. |
+## What the owner will see
 
-## Reconciliation and controls
+- **Landscape:** Group overview first, three distinct customer businesses, dated deposits and period profit, a stock comparison, completed-acquisition context and interactive funding / income / costs / capital stages. Segment and Central contributions retain a quiet unavailable state.
+- **Inside:** operating model, capabilities, applications/AI, organisation/workforce and transformation on the original illustration. Nine operating areas connect business purpose, conceptual activities, capabilities, existing disclosures and different commercial investigations. Named applications and collaborations retain contract/installation limitations.
+- **Forces:** market, competition, regulation, strategy and the existing eight-theme/four-quadrant SWOT. Seven interactive objectives use actual disclosed horizons. Each has a distinct deciding question, counter-evidence and contextual operating/programme links. Actual contribution, expected benefit and management targets remain different.
 
-- [LEI-1](../../../flora-runtime/lei-1/README.md) and [Wave 3](../../../flora-runtime/research-enrich-all-w3-689/dossiers/lloyds.md) distinguish Group, segment and legal-entity scope, reporting period, and underlying versus statutory basis. The candidate P&L, capital ratios, expense bridge and segment figures remain outside the preview.
-- [Tier 1 research and holds](../../../research/lloyds-tier1-sprint1/acceptance.md) retain appointment and mandate candidates, relationships, Unknowns and Source holds. Repository presence does not establish a canonical acceptance or public release decision.
-- [Existing Gold Standard inventory](../../../flora-runtime/lloyds-gold-standard/Inventory.json) records the finite overlay and other owners. This sprint measures coverage by the questions above. It does not count the same claim twice as new knowledge.
-- Existing Source/legal and Financial owners retain the Lloyds §2 decision. §5 direct PDF links remain deferred. ADR-027 remains Proposed. No production data, canonical or Pipeline changes.
+No Facts/Insight selector, duplicate Explore/Investigate controls, evaluation banner or competing-version links appear on the default. Source inspection is optional. Existing Financial Analyst, Leadership Agenda, qualified pressure and owner routes keep their owners and permissions.
 
-## Owner walkthrough and critique
+## Browser comparisons
 
-Open `/enterprises/lloyds/preview/gold` on a local Flora instance. Read Group overview, follow funding and earnings, then open the earnings, efficiency and capital decisions. From Commercial Banking follow the credit journey. Finally compare Forces strategy with the goals and tests of progress. Open **Evidence & boundaries** for source identity and periods.
+Actual local HTTP renders, not mockups. Chromium with simulated iPad/touch and mobile; not physical-device or live Render verification. Full capture hashes and runtime hashes are in [before](Browser-before.json) and [after](Browser-after.json). Hosted runs reproduce these journeys on the exact head and retain the fresh evidence as Actions artifacts.
 
-The goal view makes management direction easier to scan, but the available data cannot yet support a measured performance-to-target chart. The people view provides a way to ask who owns an outcome, while missing names and reporting lines limit it as an executive directory. The interactive operating links are valuable as paths through a business question. They remain conceptual until evidenced as dependencies.
+| Device | Previous default | New Group overview | Inside organisation | Strategy |
+| --- | --- | --- | --- | --- |
+| Desktop 1440 × 1000 | [Before](previews/before-desktop-landscape.jpg) | [After](previews/after-desktop-group.jpg) | [Organisation](previews/after-desktop-organisation.jpg) | [Goals](previews/after-desktop-strategy.jpg) |
+| iPad landscape 1194 × 834 | [Before](previews/before-ipad-landscape-landscape.jpg) | [After](previews/after-ipad-landscape-group.jpg) | [Organisation](previews/after-ipad-landscape-organisation.jpg) | [Goals](previews/after-ipad-landscape-strategy.jpg) |
+| iPad portrait 834 × 1194 | [Before](previews/before-ipad-portrait-landscape.jpg) | [After](previews/after-ipad-portrait-group.jpg) | [Organisation](previews/after-ipad-portrait-organisation.jpg) | [Goals](previews/after-ipad-portrait-strategy.jpg) |
+| Mobile 390 × 844 | [Before](previews/before-mobile-landscape.jpg) | [After](previews/after-mobile-group.jpg) | [Organisation](previews/after-mobile-organisation.jpg) | [Goals](previews/after-mobile-strategy.jpg) |
 
-## Reproduce
+[Economics](previews/after-desktop-economics.jpg), [Retail](previews/after-desktop-retail.jpg), [workforce limitations](previews/after-desktop-workforce.jpg), [operating architecture](previews/after-desktop-operating-model.jpg), [Commercial credit](previews/after-desktop-credit.jpg), [AI objective](previews/after-desktop-goal-ai.jpg), [SWOT](previews/after-desktop-analysis.jpg), [200% zoom](previews/after-desktop-zoom-200.jpg) and [expanded portrait illustration](previews/after-ipad-portrait-illustration-open.jpg) show the deeper states.
 
-From the repository root with existing dependencies, use `python -m cios.applications.flora.web.app` with an isolated local data directory. Use `python docs/product/flora-experience/lloyds-ceo/browser.py after /tmp/lloyds-ceo-preview` for Chromium evidence. Run the same script with `before` from the detached baseline to reproduce the comparison. iPad captures are emulated Chromium viewports.
+## Acceptance walkthrough
 
-| Viewport | Before, strategy overview | After, goals opened |
-| --- | --- | --- |
-| Desktop | [1440 × 1000](previews/before-desktop.jpg) | [1440 × 1000](previews/after-desktop.jpg) |
-| iPad landscape | [1366 × 1024](previews/before-ipad-landscape.jpg) | [1366 × 1024](previews/after-ipad-landscape.jpg) |
-| iPad portrait | [1024 × 1366](previews/before-ipad-portrait.jpg) | [1024 × 1366](previews/after-ipad-portrait.jpg) |
+1. Home → Industries → Banking → Lloyds. Group overview should arrive without experimental banners. Repeat through Enterprises → Lloyds.
+2. Choose each business in the illustration. Open Group economics, then Funding, Income, Costs and Capital. Distinguish deposits at a date from nine-month statutory profit and from management ambitions. No segment allocations should appear.
+3. Inside → Organisation & workforce. Examine reporting businesses versus legal entities; read the dated leadership attribution and its limit. Workforce values are unavailable, while licence counts remain explicitly tool footprint.
+4. Inside → Operating model → Lending & credit. Repeat with Payments, Service, Insurance, Risk, Data/AI, Platforms, Finance and Support. These are explorable conceptual mechanisms, not assertions of verified organisation/application dependencies.
+5. Applications & AI → Envoy → Evidence & dates. A collaboration does not establish installed products, contract scope, renewal or buyer need.
+6. Forces → Strategy & change → Goals. Open AI, efficiency and reporting objectives; compare dates, management response, counter-evidence and distinct next investigations. No synthetic progress chart or opportunity is produced.
+7. Forces → Analysis. Open all eight SWOT themes; inspect material caveats. Switch streams with Commercial selected; use Back, Forward and direct-link reload.
+8. Confirm easyJet, original preview, Gold evaluation and private/specialist deep links still behave under their existing access policy.
+
+## Architecture, validation and rollback
+
+[Implementation and validation scope](Validation.md) records the exact files and test reconciliation. [Knowledge audit](Knowledge-Audit.json) inventories retained references and original image hashes. [Open PR snapshot](Open-PRs.json) separates pending work from current main. The draft completion comment pins the final commit and hosted results.
+
+Reproduce with existing dependencies:
+
+```sh
+python -m pytest tests/test_flora_lloyds_ceo.py tests/test_flora_lloyds_gold.py tests/test_flora_living_enterprise_preview.py -q
+python docs/product/flora-experience/lloyds-ceo/audit.py --check
+python docs/product/flora-experience/lloyds-ceo/browser.py after /tmp/flora-ceo-browser
+python docs/product/flora-experience/lloyds-ceo/validate.py --browser /tmp/flora-ceo-browser
+python tools/ci/flora_ci.py --output /tmp/flora-ceo-ci
+```
+
+First run the same browser script by absolute path with `before` from the detached baseline, sharing the output directory. Install Playwright/Chromium only as local test dependencies; no paid services are used.
+
+No migration or data reversal is required. The reverse patch restores the exact baseline tree, proved with an isolated Git index by `validate.py`. The predecessor remains at `/enterprises/lloyds/legacy` for compatibility and inspection; ordinary navigation uses the new default. If later approved for integration/deployment, validate the exact merge commit, deploy only through the existing FLORA - CURRENT manual procedure, preserve the actually live prior deployment and smoke-test Banking/Lloyds and Aviation/easyJet. **No merge or deployment occurs in this sprint.**
+
+## Critique and remaining owner decisions
+
+The default is visually coherent and the existing illustration now leads into meaningful executive dimensions. The design does not conceal uncertainty behind impressive diagrams. Deeper operating and scorecard views are deliberately more detailed than the arrival screen.
+
+The largest limitation is substantive: a CEO cannot obtain a complete earnings bridge, current leadership directory or workforce trend from the permitted public slice. Existing research is retained; public permission and matched evidence are not inferred from its presence. The government role adds dated context rather than solving current mandate verification. Conceptual operating pathways help orientation but cannot support system criticality or supplier opportunity conclusions. No independent review agent was commissioned for this turn; this is an explicit architectural/commercial self-critique, with owner review still required.
+
+Owner acceptance should assess the actual browser composition, whether these boundaries are clear, and which held source-use operation or missing evidence is worth resolving next. Visual acceptance and permission to merge/deploy remain pending.

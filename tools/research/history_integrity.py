@@ -163,6 +163,13 @@ def verify_history(root):
         assert hashlib.sha256(actual[flagship_path]).hexdigest()=='0b6ba8d32c76e714002792fd84b7f6cbad18e2ac576919a7af0ad87885413a54', 'Unknown Lloyds public policy excerpt'
         assert flagship_path not in expected
         actual.pop(flagship_path)
+    # CEO-1 retains one government-attributed professional-role fact as an exact
+    # additive research cut. This is not canonical acceptance or a general grant.
+    # All previous bytes, unknown-addition checks and comparator stay unchanged.
+    for role_path, digest in {'enterprise-knowledge/banking/research-model/source-snapshots/CEO1-GOV-ROLE.json': '1640c40b31756b8d5fbda729c0e183a1b7c5618cca1cc88ef898fcf69ffe4d69', 'enterprise-knowledge/banking/research-model/source-snapshots/CEO1-GOV-ROLE.txt': '061058a0e65aab6e5b97e97feae9bb6d5d4bd10110e9f1584f2a11009d6f328d'}.items():
+        assert role_path in actual and role_path not in expected
+        assert hashlib.sha256(actual[role_path]).hexdigest()==digest, 'Unknown CEO role source cut'
+        actual.pop(role_path)
     compare_history(expected,actual)
     return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS)-len(EAI1_CANDIDATE_ADDITIONS)-len(BIE2_CANDIDATE_ADDITIONS)-len(BIE3_CANDIDATE_ADDITIONS)-len(F1_CANDIDATE_ADDITIONS)-len(RUD1_ADDITIONS),
             'depth_additions':len(DEPTH_ADDITIONS),'macro_additions':len(MACRO_ADDITIONS),

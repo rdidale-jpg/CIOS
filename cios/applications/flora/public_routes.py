@@ -88,7 +88,8 @@ def public_route_catalog(include_owner_inspection=False):
     add(('/industries/banking/visual-specs','/industries/aviation/visual-specs'), 'visual_specs', 'Deterministic visual output of existing public research only')
     from .banking_portfolio import BANKS as public_banks
     add(tuple('/enterprises/'+slug for slug in (*public_banks,'easyjet') if slug!='lloyds'), 'unified_enterprise', 'Finite public bank references; not Enterprise Model lookup', ('lens',))
-    add(('/enterprises/lloyds',), 'visual_enterprise', 'Existing public Lloyds research reference, never a private Enterprise Model lookup', ('lens','stream','market','layer','selected','detail','agenda','reading'))
+    add(('/enterprises/lloyds',), 'visual_enterprise', 'Existing public Lloyds research reference, never a private Enterprise Model lookup', ('lens','stream','market','layer','selected','detail','agenda','reading','focus','subject'))
+    add(('/enterprises/lloyds/legacy',), 'lloyds_legacy', 'Historical public presentation, same Source guards; no private lookup', ('lens','stream','market','layer','selected','detail','agenda','reading'))
     add(('/enterprises/lloyds/preview',), 'living_enterprise_preview',
         'Experimental read-only view of the same eligible public Lloyds research; no private model or financial-run lookup', ('stream','focus','subject'))
     add(('/enterprises/lloyds/preview/assets/styles','/enterprises/lloyds/preview/assets/interactions'),

@@ -47,7 +47,8 @@ def test_three_connected_stages_share_modes_scope_and_native_urls(path, stages, 
 
 
 def test_banking_stocks_flows_actuals_and_derived_comparison_keep_definitions():
-    html = main()
+    # Historical financial component remains at its existing explicit deep link.
+    html = main(detail='funding')
     assert '£502.8bn' in html and 'Customer deposits · 30 Sep 2026' in html
     assert '£6.6bn' in html and 'Statutory pretax profit · 9m to 30 Sep 2026' in html
     assert '£6.3bn' in html and '31 December 2025 → 30 September 2026' in html

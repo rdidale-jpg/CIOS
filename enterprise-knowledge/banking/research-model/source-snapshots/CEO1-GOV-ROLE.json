@@ -1,0 +1,54 @@
+{
+  "authority": "analytical_working_research",
+  "canonical_mutation": false,
+  "source": {
+    "id": "CEO1-GOV-ROLE",
+    "title": "Seven new towns proposed to kickstart housebuilding push",
+    "publisher": "Ministry of Housing, Communities and Local Government / Homes England",
+    "url": "https://www.gov.uk/government/news/seven-new-towns-proposed-to-kickstart-housebuilding-push",
+    "retrieval_url": "https://www.gov.uk/government/news/seven-new-towns-proposed-to-kickstart-housebuilding-push",
+    "publication_date": "2026-03-22",
+    "publication_date_evidence": "Original GOV.UK Published field",
+    "reporting_period": "Role attributed on 22 March 2026; not a current mandate verification",
+    "retrieved_at": "2026-11-24T12:33:00+00:00",
+    "retrieval_method": "approved_web_research_tool",
+    "retrieval_reference": "turn150view1",
+    "reviewed_by": "Codex primary-source factual review",
+    "review_notes": "Only government speaker identification retained. Excludes all third-party quotation and housing financial figures. No current mandate, decision authority or supplier need inferred.",
+    "verification": "primary_retrieved",
+    "content_kind": "reviewed_web_excerpt",
+    "primary_content_sha256": null,
+    "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/CEO1-GOV-ROLE.txt",
+    "text_sha256": "061058a0e65aab6e5b97e97feae9bb6d5d4bd10110e9f1584f2a11009d6f328d",
+    "rights": {
+      "status": "permitted_ogl_factual_extract",
+      "basis": "Existing Source category: factual extracts from explicitly open government material; original neutral restatement only",
+      "terms_url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "scope": "Government-authored speaker-role attribution only; no third-party quote, image, financial selection, report copy, bulk collection, export or Financial-run persistence",
+      "review": "Original page footer states OGL v3 except where otherwise stated. Selected underlying public professional-role fact is independently restated; no issuer-site retrieval or mirror is used. This does not resolve or change Lloyds \u00a72/\u00a75.",
+      "attribution": "Contains public sector information licensed under the Open Government Licence v3.0."
+    },
+    "authority": "analytical_working_research",
+    "canonical_mutation": false,
+    "excerpts": [
+      {
+        "locator": "Additional stakeholder quotes; government speaker attribution, lines 190\u2013191",
+        "quote": "Charlie Nunn, Group Chief Executive at Lloyds Banking Group, said:"
+      }
+    ]
+  },
+  "facts": [
+    {
+      "id": "CEO1-ROLE-NUNN-20260322",
+      "subject_id": "BK-ENT-001",
+      "legal_name": "Lloyds Banking Group plc",
+      "semantic_type": "reported",
+      "name": "Charlie Nunn",
+      "role": "Group Chief Executive",
+      "period": "22 March 2026",
+      "current_mandate_verified": false,
+      "source_id": "CEO1-GOV-ROLE",
+      "statement": "The government identified Charlie Nunn as Lloyds Banking Group Chief Executive on 22 March 2026."
+    }
+  ]
+}

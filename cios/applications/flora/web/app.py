@@ -142,13 +142,16 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             if parsed.path == '/enterprises/lloyds/preview/gold':
                 from cios.applications.flora.lloyds_gold import resolve
                 resolve(parse_qs(parsed.query, keep_blank_values=True))
+            if parsed.path == '/enterprises/lloyds':
+                from cios.applications.flora.lloyds_gold import canonical_query
+                canonical_query(parse_qs(parsed.query, keep_blank_values=True))
             content_type = _content_type_for_path(parsed.path)
             if content_type is None:
                 self.send_error(404, "Flora web route not found")
                 return
             self.send_response(200)
             self.send_header("Content-Type", content_type)
-            if parsed.path in {'/enterprises/lloyds/preview/gold', '/enterprises/lloyds/preview/gold/assets/styles', '/enterprises/lloyds/preview', '/enterprises/lloyds/preview/assets/styles', '/enterprises/lloyds/preview/assets/interactions'}:
+            if parsed.path in {'/enterprises/lloyds', '/enterprises/lloyds/legacy', '/enterprises/lloyds/preview/gold', '/enterprises/lloyds/preview/gold/assets/styles', '/enterprises/lloyds/preview', '/enterprises/lloyds/preview/assets/styles', '/enterprises/lloyds/preview/assets/interactions'}:
                 self.send_header("Cache-Control", "no-store")
             self.end_headers()
         except ValueError as exc:
@@ -239,12 +242,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 from cios.applications.flora.living_enterprise_preview import asset
                 body, mime = asset(parsed.path.rsplit('/', 1)[-1])
                 self._body(body, mime, 200)
-            elif parsed.path in {'/industries/banking', '/enterprises/lloyds'}:
+            elif parsed.path in {'/industries/banking', '/enterprises/lloyds', '/enterprises/lloyds/legacy'}:
                 from cios.applications.flora import visual_streams
                 query = parse_qs(parsed.query, keep_blank_values=True)
                 if query.get('lens')==['inspection']:
                     from cios.applications.flora.visual_panels import research_inspection
-                    self._html(research_inspection(parsed.path,query,self.headers))
+                    self._html(research_inspection('/enterprises/lloyds' if parsed.path.endswith('/legacy') else parsed.path,query,self.headers))
                 elif 'lens' in query:
                     # Explicit specialist deep links retain their current owner.
                     if set(query) != {'lens'} or len(query['lens']) != 1:
