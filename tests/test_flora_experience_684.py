@@ -11,8 +11,8 @@ def test_enterprise_roots_observe_three_different_questions(path):
     roots = {}
     for stream in ("landscape", "inside", "forces"):
         query = {"stream": [stream]}
-        facts = main(v.render(path, query))
-        insight = main(v.render(path, {**query, "reading": ["insight"]}))
+        facts = main(v.render("/enterprises/lloyds/legacy" if path == "/enterprises/lloyds" else path, query))
+        insight = main(v.render("/enterprises/lloyds/legacy" if path == "/enterprises/lloyds" else path, {**query, "reading": ["insight"]}))
         assert 'aria-label="Reading mode"' not in facts
         assert facts == insight
         if path == "/enterprises/lloyds":
@@ -87,7 +87,7 @@ def test_competitive_comparisons_have_no_proxy_provenance(key):
 
 @pytest.mark.parametrize("mode", ["facts", "insight"])
 def test_lloyds_envoy_withdrawal_leaves_independent_conceptual_workflow(monkeypatch, mode):
-    path = "/enterprises/lloyds"
+    path = "/enterprises/lloyds/legacy"
     root = {"stream": ["inside"], "reading": [mode]}
     dedicated = {**root, "detail": ["technology"]}
     data = v.current_data(v.resolve(path, dedicated))
@@ -153,7 +153,7 @@ def test_lloyds_capability_preserves_mode_and_selection(mode):
 
 
 def test_lloyds_withdrawn_rate_retains_only_conceptual_transmission(monkeypatch):
-    path = "/enterprises/lloyds"
+    path = "/enterprises/lloyds/legacy"
     query = {"stream": ["forces"], "reading": ["insight"]}
     data = v.current_data(v.resolve(path, query))
     claim = next(row for row in data["claims"] if row["id"] == "UK-RATE-NOV26")

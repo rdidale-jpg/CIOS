@@ -47,7 +47,8 @@ def test_every_original_label_active_destination_and_inert_boundary(item):
  ctx=v.Context(item['scope'],item['stream']);data=v.current_data(ctx)
  row=next(r for r in v.destinations(ctx,data)if r['id']==item['id'])
  assert (row['label'],row['href'])==(item['label'],item['href'])
- html=v.render(v.SCOPES[item['scope']]['route'],{'stream':[item['stream']]})
+ # Approved original-label matrix now lives on the predecessor compatibility view.
+ html=v.render('/enterprises/lloyds/legacy' if item['scope']=='lloyds' else v.SCOPES[item['scope']]['route'],{'stream':[item['stream']]})
  assert item['label'].replace('&','&amp;')in html
  matches=[(tag,a)for tag,a in DOM(html).nodes if a.get('data-label-id')==item['id']]
  assert matches

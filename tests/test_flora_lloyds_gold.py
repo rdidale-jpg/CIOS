@@ -28,8 +28,8 @@ def test_group_arrival_and_optional_preservation():
     assert '<h1>Group overview</h1>' in body and '£502.8bn' in body and '£6.6bn' in body
     assert 'Gold Standard evaluation' in old.render({})
     assert '<h1>Retail Banking</h1>' in old.render({})
-    assert 'From funding to earnings' in v.render('/enterprises/lloyds',{})
-    assert gold.PATH not in v.render('/enterprises/lloyds',{})
+    assert 'From funding to earnings' in v.render('/enterprises/lloyds/legacy',{})
+    assert gold.PATH+'?' not in v.render('/enterprises/lloyds',{})
     assert 'Original preview' in body and 'Current experience' in body
     for forbidden in ('<details','Explore the business','Investigate forces','Reading mode','Financial runs'):
         assert forbidden not in body
@@ -186,8 +186,9 @@ def test_exact_route_evolution_preserves_historical_pins_and_denies_arbitrary_mu
     read=Path.read_bytes
     for path,pin in c.GOLD_ROUTE_PINS.items():
         target=ROOT/path;current=target.read_bytes()
-        assert sha256(current).hexdigest()==pin
-        previous=c.gold_route_predecessor(ROOT,path,current)
+        reviewed=c.ceo_predecessor(ROOT,path,current)
+        assert sha256(reviewed).hexdigest()==pin
+        previous=c.gold_route_predecessor(ROOT,path,reviewed)
         assert previous==subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
         assert c.predecessor(ROOT,path)!=current
         mutation=current+b'\n# Unreviewed routing mutation\n'
@@ -285,3 +286,35 @@ def test_deep_link_serialisation_and_parent_navigation_do_not_lose_or_trap_detai
     assert gold.resolve(parse_qs(urlsplit(gold.href(state)).query,keep_blank_values=True))==state
     assert 'detail=&amp;' not in gold.link(state,'Back')
     assert 'detail=#visual-content' in gold.link(state,'Back')
+
+
+def test_ceo_deep_links_keep_subject_and_withdraw_strategy_goals(http, monkeypatch):
+    state = gold.State('forces', 'strategy', 'commercial', 'goals')
+    target = gold.href(state).split('#', 1)[0]
+    status, _, html = http(target)
+    assert status == 200
+    assert 'From Commercial Banking' in html
+    assert 'data-claim-id="LBG-A2030-CIR"' in html
+    assert 'Management objectives, on their own reporting horizons.' in html
+    current = data()
+    next(source for source in current['sources'] if source['id'] == 'PR-LBG-A2030')['withdrawn'] = True
+    monkeypatch.setattr(v, 'current_data', lambda ctx: current)
+    status, _, html = http(target)
+    assert status == 200
+    assert 'From Commercial Banking' in html
+    assert 'data-claim-id="LBG-A2030-CIR"' not in html
+    assert 'Improve cost efficiency' not in html
+    assert 'data-claim-id="LBG-Q326-INVESTMENT"' in html
+
+
+def test_people_view_withdraws_workforce_evidence_without_inventing_accountability(monkeypatch):
+    query = {'stream': ['inside'], 'focus': ['people'], 'detail': ['workforce']}
+    html = gold.render(query)
+    assert 'data-claim-id="LBG-AR25-COPILOT"' in html
+    assert 'No headcount or workforce chart is derived' in html
+    current = data()
+    next(source for source in current['sources'] if source['id'] == 'PR-LBG-AR25')['withdrawn'] = True
+    monkeypatch.setattr(v, 'current_data', lambda ctx: current)
+    html = gold.render(query)
+    assert 'data-claim-id="LBG-AR25-COPILOT"' not in html
+    assert 'data-claim-id="LBG-BRAND26-NO-ROLES"' in html

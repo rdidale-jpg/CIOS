@@ -49,13 +49,17 @@ with TemporaryDirectory(prefix='flora-living-preview-') as directory, sync_playw
             page.get_by_role('navigation',name='Primary product navigation').get_by_role('link',name='Industries',exact=True).click()
             page.locator('a[href="/industries/banking"]:visible').first.click()
             page.locator('a[href="/enterprises/lloyds"]:visible').first.click()
+            legacy = '/enterprises/lloyds/legacy' if '/enterprises/lloyds/legacy' in v.ROUTES else '/enterprises/lloyds'
+            if legacy.endswith('/legacy'):
+                expect(page.locator('[data-experience="lloyds-ceo"]')).to_have_count(1)
+                page.goto(legacy)
             expect(page.locator('main')).to_contain_text('From funding to earnings')
             capture('current-lloyds')
             for stream in ('landscape','inside','forces'):
-                page.goto('/enterprises/lloyds?stream='+stream)
+                page.goto(legacy+'?stream='+stream)
                 text=re.sub(r'\s+',' ',page.locator('main').inner_text().replace('Preview New Experience','')).strip()
                 proof['baseline_content'][device+':'+stream]=text
-                html=v.render('/enterprises/lloyds',{'stream':[stream]})
+                html=v.render(legacy,{'stream':[stream]})
                 entry='<p class="reading-context" data-preview-entry><a href="/enterprises/lloyds/preview">Preview New Experience</a></p>'
                 proof['baseline_html_sha256'][stream]=sha256(html.replace(entry,'').encode()).hexdigest()
                 if args.phase=='after':
@@ -98,7 +102,10 @@ with TemporaryDirectory(prefix='flora-living-preview-') as directory, sync_playw
                 page.go_forward();expect(page.locator('main')).to_contain_text('From Commercial Banking')
                 page.get_by_role('link',name='Return to current experience',exact=True).click()
                 assert '/preview' not in page.url
-                expect(page.get_by_role('link',name='Preview New Experience',exact=True)).to_be_visible()
+                if legacy.endswith('/legacy'):
+                    expect(page.locator('[data-experience="lloyds-ceo"]')).to_have_count(1)
+                else:
+                    expect(page.get_by_role('link',name='Preview New Experience',exact=True)).to_be_visible()
                 assert not page.locator('[data-preview="experimental-design"]').count()
             # Preserve both ordinary Industries and Enterprises arrival routes.
             for path,title in [('/industries/aviation','Aviation'),('/enterprises/easyjet','easyJet'),('/enterprises/lloyds','Lloyds')]:

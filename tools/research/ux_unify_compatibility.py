@@ -77,8 +77,19 @@ def gold_route_predecessor(root, path, current):
     return current
 
 
+# CEO default: exact reviewed evolution; every earlier pin remains immutable.
+CEO_BASE = '1c13e6962516dbb071b2133f2c1a3de87647e2ac'
+CEO_PINS = {'cios/applications/flora/web/app.py': '4bfa58b674ffc293300626632d894894e9543e862386bebc92646ad835b05b2c', 'cios/applications/flora/public_routes.py': 'a9da56cb647eeecf1e8e3b0aae0454c577fdb670a220d84a79b53fbbb5c21662', 'cios/applications/flora/visual_streams.py': '5dc89b7988f0a45e4fbcad94c015a0d0e9735fbddaa513f53c42aeacf171270f', 'cios/applications/flora/research_intelligence/source_import.py': '4ec4d32e8ff09d3e5de187bcab2969618e5d4084a9a4da0cc0804fabcd54e6fa', 'tools/research/history_integrity.py': 'cd7715aa1065f6384fd2f342377e6b465dd3e29e631a806082a3f29a839ef323'}
+
+def ceo_predecessor(root,path,current):
+    if path in CEO_PINS and sha256(current).hexdigest()==CEO_PINS[path]:
+        return subprocess.check_output(['git','show',CEO_BASE+':'+path],cwd=root)
+    return current
+
+
 def predecessor(root, path):
     current = (Path(root) / path).read_bytes()
+    current = ceo_predecessor(root,path,current)
     current = gold_route_predecessor(root, path, current)
     if path in PREVIEW_ROUTE_PINS and sha256(current).hexdigest() == PREVIEW_ROUTE_PINS[path]:
         current = subprocess.check_output(["git", "show", f"{PREVIEW_ROUTE_BASE}:{path}"], cwd=root)

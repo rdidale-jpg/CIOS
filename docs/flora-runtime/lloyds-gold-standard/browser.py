@@ -29,7 +29,8 @@ with TemporaryDirectory(prefix='flora-gold-browser-') as runtime,sync_playwright
     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),(device,name,'overflow')
     filename=args.phase+'-'+device+'-'+name+'.jpg';page.screenshot(path=out/filename,quality=80);proof['screenshots'][filename]=sha256((out/filename).read_bytes()).hexdigest()
    for path,name in [('/enterprises/lloyds','default'),('/enterprises/lloyds/preview','original-preview'),('/enterprises/lloyds/preview?stream=forces&focus=renewal','original-forces')]:
-    assert page.goto(path).status==200
+    target='/enterprises/lloyds/legacy' if path=='/enterprises/lloyds' and '/enterprises/lloyds/legacy' in v.ROUTES else path
+    assert page.goto(target).status==200
     content=re.sub(r'\s+',' ',page.locator('main').inner_text().replace('Gold Standard evaluation','')).strip();proof['baseline'][device+':'+name]=content
     if args.phase=='after':assert json.loads((out/'Browser-before.json').read_text())['baseline'][device+':'+name]==content,(device,name,'Preserved content changed')
     else:capture(name)
@@ -66,7 +67,7 @@ with TemporaryDirectory(prefix='flora-gold-browser-') as runtime,sync_playwright
    for path,title in [('/industries/banking','Banking'),('/industries/aviation','Aviation'),('/enterprises/easyjet','easyJet')]:
     assert page.goto(path).status==200;assert title.lower() in page.locator('body').inner_text().lower()
    assert not errors and not failed,(errors,failed)
-   proof['devices'].append({'device':device,'fifteen_native_image_selections':args.phase=='after','eight_swot_theme_drills':args.phase=='after','application_evidence_unknowns':args.phase=='after','context_reload_history':args.phase=='after','original_and_default_preserved':True,'no_overflow':True,'keyboard_or_touch':True,'errors':errors});page.close()
+   proof['devices'].append({'device':device,'fifteen_native_image_selections':args.phase=='after','eight_swot_theme_drills':args.phase=='after','application_evidence_unknowns':args.phase=='after','context_reload_history':args.phase=='after','original_and_previous_default_preserved':True,'no_overflow':True,'keyboard_or_touch':True,'errors':errors});page.close()
   if args.phase=='after':
    page=browser.new_page(base_url=base,viewport={'width':1194,'height':834});source=v.current_data;d=deepcopy(source(v.Context('lloyds','landscape')))
    page.goto(g.href(g.State('landscape','economics','economics')));expect(page.locator('main')).to_contain_text('£502.8bn');page.goto(g.href(g.State('forces','analysis','analysis')))

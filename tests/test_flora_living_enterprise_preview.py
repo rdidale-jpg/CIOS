@@ -57,11 +57,11 @@ def test_three_layers_twelve_live_selections_and_same_original_art(stream):
 
 def test_preview_is_optional_and_preserves_existing_arrival_and_flagship():
     for query in ({},{'stream':['inside']},{'stream':['forces']},{'stream':['landscape'],'detail':['flagship']}):
-        html=v.render('/enterprises/lloyds',query)
+        html=v.render('/enterprises/lloyds/legacy',query)
         assert html.count('Preview New Experience')==1
         assert 'data-preview="experimental-design"' not in html
         assert 'aria-label="Insight streams"' in html
-    assert 'From funding to earnings' in v.render('/enterprises/lloyds',{})
+    assert 'From funding to earnings' in v.render('/enterprises/lloyds/legacy',{})
     flagship=v.render('/enterprises/lloyds',{'stream':['landscape'],'detail':['flagship']})
     assert all(text in flagship for text in ('Overview','Explore','Investigate','SWOT quadrants'))
     for path in ('/industries/banking',v.EASYJET_ROUTE):
@@ -89,7 +89,7 @@ def test_finite_public_route_cannot_expand_to_snapshots_or_private_records(http,
 
 
 def test_guest_http_entry_assets_headers_head_and_no_write_route(http):
-    status,headers,body=http('/enterprises/lloyds')
+    status,headers,body=http('/enterprises/lloyds/legacy')
     assert status==200 and 'Preview New Experience' in body
     assert public_request_target(preview.PATH)
     status,headers,body=http(preview.PATH)
@@ -224,7 +224,8 @@ def test_route_evolution_pins_are_exact_and_reject_unreviewed_bytes(monkeypatch)
     read_bytes=Path.read_bytes
     for path,expected in compatibility.PREVIEW_ROUTE_PINS.items():
         target=root/path;actual=target.read_bytes()
-        current=compatibility.gold_route_predecessor(root,path,actual)
+        reviewed=compatibility.ceo_predecessor(root,path,actual)
+        current=compatibility.gold_route_predecessor(root,path,reviewed)
         assert sha256(current).hexdigest()==expected
         assert compatibility.predecessor(root,path)!=current
         mutation=actual+b'\n# Unreviewed route mutation\n'

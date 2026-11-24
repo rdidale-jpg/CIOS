@@ -103,7 +103,7 @@ def test_guest_http_reaches_public_journey_but_not_owner_or_private_selectors(we
 
 def test_726_navigation_arrival_and_industry_specific_economics_survive():
     bank=main(v.render('/industries/banking',{}))
-    lloyds=v.render(LLOYDS,{})
+    lloyds=v.render('/enterprises/lloyds/legacy',{})
     air=v.render(v.EASYJET_ROUTE,{})
     for html in (lloyds,air):
         for label in ('Home','Industries','Enterprises','Opportunities','Pipeline'):

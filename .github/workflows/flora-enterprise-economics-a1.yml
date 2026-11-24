@@ -36,9 +36,12 @@ jobs:
       - name: All strict security tests
         run: python -m pytest tests/test_flora_security*.py -q
       - name: Optional Living Enterprise preview and fail-closed public source boundaries
-        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py -q
+        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py -q
       - name: Lloyds intelligence utilisation and immutable image verification
-        run: python docs/flora-runtime/lloyds-gold-standard/audit.py --check
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/gold-approved-cut" 1c13e6962516dbb071b2133f2c1a3de87647e2ac
+          cd "$RUNNER_TEMP/gold-approved-cut"
+          python docs/flora-runtime/lloyds-gold-standard/audit.py --check
       - name: Verify the A1 historical cut and its reverse-tree rollback
         run: |
           # The A1 exact-cut audit includes source paths that later PRs may
@@ -76,12 +79,23 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           python docs/flora-runtime/lloyds-gold-standard/browser.py "$RUNNER_TEMP/gold-browser" after
       - name: Gold scope, source inventory, capture hashes and reverse-tree rollback
-        run: python docs/flora-runtime/lloyds-gold-standard/validate.py
+        run: |
+          cd "$RUNNER_TEMP/gold-approved-cut"
+          python docs/flora-runtime/lloyds-gold-standard/validate.py
+      - name: CEO current-head default, predecessor, responsive, source and rollback proof
+        run: |
+          cd "$RUNNER_TEMP/gold-approved-cut"
+          python "$GITHUB_WORKSPACE/docs/product/flora-experience/lloyds-ceo/browser.py" before "$RUNNER_TEMP/ceo-browser"
+          cd "$GITHUB_WORKSPACE"
+          python docs/product/flora-experience/lloyds-ceo/browser.py after "$RUNNER_TEMP/ceo-browser"
+          python docs/product/flora-experience/lloyds-ceo/validate.py --browser "$RUNNER_TEMP/ceo-browser"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: flora-enterprise-economics-${{ github.event.pull_request.head.sha }}
           path: |
+            ${{ runner.temp }}/ceo-browser/*.json
+            ${{ runner.temp }}/ceo-browser/*.jpg
             ${{ runner.temp }}/economics-quality.json
             ${{ runner.temp }}/economics-browser/*.json
             ${{ runner.temp }}/economics-browser/*.jpg

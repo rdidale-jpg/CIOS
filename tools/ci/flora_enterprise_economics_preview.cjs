@@ -3,7 +3,8 @@ const {chromium} = require('playwright');
 const cfg = JSON.parse(fs.readFileSync(process.argv[2]));
 const assert = (ok, message) => { if (!ok) throw Error(message); };
 const views = [['desktop',1440,1000],['ipad-landscape',1180,820],['ipad-portrait',820,1180],['mobile',390,844],['mobile-320',320,740]];
-const banks = '/enterprises/lloyds?stream=landscape';
+// Exercise the retained A1 component explicitly; CEO default has its own proof.
+const banks = '/enterprises/lloyds?stream=landscape&detail=funding';
 const airline = '/enterprises/easyjet/preview?stream=landscape';
 (async () => {
   const browser = await chromium.launch({executablePath: process.env.CI ? undefined : '/usr/bin/chromium', args:['--no-sandbox']});
