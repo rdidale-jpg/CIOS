@@ -8,7 +8,7 @@ BASE='cc8d93fe7183fdd86fd4c4e81907a2a0764227a5'
 ALLOWED={'.github/workflows/flora-enterprise-economics-a1.yml','cios/applications/flora/lloyds_gold.py',
  'cios/applications/flora/visual_stream_assets/lloyds-gold.css','docs/product/flora-experience/FLORA-Experience-Contract-v1.0.md',
  'docs/product/flora-experience/Main-Canvas-Interaction-Contract.md','tests/test_flora_lloyds_ceo.py',
- 'tests/test_flora_main_canvas.py','tools/ci/flora_eai2_preview.cjs'}
+ 'tests/test_flora_main_canvas.py','tools/ci/flora_eai2_preview.cjs','docs/product/flora-experience/lloyds-ceo/browser.py'}
 def git(*args,**kw):return subprocess.check_output(['git',*args],cwd=ROOT,**kw)
 def validate(browser=None):
  paths=git('diff','--name-only',BASE,'HEAD',text=True).splitlines()

@@ -24,6 +24,8 @@ No inherited-failure baseline, comparator, permitted skips, strict security test
 
 The first hosted Gold browser run identified an actual inspection-style defect: the application's evidence entry inherited a zero font size from the visual-navigation container. The entry now uses the existing `gold-inspect` container. Original Gold/CEO browser assertions remain unchanged; the canvas browser additionally verifies visibility, a 44px target and successful evidence navigation at all four viewports. This correction changes no source destination or permission.
 
+The full CEO browser also exposed a compact-Left synchronization race: after selecting a stream it could inspect the old page's expanded scene before the next document had loaded, then try to tap a hidden scene target on the new page. It now waits for the active stream and, when expanding Left, its visibility. Original destinations, touch interactions, assertions and all four viewport journeys remain required; no runtime Left or navigation code changes.
+
 ## Reproduce
 
 ```sh

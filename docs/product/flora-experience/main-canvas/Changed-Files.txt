@@ -3,6 +3,7 @@ cios/applications/flora/lloyds_gold.py
 cios/applications/flora/visual_stream_assets/lloyds-gold.css
 docs/product/flora-experience/FLORA-Experience-Contract-v1.0.md
 docs/product/flora-experience/Main-Canvas-Interaction-Contract.md
+docs/product/flora-experience/lloyds-ceo/browser.py
 docs/product/flora-experience/main-canvas/Browser-after.json
 docs/product/flora-experience/main-canvas/Browser-before.json
 docs/product/flora-experience/main-canvas/Changed-Files.txt
