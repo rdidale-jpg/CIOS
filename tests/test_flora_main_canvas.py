@@ -88,6 +88,13 @@ def test_capability_organisation_and_technology_regions_preserve_boundaries():
  assert 'installed estate inventory'in apps
 
 
+def test_specialist_evidence_entry_uses_visible_inspection_not_visual_region_container():
+ html=v.render(g.CANONICAL,query('inside','applications','envoy'))
+ assert '<p class="gold-inspect"><a class="canvas-inspection-link"'in html
+ assert 'data-canvas-exception="inspection"'in html
+ assert 'Evidence &amp; dates'in html
+
+
 def test_disclosure_and_goal_rails_do_not_claim_progress_or_event_timing():
  html=v.render(g.CANONICAL,query('inside','programmes'))
  assert 'First displayed source date · not a delivery milestone'in html

@@ -22,6 +22,8 @@ Source withdrawal is applied through the existing owning data input. Dependent c
 
 No inherited-failure baseline, comparator, permitted skips, strict security test or source history cut is modified. Full local/hosted results and the exact final SHA are recorded in the PR completion report. Current source/canvas tests do not rely on predecessor substitution.
 
+The first hosted Gold browser run identified an actual inspection-style defect: the application's evidence entry inherited a zero font size from the visual-navigation container. The entry now uses the existing `gold-inspect` container. Original Gold/CEO browser assertions remain unchanged; the canvas browser additionally verifies visibility, a 44px target and successful evidence navigation at all four viewports. This correction changes no source destination or permission.
+
 ## Reproduce
 
 ```sh

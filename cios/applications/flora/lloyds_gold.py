@@ -464,7 +464,7 @@ def applications(state,facts):
                   ('Contracted service','Unknown'),('Support expiry','Unknown'),('Contract end / renewal','Unknown'),
                   ('Programme dependency','No verified installation-to-programme or contract dependency'),('Ownership / confidence','Attributed public disclosure; no canonical installation or contract assertion')]
             body+=table(('Field','Established boundary'),rows,'Application detail · Unknown means no supported assertion')
-            body+='<p class="gold-related">'+link(state,'Evidence & dates',detail='sources')+'</p></section>'
+            body+='<p class="gold-inspect">'+link(state,'Evidence & dates',detail='sources')+'</p></section>'
     return body
 
 

@@ -1,8 +1,8 @@
 {
   "phase": "after",
-  "sha": "cc8d93fe7183fdd86fd4c4e81907a2a0764227a5",
+  "sha": "a5b6177ae87f779a934346ec5d1c4f84c777acab",
   "runtime_hashes": {
-    "cios/applications/flora/lloyds_gold.py": "30f4cb15694eeb46188a72fc7e410cb7ccb12aa1f3aade309e691970b61b3edc",
+    "cios/applications/flora/lloyds_gold.py": "58a3459457ef7ced31df37ffd255ed17dfd651a9eb02e228760a7e61144dfea4",
     "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "e043a0a8cf50e68c3467bbba1042fe240b2c24dfaee4909464b620016f57ca42"
   },
   "environment": "Isolated HTTP Chromium; emulated iPads/touch; no Render or physical Safari claim",
@@ -49,24 +49,28 @@
     {
       "device": "desktop",
       "physical_hits": true,
+      "inspection_visible_and_44px": true,
       "no_overflow": true,
       "errors": []
     },
     {
       "device": "ipad-landscape",
       "physical_hits": true,
+      "inspection_visible_and_44px": true,
       "no_overflow": true,
       "errors": []
     },
     {
       "device": "ipad-portrait",
       "physical_hits": true,
+      "inspection_visible_and_44px": true,
       "no_overflow": true,
       "errors": []
     },
     {
       "device": "mobile",
       "physical_hits": true,
+      "inspection_visible_and_44px": true,
       "no_overflow": true,
       "errors": []
     }

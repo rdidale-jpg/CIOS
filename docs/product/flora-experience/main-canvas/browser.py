@@ -73,12 +73,14 @@ def run(phase,out,smoke=False):
      page.wait_for_url(lambda url:'detail=quadrant-'in str(url));assert 'detail=quadrant-'in page.url
      page.goto(PATH+'?stream=forces&focus=analysis');target=page.locator('main .canvas-themes>a').first;target.scroll_into_view_if_needed();box=target.bounding_box();(page.mouse.click if device=='desktop'else page.touchscreen.tap)(box['x']+box['width']*.75,box['y']+box['height']*.8);page.wait_for_url(lambda url:'detail=theme-'in str(url));assert 'detail=theme-'in page.url
      chosen=page.url;page.reload();assert page.url==chosen;page.go_back();page.go_forward();assert page.url==chosen
+     page.goto(PATH+'?stream=inside&focus=applications&detail=envoy');inspection=page.get_by_role('link',name='Evidence & dates',exact=True);expect(inspection).to_be_visible();box=inspection.bounding_box();assert box['width']>=44 and box['height']>=44
+     inspection.click();expect(page.locator('main h2')).to_have_text('Evidence, dates & boundaries');assert not page.locator('main a[href*=".pdf"]').count()
      page.goto(PATH);link=page.locator('main .canvas-businesses>a').first;link.hover();assert link.evaluate('e=>getComputedStyle(e).textDecorationLine')=='none';assert link.evaluate('e=>getComputedStyle(e).boxShadow')!='none';link.focus();assert link.evaluate('e=>getComputedStyle(e).outlineStyle')=='solid';page.keyboard.press('Enter');expect(page.locator('main h1')).to_have_text('Retail Banking')
      if device=='desktop':
       page.goto(PATH);page.evaluate("document.documentElement.style.zoom='2'");capture('zoom-200');page.evaluate("document.documentElement.style.zoom='1'")
      for route in (PATH+'/legacy',PATH+'/preview','/industries/banking','/industries/aviation','/enterprises/easyjet'):
       assert page.goto(route).status==200,route
-    assert not errors and not failed,(errors,failed);proof['devices'].append({'device':device,'physical_hits':phase=='after'and not smoke,'no_overflow':True,'errors':errors});page.close()
+    assert not errors and not failed,(errors,failed);proof['devices'].append({'device':device,'physical_hits':phase=='after'and not smoke,'inspection_visible_and_44px':phase=='after'and not smoke,'no_overflow':True,'errors':errors});page.close()
    if phase=='after' and not smoke:
     context=browser.new_context(base_url=base,java_script_enabled=False);page=context.new_page();page.goto(PATH+'?stream=forces&focus=analysis');page.locator('main .canvas-themes>a').first.click();expect(page.locator('main')).to_contain_text('Counter-evidence');context.close();proof['no_javascript']=True
     original=v.current_data;data=deepcopy(original(v.Context('lloyds','landscape')));next(s for s in data['sources']if s['id']=='PR-LBG-Q326')['withdrawn']=True
