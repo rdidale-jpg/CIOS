@@ -36,7 +36,7 @@ jobs:
       - name: All strict security tests
         run: python -m pytest tests/test_flora_security*.py -q
       - name: Optional Living Enterprise preview and fail-closed public source boundaries
-        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py -q
+        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py tests/test_flora_main_canvas.py -q
       - name: Lloyds intelligence utilisation and immutable image verification
         run: |
           git worktree add --detach "$RUNNER_TEMP/gold-approved-cut" 1c13e6962516dbb071b2133f2c1a3de87647e2ac
@@ -88,12 +88,21 @@ jobs:
           python "$GITHUB_WORKSPACE/docs/product/flora-experience/lloyds-ceo/browser.py" before "$RUNNER_TEMP/ceo-browser"
           cd "$GITHUB_WORKSPACE"
           python docs/product/flora-experience/lloyds-ceo/browser.py after "$RUNNER_TEMP/ceo-browser"
-          python docs/product/flora-experience/lloyds-ceo/validate.py --browser "$RUNNER_TEMP/ceo-browser"
+          # The CEO exact-scope/capture audit remains an immutable historical cut.
+          git worktree add --detach "$RUNNER_TEMP/ceo-approved-cut" cc8d93fe7183fdd86fd4c4e81907a2a0764227a5
+          cd "$RUNNER_TEMP/ceo-approved-cut"
+          python docs/product/flora-experience/lloyds-ceo/validate.py
+          python "$GITHUB_WORKSPACE/docs/product/flora-experience/main-canvas/browser.py" before "$RUNNER_TEMP/canvas-browser"
+          cd "$GITHUB_WORKSPACE"
+          python docs/product/flora-experience/main-canvas/browser.py after "$RUNNER_TEMP/canvas-browser"
+          python docs/product/flora-experience/main-canvas/validate.py --browser "$RUNNER_TEMP/canvas-browser"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: flora-enterprise-economics-${{ github.event.pull_request.head.sha }}
           path: |
+            ${{ runner.temp }}/canvas-browser/*.json
+            ${{ runner.temp }}/canvas-browser/*.jpg
             ${{ runner.temp }}/ceo-browser/*.json
             ${{ runner.temp }}/ceo-browser/*.jpg
             ${{ runner.temp }}/economics-quality.json

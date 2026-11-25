@@ -1,0 +1,219 @@
+{
+  "phase": "before",
+  "sha": "cc8d93fe7183fdd86fd4c4e81907a2a0764227a5",
+  "runtime_hashes": {
+    "cios/applications/flora/lloyds_gold.py": "db7e75758fcdea902e1d054ae79e4ecfda2dc2062144bf2ad56fbc7718425bbe",
+    "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "86349ea8c7fcc0eab212b12cc3f904c2c28ca41965ab45d863f9fa153d17567a"
+  },
+  "environment": "Isolated HTTP Chromium; emulated iPads/touch; no Render or physical Safari claim",
+  "screenshots": {
+    "before-desktop-group.jpg": "1daed6c7b0aed3a88aecd3b707c735b4c89eeb0daa58def7cf4079235c5b7ecd",
+    "before-desktop-economics.jpg": "7d6ab80e61758923fa420debec0380dfd549a262accb0d2927f9a784c697e7b2",
+    "before-desktop-organisation.jpg": "15117c47eadcbdfdd3946523da513e81798ebbba1c2851efb0790513c7a72b25",
+    "before-desktop-operating.jpg": "e48744102002a8cea64c37d191df56c527ac228c66595932bc8b58dbc5766dfe",
+    "before-desktop-capabilities.jpg": "8da5b2cc43dd9964c8c9f67394b8511c509d08ad28ca5bc0bac24955ab95cc70",
+    "before-desktop-applications.jpg": "169a2eda08b61d9cd11d90011a470143c37b6ebc9a84a199877efa03997cca05",
+    "before-desktop-programmes.jpg": "f1102a3600c5c48a9106704a5f33121dce1ad9a89083635fadccc97c93fe396b",
+    "before-desktop-strategy.jpg": "ead5598495f1c4909dc874c14142285e00db373d6f662a8bbe594f5ca5f1b2c8",
+    "before-desktop-swot.jpg": "e7e8c35d00f74e78464806a0143ccf081974b2fa1f50d617241d7f78870ae156",
+    "before-ipad-landscape-group.jpg": "9ff635815ec911d2c1d29d4eb701ca7261945593d5cf6a27128bb3c7de97f5d0",
+    "before-ipad-landscape-economics.jpg": "f4d822a1853fbba667735ad19a876431b1ac37bed009962e74f9484874300ac9",
+    "before-ipad-landscape-organisation.jpg": "1d7551dca02fe79a97164a866407e4cdf1fec7788ea51120e6f7367a1ee8d8a3",
+    "before-ipad-landscape-operating.jpg": "f7e1d66cf0334d6bb3b693035f1cd807976a85e770e6cdfb0a96d23450c7e6a9",
+    "before-ipad-landscape-capabilities.jpg": "c5bd1b5af6e3c002135160bb3fdd938a43bca96d52bae2896a3448ae4279c89b",
+    "before-ipad-landscape-applications.jpg": "02459360b170f2c87554e01eba8181e093b93d8fa015d5eb2ce8366621390fdc",
+    "before-ipad-landscape-programmes.jpg": "6f755e9bc166126bd207aa651bdcc883d1e97aa6971b57de732b987cbf48a0ea",
+    "before-ipad-landscape-strategy.jpg": "8a54521ba62ff6ffcef168a789010f725f783a4fe8033bfbcc258b565c48c679",
+    "before-ipad-landscape-swot.jpg": "fc8144d0144f8bc60ce012af4d1d66f686ac3698610fb3d9f9b664fc7cbd70a5",
+    "before-ipad-portrait-group.jpg": "25f3a62a937d073dac0bae5283d28b61dd8b7e5ee164c3dd52daaf8cce99d406",
+    "before-ipad-portrait-economics.jpg": "c78db97678456f3330f06bd94506c1181e5d93bfc49acb3457fcae88a4c4b969",
+    "before-ipad-portrait-organisation.jpg": "8cb7fe7f61b1653d7ec1bc49c1e6c678a22f7dddc1b0953e8d0949e7ce7a149c",
+    "before-ipad-portrait-operating.jpg": "44635064bbb4fa0bc2bd01d17dfea38db6a8797dc30dee7168bbc22d86151b63",
+    "before-ipad-portrait-capabilities.jpg": "09b35ec435574fed94d20bb065df39601ed4103b7b3ba5935b7ee7c973301797",
+    "before-ipad-portrait-applications.jpg": "31ecdd9db98b72243c13d9cd7644abeef51d5ab4008b3d0d4b40ba869230d0eb",
+    "before-ipad-portrait-programmes.jpg": "fe2cdabcd00abe2af69952bfab59f497495c16e8fb1839da980672e21101f171",
+    "before-ipad-portrait-strategy.jpg": "980571a3bf5fdde9da0f12336eb3c8464d1bd31b2fa255857f0927ae937623e7",
+    "before-ipad-portrait-swot.jpg": "17c74d6290dd783aa0e123d9e8e3e2d8a41d9099254bf11fb3f440102ad094ef",
+    "before-mobile-group.jpg": "7b3687de0349c79275322959c73bcb30764f55d5ee07bfc3da5a5a471e4333aa",
+    "before-mobile-economics.jpg": "1ad5b2029a35a97572903affbfd14703a04a2379fe0b8157ad93239b682f2172",
+    "before-mobile-organisation.jpg": "6af5cea13a53e7e4cae1cdcab6a4bc6f1a7a9e003a1999d2131920ab535c3432",
+    "before-mobile-operating.jpg": "1706ab65f4f4de4130cd297f6cfb4499eafaa916fbeb2ca498bcec1f21505089",
+    "before-mobile-capabilities.jpg": "48cb7676aa539efb37bd9985f1b148e5c1cac9804d58067c6396a069248ab8b2",
+    "before-mobile-applications.jpg": "a847be830c24c8124fa66235999cb48a983774af4332e24ddbc48682f4f05cda",
+    "before-mobile-programmes.jpg": "6791e5616cb2628a4e916538bd7ed43ce4c453a445a595db526cc13a7246365b",
+    "before-mobile-strategy.jpg": "9327ae70dc955686125977336c81ce40f1bd285cbd7bcc80421105a558715ebe",
+    "before-mobile-swot.jpg": "ac30522428dd03222f239794eaae273aeed1a704940db9a8b7a3caa4426ee538"
+  },
+  "devices": [
+    {
+      "device": "desktop",
+      "physical_hits": false,
+      "no_overflow": true,
+      "errors": []
+    },
+    {
+      "device": "ipad-landscape",
+      "physical_hits": false,
+      "no_overflow": true,
+      "errors": []
+    },
+    {
+      "device": "ipad-portrait",
+      "physical_hits": false,
+      "no_overflow": true,
+      "errors": []
+    },
+    {
+      "device": "mobile",
+      "physical_hits": false,
+      "no_overflow": true,
+      "errors": []
+    }
+  ],
+  "audits": {
+    "desktop:group": {
+      "underlinedInternal": 6,
+      "visualRegions": 0
+    },
+    "desktop:economics": {
+      "underlinedInternal": 5,
+      "visualRegions": 0
+    },
+    "desktop:organisation": {
+      "underlinedInternal": 7,
+      "visualRegions": 0
+    },
+    "desktop:operating": {
+      "underlinedInternal": 9,
+      "visualRegions": 0
+    },
+    "desktop:capabilities": {
+      "underlinedInternal": 3,
+      "visualRegions": 0
+    },
+    "desktop:applications": {
+      "underlinedInternal": 2,
+      "visualRegions": 0
+    },
+    "desktop:programmes": {
+      "underlinedInternal": 5,
+      "visualRegions": 0
+    },
+    "desktop:strategy": {
+      "underlinedInternal": 8,
+      "visualRegions": 0
+    },
+    "desktop:swot": {
+      "underlinedInternal": 0,
+      "visualRegions": 0
+    },
+    "ipad-landscape:group": {
+      "underlinedInternal": 6,
+      "visualRegions": 0
+    },
+    "ipad-landscape:economics": {
+      "underlinedInternal": 5,
+      "visualRegions": 0
+    },
+    "ipad-landscape:organisation": {
+      "underlinedInternal": 7,
+      "visualRegions": 0
+    },
+    "ipad-landscape:operating": {
+      "underlinedInternal": 9,
+      "visualRegions": 0
+    },
+    "ipad-landscape:capabilities": {
+      "underlinedInternal": 3,
+      "visualRegions": 0
+    },
+    "ipad-landscape:applications": {
+      "underlinedInternal": 2,
+      "visualRegions": 0
+    },
+    "ipad-landscape:programmes": {
+      "underlinedInternal": 5,
+      "visualRegions": 0
+    },
+    "ipad-landscape:strategy": {
+      "underlinedInternal": 8,
+      "visualRegions": 0
+    },
+    "ipad-landscape:swot": {
+      "underlinedInternal": 0,
+      "visualRegions": 0
+    },
+    "ipad-portrait:group": {
+      "underlinedInternal": 6,
+      "visualRegions": 0
+    },
+    "ipad-portrait:economics": {
+      "underlinedInternal": 5,
+      "visualRegions": 0
+    },
+    "ipad-portrait:organisation": {
+      "underlinedInternal": 7,
+      "visualRegions": 0
+    },
+    "ipad-portrait:operating": {
+      "underlinedInternal": 9,
+      "visualRegions": 0
+    },
+    "ipad-portrait:capabilities": {
+      "underlinedInternal": 3,
+      "visualRegions": 0
+    },
+    "ipad-portrait:applications": {
+      "underlinedInternal": 2,
+      "visualRegions": 0
+    },
+    "ipad-portrait:programmes": {
+      "underlinedInternal": 5,
+      "visualRegions": 0
+    },
+    "ipad-portrait:strategy": {
+      "underlinedInternal": 8,
+      "visualRegions": 0
+    },
+    "ipad-portrait:swot": {
+      "underlinedInternal": 0,
+      "visualRegions": 0
+    },
+    "mobile:group": {
+      "underlinedInternal": 6,
+      "visualRegions": 0
+    },
+    "mobile:economics": {
+      "underlinedInternal": 5,
+      "visualRegions": 0
+    },
+    "mobile:organisation": {
+      "underlinedInternal": 7,
+      "visualRegions": 0
+    },
+    "mobile:operating": {
+      "underlinedInternal": 9,
+      "visualRegions": 0
+    },
+    "mobile:capabilities": {
+      "underlinedInternal": 3,
+      "visualRegions": 0
+    },
+    "mobile:applications": {
+      "underlinedInternal": 2,
+      "visualRegions": 0
+    },
+    "mobile:programmes": {
+      "underlinedInternal": 5,
+      "visualRegions": 0
+    },
+    "mobile:strategy": {
+      "underlinedInternal": 8,
+      "visualRegions": 0
+    },
+    "mobile:swot": {
+      "underlinedInternal": 0,
+      "visualRegions": 0
+    }
+  }
+}

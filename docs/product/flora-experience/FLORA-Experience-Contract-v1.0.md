@@ -1,5 +1,8 @@
 # FLORA Experience Contract v1.0 — Three Levels, Facts First, Insight by Choice
 
+> **Current binding presentation update — 25 November 2026:** [Main Canvas Visual Interaction Contract](Main-Canvas-Interaction-Contract.md). Executive Main uses whole-region visual selection, with no underlined text navigation. The owner subsequently replaced the separate Facts / FLORA Insight experience with unified eligible intelligence in #728, promoted the CEO/Gold default in #732, and now mandates visual regions. The older two-mode directions below are retained as historical decisions, not instructions to restore the selector. Existing Source, Financial, permission, canonical and Pipeline ownership is unchanged.
+
+
 **Status:** Owner-agreed **product experience direction**, 18 November 2026. **Proposed repository design contract for owner confirmation and downstream implementation; not an accepted architecture ADR, not a runtime change.** This records the owner's express acceptance of the three-level presentation matrix and the *two-option* **Facts | FLORA Insight** selector at the top of Main. It does not reclassify IT-001 (Review), EIF-001 (Review), EI-001 (Draft), EGM-001 (Founder Review), or the INT-MAP-1 draft as accepted canonical architecture.
 
 **Mission:** One comprehensible intelligence experience across **UK → Industry → Enterprise**, with **Facts as the default in Main at every level and every primary perspective**. FLORA Insight is a deliberate alternative rendering of **the same selected subject**, not a route to obscuring or modifying factual knowledge.

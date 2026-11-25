@@ -1,0 +1,330 @@
+{
+  "phase": "after",
+  "sha": "cc8d93fe7183fdd86fd4c4e81907a2a0764227a5",
+  "runtime_hashes": {
+    "cios/applications/flora/lloyds_gold.py": "30f4cb15694eeb46188a72fc7e410cb7ccb12aa1f3aade309e691970b61b3edc",
+    "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "e043a0a8cf50e68c3467bbba1042fe240b2c24dfaee4909464b620016f57ca42"
+  },
+  "environment": "Isolated HTTP Chromium; emulated iPads/touch; no Render or physical Safari claim",
+  "screenshots": {
+    "after-desktop-group.jpg": "061a6f33fa9b1af6da7c715e117ffa7792ddb6fafdfd49e2f8d47fb998be2d70",
+    "after-desktop-economics.jpg": "892ade81bd5615ae206fbe40e42e15f00c02457389554ca1e289a5cdc63e0a4b",
+    "after-desktop-organisation.jpg": "10e0aefccd7fb7df5f6b1105d222304af95d5d9192338338f7d75008c0878dab",
+    "after-desktop-operating.jpg": "e774ad886896fdf22bc8b3b82fc0afcbe9dffe1df9f41575e354d4498043eb88",
+    "after-desktop-capabilities.jpg": "eda3407773ada34860c7c35f3137defa01ab9f32b53f15c57a894656d615f432",
+    "after-desktop-applications.jpg": "b1eb0426d15681cd4f2d61ff720f72ea1ed54d685498310ec4b77fe715375b1d",
+    "after-desktop-programmes.jpg": "657d94e528d70054669f46c8d9cb999e60a032d8fef2aed74d017784000d3a08",
+    "after-desktop-strategy.jpg": "57a90b4ef71b4e7a324408ee417136bd94cd019001e7fb47f012d3f380c3d36a",
+    "after-desktop-swot.jpg": "cd2e7ef64eeee8abffb1289166207282bcfa823ac71214f0e37d12ffa02d0aa0",
+    "after-desktop-zoom-200.jpg": "bbfd6ae9de22b184b9da44aa4cae33e0dcc9ed53267fe418107680cef4de6a2d",
+    "after-ipad-landscape-group.jpg": "16f141cd8d307b7e4c6858b086f01f566ab05cad0255b51585b3d141efda9621",
+    "after-ipad-landscape-economics.jpg": "c7994e509c1f4cdad28a3dd45654ae756d89e096e6a885d8bc93065af77b652f",
+    "after-ipad-landscape-organisation.jpg": "43e79831399b62beb954efd65ca9f8c0aa945baa5d9e519a96ff2b981e2c7760",
+    "after-ipad-landscape-operating.jpg": "4df1f068ae7a8a604a3dbe07ca8a8b7ce774c3b0d11d86cd352101d7b7278782",
+    "after-ipad-landscape-capabilities.jpg": "e8bf73410601e7171233e4e17aa904ebb529524a3dac35ad17cb25d0e33d7511",
+    "after-ipad-landscape-applications.jpg": "9670741699bab2c478df1f7a1639a57a7671277b8f3dd9025d7f17f28edde6e9",
+    "after-ipad-landscape-programmes.jpg": "8ac2f34e2266bc975c1ce6cbad879bfa483064d99333f86014448f2b508ddfaf",
+    "after-ipad-landscape-strategy.jpg": "e4cdda62cbfef7c4136db626c371d399eb02686de80cdfd74e199cacddc8640d",
+    "after-ipad-landscape-swot.jpg": "0d7486e7bcdf51ac7442eb62c614a59e244a2ef9afe3bc6c90b978746eda7c03",
+    "after-ipad-portrait-group.jpg": "ee64e18b5c024c0949fb679ef3956b994f6f95c4e2a596aea2cc092210188739",
+    "after-ipad-portrait-economics.jpg": "8213301e38623f0489dd07fcd9005b0a014bfd1f65a61dc8b295741b3479ff74",
+    "after-ipad-portrait-organisation.jpg": "4930fe2c001de935f9e30bf2376b2e67ab7930d2ae5485b76d1182f32cd9bc49",
+    "after-ipad-portrait-operating.jpg": "8e628791ba6a086ecb68521042693335cf6c67403ab9da3de33a65de8d2cea8f",
+    "after-ipad-portrait-capabilities.jpg": "2c544e35e2940d251723ea1b89b6362b6152d531b8d40805ebc6c1b2235c1e4f",
+    "after-ipad-portrait-applications.jpg": "140d3dfad9c98cb5ce90f242e34a1a83bead6ebcd736ddd9eb0d4eb8150a842e",
+    "after-ipad-portrait-programmes.jpg": "239f03be8ed2e4e99925fbdaf25d71a01be27ed7465ae20bf8065913b54566fd",
+    "after-ipad-portrait-strategy.jpg": "499002806d0a18947d91cf398450476998d4914064070e9097686b625d6f0d32",
+    "after-ipad-portrait-swot.jpg": "342728b5619b7a1fe0d0ec7e483d9b188d889e4e904503419ea0afdb09220737",
+    "after-mobile-group.jpg": "eb141677d148c497689434c6525ec6b880c34436e7943d38657403acd0048406",
+    "after-mobile-economics.jpg": "5497ad6743b29fcd678a432818644272188e36e890023ed9747750164ad8e08a",
+    "after-mobile-organisation.jpg": "ae98aac6da3108d666ee90b2ff845bf506410e891b23c7a65bc09d5ec17ea1d7",
+    "after-mobile-operating.jpg": "1f68f59d49cf875e8b716b30bd73bf83b589d7cdc6a22399e84ab81a1526874b",
+    "after-mobile-capabilities.jpg": "cb087c2e07e9de7e0a38d207b79f3ba56241462a5a539bd063f165a75d44b05a",
+    "after-mobile-applications.jpg": "707d320232a4f06fe826864c2b01f3167c66821c05535baad08e11324785e00e",
+    "after-mobile-programmes.jpg": "d67078ad21651e5fdc843ee1cd851bada9ae539b482e1cfe69c3980db585952a",
+    "after-mobile-strategy.jpg": "02ce2a115bc8f1a1f8cc2af0f410aa904490cb6e45115de9beb5610c3957617b",
+    "after-mobile-swot.jpg": "7b8b0cbd637f3f826a7338089ec45223fca674db6d1979229604beabb37eba45"
+  },
+  "devices": [
+    {
+      "device": "desktop",
+      "physical_hits": true,
+      "no_overflow": true,
+      "errors": []
+    },
+    {
+      "device": "ipad-landscape",
+      "physical_hits": true,
+      "no_overflow": true,
+      "errors": []
+    },
+    {
+      "device": "ipad-portrait",
+      "physical_hits": true,
+      "no_overflow": true,
+      "errors": []
+    },
+    {
+      "device": "mobile",
+      "physical_hits": true,
+      "no_overflow": true,
+      "errors": []
+    }
+  ],
+  "audits": {
+    "desktop:group": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 12
+    },
+    "desktop:economics": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 13
+    },
+    "desktop:organisation": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 11
+    },
+    "desktop:operating": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 9
+    },
+    "desktop:capabilities": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 10
+    },
+    "desktop:applications": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 2
+    },
+    "desktop:programmes": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 5
+    },
+    "desktop:strategy": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 8
+    },
+    "desktop:swot": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 12
+    },
+    "ipad-landscape:group": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 12
+    },
+    "ipad-landscape:economics": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 13
+    },
+    "ipad-landscape:organisation": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 11
+    },
+    "ipad-landscape:operating": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 9
+    },
+    "ipad-landscape:capabilities": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 10
+    },
+    "ipad-landscape:applications": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 2
+    },
+    "ipad-landscape:programmes": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 5
+    },
+    "ipad-landscape:strategy": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 8
+    },
+    "ipad-landscape:swot": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 12
+    },
+    "ipad-portrait:group": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 12
+    },
+    "ipad-portrait:economics": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 13
+    },
+    "ipad-portrait:organisation": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 11
+    },
+    "ipad-portrait:operating": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 9
+    },
+    "ipad-portrait:capabilities": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 10
+    },
+    "ipad-portrait:applications": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 2
+    },
+    "ipad-portrait:programmes": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 5
+    },
+    "ipad-portrait:strategy": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 8
+    },
+    "ipad-portrait:swot": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 12
+    },
+    "mobile:group": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 12
+    },
+    "mobile:economics": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 13
+    },
+    "mobile:organisation": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 11
+    },
+    "mobile:operating": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 9
+    },
+    "mobile:capabilities": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 10
+    },
+    "mobile:applications": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 2
+    },
+    "mobile:programmes": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 5
+    },
+    "mobile:strategy": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 8
+    },
+    "mobile:swot": {
+      "underlined": [],
+      "small": [],
+      "bare": [],
+      "nested": 0,
+      "regions": 12
+    }
+  },
+  "no_javascript": true,
+  "withdrawal_history_reload_print_accessibility": true
+}
