@@ -1,0 +1,662 @@
+{
+  "baseline": "2757e459f90fc4e1156180acf5f7ed9a40c292d9",
+  "authority": "research_review_only",
+  "existing_artifact": "docs/flora-runtime/technology-visual-foundation/Foundation.json",
+  "providers": [
+    {
+      "key": "microsoft",
+      "pointer": "/providers/0",
+      "identity_status": "unbound",
+      "review": "cohort"
+    },
+    {
+      "key": "sap",
+      "pointer": "/providers/1",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "oracle",
+      "pointer": "/providers/2",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "salesforce",
+      "pointer": "/providers/3",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "servicenow",
+      "pointer": "/providers/4",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "sage",
+      "pointer": "/providers/5",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "workday",
+      "pointer": "/providers/6",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "pega",
+      "pointer": "/providers/7",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "access-group",
+      "pointer": "/providers/8",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "oneadvanced",
+      "pointer": "/providers/9",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "adobe",
+      "pointer": "/providers/10",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "autodesk",
+      "pointer": "/providers/11",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "aveva",
+      "pointer": "/providers/12",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "aws",
+      "pointer": "/providers/13",
+      "identity_status": "unbound",
+      "review": "cohort"
+    },
+    {
+      "key": "google-cloud",
+      "pointer": "/providers/14",
+      "identity_status": "unbound",
+      "review": "cohort"
+    },
+    {
+      "key": "snowflake",
+      "pointer": "/providers/15",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "databricks",
+      "pointer": "/providers/16",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "ovhcloud",
+      "pointer": "/providers/17",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "rackspace",
+      "pointer": "/providers/18",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "quantexa",
+      "pointer": "/providers/19",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "faculty",
+      "pointer": "/providers/20",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "nvidia",
+      "pointer": "/providers/21",
+      "identity_status": "unbound",
+      "review": "cohort"
+    },
+    {
+      "key": "openai",
+      "pointer": "/providers/22",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "anthropic",
+      "pointer": "/providers/23",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "google-deepmind",
+      "pointer": "/providers/24",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "ncc-group",
+      "pointer": "/providers/25",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "sophos",
+      "pointer": "/providers/26",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "darktrace",
+      "pointer": "/providers/27",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "palo-alto-networks",
+      "pointer": "/providers/28",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "crowdstrike",
+      "pointer": "/providers/29",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "fortinet",
+      "pointer": "/providers/30",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "rubrik",
+      "pointer": "/providers/31",
+      "identity_status": "unbound",
+      "review": "cohort"
+    },
+    {
+      "key": "accenture",
+      "pointer": "/providers/32",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "ibm",
+      "pointer": "/providers/33",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "capgemini",
+      "pointer": "/providers/34",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "sopra-steria",
+      "pointer": "/providers/35",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "dxc",
+      "pointer": "/providers/36",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "kainos",
+      "pointer": "/providers/37",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "tcs-diligenta",
+      "pointer": "/providers/38",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "infosys",
+      "pointer": "/providers/39",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "cognizant",
+      "pointer": "/providers/40",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "ntt-data",
+      "pointer": "/providers/41",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "equal-experts",
+      "pointer": "/providers/42",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "version-1",
+      "pointer": "/providers/43",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "netcompany",
+      "pointer": "/providers/44",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "cgi",
+      "pointer": "/providers/45",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "fujitsu",
+      "pointer": "/providers/46",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "hcltech",
+      "pointer": "/providers/47",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "wipro",
+      "pointer": "/providers/48",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "tech-mahindra",
+      "pointer": "/providers/49",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "atos-eviden",
+      "pointer": "/providers/50",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "valtech",
+      "pointer": "/providers/51",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "deloitte",
+      "pointer": "/providers/52",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "node4",
+      "pointer": "/providers/53",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "computacenter",
+      "pointer": "/providers/54",
+      "identity_status": "unbound",
+      "review": "cohort"
+    },
+    {
+      "key": "softcat",
+      "pointer": "/providers/55",
+      "identity_status": "unbound",
+      "review": "cohort"
+    },
+    {
+      "key": "scc",
+      "pointer": "/providers/56",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "td-synnex",
+      "pointer": "/providers/57",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "ingram-micro",
+      "pointer": "/providers/58",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "equinix",
+      "pointer": "/providers/59",
+      "identity_status": "unbound",
+      "review": "cohort"
+    },
+    {
+      "key": "telehouse",
+      "pointer": "/providers/60",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "bt",
+      "pointer": "/providers/61",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "pulsant",
+      "pointer": "/providers/62",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "digital-realty",
+      "pointer": "/providers/63",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "virtus",
+      "pointer": "/providers/64",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "cisco",
+      "pointer": "/providers/65",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "hpe",
+      "pointer": "/providers/66",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "dell",
+      "pointer": "/providers/67",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "broadcom-vmware",
+      "pointer": "/providers/68",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "lenovo",
+      "pointer": "/providers/69",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "vodafonethree",
+      "pointer": "/providers/70",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "virgin-media-o2",
+      "pointer": "/providers/71",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "cityfibre",
+      "pointer": "/providers/72",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "arm",
+      "pointer": "/providers/73",
+      "identity_status": "unbound",
+      "review": "cohort"
+    },
+    {
+      "key": "intel",
+      "pointer": "/providers/74",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "amd",
+      "pointer": "/providers/75",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "oqc",
+      "pointer": "/providers/76",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "riverlane",
+      "pointer": "/providers/77",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "quantinuum",
+      "pointer": "/providers/78",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    },
+    {
+      "key": "nu-quantum",
+      "pointer": "/providers/79",
+      "identity_status": "unbound",
+      "review": "reuse_partial"
+    }
+  ],
+  "relationships": [
+    {
+      "key": "programme-67-1",
+      "pointer": "/relationships/0",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-67-2",
+      "pointer": "/relationships/1",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-67-3",
+      "pointer": "/relationships/2",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-67-4",
+      "pointer": "/relationships/3",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-67-5",
+      "pointer": "/relationships/4",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-67-6",
+      "pointer": "/relationships/5",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-67-7",
+      "pointer": "/relationships/6",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-67-8",
+      "pointer": "/relationships/7",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-67-9",
+      "pointer": "/relationships/8",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-67-10",
+      "pointer": "/relationships/9",
+      "review": "original_rechecked_candidate",
+      "source": "T07"
+    },
+    {
+      "key": "programme-67-11",
+      "pointer": "/relationships/10",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-67-12",
+      "pointer": "/relationships/11",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-67-13",
+      "pointer": "/relationships/12",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-202-1",
+      "pointer": "/relationships/13",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-202-2",
+      "pointer": "/relationships/14",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-202-3",
+      "pointer": "/relationships/15",
+      "review": "original_rechecked_candidate",
+      "source": "T08"
+    },
+    {
+      "key": "programme-202-4",
+      "pointer": "/relationships/16",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-202-5",
+      "pointer": "/relationships/17",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-202-6",
+      "pointer": "/relationships/18",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-213-1",
+      "pointer": "/relationships/19",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-213-2",
+      "pointer": "/relationships/20",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-213-3",
+      "pointer": "/relationships/21",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-213-4",
+      "pointer": "/relationships/22",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-213-5",
+      "pointer": "/relationships/23",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-213-6",
+      "pointer": "/relationships/24",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-213-7",
+      "pointer": "/relationships/25",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-213-8",
+      "pointer": "/relationships/26",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-222-1",
+      "pointer": "/relationships/27",
+      "review": "original_rechecked_candidate",
+      "source": "T06"
+    },
+    {
+      "key": "programme-222-2",
+      "pointer": "/relationships/28",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-222-3",
+      "pointer": "/relationships/29",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-222-4",
+      "pointer": "/relationships/30",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "programme-222-5",
+      "pointer": "/relationships/31",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "nhs-sbs-oracle",
+      "pointer": "/relationships/32",
+      "review": "reuse_withheld"
+    },
+    {
+      "key": "quantum-collaboration",
+      "pointer": "/relationships/33",
+      "review": "reuse_withheld"
+    }
+  ]
+}
