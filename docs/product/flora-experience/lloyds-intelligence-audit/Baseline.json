@@ -1,0 +1,266 @@
+{
+  "audit_date": "2026-11-26",
+  "baseline": "3a4c7e0f6ad81af7ef32ed477a1a584ac2efae87",
+  "main": "3a4c7e0f6ad81af7ef32ed477a1a584ac2efae87",
+  "deployment": {
+    "service": "Flora - Current",
+    "id": "srv-d97unhbtqb8s739huf1g",
+    "sha": "3a4c7e0f6ad81af7ef32ed477a1a584ac2efae87",
+    "deploy_id": "dep-dc4702vf3r2c73afrqhg",
+    "status": "live",
+    "trigger": "manual",
+    "finished": "2026-11-26T17:46:44.672834Z",
+    "source": "Render read-only list_deploys"
+  },
+  "baseline_ci": "https://github.com/rdidale-jpg/CIOS/actions/runs/45866377400",
+  "open_prs": [
+    {
+      "number": 729,
+      "title": "FLORA design: Living Enterprise and Presentation Contract v2.0 (Phase A)",
+      "sha": "da1a6c7b5e4b95e85ef2de3697bc8c506368192c",
+      "branch": "codex/flora-living-enterprise-design",
+      "draft": true
+    },
+    {
+      "number": 715,
+      "title": "Restore the routine Initial Decision Twin research path",
+      "sha": "5b4b67e6f3fc7d0e60c7d1fcfc7470f2dfb61c2c",
+      "branch": "codex/progressive-assurance",
+      "draft": true
+    },
+    {
+      "number": 712,
+      "title": "Refine Lloyds flagship executive exploration",
+      "sha": "e9daf762131c1e70cf83bebca5c811c56f4138d9",
+      "branch": "codex/flora-lloyds-ux-refinement",
+      "draft": true
+    },
+    {
+      "number": 706,
+      "title": "FLORA FS1: assess public factual intelligence scale-out",
+      "sha": "d4ff510c9614742e8db0bd9e9e0e264637ac07be",
+      "branch": "codex/flora-fs1-assessment",
+      "draft": true
+    },
+    {
+      "number": 703,
+      "title": "FLORA cross-industry presentation audit and bounded next sprint",
+      "sha": "187aec220a87a6a8c9618f989794bf1df9a38a13",
+      "branch": "codex/flora-cross-industry-presentation-audit",
+      "draft": true
+    },
+    {
+      "number": 702,
+      "title": "FLORA design: three UK industry landscapes and economics views",
+      "sha": "fb477c3e80941ef003151dd1277aed56572bbc43",
+      "branch": "codex/flora-industry-design-expansion",
+      "draft": true
+    },
+    {
+      "number": 700,
+      "title": "Enterprise Economics design: Landscape, Operating Model and contextual lens",
+      "sha": "393e0467adfd5791f3a97447c86ed71a2950e6aa",
+      "branch": "codex/flora-enterprise-economics-design",
+      "draft": true
+    },
+    {
+      "number": 695,
+      "title": "FLORA production visual diagnostic and Lloyds recovery design",
+      "sha": "c5e7bf0f10fa14e95f5a6b0031ab88fe2b17676b",
+      "branch": "docs/flora-production-visual-diagnostic",
+      "draft": true
+    },
+    {
+      "number": 694,
+      "title": "UK Transport & Mobility: governed Industry Twin research foundation",
+      "sha": "886e3629e7e72dcf9fe1f5e7d0bc90a57dddf822",
+      "branch": "codex/uk-transport-twin-research",
+      "draft": true
+    },
+    {
+      "number": 693,
+      "title": "Research UK Technology industry economics and enterprise relationships",
+      "sha": "cc1637f4b49b2c200b97bdd90cd3a71ea689ce66",
+      "branch": "codex/uk-technology-industry-research",
+      "draft": true
+    },
+    {
+      "number": 683,
+      "title": "RESEARCH-ENRICH-ALL — portfolio audit and first primary-source enrichment wave",
+      "sha": "28b1cb9863db15949775881a434c2507f4f0b0d6",
+      "branch": "codex/research-enrich-all-681",
+      "draft": true
+    },
+    {
+      "number": 668,
+      "title": "BNK-PROOF-1 — Integrated UK Banking value system and enterprise journey",
+      "sha": "1a761d0f92adbfb2f92d0a80d390b8150941e683",
+      "branch": "codex/bnk-proof-1",
+      "draft": true
+    },
+    {
+      "number": 666,
+      "title": "BNK-ENT-1 — Lloyds, Nationwide, Google Cloud and Pay.UK enterprise intelligence",
+      "sha": "412c086391194ec4e9d2f1b76841b0bb1df8917d",
+      "branch": "codex/bnk-ent-1-664",
+      "draft": true
+    },
+    {
+      "number": 665,
+      "title": "BNK-IND-1 — UK Banking industry economics, forces and ecosystem research",
+      "sha": "46f0ed42e10f2c8a2cabbf344498898e94072990",
+      "branch": "codex/bnk-ind-1",
+      "draft": true
+    },
+    {
+      "number": 662,
+      "title": "FLORA ET-VIS-2: interactive easyJet capability preview (#659)",
+      "sha": "ab44ca164b3563520ce63c756a0245cf1bc7388c",
+      "branch": "codex/flora-et-vis2-659",
+      "draft": true
+    },
+    {
+      "number": 661,
+      "title": "BNK-COMPLETE-1 — UK Banking and ecosystem Enterprise Twin delivery plan",
+      "sha": "6ddbab6ac88e5e04354883a50a4be1ccb3a5164d",
+      "branch": "codex/bnk-complete-1",
+      "draft": true
+    },
+    {
+      "number": 657,
+      "title": "INT-MAP-1: UK→Industry→Enterprise intelligence stocktake and change-ripple decision",
+      "sha": "88e4b3afa0775fcad1ed1d70121364cee1067a1a",
+      "branch": "codex/int-map-1-intelligence-stocktake",
+      "draft": true
+    },
+    {
+      "number": 640,
+      "title": "FLORA EAR-1: NatWest document-scoped admission proof and owner decisions",
+      "sha": "d7052c9fa8598eb1f15bfa4f92440c9b6b284c06",
+      "branch": "codex/flora-ear1-639",
+      "draft": true
+    },
+    {
+      "number": 631,
+      "title": "FLORA VP-1: three-panel visual experience — design only (#629)",
+      "sha": "f4059a34a55277adbd2a2337239827cab96d962e",
+      "branch": "codex/flora-vp1-629",
+      "draft": true
+    },
+    {
+      "number": 630,
+      "title": "FLORA EAI-1: controlled evidence admission review and intelligence expansion (#628)",
+      "sha": "678412a4320b5d13d88ffe66592e7a225cc4817c",
+      "branch": "codex/flora-eai1-628",
+      "draft": true
+    },
+    {
+      "number": 624,
+      "title": "FLORA ISP-1: clear intelligence semantics and owner-only research inspection",
+      "sha": "ed26f7c52c6ec7e4ad4577f15543c7dc7b4ffcf9",
+      "branch": "codex/flora-isp1-623",
+      "draft": true
+    },
+    {
+      "number": 622,
+      "title": "FLORA RIC-1: consolidate research for controlled evidence acceptance",
+      "sha": "9db8253b23deefac00022716c53311472203aec7",
+      "branch": "codex/flora-ric1",
+      "draft": true
+    },
+    {
+      "number": 620,
+      "title": "FLORA RIE-2: Lloyds segment economics and decision-grade enterprise research",
+      "sha": "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5",
+      "branch": "codex/flora-rie2-619",
+      "draft": true
+    },
+    {
+      "number": 618,
+      "title": "FLORA RIE-1: controlled UK, industry and Lloyds intelligence research tranche",
+      "sha": "c57ed9728473563b5535db36d5bfbe5e96a8c572",
+      "branch": "codex/flora-rie1-617",
+      "draft": true
+    },
+    {
+      "number": 616,
+      "title": "FLORA SI-1: strategic intelligence model and shared Leadership Agenda — design",
+      "sha": "85317167b4001dc027216c1c4e2faf058f0631a3",
+      "branch": "codex/flora-si1-615",
+      "draft": true
+    },
+    {
+      "number": 610,
+      "title": "FLORA LJ-3N: clear parallel stream navigation, original artwork preserved (#608)",
+      "sha": "c6bf2280594922db6951c5c36205984c85ca4aea",
+      "branch": "codex/flora-living-journey-lj1",
+      "draft": true
+    },
+    {
+      "number": 609,
+      "title": "FLORA VA-1 simplicity correction: restore industry labels and subtract clutter (#605)",
+      "sha": "1f92da099c4c2fc9cb85ad3031729b8c8f6ca1dd",
+      "branch": "codex/flora-visual-atlas-va1",
+      "draft": true
+    },
+    {
+      "number": 603,
+      "title": "FLORA owner assurance: simple commercial review with optional Advanced Inspection (#602)",
+      "sha": "fc565bda6004c8ba5cd832a837ab7c116a85fc61",
+      "branch": "codex/flora-opportunity-assurance-602",
+      "draft": true
+    },
+    {
+      "number": 596,
+      "title": "FLORA strategy proposal — launch plan, GTM and illustrative business model",
+      "sha": "ca141ec5284198290304c5d5187c8a981d5cdd2e",
+      "branch": "docs/flora-launch-strategy-business-plan-v01",
+      "draft": true
+    },
+    {
+      "number": 590,
+      "title": "FLORA strategy proposal — Discovery Expeditions, Progress and Meaningful Engagement",
+      "sha": "00e47c31fd2b3ba84db84504df4c8ad913f4d7c2",
+      "branch": "docs/flora-discovery-engagement-strategy-v01",
+      "draft": true
+    },
+    {
+      "number": 589,
+      "title": "FLORA strategy proposal: Experience Roles, specialist lenses and monetisation",
+      "sha": "2b184f5657fc6ae62cf4a0ddbf43ed00bf8b07a6",
+      "branch": "docs/flora-experience-roles-monetisation-v01",
+      "draft": true
+    },
+    {
+      "number": 569,
+      "title": "FLORA UK Technology Sprint 2: controlled semantic assurance and research drafts",
+      "sha": "0ff024c17505be5c8404e9ed33be2bc6672d7dd1",
+      "branch": "codex/flora-uk-technology-semantic-sprint2",
+      "draft": true
+    },
+    {
+      "number": 568,
+      "title": "FLORA: bounded research foundation and UK technology coverage programme",
+      "sha": "b4a2c2c680d21bc252f3bc7e365c7eb08af178d3",
+      "branch": "codex/flora-autonomous-research-foundation-v1",
+      "draft": true
+    },
+    {
+      "number": 563,
+      "title": "FLORA architecture proposal — visual-first Macro Intelligence (#562)",
+      "sha": "5c35ede369e8cc5294da6a462728b595c6efdf8b",
+      "branch": "docs/flora-macro-intelligence-architecture",
+      "draft": true
+    },
+    {
+      "number": 559,
+      "title": "FLORA visual-first v2 — interactive design checkpoint (#558)",
+      "sha": "386ae2b7ecc52b00b2e2eee979984520c0d6bbdc",
+      "branch": "codex/flora-visual-first-v2-design",
+      "draft": true
+    }
+  ],
+  "authority": "Static audit only; no evidence admission or canonical-store verification",
+  "live_canonical_status": "UNVERIFIED: no authenticated production canonical-read session available",
+  "owner_acceptance": "Visual/commercial acceptance withheld by current commission"
+}

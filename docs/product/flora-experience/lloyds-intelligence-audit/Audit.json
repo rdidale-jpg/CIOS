@@ -1,0 +1,710 @@
+{
+  "authority": "Owner-readable diagnostic annotations only; no new intelligence registry or decision authority",
+  "references": {
+    "OVERLAY": [
+      "enterprise-knowledge/banking/research-model/Assessment-Overlay.json",
+      null
+    ],
+    "MODEL": [
+      "enterprise-knowledge/banking/research-model/Understanding-Review.json",
+      null
+    ],
+    "FACTORY": [
+      "docs/research/initial-factory/README.md",
+      null
+    ],
+    "FACTORY-REPLAY": [
+      "docs/research/initial-factory/commercial-replay.json",
+      null
+    ],
+    "FACTORY-PROOF": [
+      "docs/research/initial-factory/verified/isolated-records.json",
+      null
+    ],
+    "MIGRATION": [
+      "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+      null
+    ],
+    "TWIN": [
+      "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+      null
+    ],
+    "TIER": [
+      "docs/research/lloyds-tier1-sprint1/evidence.ndjson",
+      null
+    ],
+    "TIER-EDGES": [
+      "docs/research/lloyds-tier1-sprint1/relationship.ndjson",
+      null
+    ],
+    "TIER-ENDPOINTS": [
+      "docs/research/lloyds-tier1-sprint1/endpoints.md",
+      null
+    ],
+    "TIER-REVIEW": [
+      "docs/research/lloyds-tier1-sprint1/acceptance.md",
+      null
+    ],
+    "TIER-SOURCES": [
+      "docs/research/lloyds-tier1-sprint1/sources.json",
+      null
+    ],
+    "LEI": [
+      "docs/flora-runtime/lei-1/README.md",
+      null
+    ],
+    "LEI-MATH": [
+      "docs/flora-runtime/lei-1/reconciliations.json",
+      null
+    ],
+    "W3": [
+      "docs/flora-runtime/research-enrich-all-w3-689/Claims.json",
+      null
+    ],
+    "W3-ID": [
+      "docs/flora-runtime/research-enrich-all-w3-689/Banking-Portfolio-Crosswalk.json",
+      null
+    ],
+    "POLICY": [
+      "docs/flora-runtime/public-facts-policy/lloyds-q3-disposition.md",
+      null
+    ],
+    "PUBLIC-FIN": [
+      "cios/applications/flora/financial_intelligence/public_statements.py",
+      null
+    ],
+    "SOURCE": [
+      "cios/applications/flora/research_intelligence/source_import.py",
+      null
+    ],
+    "GOLD": [
+      "cios/applications/flora/lloyds_gold.py",
+      null
+    ],
+    "CSS": [
+      "cios/applications/flora/visual_stream_assets/lloyds-gold.css",
+      null
+    ],
+    "AGENDA": [
+      "cios/applications/flora/leadership_agenda.py",
+      null
+    ],
+    "B-TRIGGER": [
+      "cios/applications/flora/research_intelligence/buying_evidence.py",
+      null
+    ],
+    "DEVELOPMENT": [
+      "cios/applications/flora/seller_development.py",
+      null
+    ],
+    "R1": [
+      "docs/flora-runtime/rie1-617/Facts.json",
+      "c57ed9728473563b5535db36d5bfbe5e96a8c572"
+    ],
+    "R2": [
+      "docs/flora-runtime/rie2-619/Claims.json",
+      "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5"
+    ],
+    "R2-OPS": [
+      "docs/flora-runtime/rie2-619/Operating-Model.json",
+      "71d34bb50cff4a7e99cf49f53a0ee5c8724c3df5"
+    ],
+    "RIC": [
+      "docs/flora-runtime/ric1/Claim-Ledger.json",
+      "9db8253b23deefac00022716c53311472203aec7"
+    ],
+    "RIC-PROPOSALS": [
+      "docs/flora-runtime/ric1/Observation-Proposals.json",
+      "9db8253b23deefac00022716c53311472203aec7"
+    ],
+    "BNK": [
+      "docs/flora-runtime/bnk-ent-1/Claims.json",
+      "412c086391194ec4e9d2f1b76841b0bb1df8917d"
+    ]
+  },
+  "domains": [
+    {
+      "id": "01",
+      "domain": "Structure, subsidiaries, legal entities and brands",
+      "existing": "Tier 1 N01–N25, F01–F04; R2 primary-subsidiary note; BNK identity/control; historical Twin",
+      "quality_freshness": "Registers observed 22 Nov; Group/Bank/PSC/brand boundaries differ; candidate, not verified live model",
+      "eligibility": "Tier consideration only; registry/source scope and canonical endpoint binding unresolved",
+      "presentation": "Three reporting businesses; no complete subsidiary/brand tree",
+      "root_causes": "C,H",
+      "commercial_importance": "High: avoid selling to or allocating economics to the wrong entity",
+      "action": "Recover versioned Group/Bank/brand crosswalk; keep BK-ENT-003 collision unresolved",
+      "refs": "TIER,TIER-ENDPOINTS,R2-OPS,BNK,W3-ID"
+    },
+    {
+      "id": "02",
+      "domain": "Divisions, products and customer segments",
+      "existing": "Three reporting divisions in renderer; Tier F05–F08 current operating remits; R2 segment records",
+      "quality_freshness": "FY2024–H1 2026 reporting segments differ from Nov 2026 management organisation",
+      "eligibility": "Descriptive current orientation eligible; detailed issuer candidates require scoped Source-use decision",
+      "presentation": "Retail has two branch-access claims; Commercial and IPI FOCUS_FACTS are empty",
+      "root_causes": "C,D,H",
+      "commercial_importance": "High: account scope and value proposition must match the business",
+      "action": "Map product/value-stream and management organisation separately from reporting segments",
+      "refs": "GOLD,TIER,R2"
+    },
+    {
+      "id": "03",
+      "domain": "Market share and competitive position",
+      "existing": "Tier F18 matched GB SME recommendation survey; retained Banking comparison and Five Forces",
+      "quality_freshness": "Survey July 2025–June 2026, released Aug; recommendation is not market share or causal service quality",
+      "eligibility": "Eligible for consideration, not admitted by this audit; no new rights inferred",
+      "presentation": "Competition shows wallet/AI and policy; matched competitor customer comparison absent",
+      "root_causes": "C,F,H",
+      "commercial_importance": "High: distinguish the customer franchise and evidenced weakness",
+      "action": "Recover F18 with sample/market definition and Source lifecycle; research actual product-market shares separately",
+      "refs": "TIER,TIER-SOURCES,OVERLAY"
+    },
+    {
+      "id": "04",
+      "domain": "Group and divisional financial performance",
+      "existing": "LEI 13 reconciliations; R2 264 candidate records including 50 Retail and 50 Commercial records; W3 LBG-1/2",
+      "quality_freshness": "Matched bases/periods retained; arithmetic reproducible; original-source re-verification not repeated here",
+      "eligibility": "Existing three released measures remain; affected new issuer projection held under §2; no Financial-run permission expansion",
+      "presentation": "Two deposit stocks and rounded nine-month PBT dominate; division contribution tables unavailable",
+      "root_causes": "D,C",
+      "commercial_importance": "Critical: profit drivers and target gaps cannot be assessed from deposit size",
+      "action": "Reuse existing typed financial candidates and reconciliations once Source/legal resolves the affected operation",
+      "refs": "LEI,LEI-MATH,R2,W3,POLICY"
+    },
+    {
+      "id": "05",
+      "domain": "Revenue, costs, profitability, capital and targets",
+      "existing": "LEI net-income/PBT/capital bridges; R2 NII, other income, depreciation, remediation, impairment; current 2030 targets",
+      "quality_freshness": "Actual/APM/statutory, stock/flow and target distinctions exist; no capability allocation supported",
+      "eligibility": "New held issuer values not activated; current management ambitions already eligible",
+      "presentation": "Income, costs and capital drill-downs mostly unavailable cells; objectives repeat ambitions",
+      "root_causes": "D,C,F",
+      "commercial_importance": "Critical: distinguish structural economic issues from growth or accounting mix",
+      "action": "Build a matched-period economic story from existing records; preserve residual/lease and capital basis",
+      "refs": "LEI,LEI-MATH,R2,GOLD,POLICY"
+    },
+    {
+      "id": "06",
+      "domain": "Executive leadership, responsibilities and decision-makers",
+      "existing": "Tier F05–F09/F26 and R2 roster; dated GOV CEO role in current Source owner",
+      "quality_freshness": "Roster checked 14/22/24 Nov in retained packs; current public fact is dated 22 March, not a current mandate",
+      "eligibility": "Current roster held for scoped Source applicability/identity review; professional role is not buying authority",
+      "presentation": "Only dated Charlie Nunn attribution; conceptual functions and unavailable mandate/workforce rows",
+      "root_causes": "C,D,G,H",
+      "commercial_importance": "Critical: sponsor and delivery accountability remain unproven",
+      "action": "Reconcile date-specific role/remit and reporting basis; obtain customer-confirmed mandate only through seller development",
+      "refs": "TIER,R2-OPS,SOURCE,GOLD"
+    },
+    {
+      "id": "07",
+      "domain": "Processes and operating models",
+      "existing": "Nine JOURNEYS and four customer streams; W3 mechanisms; BNK analysis; Factory CIB/Transaction Banking replay",
+      "quality_freshness": "Nine journeys are conceptual; Factory exercised real owners only in isolated/test authority, not production",
+      "eligibility": "Conceptual depiction allowed; no automatic publication of isolated model records",
+      "presentation": "Large process bands; credit layers lack actual role/system assignments; Factory facts use a different projection",
+      "root_causes": "C,B,H",
+      "commercial_importance": "Critical: generic banking steps cannot identify a specific intervention",
+      "action": "Recover existing economic/value mechanisms and prepared organisational facts; bind a real process before new research",
+      "refs": "GOLD,W3,BNK,MODEL,FACTORY-REPLAY"
+    },
+    {
+      "id": "08",
+      "domain": "Capabilities and organisational ownership",
+      "existing": "Ten conceptual CAP records; 123 relationship records but only one verified source-supported relationship",
+      "quality_freshness": "108 interpretation, 10 conceptual, two repository-reported and two unknown edges are not verified dependency proof",
+      "eligibility": "No automatic qualification of conceptual or candidate edges",
+      "presentation": "Ten capability tiles navigate to existing context, not accountable capability ownership",
+      "root_causes": "C,E,H",
+      "commercial_importance": "Critical: no defensible capability-to-owner intervention chain",
+      "action": "Bind one dated business capability to role/process evidence; keep unknown internals explicit in Research",
+      "refs": "OVERLAY,GOLD,TIER-EDGES"
+    },
+    {
+      "id": "09",
+      "domain": "Applications, platforms and data architecture",
+      "existing": "Envoy and Copilot current; Tier F11/F13/F22; R2 adoption/Envoy dates; W3 LBG-4",
+      "quality_freshness": "Product rollout and designed controls differ from installations, active use, net benefits or architecture",
+      "eligibility": "Current Envoy/Copilot facts eligible; additional supplier/issuer statements remain candidates",
+      "presentation": "Two technology examples; application detail fields mostly Unknown; no enterprise estate map",
+      "root_causes": "C,D,E,H",
+      "commercial_importance": "High: identify what already exists before proposing replacement",
+      "action": "Recover dated product-specific statements and negative boundaries; do not manufacture a CMDB",
+      "refs": "GOLD,TIER,R2,W3"
+    },
+    {
+      "id": "10",
+      "domain": "Technology infrastructure and cloud",
+      "existing": "Existing migration and 2030 platform statements; Envoy Google collaboration; supplier catalogue",
+      "quality_freshness": "Catalogue lists Google/Microsoft/AWS/Oracle; only REV-ENVOY-GOOGLE is verified in current graph",
+      "eligibility": "Eligible collaboration does not admit specific workloads, legal counterparties or cloud topology",
+      "presentation": "Platform-priority narrative and conceptual technology layer; no grounded infrastructure topology",
+      "root_causes": "C,E,H",
+      "commercial_importance": "High: avoids false cloud exposure or incumbent displacement",
+      "action": "Map only disclosed workload/service edges; collect remaining topology in authorised customer validation",
+      "refs": "OVERLAY,GOLD,TIER-ENDPOINTS"
+    },
+    {
+      "id": "11",
+      "domain": "Strategic suppliers and partners",
+      "existing": "Current Google collaboration and Copilot licences; Tier Sprout.ai and Microsoft June statements; R2 supplier reality",
+      "quality_freshness": "Issuer/supplier statements have distinct dates and scopes; licence is not executed contract",
+      "eligibility": "Existing finite facts eligible; Tier adds Source/identity decisions, not universal canonical prerequisite",
+      "presentation": "Google/Microsoft contextual examples; AWS/Oracle catalogue not surfaced as verified contracts",
+      "root_causes": "C,H",
+      "commercial_importance": "High: differentiate incumbent capability from genuinely open scope",
+      "action": "Recover supported collaboration/trial relations under original publishers; legal contracting edges require separate evidence",
+      "refs": "TIER,R2,GOLD,OVERLAY"
+    },
+    {
+      "id": "12",
+      "domain": "Contracts, values and renewal dates",
+      "existing": "Tier F17 historical council banking award; sourcing F12/F27; platform and licence announcements",
+      "quality_freshness": "F17 is bank-as-supplier, historical five-year term from Oct 2021; no renewal proven",
+      "eligibility": "No executed technology contract/value/renewal permission or proof established",
+      "presentation": "Contract scope/value/end/renewal Unknown; no verified opportunity window",
+      "root_causes": "C,E,G,H",
+      "commercial_importance": "Critical: a collaboration or expiry arithmetic cannot establish procurement",
+      "action": "Keep directionality; seek original accessible award and actual variation/renewal only if commercially material",
+      "refs": "TIER,TIER-ENDPOINTS,GOLD"
+    },
+    {
+      "id": "13",
+      "domain": "Transformation programmes and investment",
+      "existing": "Five programme records; seven objective horizons; W3/R2 and Tier skills/AI investment findings",
+      "quality_freshness": "Commitments/disclosure dates exist; owner, delivery progress, funds and external scope mostly unknown",
+      "eligibility": "Released statement subset eligible; additional issuer facts held or candidate",
+      "presentation": "Five large publication-dated rails and seven goal events; no verified programme economics or outcome timeline",
+      "root_causes": "C,D,F,H",
+      "commercial_importance": "High: determine decisions already made versus decisions still open",
+      "action": "Separate announcement, decision, implementation and measured result; bind one supported outcome to capability",
+      "refs": "OVERLAY,GOLD,TIER,R2"
+    },
+    {
+      "id": "14",
+      "domain": "AI adoption, use cases and measurable benefit",
+      "existing": "Current AI figures/Envoy; R2 adoption; Tier trials/cohorts; Factory responsible-AI committee Evidence/Observation in isolated proof",
+      "quality_freshness": "Tools, participation and gross/expected contribution do not prove net value; isolated proof is not production acceptance",
+      "eligibility": "Bounded current statements eligible; other inputs need exact Source and public/private reconciliation",
+      "presentation": "Two platform/licence examples and figures; actual factory-derived control facts not read by this public projection",
+      "root_causes": "B,C,D,G,H",
+      "commercial_importance": "Critical: proposition must add to existing AI capability",
+      "action": "Reuse prepared records through existing authorised owners; retain private/public and net-benefit distinctions",
+      "refs": "GOLD,TIER,R2,W3,FACTORY-PROOF"
+    },
+    {
+      "id": "15",
+      "domain": "Regulatory obligations and enterprise exposure",
+      "existing": "PRA/FCA March 2027 timetable current; Tier F19/F20/F24; EAI CTP provider facts and complaint outcomes",
+      "quality_freshness": "External rule or named provider designation is not Lloyds legal-bank exposure or a control failure",
+      "eligibility": "Open-government factual lanes exist; apply exact entity and Source lifecycle; no Pressure promotion",
+      "presentation": "Generic reporting applicability caveat; motor finance/climate/AI context underused or absent",
+      "root_causes": "C,F,H",
+      "commercial_importance": "High: distinguish actual obligation and remedy from general deadline",
+      "action": "Recover dated rule scope/management response first; validate exact regulated entity and material consequence",
+      "refs": "TIER,AGENDA,GOLD"
+    },
+    {
+      "id": "16",
+      "domain": "Acquisitions, integration and implications",
+      "existing": "Curve completion and wallet priority; operating-organisation candidates and investment context",
+      "quality_freshness": "Completion is a decision already taken; integration outcomes and external work scope not evidenced",
+      "eligibility": "Existing completion/priority eligible; further causal/opportunity claims unsupported",
+      "presentation": "Curve completion region and programme detail; no measured integration story",
+      "root_causes": "C,E,H",
+      "commercial_importance": "High: avoid presenting a completed transaction as early strategic influence",
+      "action": "Connect evidenced acquisition rationale to an existing capability question; investigate only genuinely open implementation decisions",
+      "refs": "GOLD,OVERLAY,TIER"
+    },
+    {
+      "id": "17",
+      "domain": "Commercial investigation and opportunities",
+      "existing": "Three current agenda issues; nine public candidate hypotheses; Sprint B/C buying triggers, private seller development and Pipeline services",
+      "quality_freshness": "Public hypotheses retain counter-evidence; private qualification and customer attestations not inspected",
+      "eligibility": "Read-only public analytical content differs from private development/qualified Pipeline authority",
+      "presentation": "Eight SWOT themes and generic account questions; no automatic evidence-to-sales chain",
+      "root_causes": "C,F,H",
+      "commercial_importance": "Critical: fundamental sales purpose",
+      "action": "Reuse existing Offer matcher and development lifecycle with explicit seller validation; do not create a second qualification engine",
+      "refs": "AGENDA,GOLD,B-TRIGGER,DEVELOPMENT"
+    }
+  ],
+  "screens": [
+    {
+      "focus": "group",
+      "commercial_question": "What kind of Group is this and what changes the commercial conversation?",
+      "currently_presented": "Three orientation businesses, two headline measures, Curve and links; management renewal/efficiency interpretation",
+      "elsewhere": "LEI economic mechanisms; Tier identity/remits; R2/RIC issue candidates",
+      "root_causes": "D,C,F",
+      "recover_without_new_research": "Recover a scoped executive story and exact entity tree; resolve financial-use scope separately",
+      "next_sales_investigation": "Which disclosed response leaves an evidenced, unresolved business outcome?"
+    },
+    {
+      "focus": "economics",
+      "commercial_question": "How does the Group generate and retain economic value?",
+      "currently_presented": "Funding/income/cost/capital navigation, deposit comparison and PBT; not an accounting bridge",
+      "elsewhere": "LEI 13 reconciliations; R2 segment/statutory tables and notes",
+      "root_causes": "D,C",
+      "recover_without_new_research": "Reuse existing matched-period bridges after Source decision; no additional generic financial research",
+      "next_sales_investigation": "Which actual driver, rather than a headline target, explains earnings change?"
+    },
+    {
+      "focus": "retail",
+      "commercial_question": "Which Retail products, economics and customer outcomes matter?",
+      "currently_presented": "Generic customer/product mechanism plus branch-access timing and no-role-impact qualification",
+      "elsewhere": "R2 Retail lease/deposit pricing notes, H1 segment actuals; Tier matched SME survey is not Retail-wide",
+      "root_causes": "D,C",
+      "recover_without_new_research": "Map Retail-specific retained facts and period; do not allocate Group totals",
+      "next_sales_investigation": "Which product or asset cohort explains an evidenced movement after existing mitigation?"
+    },
+    {
+      "focus": "commercial",
+      "commercial_question": "Which businesses, cash/credit services and economics distinguish Commercial Banking?",
+      "currently_presented": "Conceptual financing/payments table; no direct FOCUS_FACTS",
+      "elsewhere": "R2 50 segment candidate records; Tier BCB/CIB remits and GB SME survey",
+      "root_causes": "C,D,F",
+      "recover_without_new_research": "Version reporting segment versus current management business; recover eligible customer comparison conditionally",
+      "next_sales_investigation": "Does a role own the relevant BCB/CIB problem, and is a decision actually open?"
+    },
+    {
+      "focus": "retirement",
+      "commercial_question": "How do pensions, insurance and investment create value differently?",
+      "currently_presented": "Savings/policy orientation and conceptual activity table; no direct FOCUS_FACTS",
+      "elsewhere": "R2 IPI economics/dividend/IFRS17 note; Tier Scottish Widows identity and AI trial/cohorts",
+      "root_causes": "C,D",
+      "recover_without_new_research": "Separate insurance and banking accounting and legal entities; map existing candidate evidence",
+      "next_sales_investigation": "What customer or asset outcome remains unproven despite an already disclosed trial?"
+    },
+    {
+      "focus": "operations",
+      "commercial_question": "How does Lloyds deliver an outcome across people, process and technology?",
+      "currently_presented": "Nine conceptual process bands; no direct company fact in default process body",
+      "elsewhere": "W3 asset/customer/AI mechanisms; Tier operating remits and source-supported associations",
+      "root_causes": "C,B,H",
+      "recover_without_new_research": "Select a bounded real process and attach disclosed evidence; private internals remain unknown",
+      "next_sales_investigation": "Which hand-off can the customer validate as causing measurable rework?"
+    },
+    {
+      "focus": "capabilities",
+      "commercial_question": "What can Lloyds do and who owns the result?",
+      "currently_presented": "Ten conceptual capabilities navigating to context; no verified ownership map",
+      "elsewhere": "Tier role/remit and relationship candidates; existing Understanding review",
+      "root_causes": "C,H",
+      "recover_without_new_research": "Join dated role/process only where evidence warrants; no spatial or name-based dependency inference",
+      "next_sales_investigation": "Who can attest to capability performance and validate the next action?"
+    },
+    {
+      "focus": "applications",
+      "commercial_question": "What technology is actually in use and what has it achieved?",
+      "currently_presented": "Envoy, Copilot, reported/expected AI value; disclosed examples, not estate",
+      "elsewhere": "R2 adoption and date reconciliation; Tier Microsoft/GitHub/Sprout/FCA evidence",
+      "root_causes": "B,C,D",
+      "recover_without_new_research": "Separate product/licence/adoption/use-case/net result; no duplicate platform engine",
+      "next_sales_investigation": "What incremental capability is missing after existing tools and controls?"
+    },
+    {
+      "focus": "partners",
+      "commercial_question": "Which partners deliver which evidenced services?",
+      "currently_presented": "Google/Microsoft context and caveats; not legal counterparties/contracts",
+      "elsewhere": "Tier counterpart/endpoint register and suppliers; BNK Google legal-entity work",
+      "root_causes": "C,H",
+      "recover_without_new_research": "Recover reported edges with direction/date; do not join designated Google entity to Lloyds workload",
+      "next_sales_investigation": "What deliverable, legal entity and responsibility are actually confirmed?"
+    },
+    {
+      "focus": "people",
+      "commercial_question": "Who runs the business, and what do the public roles establish?",
+      "currently_presented": "Dated March CEO attribution, reporting businesses and conceptual function/workforce lenses",
+      "elsewhere": "Tier current roles, R2 roster, BNK dated organisation; unresolved canonical endpoints",
+      "root_causes": "C,D,G,H",
+      "recover_without_new_research": "Reconcile current remit/version; do not infer budget or procurement authority",
+      "next_sales_investigation": "Which accountable role must validate the business result and decision window?"
+    },
+    {
+      "focus": "programmes",
+      "commercial_question": "What change is committed, what happened, and what remains open?",
+      "currently_presented": "Five programme rails; dates are source publication, owner/funding/progress unknown",
+      "elsewhere": "Tier skills/AI announcements; R2 investment notes; LEI matched outcomes",
+      "root_causes": "C,D,H",
+      "recover_without_new_research": "Preserve existing programme IDs; distinguish disclosure, execution and realised result",
+      "next_sales_investigation": "What decision was already taken, and what implementation choice remains evidenced as open?"
+    },
+    {
+      "focus": "strategy",
+      "commercial_question": "How do ambitions connect to actual performance and leadership choices?",
+      "currently_presented": "Seven horizons, goals and stated ambitions; progress mostly unavailable",
+      "elsewhere": "LEI actual/target bases, R2 four leadership candidates and counter-evidence",
+      "root_causes": "C,D,F",
+      "recover_without_new_research": "Link permitted performance to objective once; keep 2030 ambition separate from 2025/26 actual",
+      "next_sales_investigation": "What would disconfirm an incremental seller contribution?"
+    },
+    {
+      "focus": "markets",
+      "commercial_question": "How do the funding market and competition affect this Group?",
+      "currently_presented": "November rate decision plus deposit stock/efficiency context; conditional repricing mechanism",
+      "elsewhere": "R2 Retail pricing, structural hedge and Banking comparison; Tier matched customer survey",
+      "root_causes": "C,D,F",
+      "recover_without_new_research": "Reuse matched observations; do not infer Group sensitivity from Bank Rate alone",
+      "next_sales_investigation": "Which mix/hedge/repricing evidence changes the economics thesis?"
+    },
+    {
+      "focus": "resilience",
+      "commercial_question": "Which obligations apply and what material exposure is established?",
+      "currently_presented": "PRA/FCA timetable and renewal priority with conditional applicability caveat",
+      "elsewhere": "Tier FCA AI/climate/motor-finance context; CTP designation and source boundaries",
+      "root_causes": "C,F,H",
+      "recover_without_new_research": "Bind regulated entity and management response; use ADR-026 gates for any Pressure candidate",
+      "next_sales_investigation": "Is there evidence of consequence beyond a generic deadline or provider designation?"
+    },
+    {
+      "focus": "competition",
+      "commercial_question": "How could technology and payment changes affect the franchise?",
+      "currently_presented": "Wallet ambition, historical UK policy pilot, data/Envoy context; no measured market share",
+      "elsewhere": "Tier F18, Scottish Widows and external GoCardless/TrueLayer monitoring, R2 comparison",
+      "root_causes": "C,F,H",
+      "recover_without_new_research": "Recover appropriate competitor/outcome context without inventing competitive loss",
+      "next_sales_investigation": "What observable customer behaviour, rather than a technology headline, would change the thesis?"
+    },
+    {
+      "focus": "analysis",
+      "commercial_question": "What are the decisive strengths, constraints and conditional possibilities?",
+      "currently_presented": "Eight source-dependent SWOT themes and counter-evidence; not opportunities",
+      "elsewhere": "R2/RIC leadership issues, LEI improvement counter-case, Tier issue discriminators",
+      "root_causes": "C,F",
+      "recover_without_new_research": "Make each hypothesis distinct and traceable; no invented financial/supplier need",
+      "next_sales_investigation": "Which evidence and customer confirmation would advance or reject one hypothesis?"
+    }
+  ],
+  "recoverable_and_backlog": [
+    {
+      "id": "R01",
+      "priority": "P0",
+      "work_type": "Source dependency",
+      "item": "Group/segment economics already researched",
+      "records": "LEI 13 reconciliations; R2 264 records (overlapping scope)",
+      "refs": "LEI,R2,POLICY",
+      "root_causes": "D,C",
+      "boundary": "Do not publish affected held values; settle scoped §2 once, then reuse current Financial/Source owners",
+      "commercial_value": "Matched economic mechanisms and target-versus-actual story"
+    },
+    {
+      "id": "R02",
+      "priority": "P0",
+      "work_type": "Mapping",
+      "item": "Versioned entity, brand and reporting crosswalk",
+      "records": "Tier N01–N25/F01–F04; BNK identity/control; R2 primary holdings",
+      "refs": "TIER,TIER-ENDPOINTS,BNK,R2",
+      "root_causes": "C,H",
+      "boundary": "PSC is not full hierarchy; canonical IDs/workspace unresolved; no BK-ENT-003 collision repair by guess",
+      "commercial_value": "Correct account and economic perimeter"
+    },
+    {
+      "id": "R03",
+      "priority": "P0",
+      "work_type": "Recovery",
+      "item": "Retail asset/lease and deposit-pricing explanation",
+      "records": "R2-OBS-RETAIL-PRICE / R2-OBS-RETAIL-LEASE; W3 LBG-3",
+      "refs": "R2,W3,LEI",
+      "root_causes": "C,D",
+      "boundary": "Issuer source/use scope remains held; existing management mitigation and positive Group performance are counter-evidence",
+      "commercial_value": "Specific economic investigation rather than generic cost pain"
+    },
+    {
+      "id": "R04",
+      "priority": "P0",
+      "work_type": "Mapping",
+      "item": "Current management responsibilities versus reporting segments",
+      "records": "Tier F05–F09/F26; R2 current_roles; BE-LBG-CURRENT-BUSINESS",
+      "refs": "TIER,R2-OPS,BNK",
+      "root_causes": "C,D,G,H",
+      "boundary": "Date-specific professional roles only; not buyer authority or a restated accounting segment",
+      "commercial_value": "Relevant accountable role for an existing issue"
+    },
+    {
+      "id": "R05",
+      "priority": "P0",
+      "work_type": "Recovery",
+      "item": "Matched customer-franchise comparison",
+      "records": "Tier F18, Ipsos original survey reference",
+      "refs": "TIER,TIER-SOURCES",
+      "root_causes": "C,H",
+      "boundary": "Eligible for consideration is not public admission; preserve GB SME scope, wave, sampling and recommendation definition",
+      "commercial_value": "Differentiate evidenced customer outcomes without calling them market share"
+    },
+    {
+      "id": "R06",
+      "priority": "P0",
+      "work_type": "Recovery",
+      "item": "Scottish Widows AI participation/use-case context",
+      "records": "Tier F13/F14A/F14B/F15; source-specific FCA/issuer references",
+      "refs": "TIER,TIER-REVIEW",
+      "root_causes": "C,D,G,H",
+      "boundary": "Trial, Live Testing and Sandbox are different events; reconcile cohort/date and exact participant before reuse",
+      "commercial_value": "Distinguish established insurance experimentation from greenfield AI sales"
+    },
+    {
+      "id": "R07",
+      "priority": "P0",
+      "work_type": "Recovery",
+      "item": "Separate GitHub Copilot footprint from M365 licences",
+      "records": "Tier F11A/F11B/F22; R2-OBS-MS-ADOPTION",
+      "refs": "TIER,R2",
+      "root_causes": "B,C,H",
+      "boundary": "Supplier and issuer claims differ; users/licences/engineers and active adoption are different denominators",
+      "commercial_value": "Investigate incremental outcomes rather than reselling existing tools"
+    },
+    {
+      "id": "R08",
+      "priority": "P0",
+      "work_type": "Verification",
+      "item": "Current eligible AI contribution versus net economics",
+      "records": "LBG-AI26-REPORTED / EXPECTED; R2-OBS-AI-VALUE; I-LBG",
+      "refs": "OVERLAY,R2,W3",
+      "root_causes": "B,C,E",
+      "boundary": "Existing reported/expected figures are not net of run/change/control cost; private cost data not supplied",
+      "commercial_value": "Falsifiable net-benefit investigation with counter-case"
+    },
+    {
+      "id": "R09",
+      "priority": "P1",
+      "work_type": "Mapping",
+      "item": "Programme decision/execution chronology",
+      "records": "Five PROG-LBG records and seven OBJECTIVES; Tier F25",
+      "refs": "OVERLAY,GOLD,TIER",
+      "root_causes": "C,H",
+      "boundary": "Disclosure date is not start, delivery or open procurement; funding and accountable owners unknown",
+      "commercial_value": "An honest influence window and specific validation question"
+    },
+    {
+      "id": "R10",
+      "priority": "P1",
+      "work_type": "Recovery",
+      "item": "Disclosed sourcing process",
+      "records": "Tier F12/F27, Ariba and supplier policies",
+      "refs": "TIER,TIER-SOURCES",
+      "root_causes": "C,D,H",
+      "boundary": "Participation process is not demand, contract or buyer invitation; issuer factual-use scope needs existing-owner resolution",
+      "commercial_value": "Feasible entry route once a real issue has been validated"
+    },
+    {
+      "id": "R11",
+      "priority": "P1",
+      "work_type": "Verification",
+      "item": "Bank-as-supplier historical council relationship",
+      "records": "Tier F16/F17; endpoint and acceptance notes",
+      "refs": "TIER,TIER-ENDPOINTS",
+      "root_causes": "C,G,H",
+      "boundary": "Do not reverse the relationship or infer a 2026 renewal from a 2021 five-year award",
+      "commercial_value": "Avoid false technology prospect and renewal signal"
+    },
+    {
+      "id": "R12",
+      "priority": "P1",
+      "work_type": "Recovery",
+      "item": "Climate, AI controls and motor-finance timing",
+      "records": "Tier F19/F20/F24; preserved C01 timetable correction",
+      "refs": "TIER,TIER-REVIEW",
+      "root_causes": "C,F,H",
+      "boundary": "External scope needs exact legal applicability; no control failure or qualified Pressure follows",
+      "commercial_value": "Distinguish actual obligation and known management response"
+    },
+    {
+      "id": "R13",
+      "priority": "P1",
+      "work_type": "Recovery",
+      "item": "Three existing read-only Leadership Agenda issues",
+      "records": "funding-base, ai-benefits, service-recovery",
+      "refs": "AGENDA",
+      "root_causes": "F",
+      "boundary": "Already accessible through current canvas or historical agenda URLs; integrate meaning, not duplicate entries",
+      "commercial_value": "Sharper default story with material caveats retained"
+    },
+    {
+      "id": "R14",
+      "priority": "P1",
+      "work_type": "Mapping",
+      "item": "FCA customer outcomes to appropriate legal bank and process",
+      "records": "Service-recovery received/closed/upheld facts",
+      "refs": "AGENDA",
+      "root_causes": "C",
+      "boundary": "Received and closed are different cohorts; no Group/Retail allocation, harm-rate or backlog claim",
+      "commercial_value": "Ask customer about a defined journey rather than infer broad failure"
+    },
+    {
+      "id": "R15",
+      "priority": "P0",
+      "work_type": "Recovery / mapping",
+      "item": "Prepared organisational/AI-control facts and a bounded real process",
+      "records": "Factory six commercial replay claims plus responsible-AI committee isolated Evidence/Observation; Tier/R2/W3",
+      "refs": "FACTORY,FACTORY-REPLAY,FACTORY-PROOF,R2-OPS,TIER,W3",
+      "root_causes": "B,C,H",
+      "boundary": "Isolated execution receipts are not production import or public publication authority; do not expose private model records",
+      "commercial_value": "Recover already-extracted facts through existing owners, then connect one real business-to-capability chain"
+    },
+    {
+      "id": "R16",
+      "priority": "P1",
+      "work_type": "Source dependency",
+      "item": "RIC eight atomic Evidence review proposals",
+      "records": "RIC Observation-Proposals and accepted Source policy boundaries",
+      "refs": "RIC-PROPOSALS,POLICY",
+      "root_causes": "D,H",
+      "boundary": "Unexecuted proposals remain unapproved. Canonical acceptance is distinct from ordinary lawful analytical use",
+      "commercial_value": "Optional stronger canonical authority without imposing universal promotion"
+    },
+    {
+      "id": "R17",
+      "priority": "P2",
+      "work_type": "New research",
+      "item": "Actual product-market shares and economically comparable peers",
+      "records": "Candidate issuer results, official market/survey and regulator statistics",
+      "refs": "TIER-SOURCES",
+      "root_causes": "A,H",
+      "boundary": "No comparable measure/denominator established in this audit; do not relabel survey recommendation as share",
+      "commercial_value": "Evidence-based franchise and competitive positioning"
+    },
+    {
+      "id": "R18",
+      "priority": "P2",
+      "work_type": "New research",
+      "item": "Named application/workload-to-process ownership",
+      "records": "Issuer architecture/case disclosures; authorised customer explanation if unavailable publicly",
+      "refs": "TIER-ENDPOINTS",
+      "root_causes": "A,E,H",
+      "boundary": "No enterprise CMDB or full topology in accessible reviewed corpus; absent disclosure is not proved global unavailability",
+      "commercial_value": "Specific feasible technology intervention"
+    },
+    {
+      "id": "R19",
+      "priority": "P2",
+      "work_type": "Likely private",
+      "item": "Executed technology contract, value, renewal and remaining scope",
+      "records": "Disclosed award/filings if any; otherwise authorised customer/supplier confirmation",
+      "refs": "TIER-ENDPOINTS",
+      "root_causes": "E,H",
+      "boundary": "No such complete evidence established; procurement need, authority and supplier scope must not be invented",
+      "commercial_value": "Genuine buying event only after confirmation"
+    },
+    {
+      "id": "R20",
+      "priority": "P2",
+      "work_type": "Likely private",
+      "item": "Net AI costs/benefits and use-case operating measures",
+      "records": "Original benefit methodology and customer-confirmed full-cost/output data",
+      "refs": "LEI,R2",
+      "root_causes": "E,H",
+      "boundary": "Reported contribution/expectation is insufficient; internal measurement may not be public",
+      "commercial_value": "Deciding test for incremental transformation value"
+    },
+    {
+      "id": "R21",
+      "priority": "P0",
+      "work_type": "Verification",
+      "item": "Actual canonical/store and private development status",
+      "records": "Existing authenticated read services and receipt/subject binding",
+      "refs": "TIER-ENDPOINTS,MIGRATION,DEVELOPMENT",
+      "root_causes": "H",
+      "boundary": "No credentials or production-store reads available; repository filenames, CI and draft review are not import receipts",
+      "commercial_value": "Avoid false claims about accepted truth or qualified opportunities"
+    }
+  ]
+}
