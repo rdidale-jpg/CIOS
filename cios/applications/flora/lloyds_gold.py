@@ -58,7 +58,7 @@ DETAILS = {
  'programmes': ('legacy','ai','brand','colleague','curve','sources'),
  'markets': ('mechanism','sources'), 'resilience': ('applicability','sources'),
  'competition': ('payments','ai','sources'), 'strategy': ('timeline','options','goals','sources'),
- 'analysis': tuple('theme-'+str(i) for i in range(8))+('sources',),
+ 'analysis': tuple('theme-'+str(i) for i in range(8))+tuple('quadrant-'+q for q in ('strength','weakness','opportunity','threat'))+('sources',),
 }
 DETAILS['people']=('leadership','structure','workforce','sources')
 DETAILS['operations']+=tuple('journey-'+key for key in ('credit','payments','service','insurance','risk','data','platforms','finance','support'))
@@ -137,7 +137,115 @@ def href(state, *, stream=None, focus=None, detail=None, subject=None):
 
 def link(state,label,**kw):
     kw.setdefault('detail','')
-    return '<a href="'+e(href(state,**kw),quote=True)+'">'+e(label)+'</a>'
+    if kw['detail']=='sources':
+        return '<a class="canvas-inspection-link" data-canvas-exception="inspection" href="'+e(href(state,**kw),quote=True)+'">'+e(label)+'</a>'
+    if label.startswith('←'):
+        return '<a class="canvas-return" data-canvas-region="return" href="'+e(href(state,**kw),quote=True)+'">'+e(label)+'</a>'
+    focus=kw.get('focus',state.focus)
+    kind='money' if focus in {'economics','group'} else 'organisation' if focus=='people' else 'timeline' if focus in {'programmes','strategy'} else 'technology' if focus in {'applications','partners','capabilities'} else 'analysis' if focus=='analysis' else 'operating'
+    return region(state,label,kind=kind,**kw)
+
+
+def region(state,title,content='',*,kind='topic',caption='',mark=None,**kw):
+    """A native whole-region target over existing state, not a data owner."""
+    kw.setdefault('detail','')
+    target=href(state,**kw)
+    selected=target==href(state,detail=state.detail)
+    return ('<a class="canvas-region canvas-'+kind+'" data-canvas-region="'+kind+'" href="'+e(target,quote=True)+'" aria-label="'+e(title,quote=True)+'"'
+            +(' aria-current="page"' if selected else '')+'>'+visual_mark(mark or kind)+'<span class="canvas-title">'+e(title)+'</span>'
+            +('<span class="canvas-caption">'+e(caption)+'</span>' if caption else '')+content+'<span class="canvas-arrow" aria-hidden="true">↗</span></a>')
+
+
+def visual_mark(kind):
+    # Small explanatory diagrams, not company premises, quantitative scales or
+    # asserted dependencies. All navigation information also exists in text.
+    paths={
+      'business':'M5 28H30M30 12V44M30 12H82M30 28H82M30 44H82',
+      'retail':'M8 20A9 9 0 1 1 26 20A9 9 0 1 1 8 20M2 49C2 31 32 31 32 49M45 13H91M83 5L91 13L83 21M91 43H45M53 35L45 43L53 51',
+      'commercial':'M4 19H29V42H4ZM64 6H91V24H64ZM64 34H91V52H64ZM29 30H47V15H64M47 30V44H64',
+      'retirement':'M20 13L48 4L76 13V30C76 42 61 49 48 54C35 49 20 42 20 30ZM34 26H62M48 15V39',
+      'money':'M3 30H27M36 30H60M69 30H93M21 24L27 30L21 36M54 24L60 30L54 36M87 24L93 30L87 36',
+      'organisation':'M48 5V19M12 19H84M12 19V35M48 19V35M84 19V35M3 35H21V49H3ZM39 35H57V49H39ZM75 35H93V49H75Z',
+      'operating':'M3 12H70V23H3ZM15 29H82V40H15ZM27 46H94',
+      'technology':'M7 8H88V20H7ZM7 28H88V40H7ZM19 20V28M76 20V28M48 40V51',
+      'timeline':'M4 30H92M12 21V39M38 14V46M64 21V39M88 10V50',
+      'analysis':'M5 5H90V50H5ZM48 5V50M5 28H90',
+      'change':'M8 45L30 29L49 35L74 12H91M81 4L91 12L81 20',
+      'topic':'M5 15H57M5 29H85M5 43H68',
+    }
+    return '<svg class="canvas-mark" viewBox="0 0 98 56" aria-hidden="true" focusable="false"><path d="'+paths.get(kind,paths['topic'])+'"/></svg>'
+
+
+def business_regions(state,*,central=False):
+    body='<div class="canvas-businesses" role="group" aria-label="Reporting businesses · not financial shares">'
+    for title,customer,activity,driver,key in twin.DIVISIONS:
+        body+=region(state,title,'<span class="canvas-business-purpose">'+e(driver)+'</span>'+('<span class="canvas-business-boundary">'+e({'retail':'No Group balance or profit allocated to Retail','commercial':'Transfer pricing and risk costs matter','retirement':'Insurance accounting is not banking net interest margin'}[key])+'</span>' if central else ''),kind='business',mark={'retail':'retail','commercial':'commercial','retirement':'retirement'}[key],caption=customer,stream='landscape',focus=key,subject=key)
+    if central:body+=region(state,'Central / Equity',kind='money',caption='Central items and consolidation · no residual allocation; underlying segments must reconcile to the statutory Group',focus='economics',detail='central')
+    return body+'</div>'
+
+
+def financial_regions(state,facts):
+    return '<div class="le-measures canvas-financials">'+''.join(region(state,label,preview.measures({key:facts[key]}),kind='money',focus='economics',detail=detail)
+       for key,label,detail in [('LBG-Q326-DEPOSITS','Customer funding','funding'),('LBG-Q326-PROFIT','Reported earnings','income')] if key in facts)+'</div>'
+
+
+def operating_regions(state):
+    groups=(('Customer value streams',('credit','payments','service','insurance')),('Assure and enable delivery',('risk','data','platforms')),('Supporting organisation',('finance','support')))
+    body='<div class="canvas-value-system">'
+    for title,keys in groups:
+        body+='<section class="canvas-operating-band"><h2>'+e(title)+'</h2><div>'
+        for key in keys:
+            row=JOURNEYS[key]
+            body+=region(state,row[0],'<span class="canvas-sequence canvas-process">'+''.join('<span>'+e(step.strip())+'</span>' for step in row[2].split('→'))+'</span>',kind='operating',caption=row[1],detail='journey-'+key)
+        body+='</div></section>'
+    return body+'</div><p class="le-limit">Conceptual operating architecture; grouping and navigation do not assert verified dependencies.</p>'
+
+
+def capability_regions(state,data):
+    targets={'CAP-STRATEGY':('forces','strategy','goals'),'CAP-CHANNEL':('inside','operations','journey-service'),
+      'CAP-SERVICE':('inside','operations','service'),'CAP-DEPOSITS':('landscape','economics','funding'),
+      'CAP-FINANCE':('inside','operations','journey-finance'),'CAP-LENDING':('inside','operations','journey-credit'),
+      'CAP-PAYMENTS':('inside','operations','journey-payments'),'CAP-RISK':('inside','capabilities','risk'),
+      'CAP-TECH':('inside','capabilities','technology'),'CAP-DATA':('inside','capabilities','data')}
+    rows={r['id']:r for r in data.get('capabilities',()) if not source_import.working_restricted(r)}
+    body='<div class="canvas-capabilities">'
+    for title,ids in [('Customer and money',('CAP-CHANNEL','CAP-SERVICE','CAP-DEPOSITS','CAP-LENDING','CAP-PAYMENTS')),
+                      ('Control and shared capabilities',('CAP-RISK','CAP-DATA','CAP-TECH','CAP-FINANCE','CAP-STRATEGY'))]:
+        body+='<section><h2>'+title+'</h2><div>'
+        for key in ids:
+            if key not in rows:continue
+            stream,focus,detail=targets[key]
+            body+=region(state,rows[key]['title'],kind='technology' if key in {'CAP-DATA','CAP-TECH'} else 'operating',caption='Conceptual capability · select its existing context',stream=stream,focus=focus,detail=detail)
+        body+='</div></section>'
+    return body+'</div>'
+
+
+def transformation_regions(state,data,facts):
+    names={'legacy':'PROG-LBG-LEGACY','ai':'PROG-LBG-AI','brand':'PROG-LBG-BRAND','colleague':'PROG-LBG-COLLEAGUE','curve':'PROG-LBG-CURVE'}
+    rows=[]
+    for key,ident in names.items():
+        row=next((r for r in data.get('programmes',()) if r['id']==ident),None)
+        keys=tuple(k for k in row['claim_ids'] if k in facts) if row and not source_import.working_restricted(row) else ()
+        if not keys:continue
+        dates=sorted({ref.published for k in keys for ref in facts[k].sources if ref.published})
+        date=dates[0] if dates else ''
+        phase='Completion reported; integration unverified' if key=='curve' else 'Reported licences; adoption unverified' if key=='colleague' else 'Published plan or platform disclosure; delivery progress unverified'
+        rows.append((date,key,row,keys,phase))
+    body='<div class="canvas-timeline" aria-label="Transformation disclosures by publication date">'
+    for date,key,row,keys,phase in sorted(rows,key=lambda r:r[0]):
+        content=('<time class="canvas-date">'+e(date)+'</time>' if date else '')+'<span class="canvas-phase">'+e(phase)+'</span>'
+        body+=region(state,row['title'],content,kind='timeline',caption='First displayed source date · not a delivery milestone',detail=key)
+    return body+'</div>',rows
+
+
+def strategy_regions(state,facts):
+    # These horizons and statements are the existing disclosed objectives. The
+    # rail expresses distinct reporting horizons, not a fabricated progress axis.
+    available=[row for row in OBJECTIVES if all(key in facts for key in row[3])]
+    body='<div class="canvas-goal-rail" aria-label="Management objectives on their published horizons">'
+    for key,horizon,title,keys,owner,programme,journey in available:
+        body+=region(state,title,'<div class="canvas-goal-fact">'+reported(facts,keys[:1])+'</div>',kind='timeline',caption=horizon,focus='strategy',detail='objective-'+key)
+    return body+'</div>'
 
 
 def facts_for(data):
@@ -201,9 +309,9 @@ def scene(state,facts):
 
 def economics(state,facts,issues=()):
     body='<p class="le-deck">Deposits fund lending. Service income adds to interest income. Costs, credit losses and capital shape the return.</p>'
-    body+='<div class="gold-economic-map" aria-label="Conceptual Group economic mechanism">'+''.join('<span>'+link(state,title,focus='economics',detail=key)+'<small>'+desc+'</small></span>' for key,title,desc in (('funding','Funding','Deposits & other sources'),('income','Lending & income','Interest & fees'),('costs','Costs & impairment','Running the bank and credit risk'),('capital','Capital & returns','Risk capacity and returns')))+'</div>'
+    body+='<div class="gold-economic-map" aria-label="Conceptual Group economic mechanism">'+''.join(region(state,title,kind='money',caption=desc,focus='economics',detail=key) for key,title,desc in (('funding','Funding','Deposits & other sources'),('income','Lending & income','Interest & fees'),('costs','Costs & impairment','Running the bank and credit risk'),('capital','Capital & returns','Risk capacity and returns')))+'</div>'
     body+='<p class="le-limit">Conceptual model · not a measured allocation or accounting reconciliation.</p>'
-    body+='<div class="le-measures">'+preview.measures(facts)+'</div>'
+    body+=financial_regions(state,facts)
     stocks=[(key,label) for key,label in [('LBG-AR25-DEPOSITS','31 December 2025'),('LBG-Q326-DEPOSITS','30 September 2026')] if key in facts]
     if stocks:
         # Presentation only over existing typed, validated statements; no recipe,
@@ -212,7 +320,7 @@ def economics(state,facts,issues=()):
         body+='<figure class="gold-stocks"><figcaption>Group customer deposits · GBP billion</figcaption>'
         for key,label in stocks:
             item=facts[key];p.note_editorial_sources(item.sources)
-            body+='<div data-claim-id="'+key+'"><span>'+label+'</span><meter min="0" max="'+str(maximum)+'" value="'+str(item.value)+'" aria-label="Deposits at '+label+'">'+str(item.value)+'</meter><strong>£'+str(item.value)+'bn</strong></div>'
+            body+='<a class="canvas-region canvas-stock" data-canvas-region="financial-chart" href="'+e(href(state,focus='economics',detail='comparison'),quote=True)+'" aria-label="Compare customer deposits at '+label+'" data-claim-id="'+key+'"><span>'+label+'</span><meter min="0" max="'+str(maximum)+'" value="'+str(item.value)+'" aria-label="Deposits at '+label+'">'+str(item.value)+'</meter><strong>£'+str(item.value)+'bn</strong></a>'
         body+='<p class="le-limit">Reported stocks at two dates. Zero-based bars; a stock difference is not an adjusted deposit flow. Profit above covers nine months and uses a different unit of time.</p></figure>'
     funding=next((row for row in issues if row.key=='funding-base'),None)
     if funding and all(key in facts for key in ('LBG-AR25-DEPOSITS','LBG-Q326-DEPOSITS')):
@@ -222,12 +330,7 @@ def economics(state,facts,issues=()):
     if state.detail=='central':
         body+='<h2>Central / Equity and the Group tie-out</h2><p>Segment underlying profit and Group statutory profit have different accounting bases. Central items and the statutory bridge must remain separate; no residual is allocated to a business.</p><p>New segment and reconciliation figures are not published in this view.</p>'
     else:
-        body+=table(('Business','Economic mechanism','Financial boundary'),[
-            (link(state,'Retail Banking',focus='retail',subject='retail'),'Interest on loans and savings; service income','No Group balance or profit allocated to Retail'),
-            (link(state,'Commercial Banking',focus='commercial',subject='commercial'),'Business lending, deposits and payment services','Transfer pricing and risk costs matter'),
-            (link(state,'Insurance, Pensions & Investments',focus='retirement',subject='retirement'),'Long-term savings and policyholder obligations','Insurance accounting is not banking net interest margin'),
-            (link(state,'Central / Equity',focus='economics',detail='central'),'Central items and consolidation','Underlying segments must reconcile to the statutory Group'),
-        ],'Different businesses, different economics')
+        body+=business_regions(state,central=True)
     if state.detail=='comparison':
         body+=economic_decisions()
         body+=reported(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS','LBG-Q326-INVESTMENT','LBG-A2030-INVESTMENT'))
@@ -263,7 +366,7 @@ def division(state,facts):
     body+=table(('Value stream','Activities','Durable capabilities'),[(e(a),e(b),e(c)) for a,b,c in rows[state.focus]],'Operating interpretation · not a verified workflow or organisation chart')
     body+='<p class="ceo-unavailable">Reported segment contribution and matched comparisons are unavailable.</p>'
     body+=reported(facts,FOCUS_FACTS[state.focus])
-    body+='<p class="gold-related">'+link(state,'Group economic context',focus='economics')+' · '+link(state,'Related operating capabilities',stream='inside',focus='capabilities')+'</p>'
+    body+='<p class="gold-related">'+link(state,'Group economic context',focus='economics')+link(state,'Related operating capabilities',stream='inside',focus='capabilities')+'</p>'
     if state.focus in {'retail', 'commercial'}:
         body += '<p class="gold-related">' + link(
             state, 'Explore the credit journey', stream='inside', focus='operations', detail='credit'
@@ -312,11 +415,11 @@ def operating(state,data,facts,issues=()):
             ('Colleague technology', 'applications', 'copilot'),
         )
         body += '<p class="le-limit">Explore related topics. The links do not establish actual system dependencies.</p>'
-        body += '<p class="gold-related">' + ' · '.join(
+        body += '<p class="gold-related">' + ''.join(
             link(state, label, focus=focus, detail=detail) for label, focus, detail in targets
         ) + '</p>'
         body+='<h3>Commercial investigation</h3><p>Which hand-off causes avoidable repeat work, and what measured customer outcome would demonstrate an improvement? This is an investigation question, not established customer pain or demand.</p>'
-    else:body+='<p class="gold-related">'+link(state,'Credit journey detail',detail='credit')+' · '+link(state,'Customer service detail',detail='service')+'</p>'
+    else:body+='<p class="gold-related">'+link(state,'Credit journey detail',detail='credit')+link(state,'Customer service detail',detail='service')+'</p>'
     body+=reported(facts,FOCUS_FACTS['operations'])
     if state.detail=='service':
         service=next((row for row in issues if row.key=='service-recovery'),None)
@@ -330,16 +433,9 @@ def operating(state,data,facts,issues=()):
 
 
 def capabilities(state,data,facts):
-    rows=[]
-    for row in data.get('capabilities',()):
-        if source_import.working_restricted(row):continue
-        # The owner labels this library conceptual. Never promote relationship
-        # edges or use its presence to assert an installed app or team owner.
-        if row['id'] not in {'CAP-STRATEGY','CAP-CHANNEL','CAP-SERVICE','CAP-DEPOSITS','CAP-FINANCE','CAP-LENDING','CAP-PAYMENTS','CAP-RISK','CAP-TECH','CAP-DATA'}:continue
-        rows.append((e(row['title']),'Conceptual capability; ownership and application mapping unverified'))
     body='<p class="le-deck">Capabilities describe what the bank must be able to do; value streams describe how work delivers an outcome.</p>'
-    body+=table(('Capability','Model status'),rows,'Existing Lloyds capability library')
-    body+='<p class="gold-related">'+link(state,'Risk & control',detail='risk')+' · '+link(state,'Technology renewal',detail='technology')+' · '+link(state,'Data & AI',detail='data')+'</p>'
+    body+=capability_regions(state,data)
+    body+='<p class="le-limit">Conceptual capability grouping; no organisation, application ownership or installed dependency is asserted.</p>'
     if state.detail:
         keys={'risk':('LBG-ENVOY-CONTROLS',),'technology':('LBG-AR25-MIGRATION',),'data':('LBG-A2030-DATA',)}.get(state.detail,())
         body+=reported(facts,keys)
@@ -353,8 +449,8 @@ def applications(state,facts):
     for key,(name,status,keys,capability,note) in APPS.items():
         available=tuple(k for k in keys if k in facts)
         if len(available)!=len(keys):continue
-        rows.append((link(state,name,focus='applications',detail=key),e(status),e(capability)))
-    body+=table(('Application / product','Disclosed status','Capability association'),rows,'Source-supported examples · not an installed estate inventory') if rows else ''
+        rows.append(region(state,name,kind='technology',caption=status,content='<span class="canvas-sequence">'+e(capability)+'</span>',focus='applications',detail=key))
+    body+='<div class="canvas-technology">'+''.join(rows)+'</div><p class="le-limit">Source-supported examples · not an installed estate inventory.</p>' if rows else ''
     body+=reported(facts,('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'))
     body+=interpretation(facts,('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'),'The earlier reported AI contribution and the later expectation use different temporal states. Neither establishes net return after all costs, divisional attribution or external supplier budget.')
     key={'google':'envoy','microsoft':'copilot'}.get(state.detail,state.detail)
@@ -368,46 +464,51 @@ def applications(state,facts):
                   ('Contracted service','Unknown'),('Support expiry','Unknown'),('Contract end / renewal','Unknown'),
                   ('Programme dependency','No verified installation-to-programme or contract dependency'),('Ownership / confidence','Attributed public disclosure; no canonical installation or contract assertion')]
             body+=table(('Field','Established boundary'),rows,'Application detail · Unknown means no supported assertion')
-            body+='<p class="gold-related">'+link(state,'Evidence & dates',detail='sources')+'</p></section>'
+            body+='<p class="gold-inspect">'+link(state,'Evidence & dates',detail='sources')+'</p></section>'
     return body
 
 
 def partners(state,facts):
-    body='<p class="le-deck">A collaboration, a product licence and a contract are different relationships.</p>'
-    rows=[]
-    if 'LBG-ENVOY-GOOGLE' in facts:rows.append((link(state,'Google Cloud',detail='google'),'Disclosed Envoy collaborator','No contracting entity, spend, workshare or renewal established'))
-    if 'LBG-AR25-COPILOT' in facts:rows.append((link(state,'Microsoft Copilot',detail='microsoft'),'Disclosed licences; product context','No supplier contract or service-term inference'))
-    body+=table(('Provider / product','Supported connection','Boundary'),rows,'Disclosed connections · not a contract or dependency graph') if rows else ''
-    body+=reported(facts,FOCUS_FACTS['partners'])
+    body='<p class="le-deck">A collaboration, a product licence and a contract are different relationships.</p><div class="canvas-technology">'
+    if 'LBG-ENVOY-GOOGLE' in facts:body+=region(state,'Google Cloud',kind='technology',caption='Disclosed Envoy collaborator',content='<span class="canvas-sequence">No contracting entity, spend, workshare or renewal established</span>',detail='google')
+    if 'LBG-AR25-COPILOT' in facts:body+=region(state,'Microsoft Copilot',kind='technology',caption='Disclosed licences; product context',content='<span class="canvas-sequence">No supplier contract or service-term inference</span>',detail='microsoft')
+    body+='</div>'+reported(facts,FOCUS_FACTS['partners'])
     if state.detail in {'google','microsoft'}:body+=applications(state,facts)
     return body
 
 
 def programmes(state,data,facts):
     body='<p class="le-deck">Different kinds of change, at different points in delivery.</p>'
-    names={'legacy':'PROG-LBG-LEGACY','ai':'PROG-LBG-AI','brand':'PROG-LBG-BRAND','colleague':'PROG-LBG-COLLEAGUE','curve':'PROG-LBG-CURVE'}
-    rows=[]
-    for key,ident in names.items():
-        row=next((r for r in data.get('programmes',()) if r['id']==ident),None)
-        keys=tuple(k for k in row['claim_ids'] if k in facts) if row and not source_import.working_restricted(row) else ()
-        if not keys:continue
-        phase='Completion reported; integration unverified' if key=='curve' else 'Reported licences; adoption unverified' if key=='colleague' else 'Published plan or platform disclosure; delivery progress unverified'
-        rows.append((link(state,row['title'],detail=key),phase))
+    timeline,rows=transformation_regions(state,data,facts)
+    body+=timeline
+    for date,key,row,keys,phase in rows:
         if state.detail==key:
             body+='<section class="gold-dossier"><h2>'+e(row['title'])+'</h2>'+reported(facts,keys)
             body+=table(('Accountability','Commercial boundary','Outcome'),[('Programme owner Unknown','Funding, procurement, external scope and dates Unknown','Delivery and realised benefit Unknown')],'Programme detail · no work package or buying intent inferred')+'</section>'
-    return body+table(('Change','What is actually established'),rows,'Transformation portfolio · evidence-backed disclosures, not project status')
+    return body
 
 
 def analysis(state,facts):
     body='<p class="le-deck">Eight strategic themes. Four familiar quadrants.</p><div class="gold-swot" aria-label="Four-quadrant SWOT">'
+    selected_quadrant=state.detail.removeprefix('quadrant-') if state.detail.startswith('quadrant-') else None
     for quadrant in ('Strength','Weakness','Opportunity','Threat'):
         cards=[]
         for index,(title,keys,_) in enumerate(SWOT):
             if title.startswith(quadrant+' · ') and all(k in facts for k in keys):
-                cards.append(link(state,title.split(' · ',1)[1],detail='theme-'+str(index)))
-        body+='<section><h2>'+quadrant+'</h2>'+''.join(cards)+'</section>'
+                cards.append(region(state,title.split(' · ',1)[1],kind='theme',detail='theme-'+str(index)))
+        body+='<section class="canvas-quadrant canvas-'+quadrant.lower()+'">'
+        if cards:
+            body+=region(state,quadrant,kind='quadrant',caption={'Strength':'Existing capabilities','Weakness':'Execution constraints','Opportunity':'Conditional possibilities','Threat':'External and delivery risks'}[quadrant],detail='quadrant-'+quadrant.lower())
+            body+='<div class="canvas-themes">'+''.join(cards)+'</div>'
+        else:body+='<h2>'+quadrant+'</h2>'
+        body+='</section>'
     body+='</div><p class="le-limit">FLORA analysis, not qualified sales opportunities. Theme availability follows its underlying sources.</p>'
+    if selected_quadrant:
+        body+='<section class="gold-dossier"><h2>'+e(selected_quadrant.title())+' themes</h2>'
+        for index,(title,keys,text) in enumerate(SWOT):
+            if title.lower().startswith(selected_quadrant+' · ') and all(k in facts for k in keys):
+                body+=region(state,title.split(' · ',1)[1],interpretation(facts,keys,text),kind='theme',detail='theme-'+str(index))
+        body+='</section>'
     if state.detail.startswith('theme-'):
         index=int(state.detail.split('-')[1]); title,keys,text=SWOT[index]
         if all(k in facts for k in keys):
@@ -455,7 +556,7 @@ def strategy_goals(facts):
         return body + '<p>No eligible strategy disclosures are available for this view.</p>'
     anchors = {horizon: horizon.lower().replace(' ', '-') for horizon in groups}
     body += '<nav class="gold-related" aria-label="Strategy horizons">' + ' · '.join(
-        f'<a href="#strategy-{anchors[horizon]}">{e(horizon)}</a>' for horizon in groups
+        f'<a class="canvas-region canvas-timeline" data-canvas-region="timeline" href="#strategy-{anchors[horizon]}" aria-label="{e(horizon,quote=True)}">'+visual_mark('timeline')+f'<span class="canvas-title">{e(horizon)}</span></a>' for horizon in groups
     ) + '</nav>'
     for horizon, rows in groups.items():
         body += f'<section class="gold-dossier" id="strategy-{anchors[horizon]}"><h2>{e(horizon)}</h2>'
@@ -474,12 +575,12 @@ def forces(state,facts):
     if state.focus=='strategy':
         if state.detail == 'goals':
             return strategy_goals(facts)
-        body='<p class="le-deck">Management direction and the sequence of change.</p>'+preview.timeline(facts)
+        body='<p class="le-deck">Management direction and the sequence of change.</p>'+strategy_regions(state,facts)
         body+=reported(facts,('LBG-A2030-SAVINGS','LBG-Q326-INVESTMENT','LBG-A2030-INVESTMENT'))
         if state.detail=='options':
             for title,keys,text in next(rows for key,_,rows in flagship.VIEWS if key=='options'):
                 if all(k in facts for k in keys):body+='<h2>'+e(title)+'</h2>'+interpretation(facts,keys,text)
-        else:body+='<p class="gold-related">'+link(state,'Goals & tests of progress',detail='goals')+' · '+link(state,'Strategic alternatives & trade-offs',detail='options')+'</p>'
+        else:body+='<p class="gold-related">'+link(state,'Goals & tests of progress',detail='goals')+link(state,'Strategic alternatives & trade-offs',detail='options')+'</p>'
         return body
     keys=FOCUS_FACTS[state.focus]
     deck={'markets':'Funding and asset repricing can move at different speeds.',
@@ -503,7 +604,7 @@ def forces(state,facts):
 
 def main(state,data,facts,issues=()):
     title=SUBJECTS[state.focus]
-    body='<section class="gold-content" data-level="'+('3' if state.detail=='sources' else '2' if state.detail else '0' if state.focus=='group' else '1')+'">'
+    body='<section class="gold-content" data-canvas="visual" data-level="'+('3' if state.detail=='sources' else '2' if state.detail else '0' if state.focus=='group' else '1')+'">'
     body+='<p class="eyebrow">Lloyds Banking Group plc'+(' · From '+e(SUBJECTS[state.subject]) if state.subject!=state.focus else '')+'</p>'
     if state.detail:body+='<p class="gold-back">'+link(state,'← '+title)+'</p>'
     body+='<h1>'+e(title)+'</h1>'
@@ -521,25 +622,25 @@ def main(state,data,facts,issues=()):
     if state.stream=='landscape':
         if state.focus=='group' and not state.detail:
             body+='<p class="le-deck">Three customer businesses. Funding, earnings and the work of running the bank.</p>'
-            body+='<div class="gold-divisions">'+''.join('<article>'+link(state,title,focus=key,subject=key)+'<p>'+e(customer)+'</p></article>' for title,customer,_,_,key in twin.DIVISIONS)+'</div>'
-            body+='<div class="le-measures">'+preview.measures(facts)+'</div>'
+            body+=business_regions(state)
+            body+=financial_regions(state,facts)
             body+=interpretation(facts,('LBG-AR25-MIGRATION','LBG-A2030-CIR'),'The efficiency ambition and platform-renewal priority put the sequencing of change alongside service continuity. They establish strategic direction, not a project-level saving or open buying programme.')
             if 'LBG-Q326-CURVE' in facts:
-                body+='<section class="ceo-change"><span class="eyebrow">Reported change</span><h2>Curve acquisition reported complete</h2>'+reported(facts,('LBG-Q326-CURVE',))+'<p class="le-limit">Completion is not integration progress or open supplier scope.</p></section>'
+                body+=region(state,'Curve acquisition reported complete',reported(facts,('LBG-Q326-CURVE',))+'<p class="le-limit">Completion is not integration progress or open supplier scope.</p>',kind='change',caption='Reported change',stream='inside',focus='programmes',detail='curve')
             if 'CEO1-ROLE-NUNN-20260322' in facts:
                 p.note_editorial_sources(facts['CEO1-ROLE-NUNN-20260322'].sources)
-                body+='<p class="ceo-lead-context">'+link(state,'Leadership evidence',stream='inside',focus='people',detail='leadership')+' · Charlie Nunn was identified as Group Chief Executive in March 2026; current mandate verification is unavailable.</p><p class="ceo-attribution">Contains public sector information licensed under the Open Government Licence v3.0.</p>'
+                body+=region(state,'Leadership evidence',kind='organisation',caption='Charlie Nunn was identified as Group Chief Executive in March 2026; current mandate verification is unavailable.',stream='inside',focus='people',detail='leadership')+'<p class="ceo-attribution">Contains public sector information licensed under the Open Government Licence v3.0.</p>'
             # Keep the existing EAI agenda destinations discoverable, with their
             # current eligibility owner deciding whether each link may appear.
             related=[]
             funding=next((row for row in issues if row.key=='funding-base'),None)
             if funding and funding.facts[-1].semantic_type=='calculated' and p.eligible(funding.facts[-1]):
                 body+='<div data-intelligence="funding-base">'+p.render(funding.facts[-1])+'</div>'
-                related.append('<a href="/enterprises/lloyds?agenda=funding-base#agenda-insight">Funding comparison</a>')
+                related.append('<a class="canvas-region canvas-money" data-canvas-region="money" href="'+e(href(state,focus='economics',detail='comparison'),quote=True)+'" aria-label="Funding comparison">'+visual_mark('money')+'<span class="canvas-title">Funding comparison</span><span class="canvas-caption">Compare dated stocks and their limits</span></a>')
             if any(row.key=='service-recovery' for row in issues):
-                related.append('<a href="/enterprises/lloyds?agenda=service-recovery#agenda-insight">Customer outcomes</a>')
-            if related:body+='<p class="gold-related">'+' · '.join(related)+'</p>'
-            body+='<p class="gold-related">'+link(state,'Funding, income & earnings',focus='economics')+' · '+link(state,'Organisation & workforce',stream='inside',focus='people',detail='leadership')+' · '+link(state,'Management goals',stream='forces',focus='strategy',detail='goals')+'</p>'
+                related.append('<a class="canvas-region canvas-operating" data-canvas-region="operating" data-intelligence="service-recovery" id="preview-service-recovery" href="'+e(href(state,stream='inside',focus='operations',detail='service'),quote=True)+'" aria-label="Customer outcomes">'+visual_mark('operating')+'<span class="canvas-title">Customer outcomes</span><span class="canvas-caption">Lloyds Bank PLC · its own reporting perimeter</span></a>')
+            if related:body+='<p class="gold-related">'+''.join(related)+'</p>'
+            body+='<p class="gold-related">'+link(state,'Funding, income & earnings',focus='economics')+link(state,'Organisation & workforce',stream='inside',focus='people',detail='leadership')+link(state,'Management goals',stream='forces',focus='strategy',detail='goals')+'</p>'
         elif state.focus in {'group','economics'}:body+=_ceo_financial(state,facts,issues)
         else:body+=division(state,facts)
     elif state.stream=='inside':
@@ -668,38 +769,37 @@ def _ceo_people(state,facts):
           ('Legal entities','Not interchangeable with reporting segments; legal ownership map unavailable'),
         ],'Organisation · no inferred reporting lines')
     if state.detail=='structure':
-        body+='<div class="ceo-hierarchy"><strong>Lloyds Banking Group plc</strong><span>Reporting businesses · not legal subsidiaries</span><div>'+''.join('<article>'+link(state,title,stream='landscape',focus=key,subject=key)+'<p>'+e(customer)+'</p></article>' for title,customer,_,_,key in twin.DIVISIONS)+'</div></div>'
-        body+=table(('Function view','Durable capability','Accountability'),[
-         ('Finance / treasury','Finance and funding','Named owner / mandate unavailable'),('Customer operations','Servicing and channels','Named owner / mandate unavailable'),
-         ('Risk and control','Risk assessment and controls','Named owner / mandate unavailable'),('Technology / data','Platforms, data and AI','Named owner / mandate unavailable'),
-        ],'Conceptual function lenses · not a verified organisation chart')
+        body+='<div class="ceo-hierarchy"><strong>Lloyds Banking Group plc</strong><span>Reporting businesses · not legal subsidiaries</span>'+business_regions(state)+'</div>'
+        body+='<div class="canvas-function-map" aria-label="Conceptual function lenses">'+''.join(region(state,title,kind='operating',caption=caption,stream='inside',focus='operations',detail='journey-'+key) for key,title,caption in (
+          ('finance','Finance / treasury','Finance and funding · Named owner / mandate unavailable'),('service','Customer operations','Servicing and channels · Named owner / mandate unavailable'),
+          ('risk','Risk and control','Risk assessment and controls · Named owner / mandate unavailable'),('platforms','Technology / data','Platforms, data and AI · Named owner / mandate unavailable')))+'</div><p class="le-limit">Conceptual function lenses · not a verified organisation chart.</p>'
     if state.detail=='workforce':
         body+='<h2>Workforce measures</h2><p class="ceo-unavailable">Comparable workforce totals and distribution are unavailable in this view.</p>'
         body+=table(('Measure','Current eligible result'),[(x,'Unavailable') for x in ('Employee headcount / FTE','Prior-period movement','Business / function / geography split','Technology and AI workforce','Workforce cost / productivity','Internal / supplier-delivered split')],'Workforce · no proxy values or invented trend')
         if 'LBG-AR25-COPILOT' in facts:body+='<h2>Separate tool footprint</h2>'+reported(facts,('LBG-AR25-COPILOT',))+'<p class="le-limit">Licences are not people, active adoption or productivity. No headcount or workforce chart is derived from them.</p>'
         body+=reported(facts,('LBG-BRAND26-NO-ROLES',))
-    body+='<p class="gold-related">'+link(state,'Leadership',focus='people',detail='leadership')+' · '+link(state,'Businesses & functions',focus='people',detail='structure')+' · '+link(state,'Workforce',focus='people',detail='workforce')+'</p>'
+    body+='<p class="gold-related">'+link(state,'Leadership',focus='people',detail='leadership')+link(state,'Businesses & functions',focus='people',detail='structure')+link(state,'Workforce',focus='people',detail='workforce')+'</p>'
     return body
 
 
 def _ceo_journey(state,data,facts):
     selected=state.detail.removeprefix('journey-') if state.detail.startswith('journey-') else None
     if selected not in JOURNEYS:
-        return ('<p class="le-deck">Explore the work that delivers customer and economic outcomes.</p>'
-                +table(('Value stream / function','Business perimeter','Supported operating context'),[(link(state,row[0],detail='journey-'+key),e(row[1]),'Dated Group disclosures available' if row[4] else 'Conceptual orientation; measured operating evidence unavailable') for key,row in JOURNEYS.items()],
-                       'Operating architecture · conceptual until the specific dependency is evidenced'))
+        return '<p class="le-deck">Explore the work that delivers customer and economic outcomes.</p>'+operating_regions(state)
     title,division,activities,caps,keys,meaning,question=JOURNEYS[selected]
     names={row['id']:row['title'] for row in data.get('capabilities',()) if not source_import.working_restricted(row)}
     body='<p class="eyebrow">'+e(division)+'</p><h2>'+e(title)+'</h2><p class="le-deck">'+e(activities)+'</p><p class="le-limit">Conceptual activity sequence; no verified application, role or supplier dependency is inferred.</p>'
-    body+=table(('Layer','Established boundary'),[
-      ('Business / value stream',e(division)+' · '+e(title)),('Activities',e(activities)),
-      ('Durable capabilities',e(' · '.join(names[k] for k in caps if k in names))),('Organisation / accountable role','Unavailable; function association is conceptual'),
-      ('Applications / data','Only the separately disclosed examples below; stream assignment unavailable'),('Technology / infrastructure','Installed topology and workload criticality unavailable'),
-      ('Suppliers / contracts','Only disclosed collaboration / product context; contracted service and dates unavailable'),
-    ],'From business to delivery · factual edges are not implied by navigation')
+    body+='<div class="canvas-layer-stack" aria-label="Conceptual operating layers">'
+    body+=region(state,'Business / value stream',kind='business',caption=division+' · '+title,stream='landscape',focus=state.subject if state.subject in {'retail','commercial','retirement'} else 'group')
+    body+=region(state,'Durable capabilities',kind='operating',caption=' · '.join(names[k] for k in caps if k in names),focus='capabilities')
+    body+=region(state,'Organisation / accountable role',kind='organisation',caption='Unavailable; function association is conceptual',focus='people',detail='structure')
+    body+=region(state,'Applications / data',kind='technology',caption='Disclosed examples only; stream assignment unavailable',focus='applications')
+    body+=region(state,'Technology / infrastructure',kind='technology',caption='Installed topology and workload criticality unavailable',focus='capabilities',detail='technology')
+    body+=region(state,'Suppliers / contracts',kind='technology',caption='Disclosed collaboration only; contracted service and dates unavailable',focus='partners')
+    body+='</div>'
     body+=reported(facts,keys)+interpretation(facts,keys,meaning) if keys else '<p class="le-limit">'+e(meaning)+'</p>'
     body+='<section class="gold-dossier"><h3>Commercial significance</h3><p>'+e(meaning)+'</p><h3>Account investigation</h3><p>'+e(question)+'</p><p class="le-limit">Potential intervention must add to existing capabilities. No buyer need, budget, procurement event or supplier demand is established.</p></section>'
-    body+='<p class="gold-related">'+link(state,'Applications & disclosed suppliers',focus='applications')+' · '+link(state,'Transformation disclosures',focus='programmes')+' · '+link(state,'Related strategy',stream='forces',focus='strategy',detail='goals')+'</p>'
+    body+='<p class="gold-related">'+link(state,'Applications & disclosed suppliers',focus='applications')+link(state,'Transformation disclosures',focus='programmes')+link(state,'Related strategy',stream='forces',focus='strategy',detail='goals')+'</p>'
     return body
 
 
@@ -721,14 +821,12 @@ def _ceo_goals(state,facts):
         ],'Goal scorecard · no inferred progress percentage or causal benefit')
         body+='<h3>Commercial investigation</h3><p>'+e(GOAL_DECISIONS[key][1])+'</p><p class="le-limit">External intervention is a hypothesis only; procurement, budget and sponsor mandate are unproven.</p>'
         body+='<p class="gold-related">'+link(state,'Operating context',stream='inside',focus='operations',detail='journey-'+journey)
-        if programme:body+=' · '+link(state,'Existing programme disclosure',stream='inside',focus='programmes',detail=programme)
+        if programme:body+=link(state,'Existing programme disclosure',stream='inside',focus='programmes',detail=programme)
         return body+'</p>'
-    body='<p class="le-deck">Management objectives, on their own reporting horizons.</p><div class="ceo-goals">'
-    for key,horizon,title,keys,owner,programme,journey in available:
-        body+='<article><span class="eyebrow">'+e(horizon)+'</span><h2>'+link(state,title,detail='objective-'+key)+'</h2>'+reported(facts,keys[:1])+'</article>'
+    body='<p class="le-deck">Management objectives, on their own reporting horizons.</p>'+strategy_regions(state,facts)
     if 'LBG-Q326-INVESTMENT' in facts and not all(key in facts for key in ('LBG-Q326-INVESTMENT','LBG-A2030-INVESTMENT')):
         body+='<section><h2>Separate investment context</h2>'+reported(facts,('LBG-Q326-INVESTMENT',))+'</section>'
-    body+='</div><p class="le-limit">No measured progress-to-target chart is shown without a matched baseline and actual. A prior-year contribution and a later expectation are different states, not a percentage achieved.</p>'
+    body+='<p class="le-limit">No measured progress-to-target chart is shown without a matched baseline and actual. A prior-year contribution and a later expectation are different states, not a percentage achieved.</p>'
     return body
 
 

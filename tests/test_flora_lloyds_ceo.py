@@ -209,7 +209,8 @@ def test_history_keeps_new_role_bytes_exact_and_rejects_unreviewed_additions(tmp
 def test_existing_eai_outcomes_and_funding_still_have_one_source_guarded_entry():
     html=main(v.render(g.CANONICAL,{}))
     assert html.count('data-intelligence="funding-base"')==1
-    assert html.count('agenda=service-recovery#agenda-insight')==1
+    assert html.count('id="preview-service-recovery"')==1
+    assert 'stream=inside&amp;focus=operations&amp;subject=group&amp;detail=service' in html
     assert 'Funding comparison'in html and 'Customer outcomes'in html
 
 

@@ -48,9 +48,11 @@ def run(phase,output):
       expect(page.locator('main h1')).to_have_text('Group overview');assert not page.locator('[data-preview]').count();expect(page.get_by_role('navigation',name='Reading mode')).to_have_count(0);capture('group')
       for stream,regions in g.REGIONS.items():
        page.get_by_role('navigation',name='Insight streams').get_by_role('link',name=stream.title(),exact=True).click()
+       expect(page.get_by_role('navigation',name='Insight streams').locator('[aria-current="page"]')).to_have_text(stream.title())
        for key,label in regions:
         if stream=='inside' and key=='partners':key,label='people','Organisation & workforce'
-        if width<1000 and not page.locator('#enterprise-scene').is_visible():page.get_by_role('button',name='Explore Lloyds',exact=True).click()
+        if width<1000 and not page.locator('#enterprise-scene').is_visible():
+         page.get_by_role('button',name='Explore Lloyds',exact=True).click();expect(page.locator('#enterprise-scene')).to_be_visible()
         target=page.locator('[data-region-key="'+key+'"]');box=target.bounding_box();assert box['width']>=44 and box['height']>=44
         if device=='desktop':target.focus();page.keyboard.press('Enter')
         else:target.tap()
