@@ -95,7 +95,11 @@ jobs:
           python "$GITHUB_WORKSPACE/docs/product/flora-experience/main-canvas/browser.py" before "$RUNNER_TEMP/canvas-browser"
           cd "$GITHUB_WORKSPACE"
           python docs/product/flora-experience/main-canvas/browser.py after "$RUNNER_TEMP/canvas-browser"
-          python docs/product/flora-experience/main-canvas/validate.py --browser "$RUNNER_TEMP/canvas-browser"
+          python docs/research/lloyds-intelligence-recovery/check_canvas_browser.py "$RUNNER_TEMP/canvas-browser"
+          # Keep the original #733 scope/hash/rollback audit on its approved cut.
+          git worktree add --detach "$RUNNER_TEMP/canvas-approved-cut" 3a4c7e0f6ad81af7ef32ed477a1a584ac2efae87
+          cd "$RUNNER_TEMP/canvas-approved-cut"
+          python docs/product/flora-experience/main-canvas/validate.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
