@@ -1,0 +1,5914 @@
+{
+  "runtime_baseline": "3a4c7e0f6ad81af7ef32ed477a1a584ac2efae87",
+  "capture_checkout": "3a4c7e0f6ad81af7ef32ed477a1a584ac2efae87",
+  "mode": "isolated Guest public read; exact deployed code cut; not live DOM or physical iPad certification",
+  "screens": {
+    "desktop:group": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 1737.203125,
+        "bottom": 1886.203125,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1886,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Insurance, Pensions & Investments",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Retail",
+          "kind": "business",
+          "box": {
+            "x": 492.390625,
+            "y": 378.28125,
+            "width": 300.53125,
+            "height": 281.8125,
+            "bottom": 660.09375,
+            "right": 792.921875
+          },
+          "visible": true,
+          "words": 8
+        },
+        {
+          "name": "Commercial Banking",
+          "kind": "business",
+          "box": {
+            "x": 792.921875,
+            "y": 396.28125,
+            "width": 300.53125,
+            "height": 263.8125,
+            "bottom": 660.09375,
+            "right": 1093.453125
+          },
+          "visible": true,
+          "words": 9
+        },
+        {
+          "name": "Insurance, Pensions & Investments",
+          "kind": "business",
+          "box": {
+            "x": 1093.453125,
+            "y": 414.28125,
+            "width": 300.546875,
+            "height": 245.8125,
+            "bottom": 660.09375,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 12
+        },
+        {
+          "name": "Customer funding",
+          "kind": "money",
+          "box": {
+            "x": 492.390625,
+            "y": 693.09375,
+            "width": 460.734375,
+            "height": 200,
+            "bottom": 893.09375,
+            "right": 953.125
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Reported earnings",
+          "kind": "money",
+          "box": {
+            "x": 975.125,
+            "y": 693.09375,
+            "width": 418.875,
+            "height": 200,
+            "bottom": 893.09375,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 14
+        },
+        {
+          "name": "Curve acquisition reported complete",
+          "kind": "change",
+          "box": {
+            "x": 492.390625,
+            "y": 975.59375,
+            "width": 901.609375,
+            "height": 239.515625,
+            "bottom": 1215.109375,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 22
+        },
+        {
+          "name": "Leadership evidence",
+          "kind": "organisation",
+          "box": {
+            "x": 492.390625,
+            "y": 1215.109375,
+            "width": 901.609375,
+            "height": 160.328125,
+            "bottom": 1375.4375,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 17
+        },
+        {
+          "name": "Funding comparison",
+          "kind": "money",
+          "box": {
+            "x": 492.390625,
+            "y": 1475.765625,
+            "width": 449.296875,
+            "height": 140.4375,
+            "bottom": 1616.203125,
+            "right": 941.6875
+          },
+          "visible": false,
+          "words": 7
+        },
+        {
+          "name": "Customer outcomes",
+          "kind": "operating",
+          "box": {
+            "x": 944.6875,
+            "y": 1475.765625,
+            "width": 449.3125,
+            "height": 140.4375,
+            "bottom": 1616.203125,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 9
+        },
+        {
+          "name": "Funding, income & earnings",
+          "kind": "money",
+          "box": {
+            "x": 492.390625,
+            "y": 1644.203125,
+            "width": 298.53125,
+            "height": 172,
+            "bottom": 1816.203125,
+            "right": 790.921875
+          },
+          "visible": false,
+          "words": 4
+        },
+        {
+          "name": "Organisation & workforce",
+          "kind": "organisation",
+          "box": {
+            "x": 793.921875,
+            "y": 1644.203125,
+            "width": 298.546875,
+            "height": 172,
+            "bottom": 1816.203125,
+            "right": 1092.46875
+          },
+          "visible": false,
+          "words": 3
+        },
+        {
+          "name": "Management goals",
+          "kind": "timeline",
+          "box": {
+            "x": 1095.46875,
+            "y": 1674.203125,
+            "width": 298.53125,
+            "height": 112,
+            "bottom": 1786.203125,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 2
+        }
+      ],
+      "tables": 0,
+      "words": 221,
+      "unavailableMentions": 1,
+      "articleCount": 2,
+      "url": "/enterprises/lloyds"
+    },
+    "desktop:economics": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 1933.265625,
+        "bottom": 2082.265625,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 2082,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Insurance, Pensions & Investments",
+          "lines": 2
+        },
+        {
+          "text": "Earnings, efficiency & capital decisions",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Funding",
+          "kind": "money",
+          "box": {
+            "x": 492.390625,
+            "y": 377.28125,
+            "width": 223.890625,
+            "height": 178,
+            "bottom": 555.28125,
+            "right": 716.28125
+          },
+          "visible": true,
+          "words": 4
+        },
+        {
+          "name": "Lending & income",
+          "kind": "money",
+          "box": {
+            "x": 718.28125,
+            "y": 377.28125,
+            "width": 223.90625,
+            "height": 178,
+            "bottom": 555.28125,
+            "right": 942.1875
+          },
+          "visible": true,
+          "words": 5
+        },
+        {
+          "name": "Costs & impairment",
+          "kind": "money",
+          "box": {
+            "x": 944.1875,
+            "y": 377.28125,
+            "width": 223.90625,
+            "height": 178,
+            "bottom": 555.28125,
+            "right": 1168.09375
+          },
+          "visible": true,
+          "words": 8
+        },
+        {
+          "name": "Capital & returns",
+          "kind": "money",
+          "box": {
+            "x": 1170.09375,
+            "y": 377.28125,
+            "width": 223.90625,
+            "height": 178,
+            "bottom": 555.28125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 6
+        },
+        {
+          "name": "Customer funding",
+          "kind": "money",
+          "box": {
+            "x": 492.390625,
+            "y": 619.078125,
+            "width": 460.734375,
+            "height": 200,
+            "bottom": 819.078125,
+            "right": 953.125
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Reported earnings",
+          "kind": "money",
+          "box": {
+            "x": 975.125,
+            "y": 619.078125,
+            "width": 418.875,
+            "height": 200,
+            "bottom": 819.078125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 14
+        },
+        {
+          "name": "Compare customer deposits at 31 December 2025",
+          "kind": "financial-chart",
+          "box": {
+            "x": 492.390625,
+            "y": 898.078125,
+            "width": 901.609375,
+            "height": 78,
+            "bottom": 976.078125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Compare customer deposits at 30 September 2026",
+          "kind": "financial-chart",
+          "box": {
+            "x": 492.390625,
+            "y": 988.078125,
+            "width": 901.609375,
+            "height": 78,
+            "bottom": 1066.078125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Retail",
+          "kind": "business",
+          "box": {
+            "x": 492.390625,
+            "y": 1230.0625,
+            "width": 300.53125,
+            "height": 342,
+            "bottom": 1572.0625,
+            "right": 792.921875
+          },
+          "visible": false,
+          "words": 15
+        },
+        {
+          "name": "Commercial Banking",
+          "kind": "business",
+          "box": {
+            "x": 792.921875,
+            "y": 1248.0625,
+            "width": 300.53125,
+            "height": 324,
+            "bottom": 1572.0625,
+            "right": 1093.453125
+          },
+          "visible": false,
+          "words": 14
+        },
+        {
+          "name": "Insurance, Pensions & Investments",
+          "kind": "business",
+          "box": {
+            "x": 1093.453125,
+            "y": 1266.0625,
+            "width": 300.546875,
+            "height": 306,
+            "bottom": 1572.0625,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 19
+        },
+        {
+          "name": "Central / Equity",
+          "kind": "money",
+          "box": {
+            "x": 492.390625,
+            "y": 1572.0625,
+            "width": 300.53125,
+            "height": 210.203125,
+            "bottom": 1782.265625,
+            "right": 792.921875
+          },
+          "visible": false,
+          "words": 18
+        },
+        {
+          "name": "Earnings, efficiency & capital decisions",
+          "kind": "money",
+          "box": {
+            "x": 492.390625,
+            "y": 1815.265625,
+            "width": 901.609375,
+            "height": 136,
+            "bottom": 1951.265625,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 5
+        }
+      ],
+      "tables": 0,
+      "words": 257,
+      "unavailableMentions": 0,
+      "articleCount": 1,
+      "url": "/enterprises/lloyds?focus=economics"
+    },
+    "desktop:retail": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 1214.53125,
+        "bottom": 1363.53125,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1364,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [
+        {
+          "text": "Related operating capabilities",
+          "arrow": {
+            "x": 1367.546875,
+            "y": 865.140625,
+            "width": 12.453125,
+            "height": 18,
+            "bottom": 883.140625,
+            "right": 1380
+          },
+          "title": {
+            "x": 968.6875,
+            "y": 872.140625,
+            "width": 401.3125,
+            "height": 36.390625,
+            "bottom": 908.53125,
+            "right": 1370
+          }
+        }
+      ],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Related operating capabilities",
+          "mark": {
+            "x": 966.6875,
+            "y": 886.140625,
+            "width": 65,
+            "height": 65,
+            "bottom": 951.140625,
+            "right": 1031.6875
+          },
+          "title": {
+            "x": 968.6875,
+            "y": 872.140625,
+            "width": 401.3125,
+            "height": 36.390625,
+            "bottom": 908.53125,
+            "right": 1370
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "Group economic context",
+          "kind": "money",
+          "box": {
+            "x": 492.390625,
+            "y": 824.140625,
+            "width": 449.296875,
+            "height": 132.390625,
+            "bottom": 956.53125,
+            "right": 941.6875
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Related operating capabilities",
+          "kind": "technology",
+          "box": {
+            "x": 944.6875,
+            "y": 852.140625,
+            "width": 449.3125,
+            "height": 76.390625,
+            "bottom": 928.53125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Explore the credit journey",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 984.53125,
+            "width": 901.609375,
+            "height": 110,
+            "bottom": 1094.53125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 4
+        },
+        {
+          "name": "Division & legal entity",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 1122.53125,
+            "width": 901.609375,
+            "height": 110,
+            "bottom": 1232.53125,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 4
+        }
+      ],
+      "tables": 1,
+      "words": 124,
+      "unavailableMentions": 1,
+      "articleCount": 2,
+      "url": "/enterprises/lloyds?focus=retail"
+    },
+    "desktop:commercial": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 1147.1875,
+        "bottom": 1296.1875,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1296,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [
+        {
+          "text": "Related operating capabilities",
+          "arrow": {
+            "x": 1367.546875,
+            "y": 797.796875,
+            "width": 12.453125,
+            "height": 18,
+            "bottom": 815.796875,
+            "right": 1380
+          },
+          "title": {
+            "x": 968.6875,
+            "y": 804.796875,
+            "width": 401.3125,
+            "height": 36.390625,
+            "bottom": 841.1875,
+            "right": 1370
+          }
+        }
+      ],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Related operating capabilities",
+          "mark": {
+            "x": 966.6875,
+            "y": 818.796875,
+            "width": 65,
+            "height": 65,
+            "bottom": 883.796875,
+            "right": 1031.6875
+          },
+          "title": {
+            "x": 968.6875,
+            "y": 804.796875,
+            "width": 401.3125,
+            "height": 36.390625,
+            "bottom": 841.1875,
+            "right": 1370
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "Group economic context",
+          "kind": "money",
+          "box": {
+            "x": 492.390625,
+            "y": 756.796875,
+            "width": 449.296875,
+            "height": 132.390625,
+            "bottom": 889.1875,
+            "right": 941.6875
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Related operating capabilities",
+          "kind": "technology",
+          "box": {
+            "x": 944.6875,
+            "y": 784.796875,
+            "width": 449.3125,
+            "height": 76.390625,
+            "bottom": 861.1875,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Explore the credit journey",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 917.1875,
+            "width": 901.609375,
+            "height": 110,
+            "bottom": 1027.1875,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 4
+        },
+        {
+          "name": "Division & legal entity",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 1055.1875,
+            "width": 901.609375,
+            "height": 110,
+            "bottom": 1165.1875,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 4
+        }
+      ],
+      "tables": 1,
+      "words": 105,
+      "unavailableMentions": 1,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?focus=commercial"
+    },
+    "desktop:ipi": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 1026.953125,
+        "bottom": 1175.953125,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1176,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [
+        {
+          "text": "Related operating capabilities",
+          "arrow": {
+            "x": 1367.546875,
+            "y": 815.5625,
+            "width": 12.453125,
+            "height": 18,
+            "bottom": 833.5625,
+            "right": 1380
+          },
+          "title": {
+            "x": 968.6875,
+            "y": 822.5625,
+            "width": 401.3125,
+            "height": 36.390625,
+            "bottom": 858.953125,
+            "right": 1370
+          }
+        }
+      ],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Related operating capabilities",
+          "mark": {
+            "x": 966.6875,
+            "y": 836.5625,
+            "width": 65,
+            "height": 65,
+            "bottom": 901.5625,
+            "right": 1031.6875
+          },
+          "title": {
+            "x": 968.6875,
+            "y": 822.5625,
+            "width": 401.3125,
+            "height": 36.390625,
+            "bottom": 858.953125,
+            "right": 1370
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "Group economic context",
+          "kind": "money",
+          "box": {
+            "x": 492.390625,
+            "y": 774.5625,
+            "width": 449.296875,
+            "height": 132.390625,
+            "bottom": 906.953125,
+            "right": 941.6875
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Related operating capabilities",
+          "kind": "technology",
+          "box": {
+            "x": 944.6875,
+            "y": 802.5625,
+            "width": 449.3125,
+            "height": 76.390625,
+            "bottom": 878.953125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Division & legal entity",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 934.953125,
+            "width": 901.609375,
+            "height": 110,
+            "bottom": 1044.953125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 4
+        }
+      ],
+      "tables": 1,
+      "words": 103,
+      "unavailableMentions": 1,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?focus=retirement"
+    },
+    "desktop:operations": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 1862.296875,
+        "bottom": 2011.296875,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 2011,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "People, organisation & suppliers",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Lending & credit",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 445.28125,
+            "width": 901.609375,
+            "height": 124,
+            "bottom": 569.28125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 9
+        },
+        {
+          "name": "Payments",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 573.28125,
+            "width": 901.609375,
+            "height": 124,
+            "bottom": 697.28125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 8
+        },
+        {
+          "name": "Customer operations",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 701.28125,
+            "width": 901.609375,
+            "height": 124,
+            "bottom": 825.28125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 9
+        },
+        {
+          "name": "Insurance, pensions & wealth",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 829.28125,
+            "width": 901.609375,
+            "height": 124,
+            "bottom": 953.28125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 12
+        },
+        {
+          "name": "Risk & control",
+          "kind": "operating",
+          "box": {
+            "x": 516.390625,
+            "y": 1064.28125,
+            "width": 877.609375,
+            "height": 124,
+            "bottom": 1188.28125,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 11
+        },
+        {
+          "name": "Data & AI",
+          "kind": "operating",
+          "box": {
+            "x": 516.390625,
+            "y": 1192.28125,
+            "width": 877.609375,
+            "height": 124,
+            "bottom": 1316.28125,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 11
+        },
+        {
+          "name": "Platforms & modernisation",
+          "kind": "operating",
+          "box": {
+            "x": 516.390625,
+            "y": 1320.28125,
+            "width": 877.609375,
+            "height": 124,
+            "bottom": 1444.28125,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 10
+        },
+        {
+          "name": "Finance & treasury",
+          "kind": "operating",
+          "box": {
+            "x": 540.390625,
+            "y": 1555.28125,
+            "width": 853.609375,
+            "height": 124,
+            "bottom": 1679.28125,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 13
+        },
+        {
+          "name": "People, organisation & suppliers",
+          "kind": "operating",
+          "box": {
+            "x": 540.390625,
+            "y": 1683.28125,
+            "width": 853.609375,
+            "height": 127.21875,
+            "bottom": 1810.5,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 14
+        }
+      ],
+      "tables": 0,
+      "words": 193,
+      "unavailableMentions": 3,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?stream=inside&focus=operations"
+    },
+    "desktop:credit": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 2345.171875,
+        "bottom": 2494.171875,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 2494,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [
+        {
+          "text": "Applications & disclosed suppliers",
+          "arrow": {
+            "x": 764.46875,
+            "y": 2232.171875,
+            "width": 12.453125,
+            "height": 18,
+            "bottom": 2250.171875,
+            "right": 776.921875
+          },
+          "title": {
+            "x": 516.390625,
+            "y": 2239.171875,
+            "width": 250.53125,
+            "height": 72.78125,
+            "bottom": 2311.953125,
+            "right": 766.921875
+          }
+        }
+      ],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Applications / data",
+          "mark": {
+            "x": 541.390625,
+            "y": 970.671875,
+            "width": 65,
+            "height": 65,
+            "bottom": 1035.671875,
+            "right": 606.390625
+          },
+          "title": {
+            "x": 543.390625,
+            "y": 956.671875,
+            "width": 65,
+            "height": 145.5625,
+            "bottom": 1102.234375,
+            "right": 608.390625
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Technology / infrastructure",
+          "mark": {
+            "x": 541.390625,
+            "y": 1216.234375,
+            "width": 65,
+            "height": 65,
+            "bottom": 1281.234375,
+            "right": 606.390625
+          },
+          "title": {
+            "x": 543.390625,
+            "y": 1202.234375,
+            "width": 65,
+            "height": 218.34375,
+            "bottom": 1420.578125,
+            "right": 608.390625
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Suppliers / contracts",
+          "mark": {
+            "x": 541.390625,
+            "y": 1534.578125,
+            "width": 65,
+            "height": 65,
+            "bottom": 1599.578125,
+            "right": 606.390625
+          },
+          "title": {
+            "x": 543.390625,
+            "y": 1520.578125,
+            "width": 65,
+            "height": 145.5625,
+            "bottom": 1666.140625,
+            "right": 608.390625
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Applications & disclosed suppliers",
+          "mark": {
+            "x": 514.390625,
+            "y": 2253.171875,
+            "width": 65,
+            "height": 65,
+            "bottom": 2318.171875,
+            "right": 579.390625
+          },
+          "title": {
+            "x": 516.390625,
+            "y": 2239.171875,
+            "width": 250.53125,
+            "height": 72.78125,
+            "bottom": 2311.953125,
+            "right": 766.921875
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [
+        {
+          "text": "Applications / data",
+          "width": 65,
+          "parentColumns": "65px 741.609px",
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Technology / infrastructure",
+          "width": 65,
+          "parentColumns": "65px 741.609px",
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Suppliers / contracts",
+          "width": 65,
+          "parentColumns": "65px 741.609px",
+          "markPosition": "absolute"
+        }
+      ],
+      "wrappedTitles": [
+        {
+          "text": "Applications / data",
+          "lines": 4
+        },
+        {
+          "text": "Technology / infrastructure",
+          "lines": 6
+        },
+        {
+          "text": "Suppliers / contracts",
+          "lines": 4
+        },
+        {
+          "text": "Applications & disclosed suppliers",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "← Operating model",
+          "kind": "return",
+          "box": {
+            "x": 492.390625,
+            "y": 209.5,
+            "width": 154.734375,
+            "height": 48,
+            "bottom": 257.5,
+            "right": 647.125
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Business / value stream",
+          "kind": "business",
+          "box": {
+            "x": 519.390625,
+            "y": 581.671875,
+            "width": 874.609375,
+            "height": 105,
+            "bottom": 686.671875,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 11
+        },
+        {
+          "name": "Durable capabilities",
+          "kind": "operating",
+          "box": {
+            "x": 519.390625,
+            "y": 690.671875,
+            "width": 874.609375,
+            "height": 105,
+            "bottom": 795.671875,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 17
+        },
+        {
+          "name": "Organisation / accountable role",
+          "kind": "organisation",
+          "box": {
+            "x": 519.390625,
+            "y": 799.671875,
+            "width": 874.609375,
+            "height": 105,
+            "bottom": 904.671875,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 8
+        },
+        {
+          "name": "Applications / data",
+          "kind": "technology",
+          "box": {
+            "x": 519.390625,
+            "y": 936.671875,
+            "width": 874.609375,
+            "height": 185.5625,
+            "bottom": 1122.234375,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 8
+        },
+        {
+          "name": "Technology / infrastructure",
+          "kind": "technology",
+          "box": {
+            "x": 519.390625,
+            "y": 1182.234375,
+            "width": 874.609375,
+            "height": 258.34375,
+            "bottom": 1440.578125,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 8
+        },
+        {
+          "name": "Suppliers / contracts",
+          "kind": "technology",
+          "box": {
+            "x": 519.390625,
+            "y": 1500.578125,
+            "width": 874.609375,
+            "height": 185.5625,
+            "bottom": 1686.140625,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 10
+        },
+        {
+          "name": "Applications & disclosed suppliers",
+          "kind": "technology",
+          "box": {
+            "x": 492.390625,
+            "y": 2219.171875,
+            "width": 298.53125,
+            "height": 116,
+            "bottom": 2335.171875,
+            "right": 790.921875
+          },
+          "visible": false,
+          "words": 4
+        },
+        {
+          "name": "Transformation disclosures",
+          "kind": "timeline",
+          "box": {
+            "x": 793.921875,
+            "y": 2221.171875,
+            "width": 298.546875,
+            "height": 112,
+            "bottom": 2333.171875,
+            "right": 1092.46875
+          },
+          "visible": false,
+          "words": 2
+        },
+        {
+          "name": "Related strategy",
+          "kind": "timeline",
+          "box": {
+            "x": 1095.46875,
+            "y": 2221.171875,
+            "width": 298.53125,
+            "height": 112,
+            "bottom": 2333.171875,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 2
+        }
+      ],
+      "tables": 0,
+      "words": 224,
+      "unavailableMentions": 4,
+      "articleCount": 1,
+      "url": "/enterprises/lloyds?stream=inside&focus=operations&detail=journey-credit"
+    },
+    "desktop:capabilities": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 1209,
+        "bottom": 1358,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1358,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [
+        {
+          "text": "Data, AI & colleague enablement",
+          "arrow": {
+            "x": 927.90625,
+            "y": 798.75,
+            "width": 14.78125,
+            "height": 22,
+            "bottom": 820.75,
+            "right": 942.6875
+          },
+          "title": {
+            "x": 765.03125,
+            "y": 805.75,
+            "width": 167.65625,
+            "height": 109.171875,
+            "bottom": 914.921875,
+            "right": 932.6875
+          }
+        },
+        {
+          "text": "Technology & platforms",
+          "arrow": {
+            "x": 1146.5625,
+            "y": 798.75,
+            "width": 14.78125,
+            "height": 22,
+            "bottom": 820.75,
+            "right": 1161.34375
+          },
+          "title": {
+            "x": 983.6875,
+            "y": 805.75,
+            "width": 167.65625,
+            "height": 72.78125,
+            "bottom": 878.53125,
+            "right": 1151.34375
+          }
+        }
+      ],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Data, AI & colleague enablement",
+          "mark": {
+            "x": 763.03125,
+            "y": 819.75,
+            "width": 65,
+            "height": 65,
+            "bottom": 884.75,
+            "right": 828.03125
+          },
+          "title": {
+            "x": 765.03125,
+            "y": 805.75,
+            "width": 167.65625,
+            "height": 109.171875,
+            "bottom": 914.921875,
+            "right": 932.6875
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Technology & platforms",
+          "mark": {
+            "x": 981.6875,
+            "y": 819.75,
+            "width": 65,
+            "height": 65,
+            "bottom": 884.75,
+            "right": 1046.6875
+          },
+          "title": {
+            "x": 983.6875,
+            "y": 805.75,
+            "width": 167.65625,
+            "height": 72.78125,
+            "bottom": 878.53125,
+            "right": 1151.34375
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Digital & assisted channels",
+          "lines": 3
+        },
+        {
+          "text": "Customer service & outcomes",
+          "lines": 3
+        },
+        {
+          "text": "Deposits & customer value",
+          "lines": 2
+        },
+        {
+          "text": "Lending & credit",
+          "lines": 2
+        },
+        {
+          "text": "Risk, conduct & resilience",
+          "lines": 2
+        },
+        {
+          "text": "Data, AI & colleague enablement",
+          "lines": 3
+        },
+        {
+          "text": "Technology & platforms",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Digital & assisted channels",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 445.875,
+            "width": 177.921875,
+            "height": 203.28125,
+            "bottom": 649.15625,
+            "right": 670.3125
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Customer service & outcomes",
+          "kind": "operating",
+          "box": {
+            "x": 673.3125,
+            "y": 445.875,
+            "width": 177.921875,
+            "height": 203.28125,
+            "bottom": 649.15625,
+            "right": 851.234375
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Deposits & customer value",
+          "kind": "operating",
+          "box": {
+            "x": 854.234375,
+            "y": 445.875,
+            "width": 177.921875,
+            "height": 203.28125,
+            "bottom": 649.15625,
+            "right": 1032.15625
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Lending & credit",
+          "kind": "operating",
+          "box": {
+            "x": 1035.15625,
+            "y": 445.875,
+            "width": 177.921875,
+            "height": 203.28125,
+            "bottom": 649.15625,
+            "right": 1213.078125
+          },
+          "visible": true,
+          "words": 9
+        },
+        {
+          "name": "Payments",
+          "kind": "operating",
+          "box": {
+            "x": 1216.078125,
+            "y": 445.875,
+            "width": 177.921875,
+            "height": 203.28125,
+            "bottom": 649.15625,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 7
+        },
+        {
+          "name": "Risk, conduct & resilience",
+          "kind": "operating",
+          "box": {
+            "x": 522.390625,
+            "y": 757.75,
+            "width": 215.640625,
+            "height": 250.453125,
+            "bottom": 1008.203125,
+            "right": 738.03125
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Data, AI & colleague enablement",
+          "kind": "technology",
+          "box": {
+            "x": 741.03125,
+            "y": 785.75,
+            "width": 215.65625,
+            "height": 194.453125,
+            "bottom": 980.203125,
+            "right": 956.6875
+          },
+          "visible": true,
+          "words": 11
+        },
+        {
+          "name": "Technology & platforms",
+          "kind": "technology",
+          "box": {
+            "x": 959.6875,
+            "y": 785.75,
+            "width": 215.65625,
+            "height": 194.453125,
+            "bottom": 980.203125,
+            "right": 1175.34375
+          },
+          "visible": true,
+          "words": 9
+        },
+        {
+          "name": "Finance & treasury",
+          "kind": "operating",
+          "box": {
+            "x": 1178.34375,
+            "y": 757.75,
+            "width": 215.65625,
+            "height": 250.453125,
+            "bottom": 1008.203125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 9
+        },
+        {
+          "name": "Strategy & propositions",
+          "kind": "operating",
+          "box": {
+            "x": 522.390625,
+            "y": 1011.203125,
+            "width": 871.609375,
+            "height": 145,
+            "bottom": 1156.203125,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 9
+        }
+      ],
+      "tables": 0,
+      "words": 159,
+      "unavailableMentions": 0,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?stream=inside&focus=capabilities"
+    },
+    "desktop:applications": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 967.15625,
+        "bottom": 1116.15625,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1116,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "Envoy",
+          "kind": "technology",
+          "box": {
+            "x": 516.390625,
+            "y": 365.078125,
+            "width": 877.609375,
+            "height": 165,
+            "bottom": 530.078125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 11
+        },
+        {
+          "name": "Microsoft Copilot",
+          "kind": "technology",
+          "box": {
+            "x": 544.390625,
+            "y": 591.078125,
+            "width": 849.609375,
+            "height": 165,
+            "bottom": 756.078125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 9
+        }
+      ],
+      "tables": 0,
+      "words": 100,
+      "unavailableMentions": 0,
+      "articleCount": 2,
+      "url": "/enterprises/lloyds?stream=inside&focus=applications"
+    },
+    "desktop:partners": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 904.0625,
+        "bottom": 1053.0625,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1053,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "Google Cloud",
+          "kind": "technology",
+          "box": {
+            "x": 516.390625,
+            "y": 404.28125,
+            "width": 877.609375,
+            "height": 165,
+            "bottom": 569.28125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 11
+        },
+        {
+          "name": "Microsoft Copilot",
+          "kind": "technology",
+          "box": {
+            "x": 544.390625,
+            "y": 630.28125,
+            "width": 849.609375,
+            "height": 165,
+            "bottom": 795.28125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 10
+        }
+      ],
+      "tables": 0,
+      "words": 66,
+      "unavailableMentions": 0,
+      "articleCount": 2,
+      "url": "/enterprises/lloyds?stream=inside&focus=partners"
+    },
+    "desktop:programmes": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 1600.6875,
+        "bottom": 1749.6875,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1750,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Application decommissioning & cloud migration",
+          "lines": 2
+        },
+        {
+          "text": "AI use-case / model-platform enablement",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Application decommissioning & cloud migration",
+          "kind": "timeline",
+          "box": {
+            "x": 521.390625,
+            "y": 369.078125,
+            "width": 872.609375,
+            "height": 210.65625,
+            "bottom": 579.734375,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 20
+        },
+        {
+          "name": "Colleague AI enablement",
+          "kind": "timeline",
+          "box": {
+            "x": 521.390625,
+            "y": 643.734375,
+            "width": 872.609375,
+            "height": 180.765625,
+            "bottom": 824.5,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 14
+        },
+        {
+          "name": "AI use-case / model-platform enablement",
+          "kind": "timeline",
+          "box": {
+            "x": 521.390625,
+            "y": 888.5,
+            "width": 872.609375,
+            "height": 210.65625,
+            "bottom": 1099.15625,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 20
+        },
+        {
+          "name": "Halifax/Lloyds brand and app change",
+          "kind": "timeline",
+          "box": {
+            "x": 521.390625,
+            "y": 1163.15625,
+            "width": 872.609375,
+            "height": 180.765625,
+            "bottom": 1343.921875,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 20
+        },
+        {
+          "name": "Curve acquisition and wallet direction",
+          "kind": "timeline",
+          "box": {
+            "x": 521.390625,
+            "y": 1407.921875,
+            "width": 872.609375,
+            "height": 180.765625,
+            "bottom": 1588.6875,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 16
+        }
+      ],
+      "tables": 0,
+      "words": 127,
+      "unavailableMentions": 5,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?stream=inside&focus=programmes"
+    },
+    "desktop:people": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 1638.203125,
+        "bottom": 1787.203125,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1787,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Insurance, Pensions & Investments",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "← Organisation & workforce",
+          "kind": "return",
+          "box": {
+            "x": 492.390625,
+            "y": 209.5,
+            "width": 204.578125,
+            "height": 48,
+            "bottom": 257.5,
+            "right": 696.96875
+          },
+          "visible": true,
+          "words": 4
+        },
+        {
+          "name": "Retail",
+          "kind": "business",
+          "box": {
+            "x": 492.390625,
+            "y": 527.28125,
+            "width": 300.53125,
+            "height": 281.8125,
+            "bottom": 809.09375,
+            "right": 792.921875
+          },
+          "visible": true,
+          "words": 8
+        },
+        {
+          "name": "Commercial Banking",
+          "kind": "business",
+          "box": {
+            "x": 792.921875,
+            "y": 545.28125,
+            "width": 300.53125,
+            "height": 263.8125,
+            "bottom": 809.09375,
+            "right": 1093.453125
+          },
+          "visible": true,
+          "words": 9
+        },
+        {
+          "name": "Insurance, Pensions & Investments",
+          "kind": "business",
+          "box": {
+            "x": 1093.453125,
+            "y": 563.28125,
+            "width": 300.546875,
+            "height": 245.8125,
+            "bottom": 809.09375,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 12
+        },
+        {
+          "name": "Finance / treasury",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 842.09375,
+            "width": 901.609375,
+            "height": 160.328125,
+            "bottom": 1002.421875,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 11
+        },
+        {
+          "name": "Customer operations",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 1002.421875,
+            "width": 901.609375,
+            "height": 160.328125,
+            "bottom": 1162.75,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 10
+        },
+        {
+          "name": "Risk and control",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 1162.75,
+            "width": 901.609375,
+            "height": 160.328125,
+            "bottom": 1323.078125,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 12
+        },
+        {
+          "name": "Technology / data",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 1323.078125,
+            "width": 901.609375,
+            "height": 160.328125,
+            "bottom": 1483.40625,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 12
+        },
+        {
+          "name": "Leadership",
+          "kind": "organisation",
+          "box": {
+            "x": 492.390625,
+            "y": 1546.203125,
+            "width": 298.53125,
+            "height": 110,
+            "bottom": 1656.203125,
+            "right": 790.921875
+          },
+          "visible": false,
+          "words": 1
+        },
+        {
+          "name": "Businesses & functions",
+          "kind": "organisation",
+          "box": {
+            "x": 793.921875,
+            "y": 1546.203125,
+            "width": 298.546875,
+            "height": 110,
+            "bottom": 1656.203125,
+            "right": 1092.46875
+          },
+          "visible": false,
+          "words": 3
+        },
+        {
+          "name": "Workforce",
+          "kind": "organisation",
+          "box": {
+            "x": 1095.46875,
+            "y": 1546.203125,
+            "width": 298.53125,
+            "height": 110,
+            "bottom": 1656.203125,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 1
+        }
+      ],
+      "tables": 0,
+      "words": 142,
+      "unavailableMentions": 4,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?stream=inside&focus=people&detail=structure"
+    },
+    "desktop:strategy": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 2588.390625,
+        "bottom": 2737.390625,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 2737,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Retire applications while maintaining service",
+          "lines": 2
+        },
+        {
+          "text": "Turn AI capability into measured benefit",
+          "lines": 2
+        },
+        {
+          "text": "Keep the customer route to service clear",
+          "lines": 2
+        },
+        {
+          "text": "Prepare incident and third-party reporting",
+          "lines": 2
+        },
+        {
+          "text": "Sequence investment against delivery and returns",
+          "lines": 2
+        },
+        {
+          "text": "Improve efficiency without confusing gross and net",
+          "lines": 2
+        },
+        {
+          "text": "Develop payments and customer interaction",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Retire applications while maintaining service",
+          "kind": "timeline",
+          "box": {
+            "x": 521.390625,
+            "y": 369.078125,
+            "width": 872.609375,
+            "height": 218.703125,
+            "bottom": 587.78125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 21
+        },
+        {
+          "name": "Turn AI capability into measured benefit",
+          "kind": "timeline",
+          "box": {
+            "x": 539.390625,
+            "y": 651.78125,
+            "width": 854.609375,
+            "height": 192.3125,
+            "bottom": 844.09375,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 18
+        },
+        {
+          "name": "Keep the customer route to service clear",
+          "kind": "timeline",
+          "box": {
+            "x": 557.390625,
+            "y": 908.09375,
+            "width": 836.609375,
+            "height": 192.3125,
+            "bottom": 1100.40625,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 19
+        },
+        {
+          "name": "Prepare incident and third-party reporting",
+          "kind": "timeline",
+          "box": {
+            "x": 521.390625,
+            "y": 1164.40625,
+            "width": 872.609375,
+            "height": 192.3125,
+            "bottom": 1356.71875,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 18
+        },
+        {
+          "name": "Sequence investment against delivery and returns",
+          "kind": "timeline",
+          "box": {
+            "x": 539.390625,
+            "y": 1420.71875,
+            "width": 854.609375,
+            "height": 218.703125,
+            "bottom": 1639.421875,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 19
+        },
+        {
+          "name": "Improve efficiency without confusing gross and net",
+          "kind": "timeline",
+          "box": {
+            "x": 557.390625,
+            "y": 1703.421875,
+            "width": 836.609375,
+            "height": 218.703125,
+            "bottom": 1922.125,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 21
+        },
+        {
+          "name": "Develop payments and customer interaction",
+          "kind": "timeline",
+          "box": {
+            "x": 521.390625,
+            "y": 1986.125,
+            "width": 872.609375,
+            "height": 218.703125,
+            "bottom": 2204.828125,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 25
+        },
+        {
+          "name": "Goals & tests of progress",
+          "kind": "timeline",
+          "box": {
+            "x": 492.390625,
+            "y": 2464.390625,
+            "width": 449.296875,
+            "height": 112,
+            "bottom": 2576.390625,
+            "right": 941.6875
+          },
+          "visible": false,
+          "words": 5
+        },
+        {
+          "name": "Strategic alternatives & trade-offs",
+          "kind": "timeline",
+          "box": {
+            "x": 944.6875,
+            "y": 2464.390625,
+            "width": 449.3125,
+            "height": 112,
+            "bottom": 2576.390625,
+            "right": 1394
+          },
+          "visible": false,
+          "words": 4
+        }
+      ],
+      "tables": 0,
+      "words": 233,
+      "unavailableMentions": 0,
+      "articleCount": 10,
+      "url": "/enterprises/lloyds?stream=forces&focus=strategy"
+    },
+    "desktop:markets": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 851,
+        "bottom": 1000,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1000,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "Applicability & decision boundaries",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 543.75,
+            "width": 901.609375,
+            "height": 110,
+            "bottom": 653.75,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 4
+        }
+      ],
+      "tables": 0,
+      "words": 85,
+      "unavailableMentions": 0,
+      "articleCount": 3,
+      "url": "/enterprises/lloyds?stream=forces&focus=markets"
+    },
+    "desktop:resilience": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 851,
+        "bottom": 1000,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1000,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "Applicability & decision boundaries",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 582.953125,
+            "width": 901.609375,
+            "height": 110,
+            "bottom": 692.953125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 4
+        }
+      ],
+      "tables": 0,
+      "words": 84,
+      "unavailableMentions": 0,
+      "articleCount": 3,
+      "url": "/enterprises/lloyds?stream=forces&focus=resilience"
+    },
+    "desktop:competition": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 851,
+        "bottom": 1000,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1000,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "Applicability & decision boundaries",
+          "kind": "operating",
+          "box": {
+            "x": 492.390625,
+            "y": 640.921875,
+            "width": 901.609375,
+            "height": 110,
+            "bottom": 750.921875,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 4
+        }
+      ],
+      "tables": 0,
+      "words": 109,
+      "unavailableMentions": 0,
+      "articleCount": 4,
+      "url": "/enterprises/lloyds?stream=forces&focus=competition"
+    },
+    "desktop:swot": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 920.875,
+        "bottom": 1069.875,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1070,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Strength",
+          "mark": {
+            "x": 872.1875,
+            "y": 370.078125,
+            "width": 42,
+            "height": 30,
+            "bottom": 400.078125,
+            "right": 914.1875
+          },
+          "title": {
+            "x": 512.390625,
+            "y": 366.078125,
+            "width": 403.796875,
+            "height": 37.6875,
+            "bottom": 403.765625,
+            "right": 916.1875
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Weakness",
+          "mark": {
+            "x": 1330,
+            "y": 370.078125,
+            "width": 42,
+            "height": 30,
+            "bottom": 400.078125,
+            "right": 1372
+          },
+          "title": {
+            "x": 970.1875,
+            "y": 366.078125,
+            "width": 403.8125,
+            "height": 37.6875,
+            "bottom": 403.765625,
+            "right": 1374
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Opportunity",
+          "mark": {
+            "x": 872.1875,
+            "y": 689.078125,
+            "width": 42,
+            "height": 30,
+            "bottom": 719.078125,
+            "right": 914.1875
+          },
+          "title": {
+            "x": 512.390625,
+            "y": 685.078125,
+            "width": 403.796875,
+            "height": 37.6875,
+            "bottom": 722.765625,
+            "right": 916.1875
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Threat",
+          "mark": {
+            "x": 1330,
+            "y": 689.078125,
+            "width": 42,
+            "height": 30,
+            "bottom": 719.078125,
+            "right": 1372
+          },
+          "title": {
+            "x": 970.1875,
+            "y": 685.078125,
+            "width": 403.8125,
+            "height": 37.6875,
+            "bottom": 722.765625,
+            "right": 1374
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "Strength",
+          "kind": "quadrant",
+          "box": {
+            "x": 492.390625,
+            "y": 339.078125,
+            "width": 443.796875,
+            "height": 305,
+            "bottom": 644.078125,
+            "right": 936.1875
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "existing AI capability",
+          "kind": "theme",
+          "box": {
+            "x": 508.390625,
+            "y": 451.078125,
+            "width": 411.796875,
+            "height": 86,
+            "bottom": 537.078125,
+            "right": 920.1875
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "deposit base",
+          "kind": "theme",
+          "box": {
+            "x": 508.390625,
+            "y": 542.078125,
+            "width": 411.796875,
+            "height": 86,
+            "bottom": 628.078125,
+            "right": 920.1875
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "Weakness",
+          "kind": "quadrant",
+          "box": {
+            "x": 950.1875,
+            "y": 339.078125,
+            "width": 443.8125,
+            "height": 305,
+            "bottom": 644.078125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "migration exposure",
+          "kind": "theme",
+          "box": {
+            "x": 966.1875,
+            "y": 451.078125,
+            "width": 411.8125,
+            "height": 86,
+            "bottom": 537.078125,
+            "right": 1378
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "benefit measurement",
+          "kind": "theme",
+          "box": {
+            "x": 966.1875,
+            "y": 542.078125,
+            "width": 411.8125,
+            "height": 86,
+            "bottom": 628.078125,
+            "right": 1378
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "Opportunity",
+          "kind": "quadrant",
+          "box": {
+            "x": 492.390625,
+            "y": 658.078125,
+            "width": 443.796875,
+            "height": 305,
+            "bottom": 963.078125,
+            "right": 936.1875
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "payments",
+          "kind": "theme",
+          "box": {
+            "x": 508.390625,
+            "y": 770.078125,
+            "width": 411.796875,
+            "height": 86,
+            "bottom": 856.078125,
+            "right": 920.1875
+          },
+          "visible": true,
+          "words": 1
+        },
+        {
+          "name": "data-enabled service",
+          "kind": "theme",
+          "box": {
+            "x": 508.390625,
+            "y": 861.078125,
+            "width": 411.796875,
+            "height": 86,
+            "bottom": 947.078125,
+            "right": 920.1875
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "Threat",
+          "kind": "quadrant",
+          "box": {
+            "x": 950.1875,
+            "y": 658.078125,
+            "width": 443.8125,
+            "height": 305,
+            "bottom": 963.078125,
+            "right": 1394
+          },
+          "visible": true,
+          "words": 4
+        },
+        {
+          "name": "operating disruption",
+          "kind": "theme",
+          "box": {
+            "x": 966.1875,
+            "y": 770.078125,
+            "width": 411.8125,
+            "height": 86,
+            "bottom": 856.078125,
+            "right": 1378
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "cost of parallel running",
+          "kind": "theme",
+          "box": {
+            "x": 966.1875,
+            "y": 861.078125,
+            "width": 411.8125,
+            "height": 86,
+            "bottom": 947.078125,
+            "right": 1378
+          },
+          "visible": true,
+          "words": 4
+        }
+      ],
+      "tables": 0,
+      "words": 67,
+      "unavailableMentions": 0,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?stream=forces&focus=analysis"
+    },
+    "desktop:costs": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 851,
+        "bottom": 1000,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1000,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "← Group economics",
+          "kind": "return",
+          "box": {
+            "x": 492.390625,
+            "y": 209.5,
+            "width": 160.5,
+            "height": 48,
+            "bottom": 257.5,
+            "right": 652.890625
+          },
+          "visible": true,
+          "words": 3
+        }
+      ],
+      "tables": 1,
+      "words": 96,
+      "unavailableMentions": 3,
+      "articleCount": 2,
+      "url": "/enterprises/lloyds?focus=economics&detail=costs"
+    },
+    "desktop:capital": {
+      "main": {
+        "x": 446.390625,
+        "y": 149,
+        "width": 993.609375,
+        "height": 851,
+        "bottom": 1000,
+        "right": 1440
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageHeight": 1000,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "← Group economics",
+          "kind": "return",
+          "box": {
+            "x": 492.390625,
+            "y": 209.5,
+            "width": 160.5,
+            "height": 48,
+            "bottom": 257.5,
+            "right": 652.890625
+          },
+          "visible": true,
+          "words": 3
+        }
+      ],
+      "tables": 1,
+      "words": 76,
+      "unavailableMentions": 4,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?focus=economics&detail=capital"
+    },
+    "ipad-landscape:group": {
+      "main": {
+        "x": 382.078125,
+        "y": 149,
+        "width": 811.921875,
+        "height": 1687.75,
+        "bottom": 1836.75,
+        "right": 1194
+      },
+      "viewport": {
+        "width": 1194,
+        "height": 834
+      },
+      "pageHeight": 1837,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Insurance, Pensions & Investments",
+          "lines": 2
+        },
+        {
+          "text": "Funding, income & earnings",
+          "lines": 2
+        },
+        {
+          "text": "Organisation & workforce",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Retail",
+          "kind": "business",
+          "box": {
+            "x": 410.078125,
+            "y": 350.609375,
+            "width": 251.96875,
+            "height": 274.03125,
+            "bottom": 624.640625,
+            "right": 662.046875
+          },
+          "visible": true,
+          "words": 8
+        },
+        {
+          "name": "Commercial Banking",
+          "kind": "business",
+          "box": {
+            "x": 662.046875,
+            "y": 368.609375,
+            "width": 251.96875,
+            "height": 256.03125,
+            "bottom": 624.640625,
+            "right": 914.015625
+          },
+          "visible": true,
+          "words": 9
+        },
+        {
+          "name": "Insurance, Pensions & Investments",
+          "kind": "business",
+          "box": {
+            "x": 914.015625,
+            "y": 386.609375,
+            "width": 251.96875,
+            "height": 238.03125,
+            "bottom": 624.640625,
+            "right": 1165.984375
+          },
+          "visible": true,
+          "words": 12
+        },
+        {
+          "name": "Customer funding",
+          "kind": "money",
+          "box": {
+            "x": 410.078125,
+            "y": 657.640625,
+            "width": 384.421875,
+            "height": 200,
+            "bottom": 857.640625,
+            "right": 794.5
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Reported earnings",
+          "kind": "money",
+          "box": {
+            "x": 816.5,
+            "y": 657.640625,
+            "width": 349.5,
+            "height": 200,
+            "bottom": 857.640625,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 14
+        },
+        {
+          "name": "Curve acquisition reported complete",
+          "kind": "change",
+          "box": {
+            "x": 410.078125,
+            "y": 940.140625,
+            "width": 755.921875,
+            "height": 239.515625,
+            "bottom": 1179.65625,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 22
+        },
+        {
+          "name": "Leadership evidence",
+          "kind": "organisation",
+          "box": {
+            "x": 410.078125,
+            "y": 1179.65625,
+            "width": 755.921875,
+            "height": 160.328125,
+            "bottom": 1339.984375,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 17
+        },
+        {
+          "name": "Funding comparison",
+          "kind": "money",
+          "box": {
+            "x": 410.078125,
+            "y": 1440.3125,
+            "width": 376.453125,
+            "height": 140.4375,
+            "bottom": 1580.75,
+            "right": 786.53125
+          },
+          "visible": false,
+          "words": 7
+        },
+        {
+          "name": "Customer outcomes",
+          "kind": "operating",
+          "box": {
+            "x": 789.53125,
+            "y": 1440.3125,
+            "width": 376.46875,
+            "height": 140.4375,
+            "bottom": 1580.75,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 9
+        },
+        {
+          "name": "Funding, income & earnings",
+          "kind": "money",
+          "box": {
+            "x": 410.078125,
+            "y": 1608.75,
+            "width": 249.96875,
+            "height": 172,
+            "bottom": 1780.75,
+            "right": 660.046875
+          },
+          "visible": false,
+          "words": 4
+        },
+        {
+          "name": "Organisation & workforce",
+          "kind": "organisation",
+          "box": {
+            "x": 663.046875,
+            "y": 1608.75,
+            "width": 249.984375,
+            "height": 172,
+            "bottom": 1780.75,
+            "right": 913.03125
+          },
+          "visible": false,
+          "words": 3
+        },
+        {
+          "name": "Management goals",
+          "kind": "timeline",
+          "box": {
+            "x": 916.03125,
+            "y": 1638.75,
+            "width": 249.96875,
+            "height": 112,
+            "bottom": 1750.75,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 2
+        }
+      ],
+      "tables": 0,
+      "words": 221,
+      "unavailableMentions": 1,
+      "articleCount": 2,
+      "url": "/enterprises/lloyds"
+    },
+    "ipad-landscape:economics": {
+      "main": {
+        "x": 382.078125,
+        "y": 149,
+        "width": 811.921875,
+        "height": 2120.953125,
+        "bottom": 2269.953125,
+        "right": 1194
+      },
+      "viewport": {
+        "width": 1194,
+        "height": 834
+      },
+      "pageHeight": 2270,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Insurance, Pensions & Investments",
+          "lines": 2
+        },
+        {
+          "text": "Earnings, efficiency & capital decisions",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Funding",
+          "kind": "money",
+          "box": {
+            "x": 410.078125,
+            "y": 349.609375,
+            "width": 376.953125,
+            "height": 178,
+            "bottom": 527.609375,
+            "right": 787.03125
+          },
+          "visible": true,
+          "words": 4
+        },
+        {
+          "name": "Lending & income",
+          "kind": "money",
+          "box": {
+            "x": 789.03125,
+            "y": 349.609375,
+            "width": 376.96875,
+            "height": 178,
+            "bottom": 527.609375,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 5
+        },
+        {
+          "name": "Costs & impairment",
+          "kind": "money",
+          "box": {
+            "x": 410.078125,
+            "y": 529.609375,
+            "width": 376.953125,
+            "height": 178,
+            "bottom": 707.609375,
+            "right": 787.03125
+          },
+          "visible": true,
+          "words": 8
+        },
+        {
+          "name": "Capital & returns",
+          "kind": "money",
+          "box": {
+            "x": 789.03125,
+            "y": 529.609375,
+            "width": 376.96875,
+            "height": 178,
+            "bottom": 707.609375,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 6
+        },
+        {
+          "name": "Customer funding",
+          "kind": "money",
+          "box": {
+            "x": 410.078125,
+            "y": 771.40625,
+            "width": 384.421875,
+            "height": 200,
+            "bottom": 971.40625,
+            "right": 794.5
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Reported earnings",
+          "kind": "money",
+          "box": {
+            "x": 816.5,
+            "y": 771.40625,
+            "width": 349.5,
+            "height": 200,
+            "bottom": 971.40625,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 14
+        },
+        {
+          "name": "Compare customer deposits at 31 December 2025",
+          "kind": "financial-chart",
+          "box": {
+            "x": 410.078125,
+            "y": 1050.40625,
+            "width": 755.921875,
+            "height": 78,
+            "bottom": 1128.40625,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 3
+        },
+        {
+          "name": "Compare customer deposits at 30 September 2026",
+          "kind": "financial-chart",
+          "box": {
+            "x": 410.078125,
+            "y": 1140.40625,
+            "width": 755.921875,
+            "height": 78,
+            "bottom": 1218.40625,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 3
+        },
+        {
+          "name": "Retail",
+          "kind": "business",
+          "box": {
+            "x": 410.078125,
+            "y": 1421.984375,
+            "width": 251.96875,
+            "height": 334.21875,
+            "bottom": 1756.203125,
+            "right": 662.046875
+          },
+          "visible": false,
+          "words": 15
+        },
+        {
+          "name": "Commercial Banking",
+          "kind": "business",
+          "box": {
+            "x": 662.046875,
+            "y": 1439.984375,
+            "width": 251.96875,
+            "height": 316.21875,
+            "bottom": 1756.203125,
+            "right": 914.015625
+          },
+          "visible": false,
+          "words": 14
+        },
+        {
+          "name": "Insurance, Pensions & Investments",
+          "kind": "business",
+          "box": {
+            "x": 914.015625,
+            "y": 1457.984375,
+            "width": 251.96875,
+            "height": 298.21875,
+            "bottom": 1756.203125,
+            "right": 1165.984375
+          },
+          "visible": false,
+          "words": 19
+        },
+        {
+          "name": "Central / Equity",
+          "kind": "money",
+          "box": {
+            "x": 410.078125,
+            "y": 1756.203125,
+            "width": 251.96875,
+            "height": 227.75,
+            "bottom": 1983.953125,
+            "right": 662.046875
+          },
+          "visible": false,
+          "words": 18
+        },
+        {
+          "name": "Earnings, efficiency & capital decisions",
+          "kind": "money",
+          "box": {
+            "x": 410.078125,
+            "y": 2016.953125,
+            "width": 755.921875,
+            "height": 136,
+            "bottom": 2152.953125,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 5
+        }
+      ],
+      "tables": 0,
+      "words": 257,
+      "unavailableMentions": 0,
+      "articleCount": 1,
+      "url": "/enterprises/lloyds?focus=economics"
+    },
+    "ipad-landscape:commercial": {
+      "main": {
+        "x": 382.078125,
+        "y": 149,
+        "width": 811.921875,
+        "height": 1148.609375,
+        "bottom": 1297.609375,
+        "right": 1194
+      },
+      "viewport": {
+        "width": 1194,
+        "height": 834
+      },
+      "pageHeight": 1298,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [
+        {
+          "text": "Related operating capabilities",
+          "arrow": {
+            "x": 1139.546875,
+            "y": 776.828125,
+            "width": 12.453125,
+            "height": 18,
+            "bottom": 794.828125,
+            "right": 1152
+          },
+          "title": {
+            "x": 813.53125,
+            "y": 783.828125,
+            "width": 328.46875,
+            "height": 72.78125,
+            "bottom": 856.609375,
+            "right": 1142
+          }
+        }
+      ],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Related operating capabilities",
+          "mark": {
+            "x": 811.53125,
+            "y": 797.828125,
+            "width": 65,
+            "height": 65,
+            "bottom": 862.828125,
+            "right": 876.53125
+          },
+          "title": {
+            "x": 813.53125,
+            "y": 783.828125,
+            "width": 328.46875,
+            "height": 72.78125,
+            "bottom": 856.609375,
+            "right": 1142
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Related operating capabilities",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Group economic context",
+          "kind": "money",
+          "box": {
+            "x": 410.078125,
+            "y": 735.828125,
+            "width": 376.453125,
+            "height": 168.78125,
+            "bottom": 904.609375,
+            "right": 786.53125
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Related operating capabilities",
+          "kind": "technology",
+          "box": {
+            "x": 789.53125,
+            "y": 763.828125,
+            "width": 376.46875,
+            "height": 112.78125,
+            "bottom": 876.609375,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Explore the credit journey",
+          "kind": "operating",
+          "box": {
+            "x": 410.078125,
+            "y": 932.609375,
+            "width": 755.921875,
+            "height": 110,
+            "bottom": 1042.609375,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 4
+        },
+        {
+          "name": "Division & legal entity",
+          "kind": "operating",
+          "box": {
+            "x": 410.078125,
+            "y": 1070.609375,
+            "width": 755.921875,
+            "height": 110,
+            "bottom": 1180.609375,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 4
+        }
+      ],
+      "tables": 1,
+      "words": 105,
+      "unavailableMentions": 1,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?focus=commercial"
+    },
+    "ipad-landscape:credit": {
+      "main": {
+        "x": 382.078125,
+        "y": 149,
+        "width": 811.921875,
+        "height": 2363.0625,
+        "bottom": 2512.0625,
+        "right": 1194
+      },
+      "viewport": {
+        "width": 1194,
+        "height": 834
+      },
+      "pageHeight": 2512,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [
+        {
+          "text": "Applications & disclosed suppliers",
+          "arrow": {
+            "x": 633.59375,
+            "y": 2230.890625,
+            "width": 12.453125,
+            "height": 18,
+            "bottom": 2248.890625,
+            "right": 646.046875
+          },
+          "title": {
+            "x": 434.078125,
+            "y": 2237.890625,
+            "width": 201.96875,
+            "height": 109.171875,
+            "bottom": 2347.0625,
+            "right": 636.046875
+          }
+        }
+      ],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Applications / data",
+          "mark": {
+            "x": 459.078125,
+            "y": 943,
+            "width": 65,
+            "height": 65,
+            "bottom": 1008,
+            "right": 524.078125
+          },
+          "title": {
+            "x": 461.078125,
+            "y": 929,
+            "width": 65,
+            "height": 145.5625,
+            "bottom": 1074.5625,
+            "right": 526.078125
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Technology / infrastructure",
+          "mark": {
+            "x": 459.078125,
+            "y": 1188.5625,
+            "width": 65,
+            "height": 65,
+            "bottom": 1253.5625,
+            "right": 524.078125
+          },
+          "title": {
+            "x": 461.078125,
+            "y": 1174.5625,
+            "width": 65,
+            "height": 218.34375,
+            "bottom": 1392.90625,
+            "right": 526.078125
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Suppliers / contracts",
+          "mark": {
+            "x": 459.078125,
+            "y": 1506.90625,
+            "width": 65,
+            "height": 65,
+            "bottom": 1571.90625,
+            "right": 524.078125
+          },
+          "title": {
+            "x": 461.078125,
+            "y": 1492.90625,
+            "width": 65,
+            "height": 145.5625,
+            "bottom": 1638.46875,
+            "right": 526.078125
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Applications & disclosed suppliers",
+          "mark": {
+            "x": 432.078125,
+            "y": 2251.890625,
+            "width": 65,
+            "height": 65,
+            "bottom": 2316.890625,
+            "right": 497.078125
+          },
+          "title": {
+            "x": 434.078125,
+            "y": 2237.890625,
+            "width": 201.96875,
+            "height": 109.171875,
+            "bottom": 2347.0625,
+            "right": 636.046875
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [
+        {
+          "text": "Applications / data",
+          "width": 65,
+          "parentColumns": "65px 595.922px",
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Technology / infrastructure",
+          "width": 65,
+          "parentColumns": "65px 595.922px",
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Suppliers / contracts",
+          "width": 65,
+          "parentColumns": "65px 595.922px",
+          "markPosition": "absolute"
+        }
+      ],
+      "wrappedTitles": [
+        {
+          "text": "Applications / data",
+          "lines": 4
+        },
+        {
+          "text": "Technology / infrastructure",
+          "lines": 6
+        },
+        {
+          "text": "Suppliers / contracts",
+          "lines": 4
+        },
+        {
+          "text": "Applications & disclosed suppliers",
+          "lines": 3
+        },
+        {
+          "text": "Transformation disclosures",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "← Operating model",
+          "kind": "return",
+          "box": {
+            "x": 410.078125,
+            "y": 203.5,
+            "width": 154.734375,
+            "height": 48,
+            "bottom": 251.5,
+            "right": 564.8125
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Business / value stream",
+          "kind": "business",
+          "box": {
+            "x": 437.078125,
+            "y": 554,
+            "width": 728.921875,
+            "height": 105,
+            "bottom": 659,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 11
+        },
+        {
+          "name": "Durable capabilities",
+          "kind": "operating",
+          "box": {
+            "x": 437.078125,
+            "y": 663,
+            "width": 728.921875,
+            "height": 105,
+            "bottom": 768,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 17
+        },
+        {
+          "name": "Organisation / accountable role",
+          "kind": "organisation",
+          "box": {
+            "x": 437.078125,
+            "y": 772,
+            "width": 728.921875,
+            "height": 105,
+            "bottom": 877,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 8
+        },
+        {
+          "name": "Applications / data",
+          "kind": "technology",
+          "box": {
+            "x": 437.078125,
+            "y": 909,
+            "width": 728.921875,
+            "height": 185.5625,
+            "bottom": 1094.5625,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 8
+        },
+        {
+          "name": "Technology / infrastructure",
+          "kind": "technology",
+          "box": {
+            "x": 437.078125,
+            "y": 1154.5625,
+            "width": 728.921875,
+            "height": 258.34375,
+            "bottom": 1412.90625,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 8
+        },
+        {
+          "name": "Suppliers / contracts",
+          "kind": "technology",
+          "box": {
+            "x": 437.078125,
+            "y": 1472.90625,
+            "width": 728.921875,
+            "height": 185.5625,
+            "bottom": 1658.46875,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 10
+        },
+        {
+          "name": "Applications & disclosed suppliers",
+          "kind": "technology",
+          "box": {
+            "x": 410.078125,
+            "y": 2217.890625,
+            "width": 249.96875,
+            "height": 149.171875,
+            "bottom": 2367.0625,
+            "right": 660.046875
+          },
+          "visible": false,
+          "words": 4
+        },
+        {
+          "name": "Transformation disclosures",
+          "kind": "timeline",
+          "box": {
+            "x": 663.046875,
+            "y": 2219.890625,
+            "width": 249.984375,
+            "height": 145.171875,
+            "bottom": 2365.0625,
+            "right": 913.03125
+          },
+          "visible": false,
+          "words": 2
+        },
+        {
+          "name": "Related strategy",
+          "kind": "timeline",
+          "box": {
+            "x": 916.03125,
+            "y": 2219.890625,
+            "width": 249.96875,
+            "height": 145.171875,
+            "bottom": 2365.0625,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 2
+        }
+      ],
+      "tables": 0,
+      "words": 224,
+      "unavailableMentions": 4,
+      "articleCount": 1,
+      "url": "/enterprises/lloyds?stream=inside&focus=operations&detail=journey-credit"
+    },
+    "ipad-landscape:capabilities": {
+      "main": {
+        "x": 382.078125,
+        "y": 149,
+        "width": 811.921875,
+        "height": 1315.328125,
+        "bottom": 1464.328125,
+        "right": 1194
+      },
+      "viewport": {
+        "width": 1194,
+        "height": 834
+      },
+      "pageHeight": 1464,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [
+        {
+          "text": "Data, AI & colleague enablement",
+          "arrow": {
+            "x": 772.75,
+            "y": 919.078125,
+            "width": 14.78125,
+            "height": 22,
+            "bottom": 941.078125,
+            "right": 787.53125
+          },
+          "title": {
+            "x": 646.296875,
+            "y": 926.078125,
+            "width": 131.234375,
+            "height": 109.171875,
+            "bottom": 1035.25,
+            "right": 777.53125
+          }
+        },
+        {
+          "text": "Technology & platforms",
+          "arrow": {
+            "x": 954.984375,
+            "y": 919.078125,
+            "width": 14.78125,
+            "height": 22,
+            "bottom": 941.078125,
+            "right": 969.765625
+          },
+          "title": {
+            "x": 828.53125,
+            "y": 926.078125,
+            "width": 131.234375,
+            "height": 109.171875,
+            "bottom": 1035.25,
+            "right": 959.765625
+          }
+        }
+      ],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Data, AI & colleague enablement",
+          "mark": {
+            "x": 644.296875,
+            "y": 940.078125,
+            "width": 65,
+            "height": 65,
+            "bottom": 1005.078125,
+            "right": 709.296875
+          },
+          "title": {
+            "x": 646.296875,
+            "y": 926.078125,
+            "width": 131.234375,
+            "height": 109.171875,
+            "bottom": 1035.25,
+            "right": 777.53125
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Technology & platforms",
+          "mark": {
+            "x": 826.53125,
+            "y": 940.078125,
+            "width": 65,
+            "height": 65,
+            "bottom": 1005.078125,
+            "right": 891.53125
+          },
+          "title": {
+            "x": 828.53125,
+            "y": 926.078125,
+            "width": 131.234375,
+            "height": 109.171875,
+            "bottom": 1035.25,
+            "right": 959.765625
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Digital & assisted channels",
+          "lines": 2
+        },
+        {
+          "text": "Customer service & outcomes",
+          "lines": 3
+        },
+        {
+          "text": "Deposits & customer value",
+          "lines": 2
+        },
+        {
+          "text": "Risk, conduct & resilience",
+          "lines": 2
+        },
+        {
+          "text": "Data, AI & colleague enablement",
+          "lines": 3
+        },
+        {
+          "text": "Technology & platforms",
+          "lines": 3
+        },
+        {
+          "text": "Finance & treasury",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Digital & assisted channels",
+          "kind": "operating",
+          "box": {
+            "x": 410.078125,
+            "y": 418.203125,
+            "width": 186.71875,
+            "height": 203.28125,
+            "bottom": 621.484375,
+            "right": 596.796875
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Customer service & outcomes",
+          "kind": "operating",
+          "box": {
+            "x": 599.796875,
+            "y": 418.203125,
+            "width": 186.734375,
+            "height": 203.28125,
+            "bottom": 621.484375,
+            "right": 786.53125
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Deposits & customer value",
+          "kind": "operating",
+          "box": {
+            "x": 789.53125,
+            "y": 418.203125,
+            "width": 186.734375,
+            "height": 203.28125,
+            "bottom": 621.484375,
+            "right": 976.265625
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Lending & credit",
+          "kind": "operating",
+          "box": {
+            "x": 979.265625,
+            "y": 418.203125,
+            "width": 186.734375,
+            "height": 203.28125,
+            "bottom": 621.484375,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 9
+        },
+        {
+          "name": "Payments",
+          "kind": "operating",
+          "box": {
+            "x": 410.078125,
+            "y": 624.484375,
+            "width": 755.921875,
+            "height": 145,
+            "bottom": 769.484375,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 7
+        },
+        {
+          "name": "Risk, conduct & resilience",
+          "kind": "operating",
+          "box": {
+            "x": 440.078125,
+            "y": 878.078125,
+            "width": 179.21875,
+            "height": 250.453125,
+            "bottom": 1128.53125,
+            "right": 619.296875
+          },
+          "visible": false,
+          "words": 10
+        },
+        {
+          "name": "Data, AI & colleague enablement",
+          "kind": "technology",
+          "box": {
+            "x": 622.296875,
+            "y": 906.078125,
+            "width": 179.234375,
+            "height": 194.453125,
+            "bottom": 1100.53125,
+            "right": 801.53125
+          },
+          "visible": false,
+          "words": 11
+        },
+        {
+          "name": "Technology & platforms",
+          "kind": "technology",
+          "box": {
+            "x": 804.53125,
+            "y": 906.078125,
+            "width": 179.234375,
+            "height": 194.453125,
+            "bottom": 1100.53125,
+            "right": 983.765625
+          },
+          "visible": false,
+          "words": 9
+        },
+        {
+          "name": "Finance & treasury",
+          "kind": "operating",
+          "box": {
+            "x": 986.765625,
+            "y": 878.078125,
+            "width": 179.234375,
+            "height": 250.453125,
+            "bottom": 1128.53125,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 9
+        },
+        {
+          "name": "Strategy & propositions",
+          "kind": "operating",
+          "box": {
+            "x": 440.078125,
+            "y": 1131.53125,
+            "width": 725.921875,
+            "height": 145,
+            "bottom": 1276.53125,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 9
+        }
+      ],
+      "tables": 0,
+      "words": 159,
+      "unavailableMentions": 0,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?stream=inside&focus=capabilities"
+    },
+    "ipad-landscape:strategy": {
+      "main": {
+        "x": 382.078125,
+        "y": 149,
+        "width": 811.921875,
+        "height": 2579.8125,
+        "bottom": 2728.8125,
+        "right": 1194
+      },
+      "viewport": {
+        "width": 1194,
+        "height": 834
+      },
+      "pageHeight": 2729,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Retire applications while maintaining service",
+          "lines": 2
+        },
+        {
+          "text": "Turn AI capability into measured benefit",
+          "lines": 2
+        },
+        {
+          "text": "Keep the customer route to service clear",
+          "lines": 2
+        },
+        {
+          "text": "Prepare incident and third-party reporting",
+          "lines": 2
+        },
+        {
+          "text": "Sequence investment against delivery and returns",
+          "lines": 2
+        },
+        {
+          "text": "Improve efficiency without confusing gross and net",
+          "lines": 2
+        },
+        {
+          "text": "Develop payments and customer interaction",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Retire applications while maintaining service",
+          "kind": "timeline",
+          "box": {
+            "x": 439.078125,
+            "y": 348.109375,
+            "width": 726.921875,
+            "height": 218.703125,
+            "bottom": 566.8125,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 21
+        },
+        {
+          "name": "Turn AI capability into measured benefit",
+          "kind": "timeline",
+          "box": {
+            "x": 457.078125,
+            "y": 630.8125,
+            "width": 708.921875,
+            "height": 192.3125,
+            "bottom": 823.125,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 18
+        },
+        {
+          "name": "Keep the customer route to service clear",
+          "kind": "timeline",
+          "box": {
+            "x": 475.078125,
+            "y": 887.125,
+            "width": 690.921875,
+            "height": 218.703125,
+            "bottom": 1105.828125,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 19
+        },
+        {
+          "name": "Prepare incident and third-party reporting",
+          "kind": "timeline",
+          "box": {
+            "x": 439.078125,
+            "y": 1169.828125,
+            "width": 726.921875,
+            "height": 192.3125,
+            "bottom": 1362.140625,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 18
+        },
+        {
+          "name": "Sequence investment against delivery and returns",
+          "kind": "timeline",
+          "box": {
+            "x": 457.078125,
+            "y": 1426.140625,
+            "width": 708.921875,
+            "height": 218.703125,
+            "bottom": 1644.84375,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 19
+        },
+        {
+          "name": "Improve efficiency without confusing gross and net",
+          "kind": "timeline",
+          "box": {
+            "x": 475.078125,
+            "y": 1708.84375,
+            "width": 690.921875,
+            "height": 218.703125,
+            "bottom": 1927.546875,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 21
+        },
+        {
+          "name": "Develop payments and customer interaction",
+          "kind": "timeline",
+          "box": {
+            "x": 439.078125,
+            "y": 1991.546875,
+            "width": 726.921875,
+            "height": 218.703125,
+            "bottom": 2210.25,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 25
+        },
+        {
+          "name": "Goals & tests of progress",
+          "kind": "timeline",
+          "box": {
+            "x": 410.078125,
+            "y": 2469.8125,
+            "width": 376.453125,
+            "height": 112,
+            "bottom": 2581.8125,
+            "right": 786.53125
+          },
+          "visible": false,
+          "words": 5
+        },
+        {
+          "name": "Strategic alternatives & trade-offs",
+          "kind": "timeline",
+          "box": {
+            "x": 789.53125,
+            "y": 2469.8125,
+            "width": 376.46875,
+            "height": 112,
+            "bottom": 2581.8125,
+            "right": 1166
+          },
+          "visible": false,
+          "words": 4
+        }
+      ],
+      "tables": 0,
+      "words": 233,
+      "unavailableMentions": 0,
+      "articleCount": 10,
+      "url": "/enterprises/lloyds?stream=forces&focus=strategy"
+    },
+    "ipad-landscape:swot": {
+      "main": {
+        "x": 382.078125,
+        "y": 149,
+        "width": 811.921875,
+        "height": 885.90625,
+        "bottom": 1034.90625,
+        "right": 1194
+      },
+      "viewport": {
+        "width": 1194,
+        "height": 834
+      },
+      "pageHeight": 1035,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Strength",
+          "mark": {
+            "x": 717.03125,
+            "y": 349.109375,
+            "width": 42,
+            "height": 30,
+            "bottom": 379.109375,
+            "right": 759.03125
+          },
+          "title": {
+            "x": 430.078125,
+            "y": 345.109375,
+            "width": 330.953125,
+            "height": 37.6875,
+            "bottom": 382.796875,
+            "right": 761.03125
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Weakness",
+          "mark": {
+            "x": 1102,
+            "y": 349.109375,
+            "width": 42,
+            "height": 30,
+            "bottom": 379.109375,
+            "right": 1144
+          },
+          "title": {
+            "x": 815.03125,
+            "y": 345.109375,
+            "width": 330.96875,
+            "height": 37.6875,
+            "bottom": 382.796875,
+            "right": 1146
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Opportunity",
+          "mark": {
+            "x": 717.03125,
+            "y": 668.109375,
+            "width": 42,
+            "height": 30,
+            "bottom": 698.109375,
+            "right": 759.03125
+          },
+          "title": {
+            "x": 430.078125,
+            "y": 664.109375,
+            "width": 330.953125,
+            "height": 37.6875,
+            "bottom": 701.796875,
+            "right": 761.03125
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Threat",
+          "mark": {
+            "x": 1102,
+            "y": 668.109375,
+            "width": 42,
+            "height": 30,
+            "bottom": 698.109375,
+            "right": 1144
+          },
+          "title": {
+            "x": 815.03125,
+            "y": 664.109375,
+            "width": 330.96875,
+            "height": 37.6875,
+            "bottom": 701.796875,
+            "right": 1146
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "Strength",
+          "kind": "quadrant",
+          "box": {
+            "x": 410.078125,
+            "y": 318.109375,
+            "width": 370.953125,
+            "height": 305,
+            "bottom": 623.109375,
+            "right": 781.03125
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "existing AI capability",
+          "kind": "theme",
+          "box": {
+            "x": 426.078125,
+            "y": 430.109375,
+            "width": 338.953125,
+            "height": 86,
+            "bottom": 516.109375,
+            "right": 765.03125
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "deposit base",
+          "kind": "theme",
+          "box": {
+            "x": 426.078125,
+            "y": 521.109375,
+            "width": 338.953125,
+            "height": 86,
+            "bottom": 607.109375,
+            "right": 765.03125
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "Weakness",
+          "kind": "quadrant",
+          "box": {
+            "x": 795.03125,
+            "y": 318.109375,
+            "width": 370.96875,
+            "height": 305,
+            "bottom": 623.109375,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "migration exposure",
+          "kind": "theme",
+          "box": {
+            "x": 811.03125,
+            "y": 430.109375,
+            "width": 338.96875,
+            "height": 86,
+            "bottom": 516.109375,
+            "right": 1150
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "benefit measurement",
+          "kind": "theme",
+          "box": {
+            "x": 811.03125,
+            "y": 521.109375,
+            "width": 338.96875,
+            "height": 86,
+            "bottom": 607.109375,
+            "right": 1150
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "Opportunity",
+          "kind": "quadrant",
+          "box": {
+            "x": 410.078125,
+            "y": 637.109375,
+            "width": 370.953125,
+            "height": 305,
+            "bottom": 942.109375,
+            "right": 781.03125
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "payments",
+          "kind": "theme",
+          "box": {
+            "x": 426.078125,
+            "y": 749.109375,
+            "width": 338.953125,
+            "height": 86,
+            "bottom": 835.109375,
+            "right": 765.03125
+          },
+          "visible": true,
+          "words": 1
+        },
+        {
+          "name": "data-enabled service",
+          "kind": "theme",
+          "box": {
+            "x": 426.078125,
+            "y": 840.109375,
+            "width": 338.953125,
+            "height": 86,
+            "bottom": 926.109375,
+            "right": 765.03125
+          },
+          "visible": false,
+          "words": 2
+        },
+        {
+          "name": "Threat",
+          "kind": "quadrant",
+          "box": {
+            "x": 795.03125,
+            "y": 637.109375,
+            "width": 370.96875,
+            "height": 305,
+            "bottom": 942.109375,
+            "right": 1166
+          },
+          "visible": true,
+          "words": 4
+        },
+        {
+          "name": "operating disruption",
+          "kind": "theme",
+          "box": {
+            "x": 811.03125,
+            "y": 749.109375,
+            "width": 338.96875,
+            "height": 86,
+            "bottom": 835.109375,
+            "right": 1150
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "cost of parallel running",
+          "kind": "theme",
+          "box": {
+            "x": 811.03125,
+            "y": 840.109375,
+            "width": 338.96875,
+            "height": 86,
+            "bottom": 926.109375,
+            "right": 1150
+          },
+          "visible": false,
+          "words": 4
+        }
+      ],
+      "tables": 0,
+      "words": 67,
+      "unavailableMentions": 0,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?stream=forces&focus=analysis"
+    },
+    "ipad-portrait:group": {
+      "main": {
+        "x": 0,
+        "y": 207.5,
+        "width": 834,
+        "height": 1691.1875,
+        "bottom": 1898.6875,
+        "right": 834
+      },
+      "viewport": {
+        "width": 834,
+        "height": 1194
+      },
+      "pageHeight": 1899,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Insurance, Pensions & Investments",
+          "lines": 2
+        },
+        {
+          "text": "Funding, income & earnings",
+          "lines": 2
+        },
+        {
+          "text": "Organisation & workforce",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Retail",
+          "kind": "business",
+          "box": {
+            "x": 32,
+            "y": 404.765625,
+            "width": 256.65625,
+            "height": 281.8125,
+            "bottom": 686.578125,
+            "right": 288.65625
+          },
+          "visible": true,
+          "words": 8
+        },
+        {
+          "name": "Commercial Banking",
+          "kind": "business",
+          "box": {
+            "x": 288.65625,
+            "y": 422.765625,
+            "width": 256.671875,
+            "height": 263.8125,
+            "bottom": 686.578125,
+            "right": 545.328125
+          },
+          "visible": true,
+          "words": 9
+        },
+        {
+          "name": "Insurance, Pensions & Investments",
+          "kind": "business",
+          "box": {
+            "x": 545.328125,
+            "y": 440.765625,
+            "width": 256.65625,
+            "height": 245.8125,
+            "bottom": 686.578125,
+            "right": 801.984375
+          },
+          "visible": true,
+          "words": 12
+        },
+        {
+          "name": "Customer funding",
+          "kind": "money",
+          "box": {
+            "x": 32,
+            "y": 719.578125,
+            "width": 391.796875,
+            "height": 200,
+            "bottom": 919.578125,
+            "right": 423.796875
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Reported earnings",
+          "kind": "money",
+          "box": {
+            "x": 445.796875,
+            "y": 719.578125,
+            "width": 356.203125,
+            "height": 200,
+            "bottom": 919.578125,
+            "right": 802
+          },
+          "visible": true,
+          "words": 14
+        },
+        {
+          "name": "Curve acquisition reported complete",
+          "kind": "change",
+          "box": {
+            "x": 32,
+            "y": 1002.078125,
+            "width": 770,
+            "height": 239.515625,
+            "bottom": 1241.59375,
+            "right": 802
+          },
+          "visible": true,
+          "words": 22
+        },
+        {
+          "name": "Leadership evidence",
+          "kind": "organisation",
+          "box": {
+            "x": 32,
+            "y": 1241.59375,
+            "width": 770,
+            "height": 160.328125,
+            "bottom": 1401.921875,
+            "right": 802
+          },
+          "visible": false,
+          "words": 17
+        },
+        {
+          "name": "Funding comparison",
+          "kind": "money",
+          "box": {
+            "x": 32,
+            "y": 1502.25,
+            "width": 383.5,
+            "height": 140.4375,
+            "bottom": 1642.6875,
+            "right": 415.5
+          },
+          "visible": false,
+          "words": 7
+        },
+        {
+          "name": "Customer outcomes",
+          "kind": "operating",
+          "box": {
+            "x": 418.5,
+            "y": 1502.25,
+            "width": 383.5,
+            "height": 140.4375,
+            "bottom": 1642.6875,
+            "right": 802
+          },
+          "visible": false,
+          "words": 9
+        },
+        {
+          "name": "Funding, income & earnings",
+          "kind": "money",
+          "box": {
+            "x": 32,
+            "y": 1670.6875,
+            "width": 254.65625,
+            "height": 172,
+            "bottom": 1842.6875,
+            "right": 286.65625
+          },
+          "visible": false,
+          "words": 4
+        },
+        {
+          "name": "Organisation & workforce",
+          "kind": "organisation",
+          "box": {
+            "x": 289.65625,
+            "y": 1670.6875,
+            "width": 254.671875,
+            "height": 172,
+            "bottom": 1842.6875,
+            "right": 544.328125
+          },
+          "visible": false,
+          "words": 3
+        },
+        {
+          "name": "Management goals",
+          "kind": "timeline",
+          "box": {
+            "x": 547.328125,
+            "y": 1700.6875,
+            "width": 254.671875,
+            "height": 112,
+            "bottom": 1812.6875,
+            "right": 802
+          },
+          "visible": false,
+          "words": 2
+        }
+      ],
+      "tables": 0,
+      "words": 221,
+      "unavailableMentions": 1,
+      "articleCount": 2,
+      "url": "/enterprises/lloyds"
+    },
+    "ipad-portrait:economics": {
+      "main": {
+        "x": 0,
+        "y": 207.5,
+        "width": 834,
+        "height": 1970.0625,
+        "bottom": 2177.5625,
+        "right": 834
+      },
+      "viewport": {
+        "width": 834,
+        "height": 1194
+      },
+      "pageHeight": 2178,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Lending & income",
+          "lines": 2
+        },
+        {
+          "text": "Costs & impairment",
+          "lines": 2
+        },
+        {
+          "text": "Insurance, Pensions & Investments",
+          "lines": 2
+        },
+        {
+          "text": "Earnings, efficiency & capital decisions",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Funding",
+          "kind": "money",
+          "box": {
+            "x": 32,
+            "y": 403.765625,
+            "width": 191,
+            "height": 199.78125,
+            "bottom": 603.546875,
+            "right": 223
+          },
+          "visible": true,
+          "words": 4
+        },
+        {
+          "name": "Lending & income",
+          "kind": "money",
+          "box": {
+            "x": 225,
+            "y": 403.765625,
+            "width": 191,
+            "height": 199.78125,
+            "bottom": 603.546875,
+            "right": 416
+          },
+          "visible": true,
+          "words": 5
+        },
+        {
+          "name": "Costs & impairment",
+          "kind": "money",
+          "box": {
+            "x": 418,
+            "y": 403.765625,
+            "width": 191,
+            "height": 199.78125,
+            "bottom": 603.546875,
+            "right": 609
+          },
+          "visible": true,
+          "words": 8
+        },
+        {
+          "name": "Capital & returns",
+          "kind": "money",
+          "box": {
+            "x": 611,
+            "y": 403.765625,
+            "width": 191,
+            "height": 199.78125,
+            "bottom": 603.546875,
+            "right": 802
+          },
+          "visible": true,
+          "words": 6
+        },
+        {
+          "name": "Customer funding",
+          "kind": "money",
+          "box": {
+            "x": 32,
+            "y": 667.34375,
+            "width": 391.796875,
+            "height": 200,
+            "bottom": 867.34375,
+            "right": 423.796875
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Reported earnings",
+          "kind": "money",
+          "box": {
+            "x": 445.796875,
+            "y": 667.34375,
+            "width": 356.203125,
+            "height": 200,
+            "bottom": 867.34375,
+            "right": 802
+          },
+          "visible": true,
+          "words": 14
+        },
+        {
+          "name": "Compare customer deposits at 31 December 2025",
+          "kind": "financial-chart",
+          "box": {
+            "x": 32,
+            "y": 946.34375,
+            "width": 770,
+            "height": 78,
+            "bottom": 1024.34375,
+            "right": 802
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Compare customer deposits at 30 September 2026",
+          "kind": "financial-chart",
+          "box": {
+            "x": 32,
+            "y": 1036.34375,
+            "width": 770,
+            "height": 78,
+            "bottom": 1114.34375,
+            "right": 802
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Retail",
+          "kind": "business",
+          "box": {
+            "x": 32,
+            "y": 1317.921875,
+            "width": 256.65625,
+            "height": 342,
+            "bottom": 1659.921875,
+            "right": 288.65625
+          },
+          "visible": false,
+          "words": 15
+        },
+        {
+          "name": "Commercial Banking",
+          "kind": "business",
+          "box": {
+            "x": 288.65625,
+            "y": 1335.921875,
+            "width": 256.671875,
+            "height": 324,
+            "bottom": 1659.921875,
+            "right": 545.328125
+          },
+          "visible": false,
+          "words": 14
+        },
+        {
+          "name": "Insurance, Pensions & Investments",
+          "kind": "business",
+          "box": {
+            "x": 545.328125,
+            "y": 1353.921875,
+            "width": 256.65625,
+            "height": 306,
+            "bottom": 1659.921875,
+            "right": 801.984375
+          },
+          "visible": false,
+          "words": 19
+        },
+        {
+          "name": "Central / Equity",
+          "kind": "money",
+          "box": {
+            "x": 32,
+            "y": 1659.921875,
+            "width": 256.65625,
+            "height": 231.640625,
+            "bottom": 1891.5625,
+            "right": 288.65625
+          },
+          "visible": false,
+          "words": 18
+        },
+        {
+          "name": "Earnings, efficiency & capital decisions",
+          "kind": "money",
+          "box": {
+            "x": 32,
+            "y": 1924.5625,
+            "width": 770,
+            "height": 136,
+            "bottom": 2060.5625,
+            "right": 802
+          },
+          "visible": false,
+          "words": 5
+        }
+      ],
+      "tables": 0,
+      "words": 257,
+      "unavailableMentions": 0,
+      "articleCount": 1,
+      "url": "/enterprises/lloyds?focus=economics"
+    },
+    "ipad-portrait:commercial": {
+      "main": {
+        "x": 0,
+        "y": 207.5,
+        "width": 834,
+        "height": 1109.03125,
+        "bottom": 1316.53125,
+        "right": 834
+      },
+      "viewport": {
+        "width": 834,
+        "height": 1194
+      },
+      "pageHeight": 1317,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [
+        {
+          "text": "Related operating capabilities",
+          "arrow": {
+            "x": 775.546875,
+            "y": 832.140625,
+            "width": 12.453125,
+            "height": 18,
+            "bottom": 850.140625,
+            "right": 788
+          },
+          "title": {
+            "x": 442.5,
+            "y": 839.140625,
+            "width": 335.5,
+            "height": 36.390625,
+            "bottom": 875.53125,
+            "right": 778
+          }
+        }
+      ],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Related operating capabilities",
+          "mark": {
+            "x": 440.5,
+            "y": 853.140625,
+            "width": 65,
+            "height": 65,
+            "bottom": 918.140625,
+            "right": 505.5
+          },
+          "title": {
+            "x": 442.5,
+            "y": 839.140625,
+            "width": 335.5,
+            "height": 36.390625,
+            "bottom": 875.53125,
+            "right": 778
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "Group economic context",
+          "kind": "money",
+          "box": {
+            "x": 32,
+            "y": 791.140625,
+            "width": 383.5,
+            "height": 132.390625,
+            "bottom": 923.53125,
+            "right": 415.5
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Related operating capabilities",
+          "kind": "technology",
+          "box": {
+            "x": 418.5,
+            "y": 819.140625,
+            "width": 383.5,
+            "height": 76.390625,
+            "bottom": 895.53125,
+            "right": 802
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Explore the credit journey",
+          "kind": "operating",
+          "box": {
+            "x": 32,
+            "y": 951.53125,
+            "width": 770,
+            "height": 110,
+            "bottom": 1061.53125,
+            "right": 802
+          },
+          "visible": true,
+          "words": 4
+        },
+        {
+          "name": "Division & legal entity",
+          "kind": "operating",
+          "box": {
+            "x": 32,
+            "y": 1089.53125,
+            "width": 770,
+            "height": 110,
+            "bottom": 1199.53125,
+            "right": 802
+          },
+          "visible": true,
+          "words": 4
+        }
+      ],
+      "tables": 1,
+      "words": 105,
+      "unavailableMentions": 1,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?focus=commercial"
+    },
+    "ipad-portrait:credit": {
+      "main": {
+        "x": 0,
+        "y": 207.5,
+        "width": 834,
+        "height": 2358.71875,
+        "bottom": 2566.21875,
+        "right": 834
+      },
+      "viewport": {
+        "width": 834,
+        "height": 1194
+      },
+      "pageHeight": 2566,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [
+        {
+          "text": "Applications & disclosed suppliers",
+          "arrow": {
+            "x": 260.203125,
+            "y": 2285.046875,
+            "width": 12.453125,
+            "height": 18,
+            "bottom": 2303.046875,
+            "right": 272.65625
+          },
+          "title": {
+            "x": 56,
+            "y": 2292.046875,
+            "width": 206.65625,
+            "height": 109.171875,
+            "bottom": 2401.21875,
+            "right": 262.65625
+          }
+        }
+      ],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Applications / data",
+          "mark": {
+            "x": 81,
+            "y": 997.15625,
+            "width": 65,
+            "height": 65,
+            "bottom": 1062.15625,
+            "right": 146
+          },
+          "title": {
+            "x": 83,
+            "y": 983.15625,
+            "width": 65,
+            "height": 145.5625,
+            "bottom": 1128.71875,
+            "right": 148
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Technology / infrastructure",
+          "mark": {
+            "x": 81,
+            "y": 1242.71875,
+            "width": 65,
+            "height": 65,
+            "bottom": 1307.71875,
+            "right": 146
+          },
+          "title": {
+            "x": 83,
+            "y": 1228.71875,
+            "width": 65,
+            "height": 218.34375,
+            "bottom": 1447.0625,
+            "right": 148
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Suppliers / contracts",
+          "mark": {
+            "x": 81,
+            "y": 1561.0625,
+            "width": 65,
+            "height": 65,
+            "bottom": 1626.0625,
+            "right": 146
+          },
+          "title": {
+            "x": 83,
+            "y": 1547.0625,
+            "width": 65,
+            "height": 145.5625,
+            "bottom": 1692.625,
+            "right": 148
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Applications & disclosed suppliers",
+          "mark": {
+            "x": 54,
+            "y": 2306.046875,
+            "width": 65,
+            "height": 65,
+            "bottom": 2371.046875,
+            "right": 119
+          },
+          "title": {
+            "x": 56,
+            "y": 2292.046875,
+            "width": 206.65625,
+            "height": 109.171875,
+            "bottom": 2401.21875,
+            "right": 262.65625
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [
+        {
+          "text": "Applications / data",
+          "width": 65,
+          "parentColumns": "65px 610px",
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Technology / infrastructure",
+          "width": 65,
+          "parentColumns": "65px 610px",
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Suppliers / contracts",
+          "width": 65,
+          "parentColumns": "65px 610px",
+          "markPosition": "absolute"
+        }
+      ],
+      "wrappedTitles": [
+        {
+          "text": "Applications / data",
+          "lines": 4
+        },
+        {
+          "text": "Technology / infrastructure",
+          "lines": 6
+        },
+        {
+          "text": "Suppliers / contracts",
+          "lines": 4
+        },
+        {
+          "text": "Applications & disclosed suppliers",
+          "lines": 3
+        },
+        {
+          "text": "Transformation disclosures",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "← Operating model",
+          "kind": "return",
+          "box": {
+            "x": 32,
+            "y": 262,
+            "width": 154.734375,
+            "height": 48,
+            "bottom": 310,
+            "right": 186.734375
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "Business / value stream",
+          "kind": "business",
+          "box": {
+            "x": 59,
+            "y": 608.15625,
+            "width": 743,
+            "height": 105,
+            "bottom": 713.15625,
+            "right": 802
+          },
+          "visible": true,
+          "words": 11
+        },
+        {
+          "name": "Durable capabilities",
+          "kind": "operating",
+          "box": {
+            "x": 59,
+            "y": 717.15625,
+            "width": 743,
+            "height": 105,
+            "bottom": 822.15625,
+            "right": 802
+          },
+          "visible": true,
+          "words": 17
+        },
+        {
+          "name": "Organisation / accountable role",
+          "kind": "organisation",
+          "box": {
+            "x": 59,
+            "y": 826.15625,
+            "width": 743,
+            "height": 105,
+            "bottom": 931.15625,
+            "right": 802
+          },
+          "visible": true,
+          "words": 8
+        },
+        {
+          "name": "Applications / data",
+          "kind": "technology",
+          "box": {
+            "x": 59,
+            "y": 963.15625,
+            "width": 743,
+            "height": 185.5625,
+            "bottom": 1148.71875,
+            "right": 802
+          },
+          "visible": true,
+          "words": 8
+        },
+        {
+          "name": "Technology / infrastructure",
+          "kind": "technology",
+          "box": {
+            "x": 59,
+            "y": 1208.71875,
+            "width": 743,
+            "height": 258.34375,
+            "bottom": 1467.0625,
+            "right": 802
+          },
+          "visible": false,
+          "words": 8
+        },
+        {
+          "name": "Suppliers / contracts",
+          "kind": "technology",
+          "box": {
+            "x": 59,
+            "y": 1527.0625,
+            "width": 743,
+            "height": 185.5625,
+            "bottom": 1712.625,
+            "right": 802
+          },
+          "visible": false,
+          "words": 10
+        },
+        {
+          "name": "Applications & disclosed suppliers",
+          "kind": "technology",
+          "box": {
+            "x": 32,
+            "y": 2272.046875,
+            "width": 254.65625,
+            "height": 149.171875,
+            "bottom": 2421.21875,
+            "right": 286.65625
+          },
+          "visible": false,
+          "words": 4
+        },
+        {
+          "name": "Transformation disclosures",
+          "kind": "timeline",
+          "box": {
+            "x": 289.65625,
+            "y": 2274.046875,
+            "width": 254.671875,
+            "height": 145.171875,
+            "bottom": 2419.21875,
+            "right": 544.328125
+          },
+          "visible": false,
+          "words": 2
+        },
+        {
+          "name": "Related strategy",
+          "kind": "timeline",
+          "box": {
+            "x": 547.328125,
+            "y": 2274.046875,
+            "width": 254.671875,
+            "height": 145.171875,
+            "bottom": 2419.21875,
+            "right": 802
+          },
+          "visible": false,
+          "words": 2
+        }
+      ],
+      "tables": 0,
+      "words": 224,
+      "unavailableMentions": 4,
+      "articleCount": 1,
+      "url": "/enterprises/lloyds?stream=inside&focus=operations&detail=journey-credit"
+    },
+    "ipad-portrait:capabilities": {
+      "main": {
+        "x": 0,
+        "y": 207.5,
+        "width": 834,
+        "height": 1284.984375,
+        "bottom": 1492.484375,
+        "right": 834
+      },
+      "viewport": {
+        "width": 834,
+        "height": 1194
+      },
+      "pageHeight": 1492,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [
+        {
+          "text": "Data, AI & colleague enablement",
+          "arrow": {
+            "x": 401.71875,
+            "y": 947.234375,
+            "width": 14.78125,
+            "height": 22,
+            "bottom": 969.234375,
+            "right": 416.5
+          },
+          "title": {
+            "x": 271.75,
+            "y": 954.234375,
+            "width": 134.75,
+            "height": 109.171875,
+            "bottom": 1063.40625,
+            "right": 406.5
+          }
+        },
+        {
+          "text": "Technology & platforms",
+          "arrow": {
+            "x": 587.46875,
+            "y": 947.234375,
+            "width": 14.78125,
+            "height": 22,
+            "bottom": 969.234375,
+            "right": 602.25
+          },
+          "title": {
+            "x": 457.5,
+            "y": 954.234375,
+            "width": 134.75,
+            "height": 109.171875,
+            "bottom": 1063.40625,
+            "right": 592.25
+          }
+        }
+      ],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Data, AI & colleague enablement",
+          "mark": {
+            "x": 269.75,
+            "y": 968.234375,
+            "width": 65,
+            "height": 65,
+            "bottom": 1033.234375,
+            "right": 334.75
+          },
+          "title": {
+            "x": 271.75,
+            "y": 954.234375,
+            "width": 134.75,
+            "height": 109.171875,
+            "bottom": 1063.40625,
+            "right": 406.5
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Technology & platforms",
+          "mark": {
+            "x": 455.5,
+            "y": 968.234375,
+            "width": 65,
+            "height": 65,
+            "bottom": 1033.234375,
+            "right": 520.5
+          },
+          "title": {
+            "x": 457.5,
+            "y": 954.234375,
+            "width": 134.75,
+            "height": 109.171875,
+            "bottom": 1063.40625,
+            "right": 592.25
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Digital & assisted channels",
+          "lines": 2
+        },
+        {
+          "text": "Customer service & outcomes",
+          "lines": 2
+        },
+        {
+          "text": "Deposits & customer value",
+          "lines": 2
+        },
+        {
+          "text": "Risk, conduct & resilience",
+          "lines": 2
+        },
+        {
+          "text": "Data, AI & colleague enablement",
+          "lines": 3
+        },
+        {
+          "text": "Technology & platforms",
+          "lines": 3
+        },
+        {
+          "text": "Finance & treasury",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Digital & assisted channels",
+          "kind": "operating",
+          "box": {
+            "x": 32,
+            "y": 472.359375,
+            "width": 190.25,
+            "height": 177.28125,
+            "bottom": 649.640625,
+            "right": 222.25
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Customer service & outcomes",
+          "kind": "operating",
+          "box": {
+            "x": 225.25,
+            "y": 472.359375,
+            "width": 190.25,
+            "height": 177.28125,
+            "bottom": 649.640625,
+            "right": 415.5
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Deposits & customer value",
+          "kind": "operating",
+          "box": {
+            "x": 418.5,
+            "y": 472.359375,
+            "width": 190.25,
+            "height": 177.28125,
+            "bottom": 649.640625,
+            "right": 608.75
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Lending & credit",
+          "kind": "operating",
+          "box": {
+            "x": 611.75,
+            "y": 472.359375,
+            "width": 190.25,
+            "height": 177.28125,
+            "bottom": 649.640625,
+            "right": 802
+          },
+          "visible": true,
+          "words": 9
+        },
+        {
+          "name": "Payments",
+          "kind": "operating",
+          "box": {
+            "x": 32,
+            "y": 652.640625,
+            "width": 770,
+            "height": 145,
+            "bottom": 797.640625,
+            "right": 802
+          },
+          "visible": true,
+          "words": 7
+        },
+        {
+          "name": "Risk, conduct & resilience",
+          "kind": "operating",
+          "box": {
+            "x": 62,
+            "y": 906.234375,
+            "width": 182.75,
+            "height": 250.453125,
+            "bottom": 1156.6875,
+            "right": 244.75
+          },
+          "visible": true,
+          "words": 10
+        },
+        {
+          "name": "Data, AI & colleague enablement",
+          "kind": "technology",
+          "box": {
+            "x": 247.75,
+            "y": 934.234375,
+            "width": 182.75,
+            "height": 194.453125,
+            "bottom": 1128.6875,
+            "right": 430.5
+          },
+          "visible": true,
+          "words": 11
+        },
+        {
+          "name": "Technology & platforms",
+          "kind": "technology",
+          "box": {
+            "x": 433.5,
+            "y": 934.234375,
+            "width": 182.75,
+            "height": 194.453125,
+            "bottom": 1128.6875,
+            "right": 616.25
+          },
+          "visible": true,
+          "words": 9
+        },
+        {
+          "name": "Finance & treasury",
+          "kind": "operating",
+          "box": {
+            "x": 619.25,
+            "y": 906.234375,
+            "width": 182.75,
+            "height": 250.453125,
+            "bottom": 1156.6875,
+            "right": 802
+          },
+          "visible": true,
+          "words": 9
+        },
+        {
+          "name": "Strategy & propositions",
+          "kind": "operating",
+          "box": {
+            "x": 62,
+            "y": 1159.6875,
+            "width": 740,
+            "height": 145,
+            "bottom": 1304.6875,
+            "right": 802
+          },
+          "visible": true,
+          "words": 9
+        }
+      ],
+      "tables": 0,
+      "words": 159,
+      "unavailableMentions": 0,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?stream=inside&focus=capabilities"
+    },
+    "ipad-portrait:strategy": {
+      "main": {
+        "x": 0,
+        "y": 207.5,
+        "width": 834,
+        "height": 2576.625,
+        "bottom": 2784.125,
+        "right": 834
+      },
+      "viewport": {
+        "width": 834,
+        "height": 1194
+      },
+      "pageHeight": 2784,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [
+        {
+          "text": "Retire applications while maintaining service",
+          "lines": 2
+        },
+        {
+          "text": "Turn AI capability into measured benefit",
+          "lines": 2
+        },
+        {
+          "text": "Keep the customer route to service clear",
+          "lines": 2
+        },
+        {
+          "text": "Prepare incident and third-party reporting",
+          "lines": 2
+        },
+        {
+          "text": "Sequence investment against delivery and returns",
+          "lines": 2
+        },
+        {
+          "text": "Improve efficiency without confusing gross and net",
+          "lines": 2
+        },
+        {
+          "text": "Develop payments and customer interaction",
+          "lines": 2
+        }
+      ],
+      "regions": [
+        {
+          "name": "Retire applications while maintaining service",
+          "kind": "timeline",
+          "box": {
+            "x": 61,
+            "y": 403.421875,
+            "width": 741,
+            "height": 218.703125,
+            "bottom": 622.125,
+            "right": 802
+          },
+          "visible": true,
+          "words": 21
+        },
+        {
+          "name": "Turn AI capability into measured benefit",
+          "kind": "timeline",
+          "box": {
+            "x": 79,
+            "y": 686.125,
+            "width": 723,
+            "height": 192.3125,
+            "bottom": 878.4375,
+            "right": 802
+          },
+          "visible": true,
+          "words": 18
+        },
+        {
+          "name": "Keep the customer route to service clear",
+          "kind": "timeline",
+          "box": {
+            "x": 97,
+            "y": 942.4375,
+            "width": 705,
+            "height": 218.703125,
+            "bottom": 1161.140625,
+            "right": 802
+          },
+          "visible": true,
+          "words": 19
+        },
+        {
+          "name": "Prepare incident and third-party reporting",
+          "kind": "timeline",
+          "box": {
+            "x": 61,
+            "y": 1225.140625,
+            "width": 741,
+            "height": 192.3125,
+            "bottom": 1417.453125,
+            "right": 802
+          },
+          "visible": false,
+          "words": 18
+        },
+        {
+          "name": "Sequence investment against delivery and returns",
+          "kind": "timeline",
+          "box": {
+            "x": 79,
+            "y": 1481.453125,
+            "width": 723,
+            "height": 218.703125,
+            "bottom": 1700.15625,
+            "right": 802
+          },
+          "visible": false,
+          "words": 19
+        },
+        {
+          "name": "Improve efficiency without confusing gross and net",
+          "kind": "timeline",
+          "box": {
+            "x": 97,
+            "y": 1764.15625,
+            "width": 705,
+            "height": 218.703125,
+            "bottom": 1982.859375,
+            "right": 802
+          },
+          "visible": false,
+          "words": 21
+        },
+        {
+          "name": "Develop payments and customer interaction",
+          "kind": "timeline",
+          "box": {
+            "x": 61,
+            "y": 2046.859375,
+            "width": 741,
+            "height": 218.703125,
+            "bottom": 2265.5625,
+            "right": 802
+          },
+          "visible": false,
+          "words": 25
+        },
+        {
+          "name": "Goals & tests of progress",
+          "kind": "timeline",
+          "box": {
+            "x": 32,
+            "y": 2525.125,
+            "width": 383.5,
+            "height": 112,
+            "bottom": 2637.125,
+            "right": 415.5
+          },
+          "visible": false,
+          "words": 5
+        },
+        {
+          "name": "Strategic alternatives & trade-offs",
+          "kind": "timeline",
+          "box": {
+            "x": 418.5,
+            "y": 2525.125,
+            "width": 383.5,
+            "height": 112,
+            "bottom": 2637.125,
+            "right": 802
+          },
+          "visible": false,
+          "words": 4
+        }
+      ],
+      "tables": 0,
+      "words": 233,
+      "unavailableMentions": 0,
+      "articleCount": 10,
+      "url": "/enterprises/lloyds?stream=forces&focus=strategy"
+    },
+    "ipad-portrait:swot": {
+      "main": {
+        "x": 0,
+        "y": 207.5,
+        "width": 834,
+        "height": 882.71875,
+        "bottom": 1090.21875,
+        "right": 834
+      },
+      "viewport": {
+        "width": 834,
+        "height": 1194
+      },
+      "pageHeight": 1194,
+      "horizontalOverflow": false,
+      "clippedText": [],
+      "iconTitleBoxIntersections": [],
+      "markTitleBoxIntersections": [
+        {
+          "text": "Strength",
+          "mark": {
+            "x": 346,
+            "y": 404.421875,
+            "width": 42,
+            "height": 30,
+            "bottom": 434.421875,
+            "right": 388
+          },
+          "title": {
+            "x": 52,
+            "y": 400.421875,
+            "width": 338,
+            "height": 37.6875,
+            "bottom": 438.109375,
+            "right": 390
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Weakness",
+          "mark": {
+            "x": 738,
+            "y": 404.421875,
+            "width": 42,
+            "height": 30,
+            "bottom": 434.421875,
+            "right": 780
+          },
+          "title": {
+            "x": 444,
+            "y": 400.421875,
+            "width": 338,
+            "height": 37.6875,
+            "bottom": 438.109375,
+            "right": 782
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Opportunity",
+          "mark": {
+            "x": 346,
+            "y": 723.421875,
+            "width": 42,
+            "height": 30,
+            "bottom": 753.421875,
+            "right": 388
+          },
+          "title": {
+            "x": 52,
+            "y": 719.421875,
+            "width": 338,
+            "height": 37.6875,
+            "bottom": 757.109375,
+            "right": 390
+          },
+          "markPosition": "absolute"
+        },
+        {
+          "text": "Threat",
+          "mark": {
+            "x": 738,
+            "y": 723.421875,
+            "width": 42,
+            "height": 30,
+            "bottom": 753.421875,
+            "right": 780
+          },
+          "title": {
+            "x": 444,
+            "y": 719.421875,
+            "width": 338,
+            "height": 37.6875,
+            "bottom": 757.109375,
+            "right": 782
+          },
+          "markPosition": "absolute"
+        }
+      ],
+      "narrowLayerTitles": [],
+      "wrappedTitles": [],
+      "regions": [
+        {
+          "name": "Strength",
+          "kind": "quadrant",
+          "box": {
+            "x": 32,
+            "y": 373.421875,
+            "width": 378,
+            "height": 305,
+            "bottom": 678.421875,
+            "right": 410
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "existing AI capability",
+          "kind": "theme",
+          "box": {
+            "x": 48,
+            "y": 485.421875,
+            "width": 346,
+            "height": 86,
+            "bottom": 571.421875,
+            "right": 394
+          },
+          "visible": true,
+          "words": 3
+        },
+        {
+          "name": "deposit base",
+          "kind": "theme",
+          "box": {
+            "x": 48,
+            "y": 576.421875,
+            "width": 346,
+            "height": 86,
+            "bottom": 662.421875,
+            "right": 394
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "Weakness",
+          "kind": "quadrant",
+          "box": {
+            "x": 424,
+            "y": 373.421875,
+            "width": 378,
+            "height": 305,
+            "bottom": 678.421875,
+            "right": 802
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "migration exposure",
+          "kind": "theme",
+          "box": {
+            "x": 440,
+            "y": 485.421875,
+            "width": 346,
+            "height": 86,
+            "bottom": 571.421875,
+            "right": 786
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "benefit measurement",
+          "kind": "theme",
+          "box": {
+            "x": 440,
+            "y": 576.421875,
+            "width": 346,
+            "height": 86,
+            "bottom": 662.421875,
+            "right": 786
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "Opportunity",
+          "kind": "quadrant",
+          "box": {
+            "x": 32,
+            "y": 692.421875,
+            "width": 378,
+            "height": 305,
+            "bottom": 997.421875,
+            "right": 410
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "payments",
+          "kind": "theme",
+          "box": {
+            "x": 48,
+            "y": 804.421875,
+            "width": 346,
+            "height": 86,
+            "bottom": 890.421875,
+            "right": 394
+          },
+          "visible": true,
+          "words": 1
+        },
+        {
+          "name": "data-enabled service",
+          "kind": "theme",
+          "box": {
+            "x": 48,
+            "y": 895.421875,
+            "width": 346,
+            "height": 86,
+            "bottom": 981.421875,
+            "right": 394
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "Threat",
+          "kind": "quadrant",
+          "box": {
+            "x": 424,
+            "y": 692.421875,
+            "width": 378,
+            "height": 305,
+            "bottom": 997.421875,
+            "right": 802
+          },
+          "visible": true,
+          "words": 4
+        },
+        {
+          "name": "operating disruption",
+          "kind": "theme",
+          "box": {
+            "x": 440,
+            "y": 804.421875,
+            "width": 346,
+            "height": 86,
+            "bottom": 890.421875,
+            "right": 786
+          },
+          "visible": true,
+          "words": 2
+        },
+        {
+          "name": "cost of parallel running",
+          "kind": "theme",
+          "box": {
+            "x": 440,
+            "y": 895.421875,
+            "width": 346,
+            "height": 86,
+            "bottom": 981.421875,
+            "right": 786
+          },
+          "visible": true,
+          "words": 4
+        }
+      ],
+      "tables": 0,
+      "words": 67,
+      "unavailableMentions": 0,
+      "articleCount": 0,
+      "url": "/enterprises/lloyds?stream=forces&focus=analysis"
+    }
+  },
+  "files": {
+    "desktop-group.jpg": "4eb46b75e085c248e1ca46ec1e006f1231ed97f1039a239fe425c4d3b1acf104",
+    "desktop-group-annotated.jpg": "f2f07231384408ef25f64548ffbdb038a707b35043c4618d558ec7f68474d431",
+    "desktop-economics.jpg": "24db1b223334c67f3690322f8a9c699691590294a17696594f8fc6d49a9d8adb",
+    "desktop-economics-annotated.jpg": "ed27ef75a65a6ccbd16c774ed757ca019c429659b5ecb7d1f6625abf32c05eba",
+    "desktop-retail.jpg": "e269bf4e438650e5087b410b79cbb062690c7e057e48a8ffb919a8655cf6e05d",
+    "desktop-commercial.jpg": "e2e26b86e90a028e85b9a9a9913b5da9c6790594fe1125d0ea694b89464d10ed",
+    "desktop-commercial-annotated.jpg": "534e5c7f3d967f07870536b947ff3d66d8c85671364e0b3b86b8e3ea84177819",
+    "desktop-ipi.jpg": "c307b6dc188fc24756d134e2a257dd975ea26bfb499692743b558be697ffc95c",
+    "desktop-operations.jpg": "e27ae76b3af8a5115759ae9595d5f71ba3591eee00ee273c495dd458e6aefced",
+    "desktop-credit.jpg": "15c32beecf3cbad8446af296e6a80cb3cdcbf7d1eb1d725f602aa001f9e3008c",
+    "desktop-credit-annotated.jpg": "c344c59fa992870ca072d9072093e5856cee6ffa102e6279448b9e0cf1ebb231",
+    "desktop-capabilities.jpg": "a62acf157e009f6175397cea0e3cfc35f29ced259e64057b1d9f415dd2c4f092",
+    "desktop-applications.jpg": "8bb3fbd6a8ed4857d2dd062aa7757b7d5af5fd9052a916d5780bf19913eb97e9",
+    "desktop-partners.jpg": "886ad4d6e5f957f90196367996fcf125e0c1615f8f58637d9fe6383d08019065",
+    "desktop-programmes.jpg": "655c09017b45cf9545d5adac9083c6ebda3bf66ce0854d9cc0807982ec9c9b38",
+    "desktop-people.jpg": "8c4eed6bf6173956f164a270c87e06a287e894878d44f2d63b8422cd640a4f26",
+    "desktop-strategy.jpg": "3e5223ca1ef4ec7640cff3546f930755c2224df7688966cbb4186fe62fc46c8e",
+    "desktop-strategy-annotated.jpg": "509a25c3c675a55facdeb60afea9bc3b4d089d20322e230c62c5ca7c1c842c9a",
+    "desktop-markets.jpg": "c5b62a67de4beeb9f97f79911dafe2869e92839c22375fd9e73ee926f06d9064",
+    "desktop-resilience.jpg": "d3c58e01beef260c247fa45214c4f61ad316e54a121bae820ed926a2783da261",
+    "desktop-competition.jpg": "6f3e90cc5cd094594ee8dcbc653eabb20d88a1df1ec316769e8f9cdd6bf5d1dc",
+    "desktop-swot.jpg": "0e4d65f8c6bc8ba8ff993fec0c3ccdbec2f181bf4143c1b0c949fe9e36a05cbd",
+    "desktop-swot-annotated.jpg": "a46260949f08b67f74bd4f0987bbf1b40f1c377c22492a4c8d3fc25ce97f5aac",
+    "desktop-costs.jpg": "9b8c20cfe3d4e576d5d6e3f7d33e314ef31a1ac78bd786e8299a28f73775a056",
+    "desktop-capital.jpg": "f4f1ee1d155fadda56f28fb9b9242c35d6ae8d933b556b7c9c59d01637ff8be3",
+    "desktop-credit-layer.jpg": "f7686ed1aaa0660f5af1536439ccee14d3fe92188f5aa5d00c048127cf57eb6f",
+    "desktop-credit-layer-annotated.jpg": "d46d01761a067d1a940e247029a4fc29cbbe9b8de730c27a3c52f8c25f27a819",
+    "print-economics.pdf": "a29c7ded2504e16c5ca69478f5e88ae77d0e64d7ceebaa8e2ddbe29d16201bee",
+    "print-economics-page1.jpg": "681c32706cf157b21a193fb926bf8d2375fd2e608526a881dce1559377c47010",
+    "print-credit.pdf": "1b3620dc99122e758ec1a4a65ae08b869c393a679aabf1abf69ee7fe5524b850",
+    "print-credit-page1.jpg": "55d31534da3aa95ab1a84cb0a55f49fed37023bd18ea30e4af40e5347cd23e16",
+    "print-strategy.pdf": "fd47187e1fbd4c6e2f6b83fd34a9a5d5ac67927d7c5f14e5c4cb439c64079075",
+    "print-strategy-page1.jpg": "deb111d7304f904ea2b8f33c3c5cb2ffd6286bc7022b98d92fbc744515c2aea8",
+    "ipad-landscape-group.jpg": "b13c597eb5e965c1f6da29336e09caf6c9563ce0fbb5c825e6f954eabfcedd80",
+    "ipad-landscape-economics.jpg": "2db7f79bcaf6119a1e6d7c21b547008d3b130107c7f47d6f8bde260130f0173b",
+    "ipad-landscape-economics-annotated.jpg": "3cb27ebe5844a809a8c866c717a51b65b015dd619643f4f0d1aadf0455c4a672",
+    "ipad-landscape-commercial.jpg": "7b87a65676479715c530af0cf62e71471b20e64396f13b1a2c769522a69dda38",
+    "ipad-landscape-credit.jpg": "380fa2ac9f7c9feda794433e8958e4198a59a782bce7b2dfc7b3b473a531c183",
+    "ipad-landscape-credit-annotated.jpg": "da9ceee8e5f7484a6068e945fe757c220523e959dd0d0f101d121fddee5c8329",
+    "ipad-landscape-capabilities.jpg": "85bbed51e92831f285c2fa2460764932d5d8781daac07d5203ee302a84ef7a80",
+    "ipad-landscape-strategy.jpg": "203fb2d9b05b32855d45c9af0f267821741df5e80c671b7dbe30516407a9454a",
+    "ipad-landscape-swot.jpg": "acce93af6f959a4940d2f06ce9db4965c98b5f18c05748a5d842b3791e79a448",
+    "ipad-landscape-swot-annotated.jpg": "db862ddef8ca1255bf918bc50e1eb12a2cf3f1cb6acad53dc729b6234a73725a",
+    "ipad-landscape-credit-layer.jpg": "a96abc536ebbabd85830f09830fc8ff6ddec1a5ceef608ebfeb744ee96453413",
+    "ipad-landscape-credit-layer-annotated.jpg": "d0b81acb1613768db9fcc23a6d3682e1a4ef1a76b4da323849d4425c9f458c45",
+    "ipad-portrait-group.jpg": "e0b8ae0faa509e2be9ddee71ab44f0e63c2b829d057072ea47c8422976bba248",
+    "ipad-portrait-economics.jpg": "f9e0e16fc477ae1002bb6ce3fa4bd9b91967dbae1eb9d0fb86bbb820ab2c6fed",
+    "ipad-portrait-economics-annotated.jpg": "7f6ad655b8a1d43740d1852a31c72cac4ebb06aed723ea823b6afa0f9d809d92",
+    "ipad-portrait-commercial.jpg": "be54246c72a0bdfaeab8814a1caea152c6e5723da73c1c94345ff3394484df6e",
+    "ipad-portrait-credit.jpg": "18eee979ba5c1e09090f980a1677c6ecf5d785252ff8bfcf739868f43e2012fd",
+    "ipad-portrait-credit-annotated.jpg": "72c287ad00edbb7fca6ee6557f7d9e4848c80ddf422d9f0efb9238b02eee6495",
+    "ipad-portrait-capabilities.jpg": "202c22de99dc875ef9d85c4da0d932dd03b24584b754d750864833a69bd8c070",
+    "ipad-portrait-strategy.jpg": "e936d23f38d6d0d9a2bac16749016851d59be14c31fa9cac23df8b7497895229",
+    "ipad-portrait-swot.jpg": "948c1dcf0fb988f575c6d91434cd7a131273fc47cbc6d196e1d7639e29a6b25c",
+    "ipad-portrait-swot-annotated.jpg": "205793323ec2b1579a86027e518f0da129e90c33cc145a3e6f7bb4dd3d3c55ae",
+    "ipad-portrait-credit-layer.jpg": "beb8a4f469ecacd46dbb854b8058454aced44884a0ee19b5639bf233d6328b61",
+    "ipad-portrait-credit-layer-annotated.jpg": "71f944e31e337a7431ae4a4dc871ddb34599e32b8c6a9586204ed5a9df302161"
+  },
+  "pdf": {
+    "economics": {
+      "pages": 3,
+      "text_per_page": [
+        779,
+        993,
+        63
+      ],
+      "media": "Chromium A4 print, default app CSS; no print repair",
+      "legal_boundary": "FLORA application output, not issuer documents or tables"
+    },
+    "credit": {
+      "pages": 3,
+      "text_per_page": [
+        667,
+        554,
+        509
+      ],
+      "media": "Chromium A4 print, default app CSS; no print repair",
+      "legal_boundary": "FLORA application output, not issuer documents or tables"
+    },
+    "strategy": {
+      "pages": 3,
+      "text_per_page": [
+        535,
+        615,
+        630
+      ],
+      "media": "Chromium A4 print, default app CSS; no print repair",
+      "legal_boundary": "FLORA application output, not issuer documents or tables"
+    }
+  },
+  "live_probe": {
+    "status": "unavailable from execution network",
+    "class": "URLError",
+    "limitation": "Render deployment API independently verifies the code SHA; no live DOM or live rendering claim"
+  },
+  "runtime_errors": [],
+  "geometry_limit": "Box intersection is a candidate defect, not proof of visible glyph collision. Title wrapping and vertical scrolling are measured separately, not automatically defects."
+}
