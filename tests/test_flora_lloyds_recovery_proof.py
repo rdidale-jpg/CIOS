@@ -175,3 +175,32 @@ def test_bad_source_bindings_never_become_candidates(case, mutation):
     assert len(result['records']) == (2 if mutation == 'scope' else 0)
     if mutation == 'scope':
         assert all(r['payload'].get('statement') != source['claims'][0]['statement'] for r in result['records'])
+
+
+@pytest.mark.parametrize('corruption', [None, 'head', 'runtime', 'withdrawal', 'touch', 'screenshot'])
+def test_current_browser_evidence_checker_rejects_invalid_bindings(tmp_path, corruption):
+    """Checker unit inputs; NOT a claim that this test ran a real browser."""
+    import importlib.util
+    import subprocess
+    from hashlib import sha256
+    path = Path('docs/research/lloyds-intelligence-recovery/check_canvas_browser.py')
+    spec = importlib.util.spec_from_file_location('recovery_canvas_check', path)
+    checker = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(checker)
+    # Reuse the historical metadata shape, explicitly rebind this unit input to
+    # HEAD and one test byte-string. Actual hosted evidence is produced by the
+    # unchanged browser runner, not by this unit fixture.
+    proof = json.loads(Path('docs/product/flora-experience/main-canvas/Browser-after.json').read_text())
+    proof['sha'] = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+    (tmp_path / 'unit-only.jpg').write_bytes(b'checker-unit-input-not-a-browser-capture')
+    proof['screenshots'] = {'unit-only.jpg': sha256((tmp_path / 'unit-only.jpg').read_bytes()).hexdigest()}
+    if corruption == 'head': proof['sha'] = '0' * 40
+    elif corruption == 'runtime': proof['runtime_hashes'][next(iter(proof['runtime_hashes']))] = '0' * 64
+    elif corruption == 'withdrawal': proof['withdrawal_history_reload_print_accessibility'] = False
+    elif corruption == 'touch': proof['devices'][0]['physical_hits'] = False
+    elif corruption == 'screenshot': proof['screenshots']['unit-only.jpg'] = '0' * 64
+    (tmp_path / 'Browser-after.json').write_text(json.dumps(proof))
+    if corruption is None:
+        assert checker.check(tmp_path)['passed']
+    else:
+        with pytest.raises(AssertionError): checker.check(tmp_path)

@@ -22,9 +22,9 @@ python docs/research/lloyds-intelligence-recovery/validate.py --output /tmp/flor
 
 The existing CI gate enforces all **388 strict security tests**, approved failure/skip signatures and integrity comparisons without baseline changes. Full regression success means the comparator passes: it does not turn approved inherited failures into passing assertions. Exact-head local and hosted results are linked in the PR and completion comment; do not infer deployment from them.
 
-The only existing-file edit adds this proof and its path triggers to the existing verified Factory workflow. That workflow also runs its existing Source-revision-withdrawal regression and existing desktop / both-iPad browser proof. No workflow permissions, comparator or security tests are changed. No new approval service or deployment job is introduced. Existing fixture authentication is never installed in strict real-security-boundary tests.
+One existing workflow edit adds this proof and its path triggers to the verified Factory workflow. That workflow also runs its existing Source-revision-withdrawal regression and existing desktop / both-iPad browser proof. No workflow permissions, comparator or security tests are changed. No new approval service or deployment job is introduced. Existing fixture authentication is never installed in strict real-security-boundary tests.
 
-`validate.py` reconstructs all four generated manifests from immutable refs, checks original-record/rights/identity distinctions, all 21 backlog dispositions, eight unchanged proposal fingerprints, 13 Decimal reconciliations, local links and exact changed-file scope. It verifies every original file outside the one additive CI workflow is byte-identical. Original artwork, source ownership, Financial policy, runtime routes, canonical files and Pipeline controls therefore remain unchanged.
+`validate.py` reconstructs all four generated manifests from immutable refs, checks original-record/rights/identity distinctions, all 21 backlog dispositions, eight unchanged proposal fingerprints, 13 Decimal reconciliations, local links and exact changed-file scope. It verifies every original file outside the two explicitly bounded CI workflow edits is byte-identical. Original artwork, source ownership, Financial policy, runtime routes, canonical files and Pipeline controls therefore remain unchanged.
 
 ## Rollback proof
 
@@ -39,3 +39,11 @@ The proof establishes integration under test authority, not new original-source 
 The recovery selects explanatory material rather than reproducing financial tables. The 362-record denominator is package identity, not semantic or enterprise completeness. Source metadata has repeated originals and aliases, not 100 independent verified sources. Historical rights labels are retained as evidence of prior status, not new legal conclusions.
 
 No new desktop/iPad designs or captures are commissioned here. The accepted audit's diagnostic captures remain evidence for the deferred 65px defect. Existing browser regression covers unchanged route/source behavior; it is not final owner visual acceptance. Production canonical/private status remains UNKNOWN.
+
+## Unexpected hosted CI issue and bounded repair
+
+At the first candidate, Economics workflow run `45880997175` produced passing current-head CEO and Main Canvas browser captures but failed `main-canvas/validate.py:15`. That historical #733 auditor compares the entire current branch diff with #733's frozen `Changed-Files.txt`; any later recovery/audit files violate that exact historical scope. This was an audit-context error, not a changed runtime rendering assertion.
+
+The original validator and frozen inventory are unchanged. Economics CI now runs that full historical audit at approved #733 merge `3a4c7e0f6ad81af7ef32ed477a1a584ac2efae87`, matching its existing Gold/CEO audit pattern. It passed locally there: 89 historical files, 73 retained captures, 183 research files and 51 artwork files unchanged, exact reverse-tree rollback to `b876adc82e72347b7a563a4bdec0a96c9ff22725`.
+
+Fresh candidate browser execution remains at current HEAD. `check_canvas_browser.py` separately enforces current SHA, actual runtime hashes, screenshot hashes, four devices, physical targets, no overflow/errors, canvas interaction audits, no-JavaScript and withdrawal/history/reload/print/accessibility proof. Six checker unit cases include stale-head, wrong-runtime, withdrawal, touch and screenshot corruption; these are labelled metadata fixtures, not fabricated browser captures. No security/failure comparator or original audit assertion is relaxed. Final exact-head CI reruns cover the corrected workflow.

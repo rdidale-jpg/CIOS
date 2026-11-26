@@ -2,7 +2,7 @@
 
 ## Outcome
 
-The accepted audit #734 is integrated at `0a6423fe3a32d0a0d5d11fe9d7027859e94c6df7`, preserving its approved tree. This separate draft recovers retained Lloyds intelligence and proves two existing-owner model/projection paths under isolated test authority. Nothing new is deployed, publicly admitted or written to production/canonical stores. Exact candidate SHA and final hosted links are recorded in the draft PR's completion evidence to avoid a self-referential commit hash in committed files.
+The accepted audit #734 is integrated at `0a6423fe3a32d0a0d5d11fe9d7027859e94c6df7`, preserving its approved tree. This separate draft recovers retained Lloyds intelligence and proves two existing-owner model/projection paths under isolated test authority. Nothing new is deployed, publicly admitted or written to production/canonical stores. The initial hosted run exposed a frozen #733 audit being applied to the current recovery scope. CI now separates that unchanged historical audit from current-head browser evidence, following the existing Gold/CEO pattern. Exact candidate SHA and final hosted links are recorded in the draft PR's completion evidence to avoid a self-referential commit hash in committed files.
 
 ## What had already been built
 

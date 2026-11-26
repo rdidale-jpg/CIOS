@@ -14,6 +14,7 @@ from recover import BASE, HERE, ROOT, build
 PREFIX = str(HERE.relative_to(ROOT)) + '/'
 TEST = 'tests/test_flora_lloyds_recovery_proof.py'
 WORKFLOW = '.github/workflows/flora-verified-factory.yml'
+ECONOMICS = '.github/workflows/flora-enterprise-economics-a1.yml'
 
 
 def git(*args, env=None):
@@ -47,7 +48,7 @@ def validate():
         assert proof['recovered_assertions'] == 2 and proof['repeat'] == 'repeat_no_change'
     changed = set(git('diff', '--name-only', BASE).decode().splitlines())
     changed |= set(git('ls-files', '--others', '--exclude-standard').decode().splitlines())
-    assert changed and all(p.startswith(PREFIX) or p in {TEST, WORKFLOW} for p in changed), changed
+    assert changed and all(p.startswith(PREFIX) or p in {TEST, WORKFLOW, ECONOMICS} for p in changed), changed
     assert sorted(changed) == (HERE / 'File-Inventory.txt').read_text().splitlines()
     original = git('show', BASE + ':' + WORKFLOW).decode()
     original = original.replace("      - 'docs/research/initial-factory/verified/**'\n",
@@ -57,10 +58,18 @@ def validate():
     original = original.replace(' tests/test_flora_blueprint_import_promotion.py\n',
         ' tests/test_flora_blueprint_import_promotion.py tests/test_flora_lloyds_recovery_proof.py\n')
     assert (ROOT / WORKFLOW).read_text() == original
+    economics = git('show', BASE + ':' + ECONOMICS).decode().replace(
+        '          python docs/product/flora-experience/main-canvas/validate.py --browser "$RUNNER_TEMP/canvas-browser"',
+        '          python docs/research/lloyds-intelligence-recovery/check_canvas_browser.py "$RUNNER_TEMP/canvas-browser"\n'
+        '          # Keep the original #733 scope/hash/rollback audit on its approved cut.\n'
+        '          git worktree add --detach "$RUNNER_TEMP/canvas-approved-cut" 3a4c7e0f6ad81af7ef32ed477a1a584ac2efae87\n'
+        '          cd "$RUNNER_TEMP/canvas-approved-cut"\n'
+        '          python docs/product/flora-experience/main-canvas/validate.py')
+    assert (ROOT / ECONOMICS).read_text() == economics
     # Exact byte preservation of runtime, canonical artifacts, security,
     # artwork and all original historical research via Git's complete tree diff.
     assert not git('diff', '--name-only', BASE, '--', '.', ':(exclude)' + PREFIX,
-                   ':(exclude)' + TEST, ':(exclude)' + WORKFLOW).strip()
+                   ':(exclude)' + TEST, ':(exclude)' + WORKFLOW, ':(exclude)' + ECONOMICS).strip()
     links = 0
     for path in HERE.glob('*.md'):
         for target in re.findall(r'\]\(([^)]+)\)', path.read_text()):
