@@ -1,0 +1,15 @@
+docs/research/lloyds-verified-intelligence/Commercial-Examples.md
+docs/research/lloyds-verified-intelligence/Crosswalk-Review.json
+docs/research/lloyds-verified-intelligence/File-Inventory.txt
+docs/research/lloyds-verified-intelligence/Integration-Readiness.md
+docs/research/lloyds-verified-intelligence/Journey-Status.json
+docs/research/lloyds-verified-intelligence/Note-Disposition.json
+docs/research/lloyds-verified-intelligence/PR735-Review.md
+docs/research/lloyds-verified-intelligence/Presentation-Specification.md
+docs/research/lloyds-verified-intelligence/README.md
+docs/research/lloyds-verified-intelligence/Source-Inspection.json
+docs/research/lloyds-verified-intelligence/Source-and-Authority.md
+docs/research/lloyds-verified-intelligence/Validation.md
+docs/research/lloyds-verified-intelligence/review.py
+docs/research/lloyds-verified-intelligence/test_verification.py
+docs/research/lloyds-verified-intelligence/validate.py

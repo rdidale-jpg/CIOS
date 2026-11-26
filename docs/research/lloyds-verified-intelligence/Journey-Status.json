@@ -1,0 +1,40 @@
+{
+  "input_sha": "c7122f89f56871685772767eab207fd93b7550ce",
+  "journeys": [
+    {
+      "id": "transaction-banking",
+      "primary_review_ref": "CONDON",
+      "publication_date": "2026-11-18",
+      "entity": "Lloyds Banking Group plc; CIB organisational scope",
+      "support": "Issuer text supports appointment, remit and reported Condon-to-Langley relationship",
+      "original_bytes_sha256": null,
+      "existing_acquisition": "tools.research.verified_factory_proof.prepare_finding",
+      "state": "blocked_before_acquisition_and_staging",
+      "blockers": ["publisher_byte_capture_unavailable", "source_use_scope_unresolved", "real_canonical_workspace_acl_binding_unavailable"],
+      "candidate_evidence_created": false,
+      "new_canonical_acceptance": false,
+      "production_activation": false
+    },
+    {
+      "id": "envoy",
+      "primary_review_ref": "ENVOY-HTML",
+      "publication_date": "2026-05-01",
+      "entity": "Lloyds Banking Group plc; internal platform disclosure",
+      "support": "Issuer text supports platform and Google Cloud collaboration; dated fraud use reviewed separately",
+      "original_bytes_sha256": null,
+      "existing_acquisition": "tools.research.verified_factory_proof.prepare_finding",
+      "state": "blocked_before_acquisition_and_staging",
+      "blockers": ["publisher_byte_capture_unavailable", "source_use_scope_unresolved", "real_canonical_workspace_acl_binding_unavailable"],
+      "candidate_evidence_created": false,
+      "new_canonical_acceptance": false,
+      "production_activation": false
+    }
+  ],
+  "production_mutations": 0,
+  "pipeline_mutations": 0,
+  "new_financial_runs": 0,
+  "source_permission_changes": 0,
+  "section_2_output_active": false,
+  "section_5_pdf_links_active": false,
+  "limit": "No new positive genuine-byte-bound journey is claimed. Existing isolated controls are separate regression evidence."
+}
