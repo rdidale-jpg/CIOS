@@ -1,0 +1,1281 @@
+{
+  "baseline": "0a6423fe3a32d0a0d5d11fe9d7027859e94c6df7",
+  "authority": "Research recovery only; no new verified facts or admissions",
+  "records": [
+    {
+      "id": "REC-TIER-F01",
+      "original_refs": [
+        "TIER:F01"
+      ],
+      "entity": "Lloyds Bank plc",
+      "period": "2026-11-22",
+      "semantic_type": "Reported candidate",
+      "statement": "Lloyds Bank plc is registered as 00002065 and lists Lloyds Banking Group plc as active PSC.",
+      "source_refs": [
+        "TIER:ch-bank",
+        "TIER:ch-psc"
+      ],
+      "source_locator": "Company overview and active PSC",
+      "retained_verification": "register-observed",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "eligible for consideration",
+      "caveat": "PSC designation does not describe the entire Group perimeter.",
+      "record_sha256": "17cf68329979b5a4ca49dd4749c7c9fb5e1d52f5c1739904d0f402ae81dca922",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F02",
+      "original_refs": [
+        "TIER:F02"
+      ],
+      "entity": "HBOS plc",
+      "period": "2026-11-22",
+      "semantic_type": "Reported candidate",
+      "statement": "HBOS plc SC218813 lists Lloyds Bank plc as active PSC.",
+      "source_refs": [
+        "TIER:ch-hbos"
+      ],
+      "source_locator": "Active PSC entry",
+      "retained_verification": "register-observed",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "eligible for consideration",
+      "caveat": "Do not infer other ownership links from this entry.",
+      "record_sha256": "5fe1751a1d095419efddb351aa5d9c77896f7d0dd589ac42daf79be31716382b",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F03A",
+      "original_refs": [
+        "TIER:F03A"
+      ],
+      "entity": "Scottish Widows Limited",
+      "period": "2026-11-22",
+      "semantic_type": "Reported candidate",
+      "statement": "Scottish Widows Limited is registered at Companies House as company 03196171.",
+      "source_refs": [
+        "TIER:ch-widows"
+      ],
+      "source_locator": "Company overview and number",
+      "retained_verification": "register-observed",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "corrected eligible for consideration",
+      "caveat": "Registered identity only. No trading-history inference.",
+      "record_sha256": "ccb2681ac1f48f6d904c67a84690a17d24fa4b92d0ce8ab2f741be6163641420",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F03B",
+      "original_refs": [
+        "TIER:F03B"
+      ],
+      "entity": "Scottish Widows Limited",
+      "period": "1996-05-02 to 2015-12-31",
+      "semantic_type": "Reported candidate",
+      "statement": "The company now registered as Scottish Widows Limited held the registered name Clerical Medical Investment Group Limited from 2 May 1996 to 31 December 2015.",
+      "source_refs": [
+        "TIER:ch-widows"
+      ],
+      "source_locator": "Previous company names",
+      "retained_verification": "registered-name-history",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "corrected eligible for consideration",
+      "caveat": "Registered identity only. No trading-history inference.",
+      "record_sha256": "1ed31e1a697e1e9f5262cabb60aaa8f798d2806b64873e2d98b35900c8a8bfa3",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F04",
+      "original_refs": [
+        "TIER:F04"
+      ],
+      "entity": "Scottish Widows Master Trust",
+      "period": "2026-11-22",
+      "semantic_type": "Reported candidate",
+      "statement": "Scottish Widows Master Trust appears on the authorised list and was added on 6 May 2026 to the guidance list of providers open to enquiries from smaller defined-contribution schemes.",
+      "source_refs": [
+        "TIER:tpr",
+        "TIER:tpr-transfer"
+      ],
+      "source_locator": "Authorised list and list of trusts open to smaller-scheme enquiries",
+      "retained_verification": "regulator-observed",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "eligible for consideration",
+      "caveat": "Observed authorisation listing as of 22 November 2026. 6 May 2026 is the guidance inclusion date only. No scheme asset, volume or conversion measure.",
+      "record_sha256": "fe3a6ec9d3c49498546e8718a426184833580f1075f7c2f1c5f194c4411b8efd",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F05A",
+      "original_refs": [
+        "TIER:F05A"
+      ],
+      "entity": "Lloyds Banking Group plc, Business & Commercial Banking",
+      "period": "2026-02",
+      "semantic_type": "Reported candidate",
+      "statement": "Amanda Murphy joined the Group as CEO of Business & Commercial Banking in February 2026.",
+      "source_refs": [
+        "TIER:lbg-exco"
+      ],
+      "source_locator": "Amanda Murphy biography",
+      "retained_verification": "reported-role-start",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Appointment disclosure or stated role start only. Morton effective date and delegation unresolved.",
+      "record_sha256": "3289524b5c0615fabb7871e72dc0bc646db66d49de2fb8a5cf88db2ac207fc5e",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F05B",
+      "original_refs": [
+        "TIER:F05B"
+      ],
+      "entity": "Lloyds Banking Group plc, SME banking",
+      "period": "2026-08-12",
+      "semantic_type": "Reported candidate",
+      "statement": "Lloyds announced Fiamma Morton as Managing Director for SME banking.",
+      "source_refs": [
+        "TIER:lbg-morton"
+      ],
+      "source_locator": "12 August SME banking appointment announcement",
+      "retained_verification": "reported-appointment-announcement",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Appointment disclosure or stated role start only. Morton effective date and delegation unresolved.",
+      "record_sha256": "90debee1d3637b34026d23d07b62eeaea866160b94753806872487df258c00de",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F06A",
+      "original_refs": [
+        "TIER:F06A"
+      ],
+      "entity": "Lloyds Banking Group plc, Corporate & Institutional Banking",
+      "period": "2026-03",
+      "semantic_type": "Reported candidate",
+      "statement": "John Langley joined the Group as Corporate & Institutional Banking CEO in March 2026.",
+      "source_refs": [
+        "TIER:lbg-exco"
+      ],
+      "source_locator": "John Langley biography",
+      "retained_verification": "reported-role-start",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Role or published remit only. Condon effective date and delegated authority unresolved.",
+      "record_sha256": "2d2e09a675849858c8770b5fc890f09e21aa341ea2a5051b3994667b82460aba",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F06B",
+      "original_refs": [
+        "TIER:F06B"
+      ],
+      "entity": "Lloyds Banking Group plc, CIB Transaction Banking",
+      "period": "2026-11-18",
+      "semantic_type": "Reported candidate",
+      "statement": "Lloyds announced Natasha Condon as Global Head of Transaction Banking in CIB on 18 November 2026, with a functional remit covering cash, trade, working capital and payments.",
+      "source_refs": [
+        "TIER:lbg-condon"
+      ],
+      "source_locator": "18 November appointment announcement",
+      "retained_verification": "reported-appointment-announcement",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Role or published remit only. Condon effective date and delegated authority unresolved.",
+      "record_sha256": "fea8515ebd54e1ffedb32f0bebe6bb6807dd0f056f0e9a99e5f7d4f963bba60f",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F07",
+      "original_refs": [
+        "TIER:F07"
+      ],
+      "entity": "Lloyds Banking Group plc, Connected Finance",
+      "period": "2026-10",
+      "semantic_type": "Reported candidate",
+      "statement": "Nick Williams was appointed CEO of Connected Finance in October 2026. The unit brings together transport, European retail banking and embedded finance businesses.",
+      "source_refs": [
+        "TIER:lbg-exco"
+      ],
+      "source_locator": "Nick Williams biography",
+      "retained_verification": "issuer-reported",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Organisational grouping does not establish reporting-segment restatement.",
+      "record_sha256": "e62d7cbcdd6f0063e4dcf8db6f02ff2d4ee16ace6deac106a8f19db02bab6268",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F08A",
+      "original_refs": [
+        "TIER:F08A"
+      ],
+      "entity": "Lloyds Banking Group plc, IP&I",
+      "period": "2026-11-22",
+      "semantic_type": "Reported candidate",
+      "statement": "The Group roster lists Chirantan Barua as CEO of Insurance, Pensions and Investments.",
+      "source_refs": [
+        "TIER:lbg-exco"
+      ],
+      "source_locator": "Chirantan Barua biography",
+      "retained_verification": "role-roster-observation",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Observed role or appointment disclosure. Effective appointment date and delegated authority unresolved.",
+      "record_sha256": "7312e7e038af47c3665155f6805fd3809ae36b88fc6f5c49513a9e93dc4a9b16",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F08B",
+      "original_refs": [
+        "TIER:F08B"
+      ],
+      "entity": "Lloyds Banking Group plc, investment management remit",
+      "period": "2025-12-10",
+      "semantic_type": "Reported candidate",
+      "statement": "On 10 December 2025 the Group announced Peter Fitzgerald as Chief Investment Officer with an investment strategy and fund-management remit spanning Scottish Widows and Schroders Personal Wealth.",
+      "source_refs": [
+        "TIER:lbg-fit"
+      ],
+      "source_locator": "Chief Investment Officer appointment and remit",
+      "retained_verification": "reported-appointment-announcement",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Observed role or appointment disclosure. Effective appointment date and delegated authority unresolved.",
+      "record_sha256": "043e7f3cde62160d190eced38461cb7f433015e8a4bf74dc3b0bfa4970e33362",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F08C",
+      "original_refs": [
+        "TIER:F08C"
+      ],
+      "entity": "Scottish Widows, issuer role label",
+      "period": "2026-11-22",
+      "semantic_type": "Reported candidate",
+      "statement": "The Group roster lists Chirantan Barua as CEO of Scottish Widows.",
+      "source_refs": [
+        "TIER:lbg-exco"
+      ],
+      "source_locator": "Chirantan Barua biography",
+      "retained_verification": "role-roster-observation",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Observed role or appointment disclosure. Effective appointment date and delegated authority unresolved.",
+      "record_sha256": "a0e3d3987812833085d9b06fa39762c0eb7c0de1a0f245933553dd52171b21f7",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F09",
+      "original_refs": [
+        "TIER:F09"
+      ],
+      "entity": "Lloyds Banking Group plc",
+      "period": "2026-09",
+      "semantic_type": "Reported candidate",
+      "statement": "Javier Rodríguez de Colmenares joined as Group Chief Risk Officer in September 2026.",
+      "source_refs": [
+        "TIER:lbg-exco"
+      ],
+      "source_locator": "Javier Rodríguez de Colmenares biography",
+      "retained_verification": "issuer-reported",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Programme-level delegated controls remain unverified.",
+      "record_sha256": "87b9efe7194340e3a0d5dbd663444a575ee7a72ab397c3b874cf80e8ab81d033",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F10A",
+      "original_refs": [
+        "TIER:F10A"
+      ],
+      "entity": "Lloyds Banking Group plc",
+      "period": "2026",
+      "semantic_type": "Reported candidate",
+      "statement": "Lloyds targeted more than 1,000 roles for its 2026 AI build-out.",
+      "source_refs": [
+        "TIER:lbg-skills"
+      ],
+      "source_locator": "22 June announcement, role target for 2026",
+      "retained_verification": "issuer-plan",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "A target or announced pathway, with hiring, incremental FTE and realised benefits unresolved.",
+      "record_sha256": "21f331b6c9ecb2a9403ec0d96e1d9bb47f40999a19aa40945b2eadbabeef894d",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F10B",
+      "original_refs": [
+        "TIER:F10B"
+      ],
+      "entity": "Lloyds Banking Group plc",
+      "period": "2026-06-22",
+      "semantic_type": "Reported candidate",
+      "statement": "Lloyds announced a Level 6 AI engineering apprenticeship pathway.",
+      "source_refs": [
+        "TIER:lbg-skills"
+      ],
+      "source_locator": "22 June announcement, apprenticeship pathway",
+      "retained_verification": "issuer-plan",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "A target or announced pathway, with hiring, incremental FTE and realised benefits unresolved.",
+      "record_sha256": "f2a9c26df9458b9b06829e2155c0e4bb973fda6bd52ab509601556b5d7be2057",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F11A",
+      "original_refs": [
+        "TIER:F11A"
+      ],
+      "entity": "Lloyds Banking Group plc, colleague productivity estate",
+      "period": "2026-06-04",
+      "semantic_type": "Reported candidate",
+      "statement": "Lloyds and Microsoft reported a company-wide Microsoft 365 E7 rollout scope.",
+      "source_refs": [
+        "TIER:lbg-ms",
+        "TIER:ms-e7"
+      ],
+      "source_locator": "4 June Frontier Suite deployment announcements",
+      "retained_verification": "reported-rollout-scope",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Party-reported scope. Actual install coverage, adoption, delegated buying authority, commercial terms and hosting remain unresolved.",
+      "record_sha256": "237e3d8bdababd89fe035b133468cfb443ff97c502eac06aca54c57de1d51376",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F11B",
+      "original_refs": [
+        "TIER:F11B"
+      ],
+      "entity": "Lloyds Banking Group plc, GitHub Copilot",
+      "period": "2026-06-04",
+      "semantic_type": "Reported candidate",
+      "statement": "Microsoft reported that the agreement announced on 4 June 2026 extends the Group’s use of GitHub Copilot.",
+      "source_refs": [
+        "TIER:ms-e7"
+      ],
+      "source_locator": "GitHub Copilot extension paragraph",
+      "retained_verification": "supplier-reported-agreement",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Party-reported scope. Actual install coverage, adoption, delegated buying authority, commercial terms and hosting remain unresolved.",
+      "record_sha256": "e34a9f499c3aff9146720cadec1ec1c6706f3cb9a64b8ab55bd284443b58d406",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F12",
+      "original_refs": [
+        "TIER:F12"
+      ],
+      "entity": "Lloyds Banking Group plc, sourcing process",
+      "period": "2026-11-22",
+      "semantic_type": "Reported candidate",
+      "statement": "Group guidance requires enrolment in its Ariba Network process for supplier or sourcing participation.",
+      "source_refs": [
+        "TIER:lbg-ariba"
+      ],
+      "source_locator": "Supplier registration and participation FAQ",
+      "retained_verification": "issuer-reported",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Enrolment is a process requirement and gives no access to a particular tender.",
+      "record_sha256": "649d39a6b9cc1a1f24a6ce7ea927e6daa8753123e2c1f8cfe14069eb65440fe8",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F13",
+      "original_refs": [
+        "TIER:F13"
+      ],
+      "entity": "Scottish Widows protection claims and underwriting",
+      "period": "2025-06-05",
+      "semantic_type": "Reported candidate",
+      "statement": "Scottish Widows publicly described a trial with Sprout.ai for life and critical-illness claims and underwriting automation.",
+      "source_refs": [
+        "TIER:lbg-sprout"
+      ],
+      "source_locator": "Trial and process description",
+      "retained_verification": "historical-trial",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Trial evidence establishes neither production status nor supplier terms, realised speed or replacement.",
+      "record_sha256": "65cfecea05abd39f860e0c88b410ea3a7d65f409b84b654f0746c46f69bb1789",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F14A",
+      "original_refs": [
+        "TIER:F14A"
+      ],
+      "entity": "Scottish Widows, FCA participant label",
+      "period": "2026-04-21",
+      "semantic_type": "Reported candidate",
+      "statement": "The FCA’s 21 April 2026 release identifies Scottish Widows as a participant in the first AI Live Testing cohort.",
+      "source_refs": [
+        "TIER:fca-ai"
+      ],
+      "source_locator": "First cohort, notes to editors",
+      "retained_verification": "retrospective-citation",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "corrected eligible for consideration",
+      "caveat": "Selection or retrospective disclosure. Exact legal entity, use case and results remain unresolved.",
+      "record_sha256": "260eff937935159f21885677c221c07e70e647d0abb3917e457d63a2d353a05a",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F14B",
+      "original_refs": [
+        "TIER:F14B"
+      ],
+      "entity": "Lloyds Banking Group (Scottish Widows), FCA participant label",
+      "period": "2026-04-21",
+      "semantic_type": "Reported candidate",
+      "statement": "On 21 April 2026 the FCA announced Lloyds Banking Group (Scottish Widows) among those selected for its second AI Live Testing cohort.",
+      "source_refs": [
+        "TIER:fca-ai"
+      ],
+      "source_locator": "Second cohort selection and participant list",
+      "retained_verification": "selection-announcement",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "corrected eligible for consideration",
+      "caveat": "Selection or retrospective disclosure. Exact legal entity, use case and results remain unresolved.",
+      "record_sha256": "e5d7622d43bfaa6f196296829faeb72b603f0a30c806012d96b61f2ee85c4dd8",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F15",
+      "original_refs": [
+        "TIER:F15"
+      ],
+      "entity": "Scottish Widows, FCA participant name",
+      "period": "2026-07-22",
+      "semantic_type": "Reported candidate",
+      "statement": "The FCA separately announced Scottish Widows among the second Supercharged Sandbox cohort.",
+      "source_refs": [
+        "TIER:fca-sandbox"
+      ],
+      "source_locator": "Second-cohort participants",
+      "retained_verification": "regulator-reported",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "eligible for consideration",
+      "caveat": "Separate programme from AI Live Testing. Participation establishes no live-market adoption.",
+      "record_sha256": "5e12fd3a60ecaa3b24e8b26af0cd6fc97900d13b172e3758ce5af9b02c7ca448",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F16",
+      "original_refs": [
+        "TIER:F16"
+      ],
+      "entity": "Lloyds Bank plc as supplier",
+      "period": "2026-11-22",
+      "semantic_type": "Reported candidate",
+      "statement": "The Government Commercial Agency lists Lloyds Bank plc against RM6325 Payment Acceptance Services.",
+      "source_refs": [
+        "TIER:gca"
+      ],
+      "source_locator": "Payment Acceptance Services entry",
+      "retained_verification": "buyer-channel-observed",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "eligible for consideration",
+      "caveat": "Framework listing establishes neither an awarded call-off nor Lloyds buying technology.",
+      "record_sha256": "03db04b7d605327c3692b960a6271cf7c808bde8efe044e822578dd70ed3e11a",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F17",
+      "original_refs": [
+        "TIER:F17"
+      ],
+      "entity": "Lloyds Bank as supplier to Gloucestershire County Council",
+      "period": "2021-10",
+      "semantic_type": "Reported candidate",
+      "statement": "The council's 2021 award records a five-year award to Lloyds Bank commencing October 2021.",
+      "source_refs": [
+        "TIER:glos"
+      ],
+      "source_locator": "Bank Contract decision paragraph",
+      "retained_verification": "historical-award",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "further evidence",
+      "caveat": "Original term only. No inference of current extension, expiry, successor or retender.",
+      "record_sha256": "7fa0cda3e5721d01733e79030e63c293b839ae72b6dd4b873acba72aca8681a6",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F18",
+      "original_refs": [
+        "TIER:F18"
+      ],
+      "entity": "Great Britain SME business current account survey, Lloyds Monzo and Starling brands",
+      "period": "2025-07 to 2026-06",
+      "semantic_type": "Reported candidate",
+      "statement": "Overall recommendation shares were Lloyds 60%, Starling 83% and Monzo 85% in the August 2026 Great Britain business current account wave.",
+      "source_refs": [
+        "TIER:ipsos",
+        "TIER:starling"
+      ],
+      "source_locator": "Overall service quality panel, August 2026",
+      "retained_verification": "independent-survey",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "eligible for consideration",
+      "caveat": "One survey population and measure. Scores are neither market share nor institutional banking or Group metrics. Provider copy is not independent corroboration of Ipsos.",
+      "record_sha256": "113e2783978e3b8031618a7f1e551c51cd824d10c88f16f5d77120ab8c168de7",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F19",
+      "original_refs": [
+        "TIER:F19"
+      ],
+      "entity": "UK motor finance regime, external context",
+      "period": "2026-10-26",
+      "semantic_type": "Reported candidate",
+      "statement": "The FCA update schedules the Upper Tribunal hearing for 16 February to 3 March 2027.",
+      "source_refs": [
+        "TIER:fca-motor-firms"
+      ],
+      "source_locator": "Information for firms on motor finance complaints, 26 October 2026 update",
+      "retained_verification": "external-scheduled",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "corrected eligible for consideration",
+      "caveat": "Sector timetable is not a firm-specific payment deadline, exposure valuation or pressure qualification.",
+      "record_sha256": "b077fca94a88883e3e8c4a060825c6276adb9075258090116e75842d954b58fe",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F20",
+      "original_refs": [
+        "TIER:F20"
+      ],
+      "entity": "UK financial services AI, external context",
+      "period": "2026-10-20",
+      "semantic_type": "Reported candidate",
+      "statement": "FCA good-practice material places AI within existing safety and control obligations, including operational resilience and relevant outsourcing controls.",
+      "source_refs": [
+        "TIER:fca-aaa"
+      ],
+      "source_locator": "Safety, security and robustness section",
+      "retained_verification": "external-observed",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "eligible for consideration",
+      "caveat": "Sector expectations do not prove a Lloyds control failure or individual exposure.",
+      "record_sha256": "d301880bc906bafdfdf6e3a11e997a2a1273e37bd44e931ab311dd437f36b82e",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F21A",
+      "original_refs": [
+        "TIER:F21A"
+      ],
+      "entity": "GoCardless, external UK fintech context",
+      "period": "2026-04-21",
+      "semantic_type": "Reported candidate",
+      "statement": "The FCA names GoCardless in the second AI Live Testing cohort announced in April 2026.",
+      "source_refs": [
+        "TIER:fca-ai"
+      ],
+      "source_locator": "Second cohort participant list",
+      "retained_verification": "external-selection-announcement",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "corrected eligible for consideration",
+      "caveat": "External context. No product substitution or competitive overlap established.",
+      "record_sha256": "68549dbc142aba080d213eb54f011c97a4fb1b1c1d160f8b03210f40294bffce",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F21B",
+      "original_refs": [
+        "TIER:F21B"
+      ],
+      "entity": "TrueLayer, external UK fintech context",
+      "period": "2026-07-22",
+      "semantic_type": "Reported candidate",
+      "statement": "The FCA names TrueLayer in the second Supercharged Sandbox cohort announced in July 2026.",
+      "source_refs": [
+        "TIER:fca-sandbox"
+      ],
+      "source_locator": "Second cohort participant list",
+      "retained_verification": "external-selection-announcement",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "corrected eligible for consideration",
+      "caveat": "External context. No product substitution or competitive overlap established.",
+      "record_sha256": "821183835f89cfc17d910e41ea29efd771a00f23d3c0fc0e712193ccd856ce6c",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F22",
+      "original_refs": [
+        "TIER:F22"
+      ],
+      "entity": "Lloyds Banking Group plc, colleague software",
+      "period": "2026-06-04",
+      "semantic_type": "Reported candidate",
+      "statement": "Microsoft reported deployment of GitHub Copilot to more than 10,000 Group engineers at the time of the expansion announcement.",
+      "source_refs": [
+        "TIER:ms-e7"
+      ],
+      "source_locator": "GitHub Copilot deployment paragraph",
+      "retained_verification": "supplier-reported",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "eligible for consideration",
+      "caveat": "Interested supplier report; no engineering productivity, savings or core platform dependencies follow.",
+      "record_sha256": "f4bc0f2e5d0eb5f75e310c1c94a72689eaf6d119de7436bac0f9f6dc3472bf75",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F23A",
+      "original_refs": [
+        "TIER:F23A"
+      ],
+      "entity": "UK monetary policy, external context",
+      "period": "2026-09-17",
+      "semantic_type": "Reported candidate",
+      "statement": "The Bank of England maintained Bank Rate at 3.75% at the September 2026 MPC meeting.",
+      "source_refs": [
+        "TIER:boe-sep"
+      ],
+      "source_locator": "Monetary Policy Summary, decision paragraph",
+      "retained_verification": "external-policy-decision",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "corrected eligible for consideration",
+      "caveat": "Policy decision only. No Lloyds-specific earnings or hedge sensitivity.",
+      "record_sha256": "2a77cb727337f612dbeac04a5dcc7151bf0e2c183d3951dbf15201f5d8c12ae6",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F23B",
+      "original_refs": [
+        "TIER:F23B"
+      ],
+      "entity": "UK monetary policy, external context",
+      "period": "2026-11-04",
+      "semantic_type": "Reported candidate",
+      "statement": "The Bank of England raised Bank Rate to 4% at the November 2026 MPC meeting.",
+      "source_refs": [
+        "TIER:boe-nov"
+      ],
+      "source_locator": "Monetary Policy Summary, decision paragraph",
+      "retained_verification": "external-policy-decision",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "corrected eligible for consideration",
+      "caveat": "Policy decision only. No Lloyds-specific earnings or hedge sensitivity.",
+      "record_sha256": "69979d04559c4256c7c16e5f4033279efd47591efb494a69c2775fc7c0590a81",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F24",
+      "original_refs": [
+        "TIER:F24"
+      ],
+      "entity": "PRA-supervised firms; external context",
+      "period": "2025-12",
+      "semantic_type": "Reported candidate",
+      "statement": "PRA SS5/25 sets climate-risk expectations for banks and insurers covering governance, risk management, scenario analysis, data and disclosure.",
+      "source_refs": [
+        "TIER:pra-climate"
+      ],
+      "source_locator": "Overview and December 2025 supervisory statement summary",
+      "retained_verification": "external-observed",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "eligible for consideration",
+      "caveat": "No current legal-entity compliance or material consequence inferred.",
+      "record_sha256": "ae0f4ce9a58a6c54a366bf466a7a5ceea5769096a8c7c4d72bf0f01f1674c858",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F25",
+      "original_refs": [
+        "TIER:F25"
+      ],
+      "entity": "Lloyds Banking Group plc",
+      "period": "2026-08-20",
+      "semantic_type": "Reported candidate",
+      "statement": "The Group announced a future-skills investment programme including AI capability development.",
+      "source_refs": [
+        "TIER:lbg-invest"
+      ],
+      "source_locator": "Future skills announcement",
+      "retained_verification": "issuer-plan",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "The plan provides no realised training, spend or benefit. The financial amount is excluded from this candidate slice.",
+      "record_sha256": "79d991ea3a5c2a1dc0bfbf66e152cfb26e9f43ccc4a0e6a3ea0573d0cd88e237",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F26A",
+      "original_refs": [
+        "TIER:F26A"
+      ],
+      "entity": "Lloyds Banking Group plc, CEO role",
+      "period": "2026-11-22",
+      "semantic_type": "Reported candidate",
+      "statement": "The Group roster identifies Charlie Nunn as Group Chief Executive.",
+      "source_refs": [
+        "TIER:lbg-exco"
+      ],
+      "source_locator": "Charlie Nunn biography",
+      "retained_verification": "role-roster-observation",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Roster observation or committee reporting statement. No individual delegation or budget authority.",
+      "record_sha256": "8e7784c4208b7fcfbf447342b827fdb261d44b7ac503b95d6d5c0805b0cbe03f",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F26B",
+      "original_refs": [
+        "TIER:F26B"
+      ],
+      "entity": "Lloyds Banking Group plc, CFO role",
+      "period": "2026-11-22",
+      "semantic_type": "Reported candidate",
+      "statement": "The Group roster identifies William Chalmers as Chief Financial Officer.",
+      "source_refs": [
+        "TIER:lbg-exco"
+      ],
+      "source_locator": "William Chalmers biography",
+      "retained_verification": "role-roster-observation",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Roster observation or committee reporting statement. No individual delegation or budget authority.",
+      "record_sha256": "30d66498bb228bd4c5d8127680ad003345db18f8b0227ebc831a9a1809a12489",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F26C",
+      "original_refs": [
+        "TIER:F26C"
+      ],
+      "entity": "Lloyds Banking Group plc, COO role",
+      "period": "2026-11-22",
+      "semantic_type": "Reported candidate",
+      "statement": "The Group roster identifies Ron van Kemenade as Group Chief Operating Officer.",
+      "source_refs": [
+        "TIER:lbg-exco"
+      ],
+      "source_locator": "Ron van Kemenade biography",
+      "retained_verification": "role-roster-observation",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Roster observation or committee reporting statement. No individual delegation or budget authority.",
+      "record_sha256": "6b3b2699b409038e6891f73c745123d5eeffb46f6d07e27a00e91aa2121c50a0",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F26D",
+      "original_refs": [
+        "TIER:F26D"
+      ],
+      "entity": "Lloyds Banking Group plc, committee-level reporting",
+      "period": "2026-11-22",
+      "semantic_type": "Reported candidate",
+      "statement": "The Group states that the Group Executive Committee reports to the Group Chief Executive.",
+      "source_refs": [
+        "TIER:lbg-exco"
+      ],
+      "source_locator": "Executive Committee introduction",
+      "retained_verification": "reporting-line-observation",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Roster observation or committee reporting statement. No individual delegation or budget authority.",
+      "record_sha256": "9e921d34ea38dd1c1b7fc1ca051252d0daa4c61aaa5d1378156c19c3bd3c321c",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-TIER-F27",
+      "original_refs": [
+        "TIER:F27"
+      ],
+      "entity": "Lloyds Banking Group plc third-party sourcing",
+      "period": "2026-11-22",
+      "semantic_type": "Reported candidate",
+      "statement": "The Group's public sourcing guidance expects suppliers to implement the supplier code and comply with third-party policies applicable to the services they provide.",
+      "source_refs": [
+        "TIER:lbg-sourcing"
+      ],
+      "source_locator": "Supplier responsibilities and requirements",
+      "retained_verification": "issuer-reported",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "Existing candidate review status retained; not a public-use grant",
+      "disposition": "source decision",
+      "caveat": "Published expectations do not establish performance, acceptance into procurement or specific contractual clauses.",
+      "record_sha256": "8c1a4d28bec623722c73bf6e4157d701af2aa5d9239484a57ea6021a3abff8f0",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-R2-OBS-RETAIL-PRICE",
+      "original_refs": [
+        "RIE2:R2-OBS-RETAIL-PRICE"
+      ],
+      "entity": "Lloyds Retail",
+      "period": "H12026",
+      "semantic_type": "Reported candidate; retained compound note, NOT atomic Observation",
+      "statement": "Retail UK savings fellGBP3.3bn mainly due to disciplined tax-year-end pricing; personal current accounts broadly stable.",
+      "source_refs": [
+        "RIE2:R2-LBG-H126"
+      ],
+      "source_locator": "Retail narrative printed7",
+      "retained_verification": "Original package research assertion",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "bounded paraphrase/citation; owner evidence acceptance pending",
+      "disposition": "Financial-source dependency",
+      "caveat": "Reported disclosure/method-specific scope; interpretation and unknown commercial consequences remain separate.",
+      "record_sha256": "1ac90bb1be599c2a828ab22dfebfb1541f3f5e230226bfe77981091d950faedb",
+      "recovery_reconciliation": "Retain H1 Retail pricing explanation. This is not the Group deposit-stock comparison or evidence of organic Group outflow."
+    },
+    {
+      "id": "REC-R2-OBS-RETAIL-LEASE",
+      "original_refs": [
+        "RIE2:R2-OBS-RETAIL-LEASE"
+      ],
+      "entity": "Lloyds Retail",
+      "period": "H12026",
+      "semantic_type": "Reported candidate; retained compound note, NOT atomic Observation",
+      "statement": "Lease depreciation includes a second-quarter used-car-price charge, fleet growth and higher-value vehicles; existing risk mitigation partly offsets it.",
+      "source_refs": [
+        "RIE2:R2-LBG-H126"
+      ],
+      "source_locator": "Retail narrative printed7",
+      "retained_verification": "Original package research assertion",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "bounded paraphrase/citation; owner evidence acceptance pending",
+      "disposition": "Financial-source dependency",
+      "caveat": "Reported disclosure/method-specific scope; interpretation and unknown commercial consequences remain separate.",
+      "record_sha256": "591be0c88a872626c1fb59046cfed515ce3873be23618bac8b8e0c24927918ea",
+      "recovery_reconciliation": "Fleet growth, mix, residual prices and disclosed mitigation coexist. Other-income movements less depreciation movements do not calculate leasing margin or profit."
+    },
+    {
+      "id": "REC-R2-OBS-CREDIT-EXPLAIN",
+      "original_refs": [
+        "RIE2:R2-OBS-CREDIT-EXPLAIN"
+      ],
+      "entity": "Lloyds Retail",
+      "period": "H12026",
+      "semantic_type": "Reported candidate; retained compound note, NOT atomic Observation",
+      "statement": "Issuer attributes higher impairment to model updates/normalisation/growth and favourable prior-year house-price assumptions; describes credit performance strong/stable.",
+      "source_refs": [
+        "RIE2:R2-LBG-H126"
+      ],
+      "source_locator": "Retail narrative printed7",
+      "retained_verification": "Original package research assertion",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "bounded paraphrase/citation; owner evidence acceptance pending",
+      "disposition": "Financial-source dependency",
+      "caveat": "Reported disclosure/method-specific scope; interpretation and unknown commercial consequences remain separate.",
+      "record_sha256": "40bb6c205ef5ab80b218a1a91f75a2cab760efeaa4ea37a6ae37b09d0154e5f1",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    },
+    {
+      "id": "REC-R2-OBS-IP-DIVIDEND",
+      "original_refs": [
+        "RIE2:R2-OBS-IP-DIVIDEND"
+      ],
+      "entity": "IP&I and Group",
+      "period": "June 2026",
+      "semantic_type": "Reported candidate; retained compound note, NOT atomic Observation",
+      "statement": "Company reports100m interim dividend to Group; deferred profit5.2bn including risk adjustment and225m release are different measures.",
+      "source_refs": [
+        "RIE2:R2-LBG-H126"
+      ],
+      "source_locator": "IP&I printed10",
+      "retained_verification": "Original package research assertion",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "bounded paraphrase/citation; owner evidence acceptance pending",
+      "disposition": "Financial-source dependency",
+      "caveat": "Reported disclosure/method-specific scope; interpretation and unknown commercial consequences remain separate.",
+      "record_sha256": "0c24ca3c1480baf947115a59eba6a36c82ff082fdc89b1f18457fce0754274cd",
+      "recovery_reconciliation": "An upstream distribution, deferred-profit stock including risk adjustment and release flow are different measures; no addition into customer revenue."
+    },
+    {
+      "id": "REC-R2-OBS-PRIMARY-SUBS",
+      "original_refs": [
+        "RIE2:R2-OBS-PRIMARY-SUBS"
+      ],
+      "entity": "Group principal subsidiaries",
+      "period": "31 December 2025",
+      "semantic_type": "Reported candidate; retained compound note, NOT atomic Observation",
+      "statement": "Principal holdings distinguish direct LloydsBank/CorporateMarkets/EquityInvestments and indirect Scottish Widows/HBOS/BankOfScotland.",
+      "source_refs": [
+        "RIE2:R2-LBG-20F25"
+      ],
+      "source_locator": "Item4.C printed11, indirect-interest asterisk",
+      "retained_verification": "Original package research assertion",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "bounded paraphrase/citation; owner evidence acceptance pending",
+      "disposition": "Financial-source dependency",
+      "caveat": "Reported disclosure/method-specific scope; interpretation and unknown commercial consequences remain separate.",
+      "record_sha256": "8bddf69e8bb0e6e3ce15bb85c41c61a2629bd5ac668bfd2cf4aafc64d7e5c1b3",
+      "recovery_reconciliation": "Historical reported interests do not settle the current intermediate ownership hierarchy or override later registry observations."
+    },
+    {
+      "id": "REC-R2-OBS-MS-ADOPTION",
+      "original_refs": [
+        "RIE2:R2-OBS-MS-ADOPTION"
+      ],
+      "entity": "Group workplace/engineering",
+      "period": "4 June 2026",
+      "semantic_type": "Reported candidate; retained compound note, NOT atomic Observation",
+      "statement": "Company reports40000Copilot licences,97% active among licensed colleagues and use by10,000+ engineers alongside a new multi-year agreement.",
+      "source_refs": [
+        "RIE2:R2-LBG-MS26"
+      ],
+      "source_locator": "Announcement body",
+      "retained_verification": "Original package research assertion",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "bounded paraphrase/citation; owner evidence acceptance pending",
+      "disposition": "Research-only; source applicability and factual assurance retained",
+      "caveat": "Reported disclosure/method-specific scope; interpretation and unknown commercial consequences remain separate.",
+      "record_sha256": "b85ad89319b463e052d5edeac197ea09d3c183d392b028e275790c479725e9e1",
+      "recovery_reconciliation": "Do not reuse this compound note as one issuer-verified population. Tier F11A/F11B/F22 distinguish issuer rollout scope from the interested supplier engineering-deployment claim. Licence count, active licensed colleagues and engineers are different denominators."
+    },
+    {
+      "id": "REC-R2-OBS-ENVOY-DATE",
+      "original_refs": [
+        "RIE2:R2-OBS-ENVOY-DATE"
+      ],
+      "entity": "Group internal agent platform",
+      "period": "28 April 2026",
+      "semantic_type": "Reported candidate; retained compound note, NOT atomic Observation",
+      "statement": "Original dated Envoy PDF describes Google Cloud platform and designed oversight; companionHTML has1 May date, not a later platform event.",
+      "source_refs": [
+        "RIE2:R2-LBG-ENVOY-PDF"
+      ],
+      "source_locator": "PDF index0–1",
+      "retained_verification": "Original package research assertion",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "bounded paraphrase/citation; owner evidence acceptance pending",
+      "disposition": "Research-only; source applicability and factual assurance retained",
+      "caveat": "Reported disclosure/method-specific scope; interpretation and unknown commercial consequences remain separate.",
+      "record_sha256": "d36cfc50bf79ff7be10edd9294eb1c6eba9f7faed10c70c613f31ab398fc5321",
+      "recovery_reconciliation": "Publisher versions refer to one platform announcement. Designed controls are not independently proven effectiveness or live use-case outcomes."
+    },
+    {
+      "id": "REC-R2-OBS-AI-VALUE",
+      "original_refs": [
+        "RIE2:R2-OBS-AI-VALUE"
+      ],
+      "entity": "Group GenAI",
+      "period": "2025 actual claim /2026 expectation",
+      "semantic_type": "Reported candidate; retained compound note, NOT atomic Observation",
+      "statement": "Around50m value is company-reported2025; over100m incremental2026 remains expected, not supplier spend or independently verified realised net value.",
+      "source_refs": [
+        "RIE2:R2-LBG-AI26"
+      ],
+      "source_locator": "Published29 January, summary/body",
+      "retained_verification": "Original package research assertion",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "bounded paraphrase/citation; owner evidence acceptance pending",
+      "disposition": "Research-only; source applicability and factual assurance retained",
+      "caveat": "Reported disclosure/method-specific scope; interpretation and unknown commercial consequences remain separate.",
+      "record_sha256": "26dc8b84b47b307974974cd175b9a1b8738cf7509d95efcde409f78d000af82d",
+      "recovery_reconciliation": "Prior-year contribution is company-reported; the following-year amount is expectation. Gross/net accounting, full costs and causal attribution are not established. Neither figure is a supplier budget."
+    },
+    {
+      "id": "REC-R2-OBS-INVESTMENT",
+      "original_refs": [
+        "RIE2:R2-OBS-INVESTMENT"
+      ],
+      "entity": "Group cost base",
+      "period": "9m2026",
+      "semantic_type": "Reported candidate; retained compound note, NOT atomic Observation",
+      "statement": "Cost growth includes business/inflation/Lloyds Wealth effects offset by savings, lower severance and plateauing investment; no quantified external allocation follows.",
+      "source_refs": [
+        "RIE2:R2-LBG-Q326"
+      ],
+      "source_locator": "PDF index7",
+      "retained_verification": "Original package research assertion",
+      "new_original_source_verification": false,
+      "canonical_acceptance": false,
+      "public_admission_in_this_sprint": false,
+      "source_use": "bounded paraphrase/citation; owner evidence acceptance pending",
+      "disposition": "Financial-source dependency",
+      "caveat": "Reported disclosure/method-specific scope; interpretation and unknown commercial consequences remain separate.",
+      "record_sha256": "b0fac5eba0748d650b47843bc7cd9fa77f21b393689276738f3737268743e952",
+      "recovery_reconciliation": "Retain the original scope, date, assurance and limitations; do not strengthen the claim on recovery."
+    }
+  ],
+  "concept_groups": [
+    {
+      "id": "GROUP-REPORTING",
+      "original_refs": [
+        "RIE1:LBG-AR25-WEB-F1",
+        "RIE2:R2-OBS-PRIMARY-SUBS"
+      ],
+      "reconciliation": "Reporting divisions and legal holdings are different axes.",
+      "rule": "Co-reference, not sum or identity merge"
+    },
+    {
+      "id": "ENVOY",
+      "original_refs": [
+        "RIE1:LBG-ENVOY26-F1",
+        "RIE2:R2-OBS-ENVOY-DATE"
+      ],
+      "reconciliation": "28 April PDF and 1 May HTML are publication versions, not two deployments.",
+      "rule": "Co-reference, not sum or identity merge"
+    },
+    {
+      "id": "AI-BENEFITS",
+      "original_refs": [
+        "RIE1:LBG-AI26-F1",
+        "RIE2:R2-OBS-AI-VALUE"
+      ],
+      "reconciliation": "Prior-year reported contribution and next-year expectation are not net realised savings.",
+      "rule": "Co-reference, not sum or identity merge"
+    },
+    {
+      "id": "MICROSOFT",
+      "original_refs": [
+        "RIE1:LBG-MS26-F1",
+        "RIE2:R2-OBS-MS-ADOPTION"
+      ],
+      "reconciliation": "Agreement, licences, active users and engineering population must remain distinct.",
+      "rule": "Co-reference, not sum or identity merge"
+    }
+  ],
+  "reconciliations": [
+    {
+      "id": "q3-net-income-movement",
+      "entity": "LBG::Group",
+      "period": "9M to 30 Sep 2026 vs 9M to 30 Sep 2025",
+      "basis": "underlying GBP million flow",
+      "arithmetic_reproduces": true,
+      "eligibility": "Research arithmetic only; no Financial run or output activated"
+    },
+    {
+      "id": "q3-statutory-profit-movement",
+      "entity": "LBG::Group",
+      "period": "9M to 30 Sep 2026 vs 9M to 30 Sep 2025",
+      "basis": "GBP million flow",
+      "arithmetic_reproduces": true,
+      "eligibility": "Research arithmetic only; no Financial run or output activated"
+    },
+    {
+      "id": "q3-statutory-profit-direct",
+      "entity": "LBG::Group",
+      "period": "9M to 30 Sep 2026 vs 9M to 30 Sep 2025",
+      "basis": "statutory GBP million flow",
+      "arithmetic_reproduces": true,
+      "eligibility": "Research arithmetic only; no Financial run or output activated"
+    },
+    {
+      "id": "q3-banking-numerator",
+      "entity": "LBG::Group banking perimeter",
+      "period": "9M to 30 Sep 2026",
+      "basis": "underlying GBP million flow",
+      "arithmetic_reproduces": true,
+      "eligibility": "Research arithmetic only; no Financial run or output activated"
+    },
+    {
+      "id": "group-deposit-balance-difference",
+      "entity": "LBG::Group",
+      "period": "30 Sep 2026 vs 31 Dec 2025",
+      "basis": "statutory GBP million stock difference",
+      "arithmetic_reproduces": true,
+      "eligibility": "Research arithmetic only; no Financial run or output activated"
+    },
+    {
+      "id": "half-year-net-fees",
+      "entity": "LBG::Group",
+      "period": "H1 to 30 Jun 2026",
+      "basis": "statutory GBP million flow",
+      "arithmetic_reproduces": true,
+      "eligibility": "Research arithmetic only; no Financial run or output activated"
+    },
+    {
+      "id": "half-year-segment-tie",
+      "entity": "LBG::Group operating segments plus central",
+      "period": "H1 to 30 Jun 2026",
+      "basis": "underlying GBP million flow",
+      "arithmetic_reproduces": true,
+      "eligibility": "Research arithmetic only; no Financial run or output activated"
+    },
+    {
+      "id": "half-year-statutory-adjustments",
+      "entity": "LBG::Group",
+      "period": "H1 to 30 Jun 2026",
+      "basis": "GBP million flow",
+      "arithmetic_reproduces": true,
+      "eligibility": "Research arithmetic only; no Financial run or output activated"
+    },
+    {
+      "id": "capital-generation",
+      "entity": "LBG::Group prudential",
+      "period": "9M to 30 Sep 2026",
+      "basis": "basis points of capital ratio movement",
+      "arithmetic_reproduces": true,
+      "eligibility": "Research arithmetic only; no Financial run or output activated"
+    },
+    {
+      "id": "capital-pro-forma-movement",
+      "entity": "LBG::Group prudential",
+      "period": "31 Dec 2025 pro forma to 30 Sep 2026",
+      "basis": "basis points of capital ratio movement",
+      "arithmetic_reproduces": true,
+      "eligibility": "Research arithmetic only; no Financial run or output activated"
+    },
+    {
+      "id": "december-to-september-rwa",
+      "entity": "LBG::Group prudential",
+      "period": "30 Sep 2026 vs 31 Dec 2025",
+      "basis": "GBP billion stock difference",
+      "arithmetic_reproduces": true,
+      "eligibility": "Research arithmetic only; no Financial run or output activated"
+    },
+    {
+      "id": "fy26-nii-threshold",
+      "entity": "LBG::Group",
+      "period": "FY to 31 Dec 2026 target less 9M actual",
+      "basis": "underlying GBP million flow",
+      "arithmetic_reproduces": true,
+      "eligibility": "Research arithmetic only; no Financial run or output activated"
+    },
+    {
+      "id": "fy26-cost-threshold",
+      "entity": "LBG::Group",
+      "period": "FY to 31 Dec 2026 target less 9M actual",
+      "basis": "underlying GBP million flow",
+      "arithmetic_reproduces": true,
+      "eligibility": "Research arithmetic only; no Financial run or output activated"
+    }
+  ]
+}

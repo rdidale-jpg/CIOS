@@ -1,0 +1,689 @@
+{
+  "baseline": "0a6423fe3a32d0a0d5d11fe9d7027859e94c6df7",
+  "authority": "Dated research crosswalk, not accepted Enterprise Model hierarchy",
+  "identity_rules": [
+    "Group SC095000 != Lloyds Bank 00002065",
+    "BK-ENT-001 retained research alias is not a new canonical identity decision",
+    "BK-ENT-003 collision remains unresolved; never repaired by name similarity",
+    "PSC statements do not establish every intermediate owner or an entire Group tree",
+    "November BCB/CIB/Connected Finance labels do not restate H1 reporting segments"
+  ],
+  "entries": [
+    {
+      "kind": "group_legal_identity",
+      "name": "Lloyds Banking Group plc",
+      "registration_number": "SC095000",
+      "as_at": "2026-11-22",
+      "canonical_id": null,
+      "source_ref": "Initial Factory retained register replay commission",
+      "restriction": "Group identity from retained replay, not a fresh register verification or production binding"
+    },
+    {
+      "kind": "legal_entity",
+      "as_at": "2025-12-31",
+      "business": "Banking/financial services",
+      "entity": "Lloyds Bank plc",
+      "equity_voting_pct": 100,
+      "interest_type": "direct",
+      "intermediate_parent": "Lloyds Banking Group plc",
+      "locator": "Item4.C printed11",
+      "source_ref": "RIE2:R2-LBG-20F25",
+      "canonical_id": null,
+      "restriction": "Historical holdings from retained SEC source; not current register authority"
+    },
+    {
+      "kind": "legal_entity",
+      "as_at": "2025-12-31",
+      "business": "Life assurance",
+      "entity": "Scottish Widows Limited",
+      "equity_voting_pct": 100,
+      "interest_type": "indirect",
+      "intermediate_parent": null,
+      "locator": "Item4.C printed11",
+      "source_ref": "RIE2:R2-LBG-20F25",
+      "canonical_id": null,
+      "restriction": "Historical holdings from retained SEC source; not current register authority"
+    },
+    {
+      "kind": "legal_entity",
+      "as_at": "2025-12-31",
+      "business": "Holding company",
+      "entity": "HBOS plc",
+      "equity_voting_pct": 100,
+      "interest_type": "indirect",
+      "intermediate_parent": null,
+      "locator": "Item4.C printed11",
+      "source_ref": "RIE2:R2-LBG-20F25",
+      "canonical_id": null,
+      "restriction": "Historical holdings from retained SEC source; not current register authority"
+    },
+    {
+      "kind": "legal_entity",
+      "as_at": "2025-12-31",
+      "business": "Banking/financial services",
+      "entity": "Bank of Scotland plc",
+      "equity_voting_pct": 100,
+      "interest_type": "indirect",
+      "intermediate_parent": null,
+      "locator": "Item4.C printed11",
+      "source_ref": "RIE2:R2-LBG-20F25",
+      "canonical_id": null,
+      "restriction": "Historical holdings from retained SEC source; not current register authority"
+    },
+    {
+      "kind": "legal_entity",
+      "as_at": "2025-12-31",
+      "business": "Banking/financial services",
+      "entity": "Lloyds Bank Corporate Markets plc",
+      "equity_voting_pct": 100,
+      "interest_type": "direct",
+      "intermediate_parent": "Lloyds Banking Group plc",
+      "locator": "Item4.C printed11",
+      "source_ref": "RIE2:R2-LBG-20F25",
+      "canonical_id": null,
+      "restriction": "Historical holdings from retained SEC source; not current register authority"
+    },
+    {
+      "kind": "legal_entity",
+      "as_at": "2025-12-31",
+      "business": "Financial services",
+      "entity": "LBG Equity Investments Limited",
+      "equity_voting_pct": 100,
+      "interest_type": "direct",
+      "intermediate_parent": "Lloyds Banking Group plc",
+      "locator": "Item4.C printed11",
+      "source_ref": "RIE2:R2-LBG-20F25",
+      "canonical_id": null,
+      "restriction": "Historical holdings from retained SEC source; not current register authority"
+    },
+    {
+      "kind": "reporting_segment",
+      "name": "Retail",
+      "period": "H12026",
+      "source_ref": "RIE2:R2-LBG-H126",
+      "canonical_id": null,
+      "restriction": "Not a legal entity or automatic mapping to November management units"
+    },
+    {
+      "kind": "reporting_segment",
+      "name": "Commercial Banking",
+      "period": "H12026",
+      "source_ref": "RIE2:R2-LBG-H126",
+      "canonical_id": null,
+      "restriction": "Not a legal entity or automatic mapping to November management units"
+    },
+    {
+      "kind": "reporting_segment",
+      "name": "Insurance Pensions and Investments",
+      "period": "H12026",
+      "source_ref": "RIE2:R2-LBG-H126",
+      "canonical_id": null,
+      "restriction": "Not a legal entity or automatic mapping to November management units"
+    },
+    {
+      "kind": "professional_role",
+      "buyer_status": "not established",
+      "person": "Charlie Nunn",
+      "professional_role": "GroupChiefExecutive",
+      "read_date": "2026-11-14",
+      "source_ref": "RIE2:R2-LBG-LEAD",
+      "canonical_id": null,
+      "restriction": "Dated roster, not delegation, current mandate or buying authority"
+    },
+    {
+      "kind": "professional_role",
+      "buyer_status": "not established",
+      "person": "William Chalmers",
+      "professional_role": "CFO",
+      "read_date": "2026-11-14",
+      "source_ref": "RIE2:R2-LBG-LEAD",
+      "canonical_id": null,
+      "restriction": "Dated roster, not delegation, current mandate or buying authority"
+    },
+    {
+      "kind": "professional_role",
+      "buyer_status": "not established",
+      "person": "Ron van Kemenade",
+      "professional_role": "Group COO",
+      "read_date": "2026-11-14",
+      "source_ref": "RIE2:R2-LBG-LEAD",
+      "canonical_id": null,
+      "restriction": "Dated roster, not delegation, current mandate or buying authority"
+    },
+    {
+      "kind": "professional_role",
+      "buyer_status": "not established",
+      "person": "Jasjyot Singh",
+      "professional_role": "CEOConsumer",
+      "read_date": "2026-11-14",
+      "source_ref": "RIE2:R2-LBG-LEAD",
+      "canonical_id": null,
+      "restriction": "Dated roster, not delegation, current mandate or buying authority"
+    },
+    {
+      "kind": "professional_role",
+      "buyer_status": "not established",
+      "person": "Nick Williams",
+      "professional_role": "CEOConnected Finance",
+      "read_date": "2026-11-14",
+      "source_ref": "RIE2:R2-LBG-LEAD",
+      "canonical_id": null,
+      "restriction": "Dated roster, not delegation, current mandate or buying authority"
+    },
+    {
+      "kind": "professional_role",
+      "buyer_status": "not established",
+      "person": "Amanda Murphy",
+      "professional_role": "CEOBusinessCommercialBanking",
+      "read_date": "2026-11-14",
+      "source_ref": "RIE2:R2-LBG-LEAD",
+      "canonical_id": null,
+      "restriction": "Dated roster, not delegation, current mandate or buying authority"
+    },
+    {
+      "kind": "professional_role",
+      "buyer_status": "not established",
+      "person": "John Langley",
+      "professional_role": "CEOCorporateInstitutionalBanking",
+      "read_date": "2026-11-14",
+      "source_ref": "RIE2:R2-LBG-LEAD",
+      "canonical_id": null,
+      "restriction": "Dated roster, not delegation, current mandate or buying authority"
+    },
+    {
+      "kind": "professional_role",
+      "buyer_status": "not established",
+      "person": "Chirantan Barua",
+      "professional_role": "CEOScottish Widows /WealthInsurance",
+      "read_date": "2026-11-14",
+      "source_ref": "RIE2:R2-LBG-LEAD",
+      "canonical_id": null,
+      "restriction": "Dated roster, not delegation, current mandate or buying authority"
+    },
+    {
+      "kind": "professional_role",
+      "buyer_status": "not established",
+      "person": "Javier Rodríguez de Colmenares",
+      "professional_role": "CRO",
+      "read_date": "2026-11-14",
+      "source_ref": "RIE2:R2-LBG-LEAD",
+      "canonical_id": null,
+      "restriction": "Dated roster, not delegation, current mandate or buying authority"
+    },
+    {
+      "kind": "dated_management_or_brand_context",
+      "record_ref": "REC-TIER-F05A",
+      "statement": "Amanda Murphy joined the Group as CEO of Business & Commercial Banking in February 2026.",
+      "period": "2026-02",
+      "entity": "Lloyds Banking Group plc, Business & Commercial Banking",
+      "canonical_id": null,
+      "restriction": "Appointment disclosure or stated role start only. Morton effective date and delegation unresolved."
+    },
+    {
+      "kind": "dated_management_or_brand_context",
+      "record_ref": "REC-TIER-F05B",
+      "statement": "Lloyds announced Fiamma Morton as Managing Director for SME banking.",
+      "period": "2026-08-12",
+      "entity": "Lloyds Banking Group plc, SME banking",
+      "canonical_id": null,
+      "restriction": "Appointment disclosure or stated role start only. Morton effective date and delegation unresolved."
+    },
+    {
+      "kind": "dated_management_or_brand_context",
+      "record_ref": "REC-TIER-F06A",
+      "statement": "John Langley joined the Group as Corporate & Institutional Banking CEO in March 2026.",
+      "period": "2026-03",
+      "entity": "Lloyds Banking Group plc, Corporate & Institutional Banking",
+      "canonical_id": null,
+      "restriction": "Role or published remit only. Condon effective date and delegated authority unresolved."
+    },
+    {
+      "kind": "dated_management_or_brand_context",
+      "record_ref": "REC-TIER-F06B",
+      "statement": "Lloyds announced Natasha Condon as Global Head of Transaction Banking in CIB on 18 November 2026, with a functional remit covering cash, trade, working capital and payments.",
+      "period": "2026-11-18",
+      "entity": "Lloyds Banking Group plc, CIB Transaction Banking",
+      "canonical_id": null,
+      "restriction": "Role or published remit only. Condon effective date and delegated authority unresolved."
+    },
+    {
+      "kind": "dated_management_or_brand_context",
+      "record_ref": "REC-TIER-F07",
+      "statement": "Nick Williams was appointed CEO of Connected Finance in October 2026. The unit brings together transport, European retail banking and embedded finance businesses.",
+      "period": "2026-10",
+      "entity": "Lloyds Banking Group plc, Connected Finance",
+      "canonical_id": null,
+      "restriction": "Organisational grouping does not establish reporting-segment restatement."
+    },
+    {
+      "kind": "dated_management_or_brand_context",
+      "record_ref": "REC-TIER-F08A",
+      "statement": "The Group roster lists Chirantan Barua as CEO of Insurance, Pensions and Investments.",
+      "period": "2026-11-22",
+      "entity": "Lloyds Banking Group plc, IP&I",
+      "canonical_id": null,
+      "restriction": "Observed role or appointment disclosure. Effective appointment date and delegated authority unresolved."
+    },
+    {
+      "kind": "dated_management_or_brand_context",
+      "record_ref": "REC-TIER-F08B",
+      "statement": "On 10 December 2025 the Group announced Peter Fitzgerald as Chief Investment Officer with an investment strategy and fund-management remit spanning Scottish Widows and Schroders Personal Wealth.",
+      "period": "2025-12-10",
+      "entity": "Lloyds Banking Group plc, investment management remit",
+      "canonical_id": null,
+      "restriction": "Observed role or appointment disclosure. Effective appointment date and delegated authority unresolved."
+    },
+    {
+      "kind": "dated_management_or_brand_context",
+      "record_ref": "REC-TIER-F08C",
+      "statement": "The Group roster lists Chirantan Barua as CEO of Scottish Widows.",
+      "period": "2026-11-22",
+      "entity": "Scottish Widows, issuer role label",
+      "canonical_id": null,
+      "restriction": "Observed role or appointment disclosure. Effective appointment date and delegated authority unresolved."
+    },
+    {
+      "kind": "dated_management_or_brand_context",
+      "record_ref": "REC-TIER-F09",
+      "statement": "Javier Rodríguez de Colmenares joined as Group Chief Risk Officer in September 2026.",
+      "period": "2026-09",
+      "entity": "Lloyds Banking Group plc",
+      "canonical_id": null,
+      "restriction": "Programme-level delegated controls remain unverified."
+    },
+    {
+      "kind": "dated_management_or_brand_context",
+      "record_ref": "REC-TIER-F26A",
+      "statement": "The Group roster identifies Charlie Nunn as Group Chief Executive.",
+      "period": "2026-11-22",
+      "entity": "Lloyds Banking Group plc, CEO role",
+      "canonical_id": null,
+      "restriction": "Roster observation or committee reporting statement. No individual delegation or budget authority."
+    },
+    {
+      "kind": "dated_management_or_brand_context",
+      "record_ref": "REC-TIER-F26B",
+      "statement": "The Group roster identifies William Chalmers as Chief Financial Officer.",
+      "period": "2026-11-22",
+      "entity": "Lloyds Banking Group plc, CFO role",
+      "canonical_id": null,
+      "restriction": "Roster observation or committee reporting statement. No individual delegation or budget authority."
+    },
+    {
+      "kind": "dated_management_or_brand_context",
+      "record_ref": "REC-TIER-F26C",
+      "statement": "The Group roster identifies Ron van Kemenade as Group Chief Operating Officer.",
+      "period": "2026-11-22",
+      "entity": "Lloyds Banking Group plc, COO role",
+      "canonical_id": null,
+      "restriction": "Roster observation or committee reporting statement. No individual delegation or budget authority."
+    },
+    {
+      "kind": "dated_management_or_brand_context",
+      "record_ref": "REC-TIER-F26D",
+      "statement": "The Group states that the Group Executive Committee reports to the Group Chief Executive.",
+      "period": "2026-11-22",
+      "entity": "Lloyds Banking Group plc, committee-level reporting",
+      "canonical_id": null,
+      "restriction": "Roster observation or committee reporting statement. No individual delegation or budget authority."
+    },
+    {
+      "kind": "brand_context",
+      "name": "Halifax",
+      "source_ref": "RIE1:LBG-RING-F1",
+      "period": "Retained RIE1 November 2026 research cut",
+      "canonical_id": null,
+      "restriction": "Ring-fencing description includes Halifax activities with LloydsBank/BankOfScotland; no separate Halifax legal entity or automatic reporting-segment join inferred. Current brand transition scope/date remains subject to its original evidence owner."
+    },
+    {
+      "kind": "brand_context",
+      "name": "Scottish Widows",
+      "source_ref": "TIER:F08C",
+      "period": "2026-11-22",
+      "canonical_id": null,
+      "restriction": "Brand, roster label, legal company and authorised Master Trust are not interchangeable."
+    }
+  ],
+  "candidate_relationships": [
+    {
+      "id": "R01",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N01",
+      "target": "N02",
+      "relationship_type": "lists active PSC",
+      "evidence": [
+        "F01"
+      ],
+      "period": "2026-11-22",
+      "status": "register-observed",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Lloyds Bank plc",
+      "object_label": "Lloyds Banking Group plc",
+      "review_disposition": "evidence and identity review",
+      "uncertainty": "PSC designation does not describe the entire Group perimeter."
+    },
+    {
+      "id": "R02",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N03",
+      "target": "N01",
+      "relationship_type": "lists active PSC",
+      "evidence": [
+        "F02"
+      ],
+      "period": "2026-11-22",
+      "status": "register-observed",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "HBOS plc",
+      "object_label": "Lloyds Bank plc",
+      "review_disposition": "evidence and identity review",
+      "uncertainty": "Do not infer other ownership links from this entry."
+    },
+    {
+      "id": "R04",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N06",
+      "target": "N07",
+      "relationship_type": "public executive remit",
+      "evidence": [
+        "F05A"
+      ],
+      "period": "2026-02",
+      "status": "issuer-reported",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Business & Commercial Banking CEO",
+      "object_label": "Business & Commercial Banking",
+      "review_disposition": "evidence and identity review",
+      "uncertainty": "Appointment disclosure or stated role start only. Morton effective date and delegation unresolved."
+    },
+    {
+      "id": "R05",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N08",
+      "target": "N09",
+      "relationship_type": "public functional remit",
+      "evidence": [
+        "F06B"
+      ],
+      "period": "2026-11-18",
+      "status": "issuer-reported",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Global Head of Transaction Banking",
+      "object_label": "CIB transaction banking",
+      "review_disposition": "evidence and identity review",
+      "uncertainty": "Role or published remit only. Condon effective date and delegated authority unresolved."
+    },
+    {
+      "id": "R06",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N10",
+      "target": "N11",
+      "relationship_type": "public executive remit",
+      "evidence": [
+        "F08A"
+      ],
+      "period": "2026-11-22",
+      "status": "issuer-reported",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Insurance Pensions and Investments CEO",
+      "object_label": "Insurance, Pensions and Investments",
+      "review_disposition": "evidence and identity review",
+      "uncertainty": "Observed role or appointment disclosure. Effective appointment date and delegated authority unresolved."
+    },
+    {
+      "id": "R07",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N02",
+      "target": "N12",
+      "relationship_type": "reports rollout of",
+      "evidence": [
+        "F11A"
+      ],
+      "period": "2026-06-04",
+      "status": "party-reported",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Lloyds Banking Group plc",
+      "object_label": "Microsoft 365 E7",
+      "review_disposition": "evidence and identity review",
+      "uncertainty": "Party-reported scope. Actual install coverage, adoption, delegated buying authority, commercial terms and hosting remain unresolved."
+    },
+    {
+      "id": "R08",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N02",
+      "target": "N13",
+      "relationship_type": "requires registration through",
+      "evidence": [
+        "F12"
+      ],
+      "period": "2026-11-22",
+      "status": "issuer-reported",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Lloyds Banking Group plc",
+      "object_label": "Ariba Network",
+      "review_disposition": "source decision",
+      "uncertainty": "Enrolment is a process requirement and gives no access to a particular tender."
+    },
+    {
+      "id": "R09",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N14",
+      "target": "N15",
+      "relationship_type": "historically trialled with",
+      "evidence": [
+        "F13"
+      ],
+      "period": "2025-06-05",
+      "status": "historical-trial",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Scottish Widows protection claims and underwriting",
+      "object_label": "Sprout.ai",
+      "review_disposition": "source decision",
+      "uncertainty": "Trial evidence establishes neither production status nor supplier terms, realised speed or replacement."
+    },
+    {
+      "id": "R10",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N16",
+      "target": "N17",
+      "relationship_type": "selected for",
+      "evidence": [
+        "F14B"
+      ],
+      "period": "2026-04-21",
+      "status": "regulator-reported",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Lloyds Banking Group (Scottish Widows)",
+      "object_label": "FCA AI Live Testing cohort 2",
+      "review_disposition": "identity evidence required",
+      "uncertainty": "Selection or retrospective disclosure. Exact legal entity, use case and results remain unresolved."
+    },
+    {
+      "id": "R11",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N18",
+      "target": "N19",
+      "relationship_type": "selected for",
+      "evidence": [
+        "F15"
+      ],
+      "period": "2026-07-22",
+      "status": "regulator-reported",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Scottish Widows",
+      "object_label": "FCA Supercharged Sandbox cohort 2",
+      "review_disposition": "identity evidence required",
+      "uncertainty": "Separate programme from AI Live Testing. Participation establishes no live-market adoption."
+    },
+    {
+      "id": "R12",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N01",
+      "target": "N20",
+      "relationship_type": "listed supplier on",
+      "evidence": [
+        "F16"
+      ],
+      "period": "2026-11-22",
+      "status": "buyer-channel-observed",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Lloyds Bank plc",
+      "object_label": "RM6325 Payment Acceptance Services",
+      "review_disposition": "evidence and identity review",
+      "uncertainty": "Framework listing establishes neither an awarded call-off nor Lloyds buying technology."
+    },
+    {
+      "id": "R13",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N21",
+      "target": "N22",
+      "relationship_type": "historical banking award to",
+      "evidence": [
+        "F17"
+      ],
+      "period": "2021-10",
+      "status": "historical-award",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Gloucestershire County Council",
+      "object_label": "Lloyds Bank",
+      "review_disposition": "further evidence and identity review",
+      "uncertainty": "Original term only. No inference of current extension, expiry, successor or retender."
+    },
+    {
+      "id": "R14",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N02",
+      "target": "N23",
+      "relationship_type": "announced",
+      "evidence": [
+        "F25"
+      ],
+      "period": "2026-08-20",
+      "status": "issuer-plan",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Lloyds Banking Group plc",
+      "object_label": "Future skills programme",
+      "review_disposition": "source decision",
+      "uncertainty": "The plan provides no realised training, spend or benefit. The financial amount is excluded from this candidate slice."
+    },
+    {
+      "id": "R15",
+      "enterprise_id": "BK-ENT-001",
+      "source": "N24",
+      "target": "N25",
+      "relationship_type": "reported agreement extending",
+      "evidence": [
+        "F11B"
+      ],
+      "period": "2026-06-04",
+      "status": "party-reported",
+      "canonical_accepted": false,
+      "truth_class": "relationship",
+      "observed_on": "2026-11-22",
+      "subject_label": "Microsoft",
+      "object_label": "GitHub Copilot use at Lloyds Banking Group",
+      "review_disposition": "governed endpoint and predicate review",
+      "uncertainty": "Party-reported scope. Actual install coverage, adoption, delegated buying authority, commercial terms and hosting remain unresolved."
+    }
+  ],
+  "historical_legal_relationships": [
+    {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "direct",
+      "id": "R2-REL-1",
+      "locator": "Item4.C printed11",
+      "object": "Lloyds Bank plc",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "indirect",
+      "id": "R2-REL-2",
+      "locator": "Item4.C printed11",
+      "object": "Scottish Widows Limited",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "indirect",
+      "id": "R2-REL-3",
+      "locator": "Item4.C printed11",
+      "object": "HBOS plc",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "indirect",
+      "id": "R2-REL-4",
+      "locator": "Item4.C printed11",
+      "object": "Bank of Scotland plc",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "direct",
+      "id": "R2-REL-5",
+      "locator": "Item4.C printed11",
+      "object": "Lloyds Bank Corporate Markets plc",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    },
+    {
+      "canonical_acceptance": false,
+      "direct_or_indirect": "direct",
+      "id": "R2-REL-6",
+      "locator": "Item4.C printed11",
+      "object": "LBG Equity Investments Limited",
+      "predicate": "holds_principal_interest_as_at2025-12-31",
+      "source_refs": [
+        "R2-LBG-20F25"
+      ],
+      "subject": "Lloyds Banking Group plc"
+    }
+  ]
+}

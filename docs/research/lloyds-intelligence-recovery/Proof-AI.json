@@ -1,0 +1,46 @@
+{
+  "case": "ai",
+  "authority": "temporary verified_flora_test_authority only",
+  "factual_assurance": "retained attributed replay; no new original-source verification",
+  "publication_eligible": false,
+  "production_activation": false,
+  "candidate_streams": [
+    "inside"
+  ],
+  "register_assertions": 4,
+  "recovered_assertions": 2,
+  "isolated_service_mutations": 12,
+  "derived_model_attributes": 6,
+  "repeat": "repeat_no_change",
+  "candidate_statements": [
+    "Lloyds disclosed Google Cloud as an Envoy build partner.",
+    "Lloyds disclosed Envoy as its internal agentic AI platform."
+  ],
+  "withdrawal": "Evidence withdrawal removes both dependent presentation statements",
+  "correction": "mismatched evidence/Observation suppressed; model history unchanged",
+  "source_lifecycle_limit": "legacy replay has no original-byte document revision binding",
+  "denials": [
+    "guest",
+    "other actor",
+    "other workspace",
+    "other enterprise",
+    "pilot runtime"
+  ],
+  "financial_record": "held before staging; no new Financial run",
+  "source_bindings": [
+    {
+      "publisher": "Lloyds Banking Group",
+      "period": "2026-04-28",
+      "source_url": "https://www.lloydsbankinggroup.com/",
+      "source_locator": "Media / 28 April 2026 / built with Google Cloud",
+      "binding_sha256_not_document_bytes": "8c81f060049bcacc3aaf4a3cec1b4a269a147db977cea09feecb7d8be9c905c9"
+    },
+    {
+      "publisher": "Lloyds Banking Group",
+      "period": "2026-04-28",
+      "source_url": "https://www.lloydsbankinggroup.com/",
+      "source_locator": "Media / 28 April 2026 / Lloyds Banking Group unveils Envoy",
+      "binding_sha256_not_document_bytes": "8c81f060049bcacc3aaf4a3cec1b4a269a147db977cea09feecb7d8be9c905c9"
+    }
+  ]
+}

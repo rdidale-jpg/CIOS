@@ -1,0 +1,47 @@
+{
+  "case": "division",
+  "authority": "temporary verified_flora_test_authority only",
+  "factual_assurance": "retained attributed replay; no new original-source verification",
+  "publication_eligible": false,
+  "production_activation": false,
+  "candidate_streams": [
+    "inside",
+    "landscape"
+  ],
+  "register_assertions": 4,
+  "recovered_assertions": 2,
+  "isolated_service_mutations": 12,
+  "derived_model_attributes": 6,
+  "repeat": "repeat_no_change",
+  "candidate_statements": [
+    "Lloyds announced Natasha Condon as Global Head of Transaction Banking.",
+    "Lloyds places Transaction Banking within its CIB business unit."
+  ],
+  "withdrawal": "Evidence withdrawal removes both dependent presentation statements",
+  "correction": "mismatched evidence/Observation suppressed; model history unchanged",
+  "source_lifecycle_limit": "legacy replay has no original-byte document revision binding",
+  "denials": [
+    "guest",
+    "other actor",
+    "other workspace",
+    "other enterprise",
+    "pilot runtime"
+  ],
+  "financial_record": "held before staging; no new Financial run",
+  "source_bindings": [
+    {
+      "publisher": "Lloyds Banking Group",
+      "period": "2026-11-18",
+      "source_url": "https://www.lloydsbankinggroup.com/",
+      "source_locator": "Media / 18 November 2026 / appointment",
+      "binding_sha256_not_document_bytes": "3695bce4bbb4f926cfe7973c740607141cfe47bb4befd4774d11e60070eae48f"
+    },
+    {
+      "publisher": "Lloyds Banking Group",
+      "period": "2026-11-18",
+      "source_url": "https://www.lloydsbankinggroup.com/",
+      "source_locator": "Media / 18 November 2026 / Natasha Condon appointment",
+      "binding_sha256_not_document_bytes": "3695bce4bbb4f926cfe7973c740607141cfe47bb4befd4774d11e60070eae48f"
+    }
+  ]
+}
