@@ -30,6 +30,12 @@
       "navigation_errors": []
     }
   ],
+  "runtime_hashes": {
+    "cios/applications/flora/leadership_agenda.py": "30699653637bc8e71770d062811019cd70da0e48ef1f7c02f883578c470b8be5",
+    "cios/applications/flora/lloyds_gold.py": "58a3459457ef7ced31df37ffd255ed17dfd651a9eb02e228760a7e61144dfea4",
+    "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "e043a0a8cf50e68c3467bbba1042fe240b2c24dfaee4909464b620016f57ca42"
+  },
+  "runtime_matches_sha": true,
   "knowledge_delta": {
     "new_reported_product_cells": 0,
     "new_calculated_product_shares": 0,

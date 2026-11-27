@@ -149,3 +149,18 @@ def test_additive_research_preserves_every_historical_pin_and_exact_comparator()
     with pytest.raises(AssertionError):history.compare_history(expected,{**expected,'unapproved':b'bad'})
     with pytest.raises(AssertionError):history.compare_history(expected,{**expected,next(iter(expected)):b'changed'})
     assert history.verify_history(root)['old_review_records_retained']
+
+
+def test_new_history_compatibility_cut_is_exact_and_does_not_accept_mutations(tmp_path):
+    import subprocess
+    from pathlib import Path
+    from tools.research.ux_unify_compatibility import predecessor
+    root=Path(__file__).resolve().parents[1];path='tools/research/history_integrity.py'
+    # Compare against the already established predecessor of the prior main
+    # checker; do not update any historical pins to the new source additions.
+    expected=json.loads((root/'docs/flora-runtime/rud1-648/Owner-Evolution.json').read_text())[path]['reviewed_sha256']
+    assert hashlib.sha256(predecessor(root,path)).hexdigest()==expected
+    (tmp_path/'tools/research').mkdir(parents=True)
+    changed=(root/path).read_bytes()+b'\n# unreviewed mutation\n'
+    (tmp_path/path).write_bytes(changed)
+    assert predecessor(tmp_path,path)==changed
