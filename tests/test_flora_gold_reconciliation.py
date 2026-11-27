@@ -124,3 +124,19 @@ def test_assessment_is_complete_as_a_view_without_scores_or_new_truth():
         assert all(r[k] for k in ('available_evidence','primary_home','evidence_ids_and_version','missing_or_restricted','specific_improvement'))
         assert all((ROOT/p.strip()).is_file() for p in r['source_paths'].split(';'))
     assert 'score' not in rows[0] and 'completeness_percentage' not in rows[0]
+
+
+@pytest.mark.parametrize('mutation',('none','command','permissions','extra_path','previous_cut'))
+def test_legacy_workflow_retirement_compatibility_is_exact_and_rejects_other_changes(tmp_path,mutation):
+    from tests.flora_f2_owner_contract import assert_owner_compatible
+    path='.github/workflows/flora-validation.yml'
+    previous=subprocess.check_output(['git','show','6b10935:'+path],cwd=ROOT)
+    actual=(ROOT/path).read_bytes()
+    if mutation=='command':actual=actual.replace(b'python tools/ci/flora_ci.py',b'echo skipped')
+    elif mutation=='permissions':actual=actual.replace(b'contents: read',b'contents: write')
+    elif mutation=='extra_path':actual=actual.replace(b"      - 'tests/**'\n",b'')
+    elif mutation=='previous_cut':previous+=b'\n'
+    target=tmp_path/path;target.parent.mkdir(parents=True);target.write_bytes(actual)
+    if mutation=='none':assert_owner_compatible(tmp_path,path,previous)
+    else:
+        with pytest.raises(AssertionError):assert_owner_compatible(tmp_path,path,previous)
