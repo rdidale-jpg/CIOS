@@ -165,7 +165,12 @@
   grid-template-columns: minmax(0, 3fr) minmax(7rem, 2fr);
   gap: 0.5rem;
 }
-.gold-page .finance-bars svg {
+.gold-page .finance-plot {
+  position: relative;
+}
+.gold-page .finance-plot svg {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
 }

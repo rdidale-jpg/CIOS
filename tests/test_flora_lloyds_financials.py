@@ -81,3 +81,14 @@ def test_chart_uses_same_typed_contract_for_equinix_without_currency_conversion(
     rows = [(str(line.fiscal_year), line.value.amount) for line in data if line.metric == 'revenue']
     body = chart.bars('Equinix revenue', 'Group reported · USD million', rows)
     assert '9,217' in body and 'USD million' in body and 'GBP' not in body
+
+
+def test_changed_underlying_basis_suppresses_bridge_without_hiding_statutory_figures():
+    dataset = f.current()
+    key = (f.GROUP, 'u_cost', '2026-09-30', '2026-01-01')
+    row, fact = dataset[key]
+    dataset[key] = row.model_copy(update={'accounting_basis': 'Incompatible'}), fact
+    body = f.earnings(dataset, '#evidence')
+    assert 'Income to statutory profit' not in body
+    assert 'What moved pretax profit?' not in body
+    assert 'Statutory income and expenses' in body

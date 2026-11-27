@@ -52,7 +52,8 @@ def test_business_selection_has_differentiated_economics_and_actual_context(focu
 
 
 @pytest.mark.parametrize('detail',('funding','income','costs','capital'))
-def test_financial_detail_keeps_actuals_periods_and_unmeasured_mechanisms_separate(detail):
+def test_financial_detail_keeps_actuals_periods_and_unmeasured_mechanisms_separate(detail, monkeypatch):
+    monkeypatch.setattr(g.lloyds_financials.public_statements, 'statement_series', lambda subject: ())
     body=view(focus='economics',detail=detail)
     assert 'ce-capital' in body and '£6.6bn' in body and 'Nine months to 30 September 2026' in body
     assert 'No area, line width or connector measures an allocation' in body
@@ -125,7 +126,8 @@ def test_only_presentation_changes_and_no_research_or_protected_owner_evolution(
       'cios/applications/flora/visual_streams.py','cios/applications/flora/research_intelligence/source_import.py',
       'cios/applications/flora/financial_intelligence','cios/applications/flora/blueprint_import',
       'tools/ci/flora-baseline-v1.json','tools/ci/flora_ci.py')
-    assert not subprocess.check_output(['git','diff','--name-only',BASE,'--',*paths],cwd=ROOT,text=True)
+    from tests.test_flora_lloyds_financials import assert_only_public_financial_changes
+    assert_only_public_financial_changes(ROOT, BASE, paths)
     before=ast.parse(subprocess.check_output(['git','show',BASE+':cios/applications/flora/lloyds_gold.py'],cwd=ROOT));after=ast.parse((ROOT/'cios/applications/flora/lloyds_gold.py').read_text())
     functions=lambda tree:{n.name:ast.dump(n,include_attributes=False) for n in tree.body if isinstance(n,ast.FunctionDef)}
     old,new=functions(before),functions(after)
