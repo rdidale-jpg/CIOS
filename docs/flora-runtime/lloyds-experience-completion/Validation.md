@@ -24,6 +24,7 @@ Final exact-head local and hosted results are linked in the PR. Do not infer dep
 
 - A surviving FY25 deposit source was initially omitted from the new funding selection. Each eligible stock now renders independently; withdrawal of Q3 also removes its difference calculation.
 - Secondary wording could otherwise outlive a withdrawn source. Factual examples are conditional; economic mechanisms are explicitly conceptual.
+- The older EAI-2 browser expected a funding-agenda marker directly on the Group root. It now follows the actual whole-region Customer funding link, verifies the primary comparison and retains the exact-one and numerical-content checks.
 - Narrow Main/200% zoom initially overflowed fixed diagram regions. Container-width reflow and readable native targets correct that failure.
 - The SWOT foundation extended beyond its diagram and legacy timeline margins affected contextual controls. Bounds and spacing are corrected; browser assertions cover the geometry.
 - An exploratory regression run spanned changing checkout SHAs, so its deployment-identity signature was not valid exact-head evidence. The comparator remains unchanged; the final run uses a fixed committed head.
