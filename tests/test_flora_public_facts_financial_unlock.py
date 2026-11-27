@@ -145,3 +145,21 @@ def test_source_catalogue_rejects_a_changed_issuer_even_with_resealed_numbers(re
     edit(records,'PFI-Lloyds-Q326.json',change)
     assert ps.economic_projection('lloyds-q3')=={}
     assert ps.economic_projection('lloyds-h1')['lines']
+
+
+@pytest.mark.parametrize('flag',['withdrawn','revoked','owner_only','stale','superseded','contradictory'])
+def test_existing_document_source_denial_cannot_be_bypassed_by_numeric_representation(records,flag):
+    path=records.parent/'Assessment-Overlay.json';data=json.loads(path.read_text())
+    next(s for s in data['sources']if s['id']=='PR-LBG-Q326')[flag]=True
+    path.write_text(json.dumps(data))
+    assert ps.economic_projection('lloyds-q3')=={}
+    assert f.public_factual_projection()=={}
+    assert ps.economic_projection('lloyds-h1')['lines']
+    assert '£11.084bn'not in view() and '£2.256bn'in view('retail')
+
+
+def test_existing_source_identity_change_does_not_leave_an_unbound_snapshot_visible(records):
+    path=records.parent/'Assessment-Overlay.json';data=json.loads(path.read_text())
+    next(s for s in data['sources']if s['id']=='PR-LBG-Q326')['url']='https://www.lloydsbankinggroup.com/other.pdf'
+    path.write_text(json.dumps(data))
+    assert ps.economic_projection('lloyds-q3')=={} and f.public_factual_projection()=={}

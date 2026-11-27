@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: '22'
       - run: python -m pip install -r requirements.txt
-      - name: Ordinary factual method, inactive Lloyds, financial and tenant boundaries
+      - name: Ordinary factual method, applicable restrictions, financial and tenant boundaries
         run: python -m pytest tests/test_flora_public_financial.py tests/test_flora_f1_642.py tests/test_flora_f2_644.py tests/test_flora_f3_646.py tests/test_flora_rud1_648.py tests/test_flora_auth2_655.py -q
       - name: Preserve all historical owner cuts, private-run functions and original artwork
         run: python tools/research/auth2_compatibility.py > "$RUNNER_TEMP/public-financial-compatibility.json"
@@ -39,7 +39,7 @@ jobs:
         run: |
           npm install --prefix "$RUNNER_TEMP/public-financial-node" playwright@1.62.1
           "$RUNNER_TEMP/public-financial-node/node_modules/.bin/playwright" install --with-deps chromium
-      - name: Shipping-disabled and isolated-positive responsive proof
+      - name: Shipping factual analysis and isolated restriction/withdrawal responsive proof
         env:
           NODE_PATH: ${{ runner.temp }}/public-financial-node/node_modules
         run: python tools/research/public_financial_preview.py --output "$RUNNER_TEMP/public-financial-proof"

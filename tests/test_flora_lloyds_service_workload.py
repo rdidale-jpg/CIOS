@@ -54,7 +54,7 @@ def test_source_lifecycle_removes_chart_prose_calculations_and_inspection(retain
     for detail in ('service-workload','service-bankcards','costs','sources'):
         body=main(detail)
         assert '115,687' not in body and '97.4%' not in body and 'case types recur after a firm-upheld decision' not in body
-    assert '502.8' in main('funding')  # Unrelated eligible source remains.
+    assert '502.777' in main('funding')  # Unrelated eligible source remains.
 
 
 @pytest.mark.parametrize('change',[

@@ -290,6 +290,41 @@ def minimal_factual_integrity(source, *, statement_periods=False):
     return bindings
 
 
+def current_source_records(domain):
+    """Read existing research Source metadata, never a new registry or store."""
+    import json
+    from . import model
+    from .registry import snapshot_boundary
+    path=snapshot_boundary(domain,model.REPO).parent/'Assessment-Overlay.json'
+    relative=path.relative_to(model.REPO)
+    if any((model.REPO/Path(*relative.parts[:i])).is_symlink() for i in range(1,len(relative.parts)+1)):
+        raise ValueError('Source metadata boundary unavailable')
+    if not path.exists():return ()
+    if not path.is_file() or path.stat().st_size>LIMIT:raise ValueError('Source metadata unavailable')
+    records=json.loads(path.read_text())['sources']
+    if not isinstance(records,list) or any(not isinstance(x,dict) for x in records):raise ValueError('Invalid Source metadata')
+    return tuple(records)
+
+
+def document_use_allowed(record, domain='banking', linked_id=None):
+    """Honour existing document lifecycle across its factual representations.
+
+    A Source identity/withdrawal binding, not Evidence promotion or permission
+    per document. An existing negative cannot be cleared by a second snapshot.
+    """
+    records=current_source_records(domain)
+    if linked_id:
+        linked=[s for s in records if s.get('id')==linked_id]
+        if len(linked)!=1 or linked[0].get('url')!=record['url']:
+            raise ValueError('Existing document Source identity changed or unavailable')
+    for source in records:
+        if source.get('url')!=record['url']:continue
+        if (working_restricted(source) or source.get('restrictions')
+                or source.get('verification') in {'unverified','rejected','denied'}):
+            raise PermissionError('Existing document Source is restricted')
+    return True
+
+
 def public_factual_record():
     """One finite case in the existing Source snapshot owner; no writes or URL fetch.
 
@@ -317,6 +352,7 @@ def public_factual_record():
         raise ValueError('Factual provenance fields unavailable')
     routine_factual_use(source)
     minimal_factual_integrity(source, statement_periods=True)
+    document_use_allowed(source, linked_id='PR-LBG-Q326')
     return source
 
 
@@ -383,6 +419,7 @@ def public_statement_record(selection):
                     or value['unit']!=('percentage' if ratio else 'currency') or value['scale']!=scale
                     or f['state']!=('pro_forma' if metric=='cet1_proforma' else 'actual')):
                 raise ValueError('Financial statement presentation axes mismatch')
+    document_use_allowed(record, domain, 'PR-LBG-Q326' if selection=='lloyds-q3' else None)
     return record, subject
 
 

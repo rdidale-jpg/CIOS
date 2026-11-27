@@ -124,6 +124,8 @@ SOURCE_CASES=[
 def test_source_lifecycle_removes_facts_figures_and_hidden_markup_without_blanket_hold(monkeypatch,source,route,removed,flag):
     x=data();next(s for s in x['sources'] if s['id']==source)[flag]=True
     monkeypatch.setattr(v,'current_data',lambda _:x)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: x['sources'])
     assert removed not in view(route)
     group=g.render({},canonical=True);assert '£502.8bn' in group and '£6.625bn' in group
     if source!='LCE-BOARD':assert 'Sarah Legg' in view('board')
@@ -146,6 +148,8 @@ def test_mismatched_axes_or_authority_fail_closed(monkeypatch,mutation):
     elif mutation=='date':s['publication_date']='2026-02-14'
     else:c['relationship']={'subject':'BK-ENT-001','predicate':'buys_from','object':'SUP-GOOGLE'}
     monkeypatch.setattr(v,'current_data',lambda _:x)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: x['sources'])
     assert '60,061' not in view('employees')
     assert '£502.8bn' in g.render({},canonical=True)
 

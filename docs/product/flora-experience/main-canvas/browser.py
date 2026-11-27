@@ -61,7 +61,7 @@ def run(phase,out,smoke=False):
       page.wait_for_url(lambda url:expected in str(url))
       assert expected in page.url,(device,selector,page.url)
      physical('', 'main .canvas-businesses a','focus=')
-     physical('?focus=economics','main .ce-capital>a[aria-label=Funding]','detail=funding')
+     physical('?focus=economics','main .financial-stage-nav>a[aria-label=Funding]','detail=funding')
      physical('?focus=economics&detail=funding','main .canvas-stock','detail=comparison')
      physical('?stream=inside&focus=operations','main .ce-operating>a[href*="detail=journey-"]','detail=journey-')
      physical('?stream=inside&focus=people&detail=structure','main .canvas-businesses a','stream=landscape')

@@ -102,7 +102,8 @@ def test_changed_bank_measure_cannot_inherit_exact_source_meaning(monkeypatch, f
     monkeypatch.setattr(v, 'current_data', lambda ctx: data)
     html = main()
     assert '£502.8bn' not in html and '£6.3bn' not in html
-    assert '£6.6bn' in html
+    # Independent current Source result retains its more precise earnings value.
+    assert '£6.625bn' in html
 
 
 @pytest.mark.parametrize('field,value', [

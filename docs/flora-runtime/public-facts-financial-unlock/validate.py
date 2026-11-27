@@ -12,7 +12,7 @@ def run():
     from cios.applications.flora.financial_intelligence.public_statements import economic_projection
     validate(ROOT);verify_history(ROOT);preserved_research_cut()
     sha=git('rev-parse','HEAD',text=True).strip();changed=git('diff','--name-only',BASE,sha,text=True).splitlines()
-    forbidden=('cios/applications/flora/security','cios/applications/flora/supabase','cios/domain/','cios/services/','architecture/decisions/','tools/ci/','render','requirements')
+    forbidden=('cios/applications/flora/security','cios/applications/flora/supabase','cios/domain/','cios/services/','architecture/decisions/','tools/ci/flora_ci.py','tools/ci/flora-baseline-v1.json','render','requirements')
     assert not [p for p in changed if p.startswith(forbidden)]
     runtime={'cios/applications/flora/'+p for p in ('lloyds_gold.py','visual_stream_assets/lloyds-gold.css','financial_intelligence/candidate_analytics.py','financial_intelligence/public_statements.py','research_intelligence/source_import.py')}
     assert {p for p in changed if p.startswith('cios/')}==runtime

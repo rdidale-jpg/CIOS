@@ -40,8 +40,10 @@ def test_all_default_executive_navigation_is_semantic_region_or_inspection(strea
    assert 'data-canvas-region'in attrs or attrs.get('data-canvas-exception')=='inspection',(stream,focus,detail,attrs)
    assert not {'li','td','th'}&set(ancestors),'Navigation must not be a tiny label in a data row'
    assert public_request_target(target.split('#')[0]),target
-  else:assert detail=='sources','Only optional source inspection contains external citations'
- assert 'Reading mode'not in html and '<details'not in main(html)
+  else:assert detail=='sources' or attrs.get('data-canvas-exception')=='inspection','Only optional source inspection contains external citations'
+ assert 'Reading mode'not in html
+ body=main(html)
+ assert body.count('<details')==body.count('<details class="econ-basis">')<=1  # One optional source inspection; no navigational expanders.
 
 
 def test_primary_business_compositions_wrap_customer_and_economic_context():
@@ -51,20 +53,20 @@ def test_primary_business_compositions_wrap_customer_and_economic_context():
   assert link['data-canvas-region']=='business'
   assert 'focus='+key in link['href']
   start=html.index('aria-label="'+title.replace('&','&amp;')+'"');body=html[start:html.index('</a>',start)]
-  assert customer in body and driver.replace('&','&amp;')in body
+  assert customer in body
+  assert {'retail':'£2.256bn','commercial':'£1.425bn','retirement':'£245m'}[key] in body
  assert 'Reporting businesses · not financial shares'in html
 
 
-def test_financial_flows_and_bars_are_full_native_targets_without_new_measurements():
+def test_financial_flows_and_bars_are_full_native_targets_with_reported_measurements():
  html=v.render(g.CANONICAL,query('landscape','economics'));dom=Links(html)
- for name in ('Funding','Lending & income','Costs & impairment','Capital & returns'):
-  assert any(a.get('aria-label')==name and a.get('data-canvas-region')=='money'for a,_ in dom.links)
- assert 'ce-capital' in html and '£6.6bn' in html
+ assert 'financial-economics' in html and '£6.625bn' in html
+ for name in ('Business contribution','Operating model','Leadership priorities'):
+  assert any(a.get('aria-label')==name and a.get('data-canvas-region')for a,_ in dom.links)
  funding=v.render(g.CANONICAL,query('landscape','economics','funding'))
- assert sum(a.get('data-canvas-region')=='financial-chart'for a,_ in Links(funding).links)==2
- assert all(value in funding for value in ('£502.8bn','£496.5bn','£6.3bn'))
- assert 'not an organic inflow' in funding.lower() and 'not adjusted for consolidation' in funding
- assert all(x not in html+funding for x in ('£11.084bn','3.21%','£477.5bn','.pdf'))
+ assert sum(a.get('aria-label','').startswith('Customer deposits ·') and bool(a.get('data-canvas-region'))for a,_ in Links(funding).links)==2
+ assert all(value in funding for value in ('£502.777bn','£496.457bn','6320m','3.21%','£477.5bn'))
+ assert 'not an organic inflow' in funding and '.pdf' not in html+funding
 
 
 def test_operating_value_system_layers_have_distinct_existing_destinations():
@@ -134,6 +136,8 @@ def test_source_withdrawal_removes_dependent_regions_values_and_accessible_label
  data=deepcopy(v.current_data(v.Context('lloyds','landscape')))
  next(s for s in data['sources']if s['id']=='PR-LBG-Q326')[flag]=True
  monkeypatch.setattr(v,'current_data',lambda ctx:data)
+ from cios.applications.flora.research_intelligence import source_import
+ monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
  html=main(v.render(g.CANONICAL,query('landscape','economics','funding')))
  for token in ('£502.8bn','£6.3bn','£6.6bn','value="502.8"','Compare customer deposits at 30 September 2026'):assert token not in html
  assert '£496.5bn'in html
@@ -149,6 +153,11 @@ def test_source_ownership_financials_iam_and_original_left_are_unchanged():
  # Cross-perspective href selection is intentionally evolved by v3.
  for name in ('facts_for','reported','interpretation','scene','resolve','render','stylesheet'):
   assert a[name]==b[name],name
- for name in ('security_store.py','security_web.py','public_routes.py','visual_streams.py','research_intelligence/source_import.py','financial_intelligence/candidate_analytics.py'):
+ for name in ('security_store.py','security_web.py','public_routes.py','visual_streams.py'):
   path='cios/applications/flora/'+name
   assert (ROOT/path).read_bytes()==subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
+
+
+def test_current_source_and_financial_evolution_is_exact_and_private_owners_are_preserved():
+ from tools.research.public_financial_compatibility import validate
+ assert validate(ROOT)['ci_comparator_changed'] is False

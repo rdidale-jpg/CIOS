@@ -92,6 +92,8 @@ def test_withdrawal_removes_source_dependent_detail_and_retains_unrelated_fundin
     data=deepcopy(v.current_data(v.Context('lloyds','inside')))
     next(s for s in data['sources'] if s['id']==source)[flag]=True
     monkeypatch.setattr(v,'current_data',lambda _:data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     for route in routes:assert removed not in view(*route)
     assert '£502.8bn' in view()
 
@@ -108,6 +110,8 @@ def test_financial_withdrawal_removes_all_new_visual_and_accessible_financial_va
     path=tmp_path/'enterprise-knowledge/banking/research-model/source-snapshots/PFI-Lloyds-Q326.json'
     record=json.loads(path.read_text());record[flag]=True;path.write_text(json.dumps(record))
     monkeypatch.setattr(v,'current_data',lambda _:data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     for route in [('landscape','group',''),('landscape','economics','capital'),('landscape','economics','funding'),('forces','markets','')]:
         body=view(*route)
         assert all(value not in body for value in ('£502.8bn','£6.6bn','£6.3bn'))
@@ -164,6 +168,8 @@ def test_withdrawn_operating_example_does_not_survive_as_secondary_fact(monkeypa
     data=deepcopy(v.current_data(v.Context('lloyds','inside')))
     next(s for s in data['sources'] if s['id']=='LGV2-FRAUD')['withdrawn']=True
     monkeypatch.setattr(v,'current_data',lambda _:data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     assert 'Envoy in fraud operations' not in view('inside','operations')
     for route in [('inside','operations','journey-data'),('inside','operations','journey-risk'),('inside','capabilities','data')]:
         body=view(*route)

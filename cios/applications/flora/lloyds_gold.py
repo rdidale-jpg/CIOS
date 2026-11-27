@@ -1519,7 +1519,12 @@ def experience_business(state,facts):
 
 def experience_economic_mechanism(state,facts,issues):
     current=financial_knowledge(state)
-    if current:return current
+    if current:
+        if state.detail=='costs':
+            current+='<section><h2>Efficiency ambitions</h2>'+reported(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS'))+'<p>Gross savings are not realised net profit. Implementation, supervision and continuity costs must remain in the comparison.</p>'+region(state,'Efficiency objectives',kind='timeline',caption='Management target, not an achieved result',stream='forces',focus='strategy',detail='objective-efficiency')+'</section>'
+        if state.detail=='capital' and 'LBG-V2-CHALMERS' in facts:
+            current+='<section class="ce-evidence-story"><h2>Published finance remit</h2>'+v2_reported(facts,'CHALMERS')+'<p>Relevant Group role, not verified delegated procurement authority.</p></section>'
+        return current+connected_links(state)
     nodes=[]
     areas=[('funding','Funding','Deposits, price and maturity',(0,0,45,27)),
            ('income','Lending & income','Asset yield, fees and customer mix',(55,0,45,27)),
@@ -2135,6 +2140,8 @@ def economic_lines(projection):
 def economic_money(line, *, magnitude=False):
     from decimal import Decimal
     from .financial_intelligence.normalisation import SCALE_FACTORS
+    from .financial_intelligence.public_statements import statements
+    for _,fact in statements((line,)):p.note_editorial_sources(fact.sources)
     value=abs(line.value.amount) if magnitude else line.value.amount
     if line.value.unit=='percentage':return str(value)+'%'
     base=value*SCALE_FACTORS[line.value.scale]
@@ -2148,7 +2155,7 @@ def economic_money(line, *, magnitude=False):
 def economic_source_note(lines):
     from .financial_intelligence.public_statements import statements
     from .enterprise_economics import _basis
-    return _basis(tuple(fact for _,fact in statements(tuple(lines))))
+    return _basis(tuple(fact for _,fact in statements(tuple(lines)))).replace('<a ', '<a data-canvas-exception="inspection" ')
 
 
 def economic_comparison(state,title,current,prior,*,detail='income'):
@@ -2176,7 +2183,7 @@ def financial_knowledge(state,*,summary=False):
         for key,title,detail in [('group_underlying_nii','Net interest income','income'),('operating_costs-2026','Operating costs','costs'),('net_operating_income-2026','Net income','income')]:
             if key in ql:
                 x=ql[key];body+=region(state,title,'<strong>'+economic_money(x,magnitude=True)+'</strong>',kind='money',caption='Reported · '+x.accounting_basis,focus='economics',detail=detail)
-        return body+'</div><small class="source-credit">Source: Lloyds Banking Group · Q3 2026 results.</small></section>'
+        return body+'</div><small class="source-credit">Source: Lloyds Banking Group · Q3 and H1 2026 results.</small></section>'
     if state.focus in {'retail','commercial','retirement'}:
         prefix=state.focus;rows=[hl[k]for k in tuple(f'{prefix}-{metric}-2026'for metric in ('net_interest_income','other_income','lease_depreciation','net_operating_income','operating_costs','remediation','credit_impairment','underlying_profit_before_tax'))if k in hl]
         if not rows:return ''
@@ -2188,13 +2195,14 @@ def financial_knowledge(state,*,summary=False):
     detail=state.detail or 'income'
     period_context=('Group reporting segments · H1 2026 / H1 2025' if detail in {'central','divisions'} else 'Balance sheet · 30 September 2026 / 31 December 2025' if detail in {'funding','comparison','capital'} else 'Reported Group economics · 9M 2026 / 9M 2025')
     body='<section class="financial-economics"><p class="eyebrow">'+period_context+'</p>'
+    body+='<nav class="financial-stage-nav" aria-label="Economic stages">'+''.join(region(state,label,kind='money',caption=caption,focus='economics',detail=target)for label,caption,target in [('Funding','Balance-sheet stocks','funding'),('Lending & income','Period earnings','income'),('Costs & impairment','Period charges','costs'),('Capital & returns','Prudential capacity','capital')])+'</nav>'
     used=[]
     if detail in {'funding','comparison'}:
         body+='<h2>Funding the balance sheet</h2>'+economic_comparison(state,'Customer deposits',ql.get('customer_deposits-2026'),ql.get('customer_deposits-2025'),detail='comparison')
         used=[ql[k]for k in ('customer_deposits-2025','customer_deposits-2026','banking_nim','average_banking_assets')if k in ql]
         body+='<dl class="financial-statement-lines">'+''.join('<div><dt>'+e(x.definition)+'</dt><dd>'+economic_money(x)+'</dd></div>'for x in used[2:])+'</dl>'
         if 'customer_deposits-movement'in q.get('comparisons',{}):
-            body+='<p>Calculated deposit balance change: £'+q['comparisons']['customer_deposits-movement']['value']+'m. This is not an organic inflow. Banking margin relates to average banking earning assets, rather than Group profit.</p>'
+            body+='<p data-intelligence="funding-base" data-owner-item="customer_deposits-movement" data-semantic-type="calculated">Calculated deposit balance change: £'+q['comparisons']['customer_deposits-movement']['value']+'m. This is not an organic inflow and is not adjusted for consolidation. Banking margin relates to average banking earning assets, rather than Group profit.</p>'
     elif detail=='capital':
         body+='<h2>Risk capacity and capital</h2>'+economic_comparison(state,'Risk-weighted assets',ql.get('risk_weighted_assets-2026'),ql.get('risk_weighted_assets-2025'),detail='capital')
         used=[ql[k]for k in ('cet1-2026','cet1-2025','cet1-proforma-2025','risk_weighted_assets-2026')if k in ql]
@@ -2233,5 +2241,5 @@ def financial_knowledge(state,*,summary=False):
                 changes.append('<div><dt>'+label+'</dt><dd>'+display+'</dd></div>')
             body+='<h3>What changed</h3><dl class="financial-statement-lines">'+''.join(changes)+'</dl><h3>Commercial interpretation</h3><p>Separate recurring service-cost improvement from income growth, remediation normalisation and credit effects before attributing value to a transformation. The figures establish economic context, not an unfilled buying requirement.</p>'
 
-    body+='<div class="ce-context-controls">'+region(state,'Business contribution',kind='business',caption='Reported H1 division economics',focus='economics',detail='central')+region(state,'Operating model',kind='operating',caption='Capabilities, people and delivery',stream='inside',focus='operations',detail='')+region(state,'Leadership priorities',kind='timeline',caption='Existing objectives and trade-offs',stream='forces',focus='strategy',detail='goals')+'</div>'
+    body+='<div class="ce-context-controls">'+region(state,'Business contribution',kind='business',caption='Reported H1 division economics',focus='economics',detail='central')+region(state,'Operating model',kind='operating',caption='Capabilities, people and delivery',stream='inside',focus='operations',detail='')+region(state,'Leadership priorities',kind='timeline',caption='Existing objectives and trade-offs',stream='forces',focus='strategy',detail='goals')+region(state,'Customer operations',kind='operating',caption='Existing service and customer context',stream='inside',focus='operations',detail='service')+'</div>'
     return body+economic_source_note(used)+'</section>'

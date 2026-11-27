@@ -41,6 +41,8 @@ def test_envoy_withdrawal_removes_every_new_dependent_view(monkeypatch, flag, de
     data = deepcopy(visual.current_data(visual.Context('lloyds', 'landscape')))
     next(s for s in data['sources'] if s['id'] == 'PR-LBG-ENVOY')[flag] = True
     monkeypatch.setattr(visual, 'current_data', lambda ctx: data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     body = main(query('applications', detail))
     assert '<h2>Envoy</h2>' not in body and 'Google Cloud' not in body
     assert 'Start with one agreed workflow' not in body and 'Platform capability is a starting point' not in body
@@ -64,6 +66,8 @@ def test_benefit_withdrawal_does_not_remove_independent_platform_but_removes_num
     data = deepcopy(visual.current_data(visual.Context('lloyds', 'landscape')))
     next(s for s in data['sources'] if s['id'] == 'PR-LBG-AI26')['withdrawn'] = True
     monkeypatch.setattr(visual, 'current_data', lambda ctx: data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     body = main(query('applications', 'envoy-value'))
     assert '<h2>Envoy</h2>' in body and 'Google Cloud' in body
     assert 'GBP50m' not in body and 'GBP100m' not in body
@@ -77,6 +81,8 @@ def test_group_payment_disclosures_do_not_survive_source_withdrawal(monkeypatch)
         if source['id'] in {'PR-LBG-A2030', 'PR-LBG-Q326'}:
             source['withdrawn'] = True
     monkeypatch.setattr(visual, 'current_data', lambda ctx: data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     body = main(query(detail='transaction-delivery'))
     assert 'Separate Group payments context' not in body
     assert 'Curve acquisition' not in body
@@ -90,9 +96,11 @@ def test_new_economic_view_rejects_wrong_entity_period_unit_or_actual_basis(monk
     data = deepcopy(visual.current_data(visual.Context('lloyds', 'landscape')))
     next(c for c in data['claims'] if c['id'] == 'LBG-Q326-PROFIT')[field] = value
     monkeypatch.setattr(visual, 'current_data', lambda ctx: data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     body = main(query('economics', 'income'))
     assert '£6.6bn' not in body
-    assert 'The earnings equation' in body
+    assert 'From income to earnings' in body and '£6.625bn' in body
 
 
 def test_economic_target_is_not_an_actual_or_divisional_allocation(monkeypatch):
@@ -105,14 +113,16 @@ def test_economic_target_is_not_an_actual_or_divisional_allocation(monkeypatch):
     assert 'cost-to-income ratio below 45%' in goal
     assert 'Gross savings are not realised net profit' in body
     assert 'Unavailable</td>' not in body
-    assert '£6.6bn' in body and 'Group statutory profit' in body
-    assert 'Reported Group flow, not divisional allocation' in body
+    assert '£6.625bn' in body and 'Statutory profit before tax' in body
+    assert 'Reported Group economics' in body
     data=deepcopy(visual.current_data(visual.Context('lloyds','landscape')))
     next(source for source in data['sources'] if source['id']=='PR-LBG-A2030')['withdrawn']=True
     monkeypatch.setattr(visual,'current_data',lambda _:data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     withdrawn=main(query('economics','costs'))
     assert 'cost-to-income ratio below 45%' not in withdrawn and 'GBP2bn' not in withdrawn
-    assert '£6.6bn' in withdrawn  # Independent Group actual survives target withdrawal.
+    assert '£6.625bn' in withdrawn  # Independent Group actual survives target withdrawal.
 
 
 @pytest.mark.parametrize('selector', ['workspace=private', 'analysis=private', 'subject=BK-ENT-003', 'source=owner-only'])

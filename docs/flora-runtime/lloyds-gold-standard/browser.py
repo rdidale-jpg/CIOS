@@ -44,7 +44,7 @@ with TemporaryDirectory(prefix='flora-gold-browser-') as runtime,sync_playwright
       target=page.locator('[data-region-key="'+key+'"]');size=target.bounding_box();assert size['width']>=44 and size['height']>=44
       if device=='desktop':target.focus();page.keyboard.press('Enter')
       else:target.tap()
-      expect(page.locator('main h1')).to_have_text(label);expect(page.locator('[data-region-key="'+key+'"][aria-current]')).to_have_count(1);expect(page.locator('main details')).to_have_count(0)
+      expect(page.locator('main h1')).to_have_text(label);expect(page.locator('[data-region-key="'+key+'"][aria-current]')).to_have_count(1);expect(page.locator('main details:not(.econ-basis)')).to_have_count(0);assert page.locator('main details.econ-basis').count()<=1
     for focus,stream,name in [('economics','landscape','economics'),('operations','inside','operating-model'),('applications','inside','applications'),('programmes','inside','transformation'),('analysis','forces','analysis')]:
      page.goto(g.href(g.State(stream,focus,focus)));capture(name)
      if focus=='analysis':
@@ -70,7 +70,7 @@ with TemporaryDirectory(prefix='flora-gold-browser-') as runtime,sync_playwright
    proof['devices'].append({'device':device,'fifteen_native_image_selections':args.phase=='after','eight_swot_theme_drills':args.phase=='after','application_evidence_unknowns':args.phase=='after','context_reload_history':args.phase=='after','original_and_previous_default_preserved':True,'no_overflow':True,'keyboard_or_touch':True,'errors':errors});page.close()
   if args.phase=='after':
    page=browser.new_page(base_url=base,viewport={'width':1194,'height':834});source=v.current_data;d=deepcopy(source(v.Context('lloyds','landscape')))
-   page.goto(g.href(g.State('landscape','economics','economics')));expect(page.locator('main')).to_contain_text('£502.8bn');page.goto(g.href(g.State('forces','analysis','analysis')))
+   page.goto(g.href(g.State('landscape','economics','economics','funding')));expect(page.locator('main')).to_contain_text('£502.777bn');page.goto(g.href(g.State('forces','analysis','analysis')))
    next(s for s in d['sources'] if s['id']=='PR-LBG-Q326')['withdrawn']=True;v.current_data=lambda ctx:d
    try:
     page.go_back();expect(page.locator('main')).not_to_contain_text('£502.8bn');assert not page.locator('meter[value="502.8"]').count();expect(page.locator('main')).not_to_contain_text('£6.3bn')

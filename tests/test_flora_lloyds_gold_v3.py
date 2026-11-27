@@ -87,6 +87,8 @@ def test_withdrawal_removes_new_ordinary_hidden_and_derived_content(monkeypatch,
     data=deepcopy(v.current_data(v.Context('lloyds','landscape')))
     next(s for s in data['sources'] if s['id']==source)[flag]=True
     monkeypatch.setattr(v,'current_data',lambda _:data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     for stream,focus,detail in states:
         body=page(stream,focus,detail,'commercial' if source=='LGV2-TRANSACTIONS' else None)
         assert all(word not in body for word in removed)

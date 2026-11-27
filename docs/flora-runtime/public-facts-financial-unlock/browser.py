@@ -56,8 +56,14 @@ def run(out,phase):
                     page.goto(url(q));assert removed in page.locator('main').inner_text();page.goto('/enterprises/easyjet');record['withdrawn']=True;path.write_text(json.dumps(record));page.go_back();page.reload()
                     assert removed not in page.locator('main').inner_html();page.emulate_media(media='print');assert removed not in page.locator('main').aria_snapshot()
                     page.goto(url({}));assert unrelated in page.locator('main').inner_text();path.write_text(original);page.emulate_media(media='screen')
+                original=model.DATA.read_text();data=json.loads(original)
+                page.goto(url(VIEWS['income']));assert '£6.625bn' in page.locator('main').inner_text();page.goto('/enterprises/easyjet')
+                next(s for s in data['sources']if s['id']=='PR-LBG-Q326')['withdrawn']=True;model.DATA.write_text(json.dumps(data))
+                page.go_back();page.reload();page.emulate_media(media='print')
+                assert '£6.625bn' not in page.locator('main').inner_html() and '£6.625bn' not in page.locator('main').aria_snapshot()
+                model.DATA.write_text(original);page.emulate_media(media='screen')
                 context=browser.new_context(base_url=f'http://127.0.0.1:{server.server_port}',java_script_enabled=False);p=context.new_page();p.goto(url(VIEWS['income']));p.get_by_role('link',name='Business contribution',exact=True).click();assert '£289m' in p.locator('main').inner_text();context.close();page.close()
-                proof['checks']={'reported_financials_visible':True,'whole_region_pointer_touch':True,'keyboard_no_js':True,'back_forward_reload':True,'independent_source_withdrawal_history_print_accessibility':True,'banking_easyjet_and_compatibility_routes':True,'responsive_zoom':True}
+                proof['checks']={'reported_financials_visible':True,'whole_region_pointer_touch':True,'keyboard_no_js':True,'back_forward_reload':True,'independent_source_withdrawal_history_print_accessibility':True,'existing_document_owner_withdrawal_all_representations':True,'banking_easyjet_and_compatibility_routes':True,'responsive_zoom':True}
         finally:browser.close();server.shutdown();server.server_close()
     (out/(phase+'-browser.json')).write_text(json.dumps(proof,indent=2)+'\n');print(json.dumps({'phase':phase,'captures':len(proof['captures']),'runtime_matches_sha':matches,'passed':True}))
 if __name__=='__main__':

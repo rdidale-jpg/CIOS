@@ -25,7 +25,7 @@ def data():return deepcopy(v.current_data(v.Context('lloyds','landscape')))
 
 def test_group_arrival_and_optional_preservation():
     body=main(gold.render({}))
-    assert '<h1>Group overview</h1>' in body and '£502.8bn' in body and '£6.6bn' in body
+    assert '<h1>Group overview</h1>' in body and '£502.8bn' in body and '£6.625bn' in body
     assert 'Gold Standard evaluation' in old.render({})
     assert '<h1>Retail Banking</h1>' in old.render({})
     assert 'From funding to earnings' in v.render('/enterprises/lloyds/legacy',{})
@@ -44,7 +44,8 @@ def test_all_fifteen_subjects_and_deep_states_are_finite_native_links(stream):
             assert '<h1>'+label.replace('&','&amp;')+'</h1>' in html
             assert html.count('data-region-key=')==5 and html.count('aria-current="true"')==1
             assert html.count('data-region="')==3
-            assert '<details' not in main(html)
+            canvas=main(html)
+            assert canvas.count('<details')==canvas.count('<details class="econ-basis">')<=1
             assert '.pdf' not in html and 'primary_content_sha256' not in html
             assert public_request_target(gold.href(state).split('#',1)[0])
 
@@ -77,6 +78,8 @@ def test_http_read_only_headers_and_semantic_head(http):
 def test_withdrawn_sources_remove_all_dependent_numeric_accessibility_and_analysis_outputs(monkeypatch,flag):
     d=data();next(s for s in d['sources'] if s['id']=='PR-LBG-Q326')[flag]=True
     monkeypatch.setattr(v,'current_data',lambda ctx:d)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: d['sources'])
     for query in ({},{'focus':['economics']},{'focus':['economics'],'detail':['sources']},
                   {'stream':['forces'],'focus':['analysis']},{'stream':['forces'],'focus':['strategy']}):
         html=gold.render(query)
@@ -92,6 +95,8 @@ def test_withdrawn_collaboration_does_not_survive_in_application_or_supplier_des
     for source in d['sources']:
         if source['id'] in {'PR-LBG-ENVOY','LCE-VERTEX'}:source['withdrawn']=True
     monkeypatch.setattr(v,'current_data',lambda ctx:d)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: d['sources'])
     for focus,detail in [('applications','envoy'),('partners','google'),('partners','')]:
         html=main(gold.render({'stream':['inside'],'focus':[focus],'detail':[detail]}))
         assert 'Google Cloud' not in html and '<h2>Envoy</h2>' not in html
@@ -106,19 +111,23 @@ def test_financial_entity_period_basis_unit_actual_and_value_binding(monkeypatch
     for c in d['claims']:
         if c['id'] in gold.recovery.MEASURES:c[field]=value
     monkeypatch.setattr(v,'current_data',lambda ctx:d)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: d['sources'])
     html=gold.render({'focus':['economics']})
     assert '£502.8bn' not in html and '£496.5bn' not in html and '£6.6bn' not in html
-    assert '<meter' not in html and '£999bn' not in html
+    # Invalid legacy claims cannot change the independently verified Source lines.
+    assert '£999bn' not in html and '£6.625bn' in html
 
 
 def test_held_segment_figures_new_financial_projection_and_pdf_links_remain_inactive():
     from cios.applications.flora.financial_intelligence import candidate_analytics
     assert len(candidate_analytics.public_factual_projection()['facts']) == 3
     html=''.join(gold.render({'stream':[s],'focus':[f],'detail':[d]}) for s,rows in gold.REGIONS.items() for f,_ in rows for d in ('',*gold.DETAILS[f]))
-    for held in ('2,256','1,425','4,215','4,293','£6,625','£395.3','£321.8','.pdf','£100m opportunity'):
+    for held in ('4,293','£395.3','£321.8','.pdf','£100m opportunity'):
         assert held not in html
-    assert 'Central / Equity and the Group tie-out' in html
-    assert 'different accounting bases' in html and 'not a measured allocation' in html
+    assert 'Different businesses, different economics' in html and '£2.256bn' in html
+    assert 'underlying reporting-segment results' in html and 'none is allocated' in html
+    assert all(x in html for x in ('£2.256bn','£1.425bn','£4.215bn','£6.625bn'))
 
 
 def test_capability_relationships_and_unknown_contracts_never_become_verified_edges():
@@ -220,6 +229,8 @@ def test_exact_route_evolution_preserves_historical_pins_and_denies_arbitrary_mu
 def test_assessment_identity_and_private_metadata_are_denied_before_model_content(monkeypatch,mutation):
     d=data();d.update(mutation);d['capabilities'][0]['title']='PRIVATE CAPABILITY'
     monkeypatch.setattr(v,'current_data',lambda ctx:d)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: d['sources'])
     for stream in gold.REGIONS:
         with pytest.raises(PermissionError):gold.render({'stream':[stream]})
 
@@ -229,6 +240,8 @@ def test_private_model_rows_and_wrong_claim_identity_are_not_published(monkeypat
     d['programmes'][0].update(owner_only=True,title='PRIVATE PROGRAMME')
     next(c for c in d['claims'] if c['id']=='LBG-Q326-PROFIT')['asset_id']='BK-ENT-003'
     monkeypatch.setattr(v,'current_data',lambda ctx:d)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: d['sources'])
     assert '£6.6bn' not in gold.render({})
     assert 'PRIVATE CAPABILITY' not in gold.render({'stream':['inside'],'focus':['capabilities']})
     assert 'PRIVATE PROGRAMME' not in gold.render({'stream':['inside'],'focus':['programmes']})
@@ -254,8 +267,8 @@ def test_other_existing_owners_supply_scoped_service_outcomes_and_stock_recipe()
     assert all(value in service for value in ('118,762','118,861','66.12'))
     assert 'Open Government Licence' in service and 'different cohorts' in service
     economics=main(gold.render({'focus':['economics'],'detail':['funding']}))
-    assert 'data-owner-item="funding-stock-change"' in economics
-    assert '£6.3bn' in economics and 'data-semantic-type="calculated"' in economics
+    assert 'data-owner-item="customer_deposits-movement"' in economics
+    assert '6320m' in economics and 'data-semantic-type="calculated"' in economics
     assert 'not adjusted for consolidation' in economics
     issue=next(row for row in leadership_agenda.agenda('lloyds',data()) if row.key=='funding-base')
     assert issue.facts[-1].method=='502.8 − 496.5 = 6.3 GBP billion; arithmetic comparison of the published stocks.'
@@ -285,9 +298,15 @@ def test_fca_source_withdrawal_removes_dependent_service_outputs_only(monkeypatc
 def test_stock_withdrawal_removes_existing_calculated_result(monkeypatch):
     d=data();next(s for s in d['sources'] if s['id']=='PR-LBG-AR25')['withdrawn']=True
     monkeypatch.setattr(v,'current_data',lambda ctx:d)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: d['sources'])
     html=gold.render({'focus':['economics'],'detail':['funding']})
     assert '£6.3bn' not in html and 'funding-stock-change' not in html
-    assert '£502.8bn' in html
+    assert '£502.777bn' in html and '6320m' in html
+    # Current Q3 source independently reports both stocks; the withdrawn
+    # annual-source recipe must not replace or suppress that current input.
+    from cios.applications.flora import leadership_agenda
+    assert 'funding-base' not in {x.key for x in leadership_agenda.agenda('lloyds',d)}
 
 
 def test_deep_link_serialisation_and_parent_navigation_do_not_lose_or_trap_detail():
@@ -309,6 +328,8 @@ def test_ceo_deep_links_keep_subject_and_withdraw_strategy_goals(http, monkeypat
     current = data()
     next(source for source in current['sources'] if source['id'] == 'PR-LBG-A2030')['withdrawn'] = True
     monkeypatch.setattr(v, 'current_data', lambda ctx: current)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: current['sources'])
     status, _, html = http(target)
     assert status == 200
     assert 'From Commercial Banking' in html
@@ -325,6 +346,8 @@ def test_people_view_withdraws_workforce_evidence_without_inventing_accountabili
     current = data()
     next(source for source in current['sources'] if source['id'] == 'PR-LBG-AR25')['withdrawn'] = True
     monkeypatch.setattr(v, 'current_data', lambda ctx: current)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: current['sources'])
     html = gold.render(query)
     # The independent, source-bound June 2026 disclosure survives withdrawal
     # of the older annual-report source; the older claim does not.

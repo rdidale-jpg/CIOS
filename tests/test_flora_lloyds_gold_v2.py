@@ -37,7 +37,7 @@ def test_original_research_and_permissions_are_preserved_with_only_additive_clai
 
 def test_whole_group_arrival_and_distinct_business_models():
     body=view();assert 'Group overview' in body and 'One Group, different economic engines' in body
-    assert '28 million' in body and 'ce-economy' in body and '£502.8bn' in body and '£6.6bn' in body
+    assert '28 million' in body and 'ce-economy' in body and '£502.8bn' in body and '£6.625bn' in body
     assert '115,687' not in body and '97.4%' not in body
     assert 'BCB' not in body  # No unexplained acronym-first overview.
     commercial=view(focus='commercial')
@@ -111,6 +111,8 @@ def test_new_source_lifecycle_removes_only_dependent_intelligence(monkeypatch,fl
     data=deepcopy(v.current_data(v.Context('lloyds','inside')))
     next(s for s in data['sources'] if s['id']==sid)[flag]=True
     monkeypatch.setattr(v,'current_data',lambda _:data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     assert removed not in view(*route)
     assert '£502.8bn' in view()
 
@@ -128,6 +130,8 @@ def test_new_claims_fail_closed_for_wrong_source_identity_or_meaning(monkeypatch
     elif mutation=='published':source['publication_date']='2026-06-05'
     else:source['restrictions']=['public_read_only']
     monkeypatch.setattr(v,'current_data',lambda _:data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     assert '40,000' not in view('inside','applications','frontier')
     assert '£502.8bn' in view()
 

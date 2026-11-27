@@ -63,6 +63,8 @@ def test_ai_source_withdrawal_is_precise_and_preserves_independent_evidence(monk
     data=deepcopy(v.current_data(v.Context('lloyds','inside')))
     next(s for s in data['sources'] if s['id']==source_id)['withdrawn']=True
     monkeypatch.setattr(v,'current_data',lambda ctx:data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     body=main('forces','strategy','objective-ai')
     if source_id=='PR-LBG-AI26':
         assert 'data-claim-id="LBG-AI26-REPORTED"' not in body and 'data-claim-id="LBG-AI26-EXPECTED"' not in body
@@ -88,7 +90,7 @@ def test_source_withdrawal_removes_all_new_service_depth_and_yields_meaningful_a
         body=main(detail=detail)
         assert 'cannot be shown for this selection' in body
         assert all(s not in body for s in ('115,687','97.4%','case types recur','closed-case mix'))
-    assert '£502.8bn' in main('landscape','economics','funding')
+    assert '£502.777bn' in main('landscape','economics','funding')
 
 
 @pytest.mark.parametrize('detail',('service','service-bankcards','service-mortgages','service-insurance'))
