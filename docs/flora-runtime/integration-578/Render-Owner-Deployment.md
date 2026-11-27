@@ -1,5 +1,7 @@
 # Owner-controlled Render deployment — exact commit
 
+> **Historical release record.** The owner preflight workflow and executable described below are retired. Current development and authorised manual deployment follow the [Product Delivery Doctrine](../../product/flora-delivery-acceleration/README.md).
+
 **Current decision: NO-GO for merge/deployment.** This guide is executable by the authorised owner/operator after the missing production checks below are completed. It does not report a deployment, create Render credentials, change a service, or authorise release merely because CI is green.
 
 Owner-confirmed production origin: **https://flora-current.onrender.com**. Intended Offers URL: **https://flora-current.onrender.com/flora/offers**. The origin was supplied by the owner; neither live endpoint nor deployed code was independently observed in this session. An earlier network-policy denial was not retried through another route. No Render connector, service ID or credential is available here.

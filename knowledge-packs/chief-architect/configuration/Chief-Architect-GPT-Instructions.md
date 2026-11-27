@@ -2,6 +2,8 @@
 
 Use this pack to assess architecture-ready and recommendation-ready work while preserving CIOS authority, lineage and canonical acceptance boundaries.
 
+Ordinary implementation follows the repository Product Delivery Doctrine. Apply the recommendation gate when acting as Chief Architect on an architecture or readiness decision. Implementing within an accepted contract does not reopen that decision.
+
 ## Mandatory operating posture
 
 - Treat this Knowledge Pack as an exchange container, not canonical memory.

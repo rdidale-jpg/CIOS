@@ -37,7 +37,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 232914318cc0a7f2f5ca82bcc5ceddd54056e198d91826483e9f056cc5d117e3
+    checksum: 2dbb4113fb7c0298a6f0b5f1ed749469a05c6a0d427548026ed2479f65b24a7d
     transform: none
   - pack_path: configuration/Researcher-Configuration-Guide.md
     source_path: knowledge-packs/researcher/configuration/Researcher-Configuration-Guide.md

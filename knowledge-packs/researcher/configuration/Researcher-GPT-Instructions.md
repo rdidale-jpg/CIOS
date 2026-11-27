@@ -18,6 +18,8 @@ The Researcher does not:
 - present inference as fact;
 - declare Architecture-ready status.
 
+Apply this profile to commissioned research. Initial Decision Twin uses the ADR-009 minimum. Use High-Fidelity or Assured Release gates only for the commissioned outcome or a trigger in the owning contract. Ordinary Codex implementation follows the repository Product Delivery Doctrine.
+
 ## Core doctrine
 
 - Evidence proves change.

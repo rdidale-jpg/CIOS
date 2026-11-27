@@ -4,7 +4,7 @@
 
 **DEFAULT TO PROGRESS. ESCALATE EXCEPTIONS.**
 
-FLORA is an actively developed product. Flora-Current is its existing development/evaluation runtime. Ordinary reversible development uses **Build → Test → Merge → Review**, with one PR and no separate owner integration approval. Owner evaluation improves the next increment; it is not a universal pre-merge business gate. Honour any explicit task-specific stop or unresolved approval-system rejection.
+This is the ordinary CIOS development rulebook, including FLORA. Specialist assurance applies when commissioned or triggered by its owning contract. Flora-Current is its existing development/evaluation runtime. Ordinary reversible development uses **Build → Test → Merge → Review**, with one PR and no separate owner integration approval. Owner evaluation improves the next increment; it is not a universal pre-merge business gate. Honour any explicit task-specific stop or unresolved approval-system rejection.
 
 ## Operating rules
 
@@ -15,7 +15,7 @@ FLORA is an actively developed product. Flora-Current is its existing developmen
 5. **Keep accepted decisions closed.** Reopen only for material new evidence, changed requirements or failed assumptions. Implementing an accepted contract does not itself need another ADR.
 6. **Defer unrelated issues.** Record impact and next owner in the existing backlog; continue unaffected work. Correctness, security, source use and essential dependencies are never “unrelated”.
 7. **Accept visuals in the browser.** Walk through actual desktop/tablet routes and check mobile accessibility. Preserve beautiful simplicity. Screenshots do not prove interaction, genuine sign-in or physical-device behaviour.
-8. **Keep rollback straightforward.** Preserve the prior working SHA and use a normal Git revert through the same delivery cycle if needed. For an expressly authorised deployment, reuse Flora-Current and its existing manual process; protect persistent data and retain the prior successful deployment. Merged does not mean deployed.
+8. **Keep rollback straightforward.** Preserve the prior working SHA and use a normal Git revert through the same delivery cycle if needed. For an expressly authorised deployment, reuse Flora-Current and its existing manual process; verify exact-SHA CI and the service target, protect persistent data, retain the prior successful deployment and verify the running SHA after release. Merged does not mean deployed.
 9. **Measure commercial usefulness.** Show meaningful evidenced change without inventing demand, contracts, budgets, financial value or buying intent.
 10. **Spend nothing extra.** Use existing included/local tools. No paid API/model calls, purchased agents, subscriptions, infrastructure or billable experiments. Defer work requiring incremental expenditure.
 
@@ -60,7 +60,7 @@ Use the existing PR and report only: **what changed; what can now be tested; tes
 
 The [Experience Contract](../flora-experience/FLORA-Experience-Contract-v1.0.md) governs presentation: retain Top / Left / Main, distinct factual and interpretive semantics, accepted artwork and commercially understandable language. The current owner recovery commission supersedes the separate Facts / FLORA Insight selector with one unified executive composition. Internal gaps, source administration and suggested investigations do not become new ordinary-screen panels. Mandatory attribution and material factual limitations remain.
 
-[Source factual-use guidance](../../flora-runtime/public-facts-policy/README.md) and current Source records remain authoritative for their use scope. This doctrine grants no new source permissions. Preserve any current Lloyds §2 hold, deferred §5 links and all other operation-specific restrictions; ADR-027 remains Proposed.
+[Source factual-use guidance](../../flora-runtime/public-facts-policy/README.md) and current Source records remain authoritative for their use scope. This doctrine grants no new source permissions. Preserve any current Lloyds §2 hold, deferred §5 links and all other operation-specific restrictions; ADR-027 remains Proposed. Reuse a recorded operation-specific decision while its facts and scope remain unchanged. Continue with eligible information and escalate only new material evidence or a change in the intended use.
 
 ## Product sequence and completion evidence
 
@@ -75,4 +75,4 @@ Further semantic extraction, parsing and model/provider experiments are deferred
 
 Use the existing PR for material blockers and owner feedback. Add no telemetry service, maturity score or reporting ceremony.
 
-The [original PR #727 assessment and validation](Assessment-and-Validation.md) is historical evidence; its former five-step/draft-only/merge-approval wording is superseded by this contract. Packaged GPT instructions and external configurations are unchanged. Apply this contract to future FLORA increments within existing authority.
+The [original PR #727 assessment and validation](Assessment-and-Validation.md) is historical evidence; its former five-step/draft-only/merge-approval wording is superseded by this contract. Repository pack instructions scope specialist assurance to the relevant mission. External GPT and session configuration is managed separately. Apply this contract to future FLORA increments within existing authority.

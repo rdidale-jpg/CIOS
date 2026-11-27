@@ -2,13 +2,13 @@
 
 **Status:** Living document
 **Owner:** Rob / CIOS
-**Last updated:** 2026-11-23
+**Last updated:** 2026-11-27
 
 ## Purpose
 
 This document defines how any AI assistant, Codex session or human contributor should work on CIOS. It preserves project memory, architecture doctrine and AI operating rules outside chat history.
 
-Treat this file, the Reference Architecture, Accepted ADRs and the Architecture v2.0 Phase 1 authorities as source of truth for CIOS project direction unless Rob explicitly changes the architecture. Treat the CIOS Chief Architect Handbook as the primary guide for judgement and working practice. Treat the Reference Architecture, Accepted ADRs and owning architecture papers as authoritative for detailed architecture and model decisions.
+For ordinary Codex work, the [Product Delivery Doctrine](docs/product/flora-delivery-acceleration/README.md) governs implementation, documentation, research presentation, testing, routine merge and completion reporting. Follow **Build → Test → Merge → Review** within the current commission and applicable tool controls. Accepted ADRs and owning architecture and intelligence contracts govern their respective data, decisions and permissions. Use the Chief Architect Handbook for specialist architecture work.
 
 ## One-page quick-start for AI agents
 
@@ -20,7 +20,7 @@ Before proposing work, ask whether the change improves durable enterprise memory
 
 
 
-## Mandatory Runtime Context inputs
+## Runtime Context for governed AI missions
 
 ADR-015 requires every AI mission to declare or inherit a Runtime Context composed of Mission, Research Policy and Capability Profile. Research Policy is mandatory for every AI mission because it governs research depth, source-seeking posture, assurance burden, stop rule and escalation threshold without redefining Evidence.
 
@@ -33,7 +33,7 @@ Canonical Research Policies:
 
 Research Policy does not change CIOS Evidence doctrine. Evidence remains universal proof, Observation remains universal memory and runtime configuration does not modify durable architecture doctrine.
 
-## Progressive Assurance operating rule
+## Progressive Assurance for Twin production
 
 ADR-009 governs Commercial Digital Twin production.
 
@@ -69,7 +69,7 @@ Escalate only for provider-specific pursuit or rejection, external outreach, mat
 Optimise for one autonomous run and one completion response. Ask Rob only for information that materially changes the bounded decision. Rob is the strategic sales director and should not be required to administer research workflow.
 
 
-## Mandatory reading order
+## Reading order for major architecture work
 
 Establish this context once for the bounded mission. Reuse the recorded baseline and accepted decisions; reread affected owners when their content, the scope or a material assumption changes. This is not a requirement to restart architecture review for every commit.
 
@@ -163,7 +163,7 @@ Industry Research GPTs must review the Flora Change Queue, distinguish signal fr
 
 ## Architecture compliance expectations
 
-Every meaningful implementation proposal should state:
+When proposing a material architecture decision or conducting a commissioned readiness review, identify:
 
 - which architecture documents apply;
 - which Accepted ADRs apply;
@@ -189,18 +189,6 @@ Codex-ready prompts should be inspectable and bounded. Always include:
 - completion report.
 
 Specify whether the task is documentation-only or runtime-changing. Put Codex prompts in fenced code blocks.
-
-## FLORA product delivery
-
-Apply the [Product Delivery Doctrine](docs/product/flora-delivery-acceleration/README.md): **DEFAULT TO PROGRESS. ESCALATE EXCEPTIONS.** Use **Build → Test → Merge → Review** within the current commission and existing architecture. It is delivery guidance, not a new intelligence owner or governance service.
-
-- Deliver the smallest complete user journey using existing owners and components. Judge success by owner-tested commercial usefulness, not PR or document counts.
-- Reuse valid reviews and test evidence for the unchanged scope. Reassess only affected behaviour, changed assumptions or new evidence; keep required CI and security gates intact.
-- Use one PR for an ordinary reversible increment. Merge when existing applicable checks pass, without another owner approval for routine integration or low-risk documentation. Keep a straightforward rollback; honour explicit task-specific stops and do not bypass an approval-system rejection.
-- Escalate Source-use/restricted-publication, security/access, required canonical promotion, financial-permission, external-action/commitment and new-cost/infrastructure exceptions to the existing owner. Continue unaffected work; do not solve unrelated source acquisition merely to integrate a bounded review package.
-- For visual work, provide actual browser walkthroughs at the applicable desktop/tablet sizes. Flora-Current is the existing development/evaluation runtime. Owner evaluation follows routine integration; deployment remains a separately authorised external action and must preserve data and rollback.
-- Avoid duplicate audits, repeated frozen-corpus checks and separate proof-only PRs without a concrete risk. Keep completion reporting to what changed, what can be tested, tests/material failures, genuine blockers, and merge SHA/rollback.
-- Follow the [near-term FLORA priorities](ROADMAP.md#current-flora-product-priorities). Defer semantic extraction experiments unless a named priority milestone requires them. Use existing included/local tools with zero incremental expenditure; do not make paid API calls or purchase services.
 
 ## Response style
 

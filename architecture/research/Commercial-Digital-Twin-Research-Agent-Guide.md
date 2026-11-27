@@ -5,6 +5,8 @@
 **Last updated:** 2026-07-20  
 **Historical review copy:** `architecture/research/Commercial-Digital-Twin-Research-Agent-Guide.docx`
 
+The Researcher assurance requirements apply to commissioned research. Use the declared profile and ADR-009: Initial Decision Twin is the default, while High-Fidelity and Assured Release requirements apply only to their respective commissioned scope or owning-contract triggers. Ordinary implementation and presentation follow the [Product Delivery Doctrine](../../docs/product/flora-delivery-acceleration/README.md).
+
 ## Authority and scope
 
 This Markdown file is the canonical Research Agent Guide for Commercial Digital Twin and Research GPT operation. The DOCX file in this folder is a historical review copy and must not be edited as source. This guide aligns with [FP-010](../founding-papers/FP-010-Knowledge-Pack-Architecture.md), [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md), [EI-013](../enterprise-intelligence/EI-013-Knowledge-Asset-Exchange-Model.md), the [Knowledge Pack Specification](../specifications/knowledge-packs/Knowledge-Pack-Specification-v1.0.md), the [Twin Presentation Model Specification](../specifications/presentation-models/Twin-Presentation-Model-Specification-v1.0.md) and the [Industry Twin Lifecycle Specification](../specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md).
