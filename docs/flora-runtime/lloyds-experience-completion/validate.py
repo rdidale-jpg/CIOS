@@ -7,7 +7,7 @@ def git(*args,**kwargs):return subprocess.check_output(['git',*args],cwd=ROOT,**
 def run():
     sha=git('rev-parse','HEAD',text=True).strip()
     changed=git('diff','--name-only',BASE,sha,text=True).splitlines()
-    allowed={'tests/test_flora_eai2_integration.py','tools/ci/flora_eai2_preview.cjs','.github/workflows/flora-enterprise-economics-a1.yml','cios/applications/flora/lloyds_gold.py','cios/applications/flora/visual_stream_assets/lloyds-gold.css','docs/product/flora-experience/main-canvas/browser.py','tests/test_flora_lloyds_ceo.py','tests/test_flora_lloyds_gold.py','tests/test_flora_lloyds_gold_v2.py','tests/test_flora_main_canvas.py','tests/test_flora_lloyds_experience_completion.py'}
+    allowed={'tests/test_flora_lloyds_activation.py','tests/test_flora_eai2_integration.py','tools/ci/flora_eai2_preview.cjs','.github/workflows/flora-enterprise-economics-a1.yml','cios/applications/flora/lloyds_gold.py','cios/applications/flora/visual_stream_assets/lloyds-gold.css','docs/product/flora-experience/main-canvas/browser.py','tests/test_flora_lloyds_ceo.py','tests/test_flora_lloyds_gold.py','tests/test_flora_lloyds_gold_v2.py','tests/test_flora_main_canvas.py','tests/test_flora_lloyds_experience_completion.py'}
     assert all(p in allowed or p.startswith('docs/flora-runtime/lloyds-experience-completion/') for p in changed),changed
     assert not git('diff','--name-only',BASE,sha,'--','enterprise-knowledge','architecture/decisions','tools/ci/flora_ci.py','tools/ci/flora-baseline-v1.json')
     art=git('diff','--name-only',BASE,sha,'--','*.webp','*.png','*.svg','*.jpg',text=True).splitlines()
