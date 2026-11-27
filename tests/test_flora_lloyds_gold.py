@@ -86,7 +86,11 @@ def test_withdrawn_sources_remove_all_dependent_numeric_accessibility_and_analys
 
 
 def test_withdrawn_collaboration_does_not_survive_in_application_or_supplier_descriptions(monkeypatch):
-    d=data();next(s for s in d['sources'] if s['id']=='PR-LBG-ENVOY')['withdrawn']=True
+    d=data()
+    # Google now has a separately inspected platform disclosure as well as
+    # the Envoy collaboration. Both must be withdrawn to require its absence.
+    for source in d['sources']:
+        if source['id'] in {'PR-LBG-ENVOY','LCE-VERTEX'}:source['withdrawn']=True
     monkeypatch.setattr(v,'current_data',lambda ctx:d)
     for focus,detail in [('applications','envoy'),('partners','google'),('partners','')]:
         html=main(gold.render({'stream':['inside'],'focus':[focus],'detail':[detail]}))
@@ -125,7 +129,10 @@ def test_capability_relationships_and_unknown_contracts_never_become_verified_ed
     for word in ('does not establish a contracting entity', 'an exclusive cloud estate',
                  'application used by any particular division', 'not an asserted Lloyds architecture'):
         assert word in html
-    for false in ('AWS','Oracle','Vertex AI','2030-12-31','Contracted Google Cloud service'):
+    # A specific Vertex deployment is now source-backed; that does not prove
+    # an Envoy/whole-estate dependency or a commercial contract.
+    assert 'Vertex AI' in html and 'detail=platform-delivery' in html
+    for false in ('AWS','Oracle','2030-12-31','Contracted Google Cloud service'):
         assert false not in html
     # Unverified graph inventory is not read by this renderer.
     d['relationships']=[{'subject':'Lloyds','predicate':'depends_on','object':'Oracle','verified':False}]

@@ -114,3 +114,33 @@
 .v3-remit-rail{margin:25px 0;border-top:1px solid #bac6a8}.v3-remit-rail>div{display:flex;flex-wrap:wrap;gap:0}.gold-page .v3-remit-rail a[data-canvas-region]{flex:1 1 180px;background:transparent;border-radius:0;border-bottom:1px solid #bdc8af;padding:22px 12px}.v3-remit-rail .canvas-mark,.v3-remit-rail .canvas-arrow{display:none}.v3-remit-rail .canvas-title{font-size:22px}.v3-role{display:block;font:16px Georgia,serif;margin:9px 0}.v3-remit-rail .canvas-caption{font-size:12px}.v3-leader-portrait{border-top:2px solid #a69058;border-radius:0 35% 0 0;padding:24px 22px;background:linear-gradient(105deg,#e6ecd9,#faf6eb)}.v3-leader-portrait h2{font-size:32px}.v3-remit{font:26px/1.4 Georgia,serif}.v3-work-populations>section{padding:24px 0;border-bottom:1px solid #bfc9af;display:grid;grid-template-columns:minmax(150px,.65fr) minmax(0,1.35fr);gap:12px 28px}.v3-work-populations h3{grid-row:span 3;margin:0;font:25px/1.4 Georgia,serif}.v3-work-populations .intelligence-statement{margin:0;font:16px/1.65 Arial,sans-serif}.v3-rate-context{border-left:2px solid #ac9861;padding:0 20px;margin:24px 0}.v3-rate-context p{font-size:16px}.v3-goal-context{margin-top:28px;border-top:1px solid #bec9ae;padding-top:10px}
 @container enterprise (max-width:600px){.v3-economic-attention,.v3-connections,.v3-business-branches,.v3-verified-line,.v3-cash-cycle{flex-direction:column}.v3-reporting-edge{align-self:flex-start}.v3-economic-attention>a,.v3-connections>a,.v3-business-branches>a{flex:auto!important}.gold-page .v3-brand-mechanisms>a[data-canvas-region],.v3-work-populations>section{display:block}.v3-brand-mechanisms .canvas-caption{display:block;margin:12px 0}.v3-brand-mechanisms .intelligence-statement{margin:16px 0}.v3-work-populations h3{margin:0 0 18px}.v3-cash-cycle>span+span{border-left:0;padding:16px 0 0;border-top:1px solid #b5c1a7}.gold-page .v3-ai-horizons>a[data-canvas-region]{grid-template-columns:1fr}.v3-amount>strong{font-size:29px}.v3-verified-line .canvas-title{font-size:24px}}
 .v3-tension{border-left:2px solid #a38c58;padding:4px 20px;margin:24px 0}.v3-verified-line .canvas-caption{font-size:12px}.gold-page .v3-verified-line>a[data-canvas-region]{min-height:145px}.gold-page .v3-business-branches>a[data-canvas-region]{min-height:150px}.v3-business-branches small{font:12px/1.5 Arial,sans-serif}
+/* CEO intelligence: the existing canvas, with subject-specific figures. */
+.ceo-employee-system,.ceo-distribution,.ceo-mortgage,.ceo-platform,.ceo-settlement,.ceo-business-digital,.ceo-board,.ceo-geography,.ceo-collaborations{margin-block:2rem;container-type:inline-size}
+.ceo-fte-history{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-block:1.4rem;border-block:1px solid #a9ae9b;padding-block:1rem}
+.ceo-fte-year{display:flex;flex-direction:column;gap:.75rem;min-height:120px;padding:1rem;border-inline-start:1px solid #c4c7b7;background:linear-gradient(135deg,#edf0df88,#f7f4e700);color:inherit;text-decoration:none}
+.ceo-fte-year strong{font:clamp(1.7rem,4cqw,2.8rem)/1.15 Georgia,serif;font-variant-numeric:tabular-nums}
+.ceo-fte-year time{font-size:.95rem;letter-spacing:.05em}
+.ceo-fte-year meter,.ceo-fte-distribution meter,.ceo-actual-target meter{width:100%;height:1.1rem;accent-color:#315f48}
+.ceo-fte-year meter::-webkit-meter-bar,.ceo-fte-distribution meter::-webkit-meter-bar,.ceo-actual-target meter::-webkit-meter-bar{background:#e8ebdf;border:0;border-radius:0}
+.ceo-fte-year meter::-webkit-meter-optimum-value,.ceo-fte-distribution meter::-webkit-meter-optimum-value,.ceo-actual-target meter::-webkit-meter-optimum-value{background:#315f48;border-radius:0}
+.ceo-fte-year meter::-moz-meter-bar,.ceo-fte-distribution meter::-moz-meter-bar,.ceo-actual-target meter::-moz-meter-bar{background:#315f48}
+.ceo-fte-distribution{border-block:1px solid #c4c7b7;margin-block:1rem}
+.ceo-fte-distribution>.ceo-fte-division{display:grid;grid-template-columns:minmax(130px,1.5fr) minmax(80px,2fr) minmax(65px,.8fr);gap:1rem;align-items:center;min-height:60px;padding:.65rem .5rem;border-bottom:1px solid #dedecf;color:inherit;text-decoration:none;min-width:0}
+.ceo-fte-distribution strong{text-align:end;font-variant-numeric:tabular-nums}
+.ceo-actual-target{margin-block:1.4rem;border-block:1px solid #a9ae9b}
+.ceo-actual-target>div{display:grid;grid-template-columns:1fr auto;gap:1rem;padding:1.25rem .5rem;border-bottom:1px solid #dedecf}
+.ceo-actual-target strong{font:clamp(1.5rem,4cqw,2.3rem)/1.2 Georgia,serif}
+.ceo-actual-target meter{grid-column:1/-1}
+.ceo-target-target{border-inline-start:3px solid #a3905b;background:repeating-linear-gradient(120deg,transparent 0 13px,#b6a5750b 13px 15px)}
+.ceo-verification-flow,.ceo-settlement-route{display:grid;grid-template-columns:1fr 1.5fr 1fr;align-items:center;gap:1.25rem;min-height:130px;margin-block:1.5rem;padding:1.3rem;border-block:1px solid #a99a6b;background:linear-gradient(110deg,#e3ead7,#f6f2e500)}
+.ceo-verification-flow strong{font:clamp(1.7rem,5cqw,3rem)/1.25 Georgia,serif;text-align:center}
+.ceo-settlement-route>span{padding:1rem .5rem;min-height:50px;border-inline-end:1px solid #a99a6b;font:1.2rem/1.5 Georgia,serif}
+.ceo-platform-stack{display:flex;flex-direction:column;margin:1.5rem 0;gap:.5rem}
+.ceo-platform-stack>div{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;padding:1.4rem;border-bottom:1px solid #acaf9a;background:linear-gradient(90deg,#e4ead8,#f3f0e500)}
+.ceo-platform-stack strong{font:1.3rem/1.5 Georgia,serif;text-align:end}
+.ceo-oversight{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 1.5rem}
+.ceo-oversight>section{padding:1rem .5rem;border-top:1px solid #a99a6b}
+.ceo-investigation{margin-block:2rem;padding-top:1rem;border-top:2px solid #a99a6b}
+.ceo-employee-system a:focus-visible{outline:3px solid #315f48;outline-offset:3px}
+@container(max-width:540px){.ceo-fte-history{grid-template-columns:1fr}.ceo-fte-year{min-height:100px}.ceo-oversight{grid-template-columns:1fr}.ceo-verification-flow,.ceo-settlement-route{grid-template-columns:1fr}.ceo-platform-stack>div{align-items:start;flex-direction:column}.ceo-platform-stack strong{text-align:start}.ceo-fte-distribution>.ceo-fte-division{grid-template-columns:1fr auto}.ceo-fte-distribution meter{grid-column:1/-1;grid-row:2}}
+@media print{.ceo-fte-history,.ceo-verification-flow,.ceo-settlement-route{break-inside:avoid}}

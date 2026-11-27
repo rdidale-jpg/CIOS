@@ -1,4 +1,5 @@
 """Research lineage, framework navigation and unqualified commercial capture."""
+from tests.flora_lloyds_research_contract import preserved_research_cut
 from copy import deepcopy
 from datetime import date
 import hashlib
@@ -103,7 +104,9 @@ def test_ranking_changes_and_overlap_are_traceable():
         assert identifier in html
     assert 'BPO/outsourcing demand is not established' in html
     assert 'may compete for the same scope' in html
-    assert 'primary-supported claim count: 63' in html
+    retained=preserved_research_cut()
+    assert len([c for c in retained['claims'] if c['verification']=='source_supported'])==63
+    assert 'primary-supported claim count: 121' in html
     for row in model.ranked_candidates():
         assert row['claim_ids'] and row['driver_ids'] and row['capability_ids'] and row['gap_ids']
         assert row['ranking_change']
@@ -113,7 +116,9 @@ def test_supplier_edges_distinguish_reported_relationship_and_unknown_contract()
     data=model.load_assessment();relations={r['id']:r for r in data['relationships']}
     assert relations['REL-LBG-GCP']['assertion_kind']=='repository_reported_relationship'
     assert relations['REL-LBG-AWS']['assertion_kind']=='unknown'
-    assert [r['id'] for r in data['relationships'] if r['verified']]==['REV-ENVOY-GOOGLE']
+    retained=preserved_research_cut()
+    assert [r['id'] for r in retained['relationships'] if r['verified']]==['REV-ENVOY-GOOGLE']
+    assert [r['id'] for r in data['relationships'] if r['verified']]==['REV-ENVOY-GOOGLE']+['LCE-REL-'+k for k in ('VERTEX','VISAPILOT','ARCHAX','CAURA','PLANNARELATION')]
     changed=deepcopy(data);changed['relationships'][0]['verified']=True
     with pytest.raises(ValueError):model.validate(changed)
     assert 'enterprise contract unknown' in views.node_page('SUP-AWS')

@@ -1,0 +1,383 @@
+{
+  "phase": "after",
+  "sha": "3eedaf897f238a270f0ab6c0f2e874f36d9be97c",
+  "runtime_hashes": {
+    "cios/applications/flora/lloyds_gold.py": "655e4a31d9787b7218a2ce68d60e31a797b4af9788018f5522987d4b147b7ff2",
+    "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "6cdcdfac65cef45b8df956b4693d40f75cf29cb47094b487f2b3716911f6b075",
+    "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "5cf2812c14ffce3520ea0921ac93c15ce9ff66862f20bb69ee1f6d608080676a",
+    "enterprise-knowledge/banking/research-model/source-snapshots/LCE-ANNUAL-OPERATIONS.txt": "8013767e11d63b99616977b2c2d6d8c7a04efe99f1fe6196c563ae07f4189272",
+    "enterprise-knowledge/banking/research-model/source-snapshots/LCE-BOARD.txt": "9747b0dc18b9dd058318bfb13214b4585ad83ed7273a20ecb8a88f44a1a388f8",
+    "enterprise-knowledge/banking/research-model/source-snapshots/LCE-DELIVERY.txt": "6880a29413a1a5582ee598ff8cdddff9a77e2b6e1da75bc24198cdde86db9592",
+    "enterprise-knowledge/banking/research-model/source-snapshots/LCE-LAUNCH.txt": "1c08a6b36070191305da14c7dae060960411a2ddd371eb7c5695d5d6b067eecf",
+    "enterprise-knowledge/banking/research-model/source-snapshots/LCE-SETTLEMENT.txt": "f9450bdb40760f52919e9b27f9a2cf27b56e00a6fdaf27fef06c080520e79bc7",
+    "enterprise-knowledge/banking/research-model/source-snapshots/LCE-VERTEX.txt": "f760c835e2435a8b4fa49e4a45e3c569b6023f303cc228e1063c2d54de83d132",
+    "enterprise-knowledge/banking/research-model/source-snapshots/LCE-WORKFORCE.txt": "c6f79702360158232572e52cc6d98dfa482cf0993458f3cc8cf959c0d3551f69"
+  },
+  "runtime_matches_sha": true,
+  "environment": "Isolated HTTP Chromium; emulated iPads/mobile, not physical Safari or deployed Render",
+  "captures": {
+    "after-desktop-landscape.jpg": "e398e953dfe7b888501e36cb1dc7455a1dd95e1be01f143c0e6a1d47021eee8e",
+    "after-desktop-inside.jpg": "22e108c1d735ead0b932be97aeb583ecf58773b31305c11e868dffe96ff64eaa",
+    "after-desktop-forces.jpg": "5cf18111b5bf3962623db28d9de5a894ac50c5d6980c4f9ec982a634b3ffe77e",
+    "after-desktop-employees.jpg": "e484d3cfcea792666ab303c71b653d619b34c1a14f40f1056020139416bb7058",
+    "after-desktop-geography.jpg": "f2732cf0c223786e4ef32ab3c0a9f29a79fab5da29d03a2a93d314b20ac36e7b",
+    "after-desktop-board.jpg": "b248c636d77d2d6f9b5752ce6e17c02ef4ffe213c5f375bca8957e2c4e7618e3",
+    "after-desktop-distribution.jpg": "ac60293e3f403400e775ea653b3415b4fc6d69a92cdbac14698bf2a67f9ec5ab",
+    "after-desktop-mortgage.jpg": "5ad4e44c688970e7aa298fef2a6debdfaa7dec7b5dc8c419503d440f7e641ac3",
+    "after-desktop-platform.jpg": "bc8b167decc6ed75c8184ba9014fbac6345c5a4b51871bd02d1bece2b833ff98",
+    "after-desktop-settlement.jpg": "9ecaa2e9abf6896c9769ceb81d4ebdba7fa970757ebac0658b0fcde6bff39e10",
+    "after-desktop-business.jpg": "d31aa3660cd9501f351174babe0617c6ff164acca64f927d7799aadf4309fd99",
+    "after-desktop-wealth.jpg": "1244c98ef0214f1250385dae210d19efa032c9a9f7005c446532cd8f3242352d",
+    "after-desktop-investigations.jpg": "192c1f4a3ba49879f59e93c83cdc536d030adb37d637d850f391f9fd900cf3fd",
+    "after-desktop-collaborations.jpg": "7bb1fe674c9ceedd58386c26d3ffeea98c5b96840a70855544889f0b127cc135",
+    "after-ipad-landscape-landscape.jpg": "bb0114e77103be5926597e112f3abaa0a1b9a4ff2e4d188acc2878f1f6c9bdfb",
+    "after-ipad-landscape-inside.jpg": "347d14dfbc276c2712fa5e3ed4d113a7462254342e4bd3d4e675ad0b3101168a",
+    "after-ipad-landscape-forces.jpg": "e45c6e78bf194f9192f62a416914fc4a68ccdcecb3f8bc46b7d52d82dc5a93f9",
+    "after-ipad-landscape-employees.jpg": "67347401f20efbc70049f6c66e533c64a0e5bb2ed2560034f9c38cb180b7a68c",
+    "after-ipad-landscape-geography.jpg": "f0e94f7e898858955ae4edd8447299198b87cb89d03ab736833238b7ca1d02c6",
+    "after-ipad-landscape-board.jpg": "d0e9c2e88d38a4ad9333551046159e73d99bf43e9da704f6d84774efb55370ad",
+    "after-ipad-landscape-distribution.jpg": "d56549eaa212cf936b38948677355dad97f3db8695b72d4cf31be0c520c7fc2f",
+    "after-ipad-landscape-mortgage.jpg": "f7c5c9c2b09afdd23da918eeaecc479a9d579923ea9b8e1142be6f45ea353cfc",
+    "after-ipad-landscape-platform.jpg": "48322fca3fde0c271a719239254bd4cc1daeea9e7163ee61106fe748b895f0c5",
+    "after-ipad-landscape-settlement.jpg": "f2f071c55fa2e2e7d903241f75960e3b26d9fd25508c34a32e45e2c5bd24bcdd",
+    "after-ipad-landscape-business.jpg": "a06fe322f856b1ad421a1f93e47336d3c41c95fc88d507fa96d0220401b404e6",
+    "after-ipad-landscape-wealth.jpg": "b6690263b73c850ac31f2fbcfaa3ab122f9efb79cf6270107d328781803ae405",
+    "after-ipad-landscape-investigations.jpg": "6e31ab13be0ad5ea2b5f768f255497104a5d2d5316fccb6554bee0b5e380f9aa",
+    "after-ipad-landscape-collaborations.jpg": "de776581613c80a6d4071238f4e44b65dcc4ba7dffd8cb683b5bba862edc8d84",
+    "after-ipad-portrait-landscape.jpg": "8b802ac2582792d8ae1955d35db2b59354238068aaa53348590a5550b1470381",
+    "after-ipad-portrait-inside.jpg": "717e11738e0740d3cafd978800f32dd6d1cfa584869327978f8ef7cca1bb17d2",
+    "after-ipad-portrait-forces.jpg": "c7de90f843ddb9b905f58d159a37b5756efb594f0c9604d46a003fe4807958d6",
+    "after-ipad-portrait-employees.jpg": "909d1cd6d08f07f139f6a6135357378f45de25cda04afc6b931509d23821bc34",
+    "after-ipad-portrait-geography.jpg": "3138842b40f97297b44cf86eb96af90d2f78215473a5355673642f392a2900dc",
+    "after-ipad-portrait-board.jpg": "838e306b42de23b8095e905e0ca7a71dd38f989ef30a50e7b35207010d2c98e3",
+    "after-ipad-portrait-distribution.jpg": "d5fc7b99048b005aa0c98eb6c604141210a09dd6affbaaaa5d64ae76f79bb108",
+    "after-ipad-portrait-mortgage.jpg": "0bdd82427ede0239959b90febd46f6fd303e4caedaec77fc3ceaaf8901d2d998",
+    "after-ipad-portrait-platform.jpg": "9fcbc75e86edc0b16a056841720c08df1b54f2e81712c67ee5553156ebcffe25",
+    "after-ipad-portrait-settlement.jpg": "c8c3dc3e298b52bfdb4927077b20a33bdaf65d2c73537f1e764080510dcf8694",
+    "after-ipad-portrait-business.jpg": "ec7cc9f910cadc8ee2a12c06318a5bb508740a579ddf5621c8723e49426945bc",
+    "after-ipad-portrait-wealth.jpg": "f25986ab723214bd39488d2f2d6971ebfbf052306bdb00a9cec482091ad09d8d",
+    "after-ipad-portrait-investigations.jpg": "54636b1687860725e98e951e048a158ea9c677dc380e3882241b93f4bb085b3d",
+    "after-ipad-portrait-collaborations.jpg": "48169906d3ada7a84acd26d8ea9b695fa41be578bc0f0c3b03adf9eca0e6c33f",
+    "after-mobile-landscape.jpg": "dff05089390049404c4aae176788121a9a5f49a61d2e7f4eefced0df66414ec6",
+    "after-mobile-inside.jpg": "0a2e33a5876dc90bd86d8e3c7907e728beae29061625e1040d2be302f476fc0a",
+    "after-mobile-forces.jpg": "3a9e01b6cb008e9707179dd2e4182ce857f067c6dd448b5a7545989ad8d4d919",
+    "after-mobile-employees.jpg": "a4716f09cde69f5e029d4a5293b5bdbad5fa7d90be41f5c5721242a94cfba186",
+    "after-mobile-geography.jpg": "0d8599986c69edc0b1fbe8a3ce9c3eef1d265df4bb856dc8b0b230f9ddde7dcf",
+    "after-mobile-board.jpg": "e4f8b8a639b02e92aae2ea866afecf1891b15d56087d8d7415fc33f7b535dfa1",
+    "after-mobile-distribution.jpg": "fc6b6069876466a4efe60e7374d8764bc32b07b4a3089b0b93c0731c3a10a2a6",
+    "after-mobile-mortgage.jpg": "49e4cf3b9aa96727525564fe82a094ab786497e7dfc79d93d51b7feedda83f01",
+    "after-mobile-platform.jpg": "eccba315a6138efbda7cccac80a6f922095cdedb1344ac6bd974f6de2a7a14b3",
+    "after-mobile-settlement.jpg": "ec2721b835d38056572caee1f67ba0bfd0129ff045b1e6970149a20563f451d6",
+    "after-mobile-business.jpg": "b61b0b516f00f9c3f33d1fa93758f96004d1d2b0e2fb8c89cdb059ca8e17e568",
+    "after-mobile-wealth.jpg": "09fd86c72d2b83b288567586c48977dd76636515b868578b1728aa891311e2e2",
+    "after-mobile-investigations.jpg": "dbdcc96154ebfcfd724389dedf7ad50c97aa7b75d4fe2b3956197b71a394fc50",
+    "after-mobile-collaborations.jpg": "701c6f28da9ceaf28d775a488b3f61de9c5854d80fd39aa001bc092b0c0615ad"
+  },
+  "devices": [
+    "desktop",
+    "ipad-landscape",
+    "ipad-portrait",
+    "mobile"
+  ],
+  "navigation": [
+    {
+      "device": "desktop",
+      "topic": "distribution",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "desktop",
+      "topic": "distribution",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "desktop",
+      "topic": "distribution",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "desktop",
+      "topic": "mortgage-ml",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "desktop",
+      "topic": "mortgage-ml",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "desktop",
+      "topic": "mortgage-ml",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "desktop",
+      "topic": "settlement",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "desktop",
+      "topic": "settlement",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "desktop",
+      "topic": "settlement",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "desktop",
+      "topic": "business-digital",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "desktop",
+      "topic": "business-digital",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "desktop",
+      "topic": "business-digital",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "distribution",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "distribution",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "distribution",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "mortgage-ml",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "mortgage-ml",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "mortgage-ml",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "settlement",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "settlement",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "settlement",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "business-digital",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "business-digital",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "business-digital",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "distribution",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "distribution",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "distribution",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "mortgage-ml",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "mortgage-ml",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "mortgage-ml",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "settlement",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "settlement",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "settlement",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "business-digital",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "business-digital",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "business-digital",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "mobile",
+      "topic": "distribution",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "mobile",
+      "topic": "distribution",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "mobile",
+      "topic": "distribution",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "mobile",
+      "topic": "mortgage-ml",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "mobile",
+      "topic": "mortgage-ml",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "mobile",
+      "topic": "mortgage-ml",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "mobile",
+      "topic": "settlement",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "mobile",
+      "topic": "settlement",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "mobile",
+      "topic": "settlement",
+      "from": "forces",
+      "to": "landscape"
+    },
+    {
+      "device": "mobile",
+      "topic": "business-digital",
+      "from": "landscape",
+      "to": "inside"
+    },
+    {
+      "device": "mobile",
+      "topic": "business-digital",
+      "from": "inside",
+      "to": "forces"
+    },
+    {
+      "device": "mobile",
+      "topic": "business-digital",
+      "from": "forces",
+      "to": "landscape"
+    }
+  ],
+  "checks": {
+    "whole_region_pointer_touch": true,
+    "keyboard": true,
+    "no_javascript": true,
+    "history_reload_direct_links": true,
+    "new_source_withdrawal_history_print_accessibility": true,
+    "unrelated_funding_survives": true,
+    "banking_easyjet_legacy_preserved": true,
+    "original_compositions_and_artwork_preserved": true,
+    "responsive_zoom": true
+  }
+}

@@ -1,4 +1,5 @@
 """Commercial priority is not research rank, a pipeline stage or buyer authority."""
+from tests.flora_lloyds_research_contract import preserved_research_cut
 from copy import deepcopy
 import json
 import subprocess
@@ -57,9 +58,12 @@ def test_existing_twenty_two_primary_claims_and_all_opportunities_are_preserved(
     assert data['claims'][:len(previous['claims'])]==previous['claims']
     assert data['sources'][:len(previous['sources'])]==previous['sources']
     assert data['candidates']==previous['candidates']
-    # Two original commercial-access facts plus Gold v2's exact additive cut.
-    assert len(data['claims'])==len(previous['claims'])+2+39
-    assert len(data['sources'])==len(previous['sources'])+2+7
+    # Retain the exact previous cut and admit only the source-bound CEO addition.
+    retained=preserved_research_cut()
+    assert len(retained['claims'])==len(previous['claims'])+2+39
+    assert len(retained['sources'])==len(previous['sources'])+2+7
+    assert len(data['claims'])==len(retained['claims'])+58
+    assert len(data['sources'])==len(retained['sources'])+7
 
 
 def test_only_wider_evidence_informs_industry_capability_feedback():

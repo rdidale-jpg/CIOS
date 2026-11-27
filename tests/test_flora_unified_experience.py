@@ -78,7 +78,10 @@ def test_legacy_entry_urls_retain_supporting_content_and_canonical_destinations(
 def test_all_six_specs_are_derived_from_the_existing_research_contract():
     d=model.load_assessment();s=views.specs(d)
     assert set(s)=={'pestle','five-forces','value-chain','operating-model','ecosystem','opportunities'}
-    assert [len(s[k]['nodes']) for k in s]==[6,5,8,10,4,9]
+    from tests.flora_lloyds_research_contract import preserved_research_cut
+    prior=preserved_research_cut()
+    assert [len(views.specs(prior)[k]['nodes']) for k in s]==[6,5,8,10,4,9]
+    assert [len(s[k]['nodes']) for k in s]==[6,5,8,10,8,9]
     for spec in s.values():
         assert validate_visual_spec(spec,d,views.ROUTES)
         assert spec['last_research_update']==d['assessed_at']
