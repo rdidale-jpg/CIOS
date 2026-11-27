@@ -1,0 +1,62 @@
+{
+  "phase": "after",
+  "sha": "1c8c8ae17bb2af3c95bf264d7df9befb60b0b576",
+  "runtime_hashes": {
+    "cios/applications/flora/lloyds_gold.py": "22b65c865061f06411b6d132208bfe6a488f28aad9aed803a2ff2b9e082223e1",
+    "cios/applications/flora/leadership_agenda.py": "0f3bd5cd2a7f01635188baf8075c06cf21a4cd6ca883490aa34927845c284b61",
+    "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "bf5c501f2581cdab258c92bdf825ab4f742f2227725020decc4f007d933b2ccc",
+    "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "6307d01f80e812327fef1339ef3a8c0f1b6835ca4878c735e4e972f5f3424422"
+  },
+  "runtime_matches_sha": false,
+  "environment": "Actual isolated HTTP Chromium; emulated iPads/mobile, not Render or physical Safari",
+  "captures": {
+    "after-desktop-group.jpg": "f7f58787e57115a1a7da826fed6a563d8e665101ba458986f0e29d0e9f0289f9",
+    "after-desktop-inside.jpg": "40ab7061c32fbc550ac8dc9ea4db6b79babdfa2e4d82a1d2e1f00a2736c320b1",
+    "after-desktop-leadership.jpg": "9c17b2e61cd9b448501194157beb24f70a4a71bf6eb9f7110d8b4f98bcf2c2bf",
+    "after-desktop-workforce.jpg": "b84ff18ee0e743901db57a331764e566f05245f3a4d134cd715e068a70b39204",
+    "after-desktop-programmes.jpg": "7d0b734f827160889207ddd09f0dae4187a4456c5ae520063033acd245bc9087",
+    "after-desktop-forces.jpg": "d93d3bf39f2817eaa26d63b8ddfa1e69eee8c48883edfdc282355e76bb217f85",
+    "after-desktop-commercial.jpg": "1368b1bcb7266637f7d6d2b85ecdcc3c346565ac1d7392352a7a4065045c0bbb",
+    "after-desktop-insurance.jpg": "95795216e7c8ec91221d56e4245ea6edd76ddbac3167dc6bc30048a6aac60e66",
+    "after-desktop-economics.jpg": "616ed21305a1e6a728327144f7045c3765748ac1c1822f3288862d13f836e4c0",
+    "after-desktop-technology.jpg": "c1960f5eafcd796e847a1adef941b05272ba0a4924f448b9ac641f06b61e89ba",
+    "after-desktop-fraud.jpg": "fb18496244700f841e10d7cd49d655247a5a915223843d94aac22b3ba9fb3953",
+    "after-desktop-ai.jpg": "03c42377eeaa65c7d42172cb6362d4b8ee3bbadcb64ac0e918be2bcaa3891105",
+    "after-desktop-brands.jpg": "531c963290c59aa4f8484fbb2cf5617592aefb3df572e0ea5f90936710985eb9",
+    "after-desktop-zoom-200.jpg": "36740208de519d5f063f6c2c788b7a85b07aab40110f7acf38b4b4ce31c53cc2",
+    "after-ipad-landscape-group.jpg": "54176c0b42f68611331784b89b77126498d91b4230e64aed4402e5977f9cd21a",
+    "after-ipad-landscape-inside.jpg": "0631d890f2ee2afff2651b768d828380a2fcd6c8e9e4c75370f8af00f82deed0",
+    "after-ipad-landscape-leadership.jpg": "56770205869fed181d7fabf2ed8fac56f90c55090f4796a048fa94d540c585fe",
+    "after-ipad-landscape-workforce.jpg": "fee86cd525e4e28103d4e15da41b440181859e0888d2663b9dfec4c7c9b4691a",
+    "after-ipad-landscape-programmes.jpg": "7936634c5db2cfac9ebb4eeaadcba40cf3d7864f18c453eee08571acca66c07c",
+    "after-ipad-landscape-forces.jpg": "d49fc34811ad2ec5ec7d7216f363fbff1732a82b01552849054da85e81f23e8c",
+    "after-ipad-portrait-group.jpg": "e02bb9ef1482317a1dab3a0ec4f7d3f7ce61094d364d8cce37adb7e71edf67f0",
+    "after-ipad-portrait-inside.jpg": "e2aabc19ac400612d0c9c4556aa087302b73d69a9723a200419abf7610d3418a",
+    "after-ipad-portrait-leadership.jpg": "c8d057cb4254fd3488a7c8bd1ee9561920bd1d7ed8ea1a5c2c3d4d97672c22a6",
+    "after-ipad-portrait-workforce.jpg": "5cafd11b1665d145dc1038e2c26b1a97a754ee113dd211371325f5ac71842463",
+    "after-ipad-portrait-programmes.jpg": "0781de1975615f3456f935cbc1817a2ae0f7bf83370b3504a58fee2e5dc2c77a",
+    "after-ipad-portrait-forces.jpg": "672e47f10031ec09b70920b60eecdc75da51582a13891cd5986e6dfb61c5f33b",
+    "after-mobile-group.jpg": "413d8316a3403b0353e5a3517e5e412a093251ed74d9534a816fd4e162b32d1f",
+    "after-mobile-inside.jpg": "dc95564d60e31f0ecb063b34144fafe643d1292f8cddfdf1e631c30301e1b47e",
+    "after-mobile-leadership.jpg": "96c407a4098783d79179587129f42ccd12d2e05615ff8908b8665a6a2f2c61f0",
+    "after-mobile-workforce.jpg": "fed291645f589a446f8d2c8ea10189dbe0d3d30281cc0f4f2b75086c591237d5",
+    "after-mobile-programmes.jpg": "f006ef96d4c44aade0492e03db0c586754d655091bc2e157cc2b4fdc3d8f09a0",
+    "after-mobile-forces.jpg": "3b529412107397d35803d816528793d13c0830dff1454940756e378387baf317"
+  },
+  "devices": [
+    "desktop",
+    "ipad-landscape",
+    "ipad-portrait",
+    "mobile"
+  ],
+  "checks": {
+    "native_physical_targets": true,
+    "keyboard": true,
+    "touch": true,
+    "history_reload_direct_links": true,
+    "withdrawal_history_print_accessibility": true,
+    "independent_funding_survives": true,
+    "no_javascript": true,
+    "banking_easyjet_legacy": true
+  }
+}

@@ -83,7 +83,7 @@ def _eai_bank_data(data,key):
     try:
         if (tuple(c['id']for c in package['claims'])!=ids
                 or any(c['asset_id']!=subject for c in package['claims'])):return data
-        result=deepcopy(data);result['assessed_at']=CUTOFF
+        result=deepcopy(data);result['assessed_at']=max(data['assessed_at'],CUTOFF)
         result['sources'].append(package['source']);result['claims'].extend(package['claims'])
         model.validate(result)
     except (OSError,ValueError,KeyError,TypeError):return data
@@ -169,7 +169,7 @@ def _public_data(data):
             or proposal['source']['id']!='PR-FCA-COMPLAINTS-H126'
             or proposal['claim']['id']!='LBG-FCA-H126-RECEIVED'):return data
     result=deepcopy(data)
-    result['assessed_at']=CUTOFF
+    result['assessed_at']=max(data['assessed_at'],CUTOFF)
     result['sources'].append(proposal['source']);result['claims'].append(proposal['claim'])
     try:model.validate(result)
     except (ValueError,KeyError,OSError):return data

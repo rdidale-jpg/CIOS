@@ -3,7 +3,7 @@
   "assessment_id": "BK-RESEARCH-001",
   "industry_twin_id": "BK-IND-002",
   "enterprise_twin_id": "BK-ENT-001",
-  "assessed_at": "2026-11-09",
+  "assessed_at": "2026-11-27",
   "upstream_research_effective_date": "2026-07-17",
   "authority": "candidate_intelligence",
   "research_status": "PRIMARY_EXCERPTS_REVIEWED_COMMERCIAL_VALIDATION_OPEN",
@@ -570,6 +570,892 @@
           "locator": "Official page line 637, sourcing context"
         }
       ]
+    },
+    {
+      "id": "LGV2-LEADERS",
+      "title": "Group Executive Committee · observation 27 November 2026",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/group-executive-committee.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/group-executive-committee.html",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "retrieved_at": "2026-11-27T12:48:20+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "b3a094edac7bd4f6ae0cfbc7185c6d2e27f436e3543e73c6f2e1832f13f9209a",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LGV2-LEADERS.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn191view0",
+      "reviewed_by": "Codex bounded original-source factual review",
+      "review_notes": "Only short factual anchors retained. Independent factual restatements; not a publisher document/table archive, original-byte proof, legal approval or canonical acceptance. Scope is non-financial organisation, products and announced operating activity. Existing numerical financial holds are untouched.",
+      "limitation": "Issuer-attributed, dated or observed-page facts. No independent proof of delivery effectiveness, buying authority, supplier workshare or net financial return.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category; minimal non-financial factual research and original analytical expression",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Does not resolve Lloyds section 2 for held numerical financial use, nor section 5 PDF links; no new licence or exception resolution asserted."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "Named heading and immediately following published role",
+          "quote": "Charlie Nunn"
+        },
+        {
+          "locator": "Named heading and immediately following published role",
+          "quote": "William Chalmers"
+        },
+        {
+          "locator": "Named heading and immediately following published role",
+          "quote": "Ron van Kemenade"
+        },
+        {
+          "locator": "Named heading and immediately following published role",
+          "quote": "Sharon Doherty"
+        },
+        {
+          "locator": "Named heading and immediately following published role",
+          "quote": "Chirantan Barua"
+        },
+        {
+          "locator": "Named heading and immediately following published role",
+          "quote": "John Langley"
+        },
+        {
+          "locator": "Named heading and immediately following published role",
+          "quote": "Amanda Murphy"
+        },
+        {
+          "locator": "Named heading and immediately following published role",
+          "quote": "Jasjyot Singh OBE"
+        },
+        {
+          "locator": "Named heading and immediately following published role",
+          "quote": "Nick Williams"
+        },
+        {
+          "locator": "Named heading and immediately following published role",
+          "quote": "Rodríguez"
+        },
+        {
+          "locator": "Named executive heading and immediately following published role",
+          "quote": "Cheetham"
+        },
+        {
+          "locator": "Named executive heading and immediately following published role",
+          "quote": "Needham"
+        },
+        {
+          "locator": "Named executive heading and immediately following published role",
+          "quote": "Walton"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-V2-NUNN",
+          "statement": "Charlie Nunn is listed as Group CEO on the Group executive page observed 27 November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-LEADERS": "Charlie Nunn"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-CHALMERS",
+          "statement": "William Chalmers is listed as Group finance chief on the Group executive page observed 27 November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-LEADERS": "William Chalmers"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-KEMENADE",
+          "statement": "Ron van Kemenade is listed as Group operations chief on the Group executive page observed 27 November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-LEADERS": "Ron van Kemenade"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-DOHERTY",
+          "statement": "Sharon Doherty is listed as People and places chief on the Group executive page observed 27 November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-LEADERS": "Sharon Doherty"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-BARUA",
+          "statement": "Chirantan Barua is listed as Scottish Widows and Wealth & Insurance CEO on the Group executive page observed 27 November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-LEADERS": "Chirantan Barua"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-LANGLEY",
+          "statement": "John Langley is listed as Corporate & Institutional Banking CEO on the Group executive page observed 27 November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-LEADERS": "John Langley"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-MURPHY",
+          "statement": "Amanda Murphy is listed as Business & Commercial Banking CEO on the Group executive page observed 27 November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-LEADERS": "Amanda Murphy"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-SINGH",
+          "statement": "Jasjyot Singh OBE is listed as Consumer CEO on the Group executive page observed 27 November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-LEADERS": "Jasjyot Singh OBE"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-WILLIAMS",
+          "statement": "Nick Williams is listed as Connected Finance CEO on the Group executive page observed 27 November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-LEADERS": "Nick Williams"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-RISK",
+          "statement": "Javier Rodríguez de Colmenares is listed as Group risk chief on the Group executive page observed 27 November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-LEADERS": "Rodríguez"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-LEGAL",
+          "statement": "Kate Cheetham is listed as Legal chief and company secretary on the Group executive page observed 27 November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-LEADERS": "Cheetham"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-AUDIT",
+          "statement": "Laura Needham is listed as Internal audit chief on the Group executive page observed 27 November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-LEADERS": "Needham"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-SUSTAINABILITY",
+          "statement": "Andrew Walton is listed as Sustainability and corporate affairs chief on the Group executive page observed 27 November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-LEADERS": "Walton"
+          }
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/group-executive-committee.html",
+        "publisher": "Lloyds Banking Group",
+        "title": "Group Executive Committee · observation 27 November 2026",
+        "published": null,
+        "version": "Observed 2026-11-27; short factual anchors only"
+      }
+    },
+    {
+      "id": "LGV2-PROFILE",
+      "title": "Group identity and operating scale · observation 27 November 2026",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are.html",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "retrieved_at": "2026-11-27T12:48:20+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "7e2e0521db96267d5ad3bdb49cc47f1382fbd054494224dff085745b9cb3ce59",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LGV2-PROFILE.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn194view0",
+      "reviewed_by": "Codex bounded original-source factual review",
+      "review_notes": "Only short factual anchors retained. Independent factual restatements; not a publisher document/table archive, original-byte proof, legal approval or canonical acceptance. Scope is non-financial organisation, products and announced operating activity. Existing numerical financial holds are untouched.",
+      "limitation": "Issuer-attributed, dated or observed-page facts. No independent proof of delivery effectiveness, buying authority, supplier workshare or net financial return.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category; minimal non-financial factual research and original analytical expression",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Does not resolve Lloyds section 2 for held numerical financial use, nor section 5 PDF links; no new licence or exception resolution asserted."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "Registered-office footer, line 689",
+          "quote": "number 95000"
+        },
+        {
+          "locator": "Our impact: customers, lines 637–640; independently transcribed both counts",
+          "quote": "c.28m"
+        },
+        {
+          "locator": "Our impact: colleagues, lines 642–645",
+          "quote": ">60k"
+        },
+        {
+          "locator": "Our impact: shareholders, lines 647–650",
+          "quote": "2.1m"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-V2-IDENTITY",
+          "statement": "The issuer identifies Lloyds Banking Group plc as registered in Scotland, company number SC095000.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-PROFILE": "number 95000"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-CUSTOMERS",
+          "statement": "The undated Group profile describes approximately 28 million customers and 23.6 million digitally active customers.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-PROFILE": "c.28m"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-COLLEAGUES",
+          "statement": "The undated Group profile describes more than 60,000 colleagues; it supplies neither an FTE basis nor a measurement date.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-PROFILE": ">60k"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-SHAREHOLDERS",
+          "statement": "The undated Group profile describes 2.1 million shareholders; this is not an ownership-concentration or voting-control analysis.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-PROFILE": "2.1m"
+          }
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/who-we-are.html",
+        "publisher": "Lloyds Banking Group",
+        "title": "Group identity and operating scale · observation 27 November 2026",
+        "published": null,
+        "version": "Observed 2026-11-27; short factual anchors only"
+      }
+    },
+    {
+      "id": "LGV2-BRANDS",
+      "title": "Group brand portfolio · observation 27 November 2026",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/our-brands.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are/our-brands.html",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "retrieved_at": "2026-11-27T12:48:20+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "403a05806fb9600713bd159c5e6f88c8900196c630161f6410de01c6814eadbb",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LGV2-BRANDS.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn195view0",
+      "reviewed_by": "Codex bounded original-source factual review",
+      "review_notes": "Only short factual anchors retained. Independent factual restatements; not a publisher document/table archive, original-byte proof, legal approval or canonical acceptance. Scope is non-financial organisation, products and announced operating activity. Existing numerical financial holds are untouched.",
+      "limitation": "Issuer-attributed, dated or observed-page facts. No independent proof of delivery effectiveness, buying authority, supplier workshare or net financial return.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category; minimal non-financial factual research and original analytical expression",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Does not resolve Lloyds section 2 for held numerical financial use, nor section 5 PDF links; no new licence or exception resolution asserted."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "Our brands: named heading and product description",
+          "quote": "Lloyds Bank"
+        },
+        {
+          "locator": "Our brands: named heading and product description",
+          "quote": "Bank of Scotland"
+        },
+        {
+          "locator": "Our brands: named heading and product description",
+          "quote": "Scottish Widows"
+        },
+        {
+          "locator": "Our brands: named heading and product description",
+          "quote": "MBNA"
+        },
+        {
+          "locator": "Our brands: named heading and product description",
+          "quote": "Lloyds Wealth"
+        },
+        {
+          "locator": "Our brands: named heading and product description",
+          "quote": "Black Horse"
+        },
+        {
+          "locator": "Our brands: named heading and product description",
+          "quote": "Lex Autolease"
+        },
+        {
+          "locator": "Our brands: named heading and product description",
+          "quote": "Tusker"
+        },
+        {
+          "locator": "Brand-page headline, lines 610–611",
+          "quote": "65,000"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-V2-BANK",
+          "statement": "Lloyds Bank appears in the issuer’s brand portfolio, described in the context of retail and business banking.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-BRANDS": "Lloyds Bank"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-BOS",
+          "statement": "Bank of Scotland appears in the issuer’s brand portfolio, described in the context of banking services in Scotland.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-BRANDS": "Bank of Scotland"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-WIDOWS",
+          "statement": "Scottish Widows appears in the issuer’s brand portfolio, described in the context of long-term financial planning.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-BRANDS": "Scottish Widows"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-MBNA",
+          "statement": "MBNA appears in the issuer’s brand portfolio, described in the context of credit cards and other personal financial products.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-BRANDS": "MBNA"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-WEALTH",
+          "statement": "Lloyds Wealth appears in the issuer’s brand portfolio, described in the context of financial advice.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-BRANDS": "Lloyds Wealth"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-BLACKHORSE",
+          "statement": "Black Horse appears in the issuer’s brand portfolio, described in the context of motor-dealer point-of-sale finance.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-BRANDS": "Black Horse"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-LEX",
+          "statement": "Lex Autolease appears in the issuer’s brand portfolio, described in the context of personal and business vehicle leasing.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-BRANDS": "Lex Autolease"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-TUSKER",
+          "statement": "Tusker appears in the issuer’s brand portfolio, described in the context of salary-sacrifice vehicle leasing.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-BRANDS": "Tusker"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-BRANDWORKFORCE",
+          "statement": "The undated brand page says 65,000 colleagues; its date and workforce definition are not reconciled with the broader 60,000-plus profile statement.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+          "primary_quotes": {
+            "LGV2-BRANDS": "65,000"
+          }
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/who-we-are/our-brands.html",
+        "publisher": "Lloyds Banking Group",
+        "title": "Group brand portfolio · observation 27 November 2026",
+        "published": null,
+        "version": "Observed 2026-11-27; short factual anchors only"
+      }
+    },
+    {
+      "id": "LGV2-FRONTIER",
+      "title": "Microsoft Frontier Suite announcement",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/microsoft-365-frontier-suite.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/microsoft-365-frontier-suite.html",
+      "reporting_period": "Dated announcement 2026-06-04",
+      "publication_date": "2026-06-04",
+      "publication_date_evidence": "Original publisher Published on field",
+      "retrieved_at": "2026-11-27T12:48:20+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "1ba285b37b973134b36d76c6d739fdac5fe1f5903827a040f26e357b3a573e6f",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LGV2-FRONTIER.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn195view1",
+      "reviewed_by": "Codex bounded original-source factual review",
+      "review_notes": "Only short factual anchors retained. Independent factual restatements; not a publisher document/table archive, original-byte proof, legal approval or canonical acceptance. Scope is non-financial organisation, products and announced operating activity. Existing numerical financial holds are untouched.",
+      "limitation": "Issuer-attributed, dated or observed-page facts. No independent proof of delivery effectiveness, buying authority, supplier workshare or net financial return.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category; minimal non-financial factual research and original analytical expression",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Does not resolve Lloyds section 2 for held numerical financial use, nor section 5 PDF links; no new licence or exception resolution asserted."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "Announcement, lines 608–609",
+          "quote": "new multi-year agreement"
+        },
+        {
+          "locator": "Licence and activity paragraph, line 610; both numerical claims independently transcribed",
+          "quote": "40,000"
+        },
+        {
+          "locator": "Engineering paragraph, line 614",
+          "quote": "over 10,000"
+        },
+        {
+          "locator": "Colleague assistant paragraph, line 613",
+          "quote": "Agent 365"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-V2-MSAGREEMENT",
+          "statement": "On 4 June 2026 Lloyds and Microsoft Corp. announced a multi-year agreement covering a Group-wide Microsoft 365 E7 deployment.",
+          "kind": "reported_relationship",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated announcement 2026-06-04",
+          "primary_quotes": {
+            "LGV2-FRONTIER": "new multi-year agreement"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-MSADOPTION",
+          "statement": "The announcement reports 40,000 Microsoft 365 Copilot licences and classifies 97% of licensed colleagues as active users; its activity definition and independent outcome validation are not supplied.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated announcement 2026-06-04",
+          "primary_quotes": {
+            "LGV2-FRONTIER": "40,000"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-ENGINEERS",
+          "statement": "The announcement describes GitHub Copilot deployment to over 10,000 Group engineers; this is a tool population, not total technology headcount.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated announcement 2026-06-04",
+          "primary_quotes": {
+            "LGV2-FRONTIER": "over 10,000"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-ASSISTANT",
+          "statement": "The announcement plans a colleague self-service assistant with Agent 365 orchestration; publication does not establish later rollout or benefits.",
+          "kind": "management_commitment",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated announcement 2026-06-04",
+          "primary_quotes": {
+            "LGV2-FRONTIER": "Agent 365"
+          }
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/microsoft-365-frontier-suite.html",
+        "publisher": "Lloyds Banking Group",
+        "title": "Microsoft Frontier Suite announcement",
+        "published": "2026-06-04",
+        "version": "Observed 2026-11-27; short factual anchors only"
+      }
+    },
+    {
+      "id": "LGV2-AIPEOPLE",
+      "title": "AI skills and role plans",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/1000-new-ai-roles.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/1000-new-ai-roles.html",
+      "reporting_period": "Dated announcement 2026-06-22",
+      "publication_date": "2026-06-22",
+      "publication_date_evidence": "Original publisher Published on field",
+      "retrieved_at": "2026-11-27T12:48:20+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "b14118d6bc13cbbd49a0422c5cb268f60db1195ae7211c3628823d1a3a2fbba7",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LGV2-AIPEOPLE.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn195view2",
+      "reviewed_by": "Codex bounded original-source factual review",
+      "review_notes": "Only short factual anchors retained. Independent factual restatements; not a publisher document/table archive, original-byte proof, legal approval or canonical acceptance. Scope is non-financial organisation, products and announced operating activity. Existing numerical financial holds are untouched.",
+      "limitation": "Issuer-attributed, dated or observed-page facts. No independent proof of delivery effectiveness, buying authority, supplier workshare or net financial return.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category; minimal non-financial factual research and original analytical expression",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Does not resolve Lloyds section 2 for held numerical financial use, nor section 5 PDF links; no new licence or exception resolution asserted."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "Role plan, lines 613–614; internal/external distinction in line 613",
+          "quote": "almost 300"
+        },
+        {
+          "locator": "Existing AI teams, line 614",
+          "quote": "More than 700"
+        },
+        {
+          "locator": "Training highlights, line 608; two distinct populations transcribed",
+          "quote": "400,000"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-V2-AIRECRUIT",
+          "statement": "In June 2026 Lloyds planned more than 1,000 AI-related roles, including recruitment for nearly 300 agentic roles; roles could be filled internally or externally, so these are not net hires.",
+          "kind": "management_commitment",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated announcement 2026-06-22",
+          "primary_quotes": {
+            "LGV2-AIPEOPLE": "almost 300"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-AITEAMS",
+          "statement": "The June announcement describes more than 700 colleagues already working on AI use cases.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated announcement 2026-06-22",
+          "primary_quotes": {
+            "LGV2-AIPEOPLE": "More than 700"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-AITRAINING",
+          "statement": "The June announcement reports over 65,000 colleagues completing responsible-AI training and more than 400,000 Academy course completions since January; people and course events are different populations.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated announcement 2026-06-22",
+          "primary_quotes": {
+            "LGV2-AIPEOPLE": "400,000"
+          }
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/1000-new-ai-roles.html",
+        "publisher": "Lloyds Banking Group",
+        "title": "AI skills and role plans",
+        "published": "2026-06-22",
+        "version": "Observed 2026-11-27; short factual anchors only"
+      }
+    },
+    {
+      "id": "LGV2-FRAUD",
+      "title": "Agentic fraud decision support",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-deploys-agentic-ai-to-strengthen-real-time-.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-deploys-agentic-ai-to-strengthen-real-time-.html",
+      "reporting_period": "Dated announcement 2026-06-08",
+      "publication_date": "2026-06-08",
+      "publication_date_evidence": "Original publisher Published on field",
+      "retrieved_at": "2026-11-27T12:48:20+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "baef9bd50829ad87521aad1e18297f63bedd91dffefc4e5776d5448fc75d6fd0",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LGV2-FRAUD.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn197view0",
+      "reviewed_by": "Codex bounded original-source factual review",
+      "review_notes": "Only short factual anchors retained. Independent factual restatements; not a publisher document/table archive, original-byte proof, legal approval or canonical acceptance. Scope is non-financial organisation, products and announced operating activity. Existing numerical financial holds are untouched.",
+      "limitation": "Issuer-attributed, dated or observed-page facts. No independent proof of delivery effectiveness, buying authority, supplier workshare or net financial return.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category; minimal non-financial factual research and original analytical expression",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Does not resolve Lloyds section 2 for held numerical financial use, nor section 5 PDF links; no new licence or exception resolution asserted."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "Delivery teams and Envoy, line 614",
+          "quote": "fraud, technology, data and risk specialists"
+        },
+        {
+          "locator": "Accountability paragraph, line 619",
+          "quote": "ability to override AI suggestions"
+        },
+        {
+          "locator": "Named functional role, line 634",
+          "quote": "Tom Martin"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-V2-FRAUDWORKFLOW",
+          "statement": "The June fraud announcement describes an Envoy-built decision-support agent developed by fraud, technology, data and risk teams for existing colleague tools.",
+          "kind": "reported_programme",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated announcement 2026-06-08",
+          "primary_quotes": {
+            "LGV2-FRAUD": "fraud, technology, data and risk specialists"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-HUMANCONTROL",
+          "statement": "The announced fraud workflow leaves colleagues accountable and able to override AI suggestions; no independent effectiveness or loss-reduction estimate follows.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated announcement 2026-06-08",
+          "primary_quotes": {
+            "LGV2-FRAUD": "ability to override AI suggestions"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-FRAUDOWNER",
+          "statement": "The announcement identifies Tom Martin as Business Platform Lead for Economic Crime Prevention; that attribution is not buying authority.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated announcement 2026-06-08",
+          "primary_quotes": {
+            "LGV2-FRAUD": "Tom Martin"
+          }
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-deploys-agentic-ai-to-strengthen-real-time-.html",
+        "publisher": "Lloyds Banking Group",
+        "title": "Agentic fraud decision support",
+        "published": "2026-06-08",
+        "version": "Observed 2026-11-27; short factual anchors only"
+      }
+    },
+    {
+      "id": "LGV2-TRANSACTIONS",
+      "title": "Transaction Banking leadership appointment",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds/lloyds-appoints-natasha-condon-global-head-transaction-banking.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds/lloyds-appoints-natasha-condon-global-head-transaction-banking.html",
+      "reporting_period": "Dated announcement 2026-11-18",
+      "publication_date": "2026-11-18",
+      "publication_date_evidence": "Original publisher Published on field",
+      "retrieved_at": "2026-11-27T12:48:20+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "ecd4dfb96f3ad48b70e501a46e53efca3d1abdcdf96eed0eef49604950d20779",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LGV2-TRANSACTIONS.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn196search0",
+      "reviewed_by": "Codex bounded original-source factual review",
+      "review_notes": "Only short factual anchors retained. Independent factual restatements; not a publisher document/table archive, original-byte proof, legal approval or canonical acceptance. Scope is non-financial organisation, products and announced operating activity. Existing numerical financial holds are untouched.",
+      "limitation": "Issuer-attributed, dated or observed-page facts. No independent proof of delivery effectiveness, buying authority, supplier workshare or net financial return.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category; minimal non-financial factual research and original analytical expression",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Does not resolve Lloyds section 2 for held numerical financial use, nor section 5 PDF links; no new licence or exception resolution asserted."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "Appointment paragraph, 18 November 2026",
+          "quote": "Natasha Condon"
+        },
+        {
+          "locator": "Reporting paragraph; future reporting statement, not a wider organisation chart",
+          "quote": "Natasha will report to John Langley"
+        },
+        {
+          "locator": "Appointment remit paragraph",
+          "quote": "cash, working capital, trade and payments"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-V2-CONDON",
+          "statement": "Lloyds appointed Natasha Condon to lead Transaction Banking within Corporate & Institutional Banking in November 2026.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated announcement 2026-11-18",
+          "primary_quotes": {
+            "LGV2-TRANSACTIONS": "Natasha Condon"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-CONDONREPORT",
+          "statement": "The appointment states that Natasha Condon will report to John Langley, CIB CEO.",
+          "kind": "reported_relationship",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated announcement 2026-11-18",
+          "primary_quotes": {
+            "LGV2-TRANSACTIONS": "Natasha will report to John Langley"
+          }
+        },
+        {
+          "claim_id": "LBG-V2-TRANSACTIONREMIT",
+          "statement": "The appointment describes Transaction Banking around corporate cash management, working capital, trade and payments.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated announcement 2026-11-18",
+          "primary_quotes": {
+            "LGV2-TRANSACTIONS": "cash, working capital, trade and payments"
+          }
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds/lloyds-appoints-natasha-condon-global-head-transaction-banking.html",
+        "publisher": "Lloyds Banking Group",
+        "title": "Transaction Banking leadership appointment",
+        "published": "2026-11-18",
+        "version": "Observed 2026-11-27; short factual anchors only"
+      }
     }
   ],
   "claims": [
@@ -1366,6 +2252,669 @@
         "PR-LBG-SOURCING": "register with us on the Ariba Network"
       },
       "quote_locator": "Official page line 635, registration"
+    },
+    {
+      "id": "LBG-V2-NUNN",
+      "asset_id": "BK-ENT-001",
+      "statement": "Charlie Nunn is listed as Group CEO on the Group executive page observed 27 November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-LEADERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-LEADERS": "Charlie Nunn"
+      },
+      "quote_locator": "Named heading and immediately following published role"
+    },
+    {
+      "id": "LBG-V2-CHALMERS",
+      "asset_id": "BK-ENT-001",
+      "statement": "William Chalmers is listed as Group finance chief on the Group executive page observed 27 November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-LEADERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-LEADERS": "William Chalmers"
+      },
+      "quote_locator": "Named heading and immediately following published role"
+    },
+    {
+      "id": "LBG-V2-KEMENADE",
+      "asset_id": "BK-ENT-001",
+      "statement": "Ron van Kemenade is listed as Group operations chief on the Group executive page observed 27 November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-LEADERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-LEADERS": "Ron van Kemenade"
+      },
+      "quote_locator": "Named heading and immediately following published role"
+    },
+    {
+      "id": "LBG-V2-DOHERTY",
+      "asset_id": "BK-ENT-001",
+      "statement": "Sharon Doherty is listed as People and places chief on the Group executive page observed 27 November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-LEADERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-LEADERS": "Sharon Doherty"
+      },
+      "quote_locator": "Named heading and immediately following published role"
+    },
+    {
+      "id": "LBG-V2-BARUA",
+      "asset_id": "BK-ENT-001",
+      "statement": "Chirantan Barua is listed as Scottish Widows and Wealth & Insurance CEO on the Group executive page observed 27 November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-LEADERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-LEADERS": "Chirantan Barua"
+      },
+      "quote_locator": "Named heading and immediately following published role"
+    },
+    {
+      "id": "LBG-V2-LANGLEY",
+      "asset_id": "BK-ENT-001",
+      "statement": "John Langley is listed as Corporate & Institutional Banking CEO on the Group executive page observed 27 November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-LEADERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-LEADERS": "John Langley"
+      },
+      "quote_locator": "Named heading and immediately following published role"
+    },
+    {
+      "id": "LBG-V2-MURPHY",
+      "asset_id": "BK-ENT-001",
+      "statement": "Amanda Murphy is listed as Business & Commercial Banking CEO on the Group executive page observed 27 November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-LEADERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-LEADERS": "Amanda Murphy"
+      },
+      "quote_locator": "Named heading and immediately following published role"
+    },
+    {
+      "id": "LBG-V2-SINGH",
+      "asset_id": "BK-ENT-001",
+      "statement": "Jasjyot Singh OBE is listed as Consumer CEO on the Group executive page observed 27 November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-LEADERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-LEADERS": "Jasjyot Singh OBE"
+      },
+      "quote_locator": "Named heading and immediately following published role"
+    },
+    {
+      "id": "LBG-V2-WILLIAMS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Nick Williams is listed as Connected Finance CEO on the Group executive page observed 27 November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-LEADERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-LEADERS": "Nick Williams"
+      },
+      "quote_locator": "Named heading and immediately following published role"
+    },
+    {
+      "id": "LBG-V2-RISK",
+      "asset_id": "BK-ENT-001",
+      "statement": "Javier Rodríguez de Colmenares is listed as Group risk chief on the Group executive page observed 27 November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-LEADERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-LEADERS": "Rodríguez"
+      },
+      "quote_locator": "Named heading and immediately following published role"
+    },
+    {
+      "id": "LBG-V2-IDENTITY",
+      "asset_id": "BK-ENT-001",
+      "statement": "The issuer identifies Lloyds Banking Group plc as registered in Scotland, company number SC095000.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-PROFILE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-PROFILE": "number 95000"
+      },
+      "quote_locator": "Registered-office footer, line 689"
+    },
+    {
+      "id": "LBG-V2-CUSTOMERS",
+      "asset_id": "BK-ENT-001",
+      "statement": "The undated Group profile describes approximately 28 million customers and 23.6 million digitally active customers.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-PROFILE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-PROFILE": "c.28m"
+      },
+      "quote_locator": "Our impact: customers, lines 637–640; independently transcribed both counts"
+    },
+    {
+      "id": "LBG-V2-COLLEAGUES",
+      "asset_id": "BK-ENT-001",
+      "statement": "The undated Group profile describes more than 60,000 colleagues; it supplies neither an FTE basis nor a measurement date.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-PROFILE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-PROFILE": ">60k"
+      },
+      "quote_locator": "Our impact: colleagues, lines 642–645"
+    },
+    {
+      "id": "LBG-V2-SHAREHOLDERS",
+      "asset_id": "BK-ENT-001",
+      "statement": "The undated Group profile describes 2.1 million shareholders; this is not an ownership-concentration or voting-control analysis.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-PROFILE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-PROFILE": "2.1m"
+      },
+      "quote_locator": "Our impact: shareholders, lines 647–650"
+    },
+    {
+      "id": "LBG-V2-BANK",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lloyds Bank appears in the issuer’s brand portfolio, described in the context of retail and business banking.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-BRANDS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-BRANDS": "Lloyds Bank"
+      },
+      "quote_locator": "Our brands: named heading and product description"
+    },
+    {
+      "id": "LBG-V2-BOS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Bank of Scotland appears in the issuer’s brand portfolio, described in the context of banking services in Scotland.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-BRANDS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-BRANDS": "Bank of Scotland"
+      },
+      "quote_locator": "Our brands: named heading and product description"
+    },
+    {
+      "id": "LBG-V2-WIDOWS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Scottish Widows appears in the issuer’s brand portfolio, described in the context of long-term financial planning.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-BRANDS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-BRANDS": "Scottish Widows"
+      },
+      "quote_locator": "Our brands: named heading and product description"
+    },
+    {
+      "id": "LBG-V2-MBNA",
+      "asset_id": "BK-ENT-001",
+      "statement": "MBNA appears in the issuer’s brand portfolio, described in the context of credit cards and other personal financial products.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-BRANDS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-BRANDS": "MBNA"
+      },
+      "quote_locator": "Our brands: named heading and product description"
+    },
+    {
+      "id": "LBG-V2-WEALTH",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lloyds Wealth appears in the issuer’s brand portfolio, described in the context of financial advice.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-BRANDS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-BRANDS": "Lloyds Wealth"
+      },
+      "quote_locator": "Our brands: named heading and product description"
+    },
+    {
+      "id": "LBG-V2-BLACKHORSE",
+      "asset_id": "BK-ENT-001",
+      "statement": "Black Horse appears in the issuer’s brand portfolio, described in the context of motor-dealer point-of-sale finance.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-BRANDS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-BRANDS": "Black Horse"
+      },
+      "quote_locator": "Our brands: named heading and product description"
+    },
+    {
+      "id": "LBG-V2-LEX",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lex Autolease appears in the issuer’s brand portfolio, described in the context of personal and business vehicle leasing.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-BRANDS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-BRANDS": "Lex Autolease"
+      },
+      "quote_locator": "Our brands: named heading and product description"
+    },
+    {
+      "id": "LBG-V2-TUSKER",
+      "asset_id": "BK-ENT-001",
+      "statement": "Tusker appears in the issuer’s brand portfolio, described in the context of salary-sacrifice vehicle leasing.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-BRANDS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-BRANDS": "Tusker"
+      },
+      "quote_locator": "Our brands: named heading and product description"
+    },
+    {
+      "id": "LBG-V2-BRANDWORKFORCE",
+      "asset_id": "BK-ENT-001",
+      "statement": "The undated brand page says 65,000 colleagues; its date and workforce definition are not reconciled with the broader 60,000-plus profile statement.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-BRANDS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-BRANDS": "65,000"
+      },
+      "quote_locator": "Brand-page headline, lines 610–611"
+    },
+    {
+      "id": "LBG-V2-MSAGREEMENT",
+      "asset_id": "BK-ENT-001",
+      "statement": "On 4 June 2026 Lloyds and Microsoft Corp. announced a multi-year agreement covering a Group-wide Microsoft 365 E7 deployment.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_relationship",
+      "reporting_period": "Dated announcement 2026-06-04",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-FRONTIER"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-FRONTIER": "new multi-year agreement"
+      },
+      "quote_locator": "Announcement, lines 608–609"
+    },
+    {
+      "id": "LBG-V2-MSADOPTION",
+      "asset_id": "BK-ENT-001",
+      "statement": "The announcement reports 40,000 Microsoft 365 Copilot licences and classifies 97% of licensed colleagues as active users; its activity definition and independent outcome validation are not supplied.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated announcement 2026-06-04",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-FRONTIER"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-FRONTIER": "40,000"
+      },
+      "quote_locator": "Licence and activity paragraph, line 610; both numerical claims independently transcribed"
+    },
+    {
+      "id": "LBG-V2-ENGINEERS",
+      "asset_id": "BK-ENT-001",
+      "statement": "The announcement describes GitHub Copilot deployment to over 10,000 Group engineers; this is a tool population, not total technology headcount.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated announcement 2026-06-04",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-FRONTIER"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-FRONTIER": "over 10,000"
+      },
+      "quote_locator": "Engineering paragraph, line 614"
+    },
+    {
+      "id": "LBG-V2-ASSISTANT",
+      "asset_id": "BK-ENT-001",
+      "statement": "The announcement plans a colleague self-service assistant with Agent 365 orchestration; publication does not establish later rollout or benefits.",
+      "domain": "enterprise_executive_context",
+      "kind": "management_commitment",
+      "reporting_period": "Dated announcement 2026-06-04",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-FRONTIER"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-FRONTIER": "Agent 365"
+      },
+      "quote_locator": "Colleague assistant paragraph, line 613"
+    },
+    {
+      "id": "LBG-V2-AIRECRUIT",
+      "asset_id": "BK-ENT-001",
+      "statement": "In June 2026 Lloyds planned more than 1,000 AI-related roles, including recruitment for nearly 300 agentic roles; roles could be filled internally or externally, so these are not net hires.",
+      "domain": "enterprise_executive_context",
+      "kind": "management_commitment",
+      "reporting_period": "Dated announcement 2026-06-22",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-AIPEOPLE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-AIPEOPLE": "almost 300"
+      },
+      "quote_locator": "Role plan, lines 613–614; internal/external distinction in line 613"
+    },
+    {
+      "id": "LBG-V2-AITEAMS",
+      "asset_id": "BK-ENT-001",
+      "statement": "The June announcement describes more than 700 colleagues already working on AI use cases.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated announcement 2026-06-22",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-AIPEOPLE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-AIPEOPLE": "More than 700"
+      },
+      "quote_locator": "Existing AI teams, line 614"
+    },
+    {
+      "id": "LBG-V2-AITRAINING",
+      "asset_id": "BK-ENT-001",
+      "statement": "The June announcement reports over 65,000 colleagues completing responsible-AI training and more than 400,000 Academy course completions since January; people and course events are different populations.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated announcement 2026-06-22",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-AIPEOPLE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-AIPEOPLE": "400,000"
+      },
+      "quote_locator": "Training highlights, line 608; two distinct populations transcribed"
+    },
+    {
+      "id": "LBG-V2-FRAUDWORKFLOW",
+      "asset_id": "BK-ENT-001",
+      "statement": "The June fraud announcement describes an Envoy-built decision-support agent developed by fraud, technology, data and risk teams for existing colleague tools.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_programme",
+      "reporting_period": "Dated announcement 2026-06-08",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-FRAUD"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-FRAUD": "fraud, technology, data and risk specialists"
+      },
+      "quote_locator": "Delivery teams and Envoy, line 614"
+    },
+    {
+      "id": "LBG-V2-HUMANCONTROL",
+      "asset_id": "BK-ENT-001",
+      "statement": "The announced fraud workflow leaves colleagues accountable and able to override AI suggestions; no independent effectiveness or loss-reduction estimate follows.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated announcement 2026-06-08",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-FRAUD"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-FRAUD": "ability to override AI suggestions"
+      },
+      "quote_locator": "Accountability paragraph, line 619"
+    },
+    {
+      "id": "LBG-V2-FRAUDOWNER",
+      "asset_id": "BK-ENT-001",
+      "statement": "The announcement identifies Tom Martin as Business Platform Lead for Economic Crime Prevention; that attribution is not buying authority.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated announcement 2026-06-08",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-FRAUD"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-FRAUD": "Tom Martin"
+      },
+      "quote_locator": "Named functional role, line 634"
+    },
+    {
+      "id": "LBG-V2-CONDON",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lloyds appointed Natasha Condon to lead Transaction Banking within Corporate & Institutional Banking in November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated announcement 2026-11-18",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-TRANSACTIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-TRANSACTIONS": "Natasha Condon"
+      },
+      "quote_locator": "Appointment paragraph, 18 November 2026"
+    },
+    {
+      "id": "LBG-V2-CONDONREPORT",
+      "asset_id": "BK-ENT-001",
+      "statement": "The appointment states that Natasha Condon will report to John Langley, CIB CEO.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_relationship",
+      "reporting_period": "Dated announcement 2026-11-18",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-TRANSACTIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-TRANSACTIONS": "Natasha will report to John Langley"
+      },
+      "quote_locator": "Reporting paragraph; future reporting statement, not a wider organisation chart"
+    },
+    {
+      "id": "LBG-V2-TRANSACTIONREMIT",
+      "asset_id": "BK-ENT-001",
+      "statement": "The appointment describes Transaction Banking around corporate cash management, working capital, trade and payments.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated announcement 2026-11-18",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-TRANSACTIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-TRANSACTIONS": "cash, working capital, trade and payments"
+      },
+      "quote_locator": "Appointment remit paragraph"
+    },
+    {
+      "id": "LBG-V2-LEGAL",
+      "asset_id": "BK-ENT-001",
+      "statement": "Kate Cheetham is listed as Legal chief and company secretary on the Group executive page observed 27 November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-LEADERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-LEADERS": "Cheetham"
+      },
+      "quote_locator": "Named executive heading and immediately following published role"
+    },
+    {
+      "id": "LBG-V2-AUDIT",
+      "asset_id": "BK-ENT-001",
+      "statement": "Laura Needham is listed as Internal audit chief on the Group executive page observed 27 November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-LEADERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-LEADERS": "Needham"
+      },
+      "quote_locator": "Named executive heading and immediately following published role"
+    },
+    {
+      "id": "LBG-V2-SUSTAINABILITY",
+      "asset_id": "BK-ENT-001",
+      "statement": "Andrew Walton is listed as Sustainability and corporate affairs chief on the Group executive page observed 27 November 2026.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated maintained page observed 27 November 2026; underlying measurement date not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LGV2-LEADERS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LGV2-LEADERS": "Walton"
+      },
+      "quote_locator": "Named executive heading and immediately following published role"
     }
   ],
   "frameworks": [
@@ -4498,5 +6047,60 @@
         "confirmed_supplier_demand": false
       }
     ]
+  },
+  "gold_v2_enrichment": {
+    "base": "1c8c8ae17bb2af3c95bf264d7df9befb60b0b576",
+    "source_ids": [
+      "LGV2-LEADERS",
+      "LGV2-PROFILE",
+      "LGV2-BRANDS",
+      "LGV2-FRONTIER",
+      "LGV2-AIPEOPLE",
+      "LGV2-FRAUD",
+      "LGV2-TRANSACTIONS"
+    ],
+    "claim_ids": [
+      "LBG-V2-NUNN",
+      "LBG-V2-CHALMERS",
+      "LBG-V2-KEMENADE",
+      "LBG-V2-DOHERTY",
+      "LBG-V2-BARUA",
+      "LBG-V2-LANGLEY",
+      "LBG-V2-MURPHY",
+      "LBG-V2-SINGH",
+      "LBG-V2-WILLIAMS",
+      "LBG-V2-RISK",
+      "LBG-V2-IDENTITY",
+      "LBG-V2-CUSTOMERS",
+      "LBG-V2-COLLEAGUES",
+      "LBG-V2-SHAREHOLDERS",
+      "LBG-V2-BANK",
+      "LBG-V2-BOS",
+      "LBG-V2-WIDOWS",
+      "LBG-V2-MBNA",
+      "LBG-V2-WEALTH",
+      "LBG-V2-BLACKHORSE",
+      "LBG-V2-LEX",
+      "LBG-V2-TUSKER",
+      "LBG-V2-BRANDWORKFORCE",
+      "LBG-V2-MSAGREEMENT",
+      "LBG-V2-MSADOPTION",
+      "LBG-V2-ENGINEERS",
+      "LBG-V2-ASSISTANT",
+      "LBG-V2-AIRECRUIT",
+      "LBG-V2-AITEAMS",
+      "LBG-V2-AITRAINING",
+      "LBG-V2-FRAUDWORKFLOW",
+      "LBG-V2-HUMANCONTROL",
+      "LBG-V2-FRAUDOWNER",
+      "LBG-V2-CONDON",
+      "LBG-V2-CONDONREPORT",
+      "LBG-V2-TRANSACTIONREMIT",
+      "LBG-V2-LEGAL",
+      "LBG-V2-AUDIT",
+      "LBG-V2-SUSTAINABILITY"
+    ],
+    "canonical_mutation": false,
+    "public_scope": "Non-financial ordinary factual analysis only; existing financial restrictions unchanged"
   }
 }

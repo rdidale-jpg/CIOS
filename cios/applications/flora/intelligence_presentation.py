@@ -242,6 +242,24 @@ def claim_view(data, claim) -> Statement | None:
     for sid in claim['source_ids']:
         s=source_by_id[sid]
         if restricted_metadata(s):return None
+        if 'disclosure_bindings' in s:
+            # Source-owned ordinary factual records remain distinct from
+            # canonical acceptance. This only withholds malformed/restricted
+            # output; it grants no publisher, storage or Financial authority.
+            from .research_intelligence.source_import import working_restricted
+            rights=s.get('rights',{});identity=s.get('document_identity',{})
+            bindings=[b for b in s['disclosure_bindings'] if b.get('claim_id')==claim['id']]
+            fields=('statement','kind','entity_scope','asset_id','reporting_period','primary_quotes')
+            if (working_restricted(s) or working_restricted(claim) or s.get('restrictions')
+                    or rights.get('material_exceptions') or rights.get('restrictions')
+                    or rights.get('status')!='permitted_public_factual_category'
+                    or rights.get('policy_reference')!='https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e'
+                    or rights.get('homepage_conditions_met')is not True
+                    or any(identity.get(k)!=s.get(k) for k in ('url','publisher','title'))
+                    or identity.get('published')!=s.get('publication_date') or not identity.get('version')
+                    or claim.get('reporting_period')!=s.get('reporting_period')
+                    or len(bindings)!=1 or any(bindings[0].get(k)!=claim.get(k) for k in fields)):
+                return None
         if 'search-index'in s.get('retrieval_extent',''):return None
         sources.append(Source(s['title'],s['url'],s.get('publisher',''),s.get('publication_date')or'',s.get('reporting_period',''),claim.get('primary_quotes',{}).get(sid,''),claim.get('quote_locator','')))
     # Curated adapter permits only a disclosure before a distinct research-task

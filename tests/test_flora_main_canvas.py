@@ -82,8 +82,8 @@ def test_capability_organisation_and_technology_regions_preserve_boundaries():
  html=v.render(g.CANONICAL,query('inside','capabilities'))
  assert 'canvas-capabilities'in html and 'no organisation, application ownership or installed dependency'in html
  org=v.render(g.CANONICAL,query('inside','people','structure'))
- assert 'Reporting businesses · not legal subsidiaries'in org
- assert 'Named owner / mandate unavailable'in org
+ assert 'Financial reporting businesses'in org
+ assert 'Financial reporting businesses' in org and 'spending authority' in org
  apps=v.render(g.CANONICAL,query('inside','applications'))
  assert any(a.get('aria-label')=='Envoy'and a.get('data-canvas-region')=='technology'for a,_ in Links(apps).links)
  assert 'installed estate inventory'in apps

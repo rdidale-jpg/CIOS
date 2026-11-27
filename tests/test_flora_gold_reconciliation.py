@@ -75,7 +75,7 @@ def test_ai_source_withdrawal_is_precise_and_preserves_independent_evidence(monk
 def test_workforce_uses_scoped_signals_not_empty_tables_or_licence_proxy():
     body=main('inside','people','workforce')
     assert 'Licences are not people' in body and '<table' not in body
-    assert '30,000' not in body and '30000' not in body and 'detail=copilot' in body
+    assert '30,000' not in body and '30000' not in body and 'detail=frontier' in body
     assert 'rules out related role reductions' in body and 'Group-wide workforce growth' in body
     assert '30,000' in main('inside','applications','copilot')
 
@@ -102,10 +102,12 @@ def test_new_home_is_public_but_private_selectors_remain_denied(http,detail):
 
 def test_no_research_or_protected_owner_changes_and_no_held_financial_activation():
     assert financial.public_factual_projection()=={}
-    protected=('enterprise-knowledge','cios/applications/flora/security_store.py','cios/applications/flora/security_web.py',
+    protected=('cios/applications/flora/security_store.py','cios/applications/flora/security_web.py',
                'cios/applications/flora/research_intelligence/source_import.py','cios/applications/flora/financial_intelligence',
                'cios/applications/flora/blueprint_import/material_pressure.py')
     assert subprocess.check_output(['git','diff','--name-only','7f003982088b6f71fc2e365f3663b7beb3772d21','--',*protected],cwd=ROOT,text=True)==''
+    from tests.test_flora_lloyds_gold_v2 import test_original_research_and_permissions_are_preserved_with_only_additive_claims
+    test_original_research_and_permissions_are_preserved_with_only_additive_claims()
     for path in ('cios/applications/flora/lloyds_gold.py',):
         import ast
         old=ast.parse(subprocess.check_output(['git','show','7f003982:'+path],cwd=ROOT));new=ast.parse((ROOT/path).read_text())

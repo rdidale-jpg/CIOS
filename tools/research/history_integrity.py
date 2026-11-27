@@ -175,6 +175,39 @@ def verify_history(root):
         assert path in actual and path not in expected
         assert hashlib.sha256(actual[path]).hexdigest()==digest, "Unknown FCA product numerical source cut"
         actual.pop(path)
+    # Gold v2 is one exact additive research cut, never a new permission or
+    # canonical decision. Preserve every previous record and byte; reject all
+    # unknown additions and mutations before the unchanged comparator runs.
+    overlay='enterprise-knowledge/banking/research-model/Assessment-Overlay.json'
+    if hashlib.sha256(actual[overlay]).hexdigest()!='a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2':
+        assert hashlib.sha256(actual[overlay]).hexdigest()=='6307d01f80e812327fef1339ef3a8c0f1b6835ca4878c735e4e972f5f3424422', 'Unknown Gold v2 assessment cut'
+        original=_git(root,'show','1c8c8ae17bb2af3c95bf264d7df9befb60b0b576:'+overlay)
+        assert hashlib.sha256(original).hexdigest()=='a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2'
+        assert expected[overlay]==original
+        old,new=json.loads(original),json.loads(actual[overlay])
+        for key,value in old.items():
+            if key in {'sources','claims'}:
+                byid={r['id']:r for r in new[key]}
+                assert all(byid[r['id']]==r for r in value), 'Previous research record changed'
+            elif key!='assessed_at':assert new[key]==value, key
+        actual[overlay]=original
+        for path,digest in {'enterprise-knowledge/banking/research-model/source-snapshots/LGV2-AIPEOPLE.txt': 'b14118d6bc13cbbd49a0422c5cb268f60db1195ae7211c3628823d1a3a2fbba7', 'enterprise-knowledge/banking/research-model/source-snapshots/LGV2-BRANDS.txt': '403a05806fb9600713bd159c5e6f88c8900196c630161f6410de01c6814eadbb', 'enterprise-knowledge/banking/research-model/source-snapshots/LGV2-FRAUD.txt': 'baef9bd50829ad87521aad1e18297f63bedd91dffefc4e5776d5448fc75d6fd0', 'enterprise-knowledge/banking/research-model/source-snapshots/LGV2-FRONTIER.txt': '1ba285b37b973134b36d76c6d739fdac5fe1f5903827a040f26e357b3a573e6f', 'enterprise-knowledge/banking/research-model/source-snapshots/LGV2-LEADERS.txt': 'b3a094edac7bd4f6ae0cfbc7185c6d2e27f436e3543e73c6f2e1832f13f9209a', 'enterprise-knowledge/banking/research-model/source-snapshots/LGV2-PROFILE.txt': '7e2e0521db96267d5ad3bdb49cc47f1382fbd054494224dff085745b9cb3ce59', 'enterprise-knowledge/banking/research-model/source-snapshots/LGV2-TRANSACTIONS.txt': 'ecd4dfb96f3ad48b70e501a46e53efca3d1abdcdf96eed0eef49604950d20779'}.items():
+            assert path in actual and path not in expected
+            assert hashlib.sha256(actual.pop(path)).hexdigest()==digest, 'Unknown Gold v2 source excerpt'
+    # Existing candidate review is rebound to the additive assessment only.
+    # All prior sources, assertion judgments and relationship reviews survive.
+    if actual[REVIEW] != expected[REVIEW]:
+        assert hashlib.sha256(actual[REVIEW]).hexdigest()=='cfdddaec221b9694c04b829ccab7738d620fd598757921e3a774de191cb2b531', 'Unknown Gold v2 candidate review'
+        prior=json.loads(expected[REVIEW]); current=json.loads(actual[REVIEW])
+        assert set(current)==set(prior)
+        assert all(current[k]==v for k,v in prior.items() if k not in {'baseline_digest','as_of','sources'})
+        assert len(current['sources'])==len(prior['sources'])
+        for old_source,new_source in zip(prior['sources'],current['sources']):
+            assert {k:v for k,v in old_source.items() if k!='assessment_digest'}=={k:v for k,v in new_source.items() if k!='assessment_digest'}
+            if 'assessment_digest' in old_source:assert new_source['assessment_digest']==current['baseline_digest']
+        from cios.applications.flora.research_intelligence.cycle import digest
+        assert current['baseline_digest']==digest(json.loads((Path(root)/overlay).read_bytes()))
+        actual[REVIEW]=expected[REVIEW]
     compare_history(expected,actual)
     return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS)-len(EAI1_CANDIDATE_ADDITIONS)-len(BIE2_CANDIDATE_ADDITIONS)-len(BIE3_CANDIDATE_ADDITIONS)-len(F1_CANDIDATE_ADDITIONS)-len(RUD1_ADDITIONS),
             'depth_additions':len(DEPTH_ADDITIONS),'macro_additions':len(MACRO_ADDITIONS),

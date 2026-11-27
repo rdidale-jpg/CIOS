@@ -60,11 +60,12 @@ def test_old_specialist_deep_links_and_previous_presentations_remain_available(h
 
 def test_named_role_is_dated_government_context_not_current_mandate_or_buyer():
     html=main(v.render(g.CANONICAL,query('inside','people','leadership')))
-    assert 'Charlie Nunn' in html and '22 March 2026'in html
-    assert 'not a verified current mandate or purchasing authority'in html
-    assert 'Open Government Licence'in html
-    assert all(name not in html for name in ('Amanda Murphy','John Langley','Ron van Kemenade','William Chalmers'))
+    assert 'Charlie Nunn' in html and 'observed 27 November 2026' in html
+    assert all(name in html for name in ('Amanda Murphy','John Langley','Ron van Kemenade','William Chalmers'))
+    assert 'delegated spending authority' in html and 'does not assert who reports to whom' in html
     package=source.public_enterprise_role();assert package and package[1]['current_mandate_verified']is False
+    # The independent original OGL fact remains dated; it is not upgraded by the new issuer roster.
+    assert package[1]['period']=='22 March 2026'
 
 
 @pytest.mark.parametrize('level',['package','source','fact'])
@@ -81,7 +82,9 @@ def test_role_lifecycle_hides_all_dependent_names_and_context(monkeypatch,level,
     monkeypatch.setattr(Path,'read_text',read)
     assert not source.public_enterprise_role()
     for q in ({},query('inside','people','leadership'),query('inside','people','sources')):
-        assert 'Charlie Nunn'not in main(v.render(g.CANONICAL,q))
+        body=main(v.render(g.CANONICAL,q))
+        assert 'CEO1-ROLE-NUNN-20260322' not in body
+        assert 'Charlie Nunn' in main(v.render(g.CANONICAL,query('inside','people','leadership')))  # Independent issuer roster survives.
     assert '£502.8bn'in v.render(g.CANONICAL,{})
 
 
@@ -99,18 +102,19 @@ def test_government_fact_scope_and_dated_meaning_are_not_self_relabelled(monkeyp
 
 def test_workforce_is_unavailable_without_proxy_counts_or_invented_chart():
     html=main(v.render(g.CANONICAL,query('inside','people','workforce')))
-    assert 'Comparable employee/FTE totals' in html and 'cannot be established from these disclosures' in html
+    assert 'more than 60,000 colleagues' in html and 'not audited FTE' in html
+    assert 'FTE distribution, salary cost or productivity saving is calculated' in html
     assert 'Licences are not people'in html and '<table' not in html
     assert '<meter'not in html and 'data-semantic-type="calculated"'not in html
-    assert 'detail=copilot' in html and '30,000' not in html and '30000' not in html
+    assert 'detail=frontier' in html and '30,000' not in html and '30000' not in html
     assert 'Correspondence address'not in html and 'Date of birth'not in html
 
 
 def test_business_hierarchy_does_not_merge_legal_entities_segments_functions_people():
     html=main(v.render(g.CANONICAL,query('inside','people','structure')))
-    assert 'Reporting businesses · not legal subsidiaries'in html
-    assert 'Conceptual function lenses · not a verified organisation chart'in html
-    assert 'Named owner / mandate unavailable'in html
+    assert 'Financial reporting businesses'in html
+    assert 'does not assert who reports to whom' in html
+    assert 'no unsupported mapping is imposed' in html
 
 
 @pytest.mark.parametrize('key',tuple(g.JOURNEYS))
@@ -136,8 +140,8 @@ def test_objectives_use_real_horizons_and_do_not_claim_unsupported_progress(row)
         assert 'percentage of target delivered' in html and 'data-semantic-type="calculated"' not in html
         assert 'whether any decision remains open' in html
     else:
-        assert horizon in html and 'no inferred progress percentage'in html
-        assert 'not verified buying authority'in html
+        assert horizon in html and 'not a percentage achieved'in html
+        assert 'delegated authority remain hypotheses'in html
     assert ('External intervention remains a hypothesis' if key=='ai' else 'External intervention is a hypothesis only') in html
 
 
@@ -197,7 +201,9 @@ def test_role_publication_requires_the_exact_existing_open_government_scope(monk
         return text
     monkeypatch.setattr(Path,'read_text',altered)
     assert not source.public_enterprise_role()
-    assert 'Charlie Nunn'not in main(v.render(g.CANONICAL,query('inside','people','leadership')))
+    body=main(v.render(g.CANONICAL,query('inside','people','leadership')))
+    assert 'CEO1-ROLE-NUNN-20260322' not in body
+    assert 'Charlie Nunn' in body  # Separately verified issuer roster is unaffected.
 
 
 def test_strategy_questions_are_distinct_and_do_not_create_progress_or_buyers():
@@ -206,8 +212,8 @@ def test_strategy_questions_are_distinct_and_do_not_create_progress_or_buyers():
     for key,*_ in g.OBJECTIVES:
         html=main(v.render(g.CANONICAL,query('forces','strategy','objective-'+key)))
         assert g.GOAL_DECISIONS[key][1] in html.replace('&amp;','&')
-        assert ('no buyer mandate or budget is established' if key=='ai' else 'role hypothesis, not verified buying authority') in html
-        assert ('percentage of target delivered' if key=='ai' else 'no inferred progress percentage') in html
+        assert ('no buyer mandate or budget is established' if key=='ai' else 'delegated authority remain hypotheses') in html
+        assert ('percentage of target delivered' if key=='ai' else 'not a percentage achieved') in html
 
 @pytest.mark.parametrize('change',['json','txt','unknown'])
 def test_history_keeps_new_role_bytes_exact_and_rejects_unreviewed_additions(tmp_path,monkeypatch,change):
@@ -226,7 +232,7 @@ def test_history_keeps_new_role_bytes_exact_and_rejects_unreviewed_additions(tmp
 def test_existing_eai_outcomes_and_funding_still_have_one_source_guarded_entry():
     html=main(v.render(g.CANONICAL,{}))
     assert html.count('data-intelligence="funding-base"')==1
-    assert html.count('id="preview-service-recovery"')==1
+    assert html.count('id="preview-service-recovery"')==0  # Complaint context is no longer an executive-attention marker.
     assert 'stream=inside&amp;focus=operations&amp;subject=group&amp;detail=service' in html
     assert 'Funding comparison'in html and 'Customer operations'in html
 

@@ -197,14 +197,14 @@ def financial_regions(state,facts):
 
 def operating_regions(state):
     groups=(('Customer value streams',('credit','payments','service','insurance')),('Assure and enable delivery',('risk','data','platforms')),('Supporting organisation',('finance','support')))
-    body='<div class="canvas-value-system">'
+    body='<div class="canvas-value-system v2-operating-model">'
     for title,keys in groups:
         body+='<section class="canvas-operating-band"><h2>'+e(title)+'</h2><div>'
         for key in keys:
             row=JOURNEYS[key]
             if key=='service':
                 body+=region(state,'Customer operations',kind='operating',caption='Complaints & service · activity and outcomes',detail='service');continue
-            body+=region(state,row[0],'<span class="canvas-sequence canvas-process">'+''.join('<span>'+e(step.strip())+'</span>' for step in row[2].split('→'))+'</span>',kind='operating',caption=row[1],detail='journey-'+key)
+            body+=region(state,row[0],kind='operating',caption=row[1]+' · select the work, capabilities and supporting evidence',detail='journey-'+key)
         body+='</div></section>'
     return body+'</div><p class="le-limit">Conceptual operating architecture; grouping and navigation do not assert verified dependencies.</p>'
 
@@ -446,7 +446,9 @@ def exploration_rail(state, rows, active, *, kind):
 
 
 def transaction_banking(state,facts):
+    evidence=v2_reported(facts,'TRANSACTIONREMIT','CONDON','CONDONREPORT')
     body='<p class="le-deck">Help a business collect, hold and move money while managing the timing of payments and receipts.</p>'
+    body+=evidence
     if not state.detail:
         body+=region(state,'Transaction Banking',kind='commercial',caption='Explore customer economics, delivery and commercial interpretation',detail='transactions')
         body+='<p class="le-limit">Business-model lens within Commercial Banking; not a verified Lloyds organisation or revenue allocation.</p>'
@@ -510,11 +512,15 @@ def envoy_exploration(state,facts):
 
 
 def division(state,facts):
-    if state.focus=='commercial' and (not state.detail or state.detail.startswith('transaction')):
+    if state.focus=='commercial' and not state.detail:return executive_commercial(state,facts)
+    if state.focus=='commercial' and state.detail.startswith('transaction'):
         return transaction_banking(state,facts)
     _,customers,activities,driver,_=next(row for row in twin.DIVISIONS if row[-1]==state.focus)
     body='<p class="le-deck">'+e(customers)+'. '+e(activities)+'.</p>'
     body+='<div class="gold-business"><h2>How value is created</h2><p>'+e(driver)+'.</p><p class="le-limit">Business-model orientation. Group disclosures below do not establish divisional outcomes or allocations.</p></div>'
+    keys={'retail':('BANK','BOS','MBNA','BLACKHORSE','LEX','TUSKER'),'retirement':('WIDOWS','WEALTH')}.get(state.focus,())
+    body+='<div class="v2-business-evidence">'+v2_reported(facts,*keys)+'</div>'
+    body+='<div class="v2-economic-sequence">'+''.join('<span>'+e(x)+'</span>' for x in ({'retail':('Customer deposits','Lending, fees and asset services','Funding, servicing and credit costs','Banking return'),'retirement':('Policies and long-term savings','Protection, distribution and administration','Claims, service and capital requirements','Insurance and investment return')}.get(state.focus,())))+'</div><p class="le-limit">Conceptual economic mechanism; no capability-level allocation or cross-business profit comparison.</p>'
     rows={'retail':(('Originate & service credit','Assess affordability; book and service credit','Risk assessment, servicing and controls'),('Support the customer','Resolve requests; correct accounts','Customer operations and access controls')),
           'commercial':(('Finance businesses','Evaluate and service business credit','Lending, risk and finance · conceptual'),('Move money','Provide payment and cash-management services','Payments, technology and operations · conceptual')),
           'retirement':(('Build long-term savings','Pensions and investment products','Product, servicing and risk · conceptual'),('Meet obligations','Administer policies and customer outcomes','Operations, finance and data · conceptual'))}
@@ -613,20 +619,18 @@ def applications(state,facts):
         available=tuple(k for k in keys if k in facts)
         if len(available)!=len(keys):continue
         rows.append(region(state,name,kind='technology',caption=status,content='<span class="canvas-sequence">'+e(capability)+'</span>',focus='applications',detail=key))
+    if 'LBG-V2-MSAGREEMENT' in facts:rows.append(region(state,'Microsoft Frontier Suite',kind='technology',caption='June agreement, reported adoption and engineering tools',focus='applications',detail='frontier'))
+    if 'LBG-V2-FRAUDWORKFLOW' in facts:rows.append(region(state,'Fraud decision support',kind='operating',caption='A disclosed Envoy workflow with human accountability',focus='applications',detail='fraud'))
     body+='<div class="gold-technology-list">'+''.join(rows)+'</div><p class="le-limit">Source-supported examples · not an installed estate inventory.</p>' if rows else ''
-    body+=reported(facts,('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'))
-    body+=interpretation(facts,('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'),'The earlier reported AI contribution and the later expectation use different temporal states. Neither establishes net return after all costs, divisional attribution or external supplier budget.')
+    if all(k in facts for k in ('LBG-AI26-REPORTED','LBG-AI26-EXPECTED')):body+=region(state,'Group AI performance',kind='timeline',caption='Reported contribution and later expectation, in their strategy home',stream='forces',focus='strategy',detail='objective-ai')
     key={'google':'envoy','microsoft':'copilot'}.get(state.detail,state.detail)
     if key in APPS:
         name,status,keys,capability,note=APPS[key]
         available=tuple(k for k in keys if k in facts)
         if len(available)==len(keys):
             body+='<section class="gold-dossier"><h2>'+e(name)+'</h2>'+reported(facts,available)+'<p>'+e(note)+'</p>'
-            rows=[('Operating scope','Lloyds Banking Group disclosure; legal operating / contracting entity Unknown'),('Business capability',e(capability)),
-                  ('Installation / version',e(status)+'; version Unknown'),('Provider relationship','Google Cloud collaboration disclosed' if key=='envoy' and 'LBG-ENVOY-GOOGLE' in facts else 'Product brand disclosed; contracting counterparty Unknown'),
-                  ('Contracted service','Unknown'),('Support expiry','Unknown'),('Contract end / renewal','Unknown'),
-                  ('Programme dependency','No verified installation-to-programme or contract dependency'),('Ownership / confidence','Attributed public disclosure; no canonical installation or contract assertion')]
-            body+=table(('Field','Established boundary'),rows,'Application detail · Unknown means no supported assertion')
+            body+='<p class="le-limit">The disclosure does not establish a complete installation map, contracting entity, contract value, support expiry, renewal date or programme workshare.</p>'
+            if key=='copilot' and 'LBG-V2-MSAGREEMENT' in facts:body+=region(state,'Later Microsoft agreement and adoption',kind='technology',caption='June 2026 announcement; separate from the FY2025 footprint',focus='applications',detail='frontier')
             body+='<p class="gold-inspect">'+link(state,'Evidence & dates',detail='sources')+'</p></section>'
     return body
 
@@ -634,7 +638,8 @@ def applications(state,facts):
 def partners(state,facts):
     body='<p class="le-deck">A collaboration, a product licence and a contract are different relationships.</p><div class="gold-technology-list">'
     if 'LBG-ENVOY-GOOGLE' in facts:body+=region(state,'Google Cloud',kind='technology',caption='Disclosed Envoy collaborator',content='<span class="canvas-sequence">No contracting entity, spend, workshare or renewal established</span>',detail='google')
-    if 'LBG-AR25-COPILOT' in facts:body+=region(state,'Microsoft Copilot',kind='technology',caption='Disclosed licences; product context',content='<span class="canvas-sequence">No supplier contract or service-term inference</span>',detail='microsoft')
+    if 'LBG-V2-MSAGREEMENT' in facts:body+=region(state,'Microsoft agreement',v2_reported(facts,'MSAGREEMENT'),kind='technology',caption='Announced multi-year agreement · June 2026; workshare, price and expiry not disclosed',focus='applications',detail='frontier')
+    elif 'LBG-AR25-COPILOT' in facts:body+=region(state,'Microsoft Copilot',kind='technology',caption='Disclosed licences; product context',content='<span class="canvas-sequence">No supplier contract or service-term inference</span>',detail='microsoft')
     body+='</div>'+reported(facts,FOCUS_FACTS['partners'])
     if state.detail in {'google','microsoft'}:body+=applications(state,facts)
     return body
@@ -647,7 +652,7 @@ def programmes(state,data,facts):
     for date,key,row,keys,phase in rows:
         if state.detail==key:
             body+='<section class="gold-dossier"><h2>'+e(row['title'])+'</h2>'+reported(facts,keys)
-            body+=table(('Accountability','Commercial boundary','Outcome'),[('Programme owner Unknown','Funding, procurement, external scope and dates Unknown','Delivery and realised benefit Unknown')],'Programme detail · no work package or buying intent inferred')+'</section>'
+            body+='<p>The dated plan, licence disclosure or acquisition state is the established response. A later milestone, measured customer outcome and remaining delivery obligation need separate evidence.</p>'+region(state,'Relevant leadership and operating context',kind='organisation',caption='Published roles are not delegated programme sponsorship',focus='people',detail='leadership')+'<p class="le-limit">No programme budget, contracted work package or verified outcome is inferred.</p></section>'
     return body
 
 
@@ -734,6 +739,7 @@ def strategy_goals(facts):
 
 
 def forces(state,facts):
+    if state.focus=='markets' and not state.detail:return executive_force_overview(state,facts)
     if state.focus=='analysis':return analysis(state,facts)
     if state.focus=='strategy':
         if state.detail == 'goals':
@@ -766,6 +772,7 @@ def forces(state,facts):
 
 
 def main(state,data,facts,issues=()):
+    facts=executive_facts(data,facts)
     title=SUBJECTS[state.focus]
     body='<section class="gold-content" data-canvas="visual" data-level="'+('3' if state.detail=='sources' else '2' if state.detail else '0' if state.focus=='group' else '1')+'">'
     body+='<p class="eyebrow">Lloyds Banking Group plc'+(' · From '+e(SUBJECTS[state.subject]) if state.subject!=state.focus else '')+'</p>'
@@ -785,36 +792,18 @@ def main(state,data,facts,issues=()):
         return body+'</section>'
     if state.stream=='landscape':
         if state.focus=='group' and not state.detail:
-            body+='<p class="le-deck">Three customer businesses. Funding, earnings and the work of running the bank.</p>'
-            body+=business_regions(state)
-            body+=financial_regions(state,facts)
-            body+=interpretation(facts,('LBG-AR25-MIGRATION','LBG-A2030-CIR'),'The efficiency ambition and platform-renewal priority put the sequencing of change alongside service continuity. They establish strategic direction, not a project-level saving or open buying programme.')
-            if 'LBG-Q326-CURVE' in facts:
-                body+=region(state,'Curve acquisition reported complete',reported(facts,('LBG-Q326-CURVE',))+'<p class="le-limit">Completion is not integration progress or open supplier scope.</p>',kind='change',caption='Reported change',stream='inside',focus='programmes',detail='curve')
-            if 'CEO1-ROLE-NUNN-20260322' in facts:
-                p.note_editorial_sources(facts['CEO1-ROLE-NUNN-20260322'].sources)
-                body+=region(state,'Leadership evidence',kind='organisation',caption='Charlie Nunn was identified as Group Chief Executive in March 2026; current mandate verification is unavailable.',stream='inside',focus='people',detail='leadership')+'<p class="ceo-attribution">Contains public sector information licensed under the Open Government Licence v3.0.</p>'
-            # Keep the existing EAI agenda destinations discoverable, with their
-            # current eligibility owner deciding whether each link may appear.
-            related=[]
-            funding=next((row for row in issues if row.key=='funding-base'),None)
-            if funding and funding.facts[-1].semantic_type=='calculated' and p.eligible(funding.facts[-1]):
-                body+='<div data-intelligence="funding-base">'+p.render(funding.facts[-1])+'</div>'
-                related.append('<a class="canvas-region canvas-money" data-canvas-region="money" href="'+e(href(state,focus='economics',detail='comparison'),quote=True)+'" aria-label="Funding comparison">'+visual_mark('money')+'<span class="canvas-title">Funding comparison</span><span class="canvas-caption">Compare dated stocks and their limits</span></a>')
-            if any(row.key=='service-recovery' for row in issues):
-                related.append('<a class="canvas-region canvas-operating" data-canvas-region="operating" data-context="service-operations" id="preview-service-recovery" href="'+e(href(state,stream='inside',focus='operations',detail='service'),quote=True)+'" aria-label="Customer operations">'+visual_mark('operating')+'<span class="canvas-title">Customer operations</span><span class="canvas-caption">Lloyds Bank PLC · its own reporting perimeter</span></a>')
-            if related:body+='<p class="gold-related">'+''.join(related)+'</p>'
-            body+='<p class="gold-related">'+link(state,'Funding, income & earnings',focus='economics')+link(state,'Organisation & workforce',stream='inside',focus='people',detail='leadership')+link(state,'Management goals',stream='forces',focus='strategy',detail='goals')+'</p>'
+            body+=executive_overview(state,facts,issues)
+        elif state.focus=='group' and state.detail=='brands':body+=executive_brands(state,facts)
         elif state.focus in {'group','economics'}:body+=_ceo_financial(state,facts,issues)
         else:body+=division(state,facts)
     elif state.stream=='inside':
-        if state.focus=='people' or state.focus=='operations' and state.detail=='people':body+=_ceo_people(state,facts)
+        if state.focus=='people' or state.focus=='operations' and state.detail=='people':body+=executive_people(state,facts)
         elif state.focus=='operations' and state.detail!='service' and not state.detail.startswith('service-'):body+=_ceo_journey(state,data,facts)
         elif state.focus=='operations':body+=operating(state,data,facts,issues)
         elif state.focus=='capabilities':body+=capabilities(state,data,facts)
-        elif state.focus=='applications':body+=applications(state,facts)
+        elif state.focus=='applications':body+=executive_technology(state,facts) if state.detail in {'frontier','fraud'} else applications(state,facts)
         elif state.focus=='partners':body+=partners(state,facts)
-        else:body+=programmes(state,data,facts)
+        else:body+=executive_programme(state,facts) if state.detail in {'frontier','fraud','skills'} else programmes(state,data,facts)+executive_programme(state,facts)
     elif state.focus=='strategy' and (state.detail=='goals' or state.detail.startswith('objective-')):body+=_ceo_goals(state,facts)
     else:body+=forces(state,facts)
     owns_inspection=(state.focus=='applications' and (state.detail=='envoy' or state.detail.startswith('envoy-'))
@@ -957,7 +946,7 @@ def _ceo_journey(state,data,facts):
     selected=state.detail.removeprefix('journey-') if state.detail.startswith('journey-') else None
     if selected=='service':return service_context(state)
     if selected not in JOURNEYS:
-        return '<p class="le-deck">Explore the work that delivers customer and economic outcomes.</p>'+operating_regions(state)
+        return '<p class="le-deck">Explore the work that delivers customer and economic outcomes.</p>'+executive_operating_context(state,facts)+operating_regions(state)
     title,division,activities,caps,keys,meaning,question=JOURNEYS[selected]
     names={row['id']:row['title'] for row in data.get('capabilities',()) if not source_import.working_restricted(row)}
     body='<p class="eyebrow">'+e(division)+'</p><h2>'+e(title)+'</h2><p class="le-deck">'+e(activities)+'</p><p class="le-limit">Conceptual activity sequence; no verified application, role or supplier dependency is inferred.</p>'
@@ -1000,16 +989,10 @@ def _ceo_goals(state,facts):
         row=next((row for row in available if row[0]==selected),None)
         if row is None:return '<p class="ceo-unavailable">This objective is unavailable.</p>'
         key,horizon,title,keys,owner,programme,journey=row
-        if key=='ai':return ai_performance(state,facts)
+        if key=='ai':return ai_performance(state,facts)+executive_goal_context(state,facts,key)
         body='<p class="eyebrow">'+e(horizon)+'</p><h2>'+e(title)+'</h2>'+reported(facts,keys)
-        body+=table(('Decision dimension','Evidence boundary'),[
-          ('Accountability',e(owner)+' · role hypothesis, not verified buying authority'),
-          ('Starting position / latest progress','Only the dated statements above; matched baseline and current progress unavailable'),
-          ('Target / horizon',e(horizon)+' · distinguish actuals, commitments and expectations'),
-          ('Investment / programme','Published priorities only; work package, spend and delivery obligations unavailable'),
-          ('Capability connection',e(JOURNEYS[journey][0])+' · conceptual association'),
-          ('Counter-evidence',e(GOAL_DECISIONS[key][0])),
-        ],'Goal scorecard · no inferred progress percentage or causal benefit')
+        body+='<p class="le-limit">A matched baseline and current actual are not established for this objective. Published priorities and future ambitions are not a percentage achieved.</p>'
+        body+=executive_goal_context(state,facts,key)
         body+='<h3>Commercial investigation</h3><p>'+e(GOAL_DECISIONS[key][1])+'</p><p class="le-limit">External intervention is a hypothesis only; procurement, budget and sponsor mandate are unproven.</p>'
         body+='<p class="gold-related">'+link(state,'Operating context',stream='inside',focus='operations',detail='journey-'+journey)
         if programme:body+=link(state,'Existing programme disclosure',stream='inside',focus='programmes',detail=programme)
@@ -1050,3 +1033,252 @@ def _ceo_financial(state,facts,issues):
         body+=business_regions(state,central=True)
         body+='<p class="le-limit">Group profit cannot be allocated to businesses by customer count, deposit balance or visual area. Reporting segments, regulated legal entities and operating capabilities have different boundaries; underlying segment profit needs its statutory Group bridge.</p>'
     return body
+
+# Gold v2 editorial composition over the existing research/Source owners.
+# No model, score, qualification decision, Financial run or persisted projection.
+V2_LEADERS = (
+ ('NUNN','Charlie Nunn','Group CEO','Group direction','strategy'),
+ ('CHALMERS','William Chalmers','Finance','Earnings, capital and investment','finance'),
+ ('KEMENADE','Ron van Kemenade','Operations','Platforms, operations and delivery','platforms'),
+ ('DOHERTY','Sharon Doherty','People & places','Skills and organisational change','support'),
+ ('BARUA','Chirantan Barua','Scottish Widows / Wealth & Insurance','Protection, saving and investing','insurance'),
+ ('LANGLEY','John Langley','Corporate & Institutional Banking','Corporate finance and transaction services','payments'),
+ ('MURPHY','Amanda Murphy','Business & Commercial Banking','Business customers and commercial banking','credit'),
+ ('SINGH','Jasjyot Singh OBE','Consumer','Consumer business','service'),
+ ('WILLIAMS','Nick Williams','Connected Finance','Connected financial propositions','payments'),
+ ('RISK','Javier Rodríguez de Colmenares','Risk','Risk management','risk'),
+ ('LEGAL','Kate Cheetham','Legal & company secretariat','Legal and corporate governance','risk'),
+ ('AUDIT','Laura Needham','Internal audit','Independent internal assurance','risk'),
+ ('SUSTAINABILITY','Andrew Walton','Sustainability & corporate affairs','Sustainability and external affairs','strategy'),
+)
+V2_CLAIMS = ('LEGAL','AUDIT','SUSTAINABILITY','NUNN','CHALMERS','KEMENADE','DOHERTY','BARUA','LANGLEY','MURPHY','SINGH','WILLIAMS','RISK',
+ 'IDENTITY','CUSTOMERS','COLLEAGUES','SHAREHOLDERS','BANK','BOS','WIDOWS','MBNA','WEALTH','BLACKHORSE','LEX','TUSKER','BRANDWORKFORCE',
+ 'MSAGREEMENT','MSADOPTION','ENGINEERS','ASSISTANT','AIRECRUIT','AITEAMS','AITRAINING','FRAUDWORKFLOW','HUMANCONTROL','FRAUDOWNER',
+ 'CONDON','CONDONREPORT','TRANSACTIONREMIT')
+LLOYDS_IDS += tuple('LBG-V2-'+key for key in V2_CLAIMS)
+DETAILS['group'] += ('brands',)
+DETAILS['people'] += tuple('leader-'+key.lower() for key,*_ in V2_LEADERS)
+DETAILS['programmes'] += ('frontier','fraud','skills')
+DETAILS['applications'] += ('frontier','fraud')
+FOCUS_FACTS['group'] += tuple('LBG-V2-'+k for k in ('IDENTITY','CUSTOMERS','SHAREHOLDERS'))
+FOCUS_FACTS['people'] += tuple('LBG-V2-'+k for k in (*[r[0] for r in V2_LEADERS],'COLLEAGUES','BRANDWORKFORCE','AIRECRUIT','AITEAMS','AITRAINING'))
+FOCUS_FACTS['partners'] += tuple('LBG-V2-'+k for k in ('MSAGREEMENT','ENGINEERS'))
+FOCUS_FACTS['programmes'] += tuple('LBG-V2-'+k for k in ('MSAGREEMENT','MSADOPTION','ASSISTANT','FRAUDWORKFLOW','HUMANCONTROL','AIRECRUIT','AITEAMS'))
+FOCUS_FACTS['applications'] += tuple('LBG-V2-'+k for k in ('MSAGREEMENT','MSADOPTION','ENGINEERS','ASSISTANT','FRAUDWORKFLOW','HUMANCONTROL'))
+FOCUS_FACTS['commercial'] += tuple('LBG-V2-'+k for k in ('CONDON','CONDONREPORT','TRANSACTIONREMIT'))
+FOCUS_FACTS['operations'] += tuple('LBG-V2-'+k for k in ('FRAUDWORKFLOW','HUMANCONTROL','FRAUDOWNER','TRANSACTIONREMIT'))
+FOCUS_FACTS['strategy'] += tuple('LBG-V2-'+k for k in ('MSAGREEMENT','FRAUDWORKFLOW','AIRECRUIT'))
+
+
+def executive_facts(data, facts):
+    """Finite presentation binding checks; Source still owns the actual research.
+
+    Exact statements, role/period/perimeter and source bindings cannot be changed
+    by a viewer. These are factual integrity checks, not per-claim approvals.
+    """
+    result=dict(facts);sources={s['id']:s for s in data.get('sources',())}
+    claims={c['id']:c for c in data.get('claims',())}
+    allowed={'LGV2-LEADERS','LGV2-PROFILE','LGV2-BRANDS','LGV2-FRONTIER','LGV2-AIPEOPLE','LGV2-FRAUD','LGV2-TRANSACTIONS'}
+    fields=('statement','kind','entity_scope','asset_id','reporting_period','primary_quotes')
+    for ident in ('LBG-V2-'+key for key in V2_CLAIMS):
+        claim=claims.get(ident,{});refs=claim.get('source_ids',());valid=False
+        if ident in result and len(refs)==1 and refs[0] in allowed:
+            src=sources.get(refs[0],{});rights=src.get('rights',{})
+            bindings=[b for b in src.get('disclosure_bindings',()) if b.get('claim_id')==ident]
+            expected_url,expected_date=V2_SOURCE_URLS[refs[0]]
+            valid=(not source_import.working_restricted(src) and not src.get('restrictions')
+                and src.get('url')==src.get('retrieval_url')==expected_url
+                and src.get('publication_date')==expected_date
+                and src.get('content_kind')=='reviewed_web_excerpt'
+                and src.get('primary_content_sha256')is None
+                and rights.get('status')=='permitted_public_factual_category'
+                and rights.get('policy_reference')=='https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e'
+                and rights.get('attribution_url')=='https://www.lloydsbankinggroup.com/'
+                and rights.get('homepage_conditions_met')is True
+                and claim.get('reporting_period')==src.get('reporting_period')
+                and len(bindings)==1 and all(bindings[0].get(k)==claim.get(k) for k in fields)
+                and result[ident].scope==recovery.GROUP and claim.get('asset_id')=='BK-ENT-001')
+        if not valid:result.pop(ident,None)
+    return result
+
+
+def v2_reported(facts,*keys):
+    return reported(facts,tuple('LBG-V2-'+k for k in keys))
+
+
+def executive_overview(state,facts,issues):
+    body='<p class="le-deck">A UK financial group: everyday banking, business finance, and long-term saving and protection.</p>'
+    if 'LBG-V2-CUSTOMERS' in facts:
+        body+='<div class="v2-enterprise-scale">'+v2_reported(facts,'CUSTOMERS')+'</div>'
+    body+=business_regions(state)+financial_regions(state,facts)
+    body+='<section class="v2-value-thread"><h2>One Group, different economic engines</h2><p>Retail earns from lending, fees and asset services. Commercial combines credit with cash, trade and payment services. Insurance and investments earn through protection, distribution and long-term asset administration.</p><p class="le-limit">Business-model explanation, not a measured profit split. Segment profit, statutory Group profit and legal-bank results have different boundaries.</p></section>'
+    body+='<div class="v2-executive-agenda" aria-label="Published executive priorities"><h2>Leadership’s agenda</h2>'
+    for title,keys,caption,detail in (
+      ('Simplify while protecting service',('LBG-AR25-MIGRATION','LBG-A2030-CIR'),'Application retirement and the 2030 efficiency ambition','objective-renewal'),
+      ('Turn AI adoption into economic return',('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'),'Reported contribution, expectation and full-cost attribution','objective-ai'),
+      ('Connect more customer activity',('LBG-A2030-WALLET','LBG-Q326-CURVE'),'Payments direction and an acquisition reported complete','objective-payments')):
+        if all(k in facts for k in keys):body+=region(state,title,kind='timeline',caption=caption,stream='forces',focus='strategy',detail=detail)
+    body+='</div>'
+    funding=next((row for row in issues if row.key=='funding-base'),None)
+    if funding and funding.facts[-1].semantic_type=='calculated' and all(k in facts for k in ('LBG-AR25-DEPOSITS','LBG-Q326-DEPOSITS')):
+        body+='<div data-intelligence="funding-base">'+p.render(funding.facts[-1],compact=True)+'</div>'
+    body+='<div class="gold-related">'+link(state,'Funding comparison',focus='economics',detail='comparison')+link(state,'Group brands & identity',focus='group',detail='brands')+link(state,'Organisation & workforce',stream='inside',focus='people',detail='leadership')+'</div>'
+    if 'LBG-Q326-CURVE' in facts:
+        body+=region(state,'Curve acquisition reported complete',reported(facts,('LBG-Q326-CURVE',)),kind='change',caption='Completion is not integration progress or open supplier scope',stream='inside',focus='programmes',detail='curve')
+    # A neutral operating destination, never an attention or pressure marker.
+    body+='<div class="gold-related">'+link(state,'Customer operations',stream='inside',focus='operations',detail='service')+link(state,'Management goals',stream='forces',focus='strategy',detail='goals')+'</div>'
+    return body
+
+
+def executive_brands(state,facts):
+    body='<h2>The Group and its customer brands</h2>'+v2_reported(facts,'IDENTITY','SHAREHOLDERS')
+    body+='<div class="v2-brand-ribbon" aria-label="Disclosed brand and product families">'
+    for key,title,focus in (('BANK','Lloyds Bank','retail'),('BOS','Bank of Scotland','retail'),('MBNA','MBNA','retail'),('BLACKHORSE','Black Horse','retail'),('LEX','Lex Autolease','retail'),('TUSKER','Tusker','retail'),('WIDOWS','Scottish Widows','retirement'),('WEALTH','Lloyds Wealth','retirement')):
+        if 'LBG-V2-'+key in facts:body+=region(state,title,v2_reported(facts,key),kind='business',caption='Product-family navigation; not a legal ownership or exclusive segment allocation',focus=focus,subject=focus)
+    body+='</div><p class="le-limit">A brand is not necessarily a legal entity, and a reporting business is not a subsidiary. Lloyds Bank and Bank of Scotland serve more than one customer business. The current ownership percentages and voting-control structure are not established here.</p>'
+    return body
+
+
+def executive_people(state,facts):
+    if state.detail=='workforce':return executive_workforce(state,facts)
+    if not any('LBG-V2-'+r[0] in facts for r in V2_LEADERS):return _ceo_people(state,facts)
+    body='<p class="le-deck">Who leads the businesses, and who enables the Group.</p><p class="eyebrow">Published executive membership · observed 27 November 2026</p>'
+    chosen=state.detail.removeprefix('leader-').upper() if state.detail.startswith('leader-') else None
+    body+='<div class="v2-organisation" aria-label="Group executive membership; reporting lines not inferred">'
+    for title,keys in (('Group direction',('NUNN',)),('Customer businesses',('SINGH','MURPHY','LANGLEY','BARUA','WILLIAMS')),('Group-wide functions',('CHALMERS','KEMENADE','DOHERTY','RISK','LEGAL','AUDIT','SUSTAINABILITY'))):
+        available=[r for r in V2_LEADERS if r[0] in keys and 'LBG-V2-'+r[0] in facts]
+        if not available:continue
+        body+='<section><h2>'+title+'</h2><div>'
+        for key,name,role,remit,journey in available:
+            body+=region(state,name,'<span class="v2-role">'+e(role)+'</span>',kind='organisation',caption=remit,focus='people',detail='leader-'+key.lower())
+        body+='</div></section>'
+    body+='</div><p class="le-limit">Executive membership and role remit are reported. The layout does not assert who reports to whom, delegated spending authority, or a one-to-one match to financial segments.</p>'
+    if chosen:
+        row=next((r for r in V2_LEADERS if r[0]==chosen and 'LBG-V2-'+r[0] in facts),None)
+        if row:
+            key,name,role,remit,journey=row;body+='<section class="v2-selected"><h2>'+e(name)+' · '+e(role)+'</h2>'+v2_reported(facts,key)
+            body+='<p>'+e(remit)+' is the relevant functional context, not a verified purchase mandate.</p>'+region(state,'Operating responsibilities to understand',kind='operating',caption='Relevant capability context; delegated ownership remains to be confirmed',focus='operations',detail='journey-'+journey if journey in JOURNEYS else 'journey-finance')+'</section>'
+        else:body+='<p class="le-deck">The selected role cannot be shown from the available evidence.</p>'
+    if 'LBG-V2-CONDONREPORT' in facts:
+        body+='<section class="v2-reported-line"><h2>One explicitly disclosed reporting line</h2>'+v2_reported(facts,'CONDON','CONDONREPORT')+region(state,'Transaction Banking',kind='commercial',caption='Cash, working capital, trade and payments within CIB',stream='landscape',focus='commercial',detail='transactions')+'</section>'
+    if state.detail=='structure':
+        body+='<h2>Financial reporting businesses</h2>'+business_regions(state)+'<p class="le-limit">Consumer, Connected Finance and named executive remits are management views. Retail, Commercial Banking and Insurance, Pensions & Investments are financial reporting views; no unsupported mapping is imposed.</p>'
+    return body+'<div class="gold-related">'+link(state,'Leadership',focus='people',detail='leadership')+link(state,'Businesses & functions',focus='people',detail='structure')+link(state,'Workforce',focus='people',detail='workforce')+'</div>'
+
+
+def executive_workforce(state,facts):
+    body='<h2>People, skills and capacity</h2><div class="v2-workforce"><section><h3>Group scale</h3>'+v2_reported(facts,'COLLEAGUES')+'<p class="le-limit">This is an undated issuer profile, not audited FTE or a current-year employee count.</p></section><section><h3>Building specialist capacity</h3>'+v2_reported(facts,'AIRECRUIT','AITEAMS')+'</section><section><h3>Developing existing colleagues</h3>'+v2_reported(facts,'AITRAINING')+'</section></div>'
+    if 'LBG-V2-BRANDWORKFORCE' in facts:body+=v2_reported(facts,'BRANDWORKFORCE')
+    body+='<p class="le-limit">Course completions, trained people, licence holders and employees have different denominators. Licences are not people. No workforce reduction, net hiring, FTE distribution, salary cost or productivity saving is calculated from these disclosures.</p>'
+    body+=region(state,'Colleague technology',kind='technology',caption='Microsoft deployment and licensed-user adoption; separate from employee counts',focus='applications',detail='frontier')
+    if 'LBG-BRAND26-NO-ROLES' in facts:body+=interpretation(facts,('LBG-BRAND26-NO-ROLES',),'The brand-transition announcement rules out related role reductions. That narrow statement does not establish Group-wide workforce growth, a hiring plan or an outsourcing decision.')+region(state,'Brand transition and service access',kind='change',caption='The disclosed change and its specific workforce boundary',focus='programmes',detail='brand')
+    return body+region(state,'AI value and work',kind='timeline',caption='Group contribution and expectation; no net return or automatic capacity claim',stream='forces',focus='strategy',detail='objective-ai')
+
+
+def executive_operating_context(state,facts):
+    body='<section class="v2-operating-evidence"><h2>Where operating change is actually disclosed</h2>'
+    for key,title,detail,caption in (
+      ('FRAUDWORKFLOW','Fraud decisions with human accountability','fraud','Envoy-built workflow; disclosed delivery teams and colleague override'),
+      ('MSAGREEMENT','Colleague and engineering tools','frontier','Announced Microsoft agreement; deployment and reported adoption')):
+        if 'LBG-V2-'+key in facts:body+=region(state,title,kind='operating',caption=caption,focus='applications',detail=detail)
+    if 'LBG-V2-TRANSACTIONREMIT' in facts:body+=region(state,'Corporate cash, trade and payments',kind='commercial',caption='Actual Transaction Banking remit; not an inferred revenue allocation',stream='landscape',focus='commercial',detail='transactions')
+    return body+'</section>'
+
+
+def executive_technology(state,facts):
+    fraud=state.detail=='fraud';keys=('FRAUDWORKFLOW','HUMANCONTROL','FRAUDOWNER') if fraud else ('MSAGREEMENT','MSADOPTION','ENGINEERS','ASSISTANT')
+    available=[k for k in keys if 'LBG-V2-'+k in facts]
+    if not available:return '<p class="le-deck">This disclosed operating example cannot be shown for this selection.</p>'
+    title='Fraud decision support' if fraud else 'Colleague and engineering AI'
+    body='<h2>'+title+'</h2>'+v2_reported(facts,*available)
+    stages=('Customer interaction','Parallel checks','Colleague judgement','Override and outcome') if fraud else ('Licensed access','Reported activity','Task result','Full-cost benefit')
+    body+='<div class="v2-operating-sequence" aria-label="Conceptual evaluation sequence">'+''.join('<span>'+e(s)+'</span>' for s in stages)+'</div><p class="le-limit">An explanatory sequence, not a verified system topology or measured conversion funnel.</p>'
+    if fraud:
+        body+='<h3>Why this matters</h3><p>There is an actual cross-functional workflow to investigate, rather than an assumed missing AI platform. Fraud, technology, data and risk participation and human override are disclosed. False positives, prevented losses, handling time and full costs are not independently established.</p><h3>Management response and next decision</h3><p>The disclosed response already uses Envoy and existing colleague tools. The useful next question is which outcome or exception remains unresolved after that response, and what evidence would change the decision to expand it.</p>'
+        body+=region(state,'Envoy operating capability',kind='technology',caption='Existing platform disclosure; the example does not map the entire cloud estate',focus='applications',detail='envoy-controls')
+    else:
+        body+='<h3>Adoption is stronger evidence than availability</h3><p>The June announcement supplies a licensed-user activity percentage, beyond the earlier FY2025 licence count. It still does not define the activity threshold, independent service improvement or net economic return. Engineer and colleague populations must not be added together.</p><h3>Commercial investigation</h3><p>Which named workflow shows a sustained task, customer or control improvement after run, change and supervision costs? Confirm what existing Microsoft and internal delivery already cover before suggesting external scope.</p>'
+    return body+region(state,'Group AI performance',kind='timeline',caption='Different reporting horizons; no platform-level allocation',stream='forces',focus='strategy',detail='objective-ai')
+
+
+def executive_programme(state,facts):
+    rows={'frontier':('Microsoft deployment','4 June 2026',('MSAGREEMENT','MSADOPTION','ASSISTANT'),'An agreement and deployment announcement; the assistant is a plan, not a proven live outcome.','Licensed-user activity, service outcomes and run/change costs need a matched definition.'),
+          'fraud':('Fraud operating workflow','8 June 2026',('FRAUDWORKFLOW','HUMANCONTROL'),'A disclosed decision-support workflow with human accountability.','Which false-positive, customer and fraud outcome remains unresolved after the current response?'),
+          'skills':('AI skills and roles','22 June 2026',('AIRECRUIT','AITEAMS','AITRAINING'),'A combination of existing teams, training activity and planned roles; not net hiring.','Which capabilities need new skills, and what outcome demonstrates the benefit of retraining?')}
+    if state.detail not in rows:
+        body='<div class="v2-programme-sequence" aria-label="Dated operating developments">'
+        for key,(title,date,keys,meaning,question) in rows.items():
+            if any('LBG-V2-'+k in facts for k in keys):body+=region(state,title,'<time>'+date+'</time>',kind='timeline',caption=meaning,focus='programmes',detail=key)
+        return body+'</div>'
+    title,date,keys,meaning,question=rows[state.detail]
+    if not any('LBG-V2-'+k in facts for k in keys):return '<p class="le-deck">This programme disclosure cannot be shown for this selection.</p>'
+    body='<p class="eyebrow">'+date+'</p><h2>'+title+'</h2>'+v2_reported(facts,*keys)+'<p>'+meaning+'</p>'
+    body+='<dl class="v2-decision"><div><dt>Existing response</dt><dd>'+meaning+'</dd></div><div><dt>Decision and evidence</dt><dd>'+question+'</dd></div><div><dt>Delivery boundary</dt><dd>Named executive remit is not delegated programme sponsorship. No contract value, external workshare or unallocated budget is established.</dd></div></dl>'
+    return body+region(state,'Supporting operating example',kind='technology',caption='Capabilities, adoption and outcome distinctions',focus='applications',detail='fraud' if state.detail=='fraud' else 'frontier')
+
+
+def executive_goal_context(state,facts,key):
+    role={'renewal':'KEMENADE','ai':'KEMENADE','access':'SINGH','reporting':'RISK','investment':'CHALMERS','efficiency':'CHALMERS','payments':'LANGLEY'}[key]
+    body='<section class="v2-goal-logic"><h3>From goal to executive decision</h3>'
+    if 'LBG-V2-'+role in facts:body+='<div class="v2-role-context">'+v2_reported(facts,role)+'<p class="le-limit">Relevant published role; ownership of this decision and delegated authority remain hypotheses.</p></div>'
+    current={'renewal':('FRAUDWORKFLOW','An actual Envoy workflow is evidence of delivered capability, not proof that legacy retirement is complete.'),
+      'ai':('MSADOPTION','Reported activity adds adoption evidence; it does not reconcile Group contribution to net return.'),
+      'access':('CUSTOMERS','Group scale explains why continuity matters, not the outcome of a particular brand change.'),
+      'reporting':('HUMANCONTROL','A disclosed fraud control is existing capability, not evidence of readiness for every regulatory reporting duty.'),
+      'investment':('MSAGREEMENT','An existing agreement is committed direction, not unallocated supplier spend.'),
+      'efficiency':('AIRECRUIT','Specialist role investment can coexist with efficiency ambitions; it is not a verified net headcount or cost change.'),
+      'payments':('TRANSACTIONREMIT','CIB Transaction Banking has a disclosed remit and leadership, separate from unproven customer demand.')}[key]
+    if 'LBG-V2-'+current[0] in facts:body+=v2_reported(facts,current[0])+'<p>'+current[1]+'</p>'
+    dependencies={'renewal':('Live-service dependency mapping','Recovery evidence and dual running','Which cutover can safely retire cost?'),
+      'ai':('Data, colleague adoption and oversight','Outcome attribution and full costs','Which workflow merits further scaling?'),
+      'access':('Customer communication and service routes','Displaced demand and comprehension','Which cohorts require a different transition?'),
+      'reporting':('Legal-entity scope and provider inventory','Existing control/reporting evidence','Which applicable reporting gap remains?'),
+      'investment':('Committed change capacity and capital','Return evidence and competing programmes','Which sequencing choice is still open?'),
+      'efficiency':('Income, expenses, remediation and delivery','Gross savings versus net service outcome','Which matched cost bridge explains progress?'),
+      'payments':('Cash management, trade, working capital and payments','Adoption, integration and risk-adjusted return','Which existing client decision can be improved?')}[key]
+    body+='<dl class="v2-decision">'+''.join('<div><dt>'+label+'</dt><dd>'+e(value)+'</dd></div>' for label,value in zip(('Dependencies to establish','Risks and counter-evidence','Next decision'),dependencies))+'</dl><p class="le-limit">These are analytical connections to published direction, not qualified Material Pressures, buyer needs or opportunities.</p></section>'
+    return body
+
+
+def executive_force_overview(state,facts):
+    body='<p class="le-deck">Protect today’s earnings while building a simpler, more connected Group.</p>'
+    body+='<div class="v2-horizons" aria-label="Published strategy horizons">'
+    for horizon,title,keys,caption,detail in (
+      ('2026','Finish the current transformation',('LBG-AR25-MIGRATION',),'Retire applications and migrate carefully; delivery is not proved by the priority','objective-renewal'),
+      ('2027','Sequence the next investment cycle',('LBG-A2030-INVESTMENT',),'A planned increase followed by discipline; no supplier allocation','objective-investment'),
+      ('2030','Create lasting operating leverage',('LBG-A2030-CIR','LBG-A2030-SAVINGS'),'Efficiency ambition and gross savings, distinct from achieved net benefit','objective-efficiency')):
+        if all(k in facts for k in keys):body+=region(state,title,'<time>'+horizon+'</time>'+reported(facts,keys[:1]),kind='timeline',caption=caption,focus='strategy',detail=detail)
+    body+='</div><h2>Executive choices</h2><div class="v2-choice-map">'
+    for title,keys,caption,focus,detail in (
+      ('Earnings and funding',('LBG-Q326-PROFIT','LBG-Q326-DEPOSITS'),'Group profit and funding are real; repricing, costs and capital explain the mechanism','markets','mechanism'),
+      ('AI value beyond deployment',('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'),'A reported contribution, a later expectation and a full-cost attribution question','strategy','objective-ai'),
+      ('Connected customer propositions',('LBG-A2030-WALLET','LBG-Q326-CURVE'),'Payments direction and completed acquisition; adoption is not established','strategy','objective-payments'),
+      ('Resilience through change',('LBG-AR25-MIGRATION','UK-PRA-REPORT27'),'A transition priority and dated regulation; no control failure inferred','resilience','applicability')):
+        if all(k in facts for k in keys):body+=region(state,title,kind='timeline',caption=caption,focus=focus,detail=detail)
+    body+='</div><p class="le-limit">Published priorities and analytical trade-offs. None is automatically a qualified Material Pressure or sales opportunity.</p>'
+    body+='<div class="gold-related">'+link(state,'Eight-theme SWOT',focus='analysis')+link(state,'Strategic alternatives',focus='strategy',detail='options')+link(state,'All management goals',focus='strategy',detail='goals')+'</div>'
+    return body
+
+# Broader CEO agenda at the existing Forces destination; no new stream/route.
+REGIONS['forces']=(('markets','Executive agenda'),)+REGIONS['forces'][1:]
+SUBJECTS['markets']='Executive agenda'
+
+
+def executive_commercial(state,facts):
+    body='<p class="le-deck">Business lending and deposits sit alongside corporate financing, trade, cash management and payments.</p><div class="v2-commercial-businesses">'
+    for key,title,context in (('MURPHY','Business & Commercial Banking','Business customer relationships and commercial banking'),('LANGLEY','Corporate & Institutional Banking','Corporate and institutional relationships, including Transaction Banking')):
+        if 'LBG-V2-'+key in facts:body+=region(state,title,v2_reported(facts,key),kind='business',caption=context,stream='inside',focus='people',detail='leader-'+key.lower())
+    body+='</div><div class="v2-economic-sequence"><span>Lending and liquidity</span><span>Transaction and risk services</span><span>Funding, credit and capital cost</span><span>Commercial return</span></div><p class="le-limit">Conceptual economic mechanism. Executive business remits are not a verified split of reported Commercial Banking profit, capital or customer balances.</p>'
+    if 'LBG-V2-TRANSACTIONREMIT' in facts:body+=v2_reported(facts,'TRANSACTIONREMIT')
+    body+=region(state,'Transaction Banking',kind='commercial',caption='Cash, working capital, trade and payments: actual remit and leadership, then customer economics',detail='transactions')
+    return body+region(state,'Group funding & earnings',kind='money',caption='Keep reporting period, legal bank and management business separate',focus='economics',detail='comparison')
+
+V2_SOURCE_URLS = {
+ 'LGV2-LEADERS':('https://www.lloydsbankinggroup.com/who-we-are/group-overview/group-executive-committee.html',None),
+ 'LGV2-PROFILE':('https://www.lloydsbankinggroup.com/who-we-are.html',None),
+ 'LGV2-BRANDS':('https://www.lloydsbankinggroup.com/who-we-are/our-brands.html',None),
+ 'LGV2-FRONTIER':('https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/microsoft-365-frontier-suite.html','2026-06-04'),
+ 'LGV2-AIPEOPLE':('https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/1000-new-ai-roles.html','2026-06-22'),
+ 'LGV2-FRAUD':('https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-deploys-agentic-ai-to-strengthen-real-time-.html','2026-06-08'),
+ 'LGV2-TRANSACTIONS':('https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds/lloyds-appoints-natasha-condon-global-head-transaction-banking.html','2026-11-18'),
+}

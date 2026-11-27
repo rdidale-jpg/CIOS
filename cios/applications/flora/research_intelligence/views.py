@@ -51,6 +51,9 @@ def claims_html(data, ids):
     claims=_index(data['claims']);cards=[]
     for identifier in dict.fromkeys(ids):
         item=claims[identifier]
+        from .. import intelligence_presentation as presentation
+        bound=any('disclosure_bindings' in source for source in data['sources'] if source['id'] in item['source_ids'])
+        if bound and presentation.claim_view(data,item) is None:continue
         badge='Research gap' if item['kind']=='unknown' else 'Interpretation' if item['kind']=='interpretation' else 'Repository-reported · primary unverified' if item['verification']=='repository_reported' else 'Primary-source supported · not customer demand'
         later=[c['id'] for c in data['claims'] if c.get('updates')==identifier or c.get('corroborates')==identifier]
         historical=("<p class='research-source'>Historical observation; inspect later or corroborating evidence.</p>"+links(data,later)) if later else ''
@@ -191,6 +194,9 @@ def evidence_page(identifier,headers=None,data=None):
     ROOT=data.get("route_root",globals()["ROOT"]) if data else globals()["ROOT"]
     data=data or load_assessment();item=_index(data['claims']).get(identifier)
     if item is None:raise ValueError('Research claim unavailable')
+    from .. import intelligence_presentation as presentation
+    bound=any('disclosure_bindings' in source for source in data['sources'] if source['id'] in item['source_ids'])
+    if bound and presentation.claim_view(data,item) is None:raise ValueError('Research claim unavailable')
     segment=claim_segment(data,item);claim=candidate_claim(data,item);package=evidence_item(data,item)
     primary=not item.get('repository_quote')
     upstream_url=next(s['url'] for s in data['sources'] if s['id']==item['source_ids'][0]) if primary else 'https://github.com/rdidale-jpg/CIOS/blob/'+data['source_base_commit']+'/'+segment.source_location

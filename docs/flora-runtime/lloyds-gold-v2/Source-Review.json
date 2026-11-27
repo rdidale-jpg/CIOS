@@ -1,0 +1,60 @@
+{
+  "base": "1c8c8ae17bb2af3c95bf264d7df9befb60b0b576",
+  "source_count": 7,
+  "claim_count": 39,
+  "previous_records_preserved": true,
+  "financial_candidates_admitted": 0,
+  "new_source_permissions": 0,
+  "canonical_promotions": 0,
+  "sources": [
+    {
+      "id": "LGV2-LEADERS",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/group-executive-committee.html",
+      "published": null,
+      "review_reference": "turn191view0",
+      "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links."
+    },
+    {
+      "id": "LGV2-PROFILE",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are.html",
+      "published": null,
+      "review_reference": "turn194view0",
+      "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links."
+    },
+    {
+      "id": "LGV2-BRANDS",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/our-brands.html",
+      "published": null,
+      "review_reference": "turn195view0",
+      "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links."
+    },
+    {
+      "id": "LGV2-FRONTIER",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/microsoft-365-frontier-suite.html",
+      "published": "2026-06-04",
+      "review_reference": "turn195view1",
+      "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links."
+    },
+    {
+      "id": "LGV2-AIPEOPLE",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/1000-new-ai-roles.html",
+      "published": "2026-06-22",
+      "review_reference": "turn195view2",
+      "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links."
+    },
+    {
+      "id": "LGV2-FRAUD",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-deploys-agentic-ai-to-strengthen-real-time-.html",
+      "published": "2026-06-08",
+      "review_reference": "turn197view0",
+      "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links."
+    },
+    {
+      "id": "LGV2-TRANSACTIONS",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds/lloyds-appoints-natasha-condon-global-head-transaction-banking.html",
+      "published": "2026-11-18",
+      "review_reference": "turn196search0",
+      "scope": "Read-only public factual explanation of enterprise identity, roles, brands and operating announcements. No report/table copying, financial candidate publication, run persistence, export, contractual waiver or PDF deep links."
+    }
+  ]
+}
