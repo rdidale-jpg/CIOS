@@ -1,0 +1,46 @@
+{
+  "phase": "after",
+  "sha": "6b10935a31079d27fe00c88bf241d3d6bf1e3c98",
+  "mode": "Actual local Chromium; emulated iPads and mobile, not physical Safari or Render",
+  "captures": {
+    "after-desktop-costs.jpg": "3eabc1d5124a191c22ca4e6a758939f497746a77a6fd4a58729db8e540c050f7",
+    "after-desktop-bankcards.jpg": "f0ef37af37989cf58fb961ac940b9bf2d4a370f99fff3f003e00a9743eaca10d",
+    "after-ipad-landscape-costs.jpg": "56434ef1764adc5304f8a87112f08599a2e3f6647577065d7e32b6e194c75bb5",
+    "after-ipad-landscape-bankcards.jpg": "5897dccd9bf344623ad990061e9b18fd11c163090ea22774f908450f7848976d",
+    "after-ipad-portrait-costs.jpg": "47f19275ccaaffba186c00527646ce7986457ba9c37127180138a3189739a2ec",
+    "after-ipad-portrait-bankcards.jpg": "861ae9c2b77034b144f250a22dc3943b3a79f4b661e076477315efbed0bb927c",
+    "after-mobile-costs.jpg": "4a59fa21c0f2ef8e2f5ad729257bb99485503e5c9b7e4c59d3708bf7455a0021",
+    "after-mobile-bankcards.jpg": "76703e06c76fc291ee0d86f8f2e3708dd703b2331977002c0716af23572e43b2"
+  },
+  "journeys": [
+    {
+      "device": "desktop",
+      "new_product_measures_visible": true,
+      "navigation_errors": []
+    },
+    {
+      "device": "ipad-landscape",
+      "new_product_measures_visible": true,
+      "navigation_errors": []
+    },
+    {
+      "device": "ipad-portrait",
+      "new_product_measures_visible": true,
+      "navigation_errors": []
+    },
+    {
+      "device": "mobile",
+      "new_product_measures_visible": true,
+      "navigation_errors": []
+    }
+  ],
+  "withdrawal": {
+    "history_reload_print_accessibility": true,
+    "source_changed_in_isolated_copy_only": true
+  },
+  "knowledge_delta": {
+    "new_reported_product_cells": 15,
+    "new_calculated_product_shares": 5,
+    "new_group_or_divisional_financial_actuals": 0
+  }
+}

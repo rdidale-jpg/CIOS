@@ -170,6 +170,11 @@ def verify_history(root):
         assert role_path in actual and role_path not in expected
         assert hashlib.sha256(actual[role_path]).hexdigest()==digest, 'Unknown CEO role source cut'
         actual.pop(role_path)
+    # Additive FCA numerical product cells; every historical byte and the exact comparator remain unchanged.
+    for path, digest in {'enterprise-knowledge/banking/research-model/source-snapshots/FCA-Lloyds-Products-H126.json': 'e004a835e69655b73381340a0162b076ac53956bd3e97ea22c568fd5dc2ec214', 'enterprise-knowledge/banking/research-model/source-snapshots/FCA-Lloyds-Products-H126.txt': '1d02e44b8a2a79d6eee53b4cd94f7e14962e6c1a0fec3df59a4027ba2de33055'}.items():
+        assert path in actual and path not in expected
+        assert hashlib.sha256(actual[path]).hexdigest()==digest, "Unknown FCA product numerical source cut"
+        actual.pop(path)
     compare_history(expected,actual)
     return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS)-len(EAI1_CANDIDATE_ADDITIONS)-len(BIE2_CANDIDATE_ADDITIONS)-len(BIE3_CANDIDATE_ADDITIONS)-len(F1_CANDIDATE_ADDITIONS)-len(RUD1_ADDITIONS),
             'depth_additions':len(DEPTH_ADDITIONS),'macro_additions':len(MACRO_ADDITIONS),

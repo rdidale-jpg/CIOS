@@ -64,6 +64,7 @@ DETAILS['people']=('leadership','structure','workforce','sources')
 DETAILS['operations']+=tuple('journey-'+key for key in ('credit','payments','service','insurance','risk','data','platforms','finance','support'))
 DETAILS['strategy']+=tuple('objective-'+key for key in ('renewal','ai','access','reporting','investment','efficiency','payments'))
 DETAILS['economics']+=('funding','income','costs','capital','divisions')
+DETAILS['economics']+=('service-workload',)+tuple('service-'+key for key,_ in agenda.LLOYDS_SERVICE_PRODUCTS[:-1])
 DETAILS['commercial']+=('transactions','transaction-customers','transaction-delivery','transaction-value','transaction-investigation')
 DETAILS['applications']+=('envoy-build','envoy-controls','envoy-value','envoy-investigation')
 FOCUS_FACTS = {
@@ -312,6 +313,8 @@ def scene(state,facts):
 
 def economics(state,facts,issues=()):
     body='<p class="le-deck">Deposits fund lending. Service income adds to interest income. Costs, credit losses and capital shape the return.</p>'
+    if agenda.lloyds_service_products():
+        body+=region(state,'Service workload',kind='operating',caption='Reported product activity · Lloyds Bank PLC · H1 2026',detail='service-workload')
     body+='<div class="gold-economic-map" aria-label="Conceptual Group economic mechanism">'+''.join(region(state,title,kind='money',caption=desc,focus='economics',detail=key) for key,title,desc in (('funding','Funding','Deposits & other sources'),('income','Lending & income','Interest & fees'),('costs','Costs & impairment','Running the bank and credit risk'),('capital','Capital & returns','Risk capacity and returns')))+'</div>'
     body+='<p class="le-limit">Conceptual model · not a measured allocation or accounting reconciliation.</p>'
     body+=financial_regions(state,facts)
@@ -339,6 +342,54 @@ def economics(state,facts,issues=()):
         body+=reported(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS','LBG-Q326-INVESTMENT','LBG-A2030-INVESTMENT'))
         body+=interpretation(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS'),'Gross savings and a future cost ratio are management ambitions, not current net profit or money available to suppliers. Revenue, implementation costs and parallel running can change the result.')
     elif not state.detail:body+='<p class="gold-related">'+link(state,'Earnings, efficiency & capital decisions',focus='economics',detail='comparison')+'</p>'
+    return body
+
+
+def service_workload(state, *, inspection=False):
+    """A finite view over existing Source service profiles; no monetary estimate.
+
+    A workload share is arithmetic over a common legal-bank period, not a
+    cost allocation. Nothing is cached, exported or discovered from private runs.
+    """
+    from decimal import Decimal, ROUND_HALF_UP
+    rows=agenda.lloyds_service_products()
+    if not rows:return ''
+    total=rows[-1][2][0]; maximum=max(row[2][0].value for row in rows[:-1])
+    for _,_,facts in rows:
+        for item in facts:p.note_editorial_sources(item.sources)
+    shares={key:p.Statement(
+        label+' accounts for '+str((facts[0].value/total.value*100).quantize(Decimal('.1'),rounding=ROUND_HALF_UP))+'% of complaints received.',
+        'calculated',total.scope,total.period,tuple(dict.fromkeys((*facts[0].sources,*total.sources))),
+        'derived_from_inputs','derived_view_not_canonical','actual',
+        value=(facts[0].value/total.value*100).quantize(Decimal('.1'),rounding=ROUND_HALF_UP),unit='percent of complaints received',
+        method=str(facts[0].value)+' / '+str(total.value)+' × 100; rounded to one decimal place',
+        dependencies=(facts[0].text,total.text),dependency_types=('reported',),
+        input_authorities=(facts[0].canonical_status,total.canonical_status),caveats=total.caveats)
+        for key,label,facts in rows[:-1]}
+    if not all(p.eligible(item) for item in shares.values()):return ''
+    if inspection:
+        body='<h2>Complaint workload · source and calculation</h2>'
+        body+=flagship._source_rows(f for _,_,facts in rows for f in facts)
+        for item in shares.values():
+            body+='<p><strong>Calculated</strong> '+e(item.text)+' '+e(item.method)+'</p>'
+        return body
+    active=state.detail.removeprefix('service-')
+    body='<section class="gold-service-workload" data-intelligence="lloyds-product-workload"><p class="eyebrow">Lloyds Bank PLC · January–June 2026</p><h2>Where service workload concentrates</h2>'
+    body+='<p class="gold-workload-headline"><strong>'+e(str(shares['bankcards'].value))+'%</strong> of received complaints concerned banking and credit cards.</p>'
+    body+='<figure><figcaption>Reported complaints received · select a product group</figcaption><div class="gold-workload-bars">'
+    for key,label,facts in rows[:-1]:
+        share_text='&lt;0.1%' if facts[0].value>0 and shares[key].value==0 else str(shares[key].value)+'%'
+        body+='<a class="canvas-region gold-workload-row" data-canvas-region="service-workload" href="'+e(href(state,stream='landscape',focus='economics',detail='service-'+key),quote=True)+'"'+(' aria-current="page"' if active==key else '')+'><span class="gold-workload-label">'+e(label)+'</span><span class="gold-workload-track" aria-hidden="true"><span style="width:'+str(facts[0].value/maximum*100)+'%"></span></span><strong>'+format(facts[0].value,',')+'</strong><span class="gold-workload-share">'+share_text+' <span class="sr-only">calculated share</span></span></a>'
+    body+='</div></figure><p class="le-limit">Five product groups reconcile to '+format(total.value,',')+' received complaints. Shares are calculated. This legal bank is not the consolidated Group or Retail division; volumes are not cost or customer incidence.</p>'
+    selected=next((row for row in rows[:-1] if row[0]==active),None)
+    if selected:
+        _,label,facts=selected
+        body+='<section class="gold-workload-detail"><h3>'+e(label)+'</h3><dl>'
+        for title,item,suffix in zip(('Received','Closed','Firm-upheld share of closed'),facts,('','','%')):
+            body+='<div><dt>'+title+'</dt><dd>'+format(item.value,',')+suffix+'</dd></div>'
+        body+='</dl><p>Reported · '+e(total.period)+'. Received and closed are different cohorts. Firm-upheld is not independent adjudication; their difference is not backlog clearance.</p></section>'
+    body+='<section class="gold-workload-interpretation"><h3>Workload is concentrated; financial impact is not established</h3><p>Banking and credit cards dominate this legal bank’s recorded complaint activity. That makes this product group a focused place to examine service effort. Counts alone do not distinguish product scale, case complexity, reporting effects or avoidable repeat work.</p><h3>Commercial investigation</h3><p>Which banking-and-card complaint journeys require repeated handling, and what measured handling effort and customer outcomes remain after current remedies? Validate that with the service owner before proposing an intervention; no supplier need, budget or open procurement is established.</p></section>'
+    body+='<p class="source-licence">Contains Financial Conduct Authority information licensed under the Open Government Licence v3.0.</p></section>'
     return body
 
 
@@ -499,6 +550,8 @@ def operating(state,data,facts,issues=()):
     else:body+='<p class="gold-related">'+link(state,'Credit journey detail',detail='credit')+link(state,'Customer service detail',detail='service')+'</p>'
     body+=reported(facts,FOCUS_FACTS['operations'])
     if state.detail=='service':
+        if agenda.lloyds_service_products():
+            body=region(state,'Explore product workload',kind='operating',caption='Five reported product groups · Lloyds Bank PLC · H1 2026',stream='landscape',focus='economics',detail='service-workload')+body
         service=next((row for row in issues if row.key=='service-recovery'),None)
         if service:
             outcome='<section class="gold-dossier"><h2>Service outcomes · Lloyds Bank PLC</h2><p>January–June 2026 · this legal bank only, not consolidated Group or Retail reporting segment.</p>'
@@ -696,6 +749,7 @@ def main(state,data,facts,issues=()):
         body+='<h2>Evidence, dates & boundaries</h2>'+flagship._source_rows(item for item in items if item.semantic_type!='calculated')
         for item in items:
             if item.semantic_type=='calculated':body+='<h3>Calculated · method</h3>'+p.render(item,compact=True)+'<p>'+e(item.method)+'</p>'
+        if state.focus in {'operations','economics'}:body+=service_workload(state,inspection=True)
         body+='<p class="le-limit">Lloyds attribution links to the issuer homepage. Direct PDF links remain deferred. These statements remain analytical public research, not canonical acceptance.</p>'
         return body+'</section>'
     if state.stream=='landscape':
@@ -912,6 +966,8 @@ def _ceo_goals(state,facts):
 
 
 def _ceo_financial(state,facts,issues):
+    if state.detail.startswith('service-'):
+        return service_workload(state)
     if state.detail not in {'funding','income','costs','capital','divisions'}:return economics(state,facts,issues)
     title={'funding':'Funding & interest economics','income':'Income & profit','costs':'Costs, impairment & remediation','capital':'Capital, liquidity & returns','divisions':'Reporting businesses & contribution'}[state.detail]
     body='<h2>'+title+'</h2>'
@@ -926,6 +982,7 @@ def _ceo_financial(state,facts,issues):
         body+='<div class="le-measures">'+preview.measures({k:s for k,s in facts.items() if k=='LBG-Q326-PROFIT'})+'</div>'
         body+='<section class="gold-activation-story"><h2>Follow the earnings bridge</h2><div class="gold-value-path"><span>Interest earned less paid</span><span>Fees & other income</span><span>Costs & credit losses</span><span>Profit</span></div><p>Loan volumes alone do not explain income: pricing, asset mix and funding repricing also matter. Fees and other income have different drivers from net interest income.</p><p>The reported Group statutory profit is a flow over nine months. It is not segment contribution, underlying profit, a lending yield or an amount available for investment. A matched accounting bridge is needed to attribute any movement.</p></section>'
     elif state.detail=='costs':
+        body+=service_workload(state)
         body+='<section class="gold-activation-story"><h2>Three different pressures on earnings</h2><div class="gold-value-path"><span>Run & change costs</span><span>Remediation</span><span>Credit impairment</span></div><p>Ordinary operating expense, remediation and credit losses need separate explanations. An impairment charge covers a period; arrears and allowances are different stocks. A favourable prior-period comparison is not automatically a structural improvement.</p></section>'
         body+=reported(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS'))
         body+=interpretation(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS'),'A lower cost-to-income ratio can reflect income growth as well as cost reduction. Gross savings are not net profit: implementation, parallel running and service quality affect the economic result. The disclosed ambitions do not establish actual cost performance or supplier budget.')

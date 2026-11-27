@@ -277,6 +277,82 @@ def routine_service_issue(selected):
         return None
 
 
+LLOYDS_SERVICE_PRODUCTS = (
+    ('bankcards', 'Banking and credit cards'), ('pensions', 'Decumulation & pensions'),
+    ('mortgages', 'Home finance'), ('insurance', 'Insurance & pure protection'),
+    ('investments', 'Investments'), ('total', 'Grand Total'),
+)
+
+
+def lloyds_service_products():
+    """Read the existing Source-owned FCA service profiles, not Financial runs.
+
+    Product groups describe complaint activity, never reporting divisions or
+    financial allocations. All cells and their common total must reconcile.
+    Every render rechecks the actual Source revision, use and lifecycle.
+    """
+    from .research_intelligence.source_import import routine_factual_use, bound_facts, working_restricted
+    from .research_intelligence.registry import snapshot_boundary
+    from decimal import Decimal
+    try:
+        path = snapshot_boundary('banking', model.REPO) / 'FCA-Lloyds-Products-H126.json'
+        if path.is_symlink():return ()
+        research = json.loads(path.read_text())
+        if (research.get('authority') != 'analytical_working_research'
+                or research.get('canonical_mutation') is not False
+                or working_restricted(research) or len(research['sources']) != 1):
+            return ()
+        source = research['sources'][0]
+        if source['id'] != 'FCA-LLOYDS-PRODUCTS-H126':return ()
+        if routine_factual_use(source) != 'open_numerical_data':return ()
+        model.primary_text(source)
+        if (source['publisher'] != 'Financial Conduct Authority'
+                or source['url'] != 'https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table'
+                or source['publication_date'] != '2026-10-22'
+                or source['reporting_period'] != '1 January–30 June 2026'):
+            return ()
+        result = []
+        for key, product in LLOYDS_SERVICE_PRODUCTS:
+            selection = 'lloyds-service-' + key
+            rows = [r for r in research['service_profiles'] if r['selection'] == selection]
+            if len(rows) != 1:
+                return ()
+            row = rows[0]
+            if (row['source_id'] != source['id'] or working_restricted(row)
+                    or {k:v for k,v in row.items() if k != 'source_id'} != bound_facts(source, selection, 'service_profile')
+                    or row['name'] != 'Lloyds Bank PLC' or row['product'] != product
+                    or row['scope'] != 'Lloyds Bank PLC only; not consolidated Group or a reporting division'
+                    or row['period'] != source['reporting_period']
+                    or any(type(row[k]) is not int or row[k] < 0 for k in ('received', 'closed'))
+                    or not Decimal(row['upheld']).is_finite() or not 0 <= Decimal(row['upheld']) <= 100):
+                return ()
+            binding = next(b for b in source['fact_bindings'] if b['key'] == selection)
+            for index, metric in zip(binding['excerpt_indices'], ('Open', 'Closed', 'Upheld')):
+                if source['excerpts'][index]['locator'] != 'Lloyds Bank PLC;'+metric+' table;'+product+';'+row['period']:
+                    return ()
+            ref = p.Source(source['title'], source['url'], source['publisher'], source['publication_date'],
+                           locator='Lloyds Bank PLC; '+product+'; Open / Closed / Upheld tables; '+row['period'])
+            facts = tuple(p.Statement(
+                product + ': ' + str(row[k]) + suffix, 'reported', row['scope'], row['period'], (ref,),
+                'reviewed_excerpt', 'analytical_working_research', 'actual',
+                value=Decimal(str(row[k])), unit=unit,
+                caveats=('Different received/closed cohorts; firm-upheld is not independent adjudication. Not Group divisional results, redress, cost, customer incidence or buying need.',))
+                for k, suffix, unit in (('received', ' complaints received', 'complaints received'),
+                    ('closed', ' complaints closed', 'complaints closed'),
+                    ('upheld', '% of closed complaints upheld by firm', 'percent of closed complaints upheld by firm')))
+            if not all(p.eligible(f) for f in facts):
+                return ()
+            result.append((key, product, facts))
+        for i in (0, 1):
+            if sum(row[2][i].value for row in result[:-1]) != result[-1][2][i].value:
+                return ()
+        if result[-1][2][0].value <= 0:
+            return ()
+        return tuple(result)
+    except (OSError, ValueError, KeyError, TypeError, PermissionError, StopIteration, ArithmeticError):
+        return ()
+
+
 def agenda(scope,data=None,*,selected=''):
     """Same scope/cutoff/dependencies → same agenda, independent of lens/user.
 
