@@ -1,0 +1,301 @@
+{
+  "authority": "analytical_working_research",
+  "canonical_mutation": false,
+  "sources": [
+    {
+      "retrieved_at": "2026-11-27T00:00:00+00:00",
+      "retrieval_timestamp_precision": "day_normalised_UTC_not_server_timestamp",
+      "retrieval_method": "approved_web_research_tool",
+      "content_kind": "reviewed_web_excerpt",
+      "primary_content_sha256": null,
+      "research_domain": "banking",
+      "reviewed_by": "Lloyds substantive intelligence: existing FCA numerical Data use category; no new grant or canonical acceptance",
+      "verification": "primary_retrieved",
+      "third_party_material": false,
+      "retained_form": "minimal_facts_and_provenance",
+      "restrictions": [],
+      "id": "FCA-LLOYDS-PRODUCTS-H126",
+      "title": "FCA Lloyds Bank PLC product-group complaint activity and firm outcomes",
+      "publisher": "Financial Conduct Authority",
+      "url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+      "publication_date": "2026-10-22",
+      "publication_date_evidence": "Original FCA2026H1 release date",
+      "reporting_period": "1 January–30 June 2026",
+      "review_notes": "Product groups are FCA complaint categories, not LBG reporting divisions. Firm redress, service cost, customer denominators, matched complaint cohorts and Group financial allocations are not supplied. Under FCA legal2.2 numerical Data OGL; narrative excluded. No third-party notice identified for these cells.",
+      "retrieval_reference": "approved_web_research_tool: turn185search0 Open; turn187search0 Closed; turn188search0 headers; turn189search0 Upheld",
+      "retrieval_extent": "Five product-group rows and one total, eighteen numerical cells with entity, period and column labels; no full table or original-byte archive",
+      "rights": {
+        "basis": "fca_owned_numerical_data_ogl",
+        "terms_url": "https://www.fca.org.uk/legal",
+        "licence_url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+        "attribution": "Contains Financial Conduct Authority information licensed under the Open Government Licence v3.0.",
+        "terms_clause": "2.2 numerical Data;2.3 narrative excluded"
+      },
+      "retrieval_url": "https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table",
+      "excerpts": [
+        {
+          "locator": "Lloyds Bank PLC;Open table;Banking and credit cards;1 January–30 June 2026",
+          "quote": "115,687"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Closed table;Banking and credit cards;1 January–30 June 2026",
+          "quote": "115,798"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Upheld table;Banking and credit cards;1 January–30 June 2026",
+          "quote": "66.37%"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Open table;Decumulation & pensions;1 January–30 June 2026",
+          "quote": "31"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Closed table;Decumulation & pensions;1 January–30 June 2026",
+          "quote": "33"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Upheld table;Decumulation & pensions;1 January–30 June 2026",
+          "quote": "30.30%"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Open table;Home finance;1 January–30 June 2026",
+          "quote": "2,679"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Closed table;Home finance;1 January–30 June 2026",
+          "quote": "2,680"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Upheld table;Home finance;1 January–30 June 2026",
+          "quote": "62.57%"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Open table;Insurance & pure protection;1 January–30 June 2026",
+          "quote": "339"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Closed table;Insurance & pure protection;1 January–30 June 2026",
+          "quote": "324"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Upheld table;Insurance & pure protection;1 January–30 June 2026",
+          "quote": "11.42%"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Open table;Investments;1 January–30 June 2026",
+          "quote": "26"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Closed table;Investments;1 January–30 June 2026",
+          "quote": "26"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Upheld table;Investments;1 January–30 June 2026",
+          "quote": "19.23%"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Open table;Grand Total;1 January–30 June 2026",
+          "quote": "118,762"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Closed table;Grand Total;1 January–30 June 2026",
+          "quote": "118,861"
+        },
+        {
+          "locator": "Lloyds Bank PLC;Upheld table;Grand Total;1 January–30 June 2026",
+          "quote": "66.12%"
+        }
+      ],
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/FCA-Lloyds-Products-H126.txt",
+      "text_sha256": "1d02e44b8a2a79d6eee53b4cd94f7e14962e6c1a0fec3df59a4027ba2de33055",
+      "fact_bindings": [
+        {
+          "key": "lloyds-service-bankcards",
+          "kind": "service_profile",
+          "excerpt_indices": [
+            0,
+            1,
+            2
+          ],
+          "facts": {
+            "selection": "lloyds-service-bankcards",
+            "name": "Lloyds Bank PLC",
+            "scope": "Lloyds Bank PLC only; not consolidated Group or a reporting division",
+            "period": "1 January–30 June 2026",
+            "product": "Banking and credit cards",
+            "received": 115687,
+            "closed": 115798,
+            "upheld": "66.37"
+          }
+        },
+        {
+          "key": "lloyds-service-pensions",
+          "kind": "service_profile",
+          "excerpt_indices": [
+            3,
+            4,
+            5
+          ],
+          "facts": {
+            "selection": "lloyds-service-pensions",
+            "name": "Lloyds Bank PLC",
+            "scope": "Lloyds Bank PLC only; not consolidated Group or a reporting division",
+            "period": "1 January–30 June 2026",
+            "product": "Decumulation & pensions",
+            "received": 31,
+            "closed": 33,
+            "upheld": "30.30"
+          }
+        },
+        {
+          "key": "lloyds-service-mortgages",
+          "kind": "service_profile",
+          "excerpt_indices": [
+            6,
+            7,
+            8
+          ],
+          "facts": {
+            "selection": "lloyds-service-mortgages",
+            "name": "Lloyds Bank PLC",
+            "scope": "Lloyds Bank PLC only; not consolidated Group or a reporting division",
+            "period": "1 January–30 June 2026",
+            "product": "Home finance",
+            "received": 2679,
+            "closed": 2680,
+            "upheld": "62.57"
+          }
+        },
+        {
+          "key": "lloyds-service-insurance",
+          "kind": "service_profile",
+          "excerpt_indices": [
+            9,
+            10,
+            11
+          ],
+          "facts": {
+            "selection": "lloyds-service-insurance",
+            "name": "Lloyds Bank PLC",
+            "scope": "Lloyds Bank PLC only; not consolidated Group or a reporting division",
+            "period": "1 January–30 June 2026",
+            "product": "Insurance & pure protection",
+            "received": 339,
+            "closed": 324,
+            "upheld": "11.42"
+          }
+        },
+        {
+          "key": "lloyds-service-investments",
+          "kind": "service_profile",
+          "excerpt_indices": [
+            12,
+            13,
+            14
+          ],
+          "facts": {
+            "selection": "lloyds-service-investments",
+            "name": "Lloyds Bank PLC",
+            "scope": "Lloyds Bank PLC only; not consolidated Group or a reporting division",
+            "period": "1 January–30 June 2026",
+            "product": "Investments",
+            "received": 26,
+            "closed": 26,
+            "upheld": "19.23"
+          }
+        },
+        {
+          "key": "lloyds-service-total",
+          "kind": "service_profile",
+          "excerpt_indices": [
+            15,
+            16,
+            17
+          ],
+          "facts": {
+            "selection": "lloyds-service-total",
+            "name": "Lloyds Bank PLC",
+            "scope": "Lloyds Bank PLC only; not consolidated Group or a reporting division",
+            "period": "1 January–30 June 2026",
+            "product": "Grand Total",
+            "received": 118762,
+            "closed": 118861,
+            "upheld": "66.12"
+          }
+        }
+      ],
+      "purpose": "attributed_analytical_working_views",
+      "audience": "flora_research_views",
+      "retention": "minimal_facts_and_provenance"
+    }
+  ],
+  "service_profiles": [
+    {
+      "selection": "lloyds-service-bankcards",
+      "name": "Lloyds Bank PLC",
+      "scope": "Lloyds Bank PLC only; not consolidated Group or a reporting division",
+      "period": "1 January–30 June 2026",
+      "product": "Banking and credit cards",
+      "received": 115687,
+      "closed": 115798,
+      "upheld": "66.37",
+      "source_id": "FCA-LLOYDS-PRODUCTS-H126"
+    },
+    {
+      "selection": "lloyds-service-pensions",
+      "name": "Lloyds Bank PLC",
+      "scope": "Lloyds Bank PLC only; not consolidated Group or a reporting division",
+      "period": "1 January–30 June 2026",
+      "product": "Decumulation & pensions",
+      "received": 31,
+      "closed": 33,
+      "upheld": "30.30",
+      "source_id": "FCA-LLOYDS-PRODUCTS-H126"
+    },
+    {
+      "selection": "lloyds-service-mortgages",
+      "name": "Lloyds Bank PLC",
+      "scope": "Lloyds Bank PLC only; not consolidated Group or a reporting division",
+      "period": "1 January–30 June 2026",
+      "product": "Home finance",
+      "received": 2679,
+      "closed": 2680,
+      "upheld": "62.57",
+      "source_id": "FCA-LLOYDS-PRODUCTS-H126"
+    },
+    {
+      "selection": "lloyds-service-insurance",
+      "name": "Lloyds Bank PLC",
+      "scope": "Lloyds Bank PLC only; not consolidated Group or a reporting division",
+      "period": "1 January–30 June 2026",
+      "product": "Insurance & pure protection",
+      "received": 339,
+      "closed": 324,
+      "upheld": "11.42",
+      "source_id": "FCA-LLOYDS-PRODUCTS-H126"
+    },
+    {
+      "selection": "lloyds-service-investments",
+      "name": "Lloyds Bank PLC",
+      "scope": "Lloyds Bank PLC only; not consolidated Group or a reporting division",
+      "period": "1 January–30 June 2026",
+      "product": "Investments",
+      "received": 26,
+      "closed": 26,
+      "upheld": "19.23",
+      "source_id": "FCA-LLOYDS-PRODUCTS-H126"
+    },
+    {
+      "selection": "lloyds-service-total",
+      "name": "Lloyds Bank PLC",
+      "scope": "Lloyds Bank PLC only; not consolidated Group or a reporting division",
+      "period": "1 January–30 June 2026",
+      "product": "Grand Total",
+      "received": 118762,
+      "closed": 118861,
+      "upheld": "66.12",
+      "source_id": "FCA-LLOYDS-PRODUCTS-H126"
+    }
+  ],
+  "financial_selections": []
+}

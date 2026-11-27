@@ -1,0 +1,23 @@
+FCA numerical Data · independently arranged minimal factual cells
+Lloyds Bank PLC only · 1 January–30 June 2026
+Source: https://www.fca.org.uk/data/firm-level-complaints-data-sortable-table
+Publication: 2026-10-22
+Contains Financial Conduct Authority information licensed under the Open Government Licence v3.0.
+Lloyds Bank PLC;Open table;Banking and credit cards;1 January–30 June 2026: 115,687
+Lloyds Bank PLC;Closed table;Banking and credit cards;1 January–30 June 2026: 115,798
+Lloyds Bank PLC;Upheld table;Banking and credit cards;1 January–30 June 2026: 66.37%
+Lloyds Bank PLC;Open table;Decumulation & pensions;1 January–30 June 2026: 31
+Lloyds Bank PLC;Closed table;Decumulation & pensions;1 January–30 June 2026: 33
+Lloyds Bank PLC;Upheld table;Decumulation & pensions;1 January–30 June 2026: 30.30%
+Lloyds Bank PLC;Open table;Home finance;1 January–30 June 2026: 2,679
+Lloyds Bank PLC;Closed table;Home finance;1 January–30 June 2026: 2,680
+Lloyds Bank PLC;Upheld table;Home finance;1 January–30 June 2026: 62.57%
+Lloyds Bank PLC;Open table;Insurance & pure protection;1 January–30 June 2026: 339
+Lloyds Bank PLC;Closed table;Insurance & pure protection;1 January–30 June 2026: 324
+Lloyds Bank PLC;Upheld table;Insurance & pure protection;1 January–30 June 2026: 11.42%
+Lloyds Bank PLC;Open table;Investments;1 January–30 June 2026: 26
+Lloyds Bank PLC;Closed table;Investments;1 January–30 June 2026: 26
+Lloyds Bank PLC;Upheld table;Investments;1 January–30 June 2026: 19.23%
+Lloyds Bank PLC;Open table;Grand Total;1 January–30 June 2026: 118,762
+Lloyds Bank PLC;Closed table;Grand Total;1 January–30 June 2026: 118,861
+Lloyds Bank PLC;Upheld table;Grand Total;1 January–30 June 2026: 66.12%

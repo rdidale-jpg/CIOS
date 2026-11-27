@@ -1,0 +1,52 @@
+{
+  "phase": "after",
+  "sha": "110957618662afd26f86c56b1ac1d00afdc0e1b0",
+  "mode": "Actual local Chromium; emulated iPads and mobile, not physical Safari or Render",
+  "captures": {
+    "after-desktop-costs.jpg": "3d912e0161a20d7de011a2fe7da4308f0882623417e0d0a60d56ac70e0e47089",
+    "after-desktop-bankcards.jpg": "bfd738f0379e1865dfdc5f985d00727eb613c4de6ca0ebf845f9d95540befd6f",
+    "after-ipad-landscape-costs.jpg": "b502244455d0d28bb31ed33955f77aa8e9db2a2bdcb3458d0755ee1eba37c5fd",
+    "after-ipad-landscape-bankcards.jpg": "12f9925c1af98c1174ec0a33705290354e7611f358606e1f2538c2283bf700ba",
+    "after-ipad-portrait-costs.jpg": "d4c38026ddd732051a6abbf93318974a79e877ea758bd05d121e8c288089efac",
+    "after-ipad-portrait-bankcards.jpg": "41ee34a27e242b98fc1e0156826b10cb19313d10eb3913a4cb5197554f36890b",
+    "after-mobile-costs.jpg": "42aa5cddb1553678101a764f5bd0953d401623ac416f8928a2307e6b2778155d",
+    "after-mobile-bankcards.jpg": "b1028186a530bb085e526b35a7e2af46d4d0faa8eb82dac88b407cd94a8703b0"
+  },
+  "journeys": [
+    {
+      "device": "desktop",
+      "new_product_measures_visible": true,
+      "navigation_errors": []
+    },
+    {
+      "device": "ipad-landscape",
+      "new_product_measures_visible": true,
+      "navigation_errors": []
+    },
+    {
+      "device": "ipad-portrait",
+      "new_product_measures_visible": true,
+      "navigation_errors": []
+    },
+    {
+      "device": "mobile",
+      "new_product_measures_visible": true,
+      "navigation_errors": []
+    }
+  ],
+  "runtime_hashes": {
+    "cios/applications/flora/leadership_agenda.py": "67d06b92c8033f6352cb023546ed4dd38548e727ebada3a6183c75821661dee1",
+    "cios/applications/flora/lloyds_gold.py": "1459934f3ac5cb3ae8fcbd811c284a1c4aea1ccdcce86e61f8b8b32fd14a4bd0",
+    "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "e788eba839d8bc8aa3ba437c8c25f9e493687d279c2aaa9fb4415037b38ccfb2"
+  },
+  "runtime_matches_sha": true,
+  "withdrawal": {
+    "history_reload_print_accessibility": true,
+    "source_changed_in_isolated_copy_only": true
+  },
+  "knowledge_delta": {
+    "new_reported_product_cells": 15,
+    "new_calculated_product_shares": 5,
+    "new_group_or_divisional_financial_actuals": 0
+  }
+}

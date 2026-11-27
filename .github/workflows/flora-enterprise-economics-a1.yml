@@ -36,7 +36,7 @@ jobs:
       - name: All strict security tests
         run: python -m pytest tests/test_flora_security*.py -q
       - name: Optional Living Enterprise preview and fail-closed public source boundaries
-        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py tests/test_flora_main_canvas.py tests/test_flora_lloyds_activation.py -q
+        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py tests/test_flora_main_canvas.py tests/test_flora_lloyds_activation.py tests/test_flora_lloyds_service_workload.py -q
       - name: Lloyds intelligence utilisation and immutable image verification
         run: |
           git worktree add --detach "$RUNNER_TEMP/gold-approved-cut" 1c13e6962516dbb071b2133f2c1a3de87647e2ac
@@ -102,11 +102,15 @@ jobs:
           python docs/product/flora-experience/main-canvas/validate.py
       - name: Lloyds subject exploration, responsive interaction and live withdrawal
         run: python docs/flora-runtime/lloyds-activation/browser.py after "$RUNNER_TEMP/lloyds-activation-browser"
+      - name: Source-bound Lloyds product knowledge, navigation and withdrawal
+        run: python docs/flora-runtime/lloyds-substantive-intelligence/browser.py "$RUNNER_TEMP/lloyds-product-browser" after
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: flora-enterprise-economics-${{ github.event.pull_request.head.sha }}
           path: |
+            ${{ runner.temp }}/lloyds-product-browser/*.json
+            ${{ runner.temp }}/lloyds-product-browser/*.jpg
             ${{ runner.temp }}/lloyds-activation-browser/*.json
             ${{ runner.temp }}/lloyds-activation-browser/*.jpg
             ${{ runner.temp }}/canvas-browser/*.json

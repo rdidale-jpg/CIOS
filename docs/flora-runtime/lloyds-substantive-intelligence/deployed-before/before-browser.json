@@ -1,0 +1,44 @@
+{
+  "phase": "before",
+  "sha": "3a4c7e0f6ad81af7ef32ed477a1a584ac2efae87",
+  "mode": "Actual local Chromium; emulated iPads and mobile, not physical Safari or Render",
+  "captures": {
+    "before-desktop-costs.jpg": "012afdde3a1f5985285814e4a3ef32cf276d852213f6cc869f85d4c68a87c73c",
+    "before-ipad-landscape-costs.jpg": "e204f2f86607736b80907f8db073d2ff8391930fc43338062b9e67f9204548f4",
+    "before-ipad-portrait-costs.jpg": "eb35240928981ce780403a9263f4fd90e097608e3c786e5c906f5596bebecb34",
+    "before-mobile-costs.jpg": "bbaea9374b7ccb8951b763a56780d53b21cf1e1ea2604fafaa478d386b74f00b"
+  },
+  "journeys": [
+    {
+      "device": "desktop",
+      "new_product_measures_visible": false,
+      "navigation_errors": []
+    },
+    {
+      "device": "ipad-landscape",
+      "new_product_measures_visible": false,
+      "navigation_errors": []
+    },
+    {
+      "device": "ipad-portrait",
+      "new_product_measures_visible": false,
+      "navigation_errors": []
+    },
+    {
+      "device": "mobile",
+      "new_product_measures_visible": false,
+      "navigation_errors": []
+    }
+  ],
+  "runtime_hashes": {
+    "cios/applications/flora/leadership_agenda.py": "30699653637bc8e71770d062811019cd70da0e48ef1f7c02f883578c470b8be5",
+    "cios/applications/flora/lloyds_gold.py": "58a3459457ef7ced31df37ffd255ed17dfd651a9eb02e228760a7e61144dfea4",
+    "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "e043a0a8cf50e68c3467bbba1042fe240b2c24dfaee4909464b620016f57ca42"
+  },
+  "runtime_matches_sha": true,
+  "knowledge_delta": {
+    "new_reported_product_cells": 0,
+    "new_calculated_product_shares": 0,
+    "new_group_or_divisional_financial_actuals": 0
+  }
+}

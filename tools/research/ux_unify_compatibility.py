@@ -82,6 +82,12 @@ CEO_BASE = '1c13e6962516dbb071b2133f2c1a3de87647e2ac'
 CEO_PINS = {'cios/applications/flora/web/app.py': '4bfa58b674ffc293300626632d894894e9543e862386bebc92646ad835b05b2c', 'cios/applications/flora/public_routes.py': 'a9da56cb647eeecf1e8e3b0aae0454c577fdb670a220d84a79b53fbbb5c21662', 'cios/applications/flora/visual_streams.py': '5dc89b7988f0a45e4fbcad94c015a0d0e9735fbddaa513f53c42aeacf171270f', 'cios/applications/flora/research_intelligence/source_import.py': '4ec4d32e8ff09d3e5de187bcab2969618e5d4084a9a4da0cc0804fabcd54e6fa', 'tools/research/history_integrity.py': 'cd7715aa1065f6384fd2f342377e6b465dd3e29e631a806082a3f29a839ef323'}
 
 def ceo_predecessor(root,path,current):
+    # This exact history-checker evolution admits only the two additive FCA
+    # product files. Historical checks still receive their original checker;
+    # an unrecognised change is never projected back to an approved cut.
+    if (path == 'tools/research/history_integrity.py'
+            and sha256(current).hexdigest() == '210b4e636268b0132529af7a6963ad3034c6986791b115c68c3344950d3db0c6'):
+        current = subprocess.check_output(['git', 'show', '6b10935a31079d27fe00c88bf241d3d6bf1e3c98:'+path], cwd=root)
     if path in CEO_PINS and sha256(current).hexdigest()==CEO_PINS[path]:
         return subprocess.check_output(['git','show',CEO_BASE+':'+path],cwd=root)
     return current
