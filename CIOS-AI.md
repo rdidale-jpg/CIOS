@@ -192,12 +192,14 @@ Specify whether the task is documentation-only or runtime-changing. Put Codex pr
 
 ## FLORA product delivery
 
-Apply the [Product Delivery Doctrine](docs/product/flora-delivery-acceleration/README.md) within the current commission and existing architecture. It is working guidance, not a new architecture or approval authority.
+Apply the [Product Delivery Doctrine](docs/product/flora-delivery-acceleration/README.md): **DEFAULT TO PROGRESS. ESCALATE EXCEPTIONS.** Use **Build → Test → Merge → Review** within the current commission and existing architecture. It is delivery guidance, not a new intelligence owner or governance service.
 
 - Deliver the smallest complete user journey using existing owners and components. Judge success by owner-tested commercial usefulness, not PR or document counts.
 - Reuse valid reviews and test evidence for the unchanged scope. Reassess only affected behaviour, changed assumptions or new evidence; keep required CI and security gates intact.
-- Proceed through already authorised reversible work without repeated confirmation. Escalate material architecture, legal or security conflicts; record unrelated issues for later work.
-- For visual work, provide actual browser walkthroughs at the applicable desktop/tablet sizes. Owner visual acceptance, merge authority and deployment authority remain distinct.
+- Use one PR for an ordinary reversible increment. Merge when existing applicable checks pass, without another owner approval for routine integration or low-risk documentation. Keep a straightforward rollback; honour explicit task-specific stops and do not bypass an approval-system rejection.
+- Escalate Source-use/restricted-publication, security/access, required canonical promotion, financial-permission, external-action/commitment and new-cost/infrastructure exceptions to the existing owner. Continue unaffected work; do not solve unrelated source acquisition merely to integrate a bounded review package.
+- For visual work, provide actual browser walkthroughs at the applicable desktop/tablet sizes. Flora-Current is the existing development/evaluation runtime. Owner evaluation follows routine integration; deployment remains a separately authorised external action and must preserve data and rollback.
+- Avoid duplicate audits, repeated frozen-corpus checks and separate proof-only PRs without a concrete risk. Keep completion reporting to what changed, what can be tested, tests/material failures, genuine blockers, and merge SHA/rollback.
 - Follow the [near-term FLORA priorities](ROADMAP.md#current-flora-product-priorities). Defer semantic extraction experiments unless a named priority milestone requires them. Use existing included/local tools with zero incremental expenditure; do not make paid API calls or purchase services.
 
 ## Response style

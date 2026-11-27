@@ -1,6 +1,10 @@
 # FLORA Product Delivery Doctrine
 
-**Status:** Accepted operating guidance in PR #727; bounded recovery amendment for owner review, 23 November 2026. **Budget:** £0 incremental expenditure beyond existing ChatGPT Pro. This applies the accepted [ADR-009](../../../architecture/decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md); it creates no architecture, data owner, approval layer or release authority.
+**Status:** Owner-directed Rapid Development Delivery Contract, 27 November 2026, updating the accepted PR #727 doctrine and subsequent recovery guidance. **Budget:** £0 incremental expenditure beyond existing ChatGPT Pro. This applies accepted [ADR-009](../../../architecture/decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md); it changes delivery conventions, not architecture, data ownership or protected authority.
+
+**DEFAULT TO PROGRESS. ESCALATE EXCEPTIONS.**
+
+FLORA is an actively developed product. Flora-Current is its existing development/evaluation runtime. Ordinary reversible development uses **Build → Test → Merge → Review**, with one PR and no separate owner integration approval. Owner evaluation improves the next increment; it is not a universal pre-merge business gate. Honour any explicit task-specific stop or unresolved approval-system rejection.
 
 ## Operating rules
 
@@ -11,23 +15,35 @@
 5. **Keep accepted decisions closed.** Reopen only for material new evidence, changed requirements or failed assumptions. Implementing an accepted contract does not itself need another ADR.
 6. **Defer unrelated issues.** Record impact and next owner in the existing backlog; continue unaffected work. Correctness, security, source use and essential dependencies are never “unrelated”.
 7. **Accept visuals in the browser.** Walk through actual desktop/tablet routes and check mobile accessibility. Preserve beautiful simplicity. Screenshots do not prove interaction, genuine sign-in or physical-device behaviour.
-8. **Deploy under owner control.** Design acceptance, merge and deployment are separate. Honour existing exact-SHA authority; verify CI, configuration, persistence, backup/rollback and smoke tests before authorised deployment. Merged does not mean deployed.
+8. **Keep rollback straightforward.** Preserve the prior working SHA and use a normal Git revert through the same delivery cycle if needed. For an expressly authorised deployment, reuse Flora-Current and its existing manual process; protect persistent data and retain the prior successful deployment. Merged does not mean deployed.
 9. **Measure commercial usefulness.** Show meaningful evidenced change without inventing demand, contracts, budgets, financial value or buying intent.
 10. **Spend nothing extra.** Use existing included/local tools. No paid API/model calls, purchased agents, subscriptions, infrastructure or billable experiments. Defer work requiring incremental expenditure.
 
-## Five-step delivery workflow
+## Build → Test → Merge → Review
 
-1. **Frame once:** reuse the commission, exact main, outcome, owners and concurrent file boundaries. Inherit or declare ADR-015 Mission, Research Policy and Capability Profile; no extra intake form.
-2. **Reuse/build:** start an isolated branch from verified main; complete the bounded slice without repeated approval of authorised reversible work.
-3. **Validate:** run applicable checks near completion; correct failures and rerun affected checks. Never refresh inherited failures/skips merely to pass. Prose-only work needs no new runtime suite when protected inputs are unchanged.
-4. **Return one result:** one draft PR, exact SHA, scope, test evidence, limitations and applicable browser walkthrough. Reuse the existing PR for continuations. Keep required critiques there; add artefacts only when commissioned or contractually required.
-5. **Accept/release:** owner tests the outcome. Merge/deploy under the applicable explicit authority and checks; record actual deployed identity and smoke tests, then continue from accepted state.
+1. **Build:** establish current main, reuse accepted decisions and existing/open work, then complete the smallest useful increment on one branch and PR. Preserve concurrent work. Inherit the applicable ADR-015 context; no extra intake form.
+2. **Test:** run existing applicable automated checks and actual browser journeys for visual changes. Fix material failures and rerun affected checks. Preserve strict security, meaningful financial/evidence validation and the inherited-failure/skip comparator. Reuse valid evidence for unchanged scope; prose-only work does not need another full runtime run when protected inputs are unchanged.
+3. **Merge:** merge ordinary reversible changes, including low-risk documentation, when applicable checks pass and conflicts are resolved. No separate owner integration approval, proof-only PR or automatic draft-only stop. Keep an exact merge SHA and simple rollback. Do not merge a genuine authority exception or bypass a rejected action.
+4. **Review:** give the owner the working outcome and a concise way to test it. For visual changes use browser interaction, not CI or screenshots alone, to judge commercial usefulness. Record material feedback in the same PR or existing backlog; do not reopen accepted decisions without new evidence.
 
-This is five activities, not five new approval gates. It replaces repeated intake/review/publication loops for the same unchanged decision. No elapsed-time or productivity improvement is claimed until measured in use.
+No duplicate audits, repeated frozen-corpus checks, excessive acceptance reports or separate proof-only PRs unless a concrete risk or applicable owning contract requires them. Do not weaken or skip a required check to accelerate delivery. A routine merge is not permission to deploy, publish restricted intelligence or perform protected writes.
 
-Before building, reconcile existing work and open PRs against each accepted owner requirement in the existing PR/report: decision → exact implementation → draft/merged/deployed/owner-accepted state → remaining gap → smallest action. Verify previously accepted UX behaviour and compare the owner’s current failure captures; record unavailable evidence explicitly. Do not equate design acceptance with implementation or deployment.
+Reconcile affected accepted requirements and prior UX behaviour in the existing PR, using current failure captures when available. Distinguish draft, merged, deployed and owner-evaluated states. No separate traceability registry or standing ceremony.
 
-Completion requires the working accepted journey and its browser evidence, not passing CI alone. Keep this traceability in the same PR; create no separate registry, approval layer or standing review ceremony.
+## Exceptions requiring explicit owner authority
+
+- Source-use rights changes or restricted publication, through the existing Source/legal owner.
+- Security and access-control changes, including workspace/resource authority.
+- Canonical intelligence promotion wherever existing owners require it.
+- Financial permission changes.
+- External actions or real commercial commitments, including runtime deployment unless already expressly authorised.
+- New expenditure or infrastructure.
+
+Escalate the specific exception and continue unaffected work. Do not expand a bounded increment to resolve unrelated source acquisition or research gaps. These are existing authority boundaries, not a new approval service or registry.
+
+## Completion report
+
+Use the existing PR and report only: **what changed; what can now be tested; tests passed/material failures; genuine blockers; merge SHA and rollback**. Include browser evidence or a necessary source/financial qualification where relevant. No additional release package or approval report by default. A blocked or partial journey must remain labelled as such.
 
 ## Mandatory controls and optional conventions
 
@@ -40,7 +56,7 @@ Completion requires the working accepted journey and its browser evidence, not p
 | Material Pressure, employer/Offer and Pipeline gates | New committees, registries or automatic sales qualification |
 | Required CI, strict security and inherited-signature integrity for applicable runtime releases | The complete runtime suite for prose-only changes with protected files unchanged |
 | Independent review explicitly required by the commission or owning contract | Repeated independent review of unchanged scope when no applicable requirement demands it |
-| Real browser visual review for visual changes and separately authorised release | Screenshots or PR counts as substitutes for a working, accepted journey |
+| Real browser visual review for visual changes; express authority for deployment and other exceptions above | Separate business approval for each routine reversible merge, or screenshots/PR counts as proof of a useful journey |
 
 The [Experience Contract](../flora-experience/FLORA-Experience-Contract-v1.0.md) governs presentation: retain Top / Left / Main, distinct factual and interpretive semantics, accepted artwork and commercially understandable language. The current owner recovery commission supersedes the separate Facts / FLORA Insight selector with one unified executive composition. Internal gaps, source administration and suggested investigations do not become new ordinary-screen panels. Mandatory attribution and material factual limitations remain.
 
@@ -57,6 +73,6 @@ The [Experience Contract](../flora-experience/FLORA-Experience-Contract-v1.0.md)
 
 Further semantic extraction, parsing and model/provider experiments are deferred unless a named milestone has a demonstrated unmet dependency. Reuse the existing extraction path first; bound any necessary zero-cost experiment to that dependency. This is sequencing, not retirement of existing assets or cancellation of independently commissioned work.
 
-Note elapsed time, interruptions, acceptance and material blockers in the existing PR record. Add no telemetry service, maturity score or reporting ceremony.
+Use the existing PR for material blockers and owner feedback. Add no telemetry service, maturity score or reporting ceremony.
 
-See [assessment, proposed role amendments and validation](Assessment-and-Validation.md). The concurrent recovery sprint retains implementation ownership; this documentation PR changes none of its files.
+The [original PR #727 assessment and validation](Assessment-and-Validation.md) is historical evidence; its former five-step/draft-only/merge-approval wording is superseded by this contract. Packaged GPT instructions and external configurations are unchanged. Apply this contract to future FLORA increments within existing authority.

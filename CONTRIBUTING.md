@@ -22,9 +22,9 @@ Every contribution should:
 5. Document the decision or implementation.
 6. Commit with a clear message.
 
-For FLORA, use the [Product Delivery Doctrine](docs/product/flora-delivery-acceleration/README.md): agree the user outcome and bounded scope, reuse existing capability, deliver the complete journey, validate proportionately, then return or update one draft PR with a concise acceptance walkthrough. Reuse evidence for unchanged decisions; retain all required checks. Routine implementation within an accepted contract does not require a fresh architecture decision. A material conflict still goes to its existing owner.
+For FLORA, **default to progress; escalate exceptions**. Use the [Product Delivery Doctrine](docs/product/flora-delivery-acceleration/README.md): **Build → Test → Merge → Review**. Reuse existing capability and accepted decisions, complete one useful increment in one PR, run existing applicable checks, then merge routine reversible work without separate owner integration approval. Reuse valid evidence for unchanged scope; preserve required security, financial/evidence and regression checks. Routine implementation within an accepted contract does not require a fresh architecture decision.
 
-Visual acceptance uses the running candidate in a browser, not screenshots alone. Merge and deployment require the authority specified in the commission; neither is implied by passing tests or visual acceptance.
+Owner review tests usefulness in the running candidate; visual work needs browser interaction, not screenshots alone. Flora-Current is a development/evaluation runtime; a merge does not deploy it. Retain explicit owner authority for the doctrine's [protected exceptions](docs/product/flora-delivery-acceleration/README.md#exceptions-requiring-explicit-owner-authority), task-specific stops and actual deployment. Do not bypass an approval-system rejection. Report what changed, what can be tested, tests/material failures, genuine blockers, and merge SHA/rollback in the same PR.
 
 ## AI Agent Guidance
 
