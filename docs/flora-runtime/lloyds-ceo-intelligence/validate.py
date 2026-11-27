@@ -13,7 +13,7 @@ def run():
     sha=git('rev-parse','HEAD',text=True).strip();changed=git('diff','--name-only',BASE,sha,text=True).splitlines()
     allowed={'.github/workflows/flora-enterprise-economics-a1.yml','cios/applications/flora/lloyds_gold.py','cios/applications/flora/visual_stream_assets/lloyds-gold.css','enterprise-knowledge/banking/research-model/Assessment-Overlay.json','tests/flora_lloyds_research_contract.py','tests/test_flora_lloyds_ceo_intelligence.py','tests/test_flora_lloyds_gold_v2.py','tests/test_flora_lloyds_gold_v3.py','tests/test_flora_lloyds_experience_completion.py'}
     allowed.add('enterprise-knowledge/banking/research-model/Understanding-Review.json')
-    allowed.add('tools/research/history_integrity.py')
+    allowed.update({'tools/research/history_integrity.py','tools/research/ux_unify_compatibility.py'})
     allowed.update({'tests/test_flora_lloyds_gold.py','tests/test_flora_lloyds_ceo.py'})
     allowed|={'enterprise-knowledge/banking/research-model/source-snapshots/'+s+'.txt' for s in SOURCES}
     assert all(p in allowed or p.startswith('docs/flora-runtime/lloyds-ceo-intelligence/') for p in changed),changed

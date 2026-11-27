@@ -73,12 +73,12 @@ def run(out,phase):
                     page.goto(url({'stream':'inside'}));control=page.get_by_role('link',name='Employee operating system',exact=True);control.scroll_into_view_if_needed();box=control.bounding_box()
                     if device=='desktop':page.mouse.click(box['x']+box['width']*.65,box['y']+box['height']*.75)
                     else:page.touchscreen.tap(box['x']+box['width']*.65,box['y']+box['height']*.75)
-                    assert '60,061' in page.locator('main').inner_text()
+                    page.wait_for_url('**detail=employees**');assert '60,061' in page.locator('main').inner_text()
                     business=page.get_by_role('link',name='Retail employee context',exact=True);business.scroll_into_view_if_needed();box=business.bounding_box()
                     if device=='desktop':page.mouse.click(box['x']+box['width']*.7,box['y']+box['height']*.75)
                     else:page.touchscreen.tap(box['x']+box['width']*.7,box['y']+box['height']*.75)
-                    assert 'focus=retail' in page.url;page.go_back();assert '60,061' in page.locator('main').inner_text()
-                    control=page.get_by_role('link',name='Board and management',exact=True);control.focus();page.keyboard.press('Enter');assert 'Sarah Legg' in page.locator('main').inner_text()
+                    page.wait_for_url('**focus=retail**');assert 'focus=retail' in page.url;page.go_back();assert '60,061' in page.locator('main').inner_text()
+                    control=page.get_by_role('link',name='Board and management',exact=True);control.focus();page.keyboard.press('Enter');page.wait_for_url('**detail=board**');assert 'Sarah Legg' in page.locator('main').inner_text()
                     for route in ('/industries/banking','/industries/aviation','/enterprises/easyjet','/enterprises/lloyds/legacy','/enterprises/lloyds/preview'):
                         assert page.goto(route).status==200
                     if device=='desktop':
