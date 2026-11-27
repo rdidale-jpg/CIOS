@@ -112,12 +112,15 @@ jobs:
       - name: Gold v2 enterprise knowledge, four responsive sizes and lifecycle
         run: python docs/flora-runtime/lloyds-gold-v2/browser.py "$RUNNER_TEMP/gold-v2-browser" after
       - name: Integrated enterprise experience, responsive geometry and withdrawal
-        run: python docs/flora-runtime/lloyds-experience-completion/browser.py "$RUNNER_TEMP/experience-completion-browser" after
+        run: |
+          python docs/flora-runtime/lloyds-experience-completion/validate.py > "$RUNNER_TEMP/experience-scope.json"
+          python docs/flora-runtime/lloyds-experience-completion/browser.py "$RUNNER_TEMP/experience-completion-browser" after
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: flora-enterprise-economics-${{ github.event.pull_request.head.sha }}
           path: |
+            ${{ runner.temp }}/experience-scope.json
             ${{ runner.temp }}/experience-completion-browser/*.json
             ${{ runner.temp }}/experience-completion-browser/*.jpg
             ${{ runner.temp }}/gold-v2-browser/*.json

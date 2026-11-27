@@ -58,6 +58,8 @@ The reusable principles are semantic visual regions, actual/plan distinctions, s
 
 Aviation/easyJet is checked through its existing industry/enterprise arrivals, operating selections and economics. Airline capacity, fleet/network choices and seasonal returns require a different composition from bank funding/credit/capital. Existing easyJet code and data are not changed. BT and Arm can reuse interaction/accessibility principles while retaining their own verified network/service or IP economics; no new BT/Arm financial or supplier assertion is made here.
 
+[Actual desktop, iPad and mobile before/after previews](Previews.md). The checked-in images are a selected subset; browser manifests retain the complete run’s hashes and checks. Hosted CI regenerates the full after set at the final PR head. [Validation and rollback commands](Validation.md).
+
 ## Owner walkthrough
 
 1. Banking → Lloyds. Select each business, then a financial driver. Compare the funding stocks and distinguish statutory earnings from segment or capital information.
