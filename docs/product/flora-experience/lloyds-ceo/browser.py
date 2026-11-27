@@ -67,7 +67,7 @@ def run(phase,output):
        page.goto(PATH+'?stream=inside&focus=operations&detail=journey-'+key);expect(page.locator('main')).to_contain_text('Conceptual activity sequence');expect(page.locator('main')).to_contain_text(row[5])
       for key,*_ in g.OBJECTIVES:
        page.goto(PATH+'?stream=forces&focus=strategy&detail=objective-'+key);expect(page.locator('main')).to_contain_text(g.GOAL_DECISIONS[key][1])
-      page.goto(PATH+'?stream=inside&focus=applications&detail=envoy');expect(page.locator('main')).to_contain_text('Contract end / renewal');expect(page.locator('main')).to_contain_text('Unknown')
+      page.goto(PATH+'?stream=inside&focus=applications&detail=envoy');expect(page.locator('main')).to_contain_text('does not establish a contracting entity');expect(page.locator('main')).to_contain_text('not an asserted Lloyds architecture');expect(page.locator('main')).not_to_contain_text('Contracted Google Cloud service')
       page.get_by_role('link',name='Evidence & dates',exact=True).click();expect(page.locator('main h2')).to_have_text('Evidence, dates & boundaries');assert not page.locator('main a[href*=".pdf"]').count()
       page.goto(PATH+'?focus=commercial');page.get_by_role('navigation',name='Insight streams').get_by_role('link',name='Inside',exact=True).click();expect(page.locator('main')).to_contain_text('From Commercial Banking')
       url=page.url;page.reload();assert page.url==url;page.go_back();expect(page.locator('main h1')).to_have_text('Commercial Banking');page.go_forward();expect(page.locator('main')).to_contain_text('From Commercial Banking')

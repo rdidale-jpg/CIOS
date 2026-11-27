@@ -52,7 +52,7 @@ with TemporaryDirectory(prefix='flora-gold-browser-') as runtime,sync_playwright
       for index in range(8):
        page.locator('main a[href*="detail=theme-'+str(index)+'"]').click();expect(page.locator('main')).to_contain_text('Counter-evidence and decision boundary');page.get_by_role('link',name='← Analysis',exact=True).click()
      if focus=='applications':
-      page.get_by_role('link',name='Envoy',exact=True).click();expect(page.locator('main')).to_contain_text('Contract end / renewal');expect(page.locator('main')).to_contain_text('Unknown')
+      page.get_by_role('link',name='Envoy',exact=True).click();expect(page.locator('main')).to_contain_text('does not establish a contracting entity');expect(page.locator('main')).to_contain_text('not an asserted Lloyds architecture');expect(page.locator('main')).not_to_contain_text('Contracted Google Cloud service')
       page.get_by_role('link',name='Evidence & dates',exact=True).click();expect(page.locator('main h2')).to_have_text('Evidence, dates & boundaries');assert not page.locator('main a[href*=".pdf"]').count()
     page.goto(g.href(g.State('inside','operations','operations','service')));expect(page.locator('[data-owner-item]')).to_have_count(3);expect(page.locator('main')).to_contain_text('not consolidated Group or Retail');capture('service-outcomes')
     page.goto(g.href(g.State('landscape','commercial','commercial')));page.get_by_role('navigation',name='Insight streams').get_by_role('link',name='Inside',exact=True).click();expect(page.locator('main')).to_contain_text('From Commercial Banking')

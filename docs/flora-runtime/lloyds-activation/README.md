@@ -41,7 +41,7 @@ Commercial views explain a testable contribution and an alternative explanation.
 
 ## Validation and review
 
-`tests/test_flora_lloyds_activation.py` checks withdrawal/revocation and independence across all four Envoy views, corrupt-revision denial, Group/source separation, entity/period/unit/actual restrictions, private selectors and subject history. Existing Gold/CEO/Canvas, public financial, Source/ACL, security, regression and Aviation checks remain applicable. Two stale assertions are changed: empty contract fields become explicit anti-inference qualifications, and empty financial cells become financial-basis explanations. Their negative contract, held-value and graph-isolation assertions are retained. The current-browser checker unit input now binds current runtime hashes rather than historical #733 hashes; the checker and all corrupt-input rejection cases are unchanged. No baseline/comparator or security test is changed.
+`tests/test_flora_lloyds_activation.py` checks withdrawal/revocation and independence across all four Envoy views, corrupt-revision denial, Group/source separation, entity/period/unit/actual restrictions, private selectors and subject history. Existing Gold/CEO/Canvas, public financial, Source/ACL, security, regression and Aviation checks remain applicable. Two stale assertions are changed: empty contract fields become explicit anti-inference qualifications, and empty financial cells become financial-basis explanations. Their negative contract, held-value and graph-isolation assertions are retained. The Gold browser harness makes the same contract-boundary assertions rather than demanding empty contract fields. The current-browser checker unit input now binds current runtime hashes rather than historical #733 hashes; the checker and all corrupt-input rejection cases are unchanged. No baseline/comparator or security test is changed.
 
 ```sh
 python -m pytest tests/test_flora_lloyds_activation.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py tests/test_flora_main_canvas.py -q
@@ -49,7 +49,7 @@ python tools/ci/flora_ci.py --output /tmp/flora-lloyds-activation-ci
 python docs/flora-runtime/lloyds-activation/browser.py after /tmp/flora-lloyds-activation-browser
 ```
 
-The existing Economics workflow runs the new tests and browser check and retains exact-head screenshots/JSON. Committed comparison captures were made from the baseline/candidate working trees and identify their actual runtime hashes; they are not claimed to be committed-head or live deployments. CI and final local browser receipts identify the tested commit separately. iPad tests are emulations, not physical Safari certification.
+The existing Economics workflow runs the new tests and browser check and retains exact-head screenshots/JSON. Its Gold and CEO browser harnesses now assert explicit contract limitations instead of empty renewal fields; their inspection, withdrawal, historical-preview, touch and history checks remain. Committed comparison captures were made from the baseline/candidate working trees and identify their actual runtime hashes; they are not claimed to be committed-head or live deployments. CI and final local browser receipts identify the tested commit separately. iPad tests are emulations, not physical Safari certification.
 
 | Device | Transaction Banking before / after | Envoy before / after | Economics before / after |
 | --- | --- | --- | --- |
