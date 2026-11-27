@@ -48,7 +48,7 @@ def test_business_selection_has_differentiated_economics_and_actual_context(focu
     body=unescape(view(focus=focus))
     assert all(term in body for term in terms)
     assert 'Commercial investigation' in body and 'No measured profit split' in body
-    assert 'ce-business-portrait' in body
+    assert ('v3-commercial-system' if focus=='commercial' else 'ce-business-portrait') in body
 
 
 @pytest.mark.parametrize('detail',('funding','income','costs','capital'))
@@ -127,7 +127,9 @@ def test_only_presentation_changes_and_no_research_or_protected_owner_evolution(
     before=ast.parse(subprocess.check_output(['git','show',BASE+':cios/applications/flora/lloyds_gold.py'],cwd=ROOT));after=ast.parse((ROOT/'cios/applications/flora/lloyds_gold.py').read_text())
     functions=lambda tree:{n.name:ast.dump(n,include_attributes=False) for n in tree.body if isinstance(n,ast.FunctionDef)}
     old,new=functions(before),functions(after)
-    assert all(old[k]==new[k] for k in ('facts_for','executive_facts','reported','interpretation','scene','resolve','href','render','stylesheet'))
+    # v3 deliberately evolves cross-perspective URL selection; Source, IAM
+    # resolution, rendering ownership and the remaining protected functions stay fixed.
+    assert all(old[k]==new[k] for k in ('facts_for','executive_facts','reported','interpretation','scene','resolve','render','stylesheet'))
     assert public_factual_projection()=={}
 
 

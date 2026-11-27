@@ -113,7 +113,7 @@ def test_no_research_or_protected_owner_changes_and_no_held_financial_activation
         old=ast.parse(subprocess.check_output(['git','show','7f003982:'+path],cwd=ROOT));new=ast.parse((ROOT/path).read_text())
         funcs=lambda tree:{n.name:ast.dump(n,include_attributes=False) for n in tree.body if isinstance(n,ast.FunctionDef)}
         a,b=funcs(old),funcs(new)
-        assert all(a[k]==b[k] for k in ('facts_for','scene','resolve','href','render'))
+        assert all(a[k]==b[k] for k in ('facts_for','scene','resolve','render'))
 
 
 def test_assessment_is_complete_as_a_view_without_scores_or_new_truth():
@@ -128,7 +128,7 @@ def test_assessment_is_complete_as_a_view_without_scores_or_new_truth():
     assert 'score' not in rows[0] and 'completeness_percentage' not in rows[0]
 
 
-@pytest.mark.parametrize('mutation',('none','command','permissions','extra_path','previous_cut'))
+@pytest.mark.parametrize('mutation',('none','command','permissions','extra_path','previous_cut','unbounded_timeout'))
 def test_legacy_workflow_retirement_compatibility_is_exact_and_rejects_other_changes(tmp_path,mutation):
     from tests.flora_f2_owner_contract import assert_owner_compatible
     path='.github/workflows/flora-validation.yml'
@@ -138,6 +138,7 @@ def test_legacy_workflow_retirement_compatibility_is_exact_and_rejects_other_cha
     elif mutation=='permissions':actual=actual.replace(b'contents: read',b'contents: write')
     elif mutation=='extra_path':actual=actual.replace(b"      - 'tests/**'\n",b'')
     elif mutation=='previous_cut':previous+=b'\n'
+    elif mutation=='unbounded_timeout':actual=actual.replace(b'timeout-minutes: 45',b'timeout-minutes: 46')
     target=tmp_path/path;target.parent.mkdir(parents=True);target.write_bytes(actual)
     if mutation=='none':assert_owner_compatible(tmp_path,path,previous)
     else:

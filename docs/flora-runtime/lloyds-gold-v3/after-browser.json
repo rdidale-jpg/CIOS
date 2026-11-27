@@ -1,0 +1,869 @@
+{
+  "phase": "after",
+  "sha": "226747cc8192cdf3ca8b2e72ecb78659f8775cc7",
+  "runtime_hashes": {
+    "cios/applications/flora/lloyds_gold.py": "28950f5d3ffcb8ecd050fe2c94ff453731b590046c4dcdc78f5b611c8908469d",
+    "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "38302c19f2520591e444de1f01c8eace7df9c8bc50e4b233ac257e2f6698bdcf",
+    "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "6307d01f80e812327fef1339ef3a8c0f1b6835ca4878c735e4e972f5f3424422"
+  },
+  "runtime_matches_sha": true,
+  "environment": "Actual isolated HTTP Chromium; emulated iPads/mobile, not Render or physical Safari",
+  "captures": {
+    "after-desktop-group.jpg": "54c4e724761a75ac74d855b6d84370bf48b5054bfeeeb6ba81b45358911e556a",
+    "after-desktop-inside.jpg": "75d11feb983e2b4cef78533d393afbf7ffc042d05bfbce62db3c0bbe839773a4",
+    "after-desktop-leadership.jpg": "a0be2c48b0c72d4e1f006274f4e723b65c0ef485badacfab7a01ec1e09a517ea",
+    "after-desktop-workforce.jpg": "c5110950238f1ef62e322c988f047f0fe894aa4f3cb065fbda6428d1c0cd522b",
+    "after-desktop-programmes.jpg": "7d0b734f827160889207ddd09f0dae4187a4456c5ae520063033acd245bc9087",
+    "after-desktop-forces.jpg": "94954d18e91fafa144ca3ab61d383ff4f430ebc4feeb50a249658f692815c845",
+    "after-desktop-capital.jpg": "314216a6d086db7663dabc399ae957d189fe812c5e743098f375b87ced9f7f8a",
+    "after-desktop-capability.jpg": "89796329d8105199cf01d6f20b9b0c7992d799e7be2db3198a0e19bad47b72f4",
+    "after-desktop-payments.jpg": "22f9b4602e8bd35f5da2db2cbbac467e40e92c9da9b43fb1d50aff79372ba1af",
+    "after-desktop-commercial.jpg": "7284e66f54a053f69248f73f4cbe9b8f55da414cda3a3584485ae426fd917a61",
+    "after-desktop-ai-goal.jpg": "35fbe0d280b308ace86d1db835c2e18669705eff161cc7b78c0fa0a6ce2c7013",
+    "after-desktop-commercial-context.jpg": "e502fe770824552bfc87caf88aaaa976baa4e923beecba9c2b27aab00188b2dd",
+    "after-desktop-commercial-direction.jpg": "ed28b7cf369fa07437259da0fe2a1d06d3d2b2213b1d8855fa7251caef577a2c",
+    "after-desktop-ai-economics.jpg": "24277301ec812ecabb7732435129319c30e79056bc5c6a2c111bef8136954fa3",
+    "after-desktop-finance-leader.jpg": "a3dac7022848332b962b3d236a4bb188694c3695fe3f16f2c070f34022c455f9",
+    "after-desktop-insurance.jpg": "c3936d8a00729bde583aeeed25e6a91dfce21438192b05699c8c16c58d1d28d9",
+    "after-desktop-economics.jpg": "616ed21305a1e6a728327144f7045c3765748ac1c1822f3288862d13f836e4c0",
+    "after-desktop-technology.jpg": "c1960f5eafcd796e847a1adef941b05272ba0a4924f448b9ac641f06b61e89ba",
+    "after-desktop-fraud.jpg": "fb18496244700f841e10d7cd49d655247a5a915223843d94aac22b3ba9fb3953",
+    "after-desktop-ai.jpg": "35fbe0d280b308ace86d1db835c2e18669705eff161cc7b78c0fa0a6ce2c7013",
+    "after-desktop-brands.jpg": "531c963290c59aa4f8484fbb2cf5617592aefb3df572e0ea5f90936710985eb9",
+    "after-desktop-funding.jpg": "1b9f09935e4711967200779f848c4961bb6a683a9ad6146f27bfe0325df64694",
+    "after-desktop-retail.jpg": "b08aef548452d668bced73a649b82904e019eb9e5ec1869494ac74e7c50184d2",
+    "after-desktop-data-activity.jpg": "2c685cdd78eac48c8ff7aba6e7cfafa831627042e4a33b7a301ad09d107146fb",
+    "after-desktop-platform-activity.jpg": "37df21df18863a9da0cf7b0378ff13bedbea7e5e41b1231cfba6d66fbd1beb7b",
+    "after-desktop-zoom-200.jpg": "eaaa3f01812665a931dd70e3fc78519483661bcf319beb87df66ead1aac79f29",
+    "after-ipad-landscape-group.jpg": "1d485aadc272229279abcfaa6ec1e4f1a170d7b1f859f3013b3d0510c483d009",
+    "after-ipad-landscape-inside.jpg": "ef12875b9ad899b11e19ba7f0e841ae3c5dc47bfeaa387b0aa44b429cebc7a0c",
+    "after-ipad-landscape-leadership.jpg": "93ea6008cb16b7eb9067d1a13ad0c6f12f4d72bd17a3d9d1f6d8541b42bcb39d",
+    "after-ipad-landscape-workforce.jpg": "114d07e694e1d84544e62da38cc8dc473e9a0b28ec15b07583e8980cd54ea860",
+    "after-ipad-landscape-programmes.jpg": "7936634c5db2cfac9ebb4eeaadcba40cf3d7864f18c453eee08571acca66c07c",
+    "after-ipad-landscape-forces.jpg": "4c17320330c4ecdc01327b688dea3c8f53ef72824f7edc901558d4c0a2861b7e",
+    "after-ipad-landscape-capital.jpg": "63f1b3dc92467689fccf9fda22ae2b849370723eed0bdffe39aa047036e6ba62",
+    "after-ipad-landscape-capability.jpg": "09d52c988359e9f2fc4394595d87aa74326bae863d8c46577bd9855a700737fd",
+    "after-ipad-landscape-payments.jpg": "104e1f83726ddd4c9ad60b26b7a730c9c67b988452aeab1dd843d1d2fec87d7f",
+    "after-ipad-landscape-commercial.jpg": "870179b2af3d212195af28f157670b34bc1a5c456d34a1272151be0b5d8fa6a9",
+    "after-ipad-landscape-ai-goal.jpg": "7edf391152fd7bab5b254dba47e0cc8a69c85f4de966f855d92beb054da3e6be",
+    "after-ipad-landscape-commercial-context.jpg": "762b7c2cebf2dbda98e94a4de13b27ca858bd42410f874d888f65eb6936f305a",
+    "after-ipad-landscape-commercial-direction.jpg": "945c19a2bfb95f2efa7f8b467bcb6a769213d337aee87b752fe004fcabf3d5ff",
+    "after-ipad-landscape-ai-economics.jpg": "b9beb61b8908bcc1359e66264dc64d122c0405ad0ce9cc0bf02b72716970cb73",
+    "after-ipad-landscape-finance-leader.jpg": "613141576b309c0b29056d8fddd8c5579132854e0a3f898a00dd2d96da5fcd6a",
+    "after-ipad-portrait-group.jpg": "6f4ca1fecae699eae52c0d73f16ffa566fe93d60419695a94c37267cd7987b11",
+    "after-ipad-portrait-inside.jpg": "426c7830418405a0e55b3837ef7ae26b0d808104dc30da92c7ca5fec99430241",
+    "after-ipad-portrait-leadership.jpg": "5d1566c06ced4d80f01a2f43962e015ae73e14153931a096c70b120ca99f9ab7",
+    "after-ipad-portrait-workforce.jpg": "69f08acdf4b22d7327e69e17bd138296e2cc536e18b1f41faa03c4adb0910061",
+    "after-ipad-portrait-programmes.jpg": "0781de1975615f3456f935cbc1817a2ae0f7bf83370b3504a58fee2e5dc2c77a",
+    "after-ipad-portrait-forces.jpg": "b948b4768a00e845f36a8ceda261c3fe9d60fff1934f38fba1635a2e3029070c",
+    "after-ipad-portrait-capital.jpg": "b89f3a9f432e1667baf1da30162d35b8c7eddb9628ac8758515a297511b87c32",
+    "after-ipad-portrait-capability.jpg": "29c5b9d08e6d200c7b261941badecaf486b722e1f91d7708d5728eb247da36e9",
+    "after-ipad-portrait-payments.jpg": "792b1222cf3725f61cedac051cf1d240b96cff7ebe46b5020c763bb1f439f76b",
+    "after-ipad-portrait-commercial.jpg": "ee9a64d469a391b69cd6a00d34145192a4711b6add96897af06042c175e2cb0a",
+    "after-ipad-portrait-ai-goal.jpg": "e2510add7361880a4ea734788184f8693d6079c94a5e0c947625143deb4d8cae",
+    "after-ipad-portrait-commercial-context.jpg": "55aaf740d355326c184d2303c1a4518e3d163fed62444843a978272174b3b070",
+    "after-ipad-portrait-commercial-direction.jpg": "5a7701db3aa9ca681287a278fb4f1a4e766fc896389fafd3999106bc3205de4d",
+    "after-ipad-portrait-ai-economics.jpg": "ed6b0393a4ae80efa65d332c736013491efb750069db152ea57ad1a7447b81d2",
+    "after-ipad-portrait-finance-leader.jpg": "e83065d8796bc8e33f649e3f0f7c25c1d20ab92e51af16169955eb8c65104018",
+    "after-mobile-group.jpg": "dd9195efc7cdec3f46054aaa2cbc356b123a6c22556cc7e03779c509edb5f710",
+    "after-mobile-inside.jpg": "63b2b8a0edeb371e845357fb80b8e38dcfd1dd748407b891e2146d1b13288f65",
+    "after-mobile-leadership.jpg": "e97948e6664e0fbe590a8e3a035efdbba4d5eab2260f104a54133c35b5b53e56",
+    "after-mobile-workforce.jpg": "6db628cd36677e4fb7396cd7e7d399a58ffc1635139d46adadaf618521123bba",
+    "after-mobile-programmes.jpg": "f006ef96d4c44aade0492e03db0c586754d655091bc2e157cc2b4fdc3d8f09a0",
+    "after-mobile-forces.jpg": "1fc5c8f096eacc75cf730acff4c78856ce2d7287a7a56b763d14b341fa0285de",
+    "after-mobile-capital.jpg": "a3864a8bee49d593006e5fb9c8535e3bfdb29197e82ce7bfdf01ed79def05798",
+    "after-mobile-capability.jpg": "6afcb34673ab9802b973d11de2f73b3ddd21e0225155e2b29a2294abe6c30881",
+    "after-mobile-payments.jpg": "055648fffa5c9e096ea8506b86292ca8d5e4061736ec2497c2e39364a943a43f",
+    "after-mobile-commercial.jpg": "5e2478de5d55d2748045773ea16746ea364ccb1ab4f4519874da0d578c2a972f",
+    "after-mobile-ai-goal.jpg": "be2ca827320bc7e4ec6c707e1dc40d43e51c2e6750a7f794722752408aaf8076",
+    "after-mobile-commercial-context.jpg": "01b48bca41898c7593d952b10f3e8bce2905cf7f2fcd9a752471277a8a791a64",
+    "after-mobile-commercial-direction.jpg": "5d2c1a2c60019891326730c79b36157524e05d880c0bc24379a582953b6338a5",
+    "after-mobile-ai-economics.jpg": "f0b0b1118420a36de90dab0b43dd9a09637eb0b0265316c3669dc74a3280071e",
+    "after-mobile-finance-leader.jpg": "1fbdeec38b8dfc65ebc46ed785ac2d9fb5070018c7ea6afc236eff634633e890"
+  },
+  "devices": [
+    "desktop",
+    "ipad-landscape",
+    "ipad-portrait",
+    "mobile"
+  ],
+  "checks": {
+    "integrated_business_operating_strategy_journeys": true,
+    "node_content_inside_touch_regions": true,
+    "native_physical_targets": true,
+    "keyboard": true,
+    "touch": true,
+    "history_reload_direct_links": true,
+    "withdrawal_history_print_accessibility": true,
+    "independent_funding_survives": true,
+    "no_javascript": true,
+    "banking_easyjet_legacy": true
+  },
+  "navigation_pairs": [
+    {
+      "device": "desktop",
+      "topic": "efficiency",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "efficiency",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "efficiency",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "reporting",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "reporting",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "reporting",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "wallet",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "wallet",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "wallet",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "commercial",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "commercial"
+    },
+    {
+      "device": "desktop",
+      "topic": "commercial",
+      "from": "inside",
+      "to": "forces",
+      "subject": "commercial"
+    },
+    {
+      "device": "desktop",
+      "topic": "commercial",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "commercial"
+    },
+    {
+      "device": "desktop",
+      "topic": "transactions",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "commercial"
+    },
+    {
+      "device": "desktop",
+      "topic": "transactions",
+      "from": "inside",
+      "to": "forces",
+      "subject": "commercial"
+    },
+    {
+      "device": "desktop",
+      "topic": "transactions",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "commercial"
+    },
+    {
+      "device": "desktop",
+      "topic": "ai",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "ai",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "ai",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "renewal",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "renewal",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "renewal",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "investment",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "investment",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "investment",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "service",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "service",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "desktop",
+      "topic": "service",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "efficiency",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "efficiency",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "efficiency",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "reporting",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "reporting",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "reporting",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "wallet",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "wallet",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "wallet",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "commercial",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "commercial"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "commercial",
+      "from": "inside",
+      "to": "forces",
+      "subject": "commercial"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "commercial",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "commercial"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "transactions",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "commercial"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "transactions",
+      "from": "inside",
+      "to": "forces",
+      "subject": "commercial"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "transactions",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "commercial"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "ai",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "ai",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "ai",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "renewal",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "renewal",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "renewal",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "investment",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "investment",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "investment",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "service",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "service",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-landscape",
+      "topic": "service",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "efficiency",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "efficiency",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "efficiency",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "reporting",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "reporting",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "reporting",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "wallet",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "wallet",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "wallet",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "commercial",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "commercial"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "commercial",
+      "from": "inside",
+      "to": "forces",
+      "subject": "commercial"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "commercial",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "commercial"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "transactions",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "commercial"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "transactions",
+      "from": "inside",
+      "to": "forces",
+      "subject": "commercial"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "transactions",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "commercial"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "ai",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "ai",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "ai",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "renewal",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "renewal",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "renewal",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "investment",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "investment",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "investment",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "service",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "service",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "ipad-portrait",
+      "topic": "service",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "efficiency",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "efficiency",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "efficiency",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "reporting",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "reporting",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "reporting",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "wallet",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "wallet",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "wallet",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "commercial",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "commercial"
+    },
+    {
+      "device": "mobile",
+      "topic": "commercial",
+      "from": "inside",
+      "to": "forces",
+      "subject": "commercial"
+    },
+    {
+      "device": "mobile",
+      "topic": "commercial",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "commercial"
+    },
+    {
+      "device": "mobile",
+      "topic": "transactions",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "commercial"
+    },
+    {
+      "device": "mobile",
+      "topic": "transactions",
+      "from": "inside",
+      "to": "forces",
+      "subject": "commercial"
+    },
+    {
+      "device": "mobile",
+      "topic": "transactions",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "commercial"
+    },
+    {
+      "device": "mobile",
+      "topic": "ai",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "ai",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "ai",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "renewal",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "renewal",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "renewal",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "investment",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "investment",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "investment",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "service",
+      "from": "landscape",
+      "to": "inside",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "service",
+      "from": "inside",
+      "to": "forces",
+      "subject": "group"
+    },
+    {
+      "device": "mobile",
+      "topic": "service",
+      "from": "forces",
+      "to": "landscape",
+      "subject": "group"
+    }
+  ],
+  "print_findings": {
+    "screen_main_background": "rgb(250, 247, 239)",
+    "screen_node_backgrounds": [
+      "rgba(0, 0, 0, 0)"
+    ],
+    "print_node_backgrounds": [
+      "rgba(0, 0, 0, 0)"
+    ]
+  }
+}
