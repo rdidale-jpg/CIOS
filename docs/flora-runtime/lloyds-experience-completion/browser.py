@@ -33,7 +33,7 @@ def run(out,phase):
                     if phase=='after':
                         audit=page.locator('main').evaluate("m=>({nested:m.querySelectorAll('a a').length,small:[...m.querySelectorAll('[data-canvas-region]')].some(a=>{let b=a.getBoundingClientRect();return b.width<44||b.height<44}),bare:[...m.querySelectorAll('.gold-content a[href]')].some(a=>a.getAttribute('href').startsWith('/')&&!a.matches('[data-canvas-region],[data-canvas-exception]')&&!a.closest('.gold-inspect')),underlined:[...m.querySelectorAll('[data-canvas-region]')].some(a=>getComputedStyle(a).textDecorationLine.includes('underline'))})")
                         assert not any(audit.values()),(device,name,audit)
-                        overflow=page.locator('main .ce-node').evaluate_all("nodes=>nodes.filter(n=>n.scrollHeight>n.clientHeight+3).map(n=>({label:n.getAttribute('aria-label'),height:n.clientHeight,content:n.scrollHeight}))")
+                        overflow=page.locator('main .ce-node').evaluate_all("nodes=>nodes.filter(n=>{let b=n.getBoundingClientRect(),p=n.parentElement.getBoundingClientRect();return n.scrollHeight>n.clientHeight+3||b.bottom>p.bottom+3||b.top<p.top-3}).map(n=>({label:n.getAttribute('aria-label'),height:n.clientHeight,content:n.scrollHeight}))")
                         assert not overflow,(device,name,overflow)
                     file=f'{phase}-{device}-{name}.jpg';page.screenshot(path=out/file,full_page=True,quality=72);proof['captures'][file]=sha256((out/file).read_bytes()).hexdigest()
                 for name,q in VIEWS.items():

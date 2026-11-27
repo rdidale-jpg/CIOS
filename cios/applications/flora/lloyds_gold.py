@@ -1403,7 +1403,7 @@ def experience_forces(state,facts):
         nodes.append(experience_node(state,'Resilience through change','<span>Retirement + March 2027 timetable</span><span>Migration and controlled operations</span><strong>Continuity and reporting require their own evidence</strong>',(0,63,100,12),shape='tension',focus='strategy',detail='objective-reporting'))
     if all(k in facts for k in ('LBG-A2030-WALLET','LBG-Q326-CURVE')):
         nodes.append(experience_node(state,'Connected customer propositions','<span>Payments ambition + completed Curve transaction</span><span>Acquisition already completed</span><strong>Integration and adoption determine customer value</strong>',(0,78,100,12),shape='tension',focus='strategy',detail='objective-payments'))
-    nodes.append(experience_node(state,'Eight-theme SWOT','<span>Capabilities, constraints, alternatives and counter-evidence</span>',(4,94,92,9),kind='theme',shape='foundation',focus='analysis'))
+    nodes.append(experience_node(state,'Eight-theme SWOT','<span>Capabilities, constraints, alternatives and counter-evidence</span>',(4,91,92,9),kind='theme',shape='foundation',focus='analysis'))
     body+=experience_map('strategy','Strategic change and executive choices',
         ('M120 190 C120 230 160 240 190 260','M400 194 Q400 235 210 259','M670 194 L670 258','M190 363 Q400 373 600 380','M600 483 Q400 493 190 500','M190 603 Q400 613 600 620','M400 723 L400 748'),nodes,
         'Dotted connections are FLORA analytical associations, not proven causes or ranked Material Pressures. Published actuals, plans and ambitions retain their own periods and boundaries.')
