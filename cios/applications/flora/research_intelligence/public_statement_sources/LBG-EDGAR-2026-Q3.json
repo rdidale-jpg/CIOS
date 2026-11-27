@@ -1,0 +1,1164 @@
+{
+  "id": "LBG-EDGAR-2026-Q3",
+  "authority": "analytical_working_research",
+  "canonical_mutation": false,
+  "title": "Lloyds Banking Group Form 6-K · Q3 2026",
+  "publisher": "Lloyds Banking Group plc",
+  "url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000026/lbg6-kimsxq32026.htm",
+  "retrieval_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000026/lbg6-kimsxq32026.htm",
+  "publication_date": "2026-10-29",
+  "publication_date_evidence": "Official SEC submissions index · accession 000116010626000026",
+  "retrieved_at": "2026-11-27T22:32:43+00:00",
+  "retrieval_method": "approved_web_research_tool",
+  "retrieval_reference": "Original public SEC Form 6-K; CIK 1160106; accession 000116010626000026",
+  "verification": "primary_retrieved",
+  "content_kind": "minimal_verified_numerical_facts",
+  "primary_content_sha256": null,
+  "reporting_period": "To 30 September 2026 and disclosed comparatives",
+  "reviewed_by": "CIOS financial sprint repository verification",
+  "review_notes": "Filing tables checked in original EDGAR HTML. Retain numerical facts and locators only.",
+  "source_category": "issuer_results",
+  "third_party_material": false,
+  "retained_form": "minimal_facts_and_provenance",
+  "purpose": "attributed_analytical_working_views",
+  "audience": "flora_research_views",
+  "retention": "minimal_facts_and_provenance",
+  "rights": {
+    "basis": "ordinary_public_factual_analysis",
+    "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+    "expression_reuse": false,
+    "contract_restriction_found": false,
+    "method_review": "Independently retrieved regulator-filed EDGAR record. Existing EDGAR access practice and ordinary independent factual analysis; no investor-host material or copied tables.",
+    "operations": [
+      "read_public",
+      "independent_facts",
+      "minimal_numerical_retention",
+      "public_read_only"
+    ],
+    "material_exceptions": [],
+    "attribution_url": "https://www.sec.gov/",
+    "homepage_conditions_met": true
+  },
+  "facts_sha256": "29d6c18ccfd242a68282d9356b97b3607b43805fcc5f6a4e676881ca31a6c37d",
+  "document_identity": {
+    "url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000026/lbg6-kimsxq32026.htm",
+    "publisher": "Lloyds Banking Group plc",
+    "title": "Lloyds Banking Group Form 6-K · Q3 2026",
+    "published": "2026-10-29",
+    "version": "sha256:881d4095b57f855c0f8702f014ce3f0b2ba27a979614636c5a4a1c6875e663ef"
+  },
+  "fact_bindings": [
+    {
+      "key": "lbg-q3-pbt-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 September 2026 · Profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "pbt",
+        "definition": "Profit before tax",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "6625",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "6,625",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-nii-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 September 2026 · Net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "nii",
+        "definition": "Net interest income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "10827",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "10,827",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Net interest income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-other-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 September 2026 · Other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "other",
+        "definition": "Other income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "5257",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "5,257",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Other income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-total-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 September 2026 · Total income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "total",
+        "definition": "Total income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "16084",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "16,084",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Total income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-expenses-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 September 2026 · Operating expenses",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "expenses",
+        "definition": "Operating expenses",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-8533",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(8,533)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Operating expenses",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-impairment-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 September 2026 · Impairment",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "impairment",
+        "definition": "Impairment",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-926",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(926)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Impairment",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-pbt-2025-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 September 2025 · Profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "pbt",
+        "definition": "Profit before tax",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "4678",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "4,678",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-nii-2025-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 September 2025 · Net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "nii",
+        "definition": "Net interest income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "9808",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "9,808",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Net interest income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-other-2025-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 September 2025 · Other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "other",
+        "definition": "Other income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "4444",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "4,444",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Other income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-total-2025-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 September 2025 · Total income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "total",
+        "definition": "Total income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "14252",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "14,252",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Total income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-expenses-2025-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 September 2025 · Operating expenses",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "expenses",
+        "definition": "Operating expenses",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-8955",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(8,955)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Operating expenses",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-impairment-2025-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 September 2025 · Impairment",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "impairment",
+        "definition": "Impairment",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-09-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-619",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(619)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Impairment",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-deposits-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Balance sheet · 2026-09-30 · Customer deposits",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "deposits",
+        "definition": "Customer deposits",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "502777",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "502,777",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Customer deposits",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-assets-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Balance sheet · 2026-09-30 · Total assets",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "assets",
+        "definition": "Total assets",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "995140",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "995,140",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Total assets",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-debt-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Balance sheet · 2026-09-30 · Debt securities in issue at amortised cost",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "debt",
+        "definition": "Debt securities in issue at amortised cost",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "92477",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "92,477",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Debt securities in issue at amortised cost",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-equity-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Balance sheet · 2026-09-30 · Total equity",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "equity",
+        "definition": "Total equity",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "45971",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "45,971",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Total equity",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-rwa-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Capital · 2026-09-30 · Risk-weighted assets",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "rwa",
+        "definition": "Risk-weighted assets",
+        "accounting_basis": "Prudential reported",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "247.4",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "billions"
+        },
+        "original_display": "£247.4bn",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Risk-weighted assets",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-cet1-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Capital · 2026-09-30 · Common equity tier 1 ratio",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "cet1",
+        "definition": "Common equity tier 1 ratio",
+        "accounting_basis": "Prudential reported",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "13.3",
+          "unit": "percentage",
+          "currency": null,
+          "scale": "units"
+        },
+        "original_display": "13.3%",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Common equity tier 1 ratio",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-deposits-2025-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Balance sheet · 2025-12-31 · Customer deposits",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "deposits",
+        "definition": "Customer deposits",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-12-31"
+        },
+        "value": {
+          "amount": "496457",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "496,457",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Customer deposits",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-assets-2025-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Balance sheet · 2025-12-31 · Total assets",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "assets",
+        "definition": "Total assets",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-12-31"
+        },
+        "value": {
+          "amount": "944072",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "944,072",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Total assets",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-debt-2025-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Balance sheet · 2025-12-31 · Debt securities in issue at amortised cost",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "debt",
+        "definition": "Debt securities in issue at amortised cost",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-12-31"
+        },
+        "value": {
+          "amount": "78271",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "78,271",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Debt securities in issue at amortised cost",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-equity-2025-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Balance sheet · 2025-12-31 · Total equity",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "equity",
+        "definition": "Total equity",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-12-31"
+        },
+        "value": {
+          "amount": "47867",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "47,867",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Total equity",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-rwa-2025-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Capital · 2025-12-31 · Risk-weighted assets",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "rwa",
+        "definition": "Risk-weighted assets",
+        "accounting_basis": "Prudential reported",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-12-31"
+        },
+        "value": {
+          "amount": "235.5",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "billions"
+        },
+        "original_display": "£235.5bn",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Risk-weighted assets",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-cet1-2025-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Capital · 2025-12-31 · Common equity tier 1 ratio",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "cet1",
+        "definition": "Common equity tier 1 ratio",
+        "accounting_basis": "Prudential reported",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2025-12-31"
+        },
+        "value": {
+          "amount": "14.0",
+          "unit": "percentage",
+          "currency": null,
+          "scale": "units"
+        },
+        "original_display": "14.0%",
+        "precision_dp": 1,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2025,
+        "reported_label": "Common equity tier 1 ratio",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-mortgages-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Credit risk · gross lending by stage · Total · UK mortgages",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "mortgages",
+        "definition": "UK mortgages",
+        "accounting_basis": "Gross customer lending before allowance",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "325832",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "325,832",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "UK mortgages",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-cards-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Credit risk · gross lending by stage · Total · Credit cards",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "cards",
+        "definition": "Credit cards",
+        "accounting_basis": "Gross customer lending before allowance",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "19104",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "19,104",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Credit cards",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-unsecured-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Credit risk · gross lending by stage · Total · UK unsecured loans and overdrafts",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "unsecured",
+        "definition": "UK unsecured loans and overdrafts",
+        "accounting_basis": "Gross customer lending before allowance",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "12926",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "12,926",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "UK unsecured loans and overdrafts",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-motor-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Credit risk · gross lending by stage · Total · UK Motor Finance",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "motor",
+        "definition": "UK Motor Finance",
+        "accounting_basis": "Gross customer lending before allowance",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "17930",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "17,930",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "UK Motor Finance",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-retail_gross-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Credit risk · gross lending by stage · Total · Retail",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "retail_gross",
+        "definition": "Retail",
+        "accounting_basis": "Gross customer lending before allowance",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "399346",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "399,346",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Retail",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-bcb_gross-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Credit risk · gross lending by stage · Total · Business and Commercial Banking",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "bcb_gross",
+        "definition": "Business and Commercial Banking",
+        "accounting_basis": "Gross customer lending before allowance",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "30126",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "30,126",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Business and Commercial Banking",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-cib_gross-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Credit risk · gross lending by stage · Total · Corporate and Institutional Banking",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "cib_gross",
+        "definition": "Corporate and Institutional Banking",
+        "accounting_basis": "Gross customer lending before allowance",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "70212",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "70,212",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Corporate and Institutional Banking",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-q3-gross-2026-09-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Credit risk · gross lending by stage · Total · Total gross lending",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "gross",
+        "definition": "Total gross lending",
+        "accounting_basis": "Gross customer lending before allowance",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-09-30"
+        },
+        "value": {
+          "amount": "498543",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "498,543",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Total gross lending",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    }
+  ]
+}

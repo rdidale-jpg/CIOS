@@ -1,0 +1,556 @@
+{
+  "id": "LBG-EDGAR-2026-FY25",
+  "authority": "analytical_working_research",
+  "canonical_mutation": false,
+  "title": "Lloyds Banking Group Form 20-F, annual accounts · FY2025",
+  "publisher": "Lloyds Banking Group plc",
+  "url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000010/lyg-20251231.htm",
+  "retrieval_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000010/lyg-20251231.htm",
+  "publication_date": "2026-02-13",
+  "publication_date_evidence": "Official SEC submissions index · accession 000116010626000010",
+  "retrieved_at": "2026-11-27T22:32:43+00:00",
+  "retrieval_method": "approved_web_research_tool",
+  "retrieval_reference": "Original public SEC Form 20-F, annual accounts; CIK 1160106; accession 000116010626000010",
+  "verification": "primary_retrieved",
+  "content_kind": "minimal_verified_numerical_facts",
+  "primary_content_sha256": null,
+  "reporting_period": "To 31 December 2026 and disclosed comparatives",
+  "reviewed_by": "CIOS financial sprint repository verification",
+  "review_notes": "Filing tables checked in original EDGAR HTML. Retain numerical facts and locators only.",
+  "source_category": "issuer_results",
+  "third_party_material": false,
+  "retained_form": "minimal_facts_and_provenance",
+  "purpose": "attributed_analytical_working_views",
+  "audience": "flora_research_views",
+  "retention": "minimal_facts_and_provenance",
+  "rights": {
+    "basis": "ordinary_public_factual_analysis",
+    "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+    "expression_reuse": false,
+    "contract_restriction_found": false,
+    "method_review": "Independently retrieved regulator-filed EDGAR record. Existing EDGAR access practice and ordinary independent factual analysis; no investor-host material or copied tables.",
+    "operations": [
+      "read_public",
+      "independent_facts",
+      "minimal_numerical_retention",
+      "public_read_only"
+    ],
+    "material_exceptions": [],
+    "attribution_url": "https://www.sec.gov/",
+    "homepage_conditions_met": true
+  },
+  "facts_sha256": "31c97a523291f244eac11752d422ddae27908f167b83615388b2c6b5ff97b6a1",
+  "document_identity": {
+    "url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000010/lyg-20251231.htm",
+    "publisher": "Lloyds Banking Group plc",
+    "title": "Lloyds Banking Group Form 20-F, annual accounts · FY2025",
+    "published": "2026-02-13",
+    "version": "sha256:ff7005d81ece5bbab716b21b60b6d3860acca70a2efc8c3d83522f38148529e9"
+  },
+  "fact_bindings": [
+    {
+      "key": "lbg-fy25-nii-2025-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2025 column as presented · Net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "nii",
+        "definition": "Net interest income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "13230",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "13,230",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Net interest income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-fy25-fees-2025-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2025 column as presented · Net fee and commission income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "fees",
+        "definition": "Net fee and commission income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "1784",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "1,784",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Net fee and commission income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-fy25-other-2025-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2025 column as presented · Other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "other",
+        "definition": "Other income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "6192",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "6,192",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Other income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-fy25-total-2025-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2025 column as presented · Total income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "total",
+        "definition": "Total income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "19422",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "19,422",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Total income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-fy25-expenses-2025-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2025 column as presented · Operating expenses",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "expenses",
+        "definition": "Operating expenses",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-11966",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(11,966)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Operating expenses",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-fy25-impairment-2025-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2025 column as presented · Impairment",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "impairment",
+        "definition": "Impairment",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-795",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(795)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Impairment",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-fy25-pbt-2025-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2025 column as presented · Profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "pbt",
+        "definition": "Profit before tax",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "6661",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "6,661",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-fy25-nii-2024-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2024 column as presented · Net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "nii",
+        "definition": "Net interest income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "12277",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "12,277",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2024,
+        "reported_label": "Net interest income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-fy25-fees-2024-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2024 column as presented · Net fee and commission income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "fees",
+        "definition": "Net fee and commission income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "1759",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "1,759",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2024,
+        "reported_label": "Net fee and commission income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-fy25-other-2024-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2024 column as presented · Other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "other",
+        "definition": "Other income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "5726",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "5,726",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2024,
+        "reported_label": "Other income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-fy25-total-2024-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2024 column as presented · Total income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "total",
+        "definition": "Total income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "18003",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "18,003",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2024,
+        "reported_label": "Total income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-fy25-expenses-2024-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2024 column as presented · Operating expenses",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "expenses",
+        "definition": "Operating expenses",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-11601",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(11,601)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2024,
+        "reported_label": "Operating expenses",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-fy25-impairment-2024-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2024 column as presented · Impairment",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "impairment",
+        "definition": "Impairment",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-431",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(431)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2024,
+        "reported_label": "Impairment",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-fy25-pbt-2024-12-31-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Audited consolidated income statement · 2024 column as presented · Profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "pbt",
+        "definition": "Profit before tax",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2024-01-01",
+          "end": "2024-12-31",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "5971",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "5,971",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2024,
+        "reported_label": "Profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    }
+  ]
+}

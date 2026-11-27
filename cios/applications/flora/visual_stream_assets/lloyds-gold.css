@@ -144,3 +144,47 @@
 .ceo-employee-system a:focus-visible{outline:3px solid #315f48;outline-offset:3px}
 @container(max-width:540px){.ceo-fte-history{grid-template-columns:1fr}.ceo-fte-year{min-height:100px}.ceo-oversight{grid-template-columns:1fr}.ceo-verification-flow,.ceo-settlement-route{grid-template-columns:1fr}.ceo-platform-stack>div{align-items:start;flex-direction:column}.ceo-platform-stack strong{text-align:start}.ceo-fte-distribution>.ceo-fte-division{grid-template-columns:1fr auto}.ceo-fte-distribution meter{grid-column:1/-1;grid-row:2}}
 @media print{.ceo-fte-history,.ceo-verification-flow,.ceo-settlement-route{break-inside:avoid}}
+
+.gold-page .finance-chart {
+  border-block-start: 1px solid #a99a72;
+  margin-block: 1.4rem;
+  padding-block: 0.8rem;
+}
+.gold-page .finance-chart a.finance-chart-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.gold-page .finance-chart-link:focus-visible,
+.gold-page .finance-chart-link:hover {
+  outline: 2px solid #226350;
+  outline-offset: 4px;
+}
+.gold-page .finance-bars {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(7rem, 2fr);
+  gap: 0.5rem;
+}
+.gold-page .finance-bars svg {
+  width: 100%;
+  height: 100%;
+}
+.gold-page .finance-bars ol {
+  display: grid;
+  grid-auto-rows: 1fr;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.gold-page .finance-bars li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  min-block-size: 2.1rem;
+}
+.gold-page .finance-bars strong {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}

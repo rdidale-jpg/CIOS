@@ -103,5 +103,6 @@ def test_existing_equinix_route_uses_public_only(monkeypatch):
     assert all(label in facts for label in ('Financial statements', 'Cash flow statement', '40,141', 'Segment reporting'))
     assert '+5.36' in insight and 'investing used cash' in insight
     assert 'Source &amp; basis' in facts
-    assert p.statement_series(('research-subject:lloyds-banking-group-plc', 'Lloyds Banking Group plc')) == ()
+    assert all(row.source.url == 'https://www.sec.gov/' for row in p.statement_series(
+        ('research-subject:lloyds-banking-group-plc', 'Lloyds Banking Group plc')))
     assert f.public_factual_projection() == {}

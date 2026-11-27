@@ -2,6 +2,7 @@
 from collections import Counter
 from datetime import date, datetime
 from typing import Literal
+from urllib.parse import urlsplit
 
 from pydantic import Field, model_validator
 
@@ -78,16 +79,17 @@ def _check_history(lines):
 def project(record, *, subject, url_validator=source.official_url, check_history=True):
     """Accept only trusted Source records selected by the caller, never URLs or runs.
 
-    Source remains the owner of eligibility. Lloyds retains its existing dedicated
-    exception owner. This function exposes no HTTP request or record lookup.
+    Source remains the owner of eligibility. The investor-site exception
+    stays scoped to material acquired from the affected site. This function exposes no HTTP request or record lookup.
     """
     try:
         rights = record['rights']
         if (record.get('authority') != 'analytical_working_research'
                 or record.get('canonical_mutation') is not False
                 or rights.get('basis') != 'ordinary_public_factual_analysis'
-                or 'lloyds' in (record['publisher'] + record['url'] + record['retrieval_url']).casefold()
-                or any('lloyds' in str(item).casefold() for item in subject)):
+                or any(urlsplit(record[key]).hostname in {'lloydsbankinggroup.com', 'www.lloydsbankinggroup.com',
+                                                            'lloydsbank.com', 'www.lloydsbank.com'}
+                       for key in ('url', 'retrieval_url'))):
             return ()
         if source.routine_factual_use(record, url_validator=url_validator) != 'minimal_factual_analysis':
             return ()

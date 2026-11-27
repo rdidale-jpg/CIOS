@@ -152,14 +152,15 @@ def test_objectives_use_real_horizons_and_do_not_claim_unsupported_progress(row)
     assert ('External intervention remains a hypothesis' if key=='ai' else 'External intervention is a hypothesis only') in html
 
 
-def test_held_financials_are_not_promoted_by_the_new_default():
+def test_held_financials_are_not_promoted_by_the_new_default(monkeypatch):
+    monkeypatch.setattr(g.lloyds_financials.public_statements, 'statement_series', lambda subject: ())
     from cios.applications.flora.financial_intelligence import candidate_analytics as financial
     assert financial.public_factual_projection()=={}
     html=''.join(main(v.render(g.CANONICAL,query('landscape','economics',detail))) for detail in ('income','costs','capital','divisions'))
     for held in ('2,256','1,425','4,215','£6,625','£11,084','3.21%','17.9%','.pdf'):assert held not in html
     # Unsupported cells are omitted; meaningful financial qualifications remain.
     assert 'not segment contribution' in html
-    assert 'no capital ratio or return is inferred' in html
+    assert 'separate from divisional returns' in html
     assert 'Unavailable</td>' not in html and 'not a proxy'not in html
     assert 'different' in html or 'Separate' in html
 

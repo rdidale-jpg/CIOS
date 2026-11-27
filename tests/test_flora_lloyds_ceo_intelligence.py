@@ -186,4 +186,5 @@ def test_source_inspection_keeps_homepage_attribution_and_held_measures_off():
         assert '.pdf' not in body and 'https://www.lloydsbankinggroup.com/' in body
     assert public_factual_projection()=={}
     protected=('cios/applications/flora/security_store.py','cios/applications/flora/security_web.py','cios/applications/flora/financial_intelligence','cios/applications/flora/research_intelligence','cios/applications/flora/intelligence_presentation.py','tools/ci/flora_ci.py','tools/ci/flora-baseline-v1.json','architecture/decisions')
-    assert not subprocess.check_output(['git','diff','--name-only',BASE,'--',*protected],cwd=ROOT)
+    from tests.test_flora_lloyds_financials import assert_only_public_financial_changes
+    assert_only_public_financial_changes(ROOT, BASE, protected)

@@ -9,6 +9,7 @@ from html import escape as e
 from pathlib import Path
 from urllib.parse import urlencode
 
+from . import lloyds_financials
 from . import design_system as ds, intelligence_presentation as p
 from . import visual_streams as v, visual_panels as panels, leadership_agenda as agenda
 from . import lloyds_flagship as flagship, lloyds_recovery as recovery
@@ -341,7 +342,7 @@ def economics(state,facts,issues=()):
                       for item in funding.facts if item.semantic_type=='calculated' and p.eligible(item))
         body+='<p class="le-limit">Arithmetic comparison of published stocks; not adjusted for consolidation, transfers or other balance-sheet effects. Not an organic inflow or earnings measure.</p>'
     if state.detail=='central':
-        body+='<h2>Central / Equity and the Group tie-out</h2><p>Segment underlying profit and Group statutory profit have different accounting bases. Central items and the statutory bridge must remain separate; no residual is allocated to a business.</p><p>New segment and reconciliation figures are not published in this view.</p>'
+        body+='<h2>Central / Equity and the Group tie-out</h2><p>Segment underlying profit and Group statutory profit have different accounting bases. Central items and the statutory bridge must remain separate; no residual is allocated to a business.</p><p>The reported H1 bridge uses the separate statutory filing.</p>'
     else:
         body+=business_regions(state,central=True)
     if state.detail=='comparison':
@@ -774,6 +775,36 @@ def forces(state,facts):
     return body
 
 
+def measured_economics(state):
+    target = href(state, detail='sources').split('#')[0] + '#financial-evidence'
+    if state.stream == 'landscape' and state.focus in lloyds_financials.DIVISIONS and not state.detail:
+        body = lloyds_financials.segments(
+            lloyds_financials.current(), target, scope=lloyds_financials.DIVISIONS[state.focus]
+        )
+        if body and state.focus == 'commercial':
+            body += '<div class="ce-context-controls">' + region(
+                state, 'From segment economics to transaction services', kind='operating',
+                caption='Explore the published remit and responsibility. Segment results are not allocated to this unit.',
+                detail='transactions',
+            ) + region(state, 'Commercial direction', kind='timeline', stream='forces', focus='competition',
+                       detail='commercial-direction', subject='commercial') + '</div>'
+        return body
+    if state.focus == 'economics':
+        selected = {
+            'income': lloyds_financials.earnings, 'costs': lloyds_financials.earnings,
+            'funding': lloyds_financials.funding, 'capital': lloyds_financials.capital,
+            'divisions': lloyds_financials.segments, 'central': lloyds_financials.segments,
+        }.get(state.detail)
+        if selected:
+            return selected(lloyds_financials.current(), target)
+        if not state.detail:
+            return region(state, 'Reported contributions by business', kind='money',
+                          caption='Compare income, costs and profit on the same half-year basis', detail='divisions')
+    if state.focus == 'strategy' and state.detail == 'objective-efficiency':
+        return lloyds_financials.capital(lloyds_financials.current(), target)
+    return ''
+
+
 def main(state,data,facts,issues=()):
     facts=ceo_facts(data,executive_facts(data,facts))
     title=SUBJECTS[state.focus]
@@ -791,9 +822,12 @@ def main(state,data,facts,issues=()):
         body+='<h2>Evidence, dates & boundaries</h2>'+flagship._source_rows(item for item in items if item.semantic_type!='calculated')
         for item in items:
             if item.semantic_type=='calculated':body+='<h3>Calculated · method</h3>'+p.render(item,compact=True)+'<p>'+e(item.method)+'</p>'
+        if state.focus in {'economics', 'retail', 'commercial', 'retirement', 'strategy'}:
+            body += lloyds_financials.evidence(lloyds_financials.current())
         if state.focus in {'operations','economics'}:body+=service_workload(state,inspection=True,data=data)
         body+='<p class="le-limit">Lloyds attribution links to the issuer homepage. Direct PDF links remain deferred. These statements remain analytical public research, not canonical acceptance.</p>'
         return body+'</section>'
+    body += measured_economics(state)
     selected=ceo_selected(state,facts)
     if selected is not None:
         body+=selected
@@ -1371,6 +1405,9 @@ def experience_landscape(state,facts,issues):
         ('M110 150 C110 190 120 200 130 235','M110 160 C250 190 390 180 400 235','M685 155 C685 195 660 200 665 235','M130 470 Q130 515 400 530','M400 470 L400 530','M670 470 Q670 515 400 530','M400 630 L400 680'),nodes,
         'Conceptual economic relationships. Geometry does not encode business size, funding allocation or profit contribution. Group, reporting businesses and legal entities remain separate.')+'</div>'
     body+=v3_economic_attention(state,facts)
+    body+=region(state,'What each business contributed',kind='money',
+                 caption='Reported H1 income, costs, profit and the statutory bridge',
+                 focus='economics',detail='divisions')
     body+='<div class="ce-context-controls">'+link(state,'Funding comparison',focus='economics',detail='comparison')+link(state,'Organisation & workforce',stream='inside',focus='people',detail='leadership')+link(state,'Customer operations',stream='inside',focus='operations',detail='service')+'</div>'
     return body
 
@@ -1541,7 +1578,7 @@ def experience_economic_mechanism(state,facts,issues):
         body+='<h2>Three distinct earnings effects</h2><p>Ordinary run-and-change expense, remediation and credit impairment need separate baselines. Impairment charges cover a period; loss allowances and arrears are different stocks. A lower cost/income ratio can reflect income growth as well as lower expense.</p>'+reported(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS'))
         body+='<h3>Management response and trade-off</h3><p>Migration, colleague tools and specialist skills are different possible responses. Parallel running can add near-term work while removing future complexity. Gross savings are not realised net profit; the applicable reported responses remain available in their dated programme views.</p><h3>Executive decision</h3><p>Which recurring cost actually disappears, after implementation, supervision and continuity costs, while the customer/control outcome is maintained?</p>'
     else:
-        body+='<h2>Funding is not capital</h2><p>Deposits support balance-sheet funding. Capital absorbs risk. Lending can grow risk-weighted exposures, while retained earnings, buffers, business mix and distributions influence remaining capacity. Deposit growth alone cannot prove additional capital or a larger change budget.</p><h3>Group and business trade-offs</h3><p>Commercial credit must earn its funding, loss and capital cost; Retail combines lending, deposits and asset services; Insurance has distinct obligations and capital economics. Central items and statutory adjustments are not a residual to allocate across these businesses.</p><h3>Executive decision</h3><p>Which comparable portfolio return remains attractive after risk, delivery and capital costs, and what would change the investment sequence? Current capital ratios, RWA and divisional return bridges are not presented here; no capital ratio or return is inferred.</p>'
+        body+='<h2>Funding is not capital</h2><p>Deposits support balance-sheet funding. Capital absorbs risk. Lending can grow risk-weighted exposures, while retained earnings, buffers, business mix and distributions influence remaining capacity. Deposit growth alone cannot prove additional capital or a larger change budget.</p><h3>Group and business trade-offs</h3><p>Commercial credit must earn its funding, loss and capital cost; Retail combines lending, deposits and asset services; Insurance has distinct obligations and capital economics. Central items and statutory adjustments are not a residual to allocate across these businesses.</p><h3>Executive decision</h3><p>Which comparable portfolio return remains attractive after risk, delivery and capital costs, and what would change the investment sequence? Current capital ratios and risk-weighted assets remain separate from divisional returns.</p>'
     body+=connected_links(state)
     if 'LBG-V2-CHALMERS' in facts:body+='<section class="ce-evidence-story"><h2>Published finance remit</h2>'+v2_reported(facts,'CHALMERS')+'<p>Relevant Group role, not verified delegated authority for a product, portfolio or procurement decision.</p></section>'
     body+='<div class="ce-context-controls">'+link(state,'Funding comparison',focus='economics',detail='comparison')+link(state,'Efficiency objectives',stream='forces',focus='strategy',detail='objective-efficiency')+link(state,'Investment choices',stream='forces',focus='strategy',detail='objective-investment')+link(state,'Customer operations',stream='inside',focus='operations',detail='service')+'</div>'

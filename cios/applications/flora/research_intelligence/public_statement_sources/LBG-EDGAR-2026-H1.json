@@ -1,0 +1,1774 @@
+{
+  "id": "LBG-EDGAR-2026-H1",
+  "authority": "analytical_working_research",
+  "canonical_mutation": false,
+  "title": "Lloyds Banking Group Form 6-K · H1 2026",
+  "publisher": "Lloyds Banking Group plc",
+  "url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+  "retrieval_url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+  "publication_date": "2026-07-30",
+  "publication_date_evidence": "Official SEC submissions index · accession 000116010626000022",
+  "retrieved_at": "2026-11-27T22:32:43+00:00",
+  "retrieval_method": "approved_web_research_tool",
+  "retrieval_reference": "Original public SEC Form 6-K; CIK 1160106; accession 000116010626000022",
+  "verification": "primary_retrieved",
+  "content_kind": "minimal_verified_numerical_facts",
+  "primary_content_sha256": null,
+  "reporting_period": "To 30 June 2026 and disclosed comparatives",
+  "reviewed_by": "CIOS financial sprint repository verification",
+  "review_notes": "Filing tables checked in original EDGAR HTML. Retain numerical facts and locators only.",
+  "source_category": "issuer_results",
+  "third_party_material": false,
+  "retained_form": "minimal_facts_and_provenance",
+  "purpose": "attributed_analytical_working_views",
+  "audience": "flora_research_views",
+  "retention": "minimal_facts_and_provenance",
+  "rights": {
+    "basis": "ordinary_public_factual_analysis",
+    "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+    "expression_reuse": false,
+    "contract_restriction_found": false,
+    "method_review": "Independently retrieved regulator-filed EDGAR record. Existing EDGAR access practice and ordinary independent factual analysis; no investor-host material or copied tables.",
+    "operations": [
+      "read_public",
+      "independent_facts",
+      "minimal_numerical_retention",
+      "public_read_only"
+    ],
+    "material_exceptions": [],
+    "attribution_url": "https://www.sec.gov/",
+    "homepage_conditions_met": true
+  },
+  "facts_sha256": "5e684b0ab8a3549335a684928359ca90f8c5a77630d3f7be153b69e9eb53137d",
+  "document_identity": {
+    "url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+    "publisher": "Lloyds Banking Group plc",
+    "title": "Lloyds Banking Group Form 6-K · H1 2026",
+    "published": "2026-07-30",
+    "version": "sha256:d2f08008a5ee8e1ba4440c118214d5ecbc96e4485479cb4b7835bcb8b5f0a584"
+  },
+  "fact_bindings": [
+    {
+      "key": "lbg-h1-pbt-2026-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 June 2026 · Profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "pbt",
+        "definition": "Profit before tax",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "4293",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "4,293",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-fees-2026-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 June 2026 · Net fee and commission income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "fees",
+        "definition": "Net fee and commission income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "1002",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "1,002",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Net fee and commission income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-pbt-2025-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 June 2025 · Profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "pbt",
+        "definition": "Profit before tax",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "3504",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "3,504",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-fees-2025-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Consolidated income statement · to 30 June 2025 · Net fee and commission income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "fees",
+        "definition": "Net fee and commission income",
+        "accounting_basis": "Statutory",
+        "accounting_standard": "IFRS",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "856",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "856",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Net fee and commission income",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-net-2026-06-30-retail",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Retail · Underlying income, net of underlying operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail",
+        "metric": "net",
+        "definition": "Underlying income, net of underlying operating lease depreciation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "5710",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "5,710",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying income, net of underlying operating lease depreciation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-cost-2026-06-30-retail",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Retail · Underlying operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail",
+        "metric": "cost",
+        "definition": "Underlying operating costs",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-2872",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(2,872)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying operating costs",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_pbt-2026-06-30-retail",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Retail · Underlying profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail",
+        "metric": "segment_pbt",
+        "definition": "Underlying profit before tax",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "2256",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "2,256",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_impairment-2026-06-30-retail",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Retail · Underlying impairment charge",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail",
+        "metric": "segment_impairment",
+        "definition": "Underlying impairment charge",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-565",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(565)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying impairment charge",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_deposits-2026-06-30-retail",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 30 June 2026 · Retail · Customer deposits",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail",
+        "metric": "segment_deposits",
+        "definition": "Customer deposits",
+        "accounting_basis": "Reported segment balances",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-06-30"
+        },
+        "value": {
+          "amount": "321836",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "321,836",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Customer deposits",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-net-2026-06-30-commercial-banking",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Commercial Banking · Underlying income, net of underlying operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking",
+        "metric": "net",
+        "definition": "Underlying income, net of underlying operating lease depreciation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "2897",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "2,897",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying income, net of underlying operating lease depreciation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-cost-2026-06-30-commercial-banking",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Commercial Banking · Underlying operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking",
+        "metric": "cost",
+        "definition": "Underlying operating costs",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-1409",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(1,409)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying operating costs",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_pbt-2026-06-30-commercial-banking",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Commercial Banking · Underlying profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking",
+        "metric": "segment_pbt",
+        "definition": "Underlying profit before tax",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "1425",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "1,425",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_impairment-2026-06-30-commercial-banking",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Commercial Banking · Underlying impairment charge",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking",
+        "metric": "segment_impairment",
+        "definition": "Underlying impairment charge",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-51",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(51)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying impairment charge",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_deposits-2026-06-30-commercial-banking",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 30 June 2026 · Commercial Banking · Customer deposits",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking",
+        "metric": "segment_deposits",
+        "definition": "Customer deposits",
+        "accounting_basis": "Reported segment balances",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-06-30"
+        },
+        "value": {
+          "amount": "178623",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "178,623",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Customer deposits",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-net-2026-06-30-insurance-pensions-and-investments",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Insurance Pensions and Investments · Underlying income, net of underlying operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance Pensions and Investments",
+        "metric": "net",
+        "definition": "Underlying income, net of underlying operating lease depreciation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "747",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "747",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying income, net of underlying operating lease depreciation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-cost-2026-06-30-insurance-pensions-and-investments",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Insurance Pensions and Investments · Underlying operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance Pensions and Investments",
+        "metric": "cost",
+        "definition": "Underlying operating costs",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-494",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(494)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying operating costs",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_pbt-2026-06-30-insurance-pensions-and-investments",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Insurance Pensions and Investments · Underlying profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance Pensions and Investments",
+        "metric": "segment_pbt",
+        "definition": "Underlying profit before tax",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "245",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "245",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_impairment-2026-06-30-insurance-pensions-and-investments",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Insurance Pensions and Investments · Underlying impairment charge",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance Pensions and Investments",
+        "metric": "segment_impairment",
+        "definition": "Underlying impairment charge",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-1",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(1)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying impairment charge",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-net-2026-06-30-other",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Other · Underlying income, net of underlying operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Other",
+        "metric": "net",
+        "definition": "Underlying income, net of underlying operating lease depreciation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "393",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "393",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying income, net of underlying operating lease depreciation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-cost-2026-06-30-other",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Other · Underlying operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Other",
+        "metric": "cost",
+        "definition": "Underlying operating costs",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-101",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(101)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying operating costs",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_pbt-2026-06-30-other",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Other · Underlying profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Other",
+        "metric": "segment_pbt",
+        "definition": "Underlying profit before tax",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "289",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "289",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_deposits-2026-06-30-other",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 30 June 2026 · Other · Customer deposits",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Other",
+        "metric": "segment_deposits",
+        "definition": "Customer deposits",
+        "accounting_basis": "Reported segment balances",
+        "accounting_standard": "",
+        "period": {
+          "kind": "instant",
+          "as_at": "2026-06-30"
+        },
+        "value": {
+          "amount": "400",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "400",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "balance",
+        "fiscal_year": 2026,
+        "reported_label": "Customer deposits",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-net-2026-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Consolidated Group · Underlying income, net of underlying operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "net",
+        "definition": "Underlying income, net of underlying operating lease depreciation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "9747",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "9,747",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying income, net of underlying operating lease depreciation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-cost-2026-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Consolidated Group · Underlying operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "cost",
+        "definition": "Underlying operating costs",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-4876",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(4,876)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying operating costs",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_pbt-2026-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Consolidated Group · Underlying profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "segment_pbt",
+        "definition": "Underlying profit before tax",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "4215",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "4,215",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-lease-2026-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Total · Underlying operating lease depreciation1",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "lease",
+        "definition": "Underlying operating lease depreciation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-841",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(841)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Underlying operating lease depreciation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-remediation-2026-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2026 · Total · Remediation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "remediation",
+        "definition": "Remediation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-39",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(39)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "reported_label": "Remediation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-remove_restructuring-2026-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 · reconciliation · 2026 · Profit before tax · Removal of restructuring",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "remove_restructuring",
+        "definition": "Removal of restructuring",
+        "accounting_basis": "Statutory-to-underlying adjustment",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "34",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "34",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Removal of restructuring",
+        "sign_convention": "Filing sign is statutory to underlying. Reverse for underlying to statutory.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-remove_volatility-2026-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 · reconciliation · 2026 · Profit before tax · Removal of volatility and other items",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "remove_volatility",
+        "definition": "Removal of volatility and other items",
+        "accounting_basis": "Statutory-to-underlying adjustment",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-112",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(112)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "reported_label": "Removal of volatility and other items",
+        "sign_convention": "Filing sign is statutory to underlying. Reverse for underlying to statutory.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-net-2025-06-30-retail",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Retail · Underlying income, net of underlying operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail",
+        "metric": "net",
+        "definition": "Underlying income, net of underlying operating lease depreciation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "5279",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "5,279",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying income, net of underlying operating lease depreciation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-cost-2025-06-30-retail",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Retail · Underlying operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail",
+        "metric": "cost",
+        "definition": "Underlying operating costs",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-2922",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(2,922)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying operating costs",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_pbt-2025-06-30-retail",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Retail · Underlying profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail",
+        "metric": "segment_pbt",
+        "definition": "Underlying profit before tax",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "1974",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "1,974",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-net-2025-06-30-commercial-banking",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Commercial Banking · Underlying income, net of underlying operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking",
+        "metric": "net",
+        "definition": "Underlying income, net of underlying operating lease depreciation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "2688",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "2,688",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying income, net of underlying operating lease depreciation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-cost-2025-06-30-commercial-banking",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Commercial Banking · Underlying operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking",
+        "metric": "cost",
+        "definition": "Underlying operating costs",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-1394",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(1,394)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying operating costs",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_pbt-2025-06-30-commercial-banking",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Commercial Banking · Underlying profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking",
+        "metric": "segment_pbt",
+        "definition": "Underlying profit before tax",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "1194",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "1,194",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-net-2025-06-30-insurance-pensions-and-investments",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Insurance Pensions and Investments · Underlying income, net of underlying operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance Pensions and Investments",
+        "metric": "net",
+        "definition": "Underlying income, net of underlying operating lease depreciation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "611",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "611",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying income, net of underlying operating lease depreciation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-cost-2025-06-30-insurance-pensions-and-investments",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Insurance Pensions and Investments · Underlying operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance Pensions and Investments",
+        "metric": "cost",
+        "definition": "Underlying operating costs",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-466",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(466)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying operating costs",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_pbt-2025-06-30-insurance-pensions-and-investments",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Insurance Pensions and Investments · Underlying profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance Pensions and Investments",
+        "metric": "segment_pbt",
+        "definition": "Underlying profit before tax",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "144",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "144",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-net-2025-06-30-other",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Other · Underlying income, net of underlying operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Other",
+        "metric": "net",
+        "definition": "Underlying income, net of underlying operating lease depreciation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "336",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "336",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying income, net of underlying operating lease depreciation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-cost-2025-06-30-other",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Other · Underlying operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Other",
+        "metric": "cost",
+        "definition": "Underlying operating costs",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-92",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(92)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying operating costs",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_pbt-2025-06-30-other",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Other · Underlying profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Other",
+        "metric": "segment_pbt",
+        "definition": "Underlying profit before tax",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "249",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "249",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-net-2025-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Consolidated Group · Underlying income, net of underlying operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "net",
+        "definition": "Underlying income, net of underlying operating lease depreciation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "8914",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "8,914",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying income, net of underlying operating lease depreciation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-cost-2025-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Consolidated Group · Underlying operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "cost",
+        "definition": "Underlying operating costs",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-4874",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(4,874)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying operating costs",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-segment_pbt-2025-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Consolidated Group · Underlying profit before tax",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "segment_pbt",
+        "definition": "Underlying profit before tax",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "3561",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "3,561",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying profit before tax",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-lease-2025-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Total · Underlying operating lease depreciation1",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "lease",
+        "definition": "Underlying operating lease depreciation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-710",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(710)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Underlying operating lease depreciation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-remediation-2025-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 Segmental analysis · 2025 · Total · Remediation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "remediation",
+        "definition": "Remediation",
+        "accounting_basis": "Underlying segment reporting",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "-37",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "(37)",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "reported_label": "Remediation",
+        "sign_convention": "Signed expense or adjustment as reported.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-remove_restructuring-2025-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 · reconciliation · 2025 · Profit before tax · Removal of restructuring",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "remove_restructuring",
+        "definition": "Removal of restructuring",
+        "accounting_basis": "Statutory-to-underlying adjustment",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "9",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "9",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Removal of restructuring",
+        "sign_convention": "Filing sign is statutory to underlying. Reverse for underlying to statutory.",
+        "caveats": []
+      }
+    },
+    {
+      "key": "lbg-h1-remove_volatility-2025-06-30-consolidated-group",
+      "kind": "financial_measurement",
+      "locator": "Note 4 · reconciliation · 2025 · Profit before tax · Removal of volatility and other items",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Consolidated Group",
+        "metric": "remove_volatility",
+        "definition": "Removal of volatility and other items",
+        "accounting_basis": "Statutory-to-underlying adjustment",
+        "accounting_standard": "",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "amount": "48",
+          "unit": "currency",
+          "currency": "GBP",
+          "scale": "millions"
+        },
+        "original_display": "48",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "state": "actual",
+        "semantic_type": "reported",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "reported_label": "Removal of volatility and other items",
+        "sign_convention": "Filing sign is statutory to underlying. Reverse for underlying to statutory.",
+        "caveats": []
+      }
+    }
+  ]
+}

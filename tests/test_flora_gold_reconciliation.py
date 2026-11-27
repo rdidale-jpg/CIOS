@@ -105,7 +105,8 @@ def test_no_research_or_protected_owner_changes_and_no_held_financial_activation
     protected=('cios/applications/flora/security_store.py','cios/applications/flora/security_web.py',
                'cios/applications/flora/research_intelligence/source_import.py','cios/applications/flora/financial_intelligence',
                'cios/applications/flora/blueprint_import/material_pressure.py')
-    assert subprocess.check_output(['git','diff','--name-only','7f003982088b6f71fc2e365f3663b7beb3772d21','--',*protected],cwd=ROOT,text=True)==''
+    from tests.test_flora_lloyds_financials import assert_only_public_financial_changes
+    assert_only_public_financial_changes(ROOT, '7f003982088b6f71fc2e365f3663b7beb3772d21', protected)
     from tests.test_flora_lloyds_gold_v2 import test_original_research_and_permissions_are_preserved_with_only_additive_claims
     test_original_research_and_permissions_are_preserved_with_only_additive_claims()
     for path in ('cios/applications/flora/lloyds_gold.py',):

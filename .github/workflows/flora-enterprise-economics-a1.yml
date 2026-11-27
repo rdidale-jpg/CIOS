@@ -41,7 +41,7 @@ jobs:
       - name: All strict security tests
         run: python -m pytest tests/test_flora_security*.py -q
       - name: Optional Living Enterprise preview and fail-closed public source boundaries
-        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py tests/test_flora_main_canvas.py tests/test_flora_lloyds_activation.py tests/test_flora_lloyds_service_workload.py tests/test_flora_gold_reconciliation.py tests/test_flora_lloyds_gold_v2.py tests/test_flora_lloyds_experience_completion.py tests/test_flora_lloyds_gold_v3.py tests/test_flora_lloyds_ceo_intelligence.py -q
+        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py tests/test_flora_main_canvas.py tests/test_flora_lloyds_activation.py tests/test_flora_lloyds_service_workload.py tests/test_flora_gold_reconciliation.py tests/test_flora_lloyds_gold_v2.py tests/test_flora_lloyds_experience_completion.py tests/test_flora_lloyds_gold_v3.py tests/test_flora_lloyds_ceo_intelligence.py tests/test_flora_lloyds_financials.py -q
       - name: Lloyds intelligence utilisation and immutable image verification
         run: |
           git worktree add --detach "$RUNNER_TEMP/gold-approved-cut" 1c13e6962516dbb071b2133f2c1a3de87647e2ac
@@ -125,13 +125,17 @@ jobs:
           python docs/flora-runtime/lloyds-gold-v3/browser.py "$RUNNER_TEMP/v3-browser" after
       - name: CEO source-grounded intelligence, responsive journeys and withdrawal
         run: |
-          python docs/flora-runtime/lloyds-ceo-intelligence/validate.py > "$RUNNER_TEMP/ceo-intelligence-scope.json"
+          git worktree add --detach "$RUNNER_TEMP/ceo-intelligence-cut" 3038fd18a249485471ba3cab4f4a12989d509c40
+          (cd "$RUNNER_TEMP/ceo-intelligence-cut" && python docs/flora-runtime/lloyds-ceo-intelligence/validate.py) > "$RUNNER_TEMP/ceo-intelligence-scope.json"
           python docs/flora-runtime/lloyds-ceo-intelligence/browser.py "$RUNNER_TEMP/ceo-intelligence-browser" after
+      - name: Lloyds reported financial charts and evidence interaction
+        run: python docs/flora-runtime/lloyds-financials/browser.py "$RUNNER_TEMP/lloyds-financial-browser"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: flora-enterprise-economics-${{ github.event.pull_request.head.sha }}
           path: |
+            ${{ runner.temp }}/lloyds-financial-browser/*.jpg
             ${{ runner.temp }}/ceo-intelligence-scope.json
             ${{ runner.temp }}/ceo-intelligence-browser/*.json
             ${{ runner.temp }}/ceo-intelligence-browser/*.jpg
