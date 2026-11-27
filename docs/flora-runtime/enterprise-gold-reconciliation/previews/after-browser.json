@@ -1,0 +1,33 @@
+{
+  "phase": "after",
+  "sha": "7f003982088b6f71fc2e365f3663b7beb3772d21",
+  "environment": "Actual isolated Chromium; emulated iPads/mobile, not Render or physical Safari",
+  "captures": {
+    "after-desktop-service.jpg": "042066516b6e5d8e3b6a2a820ad810d68cd0f5f357c01d031b1de4169526d4af",
+    "after-desktop-economics.jpg": "3895a820775cc0233faa1be3803b11a3fb4ff19fa8e0a0b5351a14ae67598e38",
+    "after-desktop-strategy.jpg": "b0082a2d8c3ec7b0410225652b387948da9296455d7cfb78cd804974eeeb2376",
+    "after-desktop-workforce.jpg": "2777b09d670075f5db7202cf359b46feff5e4bbbcf763049cb3fbe17f9f277a8",
+    "after-ipad-landscape-service.jpg": "0ee40edbfecf85ad0ebf17d59d697d31896b88e0df1925fdc1337a900a89cb6d",
+    "after-ipad-landscape-economics.jpg": "8d8cc29fb631c6f6902ca5b4183ce9775309b7fabf61392a96cd9b5179185cbe",
+    "after-ipad-landscape-strategy.jpg": "66cfd5da955f7cb7e13d3189d5cedada6f777d206aa2bfcb799a42b7f1e6b93f",
+    "after-ipad-landscape-workforce.jpg": "3b7da5de403b7021579717cc9e321746a40bc79a010e4ab3e20ff221b6cd2fe1",
+    "after-ipad-portrait-service.jpg": "49f522a418523a784fae9182b82ffd7ae735591e7b828db14a185f20b5cff0a3",
+    "after-ipad-portrait-economics.jpg": "46fa68ea3bfe8fc20ffffb735beed64d71031e648cc07f36b5353f2719b5820f",
+    "after-ipad-portrait-strategy.jpg": "8eca8245612ca0c01b8a3393640de2cb45c3d0766ac37dfe2f574c215b481a03",
+    "after-ipad-portrait-workforce.jpg": "f21bd458119916d29315c6dca88a07765a98edbfcca83632a9c943de8b8d3852",
+    "after-mobile-service.jpg": "770a9dd19784681f2f2258357acf397decda204f54912569c26b805b0020c51a",
+    "after-mobile-economics.jpg": "a1f25584d17e4c9007761d7efe2a3ad53e4ca9a8aa3e02837ca21ad6e2c7b567",
+    "after-mobile-strategy.jpg": "dae068d7354845a3f5e7bfaf584827b891043036f41ebf7c2f08dd60e950ef5c",
+    "after-mobile-workforce.jpg": "8ea68cf32be6dbbf47b260410c42616e6123ecd2b390e6574022db4cbbb56791"
+  },
+  "devices": [
+    "desktop",
+    "ipad-landscape",
+    "ipad-portrait",
+    "mobile"
+  ],
+  "runtime_sha256": "3ef204dca89390b0a98d42cf46219fedaaaf9c67380378addd3556e0e1380e18",
+  "runtime_matches_sha": false,
+  "worktree_dirty": true,
+  "withdrawal_history_print_accessibility": true
+}

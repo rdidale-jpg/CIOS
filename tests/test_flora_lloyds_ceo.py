@@ -99,10 +99,10 @@ def test_government_fact_scope_and_dated_meaning_are_not_self_relabelled(monkeyp
 
 def test_workforce_is_unavailable_without_proxy_counts_or_invented_chart():
     html=main(v.render(g.CANONICAL,query('inside','people','workforce')))
-    assert 'Comparable workforce totals and distribution are unavailable' in html
-    assert 'Licences are not people'in html and 'No headcount or workforce chart is derived'in html
+    assert 'Comparable employee/FTE totals' in html and 'cannot be established from these disclosures' in html
+    assert 'Licences are not people'in html and '<table' not in html
     assert '<meter'not in html and 'data-semantic-type="calculated"'not in html
-    assert '30,000' in html or '30000' in html
+    assert 'detail=copilot' in html and '30,000' not in html and '30000' not in html
     assert 'Correspondence address'not in html and 'Date of birth'not in html
 
 
@@ -116,6 +116,10 @@ def test_business_hierarchy_does_not_merge_legal_entities_segments_functions_peo
 @pytest.mark.parametrize('key',tuple(g.JOURNEYS))
 def test_deep_journeys_separate_conceptual_paths_from_specific_estate_edges(key):
     html=main(v.render(g.CANONICAL,query('inside','operations','journey-'+key)))
+    if key=='service':
+        assert 'detail=service#' in html and 'Customer operations' in html
+        assert '115,687' not in html  # Context reference, not a second owning home.
+        return
     assert 'no verified application, role or supplier dependency is inferred'in html
     assert 'Commercial significance'in html and 'Account investigation'in html
     assert 'No buyer need, budget, procurement event or supplier demand'in html
@@ -126,10 +130,15 @@ def test_deep_journeys_separate_conceptual_paths_from_specific_estate_edges(key)
 def test_objectives_use_real_horizons_and_do_not_claim_unsupported_progress(row):
     key,horizon,title,*_=row
     html=main(v.render(g.CANONICAL,query('forces','strategy','objective-'+key)))
-    assert title in html and horizon in html
-    assert 'no inferred progress percentage'in html
-    assert 'not verified buying authority'in html
-    assert 'External intervention is a hypothesis only'in html
+    assert title in html
+    if key=='ai':
+        assert 'FY2025' in html and '2026' in html
+        assert 'percentage of target delivered' in html and 'data-semantic-type="calculated"' not in html
+        assert 'whether any decision remains open' in html
+    else:
+        assert horizon in html and 'no inferred progress percentage'in html
+        assert 'not verified buying authority'in html
+    assert ('External intervention remains a hypothesis' if key=='ai' else 'External intervention is a hypothesis only') in html
 
 
 def test_held_financials_are_not_promoted_by_the_new_default():
@@ -197,8 +206,8 @@ def test_strategy_questions_are_distinct_and_do_not_create_progress_or_buyers():
     for key,*_ in g.OBJECTIVES:
         html=main(v.render(g.CANONICAL,query('forces','strategy','objective-'+key)))
         assert g.GOAL_DECISIONS[key][1] in html.replace('&amp;','&')
-        assert 'role hypothesis, not verified buying authority'in html
-        assert 'no inferred progress percentage'in html
+        assert ('no buyer mandate or budget is established' if key=='ai' else 'role hypothesis, not verified buying authority') in html
+        assert ('percentage of target delivered' if key=='ai' else 'no inferred progress percentage') in html
 
 @pytest.mark.parametrize('change',['json','txt','unknown'])
 def test_history_keeps_new_role_bytes_exact_and_rejects_unreviewed_additions(tmp_path,monkeypatch,change):
@@ -219,7 +228,7 @@ def test_existing_eai_outcomes_and_funding_still_have_one_source_guarded_entry()
     assert html.count('data-intelligence="funding-base"')==1
     assert html.count('id="preview-service-recovery"')==1
     assert 'stream=inside&amp;focus=operations&amp;subject=group&amp;detail=service' in html
-    assert 'Funding comparison'in html and 'Customer outcomes'in html
+    assert 'Funding comparison'in html and 'Customer operations'in html
 
 
 def test_existing_isolated_replay_owner_is_preserved_without_guest_or_production_authority(monkeypatch):

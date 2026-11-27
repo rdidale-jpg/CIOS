@@ -1,0 +1,32 @@
+{
+  "phase": "before",
+  "sha": "7f003982088b6f71fc2e365f3663b7beb3772d21",
+  "environment": "Actual isolated Chromium; emulated iPads/mobile, not Render or physical Safari",
+  "captures": {
+    "before-desktop-service.jpg": "161e4c065fdaf42166fe1d0196f9db839b171507e6fabcc2341de248da31e608",
+    "before-desktop-economics.jpg": "418c13261007f78252bf10df6c7d72948e1e94aeb73ab8ab00e2564554d42136",
+    "before-desktop-strategy.jpg": "53809daccd8c1c2f30ef557616fd909a37a5368dcce453518d9705571cdf8721",
+    "before-desktop-workforce.jpg": "efd510617b3a780550c272f445821ea570b50235e306081fd183b28ced0dc8d0",
+    "before-ipad-landscape-service.jpg": "295817b1e774f6c5166950a645cc81397f62cbdeae3d764163ec1b33525c6bab",
+    "before-ipad-landscape-economics.jpg": "6d56a78d16f36eb35222fed8449ee38e8408a40ea0174fa06deae9ee58aa8419",
+    "before-ipad-landscape-strategy.jpg": "ee4dff8472609a4729820f181d10f430061b2e65d1d4e4a7737ae27a295d3af4",
+    "before-ipad-landscape-workforce.jpg": "5690e2618da2a764c19504862b023ae8870d66ef25470aa17e0cd2a52710dd78",
+    "before-ipad-portrait-service.jpg": "2b68f71e907a991bb10d9f0fc3f8961424d0c57e18a05c6c5195f646954c7387",
+    "before-ipad-portrait-economics.jpg": "04ceb6e66a799298dc3ca274958aa881954da85bdd929af817d097c275d17407",
+    "before-ipad-portrait-strategy.jpg": "e72a4e0332c5caa2e1180684c7a5d51b00e2a7928a065a7de5df11666a6cc8c9",
+    "before-ipad-portrait-workforce.jpg": "ace5684bb11b1799caabb326454055c93966dade84cead254374858e3d246a07",
+    "before-mobile-service.jpg": "10f907d52f1e78260dca2eef2f7cc03f950eae64eed36b96d239b74be58679c6",
+    "before-mobile-economics.jpg": "05911cf8587c702c12677f07c1fee846e8168d4fd6777e1fed31c080237869d3",
+    "before-mobile-strategy.jpg": "5da6c7d5bd694e39f3fdf90f9ee23f8ccfa1643f768871a69d9c57bf20487e4b",
+    "before-mobile-workforce.jpg": "5c93dba058b10b18c4f9556833f93b25c0c7f7cd16d7b0cf5915c9be79339a4f"
+  },
+  "devices": [
+    "desktop",
+    "ipad-landscape",
+    "ipad-portrait",
+    "mobile"
+  ],
+  "runtime_sha256": "1459934f3ac5cb3ae8fcbd811c284a1c4aea1ccdcce86e61f8b8b32fd14a4bd0",
+  "runtime_matches_sha": true,
+  "worktree_dirty": false
+}

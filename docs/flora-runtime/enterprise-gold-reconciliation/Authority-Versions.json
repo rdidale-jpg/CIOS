@@ -1,0 +1,23 @@
+{
+  "baseline": "7f003982088b6f71fc2e365f3663b7beb3772d21",
+  "kind": "documentation_assessment_not_intelligence_or_completeness_owner",
+  "files": {
+    "architecture/decisions/ADR-013-Enterprise-Canvas-as-Primary-Living-Twin-Navigation.md": "32f8c40154d2d95123dd5e470036e7b18ed86da96171bc5e8e99edad3c629c5b",
+    "architecture/decisions/ADR-026-Material-Pressure-Qualification-and-Ownership.md": "3cc8fd7922eb52f315f4d222acb03315da7919174bc892e3719fa249803ffbd1",
+    "architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md": "11aa8af089b54da0958c7ff96c123fb536b2d88805546e8645335107f588c5ad",
+    "docs/product/flora-experience/FLORA-Experience-Contract-v1.0.md": "81c8da1829f944e953764f3a3a6ef710bd407b074a58ee98b42f0c8362395221",
+    "docs/product/flora-experience/Main-Canvas-Interaction-Contract.md": "5d075dbce832cc82764f67f1dd4c3881c5ff6b441c8609bfaf6d9e57aca42799",
+    "docs/product/flora-delivery-acceleration/README.md": "deaf339fd89f7fca117c1b59f2727d77701a0593b79cc9adab4ee2eb2467237f"
+  },
+  "presentation_v2": {
+    "commit": "da1a6c7b5e4b95e85ef2de3697bc8c506368192c",
+    "path": "docs/product/flora-experience/Presentation-Contract-v2.0.md",
+    "status": "design proposal followed by owner-accepted implementation in #730\u2013#733; not a new ADR"
+  },
+  "pr_reconciliation": {
+    "735": "f584194533e144359ee17baeeb2dad0133530f2c",
+    "736": "8e6a42c374f52f229415437da31fa795d34f1ba9",
+    "738": "6b10935a31079d27fe00c88bf241d3d6bf1e3c98",
+    "740": "7f003982088b6f71fc2e365f3663b7beb3772d21"
+  }
+}
