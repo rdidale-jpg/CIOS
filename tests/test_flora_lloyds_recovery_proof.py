@@ -192,6 +192,8 @@ def test_current_browser_evidence_checker_rejects_invalid_bindings(tmp_path, cor
     # unchanged browser runner, not by this unit fixture.
     proof = json.loads(Path('docs/product/flora-experience/main-canvas/Browser-after.json').read_text())
     proof['sha'] = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+    proof['runtime_hashes'] = {name: sha256(Path(name).read_bytes()).hexdigest()
+                               for name in proof['runtime_hashes']}
     (tmp_path / 'unit-only.jpg').write_bytes(b'checker-unit-input-not-a-browser-capture')
     proof['screenshots'] = {'unit-only.jpg': sha256((tmp_path / 'unit-only.jpg').read_bytes()).hexdigest()}
     if corruption == 'head': proof['sha'] = '0' * 40
