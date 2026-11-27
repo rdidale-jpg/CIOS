@@ -1490,7 +1490,12 @@ def experience_economic_mechanism(state,facts,issues):
            ('income','Lending & income','Asset yield, fees and customer mix',(55,0,45,27)),
            ('costs','Costs & impairment','Run, change, remediation and credit',(0,63,45,27)),
            ('capital','Capital & returns','Risk capacity, buffers and distributions',(55,63,45,27))]
-    for key,title,meaning,geometry in areas:nodes.append(experience_node(state,title,'<span>'+meaning+'</span>',geometry,kind='money',shape='economic-lobe',focus='economics',detail=key))
+    for key,title,meaning,geometry in areas:
+        content='<span>'+meaning+'</span>'
+        if key=='funding' and 'LBG-Q326-DEPOSITS' in facts:
+            item=facts['LBG-Q326-DEPOSITS'];p.note_editorial_sources(item.sources)
+            content+='<strong>£'+str(item.value)+'bn</strong><time>Group customer deposits · reported stock · 30 September 2026</time>'
+        nodes.append(experience_node(state,title,content,geometry,kind='money',shape='economic-lobe',focus='economics',detail=key))
     if 'LBG-Q326-PROFIT' in facts:
         item=facts['LBG-Q326-PROFIT'];p.note_editorial_sources(item.sources)
         nodes.append(experience_node(state,'Group statutory profit','<strong class="ce-number">£'+str(item.value)+'bn</strong><span>Nine months to 30 September 2026</span><span>Reported Group flow, not divisional allocation</span>',(19,31,62,27),kind='money',shape='profit',focus='economics',detail='income'))
