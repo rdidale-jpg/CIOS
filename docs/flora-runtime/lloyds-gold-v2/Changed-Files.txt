@@ -81,6 +81,8 @@ enterprise-knowledge/banking/research-model/source-snapshots/LGV2-TRANSACTIONS.t
 tests/flora_f2_owner_contract.py
 tests/test_flora_commercial_assessment.py
 tests/test_flora_commercial_visual_v3.py
+tests/test_flora_controlled_integration_625.py
+tests/test_flora_design_system_585.py
 tests/test_flora_enterprise_understanding.py
 tests/test_flora_gold_reconciliation.py
 tests/test_flora_living_industry_maps.py
@@ -95,6 +97,7 @@ tests/test_flora_research_cycle.py
 tests/test_flora_research_intelligence.py
 tests/test_flora_visual_intelligence.py
 tests/test_flora_visual_panels_632.py
+tests/test_flora_visual_v2_583.py
 tools/ci/flora_eai2_preview.cjs
 tools/research/history_integrity.py
 tools/research/ux_unify_compatibility.py

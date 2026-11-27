@@ -29,3 +29,8 @@ The complete increment is reversible against its first parent without data/schem
 ## Owner acceptance
 
 Review the three scopes, select a leader and actual programme, compare banking business models, inspect the seven goal chains and eight SWOT themes, and try both iPad orientations. Check the intelligence itself: named roles and programmes must be useful, the reported periods and targets distinct, and no assumed profit split, contract scope, buying intent or held financial figure implied. Significant remaining gaps are stated in the 18-question assessment rather than hidden by a completeness score.
+
+
+## Final historical-design correction
+
+The complete design-contract job additionally found three older tests that byte-pinned the Banking overlay. They now verify their original manifest digest against the preserved predecessor, then call the existing exact research-cut guard. Artwork, other owners and original assertion/relationship judgments remain pinned. All **101 tests** in those three modules pass locally. No runtime or research data changed in this correction; none of these three test modules is selected by the 1,432-case local regression gate. That gate's run at `9821c9217349bf37f49e36c717b95966ca43ede8` remains applicable to the identical runtime and selected test inputs. Hosted validation reruns all required jobs against the final head, including the corrected design/semantic jobs.

@@ -233,7 +233,14 @@ def test_protected_intelligence_security_permissions_matching_and_pipeline_bytes
             assert hashlib.sha256(historical).hexdigest() == digest, path
             assert not (root/path).exists(), path
             continue
-        if path=='cios/applications/flora/security_store.py':
+        if path in {'enterprise-knowledge/banking/research-model/Assessment-Overlay.json',
+                     'enterprise-knowledge/banking/research-model/Understanding-Review.json'}:
+            import subprocess
+            from tests.flora_f2_owner_contract import assert_owner_compatible
+            expected=subprocess.check_output(['git','show','1c8c8ae17bb2af3c95bf264d7df9befb60b0b576:'+path],cwd=root)
+            assert hashlib.sha256(expected).hexdigest()==digest, path
+            assert_owner_compatible(root,path,expected)
+        elif path=='cios/applications/flora/security_store.py':
             import subprocess
             from tools.research.auth1_quality import assert_store_evolution,BASE as AUTH_BASE
             expected=subprocess.check_output(['git','show',AUTH_BASE+':'+path],cwd=root)
