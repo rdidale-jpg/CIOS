@@ -40,5 +40,5 @@ def bars(title, basis, rows, *, target=None, waterfall=False, suffix=''):
                      escape(value_label(value) + suffix) + '</strong></li>' for name, value in rows)
     content = f'<h3>{label}</h3><p>{escape(basis)}</p><div class="finance-bars">{plot}<ol>{labels}</ol></div>'
     if target:
-        content = f'<a class="finance-chart-link" href="{escape(target, quote=True)}">{content}</a>'
+        content = f'<a class="finance-chart-link" data-canvas-region="reported-financial-chart" href="{escape(target, quote=True)}">{content}</a>'
     return '<section class="finance-chart">' + content + '</section>'

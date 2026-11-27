@@ -152,7 +152,9 @@
 }
 .gold-page .finance-chart a.finance-chart-link {
   display: block;
+  padding: 0;
   color: inherit;
+  background: transparent;
   text-decoration: none;
 }
 .gold-page .finance-chart-link:focus-visible,
