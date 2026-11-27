@@ -83,6 +83,7 @@ tests/test_flora_commercial_assessment.py
 tests/test_flora_commercial_visual_v3.py
 tests/test_flora_controlled_integration_625.py
 tests/test_flora_design_system_585.py
+tests/test_flora_enterprise_opportunity_integration.py
 tests/test_flora_enterprise_understanding.py
 tests/test_flora_gold_reconciliation.py
 tests/test_flora_living_industry_maps.py
