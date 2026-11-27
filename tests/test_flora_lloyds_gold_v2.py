@@ -185,3 +185,13 @@ def test_strategy_roles_link_to_strategy_rather_than_arbitrary_finance_journey(r
     assert 'Published strategic priorities' in body
     assert 'focus=strategy' in body and 'detail=goals' in body
     assert 'detail=journey-finance' not in body
+
+
+@pytest.mark.parametrize('stream,focus,expected',[
+ ('landscape','group','Lex Autolease'),
+ ('landscape','commercial','Amanda Murphy'),
+ ('forces','strategy','Ron van Kemenade'),
+ ('inside','programmes','course completions'),
+])
+def test_new_content_remains_inspectable_in_existing_optional_evidence(stream,focus,expected):
+    assert expected in view(stream,focus,'sources')

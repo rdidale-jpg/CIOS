@@ -1068,6 +1068,21 @@ FOCUS_FACTS['applications'] += tuple('LBG-V2-'+k for k in ('MSAGREEMENT','MSADOP
 FOCUS_FACTS['commercial'] += tuple('LBG-V2-'+k for k in ('CONDON','CONDONREPORT','TRANSACTIONREMIT'))
 FOCUS_FACTS['operations'] += tuple('LBG-V2-'+k for k in ('FRAUDWORKFLOW','HUMANCONTROL','FRAUDOWNER','TRANSACTIONREMIT'))
 FOCUS_FACTS['strategy'] += tuple('LBG-V2-'+k for k in ('MSAGREEMENT','FRAUDWORKFLOW','AIRECRUIT'))
+# Every new statement also has a home in the existing optional inspection view.
+# This is navigation metadata, not another Evidence owner or admission decision.
+for _focus,_keys in {
+ 'group':('BANK','BOS','WIDOWS','MBNA','WEALTH','BLACKHORSE','LEX','TUSKER'),
+ 'retail':('BANK','BOS','MBNA','BLACKHORSE','LEX','TUSKER'),
+ 'retirement':('WIDOWS','WEALTH'),
+ 'commercial':('MURPHY','LANGLEY'),
+ 'people':('CONDON','CONDONREPORT'),
+ 'partners':('MSADOPTION','ASSISTANT'),
+ 'applications':('FRAUDOWNER',),
+ 'programmes':('ENGINEERS','FRAUDOWNER','AITRAINING'),
+ 'strategy':('KEMENADE','SINGH','RISK','CHALMERS','LANGLEY','MSADOPTION','CUSTOMERS','HUMANCONTROL','TRANSACTIONREMIT'),
+}.items():
+    FOCUS_FACTS[_focus] += tuple('LBG-V2-'+k for k in _keys)
+
 
 
 def executive_facts(data, facts):
