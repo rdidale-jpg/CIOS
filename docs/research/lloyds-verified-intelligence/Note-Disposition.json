@@ -1,0 +1,880 @@
+{
+  "input_sha": "c7122f89f56871685772767eab207fd93b7550ce",
+  "review_day": "2026-11-26",
+  "scope": "Finite source-support review annotations, not a new intelligence store",
+  "notes": [
+    {
+      "recovery_id": "REC-TIER-F01",
+      "original_record_sha256": "803aa0ebcf9e2f1caecdbff010799ac5942d894d97be10bea2be036e0b500c92",
+      "disposition": "registry_supported_as_returned",
+      "reviewed_source_refs": [
+        "CH-BANK"
+      ],
+      "review_delta": "Registration and corporate PSC supported; no historical-page snapshot for 22 November.",
+      "original_period": "2026-11-22",
+      "entity_scope": "Lloyds Bank plc",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F02",
+      "original_record_sha256": "40c08022b6aaca1b07c154caacbd8ef0ba090aa7492a0e743200aaf28b6d1d42",
+      "disposition": "registry_supported_as_returned",
+      "reviewed_source_refs": [
+        "CH-HBOS"
+      ],
+      "review_delta": "Corporate PSC supported; no complete ownership chain inferred.",
+      "original_period": "2026-11-22",
+      "entity_scope": "HBOS plc",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F03A",
+      "original_record_sha256": "81c5e818e13f09eeb2ff1fc94f6f8af6bd54816e8bbf350c5d145cd42e31a638",
+      "disposition": "registry_supported_as_returned",
+      "reviewed_source_refs": [
+        "CH-WIDOWS"
+      ],
+      "review_delta": "Corrected corporate number supported.",
+      "original_period": "2026-11-22",
+      "entity_scope": "Scottish Widows Limited",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F03B",
+      "original_record_sha256": "e27d945bba12be5fa7e1f225049c0beedbdd6a8b38f417e7aa80eca3bc67468a",
+      "disposition": "historical_registry_supported",
+      "reviewed_source_refs": [
+        "CH-WIDOWS"
+      ],
+      "review_delta": "Previous registered name period supported; not business continuity.",
+      "original_period": "1996-05-02 to 2015-12-31",
+      "entity_scope": "Scottish Widows Limited",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F04",
+      "original_record_sha256": "675c196d653647f419c9682d2ca966109f9aea5eb3cbab6e2c83bcc0af173d55",
+      "disposition": "regulator_supported_date_qualified",
+      "reviewed_source_refs": [
+        "TPR-LIST",
+        "TPR-GUIDE"
+      ],
+      "review_delta": "Authorised listing and 6 May enquiries-list update are distinct events.",
+      "original_period": "2026-11-22",
+      "entity_scope": "Scottish Widows Master Trust",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F05A",
+      "original_record_sha256": "93c13667647dc69fd8e2df15d2f8a108ccab84d25053b13079992c2c4ab62fdb",
+      "disposition": "issuer_attributed_dated_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "review_delta": "Biography supports February 2026 start; present role observed on retrieval.",
+      "original_period": "2026-02",
+      "entity_scope": "Lloyds Banking Group plc, Business & Commercial Banking",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F05B",
+      "original_record_sha256": "b0e9e17611f92b0a3cefc6938badc336138ed2de39f3f4a1ac0af630b3a9a65e",
+      "disposition": "issuer_attributed_announcement",
+      "reviewed_source_refs": [
+        "MORTON"
+      ],
+      "review_delta": "Dated appointment announcement supported; delegation unknown.",
+      "original_period": "2026-08-12",
+      "entity_scope": "Lloyds Banking Group plc, SME banking",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F06A",
+      "original_record_sha256": "a0bc5ef6a7bb732fe2d4a45a87be17f99e3c04ecfc679d92f97ce1748cf17677",
+      "disposition": "issuer_attributed_dated_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "review_delta": "Biography supports March 2026 CIB start.",
+      "original_period": "2026-03",
+      "entity_scope": "Lloyds Banking Group plc, Corporate & Institutional Banking",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F06B",
+      "original_record_sha256": "e03b3643595e0511593125dd0630ba8ffcc6f97035b79f3c8bae969d1583f323",
+      "disposition": "issuer_attributed_announcement",
+      "reviewed_source_refs": [
+        "CONDON"
+      ],
+      "review_delta": "Remit and stated reporting line supported; open external scope not established.",
+      "original_period": "2026-11-18",
+      "entity_scope": "Lloyds Banking Group plc, CIB Transaction Banking",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F07",
+      "original_record_sha256": "77b92ddd5ab84f1def0a25d956b4024343700881635150003c30b92d3e593548",
+      "disposition": "issuer_attributed_dated_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "review_delta": "October grouping supported; no retrospective segment restatement.",
+      "original_period": "2026-10",
+      "entity_scope": "Lloyds Banking Group plc, Connected Finance",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F08A",
+      "original_record_sha256": "dc21969eb945e098448ddd849985bb8e47065038a01a2d8e9db1cfb85abdd311",
+      "disposition": "historical_label_not_current_confirmed",
+      "reviewed_source_refs": [
+        "GEC",
+        "FITZGERALD"
+      ],
+      "review_delta": "IP&I title appears in December 2025 announcement; current roster says Wealth & Insurance. Exact 22 November page unavailable.",
+      "original_period": "2026-11-22",
+      "entity_scope": "Lloyds Banking Group plc, IP&I",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F08B",
+      "original_record_sha256": "e7682df77b8998813d5927f9b84eb6f7a65f589e887fe3b3caa06abf4e75e02b",
+      "disposition": "historical_issuer_announcement",
+      "reviewed_source_refs": [
+        "FITZGERALD"
+      ],
+      "review_delta": "Historical appointment/remit supported, not current delegation.",
+      "original_period": "2025-12-10",
+      "entity_scope": "Lloyds Banking Group plc, investment management remit",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F08C",
+      "original_record_sha256": "8bcbe0662b9e34b376895f1e0b6699c464911456faa6c89acc26ace071e0f5e1",
+      "disposition": "issuer_attributed_current_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "review_delta": "Current Scottish Widows role supported; legal company/brand/trust remain separate.",
+      "original_period": "2026-11-22",
+      "entity_scope": "Scottish Widows, issuer role label",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F09",
+      "original_record_sha256": "9eb04e3d0e55182d0709839cb4ccf7a3a20e725e3d2b3ffe265040de6dc94dff",
+      "disposition": "issuer_attributed_dated_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "review_delta": "Biography supports September 2026 start; no programme decision powers inferred.",
+      "original_period": "2026-09",
+      "entity_scope": "Lloyds Banking Group plc",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F10A",
+      "original_record_sha256": "4aab12e41dcaef7dcffe53b2b566f71507d3094e8f64dd75c42633aff49e72d3",
+      "disposition": "issuer_attributed_plan",
+      "reviewed_source_refs": [
+        "AI-ROLES"
+      ],
+      "review_delta": "Planned roles are not completed hiring or incremental external delivery demand.",
+      "original_period": "2026",
+      "entity_scope": "Lloyds Banking Group plc",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F10B",
+      "original_record_sha256": "4725aa996147986c99546b4d520a123e1a0a73fd6f1e71061be74f768b88758a",
+      "disposition": "issuer_attributed_plan",
+      "reviewed_source_refs": [
+        "AI-ROLES"
+      ],
+      "review_delta": "Apprenticeship announcement supported; not qualification/outcome completion.",
+      "original_period": "2026-06-22",
+      "entity_scope": "Lloyds Banking Group plc",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F11A",
+      "original_record_sha256": "a296a17991a29157aed7dde0289d0829b0503372ec5a66af2f09e4f7533a12e4",
+      "disposition": "issuer_and_supplier_attributed",
+      "reviewed_source_refs": [
+        "MS-ISSUER",
+        "MS-SUPPLIER"
+      ],
+      "review_delta": "Company-wide announced scope supported; not measured deployment completeness.",
+      "original_period": "2026-06-04",
+      "entity_scope": "Lloyds Banking Group plc, colleague productivity estate",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F11B",
+      "original_record_sha256": "0eec7ebe6c1f8ebb9a840fe069791c374a927bf56584fddffe7b3b0773e14eba",
+      "disposition": "supplier_attributed_corroborated_by_issuer",
+      "reviewed_source_refs": [
+        "MS-SUPPLIER",
+        "MS-ISSUER"
+      ],
+      "review_delta": "Engineering agreement/deployment is also reported in issuer body, not only supplier evidence.",
+      "original_period": "2026-06-04",
+      "entity_scope": "Lloyds Banking Group plc, GitHub Copilot",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F12",
+      "original_record_sha256": "5c67784bff7b42fd18e46d9c5d82dec8de8d882b5b3857ef3a06b385b8892906",
+      "disposition": "issuer_attributed_process",
+      "reviewed_source_refs": [
+        "ARIBA"
+      ],
+      "review_delta": "Ariba process supported; supplier participation is not a tender invitation.",
+      "original_period": "2026-11-22",
+      "entity_scope": "Lloyds Banking Group plc, sourcing process",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F13",
+      "original_record_sha256": "24c89be44d62fc2b3c81db2338421df58a7199ec1ead4884e600b870b52dc503",
+      "disposition": "historical_issuer_trial",
+      "reviewed_source_refs": [
+        "SPROUT"
+      ],
+      "review_delta": "Claims/underwriting trial supported; live effectiveness and terms remain unverified.",
+      "original_period": "2025-06-05",
+      "entity_scope": "Scottish Widows protection claims and underwriting",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F14A",
+      "original_record_sha256": "4dd8ecdc6c47bb61d7c9b66301a1e279bddeaee2bf60888231e519f5cf898311",
+      "disposition": "regulator_retrospective_cohort",
+      "reviewed_source_refs": [
+        "FCA-LIVE"
+      ],
+      "review_delta": "First-cohort participant appears in retrospective note 8; April date is the release date, not that cohort start.",
+      "original_period": "2026-04-21",
+      "entity_scope": "Scottish Widows, FCA participant label",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F14B",
+      "original_record_sha256": "c9290305825355117966b100fe7837eac780e7f4c650d53939c5388ae9aed25e",
+      "disposition": "regulator_announcement_supported",
+      "reviewed_source_refs": [
+        "FCA-LIVE"
+      ],
+      "review_delta": "Second-cohort selection supported with distinct participant wording.",
+      "original_period": "2026-04-21",
+      "entity_scope": "Lloyds Banking Group (Scottish Widows), FCA participant label",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F15",
+      "original_record_sha256": "cad572bbcdb6b83a16b02b6e2e4a378ce6deccd16d3bd68fedd12a8f0583a78f",
+      "disposition": "regulator_announcement_supported",
+      "reviewed_source_refs": [
+        "FCA-SANDBOX"
+      ],
+      "review_delta": "Separate experimentation programme supported, not live-market rollout.",
+      "original_period": "2026-07-22",
+      "entity_scope": "Scottish Widows, FCA participant name",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F16",
+      "original_record_sha256": "66138b8e804f97f28ad79bddcb7ab549cec8dbccd3285d85e3664c6bb64a6f34",
+      "disposition": "official_search_support_current_unverified",
+      "reviewed_source_refs": [
+        "GCA"
+      ],
+      "review_delta": "Official indexed listing corroborates bank-as-supplier direction; direct retrieval failed 502.",
+      "original_period": "2026-11-22",
+      "entity_scope": "Lloyds Bank plc as supplier",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F17",
+      "original_record_sha256": "3e72dd1615a82621f755c12882702e49081b14dd0bd3b3e3e451718090b0562f",
+      "disposition": "historical_official_search_support",
+      "reviewed_source_refs": [
+        "COUNCIL"
+      ],
+      "review_delta": "Historical award supported by official index; direct open 403. No renewal/current term conclusion.",
+      "original_period": "2021-10",
+      "entity_scope": "Lloyds Bank as supplier to Gloucestershire County Council",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F18",
+      "original_record_sha256": "0232f12607ba6558546946c2c3063de14c13a75901bc6cfabc12adc4ab7705e2",
+      "disposition": "partial_chart_identity_unverified",
+      "reviewed_source_refs": [
+        "IPSOS",
+        "STARLING"
+      ],
+      "review_delta": "Survey wave/definition and Monzo/Starling values supported; extracted PDF does not map named Lloyds row. Do not release its 60% without row verification.",
+      "original_period": "2025-07 to 2026-06",
+      "entity_scope": "Great Britain SME business current account survey, Lloyds Monzo and Starling brands",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F19",
+      "original_record_sha256": "1629ccad45884a0e17fbd6fe96ee4437bdaf55b5e6ee7be48c8a689e28e0aca2",
+      "disposition": "regulator_update_supported",
+      "reviewed_source_refs": [
+        "FCA-MOTOR"
+      ],
+      "review_delta": "26 October hearing extension supported; not firm-specific liability or deadline.",
+      "original_period": "2026-10-26",
+      "entity_scope": "UK motor finance regime, external context",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F20",
+      "original_record_sha256": "0ecbe514e4f99d0ec9ce4f85e048c61142e66fedc30b8bdbc8108f09536edec8",
+      "disposition": "regulator_guidance_date_qualified",
+      "reviewed_source_refs": [
+        "FCA-AI"
+      ],
+      "review_delta": "First publication 19 October, update 20 October; not proof of Lloyds deficiency.",
+      "original_period": "2026-10-20",
+      "entity_scope": "UK financial services AI, external context",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F21A",
+      "original_record_sha256": "9c6ca6afe7a28ed7eed7313ce37c0ce097919eb50157540e56c6204b1c173f8f",
+      "disposition": "regulator_external_actor_supported",
+      "reviewed_source_refs": [
+        "FCA-LIVE"
+      ],
+      "review_delta": "Go-Cardless programme participant, not a Lloyds supplier/customer relationship.",
+      "original_period": "2026-04-21",
+      "entity_scope": "GoCardless, external UK fintech context",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F21B",
+      "original_record_sha256": "3f8609b3a68acc95d0a7dfa9519183868ff522d4da3be0c6aa7c7335295147f0",
+      "disposition": "regulator_external_actor_supported",
+      "reviewed_source_refs": [
+        "FCA-SANDBOX"
+      ],
+      "review_delta": "TrueLayer programme participant, not a Lloyds relationship.",
+      "original_period": "2026-07-22",
+      "entity_scope": "TrueLayer, external UK fintech context",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F22",
+      "original_record_sha256": "64d8cfdf659c1963175ddf5b826f17f4ac0a6cdd175c917470341c21a0029b35",
+      "disposition": "issuer_and_supplier_attributed",
+      "reviewed_source_refs": [
+        "MS-SUPPLIER",
+        "MS-ISSUER"
+      ],
+      "review_delta": "Issuer also includes engineering deployment; denominator is not M365 licence population or value.",
+      "original_period": "2026-06-04",
+      "entity_scope": "Lloyds Banking Group plc, colleague software",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F23A",
+      "original_record_sha256": "5f854a18fef86e200f3cd1176ce03dce4bc0f8989a6004e4c1ac66fe3d857eb6",
+      "disposition": "official_decision_publication_separated",
+      "reviewed_source_refs": [
+        "BOE-SEP"
+      ],
+      "review_delta": "Meeting ended 16 September, published 17 September; decision substance supported.",
+      "original_period": "2026-09-17",
+      "entity_scope": "UK monetary policy, external context",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F23B",
+      "original_record_sha256": "9ca79afdfba0da34175210d4d6a7a82b1278164794702717e28cfa167cfc9ab2",
+      "disposition": "official_decision_publication_separated",
+      "reviewed_source_refs": [
+        "BOE-NOV"
+      ],
+      "review_delta": "Meeting ended 4 November, published 5 November; do not call 4 November publication.",
+      "original_period": "2026-11-04",
+      "entity_scope": "UK monetary policy, external context",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F24",
+      "original_record_sha256": "65859539159fb4ceb38e15549411c17f247b516fed2d73591548b3bfb2c1c903",
+      "disposition": "regulator_expectations_supported",
+      "reviewed_source_refs": [
+        "PRA-CLIMATE"
+      ],
+      "review_delta": "Scope and themes supported; no bank-specific materiality or non-compliance finding.",
+      "original_period": "2025-12",
+      "entity_scope": "PRA-supervised firms; external context",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F25",
+      "original_record_sha256": "ba1777715697f4ff3ec013659b40e0f451c8a3f6011f18063620acb9091ccf74",
+      "disposition": "issuer_attributed_plan",
+      "reviewed_source_refs": [
+        "SKILLS"
+      ],
+      "review_delta": "Programme supported as a plan; amount omitted from presentation candidate.",
+      "original_period": "2026-08-20",
+      "entity_scope": "Lloyds Banking Group plc",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F26A",
+      "original_record_sha256": "2b829ebc888becc9130c7b66f5eb2a6912aa577e62e3f4d149e01d663bf9dba2",
+      "disposition": "issuer_attributed_current_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "review_delta": "Roster role supported; exact historic observation snapshot not re-created.",
+      "original_period": "2026-11-22",
+      "entity_scope": "Lloyds Banking Group plc, CEO role",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F26B",
+      "original_record_sha256": "1fb4065b7d4f8042230b9b65dfaa256561c016333a97448d7bae3621b7fd19ca",
+      "disposition": "issuer_attributed_current_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "review_delta": "Roster role supported; not a verified buyer mandate.",
+      "original_period": "2026-11-22",
+      "entity_scope": "Lloyds Banking Group plc, CFO role",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F26C",
+      "original_record_sha256": "9bc519ac61a0b47866a4cd659d8b2253a31387ad09e58ee78afa0ba894338556",
+      "disposition": "issuer_attributed_current_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "review_delta": "Roster role supported; no private authority inferred.",
+      "original_period": "2026-11-22",
+      "entity_scope": "Lloyds Banking Group plc, COO role",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F26D",
+      "original_record_sha256": "6d794833b20cc23af7390bb2c0115d77c354db2d1ef6f8739ae56b9f22837c95",
+      "disposition": "issuer_statement_locator_corrected",
+      "reviewed_source_refs": [
+        "INVESTORS"
+      ],
+      "review_delta": "Committee reporting is supported in investor summary, not found in cited roster intro; locator corrected.",
+      "original_period": "2026-11-22",
+      "entity_scope": "Lloyds Banking Group plc, committee-level reporting",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-TIER-F27",
+      "original_record_sha256": "56b7d4a9f55108dd8ec66f379bffe26c53f16f2f70c956d94a807f883d0e6f26",
+      "disposition": "issuer_attributed_policy",
+      "reviewed_source_refs": [
+        "SOURCING"
+      ],
+      "review_delta": "Supplier standards supported; no particular contract or actual compliance finding.",
+      "original_period": "2026-11-22",
+      "entity_scope": "Lloyds Banking Group plc third-party sourcing",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-R2-OBS-RETAIL-PRICE",
+      "original_record_sha256": "0296ee32a1d174f1a10c5c650a307920d92eccb24b766912d70be4d70593d611",
+      "disposition": "historical_issuer_financial_source_held",
+      "reviewed_source_refs": [
+        "H126"
+      ],
+      "review_delta": "Matched H1 Retail narrative supported; no organic Group flow inference.",
+      "original_period": "H12026",
+      "entity_scope": "Lloyds Retail",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-R2-OBS-RETAIL-LEASE",
+      "original_record_sha256": "92ba925f429dbca6a2c3db0342ea8ae81758049becab0e96fd0c00ab3b5be409",
+      "disposition": "historical_issuer_financial_source_held",
+      "reviewed_source_refs": [
+        "H126"
+      ],
+      "review_delta": "Fleet/mix/used-car mechanism and mitigation supported; not leasing profit or margin.",
+      "original_period": "H12026",
+      "entity_scope": "Lloyds Retail",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-R2-OBS-CREDIT-EXPLAIN",
+      "original_record_sha256": "4c9688c1119c90bc812fcfe084582cb876c4b3e7e1a2813363da6e0c7e964562",
+      "disposition": "historical_issuer_financial_source_held",
+      "reviewed_source_refs": [
+        "H126"
+      ],
+      "review_delta": "Model/normalisation/growth and prior comparator supported; stable credit is counter-evidence.",
+      "original_period": "H12026",
+      "entity_scope": "Lloyds Retail",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-R2-OBS-IP-DIVIDEND",
+      "original_record_sha256": "39a4b40369473201e7558ee5d92f79e1b2b88352bbad3de3c61f40d7681c8ea4",
+      "disposition": "historical_issuer_financial_source_held",
+      "reviewed_source_refs": [
+        "H126"
+      ],
+      "review_delta": "Distribution, deferred-profit stock and release are different measures; no new output.",
+      "original_period": "June 2026",
+      "entity_scope": "IP&I and Group",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-R2-OBS-PRIMARY-SUBS",
+      "original_record_sha256": "6bb344848855ea4788b0dc65430dfc0f3e2c8110afa63860fa8f0839ae61d406",
+      "disposition": "historical_issuer_legal_interests",
+      "reviewed_source_refs": [
+        "FY25"
+      ],
+      "review_delta": "Direct/indirect principal interests supported at year-end; not current full hierarchy.",
+      "original_period": "31 December 2025",
+      "entity_scope": "Group principal subsidiaries",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-R2-OBS-MS-ADOPTION",
+      "original_record_sha256": "fd17dc22e832a63048dc4eb170dc3f9a441685356a75a6b03997ccc3a5a0ba56",
+      "disposition": "issuer_attributed_denominators_separated",
+      "reviewed_source_refs": [
+        "MS-ISSUER",
+        "MS-SUPPLIER"
+      ],
+      "review_delta": "All retained populations also appear in issuer announcement; correct any supplier-only implication in prior recovery annotation.",
+      "original_period": "4 June 2026",
+      "entity_scope": "Group workplace/engineering",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-R2-OBS-ENVOY-DATE",
+      "original_record_sha256": "6b0834e762a64e2ff76394b622994b6c85ce58362c5e1adf93fcfd8a46afffde",
+      "disposition": "issuer_publication_versions_supported",
+      "reviewed_source_refs": [
+        "ENVOY-PDF",
+        "ENVOY-HTML"
+      ],
+      "review_delta": "28 April PDF and 1 May HTML supported; one announcement, not two platform deployments.",
+      "original_period": "28 April 2026",
+      "entity_scope": "Group internal agent platform",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-R2-OBS-AI-VALUE",
+      "original_record_sha256": "2d82839dc97165a24786a7005cab6c6eeb7074f7f9be8336a648cef0ceea6e9c",
+      "disposition": "issuer_actual_claim_and_expectation_separated",
+      "reviewed_source_refs": [
+        "AI-VALUE"
+      ],
+      "review_delta": "Company-reported prior contribution versus expectation supported; net method/costs not verified.",
+      "original_period": "2025 actual claim /2026 expectation",
+      "entity_scope": "Group GenAI",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    },
+    {
+      "recovery_id": "REC-R2-OBS-INVESTMENT",
+      "original_record_sha256": "7bc74cf06308d4052d461b4e5588de3c080f240afee021aa1f5b5ee8459549fb",
+      "disposition": "historical_issuer_financial_source_held",
+      "reviewed_source_refs": [
+        "Q326"
+      ],
+      "review_delta": "Narrative includes growth/inflation/Lloyds Wealth and offsets; not unallocated external budget.",
+      "original_period": "9m2026",
+      "entity_scope": "Group cost base",
+      "information_type": "reported_candidate",
+      "assurance_limit": "Support review is not independent issuer-performance verification or canonical acceptance",
+      "source_bytes_verified": false,
+      "new_source_permission": false,
+      "canonical_acceptance": false,
+      "production_admission": false
+    }
+  ],
+  "counts": {
+    "registry_supported_as_returned": 3,
+    "historical_registry_supported": 1,
+    "regulator_supported_date_qualified": 1,
+    "issuer_attributed_dated_role": 4,
+    "issuer_attributed_announcement": 2,
+    "historical_label_not_current_confirmed": 1,
+    "historical_issuer_announcement": 1,
+    "issuer_attributed_current_role": 4,
+    "issuer_attributed_plan": 3,
+    "issuer_and_supplier_attributed": 2,
+    "supplier_attributed_corroborated_by_issuer": 1,
+    "issuer_attributed_process": 1,
+    "historical_issuer_trial": 1,
+    "regulator_retrospective_cohort": 1,
+    "regulator_announcement_supported": 2,
+    "official_search_support_current_unverified": 1,
+    "historical_official_search_support": 1,
+    "partial_chart_identity_unverified": 1,
+    "regulator_update_supported": 1,
+    "regulator_guidance_date_qualified": 1,
+    "regulator_external_actor_supported": 2,
+    "official_decision_publication_separated": 2,
+    "regulator_expectations_supported": 1,
+    "issuer_statement_locator_corrected": 1,
+    "issuer_attributed_policy": 1,
+    "historical_issuer_financial_source_held": 5,
+    "historical_issuer_legal_interests": 1,
+    "issuer_attributed_denominators_separated": 1,
+    "issuer_publication_versions_supported": 1,
+    "issuer_actual_claim_and_expectation_separated": 1
+  }
+}

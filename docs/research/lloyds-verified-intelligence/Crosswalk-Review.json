@@ -1,0 +1,416 @@
+{
+  "input_sha": "c7122f89f56871685772767eab207fd93b7550ce",
+  "entries": [
+    {
+      "crosswalk_entry": 1,
+      "original_record_sha256": "e148623107aaa3d0d0ae736c18a41014b967a1cfe6f07be837cf91211db351ad",
+      "kind": "group_legal_identity",
+      "disposition": "registry_identity_supported",
+      "reviewed_source_refs": [
+        "CH-GROUP"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 2,
+      "original_record_sha256": "dfcc3dbd9f790c21a665871a94af31f5e27737e5f98fe898be49b6f9a846e3b7",
+      "kind": "legal_entity",
+      "disposition": "historical_principal_interest_supported",
+      "reviewed_source_refs": [
+        "FY25"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 3,
+      "original_record_sha256": "200de2cf575b1ddc962aacc31359a9bf4f92ba313776bc78c5a7c3b9835f49b8",
+      "kind": "legal_entity",
+      "disposition": "historical_principal_interest_supported",
+      "reviewed_source_refs": [
+        "FY25"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 4,
+      "original_record_sha256": "5e9e0a0cf15eab97e88081a342a228892e6e2586345d48b5994cdbb6b7c4584f",
+      "kind": "legal_entity",
+      "disposition": "historical_principal_interest_supported",
+      "reviewed_source_refs": [
+        "FY25"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 5,
+      "original_record_sha256": "1065981bf36fe8050c10d8913da2d5c588895686d7f9a4294ed0dd8e23fb8189",
+      "kind": "legal_entity",
+      "disposition": "historical_principal_interest_supported",
+      "reviewed_source_refs": [
+        "FY25"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 6,
+      "original_record_sha256": "a4aa7bc339ed3a2bae4af8696cc35fa32cb46ceb73bfb74201441ee448bcc781",
+      "kind": "legal_entity",
+      "disposition": "historical_principal_interest_supported",
+      "reviewed_source_refs": [
+        "FY25"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 7,
+      "original_record_sha256": "9fb655dd20c37e8b791c1548ecf88313b09b062e9bb4f31e82cb715e3c75fa2a",
+      "kind": "legal_entity",
+      "disposition": "historical_principal_interest_supported",
+      "reviewed_source_refs": [
+        "FY25"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 8,
+      "original_record_sha256": "bd99d6b0cbe3c7a0d8f02e614e07f25bb5a741c21307d5e5969505a562b9b47d",
+      "kind": "reporting_segment",
+      "disposition": "historical_segment_supported",
+      "reviewed_source_refs": [
+        "H126"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 9,
+      "original_record_sha256": "dd46782f8499cbf372c7fe3626fa77583faf92d154f20a64fe9801c636072e71",
+      "kind": "reporting_segment",
+      "disposition": "historical_segment_supported",
+      "reviewed_source_refs": [
+        "H126"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 10,
+      "original_record_sha256": "607686a3e97f170e2c4c80d195c660ae26a91fd1ba62867ea6dab911477ca11b",
+      "kind": "reporting_segment",
+      "disposition": "historical_segment_supported",
+      "reviewed_source_refs": [
+        "H126"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 11,
+      "original_record_sha256": "da65bf71f6c958159dc3a1fdf7fedc652db3d2e0b9557b70dd46ed995b1f086f",
+      "kind": "professional_role",
+      "disposition": "current_role_supported_historic_snapshot_unverified",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 12,
+      "original_record_sha256": "7892a5d6e8058cf9f0ab264008ab706c408712b07f4a5e102b926f854a1e5c4e",
+      "kind": "professional_role",
+      "disposition": "current_role_supported_historic_snapshot_unverified",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 13,
+      "original_record_sha256": "6f51e9801ea15f8c6e21a01bb37e9911d68c9c2f6c315c3dd8b3967b4d93f43b",
+      "kind": "professional_role",
+      "disposition": "current_role_supported_historic_snapshot_unverified",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 14,
+      "original_record_sha256": "19b9474ff2c80bedf368fe1d2e16bebaf4643f8cddf56837696d90e24a79447a",
+      "kind": "professional_role",
+      "disposition": "current_role_supported_historic_snapshot_unverified",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 15,
+      "original_record_sha256": "708624c7e6834c013df77cb7d2bb59c5f03c56fb914ae64098d997c54883b5eb",
+      "kind": "professional_role",
+      "disposition": "current_role_supported_historic_snapshot_unverified",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 16,
+      "original_record_sha256": "5fae95a71b54373c180c9ee8ea0817aa4ebfb3d26375ef4c6e1dc43846e3655c",
+      "kind": "professional_role",
+      "disposition": "current_role_supported_historic_snapshot_unverified",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 17,
+      "original_record_sha256": "6157a8c87463bcfa1eda54f156e1c8e28c9bcb58830be48ccc942b9d72671d7b",
+      "kind": "professional_role",
+      "disposition": "current_role_supported_historic_snapshot_unverified",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 18,
+      "original_record_sha256": "8ee169575964d2d518c8e40dc3f04908c359a958a92de340ff95b261f3a66bb5",
+      "kind": "professional_role",
+      "disposition": "current_role_supported_historic_snapshot_unverified",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 19,
+      "original_record_sha256": "d009e1651a57edaaa411f4dcb61f96486f5c4a38216b7d73b1780cfedbe70537",
+      "kind": "professional_role",
+      "disposition": "current_role_supported_historic_snapshot_unverified",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 20,
+      "original_record_sha256": "67710d1d355d4122b6ef482700055a2ed70787eff7fcd08750b8847ff8d5c344",
+      "kind": "dated_management_or_brand_context",
+      "disposition": "issuer_attributed_dated_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 21,
+      "original_record_sha256": "a85cc475a55745d9facb2a909463c1d94bfd0fd77bd53a7235fac9a4397bbcf4",
+      "kind": "dated_management_or_brand_context",
+      "disposition": "issuer_attributed_announcement",
+      "reviewed_source_refs": [
+        "MORTON"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 22,
+      "original_record_sha256": "02f70cf74774abf60862014633c9a39b754284fe0e335a81e6cfd22c6302fa9c",
+      "kind": "dated_management_or_brand_context",
+      "disposition": "issuer_attributed_dated_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 23,
+      "original_record_sha256": "324f44e8c6c714c5ac6760aee9649b75313d95abc13d81c94c6076c27784321b",
+      "kind": "dated_management_or_brand_context",
+      "disposition": "issuer_attributed_announcement",
+      "reviewed_source_refs": [
+        "CONDON"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 24,
+      "original_record_sha256": "c1645b438650695e95971ae6564a1db2d8b9b468d7627e044663c0de6099a5d0",
+      "kind": "dated_management_or_brand_context",
+      "disposition": "issuer_attributed_dated_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 25,
+      "original_record_sha256": "4f2ca9391917f39d05395b10d5939d711c7686726210c6aba0e5b0ab786e54f6",
+      "kind": "dated_management_or_brand_context",
+      "disposition": "historical_label_not_current_confirmed",
+      "reviewed_source_refs": [
+        "GEC",
+        "FITZGERALD"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 26,
+      "original_record_sha256": "ab471125631e97987d1f9e4a02d75127e2ca5e2f47b5f5ad2f3a3864d2eba2c9",
+      "kind": "dated_management_or_brand_context",
+      "disposition": "historical_issuer_announcement",
+      "reviewed_source_refs": [
+        "FITZGERALD"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 27,
+      "original_record_sha256": "cc46ca44e2421673ea306df5da9ab3725e522b29333ab106bb1cbeaf389251f3",
+      "kind": "dated_management_or_brand_context",
+      "disposition": "issuer_attributed_current_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 28,
+      "original_record_sha256": "9e8868ffd55a56fea65b9deb889c3f4b90f467fa53ee275c47d1532b46e59eb1",
+      "kind": "dated_management_or_brand_context",
+      "disposition": "issuer_attributed_dated_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 29,
+      "original_record_sha256": "c2a760247d866a88f1577d1d04261b5aea4c9ff3dd1de9bf590fa58f658fa10c",
+      "kind": "dated_management_or_brand_context",
+      "disposition": "issuer_attributed_current_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 30,
+      "original_record_sha256": "9796e72fe23e620e8b929f5e9e3cd12f7447b7382f3b46d7ac86a9ac1f48fb47",
+      "kind": "dated_management_or_brand_context",
+      "disposition": "issuer_attributed_current_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 31,
+      "original_record_sha256": "28ff272efb5e505a93f7a9756b6706141dd4d27f82041795686ecb5791bb04bc",
+      "kind": "dated_management_or_brand_context",
+      "disposition": "issuer_attributed_current_role",
+      "reviewed_source_refs": [
+        "GEC"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 32,
+      "original_record_sha256": "b0d9a84f28cc71f62a60d8304d13998cff6efc4492cc69736c41e6e5dfe00af4",
+      "kind": "dated_management_or_brand_context",
+      "disposition": "issuer_statement_locator_corrected",
+      "reviewed_source_refs": [
+        "INVESTORS"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 33,
+      "original_record_sha256": "dcefc2c8cf0f8f3a00ee542a55add9fcbd58cde3a69dfa0f990f38487c4dbfe2",
+      "kind": "brand_context",
+      "disposition": "issuer_rebrand_in_progress_no_legal_rename_inferred",
+      "reviewed_source_refs": [
+        "BRANDS"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    },
+    {
+      "crosswalk_entry": 34,
+      "original_record_sha256": "771490f5608d8c605989d08bc5b8d6660b9016fddc13dbdb358c39144d9e0647",
+      "kind": "brand_context",
+      "disposition": "brand_role_not_corporate_identity",
+      "reviewed_source_refs": [
+        "BRANDS",
+        "GEC",
+        "CH-WIDOWS"
+      ],
+      "canonical_id_resolved": false,
+      "workspace_id_resolved": false,
+      "caveat": "Dated reporting/management/brand/legal axes remain separate; no delegated buying authority or retrospective page reconstruction."
+    }
+  ]
+}
