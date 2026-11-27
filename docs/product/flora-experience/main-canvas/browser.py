@@ -61,11 +61,11 @@ def run(phase,out,smoke=False):
       page.wait_for_url(lambda url:expected in str(url))
       assert expected in page.url,(device,selector,page.url)
      physical('', 'main .canvas-businesses a','focus=')
-     physical('?focus=economics','main .gold-economic-map>a','detail=funding')
-     physical('?focus=economics','main .canvas-stock','detail=comparison')
-     physical('?stream=inside&focus=operations','main .canvas-operating-band a','detail=journey-')
+     physical('?focus=economics','main .ce-capital>a[aria-label=Funding]','detail=funding')
+     physical('?focus=economics&detail=funding','main .canvas-stock','detail=comparison')
+     physical('?stream=inside&focus=operations','main .ce-operating>a[href*="detail=journey-"]','detail=journey-')
      physical('?stream=inside&focus=people&detail=structure','main .canvas-businesses a','stream=landscape')
-     physical('?stream=inside&focus=capabilities','main .canvas-capabilities a','detail=journey-')
+     physical('?stream=inside&focus=capabilities','main .ce-operating>a[href*="detail=journey-"]','detail=journey-')
      physical('?stream=inside&focus=programmes','main .canvas-timeline a','detail=')
      physical('?stream=forces&focus=strategy&detail=goals','main .canvas-goal-rail a','detail=objective-')
      # Quadrant's upper-right surface and the full theme surface are distinct.
@@ -75,7 +75,7 @@ def run(phase,out,smoke=False):
      chosen=page.url;page.reload();assert page.url==chosen;page.go_back();page.go_forward();assert page.url==chosen
      page.goto(PATH+'?stream=inside&focus=applications&detail=envoy');inspection=page.get_by_role('link',name='Evidence & dates',exact=True);expect(inspection).to_be_visible();box=inspection.bounding_box();assert box['width']>=44 and box['height']>=44
      inspection.click();expect(page.locator('main h2')).to_have_text('Evidence, dates & boundaries');assert not page.locator('main a[href*=".pdf"]').count()
-     page.goto(PATH);link=page.locator('main .canvas-businesses>a').first;link.hover();assert link.evaluate('e=>getComputedStyle(e).textDecorationLine')=='none';assert link.evaluate('e=>getComputedStyle(e).boxShadow')!='none';link.focus();assert link.evaluate('e=>getComputedStyle(e).outlineStyle')=='solid';page.keyboard.press('Enter');expect(page.locator('main h1')).to_have_text('Retail Banking')
+     page.goto(PATH);link=page.locator('main .ce-economy>a[data-canvas-region=business]').first;link.hover();assert link.evaluate('e=>getComputedStyle(e).textDecorationLine')=='none';assert link.evaluate('e=>getComputedStyle(e).boxShadow')!='none';link.focus();assert link.evaluate('e=>getComputedStyle(e).outlineStyle')=='solid';page.keyboard.press('Enter');expect(page.locator('main h1')).to_have_text('Retail Banking')
      if device=='desktop':
       page.goto(PATH);page.evaluate("document.documentElement.style.zoom='2'");capture('zoom-200');page.evaluate("document.documentElement.style.zoom='1'")
      for route in (PATH+'/legacy',PATH+'/preview','/industries/banking','/industries/aviation','/enterprises/easyjet'):

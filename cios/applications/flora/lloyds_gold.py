@@ -739,7 +739,7 @@ def strategy_goals(facts):
 
 
 def forces(state,facts):
-    if state.focus=='markets' and not state.detail:return executive_force_overview(state,facts)
+    if state.focus=='markets' and not state.detail:return experience_forces(state,facts)
     if state.focus=='analysis':return analysis(state,facts)
     if state.focus=='strategy':
         if state.detail == 'goals':
@@ -792,15 +792,18 @@ def main(state,data,facts,issues=()):
         return body+'</section>'
     if state.stream=='landscape':
         if state.focus=='group' and not state.detail:
-            body+=executive_overview(state,facts,issues)
+            body+=experience_landscape(state,facts,issues)
         elif state.focus=='group' and state.detail=='brands':body+=executive_brands(state,facts)
+        elif state.focus=='economics' and state.detail in {'','funding','income','costs','capital'}:body+=experience_economic_mechanism(state,facts,issues)
         elif state.focus in {'group','economics'}:body+=_ceo_financial(state,facts,issues)
-        else:body+=division(state,facts)
+        else:body+=experience_business(state,facts) if not state.detail else division(state,facts)
     elif state.stream=='inside':
         if state.focus=='people' or state.focus=='operations' and state.detail=='people':body+=executive_people(state,facts)
+        elif state.focus=='operations' and not state.detail:body+=experience_inside(state,data,facts)
+        elif state.focus=='operations' and state.detail.startswith('journey-'):body+=experience_activity(state,data,facts)
         elif state.focus=='operations' and state.detail!='service' and not state.detail.startswith('service-'):body+=_ceo_journey(state,data,facts)
         elif state.focus=='operations':body+=operating(state,data,facts,issues)
-        elif state.focus=='capabilities':body+=capabilities(state,data,facts)
+        elif state.focus=='capabilities':body+=experience_capability(state,data,facts) if state.detail else experience_inside(state,data,facts)
         elif state.focus=='applications':body+=executive_technology(state,facts) if state.detail in {'frontier','fraud'} else applications(state,facts)
         elif state.focus=='partners':body+=partners(state,facts)
         else:body+=executive_programme(state,facts) if state.detail in {'frontier','fraud','skills'} else programmes(state,data,facts)+executive_programme(state,facts)
@@ -1302,3 +1305,224 @@ V2_SOURCE_URLS = {
  'LGV2-FRAUD':('https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-deploys-agentic-ai-to-strengthen-real-time-.html','2026-06-08'),
  'LGV2-TRANSACTIONS':('https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds/lloyds-appoints-natasha-condon-global-head-transaction-banking.html','2026-11-18'),
 }
+
+
+# Finite presentation compositions over the same current, eligible facts.
+# Coordinates describe the picture only: never allocations, reporting lines,
+# installation maps, scores, or new enterprise-model relationships.
+def experience_node(state, label, content, geometry, *, kind='operating', shape='river', caption='', **target):
+    x,y,w,h=geometry
+    selected=(target.get('focus',state.focus)==state.focus and target.get('detail','')==state.detail)
+    return ('<a class="canvas-region ce-node ce-'+shape+'" data-canvas-region="'+kind+'" '
+            'style="--x:'+str(x)+'%;--y:'+str(y)+'%;--w:'+str(w)+'%;--h:'+str(h)+'%" '
+            'href="'+e(href(state,**target),quote=True)+'" aria-label="'+e(label,quote=True)+'"'
+            +(' aria-current="page"' if selected else '')+'><span class="canvas-title">'+e(label)+'</span>'
+            +('<span class="ce-node-copy">'+content+'</span>' if content else '')
+            +('<span class="canvas-caption">'+e(caption)+'</span>' if caption else '')+'</a>')
+
+
+def experience_map(kind, label, paths, nodes, legend):
+    drawing='<svg class="ce-connections" viewBox="0 0 800 800" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
+    floors={
+      'operating':'<path class="ce-floor" d="M0 22 Q400 -20 800 22 L800 164 Q400 215 0 164Z"/><path class="ce-floor" d="M0 390 Q400 330 800 390 L800 484 Q400 528 0 484Z"/><path class="ce-floor ce-floor-light" d="M0 542 L800 542 L800 646 Q400 682 0 646Z"/>',
+      'strategy':'<path class="ce-terrain" d="M0 38 Q130 -8 265 38 T535 38 T800 38 L800 186 Q400 237 0 186Z"/><path class="ce-strategy-current" d="M0 285 Q400 230 800 275 L800 664 Q400 720 0 665Z"/>',
+      'economy':'<path class="ce-economy-current" d="M30 410 Q400 550 770 410 L740 540 Q400 665 60 540Z"/>',
+    }.get(kind,'')
+    drawing+=floors+''.join('<path d="'+path+'"/>' for path in paths)+'</svg>'
+    return ('<div class="ce-map ce-'+kind+'" role="group" aria-label="'+e(label,quote=True)+'">'+drawing+''.join(nodes)
+            +'</div><p class="ce-legend">'+e(legend)+'</p>')
+
+
+def experience_landscape(state,facts,issues):
+    body='<p class="le-deck">Households, businesses and long-term savers. Three economic engines; one Group balance sheet.</p>'
+    nodes=[]
+    if 'LBG-Q326-DEPOSITS' in facts:
+        p.note_editorial_sources(facts['LBG-Q326-DEPOSITS'].sources)
+        nodes.append(experience_node(state,'Customer funding','<strong class="ce-number">£'+str(facts['LBG-Q326-DEPOSITS'].value)+'bn</strong><span>Group customer deposits · reported stock</span><time>30 September 2026</time>',(0,0,29,21),kind='money',shape='reservoir',focus='economics',detail='funding'))
+    if 'LBG-V2-CUSTOMERS' in facts:
+        nodes.append(experience_node(state,'Customer relationships',p.render(facts['LBG-V2-CUSTOMERS'],compact=True),(34,0,32,24),shape='island',detail='brands'))
+    if 'LBG-Q326-PROFIT' in facts:
+        p.note_editorial_sources(facts['LBG-Q326-PROFIT'].sources)
+        nodes.append(experience_node(state,'Reported earnings','<strong class="ce-number">£'+str(facts['LBG-Q326-PROFIT'].value)+'bn</strong><span>Group statutory pretax profit · reported flow</span><time>Nine months to 30 September 2026</time>',(71,0,29,21),kind='money',shape='reservoir',focus='economics',detail='income'))
+    for i,(title,customer,activity,driver,key) in enumerate(twin.DIVISIONS):
+        offer={'retail':'Borrow, save, pay and finance assets','commercial':'Lend, manage cash, trade and payments','retirement':'Protect, invest and administer long-term savings'}[key]
+        nodes.append(experience_node(state,title,'<span class="ce-customer">'+e(customer)+'</span><span>'+e(offer)+'</span><strong>'+e(driver)+'</strong>',(i*34,27,32,32),kind='business',shape='business',caption='Select the business economics',stream='landscape',focus=key,subject=key))
+    nodes.append(experience_node(state,'Costs, credit and capital','<span>Funding price · operating costs · credit losses · risk capacity</span><strong>Economic growth must earn its cost of risk and delivery</strong>',(4,64,92,15),kind='money',shape='foundation',focus='economics',detail='capital'))
+    choices=[('Simplify while protecting service',('LBG-AR25-MIGRATION','LBG-A2030-CIR'),'2030 efficiency ambition','objective-renewal'),
+             ('Turn AI adoption into economic return',('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'),'Contribution versus full-cost return','objective-ai'),
+             ('Connect more customer activity',('LBG-A2030-WALLET','LBG-Q326-CURVE'),'Payments direction and Curve completion','objective-payments')]
+    for i,(title,keys,caption,detail) in enumerate(choices):
+        if all(k in facts for k in keys):nodes.append(experience_node(state,title,'',(i*34,84,32,14),kind='timeline',shape='current',caption=caption,stream='forces',focus='strategy',detail=detail))
+    body+='<h2 class="ce-map-title">One Group, different economic engines</h2>'
+    # Retain the existing business-region semantics and deep destinations.
+    body+='<div class="canvas-businesses ce-portfolio">'+experience_map('economy','Reporting businesses · not financial shares',
+        ('M110 150 C110 190 120 200 130 235','M110 160 C250 190 390 180 400 235','M685 155 C685 195 660 200 665 235','M130 470 Q130 515 400 530','M400 470 L400 530','M670 470 Q670 515 400 530','M400 630 L400 680'),nodes,
+        'Conceptual economic relationships. Geometry does not encode business size, funding allocation or profit contribution. Group, reporting businesses and legal entities remain separate.')+'</div>'
+    body+='<div class="ce-context-controls">'+link(state,'Funding comparison',focus='economics',detail='comparison')+link(state,'Organisation & workforce',stream='inside',focus='people',detail='leadership')+link(state,'Customer operations',stream='inside',focus='operations',detail='service')+'</div>'
+    return body
+
+
+def experience_inside(state,data,facts):
+    body='<p class="le-deck">Customer value at the front. Information, controls, technology and people connect the enterprise underneath.</p>'
+    nodes=[]
+    streams=[('credit','Lending & credit','Households and businesses','Origination, risk decisions and servicing'),
+             ('payments','Payments','Business and personal customers','Cash, trade, authorisation and settlement'),
+             ('insurance','Insurance, pensions & wealth','Protection and long-term saving','Distribution, policy and asset administration')]
+    for i,(key,title,customer,mechanism) in enumerate(streams):
+        nodes.append(experience_node(state,title,'<span class="ce-customer">'+customer+'</span><strong>'+mechanism+'</strong>',(i*34,0,32,23),shape='value',focus='operations',detail='journey-'+key))
+    nodes.append(experience_node(state,'Customer operations','<span>Service channels, requests and exceptions</span><strong>'+('Actual legal-bank service outcomes available' if agenda.lloyds_service_products() else 'Customer access and exception handling')+'</strong>',(8,28,84,13),shape='service',focus='operations',detail='service'))
+    for i,(key,title,desc) in enumerate([('risk','Risk & controls','Credit, service continuity and human accountability'),('data','Data & AI','Information, models and controlled decisions'),('platforms','Platforms & change','Applications, resilience and retirement')]):
+        nodes.append(experience_node(state,title,'<span>'+desc+'</span>',(i*34,46,32,16),shape='enabler',focus='operations',detail='journey-'+key))
+    if all(k in facts for k in ('LBG-V2-FRAUDWORKFLOW','LBG-V2-HUMANCONTROL')):
+        nodes.append(experience_node(state,'Envoy in fraud operations','<span>Disclosed fraud, technology, data and risk teams</span><strong>Human judgement and override remain</strong>',(0,67,49,15),kind='technology',shape='example',focus='applications',detail='fraud'))
+    if 'LBG-V2-MSADOPTION' in facts:
+        nodes.append(experience_node(state,'Microsoft in colleague work','<strong>Licensed-user adoption disclosed</strong><span>June 2026; activity is not a measured full-cost return</span>',(51,67,49,15),kind='technology',shape='example',focus='applications',detail='frontier'))
+    count=sum('LBG-V2-'+r[0] in facts for r in V2_LEADERS)
+    if count:nodes.append(experience_node(state,'Organisation & workforce','<strong>'+str(count)+' issuer-listed executive members</strong><span>Business leadership, Group functions and skills</span>',(0,87,49,12),kind='organisation',shape='people',focus='people',detail='leadership'))
+    nodes.append(experience_node(state,'Finance & shared services','<span>Capital, performance, people and delivery capacity</span>',(51,87,49,12),shape='people',focus='operations',detail='journey-finance'))
+    body+=experience_map('operating','Connected enterprise operating model',
+        ('M130 184 C130 215 210 225 260 240','M400 184 L400 240','M670 184 C670 215 570 225 540 240','M400 328 L400 370','M130 365 Q400 320 670 365','M130 495 L130 535','M400 495 Q400 520 200 535','M670 495 L670 535','M200 657 L200 698','M600 657 L600 698'),nodes,
+        'Conceptual value streams and enabling associations, not reporting lines or verified system dependencies. The two operating examples are separately supported issuer disclosures.')
+    body+='<div class="ce-context-controls">'+link(state,'People & shared services',focus='operations',detail='journey-support')+link(state,'Capability relationships',focus='capabilities',detail='data')+link(state,'Transformation programmes',focus='programmes')+'</div>'
+    return body
+
+
+def experience_forces(state,facts):
+    body='<p class="le-deck">Protect today’s earnings. Simplify safely. Turn new capability into enduring customer and economic value.</p>'
+    nodes=[]
+    for i,(horizon,title,keys,meaning,detail) in enumerate([
+      ('2026','Retire applications while maintaining service',('LBG-AR25-MIGRATION',),'Current-cycle priority; retirement is not completion','objective-renewal'),
+      ('2027','Sequence the next investment cycle',('LBG-A2030-INVESTMENT',),'Management investment plan, not free supplier budget','objective-investment'),
+      ('2030','Create lasting operating leverage',('LBG-A2030-CIR','LBG-A2030-SAVINGS'),'Efficiency and gross-savings ambitions; not achieved net return','objective-efficiency')]):
+        if all(k in facts for k in keys):nodes.append(experience_node(state,title,'<time class="ce-horizon">'+horizon+'</time><span>'+meaning+'</span>',(i*34,0,32,24),kind='timeline',shape='horizon',focus='strategy',detail=detail))
+    if all(k in facts for k in ('LBG-Q326-PROFIT','LBG-Q326-DEPOSITS')):
+        nodes.append(experience_node(state,'Earnings and funding','<strong>£'+str(facts['LBG-Q326-PROFIT'].value)+'bn nine-month Group profit</strong><span>£'+str(facts['LBG-Q326-DEPOSITS'].value)+'bn deposits at September 2026</span><span>Funding price, credit and capital constrain economic choices</span>',(0,33,100,12),kind='money',shape='tension',focus='economics',stream='landscape',detail='capital'))
+    if all(k in facts for k in ('LBG-AI26-REPORTED','LBG-AI26-EXPECTED')):
+        nodes.append(experience_node(state,'AI value beyond deployment','<span>FY2025 contribution / 2026 expectation</span><span>Existing platforms, tools and controls</span><strong>Adoption and full-cost net return remain distinct</strong>',(0,48,100,12),kind='technology',shape='tension',focus='strategy',detail='objective-ai'))
+    if all(k in facts for k in ('LBG-AR25-MIGRATION','UK-PRA-REPORT27')):
+        nodes.append(experience_node(state,'Resilience through change','<span>Retirement + March 2027 timetable</span><span>Migration and controlled operations</span><strong>Continuity and reporting require their own evidence</strong>',(0,63,100,12),shape='tension',focus='strategy',detail='objective-reporting'))
+    if all(k in facts for k in ('LBG-A2030-WALLET','LBG-Q326-CURVE')):
+        nodes.append(experience_node(state,'Connected customer propositions','<span>Payments ambition + completed Curve transaction</span><span>Acquisition already completed</span><strong>Integration and adoption determine customer value</strong>',(0,78,100,12),shape='tension',focus='strategy',detail='objective-payments'))
+    nodes.append(experience_node(state,'Eight-theme SWOT','<span>Capabilities, constraints, alternatives and counter-evidence</span>',(4,94,92,9),kind='theme',shape='foundation',focus='analysis'))
+    body+=experience_map('strategy','Strategic change and executive choices',
+        ('M120 190 C120 230 160 240 190 260','M400 194 Q400 235 210 259','M670 194 L670 258','M190 363 Q400 373 600 380','M600 483 Q400 493 190 500','M190 603 Q400 613 600 620','M400 723 L400 748'),nodes,
+        'Dotted connections are FLORA analytical associations, not proven causes or ranked Material Pressures. Published actuals, plans and ambitions retain their own periods and boundaries.')
+    body+='<div class="ce-context-controls">'+link(state,'All management goals',focus='strategy',detail='goals')+link(state,'Strategic alternatives',focus='strategy',detail='options')+'</div>'
+    return body
+
+
+def experience_activity(state,data,facts):
+    key=state.detail.removeprefix('journey-')
+    if key not in JOURNEYS:return _ceo_journey(state,data,facts)
+    if key=='service':return service_context(state)
+    title,business,sequence,capids,keys,meaning,question=JOURNEYS[key]
+    body='<p class="le-deck">'+e(title)+' connects '+e(business.lower())+' to the wider operating system.</p>'
+    body+='<div class="ce-activity-thread" aria-label="Conceptual value-stream activities">'+''.join('<span>'+e(part.strip())+'</span>' for part in sequence.split('→'))+'</div>'
+    body+='<p class="ce-legend">Conceptual activity sequence. Durable capabilities, role remits and installed systems are separate kinds of information.</p>'
+    actual={'credit':('TRANSACTIONREMIT','MURPHY'),'payments':('TRANSACTIONREMIT','CONDON','CONDONREPORT'),
+      'insurance':('WIDOWS','WEALTH','BARUA'),'risk':('HUMANCONTROL','FRAUDOWNER','RISK'),
+      'data':('FRAUDWORKFLOW','HUMANCONTROL','AITEAMS'),'platforms':('MSAGREEMENT','ENGINEERS','KEMENADE'),
+      'finance':('CHALMERS',),'support':('COLLEAGUES','AIRECRUIT','AITRAINING','DOHERTY'),
+      'service':('HUMANCONTROL','SINGH')}[key]
+    body+='<section class="ce-evidence-story"><h2>Lloyds context</h2>'+v2_reported(facts,*actual)+reported(facts,keys)+'</section>'
+    body+='<section class="ce-economic-meaning"><h2>Economic and operational significance</h2><p>'+e(meaning)+'</p></section>'
+    caps={c['id']:c for c in data.get('capabilities',()) if not source_import.working_restricted(c)}
+    body+='<h2>Capabilities behind the activity</h2><p>'+e(' · '.join(caps[c]['title'] for c in capids if c in caps))+'</p>'
+    current={
+      'credit':('Credit growth must be considered with funding transfer price, credit loss and risk capacity. A Group deposit stock cannot supply a loan-cohort return.','A customer or portfolio outcome can improve without requiring a new external platform.'),
+      'payments':('Cash, working capital, trade and payments are distinct parts of a conceptual transaction-banking model. Acquisition, integration and product adoption are separate kinds of change.','Acquisition completion, when reported, cannot establish service adoption or remaining supplier scope.'),
+      'insurance':('Insurance obligations, distribution and asset administration have different time horizons and accounting from banking interest margin.','Brand/product descriptions do not prove a subsidiary structure, segment cost allocation or installation map.'),
+      'risk':('Human accountability and override require explicit control definitions. Control operation and independently demonstrated effectiveness are different tests.','Any existing teams and controls must be considered before asserting a missing risk capability.'),
+      'data':('An AI-enabled decision workflow needs business, technology, information and risk participation. Source quality, model control and exception handling are dependencies, not proof of a Group data defect.','Deployment alone does not reconcile prevented loss, false positives, customer outcomes and full costs.'),
+      'platforms':('Application retirement and colleague-tool adoption concern different parts of the estate. Fewer applications can reduce complexity while migration and dual running temporarily add work.','A tool reference, product licence or collaboration does not describe the entire estate or an unawarded contract.'),
+      'finance':('Funding stocks, period earnings, credit losses and capital use must be reconciled on matched definitions. Growth in deposits can coexist with a higher funding price.','Neither profit nor deposit growth is an unrestricted transformation budget; divisional and capital bridges remain unpresented.'),
+      'support':('Workforce scale, trained colleagues, course completions and planned roles have different populations and dates. Delivery capacity depends on skills, work redesign and control coverage.','Recruiting internally or externally is not net hiring, while licence counts cannot establish FTE or staff savings.'),
+      'service':('Service access, exception handling and redress affect customer outcomes. Existing FCA product measures belong to Lloyds Bank PLC, not every Group brand or division.','Complaint mix alone cannot quantify customer incidence, service cost, root cause or enterprise materiality.')
+    }[key]
+    body+='<div class="ce-tension-note"><h2>Dependencies and counter-evidence</h2><p>'+current[0]+'</p><p>'+current[1]+'</p></div>'
+    body+='<h2>Commercial investigation</h2><p>'+e(question)+'</p><p class="ce-legend">Relevant roles are published remits, not verified process ownership or purchase mandates. Conceptual association; no verified application, role or supplier dependency is inferred.</p>'
+    body+='<div class="ce-context-controls">'+link(state,'Business / value stream',focus='operations',detail='journey-'+key)+link(state,'Durable capabilities',focus='capabilities',detail='data' if key in {'data','platforms'} else 'risk')+link(state,'Organisation / accountable role',focus='people',detail='leadership')+link(state,'Applications / data',focus='applications',detail='fraud' if key in {'risk','data','service'} else 'frontier')+link(state,'Technology / infrastructure',focus='operations',detail='journey-platforms')+link(state,'Suppliers / contracts',focus='partners')+'</div>'
+    return body
+
+
+def experience_capability(state,data,facts):
+    key=state.detail if state.detail in {'risk','data','technology'} else 'data'
+    selected={'risk':('Risk and service continuity','risk',('HUMANCONTROL','FRAUDOWNER','RISK')),
+              'data':('Data as a controlled decision capability','data',('FRAUDWORKFLOW','HUMANCONTROL','AITEAMS')),
+              'technology':('Technology as enterprise delivery capacity','platforms',('MSAGREEMENT','ENGINEERS','KEMENADE'))}[key]
+    title,journey,ids=selected
+    return ('<p class="le-deck">'+title+'</p><h2>From capability to business outcome</h2><p>A capability describes an enduring ability. An activity uses that ability; an application or supplier may enable it. These are not interchangeable, and a research association does not establish ownership or an installed dependency.</p>'
+            +experience_activity(replace(state,focus='operations',detail='journey-'+journey),data,facts))
+
+
+def experience_business(state,facts):
+    key=state.focus
+    descriptions={
+      'retail':('Everyday relationships and asset finance','Households borrow, save and pay. Motor and vehicle finance add asset-service economics alongside traditional banking.',('BANK','BOS','MBNA','BLACKHORSE','LEX','TUSKER'),
+        'Interest spread and fees are different revenue mechanisms. In an asset-finance proposition, income must also cover funding, depreciation, servicing and the eventual asset value; no Lloyds cohort return is inferred.',
+        'Brand transition is a disclosed management response. It does not establish a Group staffing reduction or a customer outcome.',
+        'Which customer or asset cohort has a matched income, funding, credit and service-cost history, and what existing mitigation already protects its return?'),
+      'commercial':('Finance the business; support its daily flows','Lending and liquidity support business customers. Cash, trade, working capital and payments support their operating cycles.',('MURPHY','LANGLEY','TRANSACTIONREMIT'),
+        'A lending relationship consumes funding, credit and capital capacity. Transaction services can add service revenue and recurring customer interaction, but no contribution or cross-sell uplift is allocated here.',
+        'Amanda Murphy and John Langley have distinct published business remits. CIB Transaction Banking leadership is separately disclosed; these remits are not a financial segment split.',
+        'Which existing client process has a measurable working-capital, payment-exception or control consequence, and what bank capability already addresses it?'),
+      'retirement':('Protection and long-term financial commitments','Insurance, pensions and investment propositions combine distribution, administration and long-duration customer obligations.',('WIDOWS','WEALTH','BARUA'),
+        'Policy obligations, investment performance, distribution and administration do not follow a banking net-interest-margin model. Accounting profit, cash generation and capital available for distribution are different views.',
+        'Scottish Widows and Lloyds Wealth provide supported brand/product context. The published executive remit does not establish an exclusive legal subsidiary or reporting-segment allocation.',
+        'Which policy or asset-administration outcome can be reconciled with servicing cost and capital use on a consistent perimeter and period?'),
+    }
+    title,purpose,keys,mechanism,response,question=descriptions[key]
+    body='<p class="le-deck">'+title+'</p><div class="ce-business-portrait ce-business-'+key+'"><div class="ce-business-purpose"><h2>Customer value</h2><p>'+purpose+'</p></div><section class="ce-business-engine"><h2>How the economics work</h2><p>'+mechanism+'</p></section></div>'
+    body+='<section class="ce-evidence-story"><h2>Actual Lloyds businesses and responsibilities</h2>'+v2_reported(facts,*keys)+'</section>'
+    response_keys={'retail':('LBG-BRAND26-TIMING',),'commercial':('LBG-V2-MURPHY','LBG-V2-LANGLEY'),'retirement':('LBG-V2-WIDOWS','LBG-V2-WEALTH')}[key]
+    if all(k in facts for k in response_keys):body+='<h2>Current response and boundary</h2><p>'+response+'</p>'
+    body+='<div class="ce-tension-note"><h2>Commercial investigation</h2><p>'+question+'</p></div>'
+    if key=='commercial':body+=region(state,'Transaction Banking',kind='commercial',caption='Disclosed remit and leadership; actual source context before any buying hypothesis',detail='transactions')
+    elif key=='retail' and 'LBG-BRAND26-TIMING' in facts:body+=region(state,'Brand transition and service access',reported(facts,('LBG-BRAND26-TIMING','LBG-BRAND26-NO-ROLES')),kind='change',stream='inside',focus='programmes',detail='brand')
+    body+='<div class="ce-context-controls">'+link(state,'Group economics',focus='economics')+link(state,'Operating activities',stream='inside',focus='operations',detail='journey-'+{'retail':'credit','commercial':'payments','retirement':'insurance'}[key])+link(state,'Published executive roles',stream='inside',focus='people',detail='leadership')+'</div>'
+    body+='<p class="ce-legend">FLORA economic interpretation, with reported brand/role context. No measured profit split, supplier need, buyer mandate, capital allocation or commercial opportunity is asserted.</p>'
+    return body
+
+
+def experience_economic_mechanism(state,facts,issues):
+    nodes=[]
+    areas=[('funding','Funding','Deposits, price and maturity',(0,0,45,27)),
+           ('income','Lending & income','Asset yield, fees and customer mix',(55,0,45,27)),
+           ('costs','Costs & impairment','Run, change, remediation and credit',(0,63,45,27)),
+           ('capital','Capital & returns','Risk capacity, buffers and distributions',(55,63,45,27))]
+    for key,title,meaning,geometry in areas:nodes.append(experience_node(state,title,'<span>'+meaning+'</span>',geometry,kind='money',shape='economic-lobe',focus='economics',detail=key))
+    if 'LBG-Q326-PROFIT' in facts:
+        item=facts['LBG-Q326-PROFIT'];p.note_editorial_sources(item.sources)
+        nodes.append(experience_node(state,'Group statutory profit','<strong class="ce-number">£'+str(item.value)+'bn</strong><span>Nine months to 30 September 2026</span><span>Reported Group flow, not divisional allocation</span>',(19,31,62,27),kind='money',shape='profit',focus='economics',detail='income'))
+    body=experience_map('capital','Banking earnings, funding and risk capacity',
+      ('M170 200 Q100 400 170 520','M630 200 Q700 400 630 520','M360 100 L440 100','M360 630 L440 630','M200 205 L300 255','M600 205 L500 255','M200 510 L300 460','M600 510 L500 460'),nodes,
+      'Conceptual financial mechanism. No area, line width or connector measures an allocation, accounting bridge or causal profit effect.')
+    selected=state.detail if state.detail in {'funding','income','costs','capital'} else 'income'
+    if selected=='funding':
+        body+='<h2>Balance growth is not a funding-price explanation</h2>'+experience_funding_stocks(state,facts)
+        row=next((r for r in issues if r.key=='funding-base'),None)
+        if row and all(k in facts for k in ('LBG-AR25-DEPOSITS','LBG-Q326-DEPOSITS')):body+='<div data-intelligence="funding-base" data-owner-item="funding-stock-change">'+''.join(p.render(i,compact=True) for i in row.facts if i.semantic_type=='calculated' and p.eligible(i))+'</div>'
+        body+='<p>The two reported stocks show scale and change at their dates. The difference is not an organic inflow and is not adjusted for consolidation. These stocks do not separate product mix or the price paid to retain balances. Deposit repricing and asset-yield repricing can move at different speeds.</p><h3>Executive decision</h3><p>Compare retention and product migration with matched deposit rates, loan resets and transfer pricing. A stable or lower effective funding cost would weaken a thesis of margin pressure.</p>'
+    elif selected=='income':
+        body+='<h2>The earnings equation</h2><div class="ce-profit-equation"><span>Net interest income</span><b>+</b><span>Fees & other income</span><b>−</b><span>Operating costs and credit losses</span><b>±</b><span>Statutory adjustments</span></div><p>The reported Group profit is the result, not segment contribution, a lending yield, underlying profit or an available investment budget. Banking spread, transaction fees and insurance/asset economics need separate operational explanations.</p><h3>Executive decision</h3><p>Require a like-for-like bridge before attributing performance to volume, price, productivity or a single technology intervention. A favourable income mix or comparator can improve the result without proving structural cost improvement.</p>'
+    elif selected=='costs':
+        body+='<h2>Three distinct earnings effects</h2><p>Ordinary run-and-change expense, remediation and credit impairment need separate baselines. Impairment charges cover a period; loss allowances and arrears are different stocks. A lower cost/income ratio can reflect income growth as well as lower expense.</p>'+reported(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS'))
+        body+='<h3>Management response and trade-off</h3><p>Migration, colleague tools and specialist skills are different possible responses. Parallel running can add near-term work while removing future complexity. Gross savings are not realised net profit; the applicable reported responses remain available in their dated programme views.</p><h3>Executive decision</h3><p>Which recurring cost actually disappears, after implementation, supervision and continuity costs, while the customer/control outcome is maintained?</p>'
+    else:
+        body+='<h2>Funding is not capital</h2><p>Deposits support balance-sheet funding. Capital absorbs risk. Lending can grow risk-weighted exposures, while retained earnings, buffers, business mix and distributions influence remaining capacity. Deposit growth alone cannot prove additional capital or a larger change budget.</p><h3>Group and business trade-offs</h3><p>Commercial credit must earn its funding, loss and capital cost; Retail combines lending, deposits and asset services; Insurance has distinct obligations and capital economics. Central items and statutory adjustments are not a residual to allocate across these businesses.</p><h3>Executive decision</h3><p>Which comparable portfolio return remains attractive after risk, delivery and capital costs, and what would change the investment sequence? Current capital ratios, RWA and divisional return bridges are not presented here; no capital ratio or return is inferred.</p>'
+    if 'LBG-V2-CHALMERS' in facts:body+='<section class="ce-evidence-story"><h2>Published finance remit</h2>'+v2_reported(facts,'CHALMERS')+'<p>Relevant Group role, not verified delegated authority for a product, portfolio or procurement decision.</p></section>'
+    body+='<div class="ce-context-controls">'+link(state,'Funding comparison',focus='economics',detail='comparison')+link(state,'Efficiency objectives',stream='forces',focus='strategy',detail='objective-efficiency')+link(state,'Investment choices',stream='forces',focus='strategy',detail='objective-investment')+link(state,'Customer operations',stream='inside',focus='operations',detail='service')+'</div>'
+    return body
+
+FOCUS_FACTS['economics'] += ('LBG-V2-CHALMERS',)
+
+
+def experience_funding_stocks(state,facts):
+    rows=[(k,label) for k,label in [('LBG-AR25-DEPOSITS','31 December 2025'),('LBG-Q326-DEPOSITS','30 September 2026')] if k in facts]
+    if not rows:return ''
+    maximum=max(facts[k].value for k,_ in rows)
+    body='<figure class="gold-stocks"><figcaption>Group customer deposits · GBP billion · reported stocks</figcaption>'
+    for key,label in rows:
+        item=facts[key];p.note_editorial_sources(item.sources)
+        body+='<a class="canvas-region canvas-stock" data-canvas-region="financial-chart" data-claim-id="'+key+'" href="'+e(href(state,focus='economics',detail='comparison'),quote=True)+'" aria-label="Compare customer deposits at '+label+'"><span>'+label+'</span><meter min="0" max="'+str(maximum)+'" value="'+str(item.value)+'" aria-label="Deposits at '+label+'">'+str(item.value)+'</meter><strong>£'+str(item.value)+'bn</strong></a>'
+    return body+'<p class="ce-legend">Zero-based comparison of reported stocks at two dates, not an organic inflow, income or capital measure.</p></figure>'

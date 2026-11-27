@@ -82,7 +82,7 @@ def test_withdrawn_sources_remove_all_dependent_numeric_accessibility_and_analys
         html=gold.render(query)
         assert '£502.8bn' not in html and '£6.6bn' not in html and 'value="502.8"' not in html
         assert 'href="'+gold.PATH+'?stream=forces&amp;focus=analysis&amp;subject=analysis&amp;detail=theme-4' not in html
-    assert '£496.5bn' in gold.render({'focus':['economics']})
+    assert '£496.5bn' in gold.render({'focus':['economics'],'detail':['funding']})
 
 
 def test_withdrawn_collaboration_does_not_survive_in_application_or_supplier_descriptions(monkeypatch):
@@ -246,7 +246,7 @@ def test_other_existing_owners_supply_scoped_service_outcomes_and_stock_recipe()
     assert 'Lloyds Bank PLC' in service and 'not the consolidated Group or Retail' in service
     assert all(value in service for value in ('118,762','118,861','66.12'))
     assert 'Open Government Licence' in service and 'different cohorts' in service
-    economics=main(gold.render({'focus':['economics']}))
+    economics=main(gold.render({'focus':['economics'],'detail':['funding']}))
     assert 'data-owner-item="funding-stock-change"' in economics
     assert '£6.3bn' in economics and 'data-semantic-type="calculated"' in economics
     assert 'not adjusted for consolidation' in economics
@@ -278,7 +278,7 @@ def test_fca_source_withdrawal_removes_dependent_service_outputs_only(monkeypatc
 def test_stock_withdrawal_removes_existing_calculated_result(monkeypatch):
     d=data();next(s for s in d['sources'] if s['id']=='PR-LBG-AR25')['withdrawn']=True
     monkeypatch.setattr(v,'current_data',lambda ctx:d)
-    html=gold.render({'focus':['economics']})
+    html=gold.render({'focus':['economics'],'detail':['funding']})
     assert '£6.3bn' not in html and 'funding-stock-change' not in html
     assert '£502.8bn' in html
 
