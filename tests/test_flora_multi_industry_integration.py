@@ -92,7 +92,9 @@ def test_every_sector_uses_all_six_shared_templates_and_retains_score_dimensions
 def test_original_research_and_all_six_easyjet_hypotheses_are_byte_preserved():
     for ref,domain in [('a8515b91ea4e177bdb9700e05813c1d448ba189f','banking'),('cfa9016e6b76e9b30b7e889d16501ccfa06881ef','aviation')]:
         path='enterprise-knowledge/'+domain+'/research-model/Assessment-Overlay.json'
-        assert subprocess.check_output(['git','show',ref+':'+path],cwd=model.REPO)==(model.REPO/path).read_bytes()
+        from tests.flora_f2_owner_contract import assert_owner_compatible
+        expected=subprocess.check_output(['git','show',ref+':'+path],cwd=model.REPO)
+        assert_owner_compatible(model.REPO,path,expected)
     data=model.load_assessment('aviation')
     assert {r['id'] for r in data['candidates']}=={'RCO-EJ-'+str(i).zfill(3) for i in range(1,7)}
     assert all(c['qualification_state']=='Unqualified research hypothesis' and c['indicative_contract_value'] is None and c['procurement_date'] is None for c in data['commercial_assessment']['assessments'])

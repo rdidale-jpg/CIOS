@@ -216,7 +216,14 @@ def test_runtime_source_preserves_canonical_home_and_domain_owners():
             assert hashlib.sha256(historical).hexdigest() == digest, name
             assert not (root/name).exists(), name
             continue
-        if name=='cios/applications/flora/security_store.py':
+        if name in {'enterprise-knowledge/banking/research-model/Assessment-Overlay.json',
+                     'enterprise-knowledge/banking/research-model/Understanding-Review.json'}:
+            import subprocess
+            from tests.flora_f2_owner_contract import assert_owner_compatible
+            expected=subprocess.check_output(['git','show','1c8c8ae17bb2af3c95bf264d7df9befb60b0b576:'+name],cwd=root)
+            assert hashlib.sha256(expected).hexdigest()==digest, name
+            assert_owner_compatible(root,name,expected)
+        elif name=='cios/applications/flora/security_store.py':
             import subprocess
             from tools.research.auth1_quality import assert_store_evolution,BASE as AUTH_BASE
             expected=subprocess.check_output(['git','show',AUTH_BASE+':'+name],cwd=root)

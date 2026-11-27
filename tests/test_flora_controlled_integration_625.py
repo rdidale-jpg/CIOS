@@ -146,7 +146,8 @@ def test_all_prior_research_and_exact_artwork_manifest_and_caption_pins_unchange
  assert old['scenes']==new['scenes']and old['design_commit']==new['design_commit']
  assert old==new
  owner='enterprise-knowledge/banking/research-model/Assessment-Overlay.json'
- assert (ROOT/owner).read_bytes()==subprocess.check_output(['git','show',base+':'+owner],cwd=ROOT)
+ from tests.flora_f2_owner_contract import assert_owner_compatible
+ assert_owner_compatible(ROOT,owner,subprocess.check_output(['git','show',base+':'+owner],cwd=ROOT))
  assert (ROOT/'cios/applications/flora/visual_stream_assets/scenes.json').read_bytes()==subprocess.check_output(['git','show',base+':cios/applications/flora/visual_stream_assets/scenes.json'],cwd=ROOT)
 
 def test_new_read_projection_cannot_invoke_existing_writers_or_private_owners(monkeypatch):

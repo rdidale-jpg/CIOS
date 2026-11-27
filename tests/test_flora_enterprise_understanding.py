@@ -13,7 +13,7 @@ from cios.applications.flora.research_intelligence.source_import import official
 from cios.applications.flora.public_routes import public_request_target
 from tests.test_flora_research_intelligence import web
 
-ASOF='2026-11-10'
+ASOF='2026-11-27'
 
 
 @pytest.mark.parametrize('domain',['banking','aviation'])

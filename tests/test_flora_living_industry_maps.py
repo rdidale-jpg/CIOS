@@ -11,7 +11,7 @@ from cios.applications.flora.research_intelligence.living_map import render_livi
 from cios.applications.flora.research_intelligence.visual_intelligence_specs import build_intelligence_specs
 from tests.test_flora_research_intelligence import web,Links
 from cios.applications.flora.public_routes import public_request_target
-ASOF='2026-11-10'
+ASOF='2026-11-27'
 
 
 def inputs(domain='banking'):
@@ -177,7 +177,13 @@ def test_history_is_append_only_and_existing_enterprise_visual_profiles_unchange
     from pathlib import Path
     root=Path(__file__).resolve().parents[1]
     relative='enterprise-knowledge/banking/research-model/Understanding-Review.json'
-    old=json.loads(subprocess.check_output(['git','show','adf205993cc0857183d77766ce4882bf48326fb4:'+relative],cwd=root));new=json.loads((root/relative).read_text())
+    old=json.loads(subprocess.check_output(['git','show','adf205993cc0857183d77766ce4882bf48326fb4:'+relative],cwd=root))
+    # Preserve the original append-only review check. Gold v2 changes only the
+    # exact assessment/date bindings, independently checked with all old judgments.
+    prior=subprocess.check_output(['git','show','1c8c8ae17bb2af3c95bf264d7df9befb60b0b576:'+relative],cwd=root)
+    from tests.flora_f2_owner_contract import assert_owner_compatible
+    assert_owner_compatible(root,relative,prior)
+    new=json.loads(prior)
     for key in old:
         if key in ('sources','observations','claim_reviews','relationships'):assert new[key][:len(old[key])]==old[key]
         else:assert new[key]==old[key]

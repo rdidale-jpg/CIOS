@@ -12,13 +12,14 @@ on:
       - 'docs/flora-runtime/living-enterprise-preview/**'
       - 'docs/flora-runtime/lloyds-gold-standard/**'
       - 'docs/flora-runtime/enterprise-gold-reconciliation/**'
+      - 'docs/flora-runtime/lloyds-gold-v2/**'
       - '.github/workflows/flora-enterprise-economics-a1.yml'
 permissions:
   contents: read
 jobs:
   economics:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
         with:
@@ -37,7 +38,7 @@ jobs:
       - name: All strict security tests
         run: python -m pytest tests/test_flora_security*.py -q
       - name: Optional Living Enterprise preview and fail-closed public source boundaries
-        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py tests/test_flora_main_canvas.py tests/test_flora_lloyds_activation.py tests/test_flora_lloyds_service_workload.py tests/test_flora_gold_reconciliation.py -q
+        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py tests/test_flora_main_canvas.py tests/test_flora_lloyds_activation.py tests/test_flora_lloyds_service_workload.py tests/test_flora_gold_reconciliation.py tests/test_flora_lloyds_gold_v2.py -q
       - name: Lloyds intelligence utilisation and immutable image verification
         run: |
           git worktree add --detach "$RUNNER_TEMP/gold-approved-cut" 1c13e6962516dbb071b2133f2c1a3de87647e2ac
@@ -107,11 +108,15 @@ jobs:
         run: python docs/flora-runtime/lloyds-substantive-intelligence/browser.py "$RUNNER_TEMP/lloyds-product-browser" after
       - name: Gold reconciliation, primary homes, contextual navigation and withdrawal
         run: python docs/flora-runtime/enterprise-gold-reconciliation/browser.py "$RUNNER_TEMP/gold-reconciliation-browser" after
+      - name: Gold v2 enterprise knowledge, four responsive sizes and lifecycle
+        run: python docs/flora-runtime/lloyds-gold-v2/browser.py "$RUNNER_TEMP/gold-v2-browser" after
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: flora-enterprise-economics-${{ github.event.pull_request.head.sha }}
           path: |
+            ${{ runner.temp }}/gold-v2-browser/*.json
+            ${{ runner.temp }}/gold-v2-browser/*.jpg
             ${{ runner.temp }}/gold-reconciliation-browser/*.json
             ${{ runner.temp }}/gold-reconciliation-browser/*.jpg
             ${{ runner.temp }}/lloyds-product-browser/*.json

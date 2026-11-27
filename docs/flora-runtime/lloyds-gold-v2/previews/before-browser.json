@@ -1,0 +1,45 @@
+{
+  "phase": "before",
+  "sha": "1c8c8ae17bb2af3c95bf264d7df9befb60b0b576",
+  "runtime_hashes": {
+    "cios/applications/flora/lloyds_gold.py": "3ef204dca89390b0a98d42cf46219fedaaaf9c67380378addd3556e0e1380e18",
+    "cios/applications/flora/leadership_agenda.py": "67d06b92c8033f6352cb023546ed4dd38548e727ebada3a6183c75821661dee1",
+    "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "e788eba839d8bc8aa3ba437c8c25f9e493687d279c2aaa9fb4415037b38ccfb2",
+    "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2"
+  },
+  "runtime_matches_sha": true,
+  "environment": "Actual isolated HTTP Chromium; emulated iPads/mobile, not Render or physical Safari",
+  "captures": {
+    "before-desktop-group.jpg": "420b1ecbd60c3b037ada66c81796cc038a2ff08e683638b975a641ecd0cdc34f",
+    "before-desktop-inside.jpg": "4e11c1c758aa925352c902bb153ac1964f502bae13ee472e574be613bb0df47a",
+    "before-desktop-leadership.jpg": "7666dbfc53149aa852fcfcd9768a327980d3fc36d0e2d5fd74db98fd6941c4c6",
+    "before-desktop-workforce.jpg": "2777b09d670075f5db7202cf359b46feff5e4bbbcf763049cb3fbe17f9f277a8",
+    "before-desktop-programmes.jpg": "7f542435650383713f3d4c85dbafe651be93e07c6f661a185dd92078c3cf562b",
+    "before-desktop-forces.jpg": "c72427a52e9b9e7303cc6ff89d8399ea577b2ffb41def7600915d12e71ce9ccb",
+    "before-ipad-landscape-group.jpg": "5101f237ed2d030d6d9d46b9c211a6fd355b2944ba01431a29790268ead5ae7a",
+    "before-ipad-landscape-inside.jpg": "645f5479da6a82c764d926f2a35291b9879e71c6a62a974e9dea11625cc24f87",
+    "before-ipad-landscape-leadership.jpg": "8da2b949b823b5c25410f7d420b3280f0d0bb27789746805bd09055c5247bc1e",
+    "before-ipad-landscape-workforce.jpg": "3b7da5de403b7021579717cc9e321746a40bc79a010e4ab3e20ff221b6cd2fe1",
+    "before-ipad-landscape-programmes.jpg": "26d6777149e42549b0b17525ffbc32a1db0f9eba46703760df9268d7941d8149",
+    "before-ipad-landscape-forces.jpg": "9e53512d38a3eee738b74b19eaf39a938f433fb67e52ae43bca7abd94277ce8c",
+    "before-ipad-portrait-group.jpg": "198a18502b49465dfb825541391e94d24f09d6ddbeff7d1b3cbf97512fb3b766",
+    "before-ipad-portrait-inside.jpg": "841b26c7ce1178dbfd003e6ecb58f8ccf8b1d630502d960f83e73eeb2b3bd1d0",
+    "before-ipad-portrait-leadership.jpg": "bf09a1ff118161021a9d1766ef812859610f197bdbf96b8c819c50ccb08b47df",
+    "before-ipad-portrait-workforce.jpg": "f21bd458119916d29315c6dca88a07765a98edbfcca83632a9c943de8b8d3852",
+    "before-ipad-portrait-programmes.jpg": "7267d238dc68daca6d0cab61bae017a86cf88a8e87ecc5fc7aeecdb37f16e5aa",
+    "before-ipad-portrait-forces.jpg": "06a90797292648392a2fd5281497625305e6c4f47f9814b6ef139b16f951523f",
+    "before-mobile-group.jpg": "d1895350b2c94f37ba79e4d49cce46e3f4ea8af45d6b575156ccafcc7eec6fe2",
+    "before-mobile-inside.jpg": "55e5af8aaf435e6ea97daf915e261264ce05de28ad0d1884abba9598d3050450",
+    "before-mobile-leadership.jpg": "a9acf0ea364c9bc120a1d1e3180d4e99dbb1c1177fd3ab7eee18ac02e06ae895",
+    "before-mobile-workforce.jpg": "8ea68cf32be6dbbf47b260410c42616e6123ecd2b390e6574022db4cbbb56791",
+    "before-mobile-programmes.jpg": "9ca80218c0de864cb19cb5bb22610b4ce1d7e761eca240f1bf64d52744db5f0e",
+    "before-mobile-forces.jpg": "684c1e9c5879753b446d9779896248bd4cf26b26560714e4d779046544713305"
+  },
+  "devices": [
+    "desktop",
+    "ipad-landscape",
+    "ipad-portrait",
+    "mobile"
+  ],
+  "checks": {}
+}

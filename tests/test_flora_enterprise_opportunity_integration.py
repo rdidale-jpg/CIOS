@@ -11,7 +11,7 @@ from tests.test_flora_commercial_visual_v3 import store_hash
 
 def test_overlay_only_uses_canonical_capability_links_and_retains_unknown_business_owner():
     data=model.load_assessment(); before=deepcopy(data)
-    projection=commercial_projection(data,as_of='2026-11-11'); previous=deepcopy(projection)
+    projection=commercial_projection(data,as_of='2026-11-27'); previous=deepcopy(projection)
     html=unescape(enterprise_overlay(data,projection))
     assert 'Enterprise capability landscape' in html
     assert 'Business owner: Unknown' in html
@@ -24,7 +24,7 @@ def test_overlay_only_uses_canonical_capability_links_and_retains_unknown_busine
 
 
 def test_priority_cockpit_is_read_only_with_eight_modules_and_unknowns():
-    data=model.load_assessment(); rows=commercial_projection(data,as_of='2026-11-11')['candidates']
+    data=model.load_assessment(); rows=commercial_projection(data,as_of='2026-11-27')['candidates']
     assert len(MODULES)==8
     assert len({m[0] for m in MODULES})==8
     for cid in ('RCO-LBG-002','RCO-LBG-001','RCO-LBG-009'):
@@ -53,7 +53,7 @@ def test_aviation_route_remains_existing_visual_and_no_pursuit_overlay():
 
 def test_html_escapes_untrusted_capability_labels():
     data=model.load_assessment(); data['capabilities'][0]['title']='<script>alert(1)</script>'
-    html=enterprise_overlay(data,commercial_projection(model.load_assessment(),as_of='2026-11-11'))
+    html=enterprise_overlay(data,commercial_projection(model.load_assessment(),as_of='2026-11-27'))
     assert '<script>alert(1)</script>' not in html
 
 
@@ -67,7 +67,7 @@ def test_default_lloyds_operating_model_preserves_illustration_and_adds_context_
 def test_priority_hypotheses_put_visual_story_and_cockpit_before_one_full_research_choice():
     from cios.applications.flora.research_intelligence.commercial_views import candidate_overview
     from cios.applications.flora.research_intelligence.enterprise_opportunity import opportunity_story
-    data=model.load_assessment();projection=commercial_projection(data,as_of='2026-11-11')
+    data=model.load_assessment();projection=commercial_projection(data,as_of='2026-11-27')
     for cid in ('RCO-LBG-002','RCO-LBG-001','RCO-LBG-009'):
         row=next(r for r in projection['candidates'] if r['id']==cid)
         html=candidate_overview(data,row,projection)
@@ -82,7 +82,7 @@ def test_priority_hypotheses_put_visual_story_and_cockpit_before_one_full_resear
 
 
 def test_unmapped_hypothesis_stays_discoverable_without_fake_capability():
-    data=model.load_assessment(); projection=commercial_projection(data,as_of='2026-11-11')
+    data=model.load_assessment(); projection=commercial_projection(data,as_of='2026-11-27')
     from copy import deepcopy
     p=deepcopy(projection)
     p['candidates'][0]['capability_ids']=['MISSING-SYNTHETIC-CAPABILITY']
@@ -94,7 +94,7 @@ def test_unmapped_hypothesis_stays_discoverable_without_fake_capability():
 
 
 def test_programme_only_association_is_visible_but_not_a_claim_of_ownership():
-    data=model.load_assessment(); projection=commercial_projection(data,as_of='2026-11-11')
+    data=model.load_assessment(); projection=commercial_projection(data,as_of='2026-11-27')
     from copy import deepcopy
     p=deepcopy(projection)
     assert data['programmes'], 'Fixture must include programme records'
@@ -136,7 +136,7 @@ def test_priority_route_has_one_principal_dossier_and_visible_controlled_capture
 
 
 def test_overlay_candidate_inspectors_preserve_all_identities_and_separate_ratings():
-    data=model.load_assessment();p=commercial_projection(data,as_of='2026-11-11')
+    data=model.load_assessment();p=commercial_projection(data,as_of='2026-11-27')
     html=enterprise_overlay(data,p)
     for row in p['candidates']:
         inspector=re.search("id='eo-candidate-"+row['id']+"'>(.*?)</article>",html,re.S).group(1)
@@ -149,7 +149,7 @@ def test_overlay_candidate_inspectors_preserve_all_identities_and_separate_ratin
 
 
 def test_missing_context_does_not_gain_a_source_claim_or_qualification():
-    data=model.load_assessment();p=commercial_projection(data,as_of='2026-11-11')
+    data=model.load_assessment();p=commercial_projection(data,as_of='2026-11-27')
     row=p['candidates'][0];row['context_supported']=False
     for proof in row['support']:proof['supported']=False
     html=unescape(enterprise_overlay(data,p))

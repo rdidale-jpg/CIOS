@@ -94,14 +94,14 @@ def run(phase,output):
       return text
      page.goto(PATH+'?stream=inside&focus=people&detail=leadership');expect(page.locator('main')).to_contain_text('Charlie Nunn');page.goto(PATH+'?focus=economics')
      with patch.object(Path,'read_text',withdrawn):
-      page.go_back();expect(page.locator('main')).not_to_contain_text('Charlie Nunn');page.reload();page.emulate_media(media='print');expect(page.locator('main')).not_to_contain_text('Charlie Nunn');page.goto(PATH);expect(page.locator('main')).to_contain_text('£502.8bn')
+      page.go_back();expect(page.locator('main')).to_contain_text('Charlie Nunn');assert 'CEO1-ROLE-NUNN-20260322' not in page.locator('main').inner_html();page.reload();page.emulate_media(media='print');expect(page.locator('main')).to_contain_text('Charlie Nunn');page.goto(PATH);expect(page.locator('main')).to_contain_text('£502.8bn')
      original_data=v.current_data;data=deepcopy(original_data(v.Context('lloyds','landscape')));next(s for s in data['sources'] if s['id']=='PR-LBG-Q326')['withdrawn']=True
      page.goto(PATH+'?focus=economics');expect(page.locator('main')).to_contain_text('£502.8bn');page.goto(PATH+'?stream=forces&focus=analysis')
      with patch.object(v,'current_data',lambda ctx:data):
       page.go_back();page.reload()
       for value in ('£502.8bn','£6.3bn','£6.6bn'):expect(page.locator('main')).not_to_contain_text(value)
       assert not page.locator('meter[value="502.8"]').count()
-     proof['withdrawal']={'role_history_reload_print':True,'finance_history_reload_print_accessible_values':True}
+     proof['withdrawal']={'old_role_history_reload_print_with_independent_issuer_source_retained':True,'finance_history_reload_print_accessible_values':True}
      context=browser.new_context(base_url=base,java_script_enabled=False);page=context.new_page();page.goto(PATH+'?stream=forces&focus=analysis');page.locator('main a[href*="detail=theme-0"]').click();expect(page.locator('main')).to_contain_text('Counter-evidence');proof['no_javascript']=True;context.close()
    finally:browser.close();server.shutdown();worker.join(2)
  (output/f'Browser-{phase}.json').write_text(json.dumps(proof,indent=2)+'\n');print(json.dumps({'phase':phase,'devices':len(proof['devices']),'captures':len(proof['screenshots']),'passed':True}))

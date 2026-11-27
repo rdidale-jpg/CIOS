@@ -230,11 +230,11 @@ def test_private_model_rows_and_wrong_claim_identity_are_not_published(monkeypat
 def test_every_counted_eligible_claim_has_substantive_non_source_main_output():
     import re
     found=set()
-    for stream,rows in gold.REGIONS.items():
-        for focus,_ in rows:
-            for detail in ('',*(d for d in gold.DETAILS[focus] if d!='sources')):
-                body=main(gold.render({'stream':[stream],'focus':[focus],'detail':[detail]}))
-                found.update(re.findall('data-claim-id="([^"]+)"',body))
+    subjects=[(stream,focus) for stream,rows in gold.REGIONS.items() for focus,_ in rows]+[('inside','people')]
+    for stream,focus in subjects:
+        for detail in ('',*(d for d in gold.DETAILS[focus] if d!='sources')):
+            body=main(gold.render({'stream':[stream],'focus':[focus],'detail':[detail]}))
+            found.update(re.findall('data-claim-id="([^"]+)"',body))
     # Scale figures use the existing amount component; they are checked above.
     assert set(gold.LLOYDS_IDS)-set(gold.recovery.MEASURES)<=found
 
@@ -313,11 +313,14 @@ def test_ceo_deep_links_keep_subject_and_withdraw_strategy_goals(http, monkeypat
 def test_people_view_withdraws_workforce_evidence_without_inventing_accountability(monkeypatch):
     query = {'stream': ['inside'], 'focus': ['people'], 'detail': ['workforce']}
     html = gold.render(query)
-    assert 'detail=copilot' in html and '30,000' not in html
+    assert 'detail=frontier' in html and '30,000' not in html
     assert 'Licences are not people' in html
     current = data()
     next(source for source in current['sources'] if source['id'] == 'PR-LBG-AR25')['withdrawn'] = True
     monkeypatch.setattr(v, 'current_data', lambda ctx: current)
     html = gold.render(query)
-    assert 'detail=copilot' not in html
-    assert 'rules out related role reductions' in html
+    # The independent, source-bound June 2026 disclosure survives withdrawal
+    # of the older annual-report source; the older claim does not.
+    assert 'detail=frontier' in html
+    assert 'data-claim-id="LBG-AR25-COPILOT"' not in html
+    assert 'Licences are not people' in html
