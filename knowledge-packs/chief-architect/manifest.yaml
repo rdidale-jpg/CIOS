@@ -4,7 +4,7 @@ documents:
     title: CIOS Chief Architect Handbook
     source_path: architecture/handbook/CIOS-Chief-Architect-Handbook.md
     pack_path: handbook/CIOS-Chief-Architect-Handbook.md
-    checksum: cee0c829cce1f7e1da7cdd6c8c9573e122ae567a0ae6cf759f6ebc1e756354ba
+    checksum: 4447c6c566bb68ec4a7c7c6da2aa3e7ffdbd4da3d7e29bb8bf4608b6043db977
     authority: handbook
     inclusion_reason: Chief Architect operating model and judgement standard
   - document_id: CURRENT-PROGRAMME-STATE

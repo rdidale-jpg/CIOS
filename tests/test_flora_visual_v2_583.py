@@ -210,6 +210,12 @@ def test_runtime_source_preserves_canonical_home_and_domain_owners():
         if name in unified['presentation_exceptions']:
             assert name.endswith(('offers_views.py','banking_explorer.py','unified_views.py','visual_intelligence.py','living_map.py','sales_views.py','workspace/views.py','navigation.py'))
             continue
+        if name in {'.github/workflows/flora-release-preflight.yml', 'tools/ci/flora_release_preflight.py'}:
+            from subprocess import check_output
+            historical = check_output(['git', 'show', manifest['base_sha']+':'+name], cwd=root)
+            assert hashlib.sha256(historical).hexdigest() == digest, name
+            assert not (root/name).exists(), name
+            continue
         if name=='cios/applications/flora/security_store.py':
             import subprocess
             from tools.research.auth1_quality import assert_store_evolution,BASE as AUTH_BASE

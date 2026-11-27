@@ -227,6 +227,12 @@ def test_protected_intelligence_security_permissions_matching_and_pipeline_bytes
             amended=isp['owner_boundary_revisions'][path]
             assert amended['baseline_sha256']==digest,path
             digest=amended['candidate_sha256']
+        if path in {'.github/workflows/flora-release-preflight.yml', 'tools/ci/flora_release_preflight.py'}:
+            from subprocess import check_output
+            historical = check_output(['git', 'show', manifest['base_sha']+':'+path], cwd=root)
+            assert hashlib.sha256(historical).hexdigest() == digest, path
+            assert not (root/path).exists(), path
+            continue
         if path=='cios/applications/flora/security_store.py':
             import subprocess
             from tools.research.auth1_quality import assert_store_evolution,BASE as AUTH_BASE

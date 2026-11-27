@@ -1,5 +1,7 @@
 # PR #586 — production release preparation
 
+> **Historical release record.** The owner preflight workflow and executable described below are retired. Current development and authorised manual deployment follow the [Product Delivery Doctrine](../../product/flora-delivery-acceleration/README.md).
+
 **Production decision: NO-GO until every required Render check below is established. No merge or deployment has been performed.** A passing code gate is separate from proof that the existing service, data, identity and recovery arrangements are ready.
 
 The final validated **candidate SHA** is pinned in PR #586's current handoff and exact-head Actions results. This document is committed before that final run; it does not invent a future green result or a production deployment SHA. The owner must use the complete 40-character SHA, never a moving branch name. If a later merge produces another SHA, that SHA must receive complete local and hosted validation before it becomes a release candidate.

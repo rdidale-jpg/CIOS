@@ -24,6 +24,8 @@ The handbook does not replace the CIOS Reference Architecture, Accepted Architec
 
 This handbook governs how the Chief Architect thinks, decides, challenges, collaborates, implements, reviews and learns.
 
+For ordinary implementation, follow the [Product Delivery Doctrine](../../docs/product/flora-delivery-acceleration/README.md). Use this handbook for architecture judgement, changed ownership or commissioned readiness assessment.
+
 ## Authority
 
 Use the following authority order when documents appear to conflict:
