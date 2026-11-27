@@ -125,8 +125,8 @@ def test_deep_journeys_separate_conceptual_paths_from_specific_estate_edges(key)
         assert '115,687' not in html  # Context reference, not a second owning home.
         return
     assert 'no verified application, role or supplier dependency is inferred'in html
-    assert 'Commercial significance'in html and 'Account investigation'in html
-    assert 'No buyer need, budget, procurement event or supplier demand'in html
+    assert 'Economic and operational significance'in html and 'Commercial investigation'in html
+    assert 'purchase mandates' in html
     for invented in ('Oracle installation','AWS contract','Renewal: 2030','£100m opportunity'):assert invented not in html
 
 
@@ -231,7 +231,7 @@ def test_history_keeps_new_role_bytes_exact_and_rejects_unreviewed_additions(tmp
 
 def test_existing_eai_outcomes_and_funding_still_have_one_source_guarded_entry():
     html=main(v.render(g.CANONICAL,{}))
-    assert html.count('data-intelligence="funding-base"')==1
+    assert main(v.render(g.CANONICAL,query('landscape','economics','funding'))).count('data-intelligence="funding-base"')==1
     assert html.count('id="preview-service-recovery"')==0  # Complaint context is no longer an executive-attention marker.
     assert 'stream=inside&amp;focus=operations&amp;subject=group&amp;detail=service' in html
     assert 'Funding comparison'in html and 'Customer operations'in html

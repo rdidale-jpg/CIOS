@@ -34,7 +34,7 @@ def test_original_research_and_permissions_are_preserved_with_only_additive_clai
 
 def test_whole_group_arrival_and_distinct_business_models():
     body=view();assert 'Group overview' in body and 'One Group, different economic engines' in body
-    assert '28 million' in body and 'Leadership’s agenda' in body and '£502.8bn' in body and '£6.6bn' in body
+    assert '28 million' in body and 'ce-economy' in body and '£502.8bn' in body and '£6.6bn' in body
     assert '115,687' not in body and '97.4%' not in body
     assert 'BCB' not in body  # No unexplained acronym-first overview.
     commercial=view(focus='commercial')
@@ -42,7 +42,7 @@ def test_whole_group_arrival_and_distinct_business_models():
     assert 'Amanda Murphy' in commercial and 'John Langley' in commercial
     assert 'Cash timing is the customer problem' not in commercial
     assert 'Natasha Condon' in view(focus='commercial',detail='transactions')
-    insurance=view(focus='retirement');assert 'Scottish Widows' in insurance and 'Insurance and investment return' in insurance
+    insurance=view(focus='retirement');assert 'Scottish Widows' in insurance and 'Policy obligations, investment performance' in insurance
 
 
 def test_brands_are_not_legal_or_segment_allocations():
@@ -93,7 +93,7 @@ def test_each_goal_connects_to_evidence_role_dependencies_risk_and_decision(key)
 def test_forces_is_a_cohesive_agenda_with_distinct_horizons_and_no_claimed_pressures():
     body=view('forces','markets')
     assert 'Executive agenda' in body
-    for t in ('2026','2027','2030','Executive choices','AI value beyond deployment','Resilience through change','qualified Material Pressure'):assert t in body
+    for t in ('2026','2027','2030','Strategic change and executive choices','AI value beyond deployment','Resilience through change','ranked Material Pressures'):assert t in body
     assert '115,687' not in body and 'data-semantic-type="calculated"' not in body
 
 

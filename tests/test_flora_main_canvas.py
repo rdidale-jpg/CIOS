@@ -56,22 +56,23 @@ def test_primary_business_compositions_wrap_customer_and_economic_context():
 
 
 def test_financial_flows_and_bars_are_full_native_targets_without_new_measurements():
- html=v.render(g.CANONICAL,query('landscape','economics'))
- dom=Links(html)
- assert sum(a.get('data-canvas-region')=='financial-chart'for a,_ in dom.links)==2
+ html=v.render(g.CANONICAL,query('landscape','economics'));dom=Links(html)
  for name in ('Funding','Lending & income','Costs & impairment','Capital & returns'):
   assert any(a.get('aria-label')==name and a.get('data-canvas-region')=='money'for a,_ in dom.links)
- assert '£502.8bn'in html and '£496.5bn'in html and '£6.3bn'in html
- assert 'not an organic inflow'in html.lower() and 'not a measured allocation'in html
- assert 'Insurance accounting is not banking net interest margin'in html and 'Transfer pricing and risk costs matter'in html
- assert all(x not in html for x in ('£11.084bn','3.21%','£477.5bn','.pdf'))
+ assert 'ce-capital' in html and '£6.6bn' in html
+ funding=v.render(g.CANONICAL,query('landscape','economics','funding'))
+ assert sum(a.get('data-canvas-region')=='financial-chart'for a,_ in Links(funding).links)==2
+ assert all(value in funding for value in ('£502.8bn','£496.5bn','£6.3bn'))
+ assert 'not an organic inflow' in funding.lower() and 'not adjusted for consolidation' in funding
+ assert all(x not in html+funding for x in ('£11.084bn','3.21%','£477.5bn','.pdf'))
 
 
 def test_operating_value_system_layers_have_distinct_existing_destinations():
  html=v.render(g.CANONICAL,query('inside','operations'))
  for key in g.JOURNEYS:
   assert ('detail=service#' if key=='service' else 'detail=journey-'+key) in html
- assert html.count('class="canvas-operating-band"')==3
+ assert 'Connected enterprise operating model' in html and 'ce-connections' in html
+ assert 'canvas-operating-band' not in html
  html=v.render(g.CANONICAL,query('inside','operations','journey-credit'))
  for label in ('Business / value stream','Durable capabilities','Organisation / accountable role','Applications / data','Technology / infrastructure','Suppliers / contracts'):
   assert any(a.get('aria-label')==label for a,_ in Links(html).links)
@@ -80,7 +81,7 @@ def test_operating_value_system_layers_have_distinct_existing_destinations():
 
 def test_capability_organisation_and_technology_regions_preserve_boundaries():
  html=v.render(g.CANONICAL,query('inside','capabilities'))
- assert 'canvas-capabilities'in html and 'no organisation, application ownership or installed dependency'in html
+ assert 'Connected enterprise operating model' in html and 'not reporting lines or verified system dependencies' in html
  org=v.render(g.CANONICAL,query('inside','people','structure'))
  assert 'Financial reporting businesses'in org
  assert 'Financial reporting businesses' in org and 'spending authority' in org
@@ -133,7 +134,7 @@ def test_source_withdrawal_removes_dependent_regions_values_and_accessible_label
  data=deepcopy(v.current_data(v.Context('lloyds','landscape')))
  next(s for s in data['sources']if s['id']=='PR-LBG-Q326')[flag]=True
  monkeypatch.setattr(v,'current_data',lambda ctx:data)
- html=main(v.render(g.CANONICAL,query('landscape','economics')))
+ html=main(v.render(g.CANONICAL,query('landscape','economics','funding')))
  for token in ('£502.8bn','£6.3bn','£6.6bn','value="502.8"','Compare customer deposits at 30 September 2026'):assert token not in html
  assert '£496.5bn'in html
  swot=v.render(g.CANONICAL,query('forces','analysis'))

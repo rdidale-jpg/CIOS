@@ -1,5 +1,6 @@
 """CEO enrichment cannot admit recovered candidates or escape existing Source/IAM owners."""
 from copy import deepcopy
+import re
 from urllib.parse import parse_qs, urlsplit
 
 import pytest
@@ -90,17 +91,28 @@ def test_new_economic_view_rejects_wrong_entity_period_unit_or_actual_basis(monk
     next(c for c in data['claims'] if c['id'] == 'LBG-Q326-PROFIT')[field] = value
     monkeypatch.setattr(visual, 'current_data', lambda ctx: data)
     body = main(query('economics', 'income'))
-    assert '£6.6bn' not in body and 'Follow the earnings bridge' in body
+    assert '£6.6bn' not in body
+    assert 'The earnings equation' in body
 
 
-def test_economic_target_is_not_an_actual_or_divisional_allocation():
+def test_economic_target_is_not_an_actual_or_divisional_allocation(monkeypatch):
     body = main(query('economics', 'costs'))
-    assert 'cost-to-income ratio below 45%' not in body and 'detail=objective-efficiency' in body
+    target = re.search(r'<div data-claim-id="LBG-A2030-CIR">(.*?)</div>', body, re.S).group(1)
+    assert 'cost-to-income ratio below 45%' in target
+    assert '2030 efficiency ambition' in target and 'Management target' in target
+    assert '£6.6bn' not in target and 'detail=objective-efficiency' in body
     goal=main({'stream':['forces'],'focus':['strategy'],'detail':['objective-efficiency']})
     assert 'cost-to-income ratio below 45%' in goal
-    assert 'Gross savings are not net profit' in body
+    assert 'Gross savings are not realised net profit' in body
     assert 'Unavailable</td>' not in body
-    assert '£6.6bn' not in body
+    assert '£6.6bn' in body and 'Group statutory profit' in body
+    assert 'Reported Group flow, not divisional allocation' in body
+    data=deepcopy(visual.current_data(visual.Context('lloyds','landscape')))
+    next(source for source in data['sources'] if source['id']=='PR-LBG-A2030')['withdrawn']=True
+    monkeypatch.setattr(visual,'current_data',lambda _:data)
+    withdrawn=main(query('economics','costs'))
+    assert 'cost-to-income ratio below 45%' not in withdrawn and 'GBP2bn' not in withdrawn
+    assert '£6.6bn' in withdrawn  # Independent Group actual survives target withdrawal.
 
 
 @pytest.mark.parametrize('selector', ['workspace=private', 'analysis=private', 'subject=BK-ENT-003', 'source=owner-only'])
