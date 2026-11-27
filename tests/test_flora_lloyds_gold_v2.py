@@ -177,3 +177,11 @@ def test_historical_owner_compatibility_rejects_unknown_changes():
         assert ceo_predecessor(ROOT,path,raw)!=raw
         unknown=raw+b'\n# Unreviewed mutation\n'
         assert ceo_predecessor(ROOT,path,unknown)==unknown
+
+
+@pytest.mark.parametrize('role',('nunn','sustainability'))
+def test_strategy_roles_link_to_strategy_rather_than_arbitrary_finance_journey(role):
+    body=view('inside','people','leader-'+role)
+    assert 'Published strategic priorities' in body
+    assert 'focus=strategy' in body and 'detail=goals' in body
+    assert 'detail=journey-finance' not in body

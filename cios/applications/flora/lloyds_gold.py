@@ -1157,7 +1157,12 @@ def executive_people(state,facts):
         row=next((r for r in V2_LEADERS if r[0]==chosen and 'LBG-V2-'+r[0] in facts),None)
         if row:
             key,name,role,remit,journey=row;body+='<section class="v2-selected"><h2>'+e(name)+' · '+e(role)+'</h2>'+v2_reported(facts,key)
-            body+='<p>'+e(remit)+' is the relevant functional context, not a verified purchase mandate.</p>'+region(state,'Operating responsibilities to understand',kind='operating',caption='Relevant capability context; delegated ownership remains to be confirmed',focus='operations',detail='journey-'+journey if journey in JOURNEYS else 'journey-finance')+'</section>'
+            body+='<p>'+e(remit)+' is the relevant functional context, not a verified purchase mandate.</p>'
+            if journey in JOURNEYS:
+                body+=region(state,'Operating responsibilities to understand',kind='operating',caption='Relevant capability context; delegated ownership remains to be confirmed',focus='operations',detail='journey-'+journey)
+            else:
+                body+=region(state,'Published strategic priorities',kind='timeline',caption='Group strategy context; no delegated goal or buying authority is inferred',stream='forces',focus='strategy',detail='goals')
+            body+='</section>'
         else:body+='<p class="le-deck">The selected role cannot be shown from the available evidence.</p>'
     if 'LBG-V2-CONDONREPORT' in facts:
         body+='<section class="v2-reported-line"><h2>One explicitly disclosed reporting line</h2>'+v2_reported(facts,'CONDON','CONDONREPORT')+region(state,'Transaction Banking',kind='commercial',caption='Cash, working capital, trade and payments within CIB',stream='landscape',focus='commercial',detail='transactions')+'</section>'
