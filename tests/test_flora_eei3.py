@@ -55,7 +55,7 @@ def test_withdrawal_exception_and_origin_mismatch_isolate_affected_report(tmp_pa
     report = json.loads(path.read_text())
     for change in ({'withdrawn': True}, {'restrictions': ['material use restriction']},
                    {'rights': {**report['rights'], 'material_exceptions': [{
-                       'issue': 'facts_reuse_exception', 'operations': ['independent_facts'], 'status': 'unresolved'}]}}):
+                       'issue': 'facts_reuse_exception', 'operations': ['independent_facts'], 'status': 'unresolved', 'concrete_restriction': True}]}}):
         write(path, {**report, **change})
         lines = p.statement_series(EQ)
         assert len(lines) == 30 and max(line.fiscal_year for line in lines) == 2024
@@ -104,4 +104,4 @@ def test_existing_equinix_route_uses_public_only(monkeypatch):
     assert '+5.36' in insight and 'investing used cash' in insight
     assert 'Source &amp; basis' in facts
     assert p.statement_series(('research-subject:lloyds-banking-group-plc', 'Lloyds Banking Group plc')) == ()
-    assert f.public_factual_projection() == {}
+    assert len(f.public_factual_projection()['facts']) == 3

@@ -44,8 +44,13 @@ def preserved_research_cut():
         else:assert before==after
     assert set(rebound)=={'DEPTH-LBG-AI','DEPTH-LBG-LEGACY','DEPTH-LBG-WALLET','DEPTH-LBG-CURVE'}
     allowed.add(review_path)
+    allowed.update({'enterprise-knowledge/banking/research-model/source-snapshots/PFI-Lloyds-Q326.json','enterprise-knowledge/banking/research-model/source-snapshots/LEI-Lloyds-H126.json'})
+    original_facts=json.loads(subprocess.check_output(['git','show','8be67e3d49ad17886c1cc14da3c646271b21017e:enterprise-knowledge/banking/research-model/source-snapshots/PFI-Lloyds-Q326.json'],cwd=ROOT))['fact_bindings']
+    current_facts=json.loads((ROOT/'enterprise-knowledge/banking/research-model/source-snapshots/PFI-Lloyds-Q326.json').read_text())['fact_bindings']
+    for a,b in zip(original_facts,current_facts):
+        assert a['key']==b['key'] and all(b['facts'][k]==v for k,v in a['facts'].items())
     assert set(changed)<=allowed,changed
-    # Original source files, asset identities, rights, financial holds and
+    # Original source files, asset identities, prior research rights and
     # historical records are preserved; this returns the immutable prior cut
     # so older 39-claim/7-source assertions continue to check their own release.
     return baseline

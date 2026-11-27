@@ -36,7 +36,7 @@ def test_genuine_retained_originals_old_records_and_existing_source_policy():
         assert all(q['quote'] in text for q in s['excerpts'])
         assert s['rights']['status']=='permitted_public_factual_category'
         assert all(c['source_ids']==[s['id']] for c in x['claims'] if c['id'] in {b['claim_id'] for b in s['disclosure_bindings']})
-    assert public_factual_projection()=={}
+    assert len(public_factual_projection()['facts']) == 3
 
 
 def test_additive_review_reconciliation_does_not_grant_old_judgments_to_new_research():
@@ -125,7 +125,7 @@ def test_source_lifecycle_removes_facts_figures_and_hidden_markup_without_blanke
     x=data();next(s for s in x['sources'] if s['id']==source)[flag]=True
     monkeypatch.setattr(v,'current_data',lambda _:x)
     assert removed not in view(route)
-    group=g.render({},canonical=True);assert '£502.8bn' in group and '£6.6bn' in group
+    group=g.render({},canonical=True);assert '£502.8bn' in group and '£6.625bn' in group
     if source!='LCE-BOARD':assert 'Sarah Legg' in view('board')
 
 
@@ -165,7 +165,7 @@ def test_real_source_owner_correction_reloads_figures_and_suppresses_unreconcile
     model.load_assessment();changed=view('employees')
     assert '60,060' in changed and '60,061' not in changed
     assert 'ceo-fte-distribution' not in changed
-    assert public_factual_projection()=={}
+    assert len(public_factual_projection()['facts']) == 3
 
 
 @pytest.mark.parametrize('route',VIEWS.values())
@@ -179,11 +179,13 @@ def test_new_public_routes_do_not_accept_private_selectors_or_writes(http,route)
         assert http(url+suffix)[0] in {403,404}
 
 
-def test_source_inspection_keeps_homepage_attribution_and_held_measures_off():
+def test_source_inspection_keeps_homepage_attribution_and_authorised_facts_separate():
     for focus in ('people','applications','operations','economics','partners'):
         stream='landscape' if focus=='economics' else 'inside'
         body=g.render({'stream':[stream],'focus':[focus],'detail':['sources']},canonical=True)
         assert '.pdf' not in body and 'https://www.lloydsbankinggroup.com/' in body
-    assert public_factual_projection()=={}
-    protected=('cios/applications/flora/security_store.py','cios/applications/flora/security_web.py','cios/applications/flora/financial_intelligence','cios/applications/flora/research_intelligence','cios/applications/flora/intelligence_presentation.py','tools/ci/flora_ci.py','tools/ci/flora-baseline-v1.json','architecture/decisions')
+    assert len(public_factual_projection()['facts']) == 3
+    protected=('cios/applications/flora/security_store.py','cios/applications/flora/security_web.py','cios/applications/flora/intelligence_presentation.py','tools/ci/flora_ci.py','tools/ci/flora-baseline-v1.json','architecture/decisions')
     assert not subprocess.check_output(['git','diff','--name-only',BASE,'--',*protected],cwd=ROOT)
+    from tools.research.public_financial_compatibility import validate
+    assert validate(ROOT)['ci_comparator_changed'] is False

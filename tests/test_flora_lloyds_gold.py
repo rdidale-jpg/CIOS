@@ -113,7 +113,7 @@ def test_financial_entity_period_basis_unit_actual_and_value_binding(monkeypatch
 
 def test_held_segment_figures_new_financial_projection_and_pdf_links_remain_inactive():
     from cios.applications.flora.financial_intelligence import candidate_analytics
-    assert candidate_analytics.public_factual_projection()=={}
+    assert len(candidate_analytics.public_factual_projection()['facts']) == 3
     html=''.join(gold.render({'stream':[s],'focus':[f],'detail':[d]}) for s,rows in gold.REGIONS.items() for f,_ in rows for d in ('',*gold.DETAILS[f]))
     for held in ('2,256','1,425','4,215','4,293','£6,625','£395.3','£321.8','.pdf','£100m opportunity'):
         assert held not in html

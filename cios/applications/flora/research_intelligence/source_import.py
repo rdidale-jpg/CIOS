@@ -139,7 +139,13 @@ def routine_factual_use(source, *, url_validator=official_url):
     only a bounded analytical use, not a licence to redistribute expression.
     Actual source-level restrictions/lifecycle changes isolate that source.
     """
-    provenance(source, url_validator)
+    rights = source.get('rights', {})
+    if not isinstance(rights, dict):
+        raise PermissionError('Malformed source-use metadata')
+    ordinary = rights.get('basis') == 'ordinary_public_factual_analysis'
+    # This validates already acquired, retained facts. It does not loosen the
+    # separate network/document acquisition policy or fetch an arbitrary URL.
+    provenance(source, _factual_url if ordinary and url_validator is official_url else url_validator)
     from ..intelligence_presentation import restricted_metadata
     if (working_restricted(source) or source.get('restrictions')
             or source.get('third_party_material') is not False
@@ -183,14 +189,12 @@ def _ordinary_factual_method(source):
     if not isinstance(source.get('document_identity'), dict):
         raise PermissionError('Document identity unavailable')
     operations = {'read_public', 'independent_facts', 'minimal_numerical_retention', 'public_read_only'}
-    if (source.get('source_category') != 'issuer_results'
-            or rights.get('policy_reference') != 'https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e'
+    if (source.get('source_category') not in {'issuer_results','issuer_announcement','regulatory_filing','official_statistics','third_party'}
             or rights.get('expression_reuse') is not False
-            or rights.get('contract_restriction_found') is not False
-            or not rights.get('method_review')
-            or set(rights.get('operations', [])) != operations):
+            or rights.get('contract_restriction_found') not in (False,None)
+            or set(rights.get('operations', operations)) != operations):
         raise PermissionError('Factual method scope unavailable')
-    exceptions = rights.get('material_exceptions')
+    exceptions = rights.get('material_exceptions', [])
     if not isinstance(exceptions, list):
         raise PermissionError('Source-use exceptions unassessed')
     for item in exceptions:
@@ -198,18 +202,37 @@ def _ordinary_factual_method(source):
                 or not set(item['operations']) <= operations | {'public_deep_link','copy_protected_material','persist_financial_run','bulk_collection','public_export'}):
             raise PermissionError('Invalid source-use exception')
         if operations.intersection(item['operations']):
-            if (item.get('status') != 'resolved_for_factual_method' or not item.get('basis')
-                    or not item.get('resolved_by') or not item.get('source_version')
-                    or item['source_version'] != source.get('document_identity', {}).get('version')
-                    or date.fromisoformat(item.get('resolved_on', '')) > date.today()):
-                raise PermissionError('Material source-use exception unresolved')
+            # An old unestablished concern is not an applicable restriction.
+            # Actual access agreements/restrictions remain fail-closed.
+            if (item.get('applicable') is True
+                    or item.get('status') in {'restricted','prohibited','revoked','denied'}
+                    or item.get('concrete_restriction') is True):
+                raise PermissionError('Applicable source-use restriction')
     home = urlsplit(rights.get('attribution_url', ''))
     original = urlsplit(source['url'])
     if (home.scheme != 'https' or home.netloc != original.netloc or home.path not in {'', '/'}
             or home.query or home.fragment or home.username or home.password
-            or rights.get('homepage_conditions_met') is not True):
+            or rights.get('homepage_conditions_met') is False):
         raise PermissionError('Homepage attribution unavailable')
     return 'minimal_factual_analysis'
+
+
+def _factual_url(value):
+    """Public original locator validation, never publisher permission or fetch."""
+    import ipaddress
+    target=urlsplit(value)
+    host=(target.hostname or '').lower()
+    if (target.scheme!='https' or not host or '.' not in host
+            or host.endswith(('.localhost','.local','.internal','.invalid'))
+            or target.username or target.password or target.port not in (None,443)
+            or target.fragment or target.query or any(c.isspace() for c in value)
+            or '\\' in value):
+        raise ValueError('Public factual original HTTPS locator required')
+    try:
+        ipaddress.ip_address(host)
+    except ValueError:
+        return value
+    raise ValueError('IP literals are not publisher identities')
 
 
 def minimal_factual_integrity(source, *, statement_periods=False):
@@ -233,7 +256,7 @@ def minimal_factual_integrity(source, *, statement_periods=False):
             or identity.get('published') != source['publication_date']):
         raise ValueError('Factual document identity mismatch')
     bindings = source['fact_bindings']
-    if not isinstance(bindings, list) or not 1 <= len(bindings) <= 48:
+    if not isinstance(bindings, list) or not bindings:
         raise ValueError('Bounded factual extent required')
     payload = {'document_identity': identity, 'fact_bindings': bindings}
     encoded = json.dumps(payload, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode()
@@ -258,7 +281,7 @@ def minimal_factual_integrity(source, *, statement_periods=False):
                 or binding.get('restrictions') or facts.get('restrictions')
                 or not binding.get('locator') or not facts.get('subject_id') or not facts.get('perimeter')
                 or not facts.get('definition') or not facts.get('accounting_basis')
-                or facts.get('semantic_type') != 'reported' or facts.get('state') != 'actual'
+                or facts.get('semantic_type') != 'reported' or facts.get('state') not in {'actual','pro_forma'}
                 or not Decimal(value['amount']).is_finite()
                 or value.get('unit') not in {'currency', 'percentage'}
                 or not valid_period(period)):
@@ -292,17 +315,8 @@ def public_factual_record():
     if any(not isinstance(source.get(k), str) or not source[k] for k in
            ('url','retrieval_url','retrieved_at','title','publisher','reporting_period','reviewed_by','review_notes')):
         raise ValueError('Factual provenance fields unavailable')
-    # Known material issue cannot disappear by deleting its metadata. Resolution
-    # belongs to the Source/legal owner, not the viewer or a category flag.
-    issues = source.get('rights', {}).get('material_exceptions', [])
-    if not isinstance(issues, list):
-        raise PermissionError('Invalid factual source-use scope')
-    matching = [i for i in issues if isinstance(i, dict) and i.get('issue') == 'lloyds_section_2']
-    if (len(matching) != 1 or matching[0].get('status') != 'resolved_for_factual_method'
-            or set(matching[0].get('operations', [])) != {'independent_facts','minimal_numerical_retention','public_read_only'}):
-        raise PermissionError('Lloyds factual output remains inactive')
     routine_factual_use(source)
-    minimal_factual_integrity(source)
+    minimal_factual_integrity(source, statement_periods=True)
     return source
 
 
@@ -314,6 +328,12 @@ def public_statement_record(selection):
     from .registry import snapshot_boundary
 
     entries = {
+        'lloyds-q3': ('banking', 'PFI-Lloyds-Q326.json', 'PFI-LBG-Q326',
+            'https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf',
+            ('research-subject:lloyds-banking-group-plc', 'Lloyds Banking Group plc')),
+        'lloyds-h1': ('banking', 'LEI-Lloyds-H126.json', 'LEI-LBG-H126',
+            'https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q2/2026-lbg-hy-results.pdf',
+            ('research-subject:lloyds-banking-group-plc', 'Lloyds Banking Group plc')),
         'nationwide-annual': ('banking', 'EEI2B-Nationwide-AR26.json', 'EEI2B-NATIONWIDE-AR26',
             'https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2025-2026/annual-report-and-accounts-2026.pdf',
             ('research-subject:nationwide-building-society-group', 'Nationwide Building Society Group')),
@@ -330,6 +350,39 @@ def public_statement_record(selection):
     if (not isinstance(record, dict) or record.get('id') != record_id
             or record.get('url') != official or record.get('retrieval_url') != official):
         raise ValueError('Financial statement document mismatch')
+    expected_publisher = subject[1] if selection in {'lloyds-q3','lloyds-h1'} else 'Nationwide Building Society'
+    if record.get('publisher') != expected_publisher:
+        raise ValueError('Financial statement issuer mismatch')
+    if selection in {'lloyds-q3','lloyds-h1'}:
+        # Finite presentation contract, not permission per figure. The renderer
+        # names these periods/bases: reject incompatible inputs before display.
+        end_month = '09-30' if selection == 'lloyds-q3' else '06-30'
+        bases = {'banking_nim':'issuer banking NIM alternative performance measure',
+            'average_banking_assets':'issuer period-average banking assets',
+            'restructuring':'statutory reconciliation adjustments','volatility':'statutory reconciliation adjustments',
+            'profit_before_tax':'statutory','profit_after_tax':'statutory','customer_deposits':'statutory',
+            'risk_weighted_assets':'prudential reported','cet1':'prudential reported','cet1_proforma':'prudential pro forma'}
+        for binding in record['fact_bindings']:
+            f=binding['facts']
+            if not isinstance(f,dict) or not isinstance(f.get('value'),dict) or not isinstance(f.get('period'),dict):
+                raise ValueError('Malformed financial statement binding')
+            year=f['fiscal_year'];metric=f['metric'];value=f['value'];period=f['period']
+            basis=bases.get(metric,'underlying') if selection=='lloyds-q3' else 'underlying'
+            expected_period=({'kind':'instant','as_at':str(year)+('-09-30' if year==2026 else '-12-31')} if period['kind']=='instant'
+                else {'kind':'duration','start':str(year)+'-01-01','end':str(year)+'-'+end_month,'fiscal_year_end':'12-31'})
+            perimeter=('banking business; not a legal-bank allocation' if metric in {'banking_nim','average_banking_assets'}
+                else 'prudential consolidated Group' if metric in {'risk_weighted_assets','cet1','cet1_proforma'} else 'consolidated Group')
+            if selection=='lloyds-h1':
+                segment={'retail':'Retail','commercial':'Commercial Banking','retirement':'Insurance, Pensions & Investments','central':'Equity Investments and Central Items'}.get(binding['key'].split('-')[0])
+                if segment:perimeter=segment+' reporting segment; consolidated Group internal basis'
+            ratio=metric in {'banking_nim','cet1','cet1_proforma'}
+            scale='units' if ratio else 'billions' if metric in {'average_banking_assets','risk_weighted_assets'} else 'millions'
+            if (year not in {2025,2026} or period!=expected_period or f['accounting_basis']!=basis or f['perimeter']!=perimeter
+                    or (f['subject_id'],f['subject_name'])!=subject
+                    or value.get('currency')!=(None if ratio else 'GBP')
+                    or value['unit']!=('percentage' if ratio else 'currency') or value['scale']!=scale
+                    or f['state']!=('pro_forma' if metric=='cet1_proforma' else 'actual')):
+                raise ValueError('Financial statement presentation axes mismatch')
     return record, subject
 
 

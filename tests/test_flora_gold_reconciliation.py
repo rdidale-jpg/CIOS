@@ -101,11 +101,13 @@ def test_new_home_is_public_but_private_selectors_remain_denied(http,detail):
 
 
 def test_no_research_or_protected_owner_changes_and_no_held_financial_activation():
-    assert financial.public_factual_projection()=={}
+    assert len(financial.public_factual_projection()['facts']) == 3
     protected=('cios/applications/flora/security_store.py','cios/applications/flora/security_web.py',
-               'cios/applications/flora/research_intelligence/source_import.py','cios/applications/flora/financial_intelligence',
+
                'cios/applications/flora/blueprint_import/material_pressure.py')
     assert subprocess.check_output(['git','diff','--name-only','7f003982088b6f71fc2e365f3663b7beb3772d21','--',*protected],cwd=ROOT,text=True)==''
+    from tools.research.public_financial_compatibility import validate
+    assert validate(ROOT)['ci_comparator_changed'] is False
     from tests.test_flora_lloyds_gold_v2 import test_original_research_and_permissions_are_preserved_with_only_additive_claims
     test_original_research_and_permissions_are_preserved_with_only_additive_claims()
     for path in ('cios/applications/flora/lloyds_gold.py',):

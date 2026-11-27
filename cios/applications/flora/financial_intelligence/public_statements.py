@@ -39,7 +39,7 @@ class Line(Measurement):
         boundary = self.period.as_at or self.period.end
         if (value.scale != 'units' or value.currency is not None or not value.amount.is_finite()
                 or value.amount.as_tuple().exponent < -self.precision_dp
-                or self.semantic_type != 'reported' or self.state != 'actual' or boundary > date.today()
+                or self.semantic_type != 'reported' or self.state not in {'actual','pro_forma'} or boundary > date.today()
                 or boundary > datetime.fromisoformat(self.source.retrieved_at).date()):
             raise ValueError('Percentage requires a dated, reported actual and exact precision')
         return self
@@ -78,16 +78,13 @@ def _check_history(lines):
 def project(record, *, subject, url_validator=source.official_url, check_history=True):
     """Accept only trusted Source records selected by the caller, never URLs or runs.
 
-    Source remains the owner of eligibility. Lloyds retains its existing dedicated
-    exception owner. This function exposes no HTTP request or record lookup.
+    Source remains the owner of eligibility and applicable exceptions. This function exposes no HTTP request or record lookup.
     """
     try:
         rights = record['rights']
         if (record.get('authority') != 'analytical_working_research'
                 or record.get('canonical_mutation') is not False
-                or rights.get('basis') != 'ordinary_public_factual_analysis'
-                or 'lloyds' in (record['publisher'] + record['url'] + record['retrieval_url']).casefold()
-                or any('lloyds' in str(item).casefold() for item in subject)):
+                or rights.get('basis') != 'ordinary_public_factual_analysis'):
             return ()
         if source.routine_factual_use(record, url_validator=url_validator) != 'minimal_factual_analysis':
             return ()
@@ -96,7 +93,7 @@ def project(record, *, subject, url_validator=source.official_url, check_history
         for binding in bindings:
             fields = dict(binding['facts'])
             if ((fields['subject_id'], fields['subject_name']) != subject
-                    or fields.pop('semantic_type') != 'reported' or fields['state'] != 'actual'):
+                    or fields.pop('semantic_type') != 'reported' or fields['state'] not in {'actual','pro_forma'}):
                 return ()
             period = dict(fields.pop('period'))
             period['label'] = (period['as_at'] if period['kind'] == 'instant'
@@ -257,3 +254,49 @@ def balance_changes(lines, keys):
         except ValueError:
             continue
     return tuple(result)
+
+
+def economic_projection(selection):
+    """Read-only reusable economics over current Source-owned statement lines.
+
+    Existing Financial arithmetic supplies revision-bound comparisons/bridges.
+    No run enumeration, persistence, publication permission or canonical write.
+    """
+    from .candidate_analytics import Derivation, InputReference, Reconciliation, reconcile
+    try:
+        record, subject = source.public_statement_record(selection)
+        lines = project(record, subject=subject)
+        if not lines:
+            return {}
+        by_id = {line.measurement_id:line for line in lines}
+        comparisons = {}
+        for row in record.get('comparisons', ()):
+            try:
+                pair = [by_id[row[k]] for k in ('opening','closing')]
+                spec = Derivation(derivation_id=row['id'],formula=row['formula'],comparison=row['comparison'],
+                    inputs=tuple(InputReference(measurement_id=x.measurement_id,revision=x.revision) for x in pair))
+                comparisons[row['id']] = compare(lines,spec)
+            except (ValueError,KeyError,TypeError,ArithmeticError):
+                continue
+        bridges = {}
+        monetary = [Measurement.model_validate(x.model_dump(include=set(Measurement.model_fields)))
+                    for x in lines if x.value.unit=='currency']
+        amounts = {x.measurement_id:x for x in monetary}
+        for row in record.get('bridges', ()):
+            try:
+                def ref(key):
+                    x=amounts[key]
+                    return InputReference(measurement_id=x.measurement_id,revision=x.revision)
+                spec = Reconciliation(derivation_id=row['id'],mode=row['mode'],
+                    opening=ref(row['opening']),endpoint=ref(row['endpoint']),
+                    adjustments=tuple(ref(k) for k in row['adjustments']),
+                    adjustment_roles=tuple(row.get('adjustment_roles',())),
+                    opening_basis=row['opening_basis'],adjustment_basis=row['adjustment_basis'],endpoint_basis=row['endpoint_basis'])
+                bridges[row['id']]=reconcile(spec,monetary)
+            except (ValueError,KeyError,TypeError,ArithmeticError):
+                continue
+        return {'lines':lines,'comparisons':comparisons,'bridges':bridges,
+                'source_revision':stable_hash(record),'source_id':record['id'],
+                'authority':'analytical_working_research','canonical_mutation':False}
+    except (OSError,ValueError,KeyError,TypeError,PermissionError,ArithmeticError):
+        return {}

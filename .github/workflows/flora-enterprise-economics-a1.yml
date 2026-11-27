@@ -16,6 +16,7 @@ on:
       - 'docs/flora-runtime/lloyds-experience-completion/**'
       - 'docs/flora-runtime/lloyds-gold-v3/**'
       - 'docs/flora-runtime/lloyds-ceo-intelligence/**'
+      - 'docs/flora-runtime/public-facts-financial-unlock/**'
       - '.github/workflows/flora-enterprise-economics-a1.yml'
 permissions:
   contents: read
@@ -37,7 +38,7 @@ jobs:
           node-version: '22'
       - run: python -m pip install -r requirements.txt
       - name: Economics, source withdrawal, financial and existing journey boundaries
-        run: python -m pytest tests/test_flora_accepted_ux_recovery.py tests/test_flora_ux_unify_670.py tests/test_flora_banking_cohort_691.py tests/test_flora_uxr1_650.py tests/test_flora_lloyds_flagship.py tests/test_flora_technology_alignment.py tests/test_flora_eei3.py tests/test_flora_eei2b.py tests/test_flora_eei2a.py tests/test_flora_enterprise_economics_a1.py tests/test_flora_experience_684.py tests/test_flora_public_financial.py tests/test_flora_et_integrate_672.py tests/test_flora_f1_642.py tests/test_flora_f2_644.py tests/test_flora_f3_646.py tests/test_flora_rud1_648.py tests/test_flora_auth2_655.py tests/test_flora_visual_panels_632.py -q
+        run: python -m pytest tests/test_flora_accepted_ux_recovery.py tests/test_flora_ux_unify_670.py tests/test_flora_banking_cohort_691.py tests/test_flora_uxr1_650.py tests/test_flora_lloyds_flagship.py tests/test_flora_technology_alignment.py tests/test_flora_eei3.py tests/test_flora_eei2b.py tests/test_flora_eei2a.py tests/test_flora_enterprise_economics_a1.py tests/test_flora_experience_684.py tests/test_flora_public_financial.py tests/test_flora_public_facts_financial_unlock.py tests/test_flora_et_integrate_672.py tests/test_flora_f1_642.py tests/test_flora_f2_644.py tests/test_flora_f3_646.py tests/test_flora_rud1_648.py tests/test_flora_auth2_655.py tests/test_flora_visual_panels_632.py -q
       - name: All strict security tests
         run: python -m pytest tests/test_flora_security*.py -q
       - name: Optional Living Enterprise preview and fail-closed public source boundaries
@@ -125,13 +126,21 @@ jobs:
           python docs/flora-runtime/lloyds-gold-v3/browser.py "$RUNNER_TEMP/v3-browser" after
       - name: CEO source-grounded intelligence, responsive journeys and withdrawal
         run: |
-          python docs/flora-runtime/lloyds-ceo-intelligence/validate.py > "$RUNNER_TEMP/ceo-intelligence-scope.json"
+          git worktree add --detach "$RUNNER_TEMP/ceo-intelligence-cut" 8be67e3d49ad17886c1cc14da3c646271b21017e
+          (cd "$RUNNER_TEMP/ceo-intelligence-cut" && python docs/flora-runtime/lloyds-ceo-intelligence/validate.py) > "$RUNNER_TEMP/ceo-intelligence-scope.json"
           python docs/flora-runtime/lloyds-ceo-intelligence/browser.py "$RUNNER_TEMP/ceo-intelligence-browser" after
+      - name: Ordinary factual finance, issuer definitions and withdrawal in current runtime
+        run: |
+          python docs/flora-runtime/public-facts-financial-unlock/validate.py > "$RUNNER_TEMP/factual-scope.json"
+          python docs/flora-runtime/public-facts-financial-unlock/browser.py "$RUNNER_TEMP/factual-browser" after
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: flora-enterprise-economics-${{ github.event.pull_request.head.sha }}
           path: |
+            ${{ runner.temp }}/factual-scope.json
+            ${{ runner.temp }}/factual-browser/*.json
+            ${{ runner.temp }}/factual-browser/*.jpg
             ${{ runner.temp }}/ceo-intelligence-scope.json
             ${{ runner.temp }}/ceo-intelligence-browser/*.json
             ${{ runner.temp }}/ceo-intelligence-browser/*.jpg

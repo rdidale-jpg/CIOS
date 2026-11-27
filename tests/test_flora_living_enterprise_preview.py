@@ -177,7 +177,7 @@ def test_public_preview_does_not_inherit_private_authority_or_financial_discover
     after=preview.render({},headers).split('<main ',1)[1]
     assert before==after
     assert 'fi-private' not in after and 'primary_content_sha256' not in after
-    assert candidate_analytics.public_factual_projection()=={}
+    assert len(candidate_analytics.public_factual_projection()['facts']) == 3
 
 
 def test_frame_is_never_monkey_patched_and_context_remains_navigation_only():

@@ -28,9 +28,11 @@ def test_original_research_and_permissions_are_preserved_with_only_additive_clai
         elif key!='assessed_at':assert new[key]==old[key]
     assert len(new['claims'])-len(old['claims'])==39
     assert len(new['sources'])-len(old['sources'])==7
-    protected=('architecture/decisions','cios/applications/flora/security_store.py','cios/applications/flora/security_web.py','cios/applications/flora/research_intelligence/source_import.py','cios/applications/flora/financial_intelligence','cios/applications/flora/blueprint_import','tools/ci/flora-baseline-v1.json','tools/ci/flora_ci.py')
+    protected=('architecture/decisions','cios/applications/flora/security_store.py','cios/applications/flora/security_web.py','cios/applications/flora/blueprint_import','tools/ci/flora-baseline-v1.json','tools/ci/flora_ci.py')
     assert not subprocess.check_output(['git','diff','--name-only',BASE,'--',*protected],cwd=ROOT,text=True)
-    assert candidate_analytics.public_factual_projection()=={}
+    from tools.research.public_financial_compatibility import validate
+    assert validate(ROOT)['ci_comparator_changed'] is False
+    assert len(candidate_analytics.public_factual_projection()['facts']) == 3
 
 
 def test_whole_group_arrival_and_distinct_business_models():

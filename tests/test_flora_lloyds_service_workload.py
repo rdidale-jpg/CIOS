@@ -42,7 +42,7 @@ def test_actual_new_product_cells_reconcile_without_claiming_financial_results()
     html=main()
     assert all(s in html for s in ('115,687','115,798','66.37%','97.4%','Commercial investigation','not cost or customer incidence'))
     assert '66.12% of received' not in html and '£115,687' not in html
-    assert finance.public_factual_projection()=={}
+    assert len(finance.public_factual_projection()['facts']) == 3
     assert 'Open Government Licence v3.0' in html
     assert 'financial_statement' not in html and '<details' not in html
 

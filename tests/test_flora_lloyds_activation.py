@@ -29,7 +29,7 @@ def test_transaction_business_model_does_not_promote_recovered_appointments_or_s
     assert 'Natasha Condon' in body and 'John Langley' in body  # Newly verified original appointment, not recovery-proof promotion.
     for forbidden in ('Export Assist', 'TradeSpeed', 'Complidata', '£100m opportunity'):
         assert forbidden not in body
-    assert candidate_analytics.public_factual_projection() == {}
+    assert len(candidate_analytics.public_factual_projection()['facts']) == 3
     commercial = main(query(detail='transaction-investigation'))
     assert 'Hypothesis.' in commercial and 'Existing teams, tools or suppliers' in commercial
     assert 'does not establish procurement, budget or a sales opportunity' in commercial

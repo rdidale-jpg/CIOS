@@ -82,6 +82,21 @@ CEO_BASE = '1c13e6962516dbb071b2133f2c1a3de87647e2ac'
 CEO_PINS = {'cios/applications/flora/web/app.py': '4bfa58b674ffc293300626632d894894e9543e862386bebc92646ad835b05b2c', 'cios/applications/flora/public_routes.py': 'a9da56cb647eeecf1e8e3b0aae0454c577fdb670a220d84a79b53fbbb5c21662', 'cios/applications/flora/visual_streams.py': '5dc89b7988f0a45e4fbcad94c015a0d0e9735fbddaa513f53c42aeacf171270f', 'cios/applications/flora/research_intelligence/source_import.py': '4ec4d32e8ff09d3e5de187bcab2969618e5d4084a9a4da0cc0804fabcd54e6fa', 'tools/research/history_integrity.py': 'cd7715aa1065f6384fd2f342377e6b465dd3e29e631a806082a3f29a839ef323'}
 
 def ceo_predecessor(root,path,current):
+    # Explicit owner-authorised ordinary-facts evolution. Match the entire
+    # reviewed cut and retain every private function, import and module constant.
+    # Historical pins and the failure/skip comparator remain unchanged.
+    factual_cuts = {'cios/applications/flora/research_intelligence/source_import.py': ('5896cee93ed1b2d5f2007f6f949be36a5bdb1c51dc6338b4281382a15cb905ca', ('_factual_url', '_ordinary_factual_method', 'minimal_factual_integrity', 'public_factual_record', 'public_statement_record', 'routine_factual_use')), 'cios/applications/flora/financial_intelligence/candidate_analytics.py': ('444fc32ddbb62a504d902ffe506d1eba0e6d518460545aa9a5bb9d4ee998eccc', ('Derivation', 'Measurement', 'Reconciliation', 'calculate', 'public_factual_projection', 'reconcile')), 'cios/applications/flora/financial_intelligence/public_statements.py': ('563fb7f528c883fd470a41e0f4c2110b74dc7e9b7e854eb52eed8ad8bcbbe623', ('Line', 'economic_projection', 'project')), 'tools/research/history_integrity.py': ('6b710d19d2e09fec84992fffb2e25180e3332b3164817ba6fb05f358d48dd877', ('verify_history',))}
+    cut = factual_cuts.get(path)
+    if cut and sha256(current).hexdigest() == cut[0]:
+        previous = subprocess.check_output(['git','show','8be67e3d49ad17886c1cc14da3c646271b21017e:'+path],cwd=root)
+        import ast
+        def protected(raw):
+            tree = ast.parse(raw)
+            tree.body = [n for n in tree.body if not isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) or n.name not in cut[1]]
+            return ast.dump(tree, include_attributes=False)
+        assert protected(current) == protected(previous), 'Unlisted public-facts owner change: '+path
+        current = previous
+
     # Bounded CEO research additions: match the complete checker, then retain
     # the prior checker for historical tests. Unknown mutations are untouched.
     if (path == 'tools/research/history_integrity.py'

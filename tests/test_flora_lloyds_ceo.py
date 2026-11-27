@@ -154,7 +154,7 @@ def test_objectives_use_real_horizons_and_do_not_claim_unsupported_progress(row)
 
 def test_held_financials_are_not_promoted_by_the_new_default():
     from cios.applications.flora.financial_intelligence import candidate_analytics as financial
-    assert financial.public_factual_projection()=={}
+    assert len(financial.public_factual_projection()['facts']) == 3
     html=''.join(main(v.render(g.CANONICAL,query('landscape','economics',detail))) for detail in ('income','costs','capital','divisions'))
     for held in ('2,256','1,425','4,215','£6,625','£11,084','3.21%','17.9%','.pdf'):assert held not in html
     # Unsupported cells are omitted; meaningful financial qualifications remain.
