@@ -1,0 +1,41 @@
+{
+  "phase": "before",
+  "sha": "8e6a42c374f52f229415437da31fa795d34f1ba9",
+  "runtime_hashes": {
+    "cios/applications/flora/lloyds_gold.py": "58a3459457ef7ced31df37ffd255ed17dfd651a9eb02e228760a7e61144dfea4",
+    "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "e043a0a8cf50e68c3467bbba1042fe240b2c24dfaee4909464b620016f57ca42"
+  },
+  "environment": "Actual loopback Chromium; emulated iPads/touch, not physical Safari or Render",
+  "screenshots": {
+    "before-desktop-transaction.jpg": "e132b54b8a7126630538fe2ee4ab4f349a155d6c3916263ebe2fb4e3373f9643",
+    "before-desktop-envoy.jpg": "88cd5cc0d72b3f011c2a50a3b2ec3c2a198018a4a01c90c27eed15c27f06093e",
+    "before-desktop-economics.jpg": "6ecca0df3f6b5dbc45ab89a136fc1de895722f5350c3e5f6817cf94df4c66ee8",
+    "before-ipad-landscape-transaction.jpg": "b8f76857828a6b27c462d17f9c57e5436df3dd1ec2fe7f74910c591afa110763",
+    "before-ipad-landscape-envoy.jpg": "705c03dd4075ceccba06b4d0a9c0a6a7a73fd481d332150607f4f166ad53e2d7",
+    "before-ipad-landscape-economics.jpg": "1918ea4d76784950d17caf6ff91efe8a5bd8bb557c6044ed0a0440bdccf2cda0",
+    "before-ipad-portrait-transaction.jpg": "3d6195884b17801cb6cb8673263adf87e13ef2564e292222352f522f2aef2a4b",
+    "before-ipad-portrait-envoy.jpg": "0513e731539fd22ad6c9465135fbdc55a230acab8d95862584f9824786570e9e",
+    "before-ipad-portrait-economics.jpg": "c9b5c15ae7ae8da6a4bf98e6fbc0c308eef3559ca3ed0fa6c0083bad30b70c77",
+    "before-mobile-transaction.jpg": "bec55eb48f9ea6b4212384ef0dcc5a0a70f12695b3bd12f720476cbeaa79f91d",
+    "before-mobile-envoy.jpg": "d748602a04b589658d52f4be243580946edcb6bc7383cbbe2fe2c61a0ee2b4e0",
+    "before-mobile-economics.jpg": "6a3b0b407fdae085f442ba14e70827f8025bfd40232db50cac2695523441dc70"
+  },
+  "devices": [
+    {
+      "device": "desktop",
+      "passed": true
+    },
+    {
+      "device": "ipad-landscape",
+      "passed": true
+    },
+    {
+      "device": "ipad-portrait",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "passed": true
+    }
+  ]
+}

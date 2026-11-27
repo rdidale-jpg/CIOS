@@ -64,9 +64,12 @@ DETAILS['people']=('leadership','structure','workforce','sources')
 DETAILS['operations']+=tuple('journey-'+key for key in ('credit','payments','service','insurance','risk','data','platforms','finance','support'))
 DETAILS['strategy']+=tuple('objective-'+key for key in ('renewal','ai','access','reporting','investment','efficiency','payments'))
 DETAILS['economics']+=('funding','income','costs','capital','divisions')
+DETAILS['commercial']+=('transactions','transaction-customers','transaction-delivery','transaction-value','transaction-investigation')
+DETAILS['applications']+=('envoy-build','envoy-controls','envoy-value','envoy-investigation')
 FOCUS_FACTS = {
  'group':('CEO1-ROLE-NUNN-20260322','LBG-Q326-PROFIT','LBG-Q326-DEPOSITS','LBG-AR25-MIGRATION','LBG-A2030-CIR'), 'economics':tuple(recovery.MEASURES)+('LBG-A2030-CIR','LBG-A2030-SAVINGS','LBG-Q326-INVESTMENT','LBG-A2030-INVESTMENT'),
- 'retail':('LBG-BRAND26-TIMING','LBG-BRAND26-NO-ROLES'), 'commercial':(), 'retirement':(),
+ 'retail':('LBG-BRAND26-TIMING','LBG-BRAND26-NO-ROLES'),
+ 'commercial':('LBG-A2030-WALLET','LBG-Q326-CURVE','treasury-payments','CEO1-ROLE-NUNN-20260322'), 'retirement':(),
  'people':('LBG-AR25-COPILOT','LBG-BRAND26-NO-ROLES','CEO1-ROLE-NUNN-20260322'),
  'operations':('LBG-BRAND26-TIMING','LBG-BRAND26-NO-ROLES','LBG-AR25-COPILOT'),
  'capabilities':('LBG-AR25-MIGRATION','LBG-A2030-DATA','LBG-ENVOY-CONTROLS'),
@@ -356,7 +359,81 @@ def economic_decisions():
     )
 
 
+def exploration_rail(state, rows, active, *, kind):
+    """Presentation links over existing state; no claims, storage or new owner."""
+    selected=replace(state,detail=active)
+    return '<div class="gold-exploration-rail">'+''.join(
+        region(selected,title,kind=kind,caption=caption,detail=key)
+        for key,title,caption in rows)+'</div>'
+
+
+def transaction_banking(state,facts):
+    body='<p class="le-deck">Help a business collect, hold and move money while managing the timing of payments and receipts.</p>'
+    if not state.detail:
+        body+=region(state,'Transaction Banking',kind='commercial',caption='Explore customer economics, delivery and commercial interpretation',detail='transactions')
+        body+='<p class="le-limit">Business-model lens within Commercial Banking; not a verified Lloyds organisation or revenue allocation.</p>'
+        body+=link(state,'Group funding & earnings',focus='economics',detail='comparison')
+        return body
+    active=state.detail if state.detail!='transactions' else 'transaction-customers'
+    body+='<h2>Transaction Banking</h2><p class="le-limit">Conceptual service model. The stages do not assert Lloyds process ownership, installed systems or a specific customer problem.</p>'
+    rows=(('transaction-customers','Customer economics','Cash timing and working capital'),
+          ('transaction-delivery','Service delivery','Instructions, controls and completion'),
+          ('transaction-value','Bank economics','Fees, funding and risk'),
+          ('transaction-investigation','Commercial perspective','A bounded, testable hypothesis'))
+    body+=exploration_rail(state,rows,active,kind='commercial')
+    if active=='transaction-customers':
+        body+='<section class="gold-activation-story"><h2>Cash timing is the customer problem to understand</h2><p>A business can be profitable yet face a cash gap between paying suppliers and receiving customer money. Collections, payment timing, balance visibility and short-term finance affect that gap in different ways.</p><div class="gold-value-path"><span>Customer receipts</span><span>Cash visibility</span><span>Supplier payments</span><span>Working capital</span></div><p>Faster processing alone does not prove an economic benefit. Customer terms, inventory, payment certainty and the cost of funding can matter more. These are economic mechanisms, not measured Lloyds customer outcomes.</p></section>'
+    elif active=='transaction-delivery':
+        body+='<section class="gold-activation-story"><h2>Completion depends on the hand-offs</h2><div class="gold-value-path"><span>Client instruction</span><span>Checks & exceptions</span><span>Settlement</span><span>Reconciliation</span></div><p>Client implementation, operations, risk controls and technology need a shared view of what an instruction means and whether it completed. An apparent technology delay may instead come from incomplete documents, authorisation or a client process.</p><p>Business/product leadership, client operations, technology, risk and treasury/finance are relevant role hypotheses. No named Transaction Banking executive or delegated buying authority is asserted here.</p></section>'
+    elif active=='transaction-value':
+        body+='<section class="gold-activation-story"><h2>Different services earn value differently</h2><div class="gold-value-path"><span>Service fees</span><span>Operating balances</span><span>Credit exposure</span><span>Cost to serve</span></div><p>Transaction fees and balance-related income can support the bank’s economics; credit, liquidity, capital and servicing costs reduce the contribution. Pricing, transfer pricing and risk allocation determine the result.</p><p>No transaction volumes, divisional margin or share of Group profit is inferred. More payment activity is not automatically more profitable activity.</p></section>'
+    else:
+        body+='<section class="gold-activation-story"><h2>Investigate one real service hand-off</h2><p><strong>Hypothesis.</strong> Improving a customer-confirmed exception or implementation hand-off could reduce repeat work or improve payment certainty. It is not an established Lloyds need.</p><p>Establish the actual service owner, customer effect, exception baseline and current remedy before suggesting a diagnostic. Existing teams, tools or suppliers may already cover the issue; a settled delivery plan can leave no useful external role.</p><p>Commercial qualification requires customer evidence and an open decision. A payment strategy, appointment or policy announcement does not establish procurement, budget or a sales opportunity.</p></section>'
+    context=reported(facts,('LBG-A2030-WALLET','LBG-Q326-CURVE'))
+    if context:
+        body+='<aside class="gold-subject-context"><h2>Separate Group payments context</h2>'+context+'<p>These are Group disclosures. They do not place Curve, a wallet programme or a supplier contract within Transaction Banking.</p></aside>'
+    if active=='transaction-delivery' and 'treasury-payments' in facts:
+        body+='<aside class="gold-subject-context"><h2>Historical UK payments policy · 2024</h2>'+reported(facts,('treasury-payments',))+'<p>A historical policy pilot is not proof of adoption by Lloyds or a specific business customer.</p></aside>'
+    if active=='transaction-delivery' and 'CEO1-ROLE-NUNN-20260322' in facts:
+        body+='<aside class="gold-subject-context"><h2>Dated Group leadership context</h2>'+reported(facts,('CEO1-ROLE-NUNN-20260322',))+'<p>This establishes the dated Group attribution, not a Transaction Banking reporting line or buying authority.</p><p class="ceo-attribution">Contains public sector information licensed under the Open Government Licence v3.0.</p></aside>'
+    body+='<p class="gold-related">'+link(state,'Group economics',focus='economics')+link(state,'Payment operating model',stream='inside',focus='operations',detail='journey-payments')+'</p>'
+    return body
+
+
+def envoy_exploration(state,facts):
+    # Both existing issuer claims must remain eligible. Never admit the recovered
+    # fraud/Export Assist/leadership candidates or invent original source bytes.
+    active=state.detail if state.detail!='envoy' else 'envoy-build'
+    body='<h2>Envoy</h2><p class="le-deck">An existing AI platform changes the starting point: investigate the value of a workflow, rather than assume a platform is missing.</p>'
+    dates=sorted({source.published for key in APPS['envoy'][2] for source in facts[key].sources if source.published})
+    if dates:body+='<p class="canvas-date">Company announcement · '+e(dates[0])+'</p>'
+    body+=reported(facts,APPS['envoy'][2])
+    rows=(('envoy-build','Build & reuse','Platform and business process'),
+          ('envoy-controls','Operate & oversee','Monitoring and accountability'),
+          ('envoy-value','Value & adoption','Reported contribution versus expectation'),
+          ('envoy-investigation','Commercial perspective','Validate an incremental contribution'))
+    body+=exploration_rail(state,rows,active,kind='technology')
+    if active=='envoy-build':
+        body+='<section class="gold-activation-story"><h2>Platform capability is a starting point</h2><div class="gold-value-path"><span>Business workflow</span><span>AI capability</span><span>Information & access</span><span>Service outcome</span></div><p>The disclosed Google Cloud collaboration provides platform context. It does not establish a contracting entity, an exclusive cloud estate or the application used by any particular division.</p><p>Workflow ownership, information quality and integration determine whether platform capability becomes a repeatable service. This is an operating interpretation, not an asserted Lloyds architecture.</p></section>'
+        body+=interpretation(facts,('LBG-ENVOY-CONTROLS','LBG-A2030-DATA'),'A disclosed platform and a stated enterprise-data priority make process and information readiness relevant to AI execution. They do not prove a missing data platform or an unmet supplier requirement.')
+    elif active=='envoy-controls':
+        body+='<section class="gold-activation-story"><h2>Designed controls are different from demonstrated outcomes</h2><div class="gold-value-path"><span>Controlled release</span><span>Monitoring</span><span>Exception handling</span><span>Accountability</span></div><p>Lloyds describes controls and monitoring. Their disclosure weakens a greenfield-control pitch; it does not independently establish effectiveness or reveal a control failure.</p><p>Business operations, technology and risk need clear decision responsibilities. Human review, overrides and service quality are useful evaluation dimensions, not confirmed features or deficiencies of every Envoy workflow.</p></section>'
+    elif active=='envoy-value':
+        body+='<section class="gold-activation-story"><h2>Separate availability, adoption and economic value</h2><div class="gold-value-path"><span>Availability</span><span>Actual use</span><span>Task outcome</span><span>Net benefit</span></div></section>'
+        body+='<div class="gold-benefit-horizons">'+''.join('<section><h3>'+label+'</h3>'+reported(facts,(key,))+'</section>' for key,label in (('LBG-AI26-REPORTED','Earlier reported contribution'),('LBG-AI26-EXPECTED','Later management expectation')) if key in facts)+'</div>'
+        body+=interpretation(facts,('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'),'The earlier reported contribution and later expectation do not establish a growth rate, realised 2026 result or net return after all costs. No contribution is allocated to Envoy, a division or an external supplier.')
+        if 'LBG-AR25-COPILOT' in facts:
+            body+='<aside class="gold-subject-context"><h3>Separate colleague technology context</h3>'+reported(facts,('LBG-AR25-COPILOT',))+'<p>Copilot licences are not Envoy users, active adoption or a measured workforce reduction. Different products and populations cannot be added together.</p></aside>'
+    else:
+        body+='<section class="gold-activation-story"><h2>Start with one agreed workflow</h2><p><strong>Hypothesis.</strong> A contribution may exist in measuring or improving a customer-agreed workflow, including service quality and full control, run and change costs.</p><p>Validate the baseline, outcome attribution, exceptions and existing management response. Faster tasks can be offset by review effort or parallel running; an existing team may already have adequate measurement and remedies.</p><p>No reported platform, contribution or expectation establishes customer demand, open procurement, external scope or supplier budget. A commercial conversation is justified only after confirming an unresolved customer issue and a useful role.</p></section>'
+    body+='<p class="gold-related">'+link(state,'Enterprise data capability',focus='capabilities',detail='data')+link(state,'AI transformation disclosure',focus='programmes',detail='ai')+link(state,'Group costs & efficiency',stream='landscape',focus='economics',detail='costs')+'</p>'
+    body+='<p class="gold-inspect">'+link(state,'Evidence & dates',detail='sources')+'</p>'
+    return body
+
+
 def division(state,facts):
+    if state.focus=='commercial' and (not state.detail or state.detail.startswith('transaction')):
+        return transaction_banking(state,facts)
     _,customers,activities,driver,_=next(row for row in twin.DIVISIONS if row[-1]==state.focus)
     body='<p class="le-deck">'+e(customers)+'. '+e(activities)+'.</p>'
     body+='<div class="gold-business"><h2>How value is created</h2><p>'+e(driver)+'.</p><p class="le-limit">Business-model orientation. Group disclosures below do not establish divisional outcomes or allocations.</p></div>'
@@ -444,13 +521,15 @@ def capabilities(state,data,facts):
 
 
 def applications(state,facts):
+    if (state.detail=='envoy' or state.detail.startswith('envoy-')) and all(k in facts for k in APPS['envoy'][2]):
+        return envoy_exploration(state,facts)
     body='<p class="le-deck">Technology disclosures, with different kinds of evidence.</p>'
     rows=[]
     for key,(name,status,keys,capability,note) in APPS.items():
         available=tuple(k for k in keys if k in facts)
         if len(available)!=len(keys):continue
         rows.append(region(state,name,kind='technology',caption=status,content='<span class="canvas-sequence">'+e(capability)+'</span>',focus='applications',detail=key))
-    body+='<div class="canvas-technology">'+''.join(rows)+'</div><p class="le-limit">Source-supported examples · not an installed estate inventory.</p>' if rows else ''
+    body+='<div class="gold-technology-list">'+''.join(rows)+'</div><p class="le-limit">Source-supported examples · not an installed estate inventory.</p>' if rows else ''
     body+=reported(facts,('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'))
     body+=interpretation(facts,('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'),'The earlier reported AI contribution and the later expectation use different temporal states. Neither establishes net return after all costs, divisional attribution or external supplier budget.')
     key={'google':'envoy','microsoft':'copilot'}.get(state.detail,state.detail)
@@ -469,7 +548,7 @@ def applications(state,facts):
 
 
 def partners(state,facts):
-    body='<p class="le-deck">A collaboration, a product licence and a contract are different relationships.</p><div class="canvas-technology">'
+    body='<p class="le-deck">A collaboration, a product licence and a contract are different relationships.</p><div class="gold-technology-list">'
     if 'LBG-ENVOY-GOOGLE' in facts:body+=region(state,'Google Cloud',kind='technology',caption='Disclosed Envoy collaborator',content='<span class="canvas-sequence">No contracting entity, spend, workshare or renewal established</span>',detail='google')
     if 'LBG-AR25-COPILOT' in facts:body+=region(state,'Microsoft Copilot',kind='technology',caption='Disclosed licences; product context',content='<span class="canvas-sequence">No supplier contract or service-term inference</span>',detail='microsoft')
     body+='</div>'+reported(facts,FOCUS_FACTS['partners'])
@@ -653,7 +732,9 @@ def main(state,data,facts,issues=()):
         else:body+=programmes(state,data,facts)
     elif state.focus=='strategy' and (state.detail=='goals' or state.detail.startswith('objective-')):body+=_ceo_goals(state,facts)
     else:body+=forces(state,facts)
-    if state.focus not in {'group','analysis'} or state.detail:
+    owns_inspection=(state.focus=='applications' and (state.detail=='envoy' or state.detail.startswith('envoy-'))
+                     and all(k in facts for k in APPS['envoy'][2]))
+    if (state.focus not in {'group','analysis'} or state.detail) and not owns_inspection:
         body+='<footer class="gold-inspect">'+link(state,'Evidence & boundaries',detail='sources')+'</footer>'
     return body+'</section>'
 
@@ -834,26 +915,24 @@ def _ceo_financial(state,facts,issues):
     if state.detail not in {'funding','income','costs','capital','divisions'}:return economics(state,facts,issues)
     title={'funding':'Funding & interest economics','income':'Income & profit','costs':'Costs, impairment & remediation','capital':'Capital, liquidity & returns','divisions':'Reporting businesses & contribution'}[state.detail]
     body='<h2>'+title+'</h2>'
+    if state.detail!='funding':
+        body+=exploration_rail(state,(('funding','Funding','Dated balances and repricing'),
+            ('income','Income & profit','Interest, fees and the profit bridge'),
+            ('costs','Costs & impairment','Efficiency, remediation and credit risk'),
+            ('capital','Capital & returns','Risk capacity and distributions')),state.detail,kind='money')
     if state.detail=='funding':
         body+=economics(replace(state,detail='funding'),facts,issues)
     elif state.detail=='income':
         body+='<div class="le-measures">'+preview.measures({k:s for k,s in facts.items() if k=='LBG-Q326-PROFIT'})+'</div>'
-        body+=table(('Financial measure','Period / basis','Eligible result'),[
-          ('Net interest income','Group; statutory and underlying are distinct','Unavailable'),('Fees / other income','Matched Group reporting period','Unavailable'),
-          ('Underlying profit / statutory bridge','Same period and consolidation perimeter','Unavailable'),
-        ],'Income · no lending yield, residual or allocation inferred')
+        body+='<section class="gold-activation-story"><h2>Follow the earnings bridge</h2><div class="gold-value-path"><span>Interest earned less paid</span><span>Fees & other income</span><span>Costs & credit losses</span><span>Profit</span></div><p>Loan volumes alone do not explain income: pricing, asset mix and funding repricing also matter. Fees and other income have different drivers from net interest income.</p><p>The reported Group statutory profit is a flow over nine months. It is not segment contribution, underlying profit, a lending yield or an amount available for investment. A matched accounting bridge is needed to attribute any movement.</p></section>'
     elif state.detail=='costs':
-        body+=table(('Component','Treatment','Eligible actual'),[
-          ('Operating costs','Separate ordinary costs from remediation','Unavailable'),('Credit impairment','A charge over a period; not an arrears stock','Unavailable'),
-          ('Remediation','Separate current charge and prior-period comparison','Unavailable'),('Efficiency ambition','Management target is not current cost or net saving','See attributed ambition below'),
-        ],'Cost and risk · no manufactured financial bridge')
+        body+='<section class="gold-activation-story"><h2>Three different pressures on earnings</h2><div class="gold-value-path"><span>Run & change costs</span><span>Remediation</span><span>Credit impairment</span></div><p>Ordinary operating expense, remediation and credit losses need separate explanations. An impairment charge covers a period; arrears and allowances are different stocks. A favourable prior-period comparison is not automatically a structural improvement.</p></section>'
         body+=reported(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS'))
+        body+=interpretation(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS'),'A lower cost-to-income ratio can reflect income growth as well as cost reduction. Gross savings are not net profit: implementation, parallel running and service quality affect the economic result. The disclosed ambitions do not establish actual cost performance or supplier budget.')
     elif state.detail=='capital':
-        body+=table(('Measure','Financial meaning','Eligible result'),[
-          ('CET1 / risk-weighted assets','Actual and pro-forma bases must not be mixed','Unavailable'),('Liquidity','Dated stocks / ratios, not investment budget','Unavailable'),
-          ('Return on tangible equity','Profit and capital on a matched basis','Unavailable'),('Capital generation / distributions','Separate generation from announced return plans','Unavailable'),
-        ],'Capital and returns · no proxy for deployable supplier budget')
+        body+='<section class="gold-activation-story"><h2>Growth uses capacity as well as funding</h2><div class="gold-value-path"><span>Risk-weighted assets</span><span>Capital generation</span><span>Buffers</span><span>Distributions</span></div><p>New lending can consume risk capacity. Capital generation, regulatory and management buffers, and distributions influence how much capacity remains. More deposits do not by themselves establish more capital or a larger investment budget.</p><p>Return on tangible equity needs a matched profit and capital basis. Actual and pro-forma ratios must remain separate; no capital ratio or return is inferred from the earnings and funding context shown here.</p></section>'
+        body+=financial_regions(state,facts)
     else:
-        body+=table(('Reporting business','Current eligible contribution'),[(e(row[0]),'Reported segment measures unavailable') for row in twin.DIVISIONS]+[('Equity / Central','Reconciliation unavailable')],
-                    'Division economics · no Group-to-segment allocation')
+        body+=business_regions(state,central=True)
+        body+='<p class="le-limit">Group profit cannot be allocated to businesses by customer count, deposit balance or visual area. Reporting segments, regulated legal entities and operating capabilities have different boundaries; underlying segment profit needs its statutory Group bridge.</p>'
     return body
