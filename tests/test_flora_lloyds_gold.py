@@ -120,7 +120,10 @@ def test_held_segment_figures_new_financial_projection_and_pdf_links_remain_inac
 def test_capability_relationships_and_unknown_contracts_never_become_verified_edges():
     d=data();f=gold.facts_for(d)
     html=gold.main(gold.State('inside','applications','applications','envoy'),d,f)
-    for word in ('Contracted service','Support expiry','Contract end / renewal','Unknown','No verified installation-to-programme'):
+    # The executive view now explains the material limits instead of rendering
+    # empty contract/expiry fields. Keep the same anti-inference boundary.
+    for word in ('does not establish a contracting entity', 'an exclusive cloud estate',
+                 'application used by any particular division', 'not an asserted Lloyds architecture'):
         assert word in html
     for false in ('AWS','Oracle','Vertex AI','2030-12-31','Contracted Google Cloud service'):
         assert false not in html

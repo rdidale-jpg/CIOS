@@ -1,0 +1,42 @@
+{
+  "phase": "after",
+  "sha": "8e6a42c374f52f229415437da31fa795d34f1ba9",
+  "runtime_hashes": {
+    "cios/applications/flora/lloyds_gold.py": "36d5b1b64ab9e6c5fe42f1680c4b27cb91994ae96e7140110261a0a93933a782",
+    "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "5745ba917628caef8492a3fdd6a6450ce54ad40602a7fc36d6ccfe0fa4de177e"
+  },
+  "environment": "Actual loopback Chromium; emulated iPads/touch, not physical Safari or Render",
+  "screenshots": {
+    "after-desktop-transaction.jpg": "c92bd63df6b7d5435579ee4c8ca0727c692b683804441390298fb5a0214418e2",
+    "after-desktop-envoy.jpg": "8ac47775df6a05423c673d8baa29038056e8125b72a91ab225da55cba582d69a",
+    "after-desktop-economics.jpg": "cb58fae1360622371e6c3ca2e2789881002cf54e26e99871e64b3a600a56359a",
+    "after-ipad-landscape-transaction.jpg": "bdab9ffe1a172e4cb05676609ad5febbe439f732cc1903f8122a35de8331ae24",
+    "after-ipad-landscape-envoy.jpg": "fd21c6f0d29a846641e8f6a44431e74962b3e14cb785a2c0db1691fb2b3d0a20",
+    "after-ipad-landscape-economics.jpg": "57e2f5d9d39adcaf1a45b1695d4c87aa83decda67dd3daf4810e04196cba3750",
+    "after-ipad-portrait-transaction.jpg": "8f6ddae1cea470cd188f77310b59f835fede289521d2a203b2876a7257a0accf",
+    "after-ipad-portrait-envoy.jpg": "3aea18aac856c3f221304e059d8695f3a616d26672275b4fe982a8081abc2ad4",
+    "after-ipad-portrait-economics.jpg": "f26c1e82c5baa79616e48bcf36e145d94ca4afc1cb3fb2e8372366feaa178218",
+    "after-mobile-transaction.jpg": "bede41c1adde3e39237d6715daac9d8b23b324ae45fb0a2da3735333537271ad",
+    "after-mobile-envoy.jpg": "dca269137bf2e6980dfefe284de0a3af52752f892dcbea84770e058fab524fc6",
+    "after-mobile-economics.jpg": "965e834e7b2cdc13ab842c42ed1200927e13c5d0bffccb3308f80b64267b884b"
+  },
+  "devices": [
+    {
+      "device": "desktop",
+      "passed": true
+    },
+    {
+      "device": "ipad-landscape",
+      "passed": true
+    },
+    {
+      "device": "ipad-portrait",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "passed": true
+    }
+  ],
+  "withdrawal_reload_print_accessibility": true
+}
