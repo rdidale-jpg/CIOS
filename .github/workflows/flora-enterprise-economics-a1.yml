@@ -15,6 +15,7 @@ on:
       - 'docs/flora-runtime/lloyds-gold-v2/**'
       - 'docs/flora-runtime/lloyds-experience-completion/**'
       - 'docs/flora-runtime/lloyds-gold-v3/**'
+      - 'docs/flora-runtime/lloyds-ceo-intelligence/**'
       - '.github/workflows/flora-enterprise-economics-a1.yml'
 permissions:
   contents: read
@@ -40,7 +41,7 @@ jobs:
       - name: All strict security tests
         run: python -m pytest tests/test_flora_security*.py -q
       - name: Optional Living Enterprise preview and fail-closed public source boundaries
-        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py tests/test_flora_main_canvas.py tests/test_flora_lloyds_activation.py tests/test_flora_lloyds_service_workload.py tests/test_flora_gold_reconciliation.py tests/test_flora_lloyds_gold_v2.py tests/test_flora_lloyds_experience_completion.py tests/test_flora_lloyds_gold_v3.py -q
+        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py tests/test_flora_main_canvas.py tests/test_flora_lloyds_activation.py tests/test_flora_lloyds_service_workload.py tests/test_flora_gold_reconciliation.py tests/test_flora_lloyds_gold_v2.py tests/test_flora_lloyds_experience_completion.py tests/test_flora_lloyds_gold_v3.py tests/test_flora_lloyds_ceo_intelligence.py -q
       - name: Lloyds intelligence utilisation and immutable image verification
         run: |
           git worktree add --detach "$RUNNER_TEMP/gold-approved-cut" 1c13e6962516dbb071b2133f2c1a3de87647e2ac
@@ -119,13 +120,21 @@ jobs:
           python docs/flora-runtime/lloyds-experience-completion/browser.py "$RUNNER_TEMP/experience-completion-browser" after
       - name: Connected v3 enterprise topics and original-owner preservation
         run: |
-          python docs/flora-runtime/lloyds-gold-v3/validate.py > "$RUNNER_TEMP/v3-scope.json"
+          git worktree add --detach "$RUNNER_TEMP/gold-v3-cut" 201fe851a531ecb854d3ba8e3416bc667ab8c860
+          (cd "$RUNNER_TEMP/gold-v3-cut" && python docs/flora-runtime/lloyds-gold-v3/validate.py) > "$RUNNER_TEMP/v3-scope.json"
           python docs/flora-runtime/lloyds-gold-v3/browser.py "$RUNNER_TEMP/v3-browser" after
+      - name: CEO source-grounded intelligence, responsive journeys and withdrawal
+        run: |
+          python docs/flora-runtime/lloyds-ceo-intelligence/validate.py > "$RUNNER_TEMP/ceo-intelligence-scope.json"
+          python docs/flora-runtime/lloyds-ceo-intelligence/browser.py "$RUNNER_TEMP/ceo-intelligence-browser" after
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: flora-enterprise-economics-${{ github.event.pull_request.head.sha }}
           path: |
+            ${{ runner.temp }}/ceo-intelligence-scope.json
+            ${{ runner.temp }}/ceo-intelligence-browser/*.json
+            ${{ runner.temp }}/ceo-intelligence-browser/*.jpg
             ${{ runner.temp }}/v3-scope.json
             ${{ runner.temp }}/v3-browser/*.json
             ${{ runner.temp }}/v3-browser/*.jpg

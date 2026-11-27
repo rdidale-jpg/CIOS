@@ -1456,6 +1456,1260 @@
         "published": "2026-11-18",
         "version": "Observed 2026-11-27; short factual anchors only"
       }
+    },
+    {
+      "id": "LCE-WORKFORCE",
+      "title": "FY2025 employee disclosures, issuer-hosted Form 20-F",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2025/q4/2025-lbg-form-20f.pdf",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2025/q4/2025-lbg-form-20f.pdf",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "publication_date": "2026-02-13",
+      "publication_date_evidence": "Original document date / dated issuer announcement",
+      "retrieved_at": "2026-11-27T19:08:34+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "c6f79702360158232572e52cc6d98dfa482cf0993458f3cc8cf959c0d3551f69",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LCE-WORKFORCE.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn203view0 / turn208view2",
+      "reviewed_by": "Codex original-source factual inspection; not independent human or legal acceptance",
+      "review_notes": "Minimal factual anchors and independent factual restatements under the existing accepted public-facts category. No original-byte archive, source licence, canonical promotion or Financial-run authority is asserted.",
+      "limitation": "Issuer-attributed facts retain their own dates and populations. Operating measures are not net financial return or buyer demand.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category for bounded organisation and operating disclosures",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only factual organisation, workforce, operating performance and disclosed technology/programme relationships. No held financial candidate publication, Financial-run persistence, report/table copying, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Lloyds section 2 held numerical projection and section 5 PDF links remain unchanged. No legal determination or new permission is recorded."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "Item 6.D Employees, printed page 24; cover filing date",
+          "quote": "60,061"
+        },
+        {
+          "locator": "Item 6.D Employees, printed page 24; cover filing date",
+          "quote": "61,228"
+        },
+        {
+          "locator": "Item 6.D Employees, printed page 24; cover filing date",
+          "quote": "62,569"
+        },
+        {
+          "locator": "Item 6.D Employees, printed page 24; cover filing date",
+          "quote": "27,574"
+        },
+        {
+          "locator": "Item 6.D Employees, printed page 24; cover filing date",
+          "quote": "7,955"
+        },
+        {
+          "locator": "Item 6.D Employees, printed page 24; cover filing date",
+          "quote": "6,025"
+        },
+        {
+          "locator": "Item 6.D Employees, printed page 24; cover filing date",
+          "quote": "18,507"
+        },
+        {
+          "locator": "Item 6.D Employees, printed page 24; cover filing date",
+          "quote": "55,266"
+        },
+        {
+          "locator": "Item 6.D Employees, printed page 24; cover filing date",
+          "quote": "760"
+        },
+        {
+          "locator": "Item 6.D Employees, printed page 24; cover filing date",
+          "quote": "185"
+        },
+        {
+          "locator": "Item 6.D Employees, printed page 24; cover filing date",
+          "quote": "3,851"
+        },
+        {
+          "locator": "Item 6.D Employees, printed page 24; cover filing date",
+          "quote": "24,005"
+        },
+        {
+          "locator": "Item 6.D Employees, printed page 24; cover filing date",
+          "quote": "659"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-CE-FTE25",
+          "statement": "Group employee FTEs: 60,061 at December 2025.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+          "primary_quotes": {
+            "LCE-WORKFORCE": "60,061"
+          },
+          "metric_value": "60061",
+          "metric_unit": "employee FTE; 31 December 2025; Group"
+        },
+        {
+          "claim_id": "LBG-CE-FTE24",
+          "statement": "Group employee FTEs: 61,228 at December 2024.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+          "primary_quotes": {
+            "LCE-WORKFORCE": "61,228"
+          },
+          "metric_value": "61228",
+          "metric_unit": "employee FTE; 31 December 2024; Group"
+        },
+        {
+          "claim_id": "LBG-CE-FTE23",
+          "statement": "Group employee FTEs: 62,569 at December 2023.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+          "primary_quotes": {
+            "LCE-WORKFORCE": "62,569"
+          },
+          "metric_value": "62569",
+          "metric_unit": "employee FTE; 31 December 2023; Group"
+        },
+        {
+          "claim_id": "LBG-CE-FTERETAIL",
+          "statement": "December 2025 Retail employees: 27,574 FTEs.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+          "primary_quotes": {
+            "LCE-WORKFORCE": "27,574"
+          },
+          "metric_value": "27574",
+          "metric_unit": "employee FTE; 31 December 2025; Retail"
+        },
+        {
+          "claim_id": "LBG-CE-FTECOMMERCIAL",
+          "statement": "December 2025 Commercial employees: 7,955 FTEs.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+          "primary_quotes": {
+            "LCE-WORKFORCE": "7,955"
+          },
+          "metric_value": "7955",
+          "metric_unit": "employee FTE; 31 December 2025; Commercial"
+        },
+        {
+          "claim_id": "LBG-CE-FTEINSURANCE",
+          "statement": "December 2025 Insurance, Pensions and Investments employees: 6,025 FTEs.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+          "primary_quotes": {
+            "LCE-WORKFORCE": "6,025"
+          },
+          "metric_value": "6025",
+          "metric_unit": "employee FTE; 31 December 2025; Insurance Pensions Investments"
+        },
+        {
+          "claim_id": "LBG-CE-FTEOTHER",
+          "statement": "December 2025 other functions: 18,507 employee FTEs.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+          "primary_quotes": {
+            "LCE-WORKFORCE": "18,507"
+          },
+          "metric_value": "18507",
+          "metric_unit": "employee FTE; 31 December 2025; other functions"
+        },
+        {
+          "claim_id": "LBG-CE-FTEUK",
+          "statement": "The employee geographic disclosure lists 55,266 in the UK.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+          "primary_quotes": {
+            "LCE-WORKFORCE": "55,266"
+          },
+          "metric_value": "55266",
+          "metric_unit": "employee geographic disclosure; 31 December 2025; UK"
+        },
+        {
+          "claim_id": "LBG-CE-FTEEUROPE",
+          "statement": "The employee geographic disclosure lists 760 in continental Europe.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+          "primary_quotes": {
+            "LCE-WORKFORCE": "760"
+          },
+          "metric_value": "760",
+          "metric_unit": "employee geographic disclosure; 31 December 2025; continental Europe"
+        },
+        {
+          "claim_id": "LBG-CE-FTEAMERICAS",
+          "statement": "The employee geographic disclosure lists 185 in the Americas.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+          "primary_quotes": {
+            "LCE-WORKFORCE": "185"
+          },
+          "metric_value": "185",
+          "metric_unit": "employee geographic disclosure; 31 December 2025; Americas"
+        },
+        {
+          "claim_id": "LBG-CE-FTEWORLD",
+          "statement": "The employee geographic disclosure lists 3,851 elsewhere.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+          "primary_quotes": {
+            "LCE-WORKFORCE": "3,851"
+          },
+          "metric_value": "3851",
+          "metric_unit": "employee geographic disclosure; 31 December 2025; rest of world"
+        },
+        {
+          "claim_id": "LBG-CE-NONPERMANENT",
+          "statement": "December 2025 non-permanent worker population: 24,005; not employee FTEs.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+          "primary_quotes": {
+            "LCE-WORKFORCE": "24,005"
+          },
+          "metric_value": "24005",
+          "metric_unit": "non-permanent worker population; 31 December 2025"
+        },
+        {
+          "claim_id": "LBG-CE-AGENCY",
+          "statement": "The divisional employee disclosure includes 659 agency staff; not an additional allocation.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+          "primary_quotes": {
+            "LCE-WORKFORCE": "659"
+          },
+          "metric_value": "659",
+          "metric_unit": "agency staff included in divisional disclosure; 31 December 2025"
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2025/q4/2025-lbg-form-20f.pdf",
+        "publisher": "Lloyds Banking Group",
+        "title": "FY2025 employee disclosures, issuer-hosted Form 20-F",
+        "published": "2026-02-13",
+        "version": "original-disclosures-inspected-2026-11-27"
+      }
+    },
+    {
+      "id": "LCE-ANNUAL-OPERATIONS",
+      "title": "FY2025 operating delivery and 2026 objectives",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/investors/annual-report.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/investors/annual-report.html",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "retrieved_at": "2026-11-27T19:08:34+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "8013767e11d63b99616977b2c2d6d8c7a04efe99f1fe6196c563ae07f4189272",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LCE-ANNUAL-OPERATIONS.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn206view3",
+      "reviewed_by": "Codex original-source factual inspection; not independent human or legal acceptance",
+      "review_notes": "Minimal factual anchors and independent factual restatements under the existing accepted public-facts category. No original-byte archive, source licence, canonical promotion or Financial-run authority is asserted.",
+      "limitation": "Issuer-attributed facts retain their own dates and populations. Operating measures are not net financial return or buyer demand.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category for bounded organisation and operating disclosures",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only factual organisation, workforce, operating performance and disclosed technology/programme relationships. No held financial candidate publication, Financial-run persistence, report/table copying, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Lloyds section 2 held numerical projection and section 5 PDF links remain unchanged. No legal determination or new permission is recorded."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+          "quote": "seven minute"
+        },
+        {
+          "locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+          "quote": "85%"
+        },
+        {
+          "locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+          "quote": "45%"
+        },
+        {
+          "locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+          "quote": "50%"
+        },
+        {
+          "locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+          "quote": "fulfilled digitally"
+        },
+        {
+          "locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+          "quote": "70"
+        },
+        {
+          "locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+          "quote": "30"
+        },
+        {
+          "locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+          "quote": "21%"
+        },
+        {
+          "locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+          "quote": "84,000"
+        },
+        {
+          "locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+          "quote": "Schroders Personal Wealth"
+        },
+        {
+          "locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+          "quote": "9,000"
+        },
+        {
+          "locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+          "quote": "95%"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-CE-OPENINGTIME",
+          "statement": "The FY2025 account-opening journey is described as seven minutes.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-ANNUAL-OPERATIONS": "seven minute"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-OPENINGSHARE",
+          "statement": "Around 85% of current-account openings used mobile in 2025.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-ANNUAL-OPERATIONS": "85%"
+          },
+          "metric_value": "85",
+          "metric_unit": "percent; mobile current-account openings; FY2025"
+        },
+        {
+          "claim_id": "LBG-CE-DISTRIBUTION25",
+          "statement": "Active customers per distribution FTE rose about 45% versus 2021 by 2025.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-ANNUAL-OPERATIONS": "45%"
+          },
+          "metric_value": "45",
+          "metric_unit": "percent improvement versus 2021; active customers per distribution FTE; FY2025"
+        },
+        {
+          "claim_id": "LBG-CE-DISTRIBUTION26",
+          "statement": "The 2026 objective is about 50% more active customers per distribution FTE versus 2021.",
+          "kind": "management_expectation",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-ANNUAL-OPERATIONS": "50%"
+          },
+          "metric_value": "50",
+          "metric_unit": "percent target improvement versus 2021; active customers per distribution FTE; 2026"
+        },
+        {
+          "claim_id": "LBG-CE-BCBDIGITAL",
+          "statement": "Over half of BCB products were digitally originated and fulfilled in 2025.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-ANNUAL-OPERATIONS": "fulfilled digitally"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-BCBSERVICE",
+          "statement": "BCB reported over 50% of key servicing interactions digitised, reaching its 2026 target early.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-ANNUAL-OPERATIONS": "50%"
+          },
+          "metric_value": "50",
+          "metric_unit": "percent; disclosed lower bound for BCB key servicing interactions digitised; FY2025"
+        },
+        {
+          "claim_id": "LBG-CE-ACCOUNTING",
+          "statement": "For 2026, BCB planned connections to more than 70 accounting software packages.",
+          "kind": "management_priority",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-ANNUAL-OPERATIONS": "70"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-GOVERNMENT",
+          "statement": "CIB reported winning cash-management and payments work serving over 30 government departments and bodies.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-ANNUAL-OPERATIONS": "30"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-FXVOLUME",
+          "statement": "CIB reported around 21% growth in foreign-exchange volumes during 2025.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-ANNUAL-OPERATIONS": "21%"
+          },
+          "metric_value": "21",
+          "metric_unit": "percent year-on-year volume growth; CIB foreign exchange; FY2025"
+        },
+        {
+          "claim_id": "LBG-CE-INVESTMENTACCOUNTS",
+          "statement": "Direct-to-consumer investments had opened 84,000 accounts by the FY2025 disclosure.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-ANNUAL-OPERATIONS": "84,000"
+          },
+          "metric_value": "84000",
+          "metric_unit": "accounts opened to date; direct-to-consumer investments; FY2025 disclosure"
+        },
+        {
+          "claim_id": "LBG-CE-WEALTHPLAN",
+          "statement": "The 2026 plan included integrating Schroders Personal Wealth into the wider advice proposition.",
+          "kind": "management_priority",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-ANNUAL-OPERATIONS": "Schroders Personal Wealth"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-TECHHIRES25",
+          "statement": "The FY2025 disclosure reports about 9,000 technology and data hires since 2021.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-ANNUAL-OPERATIONS": "9,000"
+          },
+          "metric_value": "9000",
+          "metric_unit": "cumulative technology and data hires since 2021; FY2025 disclosure"
+        },
+        {
+          "claim_id": "LBG-CE-RETAILSALES",
+          "statement": "More than 95% of Retail sales used digital channels in the FY2025 disclosure.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-ANNUAL-OPERATIONS": "95%"
+          },
+          "metric_value": "95",
+          "metric_unit": "percent; lower bound for Retail sales through digital channels; FY2025"
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/investors/annual-report.html",
+        "publisher": "Lloyds Banking Group",
+        "title": "FY2025 operating delivery and 2026 objectives",
+        "published": null,
+        "version": "original-disclosures-inspected-2026-11-27"
+      }
+    },
+    {
+      "id": "LCE-VERTEX",
+      "title": "Google Cloud platform and operating use cases, April 2025",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html",
+      "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+      "publication_date": "2025-04-09",
+      "publication_date_evidence": "Original document date / dated issuer announcement",
+      "retrieved_at": "2026-11-27T19:08:34+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "f760c835e2435a8b4fa49e4a45e3c569b6023f303cc228e1063c2d54de83d132",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LCE-VERTEX.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn203view1",
+      "reviewed_by": "Codex original-source factual inspection; not independent human or legal acceptance",
+      "review_notes": "Minimal factual anchors and independent factual restatements under the existing accepted public-facts category. No original-byte archive, source licence, canonical promotion or Financial-run authority is asserted.",
+      "limitation": "Issuer-attributed facts retain their own dates and populations. Operating measures are not net financial return or buyer demand.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category for bounded organisation and operating disclosures",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only factual organisation, workforce, operating performance and disclosed technology/programme relationships. No held financial candidate publication, Financial-run persistence, report/table copying, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Lloyds section 2 held numerical projection and section 5 PDF links remain unchanged. No legal determination or new permission is recorded."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs",
+          "quote": "using Google Cloud’s Vertex AI"
+        },
+        {
+          "locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs",
+          "quote": "300"
+        },
+        {
+          "locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs",
+          "quote": "15"
+        },
+        {
+          "locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs",
+          "quote": "days to seconds"
+        },
+        {
+          "locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs",
+          "quote": "80"
+        },
+        {
+          "locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs",
+          "quote": "18"
+        },
+        {
+          "locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs",
+          "quote": "Gemini"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-CE-VERTEX",
+          "statement": "Lloyds disclosed a Group ML and GenAI platform using Google Cloud Vertex AI.",
+          "kind": "reported_relationship",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+          "primary_quotes": {
+            "LCE-VERTEX": "using Google Cloud’s Vertex AI"
+          },
+          "relationship": {
+            "subject": "BK-ENT-001",
+            "predicate": "reported_uses_platform",
+            "object": "SUP-GOOGLE"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-DEVELOPERS",
+          "statement": "Over 300 data scientists and AI developers were using the platform in April 2025.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+          "primary_quotes": {
+            "LCE-VERTEX": "300"
+          },
+          "metric_value": "300",
+          "metric_unit": "people using platform; lower bound; 9 April 2025"
+        },
+        {
+          "claim_id": "LBG-CE-MODELS",
+          "statement": "Lloyds reported migrating 15 modelling systems from on-premise infrastructure.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+          "primary_quotes": {
+            "LCE-VERTEX": "15"
+          },
+          "metric_value": "15",
+          "metric_unit": "modelling systems migrated; 9 April 2025 announcement"
+        },
+        {
+          "claim_id": "LBG-CE-MORTGAGESPEED",
+          "statement": "Lloyds described mortgage income verification moving from days to seconds.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+          "primary_quotes": {
+            "LCE-VERTEX": "days to seconds"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-MLCASES",
+          "statement": "By April 2025, over 80 new ML use cases had been initiated.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+          "primary_quotes": {
+            "LCE-VERTEX": "80"
+          },
+          "metric_value": "80",
+          "metric_unit": "ML use cases initiated; lower bound; 9 April 2025"
+        },
+        {
+          "claim_id": "LBG-CE-GENAISYSTEMS",
+          "statement": "Over 18 GenAI systems were in production at the April 2025 announcement.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+          "primary_quotes": {
+            "LCE-VERTEX": "18"
+          },
+          "metric_value": "18",
+          "metric_unit": "GenAI systems in production; lower bound; 9 April 2025"
+        },
+        {
+          "claim_id": "LBG-CE-GEMINI",
+          "statement": "The disclosed platform supports third-party and open-source models, including Google Gemini.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+          "primary_quotes": {
+            "LCE-VERTEX": "Gemini"
+          }
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html",
+        "publisher": "Lloyds Banking Group",
+        "title": "Google Cloud platform and operating use cases, April 2025",
+        "published": "2025-04-09",
+        "version": "original-disclosures-inspected-2026-11-27"
+      }
+    },
+    {
+      "id": "LCE-DELIVERY",
+      "title": "Technology and transformation operating disclosures",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html",
+      "reporting_period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "retrieved_at": "2026-11-27T19:08:34+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "6880a29413a1a5582ee598ff8cdddff9a77e2b6e1da75bc24198cdde86db9592",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LCE-DELIVERY.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn204view1 / turn201view0",
+      "reviewed_by": "Codex original-source factual inspection; not independent human or legal acceptance",
+      "review_notes": "Minimal factual anchors and independent factual restatements under the existing accepted public-facts category. No original-byte archive, source licence, canonical promotion or Financial-run authority is asserted.",
+      "limitation": "Issuer-attributed facts retain their own dates and populations. Operating measures are not net financial return or buyer demand.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category for bounded organisation and operating disclosures",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only factual organisation, workforce, operating performance and disclosed technology/programme relationships. No held financial candidate publication, Financial-run persistence, report/table copying, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Lloyds section 2 held numerical projection and section 5 PDF links remain unchanged. No legal determination or new permission is recorded."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "People and Processes; operating metrics below technology articles",
+          "quote": "50%"
+        },
+        {
+          "locator": "People and Processes; operating metrics below technology articles",
+          "quote": "40%"
+        },
+        {
+          "locator": "People and Processes; operating metrics below technology articles",
+          "quote": "35%"
+        },
+        {
+          "locator": "People and Processes; operating metrics below technology articles",
+          "quote": "30% to 60%"
+        },
+        {
+          "locator": "People and Processes; operating metrics below technology articles",
+          "quote": "100%"
+        },
+        {
+          "locator": "People and Processes; operating metrics below technology articles",
+          "quote": "57"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-CE-CLOUD",
+          "statement": "The maintained technology page reports 50% of applications transitioned to cloud.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+          "primary_quotes": {
+            "LCE-DELIVERY": "50%"
+          },
+          "metric_value": "50",
+          "metric_unit": "percent; applications transitioned to cloud; underlying date unstated"
+        },
+        {
+          "claim_id": "LBG-CE-DATACENTRES",
+          "statement": "It reports a 40% reduction in data-centre count; baseline is unstated.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+          "primary_quotes": {
+            "LCE-DELIVERY": "40%"
+          },
+          "metric_value": "40",
+          "metric_unit": "percent reduction in data-centre count; baseline unstated"
+        },
+        {
+          "claim_id": "LBG-CE-RELEASES",
+          "statement": "It reports 35% improvement in release times through agile.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+          "primary_quotes": {
+            "LCE-DELIVERY": "35%"
+          },
+          "metric_value": "35",
+          "metric_unit": "percent improvement in release times; baseline unstated"
+        },
+        {
+          "claim_id": "LBG-CE-PERMANENTMIX",
+          "statement": "It describes the permanent tech/data worker ratio moving from 30% to 60%.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+          "primary_quotes": {
+            "LCE-DELIVERY": "30% to 60%"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-AGILE",
+          "statement": "The page says all change delivery now uses agile.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+          "primary_quotes": {
+            "LCE-DELIVERY": "100%"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-DELIVEREDGENAI",
+          "statement": "The page reports 57 GenAI use cases delivered in 2025.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+          "primary_quotes": {
+            "LCE-DELIVERY": "57"
+          },
+          "metric_value": "57",
+          "metric_unit": "GenAI use cases delivered; FY2025"
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html",
+        "publisher": "Lloyds Banking Group",
+        "title": "Technology and transformation operating disclosures",
+        "published": null,
+        "version": "original-disclosures-inspected-2026-11-27"
+      }
+    },
+    {
+      "id": "LCE-BOARD",
+      "title": "Current Board roles and aligned legal-bank governance",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/directors-and-governance.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/directors-and-governance.html",
+      "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "retrieved_at": "2026-11-27T19:08:34+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "9747b0dc18b9dd058318bfb13214b4585ad83ed7273a20ecb8a88f44a1a388f8",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LCE-BOARD.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn203view4 / turn207view0 / turn208view0 / turn209view0",
+      "reviewed_by": "Codex original-source factual inspection; not independent human or legal acceptance",
+      "review_notes": "Minimal factual anchors and independent factual restatements under the existing accepted public-facts category. No original-byte archive, source licence, canonical promotion or Financial-run authority is asserted.",
+      "limitation": "Issuer-attributed facts retain their own dates and populations. Operating measures are not net financial return or buyer demand.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category for bounded organisation and operating disclosures",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only factual organisation, workforce, operating performance and disclosed technology/programme relationships. No held financial candidate publication, Financial-run persistence, report/table copying, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Lloyds section 2 held numerical projection and section 5 PDF links remain unchanged. No legal determination or new permission is recorded."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation",
+          "quote": "Budenberg"
+        },
+        {
+          "locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation",
+          "quote": "Legg"
+        },
+        {
+          "locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation",
+          "quote": "Woods"
+        },
+        {
+          "locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation",
+          "quote": "Turner"
+        },
+        {
+          "locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation",
+          "quote": "Mackenzie"
+        },
+        {
+          "locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation",
+          "quote": "Gray"
+        },
+        {
+          "locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation",
+          "quote": "Bostock"
+        },
+        {
+          "locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation",
+          "quote": "Aligned Board Model"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-CE-CHAIR",
+          "statement": "Sir Robin Budenberg is Group Chair.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+          "primary_quotes": {
+            "LCE-BOARD": "Budenberg"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-AUDITCHAIR",
+          "statement": "Sarah Legg chairs the Audit Committee.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+          "primary_quotes": {
+            "LCE-BOARD": "Legg"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-RISKCHAIR",
+          "statement": "Catherine Woods chairs the Board Risk Committee.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+          "primary_quotes": {
+            "LCE-BOARD": "Woods"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-REMUNCHAIR",
+          "statement": "Cathy Turner is Senior Independent Director and chairs Remuneration.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+          "primary_quotes": {
+            "LCE-BOARD": "Turner"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-RESPONSIBLECHAIR",
+          "statement": "Amanda Mackenzie chairs the Responsible Business Committee.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+          "primary_quotes": {
+            "LCE-BOARD": "Mackenzie"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-SWCHAIR",
+          "statement": "Danuta Gray is a non-executive director and Scottish Widows Group Chair.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+          "primary_quotes": {
+            "LCE-BOARD": "Gray"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-CMCHAIR",
+          "statement": "Nathan Bostock is a non-executive director and Lloyds Bank Corporate Markets Chair.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+          "primary_quotes": {
+            "LCE-BOARD": "Bostock"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-BANKBOARDS",
+          "statement": "The Group, Lloyds Bank, Bank of Scotland and HBOS retain separate boards under an aligned meeting model.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+          "primary_quotes": {
+            "LCE-BOARD": "Aligned Board Model"
+          }
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/directors-and-governance.html",
+        "publisher": "Lloyds Banking Group",
+        "title": "Current Board roles and aligned legal-bank governance",
+        "published": null,
+        "version": "original-disclosures-inspected-2026-11-27"
+      }
+    },
+    {
+      "id": "LCE-SETTLEMENT",
+      "title": "Visa stablecoin settlement pilot",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-and-visa-test-round-the-clock-cross-border-settlement-using-stablecoins.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-and-visa-test-round-the-clock-cross-border-settlement-using-stablecoins.html",
+      "reporting_period": "Seven-day pilot announced 30 September 2026; not a production rollout or purchasing mandate",
+      "publication_date": "2026-09-30",
+      "publication_date_evidence": "Original document date / dated issuer announcement",
+      "retrieved_at": "2026-11-27T19:08:34+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "f9450bdb40760f52919e9b27f9a2cf27b56e00a6fdaf27fef06c080520e79bc7",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LCE-SETTLEMENT.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn207view2 / turn209view2",
+      "reviewed_by": "Codex original-source factual inspection; not independent human or legal acceptance",
+      "review_notes": "Minimal factual anchors and independent factual restatements under the existing accepted public-facts category. No original-byte archive, source licence, canonical promotion or Financial-run authority is asserted.",
+      "limitation": "Issuer-attributed facts retain their own dates and populations. Operating measures are not net financial return or buyer demand.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category for bounded organisation and operating disclosures",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only factual organisation, workforce, operating performance and disclosed technology/programme relationships. No held financial candidate publication, Financial-run persistence, report/table copying, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Lloyds section 2 held numerical projection and section 5 PDF links remain unchanged. No legal determination or new permission is recorded."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "Pilot scope, booking perimeter, settlement route and interoperability paragraphs",
+          "quote": "Lloyds Banking Group and Visa"
+        },
+        {
+          "locator": "Pilot scope, booking perimeter, settlement route and interoperability paragraphs",
+          "quote": "under an hour"
+        },
+        {
+          "locator": "Pilot scope, booking perimeter, settlement route and interoperability paragraphs",
+          "quote": "Jersey"
+        },
+        {
+          "locator": "Pilot scope, booking perimeter, settlement route and interoperability paragraphs",
+          "quote": "USDC purchased through Archax"
+        },
+        {
+          "locator": "Pilot scope, booking perimeter, settlement route and interoperability paragraphs",
+          "quote": "Canton"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-CE-VISAPILOT",
+          "statement": "Lloyds and Visa completed a seven-day live cross-border settlement pilot.",
+          "kind": "reported_relationship",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Seven-day pilot announced 30 September 2026; not a production rollout or purchasing mandate",
+          "primary_quotes": {
+            "LCE-SETTLEMENT": "Lloyds Banking Group and Visa"
+          },
+          "relationship": {
+            "subject": "BK-ENT-001",
+            "predicate": "reported_pilot_with",
+            "object": "SUP-VISA"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-SETTLEMENTSPEED",
+          "statement": "Funds reached Visa in under an hour, including over the weekend.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Seven-day pilot announced 30 September 2026; not a production rollout or purchasing mandate",
+          "primary_quotes": {
+            "LCE-SETTLEMENT": "under an hour"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-JERSEY",
+          "statement": "The pilot booked settlement through Lloyds Corporate Markets in Jersey.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Seven-day pilot announced 30 September 2026; not a production rollout or purchasing mandate",
+          "primary_quotes": {
+            "LCE-SETTLEMENT": "Jersey"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-ARCHAX",
+          "statement": "The pilot used USDC purchased through Archax.",
+          "kind": "reported_relationship",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Seven-day pilot announced 30 September 2026; not a production rollout or purchasing mandate",
+          "primary_quotes": {
+            "LCE-SETTLEMENT": "USDC purchased through Archax"
+          },
+          "relationship": {
+            "subject": "BK-ENT-001",
+            "predicate": "reported_pilot_purchase_through",
+            "object": "SUP-ARCHAX"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-CANTON",
+          "statement": "Lloyds used its own Canton node, with Visa on a separate public blockchain.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "Seven-day pilot announced 30 September 2026; not a production rollout or purchasing mandate",
+          "primary_quotes": {
+            "LCE-SETTLEMENT": "Canton"
+          }
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-and-visa-test-round-the-clock-cross-border-settlement-using-stablecoins.html",
+        "publisher": "Lloyds Banking Group",
+        "title": "Visa stablecoin settlement pilot",
+        "published": "2026-09-30",
+        "version": "original-disclosures-inspected-2026-11-27"
+      }
+    },
+    {
+      "id": "LCE-LAUNCH",
+      "title": "Launch 2026 programme and disclosed operating collaborations",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/working-with-suppliers/collaborating-with-fintechs/launch-innovation-programme.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are/working-with-suppliers/collaborating-with-fintechs/launch-innovation-programme.html",
+      "reporting_period": "2026 programme dates and undated case studies observed 27 November 2026",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "retrieved_at": "2026-11-27T19:08:34+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "1c08a6b36070191305da14c7dae060960411a2ddd371eb7c5695d5d6b067eecf",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/LCE-LAUNCH.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn204view2 / turn209view3",
+      "reviewed_by": "Codex original-source factual inspection; not independent human or legal acceptance",
+      "review_notes": "Minimal factual anchors and independent factual restatements under the existing accepted public-facts category. No original-byte archive, source licence, canonical promotion or Financial-run authority is asserted.",
+      "limitation": "Issuer-attributed facts retain their own dates and populations. Operating measures are not net financial return or buyer demand.",
+      "rights": {
+        "status": "permitted_public_factual_category",
+        "basis": "Existing accepted independent public-facts category for bounded organisation and operating disclosures",
+        "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+        "retained_form": "short_factual_anchors_and_independent_assertions",
+        "attribution_url": "https://www.lloydsbankinggroup.com/",
+        "homepage_conditions_met": true,
+        "scope": "Read-only factual organisation, workforce, operating performance and disclosed technology/programme relationships. No held financial candidate publication, Financial-run persistence, report/table copying, export, contractual waiver or PDF deep links.",
+        "exception_boundary": "Lloyds section 2 held numerical projection and section 5 PDF links remain unchanged. No legal determination or new permission is recorded."
+      },
+      "legacy_source_ids": [],
+      "excerpts": [
+        {
+          "locator": "Key dates, Mortgage Brokers challenge and Caura/Planna success stories",
+          "quote": "30 September 2026"
+        },
+        {
+          "locator": "Key dates, Mortgage Brokers challenge and Caura/Planna success stories",
+          "quote": "interoperability"
+        },
+        {
+          "locator": "Key dates, Mortgage Brokers challenge and Caura/Planna success stories",
+          "quote": "white-labelling the Caura proposition"
+        },
+        {
+          "locator": "Key dates, Mortgage Brokers challenge and Caura/Planna success stories",
+          "quote": "8,000"
+        },
+        {
+          "locator": "Key dates, Mortgage Brokers challenge and Caura/Planna success stories",
+          "quote": "4,500"
+        },
+        {
+          "locator": "Key dates, Mortgage Brokers challenge and Caura/Planna success stories",
+          "quote": "Planna"
+        }
+      ],
+      "disclosure_bindings": [
+        {
+          "claim_id": "LBG-CE-LAUNCHCLOSED",
+          "statement": "Launch 2026 applications closed on 30 September; the page confirms closure.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "2026 programme dates and undated case studies observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-LAUNCH": "30 September 2026"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-BROKERCHALLENGE",
+          "statement": "The programme sought less broker administration, better data capture and system interoperability.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "2026 programme dates and undated case studies observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-LAUNCH": "interoperability"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-CAURA",
+          "statement": "Lex Autolease launched an app using a white-labelled Caura proposition.",
+          "kind": "reported_relationship",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "2026 programme dates and undated case studies observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-LAUNCH": "white-labelling the Caura proposition"
+          },
+          "relationship": {
+            "subject": "BK-ENT-001",
+            "predicate": "reported_white_label_for_lex",
+            "object": "SUP-CAURA"
+          }
+        },
+        {
+          "claim_id": "LBG-CE-LEXDOWNLOADS",
+          "statement": "The case study reports over 8,000 Lex app downloads; measurement date is unstated.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "2026 programme dates and undated case studies observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-LAUNCH": "8,000"
+          },
+          "metric_value": "8000",
+          "metric_unit": "downloads; lower bound; Lex app case study; date unstated"
+        },
+        {
+          "claim_id": "LBG-CE-LEXCUSTOMERS",
+          "statement": "Nearly 4,500 Lex customers were onboarded in the case study.",
+          "kind": "reported_fact",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "2026 programme dates and undated case studies observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-LAUNCH": "4,500"
+          },
+          "metric_value": "4500",
+          "metric_unit": "customers onboarded; approximate; Lex app case study; date unstated"
+        },
+        {
+          "claim_id": "LBG-CE-PLANNARELATION",
+          "statement": "Lloyds described providing a customer Neighbourhood Guide using Planna.",
+          "kind": "reported_relationship",
+          "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+          "asset_id": "BK-ENT-001",
+          "reporting_period": "2026 programme dates and undated case studies observed 27 November 2026",
+          "primary_quotes": {
+            "LCE-LAUNCH": "Planna"
+          },
+          "relationship": {
+            "subject": "BK-ENT-001",
+            "predicate": "reported_guide_uses",
+            "object": "SUP-PLANNA"
+          }
+        }
+      ],
+      "document_identity": {
+        "url": "https://www.lloydsbankinggroup.com/who-we-are/working-with-suppliers/collaborating-with-fintechs/launch-innovation-programme.html",
+        "publisher": "Lloyds Banking Group",
+        "title": "Launch 2026 programme and disclosed operating collaborations",
+        "published": null,
+        "version": "original-disclosures-inspected-2026-11-27"
+      }
     }
   ],
   "claims": [
@@ -2915,6 +4169,1079 @@
         "LGV2-LEADERS": "Walton"
       },
       "quote_locator": "Named executive heading and immediately following published role"
+    },
+    {
+      "id": "LBG-CE-FTE25",
+      "asset_id": "BK-ENT-001",
+      "statement": "Group employee FTEs: 60,061 at December 2025.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-WORKFORCE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-WORKFORCE": "60,061"
+      },
+      "quote_locator": "Item 6.D Employees, printed page 24; cover filing date",
+      "metric_value": "60061",
+      "metric_unit": "employee FTE; 31 December 2025; Group"
+    },
+    {
+      "id": "LBG-CE-FTE24",
+      "asset_id": "BK-ENT-001",
+      "statement": "Group employee FTEs: 61,228 at December 2024.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-WORKFORCE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-WORKFORCE": "61,228"
+      },
+      "quote_locator": "Item 6.D Employees, printed page 24; cover filing date",
+      "metric_value": "61228",
+      "metric_unit": "employee FTE; 31 December 2024; Group"
+    },
+    {
+      "id": "LBG-CE-FTE23",
+      "asset_id": "BK-ENT-001",
+      "statement": "Group employee FTEs: 62,569 at December 2023.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-WORKFORCE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-WORKFORCE": "62,569"
+      },
+      "quote_locator": "Item 6.D Employees, printed page 24; cover filing date",
+      "metric_value": "62569",
+      "metric_unit": "employee FTE; 31 December 2023; Group"
+    },
+    {
+      "id": "LBG-CE-FTERETAIL",
+      "asset_id": "BK-ENT-001",
+      "statement": "December 2025 Retail employees: 27,574 FTEs.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-WORKFORCE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-WORKFORCE": "27,574"
+      },
+      "quote_locator": "Item 6.D Employees, printed page 24; cover filing date",
+      "metric_value": "27574",
+      "metric_unit": "employee FTE; 31 December 2025; Retail"
+    },
+    {
+      "id": "LBG-CE-FTECOMMERCIAL",
+      "asset_id": "BK-ENT-001",
+      "statement": "December 2025 Commercial employees: 7,955 FTEs.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-WORKFORCE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-WORKFORCE": "7,955"
+      },
+      "quote_locator": "Item 6.D Employees, printed page 24; cover filing date",
+      "metric_value": "7955",
+      "metric_unit": "employee FTE; 31 December 2025; Commercial"
+    },
+    {
+      "id": "LBG-CE-FTEINSURANCE",
+      "asset_id": "BK-ENT-001",
+      "statement": "December 2025 Insurance, Pensions and Investments employees: 6,025 FTEs.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-WORKFORCE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-WORKFORCE": "6,025"
+      },
+      "quote_locator": "Item 6.D Employees, printed page 24; cover filing date",
+      "metric_value": "6025",
+      "metric_unit": "employee FTE; 31 December 2025; Insurance Pensions Investments"
+    },
+    {
+      "id": "LBG-CE-FTEOTHER",
+      "asset_id": "BK-ENT-001",
+      "statement": "December 2025 other functions: 18,507 employee FTEs.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-WORKFORCE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-WORKFORCE": "18,507"
+      },
+      "quote_locator": "Item 6.D Employees, printed page 24; cover filing date",
+      "metric_value": "18507",
+      "metric_unit": "employee FTE; 31 December 2025; other functions"
+    },
+    {
+      "id": "LBG-CE-FTEUK",
+      "asset_id": "BK-ENT-001",
+      "statement": "The employee geographic disclosure lists 55,266 in the UK.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-WORKFORCE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-WORKFORCE": "55,266"
+      },
+      "quote_locator": "Item 6.D Employees, printed page 24; cover filing date",
+      "metric_value": "55266",
+      "metric_unit": "employee geographic disclosure; 31 December 2025; UK"
+    },
+    {
+      "id": "LBG-CE-FTEEUROPE",
+      "asset_id": "BK-ENT-001",
+      "statement": "The employee geographic disclosure lists 760 in continental Europe.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-WORKFORCE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-WORKFORCE": "760"
+      },
+      "quote_locator": "Item 6.D Employees, printed page 24; cover filing date",
+      "metric_value": "760",
+      "metric_unit": "employee geographic disclosure; 31 December 2025; continental Europe"
+    },
+    {
+      "id": "LBG-CE-FTEAMERICAS",
+      "asset_id": "BK-ENT-001",
+      "statement": "The employee geographic disclosure lists 185 in the Americas.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-WORKFORCE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-WORKFORCE": "185"
+      },
+      "quote_locator": "Item 6.D Employees, printed page 24; cover filing date",
+      "metric_value": "185",
+      "metric_unit": "employee geographic disclosure; 31 December 2025; Americas"
+    },
+    {
+      "id": "LBG-CE-FTEWORLD",
+      "asset_id": "BK-ENT-001",
+      "statement": "The employee geographic disclosure lists 3,851 elsewhere.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-WORKFORCE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-WORKFORCE": "3,851"
+      },
+      "quote_locator": "Item 6.D Employees, printed page 24; cover filing date",
+      "metric_value": "3851",
+      "metric_unit": "employee geographic disclosure; 31 December 2025; rest of world"
+    },
+    {
+      "id": "LBG-CE-NONPERMANENT",
+      "asset_id": "BK-ENT-001",
+      "statement": "December 2025 non-permanent worker population: 24,005; not employee FTEs.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-WORKFORCE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-WORKFORCE": "24,005"
+      },
+      "quote_locator": "Item 6.D Employees, printed page 24; cover filing date",
+      "metric_value": "24005",
+      "metric_unit": "non-permanent worker population; 31 December 2025"
+    },
+    {
+      "id": "LBG-CE-AGENCY",
+      "asset_id": "BK-ENT-001",
+      "statement": "The divisional employee disclosure includes 659 agency staff; not an additional allocation.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-WORKFORCE"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-WORKFORCE": "659"
+      },
+      "quote_locator": "Item 6.D Employees, printed page 24; cover filing date",
+      "metric_value": "659",
+      "metric_unit": "agency staff included in divisional disclosure; 31 December 2025"
+    },
+    {
+      "id": "LBG-CE-OPENINGTIME",
+      "asset_id": "BK-ENT-001",
+      "statement": "The FY2025 account-opening journey is described as seven minutes.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-ANNUAL-OPERATIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-ANNUAL-OPERATIONS": "seven minute"
+      },
+      "quote_locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology"
+    },
+    {
+      "id": "LBG-CE-OPENINGSHARE",
+      "asset_id": "BK-ENT-001",
+      "statement": "Around 85% of current-account openings used mobile in 2025.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-ANNUAL-OPERATIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-ANNUAL-OPERATIONS": "85%"
+      },
+      "quote_locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+      "metric_value": "85",
+      "metric_unit": "percent; mobile current-account openings; FY2025"
+    },
+    {
+      "id": "LBG-CE-DISTRIBUTION25",
+      "asset_id": "BK-ENT-001",
+      "statement": "Active customers per distribution FTE rose about 45% versus 2021 by 2025.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-ANNUAL-OPERATIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-ANNUAL-OPERATIONS": "45%"
+      },
+      "quote_locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+      "metric_value": "45",
+      "metric_unit": "percent improvement versus 2021; active customers per distribution FTE; FY2025"
+    },
+    {
+      "id": "LBG-CE-DISTRIBUTION26",
+      "asset_id": "BK-ENT-001",
+      "statement": "The 2026 objective is about 50% more active customers per distribution FTE versus 2021.",
+      "domain": "enterprise_executive_context",
+      "kind": "management_expectation",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-ANNUAL-OPERATIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-ANNUAL-OPERATIONS": "50%"
+      },
+      "quote_locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+      "metric_value": "50",
+      "metric_unit": "percent target improvement versus 2021; active customers per distribution FTE; 2026"
+    },
+    {
+      "id": "LBG-CE-BCBDIGITAL",
+      "asset_id": "BK-ENT-001",
+      "statement": "Over half of BCB products were digitally originated and fulfilled in 2025.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-ANNUAL-OPERATIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-ANNUAL-OPERATIONS": "fulfilled digitally"
+      },
+      "quote_locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology"
+    },
+    {
+      "id": "LBG-CE-BCBSERVICE",
+      "asset_id": "BK-ENT-001",
+      "statement": "BCB reported over 50% of key servicing interactions digitised, reaching its 2026 target early.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-ANNUAL-OPERATIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-ANNUAL-OPERATIONS": "50%"
+      },
+      "quote_locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+      "metric_value": "50",
+      "metric_unit": "percent; disclosed lower bound for BCB key servicing interactions digitised; FY2025"
+    },
+    {
+      "id": "LBG-CE-ACCOUNTING",
+      "asset_id": "BK-ENT-001",
+      "statement": "For 2026, BCB planned connections to more than 70 accounting software packages.",
+      "domain": "enterprise_executive_context",
+      "kind": "management_priority",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-ANNUAL-OPERATIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-ANNUAL-OPERATIONS": "70"
+      },
+      "quote_locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology"
+    },
+    {
+      "id": "LBG-CE-GOVERNMENT",
+      "asset_id": "BK-ENT-001",
+      "statement": "CIB reported winning cash-management and payments work serving over 30 government departments and bodies.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-ANNUAL-OPERATIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-ANNUAL-OPERATIONS": "30"
+      },
+      "quote_locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology"
+    },
+    {
+      "id": "LBG-CE-FXVOLUME",
+      "asset_id": "BK-ENT-001",
+      "statement": "CIB reported around 21% growth in foreign-exchange volumes during 2025.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-ANNUAL-OPERATIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-ANNUAL-OPERATIONS": "21%"
+      },
+      "quote_locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+      "metric_value": "21",
+      "metric_unit": "percent year-on-year volume growth; CIB foreign exchange; FY2025"
+    },
+    {
+      "id": "LBG-CE-INVESTMENTACCOUNTS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Direct-to-consumer investments had opened 84,000 accounts by the FY2025 disclosure.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-ANNUAL-OPERATIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-ANNUAL-OPERATIONS": "84,000"
+      },
+      "quote_locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+      "metric_value": "84000",
+      "metric_unit": "accounts opened to date; direct-to-consumer investments; FY2025 disclosure"
+    },
+    {
+      "id": "LBG-CE-WEALTHPLAN",
+      "asset_id": "BK-ENT-001",
+      "statement": "The 2026 plan included integrating Schroders Personal Wealth into the wider advice proposition.",
+      "domain": "enterprise_executive_context",
+      "kind": "management_priority",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-ANNUAL-OPERATIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-ANNUAL-OPERATIONS": "Schroders Personal Wealth"
+      },
+      "quote_locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology"
+    },
+    {
+      "id": "LBG-CE-TECHHIRES25",
+      "asset_id": "BK-ENT-001",
+      "statement": "The FY2025 disclosure reports about 9,000 technology and data hires since 2021.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-ANNUAL-OPERATIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-ANNUAL-OPERATIONS": "9,000"
+      },
+      "quote_locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+      "metric_value": "9000",
+      "metric_unit": "cumulative technology and data hires since 2021; FY2025 disclosure"
+    },
+    {
+      "id": "LBG-CE-RETAILSALES",
+      "asset_id": "BK-ENT-001",
+      "statement": "More than 95% of Retail sales used digital channels in the FY2025 disclosure.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-ANNUAL-OPERATIONS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-ANNUAL-OPERATIONS": "95%"
+      },
+      "quote_locator": "CEO statement and Delivering our strategy: distribution, BCB, CIB, Mass Affluent, technology",
+      "metric_value": "95",
+      "metric_unit": "percent; lower bound for Retail sales through digital channels; FY2025"
+    },
+    {
+      "id": "LBG-CE-VERTEX",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lloyds disclosed a Group ML and GenAI platform using Google Cloud Vertex AI.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_relationship",
+      "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-VERTEX"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-VERTEX": "using Google Cloud’s Vertex AI"
+      },
+      "quote_locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs",
+      "relationship": {
+        "subject": "BK-ENT-001",
+        "predicate": "reported_uses_platform",
+        "object": "SUP-GOOGLE"
+      }
+    },
+    {
+      "id": "LBG-CE-DEVELOPERS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Over 300 data scientists and AI developers were using the platform in April 2025.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-VERTEX"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-VERTEX": "300"
+      },
+      "quote_locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs",
+      "metric_value": "300",
+      "metric_unit": "people using platform; lower bound; 9 April 2025"
+    },
+    {
+      "id": "LBG-CE-MODELS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lloyds reported migrating 15 modelling systems from on-premise infrastructure.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-VERTEX"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-VERTEX": "15"
+      },
+      "quote_locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs",
+      "metric_value": "15",
+      "metric_unit": "modelling systems migrated; 9 April 2025 announcement"
+    },
+    {
+      "id": "LBG-CE-MORTGAGESPEED",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lloyds described mortgage income verification moving from days to seconds.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-VERTEX"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-VERTEX": "days to seconds"
+      },
+      "quote_locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs"
+    },
+    {
+      "id": "LBG-CE-MLCASES",
+      "asset_id": "BK-ENT-001",
+      "statement": "By April 2025, over 80 new ML use cases had been initiated.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-VERTEX"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-VERTEX": "80"
+      },
+      "quote_locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs",
+      "metric_value": "80",
+      "metric_unit": "ML use cases initiated; lower bound; 9 April 2025"
+    },
+    {
+      "id": "LBG-CE-GENAISYSTEMS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Over 18 GenAI systems were in production at the April 2025 announcement.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-VERTEX"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-VERTEX": "18"
+      },
+      "quote_locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs",
+      "metric_value": "18",
+      "metric_unit": "GenAI systems in production; lower bound; 9 April 2025"
+    },
+    {
+      "id": "LBG-CE-GEMINI",
+      "asset_id": "BK-ENT-001",
+      "statement": "The disclosed platform supports third-party and open-source models, including Google Gemini.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-VERTEX"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-VERTEX": "Gemini"
+      },
+      "quote_locator": "Embracing cloud technology; platform migration; deployment and model access paragraphs"
+    },
+    {
+      "id": "LBG-CE-CLOUD",
+      "asset_id": "BK-ENT-001",
+      "statement": "The maintained technology page reports 50% of applications transitioned to cloud.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-DELIVERY"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-DELIVERY": "50%"
+      },
+      "quote_locator": "People and Processes; operating metrics below technology articles",
+      "metric_value": "50",
+      "metric_unit": "percent; applications transitioned to cloud; underlying date unstated"
+    },
+    {
+      "id": "LBG-CE-DATACENTRES",
+      "asset_id": "BK-ENT-001",
+      "statement": "It reports a 40% reduction in data-centre count; baseline is unstated.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-DELIVERY"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-DELIVERY": "40%"
+      },
+      "quote_locator": "People and Processes; operating metrics below technology articles",
+      "metric_value": "40",
+      "metric_unit": "percent reduction in data-centre count; baseline unstated"
+    },
+    {
+      "id": "LBG-CE-RELEASES",
+      "asset_id": "BK-ENT-001",
+      "statement": "It reports 35% improvement in release times through agile.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-DELIVERY"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-DELIVERY": "35%"
+      },
+      "quote_locator": "People and Processes; operating metrics below technology articles",
+      "metric_value": "35",
+      "metric_unit": "percent improvement in release times; baseline unstated"
+    },
+    {
+      "id": "LBG-CE-PERMANENTMIX",
+      "asset_id": "BK-ENT-001",
+      "statement": "It describes the permanent tech/data worker ratio moving from 30% to 60%.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-DELIVERY"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-DELIVERY": "30% to 60%"
+      },
+      "quote_locator": "People and Processes; operating metrics below technology articles"
+    },
+    {
+      "id": "LBG-CE-AGILE",
+      "asset_id": "BK-ENT-001",
+      "statement": "The page says all change delivery now uses agile.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-DELIVERY"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-DELIVERY": "100%"
+      },
+      "quote_locator": "People and Processes; operating metrics below technology articles"
+    },
+    {
+      "id": "LBG-CE-DELIVEREDGENAI",
+      "asset_id": "BK-ENT-001",
+      "statement": "The page reports 57 GenAI use cases delivered in 2025.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-DELIVERY"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-DELIVERY": "57"
+      },
+      "quote_locator": "People and Processes; operating metrics below technology articles",
+      "metric_value": "57",
+      "metric_unit": "GenAI use cases delivered; FY2025"
+    },
+    {
+      "id": "LBG-CE-CHAIR",
+      "asset_id": "BK-ENT-001",
+      "statement": "Sir Robin Budenberg is Group Chair.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-BOARD"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-BOARD": "Budenberg"
+      },
+      "quote_locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation"
+    },
+    {
+      "id": "LBG-CE-AUDITCHAIR",
+      "asset_id": "BK-ENT-001",
+      "statement": "Sarah Legg chairs the Audit Committee.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-BOARD"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-BOARD": "Legg"
+      },
+      "quote_locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation"
+    },
+    {
+      "id": "LBG-CE-RISKCHAIR",
+      "asset_id": "BK-ENT-001",
+      "statement": "Catherine Woods chairs the Board Risk Committee.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-BOARD"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-BOARD": "Woods"
+      },
+      "quote_locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation"
+    },
+    {
+      "id": "LBG-CE-REMUNCHAIR",
+      "asset_id": "BK-ENT-001",
+      "statement": "Cathy Turner is Senior Independent Director and chairs Remuneration.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-BOARD"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-BOARD": "Turner"
+      },
+      "quote_locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation"
+    },
+    {
+      "id": "LBG-CE-RESPONSIBLECHAIR",
+      "asset_id": "BK-ENT-001",
+      "statement": "Amanda Mackenzie chairs the Responsible Business Committee.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-BOARD"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-BOARD": "Mackenzie"
+      },
+      "quote_locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation"
+    },
+    {
+      "id": "LBG-CE-SWCHAIR",
+      "asset_id": "BK-ENT-001",
+      "statement": "Danuta Gray is a non-executive director and Scottish Widows Group Chair.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-BOARD"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-BOARD": "Gray"
+      },
+      "quote_locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation"
+    },
+    {
+      "id": "LBG-CE-CMCHAIR",
+      "asset_id": "BK-ENT-001",
+      "statement": "Nathan Bostock is a non-executive director and Lloyds Bank Corporate Markets Chair.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-BOARD"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-BOARD": "Bostock"
+      },
+      "quote_locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation"
+    },
+    {
+      "id": "LBG-CE-BANKBOARDS",
+      "asset_id": "BK-ENT-001",
+      "statement": "The Group, Lloyds Bank, Bank of Scotland and HBOS retain separate boards under an aligned meeting model.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-BOARD"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-BOARD": "Aligned Board Model"
+      },
+      "quote_locator": "Individual roles/committee memberships and Additional Non-Executive Directors governance explanation"
+    },
+    {
+      "id": "LBG-CE-VISAPILOT",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lloyds and Visa completed a seven-day live cross-border settlement pilot.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_relationship",
+      "reporting_period": "Seven-day pilot announced 30 September 2026; not a production rollout or purchasing mandate",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-SETTLEMENT"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-SETTLEMENT": "Lloyds Banking Group and Visa"
+      },
+      "quote_locator": "Pilot scope, booking perimeter, settlement route and interoperability paragraphs",
+      "relationship": {
+        "subject": "BK-ENT-001",
+        "predicate": "reported_pilot_with",
+        "object": "SUP-VISA"
+      }
+    },
+    {
+      "id": "LBG-CE-SETTLEMENTSPEED",
+      "asset_id": "BK-ENT-001",
+      "statement": "Funds reached Visa in under an hour, including over the weekend.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Seven-day pilot announced 30 September 2026; not a production rollout or purchasing mandate",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-SETTLEMENT"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-SETTLEMENT": "under an hour"
+      },
+      "quote_locator": "Pilot scope, booking perimeter, settlement route and interoperability paragraphs"
+    },
+    {
+      "id": "LBG-CE-JERSEY",
+      "asset_id": "BK-ENT-001",
+      "statement": "The pilot booked settlement through Lloyds Corporate Markets in Jersey.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Seven-day pilot announced 30 September 2026; not a production rollout or purchasing mandate",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-SETTLEMENT"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-SETTLEMENT": "Jersey"
+      },
+      "quote_locator": "Pilot scope, booking perimeter, settlement route and interoperability paragraphs"
+    },
+    {
+      "id": "LBG-CE-ARCHAX",
+      "asset_id": "BK-ENT-001",
+      "statement": "The pilot used USDC purchased through Archax.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_relationship",
+      "reporting_period": "Seven-day pilot announced 30 September 2026; not a production rollout or purchasing mandate",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-SETTLEMENT"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-SETTLEMENT": "USDC purchased through Archax"
+      },
+      "quote_locator": "Pilot scope, booking perimeter, settlement route and interoperability paragraphs",
+      "relationship": {
+        "subject": "BK-ENT-001",
+        "predicate": "reported_pilot_purchase_through",
+        "object": "SUP-ARCHAX"
+      }
+    },
+    {
+      "id": "LBG-CE-CANTON",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lloyds used its own Canton node, with Visa on a separate public blockchain.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "Seven-day pilot announced 30 September 2026; not a production rollout or purchasing mandate",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-SETTLEMENT"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-SETTLEMENT": "Canton"
+      },
+      "quote_locator": "Pilot scope, booking perimeter, settlement route and interoperability paragraphs"
+    },
+    {
+      "id": "LBG-CE-LAUNCHCLOSED",
+      "asset_id": "BK-ENT-001",
+      "statement": "Launch 2026 applications closed on 30 September; the page confirms closure.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "2026 programme dates and undated case studies observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-LAUNCH"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-LAUNCH": "30 September 2026"
+      },
+      "quote_locator": "Key dates, Mortgage Brokers challenge and Caura/Planna success stories"
+    },
+    {
+      "id": "LBG-CE-BROKERCHALLENGE",
+      "asset_id": "BK-ENT-001",
+      "statement": "The programme sought less broker administration, better data capture and system interoperability.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "2026 programme dates and undated case studies observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-LAUNCH"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-LAUNCH": "interoperability"
+      },
+      "quote_locator": "Key dates, Mortgage Brokers challenge and Caura/Planna success stories"
+    },
+    {
+      "id": "LBG-CE-CAURA",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lex Autolease launched an app using a white-labelled Caura proposition.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_relationship",
+      "reporting_period": "2026 programme dates and undated case studies observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-LAUNCH"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-LAUNCH": "white-labelling the Caura proposition"
+      },
+      "quote_locator": "Key dates, Mortgage Brokers challenge and Caura/Planna success stories",
+      "relationship": {
+        "subject": "BK-ENT-001",
+        "predicate": "reported_white_label_for_lex",
+        "object": "SUP-CAURA"
+      }
+    },
+    {
+      "id": "LBG-CE-LEXDOWNLOADS",
+      "asset_id": "BK-ENT-001",
+      "statement": "The case study reports over 8,000 Lex app downloads; measurement date is unstated.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "2026 programme dates and undated case studies observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-LAUNCH"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-LAUNCH": "8,000"
+      },
+      "quote_locator": "Key dates, Mortgage Brokers challenge and Caura/Planna success stories",
+      "metric_value": "8000",
+      "metric_unit": "downloads; lower bound; Lex app case study; date unstated"
+    },
+    {
+      "id": "LBG-CE-LEXCUSTOMERS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Nearly 4,500 Lex customers were onboarded in the case study.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_fact",
+      "reporting_period": "2026 programme dates and undated case studies observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-LAUNCH"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-LAUNCH": "4,500"
+      },
+      "quote_locator": "Key dates, Mortgage Brokers challenge and Caura/Planna success stories",
+      "metric_value": "4500",
+      "metric_unit": "customers onboarded; approximate; Lex app case study; date unstated"
+    },
+    {
+      "id": "LBG-CE-PLANNARELATION",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lloyds described providing a customer Neighbourhood Guide using Planna.",
+      "domain": "enterprise_executive_context",
+      "kind": "reported_relationship",
+      "reporting_period": "2026 programme dates and undated case studies observed 27 November 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "LCE-LAUNCH"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "LCE-LAUNCH": "Planna"
+      },
+      "quote_locator": "Key dates, Mortgage Brokers challenge and Caura/Planna success stories",
+      "relationship": {
+        "subject": "BK-ENT-001",
+        "predicate": "reported_guide_uses",
+        "object": "SUP-PLANNA"
+      }
     }
   ],
   "frameworks": [
@@ -3353,6 +5680,26 @@
     {
       "id": "SUP-ORACLE",
       "title": "Oracle"
+    },
+    {
+      "id": "SUP-VISA",
+      "title": "Visa",
+      "relationship_boundary": "Disclosed pilot or customer-proposition involvement only; not an inferred contract or Group-wide dependency"
+    },
+    {
+      "id": "SUP-ARCHAX",
+      "title": "Archax",
+      "relationship_boundary": "Disclosed pilot or customer-proposition involvement only; not an inferred contract or Group-wide dependency"
+    },
+    {
+      "id": "SUP-CAURA",
+      "title": "Caura",
+      "relationship_boundary": "Disclosed pilot or customer-proposition involvement only; not an inferred contract or Group-wide dependency"
+    },
+    {
+      "id": "SUP-PLANNA",
+      "title": "Planna",
+      "relationship_boundary": "Disclosed pilot or customer-proposition involvement only; not an inferred contract or Group-wide dependency"
     }
   ],
   "candidates": [
@@ -5368,6 +7715,66 @@
       ],
       "verified": false,
       "scope": "In-scope UK regulated firms; entity applicability and customer readiness unverified"
+    },
+    {
+      "id": "LCE-REL-VERTEX",
+      "subject": "BK-ENT-001",
+      "predicate": "reported_uses_platform",
+      "object": "SUP-GOOGLE",
+      "claim_ids": [
+        "LBG-CE-VERTEX"
+      ],
+      "assertion_kind": "source_supported_relationship",
+      "verified": true,
+      "scope_boundary": "Issuer-disclosed specific use/pilot/proposition; not canonical acceptance, supplier contract scope or buying intent"
+    },
+    {
+      "id": "LCE-REL-VISAPILOT",
+      "subject": "BK-ENT-001",
+      "predicate": "reported_pilot_with",
+      "object": "SUP-VISA",
+      "claim_ids": [
+        "LBG-CE-VISAPILOT"
+      ],
+      "assertion_kind": "source_supported_relationship",
+      "verified": true,
+      "scope_boundary": "Issuer-disclosed specific use/pilot/proposition; not canonical acceptance, supplier contract scope or buying intent"
+    },
+    {
+      "id": "LCE-REL-ARCHAX",
+      "subject": "BK-ENT-001",
+      "predicate": "reported_pilot_purchase_through",
+      "object": "SUP-ARCHAX",
+      "claim_ids": [
+        "LBG-CE-ARCHAX"
+      ],
+      "assertion_kind": "source_supported_relationship",
+      "verified": true,
+      "scope_boundary": "Issuer-disclosed specific use/pilot/proposition; not canonical acceptance, supplier contract scope or buying intent"
+    },
+    {
+      "id": "LCE-REL-CAURA",
+      "subject": "BK-ENT-001",
+      "predicate": "reported_white_label_for_lex",
+      "object": "SUP-CAURA",
+      "claim_ids": [
+        "LBG-CE-CAURA"
+      ],
+      "assertion_kind": "source_supported_relationship",
+      "verified": true,
+      "scope_boundary": "Issuer-disclosed specific use/pilot/proposition; not canonical acceptance, supplier contract scope or buying intent"
+    },
+    {
+      "id": "LCE-REL-PLANNARELATION",
+      "subject": "BK-ENT-001",
+      "predicate": "reported_guide_uses",
+      "object": "SUP-PLANNA",
+      "claim_ids": [
+        "LBG-CE-PLANNARELATION"
+      ],
+      "assertion_kind": "source_supported_relationship",
+      "verified": true,
+      "scope_boundary": "Issuer-disclosed specific use/pilot/proposition; not canonical acceptance, supplier contract scope or buying intent"
     }
   ],
   "gaps": [

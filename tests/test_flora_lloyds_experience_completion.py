@@ -118,7 +118,9 @@ def test_public_routes_keep_private_financial_and_foreign_workspace_access_close
 
 
 def test_only_presentation_changes_and_no_research_or_protected_owner_evolution():
-    paths=('enterprise-knowledge','architecture/decisions','cios/applications/flora/security_store.py',
+    from tests.flora_lloyds_research_contract import preserved_research_cut
+    preserved_research_cut()
+    paths=('architecture/decisions','cios/applications/flora/security_store.py',
       'cios/applications/flora/security_web.py','cios/applications/flora/public_routes.py',
       'cios/applications/flora/visual_streams.py','cios/applications/flora/research_intelligence/source_import.py',
       'cios/applications/flora/financial_intelligence','cios/applications/flora/blueprint_import',

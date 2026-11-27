@@ -100,14 +100,21 @@ def test_government_fact_scope_and_dated_meaning_are_not_self_relabelled(monkeyp
     assert not source.public_enterprise_role()
 
 
-def test_workforce_is_unavailable_without_proxy_counts_or_invented_chart():
+def test_workforce_is_unavailable_without_proxy_counts_or_invented_chart(monkeypatch):
     html=main(v.render(g.CANONICAL,query('inside','people','workforce')))
     assert 'more than 60,000 colleagues' in html and 'not audited FTE' in html
     assert 'FTE distribution, salary cost or productivity saving is calculated' in html
     assert 'Licences are not people'in html and '<table' not in html
-    assert '<meter'not in html and 'data-semantic-type="calculated"'not in html
+    assert '<meter' in html and '60,061' in html and '2025' in html
+    assert 'data-semantic-type="calculated"'not in html
     assert 'detail=frontier' in html and '30,000' not in html and '30000' not in html
     assert 'Correspondence address'not in html and 'Date of birth'not in html
+    data=deepcopy(v.current_data(v.Context('lloyds','inside')))
+    next(s for s in data['sources'] if s['id']=='LCE-WORKFORCE')['withdrawn']=True
+    monkeypatch.setattr(v,'current_data',lambda _:data)
+    withdrawn=main(v.render(g.CANONICAL,query('inside','people','workforce')))
+    assert '<meter'not in withdrawn and '60,061'not in withdrawn
+    assert 'Licences are not people' in withdrawn
 
 
 def test_business_hierarchy_does_not_merge_legal_entities_segments_functions_people():

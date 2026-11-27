@@ -775,14 +775,15 @@ def forces(state,facts):
 
 
 def main(state,data,facts,issues=()):
-    facts=executive_facts(data,facts)
+    facts=ceo_facts(data,executive_facts(data,facts))
     title=SUBJECTS[state.focus]
     body='<section class="gold-content" data-canvas="visual" data-level="'+('3' if state.detail=='sources' else '2' if state.detail else '0' if state.focus=='group' else '1')+'">'
     body+='<p class="eyebrow">Lloyds Banking Group plc'+(' · From '+e(SUBJECTS[state.subject]) if state.subject!=state.focus else '')+'</p>'
     if state.detail:body+='<p class="gold-back">'+link(state,'← '+title)+'</p>'
     body+='<h1>'+e(title)+'</h1>'
     if state.detail=='sources':
-        items=[facts[k] for k in FOCUS_FACTS[state.focus] if k in facts]
+        keys=(*FOCUS_FACTS[state.focus],*('LBG-CE-'+k for k in CEO_INSPECTION_FACTS.get(state.focus,())))
+        items=[facts[k] for k in keys if k in facts]
         if state.focus in {'operations','economics'}:
             concern='service-recovery' if state.focus=='operations' else 'funding-base'
             row=next((row for row in issues if row.key==concern),None)
@@ -793,7 +794,10 @@ def main(state,data,facts,issues=()):
         if state.focus in {'operations','economics'}:body+=service_workload(state,inspection=True,data=data)
         body+='<p class="le-limit">Lloyds attribution links to the issuer homepage. Direct PDF links remain deferred. These statements remain analytical public research, not canonical acceptance.</p>'
         return body+'</section>'
-    if state.detail in {'efficiency-context','reporting-context','customer-value'}:
+    selected=ceo_selected(state,facts)
+    if selected is not None:
+        body+=selected
+    elif state.detail in {'efficiency-context','reporting-context','customer-value'}:
         body+=v3_selected_connection(state,data,facts,issues)
     elif state.stream=='landscape':
         if state.focus=='economics' and state.detail=='ai-value':body+=v3_ai_economics(state,facts)
@@ -818,6 +822,7 @@ def main(state,data,facts,issues=()):
     elif state.focus=='competition' and state.detail in {'commercial-direction','transaction-direction'}:body+=v3_commercial_direction(state,facts)
     elif state.focus=='strategy' and (state.detail=='goals' or state.detail.startswith('objective-')):body+=_ceo_goals(state,facts)
     else:body+=forces(state,facts)
+    body+=ceo_context(state,facts)
     owns_inspection=(state.focus=='applications' and (state.detail=='envoy' or state.detail.startswith('envoy-'))
                      and all(k in facts for k in APPS['envoy'][2]))
     if (state.focus not in {'group','analysis'} or state.detail) and not owns_inspection:
@@ -1834,3 +1839,277 @@ def v3_role_caption(facts,key):
     if not row:return ''
     p.note_editorial_sources(facts['LBG-V2-'+key].sources)
     return '<span class="v3-role">'+e(row[1])+'</span><small>Issuer-listed role · observed 27 November 2026</small>'
+
+
+# CEO expansion: bounded read-only views over existing Research/Source records.
+# These destinations are presentation state, never canonical model identities.
+CEO_SOURCE_URLS = {
+ 'LCE-WORKFORCE':('https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2025/q4/2025-lbg-form-20f.pdf','2026-02-13'),
+ 'LCE-ANNUAL-OPERATIONS':('https://www.lloydsbankinggroup.com/investors/annual-report.html',None),
+ 'LCE-VERTEX':('https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html','2025-04-09'),
+ 'LCE-DELIVERY':('https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html',None),
+ 'LCE-BOARD':('https://www.lloydsbankinggroup.com/who-we-are/group-overview/directors-and-governance.html',None),
+ 'LCE-SETTLEMENT':('https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-and-visa-test-round-the-clock-cross-border-settlement-using-stablecoins.html','2026-09-30'),
+ 'LCE-LAUNCH':('https://www.lloydsbankinggroup.com/who-we-are/working-with-suppliers/collaborating-with-fintechs/launch-innovation-programme.html',None),
+}
+CEO_SOURCE_PERIODS = {
+ 'LCE-WORKFORCE':'FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025',
+ 'LCE-ANNUAL-OPERATIONS':'FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026',
+ 'LCE-VERTEX':'Dated issuer announcement 9 April 2025; historical deployment and forward plans',
+ 'LCE-DELIVERY':'Undated operating metrics observed 27 November 2026; underlying baselines not established',
+ 'LCE-BOARD':'Maintained Board page observed 27 November 2026; current published roles, not a full organogram',
+ 'LCE-SETTLEMENT':'Seven-day pilot announced 30 September 2026; not a production rollout or purchasing mandate',
+ 'LCE-LAUNCH':'2026 programme dates and undated case studies observed 27 November 2026',
+}
+CEO_KEYS=('FTE25','FTE24','FTE23','FTERETAIL','FTECOMMERCIAL','FTEINSURANCE','FTEOTHER','FTEUK','FTEEUROPE','FTEAMERICAS','FTEWORLD','NONPERMANENT','AGENCY',
+ 'OPENINGTIME','OPENINGSHARE','DISTRIBUTION25','DISTRIBUTION26','BCBDIGITAL','BCBSERVICE','ACCOUNTING','GOVERNMENT','FXVOLUME','INVESTMENTACCOUNTS','WEALTHPLAN','TECHHIRES25','RETAILSALES',
+ 'VERTEX','DEVELOPERS','MODELS','MORTGAGESPEED','MLCASES','GENAISYSTEMS','GEMINI','CLOUD','DATACENTRES','RELEASES','PERMANENTMIX','AGILE','DELIVEREDGENAI',
+ 'CHAIR','AUDITCHAIR','RISKCHAIR','REMUNCHAIR','RESPONSIBLECHAIR','SWCHAIR','CMCHAIR','BANKBOARDS',
+ 'VISAPILOT','SETTLEMENTSPEED','JERSEY','ARCHAX','CANTON','LAUNCHCLOSED','BROKERCHALLENGE','CAURA','LEXDOWNLOADS','LEXCUSTOMERS','PLANNARELATION')
+LLOYDS_IDS += tuple('LBG-CE-'+k for k in CEO_KEYS)
+DETAILS['people'] += ('employees','geography','board')
+DETAILS['retail'] += ('mortgage',)
+DETAILS['commercial'] += ('settlement','digital-business')
+DETAILS['retirement'] += ('wealth-delivery',)
+DETAILS['economics'] += ('distribution',)
+DETAILS['operations'] += ('mortgage-ml','digital-business')
+DETAILS['applications'] += ('platform-delivery','settlement')
+DETAILS['partners'] += ('visa','archax','caura')
+DETAILS['programmes'] += ('launch',)
+DETAILS['strategy'] += ('objective-distribution','objective-mortgage','objective-business-digital','investigations')
+DETAILS['competition'] += ('settlement',)
+V3_PATHS += (
+ ('distribution','Distribution productivity',(('landscape','economics','distribution'),('inside','people','employees'),('forces','strategy','objective-distribution'))),
+ ('mortgage-ml','Mortgage verification',(('landscape','retail','mortgage'),('inside','operations','mortgage-ml'),('forces','strategy','objective-mortgage'))),
+ ('settlement','Settlement pilot',(('landscape','commercial','settlement'),('inside','applications','settlement'),('forces','competition','settlement'))),
+ ('business-digital','Digital business service',(('landscape','commercial','digital-business'),('inside','operations','digital-business'),('forces','strategy','objective-business-digital'))),
+)
+CEO_INSPECTION_FACTS = {
+ 'group':('OPENINGTIME','OPENINGSHARE','DISTRIBUTION25','BCBDIGITAL','FXVOLUME'),
+ 'economics':('DISTRIBUTION25','DISTRIBUTION26','FTE25','OPENINGTIME','OPENINGSHARE'),
+ 'retail':('MORTGAGESPEED','VERTEX','OPENINGTIME','OPENINGSHARE','RETAILSALES','CAURA','LEXDOWNLOADS','LEXCUSTOMERS'),
+ 'commercial':('BCBDIGITAL','BCBSERVICE','ACCOUNTING','GOVERNMENT','FXVOLUME','VISAPILOT','SETTLEMENTSPEED','JERSEY','ARCHAX','CANTON'),
+ 'retirement':('INVESTMENTACCOUNTS','WEALTHPLAN','SWCHAIR'),
+ 'people':('FTE25','FTE24','FTE23','FTERETAIL','FTECOMMERCIAL','FTEINSURANCE','FTEOTHER','FTEUK','FTEEUROPE','FTEAMERICAS','FTEWORLD','NONPERMANENT','AGENCY','CHAIR','AUDITCHAIR','RISKCHAIR','REMUNCHAIR','RESPONSIBLECHAIR','SWCHAIR','CMCHAIR','BANKBOARDS'),
+ 'operations':('OPENINGTIME','OPENINGSHARE','MORTGAGESPEED','VERTEX','BCBDIGITAL','BCBSERVICE','ACCOUNTING'),
+ 'applications':('VERTEX','DEVELOPERS','MODELS','MORTGAGESPEED','MLCASES','GENAISYSTEMS','GEMINI','CLOUD','DATACENTRES','RELEASES','PERMANENTMIX','AGILE','DELIVEREDGENAI','VISAPILOT','SETTLEMENTSPEED','JERSEY','ARCHAX','CANTON'),
+ 'partners':('VERTEX','MODELS','GEMINI','VISAPILOT','SETTLEMENTSPEED','JERSEY','ARCHAX','CANTON','CAURA','LEXDOWNLOADS','LEXCUSTOMERS'),
+ 'programmes':('CLOUD','DATACENTRES','RELEASES','PERMANENTMIX','AGILE','DELIVEREDGENAI','LAUNCHCLOSED','BROKERCHALLENGE','CAURA','PLANNARELATION'),
+ 'strategy':('DISTRIBUTION25','DISTRIBUTION26','BCBDIGITAL','BCBSERVICE','ACCOUNTING','MORTGAGESPEED','VERTEX','LAUNCHCLOSED','BROKERCHALLENGE','FTE25'),
+ 'competition':('VISAPILOT','SETTLEMENTSPEED','JERSEY','ARCHAX','CANTON'),
+}
+
+
+def ceo_facts(data,facts):
+    """Require the existing Source-owned disclosure, identity and exact axes.
+
+    No financial admission, rights resolution or Source mutation occurs here.
+    The retained old records and held PFI projection are outside this adapter.
+    """
+    result=dict(facts);sources={s['id']:s for s in data.get('sources',())}
+    claims={c['id']:c for c in data.get('claims',())}
+    for key in CEO_KEYS:
+        ident='LBG-CE-'+key;c=claims.get(ident,{});refs=c.get('source_ids',());valid=False
+        if ident in result and len(refs)==1 and refs[0] in CEO_SOURCE_URLS:
+            src=sources.get(refs[0],{});rights=src.get('rights',{});url,published=CEO_SOURCE_URLS[refs[0]]
+            bindings=[b for b in src.get('disclosure_bindings',()) if b.get('claim_id')==ident]
+            fields=('statement','kind','entity_scope','asset_id','reporting_period','primary_quotes','metric_value','metric_unit','relationship')
+            valid=(not source_import.working_restricted(src) and not source_import.working_restricted(c)
+                and not src.get('restrictions') and not rights.get('material_exceptions')
+                and src.get('url')==src.get('retrieval_url')==url and src.get('publication_date')==published
+                and src.get('publisher')=='Lloyds Banking Group'
+                and src.get('reporting_period')==CEO_SOURCE_PERIODS[refs[0]]
+                and src.get('content_kind')=='reviewed_web_excerpt' and src.get('primary_content_sha256')is None
+                and rights.get('status')=='permitted_public_factual_category'
+                and rights.get('attribution_url')=='https://www.lloydsbankinggroup.com/'
+                and rights.get('homepage_conditions_met')is True
+                and c.get('asset_id')=='BK-ENT-001' and result[ident].scope==recovery.GROUP
+                and c.get('reporting_period')==src.get('reporting_period')
+                and len(bindings)==1 and all(bindings[0].get(k)==c.get(k) for k in fields))
+            item=result[ident]
+            if valid and item.value is not None:
+                import re
+                number=re.escape(str(item.value))
+                valid=(item.value.is_finite() and item.value>=0 and item.basis==item.unit
+                    and item.measurement_state==('target' if key=='DISTRIBUTION26' else 'not_applicable')
+                    and not item.unit.startswith(('GBP','USD','currency'))
+                    and bool(re.search(r'(?<![\d.])'+number+r'(?![\d.])',item.text.replace(',','')))
+                    and any(re.search(r'(?<![\d.])'+number+r'(?![\d.])',s.quote.replace(',','')) for s in item.sources))
+        if not valid:result.pop(ident,None)
+    return result
+
+
+def ceo_has(facts,*keys):return all('LBG-CE-'+k in facts for k in keys)
+def ceo_reported(facts,*keys):return reported(facts,tuple('LBG-CE-'+k for k in keys))
+
+
+def ceo_employees(state,facts,*,compact=False):
+    rows=[(year,'FTE'+year[-2:]) for year in ('2023','2024','2025') if ceo_has(facts,'FTE'+year[-2:])]
+    if not rows:return ''
+    body='<section class="ceo-employee-system"><h2>Employees behind the operating model</h2><p class="eyebrow">Year-end employee FTEs · consolidated Group</p><div class="ceo-fte-history" aria-label="Reported employee FTE history">'
+    top=max(facts['LBG-CE-'+k].value for _,k in rows)
+    for year,key in rows:
+        item=facts['LBG-CE-'+key];p.note_editorial_sources(item.sources)
+        ident='LBG-CE-'+key
+        opening=('<a class="canvas-region ceo-fte-year" data-claim-id="'+ident+'" data-canvas-region="organisation" href="'+e(href(state,stream='inside',focus='people',detail='employees'),quote=True)+'" aria-label="Employee FTEs at December '+year+'">') if compact else '<div class="ceo-fte-year" data-claim-id="'+ident+'">'
+        body+=opening+'<time>'+year+'</time><strong>'+f'{item.value:,.0f}'+'</strong><meter min="0" max="'+str(top)+'" value="'+str(item.value)+'" aria-label="'+year+' employee FTEs">'+str(item.value)+'</meter>'+('</a>' if compact else '</div>')
+    body+='</div><p class="ce-legend">FTEs at three year ends, not headcount, current 2026 staffing, licences or an inferred redundancy programme.</p>'
+    if not compact:
+        keys=('FTERETAIL','FTECOMMERCIAL','FTEINSURANCE','FTEOTHER')
+        if ceo_has(facts,*keys,'FTE25'):
+            total=facts['LBG-CE-FTE25'].value;parts=[facts['LBG-CE-'+k] for k in keys]
+            if sum(x.value for x in parts)==total:
+                body+='<h3>Where employees worked · December 2025</h3><div class="ceo-fte-distribution" aria-label="Reported divisional employee distribution">'
+                for label,key,item,target in zip(('Retail','Commercial','Insurance, Pensions & Investments','Other functions'),keys,parts,(('landscape','retail',''),('landscape','commercial',''),('landscape','retirement',''),('inside','operations','journey-support'))):
+                    p.note_editorial_sources(item.sources)
+                    stream,focus,detail=target;dest=href(state,stream=stream,focus=focus,detail=detail,subject=focus)
+                    body+='<a class="canvas-region ceo-fte-division" data-canvas-region="organisation" data-claim-id="LBG-CE-'+key+'" href="'+e(dest,quote=True)+'" aria-label="'+e(label,quote=True)+' employee context"><span>'+e(label)+'</span><meter min="0" max="'+str(total)+'" value="'+str(item.value)+'" aria-label="'+e(label,quote=True)+' employee FTEs">'+str(item.value)+'</meter><strong>'+f'{item.value:,.0f}'+'</strong></a>'
+                body+='</div><p class="ce-legend">This employee distribution reconciles to the disclosed Group total. It is not a salary, capability-cost or profit allocation.</p>'
+        body+=ceo_reported(facts,'NONPERMANENT','AGENCY')
+        body+='<p>Non-permanent workers and included agency staff are different disclosed populations. They are not added to the employee FTE total.</p>'
+        if ceo_has(facts,'TECHHIRES25'):body+='<h3>Skills and delivery context</h3>'+ceo_reported(facts,'TECHHIRES25')+'<p>Cumulative hiring can rise while employee FTE stocks fall. Neither departures, restructuring causes nor net job creation is derived from these different populations.</p>'
+        body+='<div class="ce-context-controls">'+region(state,'Employee geography',kind='organisation',caption='Reported locations and reconciliation',stream='inside',focus='people',detail='geography')+region(state,'Board and management',kind='organisation',caption='Oversight is distinct from operating and buying responsibility',stream='inside',focus='people',detail='board')+'</div>'
+        body+=connected_links(state)
+    return body+'</section>'
+
+
+def ceo_distribution(state,facts):
+    if not ceo_has(facts,'DISTRIBUTION25','DISTRIBUTION26'):return ''
+    body='<section class="ceo-distribution"><h2>Serve more relationships with the distribution system</h2><p class="eyebrow">Active customers per distribution FTE · improvement versus 2021</p><div class="ceo-actual-target">'
+    for key,label,kind in [('DISTRIBUTION25','2025 reported operating measure','actual'),('DISTRIBUTION26','2026 management objective','target')]:
+        item=facts['LBG-CE-'+key];p.note_editorial_sources(item.sources)
+        body+='<div class="ceo-target-'+kind+'" data-measurement-state="'+kind+'"><span>'+label+'</span><strong>About '+str(item.value)+'%</strong><meter min="0" max="100" value="'+str(item.value)+'" aria-label="'+label+'">'+str(item.value)+'</meter></div>'
+    body+='</div><p class="ce-legend">Same disclosed 2021 reference. The 2026 figure is a target, not the latest actual; no percentage achieved, staff reduction or net saving is calculated.</p>'
+    body+='<h3>The operating mechanism</h3>'+ceo_reported(facts,'OPENINGTIME','OPENINGSHARE','RETAILSALES')
+    body+='<p>Digital originations can support more customer activity per distribution FTE. That ratio is not a whole-Group productivity measure: central technology, control, property and support costs remain outside its denominator.</p>'
+    if 'LBG-V2-CHALMERS' in facts:body+='<h3>Relevant executive context</h3>'+v3_role_caption(facts,'CHALMERS')+'<p>The published finance remit is relevant; responsibility for this operating measure and a buying mandate are not established.</p>'
+    body+='<h3>Executive trade-off</h3><p>Scale convenient self-service while retaining effective exception handling and support for customers who need it. More customers per distribution FTE can coexist with higher total technology or remediation costs.</p><h3>Commercial investigation</h3><p>Which channel or customer cohort shows a comparable change in completion, repeat contacts and full service cost after the existing digital investment?</p>'
+    return body+connected_links(state)+'</section>'
+
+
+def ceo_mortgage(state,facts):
+    if not ceo_has(facts,'MORTGAGESPEED','VERTEX'):return ''
+    outcome=facts['LBG-CE-MORTGAGESPEED'];p.note_editorial_sources(outcome.sources)
+    change=outcome.text.removeprefix('Lloyds described mortgage income verification moving from ').rstrip('.')
+    body='<section class="ceo-mortgage"><h2>A disclosed mortgage-verification improvement</h2><p class="eyebrow">Issuer announcement · 9 April 2025</p><div class="ceo-verification-flow"><span>Income evidence</span><strong>'+e(change.replace(' to ',' → '))+'</strong><span>Income-verification step</span></div>'+ceo_reported(facts,'MORTGAGESPEED','VERTEX')
+    body+='<p>This describes one step, not the complete mortgage decision or completion time, an approval-rate change, reduced credit losses or every mortgage application.</p><h3>Operating and technology context</h3>'+ceo_reported(facts,'MODELS','DEVELOPERS','GEMINI')
+    if 'LBG-V2-SINGH' in facts:body+='<h3>Relevant business remit</h3>'+v3_role_caption(facts,'SINGH')+'<p>A Consumer executive remit does not prove ownership of the algorithm, underwriting decision or control model.</p>'
+    body+='<h3>Economic consequence and counter-case</h3><p>Verification time can affect handling effort and customer waiting. Exceptions, underwriting, valuation and legal work can still determine the overall journey. Existing delivery is counter-evidence to a presumed need for a new platform.</p><h3>Commercial investigation</h3><p>At what volumes and exception rates does the faster verification step improve end-to-end completion and full-cost service outcomes, and which decision remains open?</p>'
+    if ceo_has(facts,'LAUNCHCLOSED','BROKERCHALLENGE'):body+='<h3>A later, bounded management signal</h3>'+ceo_reported(facts,'BROKERCHALLENGE','LAUNCHCLOSED')+'<p>This later programme describes a challenge, not failure of the earlier verification capability. The intake is closed; no open procurement is asserted.</p>'
+    return body+connected_links(state)+'</section>'
+
+
+def ceo_platform(state,facts):
+    if not ceo_has(facts,'VERTEX'):return ''
+    body='<section class="ceo-platform"><h2>From separate modelling systems to a shared platform</h2><p class="eyebrow">Historical deployment · April 2025</p>'+ceo_reported(facts,'VERTEX','MODELS','DEVELOPERS')
+    if ceo_has(facts,'MODELS','GEMINI'):body+='<div class="ceo-platform-stack"><div><span>Modelling estate</span><strong>On-premise migration</strong></div><div><span>Shared ML / GenAI platform</span><strong>Google Cloud Vertex AI</strong></div><div><span>Model access</span><strong>Third-party and open-source options</strong></div></div>'
+    body+=ceo_reported(facts,'GEMINI','MLCASES','GENAISYSTEMS')
+    body+='<p>The source establishes a specific platform and operating deployment. It does not establish that all Lloyds applications, all Envoy workloads or every legal bank depend on it. Contract price, renewal, exclusivity and remaining external scope are not disclosed.</p>'
+    if ceo_has(facts,'CLOUD','DATACENTRES','RELEASES'):
+        body+='<h3>Broader estate disclosures · different dating</h3>'+ceo_reported(facts,'CLOUD','DATACENTRES','RELEASES','PERMANENTMIX','AGILE')+'<p>The maintained page does not date these baselines. They are not a matched improvement series or evidence of net financial benefit.</p>'
+    if ceo_has(facts,'DELIVEREDGENAI'):body+='<h3>Do not merge unlike AI populations</h3>'+ceo_reported(facts,'DELIVEREDGENAI')+'<p>Delivered use cases, initiated ML work and production GenAI systems have different definitions and dates. They are not summed, divided into a progress rate or attributed to Group AI value.</p>'
+    return body+'<div class="ce-context-controls">'+region(state,'Mortgage verification',kind='operating',caption='A specific published use case and its outcome boundary',stream='inside',focus='operations',detail='mortgage-ml')+region(state,'Group AI economics',kind='money',caption='Reported contribution versus expectation; no platform allocation',stream='landscape',focus='economics',detail='ai-value')+'</div></section>'
+
+
+def ceo_settlement(state,facts):
+    if not ceo_has(facts,'VISAPILOT','SETTLEMENTSPEED','JERSEY'):return ''
+    body='<section class="ceo-settlement"><h2>Test faster settlement without inventing a rollout</h2><p class="eyebrow">Completed pilot · 30 September 2026 announcement</p>'+ceo_reported(facts,'VISAPILOT','SETTLEMENTSPEED','JERSEY')
+    body+='<div class="ceo-settlement-route"><span>Corporate Markets · Jersey</span><span>Stablecoin settlement</span><span>Visa · US</span></div>'+ceo_reported(facts,'ARCHAX','CANTON')
+    body+='<p>The issuer describes settlement between institutions, not a new customer payment product. The stated booking perimeter is not Lloyds Bank PLC or proof of a CIB-wide programme.</p><h3>Why it matters</h3><p>Settlement timing can affect liquidity availability, reconciliation and weekend operations. A short pilot does not establish scale economics, a production control model, savings or an approved expansion.</p><h3>Existing response and alternatives</h3><p>The pilot is already complete. Conventional settlement and existing liquidity arrangements may meet the requirement; more flexible timing does not itself create customer demand.</p><h3>Commercial investigation</h3><p>Which real settlement corridor has a measured liquidity or reconciliation consequence, and what production-control, treasury and legal decision remains after this test?</p>'
+    return body+connected_links(state)+'</section>'
+
+
+def ceo_business_digital(state,facts):
+    if not ceo_has(facts,'BCBDIGITAL','BCBSERVICE'):return ''
+    body='<section class="ceo-business-digital"><h2>Business Banking is already digitally delivered</h2><p class="eyebrow">FY2025 delivery / 2026 plans · different horizons</p>'+ceo_reported(facts,'BCBDIGITAL','BCBSERVICE','ACCOUNTING')
+    body+='<h3>Different corporate customer economics</h3>'+ceo_reported(facts,'GOVERNMENT','FXVOLUME')
+    body+='<p>BCB digital fulfilment and CIB cash/FX activity concern different management remits. Volume growth is not income growth or margin; an issuer-reported contract is not a disclosed contract value, remaining scope or new procurement.</p>'
+    body+='<h3>Relevant business leadership</h3>'
+    for key in ('MURPHY','LANGLEY'):
+        if 'LBG-V2-'+key in facts:body+=v3_role_caption(facts,key)
+    body+='<h3>Commercial investigation</h3><p>Which business-client exception or accounting hand-off remains costly after the already delivered digital service, and is a further decision supported by customer-level evidence?</p>'
+    return body+'</section>'
+
+
+def ceo_board(state,facts):
+    keys=('CHAIR','AUDITCHAIR','RISKCHAIR','REMUNCHAIR','RESPONSIBLECHAIR','SWCHAIR','CMCHAIR','BANKBOARDS')
+    if not any(ceo_has(facts,k) for k in keys):return ''
+    body='<section class="ceo-board"><h2>Oversight, management and legal banks are different</h2><p class="eyebrow">Published roles · observed 27 November 2026</p><div class="ceo-oversight">'
+    for title,key in [('Group chair','CHAIR'),('Audit','AUDITCHAIR'),('Board risk','RISKCHAIR'),('Remuneration','REMUNCHAIR'),('Responsible business','RESPONSIBLECHAIR')]:
+        if ceo_has(facts,key):body+='<section><h3>'+title+'</h3>'+ceo_reported(facts,key)+'</section>'
+    body+='</div><h3>Entity-specific governance</h3>'+ceo_reported(facts,'SWCHAIR','CMCHAIR','BANKBOARDS')
+    body+='<p>Concurrent meetings do not merge legal boards. A financial reporting segment, management business, subsidiary and brand are not interchangeable. Committee chairs provide oversight; they are not inferred process owners or purchasing sponsors.</p>'
+    return body+region(state,'Executive management',kind='organisation',caption='The existing thirteen issuer-listed executive members and their remits',stream='inside',focus='people',detail='leadership')+'</section>'
+
+
+def ceo_geography(state,facts):
+    keys=('FTEUK','FTEEUROPE','FTEAMERICAS','FTEWORLD')
+    if not ceo_has(facts,*keys,'FTE25'):return ''
+    body='<section class="ceo-geography"><h2>Reported employee geography</h2><p class="eyebrow">December 2025 disclosure</p>'+ceo_reported(facts,*keys)
+    actual=sum(facts['LBG-CE-'+k].value for k in keys);group=facts['LBG-CE-FTE25'].value
+    if actual!=group:body+='<p class="material">The issuer’s geographic values total '+f'{actual:,.0f}'+' against '+f'{group:,.0f}'+' Group employee FTEs. This unreconciled difference is retained; no geographic shares, correction or workforce allocation is inferred.</p>'
+    return body+'</section>'
+
+
+def ceo_collaborations(state,facts):
+    if not ceo_has(facts,'CAURA'):return ''
+    body='<section class="ceo-collaborations"><h2>Customer propositions with disclosed delivery partners</h2>'+ceo_reported(facts,'CAURA','LEXDOWNLOADS','LEXCUSTOMERS','PLANNARELATION')
+    body+='<p>Downloads and onboarded customers are different populations with no disclosed measurement date. They are not active-user counts, a conversion rate, revenue or evidence of a renewed contract. Lex’s proposition is not assigned to every Retail capability.</p>'
+    if ceo_has(facts,'LAUNCHCLOSED'):body+=ceo_reported(facts,'LAUNCHCLOSED','BROKERCHALLENGE')
+    return body+'</section>'
+
+
+def ceo_selected(state,facts):
+    pos=(state.stream,state.focus,state.detail)
+    routes={
+      ('inside','people','employees'):ceo_employees,('inside','people','geography'):ceo_geography,('inside','people','board'):ceo_board,
+      ('landscape','economics','distribution'):ceo_distribution,('forces','strategy','objective-distribution'):ceo_distribution,
+      ('landscape','retail','mortgage'):ceo_mortgage,('inside','operations','mortgage-ml'):ceo_mortgage,('forces','strategy','objective-mortgage'):ceo_mortgage,
+      ('inside','applications','platform-delivery'):ceo_platform,
+      ('landscape','commercial','settlement'):ceo_settlement,('inside','applications','settlement'):ceo_settlement,('forces','competition','settlement'):ceo_settlement,
+      ('inside','partners','visa'):ceo_settlement,('inside','partners','archax'):ceo_settlement,
+      ('landscape','commercial','digital-business'):ceo_business_digital,('inside','operations','digital-business'):ceo_business_digital,('forces','strategy','objective-business-digital'):ceo_business_digital,
+      ('inside','partners','caura'):ceo_collaborations,('inside','programmes','launch'):ceo_collaborations,
+    }
+    if pos==('landscape','retirement','wealth-delivery'):
+        if not ceo_has(facts,'INVESTMENTACCOUNTS'):return ''
+        return '<section><h2>From investment accounts to a wider advice proposition</h2>'+ceo_reported(facts,'INVESTMENTACCOUNTS','WEALTHPLAN','SWCHAIR')+'<p>Accounts opened are not active customers, assets, revenue or profits. The earlier integration plan is not evidence of its later completion or benefits.</p></section>'
+    if pos==('forces','strategy','investigations'):return ceo_investigations(state,facts)
+    fn=routes.get(pos)
+    return fn(state,facts) if fn else None
+
+
+def ceo_investigations(state,facts):
+    body='<section class="ceo-investigations"><h2>Three consequential executive conversations</h2><p>Published operating delivery and management objectives establish relevance. They do not establish buying intent or a quantified financial pressure.</p>'
+    for title,keys,stream,focus,detail,question,kind in (
+      ('Distribution and full cost',('DISTRIBUTION25','DISTRIBUTION26'),'forces','strategy','objective-distribution','Where does customer-level cost improve after all supporting costs and exceptions?','money'),
+      ('Industrialise a proven AI use case',('MORTGAGESPEED','VERTEX'),'forces','strategy','objective-mortgage','Which end-to-end outcome improves after a faster verification step?','technology'),
+      ('Commercial growth and operating depth',('BCBDIGITAL','FXVOLUME'),'forces','strategy','objective-business-digital','Which client hand-off remains material after existing service and investment?','business')):
+        if ceo_has(facts,*keys):body+=region(state,title,ceo_reported(facts,*keys),kind=kind,caption=question,stream=stream,focus=focus,detail=detail)
+    return body+'<p class="ce-legend">These are bounded commercial investigations, not qualified Material Pressures or opportunities. No budget, buyer intent, economic deal value or Pipeline action is inferred.</p></section>'
+
+
+def ceo_context(state,facts):
+    pos=(state.stream,state.focus,state.detail);body=''
+    if pos==('landscape','group',''):
+        if ceo_has(facts,'DISTRIBUTION25'):body+=region(state,'Distribution productivity',ceo_reported(facts,'DISTRIBUTION25'),kind='operating',caption='Actual operating measure versus the next dated objective',stream='landscape',focus='economics',detail='distribution')
+    if pos==('inside','operations',''):
+        if ceo_has(facts,'FTE25'):body+=region(state,'Employee operating system',ceo_reported(facts,'FTE25'),kind='organisation',caption='Three year ends, business distribution and population boundaries',focus='people',detail='employees')
+    if pos==('forces','markets',''):
+        if ceo_has(facts,'DISTRIBUTION25','MORTGAGESPEED','BCBDIGITAL'):body+=region(state,'Executive investigations',kind='timeline',caption='Distribution economics, AI delivery and Commercial Banking growth',focus='strategy',detail='investigations')
+    if state.stream=='inside' and state.focus=='people' and state.detail in {'leadership','structure','workforce'}:
+        if state.detail=='workforce':body+=ceo_employees(state,facts,compact=True)
+        if ceo_has(facts,'FTE25'):body+=region(state,'Employee history and businesses',kind='organisation',caption='Actual year-end FTEs, not licence or recruitment proxies',detail='employees')
+        if ceo_has(facts,'CHAIR'):body+=region(state,'Board and legal-bank governance',kind='organisation',caption='Named oversight and separate legal boards',detail='board')
+    if state.stream=='inside' and state.focus in {'applications','partners','programmes'} and state.detail not in {'sources','platform-delivery','settlement','visa','archax','caura','launch'}:
+        if ceo_has(facts,'VERTEX'):body+=region(state,'Disclosed platform delivery',kind='technology',caption='Vertex AI, migration, developers and distinct operating outcomes',stream='inside',focus='applications',detail='platform-delivery')
+        if ceo_has(facts,'VISAPILOT'):body+=region(state,'Visa settlement pilot',kind='operating',caption='Actual test route and the remaining production decision',stream='inside',focus='applications',detail='settlement')
+        if state.focus=='partners' and not state.detail and ceo_has(facts,'CAURA'):body+=region(state,'Customer-proposition partners',kind='operating',caption='Disclosed Lex / Caura and Planna delivery; contract terms unverified',focus='partners',detail='caura')
+    if pos==('landscape','retail','') and ceo_has(facts,'MORTGAGESPEED'):
+        body+=region(state,'Mortgage verification',ceo_reported(facts,'MORTGAGESPEED'),kind='operating',caption='One step, not end-to-end mortgage performance',detail='mortgage')
+        if ceo_has(facts,'CAURA'):body+=region(state,'Delivered customer collaborations',kind='operating',caption='Lex / Caura and disclosed customer activity',stream='inside',focus='partners',detail='caura')
+    if pos==('landscape','commercial',''):
+        if ceo_has(facts,'BCBDIGITAL'):body+=region(state,'Digital business service',kind='operating',caption='Existing delivery, CIB activity and the next client-level test',detail='digital-business')
+        if ceo_has(facts,'VISAPILOT'):body+=region(state,'Settlement pilot',kind='operating',caption='Corporate Markets Jersey / Visa; separate from a CIB-wide programme',detail='settlement')
+    if pos==('landscape','retirement','') and ceo_has(facts,'INVESTMENTACCOUNTS'):body+=region(state,'Investment and advice delivery',ceo_reported(facts,'INVESTMENTACCOUNTS'),kind='business',caption='A dated account base and the earlier integration plan',detail='wealth-delivery')
+    return body

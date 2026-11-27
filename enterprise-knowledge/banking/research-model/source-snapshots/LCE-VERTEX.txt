@@ -1,0 +1,7 @@
+using Google Cloud’s Vertex AI
+300
+15
+days to seconds
+80
+18
+Gemini

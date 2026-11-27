@@ -136,8 +136,23 @@ def compare_history(expected, actual):
     for path,content in expected.items():
         assert actual[path]==content, 'Historical or approved source changed: '+path
 
+# Current CEO commission: exact additive working research, not Source rights or
+# canonical acceptance. Earlier bytes and the final comparator stay unchanged.
+
 
 def verify_history(root):
+    ceo_research_base = '201fe851a531ecb854d3ba8e3416bc667ab8c860'
+    ceo_research_cut = {
+        "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "5cf2812c14ffce3520ea0921ac93c15ce9ff66862f20bb69ee1f6d608080676a",
+        "enterprise-knowledge/banking/research-model/Understanding-Review.json": "a0d28a7cf0a6bd2290a807fc04be90a8b3835f64ed70554e9d35d8ae7c780361",
+        "enterprise-knowledge/banking/research-model/source-snapshots/LCE-ANNUAL-OPERATIONS.txt": "8013767e11d63b99616977b2c2d6d8c7a04efe99f1fe6196c563ae07f4189272",
+        "enterprise-knowledge/banking/research-model/source-snapshots/LCE-BOARD.txt": "9747b0dc18b9dd058318bfb13214b4585ad83ed7273a20ecb8a88f44a1a388f8",
+        "enterprise-knowledge/banking/research-model/source-snapshots/LCE-DELIVERY.txt": "6880a29413a1a5582ee598ff8cdddff9a77e2b6e1da75bc24198cdde86db9592",
+        "enterprise-knowledge/banking/research-model/source-snapshots/LCE-LAUNCH.txt": "1c08a6b36070191305da14c7dae060960411a2ddd371eb7c5695d5d6b067eecf",
+        "enterprise-knowledge/banking/research-model/source-snapshots/LCE-SETTLEMENT.txt": "f9450bdb40760f52919e9b27f9a2cf27b56e00a6fdaf27fef06c080520e79bc7",
+        "enterprise-knowledge/banking/research-model/source-snapshots/LCE-VERTEX.txt": "f760c835e2435a8b4fa49e4a45e3c569b6023f303cc228e1063c2d54de83d132",
+        "enterprise-knowledge/banking/research-model/source-snapshots/LCE-WORKFORCE.txt": "c6f79702360158232572e52cc6d98dfa482cf0993458f3cc8cf959c0d3551f69"
+    }
     root=Path(root);expected=approved_history(root)
     # Inspect the filesystem too: ignored/untracked additions are not an escape.
     files=list((root/'enterprise-knowledge').rglob('*'))
@@ -179,6 +194,28 @@ def verify_history(root):
     # canonical decision. Preserve every previous record and byte; reject all
     # unknown additions and mutations before the unchanged comparator runs.
     overlay='enterprise-knowledge/banking/research-model/Assessment-Overlay.json'
+    # Normalise only this exact newly commissioned cut back to #744 before
+    # applying all the original Gold v2 and earlier historical comparisons.
+    # New records do not acquire any prior manual review/Source permission.
+    additions=set(ceo_research_cut)-{overlay,REVIEW}
+    if additions & set(actual):
+        assert additions<=set(actual), 'Incomplete CEO research cut'
+        for path,digest in ceo_research_cut.items():
+            assert hashlib.sha256(actual[path]).hexdigest()==digest, 'Unknown CEO research cut: '+path
+        prior_data=_git(root,'show',ceo_research_base+':'+overlay)
+        old,new=json.loads(prior_data),json.loads(actual[overlay])
+        assert set(old)==set(new)
+        for key,value in old.items():
+            assert (new[key][:len(value)]==value if key in {'sources','claims','suppliers','relationships'} else new[key]==value),key
+        prior_review=_git(root,'show',ceo_research_base+':'+REVIEW)
+        old_review,new_review=json.loads(prior_review),json.loads(actual[REVIEW])
+        assert set(old_review)==set(new_review)
+        assert all(new_review[k]==value for k,value in old_review.items() if k!='baseline_digest')
+        from cios.applications.flora.research_intelligence.cycle import digest
+        assert new_review['baseline_digest']==digest(new)
+        actual[overlay]=prior_data;actual[REVIEW]=prior_review
+        for path in additions:actual.pop(path)
+    review_assessment_cut=actual[overlay]
     if hashlib.sha256(actual[overlay]).hexdigest()!='a9376bad782a001258e72d747678a7587ea962e024666d46e10f2b098085d3a2':
         assert hashlib.sha256(actual[overlay]).hexdigest()=='6307d01f80e812327fef1339ef3a8c0f1b6835ca4878c735e4e972f5f3424422', 'Unknown Gold v2 assessment cut'
         original=_git(root,'show','1c8c8ae17bb2af3c95bf264d7df9befb60b0b576:'+overlay)
@@ -206,7 +243,7 @@ def verify_history(root):
             assert {k:v for k,v in old_source.items() if k!='assessment_digest'}=={k:v for k,v in new_source.items() if k!='assessment_digest'}
             if 'assessment_digest' in old_source:assert new_source['assessment_digest']==current['baseline_digest']
         from cios.applications.flora.research_intelligence.cycle import digest
-        assert current['baseline_digest']==digest(json.loads((Path(root)/overlay).read_bytes()))
+        assert current['baseline_digest']==digest(json.loads(review_assessment_cut))
         actual[REVIEW]=expected[REVIEW]
     compare_history(expected,actual)
     return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS)-len(INT1_CANDIDATE_ADDITIONS)-len(EAI1_CANDIDATE_ADDITIONS)-len(BIE2_CANDIDATE_ADDITIONS)-len(BIE3_CANDIDATE_ADDITIONS)-len(F1_CANDIDATE_ADDITIONS)-len(RUD1_ADDITIONS),

@@ -19,7 +19,8 @@ def view(stream='landscape',focus='group',detail=''):
 
 def test_original_research_and_permissions_are_preserved_with_only_additive_claims():
     path='enterprise-knowledge/banking/research-model/Assessment-Overlay.json'
-    old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT));new=model.load_assessment()
+    from tests.flora_lloyds_research_contract import preserved_research_cut
+    old=json.loads(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT));new=preserved_research_cut()
     for key in old:
         if key in ('sources','claims'):
             byid={r['id']:r for r in new[key]}

@@ -1,0 +1,146 @@
+{
+  "base": "201fe851a531ecb854d3ba8e3416bc667ab8c860",
+  "existing_records_unchanged": true,
+  "held_financial_candidates_admitted": 0,
+  "canonical_promotions": 0,
+  "source_permissions_changed": false,
+  "sources": [
+    {
+      "id": "LCE-WORKFORCE",
+      "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2025/q4/2025-lbg-form-20f.pdf",
+      "published": "2026-02-13",
+      "period": "FY2025 employee disclosure; year-end stocks at 31 December 2023, 2024 and 2025",
+      "reference": "turn203view0 / turn208view2",
+      "claim_ids": [
+        "LBG-CE-FTE25",
+        "LBG-CE-FTE24",
+        "LBG-CE-FTE23",
+        "LBG-CE-FTERETAIL",
+        "LBG-CE-FTECOMMERCIAL",
+        "LBG-CE-FTEINSURANCE",
+        "LBG-CE-FTEOTHER",
+        "LBG-CE-FTEUK",
+        "LBG-CE-FTEEUROPE",
+        "LBG-CE-FTEAMERICAS",
+        "LBG-CE-FTEWORLD",
+        "LBG-CE-NONPERMANENT",
+        "LBG-CE-AGENCY"
+      ]
+    },
+    {
+      "id": "LCE-ANNUAL-OPERATIONS",
+      "url": "https://www.lloydsbankinggroup.com/investors/annual-report.html",
+      "published": null,
+      "period": "FY2025 actual operating disclosures and 2026 objectives; maintained page observed 27 November 2026",
+      "reference": "turn206view3",
+      "claim_ids": [
+        "LBG-CE-OPENINGTIME",
+        "LBG-CE-OPENINGSHARE",
+        "LBG-CE-DISTRIBUTION25",
+        "LBG-CE-DISTRIBUTION26",
+        "LBG-CE-BCBDIGITAL",
+        "LBG-CE-BCBSERVICE",
+        "LBG-CE-ACCOUNTING",
+        "LBG-CE-GOVERNMENT",
+        "LBG-CE-FXVOLUME",
+        "LBG-CE-INVESTMENTACCOUNTS",
+        "LBG-CE-WEALTHPLAN",
+        "LBG-CE-TECHHIRES25",
+        "LBG-CE-RETAILSALES"
+      ]
+    },
+    {
+      "id": "LCE-VERTEX",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html",
+      "published": "2025-04-09",
+      "period": "Dated issuer announcement 9 April 2025; historical deployment and forward plans",
+      "reference": "turn203view1",
+      "claim_ids": [
+        "LBG-CE-VERTEX",
+        "LBG-CE-DEVELOPERS",
+        "LBG-CE-MODELS",
+        "LBG-CE-MORTGAGESPEED",
+        "LBG-CE-MLCASES",
+        "LBG-CE-GENAISYSTEMS",
+        "LBG-CE-GEMINI"
+      ]
+    },
+    {
+      "id": "LCE-DELIVERY",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html",
+      "published": null,
+      "period": "Undated operating metrics observed 27 November 2026; underlying baselines not established",
+      "reference": "turn204view1 / turn201view0",
+      "claim_ids": [
+        "LBG-CE-CLOUD",
+        "LBG-CE-DATACENTRES",
+        "LBG-CE-RELEASES",
+        "LBG-CE-PERMANENTMIX",
+        "LBG-CE-AGILE",
+        "LBG-CE-DELIVEREDGENAI"
+      ]
+    },
+    {
+      "id": "LCE-BOARD",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/directors-and-governance.html",
+      "published": null,
+      "period": "Maintained Board page observed 27 November 2026; current published roles, not a full organogram",
+      "reference": "turn203view4 / turn207view0 / turn208view0 / turn209view0",
+      "claim_ids": [
+        "LBG-CE-CHAIR",
+        "LBG-CE-AUDITCHAIR",
+        "LBG-CE-RISKCHAIR",
+        "LBG-CE-REMUNCHAIR",
+        "LBG-CE-RESPONSIBLECHAIR",
+        "LBG-CE-SWCHAIR",
+        "LBG-CE-CMCHAIR",
+        "LBG-CE-BANKBOARDS"
+      ]
+    },
+    {
+      "id": "LCE-SETTLEMENT",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-and-visa-test-round-the-clock-cross-border-settlement-using-stablecoins.html",
+      "published": "2026-09-30",
+      "period": "Seven-day pilot announced 30 September 2026; not a production rollout or purchasing mandate",
+      "reference": "turn207view2 / turn209view2",
+      "claim_ids": [
+        "LBG-CE-VISAPILOT",
+        "LBG-CE-SETTLEMENTSPEED",
+        "LBG-CE-JERSEY",
+        "LBG-CE-ARCHAX",
+        "LBG-CE-CANTON"
+      ]
+    },
+    {
+      "id": "LCE-LAUNCH",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/working-with-suppliers/collaborating-with-fintechs/launch-innovation-programme.html",
+      "published": null,
+      "period": "2026 programme dates and undated case studies observed 27 November 2026",
+      "reference": "turn204view2 / turn209view3",
+      "claim_ids": [
+        "LBG-CE-LAUNCHCLOSED",
+        "LBG-CE-BROKERCHALLENGE",
+        "LBG-CE-CAURA",
+        "LBG-CE-LEXDOWNLOADS",
+        "LBG-CE-LEXCUSTOMERS",
+        "LBG-CE-PLANNARELATION"
+      ]
+    }
+  ],
+  "material_discrepancies": [
+    {
+      "source": "LCE-WORKFORCE",
+      "issue": "Published geographic figures sum to 60062 against Group total 60061. No reconciled geographic partition or shares.",
+      "divisional_sum": 60061
+    },
+    {
+      "source": "LCE-DELIVERY",
+      "issue": "Undated operating baselines; no time-series change inferred from other dated reports."
+    },
+    {
+      "source": "LCE-VERTEX",
+      "issue": "April 2025 production systems, initiated ML use cases and FY2025 delivered GenAI cases are different populations."
+    }
+  ],
+  "held_use": "Existing LEI financial candidate uses remain withheld; the separate three-measure section 2 projection remains inactive and section 5 PDF links remain deferred."
+}
