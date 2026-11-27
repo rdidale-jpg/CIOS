@@ -146,7 +146,8 @@ def test_source_ownership_financials_iam_and_original_left_are_unchanged():
  after=ast.parse((ROOT/'cios/applications/flora/lloyds_gold.py').read_text())
  functions=lambda tree:{n.name:ast.dump(n,include_attributes=False)for n in tree.body if isinstance(n,ast.FunctionDef)}
  a,b=functions(before),functions(after)
- for name in ('facts_for','reported','interpretation','scene','resolve','href','render','stylesheet'):
+ # Cross-perspective href selection is intentionally evolved by v3.
+ for name in ('facts_for','reported','interpretation','scene','resolve','render','stylesheet'):
   assert a[name]==b[name],name
  for name in ('security_store.py','security_web.py','public_routes.py','visual_streams.py','research_intelligence/source_import.py','financial_intelligence/candidate_analytics.py'):
   path='cios/applications/flora/'+name
