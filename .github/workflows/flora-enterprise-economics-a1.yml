@@ -22,7 +22,8 @@ permissions:
 jobs:
   economics:
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    # The full preserved journey suite exceeded its previous hosted time limit.
+    timeout-minutes: 65
     steps:
       - uses: actions/checkout@v4
         with:
