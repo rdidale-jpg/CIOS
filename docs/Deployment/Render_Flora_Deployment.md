@@ -2,6 +2,10 @@
 
 This guide deploys Flora as a Render Web Service that Rob can open from an iPad browser.
 
+## Existing Flora-Current development and evaluation
+
+The existing **FLORA - CURRENT** service is a development/evaluation runtime. Follow the [Product Delivery Doctrine](../product/flora-delivery-acceleration/README.md): routine reversible code integration needs no separate owner approval, but merging does not deploy. Deploy only under express authority, using the existing Render Manual Deploy process and the exact validated SHA. Preserve current environment, persistent storage, authentication/origin settings and data; check health and affected browser journeys, and retain the previous successful deployment for rollback. Do not apply high-scale production infrastructure requirements without an actual dependency. Do not create a service, environment or new cost without owner authority. The setup sections below are historical configuration reference, not instructions to recreate or reset Flora-Current.
+
 ## Scope
 
 The deployment wrapper is intentionally minimal:
