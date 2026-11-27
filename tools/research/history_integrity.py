@@ -144,7 +144,7 @@ def verify_history(root):
     ceo_research_base = '201fe851a531ecb854d3ba8e3416bc667ab8c860'
     ceo_research_cut = {
         "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "5cf2812c14ffce3520ea0921ac93c15ce9ff66862f20bb69ee1f6d608080676a",
-        "enterprise-knowledge/banking/research-model/Understanding-Review.json": "a0d28a7cf0a6bd2290a807fc04be90a8b3835f64ed70554e9d35d8ae7c780361",
+        "enterprise-knowledge/banking/research-model/Understanding-Review.json": "27a62d55e5c7acbe1e2542a8603be50d9a6f94033bde815c4f043d652a4b8913",
         "enterprise-knowledge/banking/research-model/source-snapshots/LCE-ANNUAL-OPERATIONS.txt": "8013767e11d63b99616977b2c2d6d8c7a04efe99f1fe6196c563ae07f4189272",
         "enterprise-knowledge/banking/research-model/source-snapshots/LCE-BOARD.txt": "9747b0dc18b9dd058318bfb13214b4585ad83ed7273a20ecb8a88f44a1a388f8",
         "enterprise-knowledge/banking/research-model/source-snapshots/LCE-DELIVERY.txt": "6880a29413a1a5582ee598ff8cdddff9a77e2b6e1da75bc24198cdde86db9592",
@@ -210,7 +210,17 @@ def verify_history(root):
         prior_review=_git(root,'show',ceo_research_base+':'+REVIEW)
         old_review,new_review=json.loads(prior_review),json.loads(actual[REVIEW])
         assert set(old_review)==set(new_review)
-        assert all(new_review[k]==value for k,value in old_review.items() if k!='baseline_digest')
+        assert all(new_review[k]==value for k,value in old_review.items() if k not in {'baseline_digest','sources'})
+        assert len(new_review['sources'])==len(old_review['sources'])
+        rebound=[]
+        for before,after in zip(old_review['sources'],new_review['sources']):
+            assert {k:v for k,v in before.items() if k!='assessment_digest'}=={k:v for k,v in after.items() if k!='assessment_digest'}
+            if 'assessment_digest' in before:
+                assert before['assessment_digest']==old_review['baseline_digest']
+                assert after['assessment_digest']==new_review['baseline_digest']
+                rebound.append(before['id'])
+            else:assert before==after
+        assert set(rebound)=={'DEPTH-LBG-AI','DEPTH-LBG-LEGACY','DEPTH-LBG-WALLET','DEPTH-LBG-CURVE'}
         from cios.applications.flora.research_intelligence.cycle import digest
         assert new_review['baseline_digest']==digest(new)
         actual[overlay]=prior_data;actual[REVIEW]=prior_review

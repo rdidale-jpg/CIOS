@@ -32,7 +32,17 @@ def preserved_research_cut():
     new_review=json.loads((ROOT/review_path).read_text())
     assert old_review['baseline_digest']==digest(baseline)
     assert new_review['baseline_digest']==digest(current)
-    assert {k:v for k,v in new_review.items() if k!='baseline_digest'}=={k:v for k,v in old_review.items() if k!='baseline_digest'}
+    assert {k:v for k,v in new_review.items() if k not in {'baseline_digest','sources'}}=={k:v for k,v in old_review.items() if k not in {'baseline_digest','sources'}}
+    assert len(new_review['sources'])==len(old_review['sources'])
+    rebound=[]
+    for before,after in zip(old_review['sources'],new_review['sources']):
+        assert {k:v for k,v in before.items() if k!='assessment_digest'}=={k:v for k,v in after.items() if k!='assessment_digest'}
+        if 'assessment_digest' in before:
+            assert before['assessment_digest']==old_review['baseline_digest']
+            assert after['assessment_digest']==new_review['baseline_digest']
+            rebound.append(before['id'])
+        else:assert before==after
+    assert set(rebound)=={'DEPTH-LBG-AI','DEPTH-LBG-LEGACY','DEPTH-LBG-WALLET','DEPTH-LBG-CURVE'}
     allowed.add(review_path)
     assert set(changed)<=allowed,changed
     # Original source files, asset identities, rights, financial holds and

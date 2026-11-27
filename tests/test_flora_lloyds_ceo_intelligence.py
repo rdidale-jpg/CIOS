@@ -56,6 +56,12 @@ def test_additive_review_reconciliation_does_not_grant_old_judgments_to_new_rese
     before=commercial_projection(old_data,old_review)['candidates'];after=commercial_projection(x,review)['candidates']
     fields=('id','commercial_rank','readiness','recommendation_eligibility','commercial','status')
     assert [{k:r.get(k) for k in fields} for r in before]==[{k:r.get(k) for k in fields} for r in after]
+    assert [[p['id'] for p in r['support']] for r in before]==[[p['id'] for p in r['support']] for r in after]
+    damaged=deepcopy(review)
+    next(s for s in damaged['sources'] if s['id']=='DEPTH-LBG-AI')['assessment_digest']='0'*64
+    denied=next(r for r in commercial_projection(x,damaged)['candidates'] if r['id']=='RCO-LBG-002')
+    assert 'RC-DEPTH-LBG-AI' not in {p['id'] for p in denied['support']}
+    assert 'LBG-CE-VERTEX' not in {p['id'] for p in denied['support']}
 
 
 def test_actual_employee_inventory_closes_populations_without_inventing_costs():

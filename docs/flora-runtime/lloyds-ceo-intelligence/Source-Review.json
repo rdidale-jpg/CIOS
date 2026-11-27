@@ -1,6 +1,5 @@
 {
   "base": "201fe851a531ecb854d3ba8e3416bc667ab8c860",
-  "existing_records_unchanged": true,
   "held_financial_candidates_admitted": 0,
   "canonical_promotions": 0,
   "source_permissions_changed": false,
@@ -142,5 +141,16 @@
       "issue": "April 2025 production systems, initiated ML use cases and FY2025 delivered GenAI cases are different populations."
     }
   ],
-  "held_use": "Existing LEI financial candidate uses remain withheld; the separate three-measure section 2 projection remains inactive and section 5 PDF links remain deferred."
+  "held_use": "Existing LEI financial candidate uses remain withheld; the separate three-measure section 2 projection remains inactive and section 5 PDF links remain deferred.",
+  "retained_review_context_rebinding": {
+    "sources": [
+      "DEPTH-LBG-AI",
+      "DEPTH-LBG-LEGACY",
+      "DEPTH-LBG-WALLET",
+      "DEPTH-LBG-CURVE"
+    ],
+    "only_field": "assessment_digest",
+    "reason": "Preserve existing candidate support across a strictly additive assessment; source identity, content, rights, hypothesis links, decisions and historical snapshots unchanged. No new fact inherits a prior judgment."
+  },
+  "existing_assessment_records_unchanged": true
 }

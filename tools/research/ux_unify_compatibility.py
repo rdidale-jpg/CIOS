@@ -85,7 +85,7 @@ def ceo_predecessor(root,path,current):
     # Bounded CEO research additions: match the complete checker, then retain
     # the prior checker for historical tests. Unknown mutations are untouched.
     if (path == 'tools/research/history_integrity.py'
-            and sha256(current).hexdigest() == '617dc372e8eb02edd2230cef4ade3670cf80c0412a2ad6632ecce0146e702c08'):
+            and sha256(current).hexdigest() == '14f1b43ef217717cd6807e35c580d2c8519da2f636750a6d44ad576528b48cf7'):
         previous = subprocess.check_output(['git', 'show', '201fe851a531ecb854d3ba8e3416bc667ab8c860:'+path], cwd=root)
         import ast
         def retained(raw):
