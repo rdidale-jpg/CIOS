@@ -1,8 +1,8 @@
 {
   "phase": "after",
-  "sha": "4036c6ba1502a4d0bf531cce9ce47ac32e679f8f",
+  "sha": "93feb94fd2c9ee468485d50b8d24916e79cae007",
   "runtime_hashes": {
-    "cios/applications/flora/lloyds_gold.py": "22b65c865061f06411b6d132208bfe6a488f28aad9aed803a2ff2b9e082223e1",
+    "cios/applications/flora/lloyds_gold.py": "f849ee75016b2a31a36a20231f830cf62db8792079ff6296f8f7f3e8b1c8a361",
     "cios/applications/flora/leadership_agenda.py": "0f3bd5cd2a7f01635188baf8075c06cf21a4cd6ca883490aa34927845c284b61",
     "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "bf5c501f2581cdab258c92bdf825ab4f742f2227725020decc4f007d933b2ccc",
     "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "6307d01f80e812327fef1339ef3a8c0f1b6835ca4878c735e4e972f5f3424422"
@@ -17,7 +17,7 @@
     "after-desktop-programmes.jpg": "7d0b734f827160889207ddd09f0dae4187a4456c5ae520063033acd245bc9087",
     "after-desktop-forces.jpg": "d93d3bf39f2817eaa26d63b8ddfa1e69eee8c48883edfdc282355e76bb217f85",
     "after-desktop-commercial.jpg": "1368b1bcb7266637f7d6d2b85ecdcc3c346565ac1d7392352a7a4065045c0bbb",
-    "after-desktop-insurance.jpg": "95795216e7c8ec91221d56e4245ea6edd76ddbac3167dc6bc30048a6aac60e66",
+    "after-desktop-insurance.jpg": "087411ea5b7309394e97de2db55b24c1bb65abd82819adf5a1bec90fed68d97e",
     "after-desktop-economics.jpg": "616ed21305a1e6a728327144f7045c3765748ac1c1822f3288862d13f836e4c0",
     "after-desktop-technology.jpg": "c1960f5eafcd796e847a1adef941b05272ba0a4924f448b9ac641f06b61e89ba",
     "after-desktop-fraud.jpg": "fb18496244700f841e10d7cd49d655247a5a915223843d94aac22b3ba9fb3953",
