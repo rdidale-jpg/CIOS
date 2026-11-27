@@ -57,8 +57,9 @@ def test_existing_twenty_two_primary_claims_and_all_opportunities_are_preserved(
     assert data['claims'][:len(previous['claims'])]==previous['claims']
     assert data['sources'][:len(previous['sources'])]==previous['sources']
     assert data['candidates']==previous['candidates']
-    assert len(data['claims'])==len(previous['claims'])+2
-    assert len(data['sources'])==len(previous['sources'])+2
+    # Two original commercial-access facts plus Gold v2's exact additive cut.
+    assert len(data['claims'])==len(previous['claims'])+2+39
+    assert len(data['sources'])==len(previous['sources'])+2+7
 
 
 def test_only_wider_evidence_informs_industry_capability_feedback():

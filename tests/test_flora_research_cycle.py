@@ -15,7 +15,7 @@ from cios.applications.flora.research_intelligence.cycle_views import render
 from tests.test_flora_primary_enrichment import download
 from tests.test_flora_research_intelligence import web
 
-AS_OF = '2026-11-10'
+AS_OF = '2026-11-27'
 
 
 def submission(data, tmp_path, effect='strengthen'):
@@ -101,7 +101,7 @@ def test_invalid_source_provenance_and_unlocated_passages_are_rejected(tmp_path)
     data = load_assessment(); item = submission(data, tmp_path)
     for change in ({'expected_sha256': '0'*64}, {'provenance_verified': False},
                    {'reviewed_quotes': [{'quote': 'A fabricated passage absent from the source', 'locator': 'p1'}]},
-                   {'url': 'https://private.invalid/source'}, {'retrieved_at': '2026-11-11T00:00:00Z'}):
+                   {'url': 'https://private.invalid/source'}, {'retrieved_at': '2026-11-28T00:00:00Z'}):
         broken = deepcopy(item); broken['metadata'].update(change)
         with pytest.raises(ValueError): cycle.run_cycle(data, AS_OF, [broken])
 

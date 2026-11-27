@@ -1,13 +1,13 @@
 {
   "phase": "after",
-  "sha": "1c8c8ae17bb2af3c95bf264d7df9befb60b0b576",
+  "sha": "4036c6ba1502a4d0bf531cce9ce47ac32e679f8f",
   "runtime_hashes": {
     "cios/applications/flora/lloyds_gold.py": "22b65c865061f06411b6d132208bfe6a488f28aad9aed803a2ff2b9e082223e1",
     "cios/applications/flora/leadership_agenda.py": "0f3bd5cd2a7f01635188baf8075c06cf21a4cd6ca883490aa34927845c284b61",
     "cios/applications/flora/visual_stream_assets/lloyds-gold.css": "bf5c501f2581cdab258c92bdf825ab4f742f2227725020decc4f007d933b2ccc",
     "enterprise-knowledge/banking/research-model/Assessment-Overlay.json": "6307d01f80e812327fef1339ef3a8c0f1b6835ca4878c735e4e972f5f3424422"
   },
-  "runtime_matches_sha": false,
+  "runtime_matches_sha": true,
   "environment": "Actual isolated HTTP Chromium; emulated iPads/mobile, not Render or physical Safari",
   "captures": {
     "after-desktop-group.jpg": "f7f58787e57115a1a7da826fed6a563d8e665101ba458986f0e29d0e9f0289f9",

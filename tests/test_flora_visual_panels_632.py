@@ -232,7 +232,9 @@ def test_seller_private_offer_and_other_workspace_never_enter_public_panels(monk
 def test_no_pending_evidence_source_or_frozen_design_data_dependency():
  for file in ['Assessment-Overlay.json','Understanding-Review.json']:
   path='enterprise-knowledge/banking/research-model/'+file
-  assert (ROOT/path).read_bytes()==subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
+  from tests.flora_f2_owner_contract import assert_owner_compatible
+  expected=subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT)
+  assert_owner_compatible(ROOT,path,expected)
  for scope,stream in CASES:
   html=v.render(v.SCOPES[scope]['route'],{'stream':[stream]})
   assert all(s not in html for s in ['EAI1-REVIEW','£130m','£129m','£1m','£212bn','SnapshotDate','canonical_acceptance','data-claim='])

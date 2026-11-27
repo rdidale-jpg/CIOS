@@ -16,7 +16,7 @@ from cios.applications.flora.public_routes import public_request_target, owner_i
 from tests.test_flora_security_repair_01b import authority
 from tests.test_flora_sales_pipeline import actor,web,complete
 from tests.test_flora_research_intelligence import Links
-ASOF='2026-11-10'
+ASOF='2026-11-27'
 CORE='VI-LBG-PLATFORMS'
 ORIGIN='RCO-LBG-001'
 

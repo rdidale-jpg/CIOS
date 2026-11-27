@@ -32,6 +32,15 @@ def assert_owner_compatible(root,path,expected):
     actual=(root/path).read_bytes()
     if actual==expected:
         return
+    if path in {'enterprise-knowledge/banking/research-model/Assessment-Overlay.json',
+                'enterprise-knowledge/banking/research-model/Understanding-Review.json'}:
+        # Gold v2 is an exact additive research cut, not an owner/rights change.
+        # Preserve the historical bytes, all records and the unchanged comparator.
+        before=subprocess.check_output(['git','show','1c8c8ae17bb2af3c95bf264d7df9befb60b0b576:'+path],cwd=root)
+        assert expected==before, 'Unknown historical research-owner cut'
+        from tools.research.history_integrity import verify_history
+        verify_history(root)  # rejects any unknown addition, mutation or review
+        return
     if path=='.github/workflows/flora-validation.yml':
         # Merged #739 retired only the two legacy release-preflight path
         # triggers. All commands, security gates and other paths stay exact.
