@@ -31,17 +31,17 @@ def run(out,phase):
         server=ThreadingHTTPServer(('127.0.0.1',0),Quiet);Thread(target=server.serve_forever,daemon=True).start()
         browser=pw.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox'])
         base=f'http://127.0.0.1:{server.server_port}'
-        path='/enterprises/lloyds?focus=economics&detail='
+        path='/enterprises/lloyds?stream=inside&focus=operations&detail='
         try:
             for device,size in [('desktop',(1440,1000)),('ipad-landscape',(1194,834)),('ipad-portrait',(834,1194)),('mobile',(390,844))]:
                 context=browser.new_context(base_url=base,viewport={'width':size[0],'height':size[1]},has_touch=device!='desktop',reduced_motion='reduce')
                 page=context.new_page();errors=[];page.on('pageerror',lambda err:errors.append(str(err)))
-                assert page.goto(path+'costs').status==200
+                assert page.goto(path+'service').status==200
                 page.evaluate('document.fonts.ready')
                 page.wait_for_function('[...document.images].filter(i=>i.checkVisibility()).every(i=>i.complete&&i.naturalWidth>0)')
                 def capture(name):
                     file=phase+'-'+device+'-'+name+'.jpg';page.screenshot(path=out/file,full_page=True,quality=75);proof['captures'][file]=sha256((out/file).read_bytes()).hexdigest()
-                capture('costs')
+                capture('service')
                 if phase=='before':
                     assert '115,687' not in page.locator('main').inner_text()
                 else:
@@ -65,7 +65,7 @@ def run(out,phase):
                 f=root/'enterprise-knowledge/banking/research-model/source-snapshots/FCA-Lloyds-Products-H126.json'
                 d=json.loads(f.read_text());next(s for s in d['sources'] if s['id']=='FCA-LLOYDS-PRODUCTS-H126')['withdrawn']=True;f.write_text(json.dumps(d))
                 page.go_back();page.reload()
-                for detail in ('service-bankcards','costs','sources'):
+                for detail in ('service-bankcards','service','sources'):
                     page.goto(path+detail);page.emulate_media(media='print')
                     text=page.locator('main').inner_text()
                     assert all(s not in text for s in ('115,687','97.4%','Which banking-and-card complaint journeys'))

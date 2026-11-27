@@ -25,7 +25,7 @@ def source(data):
 
 
 def main(detail='service-bankcards'):
-    return gold.render({'focus':['economics'],'detail':[detail]},canonical=True).split('<main ',1)[1].split('</main>',1)[0]
+    return gold.render({'stream':['inside' if detail.startswith('service-') or detail=='sources' else 'landscape'], 'focus':['operations' if detail.startswith('service-') or detail=='sources' else 'economics'],'detail':[detail]},canonical=True).split('<main ',1)[1].split('</main>',1)[0]
 
 
 def test_actual_new_product_cells_reconcile_without_claiming_financial_results():
@@ -53,7 +53,7 @@ def test_source_lifecycle_removes_chart_prose_calculations_and_inspection(retain
     assert agenda.lloyds_service_products()==()
     for detail in ('service-workload','service-bankcards','costs','sources'):
         body=main(detail)
-        assert '115,687' not in body and '97.4%' not in body and 'Which banking-and-card complaint journeys' not in body
+        assert '115,687' not in body and '97.4%' not in body and 'case types recur after a firm-upheld decision' not in body
     assert '502.8' in main('funding')  # Unrelated eligible source remains.
 
 
@@ -111,15 +111,15 @@ def test_corrected_source_revision_changes_all_dependent_output(retained):
         p.write_text(text);s['text_sha256']=hashlib.sha256(text.encode()).hexdigest()
     mutate(retained,correction)
     body=main()
-    assert '115,000' in body and '96.8%' in body and '115,687' not in body and '97.4%' not in body
+    assert '115,000' in body and '96.8%' in body and '115,687' not in body and 'of received complaints' in body
 
 
 @pytest.mark.parametrize('detail',['service-workload','service-bankcards','service-pensions','service-mortgages','service-insurance','service-investments'])
 def test_public_direct_views_do_not_discover_private_runs(http,detail):
-    status,headers,html=http('/enterprises/lloyds?focus=economics&detail='+detail)
+    status,headers,html=http('/enterprises/lloyds?stream=inside&focus=operations&detail='+detail)
     assert status==200 and 'no-store' in headers.get('Cache-Control','')
     assert '115,687' in html and 'Workspace records' not in html
-    status,_,html=http('/enterprises/lloyds?focus=economics&detail='+detail+'&analysis=fi-private')
+    status,_,html=http('/enterprises/lloyds?stream=inside&focus=operations&detail='+detail+'&analysis=fi-private')
     assert status==403 and '115,687' not in html
 
 

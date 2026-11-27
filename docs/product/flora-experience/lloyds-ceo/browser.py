@@ -64,7 +64,15 @@ def run(phase,output):
       for index in range(8):
        page.locator('main a[href*="detail=theme-'+str(index)+'"]').click();expect(page.locator('main')).to_contain_text('Counter-evidence and decision boundary');page.get_by_role('link',name='← Analysis',exact=True).click()
       for key,row in g.JOURNEYS.items():
-       page.goto(PATH+'?stream=inside&focus=operations&detail=journey-'+key);expect(page.locator('main')).to_contain_text('Conceptual activity sequence');expect(page.locator('main')).to_contain_text(row[5])
+       page.goto(PATH+'?stream=inside&focus=operations&detail=journey-'+key)
+       if key=='service':
+        # This compatibility URL now references the single operating home.
+        page.get_by_role('link',name='Customer operations',exact=True).click()
+        page.wait_for_url('**detail=service#visual-content')
+        expect(page.locator('main')).to_contain_text('Complaints & service')
+        expect(page.locator('main')).to_contain_text('not the consolidated Group or Retail')
+       else:
+        expect(page.locator('main')).to_contain_text('Conceptual activity sequence');expect(page.locator('main')).to_contain_text(row[5])
       for key,*_ in g.OBJECTIVES:
        page.goto(PATH+'?stream=forces&focus=strategy&detail=objective-'+key);expect(page.locator('main')).to_contain_text(g.GOAL_DECISIONS[key][1])
       page.goto(PATH+'?stream=inside&focus=applications&detail=envoy');expect(page.locator('main')).to_contain_text('does not establish a contracting entity');expect(page.locator('main')).to_contain_text('not an asserted Lloyds architecture');expect(page.locator('main')).not_to_contain_text('Contracted Google Cloud service')

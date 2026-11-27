@@ -65,6 +65,7 @@ DETAILS['operations']+=tuple('journey-'+key for key in ('credit','payments','ser
 DETAILS['strategy']+=tuple('objective-'+key for key in ('renewal','ai','access','reporting','investment','efficiency','payments'))
 DETAILS['economics']+=('funding','income','costs','capital','divisions')
 DETAILS['economics']+=('service-workload',)+tuple('service-'+key for key,_ in agenda.LLOYDS_SERVICE_PRODUCTS[:-1])
+DETAILS['operations']+=('service-workload',)+tuple('service-'+key for key,_ in agenda.LLOYDS_SERVICE_PRODUCTS[:-1])
 DETAILS['commercial']+=('transactions','transaction-customers','transaction-delivery','transaction-value','transaction-investigation')
 DETAILS['applications']+=('envoy-build','envoy-controls','envoy-value','envoy-investigation')
 FOCUS_FACTS = {
@@ -85,6 +86,7 @@ FOCUS_FACTS = {
              'LBG-A2030-PLATFORMS','LBG-A2030-INVESTMENT','LBG-A2030-CIR','LBG-A2030-SAVINGS','LBG-A2030-WALLET'),
  'analysis':tuple(dict.fromkeys(k for _,keys,_ in SWOT for k in keys)),
 }
+FOCUS_FACTS['strategy']+=('LBG-AI26-REPORTED','LBG-AI26-EXPECTED','LBG-ENVOY-CONTROLS')
 
 @dataclass(frozen=True)
 class State:
@@ -200,6 +202,8 @@ def operating_regions(state):
         body+='<section class="canvas-operating-band"><h2>'+e(title)+'</h2><div>'
         for key in keys:
             row=JOURNEYS[key]
+            if key=='service':
+                body+=region(state,'Customer operations',kind='operating',caption='Complaints & service · activity and outcomes',detail='service');continue
             body+=region(state,row[0],'<span class="canvas-sequence canvas-process">'+''.join('<span>'+e(step.strip())+'</span>' for step in row[2].split('→'))+'</span>',kind='operating',caption=row[1],detail='journey-'+key)
         body+='</div></section>'
     return body+'</div><p class="le-limit">Conceptual operating architecture; grouping and navigation do not assert verified dependencies.</p>'
@@ -314,7 +318,7 @@ def scene(state,facts):
 def economics(state,facts,issues=()):
     body='<p class="le-deck">Deposits fund lending. Service income adds to interest income. Costs, credit losses and capital shape the return.</p>'
     if agenda.lloyds_service_products():
-        body+=region(state,'Service workload',kind='operating',caption='Reported product activity · Lloyds Bank PLC · H1 2026',detail='service-workload')
+        body+=region(state,'Service workload',kind='operating',caption='Service context · no financial impact established',stream='inside',focus='operations',detail='service')
     body+='<div class="gold-economic-map" aria-label="Conceptual Group economic mechanism">'+''.join(region(state,title,kind='money',caption=desc,focus='economics',detail=key) for key,title,desc in (('funding','Funding','Deposits & other sources'),('income','Lending & income','Interest & fees'),('costs','Costs & impairment','Running the bank and credit risk'),('capital','Capital & returns','Risk capacity and returns')))+'</div>'
     body+='<p class="le-limit">Conceptual model · not a measured allocation or accounting reconciliation.</p>'
     body+=financial_regions(state,facts)
@@ -345,7 +349,15 @@ def economics(state,facts,issues=()):
     return body
 
 
-def service_workload(state, *, inspection=False):
+def service_context(state):
+    """Contextual reference to the single operational presentation home."""
+    if not agenda.lloyds_service_products():return ''
+    return region(state,'Customer operations',kind='operating',
+        caption='Complaints & service · Lloyds Bank PLC · H1 2026',
+        stream='inside',focus='operations',detail='service')
+
+
+def service_workload(state, *, inspection=False, data=None):
     """A finite view over existing Source service profiles; no monetary estimate.
 
     A workload share is arithmetic over a common legal-bank period, not a
@@ -354,6 +366,13 @@ def service_workload(state, *, inspection=False):
     from decimal import Decimal, ROUND_HALF_UP
     rows=agenda.lloyds_service_products()
     if not rows:return ''
+    # These retained excerpts describe the same FCA document and legal-bank
+    # return as the existing release. A restriction there must not be escaped
+    # by switching to the product excerpt of that same source.
+    basis=agenda._claims(data if data is not None else v.current_data(v.Context('lloyds','inside')),
+        ('LBG-FCA-H126-RECEIVED','EAI-LBG-CLOSED','EAI-LBG-UPHELD'))
+    if len(basis)!=3:return ''
+    if tuple(item.value for item in basis)!=tuple(item.value for item in rows[-1][2]):return ''
     total=rows[-1][2][0]; maximum=max(row[2][0].value for row in rows[:-1])
     for _,_,facts in rows:
         for item in facts:p.note_editorial_sources(item.sources)
@@ -368,19 +387,21 @@ def service_workload(state, *, inspection=False):
         for key,label,facts in rows[:-1]}
     if not all(p.eligible(item) for item in shares.values()):return ''
     if inspection:
-        body='<h2>Complaint workload · source and calculation</h2>'
+        body='<h2>Reported complaint activity · source and calculation</h2>'
         body+=flagship._source_rows(f for _,_,facts in rows for f in facts)
         for item in shares.values():
             body+='<p><strong>Calculated</strong> '+e(item.text)+' '+e(item.method)+'</p>'
+        for _,label,facts in rows[:-1]:
+            body+='<p><strong>Calculated · closed-case mix</strong> '+e(label)+': '+str(facts[1].value)+' / '+str(rows[-1][2][1].value)+' × 100; one decimal place. Same legal bank and period; different product cohorts.</p>'
         return body
     active=state.detail.removeprefix('service-')
-    body='<section class="gold-service-workload" data-intelligence="lloyds-product-workload"><p class="eyebrow">Lloyds Bank PLC · January–June 2026</p><h2>Where service workload concentrates</h2>'
+    body='<section class="gold-service-workload" data-intelligence="lloyds-product-workload"><p class="eyebrow">Lloyds Bank PLC · January–June 2026</p><h2>Complaints &amp; service</h2>'
     body+='<p class="gold-workload-headline"><strong>'+e(str(shares['bankcards'].value))+'%</strong> of received complaints concerned banking and credit cards.</p>'
     body+='<figure><figcaption>Reported complaints received · select a product group</figcaption><div class="gold-workload-bars">'
     for key,label,facts in rows[:-1]:
         share_text='&lt;0.1%' if facts[0].value>0 and shares[key].value==0 else str(shares[key].value)+'%'
-        body+='<a class="canvas-region gold-workload-row" data-canvas-region="service-workload" href="'+e(href(state,stream='landscape',focus='economics',detail='service-'+key),quote=True)+'"'+(' aria-current="page"' if active==key else '')+'><span class="gold-workload-label">'+e(label)+'</span><span class="gold-workload-track" aria-hidden="true"><span style="width:'+str(facts[0].value/maximum*100)+'%"></span></span><strong>'+format(facts[0].value,',')+'</strong><span class="gold-workload-share">'+share_text+' <span class="sr-only">calculated share</span></span></a>'
-    body+='</div></figure><p class="le-limit">Five product groups reconcile to '+format(total.value,',')+' received complaints. Shares are calculated. This legal bank is not the consolidated Group or Retail division; volumes are not cost or customer incidence.</p>'
+        body+='<a class="canvas-region gold-workload-row" data-canvas-region="service-workload" href="'+e(href(state,stream='inside',focus='operations',detail='service-'+key),quote=True)+'"'+(' aria-current="page"' if active==key else '')+'><span class="gold-workload-label">'+e(label)+'</span><span class="gold-workload-track" aria-hidden="true"><span style="width:'+str(facts[0].value/maximum*100)+'%"></span></span><strong>'+format(facts[0].value,',')+'</strong><span class="gold-workload-share">'+share_text+' <span class="sr-only">calculated share</span></span></a>'
+    body+='</div></figure><p class="le-limit">Five product groups reconcile to '+format(total.value,',')+' received complaints. Shares are calculated. This legal bank is not the consolidated Group or Retail division; volumes are not cost or customer incidence. Received and closed complaints are different cohorts.</p>'
     selected=next((row for row in rows[:-1] if row[0]==active),None)
     if selected:
         _,label,facts=selected
@@ -388,8 +409,14 @@ def service_workload(state, *, inspection=False):
         for title,item,suffix in zip(('Received','Closed','Firm-upheld share of closed'),facts,('','','%')):
             body+='<div><dt>'+title+'</dt><dd>'+format(item.value,',')+suffix+'</dd></div>'
         body+='</dl><p>Reported · '+e(total.period)+'. Received and closed are different cohorts. Firm-upheld is not independent adjudication; their difference is not backlog clearance.</p></section>'
-    body+='<section class="gold-workload-interpretation"><h3>Workload is concentrated; financial impact is not established</h3><p>Banking and credit cards dominate this legal bank’s recorded complaint activity. That makes this product group a focused place to examine service effort. Counts alone do not distinguish product scale, case complexity, reporting effects or avoidable repeat work.</p><h3>Commercial investigation</h3><p>Which banking-and-card complaint journeys require repeated handling, and what measured handling effort and customer outcomes remain after current remedies? Validate that with the service owner before proposing an intervention; no supplier need, budget or open procurement is established.</p></section>'
-    body+='<p class="source-licence">Contains Financial Conduct Authority information licensed under the Open Government Licence v3.0.</p></section>'
+    if selected:
+        closed_share=(facts[1].value/rows[-1][2][1].value*100).quantize(Decimal('.1'),rounding=ROUND_HALF_UP)
+        body+='<p class="gold-cohort-mix"><strong>Calculated · '+str(closed_share)+'%</strong> of the legal bank’s closed complaints were in this product group. </p>'
+        body+='<section class="gold-workload-interpretation"><h3>Activity, outcome and consequence</h3><p>The product-specific firm-upheld rate describes decisions on closed cases. It is not the share of customers harmed, a cost measure or a comparison of service quality across products.</p><h3>Possible explanations</h3><p><strong>Hypotheses.</strong> Product scale, case mix and repeat contact could each affect the pattern. These returns do not establish which explanation applies, or quantify handling effort.</p><h3>Management response</h3><p>The FCA return records case handling and firm decisions; it does not identify a complaints-specific remedy or its effectiveness. Closing a case is not proof of an improved customer outcome.</p><h3>Commercial investigation</h3><p>Do any '+e(label.lower())+' case types recur after a firm-upheld decision, and what measured customer outcome follows the current remedy? Establish the responsible service owner, case mix and existing response before proposing an intervention. No supplier need, budget or open procurement is established.</p></section>'
+    else:
+        body+='<p class="gold-cohort-mix">The all-product firm-upheld rate is <strong>'+str(rows[-1][2][2].value)+'%</strong> across '+format(rows[-1][2][1].value,',')+' closed cases. Product mix matters: select a product to distinguish its activity, outcome and the evidence needed to explain it.</p>'
+    body+='<p class="le-limit">The return establishes complaint activity and firm decisions, not the financial or customer impact.</p>'
+    body+='</section>'
     return body
 
 
@@ -470,11 +497,11 @@ def envoy_exploration(state,facts):
     elif active=='envoy-controls':
         body+='<section class="gold-activation-story"><h2>Designed controls are different from demonstrated outcomes</h2><div class="gold-value-path"><span>Controlled release</span><span>Monitoring</span><span>Exception handling</span><span>Accountability</span></div><p>Lloyds describes controls and monitoring. Their disclosure weakens a greenfield-control pitch; it does not independently establish effectiveness or reveal a control failure.</p><p>Business operations, technology and risk need clear decision responsibilities. Human review, overrides and service quality are useful evaluation dimensions, not confirmed features or deficiencies of every Envoy workflow.</p></section>'
     elif active=='envoy-value':
-        body+='<section class="gold-activation-story"><h2>Separate availability, adoption and economic value</h2><div class="gold-value-path"><span>Availability</span><span>Actual use</span><span>Task outcome</span><span>Net benefit</span></div></section>'
-        body+='<div class="gold-benefit-horizons">'+''.join('<section><h3>'+label+'</h3>'+reported(facts,(key,))+'</section>' for key,label in (('LBG-AI26-REPORTED','Earlier reported contribution'),('LBG-AI26-EXPECTED','Later management expectation')) if key in facts)+'</div>'
-        body+=interpretation(facts,('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'),'The earlier reported contribution and later expectation do not establish a growth rate, realised 2026 result or net return after all costs. No contribution is allocated to Envoy, a division or an external supplier.')
+        body+='<section class="gold-activation-story"><h2>Platform capability is not an attributed financial result</h2><p>Envoy is an existing platform with disclosed controls. The Group AI contribution and expectation belong to the Group strategy view; neither establishes an Envoy result, adoption level or net return.</p></section>'
+        if all(k in facts for k in ('LBG-AI26-REPORTED','LBG-AI26-EXPECTED')):
+            body+=region(state,'Group AI performance',kind='timeline',caption='Reported contribution, expectation and management response',stream='forces',focus='strategy',detail='objective-ai')
         if 'LBG-AR25-COPILOT' in facts:
-            body+='<aside class="gold-subject-context"><h3>Separate colleague technology context</h3>'+reported(facts,('LBG-AR25-COPILOT',))+'<p>Copilot licences are not Envoy users, active adoption or a measured workforce reduction. Different products and populations cannot be added together.</p></aside>'
+            body+=region(state,'Colleague technology',kind='technology',caption='Copilot disclosure · not Envoy users or measured workforce productivity',focus='applications',detail='copilot')
     else:
         body+='<section class="gold-activation-story"><h2>Start with one agreed workflow</h2><p><strong>Hypothesis.</strong> A contribution may exist in measuring or improving a customer-agreed workflow, including service quality and full control, run and change costs.</p><p>Validate the baseline, outcome attribution, exceptions and existing management response. Faster tasks can be offset by review effort or parallel running; an existing team may already have adequate measurement and remedies.</p><p>No reported platform, contribution or expectation establishes customer demand, open procurement, external scope or supplier budget. A commercial conversation is justified only after confirming an unresolved customer issue and a useful role.</p></section>'
     body+='<p class="gold-related">'+link(state,'Enterprise data capability',focus='capabilities',detail='data')+link(state,'AI transformation disclosure',focus='programmes',detail='ai')+link(state,'Group costs & efficiency',stream='landscape',focus='economics',detail='costs')+'</p>'
@@ -523,6 +550,10 @@ def people(state, facts):
 
 
 def operating(state,data,facts,issues=()):
+    if state.detail=='service' or state.detail.startswith('service-'):
+        service=service_workload(state,data=data)
+        if service:return service
+        if state.detail!='service':return '<p class="le-deck">Product-level service measures cannot be shown for this selection.</p>'+region(state,'Customer operations',kind='operating',caption='Return to available service context',detail='service')
     if state.detail == 'people':
         return people(state, facts)
     body='<p class="le-deck">Customer journeys cross durable capabilities. Shared capabilities are not reporting divisions.</p>'
@@ -551,7 +582,7 @@ def operating(state,data,facts,issues=()):
     body+=reported(facts,FOCUS_FACTS['operations'])
     if state.detail=='service':
         if agenda.lloyds_service_products():
-            body=region(state,'Explore product workload',kind='operating',caption='Five reported product groups · Lloyds Bank PLC · H1 2026',stream='landscape',focus='economics',detail='service-workload')+body
+            body=region(state,'Explore product workload',kind='operating',caption='Five reported product groups · Lloyds Bank PLC · H1 2026',stream='inside',focus='operations',detail='service')+body
         service=next((row for row in issues if row.key=='service-recovery'),None)
         if service:
             outcome='<section class="gold-dossier"><h2>Service outcomes · Lloyds Bank PLC</h2><p>January–June 2026 · this legal bank only, not consolidated Group or Retail reporting segment.</p>'
@@ -749,7 +780,7 @@ def main(state,data,facts,issues=()):
         body+='<h2>Evidence, dates & boundaries</h2>'+flagship._source_rows(item for item in items if item.semantic_type!='calculated')
         for item in items:
             if item.semantic_type=='calculated':body+='<h3>Calculated · method</h3>'+p.render(item,compact=True)+'<p>'+e(item.method)+'</p>'
-        if state.focus in {'operations','economics'}:body+=service_workload(state,inspection=True)
+        if state.focus in {'operations','economics'}:body+=service_workload(state,inspection=True,data=data)
         body+='<p class="le-limit">Lloyds attribution links to the issuer homepage. Direct PDF links remain deferred. These statements remain analytical public research, not canonical acceptance.</p>'
         return body+'</section>'
     if state.stream=='landscape':
@@ -771,14 +802,14 @@ def main(state,data,facts,issues=()):
                 body+='<div data-intelligence="funding-base">'+p.render(funding.facts[-1])+'</div>'
                 related.append('<a class="canvas-region canvas-money" data-canvas-region="money" href="'+e(href(state,focus='economics',detail='comparison'),quote=True)+'" aria-label="Funding comparison">'+visual_mark('money')+'<span class="canvas-title">Funding comparison</span><span class="canvas-caption">Compare dated stocks and their limits</span></a>')
             if any(row.key=='service-recovery' for row in issues):
-                related.append('<a class="canvas-region canvas-operating" data-canvas-region="operating" data-intelligence="service-recovery" id="preview-service-recovery" href="'+e(href(state,stream='inside',focus='operations',detail='service'),quote=True)+'" aria-label="Customer outcomes">'+visual_mark('operating')+'<span class="canvas-title">Customer outcomes</span><span class="canvas-caption">Lloyds Bank PLC · its own reporting perimeter</span></a>')
+                related.append('<a class="canvas-region canvas-operating" data-canvas-region="operating" data-context="service-operations" id="preview-service-recovery" href="'+e(href(state,stream='inside',focus='operations',detail='service'),quote=True)+'" aria-label="Customer operations">'+visual_mark('operating')+'<span class="canvas-title">Customer operations</span><span class="canvas-caption">Lloyds Bank PLC · its own reporting perimeter</span></a>')
             if related:body+='<p class="gold-related">'+''.join(related)+'</p>'
             body+='<p class="gold-related">'+link(state,'Funding, income & earnings',focus='economics')+link(state,'Organisation & workforce',stream='inside',focus='people',detail='leadership')+link(state,'Management goals',stream='forces',focus='strategy',detail='goals')+'</p>'
         elif state.focus in {'group','economics'}:body+=_ceo_financial(state,facts,issues)
         else:body+=division(state,facts)
     elif state.stream=='inside':
         if state.focus=='people' or state.focus=='operations' and state.detail=='people':body+=_ceo_people(state,facts)
-        elif state.focus=='operations' and state.detail!='service':body+=_ceo_journey(state,data,facts)
+        elif state.focus=='operations' and state.detail!='service' and not state.detail.startswith('service-'):body+=_ceo_journey(state,data,facts)
         elif state.focus=='operations':body+=operating(state,data,facts,issues)
         elif state.focus=='capabilities':body+=capabilities(state,data,facts)
         elif state.focus=='applications':body+=applications(state,facts)
@@ -871,7 +902,7 @@ JOURNEYS = {
 }
 OBJECTIVES = (
  ('renewal','2026 priority','Retire applications while maintaining service',('LBG-AR25-MIGRATION','LBG-A2030-PLATFORMS'),'Technology / service owner to verify','legacy','platforms'),
- ('ai','FY2025 reported / 2026 expectation','Turn AI capability into measured benefit',('LBG-AI26-REPORTED','LBG-AI26-EXPECTED','LBG-ENVOY-CONTROLS'),'Business benefit and control owners to verify','ai','data'),
+ ('ai','FY2025 reported / 2026 expectation','Turn AI capability into measured benefit',('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'),'Business benefit and control owners to verify','ai','data'),
  ('access','Changes planned through 2027','Keep the customer route to service clear',('LBG-BRAND26-TIMING','LBG-BRAND26-NO-ROLES'),'Customer service / channel owner to verify','brand','service'),
  ('reporting','18 March 2027 regulatory timetable','Prepare incident and third-party reporting',('UK-PRA-REPORT27','UK-FCA-REPORT27'),'Applicable regulated entity / risk owner to verify',None,'risk'),
  ('investment','2027 investment plan','Sequence investment against delivery and returns',('LBG-Q326-INVESTMENT','LBG-A2030-INVESTMENT'),'Finance and programme sponsor to verify','legacy','finance'),
@@ -909,16 +940,22 @@ def _ceo_people(state,facts):
           ('finance','Finance / treasury','Finance and funding · Named owner / mandate unavailable'),('service','Customer operations','Servicing and channels · Named owner / mandate unavailable'),
           ('risk','Risk and control','Risk assessment and controls · Named owner / mandate unavailable'),('platforms','Technology / data','Platforms, data and AI · Named owner / mandate unavailable')))+'</div><p class="le-limit">Conceptual function lenses · not a verified organisation chart.</p>'
     if state.detail=='workforce':
-        body+='<h2>Workforce measures</h2><p class="ceo-unavailable">Comparable workforce totals and distribution are unavailable in this view.</p>'
-        body+=table(('Measure','Current eligible result'),[(x,'Unavailable') for x in ('Employee headcount / FTE','Prior-period movement','Business / function / geography split','Technology and AI workforce','Workforce cost / productivity','Internal / supplier-delivered split')],'Workforce · no proxy values or invented trend')
-        if 'LBG-AR25-COPILOT' in facts:body+='<h2>Separate tool footprint</h2>'+reported(facts,('LBG-AR25-COPILOT',))+'<p class="le-limit">Licences are not people, active adoption or productivity. No headcount or workforce chart is derived from them.</p>'
-        body+=reported(facts,('LBG-BRAND26-NO-ROLES',))
+        body+='<h2>People, tools and organisational change</h2><p class="le-deck">Workforce capacity, a product deployment and a brand transition are different signals.</p>'
+        if 'LBG-AR25-COPILOT' in facts:
+            body+=region(state,'Colleague technology',kind='technology',caption='Disclosed Copilot footprint · not headcount, active use or productivity',focus='applications',detail='copilot')
+        if 'LBG-BRAND26-NO-ROLES' in facts:
+            body+=interpretation(facts,('LBG-BRAND26-NO-ROLES',),'The brand-transition announcement rules out related role reductions. That narrow statement does not establish Group-wide workforce growth, a hiring plan or an outsourcing decision.')
+            body+=region(state,'Brand transition and service access',kind='change',caption='The disclosed change and its specific workforce boundary',focus='programmes',detail='brand')
+        body+='<p class="le-limit">Comparable employee/FTE totals, business and function distribution, and workforce productivity cannot be established from these disclosures. Licences are not people.</p>'
+        if all(k in facts for k in ('LBG-AI26-REPORTED','LBG-AI26-EXPECTED')):
+            body+=region(state,'AI value and work',kind='timeline',caption='Group benefit evidence and the measurement needed before inferring capacity changes',stream='forces',focus='strategy',detail='objective-ai')
     body+='<p class="gold-related">'+link(state,'Leadership',focus='people',detail='leadership')+link(state,'Businesses & functions',focus='people',detail='structure')+link(state,'Workforce',focus='people',detail='workforce')+'</p>'
     return body
 
 
 def _ceo_journey(state,data,facts):
     selected=state.detail.removeprefix('journey-') if state.detail.startswith('journey-') else None
+    if selected=='service':return service_context(state)
     if selected not in JOURNEYS:
         return '<p class="le-deck">Explore the work that delivers customer and economic outcomes.</p>'+operating_regions(state)
     title,division,activities,caps,keys,meaning,question=JOURNEYS[selected]
@@ -938,6 +975,24 @@ def _ceo_journey(state,data,facts):
     return body
 
 
+def ai_performance(state,facts):
+    """One strategy home for Group AI outcomes; no platform allocation or forecast."""
+    keys=('LBG-AI26-REPORTED','LBG-AI26-EXPECTED')
+    if not all(key in facts for key in keys):
+        return '<p class="le-deck">A comparable AI performance view cannot be shown for this selection.</p>'
+    body='<h2>Turn AI capability into measured benefit</h2><p class="le-deck">Separate the earlier reported contribution from the later management expectation.</p>'
+    body+='<div class="gold-benefit-horizons" aria-label="Group AI reporting horizons">'
+    for key,label in zip(keys,('FY2025 · management-reported contribution','2026 · management expectation')):
+        body+='<section><h3>'+label+'</h3>'+reported(facts,(key,))+'</section>'
+    body+='</div>'
+    body+=interpretation(facts,keys,'The disclosed contribution and expectation are different periods and states. They do not establish realised 2026 growth, a percentage of target delivered or net benefit after model, infrastructure, change and control costs. No amount is attributed to Envoy, a division or a supplier.')
+    if 'LBG-ENVOY-CONTROLS' in facts:
+        body+='<section class="gold-subject-context"><h3>Management response already in place</h3>'+reported(facts,('LBG-ENVOY-CONTROLS',))+'<p>A disclosed controlled platform is existing capability. Its presence is not independent proof of effectiveness or the cause of the reported Group contribution.</p></section>'
+        body+=region(state,'Envoy operating capability',kind='technology',caption='Disclosed controls, collaboration and operating questions',stream='inside',focus='applications',detail='envoy-controls')
+    body+='<h3>The unresolved business decision</h3><p>The eligible disclosures do not reconcile gross contribution to full-cost net value or show which customer workflows produced it. A platform gap or a supplier opportunity cannot be inferred.</p><h3>Commercial investigation</h3><p>'+e(GOAL_DECISIONS['ai'][1])+' Confirm who owns the outcome and whether any decision remains open before proposing a diagnostic. External intervention remains a hypothesis; no buyer mandate or budget is established.</p>'
+    return body
+
+
 def _ceo_goals(state,facts):
     selected=state.detail.removeprefix('objective-') if state.detail.startswith('objective-') else None
     available=[row for row in OBJECTIVES if all(key in facts for key in row[3])]
@@ -945,6 +1000,7 @@ def _ceo_goals(state,facts):
         row=next((row for row in available if row[0]==selected),None)
         if row is None:return '<p class="ceo-unavailable">This objective is unavailable.</p>'
         key,horizon,title,keys,owner,programme,journey=row
+        if key=='ai':return ai_performance(state,facts)
         body='<p class="eyebrow">'+e(horizon)+'</p><h2>'+e(title)+'</h2>'+reported(facts,keys)
         body+=table(('Decision dimension','Evidence boundary'),[
           ('Accountability',e(owner)+' · role hypothesis, not verified buying authority'),
@@ -967,7 +1023,7 @@ def _ceo_goals(state,facts):
 
 def _ceo_financial(state,facts,issues):
     if state.detail.startswith('service-'):
-        return service_workload(state)
+        return service_context(state) or '<p class="le-deck">Product-level service measures cannot be shown for this selection.</p>'
     if state.detail not in {'funding','income','costs','capital','divisions'}:return economics(state,facts,issues)
     title={'funding':'Funding & interest economics','income':'Income & profit','costs':'Costs, impairment & remediation','capital':'Capital, liquidity & returns','divisions':'Reporting businesses & contribution'}[state.detail]
     body='<h2>'+title+'</h2>'
@@ -982,10 +1038,11 @@ def _ceo_financial(state,facts,issues):
         body+='<div class="le-measures">'+preview.measures({k:s for k,s in facts.items() if k=='LBG-Q326-PROFIT'})+'</div>'
         body+='<section class="gold-activation-story"><h2>Follow the earnings bridge</h2><div class="gold-value-path"><span>Interest earned less paid</span><span>Fees & other income</span><span>Costs & credit losses</span><span>Profit</span></div><p>Loan volumes alone do not explain income: pricing, asset mix and funding repricing also matter. Fees and other income have different drivers from net interest income.</p><p>The reported Group statutory profit is a flow over nine months. It is not segment contribution, underlying profit, a lending yield or an amount available for investment. A matched accounting bridge is needed to attribute any movement.</p></section>'
     elif state.detail=='costs':
-        body+=service_workload(state)
+        body+=service_context(state)
         body+='<section class="gold-activation-story"><h2>Three different pressures on earnings</h2><div class="gold-value-path"><span>Run & change costs</span><span>Remediation</span><span>Credit impairment</span></div><p>Ordinary operating expense, remediation and credit losses need separate explanations. An impairment charge covers a period; arrears and allowances are different stocks. A favourable prior-period comparison is not automatically a structural improvement.</p></section>'
-        body+=reported(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS'))
-        body+=interpretation(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS'),'A lower cost-to-income ratio can reflect income growth as well as cost reduction. Gross savings are not net profit: implementation, parallel running and service quality affect the economic result. The disclosed ambitions do not establish actual cost performance or supplier budget.')
+        if all(k in facts for k in ('LBG-A2030-CIR','LBG-A2030-SAVINGS')):
+            body+=region(state,'Efficiency objectives',kind='timeline',caption='Management ambitions, not reported cost performance',stream='forces',focus='strategy',detail='objective-efficiency')
+        body+='<p class="le-limit">A lower cost-to-income ratio can reflect income growth as well as cost reduction. Gross savings are not net profit. A matched income, expense and remediation comparison is needed before judging progress.</p>'
     elif state.detail=='capital':
         body+='<section class="gold-activation-story"><h2>Growth uses capacity as well as funding</h2><div class="gold-value-path"><span>Risk-weighted assets</span><span>Capital generation</span><span>Buffers</span><span>Distributions</span></div><p>New lending can consume risk capacity. Capital generation, regulatory and management buffers, and distributions influence how much capacity remains. More deposits do not by themselves establish more capital or a larger investment budget.</p><p>Return on tangible equity needs a matched profit and capital basis. Actual and pro-forma ratios must remain separate; no capital ratio or return is inferred from the earnings and funding context shown here.</p></section>'
         body+=financial_regions(state,facts)

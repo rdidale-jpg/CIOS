@@ -242,8 +242,8 @@ def test_every_counted_eligible_claim_has_substantive_non_source_main_output():
 def test_other_existing_owners_supply_scoped_service_outcomes_and_stock_recipe():
     from cios.applications.flora import leadership_agenda
     service=main(gold.render({'stream':['inside'],'focus':['operations'],'detail':['service']}))
-    assert service.count('data-owner-item=')==3
-    assert 'Lloyds Bank PLC' in service and 'not consolidated Group or Retail' in service
+    assert 'data-intelligence="lloyds-product-workload"' in service and '115,687' in service
+    assert 'Lloyds Bank PLC' in service and 'not the consolidated Group or Retail' in service
     assert all(value in service for value in ('118,762','118,861','66.12'))
     assert 'Open Government Licence' in service and 'different cohorts' in service
     economics=main(gold.render({'focus':['economics']}))
@@ -313,11 +313,11 @@ def test_ceo_deep_links_keep_subject_and_withdraw_strategy_goals(http, monkeypat
 def test_people_view_withdraws_workforce_evidence_without_inventing_accountability(monkeypatch):
     query = {'stream': ['inside'], 'focus': ['people'], 'detail': ['workforce']}
     html = gold.render(query)
-    assert 'data-claim-id="LBG-AR25-COPILOT"' in html
-    assert 'No headcount or workforce chart is derived' in html
+    assert 'detail=copilot' in html and '30,000' not in html
+    assert 'Licences are not people' in html
     current = data()
     next(source for source in current['sources'] if source['id'] == 'PR-LBG-AR25')['withdrawn'] = True
     monkeypatch.setattr(v, 'current_data', lambda ctx: current)
     html = gold.render(query)
-    assert 'data-claim-id="LBG-AR25-COPILOT"' not in html
-    assert 'data-claim-id="LBG-BRAND26-NO-ROLES"' in html
+    assert 'detail=copilot' not in html
+    assert 'rules out related role reductions' in html

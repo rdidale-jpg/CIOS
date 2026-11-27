@@ -94,7 +94,9 @@ def test_new_economic_view_rejects_wrong_entity_period_unit_or_actual_basis(monk
 
 def test_economic_target_is_not_an_actual_or_divisional_allocation():
     body = main(query('economics', 'costs'))
-    assert 'cost-to-income ratio below 45%' in body
+    assert 'cost-to-income ratio below 45%' not in body and 'detail=objective-efficiency' in body
+    goal=main({'stream':['forces'],'focus':['strategy'],'detail':['objective-efficiency']})
+    assert 'cost-to-income ratio below 45%' in goal
     assert 'Gross savings are not net profit' in body
     assert 'Unavailable</td>' not in body
     assert '£6.6bn' not in body

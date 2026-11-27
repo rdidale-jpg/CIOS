@@ -69,7 +69,8 @@ def test_financial_flows_and_bars_are_full_native_targets_without_new_measuremen
 
 def test_operating_value_system_layers_have_distinct_existing_destinations():
  html=v.render(g.CANONICAL,query('inside','operations'))
- for key in g.JOURNEYS:assert 'detail=journey-'+key in html
+ for key in g.JOURNEYS:
+  assert ('detail=service#' if key=='service' else 'detail=journey-'+key) in html
  assert html.count('class="canvas-operating-band"')==3
  html=v.render(g.CANONICAL,query('inside','operations','journey-credit'))
  for label in ('Business / value stream','Durable capabilities','Organisation / accountable role','Applications / data','Technology / infrastructure','Suppliers / contracts'):
@@ -119,7 +120,7 @@ def test_full_quadrant_and_theme_links_are_distinct_and_share_existing_evidence(
 
 def test_related_customer_and_funding_views_remain_in_canvas_and_old_urls_still_work(http):
  dom=Links(v.render(g.CANONICAL,{}))
- for title,detail in [('Customer outcomes','service'),('Funding comparison','comparison')]:
+ for title,detail in [('Customer operations','service'),('Funding comparison','comparison')]:
   target=next(a['href']for a,_ in dom.links if a.get('aria-label')==title)
   assert 'detail='+detail in target and 'focus='in target
   assert http(target.split('#')[0])[0]==200

@@ -32,6 +32,15 @@ def assert_owner_compatible(root,path,expected):
     actual=(root/path).read_bytes()
     if actual==expected:
         return
+    if path=='.github/workflows/flora-validation.yml':
+        # Merged #739 retired only the two legacy release-preflight path
+        # triggers. All commands, security gates and other paths stay exact.
+        from hashlib import sha256
+        assert sha256(expected).hexdigest()=='f3a398d7c243d845978f3dca195ac6edfa7b9cb50335ea2dfccd2b16dd877fd1', 'Unrecognised historical validation workflow'
+        retired=b"      - '.github/workflows/flora-release-preflight.yml'\n"
+        assert expected.count(retired)==2
+        assert actual==expected.replace(retired,b''), 'Unreviewed validation workflow change'
+        return
     if path=='cios/applications/flora/security_store.py':
         from tools.research.auth1_quality import assert_store_evolution
         assert_store_evolution(root,path,expected)
