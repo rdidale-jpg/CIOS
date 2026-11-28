@@ -1480,7 +1480,15 @@ def experience_map(kind, label, paths, nodes, legend):
 def executive_earnings(data):
     change = lloyds_financials.comparable_group_change(data)
     if not change:
-        return ''
+        projection = economic_lines(economic_research('lloyds-q3'))
+        latest = projection.get('profit_before_tax-2026')
+        if not latest:
+            return ''
+        economic_source_note((latest,))
+        return (
+            '<p><strong>'+economic_money(latest)+' statutory pretax profit</strong> · nine months to 30 September 2026.</p>'
+            '<p>The signed movement is unavailable when the retained components do not reconcile to the current report.</p>'
+        )
     profit, movement, deltas = change
     interest, other, lease, costs, remediation, credit, restructuring, volatility = deltas
     return (

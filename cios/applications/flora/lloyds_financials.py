@@ -43,7 +43,18 @@ def current():
             key = (row.perimeter, row.metric, str(period.as_at or period.end),
                    str(period.start) if period.start else None)
             active[key].append((row, fact))
-    return {key: rows[0] for key, rows in active.items() if len(rows) == 1}
+    results = {key: rows[0] for key, rows in active.items() if len(rows) == 1}
+    admitted = public_statements.economic_projection('lloyds-q3').get('lines', ())
+    for line in admitted:
+        if line.measurement_id not in {'profit_before_tax-2025', 'profit_before_tax-2026'}:
+            continue
+        key = (GROUP, 'pbt', str(line.period.end), str(line.period.start))
+        reported = results.get(key)
+        if reported and reported[0].value.amount != line.value.amount:
+            # A revised admitted total may remain visible on its own. A different
+            # filing revision cannot still support a bridge to the replaced total.
+            del results[key]
+    return results
 
 
 def select(data, keys, end, *, scope=GROUP, start=None):
