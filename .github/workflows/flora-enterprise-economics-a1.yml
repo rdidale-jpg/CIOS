@@ -23,7 +23,8 @@ permissions:
 jobs:
   economics:
     runs-on: ubuntu-latest
-    timeout-minutes: 65
+    # Run both existing Lloyds browser proofs without dropping validation.
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
         with:
