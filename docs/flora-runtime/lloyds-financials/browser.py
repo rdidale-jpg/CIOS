@@ -1,4 +1,5 @@
 """Exercise the native financial views on an isolated local Flora server."""
+from argparse import ArgumentParser
 from pathlib import Path
 from shutil import which
 import os
@@ -6,6 +7,7 @@ import sys
 from tempfile import TemporaryDirectory
 from threading import Thread
 from http.server import ThreadingHTTPServer
+from urllib.parse import parse_qs, urlsplit
 
 from playwright.sync_api import expect, sync_playwright
 
@@ -13,11 +15,82 @@ sys.path.insert(0, str(Path.cwd()))
 from cios.applications.flora.web.app import FloraWebHandler
 
 
-def check(base_url, output, browser):
+ENTERPRISE = '/enterprises/lloyds'
+TOP_LEVEL = {
+    'opening': '',
+    'economics': '?focus=economics',
+    'retail': '?focus=retail',
+    'commercial': '?focus=commercial',
+    'insurance': '?focus=retirement',
+    'operating': '?stream=inside&focus=operations',
+    'organisation': '?stream=inside&focus=people&detail=leadership',
+    'technology': '?stream=inside&focus=applications',
+    'agenda': '?stream=forces&focus=markets',
+    'strategy': '?stream=forces&focus=strategy&detail=goals',
+}
+
+
+def capture_top_level(page, output, phase):
+    for name, query in TOP_LEVEL.items():
+        assert page.goto(ENTERPRISE + query).status == 200
+        page.evaluate('document.fonts.ready')
+        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 2')
+        page.screenshot(path=output / f'{phase}-desktop-{name}.jpg', quality=82)
+
+
+def check_executive_story(page, output, device):
+    assert page.goto(ENTERPRISE).status == 200
+    main = page.locator('main')
+    opening = main.locator('.gold-executive-opening')
+    for text in ('households, businesses and long-term savers', 'cash, trade and payments',
+                 '£6.625bn', '+1,947m', '+851m'):
+        expect(opening).to_contain_text(text)
+    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 2')
+    page.screenshot(path=output / f'after-{device}-opening.jpg', quality=82)
+    opening.get_by_role('link', name='Where earnings came from', exact=True).click()
+    expect(main).to_contain_text('2,332')
+    expect(main).to_contain_text('single-quarter comparisons')
+    expect(main).to_contain_text('+64m')
+    expect(main).to_contain_text('separate nine-month bridge')
+
+    for business, label, first, follow, check in (
+        ('retail', 'Retail mortgages', 'Lending & credit', 'Verify income and underwrite', 'Vertex AI'),
+        ('commercial', 'Commercial transaction banking', 'Payments', 'Manage cash, trade and payments', 'Natasha Condon'),
+        ('retirement', 'Insurance, pensions and wealth', 'Insurance, pensions & wealth',
+         'Administer policies and investments', '84,000'),
+    ):
+        page.goto(ENTERPRISE + TOP_LEVEL['operating'])
+        main.get_by_role('link', name=first, exact=True).click()
+        rail = main.get_by_role('navigation', name=label, exact=True)
+        expect(rail).to_be_visible()
+        rail.get_by_role('link', name=follow, exact=True).click()
+        assert parse_qs(urlsplit(page.url).query)['subject'] == [business]
+        expect(main).to_contain_text(check)
+        page.reload()
+        expect(main).to_contain_text(check)
+        page.go_back()
+        expect(rail).to_be_visible()
+
+    page.goto(ENTERPRISE + TOP_LEVEL['agenda'])
+    main.get_by_role('link', name='Prepare for the executive decision', exact=True).click()
+    for label in ('CFO · Sustainable earnings and capital', 'COO · Deliver change while protecting service',
+                  'CEO · Grow customer activity and earn the investment'):
+        expect(main.get_by_role('link', name=label, exact=True)).to_be_visible()
+    main.get_by_role('link', name='COO · Deliver change while protecting service', exact=True).click()
+    expect(main).to_contain_text('end-to-end completion')
+
+
+def check(base_url, output, browser, phase):
     for name, width, height in (('desktop', 1440, 1000), ('ipad-landscape', 1366, 1024),
-                                ('ipad-portrait', 1024, 1366)):
+                                ('ipad-portrait', 1024, 1366), ('mobile', 390, 844)):
         page = browser.new_page(base_url=base_url, viewport={'width': width, 'height': height},
                                 has_touch=name != 'desktop')
+        if name == 'desktop':
+            capture_top_level(page, output, phase)
+        if phase == 'before':
+            page.close()
+            break
+        check_executive_story(page, output, name)
         income = '/enterprises/lloyds?focus=economics&detail=income'
         assert page.goto(income).status == 200
         expect(page.locator('main')).to_contain_text('1,947')
@@ -43,6 +116,9 @@ def check(base_url, output, browser):
         expect(page.locator('main')).to_contain_text('1,425')
         assert page.goto('/enterprises/lloyds?stream=forces&focus=strategy&detail=objective-efficiency').status == 200
         expect(page.locator('main')).to_contain_text('FY2026 guidance')
+        expect(page.locator('main')).to_contain_text('49.3%')
+        expect(page.locator('main')).to_contain_text('17.9%')
+        expect(page.locator('main')).to_contain_text('nine-month actuals are a checkpoint only')
         for route in ('/industries/banking', '/industries/aviation', '/enterprises/easyjet',
                       '/enterprises/lloyds/legacy', '/enterprises/lloyds/preview'):
             assert page.goto(route).status == 200
@@ -51,7 +127,11 @@ def check(base_url, output, browser):
 
 
 if __name__ == '__main__':
-    captures = Path(sys.argv[1])
+    parser = ArgumentParser()
+    parser.add_argument('output', type=Path)
+    parser.add_argument('--before', action='store_true')
+    args = parser.parse_args()
+    captures = args.output
     captures.mkdir(parents=True, exist_ok=True)
     with TemporaryDirectory(prefix='flora-financial-browser-') as runtime, sync_playwright() as playwright:
         os.environ.update(FLORA_DATA_DIR=runtime, FLORA_ENVIRONMENT='development',
@@ -62,7 +142,7 @@ if __name__ == '__main__':
             thread.start()
             try:
                 browser = playwright.chromium.launch(executable_path=which('chromium'))
-                check(f'http://127.0.0.1:{server.server_port}', captures, browser)
+                check(f'http://127.0.0.1:{server.server_port}', captures, browser, 'before' if args.before else 'after')
                 browser.close()
             finally:
                 server.shutdown()
