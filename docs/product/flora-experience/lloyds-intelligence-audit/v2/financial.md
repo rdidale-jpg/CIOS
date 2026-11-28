@@ -20,6 +20,18 @@ Baseline `70319e7905e16eb845b91974ca0fda0aca593b8f`. All amounts below are GBP m
 
 `experience_landscape` places the nine-month Group result and H1 business profits in one pictorial economic mechanism. Though individually labelled, shared paths and hierarchy suggest they are compatible components. The executive opening repeats the Group total before the map, and the detailed reconciliation is a click away. Neither the legend nor the route link repairs the immediate implied contribution. Future presentation should lead with independent panels for 9M Group and H1 divisions or show the full H1 bridge and separately labelled Q3 increment. Never label the Q3 increment as having reported segment components from these records.
 
+## Matched divisional requirement sample
+
+This separate census requires three measures across two matching half-years for each of the three principal reporting businesses. The 18 applicable cells are all present in the retained public Financial projection, with a uniform underlying segment basis and ordinary divisional chart routes. This measures a specific data slice, not the completeness of divisional finances or operating intelligence.
+
+| Reporting business | H1 2025 income after lease depreciation / operating costs / pretax | H1 2026 income after lease depreciation / operating costs / pretax |
+| --- | ---: | ---: |
+| Retail | 5,279 / −2,922 / 1,974 | 5,710 / −2,872 / 2,256 |
+| Commercial Banking | 2,688 / −1,394 / 1,194 | 2,897 / −1,409 / 1,425 |
+| Insurance, Pensions and Investments | 611 / −466 / 144 | 747 / −494 / 245 |
+
+Income and operating costs alone do not form the segment pretax total. Follow the retained segment credits, impairments and other exact adjustments rather than allocating any arithmetical difference as a reported finance line.
+
 ## Nine-month movement
 
 | Signed line | 9M 2025 | 9M 2026 | Calculated change |

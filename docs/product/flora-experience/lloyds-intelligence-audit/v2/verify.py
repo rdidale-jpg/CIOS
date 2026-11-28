@@ -56,6 +56,18 @@ def reconciliations():
     assert segment_total - restructuring - volatility == h1 == 4293
     assert q3 == 2332 and h1 + q3 == nine_months == 6625
 
+    expected_divisional = {
+        'Retail': ((5279, -2922, 1974), (5710, -2872, 2256)),
+        'Commercial Banking': ((2688, -1394, 1194), (2897, -1409, 1425)),
+        'Insurance Pensions and Investments': ((611, -466, 144), (747, -494, 245)),
+    }
+    for scope, rows in expected_divisional.items():
+        for year, expected in zip((2025, 2026), rows):
+            values = tuple(amount(metric, f'{year}-06-30', scope, basis='Underlying segment reporting')
+                           for metric in ('net', 'cost', 'segment_pbt'))
+            assert values == expected, (scope, year)
+    print('Divisional sample: 18/18 comparable retained income, costs and profit cells.')
+
     keys = ('u_net', 'u_cost', 'u_remediation', 'u_impairment', 'restructuring', 'volatility')
     changes = [amount(key, '2026-09-30') - amount(key, '2025-09-30') for key in keys]
     assert changes == [1262, -70, 851, -312, -35, 251]
