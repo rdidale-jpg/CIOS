@@ -241,3 +241,21 @@
 .gold-page .gold-executive-opening > a[data-canvas-region] {
   padding-block: 0.85rem;
 }
+
+.gold-page .gold-evidence-paths {
+  border-top: 1px solid #c4cbba;
+  margin-block: 1.25rem;
+  padding-block-start: .85rem;
+}
+.gold-page .gold-evidence-path {
+  background: #f3f4eb;
+  border-inline-start: 3px solid #678775;
+  color: #243c31;
+  margin-block: .6rem;
+  padding: .75rem 1rem;
+  min-inline-size: 0;
+  overflow-wrap: break-word;
+}
+.gold-page .gold-evidence-path h3 { margin-block: 0 .4rem; }
+.gold-page .gold-evidence-path p { max-inline-size: 74ch; }
+.gold-page .gold-executive-opening strong { white-space: normal; }

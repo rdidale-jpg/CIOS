@@ -103,3 +103,104 @@ def test_public_document_withdrawal_also_removes_report_equivalents(monkeypatch)
     assert '1,947' not in f.earnings(dataset, '#evidence')
     assert '6,661' in f.earnings(dataset, '#evidence')
     assert '4,293' in f.segments(dataset, '#evidence')
+
+
+def test_opening_reconciles_all_signed_effects_and_compatible_subperiods():
+    opening = gold.render({}, canonical=True).split('One Group, different economic engines')[0]
+    for amount in ('3,926', '+289', '-34', '+112', '4,293', '2,332', '6,625',
+                   '+1,262', '+851', '-70', '-312', '-35', '+251', '+1,947'):
+        assert amount in opening
+    assert 'does not allocate it to the businesses' in opening
+
+    data = f.current()
+    key = (f.GROUP, 'pbt', '2026-09-30', '2026-07-01')
+    row, fact = data[key]
+    data[key] = row.model_copy(update={'perimeter': 'Different entity'}), fact
+    assert not f.year_to_date_bridge(data)
+    assert f.comparable_group_change(data)
+
+
+def test_connected_wealth_evidence_updates_and_withdraws_across_views(monkeypatch):
+    from dataclasses import replace
+    from decimal import Decimal
+    from cios.applications.flora import lloyds_connections
+
+    get = gold.facts_for
+    key = 'LBG-CE-INVESTMENTACCOUNTS'
+    retained_path = lloyds_connections.BUSINESS['retirement']
+    observed = {}
+
+    def with_state(data):
+        facts = get(data)
+        item = facts[key]
+        observed['facts'] = facts.copy()
+        if observed['mode'] == 'corrected':
+            # An isolated fixture for an already admitted replacement returned by the owner.
+            sources = tuple(replace(ref, quote=ref.quote.replace('84,000', '84,001').replace('84000', '84001'))
+                            for ref in item.sources)
+            facts[key] = replace(item, text='84,001 investment accounts opened',
+                                 value=Decimal('84001'), sources=sources)
+        elif observed['mode'] == 'withdrawn':
+            facts[key] = replace(item, freshness='withdrawn')
+        return facts
+
+    monkeypatch.setattr(gold, 'facts_for', with_state)
+    observed['mode'] = 'current'
+    open_pages = ({'focus': ['retirement']},
+                  {'stream': ['inside'], 'focus': ['operations'], 'detail': ['journey-insurance'],
+                   'subject': ['retirement']},
+                  {'stream': ['forces'], 'focus': ['strategy'], 'detail': ['investigations'],
+                   'subject': ['retirement']})
+    for query in open_pages:
+        assert retained_path.title in gold.render(query, canonical=True)
+    assert lloyds_connections.evidence_for(retained_path, observed['facts'])
+
+    observed['mode'] = 'corrected'
+    for query in open_pages:
+        assert '84,001' in gold.render(query, canonical=True)
+    observed['mode'] = 'withdrawn'
+    for query in open_pages:
+        assert retained_path.title not in gold.render(query, canonical=True)
+
+
+def test_generic_compatibility_on_equinix_without_lloyds_axes():
+    rows = f.public_statements.statement_series(('research-subject:equinix-inc-group', 'Equinix, Inc.'))
+    revenue = sorted((row for row in rows if row.metric == 'revenue'), key=lambda row: row.fiscal_year)
+    assert len(revenue) >= 2
+    first, second = revenue[-2:]
+    assert f.public_statements.comparable_durations((second,), (first,))
+    foreign = second.model_copy(update={'perimeter': 'Unaffiliated entity'})
+    assert not f.public_statements.comparable_durations((foreign,), (first,))
+
+
+def test_existing_source_withdrawal_omits_all_wealth_path_destinations(monkeypatch):
+    from cios.applications.flora import visual_streams
+    from cios.applications.flora.research_intelligence import source_import
+
+    original_data = visual_streams.current_data
+    original_records = source_import.current_source_records
+
+    def restricted(rows):
+        rows = deepcopy(rows)
+        for row in rows:
+            if row.get('id') == 'LCE-ANNUAL-OPERATIONS':
+                row['withdrawn'] = True
+        return rows
+
+    def data(ctx):
+        current = deepcopy(original_data(ctx))
+        current['sources'] = restricted(current['sources'])
+        return current
+
+    monkeypatch.setattr(visual_streams, 'current_data', data)
+    monkeypatch.setattr(source_import, 'current_source_records', lambda domain: restricted(original_records(domain)))
+
+    for query in ({'focus': ['retirement']},
+                  {'stream': ['inside'], 'focus': ['operations'], 'detail': ['journey-insurance'],
+                   'subject': ['retirement']},
+                  {'stream': ['forces'], 'focus': ['strategy'], 'detail': ['investigations'],
+                   'subject': ['retirement']}):
+        html = gold.render(query, canonical=True)
+        assert 'Investment account openings and business resources' not in html
+        assert '84,000' not in html
+    assert '£6.625bn' in gold.render({}, canonical=True)

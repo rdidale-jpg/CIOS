@@ -9,7 +9,7 @@ from html import escape as e
 from pathlib import Path
 from urllib.parse import urlencode
 
-from . import lloyds_financials
+from . import lloyds_connections, lloyds_financials
 from . import design_system as ds, intelligence_presentation as p
 from . import visual_streams as v, visual_panels as panels, leadership_agenda as agenda
 from . import lloyds_flagship as flagship, lloyds_recovery as recovery
@@ -758,7 +758,7 @@ def forces(state,facts):
     keys=FOCUS_FACTS[state.focus]
     deck={'markets':'Funding and asset repricing can move at different speeds.',
           'resilience':'A regulatory timetable is dated context; enterprise exposure needs its own evidence.',
-          'competition':'Payments and AI can change the route to the customer.'}[state.focus]
+          'competition':'Compare customer access, pricing, service and credible alternatives in each market.'}[state.focus]
     body='<p class="le-deck">'+deck+'</p>'+reported(facts,keys)
     if state.focus=='markets':
         body+=interpretation(facts,('UK-RATE-NOV26',),'If funding costs reprice before asset yields, spread can narrow; the reverse timing can widen it. No Lloyds-specific sensitivity, profit effect or response is established by the rate decision.')
@@ -797,6 +797,98 @@ def measured_economics(state):
     return ''
 
 
+def evidence_path_links(state, path, rows, *, show_facts=True):
+    current = state.stream, state.focus, state.detail
+    destinations = ('Business economics', 'Operating detail', 'Decision & pressure')
+    links = ''.join(link(state, label, stream=stream, focus=focus, detail=detail, subject=state.subject)
+                    for label, (stream, focus, detail) in zip(destinations, path.destinations)
+                    if (stream, focus, detail) != current)
+    for row in rows:
+        p.note_editorial_sources(row.sources)
+    details = ''.join(p.render(row, compact=True) for row in rows) if show_facts else ''
+    return ('<section class="gold-evidence-path"><h3>'+e(path.title)+'</h3>'+details
+            + '<p>'+e(path.context)+'</p><div class="gold-related">'+links+'</div></section>')
+
+
+def connected_evidence(state, facts, *, inspection=False):
+    current = state.stream, state.focus, state.detail
+    strategy = state.focus == 'strategy' and state.detail in {'goals', 'sources'}
+    pressures = state.stream == 'forces' and state.focus in {'markets', 'competition', 'analysis'} and state.detail in {'', 'sources'}
+    estate = state.stream == 'inside' and state.focus in {'operations', 'applications', 'partners', 'programmes'} and state.detail in {'', 'sources'}
+    business = state.subject if state.subject in lloyds_connections.BUSINESS else state.focus
+    paths = []
+    for path in (*lloyds_connections.STRATEGY, *lloyds_connections.PRESSURES, *lloyds_connections.ESTATE):
+        selected = current in path.destinations or (
+            inspection and any(current[:2] == destination[:2] for destination in path.destinations))
+        if (selected or strategy and path in lloyds_connections.STRATEGY
+                or pressures and path in lloyds_connections.PRESSURES
+                or estate and path in lloyds_connections.ESTATE):
+            paths.append(path)
+    if business in lloyds_connections.BUSINESS:
+        path = lloyds_connections.BUSINESS[business]
+        if not state.detail or current in path.destinations or inspection:
+            paths.append(path)
+    live = [(path, rows) for path in paths if (rows := lloyds_connections.evidence_for(path, facts))]
+    if inspection:
+        return tuple(dict.fromkeys(row for _, rows in live for row in rows))
+    if not live:
+        return ''
+    title = ('Strategy record and reported progress' if strategy else
+             'Business pressures and competitive context' if pressures else
+             'People, facilities and delivery' if estate else 'Business evidence in context')
+    return ('<section class="gold-evidence-paths"><h2>'+title+'</h2>'
+            + ''.join(evidence_path_links(state, path, rows, show_facts=not state.detail or strategy or path in lloyds_connections.BUSINESS.values())
+                      for path, rows in live)+'</section>')
+
+
+def peer_service_context(data, issues):
+    """Compare published activity at named legal banks using existing Banking evidence."""
+    own = next((item for issue in issues if issue.key == 'service-recovery' for item in issue.facts
+                if item.unit == 'complaints received; FCA Open table total' and p.eligible(item)), None)
+    if not own:
+        return ''
+    peers = next((issue.facts for issue in agenda.agenda('banking', data)
+                  if issue.key == 'service-landscape'), ())
+    seen = tuple(item for item in peers if item.period == own.period and p.eligible(item)
+                 and item.unit == 'complaints received; all-product total')
+    if not seen:
+        return ''
+    return ('<section class="gold-evidence-paths"><h2>Customer service across named UK banks</h2>'
+            '<p>Complaints received · FCA Open table · '+e(own.period)+'</p>'
+            + ''.join(p.render(item, compact=True) for item in (own, *seen))
+            + '<p>These are activity counts for the named legal banks. Customer bases and product mix differ. '
+            'The counts cannot rank service quality, estimate harm rates or measure Lloyds Group performance.</p>'
+            '<a class="canvas-region canvas-analysis" data-canvas-region="analysis" '
+            'href="/industries/banking?agenda=service-landscape">'
+            + visual_mark('analysis') + '<span class="canvas-title">Inspect the UK Banking evidence</span>'
+            '<span class="canvas-arrow" aria-hidden="true">↗</span></a></section>')
+
+
+def business_swot(state, facts):
+    """Four grounded questions alongside the existing detailed analytical themes."""
+    body = ''
+    movement = lloyds_financials.comparable_group_change(lloyds_financials.current())
+    if movement and sum(movement[2][:3]) > 0:
+        body += region(state, 'Strength · Higher underlying income',
+                       '<p>Underlying net income rose on the matched nine-month comparison. Remediation is reported separately in the statutory bridge.</p>',
+                       kind='money', stream='landscape', focus='economics', detail='income')
+    if movement and movement[2][3] < 0 and movement[2][5] < 0:
+        body += region(state, 'Weakness to test · Cost and credit pressure',
+                       '<p>Operating costs and credit impairment both weighed on the matched comparison. Test how much persists before drawing a structural conclusion.</p>',
+                       kind='money', stream='landscape', focus='economics', detail='costs')
+    if all(key in facts for key in ('LBG-A2030-WALLET', 'LBG-Q326-CURVE')):
+        body += region(state, 'Strategic upside · More activity in payments',
+                       reported(facts, ('LBG-Q326-CURVE',)),
+                       caption='Completion is reported. Competitive adoption and economics remain open.',
+                       kind='business', focus='strategy', detail='objective-payments')
+    if all(key in facts for key in ('LBG-AR25-MIGRATION', 'UK-PRA-REPORT27')):
+        body += region(state, 'Threat to test · Service during change',
+                       reported(facts, ('LBG-AR25-MIGRATION', 'UK-PRA-REPORT27')),
+                       caption='Delivery and the reporting obligation can coincide. This does not confirm disruption or a control failure.',
+                       kind='operating', focus='strategy', detail='objective-reporting')
+    return '<section class="gold-evidence-paths"><h2>Business SWOT in evidence</h2>'+body+'</section>' if body else ''
+
+
 def main(state,data,facts,issues=()):
     facts=ceo_facts(data,executive_facts(data,facts))
     title=SUBJECTS[state.focus]
@@ -806,7 +898,7 @@ def main(state,data,facts,issues=()):
     body+='<h1>'+e(title)+'</h1>'
     if state.detail=='sources':
         keys=(*FOCUS_FACTS[state.focus],*('LBG-CE-'+k for k in CEO_INSPECTION_FACTS.get(state.focus,())))
-        items=[facts[k] for k in keys if k in facts]
+        items=list(dict.fromkeys([facts[k] for k in keys if k in facts]+list(connected_evidence(state,facts,inspection=True))))
         if state.focus in {'operations','economics'}:
             concern='service-recovery' if state.focus=='operations' else 'funding-base'
             row=next((row for row in issues if row.key==concern),None)
@@ -819,6 +911,8 @@ def main(state,data,facts,issues=()):
         if state.focus in {'operations','economics'}:body+=service_workload(state,inspection=True,data=data)
         body+='<p class="le-limit">Issuer-hosted attribution links to the issuer homepage. Regulatory evidence identifies SEC EDGAR. Direct PDF links remain deferred. These statements remain analytical public research, not canonical acceptance.</p>'
         return body+'</section>'
+    if state.stream == 'forces' and state.focus == 'strategy' and state.detail == 'goals':
+        body += connected_evidence(state, facts)
     selected=ceo_selected(state,facts)
     if selected is not None:
         body+=selected
@@ -846,7 +940,10 @@ def main(state,data,facts,issues=()):
         else:body+=executive_programme(state,facts) if state.detail in {'frontier','fraud','skills'} else programmes(state,data,facts)+executive_programme(state,facts)
     elif state.focus=='competition' and state.detail in {'commercial-direction','transaction-direction'}:body+=v3_commercial_direction(state,facts)
     elif state.focus=='strategy' and (state.detail=='goals' or state.detail.startswith('objective-')):body+=_ceo_goals(state,facts)
-    else:body+=forces(state,facts)
+    else:
+        body += forces(state,facts)
+        if state.focus == 'analysis' and not state.detail:
+            body += business_swot(state, facts)
     business = state.subject if state.subject in BUSINESS_JOURNEYS else state.focus
     if business in BUSINESS_JOURNEYS and (
         (state.stream == 'landscape' and state.focus == business and not state.detail)
@@ -854,6 +951,10 @@ def main(state,data,facts,issues=()):
             {'journey-credit', 'journey-payments', 'journey-insurance', 'commercial-context'})
     ):
         body += operating_thread(state, facts, business)
+    if state.stream == 'forces' and state.focus == 'competition' and not state.detail:
+        body += peer_service_context(data, issues)
+    if (state.stream, state.focus, state.detail) != ('forces', 'strategy', 'goals'):
+        body += connected_evidence(state, facts)
     body+=ceo_context(state,facts)
     body += measured_economics(state)
     owns_inspection=(state.focus=='applications' and (state.detail=='envoy' or state.detail.startswith('envoy-'))
@@ -1173,7 +1274,7 @@ def executive_overview(state,facts,issues):
     if 'LBG-V2-CUSTOMERS' in facts:
         body+='<div class="v2-enterprise-scale">'+v2_reported(facts,'CUSTOMERS')+'</div>'
     body+=business_regions(state)+financial_regions(state,facts)
-    body+='<section class="v2-value-thread"><h2>One Group, different economic engines</h2><p>Retail earns from lending, fees and asset services. Commercial combines credit with cash, trade and payment services. Insurance and investments earn through protection, distribution and long-term asset administration.</p><p class="le-limit">Business-model explanation, not a measured profit split. Segment profit, statutory Group profit and legal-bank results have different boundaries.</p></section>'
+    body+='<section class="v2-value-thread"><h2>One Group, different economic engines</h2><p>Business profit figures below cover H1 2026 on an underlying basis. Group statutory results use a separate reporting basis.</p><p>Retail earns from lending, fees and asset services. Commercial combines credit with cash, trade and payment services. Insurance and investments earn through protection, distribution and long-term asset administration.</p><p class="le-limit">Business-model explanation, not a measured profit split. Segment profit, statutory Group profit and legal-bank results have different boundaries.</p></section>'
     body+='<div class="v2-executive-agenda" aria-label="Published executive priorities"><h2>Leadership’s agenda</h2>'
     for title,keys,caption,detail in (
       ('Simplify while protecting service',('LBG-AR25-MIGRATION','LBG-A2030-CIR'),'Application retirement and the 2030 efficiency ambition','objective-renewal'),
@@ -1378,37 +1479,57 @@ def experience_map(kind, label, paths, nodes, legend):
             +'</div><p class="ce-legend">'+e(legend)+'</p>')
 
 
-def executive_earnings(projection):
-    """The same exact comparators that drive the detailed Group bridge."""
-    lines = economic_lines(projection)
-    comparisons = projection.get('comparisons', {})
-    needed = ('profit_before_tax-movement', 'net_operating_income-movement', 'remediation-movement',
-              'operating_costs-movement', 'credit_impairment-movement')
-    if 'profit_before_tax-2026' not in lines or not all(key in comparisons for key in needed):
-        return ''
-    from decimal import Decimal
-
-    change, income, remediation, costs, credit = (Decimal(comparisons[key]['value']) for key in needed)
-    from .financial_intelligence.public_statements import statements
-
-    for _, fact in statements((lines['profit_before_tax-2026'],)):
-        p.note_editorial_sources(fact.sources)
+def executive_earnings(data):
+    change = lloyds_financials.comparable_group_change(data)
+    if not change:
+        projection = economic_lines(economic_research('lloyds-q3'))
+        latest = projection.get('profit_before_tax-2026')
+        if not latest:
+            return ''
+        economic_source_note((latest,))
+        return (
+            '<p><strong>'+economic_money(latest)+' statutory pretax profit</strong> · nine months to 30 September 2026.</p>'
+            '<p>The signed movement is unavailable when the retained components do not reconcile to the current report.</p>'
+        )
+    profit, movement, deltas = change
+    interest, other, lease, costs, remediation, credit, restructuring, volatility = deltas
     return (
-        '<p><strong>' + economic_money(lines['profit_before_tax-2026']) +
-        ' statutory pretax profit</strong> · nine months to 30 September 2026.</p>'
-        f'<p>Year-on-year movement <strong>{change:+,}m GBP</strong>. Net income {income:+,}m, '
-        f'remediation {remediation:+,}m, operating costs {costs:+,}m, credit impairment {credit:+,}m.</p>'
+        f'<p><strong>£{profit / 1000:,.3f}bn statutory pretax profit</strong> · nine months to 30 September 2026.</p>'
+        f'<p>Year-on-year movement <strong>{movement:+,}m GBP</strong>.</p>'
+        f'<p>Net income {interest + other + lease:+,}m, remediation {remediation:+,}m, '
+        f'operating costs {costs:+,}m, credit impairment {credit:+,}m, '
+        f'restructuring {restructuring:+,}m and volatility and other {volatility:+,}m.</p>'
         '<p class="ce-legend">Lower remediation in a comparison period does not establish recurring efficiency.</p>'
     )
 
 
-def executive_opening(state, facts, projection):
+def executive_period_bridge(data):
+    bridge = lloyds_financials.year_to_date_bridge(data)
+    if not bridge:
+        return ''
+    subtotal, other, restructuring, volatility, half, quarter, nine = bridge
+    return (
+        '<p>January to June 2026 · GBP million</p>'
+        f'<p>Three businesses’ underlying profit <strong>£{subtotal:,}m</strong>, Other {other:+,}m, '
+        f'restructuring {restructuring:+,}m and volatility and other {volatility:+,}m. '
+        f'<strong>H1 Group statutory profit £{half:,}m.</strong></p>'
+        f'<p>H1 Group statutory £{half:,}m plus Q3 Group statutory £{quarter:,}m gives '
+        f'<strong>nine-month Group statutory £{nine:,}m.</strong></p>'
+        '<p class="ce-legend">The Q3 figure is a Group result. The filing does not allocate it to the businesses here.</p>'
+    )
+
+
+def executive_opening(state, facts, data):
     body = ('<section class="gold-executive-opening"><h2>Lloyds in one minute</h2>'
             '<p class="le-deck">Lloyds serves households, businesses and long-term savers. Retail earns through lending and services. '
             'Commercial Banking combines credit with cash, trade and payments. Insurance, pensions and investments earn through protection, administration and investing.</p>')
-    earnings = executive_earnings(projection)
+    earnings = executive_earnings(data)
     if earnings:
         body += region(state, 'Where earnings came from', earnings, kind='money', focus='economics', detail='income')
+    bridge = executive_period_bridge(data)
+    if bridge:
+        body += region(state, 'Reconcile H1 business profit and Group results', bridge,
+                       kind='money', focus='economics', detail='divisions')
     priorities = ('LBG-AR25-MIGRATION', 'LBG-A2030-CIR', 'LBG-A2030-WALLET')
     if all(key in facts for key in priorities):
         sources = tuple(source for key in priorities for source in facts[key].sources)
@@ -1417,6 +1538,10 @@ def executive_opening(state, facts, projection):
                        '<span>Simplify core platforms while protecting service. Improve efficiency after the cost of change. Grow customer activity in payments.</span>',
                        kind='timeline', caption='Published priorities. Delivery and full-cost returns need separate evidence.',
                        stream='forces', focus='strategy', detail='investigations')
+    if any(lloyds_connections.evidence_for(path, facts) for path in lloyds_connections.STRATEGY):
+        body += region(state, 'Strategy and reported progress', kind='timeline',
+                       caption='Compare published objectives with dated reported milestones and actuals.',
+                       stream='forces', focus='strategy', detail='goals')
     milestones = []
     for key, unit, measurement, prefix, suffix, status in (
         ('LBG-A2030-CIR', 'percent; upper-bound management target for 2030',
@@ -1487,10 +1612,10 @@ def operating_thread(state, facts, business):
 
 
 def experience_landscape(state,facts,issues):
-    projection=economic_research('lloyds-q3')
-    financial=economic_lines(projection)
+    aggregate=economic_lines(economic_research('lloyds-q3'))
     segments=economic_lines(economic_research('lloyds-h1'))
-    body=executive_opening(state,facts,projection)
+    data=lloyds_financials.current() if 'profit_before_tax-2026' in aggregate else {}
+    body=executive_opening(state,facts,data)
     nodes=[]
     if 'LBG-Q326-DEPOSITS' in facts:
         p.note_editorial_sources(facts['LBG-Q326-DEPOSITS'].sources)
@@ -1499,7 +1624,12 @@ def experience_landscape(state,facts,issues):
         nodes.append(experience_node(state,'Customer relationships',p.render(facts['LBG-V2-CUSTOMERS'],compact=True),(34,0,32,24),shape='island',detail='brands'))
     if 'LBG-Q326-PROFIT' in facts:
         p.note_editorial_sources(facts['LBG-Q326-PROFIT'].sources)
-        nodes.append(experience_node(state,'Reported earnings','<strong class="ce-number">'+(economic_money(financial['profit_before_tax-2026']) if 'profit_before_tax-2026' in financial else '£'+str(facts['LBG-Q326-PROFIT'].value)+'bn')+'</strong><span>Group statutory pretax profit · reported flow</span><time>Nine months to 30 September 2026</time>',(71,0,29,21),kind='money',shape='reservoir',focus='economics',detail='income'))
+        if 'profit_before_tax-2026' in aggregate:
+            context='<strong>Group statutory pretax profit</strong><span>Follow the separate nine-month Group reconciliation</span>'
+        else:
+            context=('<strong>£'+str(facts['LBG-Q326-PROFIT'].value)+'bn</strong>'
+                     '<span>Rounded reported nine-month Group statutory profit, separate from H1 businesses</span>')
+        nodes.append(experience_node(state,'Reported earnings',context,(71,0,29,21),kind='money',shape='reservoir',focus='economics',detail='income'))
     for i,(title,customer,activity,driver,key) in enumerate(twin.DIVISIONS):
         offer={'retail':'Borrow, save, pay and finance assets','commercial':'Lend, manage cash, trade and payments','retirement':'Protect, invest and administer long-term savings'}[key]
         financial_line=segments.get(key+'-underlying_profit_before_tax-2026')
@@ -1511,10 +1641,10 @@ def experience_landscape(state,facts,issues):
              ('Connect more customer activity',('LBG-A2030-WALLET','LBG-Q326-CURVE'),'Payments direction and Curve completion','objective-payments')]
     for i,(title,keys,caption,detail) in enumerate(choices):
         if all(k in facts for k in keys):nodes.append(experience_node(state,title,'',(i*34,84,32,14),kind='timeline',shape='current',caption=caption,stream='forces',focus='strategy',detail=detail))
-    body+='<h2 class="ce-map-title">One Group, different economic engines</h2>'
+    body+='<h2 class="ce-map-title">One Group, different economic engines</h2><p>Business profit figures below cover H1 2026 on an underlying basis. Group statutory results use a separate reporting basis.</p>'
     # Retain the existing business-region semantics and deep destinations.
     body+='<div class="canvas-businesses ce-portfolio">'+experience_map('economy','Reporting businesses · not financial shares',
-        ('M110 150 C110 190 120 200 130 235','M110 160 C250 190 390 180 400 235','M685 155 C685 195 660 200 665 235','M130 470 Q130 515 400 530','M400 470 L400 530','M670 470 Q670 515 400 530','M400 630 L400 680'),nodes,
+        ('M130 470 Q130 515 400 530','M400 470 L400 530','M670 470 Q670 515 400 530','M400 630 L400 680'),nodes,
         'Conceptual economic relationships. Geometry does not encode business size, funding allocation or profit contribution. Group, reporting businesses and legal entities remain separate.')+'</div>'
     body+=financial_knowledge(state,summary=True)
     body+=region(state,'What each business contributed',kind='money',
@@ -2229,7 +2359,7 @@ def ceo_selected(state,facts):
 def executive_decision_paths(state, facts):
     """A seller's preparation paths over evidenced actions and live questions."""
     body = '<div class="gold-decision-rail">'
-    earnings = executive_earnings(economic_research('lloyds-q3'))
+    earnings = executive_earnings(lloyds_financials.current())
     if earnings:
         body += region(
             state, 'CFO · Sustainable earnings and capital', earnings, kind='money',

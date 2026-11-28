@@ -43,7 +43,18 @@ def current():
             key = (row.perimeter, row.metric, str(period.as_at or period.end),
                    str(period.start) if period.start else None)
             active[key].append((row, fact))
-    return {key: rows[0] for key, rows in active.items() if len(rows) == 1}
+    results = {key: rows[0] for key, rows in active.items() if len(rows) == 1}
+    admitted = public_statements.economic_projection('lloyds-q3').get('lines', ())
+    for line in admitted:
+        if line.measurement_id not in {'profit_before_tax-2025', 'profit_before_tax-2026'}:
+            continue
+        key = (GROUP, 'pbt', str(line.period.end), str(line.period.start))
+        reported = results.get(key)
+        if reported and reported[0].value.amount != line.value.amount:
+            # A revised admitted total may remain visible on its own. A different
+            # filing revision cannot still support a bridge to the replaced total.
+            del results[key]
+    return results
 
 
 def select(data, keys, end, *, scope=GROUP, start=None):
@@ -67,33 +78,74 @@ def values(rows, *, monetary_bridge=False, basis=None):
     return tuple(row.value.amount for row, _ in rows)
 
 
+BRIDGE_BASIS = ('Underlying performance',) * 6 + ('Underlying-to-statutory adjustment',) * 2 + (
+    'Underlying performance', 'Underlying performance', 'Statutory',
+)
+
+
+def group_bridge(data, period):
+    keys = tuple(key for key, _ in COMPONENTS) + ('u_net', 'u_profit', 'pbt')
+    rows = select(data, keys, period)
+    read = values(rows, monetary_bridge=True, basis=BRIDGE_BASIS)
+    if read and sum(read[:3]) == read[8] and sum(read[:6]) == read[9] and sum(read[:8]) == read[10]:
+        return rows, read
+    return (), ()
+
+
+def comparable_group_change(data):
+    current, now = group_bridge(data, '2026-09-30')
+    previous, prior = group_bridge(data, '2025-09-30')
+    if not public_statements.comparable_durations(tuple(row for row, _ in current),
+                                                  tuple(row for row, _ in previous)):
+        return ()
+    deltas = tuple(a - b for a, b in zip(now[:8], prior[:8]))
+    return (now[10], now[10] - prior[10], deltas) if sum(deltas) == now[10] - prior[10] else ()
+
+
+def half_year_bridge(data, period):
+    rows = select(data, ('segment_pbt', 'remove_restructuring', 'remove_volatility', 'pbt'), period)
+    group = values(rows, monetary_bridge=True,
+                   basis=('Underlying segment reporting', 'Statutory-to-underlying adjustment',
+                          'Statutory-to-underlying adjustment', 'Statutory'))
+    divisions = [values(select(data, ('segment_pbt',), period, scope=division),
+                        monetary_bridge=True, basis=('Underlying segment reporting',))
+                 for division in DIVISIONS.values()]
+    if (group and all(divisions) and sum(item[0] for item in divisions) == group[0]
+            and group[0] - group[1] - group[2] == group[3]):
+        return sum(item[0] for item in divisions[:-1]), divisions[-1][0], -group[1], -group[2], group[3]
+    return ()
+
+
+def year_to_date_bridge(data):
+    half = half_year_bridge(data, '2026-06-30')
+    rows = (*select(data, ('pbt',), '2026-06-30'),
+            *select(data, ('pbt',), '2026-09-30', start='2026-07-01'),
+            *select(data, ('pbt',), '2026-09-30'))
+    amounts = values(rows, monetary_bridge=True, basis=('Statutory',) * 3)
+    if half and amounts and public_statements.reconciled_subperiods(*(row for row, _ in rows)):
+        return (*half, *amounts[1:])
+    return ()
+
+
 def earnings(data, target):
     title = 'Nine months ended 30 September · Group · GBP million'
     current_period = '2026-09-30'
-    previous_period = '2025-09-30'
-    keys = tuple(key for key, _ in COMPONENTS)
-    basis = ('Underlying performance',)*6 + ('Underlying-to-statutory adjustment',)*2 + (
-        'Underlying performance', 'Underlying performance', 'Statutory',
-    )
-    now = values(select(data, keys + ('u_net', 'u_profit', 'pbt'), current_period),
-                 monetary_bridge=True, basis=basis)
-    prior = values(select(data, keys + ('u_net', 'u_profit', 'pbt'), previous_period),
-                   monetary_bridge=True, basis=basis)
+    _, now = group_bridge(data, current_period)
     body = ''
-    if now and sum(now[:3]) == now[8] and sum(now[:6]) == now[9] and sum(now[:8]) == now[10]:
+    if now:
         body += chart.bars('Income to statutory profit', title + ' · 2026 · signed bridge',
                            [(name, value) for (_, name), value in zip(COMPONENTS, now)], target=target, waterfall=True)
         body += f'<p>Underlying net income £{now[8]:,}m · underlying profit £{now[9]:,}m · statutory pretax profit £{now[10]:,}m.</p>'
-        if prior and sum(prior[:3]) == prior[8] and sum(prior[:6]) == prior[9] and sum(prior[:8]) == prior[10]:
-            deltas = tuple(a - b for a, b in zip(now[:8], prior[:8]))
-            if sum(deltas) == now[10] - prior[10]:
-                body += chart.bars('What moved pretax profit?', title + ' · 2026 versus 2025 · signed changes',
-                                   [(name, value) for (_, name), value in zip(COMPONENTS, deltas)],
-                                   target=target, waterfall=True)
-                body += (f'<p>Calculated change {sum(deltas):+,}m GBP. Remediation contribution {deltas[4]:+,}m '
-                         f'and operating costs plus credit impairment {deltas[3]+deltas[5]:+,}m GBP.</p>'
-                         '<p><strong>FLORA Insight.</strong> The remediation comparison is distinct from a recurring efficiency gain. '
-                         'Test which costs fall after implementation and parallel running, while maintaining service and controls.</p>')
+        change = comparable_group_change(data)
+        if change:
+            _, _, deltas = change
+            body += chart.bars('What moved pretax profit?', title + ' · 2026 versus 2025 · signed changes',
+                               [(name, value) for (_, name), value in zip(COMPONENTS, deltas)],
+                               target=target, waterfall=True)
+            body += (f'<p>Calculated change {sum(deltas):+,}m GBP. Remediation contribution {deltas[4]:+,}m '
+                     f'and operating costs plus credit impairment {deltas[3]+deltas[5]:+,}m GBP.</p>'
+                     '<p><strong>FLORA Insight.</strong> The remediation comparison is distinct from a recurring efficiency gain. '
+                     'Test which costs fall after implementation and parallel running, while maintaining service and controls.</p>')
     basis_lines = values(select(data, ('nii', 'other', 'total', 'expenses', 'impairment', 'pbt'), current_period),
                          monetary_bridge=True, basis=('Statutory',)*6)
     if basis_lines and sum(basis_lines[:2]) == basis_lines[2] and sum(basis_lines[2:5]) == basis_lines[5]:
@@ -154,15 +206,12 @@ def segments(data, target, scope=None):
                            series, target=target)
     for year in (2026, 2025):
         period = f'{year}-06-30'
-        inputs = values(select(data, ('segment_pbt', 'remove_restructuring', 'remove_volatility', 'pbt'), period), monetary_bridge=True,
-                        basis=('Underlying segment reporting', 'Statutory-to-underlying adjustment',
-                               'Statutory-to-underlying adjustment', 'Statutory'))
-        profits = [values(select(data, ('segment_pbt',), period, scope=div), monetary_bridge=True, basis=('Underlying segment reporting',)) for div in DIVISIONS.values()]
-        if (inputs and all(profits) and sum(row[0] for row in profits) == inputs[0]
-                and inputs[0] - inputs[1] - inputs[2] == inputs[3]):
-            body += (f'<p>H1 {year} · Group underlying segment sum £{inputs[0]:,}m '
-                     f'{-inputs[1]:+,}m restructuring {-inputs[2]:+,}m volatility and other '
-                     f'= £{inputs[3]:,}m statutory pretax profit.</p>')
+        bridge = half_year_bridge(data, period)
+        if bridge:
+            subtotal, other, restructuring, volatility, statutory = bridge
+            body += (f'<p>H1 {year} · Group underlying segment sum £{subtotal + other:,}m '
+                     f'{restructuring:+,}m restructuring {volatility:+,}m volatility and other '
+                     f'= £{statutory:,}m statutory pretax profit.</p>')
     if body:
         body += '<p>Other is the filed segment caption. H1 values are six-month results and are not extrapolated to nine months.</p>'
     return body
