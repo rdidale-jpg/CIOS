@@ -1,9 +1,10 @@
 # Enterprise Twin Intelligence Production Contract
 
-**Status · Accepted in principle.** Final reconciliation awaits owner review and integration approval. On 22 November 2026, GitHub main was verified at `63df0cbf8e1de98d8a782cd0a448c7ec7bab4147`. [PR #712](https://github.com/rdidale-jpg/CIOS/pull/712) was open and draft at `e9daf762131c1e70cf83bebca5c811c56f4138d9`. This contract uses main and has no dependency on #712.
+**Production Contract v1.0 · Owner accepted and integrated.** [PR #713](https://github.com/rdidale-jpg/CIOS/pull/713) established the contract. Its proposed schedules retain their stated authority boundaries. The [Enterprise Intelligence Standard v2](enterprise-intelligence-standard-v2.md) is the proposed product and research coverage layer for owner review.
 
 | Review area | Document |
 | --- | --- |
+| Product and research coverage, maturity and financial integrity | [Enterprise Intelligence Standard v2](enterprise-intelligence-standard-v2.md) |
 | Authority, Source-use proposal and ownership decisions | [Authority and factual use](authority-and-factual-use.md) |
 | Tier 1 research obligations, exact family requirements and projections | [Enterprise factual contract](factual-contract.md) |
 | Estate, contracts, leadership, relationships and pressure qualification | [Technology and commercial intelligence](technology-commercial-intelligence.md) |

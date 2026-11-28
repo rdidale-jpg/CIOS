@@ -1,5 +1,7 @@
 # Lloyds: what is known, what is usable, and why the experience falls short
 
+The [post-#749 Enterprise Intelligence Standard v2 audit](v2/README.md) is available for owner review. This page retains the earlier findings and evidence.
+
 **Owner decision:** technical progress recognised; final visual and commercial acceptance withheld. This audit does not reverse that decision. **Research and diagnosis first; no UI implementation.** [Commission](Owner-Commission.md).
 
 **Audit cut:** 26 November 2026. GitHub main and Render's live deployment independently identify `3a4c7e0f6ad81af7ef32ed477a1a584ac2efae87`; no subsequent application changes were found at preflight. Render reports a manual successful deploy, `dep-dc4702vf3r2c73afrqhg`, completed at 17:46 UTC. [Baseline and open-PR inventory](Baseline.json). Baseline [full hosted CI passed](https://github.com/rdidale-jpg/CIOS/actions/runs/45866377400). This is not owner visual acceptance.
