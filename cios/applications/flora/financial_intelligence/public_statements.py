@@ -1,6 +1,6 @@
 """Read-only three-statement projection for Source-owned numerical facts."""
 from collections import Counter
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from typing import Literal
 
 from pydantic import Field, model_validator
@@ -300,3 +300,34 @@ def economic_projection(selection):
                 'authority':'analytical_working_research','canonical_mutation':False}
     except (OSError,ValueError,KeyError,TypeError,PermissionError,ArithmeticError):
         return {}
+
+
+def comparable_durations(current, prior):
+    """Match the scope, measurement, basis, units and calendar coverage of actual flows."""
+    if not current or not prior or len(current) != len(prior):
+        return False
+    return all(
+        _identity(now) == _identity(then)
+        and now.state == then.state == 'actual'
+        and now.period.kind == then.period.kind == 'duration'
+        and (now.period.start.month, now.period.start.day, now.period.end.month, now.period.end.day)
+        == (then.period.start.month, then.period.start.day, then.period.end.month, then.period.end.day)
+        and now.precision_dp == then.precision_dp
+        for now, then in zip(current, prior)
+    )
+
+
+def reconciled_subperiods(first, second, total):
+    """Verify a signed additive duration over adjoining actual periods."""
+    return (
+        first.value.unit == 'currency'
+        and first.statement in {'income', 'cash_flow'}
+        and _identity(first) == _identity(second) == _identity(total)
+        and first.state == second.state == total.state == 'actual'
+        and first.period.kind == second.period.kind == total.period.kind == 'duration'
+        and first.precision_dp == second.precision_dp == total.precision_dp
+        and first.period.start == total.period.start
+        and second.period.end == total.period.end
+        and first.period.end + timedelta(days=1) == second.period.start
+        and first.value.amount + second.value.amount == total.value.amount
+    )

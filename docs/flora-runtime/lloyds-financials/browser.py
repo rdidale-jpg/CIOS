@@ -27,6 +27,8 @@ TOP_LEVEL = {
     'technology': '?stream=inside&focus=applications',
     'agenda': '?stream=forces&focus=markets',
     'strategy': '?stream=forces&focus=strategy&detail=goals',
+    'competition': '?stream=forces&focus=competition',
+    'swot': '?stream=forces&focus=analysis',
 }
 
 
@@ -80,6 +82,50 @@ def check_executive_story(page, output, device):
     expect(main).to_contain_text('end-to-end completion')
 
 
+def check_integration(page, output, device):
+    assert page.goto(ENTERPRISE).status == 200
+    main = page.locator('main')
+    opening = main.locator('.gold-executive-opening')
+    for amount in ('3,926', '+289', '−34', '+112', '4,293', '2,332', '6,625',
+                   '+1,262', '+851', '−70', '−312', '−35', '+251'):
+        expect(opening).to_contain_text(amount.replace('−', '-'))
+    for route, numbers in (
+        ('retail', ('27,574', 'income verification')),
+        ('commercial', ('7,955', 'digitally')),
+        ('retirement', ('6,025', '84,000')),
+    ):
+        assert page.goto(ENTERPRISE + '?focus=' + route).status == 200
+        connection = main.locator('.gold-evidence-paths')
+        for text in numbers:
+            expect(connection).to_contain_text(text)
+        connection.get_by_role('link', name='Operating detail').click()
+        assert parse_qs(urlsplit(page.url).query)['subject'] == [route]
+        expect(main.locator('.gold-evidence-paths')).to_be_visible()
+        page.reload()
+        expect(main.locator('.gold-evidence-paths')).to_be_visible()
+        page.go_back()
+        expect(main.locator('.gold-evidence-paths')).to_contain_text(numbers[0])
+    assert page.goto(ENTERPRISE + TOP_LEVEL['strategy']).status == 200
+    expect(main.locator('.gold-evidence-paths')).to_contain_text('Cost efficiency and investment')
+    expect(main.locator('.gold-evidence-paths')).to_contain_text('Payments growth and customer use')
+    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 2')
+    page.screenshot(path=output / f'after-{device}-strategy.jpg', quality=82)
+    assert page.goto(ENTERPRISE + TOP_LEVEL['swot']).status == 200
+    expect(main).to_contain_text('Business SWOT in evidence')
+    expect(main).to_contain_text('Payment competition and substitutes')
+    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 2')
+    page.screenshot(path=output / f'after-{device}-swot.jpg', quality=82)
+    assert page.goto(ENTERPRISE + TOP_LEVEL['competition']).status == 200
+    peer = main.get_by_role('heading', name='Customer service across named UK banks').locator('..')
+    for count in ('118,762', '90,678', '79,323', '92,548'):
+        expect(peer).to_contain_text(count)
+    peer.get_by_role('link', name='Inspect the UK Banking evidence').click()
+    assert urlsplit(page.url).path == '/industries/banking'
+    expect(page.locator('main')).to_contain_text('90,678')
+    page.go_back()
+    expect(peer).to_contain_text('118,762')
+
+
 def check(base_url, output, browser, phase):
     for name, width, height in (('desktop', 1440, 1000), ('ipad-landscape', 1366, 1024),
                                 ('ipad-portrait', 1024, 1366), ('mobile', 390, 844)):
@@ -88,9 +134,14 @@ def check(base_url, output, browser, phase):
         if name == 'desktop':
             capture_top_level(page, output, phase)
         if phase == 'before':
+            for view in ('opening', 'strategy', 'swot'):
+                assert page.goto(ENTERPRISE + TOP_LEVEL[view]).status == 200
+                page.evaluate('document.fonts.ready')
+                page.screenshot(path=output / f'before-{name}-{view}.jpg', quality=82)
             page.close()
-            break
+            continue
         check_executive_story(page, output, name)
+        check_integration(page, output, name)
         income = '/enterprises/lloyds?focus=economics&detail=income'
         assert page.goto(income).status == 200
         expect(page.locator('main')).to_contain_text('1,947')

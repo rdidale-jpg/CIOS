@@ -1,0 +1,97 @@
+id	scope	requirement	before	after	evidence	freshness	public_limit
+L01.1	Group	Legal name and registration	1111	1111	ID	dated register	none for the checked identity
+L01.2	Group and Bank	Link legal entities and stable workspace identity	1100	1100	ID	dated crosswalk	authenticated binding unavailable
+L01.3	Group	History geography ownership and presence series	1000	1000	LEG	historical snapshots	specific recent ownership perimeter untested
+L02.1	Group	Published purpose with issuer and date	1000	1000	LEG	historical citation	original exact dated proposition not retained as eligible
+L02.2	Group	Separately stated vision and mission	0000	0000	S	not established	no declaration found in retained review
+L02.3	Group	Values and commitments tied to outcomes	1000	1000	T	historical	correlation to existing outcomes not proven
+L03.1	Group	Nine-month actual income-to-profit movement	1111	1111	F	9M 2026	issuer consolidated
+L03.2	Retail Commercial IPI	H1 profit contribution explicitly reconciled to Group statutory periods in opening	1100	1111	F	H1 and 9M 2026	Q3 business allocation unavailable here
+L03.3	Retail Commercial IPI	Complete signed year-on-year effects in executive summary	1100	1111	F	9M 2025 and 2026	nine-month Group perimeter only
+L04.1	Retail Commercial IPI	Three distinct reporting segment identities	1111	1111	F	H1 2026	no inferred subsidiary ownership
+L04.2	Insurance and Wealth	Proposition brand and business links	1101	1101	O	dated role and proposition disclosures	full legal mapping unverified
+L04.3	Retail Commercial IPI	Product-by-entity portfolio with markets	1000	1000	ID	historical draft	endpoint adjudication incomplete
+L05.1	Group	Audited annual results trend	1111	1111	F	FY2024 and FY2025	no wider audited trend claimed
+L05.2	Retail Commercial IPI	Matched H1 income operating costs and profit	1111	1111	F	H1 2025 and H1 2026	historical revisions beyond sample incomplete
+L05.3	Group	Full balance sheet cash-flow and restatement comparability	1000	1000	F	mixed editions	no full cross-vintage verification
+L06.1	Group	Dated efficiency ambition and investment choice	1100	1111	S	2027–2030 ambitions	allocation not reported here
+L06.2	Group and divisions	Original strategic pillars and compatible divisional allocations	1000	1000	A	historical inputs	complete allocation unavailable here
+L06.3	Group	Completed payments acquisition tied to strategy	1111	1111	S	2026	event excludes realised returns
+L07.1	Group	Distribution actual followed by dated objective	1111	1111	O	FY2025 and 2026	year-end 2026 attainment unavailable
+L07.2	Group	Target vintage to actual variance with management response	1000	1000	S	multiple horizons	matched original definitions incomplete
+L07.3	Group	Published platform retirement priority and current service obligation	1100	1111	S-M	2026 priority and 2027 timetable	no realised service impact inferred
+L08.1	Group	Core simplification and service protection priorities	1100	1111	S-M	2026–2027	no enterprise-wide delivery attribution
+L08.2	Commercial	Cash trade and payments remit	1111	1111	O	dated role	no deemed mandate
+L08.3	Retail Commercial IPI	Current priorities ranked with divisional evidence	1000	1000	S	mixed	peer and resource effects incomplete
+L09.1	Group	Curve completion and payments scope	1111	1111	S	9M 2026	no integration returns
+L09.2	Group and divisions	Dated growth and investment plans tied to economics	1101	1111	S	2027 onward	commitment is not realised cost
+L09.3	IPI	Advice integration and account openings kept distinct	1101	1111	O	FY2025 and published plan	no integration completion proof
+L10.1	Group	2030 cost/income ambition and gross savings expectation	1111	1111	S	2030 horizons	not achieved net savings
+L10.2	Group	FY guidance with actual reporting checkpoint	1111	1111	F	9M and FY2026	no full-year inference
+L10.3	Group and divisions	Commercial and non-financial target coverage across businesses	1000	1000	S	multiple horizons	no full owner or segment allocation
+I01.1	Commercial	Dated reporting line and Transaction Banking role	1111	1111	O	November 2026	delegated mandate not inferred
+I01.2	Group	Oversight and operating leadership boundaries	1111	1111	O	2026 role disclosures	not a full organogram
+I01.3	Retail Commercial IPI	Role effective dates and accountable operating units across businesses	1000	1000	T	multiple appointments	durable mapping incomplete
+I02.1	Group	Separate management roles and reporting segment boundaries	1101	1101	ID-O	dated profiles	some edges remain conceptual
+I02.2	Commercial	Published management remits and reporting lines	1111	1111	O	dated remits	delegated handoffs unknown
+I02.3	Group and divisions	Dated full organogram including shared functions	1000	1000	ID	historical crosswalk	no authoritative topology available to audit
+I03.1	Group	Comparable employee FTE stock history	1111	1111	O	December 2023–2025	not headcount
+I03.2	Retail Commercial IPI	Employee FTE resources alongside scoped operating and economic activity	1101	1111	O-F	December 2025 vs later observations	no team or cost allocation
+I03.3	Group and divisions	Skills location workforce cost and sourcing mix	1000	1000	O-T	FY2025 and older	partial disclosure only
+I04.1	Commercial	Cash management trade and payment capability remit	1111	1111	O	dated remit	no complete installed-system mapping
+I04.2	Retail	Mortgage verification and service capability	1111	1111	O	dated operations	end-to-end ownership incomplete
+I04.3	IPI	Documented account service activity tied to operating context	1101	1111	O	FY2025	process sequence remains conceptual
+I05.1	Retail	Section-level mortgage income verification measure and enabling platform	1111	1111	O	dated result	no completion-time inference
+I05.2	Commercial	Digital servicing and settlement with strategy and business context	1111	1111	O	FY2025 and separate 2026 pilot	do not aggregate cohort and pilot
+I05.3	Retail Commercial IPI	Full process chain volumes unit cost ownership and handoffs	1000	1000	REC	mixed	internal economics unavailable to this audit
+I06.1	Retail	Vertex AI mapped to disclosed mortgage verification step	1111	1111	O	datestamped deployment	not all underwriting
+I06.2	Group	Microsoft and Envoy platform usage qualified by deployment scope	1111	1111	O	reported dates	no whole-estate inference
+I06.3	Commercial IPI	Named applications and contract dependencies	1000	1000	T-REC	multiple records	full inventory unverified
+I07.1	Group	Scoped cloud data-centre and release changes linked to renewal and cost context	1101	1111	O-S	reported period no matched cost	effect is not a savings calculation
+I07.2	Group	Network hosting workplace geography and actual dependencies	1000	1000	REC	draft-era	stable topology absent
+I07.3	Retail Commercial IPI	Workload placement by business plus continuity controls	0000	0000	O	not established	no retained workload-to-host mapping
+I08.1	Group	Envoy controls described in scope	1111	1111	O	dated release	no categorical catalogue
+I08.2	Retail	Specific verification input and next control question	1111	1111	O	dated mortgage result	no protected customer lineage
+I08.3	Commercial IPI	Traceable data flow lineage and steward	1000	1000	T	some pilot or service notes	no full end-to-end disclosure
+I09.1	Retail	Group branch access and transition timing tied to service boundary	1101	1111	O	announced access plan	no actual utilisation or branch-level outcomes
+I09.2	Group	Office and site scope and period	1000	1000	LEG	historical geography	no versioned complete site inventory
+I09.3	Retail Commercial IPI	Cost and utilisation by actual facility	0000	0000	O	not established	no retained compatible facilities economics
+I10.1	Commercial	Named pilot participants direction and limits	1111	1111	O	September 2026	pilot not contractual award
+I10.2	Group	Named provider deployment separate from agreement	1111	1111	O	dated announcements	no price or dependence inferred
+I10.3	Retail Commercial IPI	Actual supplier contracted scope term and buyer entity	1000	1000	T	candidate and held	material contract terms unverified
+I11.1	Retail	Mortgage verification observed speed	1111	1111	O	dated narrow step	not full process
+I11.2	Commercial	Business Banking digitally fulfilled activity plus workforce context	1101	1111	O	FY2025 operations	availability differs from usage and staff cost
+I11.3	IPI	Account openings with scope and service question	1101	1111	O	FY2025 volume	not active stock or returns
+I12.1	Group	Renewal priorities with dated service response evidence	1100	1111	S-M	2026–2027	no delivery assurance inferred
+I12.2	Commercial	Announced digital response and reported operating scope	1111	1111	O	FY2025 and 2026	specific remit only
+I12.3	IPI	Published advice integration plan tied to actual account openings	1101	1111	O	FY2025 and dated plans	no delivery milestone inferred
+F01.1	Group	Macro rates and reported funding linked by exposure	1111	1111	M-S	November and September 2026	no product-level sensitivity
+F01.2	Retail	Credit impairment separated from performance and rates	1111	1111	F	9M 2026	Group not a retail-only allocation
+F01.3	Commercial IPI	Cross-business macro scenario and sensitivities	1000	1000	M	historical and current notes	decision-grade elasticity not available
+F02.1	Group	Industry banking mechanism and separate Group exposure	1101	1101	M	historical plus dated rates	typed comprehensive sector market maps absent
+F02.2	Commercial	External payments policy context linked to Group response	1101	1111	M-S	historical policy and 2026 acquisition	no observed market adoption
+F02.3	IPI	Peer pensions and wealth industry growth on consistent scope	1000	1000	A	historical	matched peer measures incomplete
+F03.1	Retail Commercial IPI	Direct peers and market overlap across material markets	1000	1000	M-A	draft and industry records	market identities and comparable scopes incomplete
+F03.2	Commercial	Payments alternative distinguished from a confirmed entrant	1101	1111	M-S	historical pilot and current strategy	no adoption evidence
+F03.3	Retail	SME and mortgage comparisons separately defined	1000	1000	T	historical candidates	no cross-market peer ranking
+F04.1	Retail	Four legal-bank complaint counts on a matching period with population caution	1100	1111	M	H1 2026	no bank quality ranking
+F04.2	Commercial	Matched share price growth and quality against peer	1000	1000	A	historical comparator	unmatched denominators
+F04.3	IPI	Matched peer economics and outcomes on compatible bases	0000	0000	M	not established	no eligible comparable set
+F05.1	Group	Strength and weakness context with signed profitability and cost stress	1101	1111	F-S	9M 2026	selected effects not causal proof
+F05.2	Commercial	Strategic opportunity context with reported response and explicit uncertainty	1101	1111	S	9M 2026 plus horizon	no qualified demand
+F05.3	Retail Commercial IPI	Complete four-quadrant findings with counter-evidence	1000	1000	A	archived themes	full evidenced materiality unavailable
+F06.1	Group	Profitability funding and cost questions grounded in reported outcome	1111	1111	F-S	9M 2026	limited causality
+F06.2	Group	Service continuity linked to management change and investigation	1101	1111	S-M	2026–2027	active problem not inferred
+F06.3	Retail Commercial IPI	Ranked growth margin retention quality and execution challenges	1000	1000	A	mixed	no comparable severity scores
+F07.1	Group	Published regulatory reporting timeline linked to service response	1100	1111	M-S	published timetable and dated strategy	no legal-entity readiness verdict
+F07.2	Lloyds Bank	Legal-bank complaint count with product and period	1111	1111	M	H1 2026	no extrapolation to Group
+F07.3	Group and divisions	Regulatory rule liable entity actual mitigation and outcome	1000	1000	T-M	mixed	status incomplete
+F08.1	Group	CFO earnings and capital questions with matched results	1111	1111	F-P	9M 2026	not recommendation to procure
+F08.2	Group and Retail	COO operational question with scoped delivery result	1111	1111	O-P	dated mortgage evidence	no claim of COO remit for each handoff
+F08.3	Group and Commercial	CEO payments and growth agenda tied to dated response	1111	1111	S-P	2026 and later ambition	no returns inferred
+F09.1	Group	Baseline downside and upside triggers for funding and capital	1000	1000	LEG	historical hypothesis	unmeasured sensitivity
+F09.2	Commercial	Payments adoption alternative and investigative next evidence	1101	1111	M-S	policy plus dated issuer response	no adoption forecast
+F09.3	IPI	Wealth integration scenario with matched time and economic threshold	0000	0000	O	not established	no supported threshold
+F10.1	Retail	Verified process result to bounded investigation prompt	1111	1111	O-COM	dated narrow step	no Pipeline qualification
+F10.2	Commercial	Market pressure to response and bounded research question	1101	1111	M-S-COM	historical plus current	no demand or inferred award
+F10.3	Group	Authorised qualification receipt and binding	1000	1000	COM	historical artifacts	authenticated receipt unavailable
