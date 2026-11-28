@@ -5,15 +5,76 @@ from pathlib import Path
 from http.server import ThreadingHTTPServer
 from tempfile import TemporaryDirectory
 from threading import Thread
-from urllib.parse import urlencode
+from urllib.parse import parse_qs, urlencode, urlsplit
 sys.path.insert(0,str(Path.cwd()))
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import expect, sync_playwright
 from cios.applications.flora.web.app import FloraWebHandler
 from cios.applications.flora.research_intelligence import model
 class Quiet(FloraWebHandler):
     def log_message(self,*args):pass
 VIEWS={'landscape':{},'income':{'focus':'economics','detail':'income'},'costs':{'focus':'economics','detail':'costs'},'funding':{'focus':'economics','detail':'funding'},'capital':{'focus':'economics','detail':'capital'},'divisions':{'focus':'economics','detail':'central'},'retail':{'focus':'retail'},'commercial':{'focus':'commercial'},'retirement':{'focus':'retirement'}}
 def url(q):return '/enterprises/lloyds'+('?' + urlencode(q) if q else '')
+def check_executive_value(page, device):
+    """Use the ordinary enterprise route and follow the reported figures into context."""
+    assert page.goto(url({})).status == 200
+    main = page.locator('main')
+    earnings = main.get_by_role('link', name='Reported earnings', exact=True)
+    if device == 'desktop':
+        earnings.focus()
+        page.keyboard.press('Enter')
+    else:
+        earnings.tap()
+    expect(main).to_contain_text('Reported Group economics · 9M 2026 / 9M 2025')
+    comparison = main.locator('.financial-comparison')
+    for year, value in (('2025', '£4.678bn'), ('2026', '£6.625bn')):
+        expect(comparison.get_by_role('link', name=f'Statutory profit before tax · {year}')).to_contain_text(value)
+    bridge = main.get_by_label('Source-reconciled Group earnings components')
+    for value in ('£14.819bn', '−£7.246bn', '£6.582bn', '£6.625bn'):
+        expect(bridge).to_contain_text(value)
+    expect(main).to_contain_text('£1,947m')
+    expect(main).to_contain_text('£851m')
+    expect(main).to_contain_text('remediation normalisation')
+
+    main.get_by_role('link', name='Business contribution', exact=True).click()
+    expect(main).to_contain_text('Six months to 30 June 2026 · underlying profit')
+    divisions = main.locator('.financial-division-comparison')
+    for value in ('£2.256bn', '£1.425bn', '£245m', '£289m'):
+        expect(divisions).to_contain_text(value)
+    expect(main).to_contain_text('£4.215bn')
+    divisions.get_by_role('link', name='Retail', exact=True).click()
+    expect(main).to_contain_text('H1 2026 · underlying reporting segment')
+    expect(main.locator('.financial-business')).to_contain_text('£5.71bn')
+    page.go_back()
+    divisions.get_by_role('link', name='Commercial Banking', exact=True).click()
+    expect(main).to_contain_text('H1 2026 · underlying reporting segment')
+    expect(main.get_by_role('link', name='Underlying profit · 2025', exact=True)).to_contain_text('£1.194bn')
+    expect(main.get_by_role('link', name='Underlying profit · 2026', exact=True)).to_contain_text('£1.425bn')
+    expect(main.locator('.financial-business')).to_contain_text('£2.897bn')
+    expect(main.locator('.financial-business')).to_contain_text('−£1.409bn')
+
+    main.get_by_role('link', name='Transaction Banking', exact=True).click()
+    expect(main).to_contain_text('Natasha Condon')
+    expect(main).to_contain_text('working capital')
+    assert parse_qs(urlsplit(page.url).query)['subject'] == ['commercial']
+    transaction_url = page.url
+    page.reload()
+    assert page.url == transaction_url
+    expect(main).to_contain_text('Natasha Condon')
+    page.go_back()
+    expect(main.locator('.financial-business')).to_contain_text('£2.897bn')
+
+    page.goto(url(VIEWS['income']))
+    main.get_by_role('link', name='Leadership priorities', exact=True).click()
+    main.get_by_role('link', name='Turn AI capability into measured benefit', exact=True).click()
+    expect(main.get_by_role('link', name='FY2025 · issuer-reported contribution', exact=True)).to_contain_text('About £50m')
+    expect(main.get_by_role('link', name='2026 · management expectation', exact=True)).to_contain_text('More than £100m')
+    expect(main).to_contain_text('Different periods and states')
+    expect(main).to_contain_text('No growth rate, percentage delivered')
+    main.get_by_role('link', name='Envoy operating capability', exact=True).click()
+    assert parse_qs(urlsplit(page.url).query)['stream'] == ['inside']
+    expect(main).to_contain_text('Envoy')
+
+
 def run(out,phase):
     out.mkdir(parents=True,exist_ok=True);root=Path.cwd()
     paths=['cios/applications/flora/'+p for p in ('lloyds_gold.py','visual_stream_assets/lloyds-gold.css','research_intelligence/source_import.py','financial_intelligence/public_statements.py','financial_intelligence/candidate_analytics.py')]
@@ -40,6 +101,7 @@ def run(out,phase):
                         assert '.pdf' not in page.locator('main').inner_html()
                     file=f'{phase}-{device}-{name}.jpg';page.screenshot(path=out/file,full_page=True,quality=68);proof['captures'][file]=sha256((out/file).read_bytes()).hexdigest()
                 if phase=='after':
+                    check_executive_value(page, device)
                     page.goto(url({}));control=page.locator('main .ce-node[aria-label="Retail"]');control.scroll_into_view_if_needed();box=control.bounding_box()
                     if device=='desktop':page.mouse.click(box['x']+box['width']*.7,box['y']+box['height']*.75)
                     else:page.touchscreen.tap(box['x']+box['width']*.7,box['y']+box['height']*.75)
@@ -63,7 +125,7 @@ def run(out,phase):
                 assert '£6.625bn' not in page.locator('main').inner_html() and '£6.625bn' not in page.locator('main').aria_snapshot()
                 model.DATA.write_text(original);page.emulate_media(media='screen')
                 context=browser.new_context(base_url=f'http://127.0.0.1:{server.server_port}',java_script_enabled=False);p=context.new_page();p.goto(url(VIEWS['income']));p.get_by_role('link',name='Business contribution',exact=True).click();assert '£289m' in p.locator('main').inner_text();context.close();page.close()
-                proof['checks']={'reported_financials_visible':True,'whole_region_pointer_touch':True,'keyboard_no_js':True,'back_forward_reload':True,'independent_source_withdrawal_history_print_accessibility':True,'existing_document_owner_withdrawal_all_representations':True,'banking_easyjet_and_compatibility_routes':True,'responsive_zoom':True}
+                proof['checks']={'reported_financials_visible':True,'executive_value_journey':True,'whole_region_pointer_touch':True,'keyboard_no_js':True,'back_forward_reload':True,'independent_source_withdrawal_history_print_accessibility':True,'existing_document_owner_withdrawal_all_representations':True,'banking_easyjet_and_compatibility_routes':True,'responsive_zoom':True}
         finally:browser.close();server.shutdown();server.server_close()
     (out/(phase+'-browser.json')).write_text(json.dumps(proof,indent=2)+'\n');print(json.dumps({'phase':phase,'captures':len(proof['captures']),'runtime_matches_sha':matches,'passed':True}))
 if __name__=='__main__':

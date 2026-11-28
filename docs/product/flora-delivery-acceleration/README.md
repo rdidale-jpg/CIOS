@@ -41,6 +41,20 @@ Reconcile affected accepted requirements and prior UX behaviour in the existing 
 
 Escalate the specific exception and continue unaffected work. Do not expand a bounded increment to resolve unrelated source acquisition or research gaps. These are existing authority boundaries, not a new approval service or registry.
 
+## Product value acceptance
+
+Every material sprint must demonstrate the [Product Value Standard](../../../CIOS-AI.md#product-value-standard) through the existing Build → Test → Merge → Review cycle. Use the existing PR and its walkthrough to answer:
+
+- What new enterprise knowledge can the user access?
+- What important executive question can the user answer more effectively?
+- What meaningful original analysis or visual exploration is available?
+- How does it connect to the existing Commercial Digital Twin?
+- What remains materially unknown or unproven?
+
+Passing applicable CI is necessary for technical correctness. Establish usefulness through the rendered product and its decision context. For enabling work with no visible intelligence gain, report what the work enables and what still needs delivery before claiming product success. Use the existing review step for owner feedback.
+
+Retain eligible financial measures, comparisons and their provenance when simplifying a view. Use conceptual diagrams to explain mechanisms alongside supported evidence. Keep a bounded Source exception attached to the affected operation and continue eligible research under the existing factual-use category. Technical checks, PR counts and visual polish are insufficient evidence of intelligence depth. Reopen accepted product decisions only when material new evidence changes the decision or invalidates its assumptions.
+
 ## Completion report
 
 Use the existing PR and report only: **what changed; what can now be tested; tests passed/material failures; genuine blockers; merge SHA and rollback**. Include browser evidence or a necessary source/financial qualification where relevant. No additional release package or approval report by default. A blocked or partial journey must remain labelled as such.

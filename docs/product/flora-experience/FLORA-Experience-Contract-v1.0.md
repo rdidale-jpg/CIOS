@@ -3,6 +3,12 @@
 > **Current binding presentation update — 25 November 2026:** [Main Canvas Visual Interaction Contract](Main-Canvas-Interaction-Contract.md). Executive Main uses whole-region visual selection, with no underlined text navigation. The owner subsequently replaced the separate Facts / FLORA Insight experience with unified eligible intelligence in #728, promoted the CEO/Gold default in #732, and now mandates visual regions. The older two-mode directions below are retained as historical decisions, not instructions to restore the selector. Existing Source, Financial, permission, canonical and Pipeline ownership is unchanged.
 
 
+## Current product value requirement
+
+Apply the [Product Value Standard](../../../CIOS-AI.md#product-value-standard) across connected Landscape / Inside / Forces. Landscape explains the enterprise's economic structure and reported performance. Inside connects supported operating activities, capabilities and relationships. Forces puts changes, pressures, decisions and objectives into dated enterprise context.
+
+Treat original charts, reconciliations and graphical analysis as first-class intelligence. Base financial geometry on compatible reported or reproducibly derived measures. Label concepts, assumptions and uncertain relationships, and keep their scope visible during drill-down. Preserve beautiful simplicity, Top / Left / Main, original artwork, whole-region navigation, provenance and clear executive language. Available measurement and relationship evidence belongs in the experience. A conceptual summary can explain a mechanism or identify a gap.
+
 **Status:** Owner-agreed **product experience direction**, 18 November 2026. **Proposed repository design contract for owner confirmation and downstream implementation; not an accepted architecture ADR, not a runtime change.** This records the owner's express acceptance of the three-level presentation matrix and the *two-option* **Facts | FLORA Insight** selector at the top of Main. It does not reclassify IT-001 (Review), EIF-001 (Review), EI-001 (Draft), EGM-001 (Founder Review), or the INT-MAP-1 draft as accepted canonical architecture.
 
 **Mission:** One comprehensible intelligence experience across **UK → Industry → Enterprise**, with **Facts as the default in Main at every level and every primary perspective**. FLORA Insight is a deliberate alternative rendering of **the same selected subject**, not a route to obscuring or modifying factual knowledge.
