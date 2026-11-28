@@ -43,7 +43,7 @@ def check_executive_story(page, output, device):
     main = page.locator('main')
     opening = main.locator('.gold-executive-opening')
     for text in ('households, businesses and long-term savers', 'cash, trade and payments',
-                 '£6.625bn', '+1,947m', '+851m'):
+                 '£6.625bn', '+1,947m', '+851m', 'Below 45% cost/income', 'About £2bn gross savings'):
         expect(opening).to_contain_text(text)
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 2')
     page.screenshot(path=output / f'after-{device}-opening.jpg', quality=82)

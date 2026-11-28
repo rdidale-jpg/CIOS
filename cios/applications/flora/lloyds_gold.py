@@ -1417,6 +1417,20 @@ def executive_opening(state, facts, projection):
                        '<span>Simplify core platforms while protecting service. Improve efficiency after the cost of change. Grow customer activity in payments.</span>',
                        kind='timeline', caption='Published priorities. Delivery and full-cost returns need separate evidence.',
                        stream='forces', focus='strategy', detail='investigations')
+    milestones = []
+    for key, unit, measurement, prefix, suffix, status in (
+        ('LBG-A2030-CIR', 'percent; upper-bound management target for 2030',
+         'target', 'Below ', '% cost/income', 'Management target'),
+        ('LBG-A2030-SAVINGS', 'GBP billion; projected gross cost savings, not procurement',
+         'expectation', 'About £', 'bn gross savings', 'Management expectation'),
+    ):
+        item = v3_metric(facts, key, unit, 'Strategy for 2027–2030', measurement)
+        if item:
+            p.note_editorial_sources(item.sources)
+            milestones.append(f'<span>{prefix}{e(item.value)}{suffix} · {status}</span>')
+    if milestones:
+        body += region(state, '2030 efficiency ambition', ' · '.join(milestones),
+                       kind='money', stream='forces', focus='strategy', detail='objective-efficiency')
     return body + '</section>'
 
 
