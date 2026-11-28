@@ -94,6 +94,10 @@ def test_public_document_withdrawal_also_removes_report_equivalents(monkeypatch)
         return records
 
     monkeypatch.setattr(source_import, 'current_source_records', restricted)
+    opening = gold.render({}, canonical=True)
+    assert 'Lloyds in one minute' in opening
+    assert 'Where earnings came from' not in opening
+    assert '+1,947m' not in opening
     dataset = f.current()
     assert all('Q3' not in row.source.source_id for row, _ in dataset.values())
     assert '1,947' not in f.earnings(dataset, '#evidence')

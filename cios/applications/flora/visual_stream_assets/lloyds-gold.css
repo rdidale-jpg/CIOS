@@ -208,3 +208,36 @@
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
+
+.gold-executive-opening {
+  border-block-end: 1px solid #a99a72;
+  margin-block-end: 1.75rem;
+  padding-block-end: 1rem;
+}
+.gold-executive-opening > a + a {
+  margin-block-start: 0.5rem;
+}
+.gold-decision-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-inline-start: 2px solid #a6ae94;
+  padding-inline-start: clamp(0.5rem, 2vw, 1.25rem);
+}
+.gold-page .gold-decision-rail > a[data-canvas-region] {
+  min-height: 72px;
+  padding: 0.65rem 1rem;
+}
+.gold-page .gold-decision-rail .canvas-mark {
+  display: none;
+}
+.gold-page .gold-executive-opening .le-deck {
+  max-width: 66ch;
+  font-size: clamp(1.05rem, 1.55vw, 1.35rem);
+}
+.gold-page .gold-executive-opening .canvas-mark {
+  display: none;
+}
+.gold-page .gold-executive-opening > a[data-canvas-region] {
+  padding-block: 0.85rem;
+}

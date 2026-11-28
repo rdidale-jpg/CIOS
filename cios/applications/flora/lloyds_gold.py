@@ -793,7 +793,7 @@ def measured_economics(state):
             return region(state, 'Reported contributions by business', kind='money',
                           caption='Compare income, costs and profit on the same half-year basis', detail='divisions')
     if state.focus == 'strategy' and state.detail == 'objective-efficiency':
-        return lloyds_financials.capital(lloyds_financials.current(), target)
+        return lloyds_financials.guidance(lloyds_financials.current(), target)
     return ''
 
 
@@ -847,6 +847,13 @@ def main(state,data,facts,issues=()):
     elif state.focus=='competition' and state.detail in {'commercial-direction','transaction-direction'}:body+=v3_commercial_direction(state,facts)
     elif state.focus=='strategy' and (state.detail=='goals' or state.detail.startswith('objective-')):body+=_ceo_goals(state,facts)
     else:body+=forces(state,facts)
+    business = state.subject if state.subject in BUSINESS_JOURNEYS else state.focus
+    if business in BUSINESS_JOURNEYS and (
+        (state.stream == 'landscape' and state.focus == business and not state.detail)
+        or (state.stream == 'inside' and state.focus == 'operations' and state.detail in
+            {'journey-credit', 'journey-payments', 'journey-insurance', 'commercial-context'})
+    ):
+        body += operating_thread(state, facts, business)
     body+=ceo_context(state,facts)
     body += measured_economics(state)
     owns_inspection=(state.focus=='applications' and (state.detail=='envoy' or state.detail.startswith('envoy-'))
@@ -1371,10 +1378,119 @@ def experience_map(kind, label, paths, nodes, legend):
             +'</div><p class="ce-legend">'+e(legend)+'</p>')
 
 
+def executive_earnings(projection):
+    """The same exact comparators that drive the detailed Group bridge."""
+    lines = economic_lines(projection)
+    comparisons = projection.get('comparisons', {})
+    needed = ('profit_before_tax-movement', 'net_operating_income-movement', 'remediation-movement',
+              'operating_costs-movement', 'credit_impairment-movement')
+    if 'profit_before_tax-2026' not in lines or not all(key in comparisons for key in needed):
+        return ''
+    from decimal import Decimal
+
+    change, income, remediation, costs, credit = (Decimal(comparisons[key]['value']) for key in needed)
+    from .financial_intelligence.public_statements import statements
+
+    for _, fact in statements((lines['profit_before_tax-2026'],)):
+        p.note_editorial_sources(fact.sources)
+    return (
+        '<p><strong>' + economic_money(lines['profit_before_tax-2026']) +
+        ' statutory pretax profit</strong> · nine months to 30 September 2026.</p>'
+        f'<p>Year-on-year movement <strong>{change:+,}m GBP</strong>. Net income {income:+,}m, '
+        f'remediation {remediation:+,}m, operating costs {costs:+,}m, credit impairment {credit:+,}m.</p>'
+        '<p class="ce-legend">Lower remediation in a comparison period does not establish recurring efficiency.</p>'
+    )
+
+
+def executive_opening(state, facts, projection):
+    body = ('<section class="gold-executive-opening"><h2>Lloyds in one minute</h2>'
+            '<p class="le-deck">Lloyds serves households, businesses and long-term savers. Retail earns through lending and services. '
+            'Commercial Banking combines credit with cash, trade and payments. Insurance, pensions and investments earn through protection, administration and investing.</p>')
+    earnings = executive_earnings(projection)
+    if earnings:
+        body += region(state, 'Where earnings came from', earnings, kind='money', focus='economics', detail='income')
+    priorities = ('LBG-AR25-MIGRATION', 'LBG-A2030-CIR', 'LBG-A2030-WALLET')
+    if all(key in facts for key in priorities):
+        sources = tuple(source for key in priorities for source in facts[key].sources)
+        p.note_editorial_sources(sources)
+        body += region(state, 'The leadership choices',
+                       '<span>Simplify core platforms while protecting service. Improve efficiency after the cost of change. Grow customer activity in payments.</span>',
+                       kind='timeline', caption='Published priorities. Delivery and full-cost returns need separate evidence.',
+                       stream='forces', focus='strategy', detail='investigations')
+    milestones = []
+    for key, unit, measurement, prefix, suffix, status in (
+        ('LBG-A2030-CIR', 'percent; upper-bound management target for 2030',
+         'target', 'Below ', '% cost/income', 'Management target'),
+        ('LBG-A2030-SAVINGS', 'GBP billion; projected gross cost savings, not procurement',
+         'expectation', 'About £', 'bn gross savings', 'Management expectation'),
+    ):
+        item = v3_metric(facts, key, unit, 'Strategy for 2027–2030', measurement)
+        if item:
+            p.note_editorial_sources(item.sources)
+            milestones.append(f'<span>{prefix}{item.value}{suffix} · {status}</span>')
+    if milestones:
+        body += region(state, '2030 efficiency ambition', ' · '.join(milestones),
+                       kind='money', stream='forces', focus='strategy', detail='objective-efficiency')
+    return body + '</section>'
+
+
+BUSINESS_JOURNEYS = {
+    'retail': (
+        'Retail mortgages',
+        (
+            ('Reach and distribute', 'Broker and customer access. The closed programme describes a challenge, not open procurement.', 'inside', 'programmes', 'launch', ('LBG-CE-BROKERCHALLENGE',)),
+            ('Verify income and underwrite', 'Lloyds reported faster income verification using Vertex AI. Underwriting and completion are separate steps.', 'inside', 'operations', 'mortgage-ml', ('LBG-CE-MORTGAGESPEED', 'LBG-CE-VERTEX')),
+            ('Fund lending and bear credit risk', 'Inspect Group funding and risk separately from a mortgage-cohort return.', 'landscape', 'economics', 'funding', ()),
+            ('Service and resolve', 'See separately scoped Lloyds Bank PLC complaints, before drawing a conclusion about the Retail segment.', 'inside', 'operations', 'service', ()),
+            ('Review economics and responsibility', 'Retail H1 segment economics, with a Consumer remit distinct from underwriting control ownership.', 'landscape', 'retail', '', ()),
+            ('Inspect workforce and adoption', 'Group FTE history and disclosed use of colleague tools. No mortgage-team saving or technology allocation is reported.', 'inside', 'people', 'employees', ('LBG-CE-FTE25',)),
+            ('Measure delivery', 'Compare the disclosed verification step with end-to-end service, staffing and control evidence.', 'forces', 'strategy', 'objective-mortgage', ('LBG-CE-MORTGAGESPEED',)),
+        ),
+    ),
+    'commercial': (
+        'Commercial transaction banking',
+        (
+            ('Serve business customers', 'Business & Commercial and Corporate & Institutional Banking have separately published management remits.', 'landscape', 'commercial', '', ('LBG-V2-MURPHY', 'LBG-V2-LANGLEY')),
+            ('Manage cash, trade and payments', 'Inspect the disclosed corporate remit and Condon’s reported line to Langley.', 'landscape', 'commercial', 'transactions', ('LBG-V2-TRANSACTIONREMIT',)),
+            ('Explain income, costs and risk', 'Commercial H1 segment results and internal allocations. No separate Transaction Banking earnings are reported here.', 'landscape', 'economics', 'divisions', ()),
+            ('Explore settlement technology', 'Visa pilot in Corporate Markets Jersey. A completed test is distinct from scaled delivery.', 'inside', 'applications', 'settlement', ('LBG-CE-VISAPILOT', 'LBG-CE-JERSEY')),
+            ('Decide what to investigate', 'Ask which measured working-capital, reconciliation or payment exception remains after current delivery.', 'forces', 'competition', 'commercial-direction', ('LBG-V2-CONDON',)),
+        ),
+    ),
+    'retirement': (
+        'Insurance, pensions and wealth',
+        (
+            ('Distribute protection and savings', 'Explore Scottish Widows and Lloyds Wealth as customer propositions, with distinct legal and reporting boundaries.', 'landscape', 'retirement', '', ('LBG-V2-WIDOWS', 'LBG-V2-WEALTH')),
+            ('Administer policies and investments', 'Conceptual administration sequence. Inspect the disclosed investment account base and earlier advice integration plan.', 'landscape', 'retirement', 'wealth-delivery', ('LBG-CE-INVESTMENTACCOUNTS',)),
+            ('Explain income, costs and capital', 'H1 underlying profit and administration economics sit on a different basis from banking margin.', 'landscape', 'economics', 'divisions', ()),
+            ('Inspect the people and platforms', 'Published executive roles and Group workforce context. Segment platform dependencies and role-level delivery are unverified.', 'inside', 'people', 'employees', ('LBG-CE-FTE25',)),
+            ('Test strategic delivery', 'Ask whether advice integration serves more customers after administration costs and capital use.', 'forces', 'strategy', 'investigations', ()),
+        ),
+    ),
+}
+
+
+def operating_thread(state, facts, business):
+    title, stages = BUSINESS_JOURNEYS[business]
+    links = []
+    for label, caption, stream, focus, detail, claims in stages:
+        if not all(key in facts for key in claims):
+            continue
+        if (stream, focus, detail) == (state.stream, state.focus, state.detail):
+            continue
+        p.note_editorial_sources(tuple(source for key in claims for source in facts[key].sources))
+        links.append(region(state, label, kind='operating', caption=caption, stream=stream,
+                            focus=focus, detail=detail, subject=business))
+    return ('<section class="gold-business-journey"><h2>' + title +
+            '</h2><p>Follow the customer, economics and decisions. Links connect related evidence and views.</p>'
+            '<nav class="gold-decision-rail" aria-label="' + title + '">' + ''.join(links) + '</nav></section>')
+
+
 def experience_landscape(state,facts,issues):
-    financial=economic_lines(economic_research('lloyds-q3'))
+    projection=economic_research('lloyds-q3')
+    financial=economic_lines(projection)
     segments=economic_lines(economic_research('lloyds-h1'))
-    body='<p class="le-deck">Households, businesses and long-term savers. Three economic engines; one Group balance sheet.</p>'
+    body=executive_opening(state,facts,projection)
     nodes=[]
     if 'LBG-Q326-DEPOSITS' in facts:
         p.note_editorial_sources(facts['LBG-Q326-DEPOSITS'].sources)
@@ -1401,7 +1517,6 @@ def experience_landscape(state,facts,issues):
         ('M110 150 C110 190 120 200 130 235','M110 160 C250 190 390 180 400 235','M685 155 C685 195 660 200 665 235','M130 470 Q130 515 400 530','M400 470 L400 530','M670 470 Q670 515 400 530','M400 630 L400 680'),nodes,
         'Conceptual economic relationships. Geometry does not encode business size, funding allocation or profit contribution. Group, reporting businesses and legal entities remain separate.')+'</div>'
     body+=financial_knowledge(state,summary=True)
-    body+=v3_economic_attention(state,facts)
     body+=region(state,'What each business contributed',kind='money',
                  caption='Reported H1 income, costs, profit and the statutory bridge',
                  focus='economics',detail='divisions')
@@ -1416,7 +1531,7 @@ def experience_inside(state,data,facts):
              ('payments','Payments','Business and personal customers','Cash, trade, authorisation and settlement'),
              ('insurance','Insurance, pensions & wealth','Protection and long-term saving','Distribution, policy and asset administration')]
     for i,(key,title,customer,mechanism) in enumerate(streams):
-        nodes.append(experience_node(state,title,'<span class="ce-customer">'+customer+'</span><strong>'+mechanism+'</strong>',(i*34,0,32,23),shape='value',focus='operations',detail='journey-'+key))
+        nodes.append(experience_node(state,title,'<span class="ce-customer">'+customer+'</span><strong>'+mechanism+'</strong>',(i*34,0,32,23),shape='value',focus='operations',detail='journey-'+key,subject=('retail','commercial','retirement')[i]))
     nodes.append(experience_node(state,'Customer operations','<span>Service channels, requests and exceptions</span><strong>'+('Actual legal-bank service outcomes available' if agenda.lloyds_service_products() else 'Customer access and exception handling')+'</strong>',(8,28,84,13),shape='service',focus='operations',detail='service'))
     for i,(key,title,desc) in enumerate([('risk','Risk & controls','Credit, service continuity and human accountability'),('data','Data & AI','Information, models and controlled decisions'),('platforms','Platforms & change','Applications, resilience and retirement')]):
         nodes.append(experience_node(state,title,'<span>'+desc+'</span>',(i*34,46,32,16),shape='enabler',focus='operations',detail='journey-'+key))
@@ -1436,7 +1551,10 @@ def experience_inside(state,data,facts):
 
 
 def experience_forces(state,facts):
-    body='<p class="le-deck">Protect today’s earnings. Simplify safely. Turn new capability into enduring customer and economic value.</p>'
+    body='<p class="le-deck">Three choices shape the next cycle: how much to reinvest, how quickly to simplify and which customer activity earns the return.</p>'
+    body+=region(state,'Prepare for the executive decision',kind='timeline',
+                 caption='Follow the earnings, delivery and growth decisions into the evidence.',
+                 focus='strategy', detail='investigations')
     nodes=[]
     for i,(horizon,title,keys,meaning,detail) in enumerate([
       ('2026','Retire applications while maintaining service',('LBG-AR25-MIGRATION',),'Current-cycle priority; retirement is not completion','objective-renewal'),
@@ -1479,7 +1597,7 @@ def experience_activity(state,data,facts):
     body='<p class="le-deck">'+e(title)+' connects '+e(business.lower())+' to the wider operating system.</p>'
     body+='<div class="ce-activity-thread" aria-label="Conceptual value-stream activities">'+''.join('<span>'+e(part.strip())+'</span>' for part in sequence.split('→'))+'</div>'
     body+='<p class="ce-legend">Conceptual activity sequence. Durable capabilities, role remits and installed systems are separate kinds of information.</p>'
-    actual={'credit':('TRANSACTIONREMIT','MURPHY'),'payments':('TRANSACTIONREMIT','CONDON','CONDONREPORT'),
+    actual={'credit':('SINGH',) if state.subject=='retail' else ('TRANSACTIONREMIT','MURPHY'),'payments':('TRANSACTIONREMIT','CONDON','CONDONREPORT'),
       'insurance':('WIDOWS','WEALTH','BARUA'),'risk':('HUMANCONTROL','FRAUDOWNER','RISK'),
       'data':('FRAUDWORKFLOW','HUMANCONTROL','AITEAMS'),'platforms':('MSAGREEMENT','ENGINEERS','KEMENADE'),
       'finance':('CHALMERS',),'support':('COLLEAGUES','AIRECRUIT','AITRAINING','DOHERTY'),
@@ -1692,19 +1810,6 @@ def v3_ai_horizons(state,facts):
         body+='<a class="canvas-region v3-amount '+('v3-plan' if planned else 'v3-reported')+'" data-canvas-region="financial-chart" data-claim-id="'+key+'" data-measurement-state="'+item.measurement_state+'" href="'+e(href(state,stream='forces',focus='strategy',detail='objective-ai'),quote=True)+'" aria-label="'+e(label,quote=True)+'"><span>'+label+'</span><strong>'+prefix+str(item.value)+'m</strong><span class="v3-bar-track" aria-hidden="true"><i style="width:'+str(width)+'%"></i>'+('<b>›</b>' if planned else '')+'</span></a>'
     body+='<p class="ce-legend">Different periods and states. The open-ended outline is an expectation, not an achieved amount. No growth rate, percentage delivered, platform allocation or full-cost net return is calculated.</p></figure>'
     return body
-
-
-def v3_economic_attention(state,facts):
-    """Source-bound management measures without inventing an actual cost bridge."""
-    items=[]
-    for key,label,unit,period,measurement,prefix,suffix in (
-      ('LBG-A2030-CIR','2030 efficiency ambition','percent; upper-bound management target for 2030','Strategy for 2027–2030','target','Below ','%'),
-      ('LBG-A2030-SAVINGS','Strategy gross-savings expectation','GBP billion; projected gross cost savings, not procurement','Strategy for 2027–2030','expectation','About £','bn')):
-        item=v3_metric(facts,key,unit,period,measurement)
-        if item:
-            p.note_editorial_sources(item.sources)
-            items.append(region(state,label,'<strong class="v3-large">'+prefix+str(item.value)+suffix+'</strong><span class="v3-measure-state">Management '+('target' if measurement=='target' else 'expectation')+'</span>',kind='money',caption='2027–2030 strategy; not an actual cost or available budget',stream='forces',focus='strategy',detail='objective-efficiency'))
-    return '<div class="v3-economic-attention">'+''.join(items)+'</div>' if items else ''
 
 
 def v3_business_context(state,facts):
@@ -2121,8 +2226,37 @@ def ceo_selected(state,facts):
     return fn(state,facts) if fn else None
 
 
+def executive_decision_paths(state, facts):
+    """A seller's preparation paths over evidenced actions and live questions."""
+    body = '<div class="gold-decision-rail">'
+    earnings = executive_earnings(economic_research('lloyds-q3'))
+    if earnings:
+        body += region(
+            state, 'CFO · Sustainable earnings and capital', earnings, kind='money',
+            caption='Test how funding prices, credit and capital affect durable returns. Start with matched cost and revenue, then test the delivery cost of simplification.',
+            stream='landscape', focus='economics', detail='income'
+        )
+    if ceo_has(facts, 'MORTGAGESPEED', 'VERTEX', 'FTE25'):
+        body += region(
+            state, 'COO · Deliver change while protecting service',
+            ceo_reported(facts, 'MORTGAGESPEED'), kind='operating',
+            caption='One disclosed processing gain. Ask the Group COO and business control owners for end-to-end time, exceptions and staffing cost on the same population.',
+            stream='inside', focus='operations', detail='mortgage-ml', subject='retail'
+        )
+    if all(key in facts for key in ('LBG-A2030-WALLET', 'LBG-Q326-CURVE')):
+        body += region(
+            state, 'CEO · Grow customer activity and earn the investment',
+            reported(facts, ('LBG-Q326-CURVE',)), kind='timeline',
+            caption='The deal decision has been taken. Ask which adoption and unit economics determine the next investment. Established services may already meet the need.',
+            stream='forces', focus='strategy', detail='objective-payments'
+        )
+    return body + '</div>'
+
+
 def ceo_investigations(state,facts):
-    body='<section class="ceo-investigations"><h2>Three consequential executive conversations</h2><p>Published operating delivery and management objectives establish relevance. They do not establish buying intent or a quantified financial pressure.</p>'
+    body='<section class="ceo-investigations"><h2>Three consequential executive conversations</h2>'
+    body+=executive_decision_paths(state,facts)+'</section>'
+    body+='<section><h3>Additional evidence to open</h3>'
     for title,keys,stream,focus,detail,question,kind in (
       ('Distribution and full cost',('DISTRIBUTION25','DISTRIBUTION26'),'forces','strategy','objective-distribution','Where does customer-level cost improve after all supporting costs and exceptions?','money'),
       ('Industrialise a proven AI use case',('MORTGAGESPEED','VERTEX'),'forces','strategy','objective-mortgage','Which end-to-end outcome improves after a faster verification step?','technology'),

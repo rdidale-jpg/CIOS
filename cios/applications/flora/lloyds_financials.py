@@ -117,6 +117,15 @@ def earnings(data, target):
                 quarterly.append((f'{year} Q{quarter}', found[0]))
     body += chart.bars('Quarterly earnings', 'Group statutory pretax profit · GBP million · individual quarters',
                        quarterly, target=target)
+    periods = dict(quarterly)
+    if all(key in periods for key in ('2025 Q3', '2026 Q2', '2026 Q3')):
+        recent = periods['2026 Q3']
+        body += (
+            f'<p>Q3 2026 profit of £{recent:,}m moved {recent - periods["2026 Q2"]:+,}m GBP from Q2 '
+            f'and {recent - periods["2025 Q3"]:+,}m against Q3 2025. These are single-quarter comparisons. '
+            'Use the separate nine-month bridge to test the remediation comparator and other drivers. '
+            'The quarterly change alone does not establish a sustainable run rate.</p>'
+        )
     return body
 
 
@@ -195,6 +204,11 @@ def capital(data, target):
                 if (found := values(select(data, (key,), date, start='' if is_stock else None)))]
         basis = 'Group · dated reported values' if is_stock else 'Group reported · nine months to 30 September'
         body += chart.bars(label, basis, rows, target=target, suffix=suffix)
+    return body + guidance(data, target)
+
+
+def guidance(data, target):
+    body = ''
     seen = select(data, ('cir', 'rote'), '2026-09-30')
     if all(seen) and all(item[0].source.source_revision == OBJECTIVES for item in seen):
         body += ('<section><h3>FY2026 guidance versus nine-month actuals</h3>'
