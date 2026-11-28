@@ -60,7 +60,7 @@ def test_route_render_and_withdrawal_fall_back_to_legacy(monkeypatch, tmp_path):
         html = visual_streams.render('/industries/banking', {**query, 'reading': [mode]})
         assert all(fragment not in html for fragment in ('3,904', '38,411', '+8,928', 'each contributed cash'))
         assert '£2.026bn' in html or '2,026' in html
-    assert f.public_factual_projection() == {}
+    assert len(f.public_factual_projection()['facts']) == 3
 
 
 def test_exact_source_selector_and_origin_boundaries():

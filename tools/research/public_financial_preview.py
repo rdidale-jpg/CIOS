@@ -1,4 +1,4 @@
-"""Actual isolated browser proof. Positive resolution is a test double ONLY."""
+"""Actual shipping factual method and isolated restriction/withdrawal browser proof."""
 import argparse
 from hashlib import sha256
 from http.server import ThreadingHTTPServer
@@ -39,8 +39,8 @@ def run(output):
         finally:server.shutdown();server.server_close();thread.join(2)
     assert (ROOT/relative).read_bytes()==original
     result={'head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
-        'shipping_state':'Lloyds section2 unresolved; output disabled',
-        'positive_state':'ISOLATED Source-owner resolution double, NOT real legal clearance',
+        'shipping_state':'Independent ordinary factual analysis active; existing Source determination recorded',
+        'restriction_challenge':'ISOLATED applicable-restriction test only; no live Source change',
         'production_or_canonical_writes':0,'live_Render_or_Supabase_checked':False,
         'shipping_source_sha256':sha256(original).hexdigest()}
     (output/'Proof.json').write_text(json.dumps(result,indent=2)+'\n')

@@ -1,0 +1,2952 @@
+{
+  "id": "LEI-LBG-H126",
+  "authority": "analytical_working_research",
+  "canonical_mutation": false,
+  "title": "Lloyds Banking Group H1 2026 Results",
+  "publisher": "Lloyds Banking Group plc",
+  "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q2/2026-lbg-hy-results.pdf",
+  "retrieval_url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q2/2026-lbg-hy-results.pdf",
+  "retrieved_at": "2026-11-27T22:27:16.453005+00:00",
+  "retrieval_timestamp_precision": "UTC time of original-source recheck",
+  "publication_date": "2026-07-29",
+  "publication_date_evidence": "Original issuer H1 results and LEI-1 S2 source register",
+  "reporting_period": "Six months ended 30 June 2026 and matching 2025; underlying reporting segments and consolidated Group",
+  "reviewed_by": "CIOS factual research; owner-authorised ordinary-use method",
+  "review_notes": "LEI-1 division economics rechecked against original printed page 21. Dashes are omitted, never invented zeros. Group reporting segments are not legal-bank allocations.",
+  "retrieval_method": "approved_web_research_tool",
+  "retrieval_reference": "Original issuer text turn218view1 and turn219view0; LEI-1 source S2",
+  "retrieval_extent": "Selected financial values and definitions, not copied source tables or documents",
+  "content_kind": "minimal_verified_numerical_facts",
+  "primary_content_sha256": null,
+  "verification": "primary_retrieved",
+  "third_party_material": false,
+  "retained_form": "minimal_facts_and_provenance",
+  "retention": "minimal_facts_and_provenance",
+  "purpose": "attributed_analytical_working_views",
+  "audience": "flora_research_views",
+  "source_category": "issuer_results",
+  "restrictions": [],
+  "document_identity": {
+    "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q2/2026-lbg-hy-results.pdf",
+    "publisher": "Lloyds Banking Group plc",
+    "title": "Lloyds Banking Group H1 2026 Results",
+    "published": "2026-07-29",
+    "version": "LBG-2026-H1-20260729"
+  },
+  "rights": {
+    "basis": "ordinary_public_factual_analysis",
+    "policy_reference": "https://github.com/rdidale-jpg/CIOS/pull/698/commits/9a7181fbcc43c23188c3f4ce7b7b1dea9d41977e",
+    "expression_reuse": false,
+    "contract_restriction_found": false,
+    "method_review": "Owner commission 27 November 2026: ordinary internal factual research and independent analysis; no per-number/document/publisher permission. Section 2 restricts reproduction/adaptation/storage of website material. This method retains independently restated facts and minimal provenance, not website expression or reports. No applicable prohibition identified for that distinct operation; no publisher licence or contractual waiver claimed.",
+    "operations": [
+      "read_public",
+      "independent_facts",
+      "minimal_numerical_retention",
+      "public_read_only"
+    ],
+    "attribution_url": "https://www.lloydsbankinggroup.com/",
+    "homepage_conditions_met": true,
+    "material_exceptions": [
+      {
+        "issue": "lloyds_section_2",
+        "operations": [
+          "independent_facts",
+          "minimal_numerical_retention",
+          "public_read_only"
+        ],
+        "status": "resolved_for_factual_method",
+        "basis": "Owner commission 27 November 2026: ordinary internal factual research and independent analysis; no per-number/document/publisher permission. Section 2 restricts reproduction/adaptation/storage of website material. This method retains independently restated facts and minimal provenance, not website expression or reports. No applicable prohibition identified for that distinct operation; no publisher licence or contractual waiver claimed.",
+        "source_version": "LBG-2026-H1-20260729",
+        "applicable": false,
+        "resolved_by": "Existing Source owner implementing the explicit CIOS owner commission",
+        "resolved_on": "2026-11-27"
+      },
+      {
+        "issue": "lloyds_section_5_deep_links",
+        "operations": [
+          "public_deep_link"
+        ],
+        "status": "unresolved",
+        "basis": "Homepage attribution only; original PDF locator remains internal."
+      }
+    ]
+  },
+  "fact_bindings": [
+    {
+      "key": "retail-net_interest_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Retail reporting segment; consolidated Group internal basis; Underlying net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "net_interest_income",
+        "definition": "Underlying net interest income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "5139",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "5139",
+        "reported_label": "Underlying net interest income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-net_interest_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Underlying net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "net_interest_income",
+        "definition": "Underlying net interest income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "2014",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "2014",
+        "reported_label": "Underlying net interest income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-net_interest_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Underlying net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "net_interest_income",
+        "definition": "Underlying net interest income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-71",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-71",
+        "reported_label": "Underlying net interest income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "central-net_interest_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Equity Investments and Central Items reporting segment; consolidated Group internal basis; Underlying net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Equity Investments and Central Items reporting segment; consolidated Group internal basis",
+        "metric": "net_interest_income",
+        "definition": "Underlying net interest income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "196",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "196",
+        "reported_label": "Underlying net interest income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-net_interest_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; consolidated Group; Underlying net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "net_interest_income",
+        "definition": "Underlying net interest income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "7278",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "7278",
+        "reported_label": "Underlying net interest income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-other_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Retail reporting segment; consolidated Group internal basis; Underlying other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "other_income",
+        "definition": "Underlying other income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "1406",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "1406",
+        "reported_label": "Underlying other income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-other_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Underlying other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "other_income",
+        "definition": "Underlying other income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "889",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "889",
+        "reported_label": "Underlying other income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-other_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Underlying other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "other_income",
+        "definition": "Underlying other income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "818",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "818",
+        "reported_label": "Underlying other income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "central-other_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Equity Investments and Central Items reporting segment; consolidated Group internal basis; Underlying other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Equity Investments and Central Items reporting segment; consolidated Group internal basis",
+        "metric": "other_income",
+        "definition": "Underlying other income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "197",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "197",
+        "reported_label": "Underlying other income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-other_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; consolidated Group; Underlying other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "other_income",
+        "definition": "Underlying other income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "3310",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "3310",
+        "reported_label": "Underlying other income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-lease_depreciation-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Retail reporting segment; consolidated Group internal basis; Operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "lease_depreciation",
+        "definition": "Operating lease depreciation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-835",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-835",
+        "reported_label": "Operating lease depreciation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-lease_depreciation-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "lease_depreciation",
+        "definition": "Operating lease depreciation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-6",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-6",
+        "reported_label": "Operating lease depreciation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-lease_depreciation-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; consolidated Group; Operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "lease_depreciation",
+        "definition": "Operating lease depreciation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-841",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-841",
+        "reported_label": "Operating lease depreciation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-net_operating_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Retail reporting segment; consolidated Group internal basis; Underlying net income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "net_operating_income",
+        "definition": "Underlying net income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "5710",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "5710",
+        "reported_label": "Underlying net income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-net_operating_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Underlying net income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "net_operating_income",
+        "definition": "Underlying net income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "2897",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "2897",
+        "reported_label": "Underlying net income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-net_operating_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Underlying net income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "net_operating_income",
+        "definition": "Underlying net income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "747",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "747",
+        "reported_label": "Underlying net income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "central-net_operating_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Equity Investments and Central Items reporting segment; consolidated Group internal basis; Underlying net income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Equity Investments and Central Items reporting segment; consolidated Group internal basis",
+        "metric": "net_operating_income",
+        "definition": "Underlying net income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "393",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "393",
+        "reported_label": "Underlying net income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-net_operating_income-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; consolidated Group; Underlying net income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "net_operating_income",
+        "definition": "Underlying net income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "9747",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "9747",
+        "reported_label": "Underlying net income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-operating_costs-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Retail reporting segment; consolidated Group internal basis; Operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "operating_costs",
+        "definition": "Operating costs",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-2872",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-2872",
+        "reported_label": "Operating costs",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-operating_costs-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "operating_costs",
+        "definition": "Operating costs",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-1409",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-1409",
+        "reported_label": "Operating costs",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-operating_costs-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "operating_costs",
+        "definition": "Operating costs",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-494",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-494",
+        "reported_label": "Operating costs",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "central-operating_costs-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Equity Investments and Central Items reporting segment; consolidated Group internal basis; Operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Equity Investments and Central Items reporting segment; consolidated Group internal basis",
+        "metric": "operating_costs",
+        "definition": "Operating costs",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-101",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-101",
+        "reported_label": "Operating costs",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-operating_costs-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; consolidated Group; Operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "operating_costs",
+        "definition": "Operating costs",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-4876",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-4876",
+        "reported_label": "Operating costs",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-remediation-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Retail reporting segment; consolidated Group internal basis; Remediation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "remediation",
+        "definition": "Remediation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-17",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-17",
+        "reported_label": "Remediation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-remediation-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Remediation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "remediation",
+        "definition": "Remediation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-12",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-12",
+        "reported_label": "Remediation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-remediation-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Remediation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "remediation",
+        "definition": "Remediation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-7",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-7",
+        "reported_label": "Remediation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "central-remediation-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Equity Investments and Central Items reporting segment; consolidated Group internal basis; Remediation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Equity Investments and Central Items reporting segment; consolidated Group internal basis",
+        "metric": "remediation",
+        "definition": "Remediation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-3",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-3",
+        "reported_label": "Remediation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-remediation-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; consolidated Group; Remediation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "remediation",
+        "definition": "Remediation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-39",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-39",
+        "reported_label": "Remediation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-credit_impairment-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Retail reporting segment; consolidated Group internal basis; Underlying impairment charge",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "credit_impairment",
+        "definition": "Underlying impairment charge",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-565",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-565",
+        "reported_label": "Underlying impairment charge",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-credit_impairment-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Underlying impairment charge",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "credit_impairment",
+        "definition": "Underlying impairment charge",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-51",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-51",
+        "reported_label": "Underlying impairment charge",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-credit_impairment-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Underlying impairment charge",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "credit_impairment",
+        "definition": "Underlying impairment charge",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-1",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-1",
+        "reported_label": "Underlying impairment charge",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-credit_impairment-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; consolidated Group; Underlying impairment charge",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "credit_impairment",
+        "definition": "Underlying impairment charge",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-617",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-617",
+        "reported_label": "Underlying impairment charge",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-underlying_profit_before_tax-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Retail reporting segment; consolidated Group internal basis; Underlying profit",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "underlying_profit_before_tax",
+        "definition": "Underlying profit",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "2256",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "2256",
+        "reported_label": "Underlying profit",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-underlying_profit_before_tax-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Underlying profit",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "underlying_profit_before_tax",
+        "definition": "Underlying profit",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "1425",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "1425",
+        "reported_label": "Underlying profit",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-underlying_profit_before_tax-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Underlying profit",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "underlying_profit_before_tax",
+        "definition": "Underlying profit",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "245",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "245",
+        "reported_label": "Underlying profit",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "central-underlying_profit_before_tax-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; Equity Investments and Central Items reporting segment; consolidated Group internal basis; Underlying profit",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Equity Investments and Central Items reporting segment; consolidated Group internal basis",
+        "metric": "underlying_profit_before_tax",
+        "definition": "Underlying profit",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "289",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "289",
+        "reported_label": "Underlying profit",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-underlying_profit_before_tax-2026",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2026 06-30; consolidated Group; Underlying profit",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "underlying_profit_before_tax",
+        "definition": "Underlying profit",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "4215",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2026,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "4215",
+        "reported_label": "Underlying profit",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-net_interest_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Retail reporting segment; consolidated Group internal basis; Underlying net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "net_interest_income",
+        "definition": "Underlying net interest income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "4709",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "4709",
+        "reported_label": "Underlying net interest income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-net_interest_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Underlying net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "net_interest_income",
+        "definition": "Underlying net interest income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "1766",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "1766",
+        "reported_label": "Underlying net interest income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-net_interest_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Underlying net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "net_interest_income",
+        "definition": "Underlying net interest income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-78",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-78",
+        "reported_label": "Underlying net interest income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "central-net_interest_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Equity Investments and Central Items reporting segment; consolidated Group internal basis; Underlying net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Equity Investments and Central Items reporting segment; consolidated Group internal basis",
+        "metric": "net_interest_income",
+        "definition": "Underlying net interest income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "258",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "258",
+        "reported_label": "Underlying net interest income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-net_interest_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; consolidated Group; Underlying net interest income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "net_interest_income",
+        "definition": "Underlying net interest income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "6655",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "6655",
+        "reported_label": "Underlying net interest income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-other_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Retail reporting segment; consolidated Group internal basis; Underlying other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "other_income",
+        "definition": "Underlying other income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "1276",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "1276",
+        "reported_label": "Underlying other income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-other_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Underlying other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "other_income",
+        "definition": "Underlying other income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "926",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "926",
+        "reported_label": "Underlying other income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-other_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Underlying other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "other_income",
+        "definition": "Underlying other income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "689",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "689",
+        "reported_label": "Underlying other income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "central-other_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Equity Investments and Central Items reporting segment; consolidated Group internal basis; Underlying other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Equity Investments and Central Items reporting segment; consolidated Group internal basis",
+        "metric": "other_income",
+        "definition": "Underlying other income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "78",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "78",
+        "reported_label": "Underlying other income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-other_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; consolidated Group; Underlying other income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "other_income",
+        "definition": "Underlying other income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "2969",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "2969",
+        "reported_label": "Underlying other income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-lease_depreciation-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Retail reporting segment; consolidated Group internal basis; Operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "lease_depreciation",
+        "definition": "Operating lease depreciation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-706",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-706",
+        "reported_label": "Operating lease depreciation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-lease_depreciation-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "lease_depreciation",
+        "definition": "Operating lease depreciation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-4",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-4",
+        "reported_label": "Operating lease depreciation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-lease_depreciation-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; consolidated Group; Operating lease depreciation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "lease_depreciation",
+        "definition": "Operating lease depreciation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-710",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-710",
+        "reported_label": "Operating lease depreciation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-net_operating_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Retail reporting segment; consolidated Group internal basis; Underlying net income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "net_operating_income",
+        "definition": "Underlying net income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "5279",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "5279",
+        "reported_label": "Underlying net income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-net_operating_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Underlying net income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "net_operating_income",
+        "definition": "Underlying net income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "2688",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "2688",
+        "reported_label": "Underlying net income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-net_operating_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Underlying net income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "net_operating_income",
+        "definition": "Underlying net income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "611",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "611",
+        "reported_label": "Underlying net income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "central-net_operating_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Equity Investments and Central Items reporting segment; consolidated Group internal basis; Underlying net income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Equity Investments and Central Items reporting segment; consolidated Group internal basis",
+        "metric": "net_operating_income",
+        "definition": "Underlying net income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "336",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "336",
+        "reported_label": "Underlying net income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-net_operating_income-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; consolidated Group; Underlying net income",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "net_operating_income",
+        "definition": "Underlying net income",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "8914",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "8914",
+        "reported_label": "Underlying net income",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-operating_costs-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Retail reporting segment; consolidated Group internal basis; Operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "operating_costs",
+        "definition": "Operating costs",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-2922",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-2922",
+        "reported_label": "Operating costs",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-operating_costs-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "operating_costs",
+        "definition": "Operating costs",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-1394",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-1394",
+        "reported_label": "Operating costs",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-operating_costs-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "operating_costs",
+        "definition": "Operating costs",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-466",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-466",
+        "reported_label": "Operating costs",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "central-operating_costs-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Equity Investments and Central Items reporting segment; consolidated Group internal basis; Operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Equity Investments and Central Items reporting segment; consolidated Group internal basis",
+        "metric": "operating_costs",
+        "definition": "Operating costs",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-92",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-92",
+        "reported_label": "Operating costs",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-operating_costs-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; consolidated Group; Operating costs",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "operating_costs",
+        "definition": "Operating costs",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-4874",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-4874",
+        "reported_label": "Operating costs",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-remediation-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Retail reporting segment; consolidated Group internal basis; Remediation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "remediation",
+        "definition": "Remediation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-41",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-41",
+        "reported_label": "Remediation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-remediation-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Remediation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "remediation",
+        "definition": "Remediation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-2",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-2",
+        "reported_label": "Remediation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "central-remediation-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Equity Investments and Central Items reporting segment; consolidated Group internal basis; Remediation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Equity Investments and Central Items reporting segment; consolidated Group internal basis",
+        "metric": "remediation",
+        "definition": "Remediation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "6",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "6",
+        "reported_label": "Remediation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-remediation-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; consolidated Group; Remediation",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "remediation",
+        "definition": "Remediation",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-37",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-37",
+        "reported_label": "Remediation",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-credit_impairment-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Retail reporting segment; consolidated Group internal basis; Underlying impairment charge",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "credit_impairment",
+        "definition": "Underlying impairment charge",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-342",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-342",
+        "reported_label": "Underlying impairment charge",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-credit_impairment-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Underlying impairment charge",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "credit_impairment",
+        "definition": "Underlying impairment charge",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-100",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-100",
+        "reported_label": "Underlying impairment charge",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-credit_impairment-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Underlying impairment charge",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "credit_impairment",
+        "definition": "Underlying impairment charge",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "1",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "1",
+        "reported_label": "Underlying impairment charge",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "central-credit_impairment-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Equity Investments and Central Items reporting segment; consolidated Group internal basis; Underlying impairment charge",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Equity Investments and Central Items reporting segment; consolidated Group internal basis",
+        "metric": "credit_impairment",
+        "definition": "Underlying impairment charge",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-1",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-1",
+        "reported_label": "Underlying impairment charge",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-credit_impairment-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; consolidated Group; Underlying impairment charge",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "credit_impairment",
+        "definition": "Underlying impairment charge",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "-442",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "-442",
+        "reported_label": "Underlying impairment charge",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retail-underlying_profit_before_tax-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Retail reporting segment; consolidated Group internal basis; Underlying profit",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Retail reporting segment; consolidated Group internal basis",
+        "metric": "underlying_profit_before_tax",
+        "definition": "Underlying profit",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "1974",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "1974",
+        "reported_label": "Underlying profit",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "commercial-underlying_profit_before_tax-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Commercial Banking reporting segment; consolidated Group internal basis; Underlying profit",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Commercial Banking reporting segment; consolidated Group internal basis",
+        "metric": "underlying_profit_before_tax",
+        "definition": "Underlying profit",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "1194",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "1194",
+        "reported_label": "Underlying profit",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "retirement-underlying_profit_before_tax-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Insurance, Pensions & Investments reporting segment; consolidated Group internal basis; Underlying profit",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Insurance, Pensions & Investments reporting segment; consolidated Group internal basis",
+        "metric": "underlying_profit_before_tax",
+        "definition": "Underlying profit",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "144",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "144",
+        "reported_label": "Underlying profit",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "central-underlying_profit_before_tax-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; Equity Investments and Central Items reporting segment; consolidated Group internal basis; Underlying profit",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "Equity Investments and Central Items reporting segment; consolidated Group internal basis",
+        "metric": "underlying_profit_before_tax",
+        "definition": "Underlying profit",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "249",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "segment",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "249",
+        "reported_label": "Underlying profit",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    },
+    {
+      "key": "group-underlying_profit_before_tax-2025",
+      "kind": "financial_measurement",
+      "locator": "LEI-1 S2; printed page 21; 2025 06-30; consolidated Group; Underlying profit",
+      "facts": {
+        "subject_id": "research-subject:lloyds-banking-group-plc",
+        "subject_name": "Lloyds Banking Group plc",
+        "perimeter": "consolidated Group",
+        "metric": "underlying_profit_before_tax",
+        "definition": "Underlying profit",
+        "accounting_basis": "underlying",
+        "state": "actual",
+        "period": {
+          "kind": "duration",
+          "start": "2025-01-01",
+          "end": "2025-06-30",
+          "fiscal_year_end": "12-31"
+        },
+        "value": {
+          "kind": "numeric",
+          "amount": "3561",
+          "scale": "millions",
+          "unit": "currency",
+          "currency": "GBP"
+        },
+        "semantic_type": "reported",
+        "precision_dp": 0,
+        "rounding": "reported_rounded",
+        "statement": "income",
+        "fiscal_year": 2025,
+        "accounting_standard": "Issuer underlying APM",
+        "original_display": "3561",
+        "reported_label": "Underlying profit",
+        "sign_convention": "Explicit reported sign; expense/charge values are negative",
+        "caveats": []
+      }
+    }
+  ],
+  "facts_sha256": "5c551059a685f791dd8fd0af11e111d2c908b435eaad85bac9466fbe4ee60929",
+  "comparisons": [
+    {
+      "id": "retail-net_operating_income-movement",
+      "opening": "retail-net_operating_income-2025",
+      "closing": "retail-net_operating_income-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "retail-operating_costs-movement",
+      "opening": "retail-operating_costs-2025",
+      "closing": "retail-operating_costs-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "retail-credit_impairment-movement",
+      "opening": "retail-credit_impairment-2025",
+      "closing": "retail-credit_impairment-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "retail-underlying_profit_before_tax-movement",
+      "opening": "retail-underlying_profit_before_tax-2025",
+      "closing": "retail-underlying_profit_before_tax-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "commercial-net_operating_income-movement",
+      "opening": "commercial-net_operating_income-2025",
+      "closing": "commercial-net_operating_income-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "commercial-operating_costs-movement",
+      "opening": "commercial-operating_costs-2025",
+      "closing": "commercial-operating_costs-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "commercial-credit_impairment-movement",
+      "opening": "commercial-credit_impairment-2025",
+      "closing": "commercial-credit_impairment-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "commercial-underlying_profit_before_tax-movement",
+      "opening": "commercial-underlying_profit_before_tax-2025",
+      "closing": "commercial-underlying_profit_before_tax-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "retirement-net_operating_income-movement",
+      "opening": "retirement-net_operating_income-2025",
+      "closing": "retirement-net_operating_income-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "retirement-operating_costs-movement",
+      "opening": "retirement-operating_costs-2025",
+      "closing": "retirement-operating_costs-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "retirement-credit_impairment-movement",
+      "opening": "retirement-credit_impairment-2025",
+      "closing": "retirement-credit_impairment-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "retirement-underlying_profit_before_tax-movement",
+      "opening": "retirement-underlying_profit_before_tax-2025",
+      "closing": "retirement-underlying_profit_before_tax-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "central-net_operating_income-movement",
+      "opening": "central-net_operating_income-2025",
+      "closing": "central-net_operating_income-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "central-operating_costs-movement",
+      "opening": "central-operating_costs-2025",
+      "closing": "central-operating_costs-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "central-underlying_profit_before_tax-movement",
+      "opening": "central-underlying_profit_before_tax-2025",
+      "closing": "central-underlying_profit_before_tax-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "group-net_operating_income-movement",
+      "opening": "group-net_operating_income-2025",
+      "closing": "group-net_operating_income-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "group-operating_costs-movement",
+      "opening": "group-operating_costs-2025",
+      "closing": "group-operating_costs-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "group-credit_impairment-movement",
+      "opening": "group-credit_impairment-2025",
+      "closing": "group-credit_impairment-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    },
+    {
+      "id": "group-underlying_profit_before_tax-movement",
+      "opening": "group-underlying_profit_before_tax-2025",
+      "closing": "group-underlying_profit_before_tax-2026",
+      "comparison": "matched_durations",
+      "formula": "difference"
+    }
+  ],
+  "bridges": []
+}

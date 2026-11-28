@@ -93,7 +93,7 @@ def test_existing_received_source_denial_omits_compound_outcomes_even_with_valid
  # Source denial cannot remove an independently eligible funding comparison.
  # The new executive portfolio opens that comparison through its whole region.
  funding=v.render('/enterprises/lloyds',{'focus':['economics'],'detail':['funding']})
- assert all(value in funding for value in ('£502.8bn','£496.5bn','£6.3bn'))
+ assert all(value in funding for value in ('£502.777bn','£496.457bn','6320m'))
  assert funding.count('data-intelligence="funding-base"')==1
  assert '118,762'not in funding and '66.12%'not in funding
 

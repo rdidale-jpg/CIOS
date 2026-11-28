@@ -80,7 +80,7 @@ with TemporaryDirectory(prefix='flora-living-preview-') as directory, sync_playw
                         else:target.tap()
                         expect(page.locator('main h1')).to_have_text(label)
                         expect(page.locator('[data-region-key="'+key+'"][aria-current]')).to_have_count(1)
-                        expect(page.locator('main details')).to_have_count(0)
+                        expect(page.locator('main details:not(.econ-basis)')).to_have_count(0);assert page.locator('main details.econ-basis').count()<=1
                     key={'landscape':'funding','inside':'data','forces':'renewal'}[stream]
                     page.goto(preview.href(preview.State(stream,key,key)))
                     if width<1000:

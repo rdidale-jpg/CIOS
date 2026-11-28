@@ -805,7 +805,7 @@ def main(state,data,facts,issues=()):
         elif state.focus=='group' and not state.detail:
             body+=experience_landscape(state,facts,issues)
         elif state.focus=='group' and state.detail=='brands':body+=executive_brands(state,facts)
-        elif state.focus=='economics' and state.detail in {'','funding','income','costs','capital'}:body+=experience_economic_mechanism(state,facts,issues)
+        elif state.focus=='economics' and state.detail in {'','funding','income','costs','capital','comparison','central','divisions'}:body+=experience_economic_mechanism(state,facts,issues)
         elif state.focus in {'group','economics'}:body+=_ceo_financial(state,facts,issues)
         else:body+=experience_business(state,facts) if not state.detail else division(state,facts)
     elif state.stream=='inside':
@@ -1346,6 +1346,8 @@ def experience_map(kind, label, paths, nodes, legend):
 
 
 def experience_landscape(state,facts,issues):
+    financial=economic_lines(economic_research('lloyds-q3'))
+    segments=economic_lines(economic_research('lloyds-h1'))
     body='<p class="le-deck">Households, businesses and long-term savers. Three economic engines; one Group balance sheet.</p>'
     nodes=[]
     if 'LBG-Q326-DEPOSITS' in facts:
@@ -1355,10 +1357,12 @@ def experience_landscape(state,facts,issues):
         nodes.append(experience_node(state,'Customer relationships',p.render(facts['LBG-V2-CUSTOMERS'],compact=True),(34,0,32,24),shape='island',detail='brands'))
     if 'LBG-Q326-PROFIT' in facts:
         p.note_editorial_sources(facts['LBG-Q326-PROFIT'].sources)
-        nodes.append(experience_node(state,'Reported earnings','<strong class="ce-number">£'+str(facts['LBG-Q326-PROFIT'].value)+'bn</strong><span>Group statutory pretax profit · reported flow</span><time>Nine months to 30 September 2026</time>',(71,0,29,21),kind='money',shape='reservoir',focus='economics',detail='income'))
+        nodes.append(experience_node(state,'Reported earnings','<strong class="ce-number">'+(economic_money(financial['profit_before_tax-2026']) if 'profit_before_tax-2026' in financial else '£'+str(facts['LBG-Q326-PROFIT'].value)+'bn')+'</strong><span>Group statutory pretax profit · reported flow</span><time>Nine months to 30 September 2026</time>',(71,0,29,21),kind='money',shape='reservoir',focus='economics',detail='income'))
     for i,(title,customer,activity,driver,key) in enumerate(twin.DIVISIONS):
         offer={'retail':'Borrow, save, pay and finance assets','commercial':'Lend, manage cash, trade and payments','retirement':'Protect, invest and administer long-term savings'}[key]
-        nodes.append(experience_node(state,title,'<span class="ce-customer">'+e(customer)+'</span><span>'+e(offer)+'</span><strong>'+e(driver)+'</strong>',(i*34,27,32,32),kind='business',shape='business',caption='Select the business economics',stream='landscape',focus=key,subject=key))
+        financial_line=segments.get(key+'-underlying_profit_before_tax-2026')
+        measured=('<strong>'+economic_money(financial_line)+'</strong><span>H1 2026 · underlying profit</span>') if financial_line else '<strong>'+e(driver)+'</strong>'
+        nodes.append(experience_node(state,title,'<span class="ce-customer">'+e(customer)+'</span><span>'+e(offer)+'</span>'+measured,(i*34,27,32,32),kind='business',shape='business',caption='Select the business economics',stream='landscape',focus=key,subject=key))
     nodes.append(experience_node(state,'Costs, credit and capital','<span>Funding price · operating costs · credit losses · risk capacity</span><strong>Economic growth must earn its cost of risk and delivery</strong>',(4,64,92,15),kind='money',shape='foundation',focus='economics',detail='capital'))
     choices=[('Simplify while protecting service',('LBG-AR25-MIGRATION','LBG-A2030-CIR'),'2030 efficiency ambition','objective-renewal'),
              ('Turn AI adoption into economic return',('LBG-AI26-REPORTED','LBG-AI26-EXPECTED'),'Contribution versus full-cost return','objective-ai'),
@@ -1370,6 +1374,7 @@ def experience_landscape(state,facts,issues):
     body+='<div class="canvas-businesses ce-portfolio">'+experience_map('economy','Reporting businesses · not financial shares',
         ('M110 150 C110 190 120 200 130 235','M110 160 C250 190 390 180 400 235','M685 155 C685 195 660 200 665 235','M130 470 Q130 515 400 530','M400 470 L400 530','M670 470 Q670 515 400 530','M400 630 L400 680'),nodes,
         'Conceptual economic relationships. Geometry does not encode business size, funding allocation or profit contribution. Group, reporting businesses and legal entities remain separate.')+'</div>'
+    body+=financial_knowledge(state,summary=True)
     body+=v3_economic_attention(state,facts)
     body+='<div class="ce-context-controls">'+link(state,'Funding comparison',focus='economics',detail='comparison')+link(state,'Organisation & workforce',stream='inside',focus='people',detail='leadership')+link(state,'Customer operations',stream='inside',focus='operations',detail='service')+'</div>'
     return body
@@ -1461,7 +1466,7 @@ def experience_activity(state,data,facts):
       'risk':('Human accountability and override require explicit control definitions. Control operation and independently demonstrated effectiveness are different tests.','Any existing teams and controls must be considered before asserting a missing risk capability.'),
       'data':('An AI-enabled decision workflow needs business, technology, information and risk participation. Source quality, model control and exception handling are dependencies, not proof of a Group data defect.','Deployment alone does not reconcile prevented loss, false positives, customer outcomes and full costs.'),
       'platforms':('Application retirement and colleague-tool adoption concern different parts of the estate. Fewer applications can reduce complexity while migration and dual running temporarily add work.','A tool reference, product licence or collaboration does not describe the entire estate or an unawarded contract.'),
-      'finance':('Funding stocks, period earnings, credit losses and capital use must be reconciled on matched definitions. Growth in deposits can coexist with a higher funding price.','Neither profit nor deposit growth is an unrestricted transformation budget; divisional and capital bridges remain unpresented.'),
+      'finance':('Funding stocks, period earnings, credit losses and capital use must be reconciled on matched definitions. Growth in deposits can coexist with a higher funding price.','Neither profit nor deposit growth is an unrestricted transformation budget; reported segment results and prudential capital retain distinct bases.'),
       'support':('Workforce scale, trained colleagues, course completions and planned roles have different populations and dates. Delivery capacity depends on skills, work redesign and control coverage.','Recruiting internally or externally is not net hiring, while licence counts cannot establish FTE or staff savings.'),
       'service':('Service access, exception handling and redress affect customer outcomes. Existing FCA product measures belong to Lloyds Bank PLC, not every Group brand or division.','Complaint mix alone cannot quantify customer incidence, service cost, root cause or enterprise materiality.')
     }[key]
@@ -1482,7 +1487,7 @@ def experience_capability(state,data,facts):
 
 
 def experience_business(state,facts):
-    if state.focus=='commercial':return v3_commercial_system(state,facts)
+    if state.focus=='commercial':return financial_knowledge(state)+v3_commercial_system(state,facts)
     key=state.focus
     descriptions={
       'retail':('Everyday relationships and asset finance','Households borrow, save and pay. Motor and vehicle finance add asset-service economics alongside traditional banking.',('BANK','BOS','MBNA','BLACKHORSE','LEX','TUSKER'),
@@ -1504,14 +1509,22 @@ def experience_business(state,facts):
     response_keys={'retail':('LBG-BRAND26-TIMING',),'commercial':('LBG-V2-MURPHY','LBG-V2-LANGLEY'),'retirement':('LBG-V2-WIDOWS','LBG-V2-WEALTH')}[key]
     if all(k in facts for k in response_keys):body+='<h2>Current response and boundary</h2><p>'+response+'</p>'
     body+='<div class="ce-tension-note"><h2>Commercial investigation</h2><p>'+question+'</p></div>'
+    body=financial_knowledge(state)+body
     body+=v3_business_context(state,facts)
     if key=='retail' and 'LBG-BRAND26-TIMING' in facts:body+=region(state,'Brand transition and service access',reported(facts,('LBG-BRAND26-TIMING','LBG-BRAND26-NO-ROLES')),kind='change',stream='inside',focus='programmes',detail='brand')
     body+='<div class="ce-context-controls">'+link(state,'Group economics',focus='economics')+link(state,'Operating activities',stream='inside',focus='operations',detail='journey-'+{'retail':'credit','commercial':'payments','retirement':'insurance'}[key])+link(state,'Published executive roles',stream='inside',focus='people',detail='leadership')+'</div>'
-    body+='<p class="ce-legend">FLORA economic interpretation, with reported brand/role context. No measured profit split, supplier need, buyer mandate, capital allocation or commercial opportunity is asserted.</p>'
+    body+='<p class="ce-legend">Reported segment economics and business interpretation remain distinct. Supplier need, buyer mandate, capability-level capital allocation and commercial opportunity are not inferred.</p>'
     return body
 
 
 def experience_economic_mechanism(state,facts,issues):
+    current=financial_knowledge(state)
+    if current:
+        if state.detail=='costs':
+            current+='<section><h2>Efficiency ambitions</h2>'+reported(facts,('LBG-A2030-CIR','LBG-A2030-SAVINGS'))+'<p>Gross savings are not realised net profit. Implementation, supervision and continuity costs must remain in the comparison.</p>'+region(state,'Efficiency objectives',kind='timeline',caption='Management target, not an achieved result',stream='forces',focus='strategy',detail='objective-efficiency')+'</section>'
+        if state.detail=='capital' and 'LBG-V2-CHALMERS' in facts:
+            current+='<section class="ce-evidence-story"><h2>Published finance remit</h2>'+v2_reported(facts,'CHALMERS')+'<p>Relevant Group role, not verified delegated procurement authority.</p></section>'
+        return current+connected_links(state)
     nodes=[]
     areas=[('funding','Funding','Deposits, price and maturity',(0,0,45,27)),
            ('income','Lending & income','Asset yield, fees and customer mix',(55,0,45,27)),
@@ -2113,3 +2126,120 @@ def ceo_context(state,facts):
         if ceo_has(facts,'VISAPILOT'):body+=region(state,'Settlement pilot',kind='operating',caption='Corporate Markets Jersey / Visa; separate from a CIB-wide programme',detail='settlement')
     if pos==('landscape','retirement','') and ceo_has(facts,'INVESTMENTACCOUNTS'):body+=region(state,'Investment and advice delivery',ceo_reported(facts,'INVESTMENTACCOUNTS'),kind='business',caption='A dated account base and the earlier integration plan',detail='wealth-delivery')
     return body
+
+
+def economic_research(selection):
+    from .financial_intelligence.public_statements import economic_projection
+    return economic_projection(selection)
+
+
+def economic_lines(projection):
+    return {x.measurement_id:x for x in projection.get('lines',())}
+
+
+def economic_money(line, *, magnitude=False):
+    from decimal import Decimal
+    from .financial_intelligence.normalisation import SCALE_FACTORS
+    from .financial_intelligence.public_statements import statements
+    for _,fact in statements((line,)):p.note_editorial_sources(fact.sources)
+    value=abs(line.value.amount) if magnitude else line.value.amount
+    if line.value.unit=='percentage':return str(value)+'%'
+    base=value*SCALE_FACTORS[line.value.scale]
+    unit,scale=('bn',Decimal('1e9')) if abs(base)>=Decimal('1e9') else ('m',Decimal('1e6'))
+    amount=abs(base)/scale
+    text=f'{amount:,.3f}'.rstrip('0').rstrip('.')
+    symbol={'GBP':'£','USD':'US$','EUR':'€'}.get(line.value.currency,line.value.currency+' ')
+    return ('−' if base<0 else '')+symbol+text+unit
+
+
+def economic_source_note(lines):
+    from .financial_intelligence.public_statements import statements
+    from .enterprise_economics import _basis
+    return _basis(tuple(fact for _,fact in statements(tuple(lines)))).replace('<a ', '<a data-canvas-exception="inspection" ')
+
+
+def economic_comparison(state,title,current,prior,*,detail='income'):
+    if not current:return ''
+    from .financial_intelligence.public_statements import statements
+    for _,fact in statements(tuple(x for x in (current,prior) if x)):p.note_editorial_sources(fact.sources)
+    maximum=max(abs(x.value.amount) for x in (current,prior) if x) or 1
+    body='<section class="financial-comparison"><h3>'+e(title)+'</h3>'
+    for line in (prior,current):
+        if not line:continue
+        label=(line.period.as_at.isoformat() if line.period.kind=='instant' else str(line.fiscal_year))
+        content='<time>'+label+'</time><meter min="0" max="'+str(maximum)+'" value="'+str(abs(line.value.amount))+'" aria-label="'+e(title+' '+label,quote=True)+'">'+str(line.value.amount)+'</meter><strong>'+economic_money(line,magnitude=True)+'</strong>'
+        body+=region(state,title+' · '+label,content,kind='money',caption='Reported · '+line.accounting_basis,stream='landscape',focus='economics',detail=detail)
+    return body+'</section>'
+
+
+def financial_knowledge(state,*,summary=False):
+    """Existing Landscape composition over current Source/Financial owners."""
+    if state.stream!='landscape':return ''
+    q=economic_research('lloyds-q3');h=economic_research('lloyds-h1')
+    ql=economic_lines(q);hl=economic_lines(h)
+    if summary:
+        if not q:return ''
+        body='<section class="financial-headlines"><p class="eyebrow">Group · nine months to 30 September 2026</p><div class="financial-metric-strip">'
+        for key,title,detail in [('group_underlying_nii','Net interest income','income'),('operating_costs-2026','Operating costs','costs'),('net_operating_income-2026','Net income','income')]:
+            if key in ql:
+                x=ql[key];body+=region(state,title,'<strong>'+economic_money(x,magnitude=True)+'</strong>',kind='money',caption='Reported · '+x.accounting_basis,focus='economics',detail=detail)
+        return body+'</div><small class="source-credit">Source: Lloyds Banking Group · Q3 and H1 2026 results.</small></section>'
+    if state.focus in {'retail','commercial','retirement'}:
+        prefix=state.focus;rows=[hl[k]for k in tuple(f'{prefix}-{metric}-2026'for metric in ('net_interest_income','other_income','lease_depreciation','net_operating_income','operating_costs','remediation','credit_impairment','underlying_profit_before_tax'))if k in hl]
+        if not rows:return ''
+        body='<section class="financial-business"><h2>How this business earns its return</h2><p class="eyebrow">H1 2026 · underlying reporting segment</p>'
+        body+=economic_comparison(state,'Underlying profit',hl.get(f'{prefix}-underlying_profit_before_tax-2026'),hl.get(f'{prefix}-underlying_profit_before_tax-2025'),detail='central')
+        body+='<dl class="financial-statement-lines">'+''.join('<div><dt>'+e(x.reported_label)+'</dt><dd>'+economic_money(x)+'</dd></div>'for x in rows)+'</dl><p class="ce-legend">Six-month segment figures retain internal transfer pricing and central allocations. They are not a legal-bank return or a nine-month comparison.</p>'
+        return body+economic_source_note(rows)+'</section>'
+    if state.focus!='economics' or not q:return ''
+    detail=state.detail or 'income'
+    period_context=('Group reporting segments · H1 2026 / H1 2025' if detail in {'central','divisions'} else 'Balance sheet · 30 September 2026 / 31 December 2025' if detail in {'funding','comparison','capital'} else 'Reported Group economics · 9M 2026 / 9M 2025')
+    body='<section class="financial-economics"><p class="eyebrow">'+period_context+'</p>'
+    body+='<nav class="financial-stage-nav" aria-label="Economic stages">'+''.join(region(state,label,kind='money',caption=caption,focus='economics',detail=target)for label,caption,target in [('Funding','Balance-sheet stocks','funding'),('Lending & income','Period earnings','income'),('Costs & impairment','Period charges','costs'),('Capital & returns','Prudential capacity','capital')])+'</nav>'
+    used=[]
+    if detail in {'funding','comparison'}:
+        body+='<h2>Funding the balance sheet</h2>'+economic_comparison(state,'Customer deposits',ql.get('customer_deposits-2026'),ql.get('customer_deposits-2025'),detail='comparison')
+        used=[ql[k]for k in ('customer_deposits-2025','customer_deposits-2026','banking_nim','average_banking_assets')if k in ql]
+        body+='<dl class="financial-statement-lines">'+''.join('<div><dt>'+e(x.definition)+'</dt><dd>'+economic_money(x)+'</dd></div>'for x in used[2:])+'</dl>'
+        if 'customer_deposits-movement'in q.get('comparisons',{}):
+            body+='<p data-intelligence="funding-base" data-owner-item="customer_deposits-movement" data-semantic-type="calculated">Calculated deposit balance change: £'+q['comparisons']['customer_deposits-movement']['value']+'m. This is not an organic inflow and is not adjusted for consolidation. Banking margin relates to average banking earning assets, rather than Group profit.</p>'
+    elif detail=='capital':
+        body+='<h2>Risk capacity and capital</h2>'+economic_comparison(state,'Risk-weighted assets',ql.get('risk_weighted_assets-2026'),ql.get('risk_weighted_assets-2025'),detail='capital')
+        used=[ql[k]for k in ('cet1-2026','cet1-2025','cet1-proforma-2025','risk_weighted_assets-2026')if k in ql]
+        body+='<dl class="financial-statement-lines">'+''.join('<div><dt>'+e(x.definition)+' · '+str(x.period.as_at)+'</dt><dd>'+economic_money(x)+'</dd></div>'for x in used[:3])+'</dl><p>The December actual and buyback-adjusted pro forma comparators are different bases. Capital ratios and risk-weighted assets describe prudential capacity, not cash available or a technology budget.</p>'
+    elif detail in {'central','divisions'}:
+        body+='<h2>Different businesses, different economics</h2><p class="eyebrow">Six months to 30 June 2026 · underlying profit</p><div class="financial-division-comparison">'
+        maximum=max((abs(x.value.amount)for k,x in hl.items()if k.endswith('underlying_profit_before_tax-2026')and not k.startswith('group-')),default=1)
+        for key,label in [('retail','Retail'),('commercial','Commercial Banking'),('retirement','Insurance, Pensions & Investments'),('central','Equity & Central')]:
+            x=hl.get(f'{key}-underlying_profit_before_tax-2026')
+            if x:
+                used.append(x);body+=region(state,label,'<meter min="0" max="'+str(maximum)+'" value="'+str(abs(x.value.amount))+'" aria-label="'+e(label,quote=True)+' underlying profit">'+str(x.value.amount)+'</meter><strong>'+economic_money(x)+'</strong>',kind='business',caption='Reported H1 2026',stream='landscape',focus=key if key!='central' else 'economics',detail=''if key!='central' else 'capital',subject=key if key!='central' else state.subject)
+        body+='</div><p>These are underlying reporting-segment results. Central items remain explicit; none is allocated to a brand, legal bank, capability or supplier.</p>'
+        if 'group-underlying_profit_before_tax-2026'in hl:
+            body+='<p>Reported H1 Group underlying profit: '+economic_money(hl['group-underlying_profit_before_tax-2026'])+'. This is distinct from statutory profit and the later nine-month Group result.</p>'
+    else:
+        body+='<h2>'+('Costs and credit losses'if detail=='costs'else 'From income to earnings')+'</h2>'
+        key='operating_costs'if detail=='costs'else'profit_before_tax'
+        body+=economic_comparison(state,'Operating costs'if detail=='costs'else'Statutory profit before tax',ql.get(key+'-2026'),ql.get(key+'-2025'),detail=detail)
+        income_rows=[ql[k]for k in ('group_underlying_nii','other_income-2026','lease_depreciation-2026')if k in ql]
+        if detail!='costs' and income_rows:
+            body+='<h3>Reported income components</h3><dl class="financial-statement-lines">'+''.join('<div><dt>'+e(x.reported_label)+'</dt><dd>'+economic_money(x)+'</dd></div>'for x in income_rows)+'</dl>'
+        keys=('net_operating_income','operating_costs','remediation','credit_impairment','underlying_profit_before_tax','restructuring','volatility','profit_before_tax')
+        used=income_rows+[ql[k+'-2026']for k in keys if k+'-2026'in ql]
+        if {'underlying-earnings','statutory-earnings'}<=set(q.get('bridges',{})):
+            body+='<div class="financial-earnings-bridge" aria-label="Source-reconciled Group earnings components">'
+            for x in [ql[k+'-2026']for k in keys if k+'-2026'in ql]:
+                body+=region(state,x.reported_label,'<meter min="0" max="'+str(abs(ql['net_operating_income-2026'].value.amount))+'" value="'+str(abs(x.value.amount))+'" aria-label="'+e(x.reported_label,quote=True)+' magnitude">'+str(x.value.amount)+'</meter><strong>'+economic_money(x)+'</strong>',kind='money',caption='Reported · '+x.accounting_basis,focus='economics',detail='costs'if x.metric in {'operating_costs','remediation','credit_impairment'}else'income').replace('<a ','<a data-financial-sign="'+('expense'if x.value.amount<0 else'total')+'" ',1)
+            body+='</div><p class="ce-legend">Calculated earnings bridge: net income '+economic_money(ql['net_operating_income-2026'])+' plus the signed operating, remediation and impairment charges reconciles to '+economic_money(ql['underlying_profit_before_tax-2026'])+' underlying profit. The separately reported restructuring and volatility adjustments reconcile this to '+economic_money(ql['profit_before_tax-2026'])+' statutory profit.</p>'
+        c=q.get('comparisons',{})
+        if all(k in c for k in ('profit_before_tax-movement','remediation-movement','operating_costs-movement')):
+            from decimal import Decimal
+            changes=[]
+            for label,key in [('Statutory profit movement','profit_before_tax-movement'),('Remediation impact on profit','remediation-movement'),('Operating-cost impact on profit','operating_costs-movement'),('Impairment impact on profit','credit_impairment-movement')]:
+                if key not in c:continue
+                value=Decimal(c[key]['value']);display=('−£'if value<0 else '£')+f'{abs(value):,.0f}'+'m'
+                changes.append('<div><dt>'+label+'</dt><dd>'+display+'</dd></div>')
+            body+='<h3>What changed</h3><dl class="financial-statement-lines">'+''.join(changes)+'</dl><h3>Commercial interpretation</h3><p>Separate recurring service-cost improvement from income growth, remediation normalisation and credit effects before attributing value to a transformation. The figures establish economic context, not an unfilled buying requirement.</p>'
+
+    body+='<div class="ce-context-controls">'+region(state,'Business contribution',kind='business',caption='Reported H1 division economics',focus='economics',detail='central')+region(state,'Operating model',kind='operating',caption='Capabilities, people and delivery',stream='inside',focus='operations',detail='')+region(state,'Leadership priorities',kind='timeline',caption='Existing objectives and trade-offs',stream='forces',focus='strategy',detail='goals')+region(state,'Customer operations',kind='operating',caption='Existing service and customer context',stream='inside',focus='operations',detail='service')+'</div>'
+    return body+economic_source_note(used)+'</section>'

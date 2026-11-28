@@ -87,7 +87,7 @@ class Measurement(Contract):
     metric: str = Field(min_length=1)
     definition: str = Field(min_length=1)
     accounting_basis: str = Field(min_length=1)
-    state: Literal['actual', 'target', 'guidance', 'forecast']
+    state: Literal['actual', 'target', 'guidance', 'forecast', 'pro_forma']
     period: FinancialPeriod
     value: NumericFactValue
     original_display: str = Field(min_length=1)
@@ -110,9 +110,9 @@ class Measurement(Contract):
             raise ValueError('Value exceeds declared reported precision')
         if self.semantic_type in {'estimated', 'assumed'} and not (self.assumption_owner and self.assumption_version and self.caveats):
             raise ValueError('Assumption-dependent measurement needs owner/version and limitations')
-        if self.state == 'actual' and (self.period.as_at or self.period.end) > date.today():
+        if self.state in {'actual','pro_forma'} and (self.period.as_at or self.period.end) > date.today():
             raise ValueError('Actual cannot have a future reporting boundary')
-        if (self.period.as_at or self.period.end) > datetime.fromisoformat(self.source.retrieved_at).date() and self.state == 'actual':
+        if (self.period.as_at or self.period.end) > datetime.fromisoformat(self.source.retrieved_at).date() and self.state in {'actual','pro_forma'}:
             raise ValueError('Actual reporting boundary follows source retrieval')
         return self
 
@@ -134,7 +134,7 @@ class Derivation(Contract):
     derivation_id: str = Field(min_length=1)
     formula: Literal['difference', 'percent_change']
     version: Literal['1'] = '1'
-    comparison: Literal['same_period', 'stock_dates', 'duration_dates']
+    comparison: Literal['same_period', 'stock_dates', 'duration_dates', 'matched_durations']
     inputs: tuple[InputReference, InputReference]
     # No arbitrary expression evaluation, annualisation, FX or peer ranking.
 
@@ -180,6 +180,16 @@ def calculate(spec: Derivation, measurements: list[Measurement]) -> dict:
         if ((opening.source.owner,opening.source.source_id,opening.source.source_revision)
                 != (closing.source.owner,closing.source.source_id,closing.source.source_revision)):
             raise ValueError('Annual comparators require the same presented source version')
+    elif spec.comparison == 'matched_durations':
+        if (opening.period.kind != 'duration' or closing.period.kind != 'duration'
+                or opening.period.fiscal_year_end != closing.period.fiscal_year_end
+                or closing.period.end.year != opening.period.end.year+1
+                or (opening.period.start.month,opening.period.start.day,opening.period.end.month,opening.period.end.day)
+                   != (closing.period.start.month,closing.period.start.day,closing.period.end.month,closing.period.end.day)
+                or opening.period.end >= closing.period.start
+                or (opening.source.owner,opening.source.source_id,opening.source.source_revision)
+                   != (closing.source.owner,closing.source.source_id,closing.source.source_revision)):
+            raise ValueError('Matching adjacent reported durations in the same source required')
     elif opening.period.model_dump(exclude={'label'}) != closing.period.model_dump(exclude={'label'}):
         raise ValueError('Incompatible reporting periods')
     elif (opening.semantic_type == closing.semantic_type == 'reported'
@@ -192,7 +202,7 @@ def calculate(spec: Derivation, measurements: list[Measurement]) -> dict:
         # neither original stock is relabelled as a duration measurement.
         period = (str(opening.period.as_at) + ' to ' + str(closing.period.as_at) if spec.comparison == 'stock_dates'
                   else str(opening.period.start)+'/'+str(opening.period.end)+' to '+str(closing.period.start)+'/'+str(closing.period.end)
-                  if spec.comparison == 'duration_dates' else opening.period.label)
+                  if spec.comparison in {'duration_dates','matched_durations'} else opening.period.label)
         def statement(m):
             source = presentation.Source(m.source.title, m.source.url, m.source.publisher,
                 str(m.source.published or ''), locator=m.source.locator)
@@ -208,7 +218,7 @@ def calculate(spec: Derivation, measurements: list[Measurement]) -> dict:
             amount = amount / opening.value.amount * Decimal(100)
     weaker = any(m.semantic_type != 'reported' for m in selected)
     return {'derivation_id': spec.derivation_id, 'value': str(amount),
-            **({'comparison':'duration_dates'} if spec.comparison=='duration_dates' else {}),
+            **({'comparison':spec.comparison} if spec.comparison in {'duration_dates','matched_durations'} else {}),
             'formula': spec.formula,
             'unit': '%' if spec.formula == 'percent_change' else opening.value.currency + ' ' + opening.value.scale,
             'semantic_type': 'estimated' if weaker else 'calculated',
@@ -242,7 +252,7 @@ class Reconciliation(Contract):
     formula: Literal['signed_bridge'] = 'signed_bridge'
     version: Literal['1'] = '1'
     mode: Literal['basis_reconciliation', 'reported_statement'] = 'basis_reconciliation'
-    adjustment_roles: tuple[Literal['operating_costs', 'credit_impairment', 'associate_contribution', 'restructuring_provisions'], ...] = ()
+    adjustment_roles: tuple[Literal['operating_costs', 'credit_impairment', 'associate_contribution', 'restructuring_provisions', 'remediation'], ...] = ()
     opening: InputReference
     adjustments: tuple[InputReference, ...] = Field(min_length=1, max_length=10)
     endpoint: InputReference
@@ -281,7 +291,7 @@ def reconcile(spec: Reconciliation, measurements: list[Measurement]) -> dict:
     else:
         if not spec.opening_basis==spec.adjustment_basis==spec.endpoint_basis:
             raise ValueError('Reported statement requires the same declared accounting basis')
-        roles={'operating_costs','credit_impairment','associate_contribution','restructuring_provisions'}
+        roles={'operating_costs','credit_impairment','associate_contribution','restructuring_provisions','remediation'}
         if (len(spec.adjustment_roles)!=len(spec.adjustments)
                 or len(set(spec.adjustment_roles))!=len(spec.adjustment_roles)
                 or not set(spec.adjustment_roles).issubset(roles)
@@ -497,6 +507,7 @@ def public_factual_projection() -> dict:
             'average_banking_assets': ('Average interest-earning banking assets', 'banking business; not a legal-bank allocation', 'issuer period-average banking assets', 'currency', 'billions', 'GBP', 1),
         }
         rows = source['fact_bindings']
+        rows = [r for r in rows if r['key'] in expected]
         if len(rows) != 3 or {r['key'] for r in rows} != set(expected):
             return {}
         facts = []

@@ -72,7 +72,7 @@ def test_actual_expectation_and_target_never_become_progress_or_divisional_retur
     assert all(x not in body for x in ('100% achieved','50% delivered','£11.084bn','3.21%','£477.5bn','.pdf'))
     targets=page('landscape','group')
     assert 'Below 45%' in targets and 'About £2bn' in targets and 'Management target' in targets
-    assert public_factual_projection()=={}
+    assert len(public_factual_projection()['facts']) == 3
 
 
 @pytest.mark.parametrize('flag',('withdrawn','revoked','owner_only','stale','superseded','contradictory'))
@@ -87,6 +87,8 @@ def test_withdrawal_removes_new_ordinary_hidden_and_derived_content(monkeypatch,
     data=deepcopy(v.current_data(v.Context('lloyds','landscape')))
     next(s for s in data['sources'] if s['id']==source)[flag]=True
     monkeypatch.setattr(v,'current_data',lambda _:data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     for stream,focus,detail in states:
         body=page(stream,focus,detail,'commercial' if source=='LGV2-TRANSACTIONS' else None)
         assert all(word not in body for word in removed)
@@ -117,10 +119,12 @@ def test_new_states_keep_post_private_selector_and_cross_tenant_denials(http,str
 def test_owners_research_original_images_and_comparator_are_byte_preserved():
     from tests.flora_lloyds_research_contract import preserved_research_cut
     preserved_research_cut()
-    paths=('architecture/decisions','cios/applications/flora/security_store.py','cios/applications/flora/security_web.py','cios/applications/flora/supabase_identity.py','cios/applications/flora/public_routes.py','cios/applications/flora/visual_streams.py','cios/applications/flora/financial_intelligence','cios/applications/flora/research_intelligence','cios/applications/flora/blueprint_import','tools/ci/flora_ci.py','tools/ci/flora-baseline-v1.json')
+    paths=('architecture/decisions','cios/applications/flora/security_store.py','cios/applications/flora/security_web.py','cios/applications/flora/supabase_identity.py','cios/applications/flora/public_routes.py','cios/applications/flora/visual_streams.py','cios/applications/flora/blueprint_import','tools/ci/flora_ci.py','tools/ci/flora-baseline-v1.json')
     assert not subprocess.check_output(['git','diff','--name-only',BASE,'--',*paths],cwd=ROOT)
+    from tools.research.public_financial_compatibility import validate
+    assert validate(ROOT)['ci_comparator_changed'] is False
     old=ast.parse(subprocess.check_output(['git','show',BASE+':cios/applications/flora/lloyds_gold.py'],cwd=ROOT));new=ast.parse((ROOT/'cios/applications/flora/lloyds_gold.py').read_text())
     funcs=lambda t:{n.name:ast.dump(n,include_attributes=False) for n in t.body if isinstance(n,ast.FunctionDef)}
     a,b=funcs(old),funcs(new)
     assert all(a[k]==b[k] for k in ('facts_for','executive_facts','reported','interpretation','scene','resolve','canonical_query','render','stylesheet'))
-    assert public_factual_projection()=={}
+    assert len(public_factual_projection()['facts']) == 3

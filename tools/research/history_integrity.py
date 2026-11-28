@@ -158,12 +158,28 @@ def verify_history(root):
     files=list((root/'enterprise-knowledge').rglob('*'))
     assert not any(p.is_symlink() for p in files), 'Research symlink is not a reviewed source'
     actual={str(p.relative_to(root)):p.read_bytes() for p in files if p.is_file()}
+    # Explicit owner commission removes the stale factual hold. Preserve the
+    # exact prior working-source cut for every historical comparison below.
+    # These hashes are retained-data QA, never runtime permission tokens.
+    financial_base='8be67e3d49ad17886c1cc14da3c646271b21017e'
+    financial_h1='enterprise-knowledge/banking/research-model/source-snapshots/LEI-Lloyds-H126.json'
+    financial_pfi='enterprise-knowledge/banking/research-model/source-snapshots/PFI-Lloyds-Q326.json'
+    financial_inventory=None
+    if financial_h1 in actual:
+        for name, expected_hash in {financial_h1:'e7c183a23f3c55ef85ef72d9ace114c1b7ca77d3ea7e6c2667b760571dcbf434',financial_pfi:'1800bb1438d22a6a5fada8c565aa5d2a8eb9361b54367e2336210bc227ade433'}.items():
+            assert hashlib.sha256(actual[name]).hexdigest()==expected_hash, 'Unknown factual-financial source cut: '+name
+        current_inventory=json.loads((root/'docs/flora-runtime/public-financial-intelligence/Source-Addition.json').read_text())
+        assert current_inventory['public_activation'] is True
+        assert current_inventory['sha256']==hashlib.sha256(actual[financial_pfi]).hexdigest()
+        actual.pop(financial_h1)
+        actual[financial_pfi]=_git(root,'show',financial_base+':'+financial_pfi)
+        financial_inventory=json.loads(_git(root,'show',financial_base+':docs/flora-runtime/public-financial-intelligence/Source-Addition.json'))
     # One explicitly commissioned, inactive factual case is an additive cut,
     # not a revision of the 178-file historical corpus or a source-use grant.
     # Unknown additions still reach the exact comparator and fail unchanged.
     public_path='enterprise-knowledge/banking/research-model/source-snapshots/PFI-Lloyds-Q326.json'
     if public_path in actual:
-        record=json.loads((root/'docs/flora-runtime/public-financial-intelligence/Source-Addition.json').read_text())
+        record=financial_inventory or json.loads((root/'docs/flora-runtime/public-financial-intelligence/Source-Addition.json').read_text())
         assert record['path']==public_path and record['public_activation'] is False
         assert hashlib.sha256(actual[public_path]).hexdigest()==record['sha256'], 'Unknown public factual candidate cut'
         assert public_path not in expected
