@@ -154,7 +154,10 @@ def test_objectives_use_real_horizons_and_do_not_claim_unsupported_progress(row)
     assert ('External intervention remains a hypothesis' if key=='ai' else 'External intervention is a hypothesis only') in html
 
 
-def test_held_financials_are_not_promoted_by_the_new_default():
+def test_held_financials_are_not_promoted_by_the_new_default(monkeypatch):
+    # The issuer projection must not publish a metric simply because a separate
+    # regulator filing independently supports it.
+    monkeypatch.setattr(g.lloyds_financials.public_statements, 'statement_series', lambda subject: ())
     from cios.applications.flora.financial_intelligence import candidate_analytics as financial
     assert len(financial.public_factual_projection()['facts']) == 3
     html=''.join(main(v.render(g.CANONICAL,query('landscape','economics',detail))) for detail in ('income','costs','capital','divisions'))
