@@ -105,7 +105,9 @@ def check_integration(page, output, device):
         expect(main.locator('.gold-evidence-paths')).to_be_visible()
         page.go_back()
         expect(main.locator('.gold-evidence-paths')).to_contain_text(numbers[0])
-    assert page.goto(ENTERPRISE + TOP_LEVEL['strategy']).status == 200
+    assert page.goto(ENTERPRISE).status == 200
+    opening.get_by_role('link', name='Strategy and reported progress').click()
+    assert parse_qs(urlsplit(page.url).query)['detail'] == ['goals']
     expect(main.locator('.gold-evidence-paths')).to_contain_text('Cost efficiency and investment')
     expect(main.locator('.gold-evidence-paths')).to_contain_text('Payments growth and customer use')
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 2')

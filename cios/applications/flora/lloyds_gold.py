@@ -868,7 +868,7 @@ def business_swot(state, facts):
     movement = lloyds_financials.comparable_group_change(lloyds_financials.current())
     if movement and sum(movement[2][:3]) > 0:
         body += region(state, 'Strength · Higher underlying income',
-                       '<p>Underlying net income rose on the matched nine-month comparison. Lower remediation separately contributed to statutory improvement.</p>',
+                       '<p>Underlying net income rose on the matched nine-month comparison. Remediation is reported separately in the statutory bridge.</p>',
                        kind='money', stream='landscape', focus='economics', detail='income')
     if movement and movement[2][3] < 0 and movement[2][5] < 0:
         body += region(state, 'Weakness to test · Cost and credit pressure',
@@ -909,6 +909,8 @@ def main(state,data,facts,issues=()):
         if state.focus in {'operations','economics'}:body+=service_workload(state,inspection=True,data=data)
         body+='<p class="le-limit">Issuer-hosted attribution links to the issuer homepage. Regulatory evidence identifies SEC EDGAR. Direct PDF links remain deferred. These statements remain analytical public research, not canonical acceptance.</p>'
         return body+'</section>'
+    if state.stream == 'forces' and state.focus == 'strategy' and state.detail == 'goals':
+        body += connected_evidence(state, facts)
     selected=ceo_selected(state,facts)
     if selected is not None:
         body+=selected
@@ -949,7 +951,8 @@ def main(state,data,facts,issues=()):
         body += operating_thread(state, facts, business)
     if state.stream == 'forces' and state.focus == 'competition' and not state.detail:
         body += peer_service_context(data, issues)
-    body+=connected_evidence(state,facts)
+    if (state.stream, state.focus, state.detail) != ('forces', 'strategy', 'goals'):
+        body += connected_evidence(state, facts)
     body+=ceo_context(state,facts)
     body += measured_economics(state)
     owns_inspection=(state.focus=='applications' and (state.detail=='envoy' or state.detail.startswith('envoy-'))
@@ -1525,6 +1528,10 @@ def executive_opening(state, facts, data):
                        '<span>Simplify core platforms while protecting service. Improve efficiency after the cost of change. Grow customer activity in payments.</span>',
                        kind='timeline', caption='Published priorities. Delivery and full-cost returns need separate evidence.',
                        stream='forces', focus='strategy', detail='investigations')
+    if any(lloyds_connections.evidence_for(path, facts) for path in lloyds_connections.STRATEGY):
+        body += region(state, 'Strategy and reported progress', kind='timeline',
+                       caption='Compare published objectives with dated reported milestones and actuals.',
+                       stream='forces', focus='strategy', detail='goals')
     milestones = []
     for key, unit, measurement, prefix, suffix, status in (
         ('LBG-A2030-CIR', 'percent; upper-bound management target for 2030',
