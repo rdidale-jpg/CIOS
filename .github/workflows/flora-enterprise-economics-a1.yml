@@ -23,7 +23,8 @@ permissions:
 jobs:
   economics:
     runs-on: ubuntu-latest
-    timeout-minutes: 65
+    # Run both existing Lloyds browser proofs without dropping validation.
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
         with:
@@ -42,7 +43,7 @@ jobs:
       - name: All strict security tests
         run: python -m pytest tests/test_flora_security*.py -q
       - name: Optional Living Enterprise preview and fail-closed public source boundaries
-        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py tests/test_flora_main_canvas.py tests/test_flora_lloyds_activation.py tests/test_flora_lloyds_service_workload.py tests/test_flora_gold_reconciliation.py tests/test_flora_lloyds_gold_v2.py tests/test_flora_lloyds_experience_completion.py tests/test_flora_lloyds_gold_v3.py tests/test_flora_lloyds_ceo_intelligence.py -q
+        run: python -m pytest tests/test_flora_living_enterprise_preview.py tests/test_flora_lloyds_gold.py tests/test_flora_lloyds_ceo.py tests/test_flora_main_canvas.py tests/test_flora_lloyds_activation.py tests/test_flora_lloyds_service_workload.py tests/test_flora_gold_reconciliation.py tests/test_flora_lloyds_gold_v2.py tests/test_flora_lloyds_experience_completion.py tests/test_flora_lloyds_gold_v3.py tests/test_flora_lloyds_ceo_intelligence.py tests/test_flora_lloyds_financials.py -q
       - name: Lloyds intelligence utilisation and immutable image verification
         run: |
           git worktree add --detach "$RUNNER_TEMP/gold-approved-cut" 1c13e6962516dbb071b2133f2c1a3de87647e2ac
@@ -131,13 +132,17 @@ jobs:
           python docs/flora-runtime/lloyds-ceo-intelligence/browser.py "$RUNNER_TEMP/ceo-intelligence-browser" after
       - name: Ordinary factual finance, issuer definitions and withdrawal in current runtime
         run: |
-          python docs/flora-runtime/public-facts-financial-unlock/validate.py > "$RUNNER_TEMP/factual-scope.json"
+          git worktree add --detach "$RUNNER_TEMP/factual-approved-cut" 9b5fc0a515810e8af67ba3b8a7ab5dfb07841352
+          (cd "$RUNNER_TEMP/factual-approved-cut" && python docs/flora-runtime/public-facts-financial-unlock/validate.py) > "$RUNNER_TEMP/factual-scope.json"
           python docs/flora-runtime/public-facts-financial-unlock/browser.py "$RUNNER_TEMP/factual-browser" after
+      - name: EDGAR financial charts and evidence interaction
+        run: python docs/flora-runtime/lloyds-financials/browser.py "$RUNNER_TEMP/edgar-browser"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: flora-enterprise-economics-${{ github.event.pull_request.head.sha }}
           path: |
+            ${{ runner.temp }}/edgar-browser/*.jpg
             ${{ runner.temp }}/factual-scope.json
             ${{ runner.temp }}/factual-browser/*.json
             ${{ runner.temp }}/factual-browser/*.jpg

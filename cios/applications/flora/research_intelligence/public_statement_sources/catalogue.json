@@ -55,6 +55,82 @@
       ],
       "accession": "000162828025005126",
       "presentation": "technology:equinix"
+    },
+    {
+      "id": "LBG-EDGAR-2026-FY25",
+      "file": "LBG-EDGAR-2026-FY25.json",
+      "publisher": "Lloyds Banking Group plc",
+      "url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000010/lyg-20251231.htm",
+      "version": "sha256:ff7005d81ece5bbab716b21b60b6d3860acca70a2efc8c3d83522f38148529e9",
+      "subject": [
+        "research-subject:lloyds-banking-group-plc",
+        "Lloyds Banking Group plc"
+      ],
+      "accession": "000116010626000010",
+      "presentation": "banking:lloyds",
+      "origin": {
+        "origin": "https://www.sec.gov",
+        "document_prefix": "/Archives/edgar/data/1160106/",
+        "cik": "1160106",
+        "identity_evidence": "https://data.sec.gov/submissions/CIK0001160106.json"
+      }
+    },
+    {
+      "id": "LBG-EDGAR-2026-H1",
+      "file": "LBG-EDGAR-2026-H1.json",
+      "publisher": "Lloyds Banking Group plc",
+      "url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000022/lyg-20260630.htm",
+      "version": "sha256:d2f08008a5ee8e1ba4440c118214d5ecbc96e4485479cb4b7835bcb8b5f0a584",
+      "subject": [
+        "research-subject:lloyds-banking-group-plc",
+        "Lloyds Banking Group plc"
+      ],
+      "accession": "000116010626000022",
+      "presentation": "banking:lloyds",
+      "origin": {
+        "origin": "https://www.sec.gov",
+        "document_prefix": "/Archives/edgar/data/1160106/",
+        "cik": "1160106",
+        "identity_evidence": "https://data.sec.gov/submissions/CIK0001160106.json"
+      }
+    },
+    {
+      "id": "LBG-EDGAR-2026-Q3",
+      "file": "LBG-EDGAR-2026-Q3.json",
+      "publisher": "Lloyds Banking Group plc",
+      "url": "https://www.sec.gov/Archives/edgar/data/1160106/000116010626000026/lbg6-kimsxq32026.htm",
+      "version": "sha256:881d4095b57f855c0f8702f014ce3f0b2ba27a979614636c5a4a1c6875e663ef",
+      "subject": [
+        "research-subject:lloyds-banking-group-plc",
+        "Lloyds Banking Group plc"
+      ],
+      "accession": "000116010626000026",
+      "presentation": "banking:lloyds",
+      "origin": {
+        "origin": "https://www.sec.gov",
+        "document_prefix": "/Archives/edgar/data/1160106/",
+        "cik": "1160106",
+        "identity_evidence": "https://data.sec.gov/submissions/CIK0001160106.json"
+      }
+    },
+    {
+      "id": "LBG-EDGAR-2026-Q3-RESULTS",
+      "file": "LBG-EDGAR-2026-Q3-RESULTS.json",
+      "publisher": "Lloyds Banking Group plc",
+      "url": "https://www.sec.gov/Archives/edgar/data/1160106/000165495426009203/a8900a.htm",
+      "version": "sha256:43ba76fb21b3b279505abd76efec6bb80982e43552089df133e87a6bc3b7d2f2",
+      "subject": [
+        "research-subject:lloyds-banking-group-plc",
+        "Lloyds Banking Group plc"
+      ],
+      "accession": "000165495426009203",
+      "presentation": "banking:lloyds",
+      "origin": {
+        "origin": "https://www.sec.gov",
+        "document_prefix": "/Archives/edgar/data/1160106/",
+        "cik": "1160106",
+        "identity_evidence": "https://data.sec.gov/submissions/CIK0001160106.json"
+      }
     }
   ]
 }

@@ -30,7 +30,9 @@ def write(path, obj):
 
 def test_real_new_issuer_and_successive_report_without_python_change(tmp_path, monkeypatch):
     path = package(tmp_path, monkeypatch) / 'catalogue.json'
-    nationwide, latest, prior = json.loads(path.read_text())['reports']
+    records = json.loads(path.read_text())['reports']
+    nationwide, = (entry for entry in records if tuple(entry['subject']) == NW)
+    latest, prior = (entry for entry in records if tuple(entry['subject']) == EQ)
     write(path, {'reports': [nationwide]})
     assert len(p.statement_series(NW)) == 44
     assert not economics.presented_statement_series('technology:equinix')
@@ -62,14 +64,15 @@ def test_withdrawal_exception_and_origin_mismatch_isolate_affected_report(tmp_pa
         assert len(p.statement_series(NW)) == 44
     write(path, report)
     catalogue = json.loads((target / 'catalogue.json').read_text())
-    catalogue['reports'][1]['accession'] = '000110123926000099'
+    report = next(entry for entry in catalogue['reports'] if entry['id'] == 'EEI3-EQUINIX-10K-2025')
+    report['accession'] = '000110123926000099'
     assert max(line.fiscal_year for line in p.statement_series(EQ, catalogue=catalogue)) == 2024
 
 
 def test_correction_retains_predecessor_while_suppressing_withdrawn_revision(tmp_path, monkeypatch):
     target = package(tmp_path, monkeypatch)
     catalogue = json.loads((target / 'catalogue.json').read_text())
-    latest, prior = [target / entry['file'] for entry in catalogue['reports'][1:]]
+    latest, prior = (target / entry['file'] for entry in catalogue['reports'] if tuple(entry['subject']) == EQ)
     old = json.loads(prior.read_text())
     new = json.loads(latest.read_text())
     original = next(b for b in old['fact_bindings'] if b['key'] == 'eqix-2024-revenue-2024')
@@ -103,5 +106,6 @@ def test_existing_equinix_route_uses_public_only(monkeypatch):
     assert all(label in facts for label in ('Financial statements', 'Cash flow statement', '40,141', 'Segment reporting'))
     assert '+5.36' in insight and 'investing used cash' in insight
     assert 'Source &amp; basis' in facts
-    assert p.statement_series(('research-subject:lloyds-banking-group-plc', 'Lloyds Banking Group plc')) == ()
+    lloyds = p.statement_series(('research-subject:lloyds-banking-group-plc', 'Lloyds Banking Group plc'))
+    assert len(lloyds) == 133 and all(row.source.url == 'https://www.sec.gov/' for row in lloyds)
     assert len(f.public_factual_projection()['facts']) == 3

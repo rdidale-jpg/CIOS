@@ -157,3 +157,54 @@
 .gold-page .gold-content .financial-economics a.canvas-region[aria-current=page],.gold-page .gold-content .financial-business a.canvas-region[aria-current=page]{background:transparent;color:#214b38;box-shadow:none}.financial-economics .canvas-region[aria-current=page] .canvas-caption,.financial-business .canvas-region[aria-current=page] .canvas-caption{color:#59664c}
 
 .financial-stage-nav{display:flex;gap:.5rem;border-block:1px solid #bbc4af;margin:1rem 0 2rem}.gold-page .financial-stage-nav>a.canvas-region{flex:1;min-width:0;min-height:76px;padding:.8rem .4rem;background:transparent}.financial-stage-nav .canvas-mark,.financial-stage-nav .canvas-arrow{display:none}.financial-stage-nav .canvas-title{font:1.05rem Georgia,serif}.financial-stage-nav .canvas-caption{font-size:.7rem}.gold-page .gold-content .financial-stage-nav>a.canvas-region[aria-current=page]{border-bottom:3px solid #a68f50;background:#eef0e4}@container(max-width:600px){.financial-stage-nav{flex-wrap:wrap}.gold-page .financial-stage-nav>a.canvas-region{flex-basis:40%}}
+
+.gold-page .finance-chart {
+  border-block-start: 1px solid #a99a72;
+  margin-block: 1.4rem;
+  padding-block: 0.8rem;
+}
+.gold-page .finance-chart a.finance-chart-link {
+  display: block;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  text-decoration: none;
+}
+.gold-page .finance-chart-link:focus-visible,
+.gold-page .finance-chart-link:hover {
+  outline: 2px solid #226350;
+  outline-offset: 4px;
+}
+.gold-page .finance-bars {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(7rem, 2fr);
+  gap: 0.5rem;
+}
+.gold-page .finance-plot {
+  position: relative;
+}
+.gold-page .finance-plot svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.gold-page .finance-bars ol {
+  display: grid;
+  grid-auto-rows: 1fr;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.gold-page .finance-bars li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  min-block-size: 2.1rem;
+}
+.gold-page .finance-bars strong {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}

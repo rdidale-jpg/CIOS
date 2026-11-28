@@ -119,7 +119,8 @@ def test_financial_entity_period_basis_unit_actual_and_value_binding(monkeypatch
     assert '£999bn' not in html and '£6.625bn' in html
 
 
-def test_held_segment_figures_new_financial_projection_and_pdf_links_remain_inactive():
+def test_held_investor_site_figures_remain_inactive_without_independent_filings(monkeypatch):
+    monkeypatch.setattr(gold.lloyds_financials.public_statements, 'statement_series', lambda subject: ())
     from cios.applications.flora.financial_intelligence import candidate_analytics
     assert len(candidate_analytics.public_factual_projection()['facts']) == 3
     html=''.join(gold.render({'stream':[s],'focus':[f],'detail':[d]}) for s,rows in gold.REGIONS.items() for f,_ in rows for d in ('',*gold.DETAILS[f]))
