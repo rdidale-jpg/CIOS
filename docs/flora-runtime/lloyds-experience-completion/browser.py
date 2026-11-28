@@ -48,7 +48,7 @@ def run(out,phase):
                     activate('Transaction Banking');page.wait_for_url('**detail=transactions**');assert 'Natasha Condon' in page.locator('main').inner_text()
                     chosen=page.url;page.reload();page.go_back();page.go_forward();assert page.url==chosen
                     page.goto('/enterprises/lloyds?stream=inside');activate('Risk & controls');page.wait_for_url('**detail=journey-risk**');assert 'Tom Martin' in page.locator('main').inner_text()
-                    page.goto('/enterprises/lloyds?focus=economics');activate('Funding');page.wait_for_url('**detail=funding**');assert all(x in page.locator('main').inner_text() for x in ('£502.8bn','£496.5bn','£6.3bn'))
+                    page.goto('/enterprises/lloyds?focus=economics');activate('Funding');page.wait_for_url('**detail=funding**');assert all(x in page.locator('main').inner_text() for x in ('£502.777bn','£496.457bn','6320m'))
                     page.goto('/enterprises/lloyds'+VIEWS['leadership']);target=page.get_by_role('link',name='William Chalmers',exact=True);target.focus();page.keyboard.press('Enter');page.wait_for_url('**detail=leader-chalmers**');assert 'Group finance chief' in page.locator('main').inner_text()
                     page.goto('/enterprises/lloyds'+VIEWS['forces']);activate('Create lasting operating leverage');page.wait_for_url('**detail=objective-efficiency**');assert 'Next decision' in page.locator('main').inner_text()
                     for q in DEEP.values():

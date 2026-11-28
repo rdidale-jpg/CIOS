@@ -57,7 +57,7 @@ def run(phase,output):
         if device=='desktop':target.focus();page.keyboard.press('Enter')
         else:target.tap()
         expect(page.locator('main h1')).to_have_text(label);expect(page.locator('[data-region-key="'+key+'"][aria-current]')).to_have_count(1)
-        assert page.url.split('?')[0].endswith(PATH);expect(page.locator('main details')).to_have_count(0)
+        assert page.url.split('?')[0].endswith(PATH);expect(page.locator('main details:not(.econ-basis)')).to_have_count(0);assert page.locator('main details.econ-basis').count()<=1
       for name,query in [('economics','?focus=economics'),('retail','?focus=retail'),('organisation','?stream=inside&focus=people&detail=structure'),('workforce','?stream=inside&focus=people&detail=workforce'),('operating-model','?stream=inside&focus=operations'),('credit','?stream=inside&focus=operations&detail=journey-credit&subject=commercial'),('strategy','?stream=forces&focus=strategy&detail=goals'),('goal-ai','?stream=forces&focus=strategy&detail=objective-ai'),('analysis','?stream=forces&focus=analysis')]:
        assert page.goto(PATH+query).status==200;capture(name)
       expect(page.locator('.gold-swot>section')).to_have_count(4)
@@ -96,7 +96,7 @@ def run(phase,output):
      with patch.object(Path,'read_text',withdrawn):
       page.go_back();expect(page.locator('main')).to_contain_text('Charlie Nunn');assert 'CEO1-ROLE-NUNN-20260322' not in page.locator('main').inner_html();page.reload();page.emulate_media(media='print');expect(page.locator('main')).to_contain_text('Charlie Nunn');page.goto(PATH);expect(page.locator('main')).to_contain_text('£502.8bn')
      original_data=v.current_data;data=deepcopy(original_data(v.Context('lloyds','landscape')));next(s for s in data['sources'] if s['id']=='PR-LBG-Q326')['withdrawn']=True
-     page.goto(PATH+'?focus=economics');expect(page.locator('main')).to_contain_text('£502.8bn');page.goto(PATH+'?stream=forces&focus=analysis')
+     page.goto(PATH+'?focus=economics&detail=funding');expect(page.locator('main')).to_contain_text('£502.777bn');page.goto(PATH+'?stream=forces&focus=analysis')
      with patch.object(v,'current_data',lambda ctx:data):
       page.go_back();page.reload()
       for value in ('£502.8bn','£6.3bn','£6.6bn'):expect(page.locator('main')).not_to_contain_text(value)

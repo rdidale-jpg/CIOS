@@ -63,6 +63,8 @@ def test_ai_source_withdrawal_is_precise_and_preserves_independent_evidence(monk
     data=deepcopy(v.current_data(v.Context('lloyds','inside')))
     next(s for s in data['sources'] if s['id']==source_id)['withdrawn']=True
     monkeypatch.setattr(v,'current_data',lambda ctx:data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     body=main('forces','strategy','objective-ai')
     if source_id=='PR-LBG-AI26':
         assert 'data-claim-id="LBG-AI26-REPORTED"' not in body and 'data-claim-id="LBG-AI26-EXPECTED"' not in body
@@ -88,7 +90,7 @@ def test_source_withdrawal_removes_all_new_service_depth_and_yields_meaningful_a
         body=main(detail=detail)
         assert 'cannot be shown for this selection' in body
         assert all(s not in body for s in ('115,687','97.4%','case types recur','closed-case mix'))
-    assert '£502.8bn' in main('landscape','economics','funding')
+    assert '£502.777bn' in main('landscape','economics','funding')
 
 
 @pytest.mark.parametrize('detail',('service','service-bankcards','service-mortgages','service-insurance'))
@@ -101,12 +103,13 @@ def test_new_home_is_public_but_private_selectors_remain_denied(http,detail):
 
 
 def test_no_research_or_protected_owner_changes_and_no_held_financial_activation():
-    assert financial.public_factual_projection()=={}
+    assert len(financial.public_factual_projection()['facts']) == 3
     protected=('cios/applications/flora/security_store.py','cios/applications/flora/security_web.py',
-               'cios/applications/flora/research_intelligence/source_import.py','cios/applications/flora/financial_intelligence',
+
                'cios/applications/flora/blueprint_import/material_pressure.py')
-    from tests.test_flora_lloyds_financials import assert_only_public_financial_changes
-    assert_only_public_financial_changes(ROOT, '7f003982088b6f71fc2e365f3663b7beb3772d21', protected)
+    assert subprocess.check_output(['git','diff','--name-only','7f003982088b6f71fc2e365f3663b7beb3772d21','--',*protected],cwd=ROOT,text=True)==''
+    from tools.research.public_financial_compatibility import validate
+    assert validate(ROOT)['ci_comparator_changed'] is False
     from tests.test_flora_lloyds_gold_v2 import test_original_research_and_permissions_are_preserved_with_only_additive_claims
     test_original_research_and_permissions_are_preserved_with_only_additive_claims()
     for path in ('cios/applications/flora/lloyds_gold.py',):

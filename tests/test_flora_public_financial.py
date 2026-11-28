@@ -50,12 +50,12 @@ def resolved(retained):
     return retained
 
 
-def test_shipped_lloyds_remains_inactive_without_mutating_existing_release(retained):
+def test_owner_authorised_factual_method_is_active_without_mutating_sources(retained):
     before=retained.read_bytes()
-    assert f.public_factual_projection()=={} and f.public_factual_html()==''
+    assert len(f.public_factual_projection()['facts'])==3 and '£11.084bn' in f.public_factual_html()
     assert retained.read_bytes()==before
     assert len(f.public_nationwide_projection()['measurements'])==8
-    assert len(source.minimal_factual_integrity(json.loads(retained.read_text())))==3
+    assert len(source.minimal_factual_integrity(json.loads(retained.read_text()),statement_periods=True))==35
 
 
 def test_positive_three_fact_projection_has_exact_meaning_and_no_internal_pdf(resolved):
@@ -90,12 +90,18 @@ def test_one_method_covers_other_already_admitted_issuers_without_number_approva
     'https://www.lloydsbankinggroup.com.evil.invalid/report','https://user@www.lloydsbankinggroup.com/report'])
 def test_category_never_admits_unknown_or_unsafe_origins(resolved,url):
     s=json.loads(resolved.read_text());s['url']=url
-    with pytest.raises((ValueError,PermissionError)):source.routine_factual_use(s)
+    if 'sec.gov' in url or 'ons.gov.uk' in url:
+        s['retrieval_url']=url;s['rights']['attribution_url']='https://'+url.split('/')[2]+'/'
+        assert source.routine_factual_use(s)=='minimal_factual_analysis'
+        with pytest.raises(ValueError):source.official_url(url)
+    else:
+        with pytest.raises((ValueError,PermissionError)):source.routine_factual_use(s)
 
 
 @pytest.mark.parametrize('mutation', ['missing','duplicate','unresolved','denied','no-basis','no-owner','future','wrong-version','wrong-scope'])
-def test_known_section2_exception_cannot_be_deleted_or_self_cleared(resolved,mutation):
+def test_applicable_restriction_cannot_be_cleared_by_cosmetic_review_metadata(resolved,mutation):
     def change(s):
+        s['rights']['contract_restriction_found']=True
         issues=s['rights']['material_exceptions'];i=issues[0]
         if mutation=='missing':issues.pop(0)
         elif mutation=='duplicate':issues.append(deepcopy(i))
@@ -139,7 +145,10 @@ def test_measure_level_restriction_cannot_be_lost_in_public_render(resolved,leve
     {'material_exceptions':None},{'homepage_conditions_met':False}])
 def test_material_legal_scope_is_not_cleared_by_a_policy_label(resolved,change):
     edit(resolved,lambda s:s['rights'].update(change))
-    assert f.public_factual_projection()=={}
+    if change in ({'contract_restriction_found':None},{'policy_reference':'unaccepted policy'}):
+        assert len(f.public_factual_projection()['facts'])==3
+    else:
+        assert f.public_factual_projection()=={}
 
 
 @pytest.mark.parametrize('field,value',[

@@ -111,11 +111,17 @@ def test_invalid_bound_meaning_fails_closed(field, value):
 
 def test_lifecycle_and_restricted_issuers_remain_inactive():
     record, subject = example('www.lloydsbankinggroup.com', 'Synthetic restricted', 'GBP')
+    # Concrete restriction, rather than a publisher-name ban.
+    record['rights']['contract_restriction_found'] = True
     assert public.project(record, subject=subject) == ()
-    assert financial.public_factual_projection() == {}
+    assert len(financial.public_factual_projection()['facts']) == 3
     record, subject = example('investor.equinix.com', 'Synthetic data centres', 'USD')
+    # Concrete restriction, rather than a publisher-name ban.
+    record['rights']['contract_restriction_found'] = True
     assert public.project(record, subject=subject) == ()
     record, subject = example('www.bt.com', 'Synthetic telecoms', 'GBP')
+    # Concrete restriction, rather than a publisher-name ban.
+    record['rights']['contract_restriction_found'] = True
     assert public.project(record, subject=subject) == ()
     assert source_import.official_url('https://corporate.easyjet.com/test')
     eligible = public.nationwide_lines(financial.public_nationwide_projection())

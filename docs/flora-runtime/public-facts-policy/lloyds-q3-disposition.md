@@ -1,3 +1,29 @@
+# Current Source-owner determination — 27 November 2026
+
+The owner commission **Remove Unnecessary Public-Fact Restrictions** supersedes the unresolved operational hold below for ordinary factual research. This is a determination recorded through existing Source ownership, not a new legal-review service, publisher licence, canonical acceptance or an assertion of legal advice.
+
+The original Lloyds site terms were reopened on 27 November 2026 (`https://www.lloydsbankinggroup.com/site-terms-and-conditions.html`, original text references turn215view0 / turn216view0). Section 1 asserts acceptance through use; this determination does not depend on assuming that assertion ineffective. Section 2 addresses intellectual property and reproducing/adapting/storing website material, including in private retrieval systems. A private R&D purpose alone does **not** exempt copying.
+
+The implemented operation is different: retain selected, independently expressed numerical facts, their exact entity/period/basis/units and minimal locators; calculate original analysis and render independent charts. No website/report reproduction, copied table arrangement, images, substantial prose, PDF archive, training corpus, paid/restricted access or repeated bulk database extraction is authorised. Under that concrete scope, no applicable prohibition of the independent factual method has been identified. Section 2 is therefore **resolved for this factual method**, not perpetually held pending affirmative publisher consent. This construction is reusable across the same use category and does not require another decision for each number or report. It does not declare the clause void or waive any binding agreement. A specifically applicable access agreement, licence restriction, prohibition or correction remains effective through existing Source exception/lifecycle fields.
+
+The scope of a court's possible interpretation is not guaranteed. That residual uncertainty is recorded rather than converted into a universal approval gate. No additional signed/click-through agreement restricting these factual operations was identified in the available record. A later concrete contrary restriction is isolated and enforced; unrelated lawful facts continue.
+
+| Operation | Current disposition |
+| --- | --- |
+| Read ordinary publicly accessible factual disclosures | Proceed through lawful acquisition; no access bypass. |
+| Independently state public financial/operational facts and perform original calculations | Proceed without affirmative publisher or per-number/document approval; preserve exact definitions and source lineage. |
+| Retain minimal typed factual working data | Proceed in existing Source ownership. It is not a protected-document archive or canonical promotion. |
+| Ordinary FLORA factual presentation | Proceed. Existing guest/public research boundaries and authenticated private Financial-run/workspace controls remain separate. The private-development purpose is not used to expose private records. |
+| Copy protected reports, tables, prose or graphics | Outside this method. Actual copying/access/licence requirements remain. |
+| Public Lloyds PDF deep links | Keep deferred under §5; use compatible homepage attribution. This does not hold financial facts. |
+| Financial runs | Existing authenticated resource/service controls remain; this implementation neither discovers nor creates private runs. Publisher permission is not a substitute for workspace authority, and workspace authority is not a copyright licence. |
+
+The existing PFI Source record carries this scoped determination and now includes the rechecked LEI-1 Group figures. The existing Source snapshot owner also retains H1 division measurements. Their financial axes and original source identity remain explicit. No new approval registry, per-publisher workflow or ADR acceptance is introduced.
+
+---
+
+## Historical 19 November assessment — superseded where it required the unresolved factual hold
+
 # Lloyds Q3 2026 — narrow factual-use disposition
 
 Proposed owner decision, inspected **19 November 2026**. This paper distinguishes legal basis, uncertainty and existing CIOS authority. It creates no publisher licence, source permission, canonical acceptance or runtime exception.

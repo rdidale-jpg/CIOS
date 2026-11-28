@@ -1,20 +1,9 @@
 """Regulatory Financial statements, presentation, withdrawal and comparability."""
 from copy import deepcopy
-import subprocess
 
 from cios.applications.flora import lloyds_financials as f, lloyds_gold as gold
 from cios.applications.flora.financial_intelligence import candidate_analytics, chart
 from cios.applications.flora.research_intelligence import statement_sources
-
-PUBLIC_FILING_CHANGES = set(['cios/applications/flora/financial_intelligence/chart.py', 'cios/applications/flora/financial_intelligence/public_statements.py', 'cios/applications/flora/research_intelligence/public_statement_sources/LBG-EDGAR-2026-FY25.json', 'cios/applications/flora/research_intelligence/public_statement_sources/LBG-EDGAR-2026-H1.json', 'cios/applications/flora/research_intelligence/public_statement_sources/LBG-EDGAR-2026-Q1.json', 'cios/applications/flora/research_intelligence/public_statement_sources/LBG-EDGAR-2026-Q3-RESULTS.json', 'cios/applications/flora/research_intelligence/public_statement_sources/LBG-EDGAR-2026-Q3.json', 'cios/applications/flora/research_intelligence/public_statement_sources/catalogue.json'])
-
-
-def assert_only_public_financial_changes(root, baseline, protected):
-    changed = subprocess.check_output(
-        ['git', 'diff', '--name-only', baseline, '--', *protected], cwd=root, text=True
-    ).splitlines()
-    assert set(changed) <= PUBLIC_FILING_CHANGES
-
 
 def test_real_group_and_divisional_reconciliations():
     dataset = f.current()
@@ -68,7 +57,7 @@ def test_public_view_never_reads_financial_runs_and_keeps_old_investor_hold(monk
     def forbidden(*args, **kwargs):
         raise AssertionError('Private run used during public rendering')
 
-    assert candidate_analytics.public_factual_projection() == {}
+    assert len(candidate_analytics.public_factual_projection()['facts']) == 3
     for method in ('read_analysis', 'find_existing_run', 'create_run'):
         monkeypatch.setattr(candidate_analytics, method, forbidden)
     text = gold.render({'focus': ['economics'], 'detail': ['income']})
@@ -92,3 +81,21 @@ def test_changed_underlying_basis_suppresses_bridge_without_hiding_statutory_fig
     assert 'Income to statutory profit' not in body
     assert 'What moved pretax profit?' not in body
     assert 'Statutory income and expenses' in body
+
+
+def test_public_document_withdrawal_also_removes_report_equivalents(monkeypatch):
+    from cios.applications.flora.research_intelligence import source_import
+
+    current_source_records = source_import.current_source_records
+
+    def restricted(domain):
+        records = deepcopy(current_source_records(domain))
+        next(record for record in records if record.get('id') == 'PR-LBG-Q326')['withdrawn'] = True
+        return records
+
+    monkeypatch.setattr(source_import, 'current_source_records', restricted)
+    dataset = f.current()
+    assert all('Q3' not in row.source.source_id for row, _ in dataset.values())
+    assert '1,947' not in f.earnings(dataset, '#evidence')
+    assert '6,661' in f.earnings(dataset, '#evidence')
+    assert '4,293' in f.segments(dataset, '#evidence')

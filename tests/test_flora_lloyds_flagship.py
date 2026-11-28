@@ -31,7 +31,7 @@ def test_existing_journey_and_connected_issue():
     for _, _, stream, detail in flagship.STAGES:
         route = urlsplit(visual.url(ctx, stream=stream, detail=detail))
         assert visual.resolve(route.path, parse_qs(route.query)).detail == detail
-    assert candidate_analytics.public_factual_projection() == {}
+    assert len(candidate_analytics.public_factual_projection()['facts']) == 3
     detail = visual.render(PATH, {'stream':['landscape'], 'detail':['funding']})
     assert 'Renew the bank while it runs' not in detail and 'From funding to earnings' in detail
 

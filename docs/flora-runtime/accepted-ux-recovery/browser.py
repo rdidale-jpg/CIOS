@@ -64,7 +64,7 @@ with TemporaryDirectory() as directory, sync_playwright() as playwright:
             if phase == 'after':
                 main = page.locator('main')
                 expect(page.get_by_role('navigation', name='Reading mode')).to_have_count(0)
-                expect(main.locator('details')).to_have_count(0)
+                expect(main.locator('details:not(.econ-basis)')).to_have_count(0);assert main.locator('details.econ-basis').count()<=1
                 assert 'Reviewed excerpt' not in main.inner_text()
                 jump = page.get_by_role('navigation', name='Twin sections')
                 jump.get_by_role('link', name='Explore', exact=True).click()
@@ -102,7 +102,7 @@ with TemporaryDirectory() as directory, sync_playwright() as playwright:
                 expect(page.locator('main')).to_contain_text('Lloyds')
                 if phase == 'after':
                     expect(page.get_by_role('navigation', name='Reading mode')).to_have_count(0)
-                    expect(page.locator('main details')).to_have_count(0)
+                    expect(page.locator('main details:not(.econ-basis)')).to_have_count(0);assert page.locator('main details.econ-basis').count()<=1
                 capture('lloyds-' + stream)
             page.get_by_role('navigation', name='Current scope').get_by_role('link', name='Banking', exact=True).click()
             assert page.url.endswith('/industries/banking')

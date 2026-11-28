@@ -54,7 +54,7 @@ def test_recovered_eight_themes_have_native_fallback_and_no_research_payload():
     assert 'data-semantic-type="reported"' in body and 'data-semantic-type="insight"' in body
     assert 'Management target' in body
     assert 'cannot rank service quality' in body
-    assert financial.public_factual_projection()=={}
+    assert len(financial.public_factual_projection()['facts']) == 3
 
 
 def test_source_withdrawal_removes_dependent_themes_not_independent_enterprise_context(monkeypatch):

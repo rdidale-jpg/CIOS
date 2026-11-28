@@ -42,7 +42,7 @@ def test_actual_new_product_cells_reconcile_without_claiming_financial_results()
     html=main()
     assert all(s in html for s in ('115,687','115,798','66.37%','97.4%','Commercial investigation','not cost or customer incidence'))
     assert '66.12% of received' not in html and '£115,687' not in html
-    assert finance.public_factual_projection()=={}
+    assert len(finance.public_factual_projection()['facts']) == 3
     assert 'Open Government Licence v3.0' in html
     assert 'financial_statement' not in html and '<details' not in html
 
@@ -54,7 +54,7 @@ def test_source_lifecycle_removes_chart_prose_calculations_and_inspection(retain
     for detail in ('service-workload','service-bankcards','costs','sources'):
         body=main(detail)
         assert '115,687' not in body and '97.4%' not in body and 'case types recur after a firm-upheld decision' not in body
-    assert '502.8' in main('funding')  # Unrelated eligible source remains.
+    assert '502.777' in main('funding')  # Unrelated eligible source remains.
 
 
 @pytest.mark.parametrize('change',[

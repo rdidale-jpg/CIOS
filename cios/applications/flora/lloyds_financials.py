@@ -4,6 +4,7 @@ from html import escape
 
 from . import intelligence_presentation as presentation
 from .financial_intelligence import chart, public_statements
+from .research_intelligence import source_import
 
 SUBJECT = ('research-subject:lloyds-banking-group-plc', 'Lloyds Banking Group plc')
 GROUP = 'Consolidated Group'
@@ -21,8 +22,23 @@ OBJECTIVES = '73e6c418e0edc12a265beacfb5c0b49387925c83025d15ed1f415081c6090e0f'
 
 def current():
     active = defaultdict(list)
+    # Retain the existing document-wide withdrawal boundary for the matching
+    # issuer reporting packs, even when numbers also exist in an EDGAR filing.
+    available = {
+        'LBG-EDGAR-2026-Q3': 'lloyds-q3',
+        'LBG-EDGAR-2026-Q3-RESULTS': 'lloyds-q3',
+        'LBG-EDGAR-2026-H1': 'lloyds-h1',
+    }
+    allowed = set()
+    for selection in set(available.values()):
+        try:
+            source_import.public_statement_record(selection)
+        except (OSError, ValueError, KeyError, TypeError, PermissionError):
+            continue
+        allowed.add(selection)
     for row, fact in public_statements.statements(public_statements.statement_series(SUBJECT)):
-        if row.perimeter in FINANCIAL_SUBJECTS:
+        selection = available.get(row.source.source_id)
+        if row.perimeter in FINANCIAL_SUBJECTS and (selection is None or selection in allowed):
             period = row.period
             key = (row.perimeter, row.metric, str(period.as_at or period.end),
                    str(period.start) if period.start else None)

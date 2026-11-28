@@ -41,6 +41,20 @@ Reconcile affected accepted requirements and prior UX behaviour in the existing 
 
 Escalate the specific exception and continue unaffected work. Do not expand a bounded increment to resolve unrelated source acquisition or research gaps. These are existing authority boundaries, not a new approval service or registry.
 
+## Product value acceptance
+
+Every material sprint must demonstrate the [Product Value Standard](../../../CIOS-AI.md#product-value-standard) through the existing Build → Test → Merge → Review cycle. Use the existing PR and its walkthrough to answer:
+
+- What new enterprise knowledge can the user access?
+- What important executive question can the user answer more effectively?
+- What meaningful original analysis or visual exploration is available?
+- How does it connect to the existing Commercial Digital Twin?
+- What remains materially unknown or unproven?
+
+Passing applicable CI is necessary for technical correctness. Establish usefulness through the rendered product and its decision context. For enabling work with no visible intelligence gain, report what the work enables and what still needs delivery before claiming product success. Use the existing review step for owner feedback.
+
+Retain eligible financial measures, comparisons and their provenance when simplifying a view. Use conceptual diagrams to explain mechanisms alongside supported evidence. Keep a bounded Source exception attached to the affected operation and continue eligible research under the existing factual-use category. Technical checks, PR counts and visual polish are insufficient evidence of intelligence depth. Reopen accepted product decisions only when material new evidence changes the decision or invalidates its assumptions.
+
 ## Completion report
 
 Use the existing PR and report only: **what changed; what can now be tested; tests passed/material failures; genuine blockers; merge SHA and rollback**. Include browser evidence or a necessary source/financial qualification where relevant. No additional release package or approval report by default. A blocked or partial journey must remain labelled as such.
@@ -60,7 +74,7 @@ Use the existing PR and report only: **what changed; what can now be tested; tes
 
 The [Experience Contract](../flora-experience/FLORA-Experience-Contract-v1.0.md) governs presentation: retain Top / Left / Main, distinct factual and interpretive semantics, accepted artwork and commercially understandable language. The current owner recovery commission supersedes the separate Facts / FLORA Insight selector with one unified executive composition. Internal gaps, source administration and suggested investigations do not become new ordinary-screen panels. Mandatory attribution and material factual limitations remain.
 
-[Source factual-use guidance](../../flora-runtime/public-facts-policy/README.md) and current Source records remain authoritative for their use scope. This doctrine grants no new source permissions. Preserve any current Lloyds §2 hold, deferred §5 links and all other operation-specific restrictions; ADR-027 remains Proposed. Reuse a recorded operation-specific decision while its facts and scope remain unchanged. Continue with eligible information and escalate only new material evidence or a change in the intended use.
+[Source factual-use guidance](../../flora-runtime/public-facts-policy/README.md) and current Source records remain authoritative for their use scope. This doctrine grants no new source permissions. Reuse the current Source-owner applicability determination for ordinary independent facts; do not perpetuate a superseded Lloyds §2 hold or require affirmative publisher permission for each fact/report. Preserve applicable protected-copying restrictions, deferred §5 links and other actual operation-specific restrictions; ADR-027 remains Proposed. Reuse a recorded operation-specific decision while its facts and scope remain unchanged. Continue with eligible information and escalate only new material evidence or a change in the intended use.
 
 ## Product sequence and completion evidence
 

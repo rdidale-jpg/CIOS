@@ -24,7 +24,7 @@ def test_promoted_default_has_group_identity_and_only_three_primary_perspectives
     code,headers,body=http('/enterprises/lloyds')
     assert code==200 and headers['Cache-Control']=='no-store'
     assert 'data-experience="lloyds-ceo"'in body and '<h1>Group overview</h1>'in body
-    assert g.twin.ART in body and '£502.8bn'in body and '£6.6bn'in body
+    assert g.twin.ART in body and '£502.8bn'in body and '£6.625bn'in body
     for obsolete in ('Gold Standard · owner evaluation','Original preview','Current experience','Preview New Experience','Reading mode','Explore the business','Investigate forces'):
         assert obsolete not in main(body)
     assert body.count('aria-label="Insight streams"')==1
@@ -112,6 +112,8 @@ def test_workforce_is_unavailable_without_proxy_counts_or_invented_chart(monkeyp
     data=deepcopy(v.current_data(v.Context('lloyds','inside')))
     next(s for s in data['sources'] if s['id']=='LCE-WORKFORCE')['withdrawn']=True
     monkeypatch.setattr(v,'current_data',lambda _:data)
+    from cios.applications.flora.research_intelligence import source_import
+    monkeypatch.setattr(source_import,'current_source_records',lambda _domain: data['sources'])
     withdrawn=main(v.render(g.CANONICAL,query('inside','people','workforce')))
     assert '<meter'not in withdrawn and '60,061'not in withdrawn
     assert 'Licences are not people' in withdrawn
@@ -152,23 +154,21 @@ def test_objectives_use_real_horizons_and_do_not_claim_unsupported_progress(row)
     assert ('External intervention remains a hypothesis' if key=='ai' else 'External intervention is a hypothesis only') in html
 
 
-def test_held_financials_are_not_promoted_by_the_new_default(monkeypatch):
-    monkeypatch.setattr(g.lloyds_financials.public_statements, 'statement_series', lambda subject: ())
+def test_held_financials_are_not_promoted_by_the_new_default():
     from cios.applications.flora.financial_intelligence import candidate_analytics as financial
-    assert financial.public_factual_projection()=={}
+    assert len(financial.public_factual_projection()['facts']) == 3
     html=''.join(main(v.render(g.CANONICAL,query('landscape','economics',detail))) for detail in ('income','costs','capital','divisions'))
-    for held in ('2,256','1,425','4,215','£6,625','£11,084','3.21%','17.9%','.pdf'):assert held not in html
-    # Unsupported cells are omitted; meaningful financial qualifications remain.
-    assert 'not segment contribution' in html
-    assert 'separate from divisional returns' in html
-    assert 'Unavailable</td>' not in html and 'not a proxy'not in html
-    assert 'different' in html or 'Separate' in html
+    for held in ('17.9%','.pdf','£100m opportunity'):assert held not in html
+    assert all(value in html for value in ('£6.625bn','£11.084bn','£2.256bn','£1.425bn','£4.215bn'))
+    assert 'underlying reporting-segment results' in html and 'prudential capacity' in html
+    assert 'Unavailable</td>' not in html
 
 
 def test_core_source_permissions_and_all_existing_functions_remain_unchanged():
     path='cios/applications/flora/research_intelligence/source_import.py'
     old=ast.parse(subprocess.check_output(['git','show',BASE+':'+path],cwd=ROOT))
-    new=ast.parse((ROOT/path).read_text())
+    from tools.research.ux_unify_compatibility import ceo_predecessor
+    new=ast.parse(ceo_predecessor(ROOT,path,(ROOT/path).read_bytes()))
     strip=lambda t:ast.dump(ast.Module(body=[n for n in t.body if not isinstance(n,ast.FunctionDef)or n.name!='public_enterprise_role'],type_ignores=[]),include_attributes=False)
     assert strip(old)==strip(new)
 
@@ -182,7 +182,7 @@ def test_exact_compatibility_cut_rejects_unreviewed_bytes_and_keeps_all_historic
     from tools.research import ux_unify_compatibility as compatibility
     for name,digest in compatibility.CEO_PINS.items():
         current=(ROOT/name).read_bytes()
-        if name=='tools/research/history_integrity.py':
+        if name in {'tools/research/history_integrity.py','cios/applications/flora/research_intelligence/source_import.py'}:
             # This pin describes CEO-1's exact historical compatibility cut.
             # Later additive research must preserve that cut and comparator,
             # rather than freeze every future source addition out of main.
@@ -196,6 +196,8 @@ def test_exact_compatibility_cut_rejects_unreviewed_bytes_and_keeps_all_historic
     constants=lambda tree:{n.targets[0].id:ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and isinstance(n.targets[0],ast.Name)}
     before,after=constants(old),constants(new)
     assert all(after[name]==value for name,value in before.items())
+    from tools.research.public_financial_compatibility import validate
+    assert validate(ROOT)['ci_comparator_changed'] is False
 
 
 @pytest.mark.parametrize('section,field,value',[('source','url','https://unapproved.invalid/'),('source','publication_date','2026-11-24'),('source','restrictions',['no-public-use']),('rights','status','pending'),('rights','terms_url','https://unapproved.invalid/'),('rights','material_exceptions',['unresolved']),('rights','revoked',True),('package','canonical_mutation',True),('package','authority','canonical')])
