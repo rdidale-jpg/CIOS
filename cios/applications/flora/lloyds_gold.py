@@ -858,8 +858,10 @@ def peer_service_context(data, issues):
             + ''.join(p.render(item, compact=True) for item in (own, *seen))
             + '<p>These are activity counts for the named legal banks. Customer bases and product mix differ. '
             'The counts cannot rank service quality, estimate harm rates or measure Lloyds Group performance.</p>'
-            '<a class="canvas-region" href="/industries/banking?agenda=service-landscape">'
-            'Inspect the UK Banking evidence</a></section>')
+            '<a class="canvas-region canvas-analysis" data-canvas-region="analysis" '
+            'href="/industries/banking?agenda=service-landscape">'
+            + visual_mark('analysis') + '<span class="canvas-title">Inspect the UK Banking evidence</span>'
+            '<span class="canvas-arrow" aria-hidden="true">↗</span></a></section>')
 
 
 def business_swot(state, facts):
