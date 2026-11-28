@@ -23,7 +23,7 @@ permissions:
 jobs:
   economics:
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 65
     steps:
       - uses: actions/checkout@v4
         with:

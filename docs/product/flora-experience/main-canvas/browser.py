@@ -62,7 +62,7 @@ def run(phase,out,smoke=False):
       assert expected in page.url,(device,selector,page.url)
      physical('', 'main .canvas-businesses a','focus=')
      physical('?focus=economics','main .financial-stage-nav>a[aria-label=Funding]','detail=funding')
-     physical('?focus=economics&detail=funding','main .canvas-stock','detail=comparison')
+     physical('?focus=economics&detail=funding','main .financial-comparison a.canvas-region','detail=comparison')
      physical('?stream=inside&focus=operations','main .ce-operating>a[href*="detail=journey-"]','detail=journey-')
      physical('?stream=inside&focus=people&detail=structure','main .canvas-businesses a','stream=landscape')
      physical('?stream=inside&focus=capabilities','main .ce-operating>a[href*="detail=journey-"]','detail=journey-')
@@ -84,12 +84,14 @@ def run(phase,out,smoke=False):
    if phase=='after' and not smoke:
     context=browser.new_context(base_url=base,java_script_enabled=False);page=context.new_page();page.goto(PATH+'?stream=forces&focus=analysis');page.locator('main .canvas-themes>a').first.click();expect(page.locator('main')).to_contain_text('Counter-evidence');context.close();proof['no_javascript']=True
     original=v.current_data;data=deepcopy(original(v.Context('lloyds','landscape')));next(s for s in data['sources']if s['id']=='PR-LBG-Q326')['withdrawn']=True
-    page=browser.new_page(base_url=base);page.goto(PATH+'?focus=economics');assert '502.8'in page.locator('main').aria_snapshot();page.goto(PATH+'?stream=forces&focus=analysis');v.current_data=lambda ctx:data
+    page=browser.new_page(base_url=base);page.goto(PATH+'?focus=economics&detail=funding');assert '502.777'in page.locator('main').aria_snapshot();page.goto(PATH+'?stream=forces&focus=analysis');v.current_data=lambda ctx:data
+    from cios.applications.flora.research_intelligence import source_import
+    original_sources=source_import.current_source_records;source_import.current_source_records=lambda _domain:data['sources']
     try:
      page.go_back();page.reload();page.emulate_media(media='print')
-     for value in ('£502.8bn','£6.3bn','£6.6bn'):assert value not in page.locator('main').inner_text()and value not in page.locator('main').aria_snapshot()
+     for value in ('£502.8bn','£6.3bn','£6.6bn','£502.777bn','£6.625bn','6320m'):assert value not in page.locator('main').inner_text()and value not in page.locator('main').aria_snapshot()
      assert not page.locator('main meter[value="502.8"]').count();proof['withdrawal_history_reload_print_accessibility']=True
-    finally:v.current_data=original
+    finally:v.current_data=original;source_import.current_source_records=original_sources
   finally:browser.close();server.shutdown();server.server_close();worker.join(2)
  (out/f'Browser-{phase}.json').write_text(json.dumps(proof,indent=2)+'\n');print(json.dumps({'phase':phase,'captures':len(proof['screenshots']),'devices':len(proof['devices']),'passed':True}))
 if __name__=='__main__':
