@@ -941,9 +941,9 @@ def main(state,data,facts,issues=()):
     elif state.focus=='competition' and state.detail in {'commercial-direction','transaction-direction'}:body+=v3_commercial_direction(state,facts)
     elif state.focus=='strategy' and (state.detail=='goals' or state.detail.startswith('objective-')):body+=_ceo_goals(state,facts)
     else:
+        body += forces(state,facts)
         if state.focus == 'analysis' and not state.detail:
             body += business_swot(state, facts)
-        body += forces(state,facts)
     business = state.subject if state.subject in BUSINESS_JOURNEYS else state.focus
     if business in BUSINESS_JOURNEYS and (
         (state.stream == 'landscape' and state.focus == business and not state.detail)
