@@ -1272,7 +1272,7 @@ def executive_overview(state,facts,issues):
     if 'LBG-V2-CUSTOMERS' in facts:
         body+='<div class="v2-enterprise-scale">'+v2_reported(facts,'CUSTOMERS')+'</div>'
     body+=business_regions(state)+financial_regions(state,facts)
-    body+='<section class="v2-value-thread"><h2>One Group, different economic engines</h2><p>Business profit figures below cover H1 2026 on an underlying basis. Group statutory results are reconciled separately above.</p><p>Retail earns from lending, fees and asset services. Commercial combines credit with cash, trade and payment services. Insurance and investments earn through protection, distribution and long-term asset administration.</p><p class="le-limit">Business-model explanation, not a measured profit split. Segment profit, statutory Group profit and legal-bank results have different boundaries.</p></section>'
+    body+='<section class="v2-value-thread"><h2>One Group, different economic engines</h2><p>Business profit figures below cover H1 2026 on an underlying basis. Group statutory results use a separate reporting basis.</p><p>Retail earns from lending, fees and asset services. Commercial combines credit with cash, trade and payment services. Insurance and investments earn through protection, distribution and long-term asset administration.</p><p class="le-limit">Business-model explanation, not a measured profit split. Segment profit, statutory Group profit and legal-bank results have different boundaries.</p></section>'
     body+='<div class="v2-executive-agenda" aria-label="Published executive priorities"><h2>Leadership’s agenda</h2>'
     for title,keys,caption,detail in (
       ('Simplify while protecting service',('LBG-AR25-MIGRATION','LBG-A2030-CIR'),'Application retirement and the 2030 efficiency ambition','objective-renewal'),
@@ -1610,8 +1610,10 @@ def operating_thread(state, facts, business):
 
 
 def experience_landscape(state,facts,issues):
+    aggregate=economic_lines(economic_research('lloyds-q3'))
     segments=economic_lines(economic_research('lloyds-h1'))
-    body=executive_opening(state,facts,lloyds_financials.current())
+    data=lloyds_financials.current() if 'profit_before_tax-2026' in aggregate else {}
+    body=executive_opening(state,facts,data)
     nodes=[]
     if 'LBG-Q326-DEPOSITS' in facts:
         p.note_editorial_sources(facts['LBG-Q326-DEPOSITS'].sources)
@@ -1620,7 +1622,12 @@ def experience_landscape(state,facts,issues):
         nodes.append(experience_node(state,'Customer relationships',p.render(facts['LBG-V2-CUSTOMERS'],compact=True),(34,0,32,24),shape='island',detail='brands'))
     if 'LBG-Q326-PROFIT' in facts:
         p.note_editorial_sources(facts['LBG-Q326-PROFIT'].sources)
-        nodes.append(experience_node(state,'Reported earnings','<strong>Group statutory pretax profit</strong><span>Follow the separate nine-month Group reconciliation</span>',(71,0,29,21),kind='money',shape='reservoir',focus='economics',detail='income'))
+        if 'profit_before_tax-2026' in aggregate:
+            context='<strong>Group statutory pretax profit</strong><span>Follow the separate nine-month Group reconciliation</span>'
+        else:
+            context=('<strong>£'+str(facts['LBG-Q326-PROFIT'].value)+'bn</strong>'
+                     '<span>Rounded reported nine-month Group statutory profit, separate from H1 businesses</span>')
+        nodes.append(experience_node(state,'Reported earnings',context,(71,0,29,21),kind='money',shape='reservoir',focus='economics',detail='income'))
     for i,(title,customer,activity,driver,key) in enumerate(twin.DIVISIONS):
         offer={'retail':'Borrow, save, pay and finance assets','commercial':'Lend, manage cash, trade and payments','retirement':'Protect, invest and administer long-term savings'}[key]
         financial_line=segments.get(key+'-underlying_profit_before_tax-2026')
@@ -1632,7 +1639,7 @@ def experience_landscape(state,facts,issues):
              ('Connect more customer activity',('LBG-A2030-WALLET','LBG-Q326-CURVE'),'Payments direction and Curve completion','objective-payments')]
     for i,(title,keys,caption,detail) in enumerate(choices):
         if all(k in facts for k in keys):nodes.append(experience_node(state,title,'',(i*34,84,32,14),kind='timeline',shape='current',caption=caption,stream='forces',focus='strategy',detail=detail))
-    body+='<h2 class="ce-map-title">One Group, different economic engines</h2><p>Business profit figures below cover H1 2026 on an underlying basis. Group statutory results are reconciled separately above.</p>'
+    body+='<h2 class="ce-map-title">One Group, different economic engines</h2><p>Business profit figures below cover H1 2026 on an underlying basis. Group statutory results use a separate reporting basis.</p>'
     # Retain the existing business-region semantics and deep destinations.
     body+='<div class="canvas-businesses ce-portfolio">'+experience_map('economy','Reporting businesses · not financial shares',
         ('M130 470 Q130 515 400 530','M400 470 L400 530','M670 470 Q670 515 400 530','M400 630 L400 680'),nodes,
