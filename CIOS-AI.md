@@ -2,7 +2,7 @@
 
 **Status:** Living document
 **Owner:** Rob / CIOS
-**Last updated:** 2026-11-27
+**Last updated:** 2026-11-28
 
 ## Purpose
 
@@ -13,6 +13,16 @@ For ordinary Codex work, the [Product Delivery Doctrine](docs/product/flora-deli
 ## One-page quick-start for AI agents
 
 CIOS is an Enterprise Intelligence platform that detects meaningful enterprise change, builds Commercial Digital Twins, reasons over Observations and recommends commercially valuable action.
+
+### Product Value Standard
+
+This binding standard governs Codex, AI contributors and future development commissions. Apply it through the existing [Product Delivery Doctrine](docs/product/flora-delivery-acceleration/README.md#product-value-acceptance).
+
+> Flora must make enterprise intelligence as useful as the best direct ChatGPT analysis, and more valuable through its living Commercial Digital Twin.
+>
+> Substantive evidence-backed knowledge, original analytical visualisations, enterprise connections and executive decision usefulness take precedence over architectural ceremony and output volume.
+>
+> Passing tests, merging code, building infrastructure or rendering attractive diagrams do not independently establish product success.
 
 The current north-star is: **Move Flora from report generation to living Commercial Digital Twins.**
 

@@ -2,6 +2,10 @@
 
 Owner decision draft, 19 November 2026. Reviewed main `46ed59295abb0259ee09ffa79c778848f170a5eb`, including the merged LEI-1 pack. This proposal changes no enforcement, admissions, permissions or canonical records.
 
+## Current development application
+
+The [Product Value Standard](../../../CIOS-AI.md#product-value-standard) treats eligible publicly reported facts and independent analysis as core product capabilities. Reuse the established factual-use category for compatible operations, including original comparisons, reconciliations and charts. Preserve source identity and revision, periods, basis, withdrawal, financial controls and private access boundaries. Keep materially applicable restrictions scoped to the affected operation and use the [current Lloyds disposition](lloyds-q3-disposition.md) for its specific limits. Compatible facts need routine integrity checks under the existing Source owner. No new authority is granted here.
+
 ## Final proposed policy wording
 
 **Public factual intelligence is permitted by default within an established reusable use category wherever the actual use is lawful.** Verified public facts, independently expressed explanations and original calculations do not require repeated discretionary approval or universal canonical Evidence promotion.

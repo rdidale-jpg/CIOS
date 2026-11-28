@@ -13,6 +13,10 @@ Main is a visual intelligence canvas. Executive subjects must be explored throug
 - A whole SWOT quadrant and each full theme region must be independently selectable without nested links. Keyboard order and touch hit areas must match the visual hierarchy.
 - Retain actual dates, entity/perimeter, financial type/basis, source dependencies, important caveats and counter-evidence. Visual geometry must not imply unmeasured financial shares, progress, legal reporting lines or verified installed dependencies.
 
+## Financial and operating substance
+
+Use whole-region charts, financial reconciliations and operating maps to answer a named executive question with enterprise-specific evidence. Show period, currency, unit, basis, signs and comparable perimeter on financial views. Make carried assumptions and a route to provenance available during exploration. Keep targets separate from reported actuals and show a progress comparison only when the measures and timing support it. Where evidence is limited, label the conceptual model and explain the unresolved dependency.
+
 ## Prohibited in executive Main
 
 Underlined inline navigation; lists of text hyperlinks; standalone Explore/Investigate/More text links; navigation concealed in paragraphs; tiny clickable chart labels; decorative compositions whose separate small heading is the only link. Removing an underline with CSS alone does not satisfy this contract.
